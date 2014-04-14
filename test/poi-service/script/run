@@ -49,6 +49,11 @@ then
 	cd $CURDIR
 fi
 
+if [ ! -f $MAIN_DATABASE ]
+then
+	echo 'no database available, do ./prepare <name of city> first'
+	exit
+fi
 
 read language <$EXE_DIR/language.txt
 echo $language

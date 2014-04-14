@@ -42,7 +42,8 @@ help::
 	@echo "all: Build $(ALL)"
 	@echo "clean: Clean up build dir"
 
-#Generate the proxies and adaptors for the DBus APIs first
+#Clone the positioning repository for getting the API, generate the proxies and adaptors for the DBus APIs firstly
+include get-positioning.mk
 include generate-api.mk
 
 include poi-server.mk

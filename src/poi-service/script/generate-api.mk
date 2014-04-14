@@ -76,17 +76,18 @@ ${TARGET_GENERATED_API_DIR}/genivi-navigationcore-routing_adaptor.h: ${API_DIR}/
 ${TARGET_GENERATED_API_DIR}/genivi-navigationcore-routing_proxy.h: ${API_DIR}/navigation-core/genivi-navigationcore-routing.xml
 	dbusxx-xml2cpp ${API_DIR}/navigation-core/genivi-navigationcore-routing.xml --proxy=${TARGET_GENERATED_API_DIR}/genivi-navigationcore-routing_proxy.h
 
-${TARGET_GENERATED_API_DIR}/genivi-positioning-enhancedposition_adaptor.h: ${API_DIR}/enhanced-position-service/genivi-positioning-enhancedposition.xml
-	dbusxx-xml2cpp ${API_DIR}/enhanced-position-service/genivi-positioning-enhancedposition.xml --adaptor=${TARGET_GENERATED_API_DIR}/genivi-positioning-enhancedposition_adaptor.h
+${TARGET_GENERATED_API_DIR}/genivi-positioning-enhancedposition_adaptor.h: ${positioning_API}/genivi-positioning-enhancedposition.xml
+	dbusxx-xml2cpp ${positioning_API}/genivi-positioning-enhancedposition.xml --adaptor=${TARGET_GENERATED_API_DIR}/genivi-positioning-enhancedposition_adaptor.h
 
-${TARGET_GENERATED_API_DIR}/genivi-positioning-enhancedposition_proxy.h: ${API_DIR}/enhanced-position-service/genivi-positioning-enhancedposition.xml
-	dbusxx-xml2cpp ${API_DIR}/enhanced-position-service/genivi-positioning-enhancedposition.xml --proxy=${TARGET_GENERATED_API_DIR}/genivi-positioning-enhancedposition_proxy.h
+${TARGET_GENERATED_API_DIR}/genivi-positioning-enhancedposition_proxy.h: ${positioning_API}/genivi-positioning-enhancedposition.xml
+	dbusxx-xml2cpp ${positioning_API}/genivi-positioning-enhancedposition.xml --proxy=${TARGET_GENERATED_API_DIR}/genivi-positioning-enhancedposition_proxy.h
 
 ${TARGET_GENERATED_API_DIR}/genivi-navigationcore-constants.h: ${API_DIR}/navigation-core/genivi-navigationcore-constants.xml
 	xsltproc ${API_DIR}/navigation-core/enum.xsl ${API_DIR}/navigation-core/genivi-navigationcore-constants.xml > ${TARGET_GENERATED_API_DIR}/genivi-navigationcore-constants.h
 
-${TARGET_GENERATED_API_DIR}/genivi-positioning-constants.h: ${API_DIR}/enhanced-position-service/genivi-positioning-constants.xml
-	xsltproc ${API_DIR}/enhanced-position-service/enum.xsl ${API_DIR}/enhanced-position-service/genivi-positioning-constants.xml > ${TARGET_GENERATED_API_DIR}/genivi-positioning-constants.h
+#use the enum.xsl of navigation-core to generate the positioning constants
+${TARGET_GENERATED_API_DIR}/genivi-positioning-constants.h: ${positioning_API}/genivi-positioning-constants.xml
+	xsltproc ${API_DIR}/navigation-core/enum.xsl ${positioning_API}/genivi-positioning-constants.xml > ${TARGET_GENERATED_API_DIR}/genivi-positioning-constants.h
 
 ${TARGET_GENERATED_API_DIR}/genivi-mapviewer-constants.h: ${API_DIR}/map-viewer/genivi-mapviewer-constants.xml
 	xsltproc ${API_DIR}/map-viewer/enum.xsl ${API_DIR}/map-viewer/genivi-mapviewer-constants.xml > ${TARGET_GENERATED_API_DIR}/genivi-mapviewer-constants.h
