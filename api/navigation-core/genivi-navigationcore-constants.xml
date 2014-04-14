@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="constants.xsl"?>
+<!-- SPDX-License-Identifier: MPL-2.0
+     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
+     This Source Code Form is subject to the terms of the
+     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<constants  name="NavigationCore">
+  <version>3.0.0-alpha (23-10-2013)</version>
+  <doc>
+    <line>This document defines the constants used in the NavigationCore APIs</line>
+  </doc>
+
+  <id name="INVALID" value="0x0000" />
+  <id name="DEFAULT" value="0xfffe" />
+  <id name="ALL" value="0xffff" />
+
+  <id name="AVAILABLE" value="0x0001" />
+  <id name="NOT_AVAILABLE" value="0x0002" />
+
+  <id name="TIME_FORMAT" value="0x0003" />
+  <id name="12H" value="0x0004" />
+  <id name="24H" value="0x0005" />
+
+  <id name="COORDINATES_FORMAT" value="0x0006" />
+  <id name="DEGREES" value="0x0007" />
+  <id name="MINUTES" value="0x0008" />
+  <id name="SECONDS" value="0x0009" />
+
+  <id name="TIMESTAMP" value="0x0010" />
+  <id name="TIMEZONE_OFFSET" value="0x0011" />
+  <id name="DAYLIGHT_OFFSET" value="0x0012" />
+
+  <id name="LOCALE" value="0x0025" />
+
+  <id name="UNITS_OF_MEASUREMENT" value="0x0030" />
+  <id name="LENGTH" value="0x0031" />
+  <id name="METER" value="0x0032" />
+  <id name="MILE" value="0x0033" />
+  <id name="KM" value="0x0034" />
+  <id name="YARD" value="0x0035" />
+  <id name="FOOT" value="0x0036" />
+
+  <id name="DISABLED_PROMPT" value="0x0041" />
+  <id name="AUTOMATIC_PROMPT" value="0x0042" />
+  <id name="MANUAL_PROMPT" value="0x0043" />
+
+  <id name="CRUISE" value="0x0050" />
+  <id name="MANEUVER_APPEARED" value="0x0051" />
+  <id name="PRE_ADVICE" value="0x0052" />
+  <id name="ADVICE" value="0x0053" />
+  <id name="PASSED" value="0x0054" />
+
+  <id name="ACTIVE" value="0x0060" />
+  <id name="INACTIVE" value="0x0061" />
+
+  <id name="STRAIGHT_ON" value="0x0070" />
+  <id name="CROSSROAD" value="0x0071" />
+  <id name="ROUNDABOUT" value="0x0072" />
+  <id name="HIGHWAY_ENTER" value="0x0073" />
+  <id name="HIGHWAY_EXIT" value="0x0074" />
+  <id name="HIGHWAY_CHANGE_LANE" value="0x0075" />
+  <id name="DESTINATION" value="0x0076" />
+  <id name="WAYPOINT" value="0x0077" />
+  <id name="TURN" value="0x0078" />
+  <id name="BIFURCATION" value="0x0079" />
+
+  <id name="LEFT" value="0x0080" />
+  <id name="SLIGHT_LEFT" value="0x0081" />
+  <id name="HARD_LEFT" value="0x0082" />
+  <id name="RIGHT" value="0x0083" />
+  <id name="SLIGHT_RIGHT" value="0x0084" />
+  <id name="HARD_RIGHT" value="0x0085" />
+  <id name="UTURN_RIGHT" value="0x0086" />
+  <id name="UTURN_LEFT" value="0x0087" />
+
+  <id name="ALL_MANUAL" value="0x0090" />
+  <id name="ALL_AUTOMATIC" value="0x0091" />
+  <id name="TRAFFIC_MANUAL" value="0x0092" />
+  <id name="OFF_ROUTE_MANUAL" value="0x0093" />
+
+  <id name="LATITUDE" value="0x00a0" />
+  <id name="LONGITUDE" value="0x00a1" />
+  <id name="ALTITUDE" value="0x00a2" />
+
+  <id name="HEADING" value="0x00a3" />
+  <id name="SPEED" value="0x00a4" />
+  <id name="CLIMB" value="0x00a5" />
+
+  <id name="COUNTRY" value="0x00a6" />
+  <id name="STATE" value="0x00a7" />
+  <id name="CITY" value="0x00a8" />
+  <id name="ZIPCODE" value="0x00a9" />
+  <id name="STREET" value="0x00aa" />
+  <id name="HOUSENUMBER" value="0x00ab" />
+  <id name="CROSSING" value="0x00ac" />
+  <id name="DISTRICT" value="0x00ad" />
+  <id name="PHONENUMBER" value="0x00ae" />
+  <id name="POINAME" value="0x00af" />
+  <id name="TOWNCENTER" value="0x00b0" />
+  <id name="LOCATION_INPUT" value="0x00b1" />
+  <id name="FULL_ADDRESS" value="0x00b2" />
+  <id name="COUNTRYCODE" value="0x00b3" />
+  <id name="HOUSENAME" value="0x00b4" />
+
+  <id name="NOT_STARTED" value="0x0c0" />
+  <id name="SEARCHING" value="0x00c1" />
+  <id name="FINISHED" value="0x00c2" />
+
+  <id name="OK" value="0x00d0" />
+  <id name="UNKNOWN" value="0x00d1" />
+  <id name="AMBIGUOUS" value="0x00d2" />
+  <id name="INCONSISTENT" value="0x00d3" />
+
+  <id name="GNSS_FIX_STATUS" value="0x00e0" />
+  <id name="DR_STATUS" value="0x00e1" />
+  <id name="MM_STATUS" value="0x00e2" />
+  <id name="SIMULATION_MODE" value="0x00e3" />
+
+  <id name="MATCH_TYPE" value="0x00f0" />
+  <id name="ON_ROAD" value="0x00f1" />
+  <id name="OFF_ROAD" value="0x00f2" />
+  <id name="ON_FERRY" value="0x00f3" />
+  <id name="IN_TUNNEL" value="0x00f4" />
+  <id name="ON_CARPARK" value="0x00f5" />
+
+  <id name="NO_FIX" value="0x0100" />
+  <id name="TIME_FIX" value="0x0101" />
+  <id name="2D_FIX" value="0x0102" />
+  <id name="3D_FIX" value="0x0103" />
+
+  <id name="SEGMENT_ID" value="0x0110" />
+  <id name="DIRECTION_ON_SEGMENT" value="0x0112" />
+  <id name="DISTANCE_ON_SEGMENT" value="0x0113" />
+
+  <id name="INTERMEDIATE_POINTS" value="0x0120" />
+  <id name="WAYPOINT_TYPE" value="0x0121" />
+  <id name="SOFT_POINT" value="0x0122" />
+  <id name="HARD_POINT" value="0x0123" />
+
+  <id name="CALCULATION_OK" value="0x0130" />
+  <id name="NO_POSITION" value="0x0131" />
+
+  <id name="UNMATCHED_POSITION" value="0x0132" />
+  <id name="UNREACHABLE_DESTINATION" value="0x0133" />
+  <id name="UNFULFILLED_PREFERENCE_MODE" value="0x0134" />
+
+  <id name="LINK-ID" value="0x0140" />
+  <id name="START_LATITUDE" value="0x0141" />
+  <id name="END_LATITUDE" value="0x0142" />
+  <id name="START_LONGITUDE" value="0x0143" />
+  <id name="END_LONGITUDE" value="0x0144" />
+  <id name="START_ALTITUDE" value="0x0145" />
+  <id name="END_ALTITUDE" value="0x0146" />
+  <id name="ROAD_NAME" value="0x0147" />
+  <id name="DISTANCE" value="0x0148" />
+  <id name="TIME" value="0x0149" />
+  <id name="MANEUVER" value="0x014a" />
+  <id name="INSTRUCTION" value="0x014b" />
+  <id name="BORDER_CROSSING" value="0x014c" />
+  <id name="ADDITIONAL_INFORMATION" value="0x014d" />
+  <id name="ROAD_NUMBER" value="0x014e" />
+  <id name="START_OFFSET" value="0x014f" />
+
+  <id name="FASTEST" value="0x0160" />
+  <id name="SHORTEST" value="0x0161" />
+  <id name="ECOLOGICAL" value="0x0162" />
+  <id name="SCENIC" value="0x0163" />
+  <id name="EASY" value="0x0164" />
+  <id name="BALANCED" value="0x0166" />
+  <id name="CHEAPEST" value="0x0167" />
+
+  <id name="FERRY" value="0x0170" />
+  <id name="TOLL_ROADS" value="0x0171" />
+  <id name="TUNNELS" value="0x0172" />
+  <id name="HIGHWAYS_MOTORWAYS" value="0x0173" />
+  <id name="VEHICLE_SIZE_LIMIT" value="0x0174" />
+  <id name="CRIME_AREAS" value="0x0175" />
+
+  <id name="BY_CAR" value="0x0180" />
+  <id name="ON_FOOT" value="0x0181" />
+  <id name="LONG_RANGE_TRAINS" value="0x0182" />
+  <id name="PUBLIC_TRANSPORTATION" value="0x0183" />
+  <id name="BY_BICYCLE" value="0x0184" />
+  <id name="BY_TRUCK" value="0x0185" />
+
+  <id name="ARRIVAL_TIME" value="0x018a" />
+  <id name="ARRIVAL_DATE" value="0x018b" />
+  <id name="DEPARTURE_TIME" value="0x018c" />
+  <id name="DEPARTURE_DATE" value="0x018d" /> 
+  <id name="TOTAL_TIME" value="0x018e" /> 
+  <id name="TOTAL_DISTANCE" value="0x018f" /> 
+
+  <id name="PROHIBIT" value="0x0190" />
+  <id name="AVOID" value="0x0191" />
+  <id name="USE" value="0x0192" />
+  <id name="PREFER" value="0x0193" />
+  <id name="IGNORE" value="0x0194" />
+
+  <id name="TRAFFIC_REALTIME" value="0x0200" />
+
+  <id name="TRAFFIC" value="0x0210" />
+  <id name="OFF_ROUTE" value="0x0211" />
+  <id name="MANUAL" value="0x0212" />
+  
+  <id name="SIMULATION_STATUS_NO_SIMULATION" value="0x0220" />
+  <id name="SIMULATION_STATUS_RUNNING" value="0x0221" />
+  <id name="SIMULATION_STATUS_PAUSED" value="0x0222" />
+  <id name="SIMULATION_STATUS_FIXED_POSITION" value="0x0223" />
+
+</constants>

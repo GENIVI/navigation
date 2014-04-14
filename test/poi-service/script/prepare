@@ -1,0 +1,94 @@
+#!/bin/sh
+
+# @licence app begin@
+# SPDX-License-Identifier: MPL-2.0
+#
+# \copyright Copyright (C) 2013-2014, PCA Peugeot Citroen
+#
+# \file prepare
+#
+# \brief This file is part of the Build System.
+#
+# \author Philippe Colliot <philippe.colliot@mpsa.com>
+#
+# \version 1.0
+#
+# This Source Code Form is subject to the terms of the
+# Mozilla Public License (MPL), v. 2.0.
+# If a copy of the MPL was not distributed with this file,
+# You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# For further information see http://www.genivi.org/.
+#
+# List of changes:
+# 
+# <date>, <name>, <description of change>
+#
+# @licence end@
+CURDIR=$PWD
+ROOT_DIR=$CURDIR/..
+BIN_DIR=$ROOT_DIR/bin
+EXE_DIR=$BIN_DIR
+CONFIG_DIR=$HOME"/.config/poi-service"
+CHK_DIR_EXISTS='test -d'
+MKDIR='mkdir -p'
+
+echo '------------------------localize the project and prepare the database------------------------'
+#by default city set to paris
+city="paris"
+language='en'
+
+while getopts c:h opt
+do
+	case $opt in
+	c)
+		case "$OPTARG" in
+		paris)
+			city="paris"
+			language='en'
+			;;
+		tokyo)
+			city="tokyo"
+			language='jp'
+			;;
+		san-diego)
+			city="san-diego"
+			language='en'
+			;;
+		*)
+			echo "Unsupported city $OPTARG" >&2
+			exit 1
+			;;
+		esac
+		;;
+	h)
+		echo "Usage:"
+		echo "$0 [-c city]"
+		echo "-c: Set city area (supported values: paris,tokyo,san-diego). Default is paris"
+		echo "-h: Help"
+		exit 1
+	esac
+done
+
+echo 'generate the translation files for the APIs'
+lupdate $ROOT_DIR/poi-client/poi-client.pro
+lupdate $ROOT_DIR/poi-contentaccess-module/poi-contentaccess-module.pro
+lrelease $ROOT_DIR/poi-client/poi-client.pro
+lrelease $ROOT_DIR/poi-contentaccess-module/poi-contentaccess-module.pro 
+
+echo 'generate the databases'
+./make-database $city
+
+echo 'set the config file'
+if [ ! -d $CONFIG_DIR ]
+then 
+	echo create config directory
+	mkdir -p $CONFIG_DIR
+fi
+CONFIG_FILE=$ROOT_DIR/script/$city/poi-client.conf
+cp $CONFIG_FILE $CONFIG_DIR/poi-client.conf
+
+echo 'set the language for the content access module' 
+rm -rf $EXE_DIR/language.txt
+echo "$language" > $EXE_DIR/language.txt
+

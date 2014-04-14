@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="constants.xsl"?>
+<!-- SPDX-License-Identifier: MPL-2.0
+     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
+     This Source Code Form is subject to the terms of the
+     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<constants name="POIService">
+  <version>1.0.0 (19.12.2012)</version>
+  <doc>
+    <line>This document defines the constants used in the POIService APIs</line>
+  </doc>
+  <id name="INVALID" value="0"/>
+  <id name="AIRPORT" value="1"/>
+  <id name="SPORTING" value="2"/>
+  <id name="FERRY_TERMINAL" value="3"/>
+  <id name="ENTERTAINMENT" value="4"/>
+  <id name="HOTEL_MOTEL" value="5"/>
+  <id name="RESTAURANT" value="6"/>
+  <id name="PARKING" value="7"/>
+  <id name="FUEL_STATION" value="8"/>
+  <id name="SERVICE_AREA" value="9"/>
+  <id name="CAR_REPAIR_SHOP" value="10"/>
+  <id name="CAR_DEALER" value="11"/>
+  <id name="CAR_RENTAL_AGENCY" value="12"/>
+  <id name="MEDICAL" value="13"/>
+  <id name="SHOPPING" value="14"/>
+  <id name="BUSINESS_AREA" value="15"/>
+  <id name="LANDMARK" value="16"/>
+  <id name="FLASH_RADAR" value="17"/>
+  <id name="POI_TRUCK" value="18"/>
+  <id name="SANCTUARY" value="19"/>
+  <id name="TOLLBOOTH" value="20"/>
+  <id name="KIOSK" value="21"/>
+  <id name="WATER_CLOSET" value="22"/>
+  <id name="BANK_AND_FINANCIAL" value="23"/>
+  <id name="TRAVEL" value="24"/>
+  <id name="TOURIST" value="25"/>
+  <id name="PUBLIC_BUILDING" value="26"/>
+  <id name="RAILWAY_STATION" value="27"/>
+  <id name="DESTINATION_FLAG" value="204"/>
+  <id name="FAVORITE" value="205"/>
+  <id name="FAVORITE_HOME" value="206"/>
+  <id name="FAVORITE_ADDRESSBOOK" value="207"/>
+  <id name="USER_IMPORT" value="208"/>
+  <id name="USER_CONTACT" value="209"/>
+  <id name="MOTORWAY_EXIT" value="210"/>
+  <id name="ALL_CATEGORIES" value="0xffff"/>
+  <id name="STRING" value="500"/>
+  <id name="INTEGER" value="501"/>
+  <id name="COORDINATES" value="502"/>
+  <id name="NOT_STARTED" value="510"/>
+  <id name="SEARCHING" value="511"/>
+  <id name="FINISHED" value="512"/>
+  <id name="MORE_THAN" value="520"/>
+  <id name="LESS_THAN" value="521"/>
+  <id name="EQUAL" value="522"/>
+  <id name="SORT_DEFAULT" value="560"/>
+  <id name="SORT_BY_DISTANCE" value="561"/>
+  <id name="SORT_BY_TIME" value="562"/>
+  <id name="OFF_ROUTE" value="600"/>
+  <id name="ON_ROUTE" value="601"/>
+  <id name="INSIDE_CORRIDOR" value="602"/>
+  <id name="ADDED" value="700" />
+  <id name="REMOVED" value="701" />
+  <id name="ATTR_ADDED" value="702" />
+  <id name="ATTR_MODIFIED" value="703" />
+  <id name="ATTR_REMOVED" value="704" />
+</constants>

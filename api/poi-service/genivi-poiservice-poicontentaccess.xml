@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="introspect.xsl"?>
+<!-- SPDX-License-Identifier: MPL-2.0
+     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
+     This Source Code Form is subject to the terms of the
+     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/poiservice" xsi:noNamespaceSchemaLocation="introspect.xsd">
+  <interface name="org.genivi.poiservice.POIContentAccess">
+    <version>1.0.0 (19-12-2012)</version>
+    <doc>
+      <line>This interface offers a set of common methods for Content Access Modules (CAM). The CAM provide and update POI and categories information from remote sources to the POIService modules</line>
+    </doc>
+    <method name="RegisterContentAccessModule">
+      <doc>
+        <line>RegisterContentAccessModule = Register to the POI provider module.</line>
+        <line>When the CAM registers, it provides a name and then get a unique id. This id must be used everytime the CAM communicates with the POI service component.</line>
+        <line>After the registration is done, the CAM can start to update POI categories and POI attributes as well as registers POI categories to search for.</line>
+      </doc>
+      <arg direction="in" name="moduleName" type="s">
+        <doc>
+          <line>moduleName = The name of the CAM.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="camId" type="y">
+        <doc>
+          <line>camId = Content access module unique id as known by the POI service component.</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiContentAccess.Error.RegistrationFailed">
+        <doc>
+          <line>The registration failed (for instance the name is not unique).</line>
+        </doc>
+      </error>
+    </method>
+    <method name="UnRegisterContentAccessModule">
+      <doc>
+        <line>UnRegisterContentAccessModule = Remove CAM from POI provider module.</line>
+      </doc>
+      <arg name="camId" type="y" direction="in">
+        <doc>
+          <line>camId = Content access module unique id as known by the POI service component.</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiContentAccess.Error.CamNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to send data to the POI service component but the CAM id is not registered.</line>
+        </doc>
+      </error>
+    </method>
+    <method name="RegisterPoiCategories">
+      <doc>
+        <line>RegisterPoiCategories = Register to the POI provider module the categories you can search for POI.</line>
+        <line>The categories could be predifined one or customized ones. In order to register a customized category, you might need to create it before and add it to the POI service component.</line>
+      </doc>
+      <arg name="camId" type="y" direction="in">
+        <doc>
+          <line>camId = Content access module unique id as known by the POI service component.</line>
+        </doc>
+      </arg>
+      <arg name="poiCategories" type="aq" direction="in">
+        <doc>
+          <line>poiCategories = array[unique_id]</line>
+          <line>List of POI categories to register.</line>
+          <line>unique_id = Unique category id</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiContentAccess.Error.CamNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to send data to the POI service component but the CAM id is not registered.</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiContentAccess.Error.InvalidCategory">
+        <doc>
+          <line>The category was already registered.</line>
+        </doc>
+      </error>
+    </method>
+    <method name="AddCategories">
+      <doc>
+        <line>AddCategories = Add new categories to the POI service component.</line>
+        <line>The CAM provides for each categories the name, the parent categories, the top level attribute, the list of attributes, the icons, ... .</line>
+      </doc>
+      <arg name="camId" type="y" direction="in">
+        <doc>
+          <line>camId = Content access module unique id as known by the POI service component.</line>
+        </doc>
+      </arg>
+      <arg name="poiCategories" type="a((aqvssv)a(sqa(qs))a(qs))" direction="in">
+        <doc>
+          <line>poiCategories = array[details, attributes, sortOptions]</line>
+          <line>List of details for all the POI categories.</line>
+          <line>details = struct(list of parents_id, icons, name, short_desc, media)]</line>
+          <line>parents_id = list of parent categories unique id</line>
+          <line>icons = visual icons set</line>
+          <line>name = name</line>
+          <line>short_desc = short category description (optional)</line>
+          <line>media = medial associated (html web site, audio, video, ...) (optional)</line>
+          <line>attributes = array[struct(name, type, array[struct(operator_id, operator_name)])</line>
+          <line>name = attribute unique name</line>
+          <line>type = enum(INVALID,STRING,INTEGER,COORDINATES ...)</line>
+          <line>operator_id = enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....)</line>
+          <line>operator_name = attribute operator name</line>
+          <line>sortOptions = array[struct(id, name)]</line>
+          <line>id = enum(SORT_DEFAULT,SORT_BY_DISTANCE,SORT_BY_TIME,ATTRIBUTE_CUSTOM, ... )</line>
+          <line>name = name to be displayed by application</line>
+        </doc>
+      </arg>
+      <arg name="poiCategoriesId" type="aq" direction="out">
+        <doc>
+          <line>poiCategoriesId = array of unique POI categories as registered by the POI service component.</line>
+          <line>Note: A POI category is a unique ID.</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiContentAccess.Error.CamNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to send data to the POI service component but the CAM id is not registered.</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiContentAccess.Error.InvalidCategory">
+        <doc>
+          <line>The category was already added or is already a predifined one.</line>
+          <line>Note: As there is no id yet, a category is defined as unique if there was no category registered before with the same name and parent category.</line>
+        </doc>
+      </error>
+    </method>
+    <method name="UpdateCategories">
+      <doc>
+        <line>UpdateCategories = Update categories in the POI service component. It could be a predifined or a customed one.</line>
+        <line>The CAM provides for each categories the list of attributes (mandatories like name or optional) it wants to update.</line>
+        <line>Depending on the local database write policy, the CAM might only be able to update customized attributes for a category and not the predefined ones so some update could be rejected.</line>
+      </doc>
+      <arg name="camId" type="y" direction="in">
+        <doc>
+          <line>camId = Content access module unique id as known by the POI service component.</line>
+        </doc>
+      </arg>
+      <arg name="poiCategories" type="a(qa(sqa(qs))a(qs))" direction="in">
+        <doc>
+          <line>poiCategories = array[unique_id, attributes, sortOptions]</line>
+          <line>List of attributes to update.</line>
+          <line>unique_id = unique category id</line>
+          <line>attributes = array[struct(name, type, array[struct(operator_id, operator_name)])</line>
+          <line>name = attribute unique name</line>
+          <line>type = enum(INVALID,STRING,INTEGER,COORDINATES ...)</line>
+          <line>operator_id = enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....)</line>
+          <line>operator_name = attribute operator name</line>
+          <line>sortOptions = array[struct(id, name)]</line>
+          <line>id = enum(SORT_DEFAULT,BY_DISTANCE,BY_TIME,ATTRIBUTE_CUSTOM, ... )</line>
+          <line>name = name to be displayed by application</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiContentAccess.Error.CamNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to send data to the POI service component but the CAM id is not registered.</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiContentAccess.Error.ReadOnly">
+        <doc>
+          <line>At least one of the attribute of a given category was not updated due to read-only policy.</line>
+          <line>Note: The other attributes were updated.</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiContentAccess.Error.InvalidCategory">
+        <doc>
+          <line>One of the category is not available.</line>
+        </doc>
+      </error>
+    </method>
+    <method name="RemoveCategories">
+      <doc>
+        <line>RemoveCategories = Remove categories from the POI service component. It could be a predifined or a customed one.</line>
+        <line>Depending on the local database write policy, the CAM might only not be able to remove some categories.</line>
+      </doc>
+      <arg name="camId" type="y" direction="in">
+        <doc>
+          <line>camId = Content access module unique id as known by the POI service component.</line>
+        </doc>
+      </arg>
+      <arg name="poiCategories" type="aq" direction="in">
+        <doc>
+          <line>poiCategories = array[unique_id]</line>
+          <line>List of categories to remove.</line>
+          <line>unique_id = unique category id</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiContentAccess.Error.CamNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to send data to the POI service component but the CAM id is not registered.</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiContentAccess.Error.ReadOnly">
+        <doc>
+          <line>At least one of the category was not deleted due to read-only policy.</line>
+          <line>Note: The other categories were removed.</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiContentAccess.Error.InvalidCategory">
+        <doc>
+          <line>One of the category is not available.</line>
+        </doc>
+      </error>
+    </method>
+  </interface>
+</node>

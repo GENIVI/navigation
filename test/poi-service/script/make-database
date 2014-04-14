@@ -1,0 +1,88 @@
+#!/bin/sh
+
+# @licence app begin@
+# SPDX-License-Identifier: MPL-2.0
+#
+# \copyright Copyright (C) 2013-2014, PCA Peugeot Citroen
+#
+# \file make-database
+#
+# \brief This file is part of the Build System.
+#
+# \author Philippe Colliot <philippe.colliot@mpsa.com>
+#
+# \version 1.0
+#
+# This Source Code Form is subject to the terms of the
+# Mozilla Public License (MPL), v. 2.0.
+# If a copy of the MPL was not distributed with this file,
+# You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# For further information see http://www.genivi.org/.
+#
+# List of changes:
+# 
+# <date>, <name>, <description of change>
+#
+# @licence end@
+
+CURDIR=$PWD
+ROOT_DIR=$CURDIR/..
+BIN_DIR=$ROOT_DIR/bin
+EXE_DIR=$BIN_DIR
+CHK_DIR_EXISTS='test -d'
+MKDIR='mkdir -p'
+
+if [ $# -eq 0 ]
+  then
+    echo "Set city area (supported values: paris,tokyo,san-diego)"
+	exit
+fi
+
+#folder that contains the downloaded poi files
+POI_FILES_DIR=$ROOT_DIR/script/$1
+
+FUEL_FILE=$POI_FILES_DIR/'fuel-station.xml'
+MUSEUM_AND_HOTEL_FILE=$POI_FILES_DIR/'museum-and-hotel.xml'
+STATION_FILE=$POI_FILES_DIR/'station.xml'
+BICYCLE_FILE=$POI_FILES_DIR/'bicycle.xml'
+MAIN_DATABASE=$EXE_DIR/'poi-database.db'
+ADDITIONAL_DATABASE=$EXE_DIR/'poi-database-additional.db'
+
+if [ ! -f $FUEL_FILE ]
+then
+    echo $FUEL_FILE does not exist
+	exit
+fi
+if [ ! -f $MUSEUM_AND_HOTEL_FILE ]
+then
+    echo $MUSEUM_AND_HOTEL_FILE does not exist
+	exit
+fi
+if [ ! -f $STATION_FILE ]
+then
+    echo $STATION_FILE does not exist
+	exit
+fi
+if [ ! -f $BICYCLE_FILE ]
+then
+    echo $BICYCLE_FILE does not exist
+	exit
+fi
+
+echo 'clean up'
+rm $EXE_DIR/*.db
+echo 'create empty databases'
+cp poi-database-empty $MAIN_DATABASE
+cp poi-database-empty $ADDITIONAL_DATABASE
+echo 'create the main databases for the poi-client'
+sqlite3 $MAIN_DATABASE < create-scheme.sql
+sqlite3 $MAIN_DATABASE < populate-database.sql
+$EXE_DIR/poi-supplier -p $MAIN_DATABASE $FUEL_FILE primary=amenity secondary=fuel,
+$EXE_DIR/poi-supplier -p $MAIN_DATABASE $MUSEUM_AND_HOTEL_FILE primary=tourism secondary=museum,hotel,
+$EXE_DIR/poi-supplier -p $MAIN_DATABASE $STATION_FILE primary=railway secondary=station,
+echo 'create the additional database for the poi-content-access-client'
+sqlite3 $ADDITIONAL_DATABASE < create-scheme.sql
+sqlite3 $ADDITIONAL_DATABASE < populate-database-additional.sql
+$EXE_DIR/poi-supplier -p $ADDITIONAL_DATABASE $BICYCLE_FILE primary=shop secondary=bicycle,
+

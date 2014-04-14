@@ -1,0 +1,373 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="introspect.xsl"?>
+<!-- SPDX-License-Identifier: MPL-2.0
+     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
+     This Source Code Form is subject to the terms of the
+     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/navigationcore" xsi:noNamespaceSchemaLocation="introspect.xsd">
+  <interface name="org.genivi.navigationcore.Guidance">
+    <version>3.0.0-alpha (23-10-2013)</version>
+    <doc>
+      <line>Guidance = This interface offers functions that implement the route-guidance functionality of a navigation system</line>
+    </doc>
+    <method name="GetVersion">
+      <doc>
+        <line>GetVersion = This method returns the API version implemented by the server application</line>
+      </doc>
+      <arg name="version" type="(qqqs)" direction="out">
+        <doc>
+          <line>version = struct(major,minor,micro,date)</line>
+          <line>major = when the major changes, then backward compatibility with previous releases is not granted</line>
+          <line>minor = when the minor changes, then backward compatibility with previous releases is granted, but something changed in the implementation of the API (e.g. new methods may have been added)</line>
+          <line>micro = when the micro changes, then backward compatibility with previous releases is granted (bug fixes or documentation modifications)</line>
+          <line>date = release date (e.g. 21-06-2011)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="StartGuidance">
+      <doc>
+        <line>StartGuidance = This method starts the guidance for a given route</line>
+		<line>The guidanceStatus will change to ACTIVE</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="StopGuidance">
+      <doc>
+        <line>StopGuidance = This method stops the guidance</line>
+		<line>The guidanceStatus will change to INACTIVE</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetVoiceGuidance">
+      <doc>
+        <line>SetVoiceGuidance = This method switch on/off the voice guidance</line>
+      </doc>
+      <arg name="activate" type="b" direction="in">
+        <doc>
+          <line>activation of the voice guidance</line>
+        </doc>
+      </arg>
+      <arg name="voice" type="s" direction="in">
+        <doc>
+          <line>kind of voice (to be defined)</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.Guidance.Error.VoiceNotAllowed">
+        <doc>
+          <line>This error is generated if the voice generation is inactive </line>
+        </doc>
+      </error>
+    </method>
+    <method name="GetGuidanceDetails">
+      <doc>
+        <line>GetGuidanceDetails = This method retrieves guidance information </line>
+      </doc>
+      <arg name="voiceGuidance" type="b" direction="out">
+        <doc>
+          <line>voiceGuidance = if TRUE voice guidance is active</line>
+        </doc>
+      </arg>
+      <arg name="vehicleOnTheRoad" type="b" direction="out">
+        <doc>
+          <line>vehicleOnTheRoad = if TRUE the vehicle is located on the road network</line>
+        </doc>
+      </arg>
+      <arg name="isDestinationReached" type="b" direction="out">
+        <doc>
+          <line>isDestinationReached = if TRUE the destination has been reached</line>
+        </doc>
+      </arg>
+      <arg name="maneuver" type="q" direction="out">
+        <doc>
+          <line>maneuver = enum(INVALID,CRUISE,MANEUVER_APPEARED,PRE_ADVICE,ADVICE,PASSED, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="PlayVoiceManeuver">
+      <doc>
+        <line>PlayVoiceManeuver = This method plays or repeats the last voice guidance</line>
+      </doc>
+      <error name="org.genivi.navigationcore.Guidance.Error.VoiceNotAllowed">
+        <doc>
+          <line>This error is generated if the voice generation is inactive </line>
+        </doc>
+      </error>
+    </method>
+    <method name="GetWaypointInformation">
+      <doc>
+        <line>GetWaypointInformation = This method retrieves the information on the remaining way points of the route. A point can be the final destination as well as a stage defined by the user. The returned waypoints are ordered by their 'number'.</line>
+      </doc>
+      <arg name="requestedNumberOfWaypoints" type="q" direction="in">
+        <doc>
+          <line>requestedNumberOfWaypoints = the number of requested waypoints. If 0, all waypoints will be returned.</line>
+        </doc>
+      </arg>
+      <arg name="numberOfWaypoints" type="q" direction="out">
+        <doc>
+          <line>numberOfWaypoints = the number of retrieved waypoints(NOTE: the number corresponds to the number of elements in the array)</line>
+        </doc>
+      </arg>
+      <arg name="waypointsList" type="a(uuiqnnbq)" direction="out">
+        <doc>
+          <line>array[struct(waypointOffset,travelTime,direction,side,timeZone,daylightSavingTime,isDestination,number)]</line>
+          <line>waypointOffset = the offset of the way point in meters from the beginning of the route</line>
+          <line>travelTime = time to reach the way point in seconds</line>
+          <line>direction = direction of the way point in degree relatively to the North. Range [0:360]</line>
+          <line>side = enum(LEFT,RIGHT,NOT_AVAILABLE)</line>
+          <line>timeZone = time zone of the way point. It is expressed as the time difference from the UTC in minutes</line>
+          <line>daylightSavingTime = daylight saving time of the way point. It is expressed as the time difference from the UTC in minutes</line>
+          <line>isDestination = if TRUE the way point is the destination</line>
+          <line>number = number of the next waypoint (related to the waypoint list, first way point index is 0)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetDestinationInformation">
+      <doc>
+        <line>This method retrieves the information on the final destination</line>
+      </doc>
+      <arg name="offset" type="u" direction="out">
+        <doc>
+          <line>offset = offset of the destination in meter from the beginning of the route</line>
+        </doc>
+      </arg>
+      <arg name="travelTime" type="u" direction="out">
+        <doc>
+          <line>travelTime = time to reach the destination in second</line>
+        </doc>
+      </arg>
+      <arg name="direction" type="i" direction="out">
+        <doc>
+          <line>direction = direction of the destination in degree relatively to the North. Range [0:360]</line>
+        </doc>
+      </arg>
+      <arg name="side" type="q" direction="out">
+        <doc>
+          <line>side = enum(LEFT,RIGHT,NOT_AVAILABLE)</line>
+        </doc>
+      </arg>
+      <arg name="timeZone" type="n" direction="out">
+        <doc>
+          <line>timeZone = time zone of the destination. It is expressed as the time difference from the UTC in minutes</line>
+        </doc>
+      </arg>
+      <arg name="daylightSavingTime" type="n" direction="out">
+        <doc>
+          <line>daylightSavingTime = daylight saving time of the destination. It is expressed as the time difference from the UTC in minutes</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="VehicleLeftTheRoadNetwork">
+      <doc>
+        <line>VehicleLeftTheRoadNetwork = This signal is emitted when the vehicle exits from the road network</line>
+      </doc>
+    </signal>
+    <signal name="GuidanceStatusChanged">
+      <doc>
+        <line>GuidanceStatusChanged = This signal is emitted when the guidance status changes</line>
+      </doc>
+      <arg name="guidanceStatus" type="q">
+        <doc>
+          <line>guidanceStatus = enum(INVALID,ACTIVE,INACTIVE)</line>
+          <line>ACTIVE means that NavigationCore is providing guidance information</line>
+          <line>INACTIVE means that NavigationCore is not providing guidance information</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="u">
+        <doc>
+          <line>routeHandle = Active route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value. Should be ignored when guidanceStatus=INACTIVE.</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="WaypointReached">
+      <doc>
+        <line>WaypointReached = This signal is emitted when the destination is reached</line>
+      </doc>
+      <arg name="isDestination" type="b">
+        <doc>
+          <line>isDestination = flag. TRUE means that the way point is the destination</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="ManeuverChanged">
+      <doc>
+        <line>This signal is emitted each time a maneuver event is going</line>
+      </doc>
+      <arg name="maneuver" type="q">
+        <doc>
+          <line>maneuver = enum(INVALID,CRUISE,MANEUVER_APPEARED,PRE_ADVICE,ADVICE,PASSED, ... )</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="PositionOnRouteChanged">
+      <doc>
+        <line>PositionOnRouteChanged = This signal is emitted when the position on the route changes</line>
+      </doc>
+      <arg name="offsetOnRoute" type="u">
+        <doc>
+          <line>offsetOnRoute = the current offset on the route in meters from the beginning of the route</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="GetManeuversList">
+      <doc>
+        <line>GetManeuversList = This method retrieves the list of next maneuvers</line>
+      </doc>
+      <arg name="requestedNumberOfManeuvers" type="q" direction="in">
+        <doc>
+          <line>requestedNumberOfManeuvers = the number of requested maneuvers</line>
+        </doc>
+      </arg>
+      <arg name="maneuverOffset" type="u" direction="in">
+        <doc>
+          <line>maneuverOffset = the offset of the first maneuver to retrieve</line>
+        </doc>
+      </arg>
+      <arg name="numberOfManeuvers" type="q" direction="out">
+        <doc>
+          <line>numberOfManeuvers = the number of retrieved maneuvers</line>
+          <line>Note: the number corresponds to the number of elements in the array</line>
+        </doc>
+      </arg>
+      <arg name="maneuversList" type="a(ssqqua(uui(qq)(qs)))" direction="out">
+        <doc>
+          <line>array[struct(roadNumberAfterManeuver,roadNameAfterManeuver,roadPropertyAfterManeuver,drivingSide,offsetOfNextManeuver,array[struct(offsetOfManeuver,travelTime,direction,struct(maneuver,maneuverLength),struct(maneuverDirection,exitNumber))])]</line>
+          <line>roadNumberAfterManeuver = the number of the road after the maneuver (if a road has multiple road numbers, they will be separated by slashes ('/') and combined into one string)</line>
+          <line>roadNameAfterManeuver = the name of the road after the maneuver</line>
+          <line>roadPropertyAfterManeuver = enum(TOLL_ROADS, ... ,DEFAULT)</line>
+          <line>drivingSide = enum(LEFT,RIGHT)</line>
+          <line>offsetOfNextManeuver = the offset of the next maneuver in meters from the beginning of the route (next maneuver is the second maneuver on the route ahead)</line>
+          <line>offsetOfManeuver = the offset of the current maneuver in meters from the beginning of the route (current maneuver is the first maneuver on the route ahead)</line>
+          <line>travelTime = travel time to the basic maneuver in seconds</line>
+          <line>direction = direction of the maneuver in degree relatively to the North. Range [0:360]</line>
+          <line>maneuver = enum(INVALID,STRAIGHT_ON,TURN,CROSSROAD,ROUNDABOUT,HIGHWAY_ENTER,HIGHWAY_EXIT,BIFURCATION,HIGHWAY_CHANGE_LANE,DESTINATION,WAYPOINT)</line>
+          <line>maneuverLength = when maneuver=ROUNDABOUT the length of the route segment between the entry to and the exit from the roundabout; 0 otherwise.</line>
+          <line>maneuverDirection = enum(INVALID,STRAIGHT_ON,LEFT,SLIGHT_LEFT,HARD_LEFT,RIGHT,SLIGHT_RIGHT,HARD_RIGHT,UTURN_RIGHT, UTURN_LEFT)</line>
+          <line>exitNumber = when maneuver=ROUNDABOUT or maneuver=HIGHWAY_EXIT the exit number; null otherwise.</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.Guidance.Error.NoManeuver">
+        <doc>
+          <line>This error is generated in case there's no maneuver until the destination</line>
+        </doc>
+      </error>
+    </method>
+    <signal name="VehicleLeftTheRoute">
+      <doc>
+        <line>VehicleLeftTheRoute = This signal is emitted when the vehicle has left the route</line>
+      </doc>
+    </signal>
+    <method name="SetRouteCalculationMode">
+      <doc>
+        <line>SetRouteCalculationMode = This method configures the way the navigation application wants the navigation core to behave of reroute trigger</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="routeCalculationMode" type="q" direction="in">
+        <doc>
+          <line>routeCalculationMode = enum(INVALID,ALL_MANUAL,ALL_AUTOMATIC,TRAFFIC_MANUAL,OFF_ROUTE_MANUAL)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SkipNextManeuver">
+      <doc>
+        <line>SkipNextManeuver = This method allows to jump behind the current maneuver</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.Guidance.Error.NoManeuver">
+        <doc>
+          <line>This error is generated in case there's no maneuver until the destination</line>
+        </doc>
+      </error>
+    </method>
+    <method name="GetGuidanceStatus">
+      <doc>
+        <line>GetGuidanceStatus = This method retrieves the guidance status</line>
+      </doc>
+      <arg name="guidanceStatus" type="q" direction="out">
+        <doc>
+          <line>guidanceStatus = enum(INVALID,ACTIVE,INACTIVE)</line>
+          <line>ACTIVE means that NavigationCore is providing guidance information</line>
+          <line>INACTIVE means that NavigationCore is not providing guidance information</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="u" direction="out">
+        <doc>
+          <line>routeHandle = Active route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value. Should be ignored when guidanceStatus=INACTIVE</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetVoiceGuidanceSettings">
+      <doc>
+        <line>SetVoiceGuidanceSettings = This method sets the voice guidance settings</line>
+      </doc>
+      <arg name="promptMode" type="q" direction="in">
+        <doc>
+          <line>mode = enum(INVALID,DISABLED_PROMPT,AUTOMATIC_PROMPT,MANUAL_PROMPT, ... )</line>
+          <line>MANUAL_PROMPT means that a client application can ask the NavigationCore to play the voice prompts</line>
+          <line>AUTOMATIC_PROMPT means that the voice prompts will be requested by NavigationCore automatically</line>
+          <line>DISABLED_PROMPT means that the client application will the voice generator component directly to play the messages (bypassing the NavigationCore)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetVoiceGuidanceSettings">
+      <doc>
+        <line>GetVoiceGuidanceSettings = This method returns the used voice guidance settings</line>
+      </doc>
+      <arg name="promptMode" type="q" direction="out">
+        <doc>
+          <line>mode = enum(INVALID,DISABLED_PROMPT,AUTOMATIC_PROMPT,MANUAL_PROMPT, ... )</line>
+          <line>MANUAL_PROMPT means that a client application can ask the NavigationCore to play the voice prompts</line>
+          <line>AUTOMATIC_PROMPT means that the voice prompts will be requested by NavigationCore automatically</line>
+          <line>DISABLED_PROMPT means that the client application will the voice generator component directly to play the messages (bypassing the NavigationCore)</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="PositionToRouteChanged">
+      <doc>
+        <line>PositionToRouteChanged = This signal is emitted when the vehicle is off-the-road network and either the heading or the distance (or both) to the closest point on the active route changes</line>
+      </doc>
+      <arg name="distance" type="u">
+        <doc>
+          <line>distance = distance in meters to the closest point on the active route</line>
+        </doc>
+      </arg>
+      <arg name="direction" type="i">
+        <doc>
+          <line>direction = direction in degrees relatively to the closest point on the active route. Range [0:360]</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="ActiveRouteChanged">
+      <doc>
+        <line>ActiveRouteChanged = This signal is emitted when the active route changes</line>
+      </doc>
+      <arg name="changeCause" type="q">
+        <doc>
+          <line>changeCause = enum(INVALID,TRAFFIC,OFF_ROUTE,MANUAL,...)</line>
+        </doc>
+      </arg>
+    </signal>
+  </interface>
+</node>

@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="introspect.xsl"?>
+<!-- SPDX-License-Identifier: MPL-2.0
+     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
+     This Source Code Form is subject to the terms of the
+     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/navigationcore" xsi:noNamespaceSchemaLocation="introspect.xsd">
+  <interface name="org.genivi.navigationcore.Session">
+    <version>3.0.0-alpha (07-06-2013)</version>
+    <doc>
+      <line>Session = This interface offers functions to create and delete sessions</line>
+    </doc>
+    <method name="GetVersion">
+      <doc>
+        <line>GetVersion = This method returns the API version implemented by the server application</line>
+      </doc>
+      <arg name="version" type="(qqqs)" direction="out">
+        <doc>
+          <line>version = struct(major,minor,micro,date)</line>
+          <line>major = when the major changes, then backward compatibility with previous releases is not granted</line>
+          <line>minor = when the minor changes, then backward compatibility with previous releases is granted, but something changed in the implementation of the API (e.g. new methods may have been added)</line>
+          <line>micro = when the micro changes, then backward compatibility with previous releases is granted (bug fixes or documentation modifications)</line>
+          <line>date = release date (e.g. 21-06-2011)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="CreateSession">
+      <doc>
+        <line>CreateSession = This method creates a new session</line>
+      </doc>
+      <arg name="client" type="s" direction="in">
+        <doc>
+          <line>client = name or identifier of the client application that requests a new session</line>
+          <line>The navigation core must internally associate this name to the returned session handle</line>
+          <line>This parameter can be used to identify the client application and determine if a given feature is enabled for it</line>
+        </doc>
+      </arg>
+      <arg name="sessionHandle" type="u" direction="out">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.Session.Error.NoMoreSessionHandles">
+        <doc>
+          <line>This error is generated if no more session handles are available</line>
+        </doc>
+      </error>
+    </method>
+    <method name="DeleteSession">
+      <doc>
+        <line>DeleteSession = This method deletes a session and its associated resources</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.Session.Error.SessionNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to delete a session handle that is not available</line>
+        </doc>
+      </error>
+    </method>
+    <method name="GetSessionStatus">
+      <doc>
+        <line>GetSessionStatus = This method returns whether a given session handle is available or not (for example because it was deleted)</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="sessionStatus" type="q" direction="out">
+        <doc>
+          <line>sessionStatus = enum(INVALID,AVAILABLE,NOT_AVAILABLE)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetAllSessions">
+      <doc>
+        <line>GetAllSessions = This method returns a list of all available sessions</line>
+      </doc>
+      <arg name="sessionsList" type="a(us)" direction="out">
+        <doc>
+          <line>sessionsList = array[struct(sessionHandle,client)]</line>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+          <line>client = name or identifier of the client application that requested the sessionHandle</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="SessionDeleted">
+      <doc>
+        <line>SessionDeleted = This signal is emitted when a session is deleted</line>
+      </doc>
+      <arg name="sessionHandle" type="u">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+    </signal>
+  </interface>
+</node>

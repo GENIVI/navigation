@@ -1,0 +1,1507 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="introspect.xsl"?>
+<!-- SPDX-License-Identifier: MPL-2.0
+     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
+     This Source Code Form is subject to the terms of the
+     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/mapviewer" xsi:noNamespaceSchemaLocation="introspect.xsd">
+  <interface name="org.genivi.mapviewer.MapViewerControl">
+    <version>3.0.0-alpha (07-06-2013)</version>
+    <doc>
+      <line>MapViewerControl = This interface offers functions to control the MapViewer</line>
+    </doc>
+    <method name="GetVersion">
+      <doc>
+        <line>GetVersion = This method returns the API version implemented by the server application</line>
+      </doc>
+      <arg name="version" type="(qqqs)" direction="out">
+        <doc>
+          <line>version = struct(major,minor,micro,date)</line>
+          <line>major = when the major changes, then backward compatibility with previous releases is not granted</line>
+          <line>minor = when the minor changes, then backward compatibility with previous releases is granted, but something changed in the implementation of the API (e.g. new methods may have been added)</line>
+          <line>micro = when the micro changes, then backward compatibility with previous releases is granted (bug fixes or documentation modifications)</line>
+          <line>date = release date (e.g. 21-06-2011)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="CreateMapViewInstance">
+      <doc>
+        <line>CreateMapViewInstance = This method creates a new map instance</line>
+        <line>Note: when a map instance is created, it is set to 'not visible' by default</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewSize" type="(qq)" direction="in">
+        <doc>
+          <line>mapViewSize = struct(horizontalSize,verticalSize) of the map instance in pixels.</line>
+          <line>horizontalSize = horizontal size of the map instance in pixels</line>
+          <line>verticalSize = vertical size of the map instance in pixels</line>
+        </doc>
+      </arg>
+      <arg name="mapViewType" type="q" direction="in">
+        <doc>
+          <line>mapViewType = enum(INVALID,MAIN_MAP,SPLIT_SCREEN, ... )</line>
+          <line>Note: to be used in case that a specific position of the map instance with respect to the display viewport is required</line>
+          <line>For example, if the instance 1 is of type MAIN_MAP and the instance 2 is of type SPLIT_SCREEN, the offset of the map instances</line>
+          <line>with respect to the display viewport could be (0;0) and (hres/2;0) respectively</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="out">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.mapviewer.MapViewerControl.Error.NoMoreMapViewInstanceHandles">
+        <doc>
+          <line>This error is generated if no more map view instance handles are available</line>
+        </doc>
+      </error>
+    </method>
+    <method name="ReleaseMapViewInstance">
+      <doc>
+        <line>ReleaseMapViewInstance = This method releases (i.e. destroys) a given map instance. Only invisible map instances can be released</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.mapviewer.MapViewerControl.Error.MapViewInstanceNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to delete a map view instance handle that is not available</line>
+        </doc>
+      </error>
+    </method>
+    <method name="GetMapViewType">
+      <doc>
+        <line>GetMapViewType = This method returns the map type of a map instance as it was set using CreateMapViewInstance</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewType" type="q" direction="out">
+        <doc>
+          <line>mapViewType = enum(INVALID,MAIN_MAP,SPLIT_SCREEN, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSupportedMapViewTypes">
+      <doc>
+        <line>GetSupportedMapViewTypes = This method retrieves the supported map view types</line>
+      </doc>
+      <arg name="mapViewTypeList" type="aq" direction="out">
+        <doc>
+          <line>mapViewTypeList = array[mapViewType]</line>
+          <line>mapViewType = enum(INVALID,MAIN_MAP,SPLIT_SCREEN, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetTargetPoint">
+      <doc>
+        <line>SetTargetPoint = This method sets the position of the point the camera is always aimed at</line>
+        <line>Note: the target point is typically visualized in the center of the map</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="targetPoint" type="(ddi)" direction="in">
+        <doc>
+          <line>targetPoint = (lat,lon,alt)</line>
+          <line>lat = latitude in format %3.6f. Range[-90:+90]</line>
+          <line>lon = longitude in format %3.6f. Range[-180:+180]</line>
+          <line>alt = altitude to the ground in meters</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetTargetPoint">
+      <doc>
+        <line>GetTargetPoint = This method retrieves the target point position</line>
+        <line>Note: if the FollowCar mode is active, the this method will return the current vehicle position</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="targetPoint" type="(ddi)" direction="out">
+        <doc>
+          <line>targetPoint = (lat,lon,alt)</line>
+          <line>lat = latitude in format %3.6f. Range[-90:+90]</line>
+          <line>lon = longitude in format %3.6f. Range[-180:+180]</line>
+          <line>alt = altitude to the ground in meters</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetFollowCarMode">
+      <doc>
+        <line>SetFollowCarMode = This method sets the FollowCar mode</line>
+        <line>Note: if the FollowCar is activated, the current car position is interpreted as target point position</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="followCarMode" type="b" direction="in">
+        <doc>
+          <line>followCarMode = flag. If true, the current car position is interpreted as position of the point the camera must look at</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetFollowCarMode">
+      <doc>
+        <line>GetFollowCarMode = This method returns the current FollowCar-mode</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="followCarMode" type="b" direction="out">
+        <doc>
+          <line>followCarMode = flag. If true, the current car position is interpreted as position of the point the camera must look at</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetCameraPosition">
+      <doc>
+        <line>SetCameraPosition = This method sets the coordinates of the point at which the camera must be positioned</line>
+        <line>Note: the camera heading will be automatically set in such a way, that the camera is aimed at the view point</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="position" type="(ddi)" direction="in">
+        <doc>
+          <line>position = (lat,lon,alt)</line>
+          <line>lat = latitude in format %3.6f. Range[-90:+90]</line>
+          <line>lon = longitude in format %3.6f. Range[-180:+180]</line>
+          <line>alt = altitude to the ground in meters</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetCameraPosition">
+      <doc>
+        <line>GetCameraPosition = This method returns the coordinates of the point at which the camera is positioned</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="position" type="(ddi)" direction="out">
+        <doc>
+          <line>position = (lat,lon,alt)</line>
+          <line>lat = latitude in format %3.6f. Range[-90:+90]</line>
+          <line>lon = longitude in format %3.6f. Range[-180:+180]</line>
+          <line>alt = altitude to the ground in meters</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetCameraHeadingAngle">
+      <doc>
+        <line>SetCameraHeadingAngle = This method sets the map view heading angle</line>
+        <line>Note: the camera position will be automatically set in such a way, that it looks at the currently selected target point</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="heading" type="i" direction="in">
+        <doc>
+          <line>heading = heading angle in degrees. Range [0:360]</line>
+          <line>The angle in degrees between projection on the ground plane of the line through the center of the screen and the top-centre of the screen, and the North direction</line>
+          <line>0 degrees means that the map view is oriented such that North is at the top of the screen</line>
+          <line>Degrees are measured clockwise such that 90 degrees correspond to the East direction</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetCameraHeadingToTarget">
+      <doc>
+        <line>SetCameraHeadingToTarget = This method sets the camera heading in such a way, that the camera always looks at a given target</line>
+        <line>Note: the camera position will be automatically set in such a way, that it aims at the current view point</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="target" type="(dd)" direction="in">
+        <doc>
+          <line>target = struct(lat,lon)</line>
+          <line>lat = latitude of the point towards which the map vertical axis must be aligned in format %3.6f. Range[-90:+90]</line>
+          <line>lon = longitude of the point towards which the map vertical axis must be aligned in format %3.6f. Range[-180:+180]</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetCameraHeadingTrackUp">
+      <doc>
+        <line>SetCameraHeadingTrackUp = This method sets the camera heading in such a way, that the camera always looks in the direction in which the car is moving</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetCameraHeading">
+      <doc>
+        <line>GetCameraHeading = This method returns the current camera heading</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="headingType" type="q" direction="out">
+        <doc>
+          <line>headingType = enum(INVALID,CONSTANT_ANGLE,TRACK_UP,TOWARDS_TARGET, ... )</line>
+        </doc>
+      </arg>
+      <arg name="headingAngle" type="i" direction="out">
+        <doc>
+          <line>headingAngle = heading angle in degrees measured from the North axis clockwise. Range[0:360]</line>
+          <line>Note: meaningful only if heading != TOWARDS_TARGET, otherwise it is just a dummy value and must be set to 0</line>
+        </doc>
+      </arg>
+      <arg name="target" type="(dd)" direction="out">
+        <doc>
+          <line>headingTarget = struct(lat,lon)</line>
+          <line>lat = latitude of the point towards which the map vertical axis must be aligned in format %3.6f. Range[-90:+90]</line>
+          <line>lon = longitude of the point towards which the map vertical axis must be aligned in format %3.6f. Range[-180:+180]</line>
+          <line>Note: meaningful only if heading = TOWARDS_TARGET, otherwise it is just a dummy value and must be set to (0,0)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetCameraTiltAngle">
+      <doc>
+        <line>SetCameraTiltAngle = This method sets the camera tilt angle</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="tilt" type="i" direction="in">
+        <doc>
+          <line>tilt = tilt angle in degrees. Range [-180:180]</line>
+          <line>Example: 0 = down (straight down to the ground plane), 90 = front (parrallel to the ground plane), 180 = top (straight up to the sky)</line>
+          <line>Negative angles [0:-180] result in an upside down view</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetCameraTiltAngle">
+      <doc>
+        <line>GetMapViewTiltAngle = This method returns the camera tilt angle</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="tilt" type="i" direction="out">
+        <doc>
+          <line>tilt = tilt angle in degrees. Range [-180:180]</line>
+          <line>Example: 0 = down (straight down to the ground plane), 90 = front (parrallel to the ground plane), 180 = top (straight up to the sky)</line>
+          <line>Negative angles [0:-180] result in an upside down view</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetCameraRollAngle">
+      <obligation>Optional</obligation>
+      <doc>
+        <line>SetCameraRollAngle = This method sets the camera roll angle</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="roll" type="i" direction="in">
+        <doc>
+          <line>roll = roll angle in degrees. Range [-180:180]</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetCameraRollAngle">
+      <obligation>Optional</obligation>
+      <doc>
+        <line>GetCameraRollAngle = This method returns the camera roll angle</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="roll" type="i" direction="out">
+        <doc>
+          <line>roll = roll angle in degrees. Range [-180:180]</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetCameraDistanceFromTargetPoint">
+      <doc>
+        <line>SetCameraDistanceFromTargetPoint = This method sets the mode and the camera distance from the target point</line>
+        <line>Note: this method can be used to zoom in and out</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="distance" type="u" direction="in">
+        <doc>
+          <line>distance = distance from the view point in meters</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetCameraDistanceFromTargetPoint">
+      <doc>
+        <line>GetCameraDistanceFromTargetPoint = This method gets the mode and the camera distance from the target point</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="distance" type="u" direction="out">
+        <doc>
+          <line>distance = distance from the view point in meters</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetMapViewScaleMode">
+      <doc>
+        <line>SetMapViewScaleMode = This method sets the scaling mode.</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="scaleMode" type="q" direction="in">
+        <doc>
+          <line>scaleMode = enum(AUTOMATIC,MANUAL,HYBRID)</line>
+          <line>scaleMode = AUTOMATIC, adjusts the camera distance automatically (e.g. depending on the speed)</line>
+          <line>scaleMode = MANUAL, the camera distance is specified by the argument 'distance'</line>
+          <line>scaleMode = HYBRID, e.g. AUTOMATIC depending on the proximity to the target, MANUAL otherwise</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetMapViewScaleMode">
+      <doc>
+        <line>GetMapViewScaleMode = This method gets the scaling mode.</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="scaleMode" type="q" direction="out">
+        <doc>
+          <line>scaleMode = enum(AUTOMATIC,MANUAL,HYBRID)</line>
+          <line>scaleMode = AUTOMATIC, adjusts the camera distance automatically (e.g. depending on the speed)</line>
+          <line>scaleMode = MANUAL, the camera distance is specified by the argument 'distance'</line>
+          <line>scaleMode = HYBRID, e.g. AUTOMATIC depending on the proximity to the target, MANUAL otherwise</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSupportedMapViewScaleModes">
+      <doc>
+        <line>GetSupportedMapViewScaleModes = This method gets the supported scaling modes.</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="scaleModeList" type="aq" direction="out">
+        <doc>
+          <line>scaleModeList = array[scaleMode]</line>
+          <line>scaleMode = enum(AUTOMATIC,MANUAL,HYBRID)</line>
+          <line>scaleMode = AUTOMATIC, adjusts the camera distance automatically (e.g. depending on the speed)</line>
+          <line>scaleMode = MANUAL, the camera distance is specified by the argument 'distance'</line>
+          <line>scaleMode = HYBRID, e.g. AUTOMATIC depending on the proximity to the target, MANUAL otherwise</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="MapViewScaleChanged">
+      <doc>
+        <line>MapViewScaleChanged = This signal is emitted when the mapview scale changes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="scaleID" type="y">
+        <doc>
+          <line>scaleID = scale identifier. Range[0:256]</line>
+        </doc>
+      </arg>
+      <arg name="isMinMax" type="q">
+        <doc>
+          <line>isMinMax = enum(INVALID,MIN,MAX,MID, ... )</line>
+          <line>MIN = scale ID minimal value</line>
+          <line>MID = scale ID intermediate value</line>
+          <line>MAX = scale ID maximal value</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="AddMapViewScaleChangedListener">
+      <doc>
+        <line>AddMapViewScaleChangedListener = This method adds a listener which is notified when map view scale changes.</line>
+      </doc>
+    </method>
+    <method name="RemoveMapViewScaleChangedListener">
+      <doc>
+        <line>RemoveMapViewScaleChangedListener = This method removes a listener which is notified when map view scale changes.</line>
+      </doc>
+    </method>
+    <method name="SetCameraHeight">
+      <doc>
+        <line>SetCameraHeight = This method sets the camera height</line>
+        <line>Note: this method is a subset of SetCameraPosition</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="height" type="u" direction="in">
+        <doc>
+          <line>height = height from the ground in meters</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetCameraHeight">
+      <doc>
+        <line>GetCameraHeight = This method gets the camera height</line>
+        <line>Note: this method is a subset of GetCameraPosition</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="height" type="u" direction="out">
+        <doc>
+          <line>height = height from the ground in meters</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetMapViewPerspective">
+      <doc>
+        <line>SetMapViewPerspective = This method sets the map perspective</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="perspective" type="q" direction="in">
+        <doc>
+          <line>perspective = enum(INVALID,2D,3D, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetMapViewPerspective">
+      <doc>
+        <line>GetMapViewPerspective = This method returns the current map perspective</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="perspective" type="q" direction="out">
+        <doc>
+          <line>perspective = enum(INVALID,2D,3D, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSupportedMapViewPerspectives">
+      <doc>
+        <line>GetSupportedMapViewPerspectives = This method retrieves the supported mapview perspectives</line>
+      </doc>
+      <arg name="perspectiveList" type="aq" direction="out">
+        <doc>
+          <line>perspectiveList = array[perspective]</line>
+          <line>perspective = enum(INVALID,2D,3D, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetMapViewObjectVisibility">
+      <doc>
+        <line>SetMapViewObjectVisibility = This method specifies the type of objects to show on the map.</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="objectVisibilityList" type="a{qb}" direction="in">
+        <doc>
+          <line> objectVisibilityList = array[objectVisibility]</line>
+          <line> objectVisibility = dictionary[key,value]</line>
+          <line> key = enum[BUILDINGS,TERRAIN, ...]</line>
+          <line> value = value of type 'b'; if true the objects are shown else they are not shown</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetMapViewObjectVisibility">
+      <doc>
+        <line>GetMapViewObjectVisibility = This method gets the type of objects shown on the map.</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="objectVisibilityList" type="a{qb}" direction="out">
+        <doc>
+          <line> objectVisibilityList = array[objectVisibility]</line>
+          <line> objectVisibility = dictionary[key,value]</line>
+          <line> key = enum[BUILDINGS,TERRAIN, ...]</line>
+          <line> value = value of type 'b'; if true the objects are shown else they are not shown</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSupportedMapViewObjectVisibilities">
+      <doc>
+        <line>GetSupportedMapViewObjectVisibilities = This method gets the supported object visibilities.</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="objectVisibilityList" type="aq" direction="out">
+        <doc>
+          <line> objectVisibilityList = array[objectVisibility]</line>
+          <line> objectVisibility = enum[BUILDINGS,TERRAIN, ...]</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetScaleList">
+      <doc>
+        <line>GetScaleList = This method returns a list of supported map scales</line>
+        <line>Note: a mapscale consists of an unique ID, a ScaleValue, a ScaleUnit and a number of MillimetesPerPixel</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="scaleList" type="a(qqqu)" direction="out">
+        <doc>
+          <line>scaleList = array[struct(scaleId,scaleValue,scaleUnit,millimetersPerPixel)]</line>
+          <line>scaleId = scale identifier. Range [0:256]</line>
+          <line>scaleValue = scale value. It can assume values like 100, 200, 1000, ...</line>
+          <line>scaleUnit = unit of measurement. It is an enum(INVALID,METER,KM,MILE,YARD,FOOT, ... )</line>
+          <line>millimetersPerPixel = number indicating the number of millimeters per pixel</line>
+          <line>Example: ((1,100,METER,1000),(2,200,METER,1000),(3,500,METER,1000), ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetMapViewScale">
+      <doc>
+        <line>SetMapViewScale = This method sets the map scale by specifying a ScaleID</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="scaleID" type="q" direction="in">
+        <doc>
+          <line>scaleID = scale identifier. Range[0:256]</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetMapViewScaleByDelta">
+      <doc>
+        <line>SetMapViewScaleByDelta = This method sets the map scale by specifying a delta value with respect to the currently set ScaleID</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="scaleDelta" type="n" direction="in">
+        <doc>
+          <line>scaleDelta = This parameter can have either positive or negative values. '0' means no change. Positive values indicate larger scales</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetMapViewScaleByMetersPerPixel">
+      <doc>
+        <line>SetMapViewScaleByMetersPerPixel = This method sets the map scale by specifying the number of meters that a pixel represents</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="metersPerPixel" type="d" direction="in">
+        <doc>
+          <line>metersPerPixel = meters per pixel</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetMapViewScale">
+      <doc>
+        <line>GetMapViewScale = This method returns the currently used map scale</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="scaleID" type="y" direction="out">
+        <doc>
+          <line>scaleID = scale identifier. Range[0:256]</line>
+        </doc>
+      </arg>
+      <arg name="isMinMax" type="q" direction="out">
+        <doc>
+          <line>isMinMax = enum(INVALID,MIN,MAX,MID, ... )</line>
+          <line>MIN = scale ID minimal value</line>
+          <line>MID = scale ID intermediate value</line>
+          <line>MAX = scale ID maximal value</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetMapViewBoundingBox">
+      <doc>
+        <line>SetMapViewBoundingBox = This method sets the map bounding box</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="boundingBox" type="((dd)(dd))" direction="in">
+        <doc>
+          <line>boundingBox = struct(top-left-corner,bottom-right-corner)</line>
+          <line>top-left-corner = struct(lat,lon)</line>
+          <line>bottom-right-corner = struct(lat,lon)</line>
+          <line>lat = latitude in format %3.6f. Range[-90:+90]</line>
+          <line>lon = longitude in format %3.6f. Range[-180:+180]</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetMapViewBoundingBox">
+      <doc>
+        <line>GetMapViewBoundingBox = This method returns the bounding box of a given map instance</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="boundingBox" type="((dd)(dd))" direction="out">
+        <doc>
+          <line>boundingBox = struct(top-left-corner,bottom-right-corner)</line>
+          <line>top-left-corner = struct(lat,lon)</line>
+          <line>bottom-right-corner = struct(lat,lon)</line>
+          <line>lat = latitude in format %3.6f. Range[-90:+90]</line>
+          <line>lon = longitude in format %3.6f. Range[-180:+180]</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetMapViewSaveArea">
+      <doc>
+        <line>SetMapViewSaveArea = This methods defines the area that the HMI guarantees not to 
+cover with other windows or user interface elements</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="saveArea" type="(dddd)" direction="in">
+        <doc>
+          <line>boundingBox = struct(rect-left,rect-right,rect-top,rect-bottom)</line>
+          <line>rect-left = covered area on the left. Range [0:1]</line>
+          <line>rect-right = covered area on the right. Range [0:1]</line>
+          <line>rect-top = covered area on top. Range [0:1]</line>
+          <line>rect-bottom = covered area at the bottom. Range [0:1]</line>
+          <line>Note: 0.0 means there is no covered area (offset) from that side</line>
+          <line>When all four parameters are 0 then the save area is equal to the viewport area (being the default)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetMapViewSaveArea">
+      <doc>
+        <line>SetMapViewSaveArea = This methods defines the area that the HMI guarantees not to 
+cover with other windows or user interface elements</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="saveArea" type="(dddd)" direction="out">
+        <doc>
+          <line>boundingBox = struct(rect-left,rect-right,rect-top,rect-bottom)</line>
+          <line>rect-left = covered area on the left. Range [0:1]</line>
+          <line>rect-right = covered area on the right. Range [0:1]</line>
+          <line>rect-top = covered area on top. Range [0:1]</line>
+          <line>rect-bottom = covered area at the bottom. Range [0:1]</line>
+          <line>Note: 0.0 means there is no covered area (offset) from that side</line>
+          <line>When all four parameters are 0 then the save area is equal to the viewport area (being the default)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetMapViewPan">
+      <doc>
+        <line>SetMapViewPan = This method pans a given map instance</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="panningAction" type="q" direction="in">
+        <doc>
+          <line>panningAction = enum(PAN_START,PAN_TO,PAN_END)</line>
+          <line>PAN_START, start panning the map at the specified screen coordinate identified by the arguments 'x' and 'y'</line>
+          <line>PAN_TO, pan the map to the specified screen coordinate identified by the arguments 'x' and 'y'; it has no effect before PAN_START or after PAN_END</line>
+          <line>PAN_END, pan the map to the specified screen coordinate identified by the arguments 'x' and 'y' and end panning; it has no effect before PAN_START</line>
+        </doc>
+      </arg>
+      <arg name="pixelCoordinates" type="a(qq)" direction="in">
+        <doc>
+          <line>pixelCoordinates = array[struct(x,y)]</line>
+          <line>x = x-coordinate (x=0 indicates the first left pixel of the map view)</line>
+          <line>y = y-coordinate (y=0 indicates the first top pixel of the map view)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetMapViewPan">
+      <doc>
+        <line>GetMapViewPan</line>
+        <line>This method is meant for debugging purposes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="valueToReturn" type="q" direction="in">
+        <doc>
+          <line>valueToReturn = enum(PAN_START,PAN_TO,PAN_END)</line>
+        </doc>
+      </arg>
+      <arg name="pixelCoordinates" type="a(qq)" direction="in">
+        <doc>
+          <line>pixelCoordinates = array[struct(x,y)]</line>
+          <line>x = x-coordinate (x=0 indicates the first left pixel of the map view)</line>
+          <line>y = y-coordinate (y=0 indicates the first top pixel of the map view)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetMapViewRotation">
+      <doc>
+        <line>SetMapViewRotation = This method rotates the map</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="rotationAngle" type="i" direction="in">
+        <doc>
+          <line>rotationAngle = rotation angle in degrees measured from the North axis clockwise. Range[0:360]</line>
+        </doc>
+      </arg>
+      <arg name="rotationAnglePerSecond" type="i" direction="in">
+        <doc>
+          <line>rotationAnglePerSecond = partial rotation for each second</line>
+          <line>The value can be set implement a smooth rotation</line>
+          <line>If rotationAnglePerSecond = rotationAngle it means that the rotation must be instantaneous</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetMapViewRotation">
+      <doc>
+        <line>GetMapViewRotation = This method is particularly interesting for debugging purposes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="rotationAngle" type="i" direction="out">
+        <doc>
+          <line>rotationAngle = rotation angle in degrees measured from the North axis clockwise. Range[0:360]</line>
+        </doc>
+      </arg>
+      <arg name="rotationAnglePerFrame" type="i" direction="out">
+        <doc>
+          <line>rotationAnglePerFrame = partial rotation for each map frame in degrees</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetMapViewVisibilityMode">
+      <doc>
+        <line>SetMapViewVisibilityMode = This method sets the current visibility mode</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="visibilityMode" type="q" direction="in">
+        <doc>
+          <line>visibilityMode = enum(INVALID,VISIBLE,INVISIBLE,FROZEN, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetMapViewVisibilityMode">
+      <doc>
+        <line>GetMapViewVisibilityMode = This method returns the current visibility mode</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="visibilityMode" type="q" direction="out">
+        <doc>
+          <line>visibilityMode = enum(INVALID,VISIBLE,INVISIBLE,FROZEN, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSupportedMapViewVisibilityModes">
+      <doc>
+        <line>GetSupportedMapViewVisibilityModes = This method retrieves the supported mapview visibility modes</line>
+      </doc>
+      <arg name="visibilityModeList" type="aq" direction="out">
+        <doc>
+          <line>visibilityModeList = array[visibilityMode]</line>
+          <line>visibilityMode = enum(INVALID,VISIBLE,INVISIBLE,FROZEN, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="MapViewVisibilityChanged">
+      <doc>
+        <line>MapViewVisibilityChanged = This signal is emitted when the MapView visibility changes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="visibilityMode" type="q">
+        <doc>
+          <line>visibilityMode = enum(INVALID,VISIBLE,INVISIBLE,FROZEN, ... )</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="SetMapViewPerformanceLevel">
+      <doc>
+        <line>SetMapViewPerformanceLevel = This method sets the perfomance level of a given map instance</line>
+        <line>Note: it can be used to set the MapView in application specific performance mode (e.g. low CPU-usage or low memory-usage)</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="performanceLevel" type="q" direction="in">
+        <doc>
+          <line>performanceLevel = enum(INVALID,LEVEL1,LEVEL2,LEVEL3,LEVEL4,LEVEL5, ... )</line>
+          <line>Note: performance levels are application specific</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetMapViewPerformanceLevel">
+      <doc>
+        <line>GetMapViewPerformanceLevel = This method returns the perfomance level of a given map instance</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="performanceLevel" type="q" direction="out">
+        <doc>
+          <line>performanceLevel = enum(INVALID,LEVEL1,LEVEL2,LEVEL3,LEVEL4,LEVEL5, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSupportedMapViewPerformanceLevels">
+      <doc>
+        <line>GetSupportedMapViewPerformanceLevels = This method retrieves the supported perfomance levels</line>
+      </doc>
+      <arg name="performanceLevelList" type="aq" direction="out">
+        <doc>
+          <line>performanceLevelList = array[performanceLevel]</line>
+          <line>performanceLevel = enum(INVALID,LEVEL1,LEVEL2,LEVEL3,LEVEL4,LEVEL5, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="DisplayRoute">
+      <doc>
+        <line>DisplayRoute = This method visualizes one of the calculated routes</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="highlighted" type="b" direction="in">
+        <doc>
+          <line>highlighted = flag. TRUE means highligted,FALSE means not highlighted</line>
+          <line>Note: the highlighted route must be visualized on top of the other routes</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="HideRoute">
+      <doc>
+        <line>HideRoute = This method hides one of the visible routes</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+          <line>Note: the routeHandle has to be one of the visible routes</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetDisplayedRoutes">
+      <doc>
+        <line>GetDisplayedRoutes = This method returns a list of displayed routes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="displayedRoutes" type="a(ub)" direction="out">
+        <doc>
+          <line>displayedRoutes = array[struct(routeHandle,highlighted)]</line>
+          <line>routeHandle = Route handle of a displayed route. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+          <line>highlighted = flag. TRUE means highlighted,FALSE means not highlighted</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="DisplayedRoutes">
+      <doc>
+        <line>DisplayedRoutes = This signal is emitted when the list of displayed routes change</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="displayedRoutes" type="a(ub)">
+        <doc>
+          <line>displayedRoutes = array[struct(routeHandle,highlighted)]</line>
+          <line>routeHandle = Route handle of a displayed route. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+          <line>highlighted = flag. TRUE means highlighted,FALSE means not highlighted</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="GetPoiCategoriesVisible">
+      <doc>
+        <line>GetPoiCategoriesVisible = Get the set of POI categories displayed on the map.</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="poiCategoryIds" type="aq" direction="out">
+        <doc>
+          <line>poiCategoryIds = array[poiCategoryId]</line>
+          <line>poiCategoryId = a POI category as defined in the 'GENIVI POIService API'.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetPoiCategoriesVisible">
+      <doc>
+        <line>SetPoiCategoriesVisible = Add POI categories to the set of POI categories displayed on the map.
+                   Any specified category that until now was displayed with scale limits is now displayed without limits.</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="poiCategoryIds" type="aq" direction="in">
+        <doc>
+          <line>poiCategoryIds = array[poiCategoryId]</line>
+          <line>poiCategoryId = a POI category as defined in the 'GENIVI POIService API'.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetPoiCategoriesVisibleWithinLimits">
+      <doc>
+        <line>SetPoiCategoriesVisible = Add POI categories to the set of POI categories displayed on the map, where the POI's are only displayed in a specific range of scales.
+                   Any specified category that until now was displayed without scale limits is now displayed with limits.</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="poiCategoryIds" type="aq" direction="in">
+        <doc>
+          <line>poiCategoryIds = array[poiCategoryId]</line>
+          <line>poiCategoryId = a POI category as defined in the 'GENIVI POIService API'.</line>
+        </doc>
+      </arg>
+      <arg name="minScaleID" type="y" direction="in">
+        <doc>
+          <line>minScaleID = minimun scale on which the POI categories are displayed</line>
+        </doc>
+      </arg>
+      <arg name="maxScaleID" type="y" direction="in">
+        <doc>
+          <line>maxScaleID = maximum scale on which the POI categories are displayed</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetPoiCategoriesNotVisible">
+      <doc>
+        <line>SetPoiCategoriesNotVisible = Remove POI categories from the set of POI categories displayed on the map.</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="poiCategoryIds" type="aq" direction="in">
+        <doc>
+          <line>poiCategoryIds = array[poiCategoryId]</line>
+          <line>poiCategoryId = a POI category as defined in the 'GENIVI POIService API'.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetTrafficIncidentsVisibility">
+      <doc>
+        <line>SetTrafficIncidentsVisibility = Set the visibility of Traffic Incidents on the map.</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="visible" type="b" direction="in">
+        <doc>
+          <line>visible = If true, Traffic Incidents are shown on the map, else they are not shown.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetMapViewTheme">
+      <doc>
+        <line>SetMapViewTheme = This method configures the theme of a given map view instance</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewTheme" type="q" direction="in">
+        <doc>
+          <line>mapViewTheme = enum(INVALID,THEME_1,THEME_2,THEME_3, ... )</line>
+          <line>Note: Themes are implementation specific. Example: THEME_1 = day color, THEME_2 = night color</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetMapViewTheme">
+      <doc>
+        <line>GetMapViewTheme = This method returns the current theme of a given map view instance</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewTheme" type="q" direction="out">
+        <doc>
+          <line>mapViewTheme = enum(INVALID,THEME_1,THEME_2,THEME_3, ... )</line>
+          <line>Note: Themes are implementation specific. Example: THEME_1 = day color, THEME_2 = night color</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSupportedMapViewThemes">
+      <doc>
+        <line>GetSupportedMapViewThemes = This method retrieves the supported mapview themes</line>
+      </doc>
+      <arg name="mapViewThemeList" type="aq" direction="out">
+        <doc>
+          <line>mapViewThemeList = array[mapViewTheme]</line>
+          <line>mapViewTheme = enum(INVALID,THEME_1,THEME_2,THEME_3, ... )</line>
+          <line>Note: Themes are implementation specific. Example: THEME_1 = day color, THEME_2 = night color</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="ConvertPixelCoordsToGeoCoords">
+      <doc>
+        <line>ConvertPixelCoordsToGeoCoords = This method converts pixel coordinates to geographical coordinates</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="pixelCoordinates" type="a(qq)" direction="in">
+        <doc>
+          <line>pixelCoordinates = array[struct(x,y)]</line>
+          <line>x = x-coordinate (x=0 indicates the first left pixel of the map view)</line>
+          <line>y = y-coordinate (y=0 indicates the first top pixel of the map view)</line>
+        </doc>
+      </arg>
+      <arg name="geoCoordinates" type="a(dd)" direction="out">
+        <doc>
+          <line>geoCoordinates = array[struct(lat,lon)]</line>
+          <line>lat = latitude in format %3.6f. Range[-90:+90]</line>
+          <line>lon = longitude in format %3.6f. Range[-180:+180]</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="ConvertGeoCoordsToPixelCoords">
+      <doc>
+        <line>ConvertGeoCoordsToPixelCoords = This method converts geographical coordinates into pixel coordinates</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="geoCoordinates" type="a(dd)" direction="in">
+        <doc>
+          <line>geoCoordinates = array[struct(lat,lon)]</line>
+          <line>lat = latitude in format %3.6f. Range[-90:+90]</line>
+          <line>lon = longitude in format %3.6f. Range[-180:+180]</line>
+        </doc>
+      </arg>
+      <arg name="pixelCoordinates" type="a(qq)" direction="out">
+        <doc>
+          <line>pixelCoordinates = array[struct(x,y)]</line>
+          <line>x = x-coordinate (x=0 indicates the first left pixel of the map view)</line>
+          <line>y = y-coordinate (y=0 indicates the first top pixel of the map view)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="DisplayCustomElements">
+      <doc>
+        <line>DisplayCustomElements = This method visualizes a set of custom elements on the map</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="customElements" type="a(ss(dd)(nn))" direction="in">
+        <doc>
+          <line>customElements = array[struct(name,iconUri,coordinate,anchorPoint)]</line>
+          <line>name = name of the custom element</line>
+          <line>iconUri = uri to the icon of the custome element</line>
+          <line>coordinate = struct(lat,lon)</line>
+          <line>lat = latitude in format %3.6f. Range[-90:+90]. Example: 48.053250</line>
+          <line>lon = longitude in format %3.6f. Range[-180:+180]. Example: 8.321000</line>
+          <line>anchorPoint=struct(anchorX,anchorY)</line>
+          <line>anchorPoint defines which point on the icon is used as the reference for associating the icon to the map coordinate</line>
+          <line>            (0,0) is the center of the icon </line>
+          <line>            (-1,-1) is the top left corner of the icon </line>
+          <line>            (1,1) is the bottom right corner of the icon </line>
+          <line>anchorX = anchor x value</line>
+          <line>anchorY = anchor y value</line>
+        </doc>
+      </arg>
+      <arg name="customElementHandles" type="au" direction="out">
+        <doc>
+          <line>customElementHandles = handles to the custom elements displayed on the map. 
+                   The order of the handles is the same as the order of custom elements specified in the argument 'customElements'.
+                   Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="HideCustomElements">
+      <doc>
+        <line>HideCustomElements = This method hides a set of custom elements which were visualized by DisplayCustomElements</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="customElementHandles" type="au" direction="in">
+        <doc>
+          <line>customElementHandles = Custom element handles. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetDisplayedCustomElements">
+      <doc>
+        <line>GetDisplayedCustomElements = This method retrieves the visualized custom elements on the map</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="customElements" type="a{u(ss(dd)(nn))}" direction="out">
+        <doc>
+          <line>customElements = array[customElement]</line>
+          <line>customElement = tuple[customElementHandle,struct(name,iconUri,coordinate,anchorPoint)]</line>
+          <line>customElementHandle = Custom element handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+          <line>name = name of the custom element</line>
+          <line>iconUri = uri to the icon of the custome element</line>
+          <line>coordinate = struct(lat,lon)</line>
+          <line>lat = latitude in format %3.6f. Range[-90:+90]. Example: 48.053250</line>
+          <line>lon = longitude in format %3.6f. Range[-180:+180]. Example: 8.321000</line>
+          <line>anchorPoint=struct(anchorX,anchorY)</line>
+          <line>anchorPoint defines which point on the icon is used as the reference for associating the icon to the map coordinate</line>
+          <line>            (0,0) is the center of the icon </line>
+          <line>            (-1,-1) is the top left corner of the icon </line>
+          <line>            (1,1) is the bottom right corner of the icon </line>
+          <line>anchorX = anchor x value</line>
+          <line>anchorY = anchor y value</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SelectElementsOnMap">
+      <doc>
+        <line>SelectElementsOnMap = This method selects elements on the map view which are at the position specified by user input</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u" direction="in">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="pixelCoordinate" type="(qq)" direction="in">
+        <doc>
+          <line>pixelCoordinates = struct(x,y)</line>
+          <line>x = x-coordinate of the position on the map view specified by user input (x=0 indicates the first left pixel of the map view)</line>
+          <line>y = y-coordinate of the position on the map view specified by user input (y=0 indicates the first top pixel of the map view)</line>
+        </doc>
+      </arg>
+      <arg name="selectableTypes" type="aq" direction="in">
+        <doc>
+          <line>selectableTypes = array[selectableType]</line>
+          <line>selectableType = enum(INVALID,CUSTOM_ELEMENT,CURRENT_POSITION,WAYPOINT,POI,TRAFFIC_INCIDENT,ROUTE,GEOCOORDINATES)</line>
+          <line>Note: The order of priority by which the elements are selected is implementation dependent</line>
+        </doc>
+      </arg>
+      <arg name="maxNumberOfSelectedElements" type="q" direction="in">
+        <doc>
+          <line>maxNumberOfSelectedElements = maximum number of selected elements to return. If 0, all possible elements which can be selected will be returned</line>
+        </doc>
+      </arg>
+      <arg name="selectedElements" type="a(q(dd)v)" direction="out">
+        <doc>
+          <line>selectedElements = array[selectableType,struct(lat,lon),value]</line>
+          <line>selectableType = enum(INVALID,CUSTOM_ELEMENT,CURRENT_POSITION,WAYPOINT,POI,TRAFFIC_INCIDENT,ROUTE,GEOCOORDINATES)</line>
+          <line>lat = latitude of the selected element in format %3.6f. Range[-90:+90]</line>
+          <line>lon = longitude of the selected element in format %3.6f. Range[-180:+180]</line>
+          <line>selectableType = CUSTOM_ELEMENT, value = value of type '(uss(nn))' that expresses the extra data for a custom element</line>
+          <line>Note: the extra data for a custom element is expressed as a struct(customElementHandle,name,iconUri,struct(anchorX,anchorY))</line>
+          <line>selectableType = CURRENT_POSITION, value = null</line>
+          <line>selectableType = WAYPOINT, value = value of type '(uq)' that expresses the extra data for a waypoint</line>
+          <line>Note: the extra data for a waypoint is expressed as a struct(routeHandle,waypointIndex) where waypointIndex is the index of the waypoint on the route (the first waypoint is index 0)</line>
+          <line>selectableType = POI, value = value of type 'u' that expresses a POI handle </line>
+          <line>selectableType = TRAFFIC_INCIDENT, value = value of type 'i' that expresses a traffic incident identifier</line>
+          <line>selectableType = ROUTE, value = value of type 'u' that expresses a route handle </line>
+          <line>selectableType = GEOCOORDINATES, value = null</line>
+        </doc>
+      </arg>
+    </method>
+  </interface>
+</node>

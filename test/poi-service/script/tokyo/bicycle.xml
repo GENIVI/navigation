@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="Overpass API">
+<note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
+<meta osm_base="2013-02-04T12:13:01Z"/>
+
+  <node id="822683026" lat="35.6975631" lon="139.6787833"/>
+  <node id="822683167" lat="35.6975483" lon="139.6789087"/>
+  <node id="822683192" lat="35.6977571" lon="139.6789500"/>
+  <node id="822683233" lat="35.6977757" lon="139.6788222"/>
+  <node id="1050803357" lat="35.6720652" lon="139.7122126"/>
+  <node id="1050803359" lat="35.6721908" lon="139.7124713"/>
+  <node id="1050803363" lat="35.6721954" lon="139.7122238"/>
+  <node id="1050803365" lat="35.6719578" lon="139.7125304"/>
+  <node id="1050803366" lat="35.6719623" lon="139.7124010"/>
+  <node id="1050803367" lat="35.6720583" lon="139.7123926"/>
+  <node id="1115426114" lat="35.7090104" lon="139.7089535">
+    <tag k="name" v="オリンピック サイクル"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="1352143849" lat="35.7008320" lon="139.8011880">
+    <tag k="description" v="レンタサイクル"/>
+    <tag k="name" v="17Bicycle"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="1580614679" lat="35.6709901" lon="139.7414690">
+    <tag k="name" v="Y'sROAD赤坂店"/>
+    <tag k="name:en" v="Y'sRoad Akasaka"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="1635104287" lat="35.6942500" lon="139.7645257">
+    <tag k="name" v="Y'sROAD"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="1763146176" lat="35.6591576" lon="139.7279059">
+    <tag k="name" v="Trekストア六本木"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="1837949124" lat="35.6549540" lon="139.7528220">
+    <tag k="name" v="シミズサイクル"/>
+    <tag k="phone" v="03-3432-6025"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="survey, bing"/>
+  </node>
+  <node id="1933333436" lat="35.7083455" lon="139.7079199">
+    <tag k="name" v="Lipit-Ischtar"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.lipit-ischtar.jp/"/>
+  </node>
+  <node id="2037964080" lat="35.6720467" lon="139.7124643">
+    <tag k="name" v="なるしまフレンド神宮店"/>
+    <tag k="name:en" v="Nalsima Frend"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="2041227773" lat="35.6582250" lon="139.7821385">
+    <tag k="name" v="バイシクルセオ 晴海店"/>
+    <tag k="name:en" v="bicycle seo harumi"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="bing"/>
+  </node>
+  <node id="2041460009" lat="35.6583389" lon="139.7034843">
+    <tag k="name" v="Y'sロード 渋谷レディース館"/>
+    <tag k="name:en" v="Y's Road Shibuya Ladies"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="2041460012" lat="35.6581504" lon="139.6969464">
+    <tag k="name" v="Y'sロード 渋谷本館"/>
+    <tag k="name:en" v="Y's Road Shibuya"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="bing,web"/>
+  </node>
+  <node id="2041470150" lat="35.6727962" lon="139.7590056">
+    <tag k="name" v="Y's Road 有楽町店"/>
+    <tag k="name:en" v="Y's Road Yuurakuchou"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="2041807441" lat="35.7059053" lon="139.7734549">
+    <tag k="name" v="Y'sRoad 上野アサゾー"/>
+    <tag k="name:en" v="Y'sRoad UenoAsazo"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="2041807442" lat="35.7052933" lon="139.7725175">
+    <tag k="name" v="Y'sRoad 上野テック館"/>
+    <tag k="name:en" v="Y'sRoad UenoTech"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="2041807443" lat="35.7053466" lon="139.7722640">
+    <tag k="name" v="Y'sRoad 上野本館"/>
+    <tag k="name:en" v="Y'sRoad UenoHonkan"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="2041807444" lat="35.7058040" lon="139.7725778">
+    <tag k="name" v="Y'sRoad 上野ウェア館"/>
+    <tag k="name:en" v="Y'sRoad UenoWear"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="2046013809" lat="35.6781012" lon="139.7051068">
+    <tag k="name" v="MapSports"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <way id="68327931">
+    <nd ref="822683192"/>
+    <nd ref="822683167"/>
+    <nd ref="822683026"/>
+    <nd ref="822683233"/>
+    <nd ref="822683192"/>
+    <tag k="name" v="東都サイクル"/>
+    <tag k="shop" v="bicycle"/>
+  </way>
+  <way id="90555954">
+    <nd ref="1050803363"/>
+    <nd ref="1050803359"/>
+    <nd ref="1050803365"/>
+    <nd ref="1050803366"/>
+    <nd ref="1050803367"/>
+    <nd ref="1050803357"/>
+    <nd ref="1050803363"/>
+    <tag k="building" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="Bing"/>
+  </way>
+
+</osm>

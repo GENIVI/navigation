@@ -1,0 +1,1453 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="Overpass API">
+<note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
+<meta osm_base="2013-06-24T11:34:05Z"/>
+
+  <node id="31525581" lat="32.7745574" lon="-117.2416162"/>
+  <node id="31525600" lat="32.7771128" lon="-117.2383795"/>
+  <node id="31525714" lat="32.7763321" lon="-117.2370707"/>
+  <node id="31525754" lat="32.7773419" lon="-117.2411006"/>
+  <node id="31526012" lat="32.7736640" lon="-117.2400638"/>
+  <node id="31526039" lat="32.7764671" lon="-117.2385936"/>
+  <node id="31526572" lat="32.7773654" lon="-117.2386745"/>
+  <node id="31526605" lat="32.7742527" lon="-117.2411246"/>
+  <node id="31526608" lat="32.7760160" lon="-117.2378151"/>
+  <node id="31526965" lat="32.7771563" lon="-117.2415016"/>
+  <node id="31527127" lat="32.7733993" lon="-117.2397483"/>
+  <node id="31527311" lat="32.7768502" lon="-117.2386242"/>
+  <node id="31528462" lat="32.7768536" lon="-117.2369963"/>
+  <node id="31528578" lat="32.7768634" lon="-117.2419412"/>
+  <node id="31528719" lat="32.7740849" lon="-117.2413084"/>
+  <node id="31528799" lat="32.7752965" lon="-117.2425087"/>
+  <node id="31529266" lat="32.7759947" lon="-117.2380485"/>
+  <node id="31529845" lat="32.7775148" lon="-117.2392261"/>
+  <node id="31529938" lat="32.7766633" lon="-117.2369457"/>
+  <node id="31529952" lat="32.7775720" lon="-117.2402697"/>
+  <node id="31530025" lat="32.7749605" lon="-117.2421412"/>
+  <node id="31530065" lat="32.7740109" lon="-117.2408951"/>
+  <node id="274187020" lat="32.8707141" lon="-117.2253368">
+    <tag k="name" v="Hyatt Regency La Jolla at Aventine"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="274187630" lat="32.8703949" lon="-117.2312999">
+    <tag k="name" v="Sheraton La Jolla"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="281144434" lat="32.7310718" lon="-117.1472555"/>
+  <node id="283183345" lat="32.7159445" lon="-117.1614838">
+    <tag k="created_by" v="Potlatch 0.10b"/>
+    <tag k="name" v="The US Grant"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="293394926" lat="32.7117171" lon="-117.1701352"/>
+  <node id="293394927" lat="32.7124465" lon="-117.1701352"/>
+  <node id="293394928" lat="32.7124537" lon="-117.1707961"/>
+  <node id="293394929" lat="32.7124104" lon="-117.1707961"/>
+  <node id="293394930" lat="32.7124104" lon="-117.1708476"/>
+  <node id="293394931" lat="32.7118471" lon="-117.1708562"/>
+  <node id="293394932" lat="32.7117532" lon="-117.1708390"/>
+  <node id="293394933" lat="32.7116954" lon="-117.1707961"/>
+  <node id="293394934" lat="32.7116449" lon="-117.1707275"/>
+  <node id="293394935" lat="32.7116304" lon="-117.1706502"/>
+  <node id="293394936" lat="32.7116232" lon="-117.1702125"/>
+  <node id="293394937" lat="32.7117171" lon="-117.1702211"/>
+  <node id="297552655" lat="32.7166024" lon="-117.1672600"/>
+  <node id="297552659" lat="32.7164002" lon="-117.1665562"/>
+  <node id="297552663" lat="32.7162485" lon="-117.1666163"/>
+  <node id="297552665" lat="32.7161113" lon="-117.1666163"/>
+  <node id="297552667" lat="32.7160680" lon="-117.1665648"/>
+  <node id="297552669" lat="32.7159597" lon="-117.1665648"/>
+  <node id="297552671" lat="32.7159452" lon="-117.1665991"/>
+  <node id="297552706" lat="32.7158947" lon="-117.1672600"/>
+  <node id="297552708" lat="32.7166168" lon="-117.1666077"/>
+  <node id="297552711" lat="32.7158947" lon="-117.1665991"/>
+  <node id="297553200" lat="32.7166168" lon="-117.1672257"/>
+  <node id="297553201" lat="32.7164291" lon="-117.1666077"/>
+  <node id="297553202" lat="32.7162846" lon="-117.1665562"/>
+  <node id="297553234" lat="32.7162399" lon="-117.1669293">
+    <tag k="created_by" v="Potlatch 0.10f"/>
+    <tag k="name" v="Wyndham San Diego at Emerald Plaza"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="316911836" lat="32.7310491" lon="-117.1466371"/>
+  <node id="316911837" lat="32.7309119" lon="-117.1466371"/>
+  <node id="316911838" lat="32.7309119" lon="-117.1466200"/>
+  <node id="316911839" lat="32.7305725" lon="-117.1466200"/>
+  <node id="316911840" lat="32.7305725" lon="-117.1467830"/>
+  <node id="316911841" lat="32.7305725" lon="-117.1468946"/>
+  <node id="316911842" lat="32.7305364" lon="-117.1469375"/>
+  <node id="316911843" lat="32.7305364" lon="-117.1470320"/>
+  <node id="316911844" lat="32.7305653" lon="-117.1470749"/>
+  <node id="316911845" lat="32.7305653" lon="-117.1473495"/>
+  <node id="316911846" lat="32.7308397" lon="-117.1473495"/>
+  <node id="316911847" lat="32.7308397" lon="-117.1474439"/>
+  <node id="316911848" lat="32.7309119" lon="-117.1475298"/>
+  <node id="316911849" lat="32.7310130" lon="-117.1475298"/>
+  <node id="316911850" lat="32.7310852" lon="-117.1474525"/>
+  <node id="316911851" lat="32.7310852" lon="-117.1473238"/>
+  <node id="316911852" lat="32.7310836" lon="-117.1466798"/>
+  <node id="316912122" lat="32.7274442" lon="-117.1527569"/>
+  <node id="316912123" lat="32.7275597" lon="-117.1520445"/>
+  <node id="316912124" lat="32.7274947" lon="-117.1520273"/>
+  <node id="316912125" lat="32.7274731" lon="-117.1521389"/>
+  <node id="316912126" lat="32.7270823" lon="-117.1520433"/>
+  <node id="316912127" lat="32.7270037" lon="-117.1525337"/>
+  <node id="316912128" lat="32.7273937" lon="-117.1526281"/>
+  <node id="316912129" lat="32.7273792" lon="-117.1527397"/>
+  <node id="316912134" lat="32.7270569" lon="-117.1522029"/>
+  <node id="316912135" lat="32.7270038" lon="-117.1521912"/>
+  <node id="316912136" lat="32.7269761" lon="-117.1523547"/>
+  <node id="316912137" lat="32.7270296" lon="-117.1523662"/>
+  <node id="343862452" lat="32.7073369" lon="-117.1642951"/>
+  <node id="343862453" lat="32.7081097" lon="-117.1644496"/>
+  <node id="343862790" lat="32.7107818" lon="-117.1686295"/>
+  <node id="343862791" lat="32.7106735" lon="-117.1684407"/>
+  <node id="343862792" lat="32.7103702" lon="-117.1686295"/>
+  <node id="343862793" lat="32.7099369" lon="-117.1678742"/>
+  <node id="343862794" lat="32.7104135" lon="-117.1675051"/>
+  <node id="343862795" lat="32.7099224" lon="-117.1666383"/>
+  <node id="343862796" lat="32.7090847" lon="-117.1672648"/>
+  <node id="343862797" lat="32.7090341" lon="-117.1674279"/>
+  <node id="343862798" lat="32.7090486" lon="-117.1675738"/>
+  <node id="343862799" lat="32.7092869" lon="-117.1680115"/>
+  <node id="343862800" lat="32.7091858" lon="-117.1680974"/>
+  <node id="343862801" lat="32.7093735" lon="-117.1684321"/>
+  <node id="343862802" lat="32.7094674" lon="-117.1685609"/>
+  <node id="343862803" lat="32.7095252" lon="-117.1686810"/>
+  <node id="343862804" lat="32.7095758" lon="-117.1688184"/>
+  <node id="343862805" lat="32.7096769" lon="-117.1689385"/>
+  <node id="343862806" lat="32.7097491" lon="-117.1689814"/>
+  <node id="343862807" lat="32.7098502" lon="-117.1691102"/>
+  <node id="343862808" lat="32.7100380" lon="-117.1691273"/>
+  <node id="343862809" lat="32.7102041" lon="-117.1690758"/>
+  <node id="343866512" lat="32.7082455" lon="-117.1590645"/>
+  <node id="343866513" lat="32.7074728" lon="-117.1590559"/>
+  <node id="343866514" lat="32.7073933" lon="-117.1589701"/>
+  <node id="343866515" lat="32.7073933" lon="-117.1584036"/>
+  <node id="343866516" lat="32.7082455" lon="-117.1584122"/>
+  <node id="344791523" lat="32.7259855" lon="-117.1983606"/>
+  <node id="344791524" lat="32.7256605" lon="-117.1980431"/>
+  <node id="344791525" lat="32.7260505" lon="-117.1975281"/>
+  <node id="344791526" lat="32.7261227" lon="-117.1974852"/>
+  <node id="344791527" lat="32.7262093" lon="-117.1972448"/>
+  <node id="344791528" lat="32.7267653" lon="-117.1972362"/>
+  <node id="344791529" lat="32.7268231" lon="-117.1973822"/>
+  <node id="344791530" lat="32.7268158" lon="-117.1975796"/>
+  <node id="344791531" lat="32.7267725" lon="-117.1976826"/>
+  <node id="344791532" lat="32.7269458" lon="-117.1977941"/>
+  <node id="344791533" lat="32.7269458" lon="-117.1975452"/>
+  <node id="344791534" lat="32.7270830" lon="-117.1975452"/>
+  <node id="344791535" lat="32.7270902" lon="-117.1977341"/>
+  <node id="344791536" lat="32.7271913" lon="-117.1976826"/>
+  <node id="344791537" lat="32.7272780" lon="-117.1977341"/>
+  <node id="344791538" lat="32.7274585" lon="-117.1976568"/>
+  <node id="344791539" lat="32.7280578" lon="-117.1976482"/>
+  <node id="344791540" lat="32.7280578" lon="-117.1979229"/>
+  <node id="344791541" lat="32.7276751" lon="-117.1979229"/>
+  <node id="344791542" lat="32.7276245" lon="-117.1979830"/>
+  <node id="344791543" lat="32.7275235" lon="-117.1980516"/>
+  <node id="344791544" lat="32.7273502" lon="-117.1981460"/>
+  <node id="344791545" lat="32.7271552" lon="-117.1983005"/>
+  <node id="344791546" lat="32.7270686" lon="-117.1983263"/>
+  <node id="344791547" lat="32.7269025" lon="-117.1983263"/>
+  <node id="344791548" lat="32.7268303" lon="-117.1982920"/>
+  <node id="344791549" lat="32.7266859" lon="-117.1983950"/>
+  <node id="344791550" lat="32.7264115" lon="-117.1982834"/>
+  <node id="344791551" lat="32.7264259" lon="-117.1982233"/>
+  <node id="344791552" lat="32.7263609" lon="-117.1981975"/>
+  <node id="344791553" lat="32.7263970" lon="-117.1980945"/>
+  <node id="344791554" lat="32.7262310" lon="-117.1981031"/>
+  <node id="344791555" lat="32.7261443" lon="-117.1981375"/>
+  <node id="347336970" lat="32.7266225" lon="-117.1542216"/>
+  <node id="347336971" lat="32.7266658" lon="-117.1541872"/>
+  <node id="347336972" lat="32.7267092" lon="-117.1541272"/>
+  <node id="347336973" lat="32.7267164" lon="-117.1540156"/>
+  <node id="347336974" lat="32.7267092" lon="-117.1539727"/>
+  <node id="347336975" lat="32.7266497" lon="-117.1539030"/>
+  <node id="347336976" lat="32.7265706" lon="-117.1538780"/>
+  <node id="347336977" lat="32.7264962" lon="-117.1538874"/>
+  <node id="347336978" lat="32.7264347" lon="-117.1539652"/>
+  <node id="347336979" lat="32.7263326" lon="-117.1538976"/>
+  <node id="347336980" lat="32.7262284" lon="-117.1538861"/>
+  <node id="347336982" lat="32.7260885" lon="-117.1539077"/>
+  <node id="347336983" lat="32.7259715" lon="-117.1539747"/>
+  <node id="347336984" lat="32.7258844" lon="-117.1540791"/>
+  <node id="347336985" lat="32.7258397" lon="-117.1541782"/>
+  <node id="347336986" lat="32.7257540" lon="-117.1544011"/>
+  <node id="347337019" lat="32.7257441" lon="-117.1545079"/>
+  <node id="347337020" lat="32.7257629" lon="-117.1545859"/>
+  <node id="347337021" lat="32.7258019" lon="-117.1546880"/>
+  <node id="347337022" lat="32.7258539" lon="-117.1547678"/>
+  <node id="347337023" lat="32.7260987" lon="-117.1549017"/>
+  <node id="347337024" lat="32.7261554" lon="-117.1548570"/>
+  <node id="347337025" lat="32.7262677" lon="-117.1548618"/>
+  <node id="347337026" lat="32.7263583" lon="-117.1548422"/>
+  <node id="347337027" lat="32.7264671" lon="-117.1547766"/>
+  <node id="347337028" lat="32.7265575" lon="-117.1546679"/>
+  <node id="347337029" lat="32.7266081" lon="-117.1545649"/>
+  <node id="347337030" lat="32.7266496" lon="-117.1543819"/>
+  <node id="347337031" lat="32.7266398" lon="-117.1542850"/>
+  <node id="348080361" lat="32.7726544" lon="-117.2400675"/>
+  <node id="348080364" lat="32.7724053" lon="-117.2394706"/>
+  <node id="348080366" lat="32.7737593" lon="-117.2387226"/>
+  <node id="348080368" lat="32.7738280" lon="-117.2365415"/>
+  <node id="348080369" lat="32.7738773" lon="-117.2358372"/>
+  <node id="348080371" lat="32.7748261" lon="-117.2358608"/>
+  <node id="348080372" lat="32.7770182" lon="-117.2359991"/>
+  <node id="349249601" lat="32.7728950" lon="-117.2391960"/>
+  <node id="349249602" lat="32.7731746" lon="-117.2390709"/>
+  <node id="349249603" lat="32.7735346" lon="-117.2390222"/>
+  <node id="349249604" lat="32.7736861" lon="-117.2389097"/>
+  <node id="349250108" lat="32.7724968" lon="-117.2394234"/>
+  <node id="349250119" lat="32.7737791" lon="-117.2361420"/>
+  <node id="350512810" lat="32.7166324" lon="-117.1627610"/>
+  <node id="350512811" lat="32.7158814" lon="-117.1627610"/>
+  <node id="350512812" lat="32.7158814" lon="-117.1621087"/>
+  <node id="350512814" lat="32.7166324" lon="-117.1621087"/>
+  <node id="353117202" lat="32.7081801" lon="-117.1661066"/>
+  <node id="353117203" lat="32.7084329" lon="-117.1664757"/>
+  <node id="353117204" lat="32.7084546" lon="-117.1665959"/>
+  <node id="353117205" lat="32.7085484" lon="-117.1666130"/>
+  <node id="353117206" lat="32.7088662" lon="-117.1670679"/>
+  <node id="353117208" lat="32.7089023" lon="-117.1670250"/>
+  <node id="353117209" lat="32.7086929" lon="-117.1666817"/>
+  <node id="353117210" lat="32.7087723" lon="-117.1656260"/>
+  <node id="353117211" lat="32.7088518" lon="-117.1655487"/>
+  <node id="353117212" lat="32.7091623" lon="-117.1655745"/>
+  <node id="353117213" lat="32.7092129" lon="-117.1655058"/>
+  <node id="353117214" lat="32.7091262" lon="-117.1654200"/>
+  <node id="353117215" lat="32.7090323" lon="-117.1654200"/>
+  <node id="353117216" lat="32.7088229" lon="-117.1654371"/>
+  <node id="353117217" lat="32.7086929" lon="-117.1653942"/>
+  <node id="353117219" lat="32.7085990" lon="-117.1653513"/>
+  <node id="353117220" lat="32.7085557" lon="-117.1652397"/>
+  <node id="353117221" lat="32.7085051" lon="-117.1651453"/>
+  <node id="353117222" lat="32.7084329" lon="-117.1650166"/>
+  <node id="353117223" lat="32.7083535" lon="-117.1649307"/>
+  <node id="353117224" lat="32.7083968" lon="-117.1645703"/>
+  <node id="353117225" lat="32.7081873" lon="-117.1644673"/>
+  <node id="353117227" lat="32.7071185" lon="-117.1645359"/>
+  <node id="353117228" lat="32.7075518" lon="-117.1651282"/>
+  <node id="353117229" lat="32.7076168" lon="-117.1650767"/>
+  <node id="353117230" lat="32.7076890" lon="-117.1650423"/>
+  <node id="353117231" lat="32.7077829" lon="-117.1650080"/>
+  <node id="353117232" lat="32.7078624" lon="-117.1650080"/>
+  <node id="353117233" lat="32.7079707" lon="-117.1650252"/>
+  <node id="353117234" lat="32.7080357" lon="-117.1650509"/>
+  <node id="353117235" lat="32.7081223" lon="-117.1651196"/>
+  <node id="353117236" lat="32.7081585" lon="-117.1651453"/>
+  <node id="353117237" lat="32.7082090" lon="-117.1651024"/>
+  <node id="353117238" lat="32.7082451" lon="-117.1650767"/>
+  <node id="353117239" lat="32.7082668" lon="-117.1651024"/>
+  <node id="353117240" lat="32.7082451" lon="-117.1651453"/>
+  <node id="353117241" lat="32.7082812" lon="-117.1652054"/>
+  <node id="353117242" lat="32.7083390" lon="-117.1652912"/>
+  <node id="353117243" lat="32.7083607" lon="-117.1653771"/>
+  <node id="353117244" lat="32.7082957" lon="-117.1654629"/>
+  <node id="353117245" lat="32.7082307" lon="-117.1656174"/>
+  <node id="353117246" lat="32.7082018" lon="-117.1657204"/>
+  <node id="353117247" lat="32.7081946" lon="-117.1658577"/>
+  <node id="353117248" lat="32.7081873" lon="-117.1659607"/>
+  <node id="368173981" lat="32.8444917" lon="-117.2778153">
+    <tag k="addr:state" v="CA"/>
+    <tag k="ele" v="26"/>
+    <tag k="gnis:county_name" v="San Diego"/>
+    <tag k="gnis:feature_id" v="1702485"/>
+    <tag k="gnis:import_uuid" v="57871b70-0100-4405-bb30-88b2e001a944"/>
+    <tag k="gnis:reviewed" v="no"/>
+    <tag k="name" v="La Jolla Museum of Contemporary Art"/>
+    <tag k="source" v="USGS Geonames"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="368174501" lat="32.7321565" lon="-117.1504311">
+    <tag k="addr:state" v="CA"/>
+    <tag k="ele" v="82"/>
+    <tag k="gnis:county_name" v="San Diego"/>
+    <tag k="gnis:feature_id" v="1869917"/>
+    <tag k="gnis:import_uuid" v="57871b70-0100-4405-bb30-88b2e001a944"/>
+    <tag k="gnis:reviewed" v="no"/>
+    <tag k="name" v="San Diego Museum of Art"/>
+    <tag k="source" v="USGS Geonames"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="368174504" lat="32.7172469" lon="-117.1694057">
+    <tag k="addr:state" v="CA"/>
+    <tag k="ele" v="9"/>
+    <tag k="name" v="Museum of Contemporary Art"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="368174507" lat="32.7214401" lon="-117.1678111">
+    <tag k="addr:state" v="CA"/>
+    <tag k="ele" v="15"/>
+    <tag k="gnis:county_name" v="San Diego"/>
+    <tag k="gnis:feature_id" v="1869944"/>
+    <tag k="gnis:import_uuid" v="57871b70-0100-4405-bb30-88b2e001a944"/>
+    <tag k="gnis:reviewed" v="no"/>
+    <tag k="name" v="Firehouse Museum"/>
+    <tag k="source" v="USGS Geonames"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="368174511" lat="32.8742136" lon="-117.2325362">
+    <tag k="addr:state" v="CA"/>
+    <tag k="ele" v="105"/>
+    <tag k="gnis:county_name" v="San Diego"/>
+    <tag k="gnis:feature_id" v="1869283"/>
+    <tag k="gnis:import_uuid" v="57871b70-0100-4405-bb30-88b2e001a944"/>
+    <tag k="gnis:reviewed" v="no"/>
+    <tag k="name" v="Childrens Museum of San Diego"/>
+    <tag k="source" v="USGS Geonames"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="368174514" lat="32.7528279" lon="-117.1939237">
+    <tag k="addr:state" v="CA"/>
+    <tag k="ele" v="16"/>
+    <tag k="gnis:county_name" v="San Diego"/>
+    <tag k="gnis:feature_id" v="1869276"/>
+    <tag k="gnis:import_uuid" v="57871b70-0100-4405-bb30-88b2e001a944"/>
+    <tag k="gnis:reviewed" v="no"/>
+    <tag k="name" v="American Presidents Museum"/>
+    <tag k="source" v="USGS Geonames"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="368174521" lat="32.7316694" lon="-117.1523613">
+    <tag k="addr:state" v="CA"/>
+    <tag k="ele" v="79"/>
+    <tag k="gnis:county_name" v="San Diego"/>
+    <tag k="gnis:feature_id" v="1869904"/>
+    <tag k="gnis:import_uuid" v="57871b70-0100-4405-bb30-88b2e001a944"/>
+    <tag k="gnis:reviewed" v="no"/>
+    <tag k="name" v="San Diego Museum of Man"/>
+    <tag k="source" v="USGS Geonames"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="368174635" lat="32.7592166" lon="-117.1939237">
+    <tag k="addr:state" v="CA"/>
+    <tag k="ele" v="34"/>
+    <tag k="gnis:county_name" v="San Diego"/>
+    <tag k="gnis:feature_id" v="244176"/>
+    <tag k="gnis:import_uuid" v="57871b70-0100-4405-bb30-88b2e001a944"/>
+    <tag k="gnis:reviewed" v="no"/>
+    <tag k="name" v="Juniper Serra Museum"/>
+    <tag k="source" v="USGS Geonames"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="368174636" lat="32.7211153" lon="-117.2301376">
+    <tag k="addr:state" v="CA"/>
+    <tag k="ele" v="5"/>
+    <tag k="gnis:county_name" v="San Diego"/>
+    <tag k="gnis:feature_id" v="2456341"/>
+    <tag k="gnis:import_uuid" v="57871b70-0100-4405-bb30-88b2e001a944"/>
+    <tag k="gnis:reviewed" v="no"/>
+    <tag k="name" v="Portuguese Historical Center"/>
+    <tag k="source" v="USGS Geonames"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="432026078" lat="32.7068972" lon="-117.1586985">
+    <tag k="addr:housenumber" v="675"/>
+    <tag k="addr:street" v="L St"/>
+    <tag k="name" v="The Omni"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="439803001" lat="32.7033060" lon="-117.1586440">
+    <tag k="addr:city" v="San Diego"/>
+    <tag k="addr:housenumber" v="1"/>
+    <tag k="addr:state" v="CA"/>
+    <tag k="addr:street" v="Park Boulevard"/>
+    <tag k="name" v="Hilton Bayfront Hotel"/>
+    <tag k="smoking" v="separated"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="wheelchair" v="yes"/>
+  </node>
+  <node id="490691216" lat="32.7766546" lon="-117.2385996"/>
+  <node id="490691251" lat="32.7762802" lon="-117.2385915"/>
+  <node id="490691283" lat="32.7775429" lon="-117.2396348"/>
+  <node id="490691345" lat="32.7769700" lon="-117.2386336"/>
+  <node id="490691359" lat="32.7771209" lon="-117.2385138"/>
+  <node id="490691387" lat="32.7764707" lon="-117.2369629"/>
+  <node id="490691404" lat="32.7760411" lon="-117.2382964"/>
+  <node id="490691417" lat="32.7760874" lon="-117.2384070"/>
+  <node id="490691447" lat="32.7761449" lon="-117.2374265"/>
+  <node id="490691460" lat="32.7760703" lon="-117.2376030"/>
+  <node id="490691491" lat="32.7763922" lon="-117.2423745"/>
+  <node id="490691529" lat="32.7755742" lon="-117.2424189"/>
+  <node id="490691544" lat="32.7759195" lon="-117.2423875"/>
+  <node id="490691619" lat="32.7775451" lon="-117.2399216"/>
+  <node id="490691630" lat="32.7774808" lon="-117.2406280"/>
+  <node id="490691666" lat="32.7774087" lon="-117.2409014"/>
+  <node id="490691685" lat="32.7770040" lon="-117.2417579"/>
+  <node id="490691700" lat="32.7767135" lon="-117.2421131"/>
+  <node id="490691706" lat="32.7765471" lon="-117.2422543"/>
+  <node id="490691947" lat="32.7732428" lon="-117.2397886"/>
+  <node id="490691958" lat="32.7730961" lon="-117.2398516"/>
+  <node id="490692003" lat="32.7738397" lon="-117.2404530"/>
+  <node id="490692032" lat="32.7729594" lon="-117.2399433"/>
+  <node id="494792879" lat="32.8011312" lon="-117.2586230">
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="494792972" lat="32.7995368" lon="-117.2578248">
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="494793085" lat="32.7961577" lon="-117.2573553">
+    <tag k="name" v="Crystal Pier"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="url" v="http://www.crystalpier.com/"/>
+  </node>
+  <node id="559960407" lat="32.8955633" lon="-117.2035862"/>
+  <node id="559960408" lat="32.8953560" lon="-117.2038673"/>
+  <node id="559960413" lat="32.8955633" lon="-117.2034005"/>
+  <node id="559960414" lat="32.8953560" lon="-117.2031813"/>
+  <node id="559960416" lat="32.8961659" lon="-117.2038435"/>
+  <node id="559960418" lat="32.8961635" lon="-117.2035886"/>
+  <node id="559960420" lat="32.8961563" lon="-117.2033886"/>
+  <node id="559960421" lat="32.8961540" lon="-117.2031647"/>
+  <node id="572708642" lat="32.7290814" lon="-117.2160992">
+    <tag k="name" v="Homewood Suites Hilton"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="572708644" lat="32.7302251" lon="-117.2160669">
+    <tag k="name" v="Courtyard Marriott"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="596218267" lat="32.7576830" lon="-117.1811290">
+    <tag k="addr:city" v="San Diego"/>
+    <tag k="addr:country" v="US"/>
+    <tag k="addr:housenumber" v="2089"/>
+    <tag k="addr:postcode" v="92108"/>
+    <tag k="addr:street" v="Hotel Circle South"/>
+    <tag k="is_in:city" v="San Diego"/>
+    <tag k="is_in:country" v="United States of America"/>
+    <tag k="is_in:country_code" v="US"/>
+    <tag k="is_in:state" v="California"/>
+    <tag k="is_in:state_code" v="CA"/>
+    <tag k="name" v="Extend Stay America"/>
+    <tag k="source" v="SanGIS Addresses Public Domain (http://www.sangis.org/)"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="596549023" lat="32.8969550" lon="-117.1936730">
+    <tag k="addr:city" v="San Diego"/>
+    <tag k="addr:country" v="US"/>
+    <tag k="addr:housenumber" v="5925"/>
+    <tag k="addr:postcode" v="92121"/>
+    <tag k="addr:street" v="Lusk Bl"/>
+    <tag k="is_in:city" v="San Diego"/>
+    <tag k="is_in:country" v="United States of America"/>
+    <tag k="is_in:country_code" v="US"/>
+    <tag k="is_in:state" v="California"/>
+    <tag k="is_in:state_code" v="CA"/>
+    <tag k="name" v="Holiday Inn Express"/>
+    <tag k="source" v="SanGIS Addresses Public Domain (http://www.sangis.org/)"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="596582863" lat="32.8981160" lon="-117.1924890">
+    <tag k="addr:city" v="San Diego"/>
+    <tag k="addr:country" v="US"/>
+    <tag k="addr:housenumber" v="5975"/>
+    <tag k="addr:postcode" v="92121"/>
+    <tag k="addr:street" v="Lusk Bl"/>
+    <tag k="is_in:city" v="San Diego"/>
+    <tag k="is_in:country" v="United States of America"/>
+    <tag k="is_in:country_code" v="US"/>
+    <tag k="is_in:state" v="California"/>
+    <tag k="is_in:state_code" v="CA"/>
+    <tag k="name" v="Country Inn and Suites by Carlson - San Diego North"/>
+    <tag k="source" v="SanGIS Addresses Public Domain (http://www.sangis.org/)"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="596808414" lat="32.7561970" lon="-117.2202780">
+    <tag k="addr:city" v="San Diego"/>
+    <tag k="addr:country" v="US"/>
+    <tag k="addr:housenumber" v="3950"/>
+    <tag k="addr:postcode" v="92110"/>
+    <tag k="addr:state" v="CA"/>
+    <tag k="addr:street" v="Jupiter Street"/>
+    <tag k="fax" v="+1 619 226 1409"/>
+    <tag k="internet_access" v="wlan"/>
+    <tag k="name" v="Holiday Inn Express"/>
+    <tag k="phone" v="+1 619 226 8000"/>
+    <tag k="smoking" v="no"/>
+    <tag k="source" v="SanGIS Addresses Public Domain (http://www.sangis.org/)"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://www.hiexpress.com/hotels/us/en/san-diego/sanex/hoteldetail"/>
+  </node>
+  <node id="597146198" lat="32.7209250" lon="-117.2286640">
+    <tag k="addr:city" v="San Diego"/>
+    <tag k="addr:country" v="US"/>
+    <tag k="addr:housenumber" v="2733"/>
+    <tag k="addr:postcode" v="92106"/>
+    <tag k="addr:street" v="Shelter Island Dr"/>
+    <tag k="is_in:city" v="San Diego"/>
+    <tag k="is_in:country" v="United States of America"/>
+    <tag k="is_in:country_code" v="US"/>
+    <tag k="is_in:state" v="California"/>
+    <tag k="is_in:state_code" v="CA"/>
+    <tag k="name" v="dfgh"/>
+    <tag k="source" v="SanGIS Addresses Public Domain (http://www.sangis.org/)"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="603688135" lat="32.7534341" lon="-117.1941974"/>
+  <node id="603688137" lat="32.7532432" lon="-117.1938973"/>
+  <node id="603688138" lat="32.7533244" lon="-117.1938276"/>
+  <node id="603688139" lat="32.7533153" lon="-117.1937846"/>
+  <node id="603688140" lat="32.7533735" lon="-117.1937437"/>
+  <node id="603688141" lat="32.7535787" lon="-117.1940564"/>
+  <node id="662733224" lat="32.7214110" lon="-117.1632130">
+    <tag k="name" v="Motel 6"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="675316554" lat="32.8745072" lon="-117.2083393">
+    <tag k="name" v="Embassy Suites"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="712768211" lat="32.8996229" lon="-117.1916284"/>
+  <node id="712768216" lat="32.8993799" lon="-117.1917903"/>
+  <node id="712768217" lat="32.8994952" lon="-117.1919571"/>
+  <node id="712768219" lat="32.8994046" lon="-117.1920209"/>
+  <node id="712768220" lat="32.8992893" lon="-117.1918737"/>
+  <node id="712768221" lat="32.8987579" lon="-117.1922564"/>
+  <node id="712768222" lat="32.8987043" lon="-117.1921288"/>
+  <node id="712768223" lat="32.8987249" lon="-117.1920012"/>
+  <node id="712768224" lat="32.8988979" lon="-117.1918295"/>
+  <node id="712768225" lat="32.8988691" lon="-117.1917559"/>
+  <node id="712768226" lat="32.8987867" lon="-117.1918246"/>
+  <node id="712768227" lat="32.8987208" lon="-117.1917167"/>
+  <node id="712768228" lat="32.8987249" lon="-117.1915891"/>
+  <node id="712768229" lat="32.8992481" lon="-117.1911279"/>
+  <node id="747653242" lat="32.7273401" lon="-117.1542634"/>
+  <node id="747653244" lat="32.7271661" lon="-117.1540119"/>
+  <node id="747653245" lat="32.7276509" lon="-117.1535319"/>
+  <node id="747653246" lat="32.7278278" lon="-117.1538025"/>
+  <node id="747659931" lat="32.7272622" lon="-117.1495385">
+    <tag k="name" v="World Beat Cultural Center"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="747660028" lat="32.7277090" lon="-117.1486158">
+    <tag k="name" v="Centro Cultural de la Raza"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="925958656" lat="32.7323447" lon="-117.1470197"/>
+  <node id="925958657" lat="32.7318257" lon="-117.1470197"/>
+  <node id="925958658" lat="32.7318173" lon="-117.1473792"/>
+  <node id="925958659" lat="32.7318077" lon="-117.1477868"/>
+  <node id="925958660" lat="32.7319927" lon="-117.1477976"/>
+  <node id="925958661" lat="32.7320017" lon="-117.1476957"/>
+  <node id="925958662" lat="32.7323492" lon="-117.1476903"/>
+  <node id="925958663" lat="32.7323470" lon="-117.1473738"/>
+  <node id="930188121" lat="32.7297000" lon="-117.1629150">
+    <tag k="name" v="Keating House"/>
+    <tag k="opening_hours" v="Contact them"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="940357701" lat="32.7664159" lon="-117.2373562"/>
+  <node id="940357702" lat="32.7664136" lon="-117.2373334"/>
+  <node id="940357703" lat="32.7664148" lon="-117.2373093"/>
+  <node id="940357705" lat="32.7664193" lon="-117.2372865"/>
+  <node id="940357706" lat="32.7664272" lon="-117.2372637"/>
+  <node id="940357707" lat="32.7664385" lon="-117.2372449"/>
+  <node id="940357708" lat="32.7664509" lon="-117.2372261"/>
+  <node id="940357709" lat="32.7664723" lon="-117.2372087"/>
+  <node id="940357710" lat="32.7664960" lon="-117.2371993"/>
+  <node id="940357711" lat="32.7665140" lon="-117.2371966"/>
+  <node id="940357712" lat="32.7665501" lon="-117.2372007"/>
+  <node id="940357714" lat="32.7664982" lon="-117.2370826"/>
+  <node id="940357715" lat="32.7662524" lon="-117.2372369"/>
+  <node id="940357716" lat="32.7663336" lon="-117.2374072"/>
+  <node id="940357718" lat="32.7663855" lon="-117.2375172"/>
+  <node id="940357719" lat="32.7665298" lon="-117.2376727"/>
+  <node id="940357720" lat="32.7665614" lon="-117.2376312"/>
+  <node id="940357722" lat="32.7666076" lon="-117.2376821"/>
+  <node id="940357723" lat="32.7666279" lon="-117.2376566"/>
+  <node id="940357724" lat="32.7666663" lon="-117.2376540"/>
+  <node id="940357725" lat="32.7667057" lon="-117.2376446"/>
+  <node id="940357726" lat="32.7667610" lon="-117.2376285"/>
+  <node id="940357727" lat="32.7668016" lon="-117.2376137"/>
+  <node id="940357728" lat="32.7668591" lon="-117.2375815"/>
+  <node id="940357729" lat="32.7668918" lon="-117.2375574"/>
+  <node id="940357731" lat="32.7669177" lon="-117.2375359"/>
+  <node id="940357732" lat="32.7668512" lon="-117.2374582"/>
+  <node id="940357733" lat="32.7668196" lon="-117.2374273"/>
+  <node id="940357734" lat="32.7668016" lon="-117.2374179"/>
+  <node id="940357735" lat="32.7667847" lon="-117.2374152"/>
+  <node id="940357736" lat="32.7667700" lon="-117.2374152"/>
+  <node id="940357737" lat="32.7667452" lon="-117.2374179"/>
+  <node id="940357738" lat="32.7667226" lon="-117.2374313"/>
+  <node id="940357739" lat="32.7666956" lon="-117.2374662"/>
+  <node id="940357740" lat="32.7667046" lon="-117.2374742"/>
+  <node id="940357741" lat="32.7666888" lon="-117.2374917"/>
+  <node id="940357743" lat="32.7665580" lon="-117.2373482"/>
+  <node id="940357744" lat="32.7664836" lon="-117.2374434"/>
+  <node id="940357745" lat="32.7664565" lon="-117.2374246"/>
+  <node id="964486037" lat="32.7416874" lon="-117.1577964">
+    <tag k="alt_name" v="The George and Anna Marston House Museum and Gardens"/>
+    <tag k="name" v="Marston House"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="981269200" lat="32.7231631" lon="-117.1684973">
+    <tag k="addr:street" v="606 West Date Street"/>
+    <tag k="name" v="La Pensione"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="1346369199" lat="32.7258399" lon="-117.1487500">
+    <tag k="name" v="Veteran's Museum and Memorial Center"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1458207035" lat="32.7224970" lon="-117.1636668"/>
+  <node id="1458207036" lat="32.7223603" lon="-117.1637417"/>
+  <node id="1458207041" lat="32.7224124" lon="-117.1637365"/>
+  <node id="1458207043" lat="32.7225124" lon="-117.1634927"/>
+  <node id="1458207045" lat="32.7224818" lon="-117.1634384"/>
+  <node id="1458207067" lat="32.7225241" lon="-117.1635785"/>
+  <node id="1458207081" lat="32.7222605" lon="-117.1634461"/>
+  <node id="1458207091" lat="32.7223194" lon="-117.1637302"/>
+  <node id="1458207107" lat="32.7225108" lon="-117.1636385"/>
+  <node id="1458207108" lat="32.7222339" lon="-117.1636286"/>
+  <node id="1458207112" lat="32.7222747" lon="-117.1636979"/>
+  <node id="1458207114" lat="32.7222387" lon="-117.1634852"/>
+  <node id="1458207118" lat="32.7222244" lon="-117.1635449"/>
+  <node id="1458207119" lat="32.7224599" lon="-117.1637105"/>
+  <node id="1458207120" lat="32.7223442" lon="-117.1633881"/>
+  <node id="1458207126" lat="32.7223011" lon="-117.1634070"/>
+  <node id="1458207140" lat="32.7223964" lon="-117.1633865"/>
+  <node id="1458207152" lat="32.7224460" lon="-117.1634063"/>
+  <node id="1458212924" lat="32.7310226" lon="-117.1490093">
+    <tag k="name" v="San Diego Model Railroad Museum"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1458213374" lat="32.7312299" lon="-117.1485804">
+    <tag k="name" v="Museum of Photographic Arts"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1499576359" lat="32.8346039" lon="-117.1732567">
+    <tag k="name" v="Best Western"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="1500943741" lat="32.7903921" lon="-117.2548234">
+    <tag k="addr:city" v="San Diego"/>
+    <tag k="addr:housenumber" v="707"/>
+    <tag k="addr:postcode" v="92109"/>
+    <tag k="addr:street" v="Pacific Beach Drive"/>
+    <tag k="leisure" v="beach_resort"/>
+    <tag k="name" v="Best Western Plus Blue Sea Lodge"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://bestwester-bluesea.com"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wheelchair:description" v="Has ADA compliant rooms"/>
+  </node>
+  <node id="1538591976" lat="32.8548717" lon="-117.2579053">
+    <tag k="email" v="info@LJShoresHotel.com"/>
+    <tag k="internet_access" v="yes"/>
+    <tag k="internet_access:fee" v="no"/>
+    <tag k="name" v="La Jolla Shores Hotel"/>
+    <tag k="phone" v="+18584598271"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="www.LJShoresHotel.com"/>
+  </node>
+  <node id="1609865872" lat="32.7200125" lon="-117.2327577">
+    <tag k="name" v="123456"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="1613827879" lat="32.7165410" lon="-117.2273946">
+    <tag k="name" v="Humphrey's Half Moon Inn and Suites"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="1613829107" lat="32.7172872" lon="-117.2265987">
+    <tag k="name" v="Humphrey's Half Moon Inn &amp; Suites"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="1613829108" lat="32.7273965" lon="-117.1989613">
+    <tag k="name" v="The Sheraton"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="1613831379" lat="32.7165650" lon="-117.2274570">
+    <tag k="name" v="Humphrey's Half Moon Inn &amp; Suites"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="1613831380" lat="32.7285517" lon="-117.1974163">
+    <tag k="name" v="The Sheraton"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="1613841819" lat="32.7167459" lon="-117.2277933">
+    <tag k="name" v="Humprhey's Half Moon Inn &amp; Suites"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="1710764143" lat="32.7608260" lon="-117.1881672">
+    <tag k="name" v="Comfort Inn and Suites"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="1710764145" lat="32.7603292" lon="-117.1844832">
+    <tag k="name" v="Crowne Plaza"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://www.ichotelsgroup.com/h/d/cp/1/en/hotel/SANCP"/>
+  </node>
+  <node id="1711714463" lat="32.7696421" lon="-117.1603695">
+    <tag k="name" v="Mission Valley Doubletree"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="1713143030" lat="32.7310151" lon="-117.1510187">
+    <tag k="name" v="Mingei International Museum"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1713143034" lat="32.7324881" lon="-117.1491991">
+    <tag k="name" v="San Diego Botanical Garden"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1713143048" lat="32.7318238" lon="-117.1495424">
+    <tag k="name" v="Timken Museum of Art"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1803431547" lat="32.7106549" lon="-117.1649802">
+    <tag k="name" v="The New Children's Museum"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1803433258" lat="32.7096167" lon="-117.1680165">
+    <tag k="name" v="Manchester Grand Hyatt"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="1803433389" lat="32.7083800" lon="-117.1651626">
+    <tag k="name" v="San Diego Marriott and Marina"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="1869994942" lat="32.7518996" lon="-117.2007475">
+    <tag k="name" v="Old Town Inn"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="1931041875" lat="32.7739530" lon="-117.2408263"/>
+  <node id="1931041878" lat="32.7740320" lon="-117.2412646"/>
+  <node id="1931041880" lat="32.7740589" lon="-117.2410950"/>
+  <node id="1931041893" lat="32.7756656" lon="-117.2424652"/>
+  <node id="1931041898" lat="32.7772625" lon="-117.2384904"/>
+  <node id="1931116968" lat="32.7751962" lon="-117.2359198"/>
+  <node id="1931116970" lat="32.7757094" lon="-117.2357511"/>
+  <node id="1935698964" lat="32.7743637" lon="-117.2413038"/>
+  <node id="1935699172" lat="32.7768807" lon="-117.2368318"/>
+  <node id="2048012695" lat="32.7193334" lon="-117.1725004">
+    <tag k="name" v="Wyndham San Diego on the Bay"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2048994333" lat="32.7176183" lon="-117.1667002">
+    <tag k="name" v="W Hotel San Diego"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2097842981" lat="32.7198025" lon="-117.1576072"/>
+  <node id="2097842982" lat="32.7194575" lon="-117.1576024"/>
+  <node id="2097842983" lat="32.7193853" lon="-117.1579510"/>
+  <node id="2097842984" lat="32.7194575" lon="-117.1579484"/>
+  <node id="2097842985" lat="32.7197915" lon="-117.1582701"/>
+  <node id="2097842986" lat="32.7193831" lon="-117.1582728"/>
+  <node id="2157494069" lat="32.7628504" lon="-117.0671801">
+    <tag k="designation" v="San Diego Police Museum"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="2170230528" lat="32.7622010" lon="-117.1658288"/>
+  <node id="2170230555" lat="32.7652721" lon="-117.1668823"/>
+  <node id="2170321491" lat="32.7611877" lon="-117.1690399"/>
+  <node id="2170321494" lat="32.7612030" lon="-117.1690744"/>
+  <node id="2170321496" lat="32.7612040" lon="-117.1690405"/>
+  <node id="2170321498" lat="32.7612162" lon="-117.1691077"/>
+  <node id="2170321499" lat="32.7612367" lon="-117.1691296"/>
+  <node id="2170321500" lat="32.7612716" lon="-117.1686716"/>
+  <node id="2170321503" lat="32.7612786" lon="-117.1691505"/>
+  <node id="2170321506" lat="32.7613273" lon="-117.1684186"/>
+  <node id="2170321509" lat="32.7613898" lon="-117.1681940"/>
+  <node id="2170321511" lat="32.7614410" lon="-117.1680434"/>
+  <node id="2170321513" lat="32.7616436" lon="-117.1675232"/>
+  <node id="2170321514" lat="32.7617882" lon="-117.1666497"/>
+  <node id="2170321517" lat="32.7617887" lon="-117.1666202"/>
+  <node id="2170321519" lat="32.7617935" lon="-117.1666760"/>
+  <node id="2170321521" lat="32.7617966" lon="-117.1665938"/>
+  <node id="2170321523" lat="32.7617987" lon="-117.1671266"/>
+  <node id="2170321525" lat="32.7618109" lon="-117.1667237"/>
+  <node id="2170321527" lat="32.7618193" lon="-117.1670682"/>
+  <node id="2170321529" lat="32.7618225" lon="-117.1667608"/>
+  <node id="2170321531" lat="32.7618309" lon="-117.1670224"/>
+  <node id="2170321533" lat="32.7618341" lon="-117.1668072"/>
+  <node id="2170321535" lat="32.7618383" lon="-117.1669672"/>
+  <node id="2170321537" lat="32.7618399" lon="-117.1668480"/>
+  <node id="2170321539" lat="32.7618415" lon="-117.1669038"/>
+  <node id="2170321541" lat="32.7618895" lon="-117.1663755"/>
+  <node id="2170321543" lat="32.7620001" lon="-117.1661079"/>
+  <node id="2170321545" lat="32.7620285" lon="-117.1660396"/>
+  <node id="2170321547" lat="32.7620643" lon="-117.1659739"/>
+  <node id="2170321549" lat="32.7621001" lon="-117.1659153"/>
+  <node id="2170321551" lat="32.7621232" lon="-117.1659180"/>
+  <node id="2170321553" lat="32.7621479" lon="-117.1658887"/>
+  <node id="2170321555" lat="32.7637989" lon="-117.1699732"/>
+  <node id="2170321557" lat="32.7642358" lon="-117.1700674"/>
+  <node id="2170321560" lat="32.7643340" lon="-117.1697774"/>
+  <node id="2170321563" lat="32.7646474" lon="-117.1691148"/>
+  <node id="2170321568" lat="32.7649791" lon="-117.1685700"/>
+  <node id="2170321570" lat="32.7649991" lon="-117.1685190"/>
+  <node id="2170321576" lat="32.7652725" lon="-117.1678245"/>
+  <node id="2170321581" lat="32.7654578" lon="-117.1669513"/>
+  <node id="2214898323" lat="32.7257660" lon="-117.1543756"/>
+  <node id="2214898324" lat="32.7257680" lon="-117.1545021"/>
+  <node id="2214898326" lat="32.7257896" lon="-117.1543621"/>
+  <node id="2214898328" lat="32.7258072" lon="-117.1543621"/>
+  <node id="2214898329" lat="32.7258160" lon="-117.1542789"/>
+  <node id="2214898334" lat="32.7259276" lon="-117.1540193"/>
+  <node id="2214898339" lat="32.7259749" lon="-117.1548597"/>
+  <node id="2214898341" lat="32.7260283" lon="-117.1539348"/>
+  <node id="2214898342" lat="32.7260385" lon="-117.1548902"/>
+  <node id="2214898344" lat="32.7260709" lon="-117.1549010"/>
+  <node id="2214898345" lat="32.7261304" lon="-117.1548868"/>
+  <node id="2214898346" lat="32.7261608" lon="-117.1538881"/>
+  <node id="2214898348" lat="32.7262819" lon="-117.1538868"/>
+  <node id="2214898352" lat="32.7264151" lon="-117.1548131"/>
+  <node id="2214898356" lat="32.7264563" lon="-117.1539206"/>
+  <node id="2214898358" lat="32.7265151" lon="-117.1547252"/>
+  <node id="2214898359" lat="32.7265347" lon="-117.1538766"/>
+  <node id="2214898362" lat="32.7266166" lon="-117.1538854"/>
+  <node id="2214898363" lat="32.7266362" lon="-117.1544818"/>
+  <node id="2214898365" lat="32.7266859" lon="-117.1539331"/>
+  <node id="2214898366" lat="32.7267227" lon="-117.1540741"/>
+  <node id="2214898385" lat="32.7275041" lon="-117.1523876"/>
+  <node id="2230082362" lat="32.7746230" lon="-117.0262099"/>
+  <node id="2230082367" lat="32.7746245" lon="-117.0263267"/>
+  <node id="2230082371" lat="32.7746579" lon="-117.0261737"/>
+  <node id="2230082375" lat="32.7746538" lon="-117.0262099"/>
+  <node id="2230082378" lat="32.7746904" lon="-117.0255872"/>
+  <node id="2230082381" lat="32.7746889" lon="-117.0257882"/>
+  <node id="2230082383" lat="32.7747065" lon="-117.0261123"/>
+  <node id="2230082385" lat="32.7747044" lon="-117.0261734"/>
+  <node id="2230082392" lat="32.7747725" lon="-117.0263354"/>
+  <node id="2230082396" lat="32.7747725" lon="-117.0263216"/>
+  <node id="2230082399" lat="32.7749248" lon="-117.0258457"/>
+  <node id="2230082401" lat="32.7749336" lon="-117.0258056"/>
+  <node id="2230082404" lat="32.7749468" lon="-117.0258230"/>
+  <node id="2230082407" lat="32.7749498" lon="-117.0258788"/>
+  <node id="2230082410" lat="32.7749849" lon="-117.0258492"/>
+  <node id="2230082413" lat="32.7749747" lon="-117.0261298"/>
+  <node id="2230082416" lat="32.7749822" lon="-117.0263051"/>
+  <node id="2230082419" lat="32.7749820" lon="-117.0263337"/>
+  <node id="2230082421" lat="32.7750245" lon="-117.0256017"/>
+  <node id="2230082422" lat="32.7751373" lon="-117.0254727"/>
+  <node id="2230082424" lat="32.7751769" lon="-117.0257551"/>
+  <node id="2230082425" lat="32.7751546" lon="-117.0263061"/>
+  <node id="2230082426" lat="32.7751827" lon="-117.0255425"/>
+  <node id="2230082430" lat="32.7752120" lon="-117.0255163"/>
+  <node id="2230082432" lat="32.7752208" lon="-117.0255930"/>
+  <node id="2230082435" lat="32.7752472" lon="-117.0255581"/>
+  <node id="2230082438" lat="32.7752677" lon="-117.0256505"/>
+  <way id="26748231">
+    <nd ref="293394926"/>
+    <nd ref="293394927"/>
+    <nd ref="293394928"/>
+    <nd ref="293394929"/>
+    <nd ref="293394930"/>
+    <nd ref="293394931"/>
+    <nd ref="293394932"/>
+    <nd ref="293394933"/>
+    <nd ref="293394934"/>
+    <nd ref="293394935"/>
+    <nd ref="293394936"/>
+    <nd ref="293394937"/>
+    <nd ref="293394926"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Embassy Suites"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="27120562">
+    <nd ref="297552706"/>
+    <nd ref="297552655"/>
+    <nd ref="297553200"/>
+    <nd ref="297552708"/>
+    <nd ref="297553201"/>
+    <nd ref="297552659"/>
+    <nd ref="297553202"/>
+    <nd ref="297552663"/>
+    <nd ref="297552665"/>
+    <nd ref="297552667"/>
+    <nd ref="297552669"/>
+    <nd ref="297552671"/>
+    <nd ref="297552711"/>
+    <nd ref="297552706"/>
+    <tag k="building" v="yes"/>
+    <tag k="created_by" v="Potlatch 0.10b"/>
+    <tag k="name" v="Emerald Plaza"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="28824905">
+    <nd ref="316911836"/>
+    <nd ref="316911837"/>
+    <nd ref="316911838"/>
+    <nd ref="316911839"/>
+    <nd ref="316911840"/>
+    <nd ref="316911841"/>
+    <nd ref="316911842"/>
+    <nd ref="316911843"/>
+    <nd ref="316911844"/>
+    <nd ref="316911845"/>
+    <nd ref="316911846"/>
+    <nd ref="316911847"/>
+    <nd ref="316911848"/>
+    <nd ref="316911849"/>
+    <nd ref="316911850"/>
+    <nd ref="316911851"/>
+    <nd ref="281144434"/>
+    <nd ref="316911852"/>
+    <nd ref="316911836"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Reuben H. Fleet Science Center"/>
+    <tag k="tourism" v="museum"/>
+  </way>
+  <way id="28824920">
+    <nd ref="316912122"/>
+    <nd ref="2214898385"/>
+    <nd ref="316912123"/>
+    <nd ref="316912124"/>
+    <nd ref="316912125"/>
+    <nd ref="316912126"/>
+    <nd ref="316912134"/>
+    <nd ref="316912135"/>
+    <nd ref="316912136"/>
+    <nd ref="316912137"/>
+    <nd ref="316912127"/>
+    <nd ref="316912128"/>
+    <nd ref="316912129"/>
+    <nd ref="316912122"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="San Diego Hall of Champions"/>
+    <tag k="tourism" v="museum"/>
+  </way>
+  <way id="30929700">
+    <nd ref="343862790"/>
+    <nd ref="343862791"/>
+    <nd ref="343862792"/>
+    <nd ref="343862793"/>
+    <nd ref="343862794"/>
+    <nd ref="343862795"/>
+    <nd ref="343862796"/>
+    <nd ref="343862797"/>
+    <nd ref="343862798"/>
+    <nd ref="343862799"/>
+    <nd ref="343862800"/>
+    <nd ref="343862801"/>
+    <nd ref="343862802"/>
+    <nd ref="343862803"/>
+    <nd ref="343862804"/>
+    <nd ref="343862805"/>
+    <nd ref="343862806"/>
+    <nd ref="343862807"/>
+    <nd ref="343862808"/>
+    <nd ref="343862809"/>
+    <nd ref="343862790"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Manchester Grand Hyatt San Diego"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="30929835">
+    <nd ref="343866512"/>
+    <nd ref="343866513"/>
+    <nd ref="343866514"/>
+    <nd ref="343866515"/>
+    <nd ref="343866516"/>
+    <nd ref="343866512"/>
+    <tag k="addr:housenumber" v="207"/>
+    <tag k="addr:street" v="5th Ave"/>
+    <tag k="building" v="yes"/>
+    <tag k="created_by" v="Potlatch 0.10f"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="31008692">
+    <nd ref="344791523"/>
+    <nd ref="344791524"/>
+    <nd ref="344791525"/>
+    <nd ref="344791526"/>
+    <nd ref="344791527"/>
+    <nd ref="344791528"/>
+    <nd ref="344791529"/>
+    <nd ref="344791530"/>
+    <nd ref="344791531"/>
+    <nd ref="344791532"/>
+    <nd ref="344791533"/>
+    <nd ref="344791534"/>
+    <nd ref="344791535"/>
+    <nd ref="344791536"/>
+    <nd ref="344791537"/>
+    <nd ref="344791538"/>
+    <nd ref="344791539"/>
+    <nd ref="344791540"/>
+    <nd ref="344791541"/>
+    <nd ref="344791542"/>
+    <nd ref="344791543"/>
+    <nd ref="344791544"/>
+    <nd ref="344791545"/>
+    <nd ref="344791546"/>
+    <nd ref="344791547"/>
+    <nd ref="344791548"/>
+    <nd ref="344791549"/>
+    <nd ref="344791550"/>
+    <nd ref="344791551"/>
+    <nd ref="344791552"/>
+    <nd ref="344791553"/>
+    <nd ref="344791554"/>
+    <nd ref="344791555"/>
+    <nd ref="344791523"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Sheraton San Diego"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="31240535">
+    <nd ref="347336970"/>
+    <nd ref="347336971"/>
+    <nd ref="347336972"/>
+    <nd ref="2214898366"/>
+    <nd ref="347336973"/>
+    <nd ref="347336974"/>
+    <nd ref="2214898365"/>
+    <nd ref="347336975"/>
+    <nd ref="2214898362"/>
+    <nd ref="347336976"/>
+    <nd ref="2214898359"/>
+    <nd ref="347336977"/>
+    <nd ref="2214898356"/>
+    <nd ref="347336978"/>
+    <nd ref="347336979"/>
+    <nd ref="2214898348"/>
+    <nd ref="347336980"/>
+    <nd ref="2214898346"/>
+    <nd ref="347336982"/>
+    <nd ref="2214898341"/>
+    <nd ref="347336983"/>
+    <nd ref="2214898334"/>
+    <nd ref="347336984"/>
+    <nd ref="347336985"/>
+    <nd ref="2214898329"/>
+    <nd ref="2214898328"/>
+    <nd ref="2214898326"/>
+    <nd ref="2214898323"/>
+    <nd ref="347336986"/>
+    <nd ref="2214898324"/>
+    <nd ref="347337019"/>
+    <nd ref="347337020"/>
+    <nd ref="347337021"/>
+    <nd ref="347337022"/>
+    <nd ref="2214898339"/>
+    <nd ref="2214898342"/>
+    <nd ref="2214898344"/>
+    <nd ref="347337023"/>
+    <nd ref="2214898345"/>
+    <nd ref="347337024"/>
+    <nd ref="347337025"/>
+    <nd ref="347337026"/>
+    <nd ref="2214898352"/>
+    <nd ref="347337027"/>
+    <nd ref="2214898358"/>
+    <nd ref="347337028"/>
+    <nd ref="347337029"/>
+    <nd ref="2214898363"/>
+    <nd ref="347337030"/>
+    <nd ref="347337031"/>
+    <nd ref="347336970"/>
+    <tag k="addr:state" v="CA"/>
+    <tag k="building" v="yes"/>
+    <tag k="ele" v="69"/>
+    <tag k="gnis:county_name" v="San Diego"/>
+    <tag k="gnis:feature_id" v="1869915"/>
+    <tag k="gnis:import_uuid" v="57871b70-0100-4405-bb30-88b2e001a944"/>
+    <tag k="name" v="San Diego Air &amp; Space Museum"/>
+    <tag k="source" v="USGS Geonames"/>
+    <tag k="tourism" v="museum"/>
+  </way>
+  <way id="31285222">
+    <nd ref="348080361"/>
+    <nd ref="348080364"/>
+    <nd ref="349250108"/>
+    <nd ref="349249601"/>
+    <nd ref="349249602"/>
+    <nd ref="349249603"/>
+    <nd ref="349249604"/>
+    <nd ref="348080366"/>
+    <nd ref="348080368"/>
+    <nd ref="349250119"/>
+    <nd ref="348080369"/>
+    <nd ref="348080371"/>
+    <nd ref="1931116968"/>
+    <nd ref="1931116970"/>
+    <nd ref="348080372"/>
+    <nd ref="1935699172"/>
+    <nd ref="31528462"/>
+    <nd ref="31529938"/>
+    <nd ref="490691387"/>
+    <nd ref="31525714"/>
+    <nd ref="490691447"/>
+    <nd ref="490691460"/>
+    <nd ref="31526608"/>
+    <nd ref="31529266"/>
+    <nd ref="490691404"/>
+    <nd ref="490691417"/>
+    <nd ref="490691251"/>
+    <nd ref="31526039"/>
+    <nd ref="490691216"/>
+    <nd ref="31527311"/>
+    <nd ref="490691345"/>
+    <nd ref="490691359"/>
+    <nd ref="31525600"/>
+    <nd ref="1931041898"/>
+    <nd ref="31526572"/>
+    <nd ref="31529845"/>
+    <nd ref="490691283"/>
+    <nd ref="490691619"/>
+    <nd ref="31529952"/>
+    <nd ref="490691630"/>
+    <nd ref="490691666"/>
+    <nd ref="31525754"/>
+    <nd ref="31526965"/>
+    <nd ref="490691685"/>
+    <nd ref="31528578"/>
+    <nd ref="490691700"/>
+    <nd ref="490691706"/>
+    <nd ref="490691491"/>
+    <nd ref="490691544"/>
+    <nd ref="1931041893"/>
+    <nd ref="490691529"/>
+    <nd ref="31528799"/>
+    <nd ref="31530025"/>
+    <nd ref="31525581"/>
+    <nd ref="1935698964"/>
+    <nd ref="31526605"/>
+    <nd ref="31528719"/>
+    <nd ref="1931041878"/>
+    <nd ref="1931041880"/>
+    <nd ref="31530065"/>
+    <nd ref="1931041875"/>
+    <nd ref="490692003"/>
+    <nd ref="31526012"/>
+    <nd ref="31527127"/>
+    <nd ref="490691947"/>
+    <nd ref="490691958"/>
+    <nd ref="490692032"/>
+    <nd ref="348080361"/>
+    <tag k="area" v="yes"/>
+    <tag k="name" v="Paradise Point Resort and Spa"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="31430008">
+    <nd ref="350512810"/>
+    <nd ref="350512811"/>
+    <nd ref="350512812"/>
+    <nd ref="350512814"/>
+    <nd ref="350512810"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Westgate Hotel"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="31557331">
+    <nd ref="353117202"/>
+    <nd ref="353117203"/>
+    <nd ref="353117204"/>
+    <nd ref="353117205"/>
+    <nd ref="353117206"/>
+    <nd ref="353117208"/>
+    <nd ref="353117209"/>
+    <nd ref="353117210"/>
+    <nd ref="353117211"/>
+    <nd ref="353117212"/>
+    <nd ref="353117213"/>
+    <nd ref="353117214"/>
+    <nd ref="353117215"/>
+    <nd ref="353117216"/>
+    <nd ref="353117217"/>
+    <nd ref="353117219"/>
+    <nd ref="353117220"/>
+    <nd ref="353117221"/>
+    <nd ref="353117222"/>
+    <nd ref="353117223"/>
+    <nd ref="353117224"/>
+    <nd ref="353117225"/>
+    <nd ref="343862453"/>
+    <nd ref="343862452"/>
+    <nd ref="353117227"/>
+    <nd ref="353117228"/>
+    <nd ref="353117229"/>
+    <nd ref="353117230"/>
+    <nd ref="353117231"/>
+    <nd ref="353117232"/>
+    <nd ref="353117233"/>
+    <nd ref="353117234"/>
+    <nd ref="353117235"/>
+    <nd ref="353117236"/>
+    <nd ref="353117237"/>
+    <nd ref="353117238"/>
+    <nd ref="353117239"/>
+    <nd ref="353117240"/>
+    <nd ref="353117241"/>
+    <nd ref="353117242"/>
+    <nd ref="353117243"/>
+    <nd ref="353117244"/>
+    <nd ref="353117245"/>
+    <nd ref="353117246"/>
+    <nd ref="353117247"/>
+    <nd ref="353117248"/>
+    <nd ref="353117202"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="San Diego Marriott Marquis &amp; Marina"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="44047147">
+    <nd ref="559960416"/>
+    <nd ref="559960418"/>
+    <nd ref="559960407"/>
+    <nd ref="559960413"/>
+    <nd ref="559960420"/>
+    <nd ref="559960421"/>
+    <nd ref="559960414"/>
+    <nd ref="559960408"/>
+    <nd ref="559960416"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Residence Inn San Diego Sorrento Mesa/Sorrento Valley"/>
+    <tag k="operator" v="mariott"/>
+    <tag k="source" v="yahoo_imagery"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="47430554">
+    <nd ref="603688135"/>
+    <nd ref="603688137"/>
+    <nd ref="603688138"/>
+    <nd ref="603688139"/>
+    <nd ref="603688140"/>
+    <nd ref="603688141"/>
+    <nd ref="603688135"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Best Western Hacienda, Old Town"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="57247516">
+    <nd ref="712768229"/>
+    <nd ref="712768211"/>
+    <nd ref="712768216"/>
+    <nd ref="712768217"/>
+    <nd ref="712768219"/>
+    <nd ref="712768220"/>
+    <nd ref="712768221"/>
+    <nd ref="712768222"/>
+    <nd ref="712768223"/>
+    <nd ref="712768224"/>
+    <nd ref="712768225"/>
+    <nd ref="712768226"/>
+    <nd ref="712768227"/>
+    <nd ref="712768228"/>
+    <nd ref="712768229"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Woodfin Suites"/>
+    <tag k="operator" v="Woodfin"/>
+    <tag k="source" v="yahoo_imagery"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="60194724">
+    <nd ref="747653242"/>
+    <nd ref="747653244"/>
+    <nd ref="747653245"/>
+    <nd ref="747653246"/>
+    <nd ref="747653242"/>
+    <tag k="addr:state" v="CA"/>
+    <tag k="building" v="yes"/>
+    <tag k="ele" v="72"/>
+    <tag k="gnis:county_name" v="San Diego"/>
+    <tag k="gnis:feature_id" v="2084630"/>
+    <tag k="gnis:import_uuid" v="57871b70-0100-4405-bb30-88b2e001a944"/>
+    <tag k="gnis:reviewed" v="no"/>
+    <tag k="name" v="San Diego Automotive Museum"/>
+    <tag k="source" v="USGS Geonames"/>
+    <tag k="tourism" v="museum"/>
+  </way>
+  <way id="79288741">
+    <nd ref="925958656"/>
+    <nd ref="925958657"/>
+    <nd ref="925958658"/>
+    <nd ref="925958659"/>
+    <nd ref="925958660"/>
+    <nd ref="925958661"/>
+    <nd ref="925958662"/>
+    <nd ref="925958663"/>
+    <nd ref="925958656"/>
+    <tag k="addr:state" v="CA"/>
+    <tag k="building" v="yes"/>
+    <tag k="ele" v="89"/>
+    <tag k="gnis:county_name" v="San Diego"/>
+    <tag k="gnis:feature_id" v="1869905"/>
+    <tag k="gnis:import_uuid" v="57871b70-0100-4405-bb30-88b2e001a944"/>
+    <tag k="name" v="San Diego Natural History Museum"/>
+    <tag k="source" v="USGS Geonames"/>
+    <tag k="tourism" v="museum"/>
+  </way>
+  <way id="80619496">
+    <nd ref="940357701"/>
+    <nd ref="940357702"/>
+    <nd ref="940357703"/>
+    <nd ref="940357705"/>
+    <nd ref="940357706"/>
+    <nd ref="940357707"/>
+    <nd ref="940357708"/>
+    <nd ref="940357709"/>
+    <nd ref="940357710"/>
+    <nd ref="940357711"/>
+    <nd ref="940357712"/>
+    <nd ref="940357714"/>
+    <nd ref="940357715"/>
+    <nd ref="940357716"/>
+    <nd ref="940357701"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="The Dana"/>
+    <tag k="source" v="Yahoo"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="80619505">
+    <nd ref="940357718"/>
+    <nd ref="940357719"/>
+    <nd ref="940357720"/>
+    <nd ref="940357722"/>
+    <nd ref="940357723"/>
+    <nd ref="940357724"/>
+    <nd ref="940357725"/>
+    <nd ref="940357726"/>
+    <nd ref="940357727"/>
+    <nd ref="940357728"/>
+    <nd ref="940357729"/>
+    <nd ref="940357731"/>
+    <nd ref="940357732"/>
+    <nd ref="940357733"/>
+    <nd ref="940357734"/>
+    <nd ref="940357735"/>
+    <nd ref="940357736"/>
+    <nd ref="940357737"/>
+    <nd ref="940357738"/>
+    <nd ref="940357739"/>
+    <nd ref="940357740"/>
+    <nd ref="940357741"/>
+    <nd ref="940357743"/>
+    <nd ref="940357744"/>
+    <nd ref="940357745"/>
+    <nd ref="940357718"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="The Dana"/>
+    <tag k="source" v="Yahoo"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="132579338">
+    <nd ref="1458207107"/>
+    <nd ref="1458207067"/>
+    <nd ref="1458207043"/>
+    <nd ref="1458207045"/>
+    <nd ref="1458207152"/>
+    <nd ref="1458207140"/>
+    <nd ref="1458207120"/>
+    <nd ref="1458207126"/>
+    <nd ref="1458207081"/>
+    <nd ref="1458207114"/>
+    <nd ref="1458207118"/>
+    <nd ref="1458207108"/>
+    <nd ref="1458207112"/>
+    <nd ref="1458207091"/>
+    <nd ref="1458207036"/>
+    <nd ref="1458207041"/>
+    <nd ref="1458207119"/>
+    <nd ref="1458207035"/>
+    <nd ref="1458207107"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Holiday Inn"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="199790336">
+    <nd ref="2097842985"/>
+    <nd ref="2097842986"/>
+    <nd ref="2097842983"/>
+    <nd ref="2097842984"/>
+    <nd ref="2097842982"/>
+    <nd ref="2097842981"/>
+    <nd ref="2097842985"/>
+    <tag k="name" v="Rodeway Inn &amp; Suites"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="206942936">
+    <nd ref="2170321503"/>
+    <nd ref="2170321555"/>
+    <nd ref="2170321557"/>
+    <nd ref="2170321560"/>
+    <nd ref="2170321563"/>
+    <nd ref="2170321568"/>
+    <nd ref="2170321570"/>
+    <nd ref="2170321576"/>
+    <nd ref="2170321581"/>
+    <nd ref="2170230555"/>
+    <nd ref="2170230528"/>
+    <nd ref="2170321553"/>
+    <nd ref="2170321551"/>
+    <nd ref="2170321549"/>
+    <nd ref="2170321547"/>
+    <nd ref="2170321545"/>
+    <nd ref="2170321543"/>
+    <nd ref="2170321541"/>
+    <nd ref="2170321521"/>
+    <nd ref="2170321517"/>
+    <nd ref="2170321514"/>
+    <nd ref="2170321519"/>
+    <nd ref="2170321525"/>
+    <nd ref="2170321529"/>
+    <nd ref="2170321533"/>
+    <nd ref="2170321537"/>
+    <nd ref="2170321539"/>
+    <nd ref="2170321535"/>
+    <nd ref="2170321531"/>
+    <nd ref="2170321527"/>
+    <nd ref="2170321523"/>
+    <nd ref="2170321513"/>
+    <nd ref="2170321511"/>
+    <nd ref="2170321509"/>
+    <nd ref="2170321506"/>
+    <nd ref="2170321500"/>
+    <nd ref="2170321491"/>
+    <nd ref="2170321496"/>
+    <nd ref="2170321494"/>
+    <nd ref="2170321498"/>
+    <nd ref="2170321499"/>
+    <nd ref="2170321503"/>
+    <tag k="addr:city" v="San Diego"/>
+    <tag k="addr:country" v="US"/>
+    <tag k="addr:housenumber" v="500"/>
+    <tag k="addr:postcode" v="92108"/>
+    <tag k="addr:street" v="Hotel Circle North"/>
+    <tag k="is_in:city" v="San Diego"/>
+    <tag k="is_in:country" v="United States of America"/>
+    <tag k="is_in:country_code" v="US"/>
+    <tag k="is_in:state" v="California"/>
+    <tag k="is_in:state_code" v="CA"/>
+    <tag k="name" v="Town and Country Resort Hotel"/>
+    <tag k="source" v="SanGIS Addresses Public Domain (http://www.sangis.org/)"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://www.towncountry.com"/>
+  </way>
+  <way id="213277274">
+    <nd ref="2230082367"/>
+    <nd ref="2230082392"/>
+    <nd ref="2230082396"/>
+    <nd ref="2230082419"/>
+    <nd ref="2230082416"/>
+    <nd ref="2230082425"/>
+    <nd ref="2230082424"/>
+    <nd ref="2230082438"/>
+    <nd ref="2230082432"/>
+    <nd ref="2230082435"/>
+    <nd ref="2230082430"/>
+    <nd ref="2230082426"/>
+    <nd ref="2230082422"/>
+    <nd ref="2230082421"/>
+    <nd ref="2230082378"/>
+    <nd ref="2230082381"/>
+    <nd ref="2230082401"/>
+    <nd ref="2230082404"/>
+    <nd ref="2230082399"/>
+    <nd ref="2230082407"/>
+    <nd ref="2230082410"/>
+    <nd ref="2230082413"/>
+    <nd ref="2230082383"/>
+    <nd ref="2230082385"/>
+    <nd ref="2230082371"/>
+    <nd ref="2230082375"/>
+    <nd ref="2230082362"/>
+    <nd ref="2230082367"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Holiday Inn"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+
+</osm>

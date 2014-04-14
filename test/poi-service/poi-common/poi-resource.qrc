@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/new/image">
+        <file>magasin.jpg</file>
+        <file>psa.jpg</file>
+        <file>GENIVI_Black_Logo-no_background.png</file>
+        <file>poi-client.png</file>
+        <file>poi-content-access-module.png</file>
+    </qresource>
+    <qresource prefix="/new/text">
+        <file>about.txt</file>
+    </qresource>
+</RCC>

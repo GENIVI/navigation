@@ -1,0 +1,3204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="Overpass API">
+<note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
+<meta osm_base="2013-02-04T12:12:01Z"/>
+
+  <node id="31253693" lat="35.6625750" lon="139.7595728">
+    <tag k="name" v="汐留 (Shiodome)"/>
+    <tag k="name:en" v="Shiodome"/>
+    <tag k="name:ja" v="汐留"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:汐留駅"/>
+  </node>
+  <node id="31253872" lat="35.6551037" lon="139.7570353">
+    <tag k="name" v="浜松町 (Hamamatsuchō)"/>
+    <tag k="name:en" v="Hamamatsuchō"/>
+    <tag k="name:fr" v="Hamamatsuchō"/>
+    <tag k="name:ja" v="浜松町"/>
+    <tag k="name:ja_kana" v="はままつちょう"/>
+    <tag k="name:ja_rm" v="Hamamatsuchō"/>
+    <tag k="name:ru" v="Хамамацутё"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:浜松町駅"/>
+  </node>
+  <node id="31253877" lat="35.6660605" lon="139.7579729">
+    <tag k="name" v="新橋 (Shimbashi)"/>
+    <tag k="name:en" v="Shimbashi"/>
+    <tag k="name:fr" v="Shimbashi"/>
+    <tag k="name:ja" v="新橋"/>
+    <tag k="name:ja_kana" v="しんばし"/>
+    <tag k="name:ja_rm" v="Shimbashi"/>
+    <tag k="name:ru" v="Симбаси"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:新橋駅"/>
+  </node>
+  <node id="31253879" lat="35.6661494" lon="139.7584923">
+    <tag k="name" v="新橋 (Shimbashi)"/>
+    <tag k="name:en" v="Shimbashi"/>
+    <tag k="name:fr" v="Shimbashi"/>
+    <tag k="name:ja" v="新橋"/>
+    <tag k="name:ja_kana" v="しんばし"/>
+    <tag k="name:ja_rm" v="Shimbashi"/>
+    <tag k="name:ru" v="Симбаси"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:新橋駅"/>
+  </node>
+  <node id="31253959" lat="35.6540074" lon="139.7619342">
+    <tag k="name" v="竹芝 (Takeshiba)"/>
+    <tag k="name:en" v="Takeshiba"/>
+    <tag k="name:fr" v="Takeshiba"/>
+    <tag k="name:ja" v="竹芝"/>
+    <tag k="name:ja_kana" v="たけしば"/>
+    <tag k="name:ja_rm" v="Takeshiba"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:竹芝駅"/>
+  </node>
+  <node id="31254011" lat="35.6556226" lon="139.7567054">
+    <tag k="name" v="浜松町 (Hamamatsuchō)"/>
+    <tag k="name:en" v="Hamamatsuchō"/>
+    <tag k="name:fr" v="Hamamatsuchō"/>
+    <tag k="name:ja" v="浜松町"/>
+    <tag k="name:ja_kana" v="はままつちょう"/>
+    <tag k="name:ja_rm" v="Hamamatsuchō"/>
+    <tag k="name:ru" v="Хамамацутё"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:浜松町駅"/>
+  </node>
+  <node id="31254032" lat="35.6660731" lon="139.7581042">
+    <tag k="name" v="新橋 (Shimbashi)"/>
+    <tag k="name:en" v="Shimbashi"/>
+    <tag k="name:fr" v="Shimbashi"/>
+    <tag k="name:ja" v="新橋"/>
+    <tag k="name:ja_kana" v="しんばし"/>
+    <tag k="name:ja_rm" v="Shimbashi"/>
+    <tag k="name:ru" v="Симбаси"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:新橋駅"/>
+  </node>
+  <node id="31254107" lat="35.6551117" lon="139.7569004">
+    <tag k="name" v="浜松町 (Hamamatsuchō)"/>
+    <tag k="name:en" v="Hamamatsuchō"/>
+    <tag k="name:fr" v="Hamamatsuchō"/>
+    <tag k="name:ja" v="浜松町"/>
+    <tag k="name:ja_kana" v="はままつちょう"/>
+    <tag k="name:ja_rm" v="Hamamatsuchō"/>
+    <tag k="name:ru" v="Хамамацутё"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="ja:浜松町駅"/>
+  </node>
+  <node id="31254200" lat="35.6656840" lon="139.7593075">
+    <tag k="name" v="新橋 (Shimbashi)"/>
+    <tag k="name:en" v="Shimbashi"/>
+    <tag k="name:fr" v="Shimbashi"/>
+    <tag k="name:ja" v="新橋"/>
+    <tag k="name:ja_kana" v="しんばし"/>
+    <tag k="name:ja_rm" v="Shimbashi"/>
+    <tag k="name:ru" v="Симбаси"/>
+    <tag k="operator" v="ゆりかもめ"/>
+    <tag k="railway" v="station"/>
+    <tag k="website" v="http://www.yurikamome.co.jp/"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="ja:新橋駅"/>
+  </node>
+  <node id="31297737" lat="35.6538657" lon="139.7955812">
+    <tag k="name" v="豊洲 (Toyosu)"/>
+    <tag k="name:en" v="Toyosu"/>
+    <tag k="name:ja" v="豊洲"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:豊洲駅"/>
+  </node>
+  <node id="132108993" lat="35.6713425" lon="139.7027109">
+    <tag k="name" v="原宿 (Harajuku)"/>
+    <tag k="name:en" v="Harajuku"/>
+    <tag k="name:fr" v="Harajuku"/>
+    <tag k="name:ja" v="原宿"/>
+    <tag k="name:ja_rm" v="Harajuku"/>
+    <tag k="name:ru" v="Харадзюку"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:原宿駅"/>
+  </node>
+  <node id="132109147" lat="35.6895108" lon="139.7002757">
+    <tag k="name" v="新宿 (Shinjuku)"/>
+    <tag k="name:en" v="Shinjuku"/>
+    <tag k="name:fr" v="Shinjuku"/>
+    <tag k="name:ja" v="新宿"/>
+    <tag k="name:ja_kana" v="しんじゅく"/>
+    <tag k="name:ja_rm" v="Shinjuku"/>
+    <tag k="name:ru" v="Синдзюку"/>
+    <tag k="operator" v="JR東日本"/>
+    <tag k="platforms" v="7"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="Bing 2010"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="ja:新宿駅"/>
+  </node>
+  <node id="196838866" lat="35.7007869" lon="139.6973096">
+    <tag k="name" v="大久保 (Okubo)"/>
+    <tag k="name:en" v="Okubo"/>
+    <tag k="name:ja" v="大久保"/>
+    <tag k="name:ja_rm" v="Ōkubo"/>
+    <tag k="name:ru" v="Окубо"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:大久保駅 (東京都)"/>
+  </node>
+  <node id="196838894" lat="35.7063777" lon="139.6851946">
+    <tag k="name" v="東中野 (Higashi-nakano)"/>
+    <tag k="name:en" v="Higashi-nakano"/>
+    <tag k="name:ja" v="東中野"/>
+    <tag k="name:ja_rm" v="Higashi-nakano"/>
+    <tag k="name:ru" v="Хигаси-Накано"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:東中野駅"/>
+  </node>
+  <node id="196845925" lat="35.6813055" lon="139.7114164">
+    <tag k="name" v="千駄ケ谷 (Sendagaya)"/>
+    <tag k="name:en" v="Sendagaya"/>
+    <tag k="name:fr" v="Sendagaya"/>
+    <tag k="name:ja" v="千駄ヶ谷"/>
+    <tag k="name:ru" v="Сэндагая"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="196845979" lat="35.6836899" lon="139.7023216">
+    <tag k="name:en" v="Yoyogi"/>
+    <tag k="name:fr" v="Yoyogi"/>
+    <tag k="name:ja_rm" v="Yoyogi"/>
+    <tag k="name:ru" v="Ёёги"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="199835839" lat="35.6540851" lon="139.7364641">
+    <tag k="name" v="麻布十番 (Azabu-Juban)"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:麻布十番駅"/>
+  </node>
+  <node id="236578265" lat="35.6907641" lon="139.7705532">
+    <tag k="name" v="神田 (Kanda)"/>
+    <tag k="name:en" v="Kanda"/>
+    <tag k="name:ja" v="神田"/>
+    <tag k="name:ja_rm" v="Kanda"/>
+    <tag k="name:ru" v="Канда"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:神田駅 (東京都)"/>
+  </node>
+  <node id="236578383" lat="35.7070022" lon="139.7747137">
+    <tag k="name" v="御徒町 (Okachimachi)"/>
+    <tag k="name:en" v="Okachimachi"/>
+    <tag k="name:ja" v="御徒町"/>
+    <tag k="name:ja_rm" v="Okachimachi"/>
+    <tag k="name:ru" v="Окатимати"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:御徒町駅"/>
+  </node>
+  <node id="236578444" lat="35.7125859" lon="139.7754452">
+    <tag k="name" v="上野 (Ueno)"/>
+    <tag k="name:en" v="Ueno"/>
+    <tag k="name:fr" v="Ueno"/>
+    <tag k="name:ja" v="上野"/>
+    <tag k="name:ja_kana" v="うえのおんしこうえん"/>
+    <tag k="name:ja_rm" v="Ueno"/>
+    <tag k="name:ru" v="Уэно"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:上野駅"/>
+  </node>
+  <node id="236578577" lat="35.7206495" lon="139.7787494">
+    <tag k="name" v="鶯谷 (Uguisudani)"/>
+    <tag k="name:en" v="Uguisudani"/>
+    <tag k="name:ja" v="鶯谷"/>
+    <tag k="name:ja_rm" v="Uguisudani"/>
+    <tag k="name:ru" v="Угуисудани"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:鶯谷駅"/>
+  </node>
+  <node id="236579598" lat="35.7131681" lon="139.7038922">
+    <tag k="name" v="高田馬場 (Takadanobaba)"/>
+    <tag k="name:ja_rm" v="Takadanobaba"/>
+    <tag k="name:ru" v="Такаданобаба"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:高田馬場駅"/>
+  </node>
+  <node id="236579696" lat="35.7013007" lon="139.7002421">
+    <tag k="name:ja_rm" v="Shin-Ōkubo"/>
+    <tag k="name:ru" v="Син-Окубо"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="237409677" lat="35.6800570" lon="139.7205743">
+    <tag k="name" v="信濃町 (Shinanomachi)"/>
+    <tag k="name:en" v="Shinanomachi"/>
+    <tag k="name:fr" v="Shinanomachi"/>
+    <tag k="name:ja" v="信濃町"/>
+    <tag k="name:ru" v="Синаномати"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:信濃町駅"/>
+  </node>
+  <node id="237410362" lat="35.7021473" lon="139.7542337">
+    <tag k="name" v="水道橋 (Suidobashi)"/>
+    <tag k="name:en" v="Suidobashi"/>
+    <tag k="name:ja" v="水道橋"/>
+    <tag k="name:ja_rm" v="Suidōbashi"/>
+    <tag k="name:ru" v="Суйдобаси"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:水道橋駅"/>
+  </node>
+  <node id="241896099" lat="35.6584620" lon="139.7013294">
+    <tag k="name" v="渋谷 (Shibuya)"/>
+    <tag k="name:en" v="Shibuya"/>
+    <tag k="name:fr" v="Shibuya"/>
+    <tag k="name:ja" v="渋谷"/>
+    <tag k="name:ja_rm" v="Shibuya"/>
+    <tag k="name:ru" v="Сибуя"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="ja:渋谷駅"/>
+  </node>
+  <node id="246961290" lat="35.6575609" lon="139.7021323">
+    <tag k="name" v="渋谷 (Shibuya)"/>
+    <tag k="name:en" v="Shibuya"/>
+    <tag k="name:fr" v="Shibuya"/>
+    <tag k="name:ja" v="渋谷"/>
+    <tag k="name:ja_rm" v="Shibuya"/>
+    <tag k="name:ru" v="Сибуя"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:渋谷駅"/>
+  </node>
+  <node id="264440831" lat="35.7219770" lon="139.7524680">
+    <tag k="name" v="白山 (Hakusan)"/>
+    <tag k="name:en" v="Hakusan"/>
+    <tag k="name:ja" v="白山"/>
+    <tag k="name:ja_rm" v="Hakusan"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="I-13"/>
+  </node>
+  <node id="265036742" lat="35.6809712" lon="139.7674389">
+    <tag k="KSJ2:INT" v="1"/>
+    <tag k="KSJ2:INT_label" v="新幹線"/>
+    <tag k="KSJ2:LIN" v="東北新幹線"/>
+    <tag k="KSJ2:OPC" v="東日本旅客鉄道"/>
+    <tag k="KSJ2:RAC" v="11"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道JR"/>
+    <tag k="KSJ2:STN" v="東京"/>
+    <tag k="KSJ2:coordinate" v="35.680986 139.768109"/>
+    <tag k="KSJ2:lat" v="35.680986"/>
+    <tag k="KSJ2:long" v="139.768109"/>
+    <tag k="name" v="東京 (Tōkyō)"/>
+    <tag k="name:en" v="Tōkyō"/>
+    <tag k="name:ja" v="東京"/>
+    <tag k="name:ru" v="Токио"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:東京駅"/>
+  </node>
+  <node id="265036785" lat="35.7143299" lon="139.7780117">
+    <tag k="KSJ2:INT" v="1"/>
+    <tag k="KSJ2:INT_label" v="新幹線"/>
+    <tag k="KSJ2:LIN" v="東北新幹線"/>
+    <tag k="KSJ2:OPC" v="東日本旅客鉄道"/>
+    <tag k="KSJ2:RAC" v="11"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道JR"/>
+    <tag k="KSJ2:STN" v="上野"/>
+    <tag k="KSJ2:coordinate" v="35.714321 139.778017"/>
+    <tag k="KSJ2:lat" v="35.714321"/>
+    <tag k="KSJ2:long" v="139.778017"/>
+    <tag k="name" v="上野 (Ueno)"/>
+    <tag k="name:en" v="Ueno"/>
+    <tag k="name:fr" v="Ueno"/>
+    <tag k="name:ja" v="上野"/>
+    <tag k="name:ja_kana" v="うえのおんしこうえん"/>
+    <tag k="name:ja_rm" v="Ueno"/>
+    <tag k="name:ru" v="Уэно"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:上野駅"/>
+  </node>
+  <node id="265554028" lat="35.6727780" lon="139.7240280">
+    <tag k="name" v="青山一丁目 (Aoyama-itchōme)"/>
+    <tag k="name:en" v="Aoyama-itchōme"/>
+    <tag k="name:ja" v="青山一丁目"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:青山一丁目駅"/>
+  </node>
+  <node id="265554228" lat="35.6652044" lon="139.7124350">
+    <tag k="name" v="表参道 (Omote-sando)"/>
+    <tag k="name:en" v="Omote-sando"/>
+    <tag k="name:ja" v="表参道"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:表参道駅"/>
+  </node>
+  <node id="266083652" lat="35.6594510" lon="139.7021040">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="田園都市線;11号線半蔵門線"/>
+    <tag k="KSJ2:LOC" v="cv12426_rr"/>
+    <tag k="KSJ2:OPC" v="東京急行電鉄;東京地下鉄"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_6456"/>
+    <tag k="KSJ2:STN" v="渋谷"/>
+    <tag k="KSJ2:coordinate" v="35.659451 139.702104"/>
+    <tag k="KSJ2:lat" v="35.659451"/>
+    <tag k="KSJ2:long" v="139.702104"/>
+    <tag k="KSJ2:segment" v="eb02_13485"/>
+    <tag k="name" v="渋谷 (Shibuya)"/>
+    <tag k="name:en" v="Shibuya"/>
+    <tag k="name:fr" v="Shibuya"/>
+    <tag k="name:ja" v="渋谷"/>
+    <tag k="name:ja_rm" v="Shibuya"/>
+    <tag k="name:ru" v="Сибуя"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="Z-01"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:渋谷駅"/>
+  </node>
+  <node id="270339450" lat="35.7113289" lon="139.7826636">
+    <tag k="name" v="稲荷町 (Inaricho)"/>
+    <tag k="name:en" v="Inaricho"/>
+    <tag k="name:ja" v="稲荷町"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:稲荷町駅 (東京都)"/>
+  </node>
+  <node id="281366079" lat="35.6787369" lon="139.6936743">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="小田原線"/>
+    <tag k="KSJ2:LOC" v="cv6070_rr"/>
+    <tag k="KSJ2:OPC" v="小田急電鉄"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_3143"/>
+    <tag k="KSJ2:STN" v="参宮橋"/>
+    <tag k="KSJ2:coordinate" v="35.678126 139.693293"/>
+    <tag k="KSJ2:lat" v="35.678126"/>
+    <tag k="KSJ2:long" v="139.693293"/>
+    <tag k="KSJ2:segment" v="eb02_6378"/>
+    <tag k="name" v="参宮橋 (Sangubashi)"/>
+    <tag k="name:en" v="Sangubashi"/>
+    <tag k="name:fr" v="Sangūbashi"/>
+    <tag k="name:ja" v="参宮橋"/>
+    <tag k="name:ru" v="Сангубаси"/>
+    <tag k="name:zh" v="參宮橋站"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:参宮橋駅"/>
+  </node>
+  <node id="281366423" lat="35.6837150" lon="139.6988460">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="小田原線"/>
+    <tag k="KSJ2:LOC" v="cv6062_rr"/>
+    <tag k="KSJ2:OPC" v="小田急電鉄"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_3141"/>
+    <tag k="KSJ2:STN" v="南新宿"/>
+    <tag k="KSJ2:coordinate" v="35.683715 139.698846"/>
+    <tag k="KSJ2:lat" v="35.683715"/>
+    <tag k="KSJ2:long" v="139.698846"/>
+    <tag k="KSJ2:segment" v="eb02_6370"/>
+    <tag k="name" v="南新宿 (Minami Shinjuku)"/>
+    <tag k="name:ar" v="مينامي-شينجوكو"/>
+    <tag k="name:en" v="Minami Shinjuku"/>
+    <tag k="name:fr" v="Minami Shinjuku"/>
+    <tag k="name:ja" v="南新宿"/>
+    <tag k="name:ko" v="미나미신주쿠 역"/>
+    <tag k="name:ru" v="Минами-Синдзюку"/>
+    <tag k="name:zh" v="南新宿站"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ru:Минами-Синдзюку (станция)"/>
+  </node>
+  <node id="281366434" lat="35.6915552" lon="139.6996818">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="小田原線"/>
+    <tag k="KSJ2:LOC" v="cv6071_rr"/>
+    <tag k="KSJ2:OPC" v="小田急電鉄"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_3146"/>
+    <tag k="KSJ2:STN" v="新宿"/>
+    <tag k="KSJ2:coordinate" v="35.691359 139.699645"/>
+    <tag k="KSJ2:lat" v="35.691359"/>
+    <tag k="KSJ2:long" v="139.699645"/>
+    <tag k="KSJ2:segment" v="eb02_6379"/>
+    <tag k="name" v="新宿 (Shinjuku)"/>
+    <tag k="name:en" v="Shinjuku"/>
+    <tag k="name:fr" v="Shinjuku"/>
+    <tag k="name:ja" v="新宿"/>
+    <tag k="name:ja_kana" v="しんじゅく"/>
+    <tag k="name:ja_rm" v="Shinjuku"/>
+    <tag k="name:ru" v="Синдзюку"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:新宿駅"/>
+  </node>
+  <node id="281366568" lat="35.6697010" lon="139.6890770">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="小田原線"/>
+    <tag k="KSJ2:LOC" v="cv6066_rr"/>
+    <tag k="KSJ2:OPC" v="小田急電鉄"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_3137"/>
+    <tag k="KSJ2:STN" v="代々木八幡"/>
+    <tag k="KSJ2:coordinate" v="35.669701 139.689077"/>
+    <tag k="KSJ2:lat" v="35.669701"/>
+    <tag k="KSJ2:long" v="139.689077"/>
+    <tag k="KSJ2:segment" v="eb02_6374"/>
+    <tag k="name" v="代々木八幡 (Yoyogi Hachiman)"/>
+    <tag k="name:en" v="Yoyogi Hachiman"/>
+    <tag k="name:ja" v="代々木八幡"/>
+    <tag k="name:ru" v="Ёёги-Хатиман"/>
+    <tag k="name:zh" v="代代木八幡站"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:代々木八幡駅"/>
+  </node>
+  <node id="281366963" lat="35.6690611" lon="139.6799711">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="小田原線"/>
+    <tag k="KSJ2:LOC" v="cv12856_rr"/>
+    <tag k="KSJ2:OPC" v="小田急電鉄"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_3151"/>
+    <tag k="KSJ2:STN" v="代々木上原"/>
+    <tag k="KSJ2:coordinate" v="35.668703 139.679219"/>
+    <tag k="KSJ2:lat" v="35.668703"/>
+    <tag k="KSJ2:long" v="139.679219"/>
+    <tag k="KSJ2:segment" v="eb02_6383"/>
+    <tag k="name" v="代々木上原 (Yoyogi-Uehara)"/>
+    <tag k="name:ar" v="يويوغي-أويهارا"/>
+    <tag k="name:en" v="Yoyogi-Uehara"/>
+    <tag k="name:ja" v="代々木上原"/>
+    <tag k="name:ko" v="요요기우에하라 역"/>
+    <tag k="name:ru" v="Ёёги-Уэхара"/>
+    <tag k="name:zh" v="代代木上原站"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:代々木上原駅"/>
+  </node>
+  <node id="281417661" lat="35.6887050" lon="139.6993170">
+    <tag k="KSJ2:INT" v="3"/>
+    <tag k="KSJ2:INT_label" v="公営鉄道"/>
+    <tag k="KSJ2:LIN" v="10号線新宿線"/>
+    <tag k="KSJ2:LOC" v="cv1138_rr"/>
+    <tag k="KSJ2:OPC" v="東京都"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_648"/>
+    <tag k="KSJ2:STN" v="新宿"/>
+    <tag k="KSJ2:coordinate" v="35.688705 139.699317"/>
+    <tag k="KSJ2:lat" v="35.688705"/>
+    <tag k="KSJ2:long" v="139.699317"/>
+    <tag k="KSJ2:segment" v="eb02_1183"/>
+    <tag k="name" v="新宿 (Shinjuku)"/>
+    <tag k="name:en" v="Shinjuku"/>
+    <tag k="name:fr" v="Shinjuku"/>
+    <tag k="name:ja" v="新宿"/>
+    <tag k="name:ja_kana" v="しんじゅく"/>
+    <tag k="name:ja_rm" v="Shinjuku"/>
+    <tag k="name:ru" v="Синдзюку"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="S-01"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://w3land.mlit.go.jp/ksj2/datalist/N02.html"/>
+    <tag k="wikipedia" v="ja:新宿駅"/>
+  </node>
+  <node id="281417682" lat="35.6816950" lon="139.6886240">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="京王線"/>
+    <tag k="KSJ2:LOC" v="cv1140_rr"/>
+    <tag k="KSJ2:OPC" v="京王電鉄"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_646"/>
+    <tag k="KSJ2:STN" v="初台"/>
+    <tag k="KSJ2:coordinate" v="35.681695 139.688624"/>
+    <tag k="KSJ2:lat" v="35.681695"/>
+    <tag k="KSJ2:long" v="139.688624"/>
+    <tag k="KSJ2:segment" v="eb02_1185"/>
+    <tag k="name" v="初台 (Hatsudai)"/>
+    <tag k="name:en" v="Hatsudai"/>
+    <tag k="name:ja" v="初台"/>
+    <tag k="name:ru" v="Хацудай"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:初台駅"/>
+  </node>
+  <node id="281418439" lat="35.6903547" lon="139.6990892">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="京王線"/>
+    <tag k="KSJ2:LOC" v="cv1144_rr"/>
+    <tag k="KSJ2:OPC" v="京王電鉄"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_642"/>
+    <tag k="KSJ2:STN" v="新宿"/>
+    <tag k="KSJ2:coordinate" v="35.690467 139.699166"/>
+    <tag k="KSJ2:lat" v="35.690467"/>
+    <tag k="KSJ2:long" v="139.699166"/>
+    <tag k="KSJ2:segment" v="eb02_1189"/>
+    <tag k="name" v="新宿 (Shinjuku)"/>
+    <tag k="name:en" v="Shinjuku"/>
+    <tag k="name:fr" v="Shinjuku"/>
+    <tag k="name:ja" v="新宿"/>
+    <tag k="name:ja_kana" v="しんじゅく"/>
+    <tag k="name:ja_rm" v="Shinjuku"/>
+    <tag k="name:ru" v="Синдзюку"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:新宿駅"/>
+  </node>
+  <node id="286932375" lat="35.6589024" lon="139.6833626">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="井の頭線"/>
+    <tag k="KSJ2:LOC" v="cv1124_rr"/>
+    <tag k="KSJ2:OPC" v="京王電鉄"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_621"/>
+    <tag k="KSJ2:STN" v="駒場東大前"/>
+    <tag k="KSJ2:coordinate" v="35.658861 139.683169"/>
+    <tag k="KSJ2:lat" v="35.658861"/>
+    <tag k="KSJ2:long" v="139.683169"/>
+    <tag k="KSJ2:segment" v="eb02_1169"/>
+    <tag k="name" v="駒場東大前 (Komaba-todaimae)"/>
+    <tag k="name:en" v="Komaba-todaimae"/>
+    <tag k="name:ja" v="駒場東大前"/>
+    <tag k="name:ru" v="Комаба-Тодаймаэ"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:駒場東大前駅"/>
+  </node>
+  <node id="286932377" lat="35.6572037" lon="139.6935163">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="井の頭線"/>
+    <tag k="KSJ2:LOC" v="cv1125_rr"/>
+    <tag k="KSJ2:OPC" v="京王電鉄"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_622"/>
+    <tag k="KSJ2:STN" v="神泉"/>
+    <tag k="KSJ2:coordinate" v="35.657183 139.693410"/>
+    <tag k="KSJ2:lat" v="35.657183"/>
+    <tag k="KSJ2:long" v="139.693410"/>
+    <tag k="KSJ2:segment" v="eb02_1170"/>
+    <tag k="name" v="神泉 (Shinsen)"/>
+    <tag k="name:en" v="Shinsen"/>
+    <tag k="name:ja" v="神泉"/>
+    <tag k="name:ru" v="Синсэн"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:神泉駅"/>
+  </node>
+  <node id="286932730" lat="35.6587938" lon="139.6996161">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="井の頭線"/>
+    <tag k="KSJ2:LOC" v="cv1123_rr"/>
+    <tag k="KSJ2:OPC" v="京王電鉄"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_624"/>
+    <tag k="KSJ2:STN" v="渋谷"/>
+    <tag k="KSJ2:coordinate" v="35.658716 139.699881"/>
+    <tag k="KSJ2:lat" v="35.658716"/>
+    <tag k="KSJ2:long" v="139.699881"/>
+    <tag k="KSJ2:segment" v="eb02_1168"/>
+    <tag k="name" v="渋谷 (Shibuya)"/>
+    <tag k="name:en" v="Shibuya"/>
+    <tag k="name:fr" v="Shibuya"/>
+    <tag k="name:ja" v="渋谷"/>
+    <tag k="name:ru" v="Сибуя"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="ja:渋谷駅"/>
+  </node>
+  <node id="308841984" lat="35.7117791" lon="139.7982434">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="伊勢崎線"/>
+    <tag k="KSJ2:LOC" v="cv17398_rr"/>
+    <tag k="KSJ2:OPC" v="東武鉄道"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_8518"/>
+    <tag k="KSJ2:STN" v="浅草"/>
+    <tag k="KSJ2:coordinate" v="35.711571 139.797929"/>
+    <tag k="KSJ2:lat" v="35.711571"/>
+    <tag k="KSJ2:long" v="139.797929"/>
+    <tag k="KSJ2:segment" v="eb02_18217"/>
+    <tag k="name" v="浅草"/>
+    <tag k="name:ja" v="浅草"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:浅草駅"/>
+  </node>
+  <node id="308842577" lat="35.7115024" lon="139.7981273">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="伊勢崎線"/>
+    <tag k="KSJ2:LOC" v="cv17378_rr"/>
+    <tag k="KSJ2:OPC" v="東武鉄道"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_8533"/>
+    <tag k="KSJ2:STN" v="浅草"/>
+    <tag k="KSJ2:coordinate" v="35.711389 139.797965"/>
+    <tag k="KSJ2:lat" v="35.711389"/>
+    <tag k="KSJ2:long" v="139.797965"/>
+    <tag k="KSJ2:segment" v="eb02_18196"/>
+    <tag k="name" v="浅草 (Asakusa)"/>
+    <tag k="name:en" v="Asakusa"/>
+    <tag k="name:ja" v="浅草"/>
+    <tag k="name:ru" v="Асакуса"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:浅草駅"/>
+  </node>
+  <node id="315862983" lat="35.6908178" lon="139.7703707">
+    <tag k="name" v="神田 (Kanda)"/>
+    <tag k="name:en" v="Kanda"/>
+    <tag k="name:ja" v="神田"/>
+    <tag k="name:ja_rm" v="Kanda"/>
+    <tag k="name:ru" v="Канда"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:神田駅 (東京都)"/>
+  </node>
+  <node id="315863181" lat="35.7018684" lon="139.7542272">
+    <tag k="name" v="水道橋 (Suidobashi)"/>
+    <tag k="name:en" v="Suidobashi"/>
+    <tag k="name:ja" v="水道橋"/>
+    <tag k="name:ja_rm" v="Suidōbashi"/>
+    <tag k="name:ru" v="Суйдобаси"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:水道橋駅"/>
+  </node>
+  <node id="315863463" lat="35.6813544" lon="139.7113609">
+    <tag k="name" v="千駄ケ谷 (Sendagaya)"/>
+    <tag k="name:en" v="Sendagaya"/>
+    <tag k="name:fr" v="Sendagaya"/>
+    <tag k="name:ja" v="千駄ケ谷"/>
+    <tag k="name:ja_rm" v="Sendagaya"/>
+    <tag k="name:ru" v="Сэндагая"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:千駄ケ谷駅"/>
+  </node>
+  <node id="315863473" lat="35.6834113" lon="139.7022873">
+    <tag k="name" v="代々木 (Yoyogi)"/>
+    <tag k="name:en" v="Yoyogi"/>
+    <tag k="name:fr" v="Yoyogi"/>
+    <tag k="name:ja" v="代々木"/>
+    <tag k="name:ja_rm" v="Yoyogi"/>
+    <tag k="name:ru" v="Ёёги"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:代々木駅"/>
+  </node>
+  <node id="315863497" lat="35.6800999" lon="139.7205435">
+    <tag k="name" v="信濃町 (Shinanomachi)"/>
+    <tag k="name:en" v="Shinanomachi"/>
+    <tag k="name:fr" v="Shinanomachi"/>
+    <tag k="name:ja" v="信濃町"/>
+    <tag k="name:ru" v="Синаномати"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:信濃町駅"/>
+  </node>
+  <node id="393101097" lat="35.6746521" lon="139.7624592">
+    <tag k="name" v="有楽町 (Yūrakuchō)"/>
+    <tag k="name:en" v="Yūrakuchō"/>
+    <tag k="name:fr" v="Yūrakuchō"/>
+    <tag k="name:ja" v="有楽町"/>
+    <tag k="name:ja_kana" v="ゆうらくちょう"/>
+    <tag k="name:ja_rm" v="Yūrakuchō"/>
+    <tag k="name:ru" v="Юракутё"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:有楽町駅"/>
+  </node>
+  <node id="393101119" lat="35.6744897" lon="139.7626287">
+    <tag k="name" v="有楽町 (Yūrakuchō)"/>
+    <tag k="name:en" v="Yūrakuchō"/>
+    <tag k="name:fr" v="Yūrakuchō"/>
+    <tag k="name:ja" v="有楽町"/>
+    <tag k="name:ja_kana" v="ゆうらくちょう"/>
+    <tag k="name:ja_rm" v="Yūrakuchō"/>
+    <tag k="name:ru" v="Юракутё"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:有楽町駅"/>
+  </node>
+  <node id="393101126" lat="35.6745821" lon="139.7625897">
+    <tag k="name" v="有楽町 (Yūrakuchō)"/>
+    <tag k="name:en" v="Yūrakuchō"/>
+    <tag k="name:fr" v="Yūrakuchō"/>
+    <tag k="name:ja" v="有楽町"/>
+    <tag k="name:ja_kana" v="ゆうらくちょう"/>
+    <tag k="name:ja_rm" v="Yūrakuchō"/>
+    <tag k="name:ru" v="Юракутё"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:有楽町駅"/>
+  </node>
+  <node id="393105021" lat="35.6551278" lon="139.7570787">
+    <tag k="name" v="浜松町 (Hamamatsuchō)"/>
+    <tag k="name:en" v="Hamamatsuchō"/>
+    <tag k="name:fr" v="Hamamatsuchō"/>
+    <tag k="name:ja" v="浜松町"/>
+    <tag k="name:ja_kana" v="はままつちょう"/>
+    <tag k="name:ja_rm" v="Hamamatsuchō"/>
+    <tag k="name:ru" v="Хамамацутё"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:浜松町駅"/>
+  </node>
+  <node id="410589395" lat="35.7151478" lon="139.6873411">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="新宿線"/>
+    <tag k="KSJ2:LOC" v="cv9719_rr"/>
+    <tag k="KSJ2:OPC" v="西武鉄道"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_4917"/>
+    <tag k="KSJ2:STN" v="中井"/>
+    <tag k="KSJ2:coordinate" v="35.715129 139.687348"/>
+    <tag k="KSJ2:lat" v="35.715129"/>
+    <tag k="KSJ2:long" v="139.687348"/>
+    <tag k="KSJ2:segment" v="eb02_10226"/>
+    <tag k="name" v="中井 (Nakai)"/>
+    <tag k="name:en" v="Nakai"/>
+    <tag k="name:ja" v="中井"/>
+    <tag k="name:ja_kana" v="なかい"/>
+    <tag k="name:ja_rm" v="Nakai"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:中井駅"/>
+  </node>
+  <node id="410589623" lat="35.7126540" lon="139.7038129">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="新宿線"/>
+    <tag k="KSJ2:LOC" v="cv9716_rr"/>
+    <tag k="KSJ2:OPC" v="西武鉄道"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_4913"/>
+    <tag k="KSJ2:STN" v="高田馬場"/>
+    <tag k="KSJ2:coordinate" v="35.712576 139.704012"/>
+    <tag k="KSJ2:lat" v="35.712576"/>
+    <tag k="KSJ2:long" v="139.704012"/>
+    <tag k="KSJ2:segment" v="eb02_10223"/>
+    <tag k="name" v="高田馬場 (Takadanobaba)"/>
+    <tag k="name:en" v="Takadanobaba"/>
+    <tag k="name:ja" v="高田馬場"/>
+    <tag k="name:ru" v="Такаданобаба"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:高田馬場駅"/>
+  </node>
+  <node id="410589674" lat="35.6960912" lon="139.7000455">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="新宿線"/>
+    <tag k="KSJ2:LOC" v="cv9722_rr"/>
+    <tag k="KSJ2:OPC" v="西武鉄道"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_4923"/>
+    <tag k="KSJ2:STN" v="西武新宿"/>
+    <tag k="KSJ2:coordinate" v="35.696051 139.700044"/>
+    <tag k="KSJ2:lat" v="35.696051"/>
+    <tag k="KSJ2:long" v="139.700044"/>
+    <tag k="KSJ2:segment" v="eb02_10229"/>
+    <tag k="name" v="西武新宿 (Seibu Shinjuku)"/>
+    <tag k="name:en" v="Seibu Shinjuku"/>
+    <tag k="name:ja" v="西武新宿"/>
+    <tag k="name:ja_kana" v="せいぶしんじゅく"/>
+    <tag k="name:ja_rm" v="Seibu Shinjuku"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:西武新宿駅"/>
+  </node>
+  <node id="410590121" lat="35.7157440" lon="139.6955027">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="新宿線"/>
+    <tag k="KSJ2:LOC" v="cv9718_rr"/>
+    <tag k="KSJ2:OPC" v="西武鉄道"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_4912"/>
+    <tag k="KSJ2:STN" v="下落合"/>
+    <tag k="KSJ2:coordinate" v="35.715698 139.695497"/>
+    <tag k="KSJ2:lat" v="35.715698"/>
+    <tag k="KSJ2:long" v="139.695497"/>
+    <tag k="KSJ2:segment" v="eb02_10225"/>
+    <tag k="name" v="下落合 (Shimo-Ochiai)"/>
+    <tag k="name:en" v="Shimo-Ochiai"/>
+    <tag k="name:ja" v="下落合"/>
+    <tag k="name:ja_kana" v="しもおちあい"/>
+    <tag k="name:ja_rm" v="Shimo-Ochiai"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:下落合駅"/>
+  </node>
+  <node id="661104587" lat="35.7061910" lon="139.6837019"/>
+  <node id="661104588" lat="35.7061898" lon="139.6838812"/>
+  <node id="661104589" lat="35.7062314" lon="139.6838815"/>
+  <node id="661104590" lat="35.7062276" lon="139.6837022"/>
+  <node id="661104591" lat="35.7064236" lon="139.6838422"/>
+  <node id="661104592" lat="35.7064231" lon="139.6836249"/>
+  <node id="661104593" lat="35.7063609" lon="139.6836304"/>
+  <node id="661104594" lat="35.7062276" lon="139.6835422"/>
+  <node id="661104595" lat="35.7063590" lon="139.6835392"/>
+  <node id="661104596" lat="35.7063513" lon="139.6838440"/>
+  <node id="661104598" lat="35.7062464" lon="139.6859507"/>
+  <node id="661104599" lat="35.7062221" lon="139.6865474"/>
+  <node id="661104600" lat="35.7062209" lon="139.6861622"/>
+  <node id="661104601" lat="35.7061619" lon="139.6861625"/>
+  <node id="661104602" lat="35.7061648" lon="139.6859553"/>
+  <node id="661104603" lat="35.7064172" lon="139.6859858"/>
+  <node id="661104604" lat="35.7064178" lon="139.6860515"/>
+  <node id="661104605" lat="35.7063717" lon="139.6859886"/>
+  <node id="661104606" lat="35.7063682" lon="139.6860502"/>
+  <node id="661104607" lat="35.7063730" lon="139.6865423"/>
+  <node id="712804323" lat="35.7089720" lon="139.7965830">
+    <tag k="name" v="浅草 (Asakusa)"/>
+    <tag k="name:en" v="Asakusa"/>
+    <tag k="name:ja" v="浅草"/>
+    <tag k="name:ru" v="Асакуса"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="ja:浅草駅"/>
+  </node>
+  <node id="748883630" lat="35.6571866" lon="139.6938485"/>
+  <node id="748883688" lat="35.6573150" lon="139.6938397"/>
+  <node id="748883708" lat="35.6571036" lon="139.6935027"/>
+  <node id="748883737" lat="35.6571790" lon="139.6937714">
+    <tag k="barrier" v="entrance"/>
+    <tag k="bicycle" v="no"/>
+    <tag k="foot" v="yes"/>
+    <tag k="name" v="南口"/>
+  </node>
+  <node id="748883763" lat="35.6572662" lon="139.6934403"/>
+  <node id="748883768" lat="35.6572266" lon="139.6934438">
+    <tag k="barrier" v="entrance"/>
+    <tag k="bicycle" v="no"/>
+    <tag k="foot" v="yes"/>
+    <tag k="name" v="西口"/>
+  </node>
+  <node id="789405355" lat="35.7066179" lon="139.7602092">
+    <tag k="name" v="本郷三丁目 (Hongo-sanchome)"/>
+    <tag k="name:en" v="Hongo-sanchome"/>
+    <tag k="name:ja" v="本郷三丁目"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="M21"/>
+    <tag k="wikipedia" v="ja:本郷三丁目駅"/>
+  </node>
+  <node id="789412066" lat="35.7105675" lon="139.7530695">
+    <tag k="name" v="春日"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:春日駅 (東京都)"/>
+  </node>
+  <node id="790011743" lat="35.7065031" lon="139.6828723">
+    <tag k="fixme" v="position estimated"/>
+    <tag k="name" v="東中野 (都営大江戸線)"/>
+    <tag k="note" v="estimated"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:東中野駅"/>
+  </node>
+  <node id="832289046" lat="35.7213730" lon="139.7064491">
+    <tag k="int_name" v="Mejiro Station"/>
+    <tag k="name" v="目白 (Mejiro)"/>
+    <tag k="name:en" v="Mejiro"/>
+    <tag k="name:ja" v="目白"/>
+    <tag k="name:ja_rm" v="Mejiro"/>
+    <tag k="name:ru" v="Мэдзиро"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:目白駅"/>
+  </node>
+  <node id="907673367" lat="35.6589786" lon="139.7771860">
+    <tag k="name" v="勝どき (Kachidoki)"/>
+    <tag k="name:en" v="Kachidoki"/>
+    <tag k="name:ja" v="勝どき"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:勝どき駅"/>
+  </node>
+  <node id="955519000" lat="35.6897495" lon="139.6842645">
+    <tag k="name" v="西新宿五丁目(Nishi-shinjuku-gochōme Station)"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:西新宿五丁目駅"/>
+  </node>
+  <node id="1003337762" lat="35.7187678" lon="139.7513601">
+    <tag k="name" v="白山駅"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:白山駅 (東京都)"/>
+  </node>
+  <node id="1074739698" lat="35.7038890" lon="139.7342220">
+    <tag k="name" v="神楽坂 (Kagurazaka)"/>
+    <tag k="name:en" v="Kagurazaka"/>
+    <tag k="name:ja" v="神楽坂"/>
+    <tag k="operator" v="東京メトロ"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="T07"/>
+    <tag k="wikipedia" v="ja:神楽坂駅"/>
+  </node>
+  <node id="1093541223" lat="35.7131834" lon="139.7040743"/>
+  <node id="1093541232" lat="35.7121880" lon="139.7034925"/>
+  <node id="1093541235" lat="35.7141620" lon="139.7041715"/>
+  <node id="1093541238" lat="35.7141686" lon="139.7041351"/>
+  <node id="1093541240" lat="35.7124756" lon="139.7037417"/>
+  <node id="1093541242" lat="35.7116203" lon="139.7032946"/>
+  <node id="1093541244" lat="35.7126539" lon="139.7036544"/>
+  <node id="1093541247" lat="35.7140644" lon="139.7041528"/>
+  <node id="1093541250" lat="35.7126804" lon="139.7038132"/>
+  <node id="1093541253" lat="35.7117917" lon="139.7033099"/>
+  <node id="1093541256" lat="35.7129678" lon="139.7041816"/>
+  <node id="1093541259" lat="35.7136886" lon="139.7038865"/>
+  <node id="1093541262" lat="35.7127430" lon="139.7037045"/>
+  <node id="1093541264" lat="35.7131267" lon="139.7042647"/>
+  <node id="1093541270" lat="35.7131311" lon="139.7036934"/>
+  <node id="1093541282" lat="35.7135664" lon="139.7040072"/>
+  <node id="1093541284" lat="35.7124536" lon="139.7035946"/>
+  <node id="1093541287" lat="35.7139260" lon="139.7039912"/>
+  <node id="1093541289" lat="35.7130309" lon="139.7038651"/>
+  <node id="1093541294" lat="35.7127139" lon="139.7036712"/>
+  <node id="1093541299" lat="35.7119877" lon="139.7036103"/>
+  <node id="1093541312" lat="35.7127609" lon="139.7038517"/>
+  <node id="1093541316" lat="35.7120901" lon="139.7033984"/>
+  <node id="1093541318" lat="35.7116285" lon="139.7032625"/>
+  <node id="1093541321" lat="35.7140825" lon="139.7040988"/>
+  <node id="1093541324" lat="35.7139248" lon="139.7040146"/>
+  <node id="1093541326" lat="35.7124734" lon="139.7035164"/>
+  <node id="1093541329" lat="35.7118723" lon="139.7037498"/>
+  <node id="1093541339" lat="35.7133924" lon="139.7037793"/>
+  <node id="1093541341" lat="35.7120073" lon="139.7035888"/>
+  <node id="1093541343" lat="35.7121946" lon="139.7039161"/>
+  <node id="1093541345" lat="35.7127652" lon="139.7041199"/>
+  <node id="1093541347" lat="35.7136837" lon="139.7040329"/>
+  <node id="1093541349" lat="35.7115413" lon="139.7036049"/>
+  <node id="1093541352" lat="35.7112975" lon="139.7035057"/>
+  <node id="1093541364" lat="35.7113345" lon="139.7033877"/>
+  <node id="1093541365" lat="35.7126249" lon="139.7037880"/>
+  <node id="1093541366" lat="35.7118718" lon="139.7033884"/>
+  <node id="1093541367" lat="35.7115369" lon="139.7034574"/>
+  <node id="1093541368" lat="35.7123580" lon="139.7039697"/>
+  <node id="1093541369" lat="35.7140763" lon="139.7040797"/>
+  <node id="1093541371" lat="35.7127287" lon="139.7037571"/>
+  <node id="1116460130" lat="35.7131714" lon="139.7040019"/>
+  <node id="1116460133" lat="35.7131920" lon="139.7040743"/>
+  <node id="1116460134" lat="35.7133271" lon="139.7040354"/>
+  <node id="1116460135" lat="35.7134871" lon="139.7040971"/>
+  <node id="1116460137" lat="35.7136385" lon="139.7041454"/>
+  <node id="1116460140" lat="35.7134959" lon="139.7040756"/>
+  <node id="1116460141" lat="35.7131616" lon="139.7040394"/>
+  <node id="1116460142" lat="35.7131322" lon="139.7042714"/>
+  <node id="1116460143" lat="35.7134980" lon="139.7045114"/>
+  <node id="1116460146" lat="35.7135612" lon="139.7043787"/>
+  <node id="1116460149" lat="35.7135111" lon="139.7044833"/>
+  <node id="1125926432" lat="35.6803864" lon="139.7198540"/>
+  <node id="1125926437" lat="35.6801174" lon="139.7210445"/>
+  <node id="1125926438" lat="35.6803004" lon="139.7195103"/>
+  <node id="1125926440" lat="35.6804638" lon="139.7198134"/>
+  <node id="1125926446" lat="35.6799126" lon="139.7202667"/>
+  <node id="1125926452" lat="35.6798690" lon="139.7205591"/>
+  <node id="1125926455" lat="35.6798232" lon="139.7209775"/>
+  <node id="1125926456" lat="35.6800041" lon="139.7196820"/>
+  <node id="1125926458" lat="35.6803047" lon="139.7198402"/>
+  <node id="1125926459" lat="35.6804943" lon="139.7195559"/>
+  <node id="1127216265" lat="35.6582756" lon="139.7012882"/>
+  <node id="1127216276" lat="35.6584077" lon="139.7012454"/>
+  <node id="1127216277" lat="35.6584711" lon="139.7016206"/>
+  <node id="1127216283" lat="35.6588853" lon="139.7005884"/>
+  <node id="1127216290" lat="35.6579766" lon="139.7012618"/>
+  <node id="1127216297" lat="35.6580248" lon="139.7014140"/>
+  <node id="1127216299" lat="35.6586815" lon="139.7012020"/>
+  <node id="1139431605" lat="35.6912979" lon="139.7356275"/>
+  <node id="1139431606" lat="35.6911428" lon="139.7357292"/>
+  <node id="1139431609" lat="35.6912294" lon="139.7356820"/>
+  <node id="1139431610" lat="35.6910776" lon="139.7356050"/>
+  <node id="1139431612" lat="35.6912213" lon="139.7356667"/>
+  <node id="1139431614" lat="35.6912246" lon="139.7354879"/>
+  <node id="1314077022" lat="35.6892079" lon="139.7000486"/>
+  <node id="1314077031" lat="35.6893781" lon="139.7010637"/>
+  <node id="1314077044" lat="35.6897551" lon="139.6999108"/>
+  <node id="1314077047" lat="35.6899305" lon="139.7009189"/>
+  <node id="1316050986" lat="35.6574840" lon="139.7018709"/>
+  <node id="1316051005" lat="35.6575334" lon="139.7020229"/>
+  <node id="1316051049" lat="35.6578774" lon="139.7014441"/>
+  <node id="1316051068" lat="35.6577100" lon="139.7016426"/>
+  <node id="1316051070" lat="35.6577673" lon="139.7016052"/>
+  <node id="1316051071" lat="35.6578922" lon="139.7017858"/>
+  <node id="1316051077" lat="35.6581978" lon="139.7013217"/>
+  <node id="1316051094" lat="35.6582711" lon="139.7015985"/>
+  <node id="1316051096" lat="35.6583003" lon="139.7017018"/>
+  <node id="1316051099" lat="35.6585235" lon="139.7014875"/>
+  <node id="1316051100" lat="35.6585466" lon="139.7015963"/>
+  <node id="1316051102" lat="35.6588272" lon="139.7013849"/>
+  <node id="1316051103" lat="35.6589282" lon="139.7010623"/>
+  <node id="1316051107" lat="35.6588345" lon="139.7000276"/>
+  <node id="1316051108" lat="35.6590402" lon="139.7012988"/>
+  <node id="1316051109" lat="35.6590442" lon="139.7013295"/>
+  <node id="1316051110" lat="35.6591249" lon="139.7012013"/>
+  <node id="1316051111" lat="35.6591356" lon="139.7012786"/>
+  <node id="1316051112" lat="35.6593273" lon="139.7010186"/>
+  <node id="1316051113" lat="35.6593381" lon="139.7011764"/>
+  <node id="1354438501" lat="35.6572699" lon="139.6934852"/>
+  <node id="1354438502" lat="35.6573638" lon="139.6934801"/>
+  <node id="1354438503" lat="35.6574208" lon="139.6936501"/>
+  <node id="1354438504" lat="35.6573745" lon="139.6937638"/>
+  <node id="1417172219" lat="35.6556008" lon="139.7569995"/>
+  <node id="1417172251" lat="35.6547368" lon="139.7570588"/>
+  <node id="1417172263" lat="35.6555496" lon="139.7572971"/>
+  <node id="1417172290" lat="35.6548772" lon="139.7568306"/>
+  <node id="1456006005" lat="35.7167239" lon="139.7586106">
+    <tag k="name" v="東大前"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:東大前駅"/>
+  </node>
+  <node id="1496842209" lat="35.6571102" lon="139.6935630"/>
+  <node id="1496842212" lat="35.6571302" lon="139.6935937"/>
+  <node id="1496842222" lat="35.6571684" lon="139.6935919"/>
+  <node id="1496842224" lat="35.6571698" lon="139.6934993"/>
+  <node id="1496842229" lat="35.6571855" lon="139.6934439"/>
+  <node id="1496842244" lat="35.6573715" lon="139.6935994"/>
+  <node id="1496842246" lat="35.6573736" lon="139.6937224"/>
+  <node id="1496842254" lat="35.6574057" lon="139.6937207"/>
+  <node id="1496842255" lat="35.6574122" lon="139.6936178"/>
+  <node id="1566526411" lat="35.7002621" lon="139.7437172"/>
+  <node id="1566526414" lat="35.7002924" lon="139.7436546"/>
+  <node id="1566526464" lat="35.7009848" lon="139.7442005"/>
+  <node id="1566526465" lat="35.7009947" lon="139.7441233"/>
+  <node id="1566526467" lat="35.7010027" lon="139.7441167"/>
+  <node id="1566526468" lat="35.7010484" lon="139.7442391"/>
+  <node id="1566526469" lat="35.7011075" lon="139.7442818"/>
+  <node id="1566526470" lat="35.7011109" lon="139.7441877"/>
+  <node id="1566526471" lat="35.7011725" lon="139.7443278"/>
+  <node id="1566526472" lat="35.7012297" lon="139.7443751"/>
+  <node id="1566526473" lat="35.7012515" lon="139.7442905"/>
+  <node id="1566526477" lat="35.7013466" lon="139.7444751"/>
+  <node id="1566526479" lat="35.7013569" lon="139.7443800"/>
+  <node id="1566526482" lat="35.7014592" lon="139.7445857"/>
+  <node id="1566526485" lat="35.7014899" lon="139.7445043"/>
+  <node id="1566526489" lat="35.7015740" lon="139.7447062"/>
+  <node id="1566526490" lat="35.7016225" lon="139.7446432"/>
+  <node id="1566526495" lat="35.7016769" lon="139.7448274"/>
+  <node id="1566526498" lat="35.7017347" lon="139.7448935"/>
+  <node id="1566526499" lat="35.7017501" lon="139.7447900"/>
+  <node id="1566526501" lat="35.7017842" lon="139.7449588"/>
+  <node id="1566526504" lat="35.7018386" lon="139.7450364"/>
+  <node id="1566526507" lat="35.7018775" lon="139.7450965"/>
+  <node id="1566526513" lat="35.7018921" lon="139.7449758"/>
+  <node id="1566526516" lat="35.7019335" lon="139.7451951"/>
+  <node id="1566526517" lat="35.7019385" lon="139.7450725"/>
+  <node id="1566526524" lat="35.7020333" lon="139.7453716"/>
+  <node id="1566526526" lat="35.7020340" lon="139.7452407"/>
+  <node id="1566526535" lat="35.7020958" lon="139.7454951"/>
+  <node id="1566526538" lat="35.7021027" lon="139.7453677"/>
+  <node id="1566526541" lat="35.7021418" lon="139.7455993"/>
+  <node id="1566526550" lat="35.7021702" lon="139.7455084"/>
+  <node id="1566526552" lat="35.7021955" lon="139.7457198"/>
+  <node id="1566526554" lat="35.7022340" lon="139.7456584"/>
+  <node id="1566526555" lat="35.7022428" lon="139.7458473"/>
+  <node id="1566526556" lat="35.7022908" lon="139.7458127"/>
+  <node id="1573806456" lat="35.6994098" lon="139.7651550"/>
+  <node id="1573806457" lat="35.6996364" lon="139.7651474"/>
+  <node id="1573806458" lat="35.6997060" lon="139.7636756"/>
+  <node id="1573806459" lat="35.6993183" lon="139.7651293"/>
+  <node id="1573806460" lat="35.6999107" lon="139.7639331"/>
+  <node id="1573806461" lat="35.6996907" lon="139.7637373"/>
+  <node id="1573806462" lat="35.6997060" lon="139.7638285"/>
+  <node id="1573806463" lat="35.6994250" lon="139.7650917"/>
+  <node id="1573806464" lat="35.6992856" lon="139.7652956"/>
+  <node id="1573806465" lat="35.6997253" lon="139.7637537"/>
+  <node id="1573806466" lat="35.6998562" lon="139.7636531"/>
+  <node id="1573806467" lat="35.6998890" lon="139.7635513"/>
+  <node id="1573806468" lat="35.6997775" lon="139.7637215"/>
+  <node id="1573806469" lat="35.6998171" lon="139.7636274"/>
+  <node id="1573806470" lat="35.6995848" lon="139.7653857"/>
+  <node id="1573806471" lat="35.6993401" lon="139.7653653"/>
+  <node id="1573806472" lat="35.7000131" lon="139.7636220"/>
+  <node id="1573951978" lat="35.7001047" lon="139.7437242"/>
+  <node id="1573952008" lat="35.7002112" lon="139.7438107"/>
+  <node id="1573952030" lat="35.7003167" lon="139.7436047"/>
+  <node id="1573952039" lat="35.7002055" lon="139.7435182"/>
+  <node id="1574055072" lat="35.6858863" lon="139.7309728"/>
+  <node id="1574055076" lat="35.6863198" lon="139.7299455"/>
+  <node id="1574055091" lat="35.6860889" lon="139.7308615"/>
+  <node id="1574055098" lat="35.6860094" lon="139.7303626"/>
+  <node id="1574055102" lat="35.6860769" lon="139.7309326"/>
+  <node id="1574055116" lat="35.6861532" lon="139.7307059"/>
+  <node id="1574055117" lat="35.6861085" lon="139.7308347"/>
+  <node id="1574055122" lat="35.6861172" lon="139.7307864"/>
+  <node id="1574055123" lat="35.6861085" lon="139.7308682"/>
+  <node id="1574055126" lat="35.6859081" lon="139.7308695"/>
+  <node id="1574055132" lat="35.6859687" lon="139.7308901"/>
+  <node id="1574055138" lat="35.6859774" lon="139.7308418"/>
+  <node id="1574055140" lat="35.6859135" lon="139.7308239"/>
+  <node id="1574055145" lat="35.6860399" lon="139.7310157"/>
+  <node id="1574055151" lat="35.6860591" lon="139.7309263"/>
+  <node id="1574055154" lat="35.6861680" lon="139.7307090"/>
+  <node id="1574055178" lat="35.6860933" lon="139.7308360"/>
+  <node id="1574055209" lat="35.6859796" lon="139.7301538"/>
+  <node id="1574055211" lat="35.6860072" lon="139.7301614"/>
+  <node id="1574055221" lat="35.6861375" lon="139.7307922"/>
+  <node id="1574055223" lat="35.6860362" lon="139.7298547"/>
+  <node id="1574055224" lat="35.6859687" lon="139.7303536"/>
+  <node id="1579679822" lat="35.7126494" lon="139.7036751"/>
+  <node id="1580297718" lat="35.7063709" lon="139.6863294"/>
+  <node id="1593485519" lat="35.6574975" lon="139.7019123"/>
+  <node id="1593485596" lat="35.6593374" lon="139.7011657"/>
+  <node id="1666008298" lat="35.7202384" lon="139.7790611"/>
+  <node id="1666008299" lat="35.7203169" lon="139.7791847"/>
+  <node id="1666008301" lat="35.7203675" lon="139.7789367"/>
+  <node id="1666008312" lat="35.7204460" lon="139.7790603"/>
+  <node id="1676538667" lat="35.7011872" lon="139.7000870"/>
+  <node id="1676538668" lat="35.7011918" lon="139.7000037"/>
+  <node id="1676538669" lat="35.7012156" lon="139.7000029"/>
+  <node id="1676538670" lat="35.7012169" lon="139.6999791"/>
+  <node id="1676538671" lat="35.7012175" lon="139.7003051"/>
+  <node id="1676538673" lat="35.7014516" lon="139.6969104"/>
+  <node id="1676538675" lat="35.7012336" lon="139.7000926"/>
+  <node id="1676538676" lat="35.7012381" lon="139.6999815"/>
+  <node id="1676538677" lat="35.7012420" lon="139.6999395"/>
+  <node id="1676538678" lat="35.7014113" lon="139.6968324"/>
+  <node id="1676538679" lat="35.7013715" lon="139.7003218"/>
+  <node id="1676538680" lat="35.7014004" lon="139.6999537"/>
+  <node id="1676538684" lat="35.7016398" lon="139.6967480"/>
+  <node id="1676538685" lat="35.7016522" lon="139.6965851"/>
+  <node id="1676749651" lat="35.6733781" lon="139.7035869"/>
+  <node id="1676749661" lat="35.6733809" lon="139.7035444"/>
+  <node id="1676749663" lat="35.6736956" lon="139.7038467"/>
+  <node id="1676749665" lat="35.6737218" lon="139.7037086"/>
+  <node id="1676749666" lat="35.6738770" lon="139.7041950"/>
+  <node id="1676749667" lat="35.6739621" lon="139.7038999"/>
+  <node id="1676749668" lat="35.6739845" lon="139.7039497"/>
+  <node id="1676749669" lat="35.6739860" lon="139.7038053"/>
+  <node id="1676749670" lat="35.6739920" lon="139.7039085"/>
+  <node id="1676749671" lat="35.6740145" lon="139.7038139"/>
+  <node id="1676749673" lat="35.6740224" lon="139.7037875"/>
+  <node id="1676749675" lat="35.6740245" lon="139.7037737"/>
+  <node id="1676749677" lat="35.6742400" lon="139.7040369"/>
+  <node id="1676749679" lat="35.6742799" lon="139.7038809"/>
+  <node id="1676749681" lat="35.6743498" lon="139.7043610"/>
+  <node id="1676749685" lat="35.6744825" lon="139.7039362"/>
+  <node id="1676749688" lat="35.6746342" lon="139.7044226"/>
+  <node id="1676749689" lat="35.6746864" lon="139.7041490"/>
+  <node id="1676749690" lat="35.6747012" lon="139.7044226"/>
+  <node id="1676749691" lat="35.6747295" lon="139.7040248"/>
+  <node id="1676749695" lat="35.6748367" lon="139.7040604"/>
+  <node id="1676749696" lat="35.6749144" lon="139.7040838"/>
+  <node id="1676749697" lat="35.6750026" lon="139.7042611"/>
+  <node id="1676749699" lat="35.6750329" lon="139.7041195"/>
+  <node id="1676750153" lat="35.6998726" lon="139.6977772"/>
+  <node id="1676750154" lat="35.6999230" lon="139.6979031"/>
+  <node id="1676750155" lat="35.7000399" lon="139.6976797"/>
+  <node id="1676750156" lat="35.7000875" lon="139.6978081"/>
+  <node id="1676750165" lat="35.7015241" lon="139.6966884"/>
+  <node id="1676750167" lat="35.7015425" lon="139.6967218"/>
+  <node id="1677072308" lat="35.7206473" lon="139.7063158"/>
+  <node id="1677072310" lat="35.7206662" lon="139.7062348"/>
+  <node id="1677072313" lat="35.7209084" lon="139.7064109"/>
+  <node id="1677072315" lat="35.7209244" lon="139.7066610"/>
+  <node id="1677072321" lat="35.7209754" lon="139.7064698"/>
+  <node id="1677072323" lat="35.7210122" lon="139.7063677"/>
+  <node id="1677072325" lat="35.7213283" lon="139.7067959"/>
+  <node id="1677072332" lat="35.7214014" lon="139.7065256"/>
+  <node id="1679318952" lat="35.6575873" lon="139.6974022"/>
+  <node id="1679318953" lat="35.6578864" lon="139.6972863"/>
+  <node id="1679318955" lat="35.6579847" lon="139.6987456"/>
+  <node id="1679318957" lat="35.6580128" lon="139.6987344"/>
+  <node id="1679318959" lat="35.6580236" lon="139.6987578"/>
+  <node id="1679318960" lat="35.6581237" lon="139.6987132"/>
+  <node id="1679318962" lat="35.6581370" lon="139.6987203"/>
+  <node id="1679318964" lat="35.6581593" lon="139.6987935"/>
+  <node id="1679318976" lat="35.6581593" lon="139.6988383"/>
+  <node id="1679318978" lat="35.6581659" lon="139.6988820"/>
+  <node id="1679318979" lat="35.6581832" lon="139.6990061"/>
+  <node id="1679318980" lat="35.6581981" lon="139.6989430"/>
+  <node id="1679318982" lat="35.6582163" lon="139.6989634"/>
+  <node id="1679318983" lat="35.6583896" lon="139.6985217"/>
+  <node id="1679318984" lat="35.6584073" lon="139.6985859"/>
+  <node id="1679318985" lat="35.6584399" lon="139.6986840"/>
+  <node id="1679318988" lat="35.6584771" lon="139.6987628"/>
+  <node id="1679318992" lat="35.6585418" lon="139.7000595"/>
+  <node id="1679319000" lat="35.6586942" lon="139.6992077"/>
+  <node id="1679319014" lat="35.6588355" lon="139.6996277"/>
+  <node id="1679319015" lat="35.6589150" lon="139.7000088"/>
+  <node id="1682293969" lat="35.7117981" lon="139.7982003">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="伊勢崎線"/>
+    <tag k="KSJ2:LOC" v="cv17398_rr"/>
+    <tag k="KSJ2:OPC" v="東武鉄道"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_8518"/>
+    <tag k="KSJ2:STN" v="浅草"/>
+    <tag k="KSJ2:coordinate" v="35.711571 139.797929"/>
+    <tag k="KSJ2:lat" v="35.711571"/>
+    <tag k="KSJ2:long" v="139.797929"/>
+    <tag k="KSJ2:segment" v="eb02_18217"/>
+    <tag k="name" v="浅草"/>
+    <tag k="name:ja" v="浅草"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:浅草駅"/>
+  </node>
+  <node id="1682293990" lat="35.7118493" lon="139.7981095">
+    <tag k="KSJ2:INT" v="4"/>
+    <tag k="KSJ2:INT_label" v="民営鉄道"/>
+    <tag k="KSJ2:LIN" v="伊勢崎線"/>
+    <tag k="KSJ2:LOC" v="cv17398_rr"/>
+    <tag k="KSJ2:OPC" v="東武鉄道"/>
+    <tag k="KSJ2:RAC" v="12"/>
+    <tag k="KSJ2:RAC_label" v="普通鉄道"/>
+    <tag k="KSJ2:RAS" v="eb03_8518"/>
+    <tag k="KSJ2:STN" v="浅草"/>
+    <tag k="KSJ2:coordinate" v="35.711571 139.797929"/>
+    <tag k="KSJ2:lat" v="35.711571"/>
+    <tag k="KSJ2:long" v="139.797929"/>
+    <tag k="KSJ2:segment" v="eb02_18217"/>
+    <tag k="name" v="浅草"/>
+    <tag k="name:ja" v="浅草"/>
+    <tag k="note" v="National-Land Numerical Information (Railway) 2007, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（鉄道データ）平成19年　国土交通省"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-N02-v1_1.html"/>
+    <tag k="wikipedia" v="ja:浅草駅"/>
+  </node>
+  <node id="1692889003" lat="35.6956407" lon="139.7941749"/>
+  <node id="1692889007" lat="35.6956621" lon="139.7938942"/>
+  <node id="1692889009" lat="35.6956990" lon="139.7939022"/>
+  <node id="1692889012" lat="35.6957329" lon="139.7941792"/>
+  <node id="1692889018" lat="35.6957843" lon="139.7922448"/>
+  <node id="1692889033" lat="35.6958032" lon="139.7920114"/>
+  <node id="1692889038" lat="35.6958157" lon="139.7931805"/>
+  <node id="1692889043" lat="35.6958225" lon="139.7922506"/>
+  <node id="1692889058" lat="35.6959303" lon="139.7923857"/>
+  <node id="1692889060" lat="35.6959578" lon="139.7919982"/>
+  <node id="1692889063" lat="35.6959952" lon="139.7931978"/>
+  <node id="1692889064" lat="35.6960091" lon="139.7930333"/>
+  <node id="1692889080" lat="35.6963035" lon="139.7925008"/>
+  <node id="1692889081" lat="35.6963087" lon="139.7924318"/>
+  <node id="1692889082" lat="35.6963219" lon="139.7930637"/>
+  <node id="1692889083" lat="35.6963301" lon="139.7925492"/>
+  <node id="1692889084" lat="35.6963333" lon="139.7925047"/>
+  <node id="1692889085" lat="35.6963530" lon="139.7926395"/>
+  <node id="1692889086" lat="35.6963611" lon="139.7926396"/>
+  <node id="1692889087" lat="35.6963694" lon="139.7925546"/>
+  <node id="1698152597" lat="35.6701382" lon="139.7027699"/>
+  <node id="1698152598" lat="35.6701559" lon="139.7025996"/>
+  <node id="1698152604" lat="35.6702872" lon="139.7027927"/>
+  <node id="1698152606" lat="35.6704385" lon="139.7026416"/>
+  <node id="1698152609" lat="35.6704450" lon="139.7027944"/>
+  <node id="1698152611" lat="35.6705879" lon="139.7027647"/>
+  <node id="1698152612" lat="35.6705960" lon="139.7026812"/>
+  <node id="1730435560" lat="35.6786154" lon="139.6935469"/>
+  <node id="1730435562" lat="35.6786555" lon="139.6937684"/>
+  <node id="1730435564" lat="35.6786608" lon="139.6934752"/>
+  <node id="1730435566" lat="35.6786902" lon="139.6934965">
+    <tag k="amenity" v="vending_machine"/>
+    <tag k="vending" v="public_transport_tickets"/>
+  </node>
+  <node id="1730435569" lat="35.6786924" lon="139.6936946"/>
+  <node id="1730435575" lat="35.6787152" lon="139.6935148">
+    <tag k="access" v="yes"/>
+    <tag k="entrance" v="main"/>
+  </node>
+  <node id="1730435578" lat="35.6789656" lon="139.6938718"/>
+  <node id="1730435580" lat="35.6790020" lon="139.6937972"/>
+  <node id="1730435581" lat="35.6790121" lon="139.6939710"/>
+  <node id="1730435582" lat="35.6790933" lon="139.6937895"/>
+  <node id="1808422475" lat="35.6803914" lon="139.7198243"/>
+  <node id="1808422477" lat="35.6804376" lon="139.7198326"/>
+  <node id="1808422478" lat="35.6804425" lon="139.7198061"/>
+  <node id="1817685075" lat="35.7070564" lon="139.7511990"/>
+  <node id="1817685076" lat="35.7070603" lon="139.7516240"/>
+  <node id="1817685077" lat="35.7070686" lon="139.7508990"/>
+  <node id="1817685080" lat="35.7071275" lon="139.7517037"/>
+  <node id="1817685083" lat="35.7071502" lon="139.7512411"/>
+  <node id="1817685086" lat="35.7071590" lon="139.7508997"/>
+  <node id="1817685089" lat="35.7071987" lon="139.7512377"/>
+  <node id="1817685090" lat="35.7072020" lon="139.7511155"/>
+  <node id="1817685091" lat="35.7072089" lon="139.7506018"/>
+  <node id="1817685093" lat="35.7072312" lon="139.7510538"/>
+  <node id="1817685106" lat="35.7073996" lon="139.7506072"/>
+  <node id="1817685112" lat="35.7074276" lon="139.7510498"/>
+  <node id="1817685119" lat="35.7074768" lon="139.7511103"/>
+  <node id="1817685121" lat="35.7074838" lon="139.7514511"/>
+  <node id="1817685126" lat="35.7075383" lon="139.7514559"/>
+  <node id="1817685128" lat="35.7075438" lon="139.7517037"/>
+  <node id="1817716746" lat="35.7064391" lon="139.7598085"/>
+  <node id="1817716755" lat="35.7064569" lon="139.7599687"/>
+  <node id="1817716756" lat="35.7064584" lon="139.7599811"/>
+  <node id="1817716758" lat="35.7064627" lon="139.7600599"/>
+  <node id="1817716760" lat="35.7064682" lon="139.7599668"/>
+  <node id="1817716761" lat="35.7064683" lon="139.7600958"/>
+  <node id="1817716769" lat="35.7064994" lon="139.7600239"/>
+  <node id="1817716785" lat="35.7065592" lon="139.7600865"/>
+  <node id="1817716791" lat="35.7065718" lon="139.7603339"/>
+  <node id="1817716796" lat="35.7065782" lon="139.7597850"/>
+  <node id="1817716799" lat="35.7065847" lon="139.7598295"/>
+  <node id="1817716805" lat="35.7066287" lon="139.7603274"/>
+  <node id="1817716808" lat="35.7066358" lon="139.7604212"/>
+  <node id="1817716810" lat="35.7066386" lon="139.7598012"/>
+  <node id="1817716814" lat="35.7066770" lon="139.7602040"/>
+  <node id="1817716817" lat="35.7066871" lon="139.7604149"/>
+  <node id="1817716822" lat="35.7067129" lon="139.7600908"/>
+  <node id="1817716823" lat="35.7067160" lon="139.7597733"/>
+  <node id="1817716824" lat="35.7067358" lon="139.7600435"/>
+  <node id="1817716825" lat="35.7067370" lon="139.7601200"/>
+  <node id="1817716826" lat="35.7067402" lon="139.7601934"/>
+  <node id="1817716832" lat="35.7067610" lon="139.7598242"/>
+  <node id="1817716833" lat="35.7067623" lon="139.7599011"/>
+  <node id="1825133008" lat="35.6719440" lon="139.7638890">
+    <tag k="name" v="銀座 (Ginza)"/>
+    <tag k="name:en" v="Ginza"/>
+    <tag k="name:fr" v="Ginza"/>
+    <tag k="name:ja" v="銀座"/>
+    <tag k="name:ja_kana" v="ぎんざ"/>
+    <tag k="name:ja_rm" v="Ginza"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:銀座駅"/>
+  </node>
+  <node id="1825133046" lat="35.7072930" lon="139.7506042"/>
+  <node id="1825133049" lat="35.7073185" lon="139.7506049"/>
+  <node id="1825133052" lat="35.7073305" lon="139.7517037"/>
+  <node id="1825133056" lat="35.7073625" lon="139.7517037"/>
+  <node id="1832344259" lat="35.6884720" lon="139.7881390">
+    <tag k="name" v="浜町 (Hamachō)"/>
+    <tag k="name:en" v="Hamachō"/>
+    <tag k="name:ja" v="浜町"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:浜町駅"/>
+  </node>
+  <node id="1844517097" lat="35.6750764" lon="139.7596059">
+    <tag k="name" v="日比谷 (Hibiya)"/>
+    <tag k="name:en" v="Hibiya"/>
+    <tag k="name:fr" v="Hibiya"/>
+    <tag k="name:ja" v="日比谷"/>
+    <tag k="name:ja_kana" v="ひびや"/>
+    <tag k="name:ja_rm" v="Hibiya Dōri"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:日比谷駅"/>
+  </node>
+  <node id="1894258026" lat="35.6954720" lon="139.7514170">
+    <tag k="name" v="九段下 (Kudanshita)"/>
+    <tag k="name:en" v="Kudanshita"/>
+    <tag k="name:ja" v="九段下"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:九段下駅"/>
+  </node>
+  <node id="1894258028" lat="35.6950560" lon="139.7666670">
+    <tag k="name" v="小川町 (Ogawamachi)"/>
+    <tag k="name:en" v="Ogawamachi"/>
+    <tag k="name:ja" v="小川町"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:小川町駅 (東京都)"/>
+  </node>
+  <node id="1894258029" lat="35.6955560" lon="139.7758610">
+    <tag k="name" v="岩本町 (Iwamotochō)"/>
+    <tag k="name:en" v="Iwamotochō"/>
+    <tag k="name:ja" v="岩本町"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:岩本町駅"/>
+  </node>
+  <node id="1894258031" lat="35.6915560" lon="139.7376390">
+    <tag k="name" v="市ヶ谷 (Ichigaya)"/>
+    <tag k="name:en" v="Ichigaya"/>
+    <tag k="name:ja" v="市ヶ谷"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="1894258032" lat="35.6906390" lon="139.7062500">
+    <tag k="name" v="新宿三丁目 (Shinjuku-sanchome)"/>
+    <tag k="name:en" v="Shinjuku-sanchome"/>
+    <tag k="name:ja" v="新宿三丁目"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:新宿三丁目駅"/>
+  </node>
+  <node id="1894258034" lat="35.7057738" lon="139.7212830">
+    <tag k="name" v="早稲田 (Waseda)"/>
+    <tag k="name:en" v="Waseda"/>
+    <tag k="name:ja" v="早稲田"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="T04"/>
+    <tag k="wikipedia" v="ja:早稲田駅 (東京地下鉄)"/>
+  </node>
+  <node id="1894258037" lat="35.6923890" lon="139.7228610">
+    <tag k="name" v="曙橋 (Akebonobashi)"/>
+    <tag k="name:en" v="Akebonobashi"/>
+    <tag k="name:ja" v="曙橋"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:曙橋駅"/>
+  </node>
+  <node id="1894258038" lat="35.6959170" lon="139.7580560">
+    <tag k="name" v="神保町 (Jimbōchō)"/>
+    <tag k="name:en" v="Jimbōchō"/>
+    <tag k="name:ja" v="神保町"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:神保町駅"/>
+  </node>
+  <node id="1894258040" lat="35.6904235" lon="139.7571391">
+    <tag k="name" v="竹橋 (Takebashi)"/>
+    <tag k="name:en" v="Takebashi"/>
+    <tag k="name:ja" v="竹橋"/>
+    <tag k="operator" v="東京メトロ"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="T08"/>
+    <tag k="wikipedia" v="ja:竹橋駅"/>
+  </node>
+  <node id="1894258041" lat="35.7016670" lon="139.7435560">
+    <tag k="name" v="飯田橋 (Iidabashi)"/>
+    <tag k="name:en" v="Iidabashi"/>
+    <tag k="name:ja" v="飯田橋"/>
+    <tag k="name:ru" v="Иидабаси"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:飯田橋駅"/>
+  </node>
+  <node id="1894258043" lat="35.6921110" lon="139.7827780">
+    <tag k="name" v="馬喰横山 (Bakuro-yokoyama)"/>
+    <tag k="name:en" v="Bauro-yokoyama"/>
+    <tag k="name:ja" v="馬喰横山"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:馬喰横山駅"/>
+  </node>
+  <node id="1894258044" lat="35.7137473" lon="139.7039816">
+    <tag k="name" v="高田馬場 (Takadanobaba)"/>
+    <tag k="name:en" v="Takadanobaba"/>
+    <tag k="name:ja" v="高田馬場"/>
+    <tag k="name:ru" v="Такаданобаба"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="T03"/>
+    <tag k="wikipedia" v="ja:高田馬場駅"/>
+  </node>
+  <node id="1901881582" lat="35.6983685" lon="139.7730318">
+    <tag k="name" v="秋葉原 (Akihabara)"/>
+    <tag k="name:en" v="Akihabara"/>
+    <tag k="name:ja" v="秋葉原駅"/>
+    <tag k="name:ja_kana" v="あきはばら"/>
+    <tag k="name:ja_rm" v="Akihabara"/>
+    <tag k="name:ru" v="Акихабара"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:秋葉原駅"/>
+  </node>
+  <node id="1913640131" lat="35.6571490" lon="139.6935928">
+    <tag k="barrier" v="entrance"/>
+  </node>
+  <node id="1918062080" lat="35.6973936" lon="139.7846863">
+    <tag k="name" v="浅草橋 (Asakusabashi)"/>
+    <tag k="name:ja_rm" v="Asakusabashi"/>
+    <tag k="name:ru" v="Асакусабаси"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:浅草橋駅"/>
+  </node>
+  <node id="1919930807" lat="35.7070921" lon="139.7516617"/>
+  <node id="1923761824" lat="35.6802677" lon="139.7793289">
+    <tag k="name" v="茅場町(Kayabacho)"/>
+    <tag k="operator" v="東京メトロ"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="T11"/>
+    <tag k="wikipedia" v="ja:茅場町駅"/>
+  </node>
+  <node id="1923761825" lat="35.6824360" lon="139.7739734">
+    <tag k="name" v="日本橋 (Nihombashi)"/>
+    <tag k="name:ja" v="日本橋"/>
+    <tag k="operator" v="東京メトロ"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="T10"/>
+    <tag k="wikipedia" v="ja:日本橋駅 (東京都)"/>
+  </node>
+  <node id="1923761826" lat="35.6720759" lon="139.7955920">
+    <tag k="name" v="門前仲町(Monzen-nakacho)"/>
+    <tag k="operator" v="東京メトロ"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="T12"/>
+    <tag k="wikipedia" v="ja:門前仲町駅"/>
+  </node>
+  <node id="1923768928" lat="35.6845755" lon="139.7664660">
+    <tag k="name" v="大手町 (Ōtemachi)"/>
+    <tag k="name:en" v="Ōtemachi"/>
+    <tag k="name:fr" v="Ōtemachi"/>
+    <tag k="name:ja" v="大手町"/>
+    <tag k="name:ja_kana" v="おおてまち"/>
+    <tag k="name:ja_rm" v="Ōtemachi"/>
+    <tag k="operator" v="東京メトロ"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="T09"/>
+    <tag k="wikipedia" v="ja:大手町駅 (東京都)"/>
+  </node>
+  <node id="1923768929" lat="35.6902897" lon="139.7583415">
+    <tag k="name" v="竹橋 (Takebashi)"/>
+    <tag k="name:en" v="Takebashi"/>
+    <tag k="name:ja" v="竹橋"/>
+    <tag k="operator" v="東京メトロ"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="T08"/>
+    <tag k="wikipedia" v="ja:竹橋駅"/>
+  </node>
+  <node id="1924752331" lat="35.7203979" lon="139.7789730"/>
+  <node id="1924752332" lat="35.7206823" lon="139.7786898"/>
+  <node id="1924752333" lat="35.7206910" lon="139.7786001"/>
+  <node id="1924752334" lat="35.7207034" lon="139.7786071"/>
+  <node id="1924752335" lat="35.7207332" lon="139.7786680"/>
+  <node id="1924752337" lat="35.7208248" lon="139.7788976"/>
+  <node id="1924752338" lat="35.7208577" lon="139.7788666"/>
+  <node id="1924752339" lat="35.7208889" lon="139.7784566"/>
+  <node id="1924752340" lat="35.7208889" lon="139.7785292"/>
+  <node id="1924752342" lat="35.7209318" lon="139.7785462"/>
+  <node id="1924752344" lat="35.7209725" lon="139.7784906"/>
+  <node id="1924752345" lat="35.7210300" lon="139.7786940"/>
+  <node id="1924752346" lat="35.7210816" lon="139.7786644"/>
+  <node id="1926189614" lat="35.6853330" lon="139.7743330">
+    <tag k="name" v="三越前 (Mitsukoshimae)"/>
+    <tag k="name:en" v="Mitsukoshimae"/>
+    <tag k="name:fr" v="Mitsukoshimae"/>
+    <tag k="name:ja" v="三越前"/>
+    <tag k="name:ja_kana" v="みつこしまえ"/>
+    <tag k="name:ja_rm" v="Mitsukoshimae"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:三越前駅"/>
+  </node>
+  <node id="1926189615" lat="35.7117500" lon="139.7759720">
+    <tag k="name" v="上野 (Ueno)"/>
+    <tag k="name:en" v="Ueno"/>
+    <tag k="name:fr" v="Ueno"/>
+    <tag k="name:ja" v="上野"/>
+    <tag k="name:ja_kana" v="うえのおんしこうえん"/>
+    <tag k="name:ja_rm" v="Ueno"/>
+    <tag k="name:ru" v="Уэно"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:上野駅"/>
+  </node>
+  <node id="1926189616" lat="35.7076390" lon="139.7729720">
+    <tag k="name" v="上野広小路 (Uenohirokoji)"/>
+    <tag k="name:en" v="Uenohirokoji"/>
+    <tag k="railway" v="station"/>
+    <tag k="uic_ref" v="上野広小路"/>
+    <tag k="wikipedia" v="ja:上野広小路駅"/>
+  </node>
+  <node id="1926189617" lat="35.6768330" lon="139.7701390">
+    <tag k="name" v="京橋 (Kyobashi)"/>
+    <tag k="name:en" v="Kyobashi"/>
+    <tag k="name:ja" v="京橋"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:京橋駅 (東京都)"/>
+  </node>
+  <node id="1926189618" lat="35.6705560" lon="139.7178610">
+    <tag k="name" v="外苑前 (Gaiemmae)"/>
+    <tag k="name:en" v="Gaiemmae"/>
+    <tag k="name:ja" v="外苑前"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:外苑前駅"/>
+  </node>
+  <node id="1926189619" lat="35.6674057" lon="139.7584668">
+    <tag k="name" v="新橋 (Shimbashi)"/>
+    <tag k="name:en" v="Shimbashi"/>
+    <tag k="name:fr" v="Shimbashi"/>
+    <tag k="name:ja" v="新橋"/>
+    <tag k="name:ja_kana" v="しんばし"/>
+    <tag k="name:ja_rm" v="Shimbashi"/>
+    <tag k="name:ru" v="Симбаси"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:新橋駅"/>
+  </node>
+  <node id="1926189620" lat="35.6825280" lon="139.7736940">
+    <tag k="name" v="日本橋 (Nihombashi)"/>
+    <tag k="name:en" v="Nihombashi"/>
+    <tag k="name:ja" v="日本橋"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:日本橋駅 (東京都)"/>
+  </node>
+  <node id="1926189621" lat="35.7029440" lon="139.7716670">
+    <tag k="name" v="末広町 (Suehirocho)"/>
+    <tag k="name:en" v="Suehirocho"/>
+    <tag k="name:ja" v="末広町"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:末広町駅 (東京都)"/>
+  </node>
+  <node id="1926189622" lat="35.7108330" lon="139.7978330">
+    <tag k="name" v="浅草 (Asakusa)"/>
+    <tag k="name:en" v="Asakusa"/>
+    <tag k="name:fr" v="Asakusa"/>
+    <tag k="name:ja" v="浅草"/>
+    <tag k="name:ja_kana" v="あさくさ"/>
+    <tag k="name:ja_rm" v="Asakusa"/>
+    <tag k="name:ru" v="Асакуса"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:浅草駅"/>
+  </node>
+  <node id="1926189623" lat="35.6719440" lon="139.7413890">
+    <tag k="name" v="溜池山王 (Tameike-sanno)"/>
+    <tag k="name:en" v="Tameike-sanno"/>
+    <tag k="name:ja" v="溜池山王"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:溜池山王駅"/>
+  </node>
+  <node id="1926189624" lat="35.7098610" lon="139.7907780">
+    <tag k="name" v="田原町 (Tawaramachi)"/>
+    <tag k="name:en" v="Tawaramachi"/>
+    <tag k="name:ja" v="田原町"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:田原町駅 (東京都)"/>
+  </node>
+  <node id="1926189625" lat="35.6937500" lon="139.7708890">
+    <tag k="name" v="神田 (Kanda)"/>
+    <tag k="name:en" v="Kanda"/>
+    <tag k="name:ja" v="神田"/>
+    <tag k="name:ru" v="Канда"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:神田駅 (東京都)"/>
+  </node>
+  <node id="1926189626" lat="35.6701390" lon="139.7500000">
+    <tag k="name" v="虎ノ門 (Toranomon)"/>
+    <tag k="name:en" v="Toranomon"/>
+    <tag k="name:ja" v="虎ノ門"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:虎ノ門駅"/>
+  </node>
+  <node id="1926239435" lat="35.6666558" lon="139.7264061">
+    <tag k="name" v="乃木坂 (Nogizaka)"/>
+    <tag k="name:en" v="Nogizaka"/>
+    <tag k="name:ja" v="乃木坂"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:乃木坂駅"/>
+  </node>
+  <node id="1926239440" lat="35.6689440" lon="139.6913060">
+    <tag k="name" v="代々木公園 (Yoyogi-kōen)"/>
+    <tag k="name:en" v="Yoyogi-kōen"/>
+    <tag k="name:fr" v="Yoyogi-kōen"/>
+    <tag k="name:ja" v="代々木公園"/>
+    <tag k="name:ja_kana" v="よよぎこうえん"/>
+    <tag k="name:ja_rm" v="Yoyogi-kōen"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:代々木公園駅"/>
+  </node>
+  <node id="1926239456" lat="35.6741670" lon="139.7452780">
+    <tag k="name" v="国会議事堂前 (Kokkai-gijidomae)"/>
+    <tag k="name:en" v="Kokkai-gijidomae"/>
+    <tag k="name:ja" v="国会議事堂前"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="M14"/>
+    <tag k="wikipedia" v="ja:国会議事堂前駅"/>
+  </node>
+  <node id="1926239458" lat="35.6980560" lon="139.7660000">
+    <tag k="name" v="新御茶ノ水 (Shin-ochanomizu)"/>
+    <tag k="name:en" v="Shin-ochanomizu"/>
+    <tag k="name:ja" v="新御茶ノ水"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:新御茶ノ水駅"/>
+  </node>
+  <node id="1926239461" lat="35.6684720" lon="139.7054170">
+    <tag k="name" v="明治神宮前〈原宿〉 (Meiji-jingumae ‘Harajuku’)"/>
+    <tag k="name:en" v="Meiji-jingumae ‘Harajuku’"/>
+    <tag k="name:ja" v="明治神宮前〈原宿〉"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="1926239464" lat="35.7173991" lon="139.7658160">
+    <tag k="name" v="根津 (Nezu)"/>
+    <tag k="name:en" v="Nezu"/>
+    <tag k="name:fr" v="Nezu"/>
+    <tag k="name:ja" v="根津"/>
+    <tag k="name:ja_kana" v="ねづ"/>
+    <tag k="name:ja_rm" v="Nezu"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:根津駅"/>
+  </node>
+  <node id="1926239465" lat="35.7082217" lon="139.7699302">
+    <tag k="name" v="湯島 (Yushima)"/>
+    <tag k="name:en" v="Yushima"/>
+    <tag k="name:ja" v="湯島"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:湯島駅"/>
+  </node>
+  <node id="1926239474" lat="35.6723483" lon="139.7365722">
+    <tag k="name" v="赤坂 (Akasaka)"/>
+    <tag k="name:en" v="Akasaka"/>
+    <tag k="name:ja" v="赤坂"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:赤坂駅 (東京都)"/>
+  </node>
+  <node id="1926239476" lat="35.6730542" lon="139.7504280">
+    <tag k="name" v="霞ケ関 (Kasumigaseki)"/>
+    <tag k="name:en" v="Kasumigaseki"/>
+    <tag k="name:ja" v="霞ケ関"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:霞ケ関駅 (東京都)"/>
+  </node>
+  <node id="1926277321" lat="35.6970232" lon="139.6825923">
+    <tag k="name" v="中野坂上 (Nakano-sakaue)"/>
+    <tag k="name:en" v="Nakano-sakaue"/>
+    <tag k="name:ja" v="中野坂上"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="4"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="M06"/>
+    <tag k="wikipedia" v="ja:中野坂上駅"/>
+  </node>
+  <node id="1926277322" lat="35.6879440" lon="139.7200830">
+    <tag k="name" v="四谷三丁目 (Yotsuya-sanchome)"/>
+    <tag k="name:en" v="Yotsuya-sanchome"/>
+    <tag k="name:ja" v="四谷三丁目"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="M11"/>
+    <tag k="wikipedia" v="ja:四谷三丁目駅"/>
+  </node>
+  <node id="1926277330" lat="35.6867764" lon="139.7650360">
+    <tag k="name" v="大手町 (Ōtemachi)"/>
+    <tag k="name:en" v="Ōtemachi"/>
+    <tag k="name:fr" v="Ōtemachi"/>
+    <tag k="name:ja" v="大手町"/>
+    <tag k="name:ja_kana" v="おおてまち"/>
+    <tag k="name:ja_rm" v="Ōtemachi"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:大手町駅 (東京都)"/>
+  </node>
+  <node id="1926277334" lat="35.6867945" lon="139.7662001">
+    <tag k="name" v="大手町 (Ōtemachi)"/>
+    <tag k="name:en" v="Ōtemachi"/>
+    <tag k="name:fr" v="Ōtemachi"/>
+    <tag k="name:ja" v="大手町"/>
+    <tag k="name:ja_kana" v="おおてまち"/>
+    <tag k="name:ja_rm" v="Ōtemachi"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:大手町駅 (東京都)"/>
+  </node>
+  <node id="1926277338" lat="35.6869804" lon="139.7636796">
+    <tag k="name" v="大手町 (Ōtemachi)"/>
+    <tag k="name:en" v="Ōtemachi"/>
+    <tag k="name:fr" v="Ōtemachi"/>
+    <tag k="name:ja" v="大手町"/>
+    <tag k="name:ja_kana" v="おおてまち"/>
+    <tag k="name:ja_rm" v="Ōtemachi"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:大手町駅 (東京都)"/>
+  </node>
+  <node id="1926277342" lat="35.7005448" lon="139.7640222">
+    <tag k="name" v="御茶ノ水 (Ochanomizu)"/>
+    <tag k="name:en" v="Ochanomizu"/>
+    <tag k="name:fr" v="Ochanomizu"/>
+    <tag k="name:ja" v="御茶ノ水"/>
+    <tag k="name:ja_kana" v="おちゃのみず"/>
+    <tag k="name:ja_rm" v="Ochanomizu"/>
+    <tag k="name:ru" v="Отяномидзу"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="M20"/>
+    <tag k="wikipedia" v="ja:御茶ノ水駅"/>
+  </node>
+  <node id="1926277346" lat="35.6921561" lon="139.7008287">
+    <tag k="name" v="新宿 (Shinjuku)"/>
+    <tag k="name:en" v="Shinjuku"/>
+    <tag k="name:fr" v="Shinjuku"/>
+    <tag k="name:ja" v="新宿"/>
+    <tag k="name:ja_kana" v="しんじゅく"/>
+    <tag k="name:ja_rm" v="Shinjuku"/>
+    <tag k="name:ru" v="Синдзюку"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="M08"/>
+    <tag k="wikipedia" v="ja:新宿駅"/>
+  </node>
+  <node id="1926277347" lat="35.6908519" lon="139.7048772">
+    <tag k="name" v="新宿三丁目 (Shinjuku-sanchome)"/>
+    <tag k="name:en" v="Shinjuku-sanchome"/>
+    <tag k="name:ja" v="新宿三丁目"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="4"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="M09,F13"/>
+    <tag k="wikipedia" v="ja:新宿三丁目駅"/>
+  </node>
+  <node id="1926277351" lat="35.6886146" lon="139.7107019">
+    <tag k="name" v="新宿御苑前 (Shinjuku-gyoemmae)"/>
+    <tag k="name:en" v="Shinjuku-gyoemmae"/>
+    <tag k="name:ja" v="新宿御苑前"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="M10"/>
+    <tag k="wikipedia" v="ja:新宿御苑前駅"/>
+  </node>
+  <node id="1926277363" lat="35.6954440" lon="139.7674440">
+    <tag k="name" v="淡路町 (Awajicho)"/>
+    <tag k="name:en" v="Awajicho"/>
+    <tag k="name:ja" v="淡路町"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:淡路町駅"/>
+  </node>
+  <node id="1926277366" lat="35.6944228" lon="139.6927786">
+    <tag k="name" v="西新宿 (Nishi-shinjuku)"/>
+    <tag k="name:en" v="Nishi-shinjuku"/>
+    <tag k="name:ja" v="西新宿"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="M07"/>
+    <tag k="wikipedia" v="ja:西新宿駅"/>
+  </node>
+  <node id="1926355395" lat="35.7113890" lon="139.7771670">
+    <tag k="name" v="上野 (Ueno)"/>
+    <tag k="name:en" v="Ueno"/>
+    <tag k="name:fr" v="Ueno"/>
+    <tag k="name:ja" v="上野"/>
+    <tag k="name:ja_kana" v="うえのおんしこうえん"/>
+    <tag k="name:ja_rm" v="Ueno"/>
+    <tag k="name:ru" v="Уэно"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:上野駅"/>
+  </node>
+  <node id="1926355396" lat="35.6862683" lon="139.7822757">
+    <tag k="name" v="人形町 (Ningyocho)"/>
+    <tag k="name:en" v="Ningyocho"/>
+    <tag k="name:ja" v="人形町"/>
+    <tag k="name:ru" v="Нингётё"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:人形町駅"/>
+  </node>
+  <node id="1926355397" lat="35.7065560" lon="139.7761940">
+    <tag k="name" v="仲御徒町 (Naka-okachimachi)"/>
+    <tag k="name:en" v="Naka-okachimachi"/>
+    <tag k="name:ja" v="仲御徒町"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:仲御徒町駅"/>
+  </node>
+  <node id="1926355398" lat="35.7207220" lon="139.7845830">
+    <tag k="name" v="入谷 (Iriya)"/>
+    <tag k="name:en" v="Iriya"/>
+    <tag k="name:ja" v="入谷"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:入谷駅 (東京都)"/>
+  </node>
+  <node id="1926355399" lat="35.6750000" lon="139.7770830">
+    <tag k="name" v="八丁堀 (Hatchobori)"/>
+    <tag k="name:en" v="Hatchobori"/>
+    <tag k="name:fr" v="Hatchobori"/>
+    <tag k="name:ja" v="八丁堀"/>
+    <tag k="name:ja_kana" v="はっちょうぼり"/>
+    <tag k="name:ja_rm" v="Hatchobori"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:八丁堀駅 (東京都)"/>
+  </node>
+  <node id="1926355400" lat="35.6627780" lon="139.7313890">
+    <tag k="name" v="六本木 (Roppongi)"/>
+    <tag k="name:en" v="Roppongi"/>
+    <tag k="name:fr" v="Roppongi"/>
+    <tag k="name:ja" v="六本木"/>
+    <tag k="name:ja_kana" v="ろっぽんぎ"/>
+    <tag k="name:ja_rm" v="Roppongi"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="H-04"/>
+    <tag k="wikipedia" v="ja:六本木駅"/>
+  </node>
+  <node id="1926355401" lat="35.6907500" lon="139.7784720">
+    <tag k="name" v="小伝馬町 (Kodenmacho)"/>
+    <tag k="name:en" v="Kodenmacho"/>
+    <tag k="name:ja" v="小伝馬町"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:小伝馬町駅"/>
+  </node>
+  <node id="1926355402" lat="35.6696175" lon="139.7670622">
+    <tag k="name" v="東銀座 (Higashi-ginza)"/>
+    <tag k="name:en" v="Higashi-ginza"/>
+    <tag k="name:ja" v="東銀座"/>
+    <tag k="name:ru" v="Хигаси-Гиндза"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:東銀座駅"/>
+  </node>
+  <node id="1926355403" lat="35.6629720" lon="139.7450560">
+    <tag k="name" v="神谷町 (Kamiyacho)"/>
+    <tag k="name:en" v="Kamiyacho"/>
+    <tag k="name:ja" v="神谷町"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:神谷町駅"/>
+  </node>
+  <node id="1926355404" lat="35.6986110" lon="139.7755000">
+    <tag k="name" v="秋葉原 (Akihabara)"/>
+    <tag k="name:en" v="Akihabara"/>
+    <tag k="name:ja" v="秋葉原"/>
+    <tag k="name:ru" v="Акихабара"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:秋葉原駅"/>
+  </node>
+  <node id="1926355405" lat="35.6681110" lon="139.7725830">
+    <tag k="name" v="築地 (Tsukiji)"/>
+    <tag k="name:en" v="Tsukiji"/>
+    <tag k="name:ja" v="築地"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:築地駅"/>
+  </node>
+  <node id="1926355406" lat="35.6799440" lon="139.7801390">
+    <tag k="name" v="茅場町 (Kayabacho)"/>
+    <tag k="name:en" v="Kayabacho"/>
+    <tag k="name:ja" v="茅場町"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:茅場町駅"/>
+  </node>
+  <node id="1926376077" lat="35.6913890" lon="139.7362500">
+    <tag k="name" v="市ケ谷 (Ichigaya)"/>
+    <tag k="name:en" v="Ichigaya"/>
+    <tag k="name:ja" v="市ケ谷"/>
+    <tag k="name:ru" v="Итигая"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:市ケ谷駅"/>
+  </node>
+  <node id="1926376078" lat="35.6756940" lon="139.7633330">
+    <tag k="name" v="有楽町 (Yūrakuchō)"/>
+    <tag k="name:en" v="Yūrakuchō"/>
+    <tag k="name:fr" v="Yūrakuchō"/>
+    <tag k="name:ja" v="有楽町"/>
+    <tag k="name:ja_kana" v="ゆうらくちょう"/>
+    <tag k="name:ja_rm" v="Yūrakuchō"/>
+    <tag k="name:ru" v="Юракутё"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:有楽町駅"/>
+  </node>
+  <node id="1926376080" lat="35.6773610" lon="139.7517500">
+    <tag k="name" v="桜田門 (Sakuradamon)"/>
+    <tag k="name:en" v="Sakuradamon"/>
+    <tag k="name:ja" v="桜田門"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:桜田門駅"/>
+  </node>
+  <node id="1926376081" lat="35.6786110" lon="139.7402780">
+    <tag k="name" v="永田町駅 (Nagatacho)"/>
+    <tag k="name:en" v="Nagatacho"/>
+    <tag k="name:ja" v="永田町駅"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:永田町駅"/>
+  </node>
+  <node id="1926376082" lat="35.7094440" lon="139.7335280">
+    <tag k="name" v="江戸川橋 (Edogawabashi)"/>
+    <tag k="name:en" v="Edogawabashi"/>
+    <tag k="name:ja" v="江戸川橋"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:江戸川橋駅"/>
+  </node>
+  <node id="1926376085" lat="35.7190280" lon="139.7275000">
+    <tag k="name" v="護国寺 (Gokokuji)"/>
+    <tag k="name:en" v="Gokokuji"/>
+    <tag k="name:ja" v="護国寺"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:護国寺駅"/>
+  </node>
+  <node id="1926376086" lat="35.6743610" lon="139.7670280">
+    <tag k="name" v="銀座一丁目 (Ginza-itchome)"/>
+    <tag k="name:en" v="Ginza-itchome"/>
+    <tag k="name:ja" v="銀座一丁目"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:銀座一丁目駅"/>
+  </node>
+  <node id="1926376087" lat="35.7019440" lon="139.7456110">
+    <tag k="name" v="飯田橋 (Iidabashi)"/>
+    <tag k="name:en" v="Iidabashi"/>
+    <tag k="name:ja" v="飯田橋"/>
+    <tag k="name:ru" v="Иидабаси"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:飯田橋駅"/>
+  </node>
+  <node id="1926376088" lat="35.6840280" lon="139.7376670">
+    <tag k="name" v="麹町 (Kojimachi)"/>
+    <tag k="name:en" v="Kojimachi"/>
+    <tag k="name:ja" v="麹町"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:麹町駅"/>
+  </node>
+  <node id="1926417053" lat="35.6705000" lon="139.7737220">
+    <tag k="name" v="新富町 (Shintomicho)"/>
+    <tag k="name:en" v="Shintomicho"/>
+    <tag k="name:ja" v="新富町"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:新富町駅 (東京都)"/>
+  </node>
+  <node id="1926417056" lat="35.6648890" lon="139.7842500">
+    <tag k="name" v="月島 (Tsukishima)"/>
+    <tag k="name:en" v="Tsukishima"/>
+    <tag k="name:fr" v="Tsukishima"/>
+    <tag k="name:ja" v="月島"/>
+    <tag k="name:ja_kana" v="つきしま"/>
+    <tag k="name:ja_rm" v="Tsukishima"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:月島駅"/>
+  </node>
+  <node id="1926417058" lat="35.6550000" lon="139.7961110">
+    <tag k="name" v="豊洲 (Toyosu)"/>
+    <tag k="name:en" v="Toyosu"/>
+    <tag k="name:ja" v="豊洲"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:豊洲駅"/>
+  </node>
+  <node id="1926700041" lat="35.7173620" lon="139.7368105">
+    <tag k="name" v="茗荷谷 (Myogadani)"/>
+    <tag k="name:en" v="Myogadani"/>
+    <tag k="name:ja" v="茗荷谷"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="M23"/>
+    <tag k="wikipedia" v="ja:茗荷谷駅"/>
+  </node>
+  <node id="1926703932" lat="35.6848890" lon="139.7731670">
+    <tag k="name" v="三越前 (Mitsukoshimae)"/>
+    <tag k="name:en" v="Mitsukoshimae"/>
+    <tag k="name:fr" v="Mitsukoshimae"/>
+    <tag k="name:ja" v="三越前"/>
+    <tag k="name:ja_kana" v="みつこしまえ"/>
+    <tag k="name:ja_rm" v="Mitsukoshimae"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:三越前駅"/>
+  </node>
+  <node id="1926703933" lat="35.6856940" lon="139.7416670">
+    <tag k="name" v="半蔵門 (Hanzomon)"/>
+    <tag k="name:en" v="Hanzomon"/>
+    <tag k="name:ja" v="半蔵門"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:半蔵門駅"/>
+  </node>
+  <node id="1926709957" lat="35.6698060" lon="139.7555560">
+    <tag k="name" v="内幸町 (Uchisaiwaichō)"/>
+    <tag k="name:en" v="Uchisaiwaichō"/>
+    <tag k="name:ja" v="内幸町"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:内幸町駅"/>
+  </node>
+  <node id="1926709961" lat="35.6851113" lon="139.7629149">
+    <tag k="name" v="大手町 (Ōtemachi)"/>
+    <tag k="name:en" v="Ōtemachi"/>
+    <tag k="name:fr" v="Ōtemachi"/>
+    <tag k="name:ja" v="大手町"/>
+    <tag k="name:ja_kana" v="おおてまち"/>
+    <tag k="name:ja_rm" v="Ōtemachi"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:大手町駅 (東京都)"/>
+  </node>
+  <node id="1926709965" lat="35.6611940" lon="139.7515560">
+    <tag k="name" v="御成門 (Onarimon)"/>
+    <tag k="name:en" v="Onarimon"/>
+    <tag k="name:ja" v="御成門"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:御成門駅"/>
+  </node>
+  <node id="1926709967" lat="35.7096390" lon="139.7532500">
+    <tag k="name" v="春日 (Kasuga)"/>
+    <tag k="name:en" v="Kasuga"/>
+    <tag k="name:ja" v="春日"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:春日駅 (東京都)"/>
+  </node>
+  <node id="1926709968" lat="35.7036110" lon="139.7550830">
+    <tag k="name" v="水道橋 (Suidōbashi)"/>
+    <tag k="name:en" v="Suidōbashi"/>
+    <tag k="name:ja" v="水道橋"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:水道橋駅"/>
+  </node>
+  <node id="1926709982" lat="35.6540830" lon="139.7498330">
+    <tag k="name" v="芝公園 (Shibakōen)"/>
+    <tag k="name:en" v="Shibakōen"/>
+    <tag k="name:ja" v="芝公園"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:芝公園駅"/>
+  </node>
+  <node id="1926726026" lat="35.6567715" lon="139.7546837">
+    <tag k="name" v="大門 (Daimon)"/>
+    <tag k="name:en" v="Daimon"/>
+    <tag k="name:ja" v="大門"/>
+    <tag k="name:ru" v="Даймон"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:大門駅 (東京都)"/>
+  </node>
+  <node id="1926726027" lat="35.6754302" lon="139.7718803">
+    <tag k="name" v="宝町 (Takarachō)"/>
+    <tag k="name:en" v="Takarachō"/>
+    <tag k="name:ja" v="宝町"/>
+    <tag k="name:ru" v="Такаратё"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:宝町駅 (東京都)"/>
+  </node>
+  <node id="1926726028" lat="35.6652981" lon="139.7592947">
+    <tag k="name" v="新橋 (Shimbashi)"/>
+    <tag k="name:en" v="Shimbashi"/>
+    <tag k="name:fr" v="Shimbashi"/>
+    <tag k="name:ja" v="新橋"/>
+    <tag k="name:ja_kana" v="しんばし"/>
+    <tag k="name:ja_rm" v="Shimbashi"/>
+    <tag k="name:ru" v="Симбаси"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:新橋駅"/>
+  </node>
+  <node id="1926726029" lat="35.6816768" lon="139.7757451">
+    <tag k="name" v="日本橋 (Nihombashi)"/>
+    <tag k="name:ja" v="日本橋"/>
+    <tag k="name:ru" v="Нихонбаси"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:日本橋駅 (東京都)"/>
+  </node>
+  <node id="1926726030" lat="35.6921110" lon="139.7848890">
+    <tag k="name" v="東日本橋 (Higashi-nihombashi)"/>
+    <tag k="name:en" v="Higashi-nihombashi"/>
+    <tag k="name:ja" v="東日本橋"/>
+    <tag k="name:ru" v="Хигаси-Нихонбаси"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:東日本橋駅"/>
+  </node>
+  <node id="1926726032" lat="35.6973783" lon="139.7863178">
+    <tag k="name" v="浅草橋 (Asakusabashi)"/>
+    <tag k="name:en" v="Asakusabashi"/>
+    <tag k="name:ja" v="浅草橋"/>
+    <tag k="name:ru" v="Асакусабаси"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:浅草橋駅"/>
+  </node>
+  <node id="1926726033" lat="35.7032220" lon="139.7909440">
+    <tag k="name" v="蔵前 (Kuramae)"/>
+    <tag k="name:en" v="Kuramae"/>
+    <tag k="name:ja" v="蔵前"/>
+    <tag k="name:ru" v="Курамаэ"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:蔵前駅"/>
+  </node>
+  <node id="1931878068" lat="35.7164891" lon="139.7125546">
+    <tag k="name" v="学習院下 (Gakushūinshita)"/>
+    <tag k="name:ja" v="学習院下"/>
+    <tag k="name:ja_kana" v="がくしゅういんした"/>
+    <tag k="name:ja_rm" v="Gakushūinshita"/>
+    <tag k="railway" v="station"/>
+    <tag k="start_date" v="1914-12-25"/>
+    <tag k="wikipedia" v="ja:学習院下駅"/>
+  </node>
+  <node id="1931878074" lat="35.7203132" lon="139.7148934">
+    <tag k="name" v="鬼子母神前 (Kishibojimmae)"/>
+    <tag k="name:ja" v="鬼子母神前"/>
+    <tag k="name:ja_kana" v="きしぼじんまえ"/>
+    <tag k="name:ja_rm" v="Kishibojinmae"/>
+    <tag k="railway" v="station"/>
+    <tag k="start_date" v="1914-12-25"/>
+    <tag k="wikipedia" v="ja:鬼子母神前駅"/>
+  </node>
+  <node id="1931879415" lat="35.7119270" lon="139.7186293">
+    <tag k="name" v="早稲田 (Waseda)"/>
+    <tag k="name:ja" v="早稲田"/>
+    <tag k="name:ja_kana" v="わせだ"/>
+    <tag k="name:ja_rm" v="Waseda"/>
+    <tag k="railway" v="station"/>
+    <tag k="start_date" v="1930-03-30"/>
+    <tag k="wikipedia" v="ja:早稲田駅_(東京都交通局)"/>
+  </node>
+  <node id="1931879420" lat="35.7129212" lon="139.7144478">
+    <tag k="name" v="面影橋 (Omokagebashi)"/>
+    <tag k="name:ja" v="面影橋"/>
+    <tag k="name:ja_kana" v="おもかげばし"/>
+    <tag k="name:ja_rm" v="Omokagebashi"/>
+    <tag k="railway" v="station"/>
+    <tag k="start_date" v="1930-03-30"/>
+    <tag k="wikipedia" v="ja:面影橋駅"/>
+  </node>
+  <node id="1931880080" lat="35.6694118" lon="139.6883809"/>
+  <node id="1931880081" lat="35.6694369" lon="139.6885154"/>
+  <node id="1931880084" lat="35.6694669" lon="139.6887826"/>
+  <node id="1931880086" lat="35.6695036" lon="139.6887561"/>
+  <node id="1931880087" lat="35.6695394" lon="139.6889964"/>
+  <node id="1931880089" lat="35.6695757" lon="139.6888922"/>
+  <node id="1931880090" lat="35.6695784" lon="139.6890950"/>
+  <node id="1931880092" lat="35.6695918" lon="139.6883385"/>
+  <node id="1931880094" lat="35.6696383" lon="139.6884906"/>
+  <node id="1931880095" lat="35.6696437" lon="139.6890597"/>
+  <node id="1931880096" lat="35.6696549" lon="139.6884807"/>
+  <node id="1931880098" lat="35.6696826" lon="139.6888355"/>
+  <node id="1931880099" lat="35.6697032" lon="139.6886421"/>
+  <node id="1931880100" lat="35.6697578" lon="139.6890311"/>
+  <node id="1931880101" lat="35.6697834" lon="139.6889997"/>
+  <node id="1931880102" lat="35.6698120" lon="139.6891451"/>
+  <node id="1931880103" lat="35.6698409" lon="139.6891233"/>
+  <node id="1947633318" lat="35.6968610" lon="139.7974440">
+    <tag k="name" v="両国 (Ryōgoku)"/>
+    <tag k="name:en" v="Ryōgoku"/>
+    <tag k="name:ja" v="両国"/>
+    <tag k="name:ja_kana" v="りょうごく"/>
+    <tag k="name:ja_rm" v="Ryogoku"/>
+    <tag k="name:ru" v="Рёгоку"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:両国駅"/>
+  </node>
+  <node id="1947633320" lat="35.6879720" lon="139.7970280">
+    <tag k="name" v="森下 (Morishita)"/>
+    <tag k="name:en" v="Morishita"/>
+    <tag k="name:ja" v="森下"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:森下駅 (東京都)"/>
+  </node>
+  <node id="1947633321" lat="35.6880560" lon="139.7982500">
+    <tag k="name" v="森下 (Morishita)"/>
+    <tag k="name:en" v="Morishita"/>
+    <tag k="name:ja" v="森下"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:森下駅 (東京都)"/>
+  </node>
+  <node id="1947633322" lat="35.6820560" lon="139.7860280">
+    <tag k="name" v="水天宮前 (Suitengumae)"/>
+    <tag k="name:en" v="Suitengumae"/>
+    <tag k="name:ja" v="水天宮前"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:水天宮前駅"/>
+  </node>
+  <node id="1947633323" lat="35.6820560" lon="139.7988060">
+    <tag k="name" v="清澄白河 (Kiyosumi-shirakawa)"/>
+    <tag k="name:en" v="Kiyosumi-shirakawa"/>
+    <tag k="name:ja" v="清澄白河"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:清澄白河駅"/>
+  </node>
+  <node id="1947633324" lat="35.6649170" lon="139.7669440">
+    <tag k="name" v="築地市場 (Tsukijishijō)"/>
+    <tag k="name:en" v="Tsukijishijō"/>
+    <tag k="name:ja" v="築地市場"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:築地市場駅"/>
+  </node>
+  <node id="1950328487" lat="35.7107261" lon="139.6865289">
+    <tag k="name" v="落合(Ochiai)"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="T02"/>
+    <tag k="wikipedia" v="ja:落合駅 (東京都)"/>
+  </node>
+  <node id="1951047949" lat="35.6849310" lon="139.7298931"/>
+  <node id="1951047982" lat="35.6851047" lon="139.7297506"/>
+  <node id="1951047990" lat="35.6851925" lon="139.7300594"/>
+  <node id="1951047994" lat="35.6848450" lon="139.7298368"/>
+  <node id="1951047996" lat="35.6851859" lon="139.7297188"/>
+  <node id="1951048000" lat="35.6852774" lon="139.7297537"/>
+  <node id="1951048001" lat="35.6849496" lon="139.7299843"/>
+  <node id="1951048002" lat="35.6841130" lon="139.7299468"/>
+  <node id="1951048004" lat="35.6852404" lon="139.7296638"/>
+  <node id="1951048006" lat="35.6844169" lon="139.7300246"/>
+  <node id="1951048009" lat="35.6849779" lon="139.7301292"/>
+  <node id="1951048019" lat="35.6846555" lon="139.7300903"/>
+  <node id="1951048024" lat="35.6846729" lon="139.7300098"/>
+  <node id="1951048060" lat="35.6845291" lon="139.7299320"/>
+  <node id="1951048064" lat="35.6845753" lon="139.7298767"/>
+  <node id="1951048069" lat="35.6841145" lon="139.7301140"/>
+  <node id="1951048076" lat="35.6851772" lon="139.7296880"/>
+  <node id="1951048085" lat="35.6847764" lon="139.7299146"/>
+  <node id="1951048088" lat="35.6841152" lon="139.7300380"/>
+  <node id="1951048091" lat="35.6852049" lon="139.7298029"/>
+  <node id="1951048095" lat="35.6843934" lon="139.7301127"/>
+  <node id="1951048097" lat="35.6846003" lon="139.7302629"/>
+  <node id="1951048101" lat="35.6848465" lon="139.7303782"/>
+  <node id="1951048104" lat="35.6843254" lon="139.7299428"/>
+  <node id="1951048107" lat="35.6849147" lon="139.7301439"/>
+  <node id="1951048144" lat="35.6849212" lon="139.7298033"/>
+  <node id="1951048148" lat="35.6852317" lon="139.7299750"/>
+  <node id="1951048158" lat="35.6841130" lon="139.7298985"/>
+  <node id="1951066037" lat="35.6736544" lon="139.7422374">
+    <tag k="name" v="国会議事堂前(Kokkai-gijidomae)"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:国会議事堂前駅"/>
+  </node>
+  <node id="1951081094" lat="35.6744410" lon="139.7521346">
+    <tag k="name" v="霞ヶ関(Kasumigaseki)"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="M15"/>
+  </node>
+  <node id="1951952367" lat="35.6784894" lon="139.7054577">
+    <tag k="name" v="北参道(Kita-sando)"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="F14"/>
+    <tag k="wikipedia" v="ja:北参道駅"/>
+  </node>
+  <node id="1951953898" lat="35.6985139" lon="139.7075605">
+    <tag k="name" v="東新宿(Higashi-shinjuku)"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="F12"/>
+    <tag k="wikipedia" v="ja:東新宿駅"/>
+  </node>
+  <node id="1951954570" lat="35.7079254" lon="139.7090596">
+    <tag k="name" v="西早稲田(Nishi-waseda)"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="F11"/>
+    <tag k="wikipedia" v="ja:西早稲田駅"/>
+  </node>
+  <node id="1951959623" lat="35.7200383" lon="139.7146574">
+    <tag k="name" v="雑司が谷(Zoshigaya)"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="F10"/>
+    <tag k="wikipedia" v="ja:雑司が谷駅"/>
+  </node>
+  <node id="1952094220" lat="35.6772903" lon="139.7370733">
+    <tag k="name" v="赤坂見附 (Akasaka-mitsuke)"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="4"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="G05,M13"/>
+    <tag k="wikipedia" v="ja:赤坂見附駅"/>
+  </node>
+  <node id="1976070764" lat="35.6537255" lon="139.7618051"/>
+  <node id="1976070765" lat="35.6537284" lon="139.7618338"/>
+  <node id="1976070766" lat="35.6537292" lon="139.7617731"/>
+  <node id="1976070767" lat="35.6537371" lon="139.7617488"/>
+  <node id="1976070769" lat="35.6537692" lon="139.7616890"/>
+  <node id="1976070770" lat="35.6537877" lon="139.7616746"/>
+  <node id="1976070771" lat="35.6538111" lon="139.7616591"/>
+  <node id="1976070772" lat="35.6538319" lon="139.7616482"/>
+  <node id="1976070776" lat="35.6541281" lon="139.7621714"/>
+  <node id="1976070777" lat="35.6541490" lon="139.7621653"/>
+  <node id="1976070778" lat="35.6541680" lon="139.7621527"/>
+  <node id="1976070779" lat="35.6541870" lon="139.7621336"/>
+  <node id="1976070781" lat="35.6542025" lon="139.7621114"/>
+  <node id="1976070782" lat="35.6542118" lon="139.7620953"/>
+  <node id="1976070783" lat="35.6542254" lon="139.7620659"/>
+  <node id="1976070784" lat="35.6542341" lon="139.7620235"/>
+  <node id="1976070785" lat="35.6542346" lon="139.7619983"/>
+  <node id="2037665109" lat="35.7070361" lon="139.7820390">
+    <tag k="name" v="新御徒町 (Shin-Okachimachi)"/>
+    <tag k="platforms" v="1"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="02"/>
+  </node>
+  <node id="2037665123" lat="35.7129624" lon="139.7922688">
+    <tag k="name" v="浅草 (Asakusa)"/>
+    <tag k="operator" v="首都圏新都市鉄道"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="03"/>
+  </node>
+  <node id="2037665125" lat="35.6985927" lon="139.7742225">
+    <tag k="name" v="秋葉原 (Akihabara)"/>
+    <tag k="operator" v="首都圏新都市鉄道"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="01"/>
+  </node>
+  <node id="2043532984" lat="35.7111493" lon="139.7738963">
+    <tag k="name" v="京成上野 (Keisei Ueno)"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="2059586209" lat="35.6962729" lon="139.7924274"/>
+  <node id="2070961115" lat="35.6583905" lon="139.7016576"/>
+  <node id="2071017568" lat="35.6581467" lon="139.7020496">
+    <tag k="name" v="渋谷 (Shibuya)"/>
+    <tag k="name:en" v="Shibuya"/>
+    <tag k="name:fr" v="Shibuya"/>
+    <tag k="name:ja" v="渋谷(東横線)"/>
+    <tag k="name:ja_rm" v="Shibuya"/>
+    <tag k="name:ru" v="Сибуя"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia" v="ja:渋谷駅"/>
+  </node>
+  <node id="2084165848" lat="35.6577424" lon="139.7015175"/>
+  <node id="2084165853" lat="35.6578422" lon="139.7013298"/>
+  <node id="2084165863" lat="35.6583439" lon="139.7012618"/>
+  <node id="2103660123" lat="35.6584363" lon="139.7016370"/>
+  <node id="2103660127" lat="35.6584411" lon="139.7016348"/>
+  <way id="51822834">
+    <nd ref="661104590"/>
+    <nd ref="661104587"/>
+    <nd ref="661104588"/>
+    <nd ref="661104589"/>
+    <nd ref="661104598"/>
+    <nd ref="661104602"/>
+    <nd ref="661104601"/>
+    <nd ref="661104600"/>
+    <nd ref="661104599"/>
+    <nd ref="661104607"/>
+    <nd ref="1580297718"/>
+    <nd ref="661104606"/>
+    <nd ref="661104604"/>
+    <nd ref="661104603"/>
+    <nd ref="661104605"/>
+    <nd ref="661104596"/>
+    <nd ref="661104591"/>
+    <nd ref="661104592"/>
+    <nd ref="661104593"/>
+    <nd ref="661104595"/>
+    <nd ref="661104594"/>
+    <nd ref="661104590"/>
+    <tag k="area" v="yes"/>
+    <tag k="name" v="JR東中野駅"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="NRPB of MLIT Japan"/>
+    <tag k="source:ja" v="国土画像情報（オルソ化空中写真）国土計画局"/>
+  </way>
+  <way id="60264930">
+    <nd ref="748883763"/>
+    <nd ref="748883768"/>
+    <nd ref="1496842229"/>
+    <nd ref="1496842224"/>
+    <nd ref="748883708"/>
+    <nd ref="1496842209"/>
+    <nd ref="1496842212"/>
+    <nd ref="1913640131"/>
+    <nd ref="1496842222"/>
+    <nd ref="748883737"/>
+    <nd ref="748883630"/>
+    <nd ref="748883688"/>
+    <nd ref="1354438504"/>
+    <nd ref="1496842246"/>
+    <nd ref="1496842254"/>
+    <nd ref="1354438503"/>
+    <nd ref="1496842255"/>
+    <nd ref="1496842244"/>
+    <nd ref="1354438502"/>
+    <nd ref="1354438501"/>
+    <nd ref="748883763"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="神泉駅"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="Bing,2007-04"/>
+  </way>
+  <way id="94061850">
+    <nd ref="1093541347"/>
+    <nd ref="1093541247"/>
+    <nd ref="1093541235"/>
+    <nd ref="1093541238"/>
+    <nd ref="1093541321"/>
+    <nd ref="1093541369"/>
+    <nd ref="1093541324"/>
+    <nd ref="1093541287"/>
+    <nd ref="1093541259"/>
+    <nd ref="1093541339"/>
+    <nd ref="1093541270"/>
+    <nd ref="1093541326"/>
+    <nd ref="1093541316"/>
+    <nd ref="1093541253"/>
+    <nd ref="1093541318"/>
+    <nd ref="1093541242"/>
+    <nd ref="1093541366"/>
+    <nd ref="1093541232"/>
+    <nd ref="1093541284"/>
+    <nd ref="1093541244"/>
+    <nd ref="1579679822"/>
+    <nd ref="1093541365"/>
+    <nd ref="1093541240"/>
+    <nd ref="1093541341"/>
+    <nd ref="1093541299"/>
+    <nd ref="1093541367"/>
+    <nd ref="1093541364"/>
+    <nd ref="1093541352"/>
+    <nd ref="1093541349"/>
+    <nd ref="1093541329"/>
+    <nd ref="1093541343"/>
+    <nd ref="1093541368"/>
+    <nd ref="1093541345"/>
+    <nd ref="1093541256"/>
+    <nd ref="1093541264"/>
+    <nd ref="1093541223"/>
+    <nd ref="1093541312"/>
+    <nd ref="1093541250"/>
+    <nd ref="1093541294"/>
+    <nd ref="1093541262"/>
+    <nd ref="1093541371"/>
+    <nd ref="1093541289"/>
+    <nd ref="1093541282"/>
+    <nd ref="1093541347"/>
+    <tag k="building" v="train_station"/>
+    <tag k="layer" v="2"/>
+    <tag k="name" v="高田馬場"/>
+    <tag k="name:en" v="Takadanobaba"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="Bing, 2007-04"/>
+  </way>
+  <way id="96328422">
+    <nd ref="1116460146"/>
+    <nd ref="1116460149"/>
+    <nd ref="1116460143"/>
+    <nd ref="1116460142"/>
+    <nd ref="1116460133"/>
+    <nd ref="1116460141"/>
+    <nd ref="1116460130"/>
+    <nd ref="1116460134"/>
+    <nd ref="1116460140"/>
+    <nd ref="1116460135"/>
+    <nd ref="1116460137"/>
+    <nd ref="1116460146"/>
+    <tag k="building" v="train_station"/>
+    <tag k="layer" v="2"/>
+    <tag k="name" v="高田馬場"/>
+    <tag k="name:en" v="Takadanobaba"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="Bing, 2007-04"/>
+  </way>
+  <way id="97194405">
+    <nd ref="1125926437"/>
+    <nd ref="1125926455"/>
+    <nd ref="1125926452"/>
+    <nd ref="1125926446"/>
+    <nd ref="1125926456"/>
+    <nd ref="1125926438"/>
+    <nd ref="1125926459"/>
+    <nd ref="1125926440"/>
+    <nd ref="1808422478"/>
+    <nd ref="1808422477"/>
+    <nd ref="1808422475"/>
+    <nd ref="1125926432"/>
+    <nd ref="1125926458"/>
+    <nd ref="1125926437"/>
+    <tag k="building" v="yes"/>
+    <tag k="layer" v="1"/>
+    <tag k="name:ru" v="Синаномати"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="Bing, 2007-04"/>
+  </way>
+  <way id="98491742">
+    <nd ref="1139431612"/>
+    <nd ref="1139431606"/>
+    <nd ref="1139431610"/>
+    <nd ref="1139431614"/>
+    <nd ref="1139431605"/>
+    <nd ref="1139431609"/>
+    <nd ref="1139431612"/>
+    <tag k="building" v="train_station"/>
+    <tag k="layer" v="1"/>
+    <tag k="name" v="市ヶ谷 (Ichigaya)"/>
+    <tag k="name:en" v="Ichigaya"/>
+    <tag k="name:fr" v="Ichigaya"/>
+    <tag k="name:ja" v="市ヶ谷"/>
+    <tag k="name:ru" v="Итигая"/>
+    <tag k="railway" v="station"/>
+  </way>
+  <way id="116596178">
+    <nd ref="1314077044"/>
+    <nd ref="1314077022"/>
+    <nd ref="1314077031"/>
+    <nd ref="1314077047"/>
+    <nd ref="1314077044"/>
+    <tag k="building" v="train_station"/>
+    <tag k="building:levels" v="5"/>
+    <tag k="height" v="17.5"/>
+    <tag k="layer" v="2"/>
+    <tag k="name" v="新宿駅 (Shinjukueki)"/>
+    <tag k="name:en" v="Shinjuku Station"/>
+    <tag k="name:fr" v="Gare de Shinjuku"/>
+    <tag k="railway" v="station"/>
+  </way>
+  <way id="116811932">
+    <nd ref="1316051112"/>
+    <nd ref="1593485596"/>
+    <nd ref="1316051113"/>
+    <nd ref="1316051110"/>
+    <nd ref="1316051111"/>
+    <nd ref="1316051108"/>
+    <nd ref="1316051109"/>
+    <nd ref="1316051102"/>
+    <nd ref="1316051099"/>
+    <nd ref="1316051100"/>
+    <nd ref="1127216277"/>
+    <nd ref="2103660127"/>
+    <nd ref="2103660123"/>
+    <nd ref="2070961115"/>
+    <nd ref="1316051096"/>
+    <nd ref="1316051094"/>
+    <nd ref="1316051071"/>
+    <nd ref="1316051005"/>
+    <nd ref="1593485519"/>
+    <nd ref="1316050986"/>
+    <nd ref="1316051068"/>
+    <nd ref="1316051070"/>
+    <nd ref="2084165848"/>
+    <nd ref="1316051049"/>
+    <nd ref="2084165853"/>
+    <nd ref="1127216290"/>
+    <nd ref="1127216297"/>
+    <nd ref="1316051077"/>
+    <nd ref="1127216265"/>
+    <nd ref="2084165863"/>
+    <nd ref="1127216276"/>
+    <nd ref="1127216299"/>
+    <nd ref="1679318992"/>
+    <nd ref="1679318979"/>
+    <nd ref="1679318982"/>
+    <nd ref="1679318980"/>
+    <nd ref="1679318978"/>
+    <nd ref="1679318976"/>
+    <nd ref="1679318964"/>
+    <nd ref="1679318962"/>
+    <nd ref="1679318960"/>
+    <nd ref="1679318959"/>
+    <nd ref="1679318957"/>
+    <nd ref="1679318955"/>
+    <nd ref="1679318952"/>
+    <nd ref="1679318953"/>
+    <nd ref="1679318983"/>
+    <nd ref="1679318984"/>
+    <nd ref="1679318985"/>
+    <nd ref="1679318988"/>
+    <nd ref="1679319000"/>
+    <nd ref="1679319014"/>
+    <nd ref="1679319015"/>
+    <nd ref="1316051107"/>
+    <nd ref="1127216283"/>
+    <nd ref="1316051103"/>
+    <nd ref="1316051112"/>
+    <tag k="building" v="train_station"/>
+    <tag k="name" v="JR渋谷駅"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="Bing, 2007-04"/>
+  </way>
+  <way id="128195825">
+    <nd ref="1417172219"/>
+    <nd ref="1417172263"/>
+    <nd ref="1417172251"/>
+    <nd ref="1417172290"/>
+    <nd ref="1417172219"/>
+    <tag k="building" v="train_station"/>
+    <tag k="name" v="浜松町 (Hamamatsuchō)"/>
+    <tag k="name:en" v="Hamamatsuchō"/>
+    <tag k="name:fr" v="Hamamatsuchō"/>
+    <tag k="name:ja" v="浜松町"/>
+    <tag k="name:ja_kana" v="はままつちょう"/>
+    <tag k="name:ja_rm" v="Hamamatsuchō"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="Bing"/>
+    <tag k="wikipedia" v="ja:浜松町駅"/>
+  </way>
+  <way id="143166708">
+    <nd ref="1566526414"/>
+    <nd ref="1566526465"/>
+    <nd ref="1566526467"/>
+    <nd ref="1566526470"/>
+    <nd ref="1566526473"/>
+    <nd ref="1566526479"/>
+    <nd ref="1566526485"/>
+    <nd ref="1566526490"/>
+    <nd ref="1566526499"/>
+    <nd ref="1566526513"/>
+    <nd ref="1566526517"/>
+    <nd ref="1566526526"/>
+    <nd ref="1566526538"/>
+    <nd ref="1566526550"/>
+    <nd ref="1566526554"/>
+    <nd ref="1566526556"/>
+    <nd ref="1566526555"/>
+    <nd ref="1566526552"/>
+    <nd ref="1566526541"/>
+    <nd ref="1566526535"/>
+    <nd ref="1566526524"/>
+    <nd ref="1566526516"/>
+    <nd ref="1566526507"/>
+    <nd ref="1566526504"/>
+    <nd ref="1566526501"/>
+    <nd ref="1566526498"/>
+    <nd ref="1566526495"/>
+    <nd ref="1566526489"/>
+    <nd ref="1566526482"/>
+    <nd ref="1566526477"/>
+    <nd ref="1566526472"/>
+    <nd ref="1566526471"/>
+    <nd ref="1566526469"/>
+    <nd ref="1566526468"/>
+    <nd ref="1566526464"/>
+    <nd ref="1566526411"/>
+    <nd ref="1573952008"/>
+    <nd ref="1573951978"/>
+    <nd ref="1573952039"/>
+    <nd ref="1573952030"/>
+    <nd ref="1566526414"/>
+    <tag k="building" v="train_station"/>
+    <tag k="layer" v="1"/>
+    <tag k="name" v="飯田橋 (Iidabashi)駅"/>
+    <tag k="name:ru" v="Иидабаси"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="Bing,2007-04"/>
+  </way>
+  <way id="143820280">
+    <nd ref="1573806472"/>
+    <nd ref="1573806460"/>
+    <nd ref="1573806462"/>
+    <nd ref="1573806465"/>
+    <nd ref="1573806461"/>
+    <nd ref="1573806458"/>
+    <nd ref="1573806468"/>
+    <nd ref="1573806469"/>
+    <nd ref="1573806466"/>
+    <nd ref="1573806467"/>
+    <nd ref="1573806472"/>
+    <tag k="building" v="train_station"/>
+    <tag k="layer" v="2"/>
+    <tag k="name" v="御茶ノ水 (Ochanomizu)"/>
+    <tag k="name:en" v="Ochanomizu"/>
+    <tag k="name:fr" v="Ochanomizu"/>
+    <tag k="name:ja" v="御茶ノ水"/>
+    <tag k="name:ja_kana" v="おちゃのみず"/>
+    <tag k="name:ja_rm" v="Ochanomizu"/>
+    <tag k="name:ru" v="Отяномидзу"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="Bing, 2007-04"/>
+    <tag k="wikipedia" v="ja:御茶ノ水駅"/>
+  </way>
+  <way id="143820281">
+    <nd ref="1573806464"/>
+    <nd ref="1573806471"/>
+    <nd ref="1573806470"/>
+    <nd ref="1573806457"/>
+    <nd ref="1573806463"/>
+    <nd ref="1573806456"/>
+    <nd ref="1573806459"/>
+    <nd ref="1573806464"/>
+    <tag k="building" v="train_station"/>
+    <tag k="layer" v="2"/>
+    <tag k="name" v="御茶ノ水 (Ochanomizu)"/>
+    <tag k="name:en" v="Ochanomizu"/>
+    <tag k="name:fr" v="Ochanomizu"/>
+    <tag k="name:ja" v="御茶ノ水"/>
+    <tag k="name:ja_kana" v="おちゃのみず"/>
+    <tag k="name:ja_rm" v="Ochanomizu"/>
+    <tag k="name:ru" v="Отяномидзу"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="Bing, 2007-04"/>
+    <tag k="wikipedia" v="ja:御茶ノ水駅"/>
+  </way>
+  <way id="143839128">
+    <nd ref="1574055076"/>
+    <nd ref="1574055154"/>
+    <nd ref="1574055116"/>
+    <nd ref="1574055221"/>
+    <nd ref="1574055122"/>
+    <nd ref="1574055117"/>
+    <nd ref="1574055178"/>
+    <nd ref="1574055091"/>
+    <nd ref="1574055123"/>
+    <nd ref="1574055102"/>
+    <nd ref="1574055151"/>
+    <nd ref="1574055145"/>
+    <nd ref="1574055072"/>
+    <nd ref="1574055126"/>
+    <nd ref="1574055132"/>
+    <nd ref="1574055138"/>
+    <nd ref="1574055140"/>
+    <nd ref="1574055098"/>
+    <nd ref="1574055224"/>
+    <nd ref="1574055211"/>
+    <nd ref="1574055209"/>
+    <nd ref="1574055223"/>
+    <nd ref="1574055076"/>
+    <tag k="building" v="train_station"/>
+    <tag k="layer" v="1"/>
+    <tag k="name" v="四ツ谷 (Yotsuya)"/>
+    <tag k="name:en" v="Yotsuya"/>
+    <tag k="name:fr" v="Yotsuya"/>
+    <tag k="name:ru" v="Ёцуя"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="Bing, 2007-04"/>
+  </way>
+  <way id="153990167">
+    <nd ref="1666008312"/>
+    <nd ref="1666008299"/>
+    <nd ref="1666008298"/>
+    <nd ref="1666008301"/>
+    <nd ref="1924752333"/>
+    <nd ref="1924752334"/>
+    <nd ref="1924752339"/>
+    <nd ref="1924752344"/>
+    <nd ref="1924752346"/>
+    <nd ref="1924752345"/>
+    <nd ref="1924752342"/>
+    <nd ref="1924752340"/>
+    <nd ref="1924752335"/>
+    <nd ref="1924752338"/>
+    <nd ref="1924752337"/>
+    <nd ref="1924752332"/>
+    <nd ref="1924752331"/>
+    <nd ref="1666008312"/>
+    <tag k="building" v="train_station"/>
+    <tag k="layer" v="3"/>
+    <tag k="name" v="鶯谷 (Uguisudani)"/>
+    <tag k="name:en" v="Uguisudani"/>
+    <tag k="name:ja" v="鶯谷"/>
+    <tag k="name:ja_rm" v="Uguisudani"/>
+    <tag k="railway" v="station"/>
+  </way>
+  <way id="155240583">
+    <nd ref="1676538685"/>
+    <nd ref="1676538684"/>
+    <nd ref="1676538673"/>
+    <nd ref="1676538678"/>
+    <nd ref="1676750167"/>
+    <nd ref="1676750165"/>
+    <nd ref="1676538685"/>
+    <tag k="name" v="大久保駅"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="bing"/>
+  </way>
+  <way id="155240584">
+    <nd ref="1676538680"/>
+    <nd ref="1676538679"/>
+    <nd ref="1676538671"/>
+    <nd ref="1676538675"/>
+    <nd ref="1676538667"/>
+    <nd ref="1676538668"/>
+    <nd ref="1676538669"/>
+    <nd ref="1676538670"/>
+    <nd ref="1676538676"/>
+    <nd ref="1676538677"/>
+    <nd ref="1676538680"/>
+    <tag k="name" v="新大久保駅"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="bing"/>
+  </way>
+  <way id="155269677">
+    <nd ref="1676750155"/>
+    <nd ref="1676750156"/>
+    <nd ref="1676750154"/>
+    <nd ref="1676750153"/>
+    <nd ref="1676750155"/>
+    <tag k="name" v="大久保駅"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="bing"/>
+  </way>
+  <way id="155269678">
+    <nd ref="1676749661"/>
+    <nd ref="1676749675"/>
+    <nd ref="1676749685"/>
+    <nd ref="1676749691"/>
+    <nd ref="1676749695"/>
+    <nd ref="1676749696"/>
+    <nd ref="1676749699"/>
+    <nd ref="1676749697"/>
+    <nd ref="1676749689"/>
+    <nd ref="1676749690"/>
+    <nd ref="1676749688"/>
+    <nd ref="1676749681"/>
+    <nd ref="1676749666"/>
+    <nd ref="1676749663"/>
+    <nd ref="1676749665"/>
+    <nd ref="1676749651"/>
+    <nd ref="1676749661"/>
+    <tag k="name" v="宮廷ホーム"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="bing"/>
+  </way>
+  <way id="155269682">
+    <nd ref="1676749679"/>
+    <nd ref="1676749677"/>
+    <nd ref="1676749668"/>
+    <nd ref="1676749670"/>
+    <nd ref="1676749667"/>
+    <nd ref="1676749669"/>
+    <nd ref="1676749671"/>
+    <nd ref="1676749673"/>
+    <nd ref="1676749679"/>
+    <tag k="building" v="train_station"/>
+    <tag k="description" v="皇室用"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="bing"/>
+  </way>
+  <way id="155308888">
+    <nd ref="1677072310"/>
+    <nd ref="1677072323"/>
+    <nd ref="1677072332"/>
+    <nd ref="1677072325"/>
+    <nd ref="1677072315"/>
+    <nd ref="1677072321"/>
+    <nd ref="1677072313"/>
+    <nd ref="1677072308"/>
+    <nd ref="1677072310"/>
+    <tag k="area" v="yes"/>
+    <tag k="layer" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="bing"/>
+  </way>
+  <way id="157050778">
+    <nd ref="1692889081"/>
+    <nd ref="1692889080"/>
+    <nd ref="1692889084"/>
+    <nd ref="1692889083"/>
+    <nd ref="1692889087"/>
+    <nd ref="1692889086"/>
+    <nd ref="1692889085"/>
+    <nd ref="1692889082"/>
+    <nd ref="1692889064"/>
+    <nd ref="1692889063"/>
+    <nd ref="1692889038"/>
+    <nd ref="1692889012"/>
+    <nd ref="1692889003"/>
+    <nd ref="1692889007"/>
+    <nd ref="1692889009"/>
+    <nd ref="1692889043"/>
+    <nd ref="1692889018"/>
+    <nd ref="1692889033"/>
+    <nd ref="1692889060"/>
+    <nd ref="1692889058"/>
+    <nd ref="2059586209"/>
+    <nd ref="1692889081"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="両国 (Ryōgoku)"/>
+    <tag k="name:en" v="Ryogoku"/>
+    <tag k="name:ja" v="両国"/>
+    <tag k="name:ja_kana" v="りょうごく"/>
+    <tag k="name:ja_rm" v="Ryōgoku"/>
+    <tag k="name:ru" v="Рёгоку"/>
+    <tag k="railway" v="station"/>
+  </way>
+  <way id="157576292">
+    <nd ref="1698152612"/>
+    <nd ref="1698152606"/>
+    <nd ref="1698152598"/>
+    <nd ref="1698152597"/>
+    <nd ref="1698152604"/>
+    <nd ref="1698152609"/>
+    <nd ref="1698152611"/>
+    <nd ref="1698152612"/>
+    <tag k="building" v="train_station"/>
+    <tag k="name" v="原宿 (Harajuku)"/>
+    <tag k="railway" v="station"/>
+  </way>
+  <way id="161039682">
+    <nd ref="1730435564"/>
+    <nd ref="1730435566"/>
+    <nd ref="1730435575"/>
+    <nd ref="1730435582"/>
+    <nd ref="1730435581"/>
+    <nd ref="1730435562"/>
+    <nd ref="1730435569"/>
+    <nd ref="1730435578"/>
+    <nd ref="1730435580"/>
+    <nd ref="1730435560"/>
+    <nd ref="1730435564"/>
+    <tag k="building" v="yes"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="survey+bing"/>
+  </way>
+  <way id="170598711">
+    <nd ref="1817685106"/>
+    <nd ref="1817685112"/>
+    <nd ref="1817685119"/>
+    <nd ref="1817685121"/>
+    <nd ref="1817685126"/>
+    <nd ref="1817685128"/>
+    <nd ref="1825133056"/>
+    <nd ref="1825133052"/>
+    <nd ref="1817685080"/>
+    <nd ref="1919930807"/>
+    <nd ref="1817685076"/>
+    <nd ref="1817685075"/>
+    <nd ref="1817685077"/>
+    <nd ref="1817685086"/>
+    <nd ref="1817685083"/>
+    <nd ref="1817685089"/>
+    <nd ref="1817685090"/>
+    <nd ref="1817685093"/>
+    <nd ref="1817685091"/>
+    <nd ref="1825133046"/>
+    <nd ref="1825133049"/>
+    <nd ref="1817685106"/>
+    <tag k="building" v="train_station"/>
+    <tag k="name" v="後楽園 (Korakuen)"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="M22"/>
+    <tag k="source" v="Bing"/>
+  </way>
+  <way id="170603406">
+    <nd ref="1817716760"/>
+    <nd ref="1817716755"/>
+    <nd ref="1817716746"/>
+    <nd ref="1817716796"/>
+    <nd ref="1817716799"/>
+    <nd ref="1817716810"/>
+    <nd ref="1817716823"/>
+    <nd ref="1817716832"/>
+    <nd ref="1817716833"/>
+    <nd ref="1817716824"/>
+    <nd ref="1817716822"/>
+    <nd ref="1817716825"/>
+    <nd ref="1817716826"/>
+    <nd ref="1817716814"/>
+    <nd ref="1817716817"/>
+    <nd ref="1817716808"/>
+    <nd ref="1817716805"/>
+    <nd ref="1817716791"/>
+    <nd ref="1817716785"/>
+    <nd ref="1817716761"/>
+    <nd ref="1817716758"/>
+    <nd ref="1817716769"/>
+    <nd ref="1817716756"/>
+    <nd ref="1817716760"/>
+    <tag k="building" v="train_station"/>
+    <tag k="layer" v="1"/>
+    <tag k="name" v="本郷三丁目"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="Bing"/>
+  </way>
+  <way id="182821136">
+    <nd ref="1931880103"/>
+    <nd ref="1931880102"/>
+    <nd ref="1931880100"/>
+    <nd ref="1931880098"/>
+    <nd ref="1931880089"/>
+    <nd ref="1931880095"/>
+    <nd ref="1931880090"/>
+    <nd ref="1931880087"/>
+    <nd ref="1931880084"/>
+    <nd ref="1931880086"/>
+    <nd ref="1931880081"/>
+    <nd ref="1931880080"/>
+    <nd ref="1931880092"/>
+    <nd ref="1931880094"/>
+    <nd ref="1931880096"/>
+    <nd ref="1931880099"/>
+    <nd ref="1931880101"/>
+    <nd ref="1931880103"/>
+    <tag k="building" v="train_station"/>
+    <tag k="name" v="代々木八幡 (Yoyogi Hachiman)"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="Bing"/>
+  </way>
+  <way id="184607319">
+    <nd ref="1951048004"/>
+    <nd ref="1951048000"/>
+    <nd ref="1951048091"/>
+    <nd ref="1951048148"/>
+    <nd ref="1951047990"/>
+    <nd ref="1951048009"/>
+    <nd ref="1951048107"/>
+    <nd ref="1951048101"/>
+    <nd ref="1951048097"/>
+    <nd ref="1951048019"/>
+    <nd ref="1951048095"/>
+    <nd ref="1951048069"/>
+    <nd ref="1951048088"/>
+    <nd ref="1951048006"/>
+    <nd ref="1951048024"/>
+    <nd ref="1951048001"/>
+    <nd ref="1951047949"/>
+    <nd ref="1951048085"/>
+    <nd ref="1951048060"/>
+    <nd ref="1951048104"/>
+    <nd ref="1951048002"/>
+    <nd ref="1951048158"/>
+    <nd ref="1951048064"/>
+    <nd ref="1951047994"/>
+    <nd ref="1951048144"/>
+    <nd ref="1951047982"/>
+    <nd ref="1951047996"/>
+    <nd ref="1951048076"/>
+    <nd ref="1951048004"/>
+    <tag k="building" v="train_station"/>
+    <tag k="name" v="四ツ谷(Yotsuya)"/>
+    <tag k="name:ru" v="Ёцуя"/>
+    <tag k="operator" v="東京地下鉄"/>
+    <tag k="platforms" v="2"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="M12"/>
+  </way>
+  <way id="186850860">
+    <nd ref="1976070776"/>
+    <nd ref="1976070765"/>
+    <nd ref="1976070764"/>
+    <nd ref="1976070766"/>
+    <nd ref="1976070767"/>
+    <nd ref="1976070769"/>
+    <nd ref="1976070770"/>
+    <nd ref="1976070771"/>
+    <nd ref="1976070772"/>
+    <nd ref="1976070785"/>
+    <nd ref="1976070784"/>
+    <nd ref="1976070783"/>
+    <nd ref="1976070782"/>
+    <nd ref="1976070781"/>
+    <nd ref="1976070779"/>
+    <nd ref="1976070778"/>
+    <nd ref="1976070777"/>
+    <nd ref="1976070776"/>
+    <tag k="building" v="yes"/>
+    <tag k="layer" v="2"/>
+    <tag k="name" v="竹芝 (Takeshiba)"/>
+    <tag k="railway" v="station"/>
+  </way>
+
+</osm>

@@ -1,0 +1,13 @@
+#files
+*.qm
+*.odt#
+*_adaptor.h
+*_proxy.h
+genivi-*.h
+
+
+
+
+
+
+

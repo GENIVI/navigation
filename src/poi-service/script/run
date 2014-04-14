@@ -1,0 +1,41 @@
+#!/bin/sh
+
+# @licence app begin@
+# SPDX-License-Identifier: MPL-2.0
+#
+# \copyright Copyright (C) 2013-2014, PCA Peugeot Citroen
+#
+# \file run
+#
+# \brief This file is part of the Build System.
+#
+# \author Philippe Colliot <philippe.colliot@mpsa.com>
+#
+# \version 1.0
+#
+# This Source Code Form is subject to the terms of the
+# Mozilla Public License (MPL), v. 2.0.
+# If a copy of the MPL was not distributed with this file,
+# You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# For further information see http://www.genivi.org/.
+#
+# List of changes:
+# 
+# <date>, <name>, <description of change>
+#
+# @licence end@
+
+echo '------------------------start the server------------------------'
+CURDIR=$PWD
+ROOT_DIR=$CURDIR/..
+BIN_DIR=$ROOT_DIR/bin
+EXE_DIR=$BIN_DIR
+MAIN_DATABASE='poi-database-sample.db'
+
+echo 'kill orphan process if necessary'
+$CURDIR/kill-all
+
+echo 'run'
+$EXE_DIR/poi-server -f $MAIN_DATABASE &
+

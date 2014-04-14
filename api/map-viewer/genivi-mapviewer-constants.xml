@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="constants.xsl"?>
+<!-- SPDX-License-Identifier: MPL-2.0
+     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
+     This Source Code Form is subject to the terms of the
+     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<constants  name="MapViewer">
+  <version>3.0.0-alpha (07-06-2013)</version>
+  <doc>
+    <line>This document defines the constants used in the MapViewer APIs</line>
+  </doc>
+
+  <id name="INVALID" value="0x0000" />
+  <id name="ALL" value="0xffff" />
+
+  <id name="AVAILABLE" value="0x0001" />
+  <id name="NOT_AVAILABLE" value="0x0002" />
+ 
+  <id name="TIME_FORMAT" value="0x0003" />
+  <id name="12H" value="0x0004" />
+  <id name="24H" value="0x0005" />
+
+  <id name="COORDINATES_FORMAT" value="0x0006" />
+  <id name="DEGREES" value="0x0007" />
+  <id name="MINUTES" value="0x0008" />
+  <id name="SECONDS" value="0x0009" />
+
+  <id name="MAIN_MAP" value="0x0010" />
+  <id name="SPLIT_SCREEN" value="0x0011" />
+
+  <id name="2D" value="0x0020" />
+  <id name="3D" value="0x0021" />
+
+  <id name="LOCALE" value="0x0025" />
+
+  <id name="UNITS_OF_MEASUREMENT" value="0x0030" />
+  <id name="LENGTH" value="0x0031" />
+  <id name="METER" value="0x0032" />
+  <id name="MILE" value="0x0033" />
+  <id name="KM" value="0x0034" />
+  <id name="YARD" value="0x0035" />
+  <id name="FOOT" value="0x0036" />
+
+  <id name="MIN" value="0x0040" />
+  <id name="MAX" value="0x0041" />
+  <id name="MID" value="0x0042" />
+
+  <id name="VISIBLE" value="0x0043" />
+  <id name="INVISIBLE" value="0x0044" />
+  <id name="FROZEN" value="0x0045" />
+
+  <id name="LEVEL1" value="0x0050" />
+  <id name="LEVEL2" value="0x0051" />
+  <id name="LEVEL3" value="0x0052" />
+  <id name="LEVEL4" value="0x0053" />
+  <id name="LEVEL5" value="0x0054" />
+
+  <id name="THEME_1" value="0x0060" />
+  <id name="THEME_2" value="0x0061" />
+  <id name="THEME_3" value="0x0062" />
+
+  <id name="CONSTANT_ANGLE" value="0x0070" />
+  <id name="TRACK_UP" value="0x0071" />
+  <id name="TOWARDS_TARGET" value="0x0072" />
+
+  <id name="PAN_START" value="0x0100" />
+  <id name="PAN_TO" value="0x0101" />
+  <id name="PAN_END" value="0x0102" />
+
+  <id name="BUILDINGS" value="0x0080" />
+  <id name="TERRAIN" value="0x0081" />
+
+  <id name="AUTOMATIC" value="0x0110" />
+  <id name="MANUAL" value="0x0111" />
+  <id name="HYBRID" value="0x0112" />
+
+  <id name="CUSTOM_ELEMENT" value="0x0120" />
+  <id name="CURRENT_POSITION" value="0x0121" />
+  <id name="WAYPOINT" value="0x0122" />
+  <id name="POI" value="0x0123" />
+  <id name="TRAFFIC_INCIDENT" value="0x0124" />
+  <id name="ROUTE" value="0x0125" />
+  <id name="GEOCOORDINATES" value="0x0126" />
+
+</constants>

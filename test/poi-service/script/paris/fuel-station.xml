@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="Overpass API">
+<note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
+<meta osm_base="2013-12-19T09:07:02Z"/>
+
+  <node id="25209547" lat="48.8316281" lon="2.3594731">
+    <tag k="amenity" v="fuel"/>
+    <tag k="fuel:lpg" v="yes"/>
+    <tag k="name" v="Station Total Access"/>
+    <tag k="operator" v="Total Access"/>
+    <tag k="source" v="stations.gpl.online.fr"/>
+  </node>
+  <node id="25210286" lat="48.8535333" lon="2.4151180">
+    <tag k="addr:postcode" v="75020"/>
+    <tag k="address" v="Porte de Montreuil"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="fuel:lpg" v="yes"/>
+    <tag k="is_in" v="Paris"/>
+    <tag k="name" v="Relais Total de la Porte de Montreuil"/>
+    <tag k="operator" v="Total"/>
+    <tag k="source" v="stations.gpl.online.fr"/>
+  </node>
+  <node id="25210943" lat="48.8337497" lon="2.2848189">
+    <tag k="addr:postcode" v="75015"/>
+    <tag k="address" v="44 Bd Victor"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="fuel:lpg" v="yes"/>
+    <tag k="is_in" v="PARIS"/>
+    <tag k="name" v="Station BP"/>
+    <tag k="operator" v="BP"/>
+    <tag k="source" v="stations.gpl.online.fr"/>
+  </node>
+  <node id="25211773" lat="48.8169651" lon="2.3597405">
+    <tag k="addr:postcode" v="75013"/>
+    <tag k="address" v="Porte D'Italie"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="fuel:lpg" v="yes"/>
+    <tag k="is_in" v="PARIS"/>
+    <tag k="name" v="Relais Total Porte D'italie"/>
+    <tag k="operator" v="Total"/>
+    <tag k="source" v="stations.gpl.online.fr"/>
+  </node>
+  <node id="25213384" lat="48.8346251" lon="2.2657680">
+    <tag k="addr:postcode" v="75015"/>
+    <tag k="address" v="Quai d'Issy-les-Moulineaux - Porte d'Issy"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="fuel:lpg" v="yes"/>
+    <tag k="is_in" v="PARIS"/>
+    <tag k="name" v="Relais Total Du Pont Aval"/>
+    <tag k="operator" v="Total"/>
+    <tag k="source" v="stations.gpl.online.fr"/>
+  </node>
+  <node id="25213823" lat="48.8256612" lon="2.4077565">
+    <tag k="addr:postcode" v="94220"/>
+    <tag k="address" v="N 6 , 114, rue de Paris - Porte de Charenton"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="fuel:lpg" v="yes"/>
+    <tag k="is_in" v="CHARENTON-LE-PONT"/>
+    <tag k="name" v="Station Avia"/>
+    <tag k="operator" v="Avia"/>
+    <tag k="source" v="stations.gpl.online.fr"/>
+  </node>
+  <node id="25213980" lat="48.9012005" lon="2.3862959">
+    <tag k="addr:postcode" v="75019"/>
+    <tag k="address" v="13, boulevard de la Commanderie - Porte de La Villette"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="fuel:lpg" v="yes"/>
+    <tag k="is_in" v="PARIS"/>
+    <tag k="name" v="Station Total"/>
+    <tag k="operator" v="Total"/>
+    <tag k="source" v="stations.gpl.online.fr"/>
+  </node>
+  <node id="25214653" lat="48.8801709" lon="2.3706981">
+    <tag k="addr:postcode" v="75019"/>
+    <tag k="address" v="152/162, boulevard de la Villette"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="fuel:lpg" v="yes"/>
+    <tag k="is_in" v="PARIS"/>
+    <tag k="name" v="Relais Total De Chaufourniers"/>
+    <tag k="operator" v="Total"/>
+    <tag k="source" v="stations.gpl.online.fr"/>
+  </node>
+  <node id="66492656" lat="48.8315802" lon="2.3158225">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="BP"/>
+    <tag k="operator" v="BP"/>
+  </node>
+  <node id="255003455" lat="48.8841896" lon="2.2703742">
+    <tag k="amenity" v="fuel"/>
+    <tag k="created_by" v="Potlatch 0.8a"/>
+  </node>
+  <node id="258317404" lat="48.8455659" lon="2.3086884">
+    <tag k="amenity" v="fuel"/>
+    <tag k="operator" v="Total"/>
+  </node>
+  <node id="259284911" lat="48.8391995" lon="2.2925362">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="BP"/>
+  </node>
+  <node id="259285107" lat="48.8367458" lon="2.2828065">
+    <tag k="amenity" v="fuel"/>
+    <tag k="created_by" v="Potlatch 0.8a"/>
+  </node>
+  <node id="261582387" lat="48.8501676" lon="2.3621707">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="262276013" lat="48.8593908" lon="2.3144172">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Total"/>
+  </node>
+  <node id="267156943" lat="48.8299268" lon="2.3465439">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="267652178" lat="48.8609726" lon="2.2828299">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="BP"/>
+  </node>
+  <node id="272631884" lat="48.8826632" lon="2.2476348">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="BP"/>
+  </node>
+  <node id="298915407" lat="48.8563192" lon="2.3153625">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="307372951" lat="48.8611046" lon="2.3413657">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Oil France"/>
+  </node>
+  <node id="309654919" lat="48.8475898" lon="2.3031985">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Shell"/>
+    <tag k="operator" v="Shell"/>
+    <tag k="wheelchair" v="yes"/>
+  </node>
+  <node id="315123765" lat="48.8463297" lon="2.2794951">
+    <tag k="amenity" v="fuel"/>
+    <tag k="created_by" v="Potlatch 0.10f"/>
+  </node>
+  <node id="320203219" lat="48.9002724" lon="2.3738351">
+    <tag k="amenity" v="fuel"/>
+    <tag k="operator" v="Total"/>
+  </node>
+  <node id="330413037" lat="48.8402491" lon="2.3214518">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Total"/>
+    <tag k="operator" v="Total"/>
+  </node>
+  <node id="385442502" lat="48.8178365" lon="2.2768143">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Esso"/>
+    <tag k="operator" v="Esso"/>
+  </node>
+  <node id="423836418" lat="48.8804901" lon="2.2865619">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="471629646" lat="48.8636820" lon="2.4079099">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Total"/>
+    <tag k="operator" v="Total"/>
+  </node>
+  <node id="476757242" lat="48.8844643" lon="2.4302306">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Relais des Fontaines"/>
+    <tag k="operator" v="Total"/>
+  </node>
+  <node id="477195597" lat="48.8891565" lon="2.3974249">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="477199342" lat="48.8884623" lon="2.4082739">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Elan"/>
+    <tag k="operator" v="Elan"/>
+  </node>
+  <node id="489662580" lat="48.8962798" lon="2.2868916">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="582751437" lat="48.8912181" lon="2.2474811">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Total"/>
+    <tag k="source" v="Microsoft Bing satellite 2012"/>
+  </node>
+  <node id="605504117" lat="48.8229206" lon="2.2952295">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="614321106" lat="48.8213817" lon="2.3123435">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Elf"/>
+    <tag k="operator" v="Elf"/>
+  </node>
+  <node id="625171506" lat="48.8323948" lon="2.3645635">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="BP"/>
+    <tag k="operator" v="BP"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="648114671" lat="48.8645440" lon="2.4097670">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="661296854" lat="48.8765664" lon="2.4182091">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Garage Legendre"/>
+    <tag k="operator" v="Elan"/>
+  </node>
+  <node id="667281517" lat="48.8258601" lon="2.3878725">
+    <tag k="amenity" v="fuel"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="667281518" lat="48.8457817" lon="2.3802229">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="667281519" lat="48.8443860" lon="2.3959250">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Total"/>
+    <tag k="operator" v="Total"/>
+  </node>
+  <node id="766791661" lat="48.9007433" lon="2.3748278">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Total"/>
+    <tag k="fuel:GTL_diesel" v="yes"/>
+    <tag k="fuel:HGV_diesel" v="yes"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_100" v="no"/>
+    <tag k="fuel:octane_95" v="yes"/>
+    <tag k="name" v="Relais du périphérique exterieur"/>
+    <tag k="opening_hours" v="Mo-Su 06:00-22:00"/>
+    <tag k="operator" v="Total"/>
+  </node>
+  <node id="797969992" lat="48.8959689" lon="2.3111720">
+    <tag k="amenity" v="fuel"/>
+    <tag k="is_in" v="PARIS"/>
+    <tag k="name" v="BP"/>
+    <tag k="operator" v="BP"/>
+  </node>
+  <node id="870422866" lat="48.8829736" lon="2.4265647"/>
+  <node id="870438422" lat="48.8828425" lon="2.4266683"/>
+  <node id="870465818" lat="48.8828828" lon="2.4267858"/>
+  <node id="870477542" lat="48.8830140" lon="2.4266825"/>
+  <node id="880470216" lat="48.8256889" lon="2.2481637"/>
+  <node id="880472144" lat="48.8257675" lon="2.2482166"/>
+  <node id="880474062" lat="48.8257456" lon="2.2481312"/>
+  <node id="880478275" lat="48.8257103" lon="2.2482507"/>
+  <node id="894235041" lat="48.9000640" lon="2.3292228"/>
+  <node id="894242694" lat="48.9000753" lon="2.3292409"/>
+  <node id="894264753" lat="48.9000636" lon="2.3291904"/>
+  <node id="916640221" lat="48.8464518" lon="2.3874499"/>
+  <node id="916641569" lat="48.8463602" lon="2.3873388"/>
+  <node id="916642317" lat="48.8464517" lon="2.3873379"/>
+  <node id="916644392" lat="48.8463645" lon="2.3875220"/>
+  <node id="924687591" lat="48.8198012" lon="2.3969429"/>
+  <node id="924688914" lat="48.8198831" lon="2.3960761"/>
+  <node id="924689439" lat="48.8194129" lon="2.3975138"/>
+  <node id="924689859" lat="48.8194066" lon="2.3975148"/>
+  <node id="924690990" lat="48.8196410" lon="2.3972150"/>
+  <node id="924693308" lat="48.8192941" lon="2.3967703"/>
+  <node id="924697268" lat="48.8197208" lon="2.3970785"/>
+  <node id="924700960" lat="48.8193953" lon="2.3975033"/>
+  <node id="924702277" lat="48.8195837" lon="2.3973110"/>
+  <node id="924703591" lat="48.8193404" lon="2.3974640"/>
+  <node id="924704693" lat="48.8192201" lon="2.3970747"/>
+  <node id="924705404" lat="48.8193949" lon="2.3974940"/>
+  <node id="924705785" lat="48.8191313" lon="2.3969629"/>
+  <node id="924706795" lat="48.8191300" lon="2.3969777"/>
+  <node id="924715095" lat="48.8191420" lon="2.3969499"/>
+  <node id="924716326" lat="48.8194013" lon="2.3975121"/>
+  <node id="924718955" lat="48.8191390" lon="2.3970169"/>
+  <node id="924721020" lat="48.8191418" lon="2.3970596"/>
+  <node id="924724932" lat="48.8191323" lon="2.3969847"/>
+  <node id="924727873" lat="48.8196498" lon="2.3963535"/>
+  <node id="924729138" lat="48.8200662" lon="2.3964336"/>
+  <node id="924730180" lat="48.8191394" lon="2.3969932"/>
+  <node id="924731221" lat="48.8193637" lon="2.3973555"/>
+  <node id="924736971" lat="48.8198574" lon="2.3968340"/>
+  <node id="924738006" lat="48.8193947" lon="2.3974971"/>
+  <node id="924739717" lat="48.8191477" lon="2.3971047"/>
+  <node id="924745257" lat="48.8191298" lon="2.3969718"/>
+  <node id="924747643" lat="48.8200674" lon="2.3964355"/>
+  <node id="930290277" lat="48.8205844" lon="2.3248487"/>
+  <node id="930318016" lat="48.8206750" lon="2.3249460"/>
+  <node id="930341949" lat="48.8205680" lon="2.3248290"/>
+  <node id="951862155" lat="48.8554466" lon="2.4174509"/>
+  <node id="951877503" lat="48.8555614" lon="2.4173919"/>
+  <node id="951934402" lat="48.8555448" lon="2.4171337"/>
+  <node id="951948436" lat="48.8569166" lon="2.4291817"/>
+  <node id="952055818" lat="48.8555940" lon="2.4173237"/>
+  <node id="952192857" lat="48.8570103" lon="2.4289536"/>
+  <node id="952361222" lat="48.8556023" lon="2.4174740"/>
+  <node id="953933936" lat="48.8570424" lon="2.4291311"/>
+  <node id="954040540" lat="48.8554674" lon="2.4175440"/>
+  <node id="954071549" lat="48.8568858" lon="2.4290049"/>
+  <node id="954090776" lat="48.8556671" lon="2.4173353"/>
+  <node id="954158365" lat="48.8556064" lon="2.4170982"/>
+  <node id="955211223" lat="48.8635857" lon="2.2722338">
+    <tag k="amenity" v="fuel"/>
+    <tag k="operator" v="shell"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"/>
+  </node>
+  <node id="957778578" lat="48.8997247" lon="2.2610152"/>
+  <node id="957779357" lat="48.8999029" lon="2.2610369"/>
+  <node id="957779755" lat="48.8997496" lon="2.2608963"/>
+  <node id="957779956" lat="48.8996951" lon="2.2609472"/>
+  <node id="957780038" lat="48.8997564" lon="2.2610405"/>
+  <node id="957780170" lat="48.8997552" lon="2.2607096"/>
+  <node id="957780327" lat="48.8997560" lon="2.2610573"/>
+  <node id="957780383" lat="48.8998575" lon="2.2609391"/>
+  <node id="957780604" lat="48.8998665" lon="2.2606908"/>
+  <node id="957781778" lat="48.8999856" lon="2.2609551"/>
+  <node id="957782370" lat="48.8997337" lon="2.2610068"/>
+  <node id="957782578" lat="48.8997781" lon="2.2607605"/>
+  <node id="957783025" lat="48.8998366" lon="2.2606250"/>
+  <node id="957783190" lat="48.8999313" lon="2.2608345"/>
+  <node id="957783582" lat="48.8998120" lon="2.2608355"/>
+  <node id="957783769" lat="48.8997207" lon="2.2610063"/>
+  <node id="957783832" lat="48.8997663" lon="2.2610629"/>
+  <node id="957784157" lat="48.8997607" lon="2.2610680"/>
+  <node id="957784215" lat="48.8997704" lon="2.2610263"/>
+  <node id="968171170" lat="48.8536267" lon="2.3664311">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="968924214" lat="48.8408422" lon="2.3172666">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="BP"/>
+    <tag k="fuel:diesel" v="no"/>
+    <tag k="fuel:octane_95" v="no"/>
+    <tag k="fuel:octane_98" v="no"/>
+    <tag k="name" v="8 à Huit"/>
+    <tag k="wheelchair" v="yes"/>
+  </node>
+  <node id="969203965" lat="48.9006923" lon="2.3752658"/>
+  <node id="969203967" lat="48.9008580" lon="2.3740693"/>
+  <node id="969203983" lat="48.9008608" lon="2.3741677"/>
+  <node id="969203986" lat="48.9008494" lon="2.3749161"/>
+  <node id="969203988" lat="48.9008549" lon="2.3747755"/>
+  <node id="969204003" lat="48.9005733" lon="2.3752427"/>
+  <node id="969204008" lat="48.9008614" lon="2.3742742"/>
+  <node id="969204009" lat="48.9007002" lon="2.3738851"/>
+  <node id="969204012" lat="48.9008384" lon="2.3750157"/>
+  <node id="969204014" lat="48.9008603" lon="2.3743504"/>
+  <node id="969204028" lat="48.9008196" lon="2.3750991"/>
+  <node id="969204031" lat="48.9008591" lon="2.3739932"/>
+  <node id="969204032" lat="48.9008570" lon="2.3738996"/>
+  <node id="969204047" lat="48.9008594" lon="2.3744733"/>
+  <node id="969204051" lat="48.9007807" lon="2.3752015"/>
+  <node id="969204055" lat="48.9008578" lon="2.3746127"/>
+  <node id="973809220" lat="48.8760276" lon="2.3806123">
+    <tag k="amenity" v="fuel"/>
+    <tag k="operator" v="BP"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"/>
+  </node>
+  <node id="987734571" lat="48.8842378" lon="2.3608157">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="993642116" lat="48.8387798" lon="2.2536841">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Total"/>
+    <tag k="source" v="survey"/>
+  </node>
+  <node id="994059048" lat="48.8391316" lon="2.2485201">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Combustible de Boulogne"/>
+    <tag k="network" v="Elan"/>
+    <tag k="source" v="survey"/>
+  </node>
+  <node id="995502815" lat="48.8257564" lon="2.2481734"/>
+  <node id="995502826" lat="48.8256992" lon="2.2482054"/>
+  <node id="1119984190" lat="48.8273666" lon="2.2716056"/>
+  <node id="1119984194" lat="48.8277579" lon="2.2713308"/>
+  <node id="1119984196" lat="48.8281523" lon="2.2728394">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Esso Express"/>
+  </node>
+  <node id="1119984227" lat="48.8275149" lon="2.2719489"/>
+  <node id="1119984230" lat="48.8277712" lon="2.2717015"/>
+  <node id="1172665573" lat="48.8168431" lon="2.3604808">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Relais Total Porte D'Italie"/>
+    <tag k="operator" v="Total"/>
+    <tag k="source" v="survey"/>
+  </node>
+  <node id="1188299494" lat="48.8960731" lon="2.2520490">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="BP"/>
+    <tag k="shop" v="yes"/>
+  </node>
+  <node id="1191594862" lat="48.8595020" lon="2.3116861">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Total"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"/>
+  </node>
+  <node id="1211057208" lat="48.8969126" lon="2.2546796">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Total"/>
+  </node>
+  <node id="1243135736" lat="48.8407841" lon="2.3912112">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Total"/>
+  </node>
+  <node id="1266563433" lat="48.8607706" lon="2.3747898">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="1280606426" lat="48.8772002" lon="2.3615138">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Esso"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"/>
+  </node>
+  <node id="1282166627" lat="48.8787212" lon="2.3698437">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Esso"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"/>
+  </node>
+  <node id="1319463008" lat="48.8204344" lon="2.3051655">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="BP"/>
+  </node>
+  <node id="1339598425" lat="48.8958396" lon="2.3104767"/>
+  <node id="1339598434" lat="48.8957807" lon="2.3104495"/>
+  <node id="1339598472" lat="48.8958597" lon="2.3100537"/>
+  <node id="1339598520" lat="48.8957917" lon="2.3104546"/>
+  <node id="1339598702" lat="48.8959187" lon="2.3100810"/>
+  <node id="1547720813" lat="48.8586303" lon="2.3897622">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="1547748415" lat="48.8579937" lon="2.3897210">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="1568009842" lat="48.8364028" lon="2.2775659">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="bp"/>
+  </node>
+  <node id="1650397378" lat="48.8995880" lon="2.3300677"/>
+  <node id="1650397379" lat="48.8996017" lon="2.3299812"/>
+  <node id="1650397382" lat="48.8998251" lon="2.3301423"/>
+  <node id="1650397383" lat="48.8998351" lon="2.3300550"/>
+  <node id="1650397385" lat="48.8998577" lon="2.3301063"/>
+  <node id="1650397387" lat="48.8999051" lon="2.3291991"/>
+  <node id="1650397388" lat="48.8999073" lon="2.3293410"/>
+  <node id="1650397393" lat="48.9000766" lon="2.3293746"/>
+  <node id="1650397394" lat="48.9001047" lon="2.3292388"/>
+  <node id="1650397396" lat="48.9001347" lon="2.3292856"/>
+  <node id="1747138950" lat="48.8558395" lon="2.3835889">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="1871844543" lat="48.8205780" lon="2.3247820"/>
+  <node id="1871844544" lat="48.8205816" lon="2.3247820"/>
+  <node id="1871844546" lat="48.8205880" lon="2.3248530"/>
+  <node id="1871844548" lat="48.8205940" lon="2.3248430"/>
+  <node id="1871844550" lat="48.8206030" lon="2.3247820"/>
+  <node id="1871844570" lat="48.8206370" lon="2.3248170"/>
+  <node id="1871844572" lat="48.8206410" lon="2.3248950"/>
+  <node id="1871844576" lat="48.8206650" lon="2.3248290"/>
+  <node id="1871844578" lat="48.8206720" lon="2.3248990"/>
+  <node id="1871844580" lat="48.8206740" lon="2.3248140"/>
+  <node id="1871844582" lat="48.8206880" lon="2.3248300"/>
+  <node id="1871844586" lat="48.8207040" lon="2.3248030"/>
+  <node id="1871844590" lat="48.8207070" lon="2.3249470"/>
+  <node id="1871844596" lat="48.8207280" lon="2.3248360"/>
+  <node id="1873395703" lat="48.8998716" lon="2.2609694"/>
+  <node id="1873395712" lat="48.8999568" lon="2.2608910"/>
+  <node id="1937157672" lat="48.8519985" lon="2.2908966">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Total"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_95" v="yes"/>
+    <tag k="fuel:octane_98" v="no"/>
+    <tag k="name" v="Total"/>
+    <tag k="operator" v="Total"/>
+    <tag k="source" v="survey"/>
+  </node>
+  <node id="1987167009" lat="48.8656358" lon="2.2892405">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Elan"/>
+  </node>
+  <node id="1997748867" lat="48.8786755" lon="2.3549221">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:country" v="FR"/>
+    <tag k="addr:housenumber" v="142"/>
+    <tag k="addr:postcode" v="75010"/>
+    <tag k="addr:state" v="Île-de-France"/>
+    <tag k="addr:street" v="Rue La Fayette"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="atm" v="no"/>
+    <tag k="fuel" v="yes"/>
+    <tag k="name" v="Station essence"/>
+  </node>
+  <node id="2034367275" lat="48.8797035" lon="2.3026873">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="2040281444" lat="48.8164408" lon="2.3252194">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="2117639904" lat="48.8219928" lon="2.4027040">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Total"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_95" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="name" v="Relais Total de Conflans"/>
+  </node>
+  <node id="2184296199" lat="48.8478375" lon="2.3535433">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Total"/>
+  </node>
+  <node id="2261671804" lat="48.8841496" lon="2.3640114">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Avia"/>
+    <tag k="fuel:octane_100" v="yes"/>
+  </node>
+  <node id="2330020597" lat="48.8973798" lon="2.3589436">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Esso"/>
+  </node>
+  <node id="2330020601" lat="48.8986959" lon="2.3633779">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="2330020604" lat="48.9000487" lon="2.3617903">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="2377881055" lat="48.8936152" lon="2.3152934">
+    <tag k="addr:housenumber" v="190"/>
+    <tag k="addr:street" v="Avenue de Clichy"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Total"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_95" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="name" v="Total"/>
+  </node>
+  <node id="2394065587" lat="48.8522407" lon="2.2805336">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Agip"/>
+    <tag k="source" v="survey 2013"/>
+  </node>
+  <node id="2409683708" lat="48.8191934" lon="2.2957144">
+    <tag k="amenity" v="fuel"/>
+    <tag k="source" v="local_knowledge"/>
+  </node>
+  <node id="2419607653" lat="48.8935024" lon="2.3027161"/>
+  <node id="2419607655" lat="48.8936066" lon="2.3031200"/>
+  <node id="2419607656" lat="48.8936156" lon="2.3027024"/>
+  <node id="2419607657" lat="48.8937234" lon="2.3031035"/>
+  <node id="2449638808" lat="48.8550277" lon="2.3255601">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Avia"/>
+    <tag k="operator" v="Avia"/>
+    <tag k="shop" v="convenience"/>
+  </node>
+  <node id="2526480478" lat="48.8962481" lon="2.3594957">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Total"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="shop" v="no"/>
+  </node>
+  <way id="73428044">
+    <nd ref="870422866"/>
+    <nd ref="870438422"/>
+    <nd ref="870465818"/>
+    <nd ref="870477542"/>
+    <nd ref="870422866"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Total Acess"/>
+    <tag k="building" v="roof"/>
+    <tag k="height" v="5"/>
+    <tag k="name" v="Total Access"/>
+    <tag k="operator" v="Total"/>
+    <tag k="shop" v="yes"/>
+    <tag k="source" v="extraction vectorielle v1 cadastre-dgi-fr source : Direction Générale des Impôts - Cadas. Mise à jour : 2010"/>
+  </way>
+  <way id="74493518">
+    <nd ref="880474062"/>
+    <nd ref="880470216"/>
+    <nd ref="995502826"/>
+    <nd ref="880478275"/>
+    <nd ref="880472144"/>
+    <nd ref="995502815"/>
+    <nd ref="880474062"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="BP"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"/>
+    <tag k="source:name" v="survey"/>
+  </way>
+  <way id="78019560">
+    <nd ref="916640221"/>
+    <nd ref="916642317"/>
+    <nd ref="916641569"/>
+    <nd ref="916644392"/>
+    <nd ref="916640221"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="roof"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"/>
+  </way>
+  <way id="79147677">
+    <nd ref="924702277"/>
+    <nd ref="924690990"/>
+    <nd ref="924697268"/>
+    <nd ref="924687591"/>
+    <nd ref="924736971"/>
+    <nd ref="924747643"/>
+    <nd ref="924729138"/>
+    <nd ref="924688914"/>
+    <nd ref="924727873"/>
+    <nd ref="924693308"/>
+    <nd ref="924715095"/>
+    <nd ref="924705785"/>
+    <nd ref="924745257"/>
+    <nd ref="924706795"/>
+    <nd ref="924724932"/>
+    <nd ref="924730180"/>
+    <nd ref="924718955"/>
+    <nd ref="924721020"/>
+    <nd ref="924739717"/>
+    <nd ref="924704693"/>
+    <nd ref="924731221"/>
+    <nd ref="924703591"/>
+    <nd ref="924705404"/>
+    <nd ref="924738006"/>
+    <nd ref="924700960"/>
+    <nd ref="924716326"/>
+    <nd ref="924689859"/>
+    <nd ref="924689439"/>
+    <nd ref="924702277"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Station Service Carrefour Quais d'ivry"/>
+    <tag k="source" v="extraction vectorielle v1 cadastre-dgi-fr source : Direction Générale des Impôts - Cadas. Mise à jour : 2010"/>
+  </way>
+  <way id="81771134">
+    <nd ref="954158365"/>
+    <nd ref="951934402"/>
+    <nd ref="952055818"/>
+    <nd ref="951877503"/>
+    <nd ref="951862155"/>
+    <nd ref="954040540"/>
+    <nd ref="952361222"/>
+    <nd ref="954090776"/>
+    <nd ref="954158365"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="roof"/>
+    <tag k="operator" v="Carrefour"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"/>
+  </way>
+  <way id="81839193">
+    <nd ref="951948436"/>
+    <nd ref="953933936"/>
+    <nd ref="952192857"/>
+    <nd ref="954071549"/>
+    <nd ref="951948436"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="roof"/>
+    <tag k="name" v="Elf"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"/>
+  </way>
+  <way id="82250343">
+    <nd ref="957783769"/>
+    <nd ref="957778578"/>
+    <nd ref="957782370"/>
+    <nd ref="957780327"/>
+    <nd ref="957784157"/>
+    <nd ref="957783832"/>
+    <nd ref="957780038"/>
+    <nd ref="957784215"/>
+    <nd ref="957780383"/>
+    <nd ref="1873395703"/>
+    <nd ref="957779357"/>
+    <nd ref="957781778"/>
+    <nd ref="1873395712"/>
+    <nd ref="957783190"/>
+    <nd ref="957780604"/>
+    <nd ref="957783025"/>
+    <nd ref="957780170"/>
+    <nd ref="957782578"/>
+    <nd ref="957783582"/>
+    <nd ref="957779755"/>
+    <nd ref="957779956"/>
+    <nd ref="957783769"/>
+    <tag k="addr:housenumber" v="45"/>
+    <tag k="addr:postcode" v="92400"/>
+    <tag k="addr:street" v="Boulevard de Verdun"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="roof"/>
+    <tag k="fuel:lpg" v="yes"/>
+    <tag k="name" v="Total Access"/>
+    <tag k="operator" v="Total"/>
+    <tag k="source" v="stations.gpl.online.fr"/>
+  </way>
+  <way id="83297869">
+    <nd ref="969203965"/>
+    <nd ref="969204051"/>
+    <nd ref="969204028"/>
+    <nd ref="969204012"/>
+    <nd ref="969203986"/>
+    <nd ref="969203988"/>
+    <nd ref="969204055"/>
+    <nd ref="969204047"/>
+    <nd ref="969204014"/>
+    <nd ref="969204008"/>
+    <nd ref="969203983"/>
+    <nd ref="969203967"/>
+    <nd ref="969204031"/>
+    <nd ref="969204032"/>
+    <nd ref="969204009"/>
+    <nd ref="969204003"/>
+    <nd ref="969203965"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="area" v="yes"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"/>
+  </way>
+  <way id="96711347">
+    <nd ref="1119984194"/>
+    <nd ref="1119984230"/>
+    <nd ref="1119984227"/>
+    <nd ref="1119984190"/>
+    <nd ref="1119984194"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Total"/>
+    <tag k="name" v="Total"/>
+    <tag k="shop" v="yes"/>
+  </way>
+  <way id="119155614">
+    <nd ref="1339598702"/>
+    <nd ref="1339598472"/>
+    <nd ref="1339598434"/>
+    <nd ref="1339598520"/>
+    <nd ref="1339598425"/>
+    <nd ref="1339598702"/>
+    <tag k="addr:postcode" v="75017"/>
+    <tag k="address" v="Porte De Clichy"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="yes"/>
+    <tag k="fuel:lpg" v="yes"/>
+    <tag k="is_in" v="PARIS"/>
+    <tag k="name" v="Relais Total Des Batignolles"/>
+    <tag k="operator" v="Total"/>
+    <tag k="source" v="stations.gpl.online.fr"/>
+  </way>
+  <way id="152205002">
+    <nd ref="894264753"/>
+    <nd ref="894235041"/>
+    <nd ref="894242694"/>
+    <nd ref="1650397394"/>
+    <nd ref="1650397396"/>
+    <nd ref="1650397393"/>
+    <nd ref="1650397388"/>
+    <nd ref="1650397387"/>
+    <nd ref="894264753"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="roof"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:e10" v="yes"/>
+    <tag k="fuel:octane_95" v="no"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="layer" v="1"/>
+    <tag k="name" v="Esso Express Saint-Ouen"/>
+    <tag k="shop" v="no"/>
+  </way>
+  <way id="152205005">
+    <nd ref="1650397383"/>
+    <nd ref="1650397385"/>
+    <nd ref="1650397382"/>
+    <nd ref="1650397378"/>
+    <nd ref="1650397379"/>
+    <nd ref="1650397383"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="roof"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:e10" v="yes"/>
+    <tag k="fuel:octane_95" v="no"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="layer" v="1"/>
+    <tag k="name" v="Esso Express Saint-Ouen Bichat"/>
+    <tag k="shop" v="no"/>
+  </way>
+  <way id="176708088">
+    <nd ref="1871844596"/>
+    <nd ref="1871844586"/>
+    <nd ref="1871844582"/>
+    <nd ref="1871844580"/>
+    <nd ref="1871844576"/>
+    <nd ref="1871844570"/>
+    <nd ref="1871844550"/>
+    <nd ref="1871844544"/>
+    <nd ref="1871844543"/>
+    <nd ref="930341949"/>
+    <nd ref="930290277"/>
+    <nd ref="1871844546"/>
+    <nd ref="1871844548"/>
+    <nd ref="1871844572"/>
+    <nd ref="1871844578"/>
+    <nd ref="930318016"/>
+    <nd ref="1871844590"/>
+    <nd ref="1871844596"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Total"/>
+    <tag k="building" v="yes"/>
+    <tag k="operator" v="Total"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"/>
+  </way>
+  <way id="233599523">
+    <nd ref="2419607656"/>
+    <nd ref="2419607657"/>
+    <nd ref="2419607655"/>
+    <nd ref="2419607653"/>
+    <nd ref="2419607656"/>
+    <tag k="addr:postcode" v="75017"/>
+    <tag k="address" v="2 bd Fort de Vaux (périph. ext., sortie pte de Clichy, dir pte d'Asnières)"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="yes"/>
+    <tag k="fuel:lpg" v="yes"/>
+    <tag k="is_in" v="PARIS"/>
+    <tag k="name" v="Station Service E. Leclerc - Levallois Distribution"/>
+    <tag k="operator" v="E. Leclerc"/>
+    <tag k="shop" v="no"/>
+    <tag k="source" v="stations.gpl.online.fr"/>
+    <tag k="wall" v="no"/>
+  </way>
+
+</osm>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="Overpass API">
+<note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
+<meta osm_base="2013-06-24T11:33:05Z"/>
+
+  <node id="48857638" lat="32.7057663" lon="-117.1531713">
+    <tag k="name" v="12th and Imperial Transit Center"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="48857670" lat="32.7165031" lon="-117.1688155">
+    <tag k="name" v="America Plaza"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="49495453" lat="32.7854328" lon="-117.0017203">
+    <tag k="name" v="Amaya Dr"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="49496693" lat="32.7084287" lon="-117.0950196">
+    <tag k="name" v="47th Street"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="274983237" lat="32.7058765" lon="-117.1245990">
+    <tag k="name" v="32nd/Commercial"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="295782228" lat="32.7804833" lon="-117.0974161">
+    <tag k="name" v="Grantville"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344551938" lat="32.7214941" lon="-117.1699555">
+    <tag k="name" v="County Center/Little Italy"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344552158" lat="32.7167353" lon="-117.1698168">
+    <tag k="name" v="Santa Fe Depot"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344552428" lat="32.7116399" lon="-117.1682697">
+    <tag k="name" v="Seaport Village"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344552548" lat="32.7089573" lon="-117.1634459">
+    <tag k="name" v="Convention Center"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344552646" lat="32.7069232" lon="-117.1597698">
+    <tag k="name" v="Gaslamp Quarter"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344558607" lat="32.7109806" lon="-117.1537262">
+    <tag k="name" v="Park and Market"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344559107" lat="32.7167467" lon="-117.1625114">
+    <tag k="name" v="Civic Center"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344559141" lat="32.7167692" lon="-117.1596096">
+    <tag k="name" v="5th Avenue"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344559498" lat="32.7161802" lon="-117.1541374">
+    <tag k="name" v="City College"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344559766" lat="32.7335357" lon="-117.1747015">
+    <tag k="name" v="Middletown"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344559903" lat="32.7415883" lon="-117.1842758">
+    <tag k="name" v="Washington Street"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344560031" lat="32.7548849" lon="-117.1994929">
+    <tag k="name" v="Old Town Transit Center"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344560202" lat="32.7635610" lon="-117.1968095">
+    <tag k="name" v="Morena/Linda Vista"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344560363" lat="32.7655367" lon="-117.1687970">
+    <tag k="name" v="Fashion Valley Transit Center"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344560561" lat="32.7702833" lon="-117.1581992">
+    <tag k="name" v="Hazard Center"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344560574" lat="32.7711017" lon="-117.1499559">
+    <tag k="name" v="Mission Valley Center"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344560650" lat="32.7783269" lon="-117.1271233">
+    <tag k="name" v="Fenton Parkway"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="344560663" lat="32.7810139" lon="-117.1196207">
+    <tag k="name" v="Qualcomm Stadium"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="347410782" lat="32.7808782" lon="-117.1109828">
+    <tag k="name" v="Mission San Diego"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="347413904" lat="32.7728439" lon="-117.0709833">
+    <tag k="name" v="SDSU Transit Center"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="347997429" lat="32.7053233" lon="-117.1389945">
+    <tag k="name" v="25th/Commercial"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="347998044" lat="32.7095593" lon="-117.0860013">
+    <tag k="name" v="Euclid Avenue"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="347998216" lat="32.7101193" lon="-117.0631790">
+    <tag k="name" v="Encanto/62nd St."/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="347998925" lat="32.7235227" lon="-117.0395802">
+    <tag k="name" v="Massachusetts Avenue"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="347999054" lat="32.7433376" lon="-117.0307354">
+    <tag k="name" v="Lemon Grove Depot"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="347999425" lat="32.7568512" lon="-117.0174588">
+    <tag k="name" v="Spring Street"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="347999846" lat="32.7649967" lon="-117.0205454">
+    <tag k="name" v="La Mesa Boulevard"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="348000644" lat="32.7722088" lon="-117.0422998">
+    <tag k="name" v="70th St."/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="348001379" lat="32.7773750" lon="-117.0567651">
+    <tag k="name" v="Alvarado Medical Center"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="348001749" lat="32.7816944" lon="-117.0112740">
+    <tag k="name" v="Grossmont Transit Center"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="1619736520" lat="32.7346493" lon="-117.1481097"/>
+  <node id="1619736524" lat="32.7346596" lon="-117.1480297"/>
+  <node id="1619736550" lat="32.7347929" lon="-117.1481371"/>
+  <node id="1619736552" lat="32.7348023" lon="-117.1480519"/>
+  <node id="1717500777" lat="32.7736547" lon="-117.1417635">
+    <tag k="name" v="Rio Vista"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <way id="148910128">
+    <nd ref="1619736550"/>
+    <nd ref="1619736552"/>
+    <nd ref="1619736524"/>
+    <nd ref="1619736520"/>
+    <nd ref="1619736550"/>
+    <tag k="name" v="San Diego Zoo Miniature Railroad"/>
+    <tag k="railway" v="station"/>
+    <tag k="tourism" v="attraction"/>
+  </way>
+
+</osm>

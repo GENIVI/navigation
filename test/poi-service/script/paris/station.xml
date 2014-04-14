@@ -1,0 +1,2740 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="Overpass API">
+<note>The data included in this document is from www.openstreetmap.org. It has there been collected by a large group of contributors. For individual attribution of each item please refer to http://www.openstreetmap.org/api/0.6/[node|way|relation]/#id/history </note>
+<meta osm_base="2012-08-15T06:40:02Z"/>
+
+  <node id="12388534" lat="48.8153367" lon="2.2970255">
+    <tag k="name" v="Malakoff - Rue Étienne Dolet"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="22441"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia:fr" v="Malakoff_-_Rue_Étienne_Dolet_(métro_de_Paris)"/>
+  </node>
+  <node id="21310895" lat="48.8205925" lon="2.3390267">
+    <tag k="name" v="Cité Universitaire"/>
+    <tag k="operator" v="RATP"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="RER B"/>
+    <tag k="ref:FR:RATP" v="1970"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="uic_ref" v="8775864"/>
+  </node>
+  <node id="21310914" lat="48.8330932" lon="2.3331828">
+    <tag k="name" v="Denfert-Rochereau"/>
+    <tag k="operator" v="RATP"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="RER B"/>
+    <tag k="ref:FR:RATP" v="1904"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="uic_ref" v="8775863"/>
+    <tag k="wheelchair" v="yes"/>
+  </node>
+  <node id="26721276" lat="48.8877563" lon="2.3140767">
+    <tag k="name" v="Pont Cardinet"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="26824135" lat="48.8442847" lon="2.3744312">
+    <tag k="name" v="Gare de Lyon SNCF"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:SNCF" v="PLY"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia:fr" v="Gare_de_Lyon"/>
+  </node>
+  <node id="27233126" lat="48.8970985" lon="2.2982001">
+    <tag k="name" v="Clichy-Levallois"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="27332092" lat="48.8882286" lon="2.2493898">
+    <tag k="layer" v="3"/>
+    <tag k="name" v="Esplanade de La Défense"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1913"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Esplanade de la Défense (métro de Paris)"/>
+  </node>
+  <node id="27333361" lat="48.8856101" lon="2.2577697">
+    <tag k="layer" v="3"/>
+    <tag k="name" v="Pont de Neuilly"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1709"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Pont de Neuilly (métro de Paris)"/>
+  </node>
+  <node id="27362238" lat="48.8811205" lon="2.2717733">
+    <tag k="alt_name" v="Les Sablons (Jardin d'acclimatation)"/>
+    <tag k="name" v="Les Sablons"/>
+    <tag k="name:ru" v="Ле-Саблон"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1802"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Les Sablons (métro de Paris)"/>
+  </node>
+  <node id="27362239" lat="48.8781189" lon="2.2815392">
+    <tag k="layer" v="3"/>
+    <tag k="name" v="Porte Maillot"/>
+    <tag k="name:ru" v="Порт-Майо"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1716"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Porte Maillot (métro de Paris)"/>
+  </node>
+  <node id="27362240" lat="48.8757130" lon="2.2891932">
+    <tag k="name" v="Argentine"/>
+    <tag k="name:ru" v="Аржантин"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1986"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Argentine (métro de Paris)"/>
+  </node>
+  <node id="27362249" lat="48.8718025" lon="2.3012613">
+    <tag k="name" v="George V"/>
+    <tag k="name:ru" v="Георг V"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1846"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:George V (métro de Paris)"/>
+  </node>
+  <node id="27362251" lat="48.8694252" lon="2.3086954">
+    <tag k="name" v="Franklin D. Roosevelt"/>
+    <tag k="name:ru" v="Франклин Д. Рузвельт"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1924"/>
+    <tag k="source" v="survey"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Franklin D. Roosevelt (métro de Paris)"/>
+  </node>
+  <node id="27362256" lat="48.8664075" lon="2.3221380">
+    <tag k="name" v="Concorde"/>
+    <tag k="name:ru" v="Конкорд"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Concorde (métro de Paris)"/>
+  </node>
+  <node id="27362258" lat="48.8643585" lon="2.3298436">
+    <tag k="name" v="Tuileries"/>
+    <tag k="name:ru" v="Тюильри"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1640"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Tuileries (métro de Paris)"/>
+  </node>
+  <node id="27362259" lat="48.8623829" lon="2.3361468">
+    <tag k="name" v="Palais Royal — Musée du Louvre"/>
+    <tag k="name:ru" v="Пале-Руаяль — Мюзе-дю-Лувр"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1774"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Palais Royal - Musée du Louvre (métro de Paris)"/>
+  </node>
+  <node id="27362260" lat="48.8607697" lon="2.3409358">
+    <tag k="name" v="Louvre — Rivoli"/>
+    <tag k="name:ru" v="Лувр — Риволи"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1809"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Louvre - Rivoli (métro de Paris)"/>
+  </node>
+  <node id="27371862" lat="48.8583398" lon="2.3467014">
+    <tag k="name" v="Châtelet"/>
+    <tag k="name:ru" v="Шатле"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1964"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Châtelet (métro de Paris)"/>
+  </node>
+  <node id="27371864" lat="48.8572265" lon="2.3521708">
+    <tag k="name" v="Hôtel de Ville"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1855"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Hôtel de Ville (métro de Paris)"/>
+  </node>
+  <node id="27371867" lat="48.8552140" lon="2.3606657">
+    <tag k="alt_name" v="Saint-Paul (Le Marais)"/>
+    <tag k="name" v="Saint-Paul"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1695"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="27371876" lat="48.8520122" lon="2.3686542">
+    <tag k="name" v="Bastille"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="2000"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="27371889" lat="48.8457111" lon="2.3727163">
+    <tag k="name" v="Gare de Lyon (métro 1)"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1839"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Gare de Lyon (métro de Paris)"/>
+  </node>
+  <node id="27371892" lat="48.8472696" lon="2.3866995">
+    <tag k="name" v="Reuilly — Diderot"/>
+    <tag k="name:ru" v="Рёйи — Дидро"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1662"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="27371900" lat="48.8474233" lon="2.4072293">
+    <tag k="name" v="Porte de Vincennes"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1733"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Porte de Vincennes"/>
+  </node>
+  <node id="27415772" lat="48.8853826" lon="2.2979895">
+    <tag k="name" v="Pereire-Levallois"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="5642"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="fr:Gare de Pereire - Levallois"/>
+  </node>
+  <node id="27415776" lat="48.8778882" lon="2.2843719">
+    <tag k="name" v="Neuilly - Porte Maillot"/>
+    <tag k="note:fr" v="RER C"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="5643"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="fr:Gare de Neuilly - Porte Maillot"/>
+  </node>
+  <node id="30248710" lat="48.8183175" lon="2.2920680">
+    <tag k="name" v="Vanves Malakoff"/>
+    <tag k="name:ru" v="Ванв — Малакоф"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia:fr" v="Gare_de_Vanves_-_Malakoff"/>
+  </node>
+  <node id="30738144" lat="48.8391110" lon="2.2704908">
+    <tag k="name" v="Pont du Garigliano - Hôpital européen Georges-Pompidou"/>
+    <tag k="old_name" v="Pont du Garigliano;Boulevard Victor"/>
+    <tag k="operator" v="RER"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="5598"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="wikipedia:fr" v="Pont du Garigliano"/>
+  </node>
+  <node id="30738155" lat="48.8296487" lon="2.2633224">
+    <tag k="name" v="Issy Val-de-Seine"/>
+    <tag k="operator" v="RER"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="5597"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="wikipedia" v="fr:Gare d'Issy - Val de Seine"/>
+  </node>
+  <node id="30739813" lat="48.8197687" lon="2.2589922">
+    <tag k="name" v="Issy"/>
+    <tag k="operator" v="RER C"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="5596"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="wikipedia" v="fr:Gare d'Issy"/>
+  </node>
+  <node id="34909170" lat="48.8487832" lon="2.2988351">
+    <tag k="name" v="La Motte-Picquet - Grenelle"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1705;1874"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="limited"/>
+    <tag k="wikipedia:fr" v="La_Motte-Picquet_-_Grenelle_(métro_de_Paris)"/>
+  </node>
+  <node id="34909171" lat="48.8475338" lon="2.3029524">
+    <tag k="name" v="Cambronne"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1940"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Cambronne_(métro_de_Paris)"/>
+  </node>
+  <node id="34909187" lat="48.8504212" lon="2.2936685">
+    <tag k="name" v="Dupleix"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1907"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Dupleix_(métro_de_Paris)"/>
+  </node>
+  <node id="65331500" lat="48.8404810" lon="2.3196370">
+    <tag k="name" v="Gare Montparnasse 1 - Porte Océane"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="yes"/>
+  </node>
+  <node id="134299001" lat="48.8242325" lon="2.2730847">
+    <tag k="name" v="Mairie d'Issy"/>
+    <tag k="name:ru" v="Мэри-д’Исси"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1814;2803"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Mairie_d'Issy_(métro_de_Paris)"/>
+  </node>
+  <node id="134299013" lat="48.8270162" lon="2.2794048">
+    <tag k="name" v="Corentin Celton"/>
+    <tag k="name:ru" v="Корентен Селтон"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1889;2802"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Corentin_Celton_(métro_de_Paris)"/>
+  </node>
+  <node id="134305192" lat="48.8326135" lon="2.2884024">
+    <tag k="name" v="Porte de Versailles"/>
+    <tag k="name:ru" v="Порт-де-Версай"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1732;1606"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Porte_de_Versailles_(métro_de_Paris)"/>
+  </node>
+  <node id="134305198" lat="48.8372483" lon="2.2964937">
+    <tag k="name" v="Convention"/>
+    <tag k="name:ru" v="Конвансьон"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1887;1605"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Convention_(métro_de_Paris)"/>
+  </node>
+  <node id="154788912" lat="48.8627572" lon="2.3146743">
+    <tag k="name" v="Invalides"/>
+    <tag k="name:fr" v="Invalides"/>
+    <tag k="name:ru" v="Энвалид"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="5602"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="wikipedia" v="fr:Gare des Invalides"/>
+  </node>
+  <node id="154788920" lat="48.8574537" lon="2.2904598">
+    <tag k="name" v="Champ de Mars - Tour Eiffel"/>
+    <tag k="operator" v="RER"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="5600"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="wheelchair" v="limited"/>
+  </node>
+  <node id="191754163" lat="48.8395783" lon="2.3172588"/>
+  <node id="195192900" lat="48.8391783" lon="2.3181297">
+    <tag k="name" v="Gare Montparnasse 2 - Pasteur"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="202824847" lat="48.8765581" lon="2.3252961">
+    <tag k="name" v="Gare Saint-Lazare"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+    <tag k="uic_ref" v="87384008"/>
+    <tag k="website" v="http://www.gares-en-mouvement.com/fr/frpsl/accueil/"/>
+    <tag k="wheelchair" v="limited"/>
+    <tag k="wikipedia" v="fr:Gare de Paris-Saint-Lazare"/>
+    <tag k="wikipedia:be" v="Вакзал_Сен-Лазар"/>
+    <tag k="wikipedia:cs" v="Gare_Saint-Lazare"/>
+    <tag k="wikipedia:de" v="Paris_Gare_Saint-Lazare"/>
+    <tag k="wikipedia:en" v="Gare_Saint-Lazare"/>
+    <tag k="wikipedia:es" v="Estación_de_Paris_Saint-Lazare"/>
+    <tag k="wikipedia:eu" v="Paris-Saint_Lazare_geltokia"/>
+    <tag k="wikipedia:fi" v="Saint_Lazaren_rautatieasema"/>
+    <tag k="wikipedia:he" v="תחנת_סן_לאזאר"/>
+    <tag k="wikipedia:hu" v="Paris_Gare_Saint-Lazare"/>
+    <tag k="wikipedia:id" v="Gare_Saint-Lazare"/>
+    <tag k="wikipedia:it" v="Gare_de_Paris_Saint-Lazare"/>
+    <tag k="wikipedia:ja" v="サン・ラザール駅"/>
+    <tag k="wikipedia:nl" v="Station_Paris_Saint-Lazare"/>
+    <tag k="wikipedia:pl" v="Gare_Saint-Lazare"/>
+    <tag k="wikipedia:pt" v="Gare_Saint-Lazare"/>
+    <tag k="wikipedia:ru" v="Вокзал_Сен-Лазар"/>
+    <tag k="wikipedia:sv" v="Paris_Saint-Lazare_järnvägsstation"/>
+    <tag k="wikipedia:uk" v="Вокзал_Сен-Лазар"/>
+    <tag k="wikipedia:zh" v="巴黎圣拉扎尔车站"/>
+  </node>
+  <node id="220289379" lat="48.8228800" lon="2.3256282">
+    <tag k="alt_name" v="Porte d'Orléans (Général Leclerc)"/>
+    <tag k="name" v="Porte d'Orléans"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1720"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Porte_d'Orléans_(métro_de_Paris)"/>
+  </node>
+  <node id="220289382" lat="48.8280605" lon="2.3269249">
+    <tag k="name" v="Alésia"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1981"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Alésia_(métro_de_Paris)"/>
+  </node>
+  <node id="220289385" lat="48.8313954" lon="2.3301258">
+    <tag k="name" v="Mouton-Duvernet"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1753"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia:fr" v="Mouton-Duvernet_(métro_de_Paris)"/>
+  </node>
+  <node id="220289387" lat="48.8340204" lon="2.3325902">
+    <tag k="name" v="Denfert-Rochereau"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1902"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="limited"/>
+    <tag k="wikipedia:fr" v="Denfert-Rochereau_(métro_de_Paris)"/>
+  </node>
+  <node id="220289389" lat="48.8389018" lon="2.3308032">
+    <tag k="name" v="Raspail"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1660"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia:fr" v="Raspail_(métro_de_Paris)"/>
+  </node>
+  <node id="235369898" lat="48.8330168" lon="2.3366295">
+    <tag k="name" v="Saint-Jacques"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1688"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="235370184" lat="48.8311116" lon="2.3434618">
+    <tag k="name" v="Glacière"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1848"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="235370505" lat="48.8297785" lon="2.3504704">
+    <tag k="name" v="Corvisart"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1890"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="235371392" lat="48.8314217" lon="2.3555589">
+    <tag k="name" v="Place d'Italie"/>
+    <tag k="name:ru" v="Пляс д’Итали"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1789"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="uic_ref" v="8705548"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Place d'Italie (métro de Paris)"/>
+  </node>
+  <node id="235371394" lat="48.8331919" lon="2.3628662">
+    <tag k="name" v="Nationale"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1761"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="235371395" lat="48.8349482" lon="2.3680926">
+    <tag k="name" v="Chevaleret"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1959"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="235374383" lat="48.8370750" lon="2.3729129">
+    <tag k="name" v="Quai de la Gare"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1742"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Quai de la Gare (métro de Paris)"/>
+  </node>
+  <node id="235377792" lat="48.8842870" lon="2.3659442">
+    <tag k="name" v="Stalingrad"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1627"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="241928557" lat="48.8480229" lon="2.3952136">
+    <tag k="alt_name" v="Nation"/>
+    <tag k="name" v="Nation (ligne 1,2,6)"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1758"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Nation (métro de Paris)"/>
+  </node>
+  <node id="241928758" lat="48.8454354" lon="2.4293269">
+    <tag k="name" v="Bérault"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1938"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Bérault (métro de Paris)"/>
+  </node>
+  <node id="243357000" lat="48.8778172" lon="2.3812985">
+    <tag k="name" v="Buttes Chaumont"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1936"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="243358029" lat="48.8807734" lon="2.3740760">
+    <tag k="name" v="Bolivar"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="2014"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="243486950" lat="48.8518166" lon="2.4013757">
+    <tag k="name" v="Buzenval"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1937"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="243487863" lat="48.8461657" lon="2.4193071">
+    <tag k="name" v="Saint-Mandé - Tourelle"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1690"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Saint-Mandé (métro de Paris)"/>
+  </node>
+  <node id="243489718" lat="48.8514805" lon="2.3982271">
+    <tag k="name" v="Avron"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1995"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="243490761" lat="48.8664900" lon="2.3833323">
+    <tag k="name" v="Ménilmontant"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1754"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Ménilmontant (métro de Paris)"/>
+  </node>
+  <node id="243490762" lat="48.8628581" lon="2.3874149">
+    <tag k="name" v="Père Lachaise"/>
+    <tag k="name:ru" v="Пер-Лашез"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1741"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Père Lachaise (métro de Paris)"/>
+  </node>
+  <node id="243490763" lat="48.8582526" lon="2.3901333">
+    <tag k="name" v="Philippe Auguste"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1784"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Philippe Auguste (métro de Paris)"/>
+  </node>
+  <node id="243490764" lat="48.8562640" lon="2.3945621">
+    <tag k="name" v="Alexandre Dumas"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1978"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="243493845" lat="48.8720463" lon="2.3769849">
+    <tag k="name" v="Belleville"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="2004"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="243493846" lat="48.8692947" lon="2.3801730">
+    <tag k="name" v="Couronnes"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1893"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Couronnes (métro de Paris)"/>
+  </node>
+  <node id="243493916" lat="48.8774398" lon="2.3708174">
+    <tag k="name" v="Colonel Fabien"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1972"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="243494334" lat="48.8824159" lon="2.3702227">
+    <tag k="name" v="Jaurès"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1861"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="243494998" lat="48.8829026" lon="2.3443344">
+    <tag k="name" v="Anvers"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1984"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="243496024" lat="48.8823612" lon="2.3373703">
+    <tag k="name" v="Pigalle"/>
+    <tag k="name:ru" v="Пигаль"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1787"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Pigalle (métro de Paris)"/>
+  </node>
+  <node id="243496025" lat="48.8836162" lon="2.3330841">
+    <tag k="name" v="Blanche"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="2009"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="243496027" lat="48.8835165" lon="2.3274515">
+    <tag k="name" v="Place de Clichy"/>
+    <tag k="name:ru" v="Пляс-де-Клиши"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1790"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Place de Clichy (métro de Paris)"/>
+  </node>
+  <node id="243496028" lat="48.8824462" lon="2.3221220">
+    <tag k="name" v="Rome"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1670"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Rome (métro de Paris)"/>
+  </node>
+  <node id="243496029" lat="48.8812626" lon="2.3155318">
+    <tag k="name" v="Villiers"/>
+    <tag k="name:ru" v="Вилье"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1654"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Villiers_(métro_de_Paris)"/>
+  </node>
+  <node id="243496030" lat="48.8805424" lon="2.3094235">
+    <tag k="name" v="Monceau"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1749"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Monceau (métro de Paris)"/>
+  </node>
+  <node id="243496031" lat="48.8792716" lon="2.3033776">
+    <tag k="name" v="Courcelles"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1892"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Courcelles (métro de Paris)"/>
+  </node>
+  <node id="243496033" lat="48.8736024" lon="2.2956935">
+    <tag k="name" v="Charles de Gaulle — Étoile (metro)"/>
+    <tag k="name:ru" v="Шарль де Голль — Этуаль"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1953"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="limited"/>
+    <tag k="wikipedia" v="fr:Charles de Gaulle - Étoile (métro de Paris)"/>
+  </node>
+  <node id="243496728" lat="48.8698038" lon="2.2854485">
+    <tag k="name" v="Victor Hugo"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1648"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Victor Hugo (métro de Paris)"/>
+  </node>
+  <node id="243496729" lat="48.8714638" lon="2.2768954">
+    <tag k="alt_name" v="Porte Dauphine (Maréchal de Lattre de Tassigny)"/>
+    <tag k="name" v="Porte Dauphine"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1714"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="243507233" lat="48.8652463" lon="2.4165383">
+    <tag k="alt_name" v="Gallieni (Parc de Bagnolet)"/>
+    <tag k="name" v="Galliéni"/>
+    <tag k="name:ru" v="Гальени"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1928"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="243507234" lat="48.8644893" lon="2.4088741">
+    <tag k="name" v="Porte de Bagnolet"/>
+    <tag k="name:ru" v="Порт-де-Баньоле"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1721"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="243507235" lat="48.8648600" lon="2.3985306">
+    <tag k="name" v="Gambetta"/>
+    <tag k="name:ru" v="Гамбетта"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1929"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Gambetta (métro de Paris)"/>
+  </node>
+  <node id="243507789" lat="48.8643020" lon="2.3794597">
+    <tag k="name" v="Rue Saint-Maur"/>
+    <tag k="name:ru" v="Рю-Сен-Мор"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1693"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="243507790" lat="48.8652193" lon="2.3747542">
+    <tag k="name" v="Parmentier"/>
+    <tag k="name:ru" v="Пармантье"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1779"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="243507791" lat="48.8673061" lon="2.3645980">
+    <tag k="name" v="République"/>
+    <tag k="name:fr" v="République"/>
+    <tag k="name:ru" v="Репюблик"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1679"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:République (métro de Paris)"/>
+  </node>
+  <node id="243507792" lat="48.8665492" lon="2.3615193">
+    <tag k="name" v="Temple"/>
+    <tag k="name:ru" v="Тампль"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1634"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="243507793" lat="48.8654878" lon="2.3563464">
+    <tag k="name" v="Arts et Métiers"/>
+    <tag k="name:ru" v="Ар-э-Метье"/>
+    <tag k="operator" v="RATP"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1988"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="243507794" lat="48.8663020" lon="2.3524557">
+    <tag k="name" v="Réaumur - Sébastopol"/>
+    <tag k="name:ru" v="Реомюр — Себастополь"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1676"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Réaumur - Sébastopol (métro de Paris)"/>
+  </node>
+  <node id="243507795" lat="48.8676419" lon="2.3463248">
+    <tag k="name" v="Sentier"/>
+    <tag k="name:ru" v="Сантье"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1702"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Sentier (métro de Paris)"/>
+  </node>
+  <node id="243510334" lat="48.8686692" lon="2.3412605">
+    <tag k="name" v="Bourse"/>
+    <tag k="name:ru" v="Бурс"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1930"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Bourse (métro de Paris)"/>
+  </node>
+  <node id="243510335" lat="48.8695654" lon="2.3367072">
+    <tag k="name" v="Quatre Septembre"/>
+    <tag k="name:ru" v="Катр-Септамбр"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1744"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Quatre-Septembre (métro de Paris)"/>
+  </node>
+  <node id="243510336" lat="48.8707693" lon="2.3322643">
+    <tag k="name" v="Opéra"/>
+    <tag k="name:ru" v="Опера"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1771"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="fr:Opéra (métro de Paris)"/>
+  </node>
+  <node id="243510337" lat="48.8736019" lon="2.3276269">
+    <tag k="name" v="Havre - Caumartin"/>
+    <tag k="name:fr" v="Havre - Caumartin"/>
+    <tag k="name:ru" v="Гавр — Комартен"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1852"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Havre - Caumartin (métro de Paris)"/>
+  </node>
+  <node id="243510338" lat="48.8754744" lon="2.3254192">
+    <tag k="name" v="Saint-Lazare"/>
+    <tag k="name:ru" v="Сен-Лазар"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1689"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="243510339" lat="48.8787437" lon="2.3224519">
+    <tag k="name" v="Europe"/>
+    <tag k="name:ru" v="Эроп"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1915"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Europe (métro de Paris)"/>
+  </node>
+  <node id="243510678" lat="48.8825546" lon="2.3110868">
+    <tag k="name" v="Malesherbes"/>
+    <tag k="name:ru" v="Мальзерб"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1826"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Malesherbes (métro de Paris)"/>
+  </node>
+  <node id="243510679" lat="48.8839908" lon="2.3042907">
+    <tag k="name" v="Wagram"/>
+    <tag k="name:ru" v="Ваграм"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1658"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Wagram (métro de Paris)"/>
+  </node>
+  <node id="243510680" lat="48.8847948" lon="2.2982623">
+    <tag k="name" v="Péreire"/>
+    <tag k="name:ru" v="Перер"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1740"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Pereire (métro de Paris)"/>
+  </node>
+  <node id="243510681" lat="48.8856871" lon="2.2926417">
+    <tag k="name" v="Porte de Champerret"/>
+    <tag k="name:ru" v="Порт-де-Шанперре"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1722"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Porte de Champerret (métro de Paris)"/>
+  </node>
+  <node id="244494486" lat="48.8395785" lon="2.3012923">
+    <tag k="alt_name" v="Vaugirard (Adolphe Chérioux)"/>
+    <tag k="name" v="Vaugirard"/>
+    <tag k="name:ru" v="Вожирар"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1645;1604"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Vaugirard_(métro_de_Paris)"/>
+  </node>
+  <node id="244494489" lat="48.8415118" lon="2.3080120">
+    <tag k="name" v="Volontaires"/>
+    <tag k="name:ru" v="Волонтер"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1656;1603"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia:fr" v="Volontaires_(métro_de_Paris)"/>
+  </node>
+  <node id="244494496" lat="48.8443954" lon="2.3175634">
+    <tag k="name" v="Falguière"/>
+    <tag k="name:ru" v="Фальгьер"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1601;1918"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Falguière_(métro_de_Paris)"/>
+  </node>
+  <node id="245250755" lat="48.8468543" lon="2.3166512">
+    <tag k="name" v="Duroc"/>
+    <tag k="name:fr" v="Duroc"/>
+    <tag k="name:ru" v="Дюрок"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1908"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Duroc_(métro_de_Paris)"/>
+  </node>
+  <node id="245250758" lat="48.8514000" lon="2.3143901">
+    <tag k="name" v="Saint-François-Xavier"/>
+    <tag k="name:ru" v="Сэн-Франсуа-Ксавье"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1685"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Saint-François-Xavier_(métro_de_Paris)"/>
+  </node>
+  <node id="245250759" lat="48.8568058" lon="2.3151577">
+    <tag k="name" v="Varenne"/>
+    <tag k="name:ru" v="Варен"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1644"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Varenne (métro de Paris)"/>
+  </node>
+  <node id="245455187" lat="48.8413343" lon="2.4008998">
+    <tag k="name" v="Bel-Air"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="2003"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="249335596" lat="48.8905035" lon="2.3598783">
+    <tag k="name" v="Marx Dormoy"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1831"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Marx Dormoy (métro de Paris)"/>
+  </node>
+  <node id="251387813" lat="48.8707855" lon="2.3611531">
+    <tag k="name" v="Jacques Bonsergent"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1859"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="255000799" lat="48.8921077" lon="2.2852229">
+    <tag k="name" v="Anatole France"/>
+    <tag k="name:ru" v="Анатоль Франс"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1982"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia:fr" v="Anatole_France_(métro_de_Paris)"/>
+  </node>
+  <node id="255161921" lat="48.8970740" lon="2.2803140">
+    <tag k="alt_name" v="Pont de Levallois-Bécon"/>
+    <tag k="name" v="Pont de Levallois"/>
+    <tag k="name:ru" v="Пон-де-Левалюа — Бекон"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1708"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia:fr" v="Pont_de_Levallois_-_Bécon_(métro_de_Paris)"/>
+  </node>
+  <node id="255162203" lat="48.8887892" lon="2.2878755">
+    <tag k="name" v="Louise Michel"/>
+    <tag k="name:ru" v="Луиз Мишель"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1807"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Louise Michel (métro de Paris)"/>
+  </node>
+  <node id="256441194" lat="48.8526992" lon="2.4061094">
+    <tag k="name" v="Maraîchers"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="55372"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="256442276" lat="48.8534759" lon="2.4105242">
+    <tag k="name" v="Porte de Montreuil"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1727"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="256442845" lat="48.8558145" lon="2.4237108">
+    <tag k="name" v="Robespierre"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1667"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="256443205" lat="48.8525808" lon="2.3887914">
+    <tag k="name" v="Rue des Boulets"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1673"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="256443438" lat="48.8547441" lon="2.3853565">
+    <tag k="name" v="Charonne"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1955"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="256895321" lat="48.8581580" lon="2.3798044">
+    <tag k="alt_name" v="Voltaire (Léon Blum)"/>
+    <tag k="name" v="Voltaire"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1657"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="256895609" lat="48.8610516" lon="2.3747956">
+    <tag k="name" v="Saint-Ambroise"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1680"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="256896059" lat="48.8641314" lon="2.3695694">
+    <tag k="name" v="Oberkampf"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1769"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="256897077" lat="48.8694199" lon="2.3544678">
+    <tag k="name" v="Strasbourg - Saint-Denis"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1628"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Strasbourg - Saint-Denis (métro de Paris)"/>
+  </node>
+  <node id="256897078" lat="48.8706004" lon="2.3487793">
+    <tag k="name" v="Bonne Nouvelle"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="2015"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Bonne Nouvelle (métro de Paris)"/>
+  </node>
+  <node id="256897079" lat="48.8715206" lon="2.3432861">
+    <tag k="name" v="Grands Boulevards"/>
+    <tag k="old_name" v="Montmartre; rue Montmartre"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1671"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Grands Boulevards (métro de Paris)"/>
+  </node>
+  <node id="256897080" lat="48.8720176" lon="2.3395091">
+    <tag k="name" v="Richelieu Drouot"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1665"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Richelieu - Drouot (métro de Paris)"/>
+  </node>
+  <node id="256897458" lat="48.8730612" lon="2.3333207">
+    <tag k="name" v="Chaussée d'Antin (La Fayette)"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1957"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Chaussée d'Antin - La Fayette (métro de Paris)"/>
+  </node>
+  <node id="256897554" lat="48.8747030" lon="2.3197963">
+    <tag k="name" v="Saint-Augustin"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1681"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Saint-Augustin (métro de Paris)"/>
+  </node>
+  <node id="258068724" lat="48.8464740" lon="2.3659107">
+    <tag k="name" v="Quai de la Rapée"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1743"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="260040829" lat="48.8423263" lon="2.3655037">
+    <tag k="name" v="Gare d'Austerlitz"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="5605;1838;226221"/>
+    <tag k="type:RATP" v="metro;rer"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="260040968" lat="48.8460116" lon="2.3549579">
+    <tag k="name" v="Jussieu"/>
+    <tag k="name:fr" v="Jussieu"/>
+    <tag k="name:ru" v="Жюссьё"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1866"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Jussieu (métro de Paris)"/>
+    <tag k="wikipedia:ru" v="Жюссьё_(станция_метро)"/>
+  </node>
+  <node id="260078615" lat="48.8465082" lon="2.3517283">
+    <tag k="name" v="Cardinal Lemoine"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1942"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="260078619" lat="48.8499051" lon="2.3487460">
+    <tag k="name" v="Maubert Mutualité"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1834"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Maubert - Mutualité (métro de Paris)"/>
+  </node>
+  <node id="260078622" lat="48.8508926" lon="2.3454617">
+    <tag k="name" v="Cluny - La Sorbonne"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="54244"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="260079008" lat="48.8521785" lon="2.3394266">
+    <tag k="name" v="Odéon"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1770"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Odéon (métro de Paris)"/>
+  </node>
+  <node id="260079322" lat="48.8529427" lon="2.3357457">
+    <tag k="name" v="Mabillon"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1812"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="260231828" lat="48.8363894" lon="2.2784000">
+    <tag k="name" v="Balard"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1997;1609"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Balard_(métro_de_Paris)"/>
+  </node>
+  <node id="260231831" lat="48.8387450" lon="2.2821427">
+    <tag k="name" v="Lourmel"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1808;1610"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Lourmel_(métro_de_Paris)"/>
+  </node>
+  <node id="260231832" lat="48.8410837" lon="2.2879218">
+    <tag k="name" v="Boucicaut"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="2017;1611"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Boucicaut_(métro_de_Paris)"/>
+  </node>
+  <node id="260231833" lat="48.8426906" lon="2.2917758">
+    <tag k="name" v="Félix Faure"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1612;1925"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Félix_Faure_(métro_de_Paris)"/>
+  </node>
+  <node id="260762378" lat="48.8389924" lon="2.3896778">
+    <tag k="name" v="Dugommier"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1906"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="260762379" lat="48.8395253" lon="2.3958919">
+    <tag k="alt_name" v="Daumesnil (Félix Eboué)"/>
+    <tag k="name" v="Daumesnil"/>
+    <tag k="name:ru" v="Домениль"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1901"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="260762540" lat="48.8401067" lon="2.3799581">
+    <tag k="name" v="Bercy"/>
+    <tag k="operator" v="RATP"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="2005"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="yes"/>
+  </node>
+  <node id="260763474" lat="48.8410654" lon="2.3249923">
+    <tag k="name" v="Edgar Quinet"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1910"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="260764273" lat="48.8429457" lon="2.3126019">
+    <tag k="name" v="Pasteur"/>
+    <tag k="name:ru" v="Пастер"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1602;1781"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Pasteur_(métro_de_Paris)"/>
+  </node>
+  <node id="260765385" lat="48.8713645" lon="2.2935159">
+    <tag k="name" v="Kléber"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1867"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Kléber (métro de Paris)"/>
+  </node>
+  <node id="260765387" lat="48.8669099" lon="2.2902715">
+    <tag k="name" v="Boissière"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="2012"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Boissière (métro de Paris)"/>
+  </node>
+  <node id="260765389" lat="48.8630266" lon="2.2870524">
+    <tag k="name" v="Trocadéro"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1639"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Trocadéro (métro de Paris)"/>
+  </node>
+  <node id="260765390" lat="48.8573825" lon="2.2859234">
+    <tag k="name" v="Passy"/>
+    <tag k="operator" v="RATP"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1780"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Passy (métro de Paris)"/>
+  </node>
+  <node id="260767422" lat="48.8646725" lon="2.2937783">
+    <tag k="name" v="Iéna"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1858"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Iéna (métro de Paris)"/>
+  </node>
+  <node id="260767423" lat="48.8640063" lon="2.2780859">
+    <tag k="alt_name" v="Rue de la Pompe (Avenue Georges Mandel)"/>
+    <tag k="name" v="Rue de la Pompe"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1672"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Rue de la Pompe (métro de Paris)"/>
+  </node>
+  <node id="260767424" lat="48.8580816" lon="2.2741958">
+    <tag k="name" v="La Muette"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1876"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:La Muette (métro de Paris)"/>
+  </node>
+  <node id="260767425" lat="48.8555764" lon="2.2702166">
+    <tag k="name" v="Ranelagh"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1659"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Ranelagh (métro de Paris)"/>
+  </node>
+  <node id="260767426" lat="48.8525598" lon="2.2681802">
+    <tag k="name" v="Jasmin"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1860"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Jasmin (métro de Paris)"/>
+  </node>
+  <node id="260767427" lat="48.8480038" lon="2.2641872">
+    <tag k="name" v="Michel-Ange - Auteuil"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1836"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Michel-Ange_-_Auteuil_(métro_de_Paris)"/>
+  </node>
+  <node id="260767428" lat="48.8452505" lon="2.2618802">
+    <tag k="name" v="Michel-Ange - Molitor"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1837"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Michel-Ange_-_Molitor_(métro_de_Paris)"/>
+  </node>
+  <node id="260767429" lat="48.8430044" lon="2.2600472">
+    <tag k="name" v="Exelmans"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1916"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Exelmans_(métro_de_Paris)"/>
+  </node>
+  <node id="260767430" lat="48.8377707" lon="2.2565741">
+    <tag k="name" v="Porte de Saint-Cloud"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1729"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Porte de Saint-Cloud (métro de Paris)"/>
+  </node>
+  <node id="260769132" lat="48.8649686" lon="2.3006256">
+    <tag k="name" v="Alma-Marceau"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1980"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Alma - Marceau (métro de Paris)"/>
+  </node>
+  <node id="260769651" lat="48.8723362" lon="2.3100827">
+    <tag k="name" v="Saint-Philippe du Roule"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1696"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:/Saint-Philippe du Roule (métro de Paris)"/>
+  </node>
+  <node id="260769652" lat="48.8736768" lon="2.3145456">
+    <tag k="name" v="Miromesnil"/>
+    <tag k="name:fr" v="Miromesnil"/>
+    <tag k="name:ru" v="Миромениль"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1747"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Miromesnil (métro de Paris)"/>
+  </node>
+  <node id="261162833" lat="48.8514587" lon="2.3267159">
+    <tag k="name" v="Sèvres-Babylone"/>
+    <tag k="name:fr" v="Sèvres Babylone"/>
+    <tag k="name:ru" v="Севр — Бабилон"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1632"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Sèvres_-_Babylone_(métro_de_Paris)"/>
+  </node>
+  <node id="261611873" lat="48.8939450" lon="2.3144508">
+    <tag k="name" v="Porte de Clichy"/>
+    <tag k="operator" v="Metro-RER"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1725;5581"/>
+    <tag k="type:RATP" v="metro;rer"/>
+    <tag k="wikipedia" v="fr:Porte de Clichy (métro de Paris)"/>
+  </node>
+  <node id="261611884" lat="48.8905170" lon="2.3201235">
+    <tag k="name" v="Brochant"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1931"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia:fr" v="Brochant_(métro_de_Paris)"/>
+  </node>
+  <node id="261612240" lat="48.8874127" lon="2.3256961">
+    <tag k="name" v="La Fourche"/>
+    <tag k="name:ru" v="Ля-Фурш"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1872"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:La Fourche (métro de Paris)"/>
+  </node>
+  <node id="261665825" lat="48.8470802" lon="2.3076354">
+    <tag k="name" v="Ségur"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1631"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="261666122" lat="48.8470463" lon="2.2953101">
+    <tag k="name" v="Avenue Émile Zola"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1994"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="263497271" lat="48.8606970" lon="2.3210551">
+    <tag k="name" v="Assemblée Nationale"/>
+    <tag k="name:ru" v="Ассамбле-Насьональ"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1989"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Assemblée nationale (métro de Paris)"/>
+  </node>
+  <node id="263497272" lat="48.8586775" lon="2.3231168">
+    <tag k="name" v="Solférino"/>
+    <tag k="name:ru" v="Сольферино"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1622"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Solférino (métro de Paris)"/>
+  </node>
+  <node id="263499468" lat="48.8481026" lon="2.3277965">
+    <tag k="name" v="Rennes"/>
+    <tag k="name:ru" v="Рен"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1661"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Rennes_(métro_de_Paris)"/>
+  </node>
+  <node id="263499471" lat="48.8452766" lon="2.3286613">
+    <tag k="name" v="Notre-Dame des Champs"/>
+    <tag k="name:ru" v="Нотр-Дам-де-Шан"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1768"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Notre-Dame-des-Champs_(métro_de_Paris)"/>
+  </node>
+  <node id="263917856" lat="48.8659626" lon="2.3230242">
+    <tag k="name" v="Concorde"/>
+    <tag k="name:ru" v="Конкорд"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1885"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Concorde (métro de Paris)"/>
+  </node>
+  <node id="264117312" lat="48.8700644" lon="2.3251637">
+    <tag k="name" v="Madeleine"/>
+    <tag k="name:ru" v="Мадлен"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1813"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="limited"/>
+    <tag k="wikipedia" v="fr:Madeleine (métro de Paris)"/>
+  </node>
+  <node id="264469160" lat="48.8446967" lon="2.2937668">
+    <tag k="name" v="Commerce"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1705;1973"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Commerce_(métro_de_Paris)"/>
+  </node>
+  <node id="264469541" lat="48.8546428" lon="2.3061015">
+    <tag k="name" v="École Militaire"/>
+    <tag k="name:fr" v="École Militaire"/>
+    <tag k="name:ru" v="Эколь Милитер"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1909;1007"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:École Militaire (métro de Paris)"/>
+  </node>
+  <node id="264473011" lat="48.8575837" lon="2.3102891">
+    <tag k="name" v="La Tour Maubourg"/>
+    <tag k="name:ru" v="Лятур-Мобур"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1008;54166"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:La Tour-Maubourg (métro de Paris)"/>
+  </node>
+  <node id="264473695" lat="48.8611770" lon="2.3148333">
+    <tag k="name" v="Invalides"/>
+    <tag k="name:ru" v="Энвалид"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1857"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Invalides (métro de Paris)"/>
+  </node>
+  <node id="264476971" lat="48.8632968" lon="2.3668726">
+    <tag k="name" v="Filles du Calvaire"/>
+    <tag k="name:ru" v="Фий-дю-Кальвер"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1919"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="264479724" lat="48.8608519" lon="2.3671644">
+    <tag k="name" v="Saint-Sébastien - Froissart"/>
+    <tag k="name:ru" v="Сен-Себастьен — Фруассар"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1699"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264479775" lat="48.8575371" lon="2.3679970">
+    <tag k="name" v="Chemin Vert"/>
+    <tag k="name:ru" v="Шемен-Вер"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1958"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264480619" lat="48.8531361" lon="2.3686313">
+    <tag k="name" v="Bastille"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="264480784" lat="48.8511945" lon="2.3759944">
+    <tag k="name" v="Ledru-Rollin"/>
+    <tag k="name:ru" v="Ледрю-Роллен"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1798"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264481019" lat="48.8500259" lon="2.3842705">
+    <tag k="name" v="Faidherbe — Chaligny"/>
+    <tag k="name:ru" v="Федерб — Шалиньи"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1917"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264481854" lat="48.8444003" lon="2.3899525">
+    <tag k="name" v="Montgallet"/>
+    <tag k="name:ru" v="Монгале"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1750"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="264482226" lat="48.8371074" lon="2.4024837">
+    <tag k="name" v="Michel Bizot"/>
+    <tag k="name:ru" v="Мишель Бизо"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1835"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264482296" lat="48.8266498" lon="2.4057278">
+    <tag k="name" v="Liberté"/>
+    <tag k="name:ru" v="Либерте"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1803"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="264482297" lat="48.8354584" lon="2.4063451">
+    <tag k="name" v="Porte Dorée"/>
+    <tag k="name:ru" v="Порт-Доре"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1715"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="264490283" lat="48.8448796" lon="2.4014945">
+    <tag k="name" v="Picpus"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1785"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="264491191" lat="48.8333982" lon="2.3858500">
+    <tag k="name" v="Cour Saint-Émilion"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="50055"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="fr:Cour Saint-Émilion (métro de Paris)"/>
+  </node>
+  <node id="264491192" lat="48.8298519" lon="2.3756248">
+    <tag k="name" v="Bibliothèque François Mitterrand"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="51020"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="fr:Bibliothèque François-Mitterrand (métro de Paris)"/>
+  </node>
+  <node id="264491193" lat="48.8269184" lon="2.3662163">
+    <tag k="name" v="Olympiades"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="171507"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="fr:Olympiades (métro de Paris)"/>
+  </node>
+  <node id="264491320" lat="48.8322556" lon="2.3989811">
+    <tag k="name" v="Porte de Charenton"/>
+    <tag k="name:ru" v="Порт-де-Шарантон"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1723"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="264494507" lat="48.8656737" lon="2.3344599">
+    <tag k="name" v="Pyramides"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1738;50047"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264495077" lat="48.8763705" lon="2.3326310">
+    <tag k="name" v="Trinité d'Estienne d'Orves"/>
+    <tag k="name:ru" v="Трините — д’Эстьен д’Орв"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1638;3108"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Trinité - d'Estienne d'Orves (métro de Paris)"/>
+  </node>
+  <node id="264495078" lat="48.8760654" lon="2.3385532">
+    <tag k="name" v="Notre-Dame de Lorette"/>
+    <tag k="name:ru" v="Нотр-Дам-де-Лорет"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1767;3109"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Notre-Dame-de-Lorette (métro de Paris)"/>
+  </node>
+  <node id="264495553" lat="48.8557241" lon="2.3256659">
+    <tag k="name" v="Rue du Bac"/>
+    <tag k="name:ru" v="Рю-дю-Бак"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1674"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Rue du Bac (métro de Paris)"/>
+  </node>
+  <node id="264504832" lat="48.8784508" lon="2.3374732">
+    <tag k="name" v="Saint-Georges"/>
+    <tag k="name:ru" v="Сен-Жорж"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="3110;1686"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Saint-Georges (métro de Paris)"/>
+  </node>
+  <node id="264505115" lat="48.8844760" lon="2.3384377">
+    <tag k="name" v="Abbesses"/>
+    <tag k="name:ru" v="Аббес"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1975"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Abbesses (métro de Paris)"/>
+  </node>
+  <node id="264505153" lat="48.8898183" lon="2.3386296">
+    <tag k="name" v="Lamarck-Caulaincourt"/>
+    <tag k="name:ru" v="Ламарк — Коленкур"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1879"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Lamarck - Caulaincourt (métro de Paris)"/>
+  </node>
+  <node id="264505450" lat="48.8924166" lon="2.3443983">
+    <tag k="name" v="Jules Joffrin"/>
+    <tag k="name:ru" v="Жюль Жоффрен"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1865"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Jules Joffrin (métro de Paris)"/>
+  </node>
+  <node id="264505930" lat="48.8977084" lon="2.3592969">
+    <tag k="name" v="Porte de la Chapelle"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1734"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Porte de la Chapelle (métro de Paris)"/>
+  </node>
+  <node id="264505993" lat="48.8937935" lon="2.3477372">
+    <tag k="name" v="Simplon"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1621"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Simplon (métro de Paris)"/>
+  </node>
+  <node id="264506165" lat="48.8973767" lon="2.3447674">
+    <tag k="name" v="Porte de Clignancourt"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1726"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Porte de Clignancourt (métro de Paris)"/>
+  </node>
+  <node id="264507100" lat="48.8873214" lon="2.3497042">
+    <tag k="name" v="Château Rouge"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1960"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Château Rouge (métro de Paris)"/>
+  </node>
+  <node id="264508125" lat="48.8800091" lon="2.3548990">
+    <tag k="name" v="Gare du Nord"/>
+    <tag k="operator" v="RATP"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1842"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="fr:/Gare du Nord (métro de Paris)"/>
+  </node>
+  <node id="264508548" lat="48.8760380" lon="2.3580551">
+    <tag k="alt_name" v="Gare de l'Est (Verdun)"/>
+    <tag k="name" v="Gare de L'Est"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1841"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Gare de l'Est (métro de Paris)"/>
+  </node>
+  <node id="264509793" lat="48.8638408" lon="2.3487041">
+    <tag k="name" v="Étienne Marcel"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1914"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Étienne Marcel (métro de Paris)"/>
+  </node>
+  <node id="264512252" lat="48.8723097" lon="2.3558518">
+    <tag k="heritage" v="3"/>
+    <tag k="heritage:operator" v="mhs"/>
+    <tag k="mhs:inscription_date" v="1978"/>
+    <tag k="name" v="Château d'Eau"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1961"/>
+    <tag k="ref:mhs" v="PA00086508"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Château d'Eau (métro de Paris)"/>
+  </node>
+  <node id="264513655" lat="48.8627762" lon="2.3461709">
+    <tag k="name" v="Les Halles"/>
+    <tag k="operator" v="Metro-RER"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1801"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Les Halles (métro de Paris)"/>
+  </node>
+  <node id="264514896" lat="48.8551566" lon="2.3471977">
+    <tag k="name" v="Cité"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1969"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Cité (métro de Paris)"/>
+  </node>
+  <node id="264515098" lat="48.8535657" lon="2.3443622">
+    <tag k="name" v="Saint-Michel"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1694"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Saint-Michel_(métro_de_Paris)"/>
+  </node>
+  <node id="264519782" lat="48.8536264" lon="2.3333280">
+    <tag k="name" v="Saint-Germain des Prés"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1687"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Saint-Germain-des-Prés (métro de Paris)"/>
+  </node>
+  <node id="264520061" lat="48.8470711" lon="2.3270822">
+    <tag k="name" v="Saint-Placide"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1697"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Saint-Placide_(métro_de_Paris)"/>
+  </node>
+  <node id="264526095" lat="48.8421852" lon="2.3289966">
+    <tag k="name" v="Vavin"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1646"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia:fr" v="Vavin_(métro_de_Paris)"/>
+  </node>
+  <node id="264534423" lat="48.8466102" lon="2.2859257">
+    <tag k="name" v="Charles Michels"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1952"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="264534424" lat="48.8462613" lon="2.2790398">
+    <tag k="name" v="Javel - André Citroën"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1862"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="264534683" lat="48.8473202" lon="2.2686743">
+    <tag k="name" v="Église d'Auteuil"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1911"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264535735" lat="48.8477655" lon="2.2583922">
+    <tag k="name" v="Porte d'Auteuil"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1717"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264537727" lat="48.8452670" lon="2.2672606">
+    <tag k="name" v="Chardon Lagache"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1950"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264538576" lat="48.8470891" lon="2.2728475">
+    <tag k="name" v="Mirabeau"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1746"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264591604" lat="48.8700162" lon="2.3710617">
+    <tag k="alt_name" v="Goncourt (Hôpital Saint-Louis)"/>
+    <tag k="name" v="Goncourt"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1849"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264592424" lat="48.8612740" lon="2.3535761">
+    <tag k="name" v="Rambuteau"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1745"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264690368" lat="48.8770405" lon="2.4064920">
+    <tag k="name" v="Porte des Lilas"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1736"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Porte des Lilas (métro de Paris)"/>
+  </node>
+  <node id="264690370" lat="48.8755258" lon="2.3990981">
+    <tag k="name" v="Télégraphe"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="55329"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264690371" lat="48.8766403" lon="2.3927856">
+    <tag k="name" v="Place des Fêtes"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1792"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264690372" lat="48.8738078" lon="2.3850847">
+    <tag k="name" v="Pyrénées"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="55330"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264692522" lat="48.8751161" lon="2.3892322">
+    <tag k="name" v="Jourdain"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1864"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264704365" lat="48.8385876" lon="2.3222085">
+    <tag k="name" v="Gaîté"/>
+    <tag k="name:ru" v="Гаите"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1927"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Gaîté_(métro_de_Paris)"/>
+  </node>
+  <node id="264712432" lat="48.8317799" lon="2.3140252">
+    <tag k="name" v="Plaisance"/>
+    <tag k="name:ru" v="Плезанс"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1705"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Plaisance_(métro_de_Paris)"/>
+  </node>
+  <node id="264712433" lat="48.8339551" lon="2.3180764">
+    <tag k="name" v="Pernéty"/>
+    <tag k="name:ru" v="Пернети"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1783"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Pernety_(métro_de_Paris)"/>
+  </node>
+  <node id="264713507" lat="48.8276757" lon="2.3053401">
+    <tag k="name" v="Porte de Vanves"/>
+    <tag k="name:ru" v="Порт-де-Ванв"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1731"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Porte_de_Vanves_(métro_de_Paris)"/>
+    <tag k="wikipedia:ru" v="Порт-де-Ванв_(станция_метро)"/>
+  </node>
+  <node id="264717964" lat="48.8220780" lon="2.2979835">
+    <tag k="name" v="Malakoff - Plateau de Vanves"/>
+    <tag k="name:ru" v="Малакофф — Плато-де-Ванв"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="22442"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia:fr" v="Malakoff_-_Plateau_de_Vanves_(métro_de_Paris)"/>
+    <tag k="wikipedia:ru" v="Малакофф_—_Плато-де-Ванв_(станция_метро)"/>
+  </node>
+  <node id="264769296" lat="48.8566177" lon="2.3705298">
+    <tag k="name" v="Bréguet-Sabin"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1933"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264769297" lat="48.8602039" lon="2.3721323">
+    <tag k="name" v="Richard Lenoir"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1664"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="264772256" lat="48.8850187" lon="2.3795672">
+    <tag k="name" v="Laumière"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1882"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264772371" lat="48.8869632" lon="2.3867135">
+    <tag k="name" v="Ourcq"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1773"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264772861" lat="48.8885434" lon="2.3927045">
+    <tag k="name" v="Porte de Pantin"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1728"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264772862" lat="48.8911980" lon="2.4025577">
+    <tag k="name" v="Hoche"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1853"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264775552" lat="48.8814188" lon="2.3654808">
+    <tag k="name" v="Louis Blanc"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1806"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264775805" lat="48.8772835" lon="2.3492720">
+    <tag k="name" v="Poissonnière"/>
+    <tag k="operator" v="RATP"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1706"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264776028" lat="48.8885069" lon="2.3740693">
+    <tag k="name" v="Riquet"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1666"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264776029" lat="48.8904888" lon="2.3767001">
+    <tag k="name" v="Crimée"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1894"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264776910" lat="48.8945067" lon="2.3821116">
+    <tag k="name" v="Corentin Cariou"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1888"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264778142" lat="48.8974296" lon="2.3854377">
+    <tag k="name" v="Porte de la Villette"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1735"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264780946" lat="48.8749537" lon="2.3402103">
+    <tag k="name" v="Le Peletier"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1795"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264780947" lat="48.8759682" lon="2.3441565">
+    <tag k="name" v="Cadet"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1939"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264784170" lat="48.8585901" lon="2.3424101">
+    <tag k="name" v="Pont Neuf"/>
+    <tag k="name:ru" v="Новый мост"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1712"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="264785951" lat="48.8512630" lon="2.3622044">
+    <tag k="name" v="Sully — Morland"/>
+    <tag k="name:ru" v="Сюлли — Морлан"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1630"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264785952" lat="48.8535245" lon="2.3570872">
+    <tag k="alt_name" v="Pont Marie (Cité des Arts)"/>
+    <tag k="name" v="Pont Marie"/>
+    <tag k="name:ru" v="Пон-Мари"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1711"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264786014" lat="48.8429311" lon="2.3521239">
+    <tag k="alt_name" v="Place Monge (Jardin des Plantes)"/>
+    <tag k="name" v="Place Monge"/>
+    <tag k="name:ru" v="Пляс-Монж"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1788"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264789025" lat="48.8406731" lon="2.3517801">
+    <tag k="name" v="Censier — Daubenton"/>
+    <tag k="name:ru" v="Сансье — Добантон"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1944"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264790337" lat="48.8356703" lon="2.3525980">
+    <tag k="name" v="Les Gobelins"/>
+    <tag k="name:ru" v="Гобелен"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1800"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Les Gobelins (métro de Paris)"/>
+  </node>
+  <node id="264794353" lat="48.8800010" lon="2.3989340">
+    <tag k="name" v="Pré Saint-Gervais"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1737"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264794354" lat="48.8819653" lon="2.3935696">
+    <tag k="name" v="Danube"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1900"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264794788" lat="48.8796007" lon="2.3888377">
+    <tag k="name" v="Botzaris"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="2016"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264795933" lat="48.8797147" lon="2.4162805">
+    <tag k="name" v="Mairie des Lilas"/>
+    <tag k="public_transport" v="stop_position"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1819"/>
+    <tag k="subway" v="true"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264796181" lat="48.8715165" lon="2.4040581">
+    <tag k="name" v="Saint-Fargeau"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1684"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="264796182" lat="48.8680444" lon="2.4014574">
+    <tag k="name" v="Pelleport"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1782"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="265055434" lat="48.8382823" lon="2.3608293">
+    <tag k="name" v="Saint-Marcel"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1691"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="265055750" lat="48.8356584" lon="2.3588519">
+    <tag k="name" v="Campo-Formio"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1941"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="265060052" lat="48.8927063" lon="2.3274728">
+    <tag k="name" v="Guy Môquet"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1851"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Guy Môquet (métro de Paris)"/>
+  </node>
+  <node id="265060832" lat="48.8973729" lon="2.3290349">
+    <tag k="name" v="Porte de Saint-Ouen"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1730"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Porte de Saint-Ouen (métro de Paris)"/>
+  </node>
+  <node id="267619085" lat="48.8565598" lon="2.2751570">
+    <tag k="name" v="Boulainvilliers"/>
+    <tag k="operator" v="RER"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="5586"/>
+    <tag k="type:RATP" v="rer"/>
+  </node>
+  <node id="267621966" lat="48.8643145" lon="2.2721396">
+    <tag k="name" v="Avenue Henri-Martin;Avenue Henri Martin"/>
+    <tag k="operator" v="RER"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="5585"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="wikipedia" v="fr:Gare de l'avenue Henri Martin"/>
+  </node>
+  <node id="267621967" lat="48.8708557" lon="2.2755195">
+    <tag k="name" v="Avenue Foch"/>
+    <tag k="operator" v="RER"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="5584"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="wikipedia" v="fr:Gare de l'avenue Foch"/>
+  </node>
+  <node id="268467197" lat="48.8261434" lon="2.3573719">
+    <tag k="name" v="Tolbiac"/>
+    <tag k="name:ru" v="Толбиак"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1636"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Tolbiac (métro de Paris)"/>
+  </node>
+  <node id="268467526" lat="48.8225268" lon="2.3585049">
+    <tag k="name" v="Maison Blanche"/>
+    <tag k="name:ru" v="Мезон-Бланш"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1820"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Maison Blanche (métro de Paris)"/>
+  </node>
+  <node id="268467559" lat="48.8191302" lon="2.3595818">
+    <tag k="name" v="Porte d'Italie"/>
+    <tag k="name:ru" v="Порт-д’Итали"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1718"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Porte d'Italie (métro de Paris)"/>
+  </node>
+  <node id="270191328" lat="48.8625471" lon="2.3010852">
+    <tag k="name" v="Pont de l'Alma"/>
+    <tag k="operator" v="RER"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="5601"/>
+    <tag k="type:RATP" v="rer"/>
+  </node>
+  <node id="270191607" lat="48.8605670" lon="2.3260922">
+    <tag k="name" v="Musée d'Orsay"/>
+    <tag k="operator" v="RER"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="5603"/>
+    <tag k="type:RATP" v="rer"/>
+  </node>
+  <node id="270191809" lat="48.8534338" lon="2.3455510">
+    <tag k="name" v="Saint-Michel Notre-Dame"/>
+    <tag k="operator" v="RER"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="RER B"/>
+    <tag k="ref:FR:RATP" v="5604"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="uic_ref" v="9903146"/>
+    <tag k="wheelchair" v="yes"/>
+  </node>
+  <node id="270244767" lat="48.8535052" lon="2.2797246">
+    <tag k="name" v="Avenue du Président Kennedy"/>
+    <tag k="old_name" v="Kennedy Radio-France"/>
+    <tag k="operator" v="RER"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="5587"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="wikipedia" v="fr:Gare de l'avenue du Président Kennedy"/>
+  </node>
+  <node id="282635141" lat="48.8678333" lon="2.3137075">
+    <tag k="name" v="Champs-Elysées-Clémenceau"/>
+    <tag k="name:ru" v="Шанз-Элизе — Клемансо"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1949"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Champs-Élysées - Clemenceau (métro de Paris)"/>
+  </node>
+  <node id="295442702" lat="48.8983316" lon="2.2485284">
+    <tag k="name" v="Courbevoie"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="Microsoft Bing satellite 2011"/>
+  </node>
+  <node id="300876896" lat="48.8150770" lon="2.4217740">
+    <tag k="name" v="École Vétérinaire de Maisons-Alfort"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="23674"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="300877457" lat="48.8214689" lon="2.4136458">
+    <tag k="name" v="Charenton — Écoles"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1951"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Charenton - Écoles (métro de Paris)"/>
+  </node>
+  <node id="323860043" lat="48.8386828" lon="2.3190662"/>
+  <node id="323860046" lat="48.8387732" lon="2.3191521"/>
+  <node id="323860047" lat="48.8396658" lon="2.3173840"/>
+  <node id="323888907" lat="48.8856914" lon="2.3424389"/>
+  <node id="323888910" lat="48.8855854" lon="2.3424513"/>
+  <node id="323888911" lat="48.8855941" lon="2.3426218"/>
+  <node id="323888913" lat="48.8857001" lon="2.3426094"/>
+  <node id="323889636" lat="48.8847528" lon="2.3425448"/>
+  <node id="323889640" lat="48.8846117" lon="2.3425595">
+    <tag k="source" v="mise à jour :2008;cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre"/>
+  </node>
+  <node id="323889643" lat="48.8846196" lon="2.3427353">
+    <tag k="source" v="mise à jour :2008;cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre"/>
+  </node>
+  <node id="323889646" lat="48.8847607" lon="2.3427205"/>
+  <node id="324352448" lat="48.8514725" lon="2.3311829">
+    <tag k="name" v="Saint-Sulpice"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1698"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Saint-Sulpice (métro de Paris)"/>
+  </node>
+  <node id="324363999" lat="48.8439710" lon="2.3243262">
+    <tag k="name" v="Montparnasse-Bienvenüe"/>
+    <tag k="name:ru" v="Монпарнас — Бьенвеню"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="0408"/>
+    <tag k="wikipedia:fr" v="Montparnasse_-_Bienvenüe_(métro_de_Paris)"/>
+  </node>
+  <node id="326309672" lat="48.8789208" lon="2.3623079">
+    <tag k="name" v="Château Landon"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1963"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Château-Landon (métro de Paris)"/>
+  </node>
+  <node id="327432580" lat="48.8399322" lon="2.3370615">
+    <tag k="name" v="Port Royal"/>
+    <tag k="operator" v="RATP"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="RER B"/>
+    <tag k="ref:FR:RATP" v="1713"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="uic_ref" v="8775862"/>
+    <tag k="wheelchair" v="yes"/>
+  </node>
+  <node id="327432589" lat="48.8466573" lon="2.3406504">
+    <tag k="name" v="Luxembourg"/>
+    <tag k="operator" v="RATP"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="RER B"/>
+    <tag k="ref:FR:RATP" v="1811"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="uic_ref" v="8775861"/>
+    <tag k="wheelchair" v="yes"/>
+  </node>
+  <node id="327613695" lat="48.8808040" lon="2.3573389">
+    <tag k="alt_name" v="Paris Nord RER"/>
+    <tag k="layer" v="-2"/>
+    <tag k="name" v="Gare du Nord"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="RER B,D"/>
+    <tag k="ref:FR:RATP" v="1843"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="uic_ref" v="8727102"/>
+  </node>
+  <node id="328911012" lat="48.8623241" lon="2.3466372">
+    <tag k="name" v="Châtelet-les-Halles"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1967"/>
+    <tag k="start_date" v="1977-12-09"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="uic_ref" v="8775860"/>
+    <tag k="wheelchair" v="limited"/>
+    <tag k="wikipedia" v="fr:Gare de Châtelet - Les Halles"/>
+  </node>
+  <node id="329096792" lat="48.8844216" lon="2.3602786">
+    <tag k="name" v="La Chapelle"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1868"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="329974472" lat="48.8799750" lon="2.3580882">
+    <tag k="layer" v="-3"/>
+    <tag k="name" v="Magenta"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="RER E"/>
+    <tag k="ref:FR:RATP" v="51923"/>
+    <tag k="type:RATP" v="rer"/>
+  </node>
+  <node id="329974475" lat="48.8747218" lon="2.3271274">
+    <tag k="layer" v="-3"/>
+    <tag k="name" v="Haussmann - Saint-Lazare"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="RER E"/>
+    <tag k="ref:FR:RATP" v="51922"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="330020300" lat="48.8979490" lon="2.4004574">
+    <tag k="name" v="Pantin"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="RER E"/>
+    <tag k="ref:FR:RATP" v="51924"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="330026020" lat="48.8932382" lon="2.4133209">
+    <tag k="name" v="Église de Pantin"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1912"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="330026206" lat="48.8956372" lon="2.4252683">
+    <tag k="name" v="Bobigny-Pantin Raymond Queneau"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="2011"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="330426779" lat="48.8463352" lon="2.2769926">
+    <tag k="name" v="Javel"/>
+    <tag k="operator" v="RER"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="5599"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="331514770" lat="48.8795976" lon="2.3270787">
+    <tag k="name" v="Liège"/>
+    <tag k="name:ru" v="Льеж"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1804"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Liège (métro de Paris)"/>
+  </node>
+  <node id="338930214" lat="48.8538982" lon="2.2893959">
+    <tag k="alt_name" v="Bir-Hakeim (Grenelle)"/>
+    <tag k="name" v="Bir-Hakeim"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="2007"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="fr:Bir-Hakeim (métro de Paris)"/>
+  </node>
+  <node id="354969611" lat="48.8731477" lon="2.3295277">
+    <tag k="name" v="Auber"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1990"/>
+    <tag k="start_date" v="1971-11-23"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="uic_ref" v="8775859"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="fr:Gare Auber"/>
+  </node>
+  <node id="358372136" lat="48.8412636" lon="2.3665838">
+    <tag k="created_by" v="Potlatch 0.10f"/>
+    <tag k="name" v="Gare d'Austerlitz"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="yes"/>
+  </node>
+  <node id="365930803" lat="48.8281965" lon="2.3784744">
+    <tag k="name" v="Bibliothèque François Mitterrand"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="5606"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="wheelchair" v="limited"/>
+  </node>
+  <node id="472985883" lat="48.8201086" lon="2.3647992">
+    <tag k="name" v="Porte de Choisy"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1724"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Porte de Choisy (métro de Paris)"/>
+  </node>
+  <node id="472985884" lat="48.8216697" lon="2.3693224">
+    <tag k="name" v="Porte d'Ivry"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1719"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Porte d'Ivry (métro de Paris)"/>
+  </node>
+  <node id="472985885" lat="48.8159011" lon="2.3773455">
+    <tag k="name" v="Pierre et Marie Curie"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1786"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="473070143" lat="48.8491398" lon="2.3218984">
+    <tag k="name" v="Vaneau"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1643"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="573456319" lat="48.8847292" lon="2.3425472">
+    <tag k="source" v="mise à jour :2008;cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre"/>
+  </node>
+  <node id="615107647" lat="48.8853096" lon="2.2980977"/>
+  <node id="615107648" lat="48.8853170" lon="2.2979765"/>
+  <node id="615107652" lat="48.8853938" lon="2.2978811"/>
+  <node id="615107653" lat="48.8854741" lon="2.2978931"/>
+  <node id="634996117" lat="48.8756733" lon="2.3273522">
+    <tag k="name" v="Saint-Lazare"/>
+    <tag k="name:ru" v="Сен-Лазар"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Saint-Lazare (métro de Paris)"/>
+  </node>
+  <node id="635005158" lat="48.8755630" lon="2.3241726">
+    <tag k="name" v="Saint-Lazare"/>
+    <tag k="name:ru" v="Сен-Лазар"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="fr:Saint-Lazare (métro de Paris)"/>
+  </node>
+  <node id="765950957" lat="48.8405414" lon="2.3194970">
+    <tag k="name" v="Gare Montparnasse 1 - Francilien"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="yes"/>
+  </node>
+  <node id="795810507" lat="48.8623245" lon="2.3145806"/>
+  <node id="795810575" lat="48.8621923" lon="2.3145237"/>
+  <node id="795810607" lat="48.8621783" lon="2.3145424"/>
+  <node id="795810799" lat="48.8624244" lon="2.3145928"/>
+  <node id="795810850" lat="48.8623245" lon="2.3145722"/>
+  <node id="795810897" lat="48.8622217" lon="2.3142745"/>
+  <node id="795810911" lat="48.8622125" lon="2.3145248"/>
+  <node id="795811028" lat="48.8621756" lon="2.3145638"/>
+  <node id="795811074" lat="48.8621756" lon="2.3145522"/>
+  <node id="795811176" lat="48.8624929" lon="2.3146015"/>
+  <node id="795811479" lat="48.8624249" lon="2.3145865"/>
+  <node id="795811681" lat="48.8625077" lon="2.3143016"/>
+  <node id="795811817" lat="48.8621840" lon="2.3145321"/>
+  <node id="795811920" lat="48.8624965" lon="2.3145284"/>
+  <node id="838533003" lat="48.8780508" lon="2.2982339">
+    <tag k="name" v="Ternes"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1635"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia" v="fr:Ternes (métro de Paris)"/>
+  </node>
+  <node id="942695829" lat="48.8383976" lon="2.3159455">
+    <tag k="name" v="Gare Montparnasse 3 - Vaugirard"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <node id="980292663" lat="48.8855009" lon="2.2979432"/>
+  <node id="980378668" lat="48.8853364" lon="2.2981477"/>
+  <node id="1191666961" lat="48.8625067" lon="2.3143225"/>
+  <node id="1308998006" lat="48.8435226" lon="2.3744523">
+    <tag k="name" v="Gare de Lyon RER D "/>
+    <tag k="operator" v="SNCF "/>
+    <tag k="railway" v="station"/>
+    <tag k="start_date" v="1995-09-24"/>
+    <tag k="uic_ref" v="8768603"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="1309031698" lat="48.8437844" lon="2.3740909">
+    <tag k="name" v="Gare de Lyon RER A"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1840;20952"/>
+    <tag k="start_date" v="1977-12-09"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="uic_ref" v="8775858"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="fr:Paris-Gare_de_Lyon#RER"/>
+  </node>
+  <node id="1333685615" lat="48.8153790" lon="2.3408702">
+    <tag k="name" v="Gentilly"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1845"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="uic_ref" v="8775865"/>
+  </node>
+  <node id="1367616097" lat="48.8199080" lon="2.2591900"/>
+  <node id="1367616107" lat="48.8199570" lon="2.2592890"/>
+  <node id="1367616112" lat="48.8199900" lon="2.2592530"/>
+  <node id="1367616113" lat="48.8199940" lon="2.2592610"/>
+  <node id="1367616120" lat="48.8200240" lon="2.2590590"/>
+  <node id="1367616135" lat="48.8200480" lon="2.2591120"/>
+  <node id="1367616140" lat="48.8200760" lon="2.2591710"/>
+  <node id="1439673303" lat="48.8199426" lon="2.2591509"/>
+  <node id="1472201160" lat="48.8699114" lon="2.3072110">
+    <tag k="name" v="Franklin D. Roosevelt"/>
+    <tag k="name:ru" v="Франклин Д. Рузвельт"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="survey"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Franklin D. Roosevelt (métro de Paris)"/>
+  </node>
+  <node id="1480535477" lat="48.8837592" lon="2.3495338">
+    <tag k="name" v="Barbès - Rochechouart"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1999"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Barbès - Rochechouart (métro de Paris)"/>
+  </node>
+  <node id="1481147746" lat="48.8915769" lon="2.3496679">
+    <tag k="name" v="Marcadet - Poissoniers"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1828"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Marcadet - Poissonniers (métro de Paris)"/>
+  </node>
+  <node id="1489806669" lat="48.8663302" lon="2.3215942">
+    <tag k="name" v="Concorde"/>
+    <tag k="name:ru" v="Конкорд"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Concorde (métro de Paris)"/>
+  </node>
+  <node id="1489806675" lat="48.8603937" lon="2.3146892">
+    <tag k="name" v="Invalides"/>
+    <tag k="name:ru" v="Энвалид"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Invalides (métro de Paris)"/>
+  </node>
+  <node id="1507214977" lat="48.8846857" lon="2.3426380">
+    <tag k="alt_name" v="Funiculaire Gare basse"/>
+    <tag k="name" v="Funiculaire Montmartre Station Inférieure"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="2021"/>
+    <tag k="source" v="Bing"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="1507214979" lat="48.8856445" lon="2.3425294">
+    <tag k="alt_name" v="Funiculaire Gare haute"/>
+    <tag k="name" v="Funiculaire Montmartre Station Supérieure"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="2022"/>
+    <tag k="source" v="Bing"/>
+    <tag k="type:RATP" v="metro"/>
+  </node>
+  <node id="1522343248" lat="48.8769193" lon="2.3592679">
+    <tag k="alt_name" v="Paris-Est"/>
+    <tag k="name" v="Gare de l'Est"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+    <tag k="uic_ref" v="87113001"/>
+    <tag k="website" v="http://www.gares-en-mouvement.com/fr/frpst/accueil/"/>
+    <tag k="wikipedia" v="fr:Gare de Paris-Est"/>
+  </node>
+  <node id="1522343254" lat="48.8807436" lon="2.3551336">
+    <tag k="name" v="Gare du Nord"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="fr:Gare de Paris-Nord"/>
+  </node>
+  <node id="1543414761" lat="48.8243535" lon="2.3665277">
+    <tag k="disused" v="yes"/>
+    <tag k="name" v="Paris-Gobelins"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Gare_de_Paris-Gobelins"/>
+  </node>
+  <node id="1543466659" lat="48.8246289" lon="2.3255303">
+    <tag k="alt_name" v="Petit-Montrouge"/>
+    <tag k="disused" v="yes"/>
+    <tag k="name" v="Montrouge-Ceinture"/>
+    <tag k="railway" v="station"/>
+    <tag k="wikipedia:fr" v="Gare_de_Montrouge-Ceinture"/>
+  </node>
+  <node id="1584432760" lat="48.8537409" lon="2.3693210">
+    <tag k="name" v="Bastille"/>
+    <tag k="name:ru" v="Бастий"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="1656938775" lat="48.8434791" lon="2.3741232">
+    <tag k="name" v="Gare de Lyon (métro 14)"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="yes"/>
+  </node>
+  <node id="1659843199" lat="48.8456163" lon="2.3095848">
+    <tag k="name" v="Sèvres-Lecourbe"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1633"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2012"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wikipedia:fr" v="Sèvres_-_Lecourbe_(métro_de_Paris)"/>
+  </node>
+  <node id="1731763792" lat="48.8740658" lon="2.2951493">
+    <tag k="name" v="Charles de Gaulle — Étoile (RER)"/>
+    <tag k="name:ru" v="Шарль де Голль — Этуаль"/>
+    <tag k="note" v="Limited to RER"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1954"/>
+    <tag k="start_date" v="1970-01-19"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="uic_ref" v="8775800"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="fr:Gare Charles-de-Gaulle - Étoile"/>
+  </node>
+  <node id="1731763794" lat="48.8484204" lon="2.3953679">
+    <tag k="alt_name" v="Nation"/>
+    <tag k="name" v="Nation (RER)"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1759"/>
+    <tag k="start_date" v="1969-12-14"/>
+    <tag k="type:RATP" v="rer"/>
+    <tag k="uic_ref" v="8775810"/>
+    <tag k="wheelchair" v="yes"/>
+    <tag k="wikipedia" v="fr:Gare de Nation"/>
+  </node>
+  <node id="1731763796" lat="48.8487580" lon="2.3951731">
+    <tag k="alt_name" v="Nation"/>
+    <tag k="name" v="Nation (ligne 9)"/>
+    <tag k="railway" v="station"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia" v="fr:Nation (métro de Paris)"/>
+  </node>
+  <node id="1805529567" lat="48.8420310" lon="2.3209504">
+    <tag k="name" v="Montparnasse-Bienvenüe"/>
+    <tag k="name:ru" v="Монпарнас — Бьенвеню"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="1751"/>
+    <tag k="type:RATP" v="metro"/>
+    <tag k="wheelchair" v="no"/>
+    <tag k="wikipedia:fr" v="Montparnasse_-_Bienvenüe_(métro_de_Paris)"/>
+    <tag k="wikipedia:ru" v="Монпарнас_—_Бьенвеню_(станция_метро)"/>
+  </node>
+  <node id="1823210835" lat="48.8391417" lon="2.3827712">
+    <tag k="name" v="Gare de Bercy"/>
+    <tag k="operator" v="SNCF"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref" v="BERCY"/>
+    <tag k="source" v="http://www.gares-en-mouvement.com/fr/frpbe/votre-gare/"/>
+  </node>
+  <node id="1851629060" lat="48.8768396" lon="2.3578563">
+    <tag k="FIXME" v="RER E ?"/>
+    <tag k="name" v="Gare de l'Est"/>
+    <tag k="railway" v="station"/>
+    <tag k="ref:FR:RATP" v="414501"/>
+    <tag k="type:RATP" v="rer"/>
+  </node>
+  <node id="1862264925" lat="48.8793703" lon="2.2868503">
+    <tag k="name" v="RER C Porte Maillot - Palais des Congrès"/>
+    <tag k="railway" v="station"/>
+  </node>
+  <way id="29402542">
+    <nd ref="323860043"/>
+    <nd ref="323860046"/>
+    <nd ref="323860047"/>
+    <nd ref="191754163"/>
+    <nd ref="323860043"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Gare Montparnasse 2 Pasteur"/>
+    <tag k="railway" v="station"/>
+  </way>
+  <way id="29403454">
+    <nd ref="323888907"/>
+    <nd ref="323888910"/>
+    <nd ref="323888911"/>
+    <nd ref="323888913"/>
+    <nd ref="323888907"/>
+    <tag k="building" v="train_station"/>
+    <tag k="name" v="Funiculaire Montmartre Station Supérieure"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="Bing"/>
+  </way>
+  <way id="29403485">
+    <nd ref="323889636"/>
+    <nd ref="573456319"/>
+    <nd ref="323889640"/>
+    <nd ref="323889643"/>
+    <nd ref="323889646"/>
+    <nd ref="323889636"/>
+    <tag k="building" v="train_station"/>
+    <tag k="name" v="Funiculaire Montmartre Station Inférieure"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="Bing"/>
+  </way>
+  <way id="48432724">
+    <nd ref="980378668"/>
+    <nd ref="615107647"/>
+    <nd ref="615107648"/>
+    <nd ref="615107652"/>
+    <nd ref="615107653"/>
+    <nd ref="980292663"/>
+    <nd ref="980378668"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Pereire - Levallois"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"/>
+  </way>
+  <way id="64959896">
+    <nd ref="795811479"/>
+    <nd ref="795810799"/>
+    <nd ref="795811176"/>
+    <nd ref="795811920"/>
+    <nd ref="1191666961"/>
+    <nd ref="795811681"/>
+    <nd ref="795810897"/>
+    <nd ref="795810911"/>
+    <nd ref="795810575"/>
+    <nd ref="795811817"/>
+    <nd ref="795810607"/>
+    <nd ref="795811074"/>
+    <nd ref="795811028"/>
+    <nd ref="795810507"/>
+    <nd ref="795810850"/>
+    <nd ref="795811479"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Gare des Invalides"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"/>
+  </way>
+  <way id="122364943">
+    <nd ref="1367616135"/>
+    <nd ref="1367616120"/>
+    <nd ref="1439673303"/>
+    <nd ref="1367616097"/>
+    <nd ref="1367616107"/>
+    <nd ref="1367616112"/>
+    <nd ref="1367616113"/>
+    <nd ref="1367616140"/>
+    <nd ref="1367616135"/>
+    <tag k="building" v="yes"/>
+    <tag k="railway" v="station"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"/>
+  </way>
+  <relation id="1266299">
+    <member type="node" ref="983537977" role=""/>
+    <member type="node" ref="983538057" role=""/>
+    <member type="node" ref="983538039" role=""/>
+    <member type="way" ref="84669089" role=""/>
+    <member type="node" ref="983538018" role=""/>
+    <member type="way" ref="84669081" role=""/>
+    <member type="node" ref="983538066" role=""/>
+    <member type="node" ref="983537932" role=""/>
+    <member type="node" ref="983537922" role=""/>
+    <member type="way" ref="84669083" role=""/>
+    <member type="way" ref="84669094" role=""/>
+    <member type="way" ref="84669060" role=""/>
+    <member type="way" ref="84669085" role=""/>
+    <member type="node" ref="983538065" role=""/>
+    <member type="node" ref="983537951" role=""/>
+    <member type="way" ref="84669096" role=""/>
+    <member type="way" ref="84669079" role=""/>
+    <member type="node" ref="983538015" role=""/>
+    <member type="node" ref="983538050" role=""/>
+    <member type="way" ref="84669068" role=""/>
+    <member type="way" ref="84669067" role=""/>
+    <member type="node" ref="983538033" role=""/>
+    <member type="node" ref="983538061" role=""/>
+    <member type="way" ref="84669078" role=""/>
+    <member type="way" ref="84669072" role=""/>
+    <member type="node" ref="983538031" role=""/>
+    <member type="node" ref="983537939" role=""/>
+    <member type="way" ref="84669074" role=""/>
+    <member type="node" ref="983537945" role=""/>
+    <member type="node" ref="983537949" role=""/>
+    <member type="way" ref="84669058" role=""/>
+    <member type="way" ref="84669098" role=""/>
+    <member type="way" ref="84669062" role=""/>
+    <member type="node" ref="983537974" role=""/>
+    <member type="node" ref="983538037" role=""/>
+    <member type="way" ref="84669097" role=""/>
+    <member type="node" ref="983538002" role=""/>
+    <member type="node" ref="983537947" role=""/>
+    <member type="way" ref="84669092" role=""/>
+    <member type="node" ref="983537981" role=""/>
+    <member type="node" ref="983537971" role=""/>
+    <member type="way" ref="84669064" role=""/>
+    <member type="node" ref="983538008" role=""/>
+    <member type="way" ref="84669087" role=""/>
+    <member type="node" ref="983538029" role=""/>
+    <member type="node" ref="983538053" role=""/>
+    <member type="way" ref="84669071" role=""/>
+    <member type="way" ref="84669055" role=""/>
+    <member type="node" ref="243510334" role=""/>
+    <tag k="name" v="Bourse"/>
+    <tag k="public_transport" v="stop_area"/>
+    <tag k="railway" v="station"/>
+    <tag k="site" v="subway_station"/>
+    <tag k="station" v="underground"/>
+    <tag k="type" v="public_transport"/>
+  </relation>
+
+</osm>

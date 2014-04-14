@@ -1,0 +1,531 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="introspect.xsl"?>
+<!-- SPDX-License-Identifier: MPL-2.0
+     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
+     This Source Code Form is subject to the terms of the
+     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/navigationcore" xsi:noNamespaceSchemaLocation="introspect.xsd">
+  <interface name="org.genivi.navigationcore.LocationInput">
+    <version>3.0.0-alpha (07-06-2013)</version>
+    <doc>
+      <line>LocationInput = This interface offers functions that implement the location-input functionality of a navigation system</line>
+    </doc>
+    <method name="GetVersion">
+      <doc>
+        <line>GetVersion = This method returns the API version implemented by the server application</line>
+      </doc>
+      <arg name="version" type="(qqqs)" direction="out">
+        <doc>
+          <line> version = struct(major,minor,micro,date)</line>
+          <line> major = when the major version changes, then backward compatibility with previous releases is not granted</line>
+          <line> minor = when the minor version changes, then backward compatibility with previous releases is granted, but something changed in the implementation of the API (e.g. new methods may have been added)</line>
+          <line> micro = when the micro version changes, then backward compatibility with previous releases is granted (bug fixes or documentation modifications)</line>
+          <line> date = release date (e.g. 21-06-2011)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="CreateLocationInput">
+      <doc>
+        <line>CreateLocationInput = This method creates a new location input and retrieves a handle</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="locationInputHandle" type="u" direction="out">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.LocationInput.Error.NoMoreLocationInputHandles">
+        <doc>
+          <line>This error is generated if no more location input handles are available</line>
+        </doc>
+      </error>
+    </method>
+    <method name="DeleteLocationInput">
+      <doc>
+        <line>DeleteLocationInput = This method deletes a location input and its associated resources</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="locationInputHandle" type="u" direction="in">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.LocationInput.Error.LocationInputNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to delete a location input handle that is not available</line>
+        </doc>
+      </error>
+    </method>
+    <method name="GetSupportedAddressAttributes">
+      <doc>
+        <line>GetSupportedAddressAttributes = This method retrieves the supported address attributes</line>
+      </doc>
+      <arg name="addressAttributesList" type="aq" direction="out">
+        <doc>
+          <line>addressAttributesList = array[attribute]</line>
+          <line>attribute = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,STATE,CITY,ZIPCODE,STREET,HOUSENUMBER,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )</line>
+        </doc>
+      </arg>
+    </method> 
+    <method name="SetAddress">
+      <doc>
+        <line>SetAddress = This method sets the address to start with for the LocationInput identified by the given handle</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="locationInputHandle" type="u" direction="in">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="address" type="a{qv}" direction="in">
+        <doc>
+          <line>address = array[attribute]</line>
+          <line>attribute = tuple(key,value)</line>
+          <line>key = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )</line>
+          <line>key = LATITUDE, value = value of type ´d´, that expresses the latitude in format %3.6f. Range[-90:+90]. Example: 48.70901</line>
+          <line>key = LONGITUDE, value = value of type ´d´, that expresses the longitude in format %3.6f. Range[-180:+180]. Example: 9.167898</line>
+          <line>key = ALTITUDE, value = value of type ´i´, that expresses the altitude in meters</line>
+          <line>key = COUNTRY, value = value of type ´s´, that identifies the country name</line>
+          <line>key = COUNTRYCODE, value = value of type ´s´, ISO 3166‐1 alpha 3 country code (upper case)</line>
+          <line>key = CITY, value = value of type ´s´, that identifies the city name</line>
+          <line>key = STREET, value = value of type ´s´, that identifies the street name</line>
+          <line>key = ROAD_NUMBER, value = value of type ´s´, that identifies the road number</line>
+          <line>key = HOUSENUMBER, value = value of type ´s´, that identifies the house number</line>
+          <line>key = HOUSENAME, value = value of type ´s´, that identifies the house name</line>
+          <line>key = CROSSING, value = value of type ´s´, that identifies the crossing</line>
+          <line>key = DISTRICT, value = value of type ´s´, that identifies the district name</line>
+          <line>key = PHONENUMBER, value = value of type ´s´, that identifies a phone number</line>
+          <line>key = POINAME, value = value of type ´s´, that identifies a POI name</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetSelectionCriterion">
+      <doc>
+        <line>SetSelectionCriterion = This method sets the selection criterion for the current speller, search input and the corresponding result-lists for the current session</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="locationInputHandle" type="u" direction="in">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="selectionCriterion" type="q" direction="in">
+        <doc>
+          <line>selectionCriterion = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="Spell">
+      <doc>
+        <line>Spell = This method sends the next spell input for the current session</line>
+        <line>Note: when a spell is started the entries of the search are removed</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="locationInputHandle" type="u" direction="in">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="inputCharacter" type="s" direction="in">
+        <doc>
+          <line>inputString = last input character (UTF-8) (0x08(Backspace) for delete last character, 0x0D(Carriage Return) for delete entire input)</line>
+        </doc>
+      </arg>
+      <arg name="maxWindowSize" type="q" direction="in">
+        <doc>
+          <line>maxWindowSize = maximum number of elements that should be returned as result</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="Search">
+      <doc>
+        <line>Search = This method sends the search input for the current session</line>
+        <line>Note: when a search is started the entries of the spell input are removed</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="locationInputHandle" type="u" direction="in">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="inputString" type="s" direction="in">
+        <doc>
+          <line>inputString = contains the String, that is searched</line>
+        </doc>
+      </arg>
+      <arg name="maxWindowSize" type="q" direction="in">
+        <doc>
+          <line>maxWindowSize = maximum number of elements that should be returned as result</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="CurrentSelectionCriterion">
+      <doc>
+        <line>CurrentSelectionCriterion = This signal notifies the SelectionCriterion for the current speller input or search.</line>
+        <line>Note: when no SelectionCriterion was set or an input was finished, the SelectionCriterion has the value INVALID</line>
+      </doc>
+      <arg name="locationInputHandle" type="u">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="selectionCriterion" type="q">
+        <doc>
+          <line>selectionCriterion = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="SearchStatus">
+      <doc>
+        <line>SearchStatus = This signal updates the search status of the specified session</line>
+      </doc>
+      <arg name="locationInputHandle" type="u">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="statusValue" type="q">
+        <doc>
+          <line>statusValue = enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... )</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="SpellResult">
+      <doc>
+        <line>SpellResult = This signal notifies the result of the previous Spell method</line>
+      </doc>
+      <arg name="locationInputHandle" type="u">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="uniqueString" type="s">
+        <doc>
+          <line>uniqueString = unique string derived from spell input (i.e. including auto-completion if applicable)</line>
+        </doc>
+      </arg>
+      <arg name="validCharacters" type="s">
+        <doc>
+          <line>validCharacters = set of (UTF-8 encoded) characters valid for next input (unified in a single string). A Backspace(0x08) is returned if the input character passed to the Spell method was invalid</line>
+        </doc>
+      </arg>
+      <arg name="fullMatch" type="b">
+        <doc>
+          <line>fullMatch = flag indicating whether the value in UniqueCharacters is already a full match for an existing list entry</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="RequestListUpdate">
+      <doc>
+        <line>RequestListUpdate = This method sends a request for more list elements for the current session</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="locationInputHandle" type="u" direction="in">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="offset" type="q" direction="in">
+        <doc>
+          <line>offset = starting offset of the newly requested list elements</line>
+        </doc>
+      </arg>
+      <arg name="maxWindowSize" type="q" direction="in">
+        <doc>
+          <line>maxWindowSize = maximum number of elements that should be returned as result</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="SearchResultList">
+      <doc>
+        <line>SearchResultList = This signal updates the address result list (e.g. after a Search/Spell/Scroll call)</line>
+      </doc>
+      <arg name="locationInputHandle" type="u">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="totalSize" type="q">
+        <doc>
+          <line>totalSize = total size of the result list</line>
+        </doc>
+      </arg>
+      <arg name="windowOffset" type="q">
+        <doc>
+          <line>windowOffset = window offset within the complete list</line>
+        </doc>
+      </arg>
+      <arg name="windowSize" type="q">
+        <doc>
+          <line>windowSize = size of the provided window</line>
+        </doc>
+      </arg>
+      <arg name="resultListWindow" type="aa{qv}">
+        <doc>
+          <line>resultListWindow = array[address]</line>
+          <line>address = array[attribute]</line>
+          <line>attribute = tuple(key,value)</line>
+          <line>key = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )</line>
+          <line>key = LATITUDE, value = value of type ´d´, that expresses the latitude in format %3.6f. Range [-90:+90]. Example: 48.70901</line>
+          <line>key = LONGITUDE, value = value of type ´d´, that expresses the longitude in format %3.6f. Range [-180:+180]. Example: 9.167898</line>
+          <line>key = ALTITUDE, value = value of type ´i´, that expresses the altitude in meters</line>
+          <line>key = COUNTRY, value = value of type ´s´, that identifies the country name</line>
+          <line>key = COUNTRYCODE, value = value of type ´s´, ISO 3166‐1 alpha 3 country code (upper case)</line>
+          <line>key = CITY, value = value of type ´s´, that identifies the city name</line>
+          <line>key = STREET, value = value of type ´s´, that identifies the street name</line>
+          <line>key = ROAD_NUMBER, value = value of type ´s´, that identifies the road number</line>
+          <line>key = HOUSENUMBER, value = value of type ´s´, that identifies the house number</line>
+          <line>key = HOUSENAME, value = value of type ´s´, that identifies the house name</line>
+          <line>key = CROSSING, value = value of type ´s´, that identifies the crossing</line>
+          <line>key = DISTRICT, value = value of type ´s´, that identifies the district name</line>
+          <line>key = PHONENUMBER, value = value of type ´s´, that identifies a phone number</line>
+          <line>key = POINAME, value = value of type ´s´, that identifies a POI name</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="SearchResultListSizeChanged">
+      <doc>
+        <line>SearchResultListSizeChanged = This signal updates the size of the address result list</line>
+      </doc>
+      <arg name="locationInputHandle" type="u">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="totalSize" type="q">
+        <doc>
+          <line>totalSize = total size of the result list</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="SelectEntry">
+      <doc>
+        <line>SelectEntry = This method triggers selection of a result list entry by index</line>
+        <line>Note: the update of the input content will be notified in signal ContentUpdated</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="locationInputHandle" type="u" direction="in">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="index" type="q" direction="in">
+        <doc>
+          <line>index = absolute list index of the entry to be selected</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetEntry">
+      <doc>
+        <line>GetEntry = This method synchronously gets the address for the given result list entry</line>
+      </doc>
+      <arg name="locationInputHandle" type="u" direction="in">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="index" type="q" direction="in">
+        <doc>
+          <line>index = list index of the entry to be returned</line>
+        </doc>
+      </arg>
+      <arg name="address" type="a{qv}" direction="out">
+        <doc>
+          <line>address = array[attribute]</line>
+          <line>attribute = tuple(key,value)</line>
+          <line>key = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )</line>
+          <line>key = LATITUDE, value = value of type ´d´, that expresses the latitude in format %3.6f. Range[-90:+90]. Example: 48.70901</line>
+          <line>key = LONGITUDE, value = value of type ´d´, that expresses the longitude in format %3.6f. Range[-180:+180]. Example: 9.167898</line>
+          <line>key = ALTITUDE, value = value of type ´i´, that expresses the altitude in meters</line>
+          <line>key = COUNTRY, value = value of type ´s´, that identifies the country name</line>
+          <line>key = COUNTRYCODE, value = value of type ´s´, ISO 3166‐1 alpha 3 country code (upper case)</line>
+          <line>key = CITY, value = value of type ´s´, that identifies the city name</line>
+          <line>key = STREET, value = value of type ´s´, that identifies the street name</line>
+          <line>key = ROAD_NUMBER, value = value of type ´s´, that identifies the road number</line>
+          <line>key = HOUSENUMBER, value = value of type ´s´, that identifies the house number</line>
+          <line>key = HOUSENAME, value = value of type ´s´, that identifies the house name</line>
+          <line>key = CROSSING, value = value of type ´s´, that identifies the crossing</line>
+          <line>key = DISTRICT, value = value of type ´s´, that identifies the district name</line>
+          <line>key = PHONENUMBER, value = value of type ´s´, that identifies a phone number</line>
+          <line>key = POINAME, value = value of type ´s´, that identifies a POI name</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="ContentUpdated">
+      <doc>
+        <line>ContentUpdated = This signal updates the input content data for the specified session</line>
+      </doc>
+      <arg name="locationInputHandle" type="u">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="guidable" type="b">
+        <doc>
+          <line>guidable = flag indicating whether the current address is guidable</line>
+        </doc>
+      </arg>
+      <arg name="availableSelectionCriteria" type="aq">
+        <doc>
+          <line>availableSelectionCriteria = array of enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )</line>
+          <line>Note: availableSelectionCriteria indicates the parts of the address that can be changed</line>
+        </doc>
+      </arg>
+      <arg name="address" type="a{qv}">
+        <doc>
+          <line>address = array[attribute]</line>
+          <line>attribute = tuple(key,value)</line>
+          <line>key = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )</line>
+          <line>key = LATITUDE, value = value of type ´d´, that expresses the latitude in format %3.6f. Range[-90:+90]. Example: 48.70901</line>
+          <line>key = LONGITUDE, value = value of type ´d´, that expresses the longitude in format %3.6f. Range[-180:+180]. Example: 9.167898</line>
+          <line>key = ALTITUDE, value = value of type ´i´, that expresses the altitude in meters</line>
+          <line>key = COUNTRY, value = value of type ´s´, that identifies the country name</line>
+          <line>key = COUNTRYCODE, value = value of type ´s´, ISO 3166‐1 alpha 3 country code (upper case)</line>
+          <line>key = CITY, value = value of type ´s´, that identifies the city name</line>
+          <line>key = STREET, value = value of type ´s´, that identifies the street name</line>
+          <line>key = ROAD_NUMBER, value = value of type ´s´, that identifies the road number</line>
+          <line>key = HOUSENUMBER, value = value of type ´s´, that identifies the house number</line>
+          <line>key = HOUSENAME, value = value of type ´s´, that identifies the house name</line>
+          <line>key = CROSSING, value = value of type ´s´, that identifies the crossing</line>
+          <line>key = DISTRICT, value = value of type ´s´, that identifies the district name</line>
+          <line>key = PHONENUMBER, value = value of type ´s´, that identifies a phone number</line>
+          <line>key = POINAME, value = value of type ´s´, that identifies a POI name</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="ValidateAddress">
+      <doc>
+        <line>ValidateAddress = This method validates an address from different sources than Navigation</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="locationInputHandle" type="u" direction="in">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="inputAddress" type="a{qv}" direction="in">
+        <doc>
+          <line>inputAddress = array[attribute]</line>
+          <line>attribute = tuple(key,value)</line>
+          <line>key = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )</line>
+          <line>key = LATITUDE, value = value of type ´d´, that expresses the latitude in format %3.6f. Range[-90:+90]. Example: 48.70901</line>
+          <line>key = LONGITUDE, value = value of type ´d´, that expresses the longitude in format %3.6f. Range[-180,+180]. Example: 9.167898</line>
+          <line>key = ALTITUDE, value = value of type ´i´, that expresses the altitude in meters</line>
+          <line>key = COUNTRY, value = value of type ´s´, that identifies the country name</line>
+          <line>key = COUNTRYCODE, value = value of type ´s´, ISO 3166‐1 alpha 3 country code (upper case)</line>
+          <line>key = CITY, value = value of type ´s´, that identifies the city name</line>
+          <line>key = STREET, value = value of type ´s´, that identifies the street name</line>
+          <line>key = ROAD_NUMBER, value = value of type ´s´, that identifies the road number</line>
+          <line>key = HOUSENUMBER, value = value of type ´s´, that identifies the house number</line>
+          <line>key = HOUSENAME, value = value of type ´s´, that identifies the house name</line>
+          <line>key = CROSSING, value = value of type ´s´, that identifies the crossing</line>
+          <line>key = DISTRICT, value = value of type ´s´, that identifies the district name</line>
+          <line>key = PHONENUMBER, value = value of type ´s´, that identifies a phone number</line>
+          <line>key = POINAME, value = value of type ´s´, that identifies a POI name</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="AddressValidationResult">
+      <doc>
+        <line>AddressValidationResult = This signal notifies the validation result of a former ValidateAddress call</line>
+      </doc>
+      <arg name="locationInputHandle" type="u">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="validatedAddressList" type="aa{qv}">
+        <doc>
+          <line>validatedAddressList = array[validatedAddress]</line>
+          <line>validatedAddress = array[attribute]</line>
+          <line>attribute = tuple(key,value)</line>
+          <line>key = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )</line>
+          <line>key = LATITUDE, value = value of type ´d´, that expresses the latitude in format %3.6f. Range[-90:+90]. Example: 48.70901</line>
+          <line>key = LONGITUDE, value = value of type ´d´, that expresses the longitude in format %3.6f. Range[-180:+180]. Example: 9.167898</line>
+          <line>key = ALTITUDE, value = value of type ´i´, that expresses the altitude in meters</line>
+          <line>key = COUNTRY, value = value of type ´s´, that identifies the country name</line>
+          <line>key = COUNTRYCODE, value = value of type ´s´, ISO 3166‐1 alpha 3 country code (upper case)</line>
+          <line>key = CITY, value = value of type ´s´, that identifies the city name</line>
+          <line>key = STREET, value = value of type ´s´, that identifies the street name</line>
+          <line>key = ROAD_NUMBER, value = value of type ´s´, that identifies the road number</line>
+          <line>key = HOUSENUMBER, value = value of type ´s´, that identifies the house number</line>
+          <line>key = HOUSENAME, value = value of type ´s´, that identifies the house name</line>
+          <line>key = CROSSING, value = value of type ´s´, that identifies the crossing</line>
+          <line>key = DISTRICT, value = value of type ´s´, that identifies the district name</line>
+          <line>key = PHONENUMBER, value = value of type ´s´, that identifies a phone number</line>
+          <line>key = POINAME, value = value of type ´s´, that identifies a POI name</line>
+        </doc>
+      </arg>
+      <arg name="validationStatusList" type="aa{qq}">
+        <doc>
+          <line>validationStatusList = array[validationStatus]</line>
+          <line>validationStatus = array[item]</line>
+          <line>item = tuple(key,value)</line>
+          <line>key = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )</line>
+          <line>value = enum(INVALID,OK,UNKNOWN,AMBIGUOUS,INCONSISTENT)</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="ReverseGeocode">
+      <doc>
+        <line>ReverseGeocode = This method transforms a geocoordinate into an address</line>
+        <line>Note: the update of the input content will be notified in signal ContentUpdated</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="locationInputHandle" type="u" direction="in">
+        <doc>
+          <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="coordinate" type="(dd)" direction="in">
+        <doc>
+          <line>coordinate = struct(lat,lon)</line>
+          <line>lat = latitude in format %3.6f. Range[-90:+90]. Example: 48.053250</line>
+          <line>lon = longitude in format %3.6f. Range[-180:+180]. Example: 8.321000</line>
+        </doc>
+      </arg>
+    </method>
+  </interface>
+</node>

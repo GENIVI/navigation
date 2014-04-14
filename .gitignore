@@ -1,0 +1,10 @@
+#folders used for building the code
+*-debug/
+*-release/
+bin/
+
+#files
+*~
+*.pro.user
+
+/.project

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="Overpass API">
+<note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
+<meta osm_base="2013-06-24T10:12:06Z"/>
+
+  <node id="356159913" lat="32.8386936" lon="-117.2785742"/>
+  <node id="356170188" lat="32.8385620" lon="-117.2785282"/>
+  <node id="356179270" lat="32.8384844" lon="-117.2789044"/>
+  <node id="356216137" lat="32.8386127" lon="-117.2789523"/>
+  <node id="356216228" lat="32.8386682" lon="-117.2786929"/>
+  <node id="356224569" lat="32.8385284" lon="-117.2786913"/>
+  <node id="356383422" lat="32.8331293" lon="-117.1555671">
+    <tag k="addr:housenumber" v="7638"/>
+    <tag k="addr:postcode" v="92111"/>
+    <tag k="addr:street" v=" Clairemont Mesa Boulevard"/>
+    <tag k="name" v="HTB HI-Tech Bikes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="hi-techbikes.com"/>
+  </node>
+  <node id="356390955" lat="32.8674730" lon="-117.2328245"/>
+  <node id="356475203" lat="32.8673360" lon="-117.2327816"/>
+  <node id="447649469" lat="32.8675018" lon="-117.2326014"/>
+  <node id="447649473" lat="32.8673648" lon="-117.2325585"/>
+  <node id="596908234" lat="32.8293140" lon="-117.1540610">
+    <tag k="addr:city" v="San Diego"/>
+    <tag k="addr:country" v="US"/>
+    <tag k="addr:housenumber" v="7730"/>
+    <tag k="addr:postcode" v="92111"/>
+    <tag k="addr:street" v="Ronson Rd"/>
+    <tag k="is_in:city" v="San Diego"/>
+    <tag k="is_in:country" v="United States of America"/>
+    <tag k="is_in:country_code" v="US"/>
+    <tag k="is_in:state" v="California"/>
+    <tag k="is_in:state_code" v="CA"/>
+    <tag k="name" v="Performance Bicycle"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="Bing"/>
+  </node>
+  <node id="1146834945" lat="32.8770451" lon="-117.2399473">
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="1266038024" lat="32.7290760" lon="-117.1297780">
+    <tag k="name" v="Velo Cult"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="1808327199" lat="32.7998524" lon="-117.2398363">
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="1914939588" lat="32.7701698" lon="-117.2013767">
+    <tag k="name" v="Beach Bikes &amp; Beyond"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="Bing"/>
+    <tag k="website" v="http://beachbikesandbeyond.com/"/>
+  </node>
+  <node id="1935658350" lat="32.7559737" lon="-117.2043394">
+    <tag k="addr:housename" v="B+L Bike &amp; Sport"/>
+    <tag k="addr:housenumber" v="3603"/>
+    <tag k="addr:postcode" v="92110"/>
+    <tag k="addr:street" v="Camino Del Rio West"/>
+    <tag k="name" v="B+L Bike &amp; Sport"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="local knowledge"/>
+    <tag k="website" v="blbikes.com"/>
+  </node>
+  <way id="31817077">
+    <nd ref="356224569"/>
+    <nd ref="356179270"/>
+    <nd ref="356216137"/>
+    <nd ref="356216228"/>
+    <nd ref="356159913"/>
+    <nd ref="356170188"/>
+    <nd ref="356224569"/>
+    <tag k="building" v="yes"/>
+    <tag k="building_type" v="commercial"/>
+    <tag k="name" v="California Bicycle Inc."/>
+    <tag k="sangis:OBJECTID" v="14078"/>
+    <tag k="sangis:TYPE" v="Commercial"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="SanGIS Footprints_Nonresidential_SD public domain (http://www.sangis.org/)"/>
+    <tag k="url" v="http://www.calbike.com/"/>
+  </way>
+  <way id="48654906">
+    <nd ref="447649473"/>
+    <nd ref="447649469"/>
+    <nd ref="356390955"/>
+    <nd ref="356475203"/>
+    <nd ref="447649473"/>
+    <tag k="building" v="yes"/>
+    <tag k="building_type" v="commercial"/>
+    <tag k="name" v="UC Cyclery"/>
+    <tag k="shop" v="bicycle"/>
+  </way>
+
+</osm>

@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="introspect.xsl"?>
+<!-- SPDX-License-Identifier: MPL-2.0
+     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
+     This Source Code Form is subject to the terms of the
+     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/poiservice" xsi:noNamespaceSchemaLocation="introspect.xsd">
+  <interface name="org.genivi.poiservice.POISearch">
+    <version>1.0.0 (19-12-2012)</version>
+    <doc>
+      <line>This interface offers methods that implement the POI search functionality of a navigation system</line>
+    </doc>
+    <method name="GetVersion">
+      <doc>
+        <line>GetVersion = This method returns the API version implemented by the server application</line>
+      </doc>
+      <arg name="version" type="(qqqs)" direction="out">
+        <doc>
+          <line>version = struct(major,minor,micro,date)</line>
+          <line>major = when the major changes, then backward compatibility with previous releases is not granted</line>
+          <line>minor = when the minor changes, then backward compatibility with previous releases is granted, but something changed in the implementation of the API (e.g. new methods may have been added)</line>
+          <line>micro = when the micro changes, then backward compatibility with previous releases is granted (bug fixes or documentation modifications)</line>
+          <line>date = release date (e.g. 22-05-2012)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetLanguage">
+      <doc>
+        <line>GetLanguage = Get the current language set for the search.</line>
+        <line>The language defines the poi and categories name and details language. If the language is not supported, the default details will be returned in the native language.</line>
+      </doc>
+      <arg direction="out" name="languageCode" type="s">
+        <doc>
+          <line>languageCode = The language.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="countryCode" type="s">
+        <doc>
+          <line>countryCode = The country specific variant for the language.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetLanguage">
+      <doc>
+        <line>SetLanguage = Set the language.</line>
+        <line>The language defines the poi and categories name and details language. If the language is not supported, the default details will be returned in the native language.</line>
+      </doc>
+      <arg direction="in" name="languageCode" type="s">
+        <doc>
+          <line>languageCode = The language to be used.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="countryCode" type="s">
+        <doc>
+          <line>countryCode = The country specific variant for the language to be used.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="ValidateCategories">
+      <doc>
+        <line>ValidateCategories = This method allows the application to validate that POI categories are supported by the POI component and the Content access modules.</line>
+      </doc>
+      <arg name="categories" type="aq" direction="in">
+        <doc>
+          <line>categories = array[id]</line>
+          <line>id = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
+          <line>Note: A POI category is a unique ID.</line>
+        </doc>
+      </arg>
+      <arg name="results" type="a(qb)" direction="out">
+        <doc>
+          <line>results = array[unique_id, status]</line>
+          <line>results = List of status for all the POI categories.</line>
+          <line>unique id = POI id</line>
+          <line>status = true if the category is available.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetAvailableCategories">
+      <doc>
+        <line>GetAvailableCategories = This method retrieves the list od POI categories available (pre-defined and custom).</line>
+      </doc>
+      <arg name="categories" type="a(qsb)" direction="out">
+        <doc>
+          <line>categories = array[struct(id, name, top_level)]</line>
+          <line>id = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
+          <line>name = name to be displayed by application</line>
+          <line>top_level = true if the category is a pre-defined one (top level with only ALL_CATEGORIES as parent), false for customized categories created by plug-in.</line>
+          <line>Note: A POI category is a unique ID.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetRootCategory">
+      <doc>
+        <line>GetRootCategory = Get the root category id. That would be ALL_CATEGORIES.</line>
+      </doc>
+      <arg name="category" type="q" direction="out">
+        <doc>
+          <line>id = ALL_CATEGORIES</line>
+          <line>The root category is a top level one by design.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetChildrenCategories">
+      <doc>
+        <line>GetChildrenCategories = Get the children categories id and type (top level) from the a parent unique id.</line>
+      </doc>
+      <arg name="category" type="q" direction="in">
+        <doc>
+          <line>unique category id</line>
+        </doc>
+      </arg>
+      <arg name="categories" type="a(qb)" direction="out">
+        <doc>
+          <line>categories = array[struct(id, top_level)]</line>
+          <line>id = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
+          <line>top_level = true if the category is a pre-defined one (top level with only ALL_CATEGORIES as parent), false for customized categories created by plug-in.</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiSearch.Error.InvalidCategory">
+        <doc>
+          <line>The category is not available.</line>
+        </doc>
+      </error>
+    </method>
+    <method name="GetParentCategories">
+      <doc>
+        <line>GetParentCategories = Get the parent categories id and type (top level) from the a unique id.</line>
+      </doc>
+      <arg name="category" type="q" direction="in">
+        <doc>
+          <line>unique category id</line>
+        </doc>
+      </arg>
+      <arg name="categories" type="a(qb)" direction="out">
+        <doc>
+          <line>categories = array[struct(id, top_level)]</line>
+          <line>id = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
+          <line>top_level = true if the category is a pre-defined one (top level with only ALL_CATEGORIES as parent), false for customized categories created by plug-in.</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiSearch.Error.InvalidCategory">
+        <doc>
+          <line>The category is not available.</line>
+        </doc>
+      </error>
+    </method>
+    <method name="GetCategoriesDetails">
+      <doc>
+        <line>GetCategoriesDetails = This method retrieves the details associated to one or more POI categories.</line>
+        <line>It contains the name, the parent categories, the top level attribute, the list of attributes, the icons, ... .</line>
+      </doc>
+      <arg name="categories" type="aq" direction="in">
+        <doc>
+          <line>list of categories = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
+          <line>Note: A POI category is a unique ID. It could be a predifined category or a custom one defined by a POI plug-in.</line>
+        </doc>
+      </arg>
+      <arg name="results" type="a((qaqvsbsv)a(sqa(qs))a(qs))" direction="out">
+        <doc>
+          <line>results = array[details, attributes, sortOptions]</line>
+          <line>results = List of details for all the POI categories.</line>
+          <line>details = struct(unique_id, list of parents_id, icons, name, top_level, short_desc, media)]</line>
+          <line>unique_id = Category unique id</line>
+          <line>parents_id = list of parent categories unique id</line>
+          <line>icons = visual icons set</line>
+          <line>name = name</line>
+          <line>top_level = true if the category is a pre-defined one (top level), false for customized categories created by plug-in.</line>
+          <line>short_desc = short category description (optional)</line>
+          <line>media = medial associated (html web site, audio, video, ...) (optional)</line>
+          <line>attributes = array[struct(name, type, array[struct(operator_id, operator_name)])</line>
+          <line>name = attribute unique name</line>
+          <line>type = enum(INVALID,STRING,INTEGER,COORDINATES ...)</line>
+          <line>operator_id = enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....)</line>
+          <line>operator_name = attribute operator name</line>
+          <line>sortOptions = array[struct(id, name)]</line>
+          <line>id = enum(SORT_DEFAULT,SORT_BY_DISTANCE,SORT_BY_TIME,ATTRIBUTE_CUSTOM, ... )</line>
+          <line>name = name to be displayed by application</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiSearch.Error.InvalidCategory">
+        <doc>
+          <line>The category is not available.</line>
+          <line>If there are more than one category and one of them is not available, no detailed will be returned for this category but there will be no error.</line>
+        </doc>
+      </error>
+    </method>
+    <signal name="CategoriesUpdated">
+      <doc>
+        <line>CategoriesUpdated = This signal indicates that one or more POI categories were added, updated or removed.</line>
+      </doc>
+      <arg name="poiCategories" type="a(qq)" direction="out">
+        <doc>
+          <line>poiCategories = array[struct(unique_id, reason)]</line>
+          <line>List of POI categories modified or added.</line>
+          <line>unique_id = Unique category id</line>
+          <line>reason = enum(ADDED,REMOVED,ATTR_ADDED,ATTR_MODIFIED,ATTR_REMOVED, ... )</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="CreatePoiSearchHandle">
+      <doc>
+        <line>CreatePoiSearchHandle = This method creates a new location input and retrieves a handle</line>
+      </doc>
+      <arg name="poiSearchHandle" type="y" direction="out">
+        <doc>
+          <line>poiSearchHandle = poi search unique handle</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiSearch.Error.NoMoreHandles">
+        <doc>
+          <line>This error is generated if no more poi search unique handles are available</line>
+        </doc>
+      </error>
+    </method>
+    <method name="DeletePoiSearchHandle">
+      <doc>
+        <line>DeletePoiSearchHandle = This method deletes a location input and its associated resources</line>
+      </doc>
+      <arg name="poiSearchHandle" type="y" direction="in">
+        <doc>
+          <line>poiSearchHandle = poi search unique handle</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to delete a poi search unique handle that is not available</line>
+        </doc>
+      </error>
+    </method>
+    <method name="SetCenter">
+      <doc>
+        <line>SetCenter  = This method sets the location to start the search around.</line>
+        <line>If a route handle was defined before, it will be replaced by this location.</line>
+      </doc>
+      <arg name="poiSearchHandle" type="y" direction="in">
+        <doc>
+          <line>poiSearchHandle = poi search unique handle</line>
+        </doc>
+      </arg>
+      <arg name="location" type="(ddi)" direction="in">
+        <doc>
+          <line>location = struct(lat,lon,alt)</line>
+          <line>lat = latitude of a vertex of the polygon in format %3.6f. Range [-90:+90]. Example: 48.053250</line>
+          <line>lon = longitude of a vertex of the polygon in format %3.6f. Range [-180:+180]. Example: 48.053250</line>
+          <line>alt = altitude above the sea level of the current position in meters</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiSearch.Error.InvalidPosition">
+        <doc>
+          <line>This error is generated if an application tries to set invalid coordinates.</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiSearch.Error.SearchIsActive">
+        <doc>
+          <line>This error is generated if an application tries to change the search criteria but the search is on-going and could not be updated.</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
+        </doc>
+      </error>
+    </method>
+    <method name="SetRouteHandle">
+      <doc>
+        <line>SetRouteHandle  = This method allows to start a POI search along a guided route.</line>
+        <line>The route handle must be valid or the POI search will failed.</line>
+        <line>If a search location was defined before, it will be replaced by the route.</line>
+      </doc>
+      <arg name="poiSearchHandle" type="y" direction="in">
+        <doc>
+          <line>poiSearchHandle = poi search unique handle</line>
+        </doc>
+      </arg>
+      <arg name="sessionHandle" type="y" direction="in">
+        <doc>
+          <line>sessionHandle = session handle</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="y" direction="in">
+        <doc>
+          <line>routeHandle = route handle.</line>
+        </doc>
+      </arg>
+      <arg name="startSearchOffset" type="q" direction="in">
+        <doc>
+          <line>startSearchOffset (optional) = Distance from vehicle (in meters) from where to start the search along. 0 or invalid distance means start from vehicle.</line>
+        </doc>
+      </arg>
+      <arg name="endSearchOffset" type="q" direction="in">
+        <doc>
+          <line>endSearchOffset (optional) = Lenght of the route (in meters) from where to start the search along. 0 or invalid lenght means end is the destination.</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiSearch.Error.InvalidRouteHandle">
+        <doc>
+          <line>This error is generated if an application tries to set invalid route handle.</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiSearch.Error.SearchIsActive">
+        <doc>
+          <line>This error is generated if an application tries to change the search criteria but the search is on-going and could not be updated.</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
+        </doc>
+      </error>
+    </method>
+    <method name="SetCategories">
+      <doc>
+        <line>SetCategories = This method sets the POI categories for the current search input and the corresponding result-lists for the current session</line>
+      </doc>
+      <arg name="poiSearchHandle" type="y" direction="in">
+        <doc>
+          <line>poiSearchHandle = poi search unique handle</line>
+        </doc>
+      </arg>
+      <arg name="poiCategories" type="a(qu)" direction="in">
+        <doc>
+          <line>poiCategories = array[struct(category, radius)]</line>
+          <line>category = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
+          <line>radius  = activation or search radius around the position (in 10 meters) for the category. If value is 0 (zero), the default radius (defined for a category) is applied.</line>
+          <line>Note: A POI category is a unique ID. It could be a predifined category or a custom one defined by a POI plug-in.</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiSearch.Error.InvalidCategory">
+        <doc>
+          <line>This error is generated if an application tries to set one or more invalid poi categories.</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiSearch.Error.SearchIsActive">
+        <doc>
+          <line>This error is generated if an application tries to change the search criteria but the search is on-going and could not be updated.</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
+        </doc>
+      </error>
+    </method>
+    <method name="SetAttributes">
+      <doc>
+        <line>SetAttributes = This method set POI attributes (optional) for the current search input and the corresponding result-lists for the current session</line>
+        <line>An attribute is attached to a category</line>
+      </doc>
+      <arg name="poiSearchHandle" type="y" direction="in">
+        <doc>
+          <line>poiSearchHandle = poi search unique handle</line>
+        </doc>
+      </arg>
+      <arg name="poiAttributes" type="a(sqqvqb)" direction="in">
+        <doc>
+          <line>poiAtttributes = array[struct(name, poiCategory, type, value, operator, mandatory)]</line>
+          <line>name = attribute unique name (see data model)</line>
+          <line>poiCategory = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
+          <line>type = enum(INVALID,STRING,INTEGER,COORDINATES ...)</line>
+          <line>value = value or partial value. The value depends on the attribute specifications and type.</line>
+          <line>operator = enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....)</line>
+          <line>mandatory = true if the attribute is mandatory for the search and false for optional.</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiSearch.Error.InvalidPoiAttribute">
+        <doc>
+          <line>This error is generated if an application tries to set one or more invalid poi attributes.</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiSearch.Error.SearchIsActive">
+        <doc>
+          <line>This error is generated if an application tries to change the search criteria but the search is on-going and could not be updated.</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
+        </doc>
+      </error>
+    </method>
+    <method name="StartPoiSearch">
+      <doc>
+        <line>StartPoiSearch = This method sends the search input for the search handle.</line>
+        <line>The search will start with the either the location or the route handle.</line>
+        <line>If no positon or route handle were configured, the search will use the vehicle position are center location.</line>
+      </doc>
+      <arg name="poiSearchHandle" type="y" direction="in">
+        <doc>
+          <line>poiSearchHandle = poi search unique handle</line>
+        </doc>
+      </arg>
+      <arg name="inputString" type="s" direction="in">
+        <doc>
+          <line>inputString = contains the name of the poi that is searched. It could be a partial name or an empty string.</line>
+        </doc>
+      </arg>
+      <arg name="sortOption" type="q" direction="in">
+        <doc>
+          <line>sortOption = enum(SORT_DEFAULT,SORT_BY_DISTANCE,SORT_BY_TIME,ATTRIBUTE_CUSTOM, ... )</line>
+          <line>If more than one category was defined for this search, the sort criteria should be compliant with all categories.</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiSearch.Error.InvalidCategory">
+        <doc>
+          <line>This error is generated if an application tries to start a search without, at least, one poi category defined.</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiSearch.Error.BadLocation">
+        <doc>
+          <line>This error is generated if an application tries to start a search without a valid location (coordinates or route handle) defined.</line>
+        </doc>
+      </error>
+    </method>
+    <method name="CancelPoiSearch">
+      <doc>
+        <line>CancelPoiSearch = This method cancels the search for the current session</line>
+      </doc>
+      <arg name="poiSearchHandle" type="y" direction="in">
+        <doc>
+          <line>poiSearchHandle = poi search unique handle</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
+        </doc>
+      </error>
+    </method>
+    <method name="StartPoiProximityAlert">
+      <doc>
+        <line>StartPoiProximityAlert = This method starts to check for POI aound vehicle according to the criteria defined with the unique handle.</line>
+        <line>Bt default, it will search for POI around vehicle position with default radius defined for each categories.</line>
+        <line>If a route handle was defined, it will search along the route with default categorie's radius.</line>
+      </doc>
+      <arg name="poiSearchHandle" type="y" direction="in">
+        <doc>
+          <line>poiSearchHandle = poi alert unique handle</line>
+        </doc>
+      </arg>
+      <arg name="inputString" type="s" direction="in">
+        <doc>
+          <line>inputString = contains the name of the poi that is searched. It could be a partial name or an empty string.</line>
+        </doc>
+      </arg>
+      <arg name="sortOption" type="q" direction="in">
+        <doc>
+          <line>sortOption = enum(SORT_DEFAULT,SORT_BY_DISTANCE,SORT_BY_TIME,ATTRIBUTE_CUSTOM, ... )</line>
+          <line>If more than one category was defined for this search, the sort criteria should be compliant with all categories.</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiSearch.Error.InvalidCategory">
+        <doc>
+          <line>This error is generated if an application tries to start a search without, at least, one poi category defined.</line>
+        </doc>
+      </error>
+    </method>
+    <method name="CancelPoiProximityAlert">
+      <doc>
+        <line>CancelPoiProximityAlert = This method cancels the search for the current session</line>
+      </doc>
+      <arg name="poiSearchHandle" type="y" direction="in">
+        <doc>
+          <line>poiSearchHandle = poi alert unique handle</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
+        </doc>
+      </error>
+    </method>
+    <signal name="PoiStatus">
+      <doc>
+        <line>PoiStatus = This signal updates the search or proximity alert status of the specified handle.</line>
+      </doc>
+      <arg name="poiSearchHandle" type="y" direction="out">
+        <doc>
+          <line>poiSearchHandle = poi search unique handle</line>
+        </doc>
+      </arg>
+      <arg name="statusValue" type="q" direction="out">
+        <doc>
+          <line>statusValue = enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... )</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="ResultListChanged">
+      <doc>
+        <line>ResultListChanged = This signal updates in the poi results list</line>
+      </doc>
+      <arg name="poiSearchHandle" type="y" direction="out">
+        <doc>
+          <line>poiSearchHandle = poi search unique handle</line>
+        </doc>
+      </arg>
+      <arg name="resultListSize" type="q" direction="out">
+        <doc>
+          <line>resultListSize = Number of items of the results list</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="RequestResultList">
+      <doc>
+        <line>RequestResultList = This method gets the poi result list (e.g. after a Search/Scroll call)</line>
+      </doc>
+      <arg name="poiSearchHandle" type="y" direction="in">
+        <doc>
+          <line>poiSearchHandle = poi search unique handle</line>
+        </doc>
+      </arg>
+      <arg name="offset" type="q" direction="in">
+        <doc>
+          <line>offset = starting offset of the newly requested list elements. If invalid (more that total list for instance) it starts from the begining.</line>
+        </doc>
+      </arg>
+      <arg name="maxWindowSize" type="q" direction="in">
+        <doc>
+          <line>maxWindowSize = maximum number of elements that should be returned as result</line>
+        </doc>
+      </arg>
+      <arg name="attributes" type="as" direction="in">
+        <doc>
+          <line>attributes = List of attributes name to retrieve. This is optional and the list could be empty.</line>
+        </doc>
+      </arg>
+      <arg name="statusValue" type="q" direction="out">
+        <doc>
+          <line>statusValue = enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... )</line>
+        </doc>
+      </arg>
+      <arg name="resultListSize" type="q" direction="out">
+        <doc>
+          <line>resultListSize = Number of items of the results list</line>
+        </doc>
+      </arg>
+      <arg name="resultListWindow" type="a(uuqa(sqv))" direction="out">
+        <doc>
+          <line>resultListWindow = array[unique_id, distance, route_status, attributes]</line>
+          <line>unique_id = POI unique id</line>
+          <line>distance = distance in meters to poi from center of the search or from vehicle if search along</line>
+          <line>route_status = enum(OFF_ROUTE,ON_ROUTE,INSIDE_CORRIDOR, ... )</line>
+          <line>attributes = array[struct(name, type, value)]</line>
+          <line>List of attributes requested. It could be empty.</line>
+          <line>name = attribute unique name (see data model)</line>
+          <line>type = enum(INVALID,STRING,INTEGER,COORDINATES ...)</line>
+          <line>value = value. The value depends on the attribute specifications and type.</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
+        </doc>
+      </error>
+      <error name="org.genivi.poiservice.poiSearch.Error.InvalidPoiAttribute">
+        <doc>
+          <line>This error is generated if an application tries to get one or more invalid poi attributes.</line>
+        </doc>
+      </error>
+    </method>
+    <method name="GetPoiDetails">
+      <doc>
+        <line>GetPoiDetails = This method retrieves the details associated to one or more POI.</line>
+        <line>It contains the name, the parent categories, the list of attributes, the icons, ... .</line>
+      </doc>
+      <arg name="id" type="au" direction="in">
+        <doc>
+          <line>list of poi = Unique poi id</line>
+        </doc>
+      </arg>
+      <arg name="results" type="a((usddi)aqa(sqv))" direction="out">
+        <doc>
+          <line>results = array[details, categories, attributes]</line>
+          <line>results = List of details for all the POI.</line>
+          <line>details = struct(unique id, name, lat, lon, alt)</line>
+          <line>unique id = POI id</line>
+          <line>name = POI name</line>
+          <line>lat = latitude of a vertex of the polygon in format %3.6f. Range [-90:+90]. Example: 48.053250</line>
+          <line>lon = longitude of a vertex of the polygon in format %3.6f. Range [-180:+180]. Example: 48.053250</line>
+          <line>alt = altitude above the sea level of the current position in meters</line>
+          <line>categories = array[id]</line>
+          <line>id = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
+          <line>attributes = array[struct(name, type, value)]</line>
+          <line>name = attribute unique name (see data model)</line>
+          <line>type = enum(INVALID,STRING,INTEGER,COORDINATES ...)</line>
+          <line>value = value. The value depends on the attribute specifications and type.</line>
+          <line>Note: This list only contains the available attributes. If there is no value for an optional attributes, it is not returned.</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.poiservice.poiSearch.Error.InvalidPoiId">
+        <doc>
+          <line>The poi unique id is not valid.</line>
+        </doc>
+      </error>
+    </method>
+  </interface>
+</node>

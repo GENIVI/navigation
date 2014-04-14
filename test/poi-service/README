@@ -1,0 +1,58 @@
+Release date of the file: 11-04-2014 
+Status: to be completed
+
+Project:
+Search engine for Point Of Interest with a content access module mechanism to extend to additional sources of data
+This project is one of the navigation-service common projects that implements the GENIVI navigation APIs.
+
+More:
+The project is made of four parts:
+- poi-supplier that populates a sqlite3 based database from OSM data in xml format
+- poi-server that implements the poi search API and access an embedded database
+- poi-contentaccess-module that implements a content access module that access an additional database, and a simple HMI 
+- poi-client that implements a client with a test HMI 
+See also other navigation projects like navigation or proof of concepts implemented for traffic-info and positioning 
+
+What is in:
+This folder contains scripts for building poi-supplier, poi-contentaccess-module and poi-client, generating the databases and launching the whole stuff (build poi-server if necessary)
+FYI: poi-server is located under src/poi-service
+
+Author: 
+Philippe Colliot philippe.colliot@mpsa.com
+
+License: 
+See headers and LICENSE file (mainly MPL V2)
+
+Test target: 
+Ubuntu 12.04.1 LTS
+
+To get the code:
+Code is part of the navigation-service repository, so you need to clone all:
+git clone http://git.projects.genivi.org/lbs/navigation-service.git $WORKING-DIR
+
+Dependencies:
+libqt4-dev libdbus-c++-dev libxml2-dev libsqlite3-dev sqlite3 libglib2.0-dev libglibmm-2.4-dev libdbus-1-dev libxml++2.6-dev xsltproc
+ 
+Important notice before building the POC:
+# The software is using stream conversion, so please care if your local settings are right
+# There could be a potential runtime error due to a wrong sql request (problem with the use of ',' in place of '.')
+# so, if you enter 
+locale | grep 'LC_NUMERIC' 
+# you must get
+LC_NUMERIC="en_US.UTF-8"
+
+Build:
+# Enter into the directory
+cd $WORKING-DIR/navigation-service/test/poi-service/script
+make all
+
+Prepare databases, configure and run:
+As examples, three databases can be generated for Paris, Tokyo and San-Diego
+
+To launch the stuff for Paris:
+./prepare paris
+./run
+
+Clean up:
+./kill-all
+

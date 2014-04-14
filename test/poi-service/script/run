@@ -1,0 +1,59 @@
+#!/bin/sh
+
+# @licence app begin@
+# SPDX-License-Identifier: MPL-2.0
+#
+# \copyright Copyright (C) 2013-2014, PCA Peugeot Citroen
+#
+# \file run
+#
+# \brief This file is part of the Build System.
+#
+# \author Philippe Colliot <philippe.colliot@mpsa.com>
+#
+# \version 1.0
+#
+# This Source Code Form is subject to the terms of the
+# Mozilla Public License (MPL), v. 2.0.
+# If a copy of the MPL was not distributed with this file,
+# You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# For further information see http://www.genivi.org/.
+#
+# List of changes:
+# 
+# <date>, <name>, <description of change>
+#
+# @licence end@
+
+echo '------------------------start the proof of concept------------------------'
+CURDIR=$PWD
+ROOT_DIR=$CURDIR/..
+BIN_DIR=$ROOT_DIR/bin
+EXE_DIR=$BIN_DIR
+COMPONENT_EXE_DIR=$ROOT_DIR/../../src/poi-service/bin
+COMPONENT_SCRIPT_DIR=$ROOT_DIR/../../src/poi-service/script
+MAIN_DATABASE=$EXE_DIR/'poi-database.db'
+ADDITIONAL_DATABASE=$EXE_DIR/'poi-database-additional.db'
+
+echo 'kill orphan process if necessary'
+$CURDIR/kill-all
+
+echo 'run'
+#check is poi-server exists, if not make it 
+if [ ! -f $COMPONENT_EXE_DIR/poi-server ]
+then
+    echo $COMPONENT_EXE_DIR/poi-server does not exist, so make it first
+	cd 	$COMPONENT_SCRIPT_DIR
+	make all
+	cd $CURDIR
+fi
+
+
+read language <$EXE_DIR/language.txt
+echo $language
+$EXE_DIR/poi-contentaccess-module -f $ADDITIONAL_DATABASE -i $language &
+$COMPONENT_EXE_DIR/poi-server -f $MAIN_DATABASE &
+
+$EXE_DIR/poi-client &
+

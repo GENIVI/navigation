@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="introspect.xsl"?>
+<!-- SPDX-License-Identifier: MPL-2.0
+     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
+     This Source Code Form is subject to the terms of the
+     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/navigationcore" xsi:noNamespaceSchemaLocation="introspect.xsd">
+  <interface name="org.genivi.navigationcore.MapMatchedPosition">
+    <version>3.0.0-alpha (23-10-2013)</version>
+    <doc>
+      <line>MapMatchedPosition = This interface offers functions to retrieve the map matched position and to simulate positioning</line>
+	  <line></line>
+	  <line>If NavigationCore is not in Simulation Mode (Simulation Status is SIMULATION_STATUS_NO_SIMULATION), it is using the EnhancedPosition from the Positioning component.</line>
+	  <line>In Simulation Mode it is not using this position, instead it uses FixedPosition or FollowActiveRoute to determine the position.</line>
+	  <line>With FixedPosition (Simulation Status is SIMULATION_STATUS_FIXED_POSITION), the position is fixed, unless it is changed by a call to setPosition().</line>
+	  <line>This supports use cases like: setting the current car position in a demo mode, or replay a position log file (where setPosition() is called for each logged location).</line>
+	  <line>In Follow Active Route mode, NavigationCore is generating positions itself.</line>
+	  <line>These positions follow the current active route. When the end of the route is reached, the position jumps back to the starting point of the route.</line>
+	  <line>There are two sub states: Running (Simulation Status is SIMULATION_STATUS_RUNNING) and Paused (Simulation Status is SIMULATION_STATUS_PAUSED).</line>
+	  <line>By default the ‘driving speed’ will be equal to the free flow speed of each road segment. However a speed factor can be set via the method SetSimulationSpeed.</line>
+    </doc>
+    <method name="GetVersion">
+      <doc>
+        <line>GetVersion = This method returns the API version implemented by the server application</line>
+      </doc>
+      <arg name="version" type="(qqqs)" direction="out">
+        <doc>
+          <line>version = struct(major,minor,micro,date)</line>
+          <line>major = when the major changes, then backward compatibility with previous releases is not granted</line>
+          <line>minor = when the minor changes, then backward compatibility with previous releases is granted, but something changed in the implementation of the API (e.g. new methods may have been added)</line>
+          <line>micro = when the micro changes, then backward compatibility with previous releases is granted (bug fixes or documentation modifications)</line>
+          <line>date = release date (e.g. 21-06-2011)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetSimulationMode">
+      <doc>
+        <line>SetSimulationMode = This method activates or deactivates the simulation mode</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="activate" type="b" direction="in">
+        <doc>
+          <line>activate = flag. TRUE means that the simulation mode is activated.</line>
+		  <line>The simulation status will be SIMULATION_STATUS_FIXED_POSITION, with the position being the last known position in the NavigationCore.</line>
+		  <line>FALSE means that the simulation mode is de-activated. The simulation status will be SIMULATION_STATUS_NO_SIMULATION</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSimulationStatus">
+      <doc>
+        <line>GetSimulationStatus = This method retrieves the simulation status</line>
+      </doc>
+      <arg name="simulationStatus" type="q" direction="out">
+        <doc>
+          <line>simulationStatus = enum(SIMULATION_STATUS_NO_SIMULATION, SIMULATION_STATUS_RUNNING, SIMULATION_STATUS_PAUSED, SIMULATION_STATUS_FIXED_POSITION)</line>
+          <line>SIMULATION_STATUS_NO_SIMULATION means that NavigationCore is using the EnhancedPosition</line>
+          <line>SIMULATION_STATUS_RUNNING means that positions are generated along the active route</line>
+          <line>SIMULATION_STATUS_PAUSED means that the generation of positions along the active route is paused</line>
+          <line>SIMULATION_STATUS_FIXED_POSITION means that the position is fixed.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="AddSimulationStatusListener">
+      <doc>
+        <line> AddSimulationStatusListener = Add this node as a listener to Simulation Status changes.</line>
+		<line>Upon changes a SimulationStatusChanged signal will be received. NavigationCore will only send out a SimulationStatusChanged signal if there is at least one node listening to these changes.</line>
+      </doc>
+    </method>
+    <method name="RemoveSimulationStatusListener">
+      <doc>
+        <line> RemoveSimulationStatusListener = Remove this node as a listener to Simulation Status changes.</line>
+      </doc>
+    </method>
+    <signal name="SimulationStatusChanged">
+      <doc>
+        <line>SimulationStatusChanged = This signal is emitted when the Simulation Status has changed</line>
+      </doc>
+      <arg name="simulationStatus" type="q">
+        <doc>
+          <line>simulationStatus = enum(SIMULATION_STATUS_NO_SIMULATION, SIMULATION_STATUS_RUNNING, SIMULATION_STATUS_PAUSED, SIMULATION_STATUS_FIXED_POSITION)</line>
+          <line>SIMULATION_STATUS_NO_SIMULATION means that NavigationCore is using the EnhancedPosition</line>
+          <line>SIMULATION_STATUS_RUNNING means that positions are generated along the active route</line>
+          <line>SIMULATION_STATUS_PAUSED means that the generation of positions along the active route is paused</line>
+          <line>SIMULATION_STATUS_FIXED_POSITION means that the position is fixed.</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="SetSimulationSpeed">
+      <doc>
+        <line>SetSimulationSpeed = This method sets the speed factor for the simulation mode</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="speedFactor" type="y" direction="in">
+        <doc>
+          <line>speedFactor = speed factor</line>
+          <line>unit is x0.25. Normal speed x1 is 4</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSimulationSpeed">
+      <doc>
+        <line>GetSimulationSpeed = returns the speed factor for the simulation mode</line>
+      </doc>
+      <arg name="speedFactor" type="y" direction="out">
+        <doc>
+          <line>speedFactor = speed factor</line>
+          <line>unit is x0.25. Normal speed x1 is 4</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="AddSimulationSpeedListener">
+      <doc>
+        <line> AddSimulationSpeedListener = Add this node as a listener to simulation speed factor changes.</line>
+		<line>Upon changes a SimulationSpeedChanged signal will be received.</line>
+		<line>NavigationCore will only send out a SimulationSpeedChanged signal if there is at least one node listening to these changes</line>
+      </doc>
+    </method>
+    <method name="RemoveSimulationSpeedListener">
+      <doc>
+        <line> RemoveSimulationSpeedListener = Remove this node as a listener to simulation speed factor changes.</line>
+      </doc>
+    </method>
+    <signal name="SimulationSpeedChanged">
+      <doc>
+        <line>SimulationSpeedChanged = This signal is emitted when the simulation speed factor has changed</line>
+		<line>NavigationCore will only send out a SimulationSpeedChanged signal if there is at least one node listening to these changes</line>
+      </doc>
+      <arg name="speedFactor" type="y">
+        <doc>
+          <line>speedFactor = speed factor</line>
+          <line>unit is x0.25. Normal speed x1 is 4</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="StartSimulation">
+      <doc>
+        <line>StartSimulation = This method starts, or resumes, a Follow Active Route simulation</line>
+        <line>If the current Simulation Status is SIMULATION_STATUS_PAUSED, the simulation is resumed from the current location.</line>
+		<line>Otherwise the simulation is started from the starting point of the route. In both cases the new status will be SIMULATION_STATUS_RUNNING</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="PauseSimulation">
+      <doc>
+        <line>PauseSimulation = This method freezes the current location</line>
+		<line>The new status will be SIMULATION_STATUS_PAUSED</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetPosition">
+      <doc>
+        <line>GetPosition = This method returns the current position</line>
+      </doc>
+      <arg name="valuesToReturn" type="aq" direction="in">
+        <doc>
+          <line>valuesToReturn= array[key]</line>
+          <line>key = enum(INVALID,TIMESTAMP,LATITUDE,LONGITUDE,ALTITUDE,HEADING,SPEED,CLIMB,GNSS_FIX_STATUS,DR_STATUS,MM_STATUS,SIMULATION_MODE, ... ,ALL)</line>
+        </doc>
+      </arg>
+      <arg name="position" type="a{qv}" direction="out">
+        <doc>
+          <line>position = dictionary[key,value]</line>
+          <line>dictionary = array of tuples (key,value)</line>
+          <line>key = enum(INVALID,TIMESTAMP,LATITUDE,LONGITUDE,ALTITUDE,HEADING,SPEED,CLIMB,GNSS_FIX_STATUS,DR_STATUS,MM_STATUS,SIMULATION_MODE, ... )</line>
+          <line>key = TIMESTAMP, value = value of type 't', that represents a timestamp in ms</line>
+          <line>key = LATITUDE, value = value of type 'd', that expresses the latitude of the current position in format %3.6f. Range [-90,+90]. Example: 48.053250</line>
+          <line>key = LONGITUDE, value = value of type 'd', that expresses the longitude of the current position in format %3.6f. Range [-180,+180]. Example: 8.324500</line>
+          <line>key = ALTITUDE, value = value of type 'i', that expresses the altitude above the sea level of the current position in meters</line>
+          <line>key = HEADING, value = value of type 'u', that expresses the course angle in degree (0 = north, 90 = east, 180 = south, 270 = west, no negative values)</line>
+          <line>key = SPEED, value = value of type 'd', that expresses speed measured in m/s. A negative value indicates that the vehicle is moving backwards</line>
+          <line>key = CLIMB, value = value of type 'i', that expresses the inclination measured in degrees</line>
+          <line>key = GNSS_FIX_STATUS, value = value of type 'q', that represents an enum(INVALID,NO_FIX,TIME_FIX,2D_FIX,3D_FIX, ... )</line>
+          <line>key = DR_STATUS, value = value of type 'b', where TRUE means that a dead-reckoning algorithm has been used to calculate the current position</line>
+          <line>key = MM_STATUS, value = value of type 'b', where TRUE means that a map-matching algorithm has been used to calculate the current position</line>
+          <line>key = SIMULATION_MODE, value = value of type 'b', where TRUE means that the current position is simulated</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.MapMatchedPosition.Error.NoPosition">
+        <doc>
+          <line>This error is generated if no position is available</line>
+        </doc>
+      </error>
+    </method>
+    <method name="SetPosition">
+      <doc>
+        <line>SetPosition = This method sets the position to a specific location</line>
+        <line>Independent of the current Simulation Status, the new status will be SIMULATION_STATUS_FIXED_POSITION.</line>
+        <line>This method can be used to replay a position log file (with positions obtained via calls to GetPosition()) by calling this method for each position in the log file.</line>
+        <line>It is of course also possible to call this method just once with e.g. a 'current location' entered by the user (via the HMI).</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="position" type="a{qv}" direction="in">
+        <doc>
+          <line>position = dictionary[key,value]</line>
+          <line>dictionary = array of tuples (key,value)</line>
+          <line>key = enum(INVALID,TIMESTAMP,LATITUDE,LONGITUDE,ALTITUDE,HEADING,SPEED,CLIMB,GNSS_FIX_STATUS,DR_STATUS,MM_STATUS, ... )</line>
+          <line>key = TIMESTAMP, value = value of type 't', that represents a timestamp in ms</line>
+          <line>key = LATITUDE, value = value of type 'd', that expresses the latitude of the current position in format %3.6f. Range [-90,+90]. Example: 48.053250</line>
+          <line>key = LONGITUDE, value = value of type 'd', that expresses the longitude of the current position in format %3.6f. Range [-180,+180]. Example: 8.324500</line>
+          <line>key = ALTITUDE, value = value of type 'i', that expresses the altitude above the sea level of the current position in meters</line>
+          <line>key = HEADING, value = value of type 'u', that expresses the course angle in degree (0 = north, 90 = east, 180 = south, 270 = west, no negative values)</line>
+          <line>key = SPEED, value = value of type 'd', that expresses speed measured in m/s. A negative value indicates that the vehicle is moving backwards</line>
+          <line>key = CLIMB, value = value of type 'i', that expresses the inclination measured in degrees</line>
+          <line>key = GNSS_FIX_STATUS, value = value of type 'q', that represents an enum(INVALID,NO_FIX,TIME_FIX,2D_FIX,3D_FIX, ... )</line>
+          <line>key = DR_STATUS, value = value of type 'b', where TRUE means that a dead-reckoning algorithm has been used to calculate the current position</line>
+          <line>key = MM_STATUS, value = value of type 'b', where TRUE means that a map-matching algorithm has been used to calculate the current position</line>
+          <line>Note that the key SIMULATION_MODE is not allowed here, as it will be true by definition.</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="PositionUpdate">
+      <doc>
+        <line>PositionUpdate = This signal is called to notify a client application of a position change. The update frequency is implementation specific. The maximal allowed frequency is 10Hz</line>
+      </doc>
+      <arg name="changedValues" type="aq">
+        <doc>
+          <line>changedValues = array[value]</line>
+          <line>value = enum(INVALID,TIMESTAMP,LATITUDE,LONGITUDE,ALTITUDE,HEADING,SPEED,CLIMB,GNSS_FIX_STATUS,DR_STATUS,MM_STATUS,SIMULATION_MODE, ... )</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="GetAddress">
+      <doc>
+        <line>GetAddress = This method returns the current address</line>
+      </doc>
+      <arg name="valuesToReturn" type="aq" direction="in">
+        <doc>
+          <line>valuesToReturn= array[fieldType]</line>
+          <line>key = enum(INVALID,TIMESTAMP,COUNTRY,COUNTRYCODE,CITY,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,TIMEZONE_OFFSET,DAYLIGHT_OFFSET,MATCH_TYPE, ... ,ALL)</line>
+        </doc>
+      </arg>
+      <arg name="address" type="a{qv}" direction="out">
+        <doc>
+          <line>address = dictionary[key,value]</line>
+          <line>dictionary = array of tuples (key,value)</line>
+          <line>key = enum(INVALID,TIMESTAMP,COUNTRY,COUNTRYCODE,CITY,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,TIMEZONE_OFFSET,DAYLIGHT_OFFSET,MATCH_TYPE, ... )</line>
+          <line>key = TIMESTAMP, value = value of type 't', that represents a timestamp in ms</line>
+          <line>key = COUNTRY, value = value of type 's', that identifies the country name</line>
+          <line>key = COUNTRYCODE, value = value of type 's', ISO 3166‐1 alpha 3 country code (upper case)</line>
+          <line>key = CITY, value = value of type 's', that identifies the city name</line>
+          <line>key = STREET, value = value of type 's', that identifies the street name</line>
+          <line>key = ROAD_NUMBER, value = value of type ´s´, that identifies the road number</line>
+          <line>key = HOUSENUMBER, value = value of type 's', that identifies the house number</line>
+          <line>key = HOUSENAME, value = value of type ´s´, that identifies the house name</line>
+          <line>key = CROSSING, value = value of type 's', that identifies the crossing</line>
+          <line>key = DISTRICT, value = value of type 's', that identifies the district name</line>
+          <line>key = TIMEZONE_OFFSET, value = value of type 'n', that identifies the timezone offset at the current address</line>
+          <line>key = DAYLIGHT_OFFSET, value = value of type 'n', that identifies the daylight offset at the current address</line>
+          <line>key = MATCH_TYPE, value = value of type 'q', that identifies an enum(INVALID,ON_ROAD,OFF_ROAD,ON_FERRY,IN_TUNNEL,ON_CARPARK, ... )</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.MapMatchedPosition.Error.NoMap">
+        <doc>
+          <line>This error is generated if no map is available</line>
+        </doc>
+      </error>
+      <error name="org.genivi.navigationcore.MapMatchedPosition.Error.OutOfKnownMap">
+        <doc>
+          <line>This error is generated if the vehicle is located in a position outside of the known map</line>
+        </doc>
+      </error>
+    </method>
+    <signal name="AddressUpdate">
+      <doc>
+        <line>AddressUpdate = This signal is called to notify a client application that the current address changed</line>
+      </doc>
+      <arg name="changedValues" type="aq">
+        <doc>
+          <line>changedValues = array[value]</line>
+          <line>value = enum(INVALID,TIMESTAMP,COUNTRY,COUNTRYCODE,CITY,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,TIMEZONE_OFFSET,DAYLIGHT_OFFSET,MATCH_TYPE, ... )</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="GetPositionOnSegment">
+      <doc>
+        <line>positionOnSegment = This method returns the vehicle position on a route segment</line>
+      </doc>
+      <arg name="valuesToReturn" type="aq" direction="in">
+        <doc>
+          <line>valuesToReturn= array[fieldType]</line>
+          <line>key = enum(INVALID,TIMESTAMP,SEGMENT_ID,DIRECTION_ON_SEGMENT,DISTANCE_ON_SEGMENT, ... ,ALL)</line>
+        </doc>
+      </arg>
+      <arg name="positionOnSegment" type="a{qv}" direction="out">
+        <doc>
+          <line>positionOnSegment = dictionary[key,value]</line>
+          <line>dictionary = array of tuples (key,value)</line>
+          <line>key = enum(INVALID,TIMESTAMP,SEGMENT_ID,DIRECTION_ON_SEGMENT,DISTANCE_ON_SEGMENT, ... )</line>
+          <line>key = TIMESTAMP, value = value of type 't', that represents a timestamp in ms</line>
+          <line>key = SEGMENT_ID, value = value = value of type 'ay', that represents a link-ID in a format whose interpretation is left to the navigationcore</line>
+          <line>key = DIRECTION_ON_SEGMENT, value = value of type 'b', where TRUE means forward and FALSE means backward</line>
+          <line>key = DISTANCE_ON_SEGMENT, value = value of type 'd', that indicates the distance in meter on the segment</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="PositionOnSegmentUpdate">
+      <doc>
+        <line>PositionOnSegmentUpdate = This signal is called to notify the client that the vehicle position on the route segment changed</line>
+      </doc>
+      <arg name="changedValues" type="aq">
+        <doc>
+          <line>changedValues = array[value]</line>
+          <line>value = enum(INVALID,TIMESTAMP,SEGMENT_ID,DIRECTION_ON_SEGMENT,DISTANCE_ON_SEGMENT, ... )</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="GetStatus">
+      <doc>
+        <line>GetStatus = This method returns the current status</line>
+      </doc>
+      <arg name="valuesToReturn" type="aq" direction="in">
+        <doc>
+          <line>valuesToReturn = array[fieldType]</line>
+          <line>key = enum(INVALID,TIMESTAMP,GNSS_FIX_STATUS,DR_STATUS,MM_STATUS,SIMULATION_MODE, ... ,ALL)</line>
+        </doc>
+      </arg>
+      <arg name="status" type="a{qv}" direction="out">
+        <doc>
+          <line>status = dictionary[key,value]</line>
+          <line>dictionary = array of tuples (key,value)</line>
+          <line>key = enum(INVALID,TIMESTAMP,GNSS_FIX_STATUS,DR_STATUS,MM_STATUS,SIMULATION_MODE, ... )</line>
+          <line>key = TIMESTAMP, value = value of type 't', that represents a timestamp in ms</line>
+          <line>key = GNSS_FIX_STATUS, value = value of type 'q', that represents an enum(INVALID,NO_FIX,TIME_FIX,2D_FIX,3D_FIX, ... )</line>
+          <line>key = DR_STATUS, value = value of type 'b', where TRUE means that a dead-reckoning algorithm has been used to calculate the current position</line>
+          <line>key = MM_STATUS, value = value of type 'b', where TRUE means that a map-matching algorithm has been used to calculate the current position</line>
+          <line>key = SIMULATION_MODE, value = value of type 'b', where TRUE means that the current position is simulated</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="StatusUpdate">
+      <doc>
+        <line>StatusUpdate = This signal is emitted to notifiy a client application that the current status changed</line>
+      </doc>
+      <arg name="changedValues" type="aq">
+        <doc>
+          <line>changedValues = array[value]</line>
+          <line>value = enum(INVALID,TIMESTAMP,GNSS_FIX_STATUS,DR_STATUS,MM_STATUS,SIMULATION_MODE, ... )</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="OffRoadPositionChanged">
+      <doc>
+        <line>OffroadPositionChanged = This signal is emitted when the heading and the distance to the closest point on the road network changes</line>
+      </doc>
+      <arg name="distance" type="u">
+        <doc>
+          <line>distance = distance in meters to the closest point on the road network</line>
+        </doc>
+      </arg>
+      <arg name="direction" type="i">
+        <doc>
+          <line>direction = direction in degrees relatively to the closest point on the road network. Range [0:360]</line>
+        </doc>
+      </arg>
+    </signal>
+  </interface>
+</node>

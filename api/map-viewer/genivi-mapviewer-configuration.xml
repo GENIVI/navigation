@@ -1,0 +1,194 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="introspect.xsl"?>
+<!-- SPDX-License-Identifier: MPL-2.0
+     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
+     This Source Code Form is subject to the terms of the
+     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/mapviewer" xsi:noNamespaceSchemaLocation="introspect.xsd">
+  <interface name="org.genivi.mapviewer.Configuration">
+    <version>2.0.0 (07-06-2013)</version>
+    <doc>
+      <line>Configuration = This interface offers functions to set and retrieve configuration parameters</line>
+    </doc>
+    <method name="GetVersion">
+      <doc>
+        <line>GetVersion = This method returns the API version implemented by the server application</line>
+      </doc>
+      <arg name="version" type="(qqqs)" direction="out">
+        <doc>
+          <line>version = struct(major,minor,micro,date)</line>
+          <line>major = when the major changes, then backward compatibility with previous releases is not granted</line>
+          <line>minor = when the minor changes, then backward compatibility with previous releases is granted, but something changed in the implementation of the API (e.g. new methods may have been added)</line>
+          <line>micro = when the micro changes, then backward compatibility with previous releases is granted (bug fixes or documentation modifications)</line>
+          <line>date = release date (e.g. 21-06-2011)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetUnitsOfMeasurement">
+      <doc>
+        <line>SetUnitsOfMeasurement = This method sets the units of measurement</line>
+      </doc>
+      <arg name="unitsOfMeasurementList" type="a{qv}" direction="in">
+        <doc>
+          <line>unitsOfMeasurementList = array[unitsOfMeasurement]</line>
+          <line>unitsOfMeasurement = tuple (key,value)</line>
+          <line>key = enum(INVALID,LENGTH, ... )</line>
+          <line>key = LENGTH, value = value of type 'q', that represents an enum(INVALID,METER,MILE, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetUnitsOfMeasurement">
+      <doc>
+        <line>GetUnitsOfMeasurement = This method retrieves the units of measurement</line>
+      </doc>
+      <arg name="unitsOfMeasurementList" type="a{qv}" direction="out">
+        <doc>
+          <line>unitsOfMeasurementList = array[unitsOfMeasurement]</line>
+          <line>unitsOfMeasurement = tuple (key,value)</line>
+          <line>key = enum(INVALID,LENGTH, ... )</line>
+          <line>key = LENGTH, value = value of type 'q', that represents an enum(INVALID,METER,MILE, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSupportedUnitsOfMeasurement">
+      <doc>
+        <line>GetSupportedUnitsOfMeasurement = This method retrieves the supported units of measurement</line>
+      </doc>
+      <arg name="unitsOfMeasurementList" type="a{qv}" direction="out">
+        <doc>
+          <line>unitsOfMeasurementList = array[unitsOfMeasurement]</line>
+          <line>unitsOfMeasurement = dictionary[key,value]</line>
+          <line>dictionary = array of tuples (key,value)</line>
+          <line>key = enum(INVALID,LENGTH, ... )</line>
+          <line>key = LENGTH, value = value of type 'aq'; 'q' is an enum(INVALID,METER,MILE, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetTimeFormat">
+      <doc>
+        <line>SetTimeFormat = This method sets the time format</line>
+      </doc>
+      <arg name="timeFormat" type="q" direction="in">
+        <doc>
+          <line>timeFormat = enum(INVALID,12H,24H, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetTimeFormat">
+      <doc>
+        <line>GetTimeFormat = This method retrieves the time format</line>
+      </doc>
+      <arg name="timeFormat" type="q" direction="out">
+        <doc>
+          <line>timeFormat = enum(INVALID,12H,24H, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSupportedTimeFormats">
+      <doc>
+        <line>GetSupportedTimeFormats = This method retrieves the supported time formats</line>
+      </doc>
+      <arg name="timeFormatList" type="aq" direction="out">
+        <doc>
+          <line>timeFormatList = array[timeFormat]</line>
+          <line>timeFormat = enum(INVALID,12H,24H, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetCoordinatesFormat">
+      <doc>
+        <line>SetCoordinatesFormat = This method sets the coordinates format</line>
+      </doc>
+      <arg name="coordinatesFormat" type="q" direction="in">
+        <doc>
+          <line>coordinatesFormat = enum(INVALID,DEGREES,MINUTES,SECONDS, ... )</line>
+          <line>DEGREES format = d.dº</line>
+          <line>MINUTES format = dºm.m'</line>
+          <line>SECONDS format = dºm's"</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetCoordinatesFormat">
+      <doc>
+        <line>GetCoordinatesFormat = This method retrieves the coordinates format</line>
+      </doc>
+      <arg name="coordinatesFormat" type="q" direction="out">
+        <doc>
+          <line>coordinatesFormat = enum(INVALID,DEGREES,MINUTES,SECONDS, ... )</line>
+          <line>DEGREES format = d.dº</line>
+          <line>MINUTES format = dºm.m'</line>
+          <line>SECONDS format = dºm's"</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSupportedCoordinatesFormats">
+      <doc>
+        <line>GetSupportedCoordinatesFormats = This method retrieves the supported coordinates formats</line>
+      </doc>
+      <arg name="coordinatesFormatList" type="aq" direction="out">
+        <doc>
+          <line>coordinatesFormatList = array[coordinatesFormat]</line>
+          <line>coordinatesFormat = enum(INVALID,DEGREES,MINUTES,SECONDS, ... )</line>
+          <line>DEGREES format = d.dº</line>
+          <line>MINUTES format = dºm.m'</line>
+          <line>SECONDS format = dºm's"</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetLocale">
+      <doc>
+        <line>SetLocale = This method sets the current language and country</line>
+      </doc>
+      <arg name="language" type="s" direction="in">
+        <doc>
+          <line>language =  ISO 639‐3 language code (lower case)</line>
+        </doc>
+      </arg>
+      <arg name="country" type="s" direction="in">
+        <doc>
+          <line>country = ISO 3166‐1 alpha 3 country code (upper case)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetLocale">
+      <doc>
+        <line>GetLocale = This method retrieves the current language and country</line>
+      </doc>
+      <arg name="language" type="s" direction="out">
+        <doc>
+          <line>language = ISO 639‐3 language code (lower case)</line>
+        </doc>
+      </arg>
+      <arg name="country" type="s" direction="out">
+        <doc>
+          <line>country = ISO 3166‐1 alpha 3 country code (upper case)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSupportedLocales">
+      <doc>
+        <line>GetSupportedLocales = This method retrieves the supported languages and countries</line>
+      </doc>
+      <arg name="localeList" type="a(ss)" direction="out">
+        <doc>
+          <line>localeList = array[struct(language,country)]</line>
+          <line>language = ISO 639-3 language code (lower case)</line>
+          <line>country = ISO 3166-1 alpha 3 country code (upper case)</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="ConfigurationChanged">
+      <doc>
+        <line>ConfigurationChanged = This signal is sent to the clients when one or more configuration settings changes</line>
+      </doc>
+      <arg name="changedSettings" type="aq">
+        <doc>
+          <line>changedSettings = array[setting]</line>
+          <line>setting = enum(INVALID,UNITS_OF_MEASUREMENT,LOCALE,TIME_FORMAT,COORDINATES_FORMAT, ... )</line>
+        </doc>
+      </arg>
+    </signal>
+  </interface>
+</node>

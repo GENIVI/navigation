@@ -1,0 +1,830 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="introspect.xsl"?>
+<!-- SPDX-License-Identifier: MPL-2.0
+     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
+     This Source Code Form is subject to the terms of the
+     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/navigationcore" xsi:noNamespaceSchemaLocation="introspect.xsd">
+  <interface name="org.genivi.navigationcore.Routing">
+    <version>3.0.0-alpha (07-06-2013)</version>
+    <doc>
+      <line>Routing = This interface offers functions that implement the routing functionality of a navigation system</line>
+    </doc>
+    <method name="GetVersion">
+      <doc>
+        <line>GetVersion = This method returns the API version implemented by the server application</line>
+      </doc>
+      <arg name="version" type="(qqqs)" direction="out">
+        <doc>
+          <line>version = struct(major,minor,micro,date)</line>
+          <line>major = when the major changes, then backward compatibility with previous releases is not granted</line>
+          <line>minor = when the minor changes, then backward compatibility with previous releases is granted, but something changed in the implementation of the API (e.g. new methods may have been added)</line>
+          <line>micro = when the micro changes, then backward compatibility with previous releases is granted (bug fixes or documentation modifications)</line>
+          <line>date = release date (e.g. 21-06-2011)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="CreateRoute">
+      <doc>
+        <line>CreateRoute = This method creates a route</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="u" direction="out">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.Routing.Error.NoMoreRouteHandles">
+        <doc>
+          <line>This error is generated if no more routing handles are available</line>
+        </doc>
+      </error>
+    </method>
+    <method name="DeleteRoute">
+      <doc>
+        <line>DeleteRoute = This method deletes a route and its associated resources</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.Routing.Error.RouteNotAvailable">
+        <doc>
+          <line>This error is generated if an application tries to delete a route handle that is not available</line>
+        </doc>
+      </error>
+      <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
+        <doc>
+          <line>This error is generated if an application tries to delete a route which is not created manually (e.g. an alternative route calculated in the background)</line>
+        </doc>
+      </error>
+    </method>
+    <signal name="RouteDeleted">
+      <doc>
+        <line>RouteDeleted = This signal is emitted to inform clients that the current route has been deleted</line>
+      </doc>
+      <arg name="routeHandle" type="u">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="SetCostModel">
+      <doc>
+        <line>SetCostModel = This method sets the cost model</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="costModel" type="q" direction="in">
+        <doc>
+          <line>costModel = enum(INVALID,FASTEST,SHORTEST,ECOLOGICAL,SCENIC,EASY,OFF_ROAD,BALANCED,CHEAPEST, ... )</line>
+          <line>FASTEST = least time to reach the destination </line>
+          <line>SHORTEST = shortest distance to destination </line>
+          <line>ECOLOGICAL = least fuel or electric charge to destination </line>
+          <line>SCENIC = most scenic route to destination </line>
+          <line>EASY = least number of turns to reach the destination </line>
+          <line>OFF_ROAD = a distance-optimised route between points that are not covered by road mappings</line>
+          <line>BALANCED = trade-off between FASTEST and SHORTEST (e.g. 50% FASTEST and 50% SHORTEST) </line>
+          <line>CHEAPEST = least fuel or electric charge to destination taking pricing into account </line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
+        <doc>
+          <line>This error is generated if an application tries to set a cost model for a route which is not created manually (e.g. an alternative route calculated in the background)</line>
+        </doc>
+      </error>
+    </method>
+    <method name="GetCostModel">
+      <doc>
+        <line>GetCostModel = This method retrieves the selected cost model</line>
+      </doc>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="costModel" type="q" direction="out">
+        <doc>
+          <line>costModel = enum(INVALID,FASTEST,SHORTEST,ECOLOGICAL,SCENIC,EASY,OFF_ROAD,BALANCED,CHEAPEST, ... )</line>
+          <line>FASTEST = least time to reach the destination </line>
+          <line>SHORTEST = shortest distance to destination </line>
+          <line>ECOLOGICAL = least fuel or electric charge to destination </line>
+          <line>SCENIC = most scenic route to destination </line>
+          <line>EASY = least number of turns to reach the destination </line>
+          <line>OFF_ROAD = a distance-optimised route between points that are not covered by road mappings</line>
+          <line>BALANCED = trade-off between FASTEST and SHORTEST (e.g. 50% FASTEST and 50% SHORTEST) </line>
+          <line>CHEAPEST = least fuel or electric charge to destination taking pricing into account </line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSupportedCostModels">
+      <doc>
+        <line>GetSupportedCostModels = This method retrieves a list of supported cost models</line>
+      </doc>
+      <arg name="costModelsList" type="aq" direction="out">
+        <doc>
+          <line>costModelsList = array[costModel]</line>
+          <line>costModel = enum(INVALID,FASTEST,SHORTEST,ECOLOGICAL,SCENIC,EASY,OFF_ROAD,BALANCED,CHEAPEST, ... )</line>
+          <line>FASTEST = least time to reach the destination </line>
+          <line>SHORTEST = shortest distance to destination </line>
+          <line>ECOLOGICAL = least fuel or electric charge to destination </line>
+          <line>SCENIC = most scenic route to destination </line>
+          <line>EASY = least number of turns to reach the destination </line>
+          <line>OFF_ROAD = a distance-optimised route between points that are not covered by road mappings</line>
+          <line>BALANCED = trade-off between FASTEST and SHORTEST (e.g. 50% FASTEST and 50% SHORTEST) </line>
+          <line>CHEAPEST = least fuel or electric charge to destination taking pricing into account </line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetRoutePreferences">
+      <doc>
+        <line>SetRoutePreferences = This method sets a list of route preferences</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="countryCode" type="s" direction="in">
+        <doc>
+          <line>countryCode = ISO 3166‐1 alpha 3 country code (upper case)</line>
+          <line>If this argument is an empty string, it means that the preferences apply to all countries</line>
+        </doc>
+      </arg>
+      <arg name="roadPreferenceList" type="a(qq)" direction="in">
+        <doc>
+          <line>roadPreferenceList = array[preference]</line>
+          <line>preference = struct(preferenceMode,preferenceSource)</line>
+          <line>preferenceMode = enum(PROHIBIT,AVOID,USE,PREFER)</line>
+          <line>preferenceMode = PROHIBIT. Routing module must not calculate a planned route including sections matching given avoidance source.</line>
+          <line>preferenceMode = AVOID. Routing module should not calculate a planned route including sections matching given avoidance source.</line>
+          <line>preferenceMode = USE. Routing module should calculate a planned route including sections matching given avoidance source.</line>
+          <line>preferenceMode = PREFER. Routing module should calculate a planned route including as much as possible sections matching given avoidance source.</line>
+          <line>preferenceSource = enum(FERRY,TOLL_ROADS,TUNNELS,HIGHWAYS_MOTORWAYS,VEHICLE_SIZE_LIMIT,CRIME_AREAS)</line>
+        </doc>
+      </arg>
+      <arg name="conditionPreferenceList" type="a(qq)" direction="in">
+        <doc>
+          <line>conditionPreferenceList = array[preference]</line>
+          <line>preference = struct(preferenceMode,preferenceSource)</line>
+          <line>preferenceMode = enum(USE,IGNORE)</line>
+          <line>preferenceSource = enum(TRAFFIC_REALTIME, ...)</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
+        <doc>
+          <line>This error is generated if an application tries to set route preferences for a route which is not created manually (e.g. an alternative route calculated in the background)</line>
+        </doc>
+      </error>
+      <error name="org.genivi.navigationcore.Routing.Error.RoutePreferenceNotSupported">
+        <doc>
+          <line>This error is generated if an application tries to set a route preference which is not supported (e.g. (USE,CRIME_AREA)). The preferences which are not supported are product dependent.</line>
+        </doc>
+      </error>
+    </method>
+    <method name="GetRoutePreferences">
+      <doc>
+        <line>GetRoutePreferences = This method retrieves a list of selected route preferences</line>
+      </doc>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="countryCode" type="s" direction="in">
+        <doc>
+          <line>countryCode = ISO 3166‐1 alpha 3 country code (upper case)</line>
+          <line>If this argument is an empty string, it means that the preferences apply to all countries</line>
+        </doc>
+      </arg>
+      <arg name="roadPreferenceList" type="a(qq)" direction="out">
+        <doc>
+          <line>roadPreferenceList = array[preference]</line>
+          <line>preference = struct(preferenceMode,preferenceSource)</line>
+          <line>preferenceMode = enum(PROHIBIT,AVOID,USE,PREFER)</line>
+          <line>preferenceMode = PROHIBIT. Routing module must not calculate a planned route including sections matching given avoidance source.</line>
+          <line>preferenceMode = AVOID. Routing module should not calculate a planned route including sections matching given avoidance source.</line>
+          <line>preferenceMode = USE. Routing module should calculate a planned route including sections matching given avoidance source.</line>
+          <line>preferenceMode = PREFER. Routing module should calculate a planned route including as much as possible sections matching given avoidance source.</line>
+          <line>preferenceSource = enum(FERRY,TOLL_ROADS,TUNNELS,HIGHWAYS_MOTORWAYS,VEHICLE_SIZE_LIMIT,CRIME_AREAS)</line>
+        </doc>
+      </arg>
+      <arg name="conditionPreferenceList" type="a(qq)" direction="out">
+        <doc>
+          <line>conditionPreferenceList = array[preference]</line>
+          <line>preference = struct(preferenceMode,preferenceSource)</line>
+          <line>preferenceMode = enum(USE,IGNORE)</line>
+          <line>preferenceSource = enum(TRAFFIC_REALTIME, ...)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSupportedRoutePreferences">
+      <doc>
+        <line>GetSupportedRoutePreferences = This method retrieves a list of supported route preferences</line>
+      </doc>
+      <arg name="routePreferencesList" type="a(qq)" direction="out">
+        <doc>
+          <line>routePreferencesList = array[preference]</line>
+          <line>preference = struct(preferenceMode,preferenceSource)</line>
+          <line>preferenceMode = enum(PROHIBIT,AVOID,USE,PREFER)</line>
+          <line>preferenceMode = PROHIBIT. Routing module must not calculate a planned route including sections matching given avoidance source.</line>
+          <line>preferenceMode = AVOID. Routing module should not calculate a planned route including sections matching given avoidance source.</line>
+          <line>preferenceMode = USE. Routing module should calculate a planned route including sections matching given avoidance source.</line>
+          <line>preferenceMode = PREFER. Routing module should calculate a planned route including as much as possible sections matching given avoidance source.</line>
+          <line>preferenceSource = enum(FERRY,TOLL_ROADS,TUNNELS,HIGHWAYS_MOTORWAYS,VEHICLE_SIZE_LIMIT,CRIME_AREAS)</line>
+        </doc>
+      </arg>
+      <arg name="conditionPreferenceList" type="a(qq)" direction="out">
+        <doc>
+          <line>conditionPreferenceList = array[preference]</line>
+          <line>preference = struct(preferenceMode,preferenceSource)</line>
+          <line>preferenceMode = enum(USE,IGNORE)</line>
+          <line>preferenceSource = enum(TRAFFIC_REALTIME, ...)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetRouteSchedule">
+      <doc>
+        <line> SetRouteSchedule = This method sets the time schedule for the route to be calculated</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="routeSchedule" type="a{qu}" direction="in">
+        <doc>
+          <line>routeSchedule = array[detail]</line>
+          <line>detail = dictionary[key,value]</line>
+          <line>dictionary = array of tuples (key,value)</line>
+          <line>key = enum(ARRIVAL_TIME, ARRIVAL_DATE,DEPARTURE_TIME, DEPARTURE_DATE)</line>
+          <line>key = ARRIVAL_TIME, value of type 'u', that represents the arrival time is expressed in seconds since mid-night (UTC)</line>
+          <line>key = ARRIVAL_DATE, value of type 'u', that represents the arrival date is either a calendar date (the number of days since 1 Jan 2000) or a weekday indication. For weekday indication the values 0 till 6 are used (0 = Saturday, 1 = Sunday, 2 = Monday, ..., 6 = Friday)</line>
+          <line>key = DEPARTURE_TIME, value of type 'u', that represents the departure time is expressed in seconds since mid-night (UTC)</line>
+          <line>key = DEPARTURE_DATE, value of type 'u', that represents the departure date is either a calendar date (the number of days since 1 Jan 2000) or a weekday indication. For weekday indication the values 0 till 6 are used (0 = Saturday, 1 = Sunday, 2 = Monday, ..., 6 = Friday)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetRouteSchedule">
+      <doc>
+        <line> GetRouteSchedule = This method gets the time schedule for the route to be calculated</line>
+      </doc>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="valuesToReturn" type="aq" direction="in">
+        <doc>
+          <line>valuesToReturn= array[value]</line>
+          <line>value= enum(ARRIVAL_TIME, ARRIVAL_DATE,DEPARTURE_TIME, DEPARTURE_DATE)</line>
+        </doc>
+      </arg>
+      <arg name="routeSchedule" type="a{qu}" direction="out">
+        <doc>
+          <line> routeSchedule = array[detail]</line>
+          <line>detail = dictionary[key,value]</line>
+          <line>dictionary = array of tuples (key,value)</line>
+          <line>key = enum(ARRIVAL_TIME, ARRIVAL_DATE,DEPARTURE_TIME, DEPARTURE_DATE)</line>
+          <line>key = ARRIVAL_TIME, value of type 'u', that represents the arrival time is expressed in seconds since mid-night (UTC)</line>
+          <line>key = ARRIVAL_DATE, value of type 'u', that represents the arrival date is either a calendar date (the number of days since 1 Jan 2000) or a weekday indication. For weekday indication the values 0 till 6 are used (0 = Saturday, 1 = Sunday, 2 = Monday, ..., 6 = Friday)</line>
+          <line>key = DEPARTURE_TIME, value of type 'u', that represents the departure time is expressed in seconds since mid-night (UTC)</line>
+          <line>key = DEPARTURE_DATE, value of type 'u', that represents the departure date is either a calendar date (the number of days since 1 Jan 2000) or a weekday indication. For weekday indication the values 0 till 6 are used (0 = Saturday, 1 = Sunday, 2 = Monday, ..., 6 = Friday)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetTransportationMeans">
+      <doc>
+        <line>SetTransportationMeans = This method sets a list of means of transportation that must be considered when calculating a route</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="transportationMeansList" type="aq" direction="in">
+        <doc>
+          <line>transportationMeansList = array[transportationMeans]</line>
+          <line>transportationMeans = enum(INVALID,BY_CAR,ON_FOOT,LONG_RANGE_TRAINS,PUBLIC_TRANSPORTATION,BY_BICYCLE,BY_TRUCK, ... )</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
+        <doc>
+          <line>This error is generated if an application tries to set transportation means for a route which is not created manually (e.g. an alternative route calculated in the background)</line>
+        </doc>
+      </error>
+    </method>
+    <method name="GetTransportationMeans">
+      <doc>
+        <line>GetTransportationMeans = This method retrieves the selected means of transportation</line>
+      </doc>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="transportationMeansList" type="aq" direction="out">
+        <doc>
+          <line>transportationMeansList = array[transportationMeans]</line>
+          <line>transportationMeans = enum(INVALID,BY_CAR,ON_FOOT,LONG_RANGE_TRAINS,PUBLIC_TRANSPORTATION,BY_BICYCLE,BY_TRUCK, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSupportedTransportationMeans">
+      <doc>
+        <line>GetSupportedTransportationMeans = This method retrieves a list of supported means of transportation</line>
+      </doc>
+      <arg name="transportationMeansList" type="aq" direction="out">
+        <doc>
+          <line>transportationMeansList = array[transportationMeans]</line>
+          <line>transportationMeans = enum(INVALID,BY_CAR,ON_FOOT,LONG_RANGE_TRAINS,PUBLIC_TRANSPORTATION,BY_BICYCLE,BY_TRUCK, ... )</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetExcludedAreas">
+      <doc>
+        <line>SetExcludedAreas = This method sets the areas to be excluded when calculating a route</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="excludedAreas" type="aa(dd)" direction="in">
+        <doc>
+          <line>excludedAreas = array[array(lat,lon)]</line>
+          <line>excludedAreas = array[convexPolygon]</line>
+          <line>convexPolygon = array[lat,lon] </line>
+          <line>lat = latitude of a vertex of the polygon in format %3.6f. Range [-90:+90]. Example: 48.053250</line>
+          <line>lon = longitude of a vertex of the polygon in format %3.6f. Range [-180:+180]. Example: 48.053250</line>
+          <line>Note: a polygon must have at least 3 vertexes</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
+        <doc>
+          <line>This error is generated if an application tries to set excluded areas for a route which is not created manually (e.g. an alternative route calculated in the background)</line>
+        </doc>
+      </error>
+    </method>
+    <method name="GetExcludedAreas">
+      <doc>
+        <line>GetExcludedAreas = This method retrieves the areas to be excluded when calculating a route</line>
+      </doc>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="excludedAreas" type="aa(dd)" direction="out">
+        <doc>
+          <line>excludedAreas = array[array(lat,lon)]</line>
+          <line>excludedAreas = array[convexPolygon]</line>
+          <line>convexPolygon = array[lat,lon]</line>
+          <line>lat = latitude of a vertex of the polygon in format %3.6f. Range [-90:+90]. Example: 48.053250</line>
+          <line>lon = longitude of a vertex of the polygon in format %3.6f. Range [-180:+180]. Example: 48.053250</line>
+          <line>Note: pass an empty array to remove previously selected excluded areas</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetWaypoints">
+      <doc>
+        <line>SetWaypoints = This method sets a list of waypoints</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="startFromCurrentPosition" type="b" direction="in">
+        <doc>
+          <line>startFromCurrentPosition = flag indicating if the current position is used as starting point</line>
+        </doc>
+      </arg>
+      <arg name="waypointsList" type="aa{qv}" direction="in">
+        <doc>
+          <line>waypointsList = array[waypoint]</line>
+          <line>waypoint = tuple (key,value)</line>
+          <line>key = enum(INVALID,WAYPOINT_TYPE,LOCATION_INPUT,LATITUDE,LONGITUDE,ALTITUDE, ... )</line>
+          <line>key = WAYPOINT_TYPE, value = value of type 'q', that represents an enum(INVALID,SOFT_POINT,HARD_POINT, ... )</line>
+          <line>key = LOCATION_INPUT, value = value of type 'ay'. This is a byte array whose interpretation is left to the navigation core</line>
+          <line>key = LATITUDE, value = value of type 'd', that expresses the latitude of the starting point in format %3.6f. Range [-90:+90]. Example: 48.053250</line>
+          <line>key = LONGITUDE, value = value of type 'd', that expresses the longitude of the starting point in format %3.6f. Range [-180:+180]. Example: 8.324500</line>
+          <line>key = ALTITUDE, value = value of type 'i', that expresses the altitude of the starting point in meters</line>
+          <line>Note: if the flag StartFromCurrentPosition=true, then at least one waypoint must be provided (destination)</line>
+          <line>Note: if the flag StartFromCurrentPosition=false, then at least two waypoints must be provided (starting point and destination)</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.Routing.Error.WaypointCannotBeChanged">
+        <doc>
+          <line>This error is sent when a client application tries to change the waypoints while the route guidance is active</line>
+        </doc>
+      </error>
+      <error name="org.genivi.navigationcore.Routing.Error.TooManyWaypoints">
+        <doc>
+          <line>This error is sent when a client application tries to set a number of waypoints that exceeds the system capabilities</line>
+        </doc>
+      </error>
+      <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
+        <doc>
+          <line>This error is generated if an application tries to set waypoints for a route which is not created manually (e.g. an alternative route calculated in the background)</line>
+        </doc>
+      </error>
+    </method>
+    <method name="GetWaypoints">
+      <doc>
+        <line>GetWaypoints = This method retrieves a list of waypoints</line>
+      </doc>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="startFromCurrentPosition" type="b" direction="out">
+        <doc>
+          <line>startFromCurrentPosition = flag indicating if the current position is used as starting point</line>
+        </doc>
+      </arg>
+      <arg name="waypointsList" type="aa{qv}" direction="out">
+        <doc>
+          <line>waypointsList = array[waypoint]</line>
+          <line>waypoint = tuple (key,value)</line>
+          <line>key = enum(INVALID,WAYPOINT_TYPE,LOCATION_INPUT,LATITUDE,LONGITUDE,ALTITUDE, ... )</line>
+          <line>key = WAYPOINT_TYPE, value = value of type 'q', that represents an enum(INVALID,SOFT_POINT,HARD_POINT, ... )</line>
+          <line>key = LOCATION_INPUT, value = value of type 'ay'. This is a byte array whose interpretation is left to the navigation core</line>
+          <line>key = LATITUDE, value = value of type 'd', that expresses the latitude of the starting point in format %3.6f. Range [-90:+90]. Example: 48.053250</line>
+          <line>key = LONGITUDE, value = value of type 'd', that expresses the longitude of the starting point in format %3.6f. Range [-180:+180]. Example: 8.324500</line>
+          <line>key = ALTITUDE, value = value of type 'i', that expresses the altitude of the starting point in meters</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="CalculateRoute">
+      <doc>
+        <line>CalculateRoute = This method starts a route calculation</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
+        <doc>
+          <line>This error is generated if an application tries to calculate a route which is not created manually (e.g. an alternative route calculated in the background)</line>
+        </doc>
+      </error>
+    </method>
+    <method name="CancelRouteCalculation">
+      <doc>
+        <line>CancelRouteCalculation = This method cancels a route calculation</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="RouteCalculationCancelled">
+      <doc>
+        <line>RouteCalculationCancelled = This signal informs a client that a route calculation was cancelled</line>
+      </doc>
+      <arg name="routeHandle" type="u">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="RouteCalculationSuccessful">
+      <doc>
+        <line>RouteCalculationSuccessful = This signal informs a client that a route calculation was successful</line>
+      </doc>
+      <arg name="routeHandle" type="u">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="unfullfilledPreferences" type="a{qq}">
+        <doc>
+          <line>unfullfilledPreferences = array[preference]</line>
+          <line>preference = tuple(preferenceMode,preferenceSource)</line>
+          <line>preferenceMode = enum(PROHIBIT,AVOID,USE,PREFER)</line>
+          <line>preferenceMode = PROHIBIT. Routing module must not calculate a planned route including sections matching given avoidance source.</line>
+          <line>preferenceMode = AVOID. Routing module should not calculate a planned route including sections matching given avoidance source.</line>
+          <line>preferenceMode = USE. Routing module should calculate a planned route including sections matching given avoidance source.</line>
+          <line>preferenceMode = PREFER. Routing module should calculate a planned route including as much as possible sections matching given avoidance source.</line>
+          <line>preferenceSource = enum(FERRY,TOLL_ROADS,TUNNELS,HIGHWAYS_MOTORWAYS,VEHICLE_SIZE_LIMIT,CRIME_AREAS)</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="RouteCalculationFailed">
+      <doc>
+        <line>RouteCalculationFailed = This signal informs a client that a route calculation failed</line>
+      </doc>
+      <arg name="routeHandle" type="u">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="errorCode" type="q">
+        <doc>
+          <line>errorCode = enum(INVALID,UNMATCHED_POSITION,UNREACHABLE_DESTINATION,UNFULFILLED_PREFERENCE_MODE, ... )</line>
+          <line>errorCode = UNFULFILLED_PREFERENCE_MODE. Refer to unfullfilledPreferences to see which routing preferences could not be met causing routing calculation to fail; for any other value the argument unfulfilledPreferences should be ignored. </line>
+        </doc>
+      </arg>
+      <arg name="unfullfilledPreferences" type="a{qq}">
+        <doc>
+          <line>unfullfilledPreferences = array[preference]</line>
+          <line>preference = tuple(preferenceMode,preferenceSource)</line>
+          <line>preferenceMode = enum(PROHIBIT,AVOID,USE,PREFER)</line>
+          <line>preferenceMode = PROHIBIT. Routing module must not calculate a planned route including sections matching given avoidance source.</line>
+          <line>preferenceMode = AVOID. Routing module should not calculate a planned route including sections matching given avoidance source.</line>
+          <line>preferenceMode = USE. Routing module should calculate a planned route including sections matching given avoidance source.</line>
+          <line>preferenceMode = PREFER. Routing module should calculate a planned route including as much as possible sections matching given avoidance source.</line>
+          <line>preferenceSource = enum(FERRY,TOLL_ROADS,TUNNELS,HIGHWAYS_MOTORWAYS,VEHICLE_SIZE_LIMIT,CRIME_AREAS)</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="RouteCalculationProgressUpdate">
+      <doc>
+        <line>RouteCalculationProgressUpdate = This signal informs a client about a route calculation progress</line>
+      </doc>
+      <arg name="routeHandle" type="u">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="status" type="q">
+        <doc>
+          <line>status = enum(INVALID,CALCULATION_OK,NO_POSITION, ... )</line>
+        </doc>
+      </arg>
+      <arg name="percentage" type="y">
+        <doc>
+          <line>percentage = progress status. Range [0:100]</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="CalculateRoutes">
+      <doc>
+        <line>CalculateRoutes = This method allows a client to calculate alternative routes that differs from a list of already calculated routes</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="calculatedRoutesList" type="au" direction="in">
+        <doc>
+          <line>calculatedRoutesList = array[calculatedRoute]</line>
+          <line>calculatedRoute = Handle identifying an already calculated route. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="alternativeRoutesList" type="au" direction="out">
+        <doc>
+          <line>alternativeRoutesList = array[alternativeRoute]</line>
+          <line>alternativeRoute = Handle identifying an alternative route. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
+        <doc>
+          <line>This error is generated if an application tries to calculate an alternative to a route which is not created manually (e.g. an alternative route calculated in the background)</line>
+        </doc>
+      </error>
+    </method>
+    <method name="GetRouteSegments">
+      <doc>
+        <line>GetRouteSegments = This method retrieves a list of segments for a given route starting from the one closest to the current position to the one closest to the destination</line>
+      </doc>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="detailLevel" type="n" direction="in">
+        <doc>
+          <line>detailLevel = detail level</line>
+        </doc>
+      </arg>
+      <arg name="valuesToReturn" type="aq" direction="in">
+        <doc>
+          <line>valuesToReturn= array[key]</line>
+          <line>key = enum(INVALID,LINK-ID,INTERMEDIATE_POINTS,START_LATITUDE,START_LONGITUDE,START_ALTITUDE,</line>
+          <line>END_LATITUDE,END_LONGITUDE,END_ALTITUDE,ROAD_NAME,ROAD_NUMBER,DISTANCE,TIME,MANEUVER,INSTRUCTION,</line>
+          <line>BORDER_CROSSING,TIME_ZONE,DAYLIGHT_SAVING_TIME,ADDITIONAL_INFORMATION,HIGHWAY_EXIT, ... , ALL)</line>
+        </doc>
+      </arg>
+      <arg name="numberOfSegments" type="u" direction="in">
+        <doc>
+          <line>numberOfSegments = number of segments to be retrieved</line>
+        </doc>
+      </arg>
+      <arg name="offset" type="u" direction="in">
+        <doc>
+          <line>offset = offset from the beginning of the list</line>
+        </doc>
+      </arg>
+      <arg name="totalNumberOfSegments" type="u" direction="out">
+        <doc>
+          <line>totalNumberOfSegments = total number of segments</line>
+        </doc>
+      </arg>
+      <arg name="routeSegments" type="aa{qv}" direction="out">
+        <doc>
+          <line>routeSegments = array[segment]</line>
+          <line>segment = tuple(key,value)</line>
+          <line>Note: a segment is the shortest navigable stretch of a route (e.g. the stretch between two adjacent junctions)</line>
+          <line>key = enum(INVALID,LINK-ID,INTERMEDIATE_POINTS,START_LATITUDE,START_LONGITUDE,START_ALTITUDE,</line>
+          <line>END_LATITUDE,END_LONGITUDE,END_ALTITUDE,ROAD_NAME,ROAD_NUMBER,DISTANCE,TIME,MANEUVER,INSTRUCTION,</line>
+          <line>BORDER_CROSSING,TIME_ZONE,DAYLIGHT_SAVING_TIME,ADDITIONAL_INFORMATION,HIGHWAY_EXIT, ... )</line>
+          <line>key = LINK-ID, value = value of type 'ay', that represents a link-ID in a format whose interpretation is left to the navigationcore</line>
+          <line>key = START_LATITUDE, value = value of type 'd', that expresses the latitude of the starting point in format %3.6f. Range [-90:+90]. Example: 48.053250</line>
+          <line>key = END_LATITUDE, value = value of type 'd', that expresses the latitude of the ending point in format %3.6f. Range [-90:+90]. Example: 48.053250</line>
+          <line>Note: END_LATITUDE can be omitted, if it coincides with the latitude of the start point of the next segment</line>
+          <line>key = START_LONGITUDE, value = value of type 'd', that expresses the longitude of the starting point in format %3.6f. Range [-180:+180]. Example: 8.321000</line>
+          <line>key = END_LONGITUDE, value = value of type 'd', that expresses the longitude of the ending point in format %3.6f. Range [-180:+180]. Example: 8.321000</line>
+          <line>Note: END_LONGITUDE can be omitted, if it coincides with the longitude of the start point of the next segment</line>
+          <line>key = START_ALTITUDE, value = value of type 'i', that expresses the altitude relative to the ground of the starting point in meters</line>
+          <line>key = END_ALTITUDE, value = value of type 'i', that expresses the altitude relative to the ground of the ending point in meters</line>
+          <line>Note: END_ALTITUDE can be omitted, if it coincides with the altitude of the start point of the next segment</line>
+          <line>key = INTERMEDIATE_POINTS, value = value of type 'a(qddd)', that expresses an array of intermediate points</line>
+          <line>Note: an intermedate point is expressed as a struct(type,latitude,longitude,altitude), where type = enum(INVALID,HARD_POINT,SOFT_POINT, ... )</line>
+          <line>key = ROAD_NUMBER, value = value of type 's', that expresses the road number</line>
+          <line>key = ROAD_NAME, value = value of type 's', that expresses the road name</line>
+          <line>key = DISTANCE, value = value of type 'u', that identifies distance to the next segment in meters</line>
+          <line>key = TIME, value = value of type 'u', that identifies time to travel to the next segment in seconds</line>
+          <line>key = MANEUVER, value = value of type 'a(qqaq)', that identifies a pictogram that describes the next maneuver (OPTIONAL)</line>
+          <line>key = INSTRUCTION, value = value of type 's', that identifies the instruction to the user</line>
+          <line>key = BORDER_CROSSING, value = value of type 's', that contains information about border crossings</line>
+          <line>key = TIME_ZONE, value = value of type 'n', that indicates the time zone of the current segment. It is expressed as the time difference from the UTC in minutes</line>
+          <line>key = DAYLIGHT_SAVING_TIME, value = value of type 'n', that indicates the daylight saving time of the current segment. It is expressed as the time difference from the UTC in minutes</line>
+          <line>key = ADDITIONAL_INFORMATION, value = value of type 's', that contains additional information to the user (toll cost, ... )</line>
+          <line>key = HIGHWAY_EXIT, value = value of type 's', that in case the road segment ends with a highway exit, it expresses the highway exit number</line>
+          <line>key = START_OFFSET, value = value of type 'u', that indicates the offset of the starting point in meters from the beginning of the route</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetRouteOverview">
+      <doc>
+        <line> GetRouteOverview = This method retrieves general information about a given route</line>
+      </doc>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="valuesToReturn" type="aq" direction="in">
+        <doc>
+          <line>valuesToReturn = array[key]</line>
+          <line>key = enum(ARRIVAL_TIME,ARRIVAL_DATE,DEPARTURE_TIME,DEPARTURE_DATE,TOTAL_DISTANCE,TOTAL_TIME, ... ,ALL)</line>
+        </doc>
+      </arg>     
+      <arg name="routeOverview" type="a{qv}" direction="out">
+        <doc>
+          <line>routeOverview = array[detail]</line>
+          <line>detail = tuple(key,value)</line>
+          <line>key = enum(ARRIVAL_TIME,ARRIVAL_DATE,DEPARTURE_TIME,DEPARTURE_DATE,TOTAL_DISTANCE,TOTAL_TIME, ...)</line>
+          <line>key = ARRIVAL_TIME, value of type 'u', that represents the arrival time expressed in seconds since mid-night (UTC)</line>
+          <line>key = ARRIVAL_DATE, value of type 'u', that represents the arrival date expressed either as calendar date (the number of days since 1 Jan 2000) or as weekday. The weekday is expressed with values from 0 to 6 (0 = Saturday, 1 = Sunday, 2 = Monday, ..., 6 = Friday)</line>
+          <line>key = DEPARTURE_TIME, value of type 'u', that represents the departure time expressed in seconds since mid-night (UTC)</line>
+          <line>key = DEPARTURE_DATE, value of type 'u', that represents the departure date expressed either as calendar date (the number of days since 1 Jan 2000) or as weekday. The weekday is expressed with values from 0 to 6  (0 = Saturday, 1 = Sunday, 2 = Monday, ..., 6 = Friday)</line>
+          <line>key = TOTAL_DISTANCE, value of type 'u', that represents the total distance in m </line>
+          <line>key = TOTAL_TIME, value of type 'u', that represents the total time in seconds </line>
+        </doc>
+      </arg>
+    </method> 
+    <method name="GetRouteBoundingBox">
+      <doc>
+        <line>GetRouteBoundingBox = This method retrieves the bounding box containing a calculated route</line>
+      </doc>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="boundingBox" type="((dd)(dd))" direction="out">
+        <doc>
+          <line>boundingBox = struct(top-left-corner,bottom-right-corner)</line>
+          <line>geocoordinates of the top-left-corner = struct(lat,lon)</line>
+          <line>geocoordinates of the bottom-right-corner = struct(lat,lon)</line>
+          <line>lat = latitude in format %3.6f. Range[-90:+90]. Example: 48.053250</line>
+          <line>lon = longitude in format %3.6f. Range[-180:+180]. Example: 8.321000</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetAllRoutes">
+      <doc>
+        <line>GetAllRoutes = This method retrieves the handles of all created routes</line>
+      </doc>
+      <arg name="routesList" type="au" direction="out">
+        <doc>
+          <line>routesList = array[route]</line>
+          <line>route = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="AlternativeRoutesAvailable">
+      <doc>
+        <line>AlternativeRoutesAvailable = This signal is emitted when alternative routes have been computed in the background and are available for guidance.</line>
+      </doc>
+      <arg name="routeHandlesList" type="au">
+        <doc>
+          <line>routeHandlesList = array[routeHandle]</line>
+          <line>routeHandle = Handle identifying a computed alternative route. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="SetBlockedRouteStretches">
+      <doc>
+        <line>SetBlockedRouteStretches = This method sets blocked streches on a given route</line>
+      </doc>
+      <arg name="sessionHandle" type="u" direction="in">
+        <doc>
+          <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="blockParameters" type="a(uu)" direction="in">
+        <doc>
+          <line>blockParameters = struct(offset,length)</line>
+          <line>offset = the offset in meters from the beginning of the route where the road block starts from</line>
+          <line>length = the length of the road block in meters</line>
+          <line>Note: pass an empty array to remove previously set blocked route stretches</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetBlockedRouteStretches">
+      <doc>
+        <line>GetBlockedRouteStretches = This method retrieves all blocked streches on a given route</line>
+      </doc>
+      <arg name="routeHandle" type="u" direction="in">
+        <doc>
+          <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="blockParameters" type="a(uu)" direction="out">
+        <doc>
+          <line>blockParameters = struct(offset,length)</line>
+          <line>offset = the offset in meters from the beginning of the route where the road block starts from</line>
+          <line>length = the length of the road block in meters</line>
+        </doc>
+      </arg>
+    </method>
+  </interface>
+</node>

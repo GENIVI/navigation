@@ -1,0 +1,40 @@
+Release date of the file: 11-04-2014 
+Status: to be completed
+
+Project:
+Navigation software based on Navit and compliant with the Navigation APIs standardized by the GENIVI Alliance
+This project is one of the navigation-service common projects that implements the GENIVI navigation APIs.
+
+More:
+The GENIVI APIs are implemented into navit plugins, running on DBus. The HMI is made in Qml
+See also other navigation projects like proof of concepts implemented for poi-service, traffic-info and positioning 
+
+What is in:
+This folder contains scripts for building Navit and the GENIVI plugins. It runs only the navigation middleware (without the HMI)
+FYI: the application (with the HMI) is located into git://git.projects.genivi.org/lbs/navigation-application.git
+     it's possible to build and run the whole stuff directly from that repository
+
+Author: 
+Martin Schaller <martin.schaller@it-schaller.de>
+Philippe Colliot philippe.colliot@mpsa.com
+
+License: 
+See headers and LICENSE file
+
+Test target: 
+Ubuntu 12.04.1 LTS
+
+To get the code:
+git clone http://git.projects.genivi.org/lbs/navigation-service.git $WORKING-DIR
+
+Dependencies:
+<to be completed>
+ 
+Build:
+cd $WORKING-DIR/navigation-service/src/navigation/script
+make all
+
+To launch (several options available):
+./run 
+
+
