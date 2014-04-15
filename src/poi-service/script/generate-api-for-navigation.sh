@@ -1,6 +1,7 @@
 #!/bin/sh
 API_DIR=${1-../../../api}
 TARGET_DIR=${2-../poi-common}
+POSITIONING_API_DIR=${3-../../../api/enhanced-position-service}
 echo 'clean up'
 
 echo "generate the adaptors and the proxys for the POI APIs from $API_DIR to $TARGET_DIR"
@@ -19,12 +20,12 @@ dbusxx-xml2cpp ${API_DIR}/navigation-core/genivi-navigationcore-guidance.xml --a
 dbusxx-xml2cpp ${API_DIR}/navigation-core/genivi-navigationcore-guidance.xml --proxy=${TARGET_DIR}/genivi-navigationcore-guidance_proxy.h
 dbusxx-xml2cpp ${API_DIR}/navigation-core/genivi-navigationcore-routing.xml --adaptor=${TARGET_DIR}/genivi-navigationcore-routing_adaptor.h
 dbusxx-xml2cpp ${API_DIR}/navigation-core/genivi-navigationcore-routing.xml --proxy=${TARGET_DIR}/genivi-navigationcore-routing_proxy.h
-dbusxx-xml2cpp ${API_DIR}/enhanced-position-service/genivi-positioning-enhancedposition.xml --adaptor=${TARGET_DIR}/genivi-positioning-enhancedposition_adaptor.h
-dbusxx-xml2cpp ${API_DIR}/enhanced-position-service/genivi-positioning-enhancedposition.xml --proxy=${TARGET_DIR}/genivi-positioning-enhancedposition_proxy.h
+dbusxx-xml2cpp ${POSITIONING_API_DIR}/genivi-positioning-enhancedposition.xml --adaptor=${TARGET_DIR}/genivi-positioning-enhancedposition_adaptor.h
+dbusxx-xml2cpp ${POSITIONING_API_DIR}/genivi-positioning-enhancedposition.xml --proxy=${TARGET_DIR}/genivi-positioning-enhancedposition_proxy.h
 
 echo 'generate the constants for the other APIs'
 xsltproc ${API_DIR}/navigation-core/enum.xsl ${API_DIR}/navigation-core/genivi-navigationcore-constants.xml > ${TARGET_DIR}/genivi-navigationcore-constants.h
-xsltproc ${API_DIR}/enhanced-position-service/enum.xsl ${API_DIR}/enhanced-position-service/genivi-positioning-constants.xml > ${TARGET_DIR}/genivi-positioning-constants.h
+xsltproc ${API_DIR}/poi-service/enum.xsl ${POSITIONING_API_DIR}/genivi-positioning-constants.xml > ${TARGET_DIR}/genivi-positioning-constants.h
 xsltproc ${API_DIR}/map-viewer/enum.xsl ${API_DIR}/map-viewer/genivi-mapviewer-constants.xml > ${TARGET_DIR}/genivi-mapviewer-constants.h
 
 
