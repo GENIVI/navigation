@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram>
+<source><![CDATA[hmi:HMISS[t] "HMI application"
+pos:HMISS[t] "Enhanced Position"
+logic:HMISS[t] "POI Service"
+map:HMISS[t] "Map Data Access & Content Access Modules"
+
+*11 logic
+a new CAM registers to propose fuel stations information
+*11
+map:RegisterContentAccessModule(Id=camId)=logic.RegisterContentAccessModule(name=DangerAreaLive)
+map:>logic.AddCategories(camId, cat=DANGEROUS_AREA, name="Dangerous Area", other attributes) &
+map:>logic.RegisterPoiCategories(camId, cat=DANGEROUS_AREA) &
+*6 hmi
+HMI starts to configure for fuel stations alert around vehicle
+*6
+
+[c:Position]
+*1 hmi
+get position
+*1
+hmi:Position(x=_, y=_, speed=_)=pos.Get_Position() &
+[/c]
+
+[c:POIService]
+*2 hmi
+validate that category dangerous area is supported by POI service
+*2
+hmi:ValidateCategories(status=OK)=logic.ValidateCategories(DANGEROUS_AREA)
+hmi:
+*5 hmi
+select dangerous area for proximity alert if category is available
+*5
+hmi:CreatePoiSearchHandle(LocationHandle=_)=logic.CreatePoiSearchHandle()
+hmi:
+*7 hmi
+The HMI automatically configures the alert with relevant parameters
+*7
+hmi:>logic.SetCenter(LocationHandle, x, y) &
+hmi:>logic.SetCategories(LocationHandle, {DANGEROUS_AREA, 0}) &
+hmi:
+*8 hmi
+The HMI starts the alert and display a status message to the user
+*8
+hmi:StartPoiProximityAlert(Status=_, Error=_)=logic.StartPoiProximityAlert(LocationHandle,DANGEROUS_AREA, "", 15, SORT_BY_DISTANCE)
+hmi:
+logic:>hmi.PoiStatus(LocationHandle, SEARCHING) &
+logic:
+[c:POI_Alert]
+*3 hmi
+search for dangerous area with all available poi sources taht registered this category when positon changes
+*3
+logic:PoiSearchStarted(Status=_, Error=_)=map.PoiSearchStarted(LocationHandle, DANGEROUS_AREA, "", 15, SORT_BY_DISTANCE)
+logic:
+logic:>hmi.PoiSearchStatus(LocationHandle, SEARCHING) &
+logic:ResultListRequested(camId, LocationHandle, FINISHED, 3, {(source_id, name, x, y), ...})=map.ResultListRequested(camId, LocationHandle)
+logic:
+logic:>logic.BuildList(list(name, x, y, desc, distance)) &
+
+logic:>hmi.ResultListChanged(LocationHandle, 3) &
+logic:
+*9 hmi
+The list of results with a short description is displayed so the user can select one
+*9
+hmi:RequestResultList(LocationHandle, FINISHED, 3, {(id, name, x, y), ...})=logic.RequestResultList(0, 15)
+hmi:GetPoiDetails(name, x, y, dangerousness, description))=logic.GetPoiDetails(LocationHandle, id)
+logic:PoiDetailsRequested(name, x, y, dangerousness, description))=map.PoiDetailsRequested(source_id)
+[/c]
+hmi:
+[/c]
+*10 hmi
+Once a dangerous area is selected by the user, the HMI can avoid it from current guidance
+*10
+hmi:
+]]></source>
+<configuration>
+<property name="activationBarBorderThickness" value="1"/>
+<property name="actorWidth" value="25"/>
+<property name="arrowColor" value="-14803256"/>
+<property name="arrowSize" value="6"/>
+<property name="arrowThickness" value="1"/>
+<property name="colorizeThreads" value="true"/>
+<property name="destructorWidth" value="30"/>
+<property name="explicitReturns" value="false"/>
+<property family="Dialog" name="font" size="12" style="0"/>
+<property name="fragmentBorderThickness" value="2"/>
+<property name="fragmentEdgeColor" value="-16751616"/>
+<property name="fragmentLabelBgColor" value="-36"/>
+<property name="fragmentMargin" value="8"/>
+<property name="fragmentPadding" value="10"/>
+<property name="fragmentTextPadding" value="3"/>
+<property name="glue" value="10"/>
+<property name="headHeight" value="35"/>
+<property name="headLabelPadding" value="5"/>
+<property name="headWidth" value="100"/>
+<property name="initialSpace" value="10"/>
+<property name="labeledBoxBgColor" value="-76"/>
+<property name="leftMargin" value="5"/>
+<property name="lifelineThickness" value="1"/>
+<property name="lineWrap" value="false"/>
+<property name="lowerMargin" value="5"/>
+<property name="mainLifelineWidth" value="2"/>
+<property name="messageLabelSpace" value="3"/>
+<property name="messagePadding" value="6"/>
+<property name="noteBgColor" value="-76"/>
+<property name="noteBorderThickness" value="1"/>
+<property name="noteMargin" value="6"/>
+<property name="notePadding" value="6"/>
+<property name="opaqueMessageText" value="false"/>
+<property name="returnArrowVisible" value="true"/>
+<property name="rightMargin" value="5"/>
+<property name="selfMessageHorizontalSpace" value="15"/>
+<property name="separatorBottomMargin" value="8"/>
+<property name="separatorTopMargin" value="15"/>
+<property name="shouldShadowParticipants" value="true"/>
+<property name="slackMode" value="false"/>
+<property name="spaceBeforeActivation" value="2"/>
+<property name="spaceBeforeAnswerToSelf" value="10"/>
+<property name="spaceBeforeConstruction" value="6"/>
+<property name="spaceBeforeSelfMessage" value="7"/>
+<property name="subLifelineWidth" value="2"/>
+<property name="tc0" value="-1118482"/>
+<property name="tc1" value="-256"/>
+<property name="tc2" value="-65536"/>
+<property name="tc3" value="-16776961"/>
+<property name="tc4" value="-16711936"/>
+<property name="tc5" value="-4144960"/>
+<property name="tc6" value="-65281"/>
+<property name="tc7" value="-14336"/>
+<property name="tc8" value="-20561"/>
+<property name="tc9" value="-12566464"/>
+<property name="threadNumbersVisible" value="false"/>
+<property name="threaded" value="true"/>
+<property name="upperMargin" value="5"/>
+<property name="verticallySplit" value="true"/>
+</configuration>
+</diagram>
