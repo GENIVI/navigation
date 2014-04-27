@@ -37,7 +37,7 @@
 		<xsl:text>&#x0A;                </xsl:text>
 		<plugin path="../../navigationcore-enhancedposition/.libs/libgenivi_positioning_enhancedposition.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../poiservice/.libs/libgenivi_poiservice_cam_navit.so" ondemand="no"/>
+		<plugin path="../../poi-cam/.libs/libgenivi_poiservice_cam_navit.so" ondemand="no"/>
         </xsl:template>
         <xsl:template match="/config/plugins/plugin">
 		<xsl:copy><xsl:apply-templates select="@*|node()"/></xsl:copy>
