@@ -8,6 +8,7 @@
 # \brief This file is part of the Build System.
 #
 # \author Martin Schaller <martin.schaller@it-schaller.de>
+# \author Philippe Colliot <philippe.colliot@mpsa.com>
 #
 # \version 1.0
 #
@@ -20,22 +21,24 @@
 #
 # List of changes:
 # 
-# <date>, <name>, <description of change>
-#
+# 28-04-2014, Philippe Colliot, link to the public repos of positioning, add clean feature
+# 
 # @licence end@
 positioning_SRC=$(ROOT_DIR)/positioning
 positioning_API=$(positioning_SRC)/enhanced-position-service/api
-positioning_URL=https://git.genivi.org/srv/git/positioning
-positioning_VERSION=7cd257d8fdfcd35ca4d0757cc269c2f9925009a0
+positioning_URL=http://git.projects.genivi.org/lbs/positioning.git
+positioning_VERSION=183d134e734e157c498f6cff367d104e4c5ad670
 
 ALL+=positioning
+CLEAN+=clean-get-positioning
 
 help::
 	@echo "positioning: Get positioning"
 
-
 positioning: $(positioning_API)/genivi-positioning-enhancedposition.xml
 
+clean-get-positioning:: 
+	rm -rf $(positioning_SRC)
 
 $(positioning_API)/genivi-positioning-enhancedposition.xml:
 	cd $(positioning_SRC)/.. && git clone $(positioning_URL)
