@@ -117,7 +117,7 @@ then
 		REPLAYER_LOG_FILE=$SRC_DIR/positioning/provider/rest/geneve-cologny.gvsl
 	fi
 	export REPLAYER_LOG_FILE
-	run EnhancedPositionService $BIN_DIR/positioning/EnhancedPositionService/src/server/position-daemon 
+	run EnhancedPositionService $BIN_DIR/positioning/src/position-daemon 
 fi
 cd $BIN_DIR/navit/navit
 >bookmark.txt
