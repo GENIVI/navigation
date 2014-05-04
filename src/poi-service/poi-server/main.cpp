@@ -613,10 +613,9 @@ DBus_searchResultDetails::DBus_searchResultDetails_t poiContentAccessServer::Get
     return(m_poiDetailsTable.at(index));
 }
 
-uint16_t poiContentAccessServer::searchAroundALocation(DBus_geoCoordinate3D::geoCoordinate3D_t location,const std::string* inputString)
+uint16_t poiContentAccessServer::searchAroundALocation(DBus_geoCoordinate3D::geoCoordinate3D_t location,const std::string* inputString, uint16_t sortOption)
 {
     uint16_t maxSize;
-    uint16_t sortOption;
     DBus_geoCoordinate3D loc;
     std::vector< std::string > attributes;
     uint16_t statusValue;
@@ -633,7 +632,6 @@ uint16_t poiContentAccessServer::searchAroundALocation(DBus_geoCoordinate3D::geo
 
         //prepare the data for the Poi Search on the CAM
         maxSize = 255; //by default, to be discussed why it's needed to define it ?
-        sortOption = 0; //by default
         loc.set(location);
         mp_contentAccessModule->PoiSearchStarted(m_poiSearchHandle,maxSize,loc.getDBus(),m_poiCategories,m_poiAttributes,*inputString,sortOption);
 
@@ -1262,7 +1260,7 @@ void poiSearchServer::StartPoiSearch(const uint8_t& poiSearchHandle, const std::
             // search on the embedded database first
             m_totalSize = searchAroundALocation(m_centerLocation,&inputString); //search around the current location of the vehicle
             //and now search on the additional database if the cam has been registered before the creation of the poi search handle
-            m_totalSize += mp_poiContentAccess->searchAroundALocation(m_centerLocation,&inputString);
+            m_totalSize += mp_poiContentAccess->searchAroundALocation(m_centerLocation,&inputString,sortOption);
             m_searchStatus = GENIVI_POISERVICE_FINISHED;
             PoiStatus(poiSearchHandle,(uint16_t)m_searchStatus);
             ResultListChanged(poiSearchHandle,m_totalSize);
