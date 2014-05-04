@@ -210,8 +210,10 @@ class ContentAccessModule
 			mapset_close(m_msh);
 		m_msh=mapset_open(m_mapset);
 		map_next();
-		m_sort_func=NULL;
-		// m_sort_func=do_sort_distance;
+		if (sortOption == GENIVI_POISERVICE_SORT_BY_DISTANCE)
+			m_sort_func=do_sort_distance;
+		else
+			m_sort_func=NULL;
 	}
 
 	void
