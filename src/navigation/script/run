@@ -28,12 +28,14 @@ function run
 {
 	local x=$xterm
 	local g=$gdb
+	local l=$log
 	local title="$1"
 	shift
 	if [ "$1" = "-n" ]
 	then
 		shift
 		x=0
+		log=0
 	fi
 	if [ "$1" = -"g" ]
 	then
@@ -47,6 +49,9 @@ function run
 			set -- gdb -ex run --args "$@"
 		fi
 		xterm -T "$title" -sb -sl 5000 -e "$@" &
+	elif [ "$log" = 1 ]
+	then
+		"$@" >"$CUR_DIR/$title.log" 2>&1 &
 	else
 		"$@" &
 	fi
@@ -62,11 +67,13 @@ function terminate
 
 gdb=0
 xterm=0
+log=0
 enhpos=1
 center="4612 N 0608 E"
+CUR_DIR=$PWD
 BIN_DIR=$PWD/../bin
 SRC_DIR=$PWD/..
-while getopts b:c:gnx opt
+while getopts b:c:gnox opt
 do
 	case $opt in
 	b)
@@ -94,6 +101,9 @@ do
 		;;
 	n)
 		enhpos=0
+		;;
+	o)
+		log=1
 		;;
 	x)
 		xterm=1
