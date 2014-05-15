@@ -240,7 +240,7 @@ class ContentAccessModule
 			transform_to_geo(projection_mg, &c, &g);
 			result._4._1=g.lat; /* lat */
 			result._4._2=g.lng; /* lon */
-			double distance=transform_distance(projection_mg, &m_center, &c)/m_scale/10;
+			double distance=transform_distance(projection_mg, &m_center, &c)/m_scale;
 #if 0
 			if (distance > m_max_radius)
 				return;
