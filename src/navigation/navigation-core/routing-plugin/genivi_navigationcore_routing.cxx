@@ -603,13 +603,16 @@ get_map(struct coord *c, struct item *item, int is_end, const std::vector< uint1
 		if (vector_contains(valuesToReturn, lon_key))
 			map[lon_key]=variant_double(g.lng);
 	}
-	if (item && (vector_contains(valuesToReturn, GENIVI_NAVIGATIONCORE_DISTANCE) || vector_contains(valuesToReturn, GENIVI_NAVIGATIONCORE_TIME))) {
-		struct attr length, time;
+	if (item && (vector_contains(valuesToReturn, GENIVI_NAVIGATIONCORE_DISTANCE) || vector_contains(valuesToReturn, GENIVI_NAVIGATIONCORE_TIME) || vector_contains(valuesToReturn, GENIVI_NAVIGATIONCORE_SPEED))) {
+		struct attr length, time, speed;
 		if (item_attr_get(item, attr_length, &length) && vector_contains(valuesToReturn, GENIVI_NAVIGATIONCORE_DISTANCE)) {
 			map[GENIVI_NAVIGATIONCORE_DISTANCE]=variant_double(length.u.num);
 		}
 		if (item_attr_get(item, attr_time, &time) && vector_contains(valuesToReturn, GENIVI_NAVIGATIONCORE_TIME)) {
 			map[GENIVI_NAVIGATIONCORE_TIME]=variant_uint16((time.u.num+5)/10);
+		}
+		if (item_attr_get(item, attr_speed, &speed) && vector_contains(valuesToReturn, GENIVI_NAVIGATIONCORE_SPEED)) {
+			map[GENIVI_NAVIGATIONCORE_SPEED]=variant_uint16(speed.u.num);
 		}
 	}
 	if (item && vector_contains(valuesToReturn, GENIVI_NAVIGATIONCORE_ROAD_NAME)) {
