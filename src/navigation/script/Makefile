@@ -46,6 +46,9 @@ all: $(ALL)
 
 deps::
 	sudo apt-get install $(DEPS)
+	# See https://bugs.launchpad.net/ubuntu/+source/freetype/+bug/1319642 why this is necessary
+	[ -e /usr/include/freetype2/freetype ] || sudo ln -s . /usr/include/freetype2/freetype
+
 
 all2: deps all
 navit-plugins: all
