@@ -1,0 +1,87 @@
+package org.genivi.lbs.POIService
+
+import org.genivi.lbs.LBScommonTypes.* from "../CommonTypes.fidl"
+import org.genivi.lbs.POIServiceTypes.* from "POIServiceTypes.fidl"
+
+
+<** @description : This interface offers a set of common methods for Content Access Modules (CAM). The CAM provide and update POI and categories information from remote sources to the POIService modules.**>
+interface POIContentAccess {
+	version {
+		major 1 
+		minor 0
+	}
+    <** @description : Register to the POI provider module 
+        When the CAM registers, it provides a name and then get a unique id. This id must be used everytime the CAM communicates with the POI service component.
+        After the registration is done, the CAM can start to update POI categories and POI attributes as well as registers POI categories to search for.**>	
+	method RegisterContentAccessModule {
+		in {
+			<** @description : The name of the CAM.**>
+			String moduleName				
+		}
+		
+		out {
+			<** @description : Content access module unique id as known by the POI service component.**>
+			UInt8 camId
+		}
+
+	}
+	<**	@description : Remove CAM from POI provider module.**>
+	method UnRegisterContentAccessModule {
+		in {
+			<** @description : Content access module unique id as known by the POI service component.**>
+			UInt8 camId				
+		}
+	}
+	<**	@description : Register to the POI provider module the categories you can search for POI.
+        The categories could be predifined one or customized ones. In order to register a customized category, you might need to create it before and add it to the POI service component.**>
+	method RegisterPoiCategories {
+		in {
+			<** @description : Content access module unique id as known by the POI service component.**>
+			UInt8 camId		
+			<**	@description : array[unique_id].
+			List of POI categories to register.
+			unique_id = Unique category id.
+			**>
+			UInt16[] poiCategories		
+		}
+	}
+	<**	@description : Update categories in the POI service component. It could be a predifined or a customed one.
+        The CAM provides for each categories the list of attributes (mandatories like name or optional) it wants to update.
+        Depending on the local database write policy, the CAM might only be able to update customized attributes for a category and not the predefined ones so some update could be rejected.**>
+	method UpdateCategories {
+		in {
+			<** @description : Content access module unique id as known by the POI service component.**>
+			UInt8 camId		
+			<**	@description : array[unique_id, attributes, sortOptions].**>
+			POIServiceTypes.CAMCategoryUpdate_t[] poiCategories		
+		}
+	}
+	<**	@description : Add new categories to the POI service component.
+        The CAM provides for each categories the name, the parent categories, the top level attribute, the list of attributes, the icons, ...  .**>
+	method AddCategories {
+		in {
+			<** @description : Content access module unique id as known by the POI service component.**>
+			UInt8 camId		
+			<**	@description : List of details for all the POI categories.**>
+			POIServiceTypes.CAMCategory_t[] poiCategories
+		}	
+		out {
+			<**	
+			@description : array of unique POI categories as registered by the POI service component.
+			Note: A POI category is a unique ID
+			**>
+			UInt16[] poiCategoriesId			
+		}
+	}
+	<**	@description : Remove categories from the POI service component. It could be a predifined or a customed one.
+        Depending on the local database write policy, the CAM might only not be able to remove some categories.**>
+	method RemoveCategories {
+		in {
+			<** @description : Content access module unique id as known by the POI service component.**>
+			UInt8 camId		
+			<**	@description : array[unique_id].
+			List of POI categories to remove.**>
+			UInt16[] poiCategories		
+		}
+	}
+}

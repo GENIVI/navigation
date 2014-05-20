@@ -1,0 +1,259 @@
+package org.genivi.lbs.POIServiceTypes
+
+import org.genivi.lbs.CommonTypes.* from "../CommonTypes.fidl"
+
+typeCollection POIServiceTypes {
+	version {
+		 major 0 
+		 minor 1 
+	}
+	
+	
+	<**	@description:**>
+	struct details_t {
+		<**	@description : list of parent categories unique id.**>
+		UInt16[] parents_id
+		<**	@description : visual icons set.**>
+		CommonTypes.variant_t icons
+		<**	@description : name.**>
+		String name
+		<**	@description : short category description (optional).**>
+		String short_desc
+		<**	@description : media associated (html web site, audio, video, ...) (optional).**>
+		CommonTypes.variant_t media
+	}
+	
+	<** @description:**>			
+	struct operator_t {
+		<**	@description : enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....).**>
+		UInt16 operator_id
+		<**	@description : attribute operator name.**>
+		String operator_name
+	}
+	
+	
+	<**	@description:**>
+	struct categoryAttribute_t {
+		<**	@description : attribute unique name.**>
+		String name
+		<**	@description : enum(INVALID,STRING,INTEGER,COORDINATES ...).**>
+		UInt16 type
+		<**	@description:**>
+		operator_t[] operators
+	}
+	
+	
+	<** @description:**>			
+	struct categorySortOption_t {
+		<**	@description : enum(SORT_DEFAULT,SORT_BY_DISTANCE,SORT_BY_TIME,ATTRIBUTE_CUSTOM, ... ).**>
+		UInt16 id
+		<**	@description : name to be displayed by application.**>
+		String name
+	}
+	
+	
+	<** @description:**>			
+	struct CAMCategory_t {
+		<**	@description : struct(list of parents_id, icons, name, short_desc, media).**>
+		details_t details
+		<**	@description : array[struct(name, type, array[struct(operator_id, operator_name)])].**>
+		categoryAttribute_t[] attributes
+		<**	@description : array[struct(id, name)].**>
+		categorySortOption_t[] sortOptions
+	}
+	
+	
+ 	<** @description:**>			
+	struct CAMCategoryUpdate_t {
+ 		<**	@description : enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...). Note: A POI category is a unique ID. It could be a predefined category or a custom one defined by a POI plug-in **>			
+		UInt16 id	
+		<**	@description : array[struct(name, type, array[struct(operator_id, operator_name)])].**>
+		categoryAttribute_t[] attributes
+		<**	@description : array[struct(id, name)].**>
+		categorySortOption_t[] sortOptions
+	}
+	
+
+	
+  	<** @description:**>			
+    struct poiAttribute_t
+    {
+		<** @description:attribute unique name (see data model)**>			
+        String name
+ 		<** @description:enum(INVALID,STRING,INTEGER,COORDINATES ...)**>			
+        UInt16 type
+		<** @description:The value depends on the attribute specifications and type**>			
+        CommonTypes.variant_t value
+    }
+	
+
+ 	
+	<** @description:**>			
+    struct categoryRadius_t
+    {
+ 		<**	@description : enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...). Note: A POI category is a unique ID. It could be a predefined category or a custom one defined by a POI plug-in **>			
+        UInt16 id
+ 		<**	@description : activation or search radius around the position (in 10 meters) for the category. If value is 0 (zero), the default radius (defined for a category) is applied.**>
+        UInt32 radius
+    }
+	
+	
+  	<** @description:**>			
+    struct poiDetails_t
+    {
+		<** @description:POI id**>			
+        UInt32 id
+		<** @description:POI name**>			
+        String name
+ 		<** @description:latitude of a vertex of the polygon in format %3.6f. Range [-90:+90]. Example: 48.053250**>			
+        Double latitude
+ 		<** @description:longitude of a vertex of the polygon in format %3.6f. Range [-180:+180]. Example: 48.053250**>			
+        Double longitude
+ 		<** @description:altitude above the sea level of the current position in meters**>			
+        Int32 altitude
+    }
+	
+ 	
+ 	<** @description:**>			
+    struct searchResultDetails_t
+    {
+  		<** @description: struct(id,name,latitude,longitude,altitude).**>			
+        poiDetails_t details
+  		<** @description: array[unique_id].**>			
+        UInt16[] categories
+   		<** @description: array[struct(name,type,value)].**>			
+        poiAttribute_t[] attributes
+    }
+
+ 	<** @description:**>			
+    struct searchResult_t
+    {
+		<** @description:POI id**>			
+        UInt32 id
+		<** @description:distance in meters to poi from center of the search or from vehicle if search along**>			
+        UInt32 distance
+		<** @description:enum(OFF_ROUTE,ON_ROUTE,INSIDE_CORRIDOR, ... )**>			
+        UInt16 route_status
+		<** @description:List of attributes requested. It could be empty**>			
+        poiAttribute_t[] attributes
+    }
+
+	
+  	<** @description:**>			
+    struct poiCAMDetails_t 
+    {
+ 		<** @description:POI unique id as known by the content access module. This id will be used by POI service to request POI details.**>			
+        UInt32 source_id
+  		<** @description:POI name.**>			
+        String name
+  		<** @description:POI category unique id.**>			
+        UInt16 category
+ 		<** @description:POI location.**>			
+        CommonTypes.geoCoordinate3D_t location
+ 		<** @description:distance in meters to poi from center of the search.**>			
+        UInt16 distance
+ 		<** @description:List of attributes requested. It could be empty.**>			
+        poiAttribute_t[] attributes
+    }
+	
+ 	
+  	<** @description:**>			
+    struct attributeDetails_t
+    {
+ 		<**	@description : attribute unique name (see data model).**>
+        String name
+  		<**	@description : enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...). Note: A POI category is a unique ID. It could be a predefined category or a custom one defined by a POI plug-in **>			
+		UInt16  poiCategory 
+  		<**	@description : enum(INVALID,STRING,INTEGER,COORDINATES ...).**>
+        UInt16 type
+  		<**	@description : value or partial value. The value depends on the attribute specifications and type.**>
+        CommonTypes.variant_t value
+  		<**	@description : enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....).**>
+        UInt16 oper
+  		<**	@description : true if the attribute is mandatory for the search and false for optional.**>
+        Boolean mandatory
+    }
+
+  	<** @description:**>			
+    struct categoryDetails_t
+    {
+ 		<**	@description : Category unique id.**>
+        UInt16 unique_id
+ 		<**	@description : list of parent categories unique id.**>
+        UInt16[] parents_id
+ 		<**	@description : visual icons set.**>
+        CommonTypes.variant_t icons
+ 		<**	@description : name.**>
+        String name
+ 		<**	@description : true if the category is a pre-defined one (top level), false for customized categories created by plug-in.**>
+        Boolean top_level
+ 		<**	@description : short category description (optional).**>
+        String description
+ 		<**	@description : media associated (html web site, audio, video, ...) (optional).**>
+        CommonTypes.variant_t media
+    }
+
+ 	<** @description:**>			
+    struct category_t
+    {
+		<**	@description : struct(unique_id, list of parents_id, icons, name, top_level, short_desc, media).**>
+        categoryDetails_t details
+		<**	@description : array[struct(name, type, array[struct(operator_id, operator_name)].**>
+        categoryAttribute_t[] attributes
+ 		<**	@description : array[struct(id, name)].**>
+        categorySortOption_t[] sortOptions
+    }
+
+	<** @description:**>			
+    struct poiCategoryAndLevel_t
+    {
+ 		<**	@description : Category unique id.**>
+        UInt16 unique_id
+ 		<**	@description : true if the category is a pre-defined one (top level), false for customized categories created by plug-in.**>
+        Boolean top_level
+    }
+
+	<** @description:**>			
+    struct poiCategoryAndName_t
+    {
+ 		<**	@description : Category unique id.**>
+        UInt16 unique_id
+ 		<**	@description : name.**>
+        String name
+ 		<**	@description : true if the category is a pre-defined one (top level), false for customized categories created by plug-in.**>
+        Boolean top_level
+    }
+    
+	<** @description:**>			
+	struct poiCategoryAndReason_t
+	{
+ 		<**	@description : Category unique id.**>
+        UInt16 unique_id
+        <** @description : enum(ADDED,REMOVED,ATTR_ADDED,ATTR_MODIFIED,ATTR_REMOVED, ... ) .**>
+    	UInt16 reason
+	}
+	<** @description:**>			
+	struct poiCategoryAndStatus_t
+	{
+ 		<**	@description : Category unique id.**>
+        UInt16 unique_id
+        <** @description : true if the category is available .**>
+    	UInt16 status
+	}
+
+ 	<** @description:**>			
+    struct poiAddedDetails_t
+    {
+		<** @description:POI name**>			
+        String name
+ 		<** @description:latitude of a vertex of the polygon in format %3.6f. Range [-90:+90]. Example: 48.053250**>			
+        Double latitude
+ 		<** @description:longitude of a vertex of the polygon in format %3.6f. Range [-180:+180]. Example: 48.053250**>			
+        Double longitude
+ 		<** @description:altitude above the sea level of the current position in meters**>			
+        Int32 altitude
+   		<** @description: array[struct(name,type,value)].**>			
+        poiAttribute_t[] attributes
+    }
+
+}
