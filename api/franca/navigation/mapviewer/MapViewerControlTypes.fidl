@@ -1,0 +1,175 @@
+// SPDX-License-Identifier: MPL-2.0
+// Copyright (C) 2014, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
+// This Source Code Form is subject to the terms of the
+// Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+// this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+package org.genivi.navigation.navigationcore
+
+import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
+
+typeCollection MapViewerControlTypes {
+	
+	enumeration MapViewType extends BasicEnum {
+		MAIN_MAP		= "0x0010"
+		SPLIT_SCREEN	= "0x0011"
+	}
+	
+	enumeration MapScaleMode extends BasicEnum {
+		AUTOMATIC		= "0x0110"
+		MANUAL			= "0x0111"
+		HYBRID			= "0x0112"
+	}
+
+	enumeration MapPerspective extends BasicEnum {
+		PERSPECTIVE_2D	= "0x0020"
+		PERSPECTIVE_3D	= "0x0021"
+	}
+
+	enumeration MapObject extends BasicEnum {
+		BUILDINGS		= "0x0080"
+		TERRAIN			= "0x0081"
+	}
+
+	enumeration PanAction extends BasicEnum {
+		PAN_START		= "0x0100"
+		PAN_TO			= "0x0101"
+		PAN_END			= "0x0102"
+	}
+	
+	enumeration Visibility extends BasicEnum {
+		VISIBLE			= "0x0043"
+		INVISIBLE		= "0x0044"
+		FROZEN			= "0x0045"
+	}
+
+	enumeration Level extends BasicEnum {
+		LEVEL_1			= "0x0050"
+		LEVEL_2			= "0x0051"
+		LEVEL_3			= "0x0052"
+		LEVEL_4			= "0x0053"
+		LEVEL_5			= "0x0054"
+	}
+
+	enumeration MapTheme extends BasicEnum {
+		THEME_1			= "0x0060"
+		THEME_2			= "0x0061"
+		THEME_3			= "0x0062"
+	}
+
+	<**
+		@description : struct generated for DBus argument CreateMapViewInstance_mapViewSize
+	**>
+	struct Dimension {
+		UInt16 horizontalSize
+		UInt16 verticalSize
+	}
+
+	map MapObjectVisibility {
+		MapObject to Boolean
+	}
+
+	enumeration MapScaleUnit extends BasicEnum {
+		METER		= "0x0032"
+		MILE		= "0x0033"
+		KM			= "0x0034"
+		YARD		= "0x0035"
+		FOOT		= "0x0036"
+	}
+
+	enumeration MapScaleType extends BasicEnum {
+		MIN			= "0x0040"
+		MAX			= "0x0041"
+		MID			= "0x0042"
+	}
+
+	enumeration SelectableMapType extends BasicEnum {
+		CUSTOM_ELEMENT		= "0x0120"
+		CURRENT_POSITION	= "0x0121"
+		WAYPOINT			= "0x0122"
+		POI					= "0x0123"
+		TRAFFIC_INCIDENT	= "0x0124"	
+		ROUTE				= "0x0125"
+		GEOCOORDINATES		= "0x0126"
+	}
+
+	<**
+		@description : struct generated for DBus argument GetScaleList_scaleList
+	**>
+	struct MapScale {
+		UInt16 scaleId
+		UInt16 scaleValue
+		MapScaleUnit unit
+		UInt32 millimetersPerPixel
+	}
+
+
+	<**
+		@description : struct generated for DBus argument SetMapViewSaveArea_saveArea
+	**>
+	struct MapViewArea {
+		Double left
+		Double right
+		Double top
+		Double bottom
+	}
+
+	<**
+		@description : struct generated for DBus argument SetMapViewPan_pixelCoordinates
+	**>
+	struct Pixel {
+		UInt16 x
+		UInt16 y
+	}
+
+
+	<**
+		@description : struct generated for DBus argument GetDisplayedRoutes_displayedRoutes
+	**>
+	struct DisplayedRoute {
+		Handle	routeHandle
+		Boolean highlighted
+	}
+
+
+
+	<**
+		@description : struct generated for DBus argument DisplayCustomElements_customElementsElem4
+	**>
+	struct AnchorPoint {
+		Int16 x
+		Int16 y
+	}
+
+	<**
+		@description : struct generated for DBus argument DisplayCustomElements_customElements
+	**>
+	struct CustomElement {
+		String name
+		String iconUri
+		Coordinate2D coordinate
+		AnchorPoint elem4
+	}
+
+
+	map tCustomElementDict {
+		Handle to CustomElement
+	}
+
+	<**
+		@description : struct generated for DBus argument SelectElementsOnMap_selectedElements
+	**>
+	struct SelectedMapElement {
+		SelectableMapType type
+		Coordinate2D position
+		ElementValue value
+	}
+
+	union ElementValue {
+		Int32 trafficIncident
+		Handle handle
+		CustomElement element
+	}
+	
+	
+}

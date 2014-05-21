@@ -1,0 +1,124 @@
+/* 
+SPDX-License-Identifier: MPL-2.0
+Copyright (C) 2014, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
+This Source Code Form is subject to the terms of the
+Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+*/
+
+package org.genivi.navigation.navigationcore
+
+import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
+
+typeCollection MapMatchedPositionTypes {
+	
+	enumeration SimulationStatus extends BasicEnum {
+		SIMULATION_STATUS_NO_SIMULATION		= "0x0220"
+		SIMULATION_STATUS_RUNNING			= "0x0221"
+		SIMULATION_STATUS_PAUSED			= "0x0222"
+		SIMULATION_STATUS_FIXED_POSITION	= "0x0223"
+	}
+	
+	enumeration PositionStatus extends BasicEnum {
+		TIMESTAMP			= "0x0010"
+		GNSS_FIX_STATUS		= "0x00e0"
+		DR_STATUS			= "0x00e1"
+		MM_STATUS			= "0x00e2"
+		SIMULATION_MODE		= "0x00e3"		
+	}
+	
+	enumeration PositionItemKey extends PositionStatus {
+		LATITUDE			= "0x00a0"
+		LONGITUDE			= "0x00a1"
+		ALTITUDE			= "0x00a2"
+		HEADING				= "0x00a3"
+		SPEED				= "0x00a4"
+		CLIMB				= "0x00a5"
+	}
+	
+	 enumeration GnnsFixStatus extends BasicEnum {
+	 	NO_FIX				= "0x0100"
+	 	TIME_FIX			= "0x0101"
+	 	FIX_2D				= "0x0102"
+	 	FIX_3D				= "0x0103"
+	}
+		
+	enumeration MatchMode { 
+		INVALID				= "0x00f0"
+		ON_ROAD				= "0x00f1"
+		OFF_ROAD			= "0x00f2"
+		ON_FERRY			= "0x00f3"
+		IN_TUNNEL			= "0x00f4"
+		ON_CARPARK			= "0x00f5"
+	}		
+		
+	union PositionItemValue {
+		Timestamp timestamp
+		Boolean status
+		GnnsFixStatus fix
+		Double doubleValue
+		Int32 intValue
+	}	
+		
+	map PositionItemDict {
+		PositionItemKey to PositionItemValue
+	}
+	
+	enumeration AddressItemKey  extends BasicEnum {
+		TIMESTAMP			= "0x0010"
+		COUNTRY				= "0x00a6"
+		COUNTRYCODE			= "0x00b3"
+		STATE				= "0x00a7"
+		CITY				= "0x00a8"
+		STREET				= "0x00aa"
+		ROAD_NUMBER			= "0x014e"
+		HOUSENUMBER			= "0x00ab"
+		HOUSENAME			= "0x00b4"
+		CROSSING			= "0x00ac"
+		DISTRICT			= "0x00ad"
+		TIMEZONE_OFFSET		= "0x0011"
+		DAYLIGHT_OFFSET		= "0x0012"
+		MATCH_TYPE			= "0x00f0"		
+	}
+		
+	union AddressItemValue {
+		String addressField
+		Int16 offset
+		Timestamp timestamp
+		MatchMode matchMode
+	}
+	
+	map AddressItemDict {
+		AddressItemKey to AddressItemValue
+	}
+	
+	enumeration PositionOnSegmentKey extends BasicEnum {
+		TIMESTAMP				= "0x0010"
+		SEGMENT_ID				= "0x0110"
+		DIRECTION_ON_SEGMENT	= "0x0112"
+		DISTANCE_ON_SEGMENT		= "0x0113"
+	}
+	
+	union PositionOnSegmentValue {
+		Boolean directionOnSegment
+		Distance distanceOnSegment
+		LinkId segment
+		Timestamp timestamp
+	}
+	
+	map PositionOnSegmentDict {
+		PositionOnSegmentKey to PositionOnSegmentValue
+	}
+	
+	union PositionStatusValue {
+		Boolean statusValue
+		GnnsFixStatus fixStatus
+		Timestamp timestanp
+	}
+	
+	map PositionStatusDict {
+		PositionStatus to PositionStatusValue
+	}
+
+	
+}

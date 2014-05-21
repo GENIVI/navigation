@@ -1,0 +1,377 @@
+// SPDX-License-Identifier: MPL-2.0
+// Copyright (C) 2014, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
+// This Source Code Form is subject to the terms of the
+// Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+// this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+package org.genivi.navigation.navigationcore
+	
+import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
+import org.genivi.navigation.navigationcore.GuidanceTypes.* from "GuidanceTypes.fidl"
+
+
+<**
+	@description : Guidance = This interface offers functions that implement the route-guidance functionality of a navigation system
+**>
+
+interface org.genivi.navigationcore.Guidance {
+	version {
+		major 0
+		minor 0
+	}
+
+	<**
+		@description : GetVersion = This method returns the API version implemented by the server application
+	**>
+	method GetVersion {
+		out {
+			Version ^version
+		}
+	}
+
+	<**
+		@description : StartGuidance = This method starts the guidance for a given route
+	**>
+	method StartGuidance {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+		}
+	}
+
+	<**
+		@description : StopGuidance = This method stops the guidance
+	**>
+	method StopGuidance {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+		}
+	}
+
+	<**
+		@description : SetVoiceGuidance = This method switch on/off the voice guidance
+	**>
+	method SetVoiceGuidance {
+		in {
+
+			<**
+				@description : activation of the voice guidance
+			**>
+			Boolean activate
+
+			<**
+				@description : kind of voice (to be defined)
+			**>
+			String voice
+		}
+	}
+
+	<**
+		@description : GetGuidanceDetails = This method retrieves guidance information 
+	**>
+	method GetGuidanceDetails {
+		out {
+
+			<**
+				@description : voiceGuidance = if TRUE voice guidance is active
+			**>
+			Boolean voiceGuidance
+
+			<**
+				@description : vehicleOnTheRoad = if TRUE the vehicle is located on the road network
+			**>
+			Boolean vehicleOnTheRoad
+
+			<**
+				@description : isDestinationReached = if TRUE the destination has been reached
+			**>
+			Boolean isDestinationReached
+
+			<**
+				@description : maneuver = enum(INVALID,CRUISE,MANEUVER_APPEARED,PRE_ADVICE,ADVICE,PASSED, ... )
+			**>
+			ManueverPhase maneuver
+		}
+	}
+
+	<**
+		@description : PlayVoiceManeuver = This method plays or repeats the last voice guidance
+	**>
+	method PlayVoiceManeuver {
+	}
+
+	<**
+		@description : GetWaypointInformation = This method retrieves the information on the remaining way points of the route. A point can be the final destination as well as a stage defined by the user. The returned waypoints are ordered by their 'number'.
+	**>
+	method GetWaypointInformation {
+		in {
+
+			<**
+				@description : requestedNumberOfWaypoints = the number of requested waypoints. If 0, all waypoints will be returned.
+			**>
+			UInt16 requestedNumberOfWaypoints
+		}
+		out {
+
+			<**
+				@description : numberOfWaypoints = the number of retrieved waypoints(NOTE: the number corresponds to the number of elements in the array)
+			**>
+			UInt16 numberOfWaypoints
+			tWaypointStruct [] waypointsList
+		}
+	}
+
+	<**
+		@description : This method retrieves the information on the final destination
+	**>
+	method GetDestinationInformation {
+		out {
+
+			<**
+				@description : offset = offset of the destination in meter from the beginning of the route
+			**>
+			UInt32 offset
+
+			<**
+				@description : travelTime = time to reach the destination in second
+			**>
+			UInt32 travelTime
+
+			<**
+				@description : direction = direction of the destination in degree relatively to the North. Range [0:360]
+			**>
+			Int32 direction
+
+			<**
+				@description : side = enum(LEFT,RIGHT,NOT_AVAILABLE)
+			**>
+			UInt16 side
+
+			<**
+				@description : timeZone = time zone of the destination. It is expressed as the time difference from the UTC in minutes
+			**>
+			Int16 timeZone
+
+			<**
+				@description : daylightSavingTime = daylight saving time of the destination. It is expressed as the time difference from the UTC in minutes
+			**>
+			Int16 daylightSavingTime
+		}
+	}
+
+	<**
+		@description : GetManeuversList = This method retrieves the list of next maneuvers
+	**>
+	method GetManeuversList {
+		in {
+
+			<**
+				@description : requestedNumberOfManeuvers = the number of requested maneuvers
+			**>
+			UInt16 requestedNumberOfManeuvers
+
+			<**
+				@description : maneuverOffset = the offset of the first maneuver to retrieve
+			**>
+			UInt32 maneuverOffset
+		}
+		out {
+
+			<**
+				@description : numberOfManeuvers = the number of retrieved maneuvers
+			**>
+			UInt16 numberOfManeuvers
+			
+			Maneuver[] maneuversList
+		}
+	}
+
+	<**
+		@description : SetRouteCalculationMode = This method configures the way the navigation application wants the navigation core to behave of reroute trigger
+	**>
+	method SetRouteCalculationMode {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : routeCalculationMode = enum(INVALID,ALL_MANUAL,ALL_AUTOMATIC,TRAFFIC_MANUAL,OFF_ROUTE_MANUAL)
+			**>
+			CalculationMode routeCalculationMode
+		}
+	}
+
+	<**
+		@description : SkipNextManeuver = This method allows to jump behind the current maneuver
+	**>
+	method SkipNextManeuver {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+		}
+	}
+
+	<**
+		@description : GetGuidanceStatus = This method retrieves the guidance status
+	**>
+	method GetGuidanceStatus {
+		out {
+
+			<**
+				@description : guidanceStatus = enum(INVALID,ACTIVE,INACTIVE)
+			**>
+			GuidanceStatus guidanceStatus
+
+			<**
+				@description : routeHandle = Active route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value. Should be ignored when guidanceStatus=INACTIVE
+			**>
+			Handle routeHandle
+		}
+	}
+
+	<**
+		@description : SetVoiceGuidanceSettings = This method sets the voice guidance settings
+	**>
+	method SetVoiceGuidanceSettings {
+		in {
+
+			<**
+				@description : mode = enum(INVALID,DISABLED_PROMPT,AUTOMATIC_PROMPT,MANUAL_PROMPT, ... )
+			**>
+			PromptMode promptMode
+		}
+	}
+
+	<**
+		@description : GetVoiceGuidanceSettings = This method returns the used voice guidance settings
+	**>
+	method GetVoiceGuidanceSettings {
+		out {
+
+			<**
+				@description : mode = enum(INVALID,DISABLED_PROMPT,AUTOMATIC_PROMPT,MANUAL_PROMPT, ... )
+			**>
+			PromptMode promptMode
+		}
+	}
+
+	<**
+		@description : VehicleLeftTheRoadNetwork = This signal is emitted when the vehicle exits from the road network
+	**>
+	broadcast VehicleLeftTheRoadNetwork {
+	}
+
+	<**
+		@description : GuidanceStatusChanged = This signal is emitted when the guidance status changes
+	**>
+	broadcast GuidanceStatusChanged {
+		out {
+
+			<**
+				@description : guidanceStatus = enum(INVALID,ACTIVE,INACTIVE)
+			**>
+			GuidanceStatus guidanceStatus
+
+			<**
+				@description : routeHandle = Active route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value. Should be ignored when guidanceStatus=INACTIVE.
+			**>
+			Handle routeHandle
+		}
+	}
+
+	<**
+		@description : WaypointReached = This signal is emitted when the destination is reached
+	**>
+	broadcast WaypointReached {
+		out {
+
+			<**
+				@description : isDestination = flag. TRUE means that the way point is the destination
+			**>
+			Boolean isDestination
+		}
+	}
+
+	<**
+		@description : This signal is emitted each time a maneuver event is going
+	**>
+	broadcast ManeuverChanged {
+		out {
+
+			<**
+				@description : maneuver = enum(INVALID,CRUISE,MANEUVER_APPEARED,PRE_ADVICE,ADVICE,PASSED, ... )
+			**>
+			ManueverPhase maneuver
+		}
+	}
+
+	<**
+		@description : PositionOnRouteChanged = This signal is emitted when the position on the route changes
+	**>
+	broadcast PositionOnRouteChanged {
+		out {
+
+			<**
+				@description : offsetOnRoute = the current offset on the route in meters from the beginning of the route
+			**>
+			UInt32 offsetOnRoute
+		}
+	}
+
+	<**
+		@description : VehicleLeftTheRoute = This signal is emitted when the vehicle has left the route
+	**>
+	broadcast VehicleLeftTheRoute {
+	}
+
+	<**
+		@description : PositionToRouteChanged = This signal is emitted when the vehicle is off-the-road network and either the heading or the distance (or both) to the closest point on the active route changes
+	**>
+	broadcast PositionToRouteChanged {
+		out {
+
+			<**
+				@description : distance = distance in meters to the closest point on the active route
+			**>
+			UInt32 distance
+
+			<**
+				@description : direction = direction in degrees relatively to the closest point on the active route. Range [0:360]
+			**>
+			Int32 direction
+		}
+	}
+
+	<**
+		@description : ActiveRouteChanged = This signal is emitted when the active route changes
+	**>
+	broadcast ActiveRouteChanged {
+		out {
+
+			<**
+				@description : changeCause = enum(INVALID,TRAFFIC,OFF_ROUTE,MANUAL,...)
+			**>
+			RouteChangedCause changeCause
+		}
+	}
+
+
+}

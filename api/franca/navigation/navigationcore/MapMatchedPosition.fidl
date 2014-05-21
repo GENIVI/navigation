@@ -1,0 +1,291 @@
+/* 
+SPDX-License-Identifier: MPL-2.0
+Copyright (C) 2014, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
+This Source Code Form is subject to the terms of the
+Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+*/
+
+package org.genivi.navigation.navigationcore
+
+import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
+import org.genivi.navigation.navigationcore.MapMatchedPositionTypes.* from "MapMatchedPositionTypes.fidl"
+
+<**
+	@description : MapMatchedPosition = This interface offers functions to retrieve the map matched position and to simulate positioning
+**>
+
+interface org.genivi.navigationcore.MapMatchedPosition {
+	version {
+		major 0
+		minor 0
+	}
+
+	<**
+		@description : GetVersion = This method returns the API version implemented by the server application
+	**>
+	method GetVersion {
+		out {
+			Version ^version
+		}
+	}
+
+	<**
+		@description : SetSimulationMode = This method activates or deactivates the simulation mode
+	**>
+	method SetSimulationMode {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : activate = flag. TRUE means that the simulation mode is activated.
+			**>
+			Boolean activate
+		}
+	}
+
+	<**
+		@description : GetSimulationStatus = This method retrieves the simulation status
+	**>
+	method GetSimulationStatus {
+		out {
+
+			<**
+				@description : simulationStatus = enum(SIMULATION_STATUS_NO_SIMULATION, SIMULATION_STATUS_RUNNING, SIMULATION_STATUS_PAUSED, SIMULATION_STATUS_FIXED_POSITION)
+			**>
+			SimulationStatus simulationStatus
+		}
+	}
+
+	<**
+		@description :  AddSimulationStatusListener = Add this node as a listener to Simulation Status changes.
+	**>
+	method AddSimulationStatusListener {
+	}
+
+	<**
+		@description :  RemoveSimulationStatusListener = Remove this node as a listener to Simulation Status changes.
+	**>
+	method RemoveSimulationStatusListener {
+	}
+
+	<**
+		@description : SetSimulationSpeed = This method sets the speed factor for the simulation mode
+	**>
+	method SetSimulationSpeed {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : speedFactor = speed factor
+			**>
+			Int8 speedFactor
+		}
+	}
+
+	<**
+		@description : GetSimulationSpeed = returns the speed factor for the simulation mode
+	**>
+	method GetSimulationSpeed {
+		out {
+
+			<**
+				@description : speedFactor = speed factor
+			**>
+			Int8 speedFactor
+		}
+	}
+
+	<**
+		@description :  AddSimulationSpeedListener = Add this node as a listener to simulation speed factor changes.
+	**>
+	method AddSimulationSpeedListener {
+	}
+
+	<**
+		@description :  RemoveSimulationSpeedListener = Remove this node as a listener to simulation speed factor changes.
+	**>
+	method RemoveSimulationSpeedListener {
+	}
+
+	<**
+		@description : StartSimulation = This method starts, or resumes, a Follow Active Route simulation
+	**>
+	method StartSimulation {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+		}
+	}
+
+	<**
+		@description : PauseSimulation = This method freezes the current location
+	**>
+	method PauseSimulation {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+		}
+	}
+
+	<**
+		@description : GetPosition = This method returns the current position
+	**>
+	method GetPosition {
+		in {
+			PositionItemKey[] valuesToReturn
+		}
+		out {
+			PositionItemDict position
+		}
+	}
+
+	<**
+		@description : SetPosition = This method sets the position to a specific location
+	**>
+	method SetPosition {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+			
+			PositionItemDict position
+		}
+	}
+
+	<**
+		@description : GetAddress = This method returns the current address
+	**>
+	method GetAddress {
+		in {
+			AddressItemKey[] valuesToReturn
+		}
+		out {
+			AddressItemDict address
+		}
+	}
+
+	<**
+		@description : positionOnSegment = This method returns the vehicle position on a route segment
+	**>
+	method GetPositionOnSegment {
+		in {
+			PositionOnSegmentKey [] valuesToReturn
+		}
+		out {
+			PositionOnSegmentDict positionOnSegment
+		}
+	}
+
+	<**
+		@description : GetStatus = This method returns the current status
+	**>
+	method GetStatus {
+		in {
+			PositionStatus [] valuesToReturn
+		}
+		out {
+			PositionStatusDict status
+		}
+	}
+
+	<**
+		@description : SimulationStatusChanged = This signal is emitted when the Simulation Status has changed
+	**>
+	broadcast SimulationStatusChanged {
+		out {
+
+			<**
+				@description : simulationStatus = enum(SIMULATION_STATUS_NO_SIMULATION, SIMULATION_STATUS_RUNNING, SIMULATION_STATUS_PAUSED, SIMULATION_STATUS_FIXED_POSITION)
+			**>
+			SimulationStatus simulationStatus
+		}
+	}
+
+	<**
+		@description : SimulationSpeedChanged = This signal is emitted when the simulation speed factor has changed
+	**>
+	broadcast SimulationSpeedChanged {
+		out {
+
+			<**
+				@description : speedFactor = speed factor
+			**>
+			Int8 speedFactor
+		}
+	}
+
+	<**
+		@description : PositionUpdate = This signal is called to notify a client application of a position change. The update frequency is implementation specific. The maximal allowed frequency is 10Hz
+	**>
+	broadcast PositionUpdate {
+		out {
+			PositionItemKey [] changedValues
+		}
+	}
+
+	<**
+		@description : AddressUpdate = This signal is called to notify a client application that the current address changed
+	**>
+	broadcast AddressUpdate {
+		out {
+			AddressItemKey[] changedValues
+		}
+	}
+
+	<**
+		@description : PositionOnSegmentUpdate = This signal is called to notify the client that the vehicle position on the route segment changed
+	**>
+	broadcast PositionOnSegmentUpdate {
+		out {
+			PositionOnSegmentKey[] changedValues
+		}
+	}
+
+	<**
+		@description : StatusUpdate = This signal is emitted to notifiy a client application that the current status changed
+	**>
+	broadcast StatusUpdate {
+		out {
+			PositionStatus [] changedValues
+		}
+	}
+
+	<**
+		@description : OffroadPositionChanged = This signal is emitted when the heading and the distance to the closest point on the road network changes
+	**>
+	broadcast OffRoadPositionChanged {
+		out {
+
+			<**
+				@description : distance = distance in meters to the closest point on the road network
+			**>
+			UInt32 distance
+
+			<**
+				@description : direction = direction in degrees relatively to the closest point on the road network. Range [0:360]
+			**>
+			Int32 direction
+		}
+	}
+
+
+
+
+}

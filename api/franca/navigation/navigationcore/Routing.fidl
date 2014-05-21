@@ -1,0 +1,615 @@
+/* 
+SPDX-License-Identifier: MPL-2.0
+Copyright (C) 2014, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
+This Source Code Form is subject to the terms of the
+Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+*/
+
+package org.genivi.navigation.navigationcore
+
+import org.genivi.navigation.navigationcore.RoutingTypes.* from "RoutingTypes.fidl"
+import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
+
+
+<**
+	@description : This interface offers functions that implement the routing functionality of a navigation system
+**>
+
+interface org.genivi.navigationcore.Routing {
+	version {
+		major 0
+		minor 0
+	}
+
+	<**
+		@description : This method returns the API version implemented by the server application
+	**>
+	method GetVersion {
+		out {
+			Version ^version
+		}
+	}
+
+	<**
+		@description : This method creates a route
+	**>
+	method CreateRoute {
+		in {
+
+			<**
+				@description : Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+		}
+		out {
+
+			<**
+				@description : Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+		}
+	}
+
+	<**
+		@description : This method deletes a route and its associated resources
+	**>
+	method DeleteRoute {
+		in {
+
+			<**
+				@description : Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+		}
+	}
+
+	<**
+		@description : This method sets the cost model
+	**>
+	method SetCostModel {
+		in {
+
+			<**
+				@description : Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+
+			<**
+				@description : enum(INVALID,FASTEST,SHORTEST,ECOLOGICAL,SCENIC,EASY,OFF_ROAD,BALANCED,CHEAPEST, ... )
+			**>
+			CostModel costModel
+		}
+	}
+
+	<**
+		@description : This method retrieves the selected cost model
+	**>
+	method GetCostModel {
+		in {
+
+			<**
+				@description : Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+		}
+		out {
+
+			<**
+				@description : enum(INVALID,FASTEST,SHORTEST,ECOLOGICAL,SCENIC,EASY,OFF_ROAD,BALANCED,CHEAPEST, ... )
+			**>
+			CostModel costModel
+		}
+	}
+
+	<**
+		@description : This method retrieves a list of supported cost models
+	**>
+	method GetSupportedCostModels {
+		out {
+			CostModel [] costModelsList
+		}
+	}
+
+	<**
+		@description : This method sets a list of route preferences
+	**>
+	method SetRoutePreferences {
+		in {
+
+			<**
+				@description : Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+
+			<**
+				@description : ISO 3166-1 alpha 3 country code (upper case)
+			**>
+			String countryCode
+			
+			RoutePreference[] roadPreferenceList
+			
+			ConiditionPreference[] conditionPreferenceList
+		}
+	}
+
+	<**
+		@description : This method retrieves a list of selected route preferences
+	**>
+	method GetRoutePreferences {
+		in {
+
+			<**
+				@description : Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+
+			<**
+				@description : ISO 3166-1 alpha 3 country code (upper case)
+			**>
+			String countryCode
+		}
+		out {
+			RoutePreference[] roadPreferenceList
+			ConiditionPreference[] conditionPreferenceList
+		}
+	}
+
+	<**
+		@description : This method retrieves a list of supported route preferences
+	**>
+	method GetSupportedRoutePreferences {
+		out {
+			RoutePreference[] routePreferencesList
+			ConiditionPreference[] conditionPreferenceList
+		}
+	}
+
+	<**
+		@description :  This method sets the time schedule for the route to be calculated
+	**>
+	method SetRouteSchedule {
+		in {
+
+			<**
+				@description : Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+			
+			RouteSchedule routeSchedule
+		}
+	}
+
+	<**
+		@description :  This method gets the time schedule for the route to be calculated
+	**>
+	method GetRouteSchedule {
+		in {
+
+			<**
+				@description : Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+			
+			Schedule[] valuesToReturn
+		}
+		out {
+			
+			RouteSchedule routeSchedule
+		}
+	}
+
+	<**
+		@description : This method sets a list of means of transportation that must be considered when calculating a route
+	**>
+	method SetTransportationMeans {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+			
+			TransportationMeans[] transportationMeansList
+		}
+	}
+
+	<**
+		@description : GetTransportationMeans = This method retrieves the selected means of transportation
+	**>
+	method GetTransportationMeans {
+		in {
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+		}
+		out {
+			TransportationMeans[] transportationMeansList
+		}
+	}
+
+	<**
+		@description : GetSupportedTransportationMeans = This method retrieves a list of supported means of transportation
+	**>
+	method GetSupportedTransportationMeans {
+		out {
+			TransportationMeans[] transportationMeansList
+		}
+	}
+
+	<**
+		@description : SetExcludedAreas = This method sets the areas to be excluded when calculating a route
+	**>
+	method SetExcludedAreas {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+			
+			Area[] excludedAreas
+		}
+	}
+
+	<**
+		@description : GetExcludedAreas = This method retrieves the areas to be excluded when calculating a route
+	**>
+	method GetExcludedAreas {
+		in {
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+		}
+		out {
+			Area[] excludedAreas
+		}
+	}
+
+	<**
+		@description : SetWaypoints = This method sets a list of waypoints
+	**>
+	method SetWaypoints {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+
+			<**
+				@description : startFromCurrentPosition = flag indicating if the current position is used as starting point
+			**>
+			Boolean startFromCurrentPosition
+			
+			WayPoint[] waypointsList
+		}
+	}
+
+	<**
+		@description : GetWaypoints = This method retrieves a list of waypoints
+	**>
+	method GetWaypoints {
+		in {
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+		}
+		out {
+
+			<**
+				@description : startFromCurrentPosition = flag indicating if the current position is used as starting point
+			**>
+			Boolean startFromCurrentPosition
+			
+			WayPoint[] waypointsList
+		}
+	}
+
+	<**
+		@description : CalculateRoute = This method starts a route calculation
+	**>
+	method CalculateRoute {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+		}
+	}
+
+	<**
+		@description : CancelRouteCalculation = This method cancels a route calculation
+	**>
+	method CancelRouteCalculation {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+		}
+	}
+
+	<**
+		@description : CalculateRoutes = This method allows a client to calculate alternative routes that differs from a list of already calculated routes
+	**>
+	method CalculateRoutes {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+			Handle[] calculatedRoutesList
+		}
+		out {
+			Handle[] alternativeRoutesList
+		}
+	}
+
+	<**
+		@description : GetRouteSegments = This method retrieves a list of segments for a given route starting from the one closest to the current position to the one closest to the destination
+	**>
+	method GetRouteSegments {
+		in {
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+
+			<**
+				@description : detailLevel = detail level
+			**>
+			Int16 detailLevel
+			
+			RouteSegmentType [] valuesToReturn
+
+			<**
+				@description : numberOfSegments = number of segments to be retrieved
+			**>
+			UInt32 numberOfSegments
+
+			<**
+				@description : offset = offset from the beginning of the list
+			**>
+			UInt32 offset
+		}
+		out {
+
+			<**
+				@description : totalNumberOfSegments = total number of segments
+			**>
+			UInt32 totalNumberOfSegments
+			
+			RouteSegment[] routeSegments
+		}
+	}
+
+	<**
+		@description :  GetRouteOverview = This method retrieves general information about a given route
+	**>
+	method GetRouteOverview {
+		in {
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+			
+			RouteOverviewType [] valuesToReturn
+		}
+		out {
+			RouteOverview routeOverview
+		}
+	}
+
+	<**
+		@description : GetRouteBoundingBox = This method retrieves the bounding box containing a calculated route
+	**>
+	method GetRouteBoundingBox {
+		in {
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+		}
+		out {
+			Rectangle boundingBox
+		}
+	}
+
+	<**
+		@description : GetAllRoutes = This method retrieves the handles of all created routes
+	**>
+	method GetAllRoutes {
+		out {
+			Handle [] routesList
+		}
+	}
+
+	<**
+		@description : SetBlockedRouteStretches = This method sets blocked streches on a given route
+	**>
+	method SetBlockedRouteStretches {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+			
+			BlockedRouteElement[] blockParameters
+		}
+	}
+
+	<**
+		@description : GetBlockedRouteStretches = This method retrieves all blocked streches on a given route
+	**>
+	method GetBlockedRouteStretches {
+		in {
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+		}
+		out {
+			BlockedRouteElement [] blockParameters
+		}
+	}
+
+	<**
+		@description : RouteDeleted = This signal is emitted to inform clients that the current route has been deleted
+	**>
+	broadcast RouteDeleted {
+		out {
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+		}
+	}
+
+	<**
+		@description : RouteCalculationCancelled = This signal informs a client that a route calculation was cancelled
+	**>
+	broadcast RouteCalculationCancelled {
+		out {
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+		}
+	}
+
+	<**
+		@description : RouteCalculationSuccessful = This signal informs a client that a route calculation was successful
+	**>
+	broadcast RouteCalculationSuccessful {
+		out {
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+			
+			RoutePreference unfullfilledPreferences
+		}
+	}
+
+	<**
+		@description : RouteCalculationFailed = This signal informs a client that a route calculation failed
+	**>
+	broadcast RouteCalculationFailed {
+		out {
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle Handle
+
+			<**
+				@description : errorCode = enum(INVALID,UNMATCHED_POSITION,UNREACHABLE_DESTINATION,UNFULFILLED_PREFERENCE_MODE, ... )
+			**>
+			CalculationError errorCode
+			
+			RoutePreference unfullfilledPreferences
+		}
+	}
+
+	<**
+		@description : RouteCalculationProgressUpdate = This signal informs a client about a route calculation progress
+	**>
+	broadcast RouteCalculationProgressUpdate {
+		out {
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+
+			<**
+				@description : status = enum(INVALID,CALCULATION_OK,NO_POSITION, ... )
+			**>
+			CalculationStatus status
+
+			<**
+				@description : percentage = progress status. Range [0:100]
+			**>
+			Int8 percentage
+		}
+	}
+
+	<**
+		@description : AlternativeRoutesAvailable = This signal is emitted when alternative routes have been computed in the background and are available for guidance.
+	**>
+	broadcast AlternativeRoutesAvailable {
+		out {
+			Handle[] routeHandlesList
+		}
+	}
+
+
+}

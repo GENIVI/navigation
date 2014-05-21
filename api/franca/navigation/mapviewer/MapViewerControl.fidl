@@ -1,0 +1,1456 @@
+// SPDX-License-Identifier: MPL-2.0
+// Copyright (C) 2014, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
+// This Source Code Form is subject to the terms of the
+// Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+// this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+package org.genivi.navigation.navigationcore
+
+import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
+import org.genivi.navigation.navigationcore.MapViewerControlTypes.* from "MapViewerControlTypes.fidl"
+
+<**
+	@description : MapViewerControl = This interface offers functions to control the MapViewer
+**>
+
+interface org.genivi.mapviewer.MapViewerControl {
+	version {
+		major 0
+		minor 0
+	}
+
+	<**
+		@description : GetVersion = This method returns the API version implemented by the server application
+	**>
+	method GetVersion {
+		out {
+			Version ^version
+		}
+	}
+
+	<**
+		@description : CreateMapViewInstance = This method creates a new map instance
+	**>
+	method CreateMapViewInstance {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+			
+			Dimension mapViewSize
+
+			<**
+				@description : mapViewType = enum(INVALID,MAIN_MAP,SPLIT_SCREEN, ... )
+			**>
+			MapViewType mapViewType
+		}
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+	}
+
+	<**
+		@description : ReleaseMapViewInstance = This method releases (i.e. destroys) a given map instance. Only invisible map instances can be released
+	**>
+	method ReleaseMapViewInstance {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+	}
+
+	<**
+		@description : GetMapViewType = This method returns the map type of a map instance as it was set using CreateMapViewInstance
+	**>
+	method GetMapViewType {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+
+			<**
+				@description : mapViewType = enum(INVALID,MAIN_MAP,SPLIT_SCREEN, ... )
+			**>
+			MapViewType mapViewType
+		}
+	}
+
+	<**
+		@description : GetSupportedMapViewTypes = This method retrieves the supported map view types
+	**>
+	method GetSupportedMapViewTypes {
+		out {
+			MapViewType [] mapViewTypeList
+		}
+	}
+
+	<**
+		@description : SetTargetPoint = This method sets the position of the point the camera is always aimed at
+	**>
+	method SetTargetPoint {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			
+			Coordinate3D targetPoint
+		}
+	}
+
+	<**
+		@description : GetTargetPoint = This method retrieves the target point position
+	**>
+	method GetTargetPoint {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+			Coordinate3D targetPoint
+		}
+	}
+
+	<**
+		@description : SetFollowCarMode = This method sets the FollowCar mode
+	**>
+	method SetFollowCarMode {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : followCarMode = flag. If true, the current car position is interpreted as position of the point the camera must look at
+			**>
+			Boolean followCarMode
+		}
+	}
+
+	<**
+		@description : GetFollowCarMode = This method returns the current FollowCar-mode
+	**>
+	method GetFollowCarMode {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+
+			<**
+				@description : followCarMode = flag. If true, the current car position is interpreted as position of the point the camera must look at
+			**>
+			Boolean followCarMode
+		}
+	}
+
+	<**
+		@description : SetCameraPosition = This method sets the coordinates of the point at which the camera must be positioned
+	**>
+	method SetCameraPosition {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			
+			Coordinate3D position
+		}
+	}
+
+	<**
+		@description : GetCameraPosition = This method returns the coordinates of the point at which the camera is positioned
+	**>
+	method GetCameraPosition {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+			Coordinate3D position
+		}
+	}
+
+	<**
+		@description : SetCameraHeadingAngle = This method sets the map view heading angle
+	**>
+	method SetCameraHeadingAngle {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : heading = heading angle in degrees. Range [0:360]
+			**>
+			Int32 heading
+		}
+	}
+
+	<**
+		@description : SetCameraHeadingToTarget = This method sets the camera heading in such a way, that the camera always looks at a given target
+	**>
+	method SetCameraHeadingToTarget {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			
+			Coordinate2D target
+		}
+	}
+
+	<**
+		@description : SetCameraHeadingTrackUp = This method sets the camera heading in such a way, that the camera always looks in the direction in which the car is moving
+	**>
+	method SetCameraHeadingTrackUp {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+	}
+
+	<**
+		@description : GetCameraHeading = This method returns the current camera heading
+	**>
+	method GetCameraHeading {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+
+			<**
+				@description : headingType = enum(INVALID,CONSTANT_ANGLE,TRACK_UP,TOWARDS_TARGET, ... )
+			**>
+			UInt16 headingType
+
+			<**
+				@description : headingAngle = heading angle in degrees measured from the North axis clockwise. Range[0:360]
+			**>
+			Int32 headingAngle
+			
+			Coordinate2D target
+		}
+	}
+
+	<**
+		@description : SetCameraTiltAngle = This method sets the camera tilt angle
+	**>
+	method SetCameraTiltAngle {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : tilt = tilt angle in degrees. Range [-180:180]
+			**>
+			Int32 tilt
+		}
+	}
+
+	<**
+		@description : GetMapViewTiltAngle = This method returns the camera tilt angle
+	**>
+	method GetCameraTiltAngle {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+
+			<**
+				@description : tilt = tilt angle in degrees. Range [-180:180]
+			**>
+			Int32 tilt
+		}
+	}
+
+	<**
+		@description : SetCameraRollAngle = This method sets the camera roll angle
+	**>
+	method SetCameraRollAngle {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : roll = roll angle in degrees. Range [-180:180]
+			**>
+			Int32 roll
+		}
+	}
+
+	<**
+		@description : GetCameraRollAngle = This method returns the camera roll angle
+	**>
+	method GetCameraRollAngle {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+
+			<**
+				@description : roll = roll angle in degrees. Range [-180:180]
+			**>
+			Int32 roll
+		}
+	}
+
+	<**
+		@description : SetCameraDistanceFromTargetPoint = This method sets the mode and the camera distance from the target point
+	**>
+	method SetCameraDistanceFromTargetPoint {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : distance = distance from the view point in meters
+			**>
+			UInt32 distance
+		}
+	}
+
+	<**
+		@description : GetCameraDistanceFromTargetPoint = This method gets the mode and the camera distance from the target point
+	**>
+	method GetCameraDistanceFromTargetPoint {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+
+			<**
+				@description : distance = distance from the view point in meters
+			**>
+			UInt32 distance
+		}
+	}
+
+	<**
+		@description : SetMapViewScaleMode = This method sets the scaling mode.
+	**>
+	method SetMapViewScaleMode {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : scaleMode = enum(AUTOMATIC,MANUAL,HYBRID)
+			**>
+			MapScaleMode scaleMode
+		}
+	}
+
+	<**
+		@description : GetMapViewScaleMode = This method gets the scaling mode.
+	**>
+	method GetMapViewScaleMode {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+
+			<**
+				@description : scaleMode = enum(AUTOMATIC,MANUAL,HYBRID)
+			**>
+			MapScaleMode scaleMode
+		}
+	}
+
+	<**
+		@description : GetSupportedMapViewScaleModes = This method gets the supported scaling modes.
+	**>
+	method GetSupportedMapViewScaleModes {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+			MapScaleMode [] scaleModeList
+		}
+	}
+
+	<**
+		@description : AddMapViewScaleChangedListener = This method adds a listener which is notified when map view scale changes.
+	**>
+	method AddMapViewScaleChangedListener {
+	}
+
+	<**
+		@description : RemoveMapViewScaleChangedListener = This method removes a listener which is notified when map view scale changes.
+	**>
+	method RemoveMapViewScaleChangedListener {
+	}
+
+	<**
+		@description : SetCameraHeight = This method sets the camera height
+	**>
+	method SetCameraHeight {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : height = height from the ground in meters
+			**>
+			UInt32 height
+		}
+	}
+
+	<**
+		@description : GetCameraHeight = This method gets the camera height
+	**>
+	method GetCameraHeight {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+
+			<**
+				@description : height = height from the ground in meters
+			**>
+			UInt32 height
+		}
+	}
+
+	<**
+		@description : SetMapViewPerspective = This method sets the map perspective
+	**>
+	method SetMapViewPerspective {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : perspective = enum(INVALID,2D,3D, ... )
+			**>
+			MapPerspective perspective
+		}
+	}
+
+	<**
+		@description : GetMapViewPerspective = This method returns the current map perspective
+	**>
+	method GetMapViewPerspective {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+
+			<**
+				@description : perspective = enum(INVALID,2D,3D, ... )
+			**>
+			MapPerspective perspective
+		}
+	}
+
+	<**
+		@description : GetSupportedMapViewPerspectives = This method retrieves the supported mapview perspectives
+	**>
+	method GetSupportedMapViewPerspectives {
+		out {
+			MapPerspective[] perspectiveList
+		}
+	}
+
+	<**
+		@description : SetMapViewObjectVisibility = This method specifies the type of objects to show on the map.
+	**>
+	method SetMapViewObjectVisibility {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			
+			MapObjectVisibility objectVisibilityList
+		}
+	}
+
+	<**
+		@description : GetMapViewObjectVisibility = This method gets the type of objects shown on the map.
+	**>
+	method GetMapViewObjectVisibility {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+			MapObjectVisibility objectVisibilityList
+		}
+	}
+
+	<**
+		@description : GetSupportedMapViewObjectVisibilities = This method gets the supported object visibilities.
+	**>
+	method GetSupportedMapViewObjectVisibilities {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+			MapObject [] objectVisibilityList
+		}
+	}
+
+	<**
+		@description : GetScaleList = This method returns a list of supported map scales
+	**>
+	method GetScaleList {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+			MapScale[] scaleList
+		}
+	}
+
+	<**
+		@description : SetMapViewScale = This method sets the map scale by specifying a ScaleID
+	**>
+	method SetMapViewScale {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : scaleID = scale identifier. Range[0:256]
+			**>
+			UInt16 scaleID
+		}
+	}
+
+	<**
+		@description : SetMapViewScaleByDelta = This method sets the map scale by specifying a delta value with respect to the currently set ScaleID
+	**>
+	method SetMapViewScaleByDelta {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : scaleDelta = This parameter can have either positive or negative values. '0' means no change. Positive values indicate larger scales
+			**>
+			Int16 scaleDelta
+		}
+	}
+
+	<**
+		@description : SetMapViewScaleByMetersPerPixel = This method sets the map scale by specifying the number of meters that a pixel represents
+	**>
+	method SetMapViewScaleByMetersPerPixel {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : metersPerPixel = meters per pixel
+			**>
+			Double metersPerPixel
+		}
+	}
+
+	<**
+		@description : GetMapViewScale = This method returns the currently used map scale
+	**>
+	method GetMapViewScale {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+
+			<**
+				@description : scaleID = scale identifier. Range[0:256]
+			**>
+			Int8 scaleID
+
+			<**
+				@description : isMinMax = enum(INVALID,MIN,MAX,MID, ... )
+			**>
+			MapScaleType isMinMax
+		}
+	}
+
+	<**
+		@description : SetMapViewBoundingBox = This method sets the map bounding box
+	**>
+	method SetMapViewBoundingBox {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			
+			Rectangle boundingBox
+		}
+	}
+
+	<**
+		@description : GetMapViewBoundingBox = This method returns the bounding box of a given map instance
+	**>
+	method GetMapViewBoundingBox {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+			Rectangle boundingBox
+		}
+	}
+
+	<**
+		@description : SetMapViewSaveArea = This methods defines the area that the HMI guarantees not to 
+cover with other windows or user interface elements
+	**>
+	method SetMapViewSaveArea {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			
+			MapViewArea saveArea
+		}
+	}
+
+	<**
+		@description : SetMapViewSaveArea = This methods defines the area that the HMI guarantees not to 
+cover with other windows or user interface elements
+	**>
+	method GetMapViewSaveArea {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+			MapViewArea saveArea
+		}
+	}
+
+	<**
+		@description : SetMapViewPan = This method pans a given map instance
+	**>
+	method SetMapViewPan {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : panningAction = enum(PAN_START,PAN_TO,PAN_END)
+			**>
+			PanAction panningAction
+			
+			Pixel [] pixelCoordinates
+		}
+	}
+
+	<**
+		@description : GetMapViewPan
+	**>
+	method GetMapViewPan {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : valueToReturn = enum(PAN_START,PAN_TO,PAN_END)
+			**>
+			PanAction  valueToReturn
+			
+			Pixel [] pixelCoordinates
+		}
+	}
+
+	<**
+		@description : SetMapViewRotation = This method rotates the map
+	**>
+	method SetMapViewRotation {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : rotationAngle = rotation angle in degrees measured from the North axis clockwise. Range[0:360]
+			**>
+			Int32 rotationAngle
+
+			<**
+				@description : rotationAnglePerSecond = partial rotation for each second
+			**>
+			Int32 rotationAnglePerSecond
+		}
+	}
+
+	<**
+		@description : GetMapViewRotation = This method is particularly interesting for debugging purposes
+	**>
+	method GetMapViewRotation {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+
+			<**
+				@description : rotationAngle = rotation angle in degrees measured from the North axis clockwise. Range[0:360]
+			**>
+			Int32 rotationAngle
+
+			<**
+				@description : rotationAnglePerFrame = partial rotation for each map frame in degrees
+			**>
+			Int32 rotationAnglePerFrame
+		}
+	}
+
+	<**
+		@description : SetMapViewVisibilityMode = This method sets the current visibility mode
+	**>
+	method SetMapViewVisibilityMode {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : visibilityMode = enum(INVALID,VISIBLE,INVISIBLE,FROZEN, ... )
+			**>
+			Visibility visibilityMode
+		}
+	}
+
+	<**
+		@description : GetMapViewVisibilityMode = This method returns the current visibility mode
+	**>
+	method GetMapViewVisibilityMode {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+
+			<**
+				@description : visibilityMode = enum(INVALID,VISIBLE,INVISIBLE,FROZEN, ... )
+			**>
+			Visibility visibilityMode
+		}
+	}
+
+	<**
+		@description : GetSupportedMapViewVisibilityModes = This method retrieves the supported mapview visibility modes
+	**>
+	method GetSupportedMapViewVisibilityModes {
+		out {
+			Visibility [] visibilityModeList
+		}
+	}
+
+	<**
+		@description : SetMapViewPerformanceLevel = This method sets the perfomance level of a given map instance
+	**>
+	method SetMapViewPerformanceLevel {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : performanceLevel = enum(INVALID,LEVEL1,LEVEL2,LEVEL3,LEVEL4,LEVEL5, ... )
+			**>
+			Level performanceLevel
+		}
+	}
+
+	<**
+		@description : GetMapViewPerformanceLevel = This method returns the perfomance level of a given map instance
+	**>
+	method GetMapViewPerformanceLevel {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+
+			<**
+				@description : performanceLevel = enum(INVALID,LEVEL1,LEVEL2,LEVEL3,LEVEL4,LEVEL5, ... )
+			**>
+			Level performanceLevel
+		}
+	}
+
+	<**
+		@description : GetSupportedMapViewPerformanceLevels = This method retrieves the supported perfomance levels
+	**>
+	method GetSupportedMapViewPerformanceLevels {
+		out {
+			Level [] performanceLevelList
+		}
+	}
+
+	<**
+		@description : DisplayRoute = This method visualizes one of the calculated routes
+	**>
+	method DisplayRoute {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+
+			<**
+				@description : highlighted = flag. TRUE means highligted,FALSE means not highlighted
+			**>
+			Boolean highlighted
+		}
+	}
+
+	<**
+		@description : HideRoute = This method hides one of the visible routes
+	**>
+	method HideRoute {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle routeHandle
+		}
+	}
+
+	<**
+		@description : GetDisplayedRoutes = This method returns a list of displayed routes
+	**>
+	method GetDisplayedRoutes {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+			DisplayedRoute [] displayedRoutes
+		}
+	}
+
+	<**
+		@description : GetPoiCategoriesVisible = Get the set of POI categories displayed on the map.
+	**>
+	method GetPoiCategoriesVisible {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+			UInt16 [] poiCategoryIds
+		}
+	}
+
+	<**
+		@description : SetPoiCategoriesVisible = Add POI categories to the set of POI categories displayed on the map.
+                   Any specified category that until now was displayed with scale limits is now displayed without limits.
+	**>
+	method SetPoiCategoriesVisible {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			UInt16 [] poiCategoryIds
+		}
+	}
+
+	<**
+		@description : SetPoiCategoriesVisible = Add POI categories to the set of POI categories displayed on the map, where the POI's are only displayed in a specific range of scales.
+                   Any specified category that until now was displayed without scale limits is now displayed with limits.
+	**>
+	method SetPoiCategoriesVisibleWithinLimits {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			UInt16 [] poiCategoryIds
+
+			<**
+				@description : minScaleID = minimun scale on which the POI categories are displayed
+			**>
+			Int8 minScaleID
+
+			<**
+				@description : maxScaleID = maximum scale on which the POI categories are displayed
+			**>
+			Int8 maxScaleID
+		}
+	}
+
+	<**
+		@description : SetPoiCategoriesNotVisible = Remove POI categories from the set of POI categories displayed on the map.
+	**>
+	method SetPoiCategoriesNotVisible {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			UInt16 [] poiCategoryIds
+		}
+	}
+
+	<**
+		@description : SetTrafficIncidentsVisibility = Set the visibility of Traffic Incidents on the map.
+	**>
+	method SetTrafficIncidentsVisibility {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : visible = If true, Traffic Incidents are shown on the map, else they are not shown.
+			**>
+			Boolean visible
+		}
+	}
+
+	<**
+		@description : SetMapViewTheme = This method configures the theme of a given map view instance
+	**>
+	method SetMapViewTheme {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : mapViewTheme = enum(INVALID,THEME_1,THEME_2,THEME_3, ... )
+			**>
+			MapTheme mapViewTheme
+		}
+	}
+
+	<**
+		@description : GetMapViewTheme = This method returns the current theme of a given map view instance
+	**>
+	method GetMapViewTheme {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+
+			<**
+				@description : mapViewTheme = enum(INVALID,THEME_1,THEME_2,THEME_3, ... )
+			**>
+			MapTheme mapViewTheme
+		}
+	}
+
+	<**
+		@description : GetSupportedMapViewThemes = This method retrieves the supported mapview themes
+	**>
+	method GetSupportedMapViewThemes {
+		out {
+			MapTheme [] mapViewThemeList
+		}
+	}
+
+	<**
+		@description : ConvertPixelCoordsToGeoCoords = This method converts pixel coordinates to geographical coordinates
+	**>
+	method ConvertPixelCoordsToGeoCoords {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			
+			Pixel [] pixelCoordinates
+		}
+		out {			
+			Coordinate2D [] geoCoordinates
+		}
+	}
+
+	<**
+		@description : ConvertGeoCoordsToPixelCoords = This method converts geographical coordinates into pixel coordinates
+	**>
+	method ConvertGeoCoordsToPixelCoords {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			
+
+			Coordinate2D [] geoCoordinates
+		}
+		out {
+			
+			Pixel [] pixelCoordinates
+		}
+	}
+
+	<**
+		@description : DisplayCustomElements = This method visualizes a set of custom elements on the map
+	**>
+	method DisplayCustomElements {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			CustomElement [] customElements
+		}
+		out {
+			Handle[] customElemenHandles
+		}
+	}
+
+	<**
+		@description : HideCustomElements = This method hides a set of custom elements which were visualized by DisplayCustomElements
+	**>
+	method HideCustomElements {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			
+			Handle [] customElemenHandles
+		}
+	}
+
+	<**
+		@description : GetDisplayedCustomElements = This method retrieves the visualized custom elements on the map
+	**>
+	method GetDisplayedCustomElements {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+		}
+		out {
+			tCustomElementDict customElements
+		}
+	}
+
+	<**
+		@description : SelectElementsOnMap = This method selects elements on the map view which are at the position specified by user input
+	**>
+	method SelectElementsOnMap {
+		in {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			
+			Pixel pixelCoordinate
+			
+			SelectableMapType [] selectableTypes
+
+			<**
+				@description : maxNumberOfSelectedElements = maximum number of selected elements to return. If 0, all possible elements which can be selected will be returned
+			**>
+			UInt16 maxNumberOfSelectedElements
+		}
+		out {
+			SelectedMapElement [] selectedElements
+		}
+	}
+
+	<**
+		@description : MapViewScaleChanged = This signal is emitted when the mapview scale changes
+	**>
+	broadcast MapViewScaleChanged {
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : scaleID = scale identifier. Range[0:256]
+			**>
+			Int8 scaleID
+
+			<**
+				@description : isMinMax = enum(INVALID,MIN,MAX,MID, ... )
+			**>
+			MapScaleType isMinMax
+		}
+	}
+
+	<**
+		@description : MapViewVisibilityChanged = This signal is emitted when the MapView visibility changes
+	**>
+	broadcast MapViewVisibilityChanged {
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : visibilityMode = enum(INVALID,VISIBLE,INVISIBLE,FROZEN, ... )
+			**>
+			Visibility visibilityMode
+		}
+	}
+
+	<**
+		@description : DisplayedRoutes = This signal is emitted when the list of displayed routes change
+	**>
+	broadcast DisplayedRoutes {
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			DisplayedRoute [] displayedRoutes
+		}
+	}
+
+
+
+}

@@ -1,0 +1,52 @@
+// SPDX-License-Identifier: MPL-2.0
+// Copyright (C) 2014, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
+// This Source Code Form is subject to the terms of the
+// Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+// this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+package org.genivi.navigation
+
+typeCollection NavigationTypes {
+
+	<** @description: version.**>			
+	struct Version {
+		<** @description : when the major changes, then backward compatibility with previous releases is not granted.**>
+		UInt16 ^major
+		<** @description : when the minor changes, then backward compatibility with previous releases is granted, but something changed in the implementation of the API (e.g. new methods may have been added).**>
+		UInt16 ^minor
+		<** @description : when the micro changes, then backward compatibility with previous releases is granted (bug fixes or documentation modifications).**>
+		UInt16 ^micro
+		<** @description : release date (e.g. 21-06-2011).**>
+		String date
+	}
+
+	typedef Handle is UInt32
+
+	struct Coordinate2D {
+		Double latitude
+		Double longitude
+	}
+
+	struct Coordinate3D extends Coordinate2D {
+		Int32 altitude
+	}
+
+	array Polygon of Coordinate2D
+	
+	typedef Area is Polygon
+
+	struct Rectangle {
+		Coordinate2D topLeft
+		Coordinate2D bottomRight
+	}
+
+	enumeration BasicEnum {
+		INVALID = "0x0000"
+	}
+
+	typedef Timestamp is UInt64
+	
+	typedef Distance is Double
+	
+	typedef LinkId is ByteBuffer
+}

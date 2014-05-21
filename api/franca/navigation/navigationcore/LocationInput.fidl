@@ -1,0 +1,448 @@
+/* 
+SPDX-License-Identifier: MPL-2.0
+Copyright (C) 2014, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
+This Source Code Form is subject to the terms of the
+Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+*/
+
+package org.genivi.navigation.navigationcore
+
+import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
+import org.genivi.navigation.navigationcore.LocationInputTypes.* from "LocationInputTypes.fidl"
+
+<**
+	@description : LocationInput = This interface offers functions that implement the location-input functionality of a navigation system
+**>
+
+interface org.genivi.navigationcore.LocationInput {
+	version {
+		major 3
+		minor 0
+	}
+
+	<**
+		@description : GetVersion = This method returns the API version implemented by the server application
+	**>
+	method GetVersion {
+		out {
+			Version ^version
+		}
+	}
+
+	<**
+		@description : CreateLocationInput = This method creates a new location input and retrieves a handle
+	**>
+	method CreateLocationInput {
+		in {
+
+			<**
+				@description : Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+		}
+		out {
+
+			<**
+				@description : Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+		}
+		error {
+			NoMoreLocationInpuHandles
+		}
+	}
+
+	<**
+		@description : DeleteLocationInput = This method deletes a location input and its associated resources
+	**>
+	method DeleteLocationInput {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+		}
+	}
+
+	<**
+		@description : GetSupportedAddressAttributes = This method retrieves the supported address attributes
+	**>
+	method GetSupportedAddressAttributes {
+		out {
+			AddressAttributeList addressAttributesList
+		}
+	}
+
+	<**
+		@description : SetAddress = This method sets the address to start with for the LocationInput identified by the given handle
+	**>
+	method SetAddress {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+			
+			Address address
+		}
+	}
+
+	<**
+		@description : SetSelectionCriterion = This method sets the selection criterion for the current speller, search input and the corresponding result-lists for the current session
+	**>
+	method SetSelectionCriterion {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+
+			<**
+				@description : selectionCriterion = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )
+			**>
+			AddressAttribute selectionCriterion
+		}
+	}
+
+	<**
+		@description : Spell = This method sends the next spell input for the current session
+	**>
+	method Spell {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+
+			<**
+				@description : inputString = last input character (UTF-8) (0x08(Backspace) for delete last character, 0x0D(Carriage Return) for delete entire input)
+			**>
+			String inputCharacter
+
+			<**
+				@description : maxWindowSize = maximum number of elements that should be returned as result
+			**>
+			UInt16 maxWindowSize
+		}
+	}
+
+	<**
+		@description : Search = This method sends the search input for the current session
+	**>
+	method Search {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+
+			<**
+				@description : inputString = contains the String, that is searched
+			**>
+			String inputString
+
+			<**
+				@description : maxWindowSize = maximum number of elements that should be returned as result
+			**>
+			UInt16 maxWindowSize
+		}
+	}
+
+	<**
+		@description : RequestListUpdate = This method sends a request for more list elements for the current session
+	**>
+	method RequestListUpdate {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+
+			<**
+				@description : offset = starting offset of the newly requested list elements
+			**>
+			UInt16 offset
+
+			<**
+				@description : maxWindowSize = maximum number of elements that should be returned as result
+			**>
+			UInt16 maxWindowSize
+		}
+	}
+
+	<**
+		@description : SelectEntry = This method triggers selection of a result list entry by index
+	**>
+	method SelectEntry {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+
+			<**
+				@description : index = absolute list index of the entry to be selected
+			**>
+			UInt16 index
+		}
+	}
+
+	<**
+		@description : GetEntry = This method synchronously gets the address for the given result list entry
+	**>
+	method GetEntry {
+		in {
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+
+			<**
+				@description : index = list index of the entry to be returned
+			**>
+			UInt16 index
+		}
+		out {
+			Address address
+		}
+	}
+
+	<**
+		@description : ValidateAddress = This method validates an address from different sources than Navigation
+	**>
+	method ValidateAddress {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+			
+			Address inputAddress
+		}
+	}
+
+	<**
+		@description : ReverseGeocode = This method transforms a geocoordinate into an address
+	**>
+	method ReverseGeocode {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+			
+			Coordinate2D coordinate
+		}
+	}
+
+	<**
+		@description : CurrentSelectionCriterion = This signal notifies the SelectionCriterion for the current speller input or search.
+	**>
+	broadcast CurrentSelectionCriterion {
+		out {
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+
+			<**
+				@description : selectionCriterion = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )
+			**>
+			AddressAttribute selectionCriterion
+		}
+	}
+
+	<**
+		@description : SearchStatus = This signal updates the search status of the specified session
+	**>
+	broadcast SearchStatus {
+		out {
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+
+			<**
+				@description : statusValue = enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... )
+			**>
+			SearchStatus statusValue
+		}
+	}
+
+	<**
+		@description : SpellResult = This signal notifies the result of the previous Spell method
+	**>
+	broadcast SpellResult {
+		out {
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+
+			<**
+				@description : uniqueString = unique string derived from spell input (i.e. including auto-completion if applicable)
+			**>
+			String uniqueString
+
+			<**
+				@description : validCharacters = set of (UTF-8 encoded) characters valid for next input (unified in a single string). A Backspace(0x08) is returned if the input character passed to the Spell method was invalid
+			**>
+			String validCharacters
+
+			<**
+				@description : fullMatch = flag indicating whether the value in UniqueCharacters is already a full match for an existing list entry
+			**>
+			Boolean fullMatch
+		}
+	}
+
+	<**
+		@description : SearchResultList = This signal updates the address result list (e.g. after a Search/Spell/Scroll call)
+	**>
+	broadcast SearchResultList {
+		out {
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+
+			<**
+				@description : totalSize = total size of the result list
+			**>
+			UInt16 totalSize
+
+			<**
+				@description : windowOffset = window offset within the complete list
+			**>
+			UInt16 windowOffset
+
+			<**
+				@description : windowSize = size of the provided window
+			**>
+			UInt16 windowSize
+			
+			Address [] resultListWindow
+		}
+	}
+
+	<**
+		@description : SearchResultListSizeChanged = This signal updates the size of the address result list
+	**>
+	broadcast SearchResultListSizeChanged {
+		out {
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+
+			<**
+				@description : totalSize = total size of the result list
+			**>
+			UInt16 totalSize
+		}
+	}
+
+	<**
+		@description : ContentUpdated = This signal updates the input content data for the specified session
+	**>
+	broadcast ContentUpdated {
+		out {
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+
+			<**
+				@description : guidable = flag indicating whether the current address is guidable
+			**>
+			Boolean guidable
+			
+			AddressAttribute [] availableSelectionCriteria
+			
+			Address address
+		}
+	}
+
+	<**
+		@description : AddressValidationResult = This signal notifies the validation result of a former ValidateAddress call
+	**>
+	broadcast AddressValidationResult {
+		out {
+
+			<**
+				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle locationInpuHandle
+			
+			Address [] validatedAddressList
+			
+			ValidationStatus [] validationStatusList
+		}
+	}
+
+	
+
+
+}
