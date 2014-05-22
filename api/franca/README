@@ -1,0 +1,9 @@
+---------------------------------------------------------------------------------------------------------------------------------
+IMPORTANT NOTE
+---------------------------------------------------------------------------------------------------------------------------------
+
+Please note that the Franca interfaces described in this folder (*.fidl) are still a draft.
+
+The conversion of the navigation D-Bus interfaces into Franca IDL interfaces has not been completed yet.
+
+The official GENIVI nvaigation interfaces are those defined in the D-Bus XML files.
