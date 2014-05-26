@@ -25,7 +25,7 @@
 # @licence end@
 POI_SERVER_SRC_DIR=$(ROOT_DIR)/poi-server
 POI_SERVER_BIN_DIR=$(BIN_DIR)/poi-server-bin
-POI_SERVER_DEPS=POI_SERVER_LIBSqlite3-dev sqlite3
+POI_SERVER_DEPS=libsqlite3-dev sqlite3
 POI_SERVER_INCPATH=-I$(COMMON_DIR) -I$(POI_SERVER_SRC_DIR) -I/usr/include/glibmm-2.4 -I/usr/lib/i386-linux-gnu/glibmm-2.4/include -I/usr/include/glib-2.0 -I/usr/lib/i386-linux-gnu/glib-2.0/include -I/usr/include/dbus-c++-1 -I/usr/include/dbus-1.0 -I/usr/lib/i386-linux-gnu/dbus-1.0/include
 POI_SERVER_LIBS=-lglibmm-2.4 -lglib-2.0 -lgobject-2.0 -lsqlite3 -ldbus-c++-glib-1 -ldbus-c++-1 -ldbus-1 
 POI_SERVER_LINK=g++

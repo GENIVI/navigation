@@ -1,4 +1,4 @@
-Release date of the file: 11-04-2014 
+Release date of the file: 26-05-2014 
 Status: to be completed
 
 Project:
@@ -25,6 +25,10 @@ See headers and LICENSE file (mainly MPL V2)
 
 Test target: 
 Ubuntu 12.04.1 LTS
+Ubuntu 14.04 LTS
+
+Qt version:
+Qt4 (to get the version -> qtchooser -print-env, to set the version -> export QT-SELECT=<version>)
 
 To get the code:
 Code is part of the navigation-service repository, so you need to clone all:

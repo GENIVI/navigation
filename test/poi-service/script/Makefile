@@ -52,7 +52,7 @@ include poi-client.mk
 include poi-contentaccess-module.mk
 
 all: $(ALL)
-
+	
 deps::
 	sudo apt-get install $(DEPS)
 

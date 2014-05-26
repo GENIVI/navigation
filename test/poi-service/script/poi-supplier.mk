@@ -26,7 +26,7 @@
 POI_SUPPLIER_SRC_DIR=$(ROOT_DIR)/poi-supplier
 POI_SUPPLIER_COMMON_DIR=$(ROOT_DIR)/poi-common
 POI_SUPPLIER_BIN_DIR=$(BIN_DIR)/poi-supplier-bin
-POI_SUPPLIER_DEPS=libxml2-dev POI_SUPPLIER_LIBSqlite3-dev sqlite3
+POI_SUPPLIER_DEPS=libxml2-dev libsqlite3-dev sqlite3 libxml++2.6-dev
 POI_SUPPLIER_INCPATH=-I$(POI_SUPPLIER_COMMON_DIR) -I$(POI_SUPPLIER_SRC_DIR) -I/usr/include/libxml++-2.6 -I/usr/lib/libxml++-2.6/include -I/usr/include/libxml2 -I/usr/include/glibmm-2.4 -I/usr/lib/i386-linux-gnu/glibmm-2.4/include -I/usr/include/glib-2.0 -I/usr/lib/i386-linux-gnu/glib-2.0/include 
 POI_SUPPLIER_LIBS=-lxml++-2.6 -lxml2 -lglibmm-2.4 -lglib-2.0 -lgobject-2.0 -lsqlite3
 POI_SUPPLIER_LINK=g++
