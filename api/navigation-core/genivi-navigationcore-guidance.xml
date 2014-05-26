@@ -1,14 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="introspect.xsl"?>
-<!-- SPDX-License-Identifier: MPL-2.0
-     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
-     This Source Code Form is subject to the terms of the
-     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
-     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
--->
 <node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/navigationcore" xsi:noNamespaceSchemaLocation="introspect.xsd">
   <interface name="org.genivi.navigationcore.Guidance">
-    <version>3.0.0-alpha (23-10-2013)</version>
+    <version>3.1.0-alpha (03-03-2014)</version>
     <doc>
       <line>Guidance = This interface offers functions that implement the route-guidance functionality of a navigation system</line>
     </doc>
@@ -243,21 +237,37 @@
           <line>Note: the number corresponds to the number of elements in the array</line>
         </doc>
       </arg>
-      <arg name="maneuversList" type="a(ssqqua(uui(qq)(qs)))" direction="out">
+      <arg name="maneuversList" type="a(ssqqua(uuiqa(qv)))" direction="out">
         <doc>
-          <line>array[struct(roadNumberAfterManeuver,roadNameAfterManeuver,roadPropertyAfterManeuver,drivingSide,offsetOfNextManeuver,array[struct(offsetOfManeuver,travelTime,direction,struct(maneuver,maneuverLength),struct(maneuverDirection,exitNumber))])]</line>
+          <line>maneuversList = array[struct(roadNumberAfterManeuver,roadNameAfterManeuver,roadPropertyAfterManeuver,drivingSide,offsetOfNextManeuver,maneuverDetails)]</line>
           <line>roadNumberAfterManeuver = the number of the road after the maneuver (if a road has multiple road numbers, they will be separated by slashes ('/') and combined into one string)</line>
           <line>roadNameAfterManeuver = the name of the road after the maneuver</line>
           <line>roadPropertyAfterManeuver = enum(TOLL_ROADS, ... ,DEFAULT)</line>
           <line>drivingSide = enum(LEFT,RIGHT)</line>
           <line>offsetOfNextManeuver = the offset of the next maneuver in meters from the beginning of the route (next maneuver is the second maneuver on the route ahead)</line>
+          <line>maneuverDetails = array[struct(offsetOfManeuver,travelTime,direction,maneuver,maneuverData)]</line>
           <line>offsetOfManeuver = the offset of the current maneuver in meters from the beginning of the route (current maneuver is the first maneuver on the route ahead)</line>
           <line>travelTime = travel time to the basic maneuver in seconds</line>
           <line>direction = direction of the maneuver in degree relatively to the North. Range [0:360]</line>
-          <line>maneuver = enum(INVALID,STRAIGHT_ON,TURN,CROSSROAD,ROUNDABOUT,HIGHWAY_ENTER,HIGHWAY_EXIT,BIFURCATION,HIGHWAY_CHANGE_LANE,DESTINATION,WAYPOINT)</line>
-          <line>maneuverLength = when maneuver=ROUNDABOUT the length of the route segment between the entry to and the exit from the roundabout; 0 otherwise.</line>
-          <line>maneuverDirection = enum(INVALID,STRAIGHT_ON,LEFT,SLIGHT_LEFT,HARD_LEFT,RIGHT,SLIGHT_RIGHT,HARD_RIGHT,UTURN_RIGHT, UTURN_LEFT)</line>
-          <line>exitNumber = when maneuver=ROUNDABOUT or maneuver=HIGHWAY_EXIT the exit number; null otherwise.</line>
+          <line>maneuver = enum(INVALID,STRAIGHT_ON,TURN,CROSSROAD,ROUNDABOUT,HIGHWAY_ENTER,HIGHWAY_EXIT,BIFURCATION,FOLLOW_SPECIFIC_LANE,DESTINATION,WAYPOINT,ROAD_FORM_CHANGE)</line>
+          <line>maneuverData = array[struct(key, value)]</line>
+          <line>key = enum(LENGTH,DIRECTION,EXIT_NUMBER,ROAD_FORM,LANE_INFO,LATITUDE,LONGITUDE,ALTITUDE)</line>
+          <line>key = LENGTH, value of type 'q', when maneuver=ROUNDABOUT, expresses the length of the route segment between the entry to and the exit from the roundabout</line>
+          <line>key = DIRECTION, value of type 'q', enum(INVALID,STRAIGHT_ON,LEFT,SLIGHT_LEFT,HARD_LEFT,RIGHT,SLIGHT_RIGHT,HARD_RIGHT,UTURN_RIGHT,UTURN_LEFT)</line>
+          <line>key = EXIT_NUMBER, when maneuver=ROUNDABOUT, value of type 'q' that expresses the roundabout exit number</line>
+          <line>                   when maneuver=HIGHWAY_EXIT, value of type 's' that expresses the highway exit number</line>
+          <line>key = ROAD_FORM, value of type 'q', enum(INVALID,ROAD_REGULAR,ROAD_HIGHWAY_MOTORWAY,ROAD_FERRY)</line>
+          <line>key = LANE_INFO, value of type 'a(uuuq)', array[struct(laneIndex,laneDirections,directionToFollow,divider)]</line>
+          <line>laneIndex = number of the individual lane. Counting starts from zero, beginning at the left-most lane in the direction of travel (independent of the driving side)</line>
+          <line>laneDirections = bitfield where each bit corresponds to a certain direction. A 1-bit indicates that the corresponding part of the lane arrow is drawn in the lane information on the street (see the lane info bitmasks)</line>
+          <line>directionToFollow = bitfield where each bit corresponds to a certain direction. A 1-bit indicates that the corresponding part of the lane arrow matches the direction of the corresponding maneuver (see the lane info bitmasks). At most one bit of this bitmask will be set.</line>
+          <line>The bitmasks are: LANE_INFO_BITMASK_STRAIGHT,LANE_INFO_BITMASK_SLIGHTRIGHT,LANE_INFO_BITMASK_RIGHT,LANE_INFO_BITMASK_SHARPRIGHT,LANE_INFO_BITMASK_RIGHTUTURN,LANE_INFO_BITMASK_SLIGHTLEFT,LANE_INFO_BITMASK_LEFT,LANE_INFO_BITMASK_SHARPLEFT,LANE_INFO_BITMASK_LEFTUTURN</line>
+          <line>divider = indicates the type of divider between the given lane and the next one to the right, in the direction of travel</line>
+          <line>          enum(DIVIDER_UNDEFINED,DIVIDER_INTERRUPTEDLONG,DIVIDER_INTERRUPTEDSHORT,DIVIDER_SOLIDSINGLE,DIVIDER_SOLIDDOUBLE,DIVIDER_SOLIDINTERRUPTED,DIVIDER_INTERRUPTEDSOLID)</line>
+          <line>Note: To describe the divider on the left side of the left-most lane, use the following entry in LANE_INFO: (laneIndex=0xffffffff,laneDirections=0x00000000,directionToFollow=0x00000000,divider=type)</line>
+          <line>key = LATITUDE, value = value of type 'd', that expresses the latitude of the starting point in format %3.6f. Range [-90:+90]. Example: 48.053250</line>
+          <line>key = LONGITUDE, value = value of type 'd', that expresses the longitude of the starting point in format %3.6f. Range [-180:+180]. Example: 8.324500</line>
+          <line>key = ALTITUDE, value = value of type 'i', that expresses the altitude of the starting point in meters</line>
         </doc>
       </arg>
       <error name="org.genivi.navigationcore.Guidance.Error.NoManeuver">

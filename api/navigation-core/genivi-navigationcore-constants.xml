@@ -1,13 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="constants.xsl"?>
-<!-- SPDX-License-Identifier: MPL-2.0
-     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
-     This Source Code Form is subject to the terms of the
-     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
-     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
--->
+
 <constants  name="NavigationCore">
-  <version>3.0.0-alpha (23-10-2013)</version>
+  <version>3.0.0 (21-01-2014)</version>
   <doc>
     <line>This document defines the constants used in the NavigationCore APIs</line>
   </doc>
@@ -60,7 +55,7 @@
   <id name="ROUNDABOUT" value="0x0072" />
   <id name="HIGHWAY_ENTER" value="0x0073" />
   <id name="HIGHWAY_EXIT" value="0x0074" />
-  <id name="HIGHWAY_CHANGE_LANE" value="0x0075" />
+  <id name="FOLLOW_SPECIFIC_LANE" value="0x0075" />
   <id name="DESTINATION" value="0x0076" />
   <id name="WAYPOINT" value="0x0077" />
   <id name="TURN" value="0x0078" />
@@ -208,5 +203,33 @@
   <id name="SIMULATION_STATUS_RUNNING" value="0x0221" />
   <id name="SIMULATION_STATUS_PAUSED" value="0x0222" />
   <id name="SIMULATION_STATUS_FIXED_POSITION" value="0x0223" />
+
+  <id name="ROAD_FORM_CHANGE" value="0x0230" />
+  <id name="ROAD_REGULAR" value="0x0231" />
+  <id name="ROAD_HIGHWAY_MOTORWAY" value="0x0232" />
+  <id name="ROAD_FERRY" value="0x0233" />
+
+  <id name="DIRECTION" value="0x0240" />
+  <id name="EXIT_NUMBER" value="0x0241" />
+  <id name="ROAD_FORM" value="0x0242" />
+  <id name="LANE_INFO" value="0x0243" />
+
+  <id name="LANE_INFO_BITMASK_STRAIGHT" value="0x0001" />
+  <id name="LANE_INFO_BITMASK_SLIGHTRIGHT" value="0x0002" />
+  <id name="LANE_INFO_BITMASK_RIGHT" value="0x0004" />
+  <id name="LANE_INFO_BITMASK_SHARPRIGHT" value="0x0008" />
+  <id name="LANE_INFO_BITMASK_RIGHTUTURN" value="0x0010" />
+  <id name="LANE_INFO_BITMASK_SLIGHTLEFT" value="0x0020" />
+  <id name="LANE_INFO_BITMASK_LEFT" value="0x0040" />
+  <id name="LANE_INFO_BITMASK_SHARPLEFT" value="0x0080" />
+  <id name="LANE_INFO_BITMASK_LEFTUTURN" value="0x0100" />
+
+  <id name="DIVIDER_UNDEFINED" value="0x0250" />
+  <id name="DIVIDER_INTERRUPTEDLONG" value="0x0251" />
+  <id name="DIVIDER_INTERRUPTEDSHORT" value="0x0252" />
+  <id name="DIVIDER_SOLIDSINGLE" value="0x0253" />
+  <id name="DIVIDER_SOLIDDOUBLE" value="0x0254" />
+  <id name="DIVIDER_SOLIDINTERRUPTED" value="0x0255" />
+  <id name="DIVIDER_INTERRUPTEDSOLID" value="0x0256" />
 
 </constants>

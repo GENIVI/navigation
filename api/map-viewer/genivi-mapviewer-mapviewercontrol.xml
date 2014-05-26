@@ -1,14 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="introspect.xsl"?>
-<!-- SPDX-License-Identifier: MPL-2.0
-     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
-     This Source Code Form is subject to the terms of the
-     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
-     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
--->
 <node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/mapviewer" xsi:noNamespaceSchemaLocation="introspect.xsd">
   <interface name="org.genivi.mapviewer.MapViewerControl">
-    <version>3.0.0-alpha (07-06-2013)</version>
+    <version>3.1.0-alpha (03-03-2014)</version>
     <doc>
       <line>MapViewerControl = This interface offers functions to control the MapViewer</line>
     </doc>
@@ -187,6 +181,21 @@
         </doc>
       </arg>
     </method>
+    <signal name="FollowCarModeChanged">
+      <doc>
+        <line>FollowCarModeChanged = This signal is emitted when the follow-car-mode changes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="followCarMode" type="b">
+        <doc>
+          <line>followCarMode = flag. If true, the current car position is interpreted as position of the point the camera must look at</line>
+        </doc>
+      </arg>
+    </signal>
     <method name="SetCameraPosition">
       <doc>
         <line>SetCameraPosition = This method sets the coordinates of the point at which the camera must be positioned</line>
@@ -229,6 +238,24 @@
         </doc>
       </arg>
     </method>
+    <signal name="CameraPositionChanged">
+      <doc>
+        <line>CameraPositionChanged = This signal is emitted when the position of the camera changes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="targetPoint" type="(ddi)">
+        <doc>
+          <line>targetPoint = (lat,lon,alt)</line>
+          <line>lat = latitude in format %3.6f. Range[-90:+90]</line>
+          <line>lon = longitude in format %3.6f. Range[-180:+180]</line>
+          <line>alt = altitude to the ground in meters</line>
+        </doc>
+      </arg>
+    </signal>
     <method name="SetCameraHeadingAngle">
       <doc>
         <line>SetCameraHeadingAngle = This method sets the map view heading angle</line>
@@ -320,6 +347,29 @@
         </doc>
       </arg>
     </method>
+    <signal name="CameraHeadingChanged">
+      <doc>
+        <line>CameraHeadingAngleChanged = This signal is emitted when the heading angle of the camera changes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="headingType" type="q">
+        <doc>
+          <line>headingType = enum(INVALID,CONSTANT_ANGLE,TRACK_UP,TOWARDS_TARGET, ... )</line>
+        </doc>
+      </arg>
+      <arg name="headingAngle" type="i">
+        <doc>
+          <line>headingAngle = heading angle in degrees. Range [0:360]</line>
+          <line>The angle in degrees between projection on the ground plane of the line through the center of the screen and the top-centre of the screen, and the North direction</line>
+          <line>0 degrees means that the map view is oriented such that North is at the top of the screen</line>
+          <line>Degrees are measured clockwise such that 90 degrees correspond to the East direction</line>
+        </doc>
+      </arg>
+    </signal>
     <method name="SetCameraTiltAngle">
       <doc>
         <line>SetCameraTiltAngle = This method sets the camera tilt angle</line>
@@ -359,6 +409,23 @@
         </doc>
       </arg>
     </method>
+    <signal name="CameraTiltAngleChanged">
+      <doc>
+        <line>CameraTiltAngleChanged = This signal is emitted when the camera tilt angle changes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="tilt" type="i">
+        <doc>
+          <line>tilt = tilt angle in degrees. Range [-180:180]</line>
+          <line>Example: 0 = down (straight down to the ground plane), 90 = front (parrallel to the ground plane), 180 = top (straight up to the sky)</line>
+          <line>Negative angles [0:-180] result in an upside down view</line>
+        </doc>
+      </arg>
+    </signal>
     <method name="SetCameraRollAngle">
       <obligation>Optional</obligation>
       <doc>
@@ -432,6 +499,21 @@
         </doc>
       </arg>
     </method>
+    <signal name="CameraDistanceFromTargetPointChanged">
+      <doc>
+        <line>CameraDistanceFromTargetPointChanged = This signal is emitted when the camera distance from the target point changes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="distance" type="u">
+        <doc>
+          <line>distance = distance from the view point in meters</line>
+        </doc>
+      </arg>
+    </signal>
     <method name="SetMapViewScaleMode">
       <doc>
         <line>SetMapViewScaleMode = This method sets the scaling mode.</line>
@@ -597,6 +679,21 @@
         </doc>
       </arg>
     </method>
+    <signal name="MapViewPerspectiveChanged">
+      <doc>
+        <line>MapViewPerspectiveChanged = This signal is emitted when the map perspective chnages</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="perspective" type="q">
+        <doc>
+          <line>perspective = enum(INVALID,2D,3D, ... )</line>
+        </doc>
+      </arg>
+    </signal>
     <method name="GetSupportedMapViewPerspectives">
       <doc>
         <line>GetSupportedMapViewPerspectives = This method retrieves the supported mapview perspectives</line>
@@ -649,6 +746,24 @@
         </doc>
       </arg>
     </method>
+    <signal name="MapViewObjectVisibilityChanged">
+      <doc>
+        <line>MapViewObjectVisibilityChanged = This signal is emitted when the type of objects shown on the map changes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="objectVisibilityList" type="a{qb}">
+        <doc>
+          <line> objectVisibilityList = array[objectVisibility]</line>
+          <line> objectVisibility = dictionary[key,value]</line>
+          <line> key = enum[BUILDINGS,TERRAIN, ...]</line>
+          <line> value = value of type 'b'; if true the objects are shown else they are not shown</line>
+        </doc>
+      </arg>
+    </signal>
     <method name="GetSupportedMapViewObjectVisibilities">
       <doc>
         <line>GetSupportedMapViewObjectVisibilities = This method gets the supported object visibilities.</line>
@@ -812,6 +927,25 @@
         </doc>
       </arg>
     </method>
+    <signal name="MapViewBoundingBoxChanged">
+      <doc>
+        <line>MapViewBoundingBoxChanged = This signal is emitted when the bounding box of a map instance changes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="boundingBox" type="((dd)(dd))">
+        <doc>
+          <line>boundingBox = struct(top-left-corner,bottom-right-corner)</line>
+          <line>top-left-corner = struct(lat,lon)</line>
+          <line>bottom-right-corner = struct(lat,lon)</line>
+          <line>lat = latitude in format %3.6f. Range[-90:+90]</line>
+          <line>lon = longitude in format %3.6f. Range[-180:+180]</line>
+        </doc>
+      </arg>
+    </signal>
     <method name="SetMapViewSaveArea">
       <doc>
         <line>SetMapViewSaveArea = This methods defines the area that the HMI guarantees not to 
@@ -861,6 +995,27 @@ cover with other windows or user interface elements</line>
         </doc>
       </arg>
     </method>
+    <signal name="MapViewSaveAreaChanged">
+      <doc>
+        <line>MapViewSaveAreaChanged = This signal is emitted when the area that the HMI guarantees not to cover with other windows or user interface elements chnages</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="saveArea" type="(dddd)">
+        <doc>
+          <line>boundingBox = struct(rect-left,rect-right,rect-top,rect-bottom)</line>
+          <line>rect-left = covered area on the left. Range [0:1]</line>
+          <line>rect-right = covered area on the right. Range [0:1]</line>
+          <line>rect-top = covered area on top. Range [0:1]</line>
+          <line>rect-bottom = covered area at the bottom. Range [0:1]</line>
+          <line>Note: 0.0 means there is no covered area (offset) from that side</line>
+          <line>When all four parameters are 0 then the save area is equal to the viewport area (being the default)</line>
+        </doc>
+      </arg>
+    </signal>
     <method name="SetMapViewPan">
       <doc>
         <line>SetMapViewPan = This method pans a given map instance</line>
@@ -1059,6 +1214,21 @@ cover with other windows or user interface elements</line>
         </doc>
       </arg>
     </method>
+    <signal name="MapViewPerformanceLevelChanged">
+      <doc>
+        <line>MapViewPerformanceLevelChanged = This signal is emitted when the perfomance level of a map instance changes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="performanceLevel" type="q">
+        <doc>
+          <line>performanceLevel = enum(INVALID,LEVEL1,LEVEL2,LEVEL3,LEVEL4,LEVEL5, ... )</line>
+        </doc>
+      </arg>
+    </signal>
     <method name="GetSupportedMapViewPerformanceLevels">
       <doc>
         <line>GetSupportedMapViewPerformanceLevels = This method retrieves the supported perfomance levels</line>
@@ -1242,6 +1412,37 @@ cover with other windows or user interface elements</line>
         </doc>
       </arg>
     </method>
+    <signal name="PoiCategoriesVisibilityChanged">
+      <doc>
+        <line>PoiCategoriesVisibilityChanged = This signal is emitted when the visibility of POI categories on a map instance changes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="poiCategoryIds" type="aq">
+        <doc>
+          <line>poiCategoryIds = array[poiCategoryId]</line>
+          <line>poiCategoryId = a POI category as defined in the 'GENIVI POIService API'.</line>
+        </doc>
+      </arg>
+      <arg name="visible" type="b">
+        <doc>
+          <line>visible = flag. TRUE means that the POI categories are visible</line>
+        </doc>
+      </arg>
+      <arg name="minScaleID" type="y">
+        <doc>
+          <line>minScaleID = minimun scale on which the POI categories are displayed</line>
+        </doc>
+      </arg>
+      <arg name="maxScaleID" type="y">
+        <doc>
+          <line>maxScaleID = maximum scale on which the POI categories are displayed</line>
+        </doc>
+      </arg>
+    </signal>
     <method name="SetTrafficIncidentsVisibility">
       <doc>
         <line>SetTrafficIncidentsVisibility = Set the visibility of Traffic Incidents on the map.</line>
@@ -1299,6 +1500,22 @@ cover with other windows or user interface elements</line>
         </doc>
       </arg>
     </method>
+    <signal name="MapViewThemeChanged">
+      <doc>
+        <line>MapViewThemeChanged = This signal is emitted when the theme of a map view instance changes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="mapViewTheme" type="q">
+        <doc>
+          <line>mapViewTheme = enum(INVALID,THEME_1,THEME_2,THEME_3, ... )</line>
+          <line>Note: Themes are implementation specific. Example: THEME_1 = day color, THEME_2 = night color</line>
+        </doc>
+      </arg>
+    </signal>
     <method name="GetSupportedMapViewThemes">
       <doc>
         <line>GetSupportedMapViewThemes = This method retrieves the supported mapview themes</line>
