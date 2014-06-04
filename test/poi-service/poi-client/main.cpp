@@ -28,7 +28,7 @@
 #include "mainwindow.h"
 #include "../poi-common/poi-marshal-handler.h"
 
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QTranslator>
 #include <QSettings>
 

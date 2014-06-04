@@ -20,7 +20,7 @@
 #
 # List of changes:
 # 
-# <date>, <name>, <description of change>
+# 4/6/2014, Philippe Colliot, complete src-clean option
 #
 # @licence end@
 
@@ -42,6 +42,7 @@ help::
 	@echo "The following targets exist"
 	@echo "all: Build $(ALL)"
 	@echo "clean: Clean up build dir"
+	@echo "src-clean: Clean up all checked out sources"
 
 #Clone the positioning repository for getting the API, generate the proxies and adaptors for the DBus APIs firstly
 include get-positioning.mk
@@ -57,6 +58,8 @@ deps::
 	sudo apt-get install $(DEPS)
 
 all2: deps all
+
+src-clean: $(SRC_CLEAN)
 
 clean: $(CLEAN)
 

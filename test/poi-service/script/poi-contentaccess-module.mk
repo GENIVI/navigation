@@ -9,7 +9,7 @@
 #
 # \author Philippe Colliot <philippe.colliot@mpsa.com>
 #
-# \version 1.0
+# \version 1.1
 #
 # This Source Code Form is subject to the terms of the
 # Mozilla Public License (MPL), v. 2.0.
@@ -20,11 +20,11 @@
 #
 # List of changes:
 # 
-# <date>, <name>, <description of change>
+# 04/06/2014, Philippe Colliot, Migration to Qt5.2
 #
 # @licence end@
 POI_CONTENTACCESS_MODULE_SRC_DIR=$(ROOT_DIR)/poi-contentaccess-module
-POI_CONTENTACCESS_MODULE_DEPS=qt4-qmlviewer libqt4-dev libqt4-declarative libsqlite3-dev sqlite3
+POI_CONTENTACCESS_MODULE_DEPS=qt4-qmlviewer libqt5widgets5 libqt5dbus5 libqt5core5a libqt5gui5 libsqlite3-dev sqlite3
 POI_CONTENTACCESS_MODULE_BIN_DIR=$(BIN_DIR)/poi-contentaccess-module-bin
 
 DEPS+=$(POI_CONTENTACCESS_MODULE_DEPS)

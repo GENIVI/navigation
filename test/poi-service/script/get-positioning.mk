@@ -22,6 +22,7 @@
 # List of changes:
 # 
 # 28-04-2014, Philippe Colliot, link to the public repos of positioning, add clean feature
+# 4/6/2014, Philippe Colliot, complete src-clean option
 # 
 # @licence end@
 positioning_SRC=$(ROOT_DIR)/positioning
@@ -30,14 +31,14 @@ positioning_URL=http://git.projects.genivi.org/lbs/positioning.git
 positioning_VERSION=183d134e734e157c498f6cff367d104e4c5ad670
 
 ALL+=positioning
-CLEAN+=clean-get-positioning
+SRC_CLEAN+=clean-positioning_SRC
 
 help::
 	@echo "positioning: Get positioning"
 
 positioning: $(positioning_API)/genivi-positioning-enhancedposition.xml
 
-clean-get-positioning:: 
+clean-positioning_SRC:: 
 	rm -rf $(positioning_SRC)
 
 $(positioning_API)/genivi-positioning-enhancedposition.xml:

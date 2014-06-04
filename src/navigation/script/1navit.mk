@@ -8,6 +8,7 @@
 # \brief This file is part of the Build System.
 #
 # \author Martin Schaller <martin.schaller@it-schaller.de>
+# \author Philippe Colliot <philippe.colliot@mpsa.com>
 #
 # \version 1.0
 #
@@ -20,7 +21,7 @@
 #
 # List of changes:
 # 
-# <date>, <name>, <description of change>
+# 4/6/2014, Philippe Colliot, complete src-clean option
 #
 # @licence end@
 navit_SRC=$(SRC_DIR)/navit
@@ -32,10 +33,14 @@ navit_DEPS=gtk2.0-dev
 
 DEPS+=$(navit_DEPS)
 ALL+=navit navit_map
+SRC_CLEAN+=clean-navit_SRC
 
 help::
 	@echo "navit: Build navit"
 	@echo "navit_map: Download and install navit map"
+
+clean-navit_SRC::
+	rm -rf $(navit_SRC)
 
 navit: $(navit_BIN)/navit/navit
 

@@ -1,5 +1,5 @@
 
-QT += dbus
+QT += dbus widgets
 
 SOURCES += main.cpp mainwindow.cpp \
     about-dialog.cpp \

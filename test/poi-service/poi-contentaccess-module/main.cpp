@@ -39,7 +39,7 @@
 
 #include "poi-contentaccess-module-class.h"
 
-#include <QtGui/QApplication>
+#include <QApplication>
 #include <QTranslator>
 #include "mainwindow.h"
 

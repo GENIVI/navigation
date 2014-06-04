@@ -1,5 +1,5 @@
-Release date of the file: 26-05-2014 
-Status: to be completed
+Release date of the file: 4-06-2014 
+Status: OK
 
 Project:
 Search engine for Point Of Interest with a content access module mechanism to extend to additional sources of data
@@ -24,11 +24,10 @@ License:
 See headers and LICENSE file (mainly MPL V2)
 
 Test target: 
-Ubuntu 12.04.1 LTS
 Ubuntu 14.04 LTS
 
 Qt version:
-Qt4 (to get the version -> qtchooser -print-env, to set the version -> export QT-SELECT=<version>)
+Qt5 (to get the version -> qtchooser -print-env, to set the version -> export QT-SELECT=<version>)
 
 To get the code:
 Code is part of the navigation-service repository, so you need to clone all:

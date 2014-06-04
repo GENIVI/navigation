@@ -11,26 +11,26 @@
 #define UI_MAINWINDOW_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QCheckBox>
-#include <QtGui/QComboBox>
-#include <QtGui/QFrame>
-#include <QtGui/QGraphicsView>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHBoxLayout>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QLineEdit>
-#include <QtGui/QMainWindow>
-#include <QtGui/QMenuBar>
-#include <QtGui/QPushButton>
-#include <QtGui/QSpacerItem>
-#include <QtGui/QTabWidget>
-#include <QtGui/QTableView>
-#include <QtGui/QVBoxLayout>
-#include <QtGui/QWidget>
+#include <QAction>
+#include <QApplication>
+#include <QButtonGroup>
+#include <QCheckBox>
+#include <QComboBox>
+#include <QFrame>
+#include <QGraphicsView>
+#include <QGroupBox>
+#include <QHBoxLayout>
+#include <QHeaderView>
+#include <QLabel>
+#include <QLineEdit>
+#include <QMainWindow>
+#include <QMenuBar>
+#include <QPushButton>
+#include <QSpacerItem>
+#include <QTabWidget>
+#include <QTableView>
+#include <QVBoxLayout>
+#include <QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -1093,88 +1093,88 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "POI Search Proof Of Concept", 0, QApplication::UnicodeUTF8));
-        label_2->setText(QApplication::translate("MainWindow", "Search mode", 0, QApplication::UnicodeUTF8));
-        searchMode->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        label->setText(QApplication::translate("MainWindow", "<html><head/><body><p>Search around </p><p>     a location</p></body></html>", 0, QApplication::UnicodeUTF8));
-        checkLocation->setText(QApplication::translate("MainWindow", "Current", 0, QApplication::UnicodeUTF8));
-        label_16->setText(QApplication::translate("MainWindow", "Lat:", 0, QApplication::UnicodeUTF8));
-        currentLocationLatitude->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        label_17->setText(QApplication::translate("MainWindow", "Lon:", 0, QApplication::UnicodeUTF8));
-        currentLocationLongitude->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "POI Search Proof Of Concept", 0));
+        label_2->setText(QApplication::translate("MainWindow", "Search mode", 0));
+        searchMode->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        label->setText(QApplication::translate("MainWindow", "<html><head/><body><p>Search around </p><p>     a location</p></body></html>", 0));
+        checkLocation->setText(QApplication::translate("MainWindow", "Current", 0));
+        label_16->setText(QApplication::translate("MainWindow", "Lat:", 0));
+        currentLocationLatitude->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        label_17->setText(QApplication::translate("MainWindow", "Lon:", 0));
+        currentLocationLongitude->setText(QApplication::translate("MainWindow", "TextLabel", 0));
         latitude_direction->clear();
         latitude_direction->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "NORTH", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "SOUTH", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindow", "NORTH", 0)
+         << QApplication::translate("MainWindow", "SOUTH", 0)
         );
         longitude_direction->clear();
         longitude_direction->insertItems(0, QStringList()
-         << QApplication::translate("MainWindow", "EAST", 0, QApplication::UnicodeUTF8)
-         << QApplication::translate("MainWindow", "WEST", 0, QApplication::UnicodeUTF8)
+         << QApplication::translate("MainWindow", "EAST", 0)
+         << QApplication::translate("MainWindow", "WEST", 0)
         );
-        startSearch->setText(QApplication::translate("MainWindow", "SEARCH", 0, QApplication::UnicodeUTF8));
-        cancelSearch->setText(QApplication::translate("MainWindow", "CANCEL", 0, QApplication::UnicodeUTF8));
-        label_4->setText(QApplication::translate("MainWindow", "Set proximity alert", 0, QApplication::UnicodeUTF8));
-        setProximity->setText(QApplication::translate("MainWindow", "SET", 0, QApplication::UnicodeUTF8));
-        cancelProximity->setText(QApplication::translate("MainWindow", "UNSET", 0, QApplication::UnicodeUTF8));
-        label_5->setText(QApplication::translate("MainWindow", "Manage poi handle", 0, QApplication::UnicodeUTF8));
-        poiHandle->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        createpoiHandle->setText(QApplication::translate("MainWindow", "CREATE", 0, QApplication::UnicodeUTF8));
-        deletepoiHandle->setText(QApplication::translate("MainWindow", "DELETE", 0, QApplication::UnicodeUTF8));
-        label_8->setText(QApplication::translate("MainWindow", "Search status", 0, QApplication::UnicodeUTF8));
-        search_status->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        totalSize->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
+        startSearch->setText(QApplication::translate("MainWindow", "SEARCH", 0));
+        cancelSearch->setText(QApplication::translate("MainWindow", "CANCEL", 0));
+        label_4->setText(QApplication::translate("MainWindow", "Set proximity alert", 0));
+        setProximity->setText(QApplication::translate("MainWindow", "SET", 0));
+        cancelProximity->setText(QApplication::translate("MainWindow", "UNSET", 0));
+        label_5->setText(QApplication::translate("MainWindow", "Manage poi handle", 0));
+        poiHandle->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        createpoiHandle->setText(QApplication::translate("MainWindow", "CREATE", 0));
+        deletepoiHandle->setText(QApplication::translate("MainWindow", "DELETE", 0));
+        label_8->setText(QApplication::translate("MainWindow", "Search status", 0));
+        search_status->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        totalSize->setText(QApplication::translate("MainWindow", "TextLabel", 0));
 #ifndef QT_NO_ACCESSIBILITY
         searchSettings->setAccessibleName(QString());
 #endif // QT_NO_ACCESSIBILITY
-        label_9->setText(QApplication::translate("MainWindow", "Category", 0, QApplication::UnicodeUTF8));
-        label_10->setText(QApplication::translate("MainWindow", "Radius", 0, QApplication::UnicodeUTF8));
-        label_3->setText(QApplication::translate("MainWindow", "Source", 0, QApplication::UnicodeUTF8));
-        label_7->setText(QApplication::translate("MainWindow", "WebSite", 0, QApplication::UnicodeUTF8));
-        label_11->setText(QApplication::translate("MainWindow", "Phone", 0, QApplication::UnicodeUTF8));
-        label_12->setText(QApplication::translate("MainWindow", "Stars", 0, QApplication::UnicodeUTF8));
-        label_6->setText(QApplication::translate("MainWindow", "Open hours", 0, QApplication::UnicodeUTF8));
-        label_18->setText(QApplication::translate("MainWindow", "Number", 0, QApplication::UnicodeUTF8));
-        label_21->setText(QApplication::translate("MainWindow", "Street", 0, QApplication::UnicodeUTF8));
-        label_22->setText(QApplication::translate("MainWindow", "Post code", 0, QApplication::UnicodeUTF8));
-        label_30->setText(QApplication::translate("MainWindow", "City", 0, QApplication::UnicodeUTF8));
-        label_31->setText(QApplication::translate("MainWindow", "Brand", 0, QApplication::UnicodeUTF8));
-        label_32->setText(QApplication::translate("MainWindow", "Operator", 0, QApplication::UnicodeUTF8));
-        label_23->setText(QApplication::translate("MainWindow", "Category", 0, QApplication::UnicodeUTF8));
-        label_28->setText(QApplication::translate("MainWindow", "Radius", 0, QApplication::UnicodeUTF8));
-        label_24->setText(QApplication::translate("MainWindow", "Source", 0, QApplication::UnicodeUTF8));
-        label_25->setText(QApplication::translate("MainWindow", "WebSite", 0, QApplication::UnicodeUTF8));
-        label_26->setText(QApplication::translate("MainWindow", "Phone", 0, QApplication::UnicodeUTF8));
-        label_27->setText(QApplication::translate("MainWindow", "Stars", 0, QApplication::UnicodeUTF8));
-        label_29->setText(QApplication::translate("MainWindow", "Open hours", 0, QApplication::UnicodeUTF8));
-        label_34->setText(QApplication::translate("MainWindow", "Number", 0, QApplication::UnicodeUTF8));
-        label_37->setText(QApplication::translate("MainWindow", "Street", 0, QApplication::UnicodeUTF8));
-        label_36->setText(QApplication::translate("MainWindow", "Post code", 0, QApplication::UnicodeUTF8));
-        label_35->setText(QApplication::translate("MainWindow", "City", 0, QApplication::UnicodeUTF8));
-        label_39->setText(QApplication::translate("MainWindow", "Brand", 0, QApplication::UnicodeUTF8));
-        label_38->setText(QApplication::translate("MainWindow", "Operator", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(searchSettings), QApplication::translate("MainWindow", "Categories", 0, QApplication::UnicodeUTF8));
-        getTopList->setText(QApplication::translate("MainWindow", "TOP", 0, QApplication::UnicodeUTF8));
-        getPrevList->setText(QApplication::translate("MainWindow", "PREV", 0, QApplication::UnicodeUTF8));
-        getNextList->setText(QApplication::translate("MainWindow", "NEXT", 0, QApplication::UnicodeUTF8));
-        recordFrom->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        label_14->setText(QApplication::translate("MainWindow", "FROM:", 0, QApplication::UnicodeUTF8));
-        recordTo->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        label_15->setText(QApplication::translate("MainWindow", "TO:", 0, QApplication::UnicodeUTF8));
-        label_13->setText(QApplication::translate("MainWindow", "Attributes to get", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(resultList), QApplication::translate("MainWindow", "Result list", 0, QApplication::UnicodeUTF8));
-        label_20->setText(QApplication::translate("MainWindow", "Route handle", 0, QApplication::UnicodeUTF8));
-        routeHandle->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        label_19->setText(QApplication::translate("MainWindow", "Route segments", 0, QApplication::UnicodeUTF8));
-        routeTotalSegments->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(resultView), QApplication::translate("MainWindow", "Result view", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("MainWindow", "Version", 0, QApplication::UnicodeUTF8));
-        VersionSearch->setText(QApplication::translate("MainWindow", "to be initialized", 0, QApplication::UnicodeUTF8));
-        groupBox->setTitle(QApplication::translate("MainWindow", "Language", 0, QApplication::UnicodeUTF8));
-        languageCode->setText(QApplication::translate("MainWindow", "languageCode", 0, QApplication::UnicodeUTF8));
-        countryCode->setText(QApplication::translate("MainWindow", "countryCode", 0, QApplication::UnicodeUTF8));
-        About->setText(QApplication::translate("MainWindow", "About", 0, QApplication::UnicodeUTF8));
-        tabWidget->setTabText(tabWidget->indexOf(settings), QApplication::translate("MainWindow", "Settings", 0, QApplication::UnicodeUTF8));
+        label_9->setText(QApplication::translate("MainWindow", "Category", 0));
+        label_10->setText(QApplication::translate("MainWindow", "Radius", 0));
+        label_3->setText(QApplication::translate("MainWindow", "Source", 0));
+        label_7->setText(QApplication::translate("MainWindow", "WebSite", 0));
+        label_11->setText(QApplication::translate("MainWindow", "Phone", 0));
+        label_12->setText(QApplication::translate("MainWindow", "Stars", 0));
+        label_6->setText(QApplication::translate("MainWindow", "Open hours", 0));
+        label_18->setText(QApplication::translate("MainWindow", "Number", 0));
+        label_21->setText(QApplication::translate("MainWindow", "Street", 0));
+        label_22->setText(QApplication::translate("MainWindow", "Post code", 0));
+        label_30->setText(QApplication::translate("MainWindow", "City", 0));
+        label_31->setText(QApplication::translate("MainWindow", "Brand", 0));
+        label_32->setText(QApplication::translate("MainWindow", "Operator", 0));
+        label_23->setText(QApplication::translate("MainWindow", "Category", 0));
+        label_28->setText(QApplication::translate("MainWindow", "Radius", 0));
+        label_24->setText(QApplication::translate("MainWindow", "Source", 0));
+        label_25->setText(QApplication::translate("MainWindow", "WebSite", 0));
+        label_26->setText(QApplication::translate("MainWindow", "Phone", 0));
+        label_27->setText(QApplication::translate("MainWindow", "Stars", 0));
+        label_29->setText(QApplication::translate("MainWindow", "Open hours", 0));
+        label_34->setText(QApplication::translate("MainWindow", "Number", 0));
+        label_37->setText(QApplication::translate("MainWindow", "Street", 0));
+        label_36->setText(QApplication::translate("MainWindow", "Post code", 0));
+        label_35->setText(QApplication::translate("MainWindow", "City", 0));
+        label_39->setText(QApplication::translate("MainWindow", "Brand", 0));
+        label_38->setText(QApplication::translate("MainWindow", "Operator", 0));
+        tabWidget->setTabText(tabWidget->indexOf(searchSettings), QApplication::translate("MainWindow", "Categories", 0));
+        getTopList->setText(QApplication::translate("MainWindow", "TOP", 0));
+        getPrevList->setText(QApplication::translate("MainWindow", "PREV", 0));
+        getNextList->setText(QApplication::translate("MainWindow", "NEXT", 0));
+        recordFrom->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        label_14->setText(QApplication::translate("MainWindow", "FROM:", 0));
+        recordTo->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        label_15->setText(QApplication::translate("MainWindow", "TO:", 0));
+        label_13->setText(QApplication::translate("MainWindow", "Attributes to get", 0));
+        tabWidget->setTabText(tabWidget->indexOf(resultList), QApplication::translate("MainWindow", "Result list", 0));
+        label_20->setText(QApplication::translate("MainWindow", "Route handle", 0));
+        routeHandle->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        label_19->setText(QApplication::translate("MainWindow", "Route segments", 0));
+        routeTotalSegments->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        tabWidget->setTabText(tabWidget->indexOf(resultView), QApplication::translate("MainWindow", "Result view", 0));
+        groupBox_2->setTitle(QApplication::translate("MainWindow", "Version", 0));
+        VersionSearch->setText(QApplication::translate("MainWindow", "to be initialized", 0));
+        groupBox->setTitle(QApplication::translate("MainWindow", "Language", 0));
+        languageCode->setText(QApplication::translate("MainWindow", "languageCode", 0));
+        countryCode->setText(QApplication::translate("MainWindow", "countryCode", 0));
+        About->setText(QApplication::translate("MainWindow", "About", 0));
+        tabWidget->setTabText(tabWidget->indexOf(settings), QApplication::translate("MainWindow", "Settings", 0));
     } // retranslateUi
 
 };

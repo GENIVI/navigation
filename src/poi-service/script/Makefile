@@ -9,7 +9,7 @@
 #
 # \author Philippe Colliot <philippe.colliot@mpsa.com>
 #
-# \version 1.0
+# \version 1.1
 #
 # This Source Code Form is subject to the terms of the
 # Mozilla Public License (MPL), v. 2.0.
@@ -20,7 +20,7 @@
 #
 # List of changes:
 # 
-# <date>, <name>, <description of change>
+# 4/6/2014, Philippe Colliot, complete src-clean option
 #
 # @licence end@
 
@@ -41,6 +41,7 @@ help::
 	@echo "The following targets exist"
 	@echo "all: Build $(ALL)"
 	@echo "clean: Clean up build dir"
+	@echo "src-clean: Clean up all checked out sources"
 
 #Clone the positioning repository for getting the API, generate the proxies and adaptors for the DBus APIs firstly
 include get-positioning.mk
@@ -49,6 +50,8 @@ include generate-api.mk
 include poi-server.mk
 
 all: $(ALL)
+
+src-clean: $(SRC_CLEAN)
 
 deps::
 	sudo apt-get install $(DEPS)

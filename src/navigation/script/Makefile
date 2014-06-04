@@ -8,6 +8,7 @@
 # \brief This file is part of the Build System.
 #
 # \author Martin Schaller <martin.schaller@it-schaller.de>
+# \author Philippe Colliot <philippe.colliot@mpsa.com>
 #
 # \version 1.0
 #
@@ -20,7 +21,7 @@
 #
 # List of changes:
 # 
-# <date>, <name>, <description of change>
+# 4/6/2014, Philippe Colliot, complete src-clean option
 #
 # @licence end@
 SRC_DIR=$(CURDIR)/../../navigation
@@ -38,11 +39,15 @@ help::
 	@echo "The following targets exist"
 	@echo "all: Build $(ALL)"
 	@echo "all2: Install all necessary dependencies and build all"
+	@echo "clean: Clean up build dir"
+	@echo "src-clean: Clean up all checked out sources"
 
 
 include *.mk
 
 all: $(ALL)
+
+src-clean: $(SRC_CLEAN)
 
 deps::
 	sudo apt-get install $(DEPS)
@@ -51,4 +56,8 @@ deps::
 
 
 all2: deps all
+
 navit-plugins: all
+
+clean:
+	rm -rf $(BIN_DIR)

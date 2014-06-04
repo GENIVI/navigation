@@ -11,14 +11,14 @@
 #define UI_ABOUT_2D_DIALOG_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QDialog>
-#include <QtGui/QHeaderView>
-#include <QtGui/QPushButton>
-#include <QtGui/QTextBrowser>
-#include <QtGui/QWidget>
+#include <QAction>
+#include <QApplication>
+#include <QButtonGroup>
+#include <QDialog>
+#include <QHeaderView>
+#include <QPushButton>
+#include <QTextBrowser>
+#include <QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -58,8 +58,8 @@ public:
 
     void retranslateUi(QDialog *aboutDialog)
     {
-        aboutDialog->setWindowTitle(QApplication::translate("aboutDialog", "About", 0, QApplication::UnicodeUTF8));
-        pushButton->setText(QApplication::translate("aboutDialog", "OK", 0, QApplication::UnicodeUTF8));
+        aboutDialog->setWindowTitle(QApplication::translate("aboutDialog", "About", 0));
+        pushButton->setText(QApplication::translate("aboutDialog", "OK", 0));
     } // retranslateUi
 
 };

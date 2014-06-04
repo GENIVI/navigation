@@ -1,6 +1,6 @@
 TEMPLATE = app
 CONFIG += console
-QT       += core gui
+QT       += core gui widgets
 
 RESOURCES += \
     ../poi-common/poi-resource.qrc

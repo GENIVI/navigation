@@ -12,19 +12,19 @@
 
 #include <QtCore/QLocale>
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
-#include <QtGui/QApplication>
-#include <QtGui/QButtonGroup>
-#include <QtGui/QFrame>
-#include <QtGui/QGroupBox>
-#include <QtGui/QHeaderView>
-#include <QtGui/QLabel>
-#include <QtGui/QMainWindow>
-#include <QtGui/QMenuBar>
-#include <QtGui/QPushButton>
-#include <QtGui/QStatusBar>
-#include <QtGui/QToolBar>
-#include <QtGui/QWidget>
+#include <QAction>
+#include <QApplication>
+#include <QButtonGroup>
+#include <QFrame>
+#include <QGroupBox>
+#include <QHeaderView>
+#include <QLabel>
+#include <QMainWindow>
+#include <QMenuBar>
+#include <QPushButton>
+#include <QStatusBar>
+#include <QToolBar>
+#include <QWidget>
 
 QT_BEGIN_NAMESPACE
 
@@ -170,19 +170,19 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Bicycle shop", 0, QApplication::UnicodeUTF8));
-        camID->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        poiCategoryName->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        poiCategoryID->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        groupBox_2->setTitle(QApplication::translate("MainWindow", "Version", 0, QApplication::UnicodeUTF8));
-        VersionCAM->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        addCAMCategory->setText(QApplication::translate("MainWindow", "ADDandREG", 0, QApplication::UnicodeUTF8));
-        removeCAMCategory->setText(QApplication::translate("MainWindow", "REMOVE", 0, QApplication::UnicodeUTF8));
-        unregisterCAM->setText(QApplication::translate("MainWindow", "UNREGISTER", 0, QApplication::UnicodeUTF8));
-        registerCAM->setText(QApplication::translate("MainWindow", "REGISTER", 0, QApplication::UnicodeUTF8));
-        groupBox->setTitle(QApplication::translate("MainWindow", "Language", 0, QApplication::UnicodeUTF8));
-        languageCode->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
-        countryCode->setText(QApplication::translate("MainWindow", "TextLabel", 0, QApplication::UnicodeUTF8));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Bicycle shop", 0));
+        camID->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        poiCategoryName->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        poiCategoryID->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        groupBox_2->setTitle(QApplication::translate("MainWindow", "Version", 0));
+        VersionCAM->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        addCAMCategory->setText(QApplication::translate("MainWindow", "ADDandREG", 0));
+        removeCAMCategory->setText(QApplication::translate("MainWindow", "REMOVE", 0));
+        unregisterCAM->setText(QApplication::translate("MainWindow", "UNREGISTER", 0));
+        registerCAM->setText(QApplication::translate("MainWindow", "REGISTER", 0));
+        groupBox->setTitle(QApplication::translate("MainWindow", "Language", 0));
+        languageCode->setText(QApplication::translate("MainWindow", "TextLabel", 0));
+        countryCode->setText(QApplication::translate("MainWindow", "TextLabel", 0));
     } // retranslateUi
 
 };

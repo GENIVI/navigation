@@ -1,5 +1,5 @@
-Release date of the file: 11-04-2014 
-Status: to be completed
+Release date of the file: 4-06-2014 
+Status: OK
 
 Project:
 Navigation software based on Navit and compliant with the Navigation APIs standardized by the GENIVI Alliance
@@ -22,7 +22,7 @@ License:
 See headers and LICENSE file
 
 Test target: 
-Ubuntu 12.04.1 LTS
+Ubuntu 14.04 LTS
 
 To get the code:
 git clone http://git.projects.genivi.org/lbs/navigation-service.git $WORKING-DIR
