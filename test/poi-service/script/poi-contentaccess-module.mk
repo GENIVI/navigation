@@ -24,7 +24,7 @@
 #
 # @licence end@
 POI_CONTENTACCESS_MODULE_SRC_DIR=$(ROOT_DIR)/poi-contentaccess-module
-POI_CONTENTACCESS_MODULE_DEPS=qt4-qmlviewer libqt5widgets5 libqt5dbus5 libqt5core5a libqt5gui5 libsqlite3-dev sqlite3
+POI_CONTENTACCESS_MODULE_DEPS=qt4-qmlviewer libqt5widgets5 libqt5dbus5 libqt5core5a libqt5gui5 libsqlite3-dev sqlite3 qtbase5-dev-tools
 POI_CONTENTACCESS_MODULE_BIN_DIR=$(BIN_DIR)/poi-contentaccess-module-bin
 
 DEPS+=$(POI_CONTENTACCESS_MODULE_DEPS)
