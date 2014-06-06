@@ -25,6 +25,8 @@
 # @licence end@
 COMMON_DIR=$(ROOT_DIR)/poi-common
 TARGET_GENERATED_API_DIR=$(COMMON_DIR)
+GENERATE_API_DEPS=libdbus-c++-dev xsltproc
+DEPS+=$(GENERATE_API_DEPS)
 
 ALL+=generate-api
 CLEAN+=clean-generate-api

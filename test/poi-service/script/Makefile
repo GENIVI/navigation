@@ -43,6 +43,7 @@ help::
 	@echo "all: Build $(ALL)"
 	@echo "clean: Clean up build dir"
 	@echo "src-clean: Clean up all checked out sources"
+	@echo "all2: Get $(DEPS) and build $(ALL)"
 
 #Clone the positioning repository for getting the API, generate the proxies and adaptors for the DBus APIs firstly
 include get-positioning.mk

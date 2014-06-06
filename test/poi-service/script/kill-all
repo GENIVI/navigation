@@ -1,4 +1,4 @@
 #!/bin/sh
 echo 'kill all remaining process'
-kill -9 `ps -ef | grep poi- | grep -v grep | awk '{print $2}'`
+kill -9 `ps -ef | egrep poi- | grep -v grep | awk '{print $2}'`
 
