@@ -49,7 +49,7 @@ $(navit_BIN)/navit/navit: $(navit_BIN)/Makefile
 
 $(navit_BIN)/Makefile: $(navit_SRC2)/CMakeLists.txt
 	mkdir -p $(navit_BIN)
-	cd $(navit_BIN) && cmake -DSAMPLE_MAP=0 -Dvehicle/null=1 -Dgraphics/qt_qpainter=0 $(navit_SRC2)
+	cd $(navit_BIN) && cmake -DDISABLE_QT=1 -DSAMPLE_MAP=0 -Dvehicle/null=1 -Dgraphics/qt_qpainter=0 $(navit_SRC2)
 
 $(navit_SRC2)/CMakeLists.txt:
 	cd $(navit_SRC)/.. && git clone $(navit_URL)
