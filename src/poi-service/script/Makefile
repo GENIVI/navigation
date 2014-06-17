@@ -34,6 +34,7 @@ CXX=g++
 CXXFLAGS=-pipe -O2 -Wall
 CHK_DIR_EXISTS=test -d
 MKDIR=mkdir -p
+APT_GET=apt-get
 
 default: help
 
@@ -55,7 +56,7 @@ all: $(ALL)
 src-clean: $(SRC_CLEAN)
 
 deps::
-	sudo apt-get install $(DEPS)
+	sudo $(APT_GET) install $(DEPS)
 
 all2: deps all
 

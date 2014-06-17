@@ -32,6 +32,7 @@ MAP_DIR=$(CURDIR)/../../map
 CONSTANTS_BIN=$(BIN_DIR)/constants
 
 QMAKE=qmake
+APT_GET=apt-get
 
 default: help
 
@@ -50,7 +51,7 @@ all: $(ALL)
 src-clean: $(SRC_CLEAN)
 
 deps::
-	sudo apt-get install $(DEPS)
+	sudo $(APT_GET) install $(DEPS)
 	# See https://bugs.launchpad.net/ubuntu/+source/freetype/+bug/1319642 why this is necessary
 	[ -e /usr/include/freetype2/freetype ] || sudo ln -s . /usr/include/freetype2/freetype
 

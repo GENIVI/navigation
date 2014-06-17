@@ -35,6 +35,7 @@ CXX=g++
 CXXFLAGS=-pipe -O2 -Wall
 CHK_DIR_EXISTS=test -d
 MKDIR=mkdir -p
+APT_GET=apt-get
 
 default: help
 
@@ -56,7 +57,7 @@ include poi-contentaccess-module.mk
 all: $(ALL)
 	
 deps::
-	sudo apt-get install $(DEPS)
+	sudo $(APT_GET) install $(DEPS)
 
 all2: deps all
 

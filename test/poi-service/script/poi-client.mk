@@ -24,7 +24,7 @@
 #
 # @licence end@
 POI_CLIENT_SRC_DIR=$(ROOT_DIR)/poi-client
-POI_CLIENT_DEPS=qt4-qmlviewer libqt5widgets5 libqt5dbus5 libqt5core5a libqt5gui5 qtbase5-dev-tools
+POI_CLIENT_DEPS=qt4-qmlviewer libqt5widgets5 libqt5dbus5 libqt5core5a libqt5gui5 qtbase5-dev-tools qttools5-dev-tools
 POI_CLIENT_BIN_DIR=$(BIN_DIR)/poi-client-bin
 
 DEPS+=$(POI_CLIENT_DEPS)
