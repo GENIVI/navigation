@@ -21,6 +21,7 @@
 # List of changes:
 # 
 # 4/6/2014, Philippe Colliot, complete src-clean option
+# 18/6/2014, Philippe Colliot, APT_GET option for Fedora
 #
 # @licence end@
 
@@ -34,7 +35,10 @@ CXX=g++
 CXXFLAGS=-pipe -O2 -Wall
 CHK_DIR_EXISTS=test -d
 MKDIR=mkdir -p
-APT_GET=apt-get
+
+ifndef $(APT_GET) 
+	APT_GET=apt-get
+endif
 
 default: help
 
@@ -44,6 +48,7 @@ help::
 	@echo "clean: Clean up build dir"
 	@echo "src-clean: Clean up all checked out sources"
 	@echo "all2: Get $(DEPS) and build $(ALL)"
+	@echo "make APT_GET=yum for Fedora, by default APT_GET is set to apt-get"
 
 #Clone the positioning repository for getting the API, generate the proxies and adaptors for the DBus APIs firstly
 include get-positioning.mk

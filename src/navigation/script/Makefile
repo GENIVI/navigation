@@ -22,6 +22,7 @@
 # List of changes:
 # 
 # 4/6/2014, Philippe Colliot, complete src-clean option
+# 18/6/2014, Philippe Colliot, APT_GET option for Fedora
 #
 # @licence end@
 SRC_DIR=$(CURDIR)/../../navigation
@@ -32,7 +33,9 @@ MAP_DIR=$(CURDIR)/../../map
 CONSTANTS_BIN=$(BIN_DIR)/constants
 
 QMAKE=qmake
-APT_GET=apt-get
+ifndef $(APT_GET) 
+	APT_GET=apt-get
+endif
 
 default: help
 
@@ -42,6 +45,7 @@ help::
 	@echo "all2: Install all necessary dependencies and build all"
 	@echo "clean: Clean up build dir"
 	@echo "src-clean: Clean up all checked out sources"
+	@echo "make APT_GET=yum for Fedora, by default APT_GET is set to apt-get"
 
 
 include *.mk
