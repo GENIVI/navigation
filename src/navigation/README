@@ -17,6 +17,7 @@ FYI: the application (with the HMI) is located into git://git.projects.genivi.or
 Author: 
 Martin Schaller <martin.schaller@it-schaller.de>
 Philippe Colliot philippe.colliot@mpsa.com
+Marco Residori marco.residori@xse.de
 
 License: 
 See headers and LICENSE file
@@ -32,7 +33,7 @@ Dependencies:
  
 Build:
 cd $WORKING-DIR/navigation-service/src/navigation/script
-make all
+make all2
 
 To launch (several options available):
 ./run 

@@ -98,7 +98,9 @@ class EnhancedPosition
 	public:
 	struct vehicle_priv *m_priv;
 	EnhancedPosition(DBus::Connection &connection, struct vehicle_priv *priv)
-		: DBus::ObjectProxy(connection, "/position","org.genivi.positioning.EnhancedPosition")
+		: DBus::ObjectProxy(connection, 
+                                    "/org/genivi/positioning/EnhancedPosition",
+                                    "org.genivi.positioning.EnhancedPosition")
 	{
 		m_priv=priv;
 		try {
