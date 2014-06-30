@@ -39,3 +39,6 @@ rm *.html
 #concatenate pdf files
 pdftk $INPUT_FILE1 $INPUT_FILE2 cat output $OUTPUT_DIR/$OUTPUT_FILE
 
+sleep 1
+rm $INPUT_FILE2
+
