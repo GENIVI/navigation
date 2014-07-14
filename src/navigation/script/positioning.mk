@@ -23,12 +23,19 @@
 # 
 # 4/6/2014, Philippe Colliot, complete src-clean option
 #
+# 26/6/2014, Marco Residori, add support of new enhanced-position-service
+#
 # @licence end@
+
 positioning_BIN=$(BIN_DIR)/positioning
-gnss-service_BIN=$(BIN_DIR)/gnss-service
-sensors-service_BIN=$(BIN_DIR)/sensors-service
+
+log-replayer_BIN=$(positioning_BIN)/log-replayer
+gnss-service_BIN=$(positioning_BIN)/gnss-service
+sensors-service_BIN=$(positioning_BIN)/sensors-service
+enhanced-position-service_BIN=$(positioning_BIN)/enhanced-position-service
+
 positioning_URL=http://git.projects.genivi.org/lbs/positioning.git
-positioning_VERSION=HEAD
+positioning_VERSION=963d70c3d3a1f534146372e24c4d53a57d14ade2
 positioning_SRC=$(SRC_DIR)/positioning_$(positioning_VERSION)
 positioning_API=$(positioning_SRC)/enhanced-position-service/api
 
@@ -42,19 +49,20 @@ help::
 clean-positioning_SRC::
 	rm -rf $(positioning_SRC)
 
-positioning: $(positioning_BIN)/enhanced-position-service/src/server/position-daemon
+positioning: $(positioning_BIN)/enhanced-position-service
 
-$(positioning_BIN)/Makefile: $(positioning_SRC)/enhanced-position-service/CMakeLists.txt
-	mkdir -p $(positioning_BIN) $(gnss-service_BIN) $(sensors-service_BIN)
-	cd $(gnss-service_BIN) && cmake $(positioning_SRC)/gnss-service
-	cd $(sensors-service_BIN) && cmake $(positioning_SRC)/sensors-service
-	cd $(positioning_BIN) && cmake -DWITH_GPSD=OFF -DWITH_DLT=OFF -DWITH_REPLAYER=ON -DWITH_TESTS=OFF $(positioning_SRC)/enhanced-position-service
-
-
-$(positioning_BIN)/enhanced-position-service/src/server/position-daemon: $(positioning_BIN)/Makefile
+$(positioning_BIN)/enhanced-position-service: $(positioning_BIN)/Makefile
 	cd $(gnss-service_BIN) && make
 	cd $(sensors-service_BIN) && make
-	cd $(positioning_BIN) && make
+	cd $(log-replayer_BIN) && make 
+	cd $(enhanced-position-service_BIN) && make
+
+$(positioning_BIN)/Makefile: $(positioning_SRC)/enhanced-position-service/CMakeLists.txt
+	mkdir -p $(positioning_BIN) $(gnss-service_BIN) $(sensors-service_BIN) $(log-replayer_BIN) $(enhanced-position-service_BIN)
+	cd $(gnss-service_BIN) && cmake $(positioning_SRC)/gnss-service
+	cd $(sensors-service_BIN) && cmake $(positioning_SRC)/sensors-service 
+	cd $(log-replayer_BIN) && cmake $(positioning_SRC)/log-replayer
+	cd $(enhanced-position-service_BIN) && cmake -DWITH_GPSD=OFF -DWITH_DLT=OFF -DWITH_REPLAYER=ON -DWITH_TESTS=OFF $(positioning_SRC)/enhanced-position-service
 
 $(positioning_SRC)/enhanced-position-service/CMakeLists.txt:
 	cd $(positioning_SRC)/.. && git clone $(positioning_URL) $(positioning_SRC)

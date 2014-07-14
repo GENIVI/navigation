@@ -47,9 +47,13 @@ help::
 	@echo "src-clean: Clean up all checked out sources"
 	@echo "make APT_GET=yum for Fedora, by default APT_GET is set to apt-get"
 
+#initialize the variable ALL to an empty string
+ALL=
 
+#include makefiles
 include *.mk
 
+#ALL is updated in the makefiles 
 all: $(ALL)
 
 src-clean: $(SRC_CLEAN)
