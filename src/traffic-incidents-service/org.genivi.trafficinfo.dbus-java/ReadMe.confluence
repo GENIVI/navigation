@@ -1,0 +1,5 @@
+This project is a copy of the dbus-java project by Matthew Johnson, with small modifications needed to get the TrafficIncidentsService PoC running.
+* support for unicast signals added
+* some bugs fixed, e.g. support of empty lists
+
+The original project can be found at http://dbus.freedesktop.org/

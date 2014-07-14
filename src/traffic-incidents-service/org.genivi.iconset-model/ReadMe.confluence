@@ -1,0 +1,5 @@
+This project defines an Icon Set.
+Icon Sets are used in the TrafficIncidents interface, but can also be used in other locations where icons are used.
+Detailed information can be found in the "GENIVI TrafficIncidentsService Component Specification".
+
+IconSet.ecorediag, in de model folder, provides a good overview of the structure of an Icon Set.

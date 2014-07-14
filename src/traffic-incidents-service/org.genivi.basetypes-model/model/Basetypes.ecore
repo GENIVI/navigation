@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="genivi" nsURI="http://org.genivi" nsPrefix="genivi">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <details key="documentation" value="Copyright (C) 2013 TomTom International B.V.&#xD;&#xA;&#xD;&#xA;This Source Code Form is subject to the terms of the Mozilla Public&#xD;&#xA;License, v. 2.0. If a copy of the MPL was not distributed with this&#xD;&#xA;file, You can obtain one at http://mozilla.org/MPL/2.0/."/>
+  </eAnnotations>
+  <eSubpackages name="location" nsURI="http://org.genivi.location" nsPrefix="common">
+    <eClassifiers xsi:type="ecore:EClass" name="Location">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Common parent for all location types."/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PointLocation" eSuperTypes="#//location/Location">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The location is a single point (along the road), e.g. the location of a broken down vehicle.&#xD;&#xA;TODO Work out the PointLocation class"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AreaLocation" eSuperTypes="#//location/Location">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The location is an area, e.g. an area with fog.&#xD;&#xA;TODO Work out the AreaLocation class"/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LinearLocation" eSuperTypes="#//location/Location">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The location is a road stretch, e.g. the road stretch where there is a traffic jam."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="segments" lowerBound="1"
+          upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The database segments of the location."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="positiveOffset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
+          unsettable="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The positive offset is the distance (in meters) between the begin node of the first segment and the start point of the actual location."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="negativeOffset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
+          unsettable="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The negative offset is the distance (in meters) between the end point of the actual location and the end node of the last segment."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LocationInfo">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="mainLocation" eType="#//common/Coordinate"
+          containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="PointLocationInfo" eSuperTypes="#//location/LocationInfo">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="locationType" eType="#//location/PointLocationType"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LinearLocationInfo" eSuperTypes="#//location/LocationInfo">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromLocationName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="fromLocationParentName"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="toLocationName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="toLocationParentName"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="coordinates" upperBound="-1"
+          eType="#//common/Coordinate" containment="true"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="AreaLocationInfo" eSuperTypes="#//location/LocationInfo"/>
+    <eClassifiers xsi:type="ecore:EEnum" name="PointLocationType">
+      <eLiterals name="MOTORWAY_EXIT"/>
+      <eLiterals name="MOTORWAY_TRIANGLE" value="1"/>
+      <eLiterals name="MOTORWAY_CROSSING" value="2"/>
+      <eLiterals name="MOTORWAY_ENTRY" value="3"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="common" nsURI="http://org.genivi.common" nsPrefix="model">
+    <eClassifiers xsi:type="ecore:EClass" name="Coordinate">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This data type represents a 3D WGS84 coordinate."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="latitude" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="latitude >= -90 and &lt;= 90"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="longitude" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="longitude >= -180 and &lt;= 180"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="altitude" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="altitude values are in meters above sea level"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="RectangularArea">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This datatype represents a rectangular area. The area is defined by the WGS84 coordinates of its bottomLeft and topRight corners."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="bottomLeft" lowerBound="1"
+          eType="#//common/Coordinate" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The bottom-left corner of the area."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="topRight" lowerBound="1"
+          eType="#//common/Coordinate" containment="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The top-right corner of the area."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Version">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This datatype is used to provide version information."/>
+      </eAnnotations>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="major" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" unsettable="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The major version number."/>
+        </eAnnotations>
+        <eAnnotations source="http://www.tomtom.com/emfidl/2012/GenModel">
+          <details key="valueMin" value="0"/>
+          <details key="valueMax" value="32767"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="minor" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" unsettable="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The minor version number."/>
+        </eAnnotations>
+        <eAnnotations source="http://www.tomtom.com/emfidl/2012/GenModel">
+          <details key="valueMin" value="0"/>
+          <details key="valueMax" value="32767"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="micro" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" unsettable="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The micro version number."/>
+        </eAnnotations>
+        <eAnnotations source="http://www.tomtom.com/emfidl/2012/GenModel">
+          <details key="valueMin" value="0"/>
+          <details key="valueMax" value="32767"/>
+        </eAnnotations>
+      </eStructuralFeatures>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          unsettable="true">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The date of this version."/>
+        </eAnnotations>
+      </eStructuralFeatures>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="LocalizedString">
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="languageCode" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          unsettable="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="countryCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          unsettable="true"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" lowerBound="1"
+          eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+          unsettable="true"/>
+    </eClassifiers>
+  </eSubpackages>
+</ecore:EPackage>

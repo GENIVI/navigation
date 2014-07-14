@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (C) 2013 TomTom International B.V.&#xD;&#xA;&#xD;&#xA;This Source Code Form is subject to the terms of the Mozilla Public&#xD;&#xA;License, v. 2.0. If a copy of the MPL was not distributed with this&#xD;&#xA;file, You can obtain one at http://mozilla.org/MPL/2.0/."
+    modelDirectory="/org.genivi.basetypes-model/src" modelPluginID="org.genivi.basetypes-model"
+    modelName="Basetypes" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false">
+  <foreignModel>Basetypes.ecore</foreignModel>
+  <genPackages prefix="Genivi" basePackage="org" disposableProviderFactory="true"
+      ecorePackage="Basetypes.ecore#/">
+    <nestedGenPackages prefix="Location" disposableProviderFactory="true" ecorePackage="Basetypes.ecore#//location">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="Basetypes.ecore#//location/PointLocationType">
+        <genEnumLiterals ecoreEnumLiteral="Basetypes.ecore#//location/PointLocationType/MOTORWAY_EXIT"/>
+        <genEnumLiterals ecoreEnumLiteral="Basetypes.ecore#//location/PointLocationType/MOTORWAY_TRIANGLE"/>
+        <genEnumLiterals ecoreEnumLiteral="Basetypes.ecore#//location/PointLocationType/MOTORWAY_CROSSING"/>
+        <genEnumLiterals ecoreEnumLiteral="Basetypes.ecore#//location/PointLocationType/MOTORWAY_ENTRY"/>
+      </genEnums>
+      <genClasses ecoreClass="Basetypes.ecore#//location/Location"/>
+      <genClasses ecoreClass="Basetypes.ecore#//location/PointLocation"/>
+      <genClasses ecoreClass="Basetypes.ecore#//location/AreaLocation"/>
+      <genClasses ecoreClass="Basetypes.ecore#//location/LinearLocation">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//location/LinearLocation/segments"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//location/LinearLocation/positiveOffset"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//location/LinearLocation/negativeOffset"/>
+      </genClasses>
+      <genClasses ecoreClass="Basetypes.ecore#//location/LocationInfo">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//location/LocationInfo/name"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Basetypes.ecore#//location/LocationInfo/mainLocation"/>
+      </genClasses>
+      <genClasses ecoreClass="Basetypes.ecore#//location/PointLocationInfo">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//location/PointLocationInfo/locationType"/>
+      </genClasses>
+      <genClasses ecoreClass="Basetypes.ecore#//location/LinearLocationInfo">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//location/LinearLocationInfo/fromLocationName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//location/LinearLocationInfo/fromLocationParentName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//location/LinearLocationInfo/toLocationName"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//location/LinearLocationInfo/toLocationParentName"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Basetypes.ecore#//location/LinearLocationInfo/coordinates"/>
+      </genClasses>
+      <genClasses ecoreClass="Basetypes.ecore#//location/AreaLocationInfo"/>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Common" disposableProviderFactory="true" ecorePackage="Basetypes.ecore#//common">
+      <genClasses ecoreClass="Basetypes.ecore#//common/Coordinate">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//common/Coordinate/latitude"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//common/Coordinate/longitude"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//common/Coordinate/altitude"/>
+      </genClasses>
+      <genClasses ecoreClass="Basetypes.ecore#//common/RectangularArea">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Basetypes.ecore#//common/RectangularArea/bottomLeft"/>
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Basetypes.ecore#//common/RectangularArea/topRight"/>
+      </genClasses>
+      <genClasses ecoreClass="Basetypes.ecore#//common/Version">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//common/Version/major"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//common/Version/minor"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//common/Version/micro"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//common/Version/date"/>
+      </genClasses>
+      <genClasses ecoreClass="Basetypes.ecore#//common/LocalizedString">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//common/LocalizedString/languageCode"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//common/LocalizedString/countryCode"/>
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Basetypes.ecore#//common/LocalizedString/string"/>
+      </genClasses>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

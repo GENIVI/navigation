@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="family" nsURI="http://org.genivi.family" nsPrefix="family">
+  <eAnnotations source="GenModel">
+    <details key="documentation" value="Copyright (C) 2013 TomTom International B.V.&#xD;&#xA;&#xD;&#xA;This Source Code Form is subject to the terms of the Mozilla Public&#xD;&#xA;License, v. 2.0. If a copy of the MPL was not distributed with this&#xD;&#xA;file, You can obtain one at http://mozilla.org/MPL/2.0/."/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Family">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" lowerBound="1"
+        upperBound="-1" eType="#//Person" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="surname" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfPets" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="hasASwimmingPool" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="address" eType="#//Address"
+        unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="favoriteHolidayDestinations"
+        upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Person">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="firstName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sexe" lowerBound="1" eType="#//Sexe"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedCars" upperBound="-1"
+        eType="#//Car" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Sexe">
+    <eLiterals name="MALE"/>
+    <eLiterals name="FEMALE" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Car">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfSeats" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Address">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="street" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WealthyFamily" eSuperTypes="#//Family">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="forbesRanking" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        unsettable="true"/>
+  </eClassifiers>
+</ecore:EPackage>

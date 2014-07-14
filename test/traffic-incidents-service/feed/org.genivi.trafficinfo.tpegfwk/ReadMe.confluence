@@ -1,0 +1,22 @@
+This project contains TPEG related classes.
+
+*org.genivi.tpeg.clientside.broadcast.fwk*
+TPEG framework interfaces for the client side.
+
+*org.genivi.tpeg.clientside.broadcast.fwk.impl*
+Mininal implementation of the client side service framework.
+
+*org.genivi.tpeg.clientside.broadcastadaptationlayer.refimpl*
+Reference implementation for a client side Broadcast adaptation layer.
+
+*org.genivi.tpeg.registeredvalues*
+Contains TPEG services related values registered with TISA. For now it contains the registered Application Ids (for testing only).
+
+*org.genivi.tpeg.serverside.broadcast.app.fwk*
+Interface for a TPEG application on the server side, in a broadcast framework.
+
+*org.genivi.tpeg.serverside.broadcast.fwk*
+Interface for a TPEG framework on the server side, in a broadcast framework.
+
+*org.genivi.tpeg.serverside.broadcast.fwk.impl*
+Minimal implementation of the server side service framework.

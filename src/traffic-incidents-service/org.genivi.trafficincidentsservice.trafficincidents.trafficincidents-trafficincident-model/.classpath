@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="src" including="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.common/2.8.0.v20130125-0546/org.eclipse.emf.common-2.8.0.v20130125-0546.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.ecore/2.8.3.v20130125-0546/org.eclipse.emf.ecore-2.8.3.v20130125-0546.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.ecore.xmi/2.8.1.v20130125-0546/org.eclipse.emf.ecore.xmi-2.8.1.v20130125-0546.jar"/>
+  <classpathentry kind="src" path="/org.genivi.basetypes-model"/>
+  <classpathentry kind="src" path="/org.genivi.trafficincidentsservice.trafficincidenttables-model"/>
+</classpath>

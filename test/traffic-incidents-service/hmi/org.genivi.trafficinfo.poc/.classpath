@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/org/genivi/trafficincidentsservice/dbuswrapper/1.0-SNAPSHOT/dbuswrapper-1.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/genivi/basetypes-model/1.0-SNAPSHOT/basetypes-model-1.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.common/2.8.0.v20130125-0546/org.eclipse.emf.common-2.8.0.v20130125-0546.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.ecore/2.8.3.v20130125-0546/org.eclipse.emf.ecore-2.8.3.v20130125-0546.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.ecore.xmi/2.8.1.v20130125-0546/org.eclipse.emf.ecore.xmi-2.8.1.v20130125-0546.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/genivi/trafficinfo/1.0-SNAPSHOT/trafficinfo-1.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/openlr/openlr-cli-sqlite-with-dependencies/1.2.2/openlr-cli-sqlite-with-dependencies-1.2.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/openlr/openlr-map/1.2.2/openlr-map-1.2.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/openlr/openlr-map-sqlite-with-dependencies/1.2.2/openlr-map-sqlite-with-dependencies-1.2.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/genivi/trafficinfo/dbus-java/1.0-SNAPSHOT/dbus-java-1.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/genivi/trafficinfo/libmatthew/1.0-SNAPSHOT/libmatthew-1.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/genivi/trafficincidentsservice/trafficincidentsservice-model/1.0-SNAPSHOT/trafficincidentsservice-model-1.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/genivi/booleanexpr-model/1.0-SNAPSHOT/booleanexpr-model-1.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/4.3.1/junit-4.3.1.jar" sourcepath="M2_REPO/junit/junit/4.3.1/junit-4.3.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/D:/maven_repository/repository/junit/junit/4.3.1/junit-4.3.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/genivi/trafficinfo/demo/1.0-SNAPSHOT/demo-1.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/genivi/iconset-model/1.0-SNAPSHOT/iconset-model-1.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/genivi/locref-model/1.0-SNAPSHOT/locref-model-1.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/genivi/trafficincidentsservice/trafficincidents/trafficincidents-trafficincident-model/1.0-SNAPSHOT/trafficincidents-trafficincident-model-1.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/genivi/trafficincidentsservice/trafficincidenttables-model/1.0-SNAPSHOT/trafficincidenttables-model-1.0-SNAPSHOT.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/genivi/trafficincidentsservice/trafficincidentfeed/trafficincidentfeed-trafficincident-model/1.0-SNAPSHOT/trafficincidentfeed-trafficincident-model-1.0-SNAPSHOT.jar"/>
+</classpath>

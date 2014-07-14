@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.genivi.trafficinfo.trafficincident;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.genivi.trafficincidentsservice.trafficincidents.trafficincident,
+ org.genivi.trafficincidentsservice.trafficincidents.trafficincident.impl,
+ org.genivi.trafficincidentsservice.trafficincidents.trafficincident.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.genivi.basetypes-model;visibility:=reexport,
+ org.genivi.trafficinfo.trafficincidenttables;resolution:=optional;visibility:=reexport
+Bundle-ActivationPolicy: lazy

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XML-Schema-instance" xmlns="http://maven.apache.org/POM/4.0"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.genivi.trafficinfo</groupId>
+  <artifactId>demo</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>GENIVI Demo Related Classes</name>
+  <description>This project contains general classes used for demo's.</description>
+  <parent>
+    <groupId>org.genivi.trafficinfo</groupId>
+    <artifactId>maven-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../org.genivi.trafficinfo.maven-parent</relativePath>
+  </parent>
+  <dependencies>
+  </dependencies>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+  </build>
+</project>

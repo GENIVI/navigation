@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+  <name>org.genivi.trafficincidentsservice.trafficincidentsservice-model</name>
+  <comment>This project contains the model which defines the API&apos;s of the Traffic Incidents Service. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
+  <projects>
+    <project>org.genivi.basetypes-model</project>
+    <project>org.genivi.booleanexpr-model</project>
+    <project>org.genivi.trafficinfo.demo</project>
+    <project>org.genivi.iconset-model</project>
+    <project>org.genivi.locref-model</project>
+    <project>org.genivi.trafficincidentsservice.trafficincidents.trafficincidents-trafficincident-model</project>
+    <project>org.genivi.trafficincidentsservice.trafficincidenttables-model</project>
+    <project>org.genivi.trafficincidentsservice.trafficincidentfeed.trafficincidentfeed-trafficincident-model</project>
+  </projects>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+    </buildCommand>
+    <buildCommand>
+      <name>org.eclipse.pde.ManifestBuilder</name>
+    </buildCommand>
+    <buildCommand>
+      <name>org.eclipse.pde.SchemaBuilder</name>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+    <nature>org.eclipse.pde.PluginNature</nature>
+  </natures>
+</projectDescription>

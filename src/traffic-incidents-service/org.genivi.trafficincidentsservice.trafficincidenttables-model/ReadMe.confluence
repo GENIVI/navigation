@@ -1,0 +1,3 @@
+This project defines the tables that are used in the Traffic Incident definitions of both the TrafficIncidents interface and the TrafficIncidentFeed interface.
+
+TrafficIncidentTables.ecorediag, in de model folder, provides a good overview of the tables.

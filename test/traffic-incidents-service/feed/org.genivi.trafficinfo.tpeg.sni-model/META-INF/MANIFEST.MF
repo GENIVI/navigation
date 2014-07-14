@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: org.genivi.trafficinfo.tpeg-sni-model;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.genivi.trafficinfo.tpeg.snitypes,
+ org.genivi.trafficinfo.tpeg.snitypes.impl,
+ org.genivi.trafficinfo.tpeg.snitypes.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.genivi.trafficinfo.tpegfwktypes-model;visibility:=reexport
+Bundle-ActivationPolicy: lazy

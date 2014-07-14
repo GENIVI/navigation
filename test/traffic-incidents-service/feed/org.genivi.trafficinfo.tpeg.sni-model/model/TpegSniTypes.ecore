@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="snitypes" nsURI="http://org.genivi.tpeg.snitypes" nsPrefix="snitypes">
+  <eAnnotations source="GenModel">
+    <details key="documentation" value="Copyright (C) 2013 TomTom International B.V.&#xD;&#xA;&#xD;&#xA;This Source Code Form is subject to the terms of the Mozilla Public&#xD;&#xA;License, v. 2.0. If a copy of the MPL was not distributed with this&#xD;&#xA;file, You can obtain one at http://mozilla.org/MPL/2.0/."/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="SniComponent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte"
+        unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Component identifier"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="n" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Length of component data in bytes."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SniComponentFastTuning" eSuperTypes="#//SniComponent">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="id = 0x01"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tableIncrementalVersionNumber"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="charTab" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte"
+        unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Character table identifier."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="linesOfTable1" upperBound="-1"
+        eType="#//LineOfTable1" unsettable="true" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LineOfTable1">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="serviceComponentId" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selector" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte" unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Component elements supplied"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="originatorServiceIdentifier"
+        eType="ecore:EClass ../../org.genivi.trafficinfo.tpegfwktypes-model/model/TpegFwkTypes.ecore#//ServiceIdentifier"
+        unsettable="true" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Present only, when different from Carrier ServiceID. Indicated by selector = xxxxxxx1."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contentId" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="applicationId" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operatingTime" eType="#//OperatingTime"
+        unsettable="true" containment="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Present if selector = xxxxx1xx."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="encryptionIndicator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte"
+        unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Present if selector = xxxx1xxx."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OperatingTime"/>
+</ecore:EPackage>

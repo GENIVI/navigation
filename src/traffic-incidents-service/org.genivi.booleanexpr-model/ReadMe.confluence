@@ -1,0 +1,6 @@
+This project defines a Boolean Expression.
+These expressions are used in the TrafficIncidents interface, but can also be used in other locations where hierarchical data is used.
+Detailed information can be found in the "GENIVI TrafficIncidentsService Component Specification".
+
+In the model folder, FilterExpr.ecore defines the Boolean Expressions. The Family.ecore model is only used for testing.
+FilterExpr.ecorediag provides a good overview of the structure of a Boolean Expression.

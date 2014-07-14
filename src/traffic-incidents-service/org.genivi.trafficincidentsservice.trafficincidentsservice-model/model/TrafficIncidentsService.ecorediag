@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_Dx65oY6nEeGD2upJ5SBM5Q" type="EcoreTools" name="TrafficIncidentsService.ecorediag" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_HEoAgI6nEeGD2upJ5SBM5Q" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_HExxgI6nEeGD2upJ5SBM5Q" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_HExxgY6nEeGD2upJ5SBM5Q" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_HExxgo6nEeGD2upJ5SBM5Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_HExxg46nEeGD2upJ5SBM5Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_HExxhI6nEeGD2upJ5SBM5Q"/>
+      <layoutConstraint xmi:type="notation:Ratio" xmi:id="_I1bPwI6nEeGD2upJ5SBM5Q" value="0.3"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_HExxhY6nEeGD2upJ5SBM5Q" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_IIcCYI6xEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/getVersion"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_IIcCYY6xEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_qePwII8NEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/getLanguage"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_qePwIY8NEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__K920I8NEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/setLanguage"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__K920Y8NEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_R7qZcB0bEeKnjbQ-hZZ19g" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/setTimeFormat"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_R7qZcR0bEeKnjbQ-hZZ19g"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_aGE2IB0bEeKnjbQ-hZZ19g" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/setDateFormat"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_aGE2IR0bEeKnjbQ-hZZ19g"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_f4FRAB0bEeKnjbQ-hZZ19g" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/setLengthUnit"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_f4FRAR0bEeKnjbQ-hZZ19g"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_EXhmUB3cEeKnjbQ-hZZ19g" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/setWeightUnit"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_EXhmUR3cEeKnjbQ-hZZ19g"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_lESlgBecEeK70NvnY3NN2A" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/getApplicability"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_lESlgRecEeK70NvnY3NN2A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_YVjpEBecEeK70NvnY3NN2A" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/setApplicability"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_YVjpERecEeK70NvnY3NN2A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Ttp78A37EeKQkNvsZzz0Dw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/reserveIconSetIds"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Ttp78Q37EeKQkNvsZzz0Dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_l0HLAA37EeKQkNvsZzz0Dw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/freeIconSetIds"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_l0HLAQ37EeKQkNvsZzz0Dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__IcWAA37EeKQkNvsZzz0Dw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/getIconSets"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__IcWAQ37EeKQkNvsZzz0Dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_oi998A37EeKQkNvsZzz0Dw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/addIconSetDefinitions"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_oi998Q37EeKQkNvsZzz0Dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_wltFUA37EeKQkNvsZzz0Dw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/removeIconSetDefinitions"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_wltFUQ37EeKQkNvsZzz0Dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_DPo04A38EeKQkNvsZzz0Dw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/getIconDefinitions"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_DPo04Q38EeKQkNvsZzz0Dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_dwLw0A37EeKQkNvsZzz0Dw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/addIconDefinitions"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_dwLw0Q37EeKQkNvsZzz0Dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uCUikA37EeKQkNvsZzz0Dw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/removeIconDefinitions"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uCUikQ37EeKQkNvsZzz0Dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_TCgQsA38EeKQkNvsZzz0Dw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/reserveCategoryIds"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_TCgQsQ38EeKQkNvsZzz0Dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_TBUvgA39EeKQkNvsZzz0Dw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/freeCategoryIds"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_TBUvgQ39EeKQkNvsZzz0Dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_-lKY8BIQEeK70NvnY3NN2A" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/getCategoryDefinitions"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-lKY8RIQEeK70NvnY3NN2A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_icaRQAM4EeKPy-s2XR1yyQ" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/addCategoryDefinitions"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_icaRQQM4EeKPy-s2XR1yyQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VywVUA39EeKQkNvsZzz0Dw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/removeCategoryDefinitions"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VywVUQ39EeKQkNvsZzz0Dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_4YDpII7MEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidentIds"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_4YDpIY7MEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_xCALII7YEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidentIdsInAreas"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_xCALIY7YEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_DHUOEI8CEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidents"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_DHUOEY8CEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_-8tfwI8KEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidentsFields"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-8tfwY8KEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_nr-HsI8LEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/getTexts"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_nr-HsY8LEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_69QmYOUnEeGfTpjeEoUARg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/addTrafficIncidentsStatusListener"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_69QmYeUnEeGfTpjeEoUARg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_9v2bwIyJEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/removeTrafficIncidentsStatusListener"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_9v2bwYyJEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_qbvxgOVLEeGfTpjeEoUARg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/addFeedInformationListener"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_qbvxgeVLEeGfTpjeEoUARg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_DgVzsIyKEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/removeFeedInformationListener"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_DgVzsYyKEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_gVIAgI8MEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/addUpdateListener"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_gVIAgY8MEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_2uoUsBOIEeK70NvnY3NN2A" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/removeUpdateListener"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_2uoUsROIEeK70NvnY3NN2A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Yz2K8I8NEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/addAreasUpdateListener"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Yz2K8Y8NEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_47spMBOIEeK70NvnY3NN2A" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidents/removeAreasUpdateListener"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_47spMROIEeK70NvnY3NN2A"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_HExxho6nEeGD2upJ5SBM5Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_HExxh46nEeGD2upJ5SBM5Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_HExxiI6nEeGD2upJ5SBM5Q"/>
+      <layoutConstraint xmi:type="notation:Ratio" xmi:id="_I1bPwY6nEeGD2upJ5SBM5Q" value="0.3"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_HEoAgY6nEeGD2upJ5SBM5Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="TrafficIncidentsService.ecore#//TrafficIncidents"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HEoAgo6nEeGD2upJ5SBM5Q" x="24" y="48"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_J6bI8I6nEeGD2upJ5SBM5Q" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_J6bI846nEeGD2upJ5SBM5Q" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_J6bI9I6nEeGD2upJ5SBM5Q" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_J6bI9Y6nEeGD2upJ5SBM5Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_J6bI9o6nEeGD2upJ5SBM5Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_J6bI946nEeGD2upJ5SBM5Q"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_J6bI-I6nEeGD2upJ5SBM5Q" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_hL9KMI6xEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getVersionReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_hL9KMY6xEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_wq6twI8NEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getLanguageReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_wq6twY8NEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_rmB1EIvYEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/setLanguageReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_rmB1EYvYEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_1GZYEIvYEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/setTimeFormatReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1GZYEYvYEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_9FBbgIvYEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/setDateFormatReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_9FBbgYvYEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_EDb_IIvZEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/setLengthUnitReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_EDb_IYvZEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_LgF98IvZEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/setWeightUnitReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LgF98YvZEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VCWpcC82EeKgHK0pLzUFog" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getApplicabilityReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VCWpcS82EeKgHK0pLzUFog"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Xggb0IvZEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/setApplicabilityReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Xggb0YvZEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_3CoTMA4AEeKQkNvsZzz0Dw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/reserveIconSetIdsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_3CoTMQ4AEeKQkNvsZzz0Dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_kQuwkIvaEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/freeIconSetIdsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_kQuwkYvaEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_l-qJ8A4CEeKQkNvsZzz0Dw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getIconSetsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_l-qJ8Q4CEeKQkNvsZzz0Dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_UaZ7oIvbEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/addIconSetDefinitionsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_UaZ7oYvbEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_diqgoIvbEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/removeIconSetDefinitionsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_diqgoYvbEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_LCr2QA4DEeKQkNvsZzz0Dw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getIconDefinitionsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LCr2QQ4DEeKQkNvsZzz0Dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__zErQIvaEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/addIconDefinitionsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__zErQYvaEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_MokXAIvbEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/removeIconDefinitionsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_MokXAYvbEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_92bNIA3-EeKQkNvsZzz0Dw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/reserveCategoryIdsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_92bNIQ3-EeKQkNvsZzz0Dw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uUS8sIvZEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/freeCategoryIdsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uUS8sYvZEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_KK0NcBIREeK70NvnY3NN2A" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getCategoryDefinitionsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_KK0NcRIREeK70NvnY3NN2A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_8Ewb4IvZEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/addCategoryDefinitionsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_8Ewb4YvZEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_GToDoIvaEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/removeCategoryDefinitionsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_GToDoYvaEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_K6MHkI7NEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getTrafficIncidentIdsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_K6MHkY7NEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_cdXM8I7ZEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getTrafficIncidentIdsInAreasReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_cdXM8Y7ZEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_jdrRYI8CEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getTrafficIncidentsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_jdrRYY8CEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_WKgcEI8LEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getTrafficIncidentsFieldsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_WKgcEY8LEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_MQWDkI8MEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getTextsReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_MQWDkY8MEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_t86UQIvVEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/addTrafficIncidentsStatusListenerReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_t86UQYvVEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_RKQmAIyKEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/removeTrafficIncidentsStatusListenerReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_RKQmAYyKEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_P9UekIvWEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/addFeedInformationListenerReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_P9UekYvWEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_KE_McIyKEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/removeFeedInformationListenerReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_KE_McYyKEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_tVzmEIvXEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/addUpdateListenerReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_tVzmEYvXEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ymFM4IvXEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/removeUpdateListenerReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ymFM4YvXEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_FHOM0IvYEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/addAreasUpdateListenerReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_FHOM0YvYEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_bScR0IvYEeKO9ueHrPKIyg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/removeAreasUpdateListenerReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_bScR0YvYEeKO9ueHrPKIyg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_OCH-cOUoEeGfTpjeEoUARg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/trafficIncidentsStatus"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_OCH-ceUoEeGfTpjeEoUARg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_vc9BkOVLEeGfTpjeEoUARg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/feedInformation"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_vc9BkeVLEeGfTpjeEoUARg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_o9XBoI8MEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/updates"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_o9XBoY8MEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_GTWrQI8NEeGD2upJ5SBM5Q" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener/updatesInAreas"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_GTWrQY8NEeGD2upJ5SBM5Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_J6bI-Y6nEeGD2upJ5SBM5Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_J6bI-o6nEeGD2upJ5SBM5Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_J6bI-46nEeGD2upJ5SBM5Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_J6bI8Y6nEeGD2upJ5SBM5Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="TrafficIncidentsService.ecore#//TrafficIncidentsListener"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_J6bI8o6nEeGD2upJ5SBM5Q" x="696" y="48"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_YxiwkI7bEeGD2upJ5SBM5Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_Yxiwk47bEeGD2upJ5SBM5Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_YxiwlI7bEeGD2upJ5SBM5Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_dfl0EI7bEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/TRAFFIC_INCIDENT_ID"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_dfl0EY7bEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_oMJdYI7bEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/EFFECT_CODE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_oMJdYY7bEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_qbMu4I7bEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/EFFECT_TEXT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_qbMu4Y7bEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_tN3q0I7bEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/START_TIME"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_tN3q0Y7bEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_wbgEcI7bEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/STOP_TIME"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_wbgEcY7bEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_yQB9II7bEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/TENDENCY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_yQB9IY7bEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_0hwvMI7bEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/TENDENCY_TEXT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_0hwvMY7bEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_4j2roI7bEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/LENGTH_AFFECTED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_4j2roY7bEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_6-YNUI7bEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/AVERAGE_SPEED_ABSOLUTE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_6-YNUY7bEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_A30s8I7cEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/DELAY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_A30s8Y7cEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_D7U6MI7cEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/SEGMENT_SPEED_LIMIT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_D7U6MY7cEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_eKEz0J-ZEeO2bPxtRJW0gw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/EXPECTED_SPEED_ABSOLUTE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_eKEz0Z-ZEeO2bPxtRJW0gw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_GyKkcI7cEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/CAUSES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_GyKkcY7cEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_JX3bYI7cEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/CAUSE_TEXTS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_JX3bYY7cEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_MP5YcI7cEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/APPLICABILITY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_MP5YcY7cEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Ovx7QI7cEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/APPLICABILITY_TEXTS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Ovx7QY7cEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_RVxtII7cEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/LOCATION"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_RVxtIY7cEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_TotZEI7cEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/LOCATION_INFO"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_TotZEY7cEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_WQWJsI7cEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/LOCATION_BOUNDING_BOX"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_WQWJsY7cEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_O2TtwDSjEeKmrrjF28z5iw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/ADVICES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_O2TtwTSjEeKmrrjF28z5iw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_SaipgDSjEeKmrrjF28z5iw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentField/ADVICE_TEXTS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_SaipgTSjEeKmrrjF28z5iw"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_YxiwlY7bEeGD2upJ5SBM5Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_Yxiwlo7bEeGD2upJ5SBM5Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_Yxiwl47bEeGD2upJ5SBM5Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_YxiwkY7bEeGD2upJ5SBM5Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentsService.ecore#//TrafficIncidentField"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Yxiwko7bEeGD2upJ5SBM5Q" x="12" y="684"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_8WJ3wI8LEeGD2upJ5SBM5Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_8WTBsI8LEeGD2upJ5SBM5Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_8WTBsY8LEeGD2upJ5SBM5Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_AkdEMI8MEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TextDetailLevel/FULL"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_AkdEMY8MEeGD2upJ5SBM5Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_DUb4gI8MEeGD2upJ5SBM5Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TextDetailLevel/SUMMARY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_DUb4gY8MEeGD2upJ5SBM5Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_8WTBso8LEeGD2upJ5SBM5Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_8WTBs48LEeGD2upJ5SBM5Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_8WTBtI8LEeGD2upJ5SBM5Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_8WJ3wY8LEeGD2upJ5SBM5Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentsService.ecore#//TextDetailLevel"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_8WJ3wo8LEeGD2upJ5SBM5Q" x="252" y="768"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_hIei0L6dEeG2bpJ885_B6A" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_hIoT0L6dEeG2bpJ885_B6A" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_hIoT0b6dEeG2bpJ885_B6A" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_hIoT0r6dEeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_hIoT076dEeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_hIoT1L6dEeG2bpJ885_B6A"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_hIoT1b6dEeG2bpJ885_B6A" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_QkzcscYSEeGWeNdmieJCCA" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentFeed/getVersion"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_QkzcssYSEeGWeNdmieJCCA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_k7mtAL7bEeG2bpJ885_B6A" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentFeed/getLanguage"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_k7mtAb7bEeG2bpJ885_B6A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_MNwv8OVLEeGfTpjeEoUARg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentFeed/registerFeed"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_MNwv8eVLEeGfTpjeEoUARg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_y3-9wL7aEeG2bpJ885_B6A" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentFeed/addLanguageListener"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_y3-9wb7aEeG2bpJ885_B6A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VTQIwNNkEeKmBL92HXjgQw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentFeed/removeLanguageListener"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VTQIwdNkEeKmBL92HXjgQw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uZyvcMYSEeGWeNdmieJCCA" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentFeed/clear"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uZyvccYSEeGWeNdmieJCCA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_pcXroL6dEeG2bpJ885_B6A" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentFeed/updateIncidents"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_pcXrob6dEeG2bpJ885_B6A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_1MId0OU-EeGfTpjeEoUARg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentFeed/updateStatus"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1MId0eU-EeGfTpjeEoUARg"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_hIoT1r6dEeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_hIoT176dEeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_hIoT2L6dEeG2bpJ885_B6A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_hIei0b6dEeG2bpJ885_B6A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="TrafficIncidentsService.ecore#//TrafficIncidentFeed"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hIei0r6dEeG2bpJ885_B6A" y="1068"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_in5VEMYaEeGWeNdmieJCCA" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_ioCfAMYaEeGWeNdmieJCCA" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_ioCfAcYaEeGWeNdmieJCCA" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_ioCfAsYaEeGWeNdmieJCCA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ioCfA8YaEeGWeNdmieJCCA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ioCfBMYaEeGWeNdmieJCCA"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_ioCfBcYaEeGWeNdmieJCCA" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_Qe3UZOUtEeGfTpjeEoUARg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentFeedListener/getVersionReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Qe3UZeUtEeGfTpjeEoUARg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Qe3UZuUtEeGfTpjeEoUARg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentFeedListener/getLanguageReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Qe3UZ-UtEeGfTpjeEoUARg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_eTykYOVPEeGfTpjeEoUARg" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentFeedListener/registerFeedReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_eTykYeVPEeGfTpjeEoUARg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_4D9nQNNnEeKmBL92HXjgQw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentFeedListener/addLanguageListenerReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_4D9nQdNnEeKmBL92HXjgQw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_6_u00NNnEeKmBL92HXjgQw" type="2002">
+        <element xmi:type="ecore:EOperation" href="TrafficIncidentsService.ecore#//TrafficIncidentFeedListener/removeLanguageListenerReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_6_u00dNnEeKmBL92HXjgQw"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_ioCfBsYaEeGWeNdmieJCCA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ioCfB8YaEeGWeNdmieJCCA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ioCfCMYaEeGWeNdmieJCCA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_in5VEcYaEeGWeNdmieJCCA" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="TrafficIncidentsService.ecore#//TrafficIncidentFeedListener"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_in5VEsYaEeGWeNdmieJCCA" x="600" y="1068"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_eaCk4eUkEeGfTpjeEoUARg" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_eaCk5OUkEeGfTpjeEoUARg" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_eaLu0OUkEeGfTpjeEoUARg" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_hYONQOUkEeGfTpjeEoUARg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentFeedStatus/UNAVAILABLE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_hYONQeUkEeGfTpjeEoUARg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_jT2McOUkEeGfTpjeEoUARg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentFeedStatus/CONNECTED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_jT2MceUkEeGfTpjeEoUARg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_kusZ0OUkEeGfTpjeEoUARg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentFeedStatus/DISCONNECTED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_kusZ0eUkEeGfTpjeEoUARg"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_eaLu0eUkEeGfTpjeEoUARg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_eaLu0uUkEeGfTpjeEoUARg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_eaLu0-UkEeGfTpjeEoUARg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_eaCk4uUkEeGfTpjeEoUARg" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentsService.ecore#//TrafficIncidentFeedStatus"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_eaCk4-UkEeGfTpjeEoUARg" x="420" y="768"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_-4TnAOUkEeGfTpjeEoUARg" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_-4TnA-UkEeGfTpjeEoUARg" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_-4TnBOUkEeGfTpjeEoUARg" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_JFZGEOUlEeGfTpjeEoUARg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentsStatus/UNAVAILABLE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_JFZGEeUlEeGfTpjeEoUARg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Lkm6gOUlEeGfTpjeEoUARg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentsStatus/PARTLY_AVAILABLE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Lkm6geUlEeGfTpjeEoUARg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ObDjMOUlEeGfTpjeEoUARg" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//TrafficIncidentsStatus/AVAILABLE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ObDjMeUlEeGfTpjeEoUARg"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_-4TnBeUkEeGfTpjeEoUARg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-4TnBuUkEeGfTpjeEoUARg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-4TnB-UkEeGfTpjeEoUARg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_-4TnAeUkEeGfTpjeEoUARg" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentsService.ecore#//TrafficIncidentsStatus"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-4TnAuUkEeGfTpjeEoUARg" x="600" y="768"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_wHdpEOVJEeGfTpjeEoUARg" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_wHwkAOVJEeGfTpjeEoUARg" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_wHwkAeVJEeGfTpjeEoUARg" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_zN-HAOVJEeGfTpjeEoUARg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="TrafficIncidentsService.ecore#//FeedInformation/dataProviderName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_zN-HAeVJEeGfTpjeEoUARg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_4NlboOVJEeGfTpjeEoUARg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="TrafficIncidentsService.ecore#//FeedInformation/protocolName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_4NlboeVJEeGfTpjeEoUARg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_9DCusOVJEeGfTpjeEoUARg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="TrafficIncidentsService.ecore#//FeedInformation/communicationChannelName"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_9DCuseVJEeGfTpjeEoUARg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_KVdnAOVKEeGfTpjeEoUARg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="TrafficIncidentsService.ecore#//FeedInformation/feedStatus"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_KVdnAeVKEeGfTpjeEoUARg"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_MAm6MOVKEeGfTpjeEoUARg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="TrafficIncidentsService.ecore#//FeedInformation/trafficIncidentsStatus"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_MAm6MeVKEeGfTpjeEoUARg"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_wHwkAuVJEeGfTpjeEoUARg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_wHwkA-VJEeGfTpjeEoUARg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_wHwkBOVJEeGfTpjeEoUARg"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_wHwkBeVJEeGfTpjeEoUARg" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_wHwkBuVJEeGfTpjeEoUARg"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_wHwkB-VJEeGfTpjeEoUARg"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_wHwkCOVJEeGfTpjeEoUARg"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_wHdpEeVJEeGfTpjeEoUARg" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="TrafficIncidentsService.ecore#//FeedInformation"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_wHdpEuVJEeGfTpjeEoUARg" x="252" y="912"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_6uuX4AMzEeKPy-s2XR1yyQ" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_6uuX4wMzEeKPy-s2XR1yyQ" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_6uuX5AMzEeKPy-s2XR1yyQ" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_AgPqkAM0EeKPy-s2XR1yyQ" type="2001">
+        <element xmi:type="ecore:EAttribute" href="TrafficIncidentsService.ecore#//CategoryDefinition/categoryId"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_AgPqkQM0EeKPy-s2XR1yyQ"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_mdis8FjCEeKlENJKsZWCJg" type="2001">
+        <element xmi:type="ecore:EAttribute" href="TrafficIncidentsService.ecore#//CategoryDefinition/expression"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_mdis8VjCEeKlENJKsZWCJg"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_6uuX5QMzEeKPy-s2XR1yyQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_6uuX5gMzEeKPy-s2XR1yyQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_6uuX5wMzEeKPy-s2XR1yyQ"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_6uuX6AMzEeKPy-s2XR1yyQ" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_6uuX6QMzEeKPy-s2XR1yyQ"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_6uuX6gMzEeKPy-s2XR1yyQ"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_6uuX6wMzEeKPy-s2XR1yyQ"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_6uuX4QMzEeKPy-s2XR1yyQ" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="TrafficIncidentsService.ecore#//CategoryDefinition"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6uuX4gMzEeKPy-s2XR1yyQ" x="804" y="792"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_CKQ9QB0bEeKnjbQ-hZZ19g" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_CKaHMB0bEeKnjbQ-hZZ19g" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_CKaHMR0bEeKnjbQ-hZZ19g" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_DkdDUB0bEeKnjbQ-hZZ19g" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//SpeedUnit/KILOMETERS_PER_HOUR"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_DkdDUR0bEeKnjbQ-hZZ19g"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_FJOBsB0bEeKnjbQ-hZZ19g" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//SpeedUnit/MILES_PER_HOUR"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_FJOBsR0bEeKnjbQ-hZZ19g"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_CKaHMh0bEeKnjbQ-hZZ19g"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_CKaHMx0bEeKnjbQ-hZZ19g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_CKaHNB0bEeKnjbQ-hZZ19g"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_CKQ9QR0bEeKnjbQ-hZZ19g" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentsService.ecore#//SpeedUnit"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CKQ9Qh0bEeKnjbQ-hZZ19g" x="996" y="744"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_ji9kEB3bEeKnjbQ-hZZ19g" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_ji9kEx3bEeKnjbQ-hZZ19g" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_ji9kFB3bEeKnjbQ-hZZ19g" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_nnctMB3bEeKnjbQ-hZZ19g" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//LengthUnit/KILOMETERS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_nnctMR3bEeKnjbQ-hZZ19g"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_tWkMIB3bEeKnjbQ-hZZ19g" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//LengthUnit/MILES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_tWkMIR3bEeKnjbQ-hZZ19g"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_ji9kFR3bEeKnjbQ-hZZ19g"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ji9kFh3bEeKnjbQ-hZZ19g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ji9kFx3bEeKnjbQ-hZZ19g"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_ji9kER3bEeKnjbQ-hZZ19g" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentsService.ecore#//LengthUnit"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ji9kEh3bEeKnjbQ-hZZ19g" x="252" y="672"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_lfdtAB3bEeKnjbQ-hZZ19g" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_lfdtAx3bEeKnjbQ-hZZ19g" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_lfdtBB3bEeKnjbQ-hZZ19g" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_21eWkB3bEeKnjbQ-hZZ19g" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//WeightUnit/KILOGRAM"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_21eWkR3bEeKnjbQ-hZZ19g"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_5MpCQB3bEeKnjbQ-hZZ19g" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentsService.ecore#//WeightUnit/POUND"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_5MpCQR3bEeKnjbQ-hZZ19g"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_lfdtBR3bEeKnjbQ-hZZ19g"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_lfdtBh3bEeKnjbQ-hZZ19g"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_lfdtBx3bEeKnjbQ-hZZ19g"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_lfdtAR3bEeKnjbQ-hZZ19g" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentsService.ecore#//WeightUnit"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lfdtAh3bEeKnjbQ-hZZ19g" x="420" y="672"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_Dx65oo6nEeGD2upJ5SBM5Q"/>
+  <element xmi:type="ecore:EPackage" href="TrafficIncidentsService.ecore#/"/>
+</notation:Diagram>

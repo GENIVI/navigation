@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    copyrightText="Copyright (C) 2013 TomTom International B.V.&#xD;&#xA;&#xD;&#xA;This Source Code Form is subject to the terms of the Mozilla Public&#xD;&#xA;License, v. 2.0. If a copy of the MPL was not distributed with this&#xD;&#xA;file, You can obtain one at http://mozilla.org/MPL/2.0/."
+    modelDirectory="/org.genivi.trafficincidentsservice.trafficincidenttables-model/src"
+    editDirectory="/org.genivi.trafficincidentsservice.trafficincidenttables-model.edit/src"
+    editorDirectory="/org.genivi.trafficincidentsservice.trafficincidenttables-model.editor/src"
+    modelPluginID="org.genivi.trafficinfo.trafficincidenttables" modelName="TrafficIncidentTables"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0" copyrightFields="false"
+    usedGenPackages="../../org.genivi.basetypes-model/model/Basetypes.genmodel#//genivi">
+  <foreignModel>TrafficIncidentTables.ecore</foreignModel>
+  <genPackages prefix="trafficincidenttables" basePackage="org.genivi.trafficincidentsservice"
+      disposableProviderFactory="true" ecorePackage="TrafficIncidentTables.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//EffectCode">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//EffectCode/TRAFFIC_FLOW_UNKNOWN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//EffectCode/FREE_TRAFFIC_FLOW"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//EffectCode/HEAVY_TRAFFIC"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//EffectCode/SLOW_TRAFFIC"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//EffectCode/QUEUING_TRAFFIC"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//EffectCode/STATIONARY_TRAFFIC"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//EffectCode/NO_TRAFFIC_FLOW"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//Tendency">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Tendency/SLIGHTLY_INCREASING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Tendency/INCREASING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Tendency/STRONGLY_INCREASING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Tendency/SLIGHTLY_DECREASING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Tendency/DECREASING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Tendency/STRONGLY_DECREASING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Tendency/CONSTANT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//CauseCode">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/TRAFFIC_CONGESTION"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/ACCIDENT"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/ROADWORKS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/NARROW_LANES"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/IMPASSIBILITY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/SLIPPERY_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/AQUAPLANING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/FIRE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/HAZARDOUS_DRIVING_CONDITIONS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/OBJECTS_ON_THE_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/ANIMALS_ON_ROADWAY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/PEOPLE_ON_ROADWAY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/BROKEN_DOWN_VEHICLES"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/VEHICLE_ON_WRONG_CARRIAGEWAY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/RESCUE_AND_RECOVERY_WORK_IN_PROGRESS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/REGULATORY_MEASURE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/EXTREME_WEATHER_CONDITIONS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/VISIBILITY_REDUCED"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/PRECIPITATION"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/RECKLESS_PERSONS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/OVER_HEIGHT_WARNING_SYSTEM_TRIGGERED"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/TRAFFIC_REGULATIONS_CHANGED"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/MAJOR_EVENT"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/SERVICE_NOT_OPERATING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/SERVICE_NOT_USEABLE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/SLOW_MOVING_VEHICLES"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/DANGEROUS_END_OF_QUEUE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/RISK_OF_FIRE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/TIME_DELAY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/POLICE_CHECKPOINT"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//CauseCode/MALFUNCTIONING_ROADSIDE_EQUIPMENT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//WarningLevel">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//WarningLevel/INFORMATIVE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//WarningLevel/DANGER_LEVEL_1"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//WarningLevel/DANGER_LEVEL_2"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//WarningLevel/DANGER_LEVEL_3"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//TrafficCongestion">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//TrafficCongestion/INCREASED_VOLUME_OF_TRAFFIC"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//Accident">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Accident/MULTI_VEHICLE_ACCIDENT"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Accident/HEAVY_ACCIDENT"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Accident/ACCIDENT_INVOLVING_LORRY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Accident/ACCIDENT_INVOLVING_BUS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Accident/ACCIDENT_INVOLVING_HAZARDOUS_MATERIALS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Accident/ACCIDENT_ON_OPPOSITE_LANE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Accident/UNSECURED_ACCIDENT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//RoadWorks">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RoadWorks/MAJOR_ROADWORKS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RoadWorks/ROAD_MARKING_WORK"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RoadWorks/SLOW_MOVING_ROAD_MAINTENANCE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//NarrowLanes">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//NarrowLanes/CONTRAFLOW"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//NarrowLanes/HARD_SHOULDER_CLOSED"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//NarrowLanes/SLIP_LANE_CLOSED"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//NarrowLanes/CRAWLER_LANE_CLOSED"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//Impassibility">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Impassibility/FLOODING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Impassibility/DANGER_OF_AVALANCHES"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Impassibility/BLASTING_OF_AVALANCHES"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Impassibility/LANDSLIPS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Impassibility/CHEMICAL_SPILLAGE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Impassibility/WINTER_CLOSURE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//SlipperyRoad">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlipperyRoad/HEAVY_FROST_ON_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlipperyRoad/FUEL_ON_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlipperyRoad/MUD_ON_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlipperyRoad/SNOW_ON_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlipperyRoad/ICE_ON_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlipperyRoad/BLACK_ICE_ON_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlipperyRoad/OIL_ON_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlipperyRoad/LOOSE_CHIPPINGS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlipperyRoad/INSTANT_BLACK_ICE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlipperyRoad/ROADS_SALTED"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//Fire">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Fire/MAJOR_FIRE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Fire/FOREST_FIRE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//HazardousDrivingConditions">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//HazardousDrivingConditions/ROCKFALLS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//HazardousDrivingConditions/EARTHQUAKE_DAMAGE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//HazardousDrivingConditions/SEWER_COLLAPSE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//HazardousDrivingConditions/SUBSIDENCE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//HazardousDrivingConditions/SNOW_DRIFTS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//HazardousDrivingConditions/STORM_DAMAGE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//HazardousDrivingConditions/BURST_PIPE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//HazardousDrivingConditions/VOLCANO_ERUPTION"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//HazardousDrivingConditions/FALLING_ICE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//ObjectsOnTheRoad">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ObjectsOnTheRoad/SHED_LOAD"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ObjectsOnTheRoad/PARTS_OF_VEHICLES"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ObjectsOnTheRoad/PARTS_OF_TYRES"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ObjectsOnTheRoad/BIG_OBJECTS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ObjectsOnTheRoad/FALLEN_TREES"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ObjectsOnTheRoad/HUB_CAPS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ObjectsOnTheRoad/WAITING_VEHICLES"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//AnimalsOnRoadway">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AnimalsOnRoadway/WILD_ANIMALS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AnimalsOnRoadway/HERD_OF_ANIMALS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AnimalsOnRoadway/SMALL_ANIMALS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AnimalsOnRoadway/LARGE_ANIMALS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//PeopleOnRoadway">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//PeopleOnRoadway/CHILDREN_ON_ROADWAY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//PeopleOnRoadway/CYCLISTS_ON_ROADWAY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//PeopleOnRoadway/MOTOR_CYCLIST_ON_ROADWAY"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//BrokenDownVehicles">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//BrokenDownVehicles/BROKEN_DOWN_VEHICLE_BURNING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//BrokenDownVehicles/BROKEN_DOWN_UNLIT_VEHICLE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//RescueAndRecoveryWorkInProgress">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RescueAndRecoveryWorkInProgress/EMERGENCY_VEHICLES"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RescueAndRecoveryWorkInProgress/RESCUE_HELICOPTER_LANDING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RescueAndRecoveryWorkInProgress/POLICE_ACTIVITY_ONGOING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RescueAndRecoveryWorkInProgress/MEDICAL_EMERGENCY_ONGOING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RescueAndRecoveryWorkInProgress/CHILD_ABDUCTION_IN_PROGRESS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//RegulatoryMeasure">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RegulatoryMeasure/SECURITY_ALERT"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RegulatoryMeasure/CONTAGIOUS_DISEASE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RegulatoryMeasure/ENVIRONMENTAL"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RegulatoryMeasure/SMOG_ALERT"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RegulatoryMeasure/BATCH_SERVICE_IN_PROGRESS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//LaneRestrictionType">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//LaneRestrictionType/LANES_CLOSED"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//LaneRestrictionType/LANES_OPEN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//LaneRestrictionType/RIGHT_LANES_CLOSED"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//LaneRestrictionType/LEFT_LANES_CLOSED"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//AdviceCode">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/DRIVE_TO_NEXT_AVAILABLE_PARKING_PLACE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/OVERTAKING_NOT_ALLOWED"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/DRIVING_NOT_ALLOWED"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/USE_HARD_SHOULDER_AS_LANE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/WAIT_FOR_POLICE_PATROL"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/WAIT_FOR_IMPROVED_WEATHER"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/GIVING_PATH_VEHICLES_COMING_FROM_BEHIND"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/FOLLOW_DIVERSION"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/NO_DIVERSION_TO_RECOMMEND"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/DO_NOT_DIVERT"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/FOLLOW_POLICE_INSTRUCTIONS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/AVOID_THE_AREA"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/DRIVE_CAREFULLY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/DO_NOT_LEAVE_YOUR_VEHICLE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/SWITCH_ON_RADIO"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/USE_TOLL_LANES"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//AdviceCode/WAIT_FOR_CONVOI"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//VehicleType">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VehicleType/CAR"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VehicleType/LORRY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VehicleType/BUS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VehicleType/TAXI"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VehicleType/TRAIN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VehicleType/MOTOR_CYCLE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VehicleType/VEHICLE_WITH_TRAILER"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VehicleType/MOTOR_VEHICLES"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VehicleType/TRANSPORT_OF_DANGEROUS_GOODS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VehicleType/TRANSPORT_OF_ABNORMAL_LOAD"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VehicleType/HEAVY_VEHICLE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//RestrictionType">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/WIDTH_LESS_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/WIDTH_GREATER_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/HEIGTH_LESS_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/HEIGTH_GREATER_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/WEIGHT_LESS_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/WEIGHT_GREATER_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/WITHOUT_WINTER_TYRE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/WITHOUT_SNOW_CHAIN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/WITH_TRAILER"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/WITH_CARAVAN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/PERSONS_IN_VEHICLE_LESS_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/PERSONS_IN_VEHICLE_MORE_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/EVEN_NUMBER_PLATE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/ODD_NUMBER_PLATE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/LENGTH_LESS_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/LENGTH_GREATER_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/AXLE_LOAD_LESS_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/AXLE_LOAD_GREATER_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/VEHICLE_FULFILLS_EMISSION_STANDARD_EURO3"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/VEHICLE_FULFILLS_EMISSION_STANDARD_EURO3D4"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/VEHICLE_FULFILLS_EMISSION_STANDARD_EURO4"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/VEHICLE_FULFILLS_EMISSION_STANDARD_EURO5"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/WITH_PETROL_ENGINE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/WITH_DIESEL_ENGINE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/WITH_LPG_ENGINE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/THROUGH_TRAFFIC"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/RESIDENTS_TRAFFIC"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RestrictionType/WITH_DESTINATION_IN_GIVEN_AREA"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//ExtremeWeatherConditions">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ExtremeWeatherConditions/STRONG_WINDS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ExtremeWeatherConditions/DAMAGING_HAIL"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ExtremeWeatherConditions/HURRICANE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ExtremeWeatherConditions/THUNDERSTORM"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ExtremeWeatherConditions/TORNADO"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ExtremeWeatherConditions/BLIZARD"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//VisibilityReduced">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_FOG"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_SMOKE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_HEAVY_SNOWFALL"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_HEAVY_RAIN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_HEAVY_HAIL"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_LOW_SUN_GLARE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_SANDSTORMS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_SWARMS_OF_INSECTS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//Precipitation">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Precipitation/HEAVY_RAIN"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Precipitation/HEAVY_SNOWFALL"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//Precipitation/SOFT_HAIL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//RecklessPersons">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RecklessPersons/RECKLESS_DRIVER"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RecklessPersons/GUNFIRE_ON_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RecklessPersons/STONE_THROWING_PERSONS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//MajorEvent">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//MajorEvent/SPORTS_EVENT"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//MajorEvent/DEMONSTRATION"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//MajorEvent/DEMONSTRATION_WITH_VEHICLES"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//MajorEvent/CONCERT"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//MajorEvent/FAIR"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//MajorEvent/MILITARY_TRAINING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//MajorEvent/EMERGENCY_TRAINING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//MajorEvent/FESTIVITY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//MajorEvent/PROCESSION"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//ServiceNotOperating">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ServiceNotOperating/FERRY_SERVICE_NOT_OPERATING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ServiceNotOperating/PLANE_SERVICE_NOT_OPERATING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ServiceNotOperating/TRAIN_SERVICE_NOT_OPERATING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ServiceNotOperating/BUS_SERVICE_NOT_OPERATING"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//ServiceNotUsable">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ServiceNotUsable/FUEL_STATION_CLOSED"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ServiceNotUsable/SERVICE_AREA_CLOSED"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ServiceNotUsable/SERVICE_AREA_BUSY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ServiceNotUsable/PARKING_FULL"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//ServiceNotUsable/CAR_PARK_CLOSED"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//SlowMovingVehicles">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlowMovingVehicles/SLOW_MOVING_MAINTENANCE_VEHICLE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlowMovingVehicles/VEHICLES_SLOWING_TO_LOOK_AT_ACCIDENT"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlowMovingVehicles/ABNORMAL_LOAD"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlowMovingVehicles/ABNORMAL_WIDE_LOAD"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlowMovingVehicles/CONVOY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlowMovingVehicles/SNOWPLOUGH"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlowMovingVehicles/DEICING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//SlowMovingVehicles/SALTING_VEHICLES"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//DangerousEndOfQueue">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//DangerousEndOfQueue/SUDDEN_END_OF_QUEUE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//DangerousEndOfQueue/QUEUE_OVER_HILL"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//DangerousEndOfQueue/QUEUE_AROUND_BEND"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//DangerousEndOfQueue/QUEUE_IN_TUNNEL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//RiskOfFire">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RiskOfFire/LEAKAGE_OF_FUEL"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//RiskOfFire/LEAKAGE_OF_GAS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//TimeDelay">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//TimeDelay/TIME_DELAY_AT_FRONTIER"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//TimeDelay/TIME_DELAY_AT_FERRY_PORT"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//TimeDelay/TIME_DELAY_AT_VEHICLE_ON_RAIL_TERMINAL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//PoliceCheckpoint">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//PoliceCheckpoint/PERMANENT_POLICE_CHECKPOINT"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//PoliceCheckpoint/TEMPORARY_POLICE_CHECKPOINT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//MalfunctioningRoadsideEquipment">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//MalfunctioningRoadsideEquipment/ROAD_RAIL_CROSSING_FAILURE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//MalfunctioningRoadsideEquipment/TUNNEL_VENTILATION_NOT_WORKING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//MalfunctioningRoadsideEquipment/TRAFFIC_CONTROL_SIGNALS_WORKING_INCORRECTLY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//MalfunctioningRoadsideEquipment/EMERGENCY_TELEPHONES_NOT_WORKING"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//MalfunctioningRoadsideEquipment/AUTOMATIC_PAYMENT_LANES_NOT_WORKING"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//OvertakingNotAllowed">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//OvertakingNotAllowed/DO_NOT_USE_OVERTAKING_LANES"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//OvertakingNotAllowed/OVERTAKING_NOT_ALLOWED_DRIVE_ON_CRAWLER_LANE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//OvertakingNotAllowed/OVERTAKING_NOT_ALLOWED_DRIVE_ON_LEFT_MOST_LANE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//OvertakingNotAllowed/OVERTAKING_NOT_ALLOWED_DRIVE_ON_RIGHT_MOST_LANE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//DrivingNotAllowed">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//DrivingNotAllowed/DRIVING_NOT_ALLOWED_TAKE_NEXT_POSSIBLE_PLACE_TO_STOP_VEHICLE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//GivingPathVehiclesFromBehind">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//GivingPathVehiclesFromBehind/GIVING_PATH_FOR_RESCUE_VEHICLE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//GivingPathVehiclesFromBehind/GIVING_PATH_FOR_SERVICE_VEHICLES"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//FollowDiversion">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//FollowDiversion/FOLLOW_DIVERSION_SIGNS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//DriveCarefully">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//DriveCarefully/DRIVE_CAREFULLY_DANGEROUS_SITUATION_ON_ENTRY_SLIP_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//DriveCarefully/DRIVE_CAREFULLY_DANGEROUS_SITUATION_ON_EXIT_SLIP_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//DriveCarefully/DRIVE_CAREFULLY_ICE_BUILDUP_ON_CABLE_STRUCTURE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//DoNotLeaveYourVehicle">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//DoNotLeaveYourVehicle/DO_NOT_LEAVE_YOUR_VEHICLE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//DoNotLeaveYourVehicle/DO_NOT_LEAVE_YOUR_VEHICLE_CLOSE_WINDOWS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentTables.ecore#//UseTollLanes">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//UseTollLanes/USE_MANUAL_PAYMENT_TOLL_LANES"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentTables.ecore#//UseTollLanes/USE_AUTOMATIC_PAYMENT_TOLL_LANES"/>
+    </genEnums>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,1 @@
+This project contains a class to start the WarningClient from org.genivi.trafficinfo.trafficincidentsexampleclients on top of a D-Bus proxy.

@@ -1,0 +1,3 @@
+This project defines the TrafficIncident data model as used in the TrafficIncidents interface.
+
+TrafficIncident.ecorediag, in de model folder, provides a good overview of the structure of a TrafficIncident.

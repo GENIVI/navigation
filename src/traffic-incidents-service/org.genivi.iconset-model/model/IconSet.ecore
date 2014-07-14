@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="iconset" nsURI="http://org.genivi.iconset" nsPrefix="iconset">
+  <eAnnotations source="GenModel">
+    <details key="documentation" value="Copyright (C) 2013 TomTom International B.V.&#xD;&#xA;&#xD;&#xA;This Source Code Form is subject to the terms of the Mozilla Public&#xD;&#xA;License, v. 2.0. If a copy of the MPL was not distributed with this&#xD;&#xA;file, You can obtain one at http://mozilla.org/MPL/2.0/."/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="IconSet">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="iconSetId" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="colorType" lowerBound="1"
+        eType="#//ColorType" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dimension" eType="#//IconDimension"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="size" lowerBound="1" eType="#//IconSize"
+        unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dayTimeIcon" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="themeId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mediumType" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iconDescriptors" upperBound="-1"
+        eType="#//IconDescriptor" unsettable="true" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ColorType">
+    <eLiterals name="BLACK_AND_WHITE" value="1"/>
+    <eLiterals name="GRAY_4" value="2"/>
+    <eLiterals name="GRAY_8" value="3"/>
+    <eLiterals name="RGB555" value="4"/>
+    <eLiterals name="RGB565" value="5"/>
+    <eLiterals name="RGB888" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="IconDimension">
+    <eLiterals name="D_2D" value="1"/>
+    <eLiterals name="D_2_5D" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IconSize">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="width" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="height" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dpi" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IconDescriptor">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="url" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="iconId" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IconData">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="data" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByteArray"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IconInfo">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="iconSetId" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="iconId" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IconDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iconInfo" lowerBound="1"
+        eType="#//IconInfo" unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iconData" lowerBound="1"
+        eType="#//IconData" unsettable="true" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

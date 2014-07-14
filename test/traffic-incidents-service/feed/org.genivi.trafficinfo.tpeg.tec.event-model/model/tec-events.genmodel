@@ -1,0 +1,405 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (C) 2013 TomTom International B.V.&#xD;&#xA;&#xD;&#xA;This Source Code Form is subject to the terms of the Mozilla Public&#xD;&#xA;License, v. 2.0. If a copy of the MPL was not distributed with this&#xD;&#xA;file, You can obtain one at http://mozilla.org/MPL/2.0/."
+    modelDirectory="/org.genivi.trafficinfo.tpeg.tec.event-model/src" modelPluginID="tec-model"
+    modelName="Tec-events" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false" usedGenPackages="../../org.genivi.trafficinfo.tpegfwktypes-model/model/TpegFwkTypes.genmodel#//tpegfwktypes">
+  <foreignModel>tec-events.ecore</foreignModel>
+  <genPackages prefix="Event" basePackage="org.genivi.trafficinfo.tpeg.tec" disposableProviderFactory="true"
+      ecorePackage="tec-events.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//EffectCode">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//EffectCode/TRAFFIC_FLOW_UNKNOWN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//EffectCode/FREE_TRAFFIC_FLOW"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//EffectCode/HEAVY_TRAFFIC"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//EffectCode/SLOW_TRAFFIC"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//EffectCode/QUEUING_TRAFFIC"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//EffectCode/STATIONARY_TRAFFIC"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//EffectCode/NO_TRAFFIC_FLOW"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//Tendency">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Tendency/SLIGHTLY_INCREASING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Tendency/INCREASING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Tendency/STRONGLY_INCREASING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Tendency/SLIGHTLY_DECREASING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Tendency/DECREASING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Tendency/STRONGLY_DECREASING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Tendency/CONSTANT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//CauseCode">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/TRAFFIC_CONGESTION"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/ACCIDENT"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/ROADWORKS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/NARROW_LANES"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/IMPASSIBILITY"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/SLIPPERY_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/AQUAPLANING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/FIRE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/HAZARDOUS_DRIVING_CONDITIONS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/OBJECTS_ON_THE_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/ANIMALS_ON_ROADWAY"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/PEOPLE_ON_ROADWAY"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/BROKEN_DOWN_VEHICLES"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/VEHICLE_ON_WRONG_CARRIAGEWAY"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/RESCUE_AND_RECOVERY_WORK_IN_PROGRESS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/REGULATORY_MEASURE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/EXTREME_WEATHER_CONDITIONS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/VISIBILITY_REDUCED"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/PRECIPITATION"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/RECKLESS_PERSONS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/OVER_HEIGHT_WARNING_SYSTEM_TRIGGERED"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/TRAFFIC_REGULATIONS_CHANGED"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/MAJOR_EVENT"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/SERVICE_NOT_OPERATING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/SERVICE_NOT_USEABLE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/SLOW_MOVING_VEHICLES"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/DANGEROUS_END_OF_QUEUE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/RISK_OF_FIRE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/TIME_DELAY"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/POLICE_CHECKPOINT"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/MALFUNCTIONING_ROADSIDE_EQUIPMENT"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/TEST_MESSAGE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//CauseCode/UNDECODABLE_CAUSE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//WarningLevel">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//WarningLevel/INFORMATIVE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//WarningLevel/DANGER_LEVEL_1"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//WarningLevel/DANGER_LEVEL_2"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//WarningLevel/DANGER_LEVEL_3"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//TrafficCongestion">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//TrafficCongestion/INCREASED_VOLUME_OF_TRAFFIC"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//Accident">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Accident/MULTI_VEHICLE_ACCIDENT"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Accident/HEAVY_ACCIDENT"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Accident/ACCIDENT_INVOLVING_LORRY"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Accident/ACCIDENT_INVOLVING_BUS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Accident/ACCIDENT_INVOLVING_HAZARDOUS_MATERIALS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Accident/ACCIDENT_ON_OPPOSITE_LANE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Accident/UNSECURED_ACCIDENT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//RoadWorks">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RoadWorks/MAJOR_ROADWORKS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RoadWorks/ROAD_MARKING_WORK"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RoadWorks/SLOW_MOVING_ROAD_MAINTENANCE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//NarrowLanes">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//NarrowLanes/CONTRAFLOW"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//NarrowLanes/HARD_SHOULDER_CLOSED"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//NarrowLanes/SLIP_LANE_CLOSED"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//NarrowLanes/CRAWLER_LANE_CLOSED"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//Impassibility">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Impassibility/FLOODING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Impassibility/DANGER_OF_AVALANCHES"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Impassibility/BLASTING_OF_AVALANCHES"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Impassibility/LANDSLIPS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Impassibility/CHEMICAL_SPILLAGE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Impassibility/WINTER_CLOSURE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//SlipperyRoad">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlipperyRoad/HEAVY_FROST_ON_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlipperyRoad/FUEL_ON_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlipperyRoad/MUD_ON_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlipperyRoad/SNOW_ON_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlipperyRoad/ICE_ON_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlipperyRoad/BLACK_ICE_ON_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlipperyRoad/OIL_ON_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlipperyRoad/LOOSE_CHIPPINGS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlipperyRoad/INSTANT_BLACK_ICE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlipperyRoad/ROADS_SALTED"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//Fire">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Fire/MAJOR_FIRE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Fire/FOREST_FIRE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//HazardousDrivingConditions">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//HazardousDrivingConditions/ROCKFALLS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//HazardousDrivingConditions/EARTHQUAKE_DAMAGE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//HazardousDrivingConditions/SEWER_COLLAPSE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//HazardousDrivingConditions/SUBSIDENCE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//HazardousDrivingConditions/SNOW_DRIFTS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//HazardousDrivingConditions/STORM_DAMAGE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//HazardousDrivingConditions/BURST_PIPE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//HazardousDrivingConditions/VOLCANO_ERUPTION"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//HazardousDrivingConditions/FALLING_ICE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//ObjectsOnTheRoad">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ObjectsOnTheRoad/SHED_LOAD"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ObjectsOnTheRoad/PARTS_OF_VEHICLES"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ObjectsOnTheRoad/PARTS_OF_TYRES"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ObjectsOnTheRoad/BIG_OBJECTS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ObjectsOnTheRoad/FALLEN_TREES"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ObjectsOnTheRoad/HUB_CAPS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ObjectsOnTheRoad/WAITING_VEHICLES"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//AnimalsOnRoadway">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AnimalsOnRoadway/WILD_ANIMALS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AnimalsOnRoadway/HERD_OF_ANIMALS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AnimalsOnRoadway/SMALL_ANIMALS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AnimalsOnRoadway/LARGE_ANIMALS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//PeopleOnRoadway">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//PeopleOnRoadway/CHILDREN_ON_ROADWAY"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//PeopleOnRoadway/CYCLISTS_ON_ROADWAY"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//PeopleOnRoadway/MOTOR_CYCLIST_ON_ROADWAY"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//BrokenDownVehicles">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//BrokenDownVehicles/BROKEN_DOWN_VEHICLE_BURNING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//BrokenDownVehicles/BROKEN_DOWN_UNLIT_VEHICLE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//RescueAndRecoveryWorkInProgress">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RescueAndRecoveryWorkInProgress/EMERGENCY_VEHICLES"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RescueAndRecoveryWorkInProgress/RESCUE_HELICOPTER_LANDING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RescueAndRecoveryWorkInProgress/POLICE_ACTIVITY_ONGOING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RescueAndRecoveryWorkInProgress/MEDICAL_EMERGENCY_ONGOING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RescueAndRecoveryWorkInProgress/CHILD_ABDUCTION_IN_PROGRESS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//RegulatoryMeasure">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RegulatoryMeasure/SECURITY_ALERT"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RegulatoryMeasure/CONTAGIOUS_DISEASE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RegulatoryMeasure/ENVIRONMENTAL"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RegulatoryMeasure/SMOG_ALERT"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RegulatoryMeasure/BATCH_SERVICE_IN_PROGRESS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RegulatoryMeasure/ROAD_CLOSED_BY_THE_REGULATORY_AUTHORITIES"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//LaneRestrictionType">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//LaneRestrictionType/LANES_CLOSED"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//LaneRestrictionType/LANES_OPEN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//LaneRestrictionType/RIGHT_LANES_CLOSED"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//LaneRestrictionType/LEFT_LANES_CLOSED"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//AdviceCode">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/DRIVE_TO_NEXT_AVAILABLE_PARKING_PLACE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/OVERTAKING_NOT_ALLOWED"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/DRIVING_NOT_ALLOWED"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/USE_HARD_SHOULDER_AS_LANE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/WAIT_FOR_POLICE_PATROL"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/WAIT_FOR_IMPROVED_WEATHER"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/GIVING_PATH_VEHICLES_COMING_FROM_BEHIND"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/FOLLOW_DIVERSION"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/NO_DIVERSION_TO_RECOMMEND"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/DO_NOT_DIVERT"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/FOLLOW_POLICE_INSTRUCTIONS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/AVOID_THE_AREA"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/DRIVE_CAREFULLY"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/DO_NOT_LEAVE_YOUR_VEHICLE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/SWITCH_ON_RADIO"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/USE_TOLL_LANES"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/WAIT_FOR_CONVOI"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//AdviceCode/UNDECODABLE_ADVICE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//VehicleType">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VehicleType/CAR"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VehicleType/LORRY"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VehicleType/BUS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VehicleType/TAXI"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VehicleType/TRAIN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VehicleType/MOTOR_CYCLE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VehicleType/VEHICLE_WITH_TRAILER"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VehicleType/MOTOR_VEHICLES"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VehicleType/HEAVY_VEHICLE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VehicleType/TRANSPORT_OF_DANGEROUS_GOODS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VehicleType/TRANSPORT_OF_ABNORMAL_LOAD"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VehicleType/UNDECODABLE_VEHICLE_TYPE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//RestrictionType">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/WIDTH_LESS_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/WIDTH_GREATER_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/HEIGTH_LESS_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/HEIGTH_GREATER_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/WEIGHT_LESS_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/WEIGHT_GREATER_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/WITHOUT_WINTER_TYRE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/WITHOUT_SNOW_CHAIN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/WITH_TRAILER"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/WITH_CARAVAN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/PERSONS_IN_VEHICLE_LESS_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/PERSONS_IN_VEHICLE_MORE_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/EVEN_NUMBER_PLATE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/ODD_NUMBER_PLATE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/LENGTH_LESS_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/LENGTH_GREATER_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/AXLE_LOAD_LESS_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/AXLE_LOAD_GREATER_THAN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/VEHICLE_FULFILLS_EMMISSION_STANDARD_EURO3"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/VEHICLE_FULFILLS_EMMISSION_STANDARD_EURO3D4"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/VEHICLE_FULFILLS_EMMISSION_STANDARD_EURO4"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/VEHICLE_FULFILLS_EMMISSION_STANDARD_EURO5"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/WITH_PETROL_ENGINE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/WITH_LPG_ENGINE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/WITH_DIESEL_ENGINE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/THROUGH_TRAFFIC"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/RESIDENTS_TRAFFIC"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/WITH_DESTINATION_IN_GIVEN_AREA"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RestrictionType/UNDECODABLE_RESTRICTION"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//ExtremeWeatherConditions">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ExtremeWeatherConditions/STRONG_WINDS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ExtremeWeatherConditions/DAMAGING_HAIL"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ExtremeWeatherConditions/HURRICANE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ExtremeWeatherConditions/THUNDERSTORM"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ExtremeWeatherConditions/TORNADO"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ExtremeWeatherConditions/BLIZARD"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//VisibilityReduced">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_FOG"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_SMOKE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_HEAVY_SNOWFALL"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_HEAVY_RAIN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_HEAVY_HAIL"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_LOW_SUN_GLARE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_SANDSTORMS"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_SWARMS_OF_INSECTS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//Precipitation">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Precipitation/HEAVY_RAIN"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Precipitation/HEAVY_SNOWFALL"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//Precipitation/SOFT_HAIL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//RecklessPersons">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RecklessPersons/RECKLESS_DRIVER"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RecklessPersons/GUNFIRE_ON_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RecklessPersons/STONE_THROWING_PERSONS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//MajorEvent">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//MajorEvent/SPORTS_EVENT"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//MajorEvent/DEMONSTRATION"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//MajorEvent/DEMONSTRATION_WITH_VEHICLES"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//MajorEvent/CONCERT"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//MajorEvent/FAIR"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//MajorEvent/MILITARY_TRAINING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//MajorEvent/EMERGENCY_TRAINING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//MajorEvent/FESTIVITY"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//MajorEvent/PROCESSION"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//ServiceNotOperating">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ServiceNotOperating/FERRY_SERVICE_NOT_OPERATING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ServiceNotOperating/PLANE_SERVICE_NOT_OPERATING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ServiceNotOperating/TRAIN_SERVICE_NOT_OPERATING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ServiceNotOperating/BUS_SERVICE_NOT_OPERATING"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//ServiceNotUsable">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ServiceNotUsable/FUEL_STATION_CLOSED"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ServiceNotUsable/SERVICE_AREA_CLOSED"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ServiceNotUsable/SERVICE_AREA_BUSY"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ServiceNotUsable/PARKING_FULL"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//ServiceNotUsable/CAR_PARK_CLOSED"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//SlowMovingVehicles">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlowMovingVehicles/SLOW_MOVING_MAINTENANCE_VEHICLE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlowMovingVehicles/VEHICLES_SLOWING_TO_LOOK_AT_ACCIDENT"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlowMovingVehicles/ABNORMAL_LOAD"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlowMovingVehicles/ABNORMAL_WIDE_LOAD"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlowMovingVehicles/CONVOY"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlowMovingVehicles/SNOWPLOUGH"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlowMovingVehicles/DEICING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//SlowMovingVehicles/SALTING_VEHICLES"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//DangerousEndOfQueue">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//DangerousEndOfQueue/SUDDEN_END_OF_QUEUE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//DangerousEndOfQueue/QUEUE_OVER_HILL"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//DangerousEndOfQueue/QUEUE_AROUND_BEND"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//DangerousEndOfQueue/QUEUE_IN_TUNNEL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//RiskOfFire">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RiskOfFire/LEAKAGE_OF_FUEL"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//RiskOfFire/LEAKAGE_OF_GAS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//TimeDelay">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//TimeDelay/TIME_DELAY_AT_FRONTIER"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//TimeDelay/TIME_DELAY_AT_FERRY_PORT"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//TimeDelay/TIME_DELAY_AT_VEHICLE_ON_RAIL_TERMINAL"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//PoliceCheckpoint">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//PoliceCheckpoint/PERMANENT_POLICE_CHECKPOINT"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//PoliceCheckpoint/TEMPORARY_POLICE_CHECKPOINT"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//MalfunctioningRoadsideEquipment">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//MalfunctioningRoadsideEquipment/ROAD_RAIL_CROSSING_FAILURE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//MalfunctioningRoadsideEquipment/TUNNEL_VENTILATION_NOT_WORKING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//MalfunctioningRoadsideEquipment/TRAFFIC_CONTROL_SIGNALS_WORKING_INCORRECTLY"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//MalfunctioningRoadsideEquipment/EMERGENCY_TELEPHONES_NOT_WORKING"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//MalfunctioningRoadsideEquipment/AUTOMATIC_PAYMENT_LANES_NOT_WORKING"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//OvertakingNotAllowed">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//OvertakingNotAllowed/DO_NOT_USE_OVERTAKING_LANES"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//OvertakingNotAllowed/OVERTAKING_NOT_ALLOWED_DRIVE_ON_CRAWLER_LANE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//OvertakingNotAllowed/OVERTAKING_NOT_ALLOWED_DRIVE_ON_LEFT_MOST_LANE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//OvertakingNotAllowed/OVERTAKING_NOT_ALLOWED_DRIVE_ON_RIGHT_MOST_LANE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//DrivingNotAllowed">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//DrivingNotAllowed/DRIVING_NOT_ALLOWED_TAKE_NEXT_POSSIBLE_PLACE_TO_STOP_VEHICLE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//GivingPathVehiclesFromBehind">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//GivingPathVehiclesFromBehind/GIVING_PATH_FOR_RESCUE_VEHICLE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//GivingPathVehiclesFromBehind/GIVING_PATH_FOR_SERVICE_VEHICLES"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//FollowDiversion">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//FollowDiversion/FOLLOW_DIVERSION_SIGNS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//DriveCarefully">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//DriveCarefully/DRIVE_CAREFULLY_DANGEROUS_SITUATION_ON_ENTRY_SLIP_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//DriveCarefully/DRIVE_CAREFULLY_DANGEROUS_SITUATION_ON_EXIT_SLIP_ROAD"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//DriveCarefully/DRIVE_CAREFULLY_ICE_BUILDUP_ON_CABLE_STRUCTURE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//DoNotLeaveYourVehicle">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//DoNotLeaveYourVehicle/DO_NOT_LEAVE_YOUR_VEHICLE"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//DoNotLeaveYourVehicle/DO_NOT_LEAVE_YOUR_VEHICLE_CLOSE_WINDOWS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="tec-events.ecore#//UseTollLanes">
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//UseTollLanes/USE_MANUAL_PAYMENT_TOLL_LANES"/>
+      <genEnumLiterals ecoreEnumLiteral="tec-events.ecore#//UseTollLanes/USE_AUTOMATIC_PAYMENT_TOLL_LANES"/>
+    </genEnums>
+    <genClasses ecoreClass="tec-events.ecore#//Event">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//Event/effectCode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//Event/startTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//Event/stopTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//Event/tendency"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//Event/lengthAffected"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//Event/averageSpeedAbsolute"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//Event/delay"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//Event/segmentSpeedLimit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tec-events.ecore#//Event/cause"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tec-events.ecore#//Event/advice"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tec-events.ecore#//Event/vehicleRestriction"/>
+    </genClasses>
+    <genClasses ecoreClass="tec-events.ecore#//Cause">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//Cause/mainCause"/>
+    </genClasses>
+    <genClasses ecoreClass="tec-events.ecore#//LinkedCause">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//LinkedCause/linkedMessage"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//LinkedCause/COID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EReference tec-events.ecore#//LinkedCause/originatorSID"/>
+    </genClasses>
+    <genClasses ecoreClass="tec-events.ecore#//DirectCause">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//DirectCause/warningLevel"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//DirectCause/unverifiedInformation"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//DirectCause/subCause"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//DirectCause/lengthAffected"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//DirectCause/laneRestrictionType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//DirectCause/numberOfLanes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tec-events.ecore#//DirectCause/freeText"/>
+    </genClasses>
+    <genClasses ecoreClass="tec-events.ecore#//Advice">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//Advice/adviceCode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//Advice/subAdviceCode"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tec-events.ecore#//Advice/freeText"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tec-events.ecore#//Advice/vehicleRestriction"/>
+    </genClasses>
+    <genClasses ecoreClass="tec-events.ecore#//VehicleRestriction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//VehicleRestriction/vehicleType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tec-events.ecore#//VehicleRestriction/restriction"/>
+    </genClasses>
+    <genClasses ecoreClass="tec-events.ecore#//VehicleRelatedRestriction">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//VehicleRelatedRestriction/restrictionType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tec-events.ecore#//VehicleRelatedRestriction/restrictionValue"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tec-events.ecore#//VehicleRelatedRestriction/restrictionLocation"/>
+    </genClasses>
+    <genClasses ecoreClass="tec-events.ecore#//TECMessage">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tec-events.ecore#//TECMessage/mmt"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tec-events.ecore#//TECMessage/event"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference tec-events.ecore#//TECMessage/loc"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

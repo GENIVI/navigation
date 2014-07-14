@@ -1,0 +1,4 @@
+This project defines an interface for decoding Location References.
+Currently this is an internal interface within the TrafficIncidentsService. However, in the future, they may be a separate component for decoding Location References (as part of Map Data Access).
+
+LocationReference.ecorediag, in de model folder, provides an overview of the interface.

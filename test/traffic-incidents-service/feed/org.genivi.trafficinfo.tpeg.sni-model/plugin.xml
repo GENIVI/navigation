@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://org.genivi.tpeg.snitypes"
+            class="org.genivi.trafficinfo.tpeg.snitypes.SnitypesPackage"
+            genModel="model/TpegSniTypes.genmodel"/>
+   </extension>
+
+</plugin>

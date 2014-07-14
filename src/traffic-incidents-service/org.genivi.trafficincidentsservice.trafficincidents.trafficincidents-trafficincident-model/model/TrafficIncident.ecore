@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="trafficincident" nsURI="http://org.genivi.trafficinfo" nsPrefix="TrafficIncident">
+  <eAnnotations source="GenModel">
+    <details key="documentation" value="Copyright (C) 2013 TomTom International B.V.&#xD;&#xA;&#xD;&#xA;This Source Code Form is subject to the terms of the Mozilla Public&#xD;&#xA;License, v. 2.0. If a copy of the MPL was not distributed with this&#xD;&#xA;file, You can obtain one at http://mozilla.org/MPL/2.0/."/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="TrafficIncident">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="See http://vos.intra.local/display/GENIVI/GENIVI+Traffic+Information+-+Traffic+Incident+Definition for definitions of the meanings of the attributes."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="effectCode" lowerBound="1"
+        eType="ecore:EEnum ../../org.genivi.trafficincidentsservice.trafficincidenttables-model/model/TrafficIncidentTables.ecore#//EffectCode"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="effectText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stopTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tendency" eType="ecore:EEnum ../../org.genivi.trafficincidentsservice.trafficincidenttables-model/model/TrafficIncidentTables.ecore#//Tendency"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="tendencyText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lengthAffected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="averageSpeedAbsolute" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="delay" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="segmentSpeedLimit" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="causes" upperBound="-1"
+        eType="#//Cause" unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="location" lowerBound="1"
+        eType="ecore:EClass ../../org.genivi.basetypes-model/model/Basetypes.ecore#//location/Location"
+        unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="advices" upperBound="-1"
+        eType="#//Advice" unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="applicability" upperBound="-1"
+        eType="#//Applicability" unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="trafficIncidentId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="locationInfo" eType="ecore:EClass ../../org.genivi.basetypes-model/model/Basetypes.ecore#//location/LocationInfo"
+        unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="causeTexts" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="applicabilityTexts" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="adviceTexts" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="categoryIds" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="locationBoundingBox" lowerBound="1"
+        eType="ecore:EClass ../../org.genivi.basetypes-model/model/Basetypes.ecore#//common/RectangularArea"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expectedSpeedAbsolute"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="temporarySpeedLimit" upperBound="-1"
+        eType="#//TemporarySpeedLimit" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Cause">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainCause" eType="ecore:EEnum ../../org.genivi.trafficincidentsservice.trafficincidenttables-model/model/TrafficIncidentTables.ecore#//CauseCode"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LinkedCause" eSuperTypes="#//Cause">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="causeTrafficIncidentId"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="There can be a LinkedCause for which the linked TrafficIncident isn't available (to the application) yet. Therefore this atttibute is optional."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DirectCause" eSuperTypes="#//Cause">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="warningLevel" lowerBound="1"
+        eType="ecore:EEnum ../../org.genivi.trafficincidentsservice.trafficincidenttables-model/model/TrafficIncidentTables.ecore#//WarningLevel"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unverifiedInformation"
+        lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subCause" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
+        unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The actual value of this atttribute depends on the mainCause. So based on the mainCause it has to be cast to the related enum."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="lengthAffected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="laneRestrictions" eType="#//LaneRestrictions"
+        unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="freeText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="causeOffset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LaneRestrictions">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="laneRestrictionType" eType="ecore:EEnum ../../org.genivi.trafficincidentsservice.trafficincidenttables-model/model/TrafficIncidentTables.ecore#//LaneRestrictionType"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfLanes" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Advice">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="mainAdvice" eType="ecore:EEnum ../../org.genivi.trafficincidentsservice.trafficincidenttables-model/model/TrafficIncidentTables.ecore#//AdviceCode"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="subAdvice" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"
+        unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The actual value of this atttribute depends on the adviceCode. So based on the adviceCode it has to be cast to the related enum."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="applicability" upperBound="-1"
+        eType="#//Applicability" unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="freeText" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Applicability">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="vehicleType" eType="ecore:EEnum ../../org.genivi.trafficincidentsservice.trafficincidenttables-model/model/TrafficIncidentTables.ecore#//VehicleType"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="vehicleRelatedRestrictions"
+        upperBound="-1" eType="#//VehicleRelatedRestriction" unsettable="true" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VehicleRelatedRestriction">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="restrictionType" lowerBound="1"
+        eType="ecore:EEnum ../../org.genivi.trafficincidentsservice.trafficincidenttables-model/model/TrafficIncidentTables.ecore#//RestrictionType"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="restrictionValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="restrictionLocation" eType="ecore:EClass ../../org.genivi.basetypes-model/model/Basetypes.ecore#//location/Location"
+        unsettable="true" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TemporarySpeedLimit">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="temporarySpeedLimitSections"
+        lowerBound="1" upperBound="-1" eType="#//TemporarySpeedLimitSection" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unitsMPH" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="offset" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="applicability" upperBound="-1"
+        eType="#//Applicability" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TemporarySpeedLimitSection">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="speedLimitValue" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="speedLimitValueWet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="speedLimitLength" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EIntegerObject"
+        unsettable="true"/>
+  </eClassifiers>
+</ecore:EPackage>

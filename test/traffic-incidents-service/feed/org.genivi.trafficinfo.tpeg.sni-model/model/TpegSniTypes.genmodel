@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (C) 2013 TomTom International B.V.&#xD;&#xA;&#xD;&#xA;This Source Code Form is subject to the terms of the Mozilla Public&#xD;&#xA;License, v. 2.0. If a copy of the MPL was not distributed with this&#xD;&#xA;file, You can obtain one at http://mozilla.org/MPL/2.0/."
+    modelDirectory="/org.genivi.trafficinfo.tpeg.sni-model/src" editDirectory="/org.genivi.trafficinfo.tpeg.sni-model.edit/src"
+    editorDirectory="/org.genivi.trafficinfo.tpeg.sni-model.editor/src" modelPluginID="org.genivi.trafficinfo.tpeg-sni-model"
+    modelName="TpegSniTypes" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false" usedGenPackages="../../org.genivi.trafficinfo.tpegfwktypes-model/model/TpegFwkTypes.genmodel#//tpegfwktypes">
+  <foreignModel>TpegSniTypes.ecore</foreignModel>
+  <genPackages prefix="Snitypes" basePackage="org.genivi.trafficinfo.tpeg" disposableProviderFactory="true"
+      ecorePackage="TpegSniTypes.ecore#/">
+    <genClasses ecoreClass="TpegSniTypes.ecore#//SniComponent">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegSniTypes.ecore#//SniComponent/id"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegSniTypes.ecore#//SniComponent/n"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegSniTypes.ecore#//SniComponentFastTuning">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegSniTypes.ecore#//SniComponentFastTuning/tableIncrementalVersionNumber"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegSniTypes.ecore#//SniComponentFastTuning/charTab"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TpegSniTypes.ecore#//SniComponentFastTuning/linesOfTable1"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegSniTypes.ecore#//LineOfTable1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegSniTypes.ecore#//LineOfTable1/serviceComponentId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegSniTypes.ecore#//LineOfTable1/selector"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TpegSniTypes.ecore#//LineOfTable1/originatorServiceIdentifier"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegSniTypes.ecore#//LineOfTable1/contentId"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegSniTypes.ecore#//LineOfTable1/applicationId"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TpegSniTypes.ecore#//LineOfTable1/operatingTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegSniTypes.ecore#//LineOfTable1/encryptionIndicator"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegSniTypes.ecore#//OperatingTime"/>
+  </genPackages>
+</genmodel:GenModel>

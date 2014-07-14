@@ -1,0 +1,1108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="introspect.xsl"?>
+<!-- SPDX-License-Identifier: MPL-2.0
+     Copyright (C) 2014, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD., Neusoft Technology Solutions GmbH
+     This Source Code Form is subject to the terms of the
+     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="introspect.xsd" name="org.genivi.trafficincidentsservice.trafficincidents">
+  <interface name="TrafficIncidents">
+    <version>1.0.0 (06-03-2014)</version>
+    <method name="GetVersion">
+      <doc>
+        <line>getVersion = Get the API version of this interface implemented by the service.</line>
+      </doc>
+      <arg direction="out" name="version" type="(qqqs)">
+        <doc>
+          <line>version (of type Version) = The API version of this interface implemented by the service.</line>
+          <line>Version struct[major, minor, micro, date] = This datatype is used to provide version information.</line>
+          <line>Version.major ('q') = The major version number.</line>
+          <line>Version.minor ('q') = The minor version number.</line>
+          <line>Version.micro ('q') = The micro version number.</line>
+          <line>Version.date ('s') = The date of this version.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetLanguage">
+      <doc>
+        <line>getLanguage = Get the current language.</line>
+      </doc>
+      <arg direction="out" name="languageCode" type="s">
+        <doc>
+          <line>languageCode = The language, specified as ISO 639-3 language code (lower case).</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="countryCode" type="s">
+        <doc>
+          <line>countryCode = The country specific variant for the language, specified as ISO 3166-1 alpha 3 country code (upper case).</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetLanguage">
+      <doc>
+        <line>setLanguage = Set the language.</line>
+      </doc>
+      <arg direction="in" name="languageCode" type="s">
+        <doc>
+          <line>languageCode = The language to be used, specified as ISO 639-3 language code (lower case).</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="countryCode" type="s">
+        <doc>
+          <line>countryCode = The country specific variant for the language to be used, specified as ISO 3166-1 alpha 3 country code (upper case).</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetTimeFormat">
+      <doc>
+        <line>setTimeFormat = Set the format to be used for representing time in textual information.</line>
+      </doc>
+      <arg direction="in" name="timeFormat" type="s">
+        <doc>
+          <line>timeFormat = Time format specification.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetDateFormat">
+      <doc>
+        <line>setDateFormat = Set the format to be used for representing dates in textual information.</line>
+      </doc>
+      <arg direction="in" name="dateFormat" type="s">
+        <doc>
+          <line>dateFormat = Date format specification.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetLengthUnit">
+      <doc>
+        <line>setLengthUnit = Set the unit to be used for representing lengths and distances in textual information.</line>
+      </doc>
+      <arg direction="in" name="lengthUnit" type="y">
+        <doc>
+          <line>lengthUnit = Length unit.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetWeightUnit">
+      <doc>
+        <line>setWeightUnit = Set the unit to be used for representing weights in textual information.</line>
+      </doc>
+      <arg direction="in" name="weightUnit" type="y">
+        <doc>
+          <line>weightUnit = weight unit</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetApplicability">
+      <doc>
+        <line>getApplicability = Get the filter expression which specifies which Traffic Incidents are NOT applicable.</line>
+      </doc>
+      <arg direction="out" name="filterExpression" type="s">
+        <doc>
+          <line>filterExpression = Filter expression. An empty string indicates that no filtering takes place.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="SetApplicability">
+      <doc>
+        <line>setApplicability = Set the filter expression which specifies which Traffic Incidents are NOT applicable.</line>
+      </doc>
+      <arg direction="in" name="filterExpression" type="s">
+        <doc>
+          <line>filterExpression = Filter expression. An empty string indicates that no filtering shall take place.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="ReserveIconSetIds">
+      <doc>
+        <line>reserveIconSetIds = Reserve a number of IconSet Ids.</line>
+      </doc>
+      <arg direction="in" name="numberOfIds" type="i">
+        <doc>
+          <line>numberOfIds = The number of Ids to be reserved.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="iconSetIds" type="ai">
+        <doc>
+          <line>iconSetIds = The reserved Ids.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="FreeIconSetIds">
+      <doc>
+        <line>freeIconSetIds = Free a set of IconSet Ids.</line>
+      </doc>
+      <arg direction="in" name="iconSetIds" type="ai">
+        <doc>
+          <line>iconSetIds = The Ids to be freed.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetIconSets">
+      <doc>
+        <line>getIconSets = Get all IconSet definitions.</line>
+      </doc>
+      <arg direction="out" name="iconSets" type="a(iyya(iii)bisa(si))">
+        <doc>
+          <line>iconSets (of type IconSet) = The IconSet definitions.</line>
+          <line>IconSet struct[iconSetId, colorType, dimension, size, dayTimeIcon, themeId, mediumType, iconDescriptors] = Specifies the characteristics of a set of icons.</line>
+          <line>IconSet.iconSetId ('i') = Unique Id of the IconSet.</line>
+          <line>IconSet.colorType ('y') = Color Type. Optional, 0 indicates not specified.</line>
+          <line>IconSet.dimension ('y') = Dimensionality. Optional, 0 indicates not specified.</line>
+          <line>IconSet.size (of type IconSize) = Size of the Icon. Optional, the array contains at most 1 element.</line>
+          <line>IconSize struct[width, height, dpi] = Size of an icon.</line>
+          <line>IconSize.width ('i') = Width of the icon in pixels.</line>
+          <line>IconSize.height ('i') = Height of the icon in pixels.</line>
+          <line>IconSize.dpi ('i') = Dots per inch. Optional, 0 indicates not specified</line>
+          <line>IconSet.dayTimeIcon ('b') = Daytime (true) or nighttime (false) indication.</line>
+          <line>IconSet.themeId ('i') = Theme Identifier.</line>
+          <line>IconSet.mediumType ('s') = Medium type for the icons in this set, e.g. &quot;image/png&quot;.</line>
+          <line>IconSet.iconDescriptors (of type IconDescriptor) = Descriptors of the icons.</line>
+          <line>IconDescriptor struct[url, iconId] = Icon Descriptor.</line>
+          <line>IconDescriptor.url ('s') = Location of the icon data. Optional, an empty string indicates not specified.</line>
+          <line>IconDescriptor.iconId ('i') = Unique Id, within an IconSet, of the icon.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="AddIconSetDefinitions">
+      <doc>
+        <line>addIconSetDefinitions = Add IconSet definitions.</line>
+      </doc>
+      <arg direction="in" name="iconSets" type="a(iyya(iii)bisa(si))">
+        <doc>
+          <line>iconSets (of type IconSet) = The IconSet definitions to be added.</line>
+          <line>IconSet struct[iconSetId, colorType, dimension, size, dayTimeIcon, themeId, mediumType, iconDescriptors] = Specifies the characteristics of a set of icons.</line>
+          <line>IconSet.iconSetId ('i') = Unique Id of the IconSet.</line>
+          <line>IconSet.colorType ('y') = Color Type. Optional, 0 indicates not specified.</line>
+          <line>IconSet.dimension ('y') = Dimensionality. Optional, 0 indicates not specified.</line>
+          <line>IconSet.size (of type IconSize) = Size of the Icon. Optional, the array contains at most 1 element.</line>
+          <line>IconSize struct[width, height, dpi] = Size of an icon.</line>
+          <line>IconSize.width ('i') = Width of the icon in pixels.</line>
+          <line>IconSize.height ('i') = Height of the icon in pixels.</line>
+          <line>IconSize.dpi ('i') = Dots per inch. Optional, 0 indicates not specified</line>
+          <line>IconSet.dayTimeIcon ('b') = Daytime (true) or nighttime (false) indication.</line>
+          <line>IconSet.themeId ('i') = Theme Identifier.</line>
+          <line>IconSet.mediumType ('s') = Medium type for the icons in this set, e.g. &quot;image/png&quot;.</line>
+          <line>IconSet.iconDescriptors (of type IconDescriptor) = Descriptors of the icons.</line>
+          <line>IconDescriptor struct[url, iconId] = Icon Descriptor.</line>
+          <line>IconDescriptor.url ('s') = Location of the icon data. Optional, an empty string indicates not specified.</line>
+          <line>IconDescriptor.iconId ('i') = Unique Id, within an IconSet, of the icon.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="RemoveIconSetDefinitions">
+      <doc>
+        <line>removeIconSetDefinitions = Remove IconSet definitions.</line>
+      </doc>
+      <arg direction="in" name="iconSetIds" type="ai">
+        <doc>
+          <line>iconSetIds = The Ids of the IconSets to be removed.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetIconDefinitions">
+      <doc>
+        <line>getIconDefinitions = Get the icon definitions for a specified set of icons.</line>
+      </doc>
+      <arg direction="in" name="iconInfos" type="a(ii)">
+        <doc>
+          <line>iconInfos (of type IconInfo) = The set of icons for which the definition is to be obtained.</line>
+          <line>IconInfo struct[iconSetId, iconId] = A reference to an icon: an IconSetId/IconId pair.</line>
+          <line>IconInfo.iconSetId ('i') = IconSet Id.</line>
+          <line>IconInfo.iconId ('i') = Icon Id.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="iconDefinitions" type="a((ii)(ay))">
+        <doc>
+          <line>iconDefinitions (of type IconDefinition) = The icon definitions.</line>
+          <line>IconDefinition struct[iconInfo, iconData] = Icon Definition.</line>
+          <line>IconDefinition.iconInfo (of type IconInfo) = The reference to the icon.</line>
+          <line>IconInfo struct[iconSetId, iconId] = A reference to an icon: an IconSetId/IconId pair.</line>
+          <line>IconInfo.iconSetId ('i') = IconSet Id.</line>
+          <line>IconInfo.iconId ('i') = Icon Id.</line>
+          <line>IconDefinition.iconData (of type IconData) = The binary icon data.</line>
+          <line>IconData struct[data] = Binary icon data.</line>
+          <line>IconData.data ('y') = Description missing</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="AddIconDefinitions">
+      <doc>
+        <line>addIconDefinitions = Add icon definitions.</line>
+      </doc>
+      <arg direction="in" name="iconDefinitions" type="a((ii)(ay))">
+        <doc>
+          <line>iconDefinitions (of type IconDefinition) = The icon definitions to be added.</line>
+          <line>IconDefinition struct[iconInfo, iconData] = Icon Definition.</line>
+          <line>IconDefinition.iconInfo (of type IconInfo) = The reference to the icon.</line>
+          <line>IconInfo struct[iconSetId, iconId] = A reference to an icon: an IconSetId/IconId pair.</line>
+          <line>IconInfo.iconSetId ('i') = IconSet Id.</line>
+          <line>IconInfo.iconId ('i') = Icon Id.</line>
+          <line>IconDefinition.iconData (of type IconData) = The binary icon data.</line>
+          <line>IconData struct[data] = Binary icon data.</line>
+          <line>IconData.data ('y') = Description missing</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="RemoveIconDefinitions">
+      <doc>
+        <line>removeIconDefinitions = Remove icon definitions.</line>
+      </doc>
+      <arg direction="in" name="iconInfos" type="a(ii)">
+        <doc>
+          <line>iconInfos (of type IconInfo) = The set of icons for which the definition is to be removed.</line>
+          <line>IconInfo struct[iconSetId, iconId] = A reference to an icon: an IconSetId/IconId pair.</line>
+          <line>IconInfo.iconSetId ('i') = IconSet Id.</line>
+          <line>IconInfo.iconId ('i') = Icon Id.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="ReserveCategoryIds">
+      <doc>
+        <line>reserveCategoryIds = Reserve a number of Category Ids.</line>
+      </doc>
+      <arg direction="in" name="numberOfIds" type="i">
+        <doc>
+          <line>numberOfIds = The number of Ids to be reserved.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="categoryIds" type="ai">
+        <doc>
+          <line>categoryIds = The reserved Ids.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="FreeCategoryIds">
+      <doc>
+        <line>freeCategoryIds = Free a set of Category Ids.</line>
+      </doc>
+      <arg direction="in" name="categoryIds" type="ai">
+        <doc>
+          <line>categoryIds = The Ids to be freed.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetCategoryDefinitions">
+      <doc>
+        <line>getCategoryDefinitions = Get all Category definitions.</line>
+      </doc>
+      <arg direction="out" name="categoryDefinitions" type="a(a(sss)ia(ii)s)">
+        <doc>
+          <line>categoryDefinitions (of type CategoryDefinition) = The Category definitions.</line>
+          <line>CategoryDefinition struct[localizedNames, categoryId, icons, expression] = The definition of a category of Traffic Incidents.</line>
+          <line>CategoryDefinition.localizedNames (of type LocalizedString) = The name of the category in different languages.</line>
+          <line>LocalizedString struct[languageCode, countryCode, string] = A string in a specified language.</line>
+          <line>LocalizedString.languageCode ('s') = A language, specified as ISO 639-3 language code (lower case).</line>
+          <line>LocalizedString.countryCode ('s') = The country specific variant for the language, specified as ISO 3166-1 alpha 3 country code (upper case).&#xD;
+                               Optional, an empty string indicates not specified.</line>
+          <line>LocalizedString.string ('s') = A string in the specified language.</line>
+          <line>CategoryDefinition.categoryId ('i') = The unique Id of the category.</line>
+          <line>CategoryDefinition.icons (of type IconInfo) = The icons related to the category.</line>
+          <line>IconInfo struct[iconSetId, iconId] = A reference to an icon: an IconSetId/IconId pair.</line>
+          <line>IconInfo.iconSetId ('i') = IconSet Id.</line>
+          <line>IconInfo.iconId ('i') = Icon Id.</line>
+          <line>CategoryDefinition.expression ('s') = Filter expression. A Traffic Incident that passes the related filter, is part of the category.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="AddCategoryDefinitions">
+      <doc>
+        <line>addCategoryDefinitions = Add Category definitions.</line>
+      </doc>
+      <arg direction="in" name="categoryDefinitions" type="a(a(sss)ia(ii)s)">
+        <doc>
+          <line>categoryDefinitions (of type CategoryDefinition) = The Category definitions to be added.</line>
+          <line>CategoryDefinition struct[localizedNames, categoryId, icons, expression] = The definition of a category of Traffic Incidents.</line>
+          <line>CategoryDefinition.localizedNames (of type LocalizedString) = The name of the category in different languages.</line>
+          <line>LocalizedString struct[languageCode, countryCode, string] = A string in a specified language.</line>
+          <line>LocalizedString.languageCode ('s') = A language, specified as ISO 639-3 language code (lower case).</line>
+          <line>LocalizedString.countryCode ('s') = The country specific variant for the language, specified as ISO 3166-1 alpha 3 country code (upper case).&#xD;
+                               Optional, an empty string indicates not specified.</line>
+          <line>LocalizedString.string ('s') = A string in the specified language.</line>
+          <line>CategoryDefinition.categoryId ('i') = The unique Id of the category.</line>
+          <line>CategoryDefinition.icons (of type IconInfo) = The icons related to the category.</line>
+          <line>IconInfo struct[iconSetId, iconId] = A reference to an icon: an IconSetId/IconId pair.</line>
+          <line>IconInfo.iconSetId ('i') = IconSet Id.</line>
+          <line>IconInfo.iconId ('i') = Icon Id.</line>
+          <line>CategoryDefinition.expression ('s') = Filter expression. A Traffic Incident that passes the related filter, is part of the category.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="RemoveCategoryDefinitions">
+      <doc>
+        <line>removeCategoryDefinitions = Remove Category definitions.</line>
+      </doc>
+      <arg direction="in" name="categoryIds" type="ai">
+        <doc>
+          <line>categoryIds = The Ids of the Category definitions to be removed.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetTrafficIncidentIds">
+      <doc>
+        <line>getTrafficIncidentIds = Get all the Ids of the current traffic incidents.</line>
+      </doc>
+      <arg direction="in" name="warningLevels" type="ay">
+        <doc>
+          <line>warningLevels = 
+                Only incidents with one of the specified warning levels will be returned.
+                In case of an empty list, traffic incidents with any warning level (and no specified warning level) are returned.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="categoryIds" type="ai">
+        <doc>
+          <line>categoryIds = 
+                Only incidents with one of the specified cateory Ids will be returned.
+                In case of an empty list, traffic incidents with any category Id (including no category Id) are returned.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="trafficIncidentIds" type="ai">
+        <doc>
+          <line>trafficIncidentIds = The Ids of the requested traffic incidents.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetTrafficIncidentIdsInAreas">
+      <doc>
+        <line>getTrafficIncidentIdsInAreas = Get the Ids of the traffic incidents in a number of areas.</line>
+      </doc>
+      <arg direction="in" name="warningLevels" type="ay">
+        <doc>
+          <line>warningLevels = 
+                Only incidents with one of the specified warning levels will be returned.
+                In case of an empty list, traffic incidents with any warning level (and no specified warning level) are returned.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="categoryIds" type="ai">
+        <doc>
+          <line>categoryIds = 
+                Only incidents with one of the specified cateory Ids will be returned.
+                In case of an empty list, traffic incidents with any category Id (including no category Id) are returned.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="areas" type="a((ddi)(ddi))">
+        <doc>
+          <line>areas (of type RectangularArea) = The areas for which the traffic incident Ids are requested.</line>
+          <line>RectangularArea struct[bottomLeft, topRight] = This datatype represents a rectangular area. The area is defined by the WGS84 coordinates of its bottomLeft and topRight corners.</line>
+          <line>RectangularArea.bottomLeft (of type Coordinate) = The bottom-left corner of the area.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+          <line>RectangularArea.topRight (of type Coordinate) = The top-right corner of the area.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="trafficIncidentIds" type="ai">
+        <doc>
+          <line>trafficIncidentIds = The Ids of the requested traffic incidents.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetTrafficIncidents">
+      <doc>
+        <line>getTrafficIncidents = Get a number of Traffic Incidents.</line>
+      </doc>
+      <arg direction="in" name="trafficIncidentIds" type="ai">
+        <doc>
+          <line>trafficIncidentIds = The Ids of the requested Traffic Incidents.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="includeTextFields" type="b">
+        <doc>
+          <line>includeTextFields = The text fields in the returned Traffic Incident will only be filled in if this parameter is set to true.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="trafficIncidents" type="a(iysiiysiiiiia(yv)a(yv)a(yysa(ya(yaia(yv))))a(ya(yaia(yv)))a(bia(nni)a(ya(yaia(yv))))a(yv)asasasa((ddi)(ddi))ai)">
+        <doc>
+          <line>trafficIncidents (array of type TrafficIncident) = 
+                The requested Traffic Incidents. This list may be shorter than the request list
+                as nothing is returned for Ids that don't exist (anymore).</line>
+          <line>TrafficIncident struct[trafficIncidentId, effectCode, effectText, startTime, stopTime, tendency, tendencyText, lengthAffected, averageSpeedAbsolute, delay, segmentSpeedLimit, expectedSpeedAbsolute, causes, location, advices, applicability, temporarySpeedLimits, locationInfo, causeTexts, applicabilityTexts, adviceTexts, locationBoundingBox, categoryIds] = Data model description of a Traffic Incident.</line>
+          <line>TrafficIncident.trafficIncidentId ('i') = unique Id</line>
+          <line>TrafficIncident.effectCode ('y') = Effect Code, optional value, NOT_SPECIFIED indicates not specified.</line>
+          <line>TrafficIncident.effectText ('s') = Textual representation of the Effect Code, optional value, an empty string indicates not specified.</line>
+          <line>TrafficIncident.startTime ('i') = Start Time in minutes since the standard base time known as &quot;the epoch&quot;, namely January 1, 1970, 00:00:00 GMT. Optional value, -1 indicates not specified</line>
+          <line>TrafficIncident.stopTime ('i') = Stop Time in minutes since the standard base time known as &quot;the epoch&quot;, namely January 1, 1970, 00:00:00 GMT. Optional value, -1 indicates not specified</line>
+          <line>TrafficIncident.tendency ('y') = Tendency, optional value, NOT_SPECIFIED indicates not specified.</line>
+          <line>TrafficIncident.tendencyText ('s') = Textual representation of the Tendency, optional value, an empty string indicates not specified.</line>
+          <line>TrafficIncident.lengthAffected ('i') = Length of the event in meters, optional value, -1 indicates not specified.</line>
+          <line>TrafficIncident.averageSpeedAbsolute ('i') = Average speed in m/s at the given location, optional value, -1 indicates not specified.</line>
+          <line>TrafficIncident.delay ('i') = Delay in minutes, optional value, -1 indicates not specified.</line>
+          <line>TrafficIncident.segmentSpeedLimit ('i') = Maximum speed in m/s., optional value, -1 indicates not specified.</line>
+          <line>TrafficIncident.expectedSpeedAbsolute ('i') = The expectedSpeedAbsolute, in m/s, is used to signal the expected
+                  (normal) speed of traffic through the problem location. Value range 0, .. , 127 (0x7f).
+                  Optional value, -1 indicates not specified.</line>
+          <line>TrafficIncident.causes (of type CauseDiscriminatedUnion) = Causes.</line>
+          <line>CauseDiscriminatedUnion struct[causeType, causeUnion] = A type to transfer any Cause sub-type, together with an indication of which sub-type it is.</line>
+          <line>CauseDiscriminatedUnion.causeType ('y') = Indentifies the Cause sub-type contained in the causeUnion.</line>
+          <line>CauseDiscriminatedUnion.causeUnion (of type CauseUnion) = The Cause.</line>
+          <line>CauseUnion variant[directCause, linkedCause] = Union for the Cause sub-types.</line>
+          <line>CauseUnion.directCause (of type DirectCause) = Direct Cause.</line>
+          <line>DirectCause struct[mainCause, warningLevel, unverifiedInformation, subCause, lengthAffected, causeOffset, laneRestrictions, freeText] = A Direct Cause for the incident, i.e. all details of the cause are specified here.</line>
+          <line>DirectCause.mainCause ('y') = Main Cause for the incident.</line>
+          <line>DirectCause.warningLevel ('y') = Warning Level. Optional value, NOT_SPECIFIED indicates not specified.</line>
+          <line>DirectCause.unverifiedInformation ('b') = Indication of whether the information has been verified by an authority (like the police) or not.</line>
+          <line>DirectCause.subCause ('y') = More detailed cause. The actual value of this atttribute depends on the mainCause. So based on the mainCause it has to be cast to the related enum.</line>
+          <line>DirectCause.lengthAffected ('i') = Length of the cause in meters, optional value, -1 indicates not specified.</line>
+          <line>DirectCause.causeOffset ('i') = Offset (in metres) from the start of the Cause to the end of the Problem Location.
+                   When used together with Affected Length the cause can be positioned within the event more accurately.
+                   Without Cause Offset but with Affected Length defined the cause position is not defined.
+                   If neither Affected Length nor Cause Offset are defined the Cause spans the entire Problem Location.
+                   Value range: 0, .. , 2147483647 (0x7fffffff). Optional value, -1 indicates not specified.</line>
+          <line>DirectCause.laneRestrictions (of type LaneRestrictions) = Lane Restrictions. Optional value, represented by an array with 0 or 1 elements.</line>
+          <line>LaneRestrictions struct[laneRestrictionType, numberOfLanes] = Lane Restrictions.</line>
+          <line>LaneRestrictions.laneRestrictionType ('y') = Lane Restriction Type.</line>
+          <line>LaneRestrictions.numberOfLanes ('i') = Number of lanes affected by the Lane Restriction Type. Optional value, -1 indicates not specified.</line>
+          <line>DirectCause.freeText ('s') = Free Text.</line>
+          <line>CauseUnion.linkedCause (of type LinkedCause) = Linked Cause.</line>
+          <line>LinkedCause struct[mainCause, causeTrafficIncidentId] = A Cause for the incident, with a reference to another incident, which is a cause for this incident.</line>
+          <line>LinkedCause.mainCause ('y') = Main Cause for the incident.</line>
+          <line>LinkedCause.causeTrafficIncidentId ('s') = Id of a TrafficIncident which is a cause for this incident.</line>
+          <line>TrafficIncident.location (of type LocationDiscriminatedUnion) = Location. Optional value, represented by an array with 0 or 1 elements.</line>
+          <line>LocationDiscriminatedUnion struct[locationType, locationUnion] = A type to transfer any type of Location, together with an indication of which Location Type it is.</line>
+          <line>LocationDiscriminatedUnion.locationType ('y') = Indentifies the Location Type contained in the locationUnion.</line>
+          <line>LocationDiscriminatedUnion.locationUnion (of type LocationUnion) = The Location.</line>
+          <line>LocationUnion variant[pointLocation, linearLocation, areaLocation] = Union for the different types of Locations</line>
+          <line>LocationUnion.pointLocation (of type PointLocation) = Point Location.</line>
+          <line>PointLocation struct[] = The location is a single point (along the road), e.g. the location of a broken down vehicle.</line>
+          <line>LocationUnion.linearLocation (of type LinearLocation) = Linear Location.</line>
+          <line>LinearLocation struct[segments, positiveOffset, negativeOffset] = The location is a road stretch, e.g. the road stretch where there is a traffic jam.</line>
+          <line>LinearLocation.segments ('x') = The database segments of the location.</line>
+          <line>LinearLocation.positiveOffset ('u') = The positive offset is the distance (in meters) between the begin node of the first segment and the start point of the actual location.</line>
+          <line>LinearLocation.negativeOffset ('u') = The negative offset is the distance (in meters) between the end point of the actual location and the end node of the last segment.</line>
+          <line>LocationUnion.areaLocation (of type AreaLocation) = Area Location.</line>
+          <line>AreaLocation struct[] = The location is an area, e.g. an area with fog.</line>
+          <line>TrafficIncident.advices (of type Advice) = Advices</line>
+          <line>Advice struct[mainAdvice, subAdvice, freeText, applicability] = Advice.</line>
+          <line>Advice.mainAdvice ('y') = Main advice.</line>
+          <line>Advice.subAdvice ('y') = More detailed advice. The actual value of this atttribute depends on the adviceCode. So based on the adviceCode it has to be cast to the related enum.</line>
+          <line>Advice.freeText ('s') = Free Text.</line>
+          <line>Advice.applicability (of type Applicability) = Applicability of the advice.</line>
+          <line>Applicability struct[vehicleType, vehicleRelatedRestrictions] = Applicability.</line>
+          <line>Applicability.vehicleType ('y) = Vehicle Type.</line>
+          <line>Applicability.vehicleRelatedRestrictions (of type VehicleRelatedRestriction) = Restrictions.</line>
+          <line>VehicleRelatedRestriction struct[restrictionType, restrictionValue, restrictionLocation] = Vehicle Related Restriction.</line>
+          <line>VehicleRelatedRestriction.restrictionType ('y') = Restriction Type.</line>
+          <line>VehicleRelatedRestriction.restrictionValue ('i') = Restriction value.</line>
+          <line>VehicleRelatedRestriction.restrictionLocation (of type LocationDiscriminatedUnion) = Restriction location.</line>
+          <line>LocationDiscriminatedUnion struct[locationType, locationUnion] = A type to transfer any type of Location, together with an indication of which Location Type it is.</line>
+          <line>LocationDiscriminatedUnion.locationType ('y') = Indentifies the Location Type contained in the locationUnion.</line>
+          <line>LocationDiscriminatedUnion.locationUnion (of type LocationUnion) = The Location.</line>
+          <line>LocationUnion variant[pointLocation, linearLocation, areaLocation] = Union for the different types of Locations</line>
+          <line>LocationUnion.pointLocation (of type PointLocation) = Point Location.</line>
+          <line>PointLocation struct[] = The location is a single point (along the road), e.g. the location of a broken down vehicle.</line>
+          <line>LocationUnion.linearLocation (of type LinearLocation) = Linear Location.</line>
+          <line>LinearLocation struct[segments, positiveOffset, negativeOffset] = The location is a road stretch, e.g. the road stretch where there is a traffic jam.</line>
+          <line>LinearLocation.segments ('x') = The database segments of the location.</line>
+          <line>LinearLocation.positiveOffset ('u') = The positive offset is the distance (in meters) between the begin node of the first segment and the start point of the actual location.</line>
+          <line>LinearLocation.negativeOffset ('u') = The negative offset is the distance (in meters) between the end point of the actual location and the end node of the last segment.</line>
+          <line>LocationUnion.areaLocation (of type AreaLocation) = Area Location.</line>
+          <line>AreaLocation struct[] = The location is an area, e.g. an area with fog.</line>
+          <line>TrafficIncident.applicability (of type Applicability) = Applicability.</line>
+          <line>Applicability struct[vehicleType, vehicleRelatedRestrictions] = Applicability.</line>
+          <line>Applicability.vehicleType ('y) = Vehicle Type.</line>
+          <line>Applicability.vehicleRelatedRestrictions (of type VehicleRelatedRestriction) = Restrictions.</line>
+          <line>VehicleRelatedRestriction struct[restrictionType, restrictionValue, restrictionLocation] = Vehicle Related Restriction.</line>
+          <line>VehicleRelatedRestriction.restrictionType ('y') = Restriction Type.</line>
+          <line>VehicleRelatedRestriction.restrictionValue ('i') = Restriction value.</line>
+          <line>VehicleRelatedRestriction.restrictionLocation (of type LocationDiscriminatedUnion) = Restriction location.</line>
+          <line>LocationDiscriminatedUnion struct[locationType, locationUnion] = A type to transfer any type of Location, together with an indication of which Location Type it is.</line>
+          <line>LocationDiscriminatedUnion.locationType ('y') = Indentifies the Location Type contained in the locationUnion.</line>
+          <line>LocationDiscriminatedUnion.locationUnion (of type LocationUnion) = The Location.</line>
+          <line>LocationUnion variant[pointLocation, linearLocation, areaLocation] = Union for the different types of Locations</line>
+          <line>LocationUnion.pointLocation (of type PointLocation) = Point Location.</line>
+          <line>PointLocation struct[] = The location is a single point (along the road), e.g. the location of a broken down vehicle.</line>
+          <line>LocationUnion.linearLocation (of type LinearLocation) = Linear Location.</line>
+          <line>LinearLocation struct[segments, positiveOffset, negativeOffset] = The location is a road stretch, e.g. the road stretch where there is a traffic jam.</line>
+          <line>LinearLocation.segments ('x') = The database segments of the location.</line>
+          <line>LinearLocation.positiveOffset ('u') = The positive offset is the distance (in meters) between the begin node of the first segment and the start point of the actual location.</line>
+          <line>LinearLocation.negativeOffset ('u') = The negative offset is the distance (in meters) between the end point of the actual location and the end node of the last segment.</line>
+          <line>LocationUnion.areaLocation (of type AreaLocation) = Area Location.</line>
+          <line>AreaLocation struct[] = The location is an area, e.g. an area with fog.</line>
+          <line>TrafficIncident.temporarySpeedLimits (array of type TemporarySpeedLimit) = Temporary speed limit information suitable for display to the driver.</line>
+          <line>TemporarySpeedLimit struct[unitsMPH, offset, temporarySpeedLimitSections, applicability] = One of the highly visible attributes of
+                           many roadworks is the imposed Temporary Speed Limit. This component provides the ability to define temporary speed limit
+                           information suitable for display to the driver. Temporary Speed limit info associated with the event is defined in either
+                           kph or mph. Multiple sections with a different speed value may be provided with a length. The offset from the end of the
+                           Location to the start of the first speed limit restriction allows the speed limit zone to be positioned independently of
+                           the cause. Applicability can be added if needed.
+          </line>
+          <line>TemporarySpeedLimit.unitsMPH ('b') = Units definition for this Temporary Speed Limit. If true, the unit is mph, else the unit is km/h.</line>
+          <line>TemporarySpeedLimit.offset ('i') = Offset defines the distance in meters from the start of the Temporary speed limit to the end of the
+                           Location. If not defined then first SpeedLimitSection starts at the beginning of the Location.
+                           Value range: 0, .. , 2147483647 (0x7fffffff)
+          </line>
+          <line>TemporarySpeedLimit.temporarySpeedLimitSections (array of TemporarySpeedLimitSection) = Speed Limit information per section.</line>
+          <line>TemporarySpeedLimitSection struct[speedLimitValue, speedLimitValueWet, speedLimitLength] = Each section of a TemporarySpeedLimit is defined
+                           by a speed value and length.
+                           A speed value for use in Wet conditions is also optionally available.
+          </line>
+          <line>TemporarySpeedLimitSection.speedLimitValue ('n') = Speed Limit numerical value in kph or mph. Value range: 0, .. , 32767 (0x7fff)</line>
+          <line>TemporarySpeedLimitSection.speedLimitValueWet ('n') = Speed Limit numerical value to be used in wet conditions; in kph or mph.
+                           Value range: 0, .. , 32767 (0x7fff)
+          </line>
+          <line>TemporarySpeedLimitSection.speedLimitLength ('i') = Length of the SpeedLimitSection, If this is not defined, then section finishes
+                           at end of the Problem Location. Value range: 0, .. , 2147483647 (0x7fffffff)
+          </line>
+          <line>TemporarySpeedLimit.applicability (of type Applicability) = Applicability.</line>
+          <line>Applicability struct[vehicleType, vehicleRelatedRestrictions] = Applicability.</line>
+          <line>Applicability.vehicleType ('y) = Vehicle Type.</line>
+          <line>Applicability.vehicleRelatedRestrictions (of type VehicleRelatedRestriction) = Restrictions.</line>
+          <line>VehicleRelatedRestriction struct[restrictionType, restrictionValue, restrictionLocationReference] = Vehicle Related Restriction.</line>
+          <line>VehicleRelatedRestriction.restrictionType ('y') = Restriction Type.</line>
+          <line>VehicleRelatedRestriction.restrictionValue ('i') = Restriction value. Optional value, represented by an array with 0 or 1 elements.</line>
+          <line>VehicleRelatedRestriction.restrictionLocationReference (of type LocationReference) = Description of the restriction location.</line>
+          <line>LocationReference struct[locationReferenceType, data] = Map database independent description of a location.</line>
+          <line>LocationReference.locationReferenceType ('y') = The type of location reference.</line>
+          <line>LocationReference.data ('y') = The actual data of the location reference.</line>
+          <line>TrafficIncident.locationInfo (of type LocationInfoDiscriminatedUnion) = Information about the location.</line>
+          <line>LocationInfoDiscriminatedUnion struct[locationInfoType, locationInfoUnion] = A type to transfer any type of Location Information, together with an indication of which Location Information Type it is.</line>
+          <line>LocationInfoDiscriminatedUnion.locationInfoType ('y') = Indentifies the Location Information Type contained in the locationInformationUnion.</line>
+          <line>LocationInfoDiscriminatedUnion.locationInfoUnion (of type LocationInfoUnion) = The Location Information.</line>
+          <line>LocationInfoUnion variant[pointLocationInfo, linearLocationInfo, areaLocationInfo] = Union for the different types of Location Information</line>
+          <line>LocationInfoUnion.pointLocationInfo (of type PointLocationInfo) = Point Location Information.</line>
+          <line>PointLocationInfo struct[name, mainLocation, locationType] = Point Location specific Location Information.</line>
+          <line>PointLocationInfo.name ('s') = Name of the location.</line>
+          <line>PointLocationInfo.mainLocation (of type Coordinate) = Coordinates of the main location.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+          <line>PointLocationInfo.locationType ('y') = The type of point location.</line>
+          <line>LocationInfoUnion.linearLocationInfo (of type LinearLocationInfo) = Linear Location Information.</line>
+          <line>LinearLocationInfo struct[name, mainLocation, fromLocationName, fromLocationParentName, toLocationName, toLocationParentName, coordinates] = Linear Location specific Location Information.</line>
+          <line>LinearLocationInfo.name ('s') = Name of the location.</line>
+          <line>LinearLocationInfo.mainLocation (of type Coordinate) = Coordinates of the main location.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+          <line>LinearLocationInfo.fromLocationName ('s') = Name of the 'from' location.</line>
+          <line>LinearLocationInfo.fromLocationParentName ('s') = Name of parent of the 'from' location.</line>
+          <line>LinearLocationInfo.toLocationName ('s') = Name of the 'to' location.</line>
+          <line>LinearLocationInfo.toLocationParentName ('s') = Name of the parent of the 'to' location.</line>
+          <line>LinearLocationInfo.coordinates (of type Coordinate) = List of coordinates of the location.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+          <line>LocationInfoUnion.areaLocationInfo (of type AreaLocationInfo) = Area Location Information.</line>
+          <line>AreaLocationInfo struct[name, mainLocation] = Area Location specific Location Information.</line>
+          <line>AreaLocationInfo.name ('s') = Name of the location.</line>
+          <line>AreaLocationInfo.mainLocation (of type Coordinate) = Coordinates of the main location.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+          <line>TrafficIncident.causeTexts ('s') = Textual representations of the causes.</line>
+          <line>TrafficIncident.applicabilityTexts ('s') = Textual representations of the applicability.</line>
+          <line>TrafficIncident.adviceTexts ('s') = Textual representations of the advices.</line>
+          <line>TrafficIncident.locationBoundingBox (of type RectangularArea) = A bounding box in around the location.</line>
+          <line>RectangularArea struct[bottomLeft, topRight] = This datatype represents a rectangular area. The area is defined by the WGS84 coordinates of its bottomLeft and topRight corners.</line>
+          <line>RectangularArea.bottomLeft (of type Coordinate) = The bottom-left corner of the area.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+          <line>RectangularArea.topRight (of type Coordinate) = The top-right corner of the area.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+          <line>TrafficIncident.categoryIds ('i') = Category Ids.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetTrafficIncidentsFields">
+      <doc>
+        <line>getTrafficIncidentsFields = 
+              Get a number of Traffic Incidents, where only specific fields are filled in.
+              The field TRAFFIC_INCIDENT_ID is always filled in, independent of whether it is requested or not.
+        </line>
+      </doc>
+      <arg direction="in" name="trafficIncidentIds" type="ai">
+        <doc>
+          <line>trafficIncidentIds = The Ids of the requested Traffic Incidents.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="trafficIncidentFields" type="ay">
+        <doc>
+          <line>trafficIncidentFields = The fields (attributes) to be filled in in the Traffic Incident.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="trafficIncidents" type="a(iysiiysiiiiia(yv)a(yv)a(yysa(ya(yaia(yv))))a(ya(yaia(yv)))a(bia(nni)a(ya(yaia(yv))))a(yv)asasasa((ddi)(ddi))ai)">
+        <doc>
+          <line>trafficIncidents (array of type TrafficIncident) = 
+                The requested Traffic Incidents, with only the requested fields filled in.
+                This list may be shorter than the request list as nothing is returned for
+                Ids that don't exist (anymore).</line>
+          <line>TrafficIncident struct[trafficIncidentId, effectCode, effectText, startTime, stopTime, tendency, tendencyText, lengthAffected, averageSpeedAbsolute, delay, segmentSpeedLimit, expectedSpeedAbsolute, causes, location, advices, applicability, locationInfo, causeTexts, applicabilityTexts, adviceTexts, locationBoundingBox, categoryIds] = Data model description of a Traffic Incident.</line>
+          <line>TrafficIncident.trafficIncidentId ('i') = unique Id</line>
+          <line>TrafficIncident.effectCode ('y') = Effect Code, optional value, NOT_SPECIFIED indicates not specified.</line>
+          <line>TrafficIncident.effectText ('s') = Textual representation of the Effect Code, optional value, an empty string indicates not specified.</line>
+          <line>TrafficIncident.startTime ('i') = Start Time in minutes since the standard base time known as &quot;the epoch&quot;, namely January 1, 1970, 00:00:00 GMT. Optional value, -1 indicates not specified</line>
+          <line>TrafficIncident.stopTime ('i') = Stop Time in minutes since the standard base time known as &quot;the epoch&quot;, namely January 1, 1970, 00:00:00 GMT. Optional value, -1 indicates not specified</line>
+          <line>TrafficIncident.tendency ('y') = Tendency, optional value, NOT_SPECIFIED indicates not specified.</line>
+          <line>TrafficIncident.tendencyText ('s') = Textual representation of the Tendency, optional value, an empty string indicates not specified.</line>
+          <line>TrafficIncident.lengthAffected ('i') = Length of the event in meters, optional value, -1 indicates not specified.</line>
+          <line>TrafficIncident.averageSpeedAbsolute ('i') = Average speed in m/s at the given location, optional value, -1 indicates not specified.</line>
+          <line>TrafficIncident.delay ('i') = Delay in minutes, optional value, -1 indicates not specified.</line>
+          <line>TrafficIncident.segmentSpeedLimit ('i') = Maximum speed in m/s., optional value, -1 indicates not specified.</line>
+          <line>TrafficIncident.expectedSpeedAbsolute ('i') = The expectedSpeedAbsolute, in m/s, is used to signal the expected
+                  (normal) speed of traffic through the problem location. Value range 0, .. , 127 (0x7f).
+                  Optional value, -1 indicates not specified.</line>
+          <line>TrafficIncident.causes (of type CauseDiscriminatedUnion) = Causes.</line>
+          <line>CauseDiscriminatedUnion struct[causeType, causeUnion] = A type to transfer any Cause sub-type, together with an indication of which sub-type it is.</line>
+          <line>CauseDiscriminatedUnion.causeType ('y') = Indentifies the Cause sub-type contained in the causeUnion.</line>
+          <line>CauseDiscriminatedUnion.causeUnion (of type CauseUnion) = The Cause.</line>
+          <line>CauseUnion variant[directCause, linkedCause] = Union for the Cause sub-types.</line>
+          <line>CauseUnion.directCause (of type DirectCause) = Direct Cause.</line>
+          <line>DirectCause struct[mainCause, warningLevel, unverifiedInformation, subCause, lengthAffected, causeOffset, laneRestrictions, freeText] = A Direct Cause for the incident, i.e. all details of the cause are specified here.</line>
+          <line>DirectCause.mainCause ('y') = Main Cause for the incident.</line>
+          <line>DirectCause.warningLevel ('y') = Warning Level. Optional value, NOT_SPECIFIED indicates not specified.</line>
+          <line>DirectCause.unverifiedInformation ('b') = Indication of whether the information has been verified by an authority (like the police) or not.</line>
+          <line>DirectCause.subCause ('y') = More detailed cause. The actual value of this atttribute depends on the mainCause. So based on the mainCause it has to be cast to the related enum.</line>
+          <line>DirectCause.lengthAffected ('i') = Length of the cause in meters, optional value, -1 indicates not specified.</line>
+          <line>DirectCause.causeOffset ('i') = Offset (in metres) from the start of the Cause to the end of the Problem Location.
+                   When used together with Affected Length the cause can be positioned within the event more accurately.
+                   Without Cause Offset but with Affected Length defined the cause position is not defined.
+                   If neither Affected Length nor Cause Offset are defined the Cause spans the entire Problem Location.
+                   Value range: 0, .. , 2147483647 (0x7fffffff). Optional value, -1 indicates not specified.</line>
+          <line>DirectCause.laneRestrictions (of type LaneRestrictions) = Lane Restrictions. Optional value, represented by an array with 0 or 1 elements.</line>
+          <line>LaneRestrictions struct[laneRestrictionType, numberOfLanes] = Lane Restrictions.</line>
+          <line>LaneRestrictions.laneRestrictionType ('y') = Lane Restriction Type.</line>
+          <line>LaneRestrictions.numberOfLanes ('i') = Number of lanes affected by the Lane Restriction Type. Optional value, -1 indicates not specified.</line>
+          <line>DirectCause.freeText ('s') = Free Text.</line>
+          <line>CauseUnion.linkedCause (of type LinkedCause) = Linked Cause.</line>
+          <line>LinkedCause struct[mainCause, causeTrafficIncidentId] = A Cause for the incident, with a reference to another incident, which is a cause for this incident.</line>
+          <line>LinkedCause.mainCause ('y') = Main Cause for the incident.</line>
+          <line>LinkedCause.causeTrafficIncidentId ('s') = Id of a TrafficIncident which is a cause for this incident.</line>
+          <line>TrafficIncident.location (of type LocationDiscriminatedUnion) = Location. Optional value, represented by an array with 0 or 1 elements.</line>
+          <line>LocationDiscriminatedUnion struct[locationType, locationUnion] = A type to transfer any type of Location, together with an indication of which Location Type it is.</line>
+          <line>LocationDiscriminatedUnion.locationType ('y') = Indentifies the Location Type contained in the locationUnion.</line>
+          <line>LocationDiscriminatedUnion.locationUnion (of type LocationUnion) = The Location.</line>
+          <line>LocationUnion variant[pointLocation, linearLocation, areaLocation] = Union for the different types of Locations</line>
+          <line>LocationUnion.pointLocation (of type PointLocation) = Point Location.</line>
+          <line>PointLocation struct[] = The location is a single point (along the road), e.g. the location of a broken down vehicle.</line>
+          <line>LocationUnion.linearLocation (of type LinearLocation) = Linear Location.</line>
+          <line>LinearLocation struct[segments, positiveOffset, negativeOffset] = The location is a road stretch, e.g. the road stretch where there is a traffic jam.</line>
+          <line>LinearLocation.segments ('x') = The database segments of the location.</line>
+          <line>LinearLocation.positiveOffset ('u') = The positive offset is the distance (in meters) between the begin node of the first segment and the start point of the actual location.</line>
+          <line>LinearLocation.negativeOffset ('u') = The negative offset is the distance (in meters) between the end point of the actual location and the end node of the last segment.</line>
+          <line>LocationUnion.areaLocation (of type AreaLocation) = Area Location.</line>
+          <line>AreaLocation struct[] = The location is an area, e.g. an area with fog.</line>
+          <line>TrafficIncident.advices (of type Advice) = Advices</line>
+          <line>Advice struct[mainAdvice, subAdvice, freeText, applicability] = Advice.</line>
+          <line>Advice.mainAdvice ('y') = Main advice.</line>
+          <line>Advice.subAdvice ('y') = More detailed advice. The actual value of this atttribute depends on the adviceCode. So based on the adviceCode it has to be cast to the related enum.</line>
+          <line>Advice.freeText ('s') = Free Text.</line>
+          <line>Advice.applicability (of type Applicability) = Applicability of the advice.</line>
+          <line>Applicability struct[vehicleType, vehicleRelatedRestrictions] = Applicability.</line>
+          <line>Applicability.vehicleType ('y) = Vehicle Type.</line>
+          <line>Applicability.vehicleRelatedRestrictions (of type VehicleRelatedRestriction) = Restrictions.</line>
+          <line>VehicleRelatedRestriction struct[restrictionType, restrictionValue, restrictionLocation] = Vehicle Related Restriction.</line>
+          <line>VehicleRelatedRestriction.restrictionType ('y') = Restriction Type.</line>
+          <line>VehicleRelatedRestriction.restrictionValue ('i') = Restriction value.</line>
+          <line>VehicleRelatedRestriction.restrictionLocation (of type LocationDiscriminatedUnion) = Restriction location.</line>
+          <line>LocationDiscriminatedUnion struct[locationType, locationUnion] = A type to transfer any type of Location, together with an indication of which Location Type it is.</line>
+          <line>LocationDiscriminatedUnion.locationType ('y') = Indentifies the Location Type contained in the locationUnion.</line>
+          <line>LocationDiscriminatedUnion.locationUnion (of type LocationUnion) = The Location.</line>
+          <line>LocationUnion variant[pointLocation, linearLocation, areaLocation] = Union for the different types of Locations</line>
+          <line>LocationUnion.pointLocation (of type PointLocation) = Point Location.</line>
+          <line>PointLocation struct[] = The location is a single point (along the road), e.g. the location of a broken down vehicle.</line>
+          <line>LocationUnion.linearLocation (of type LinearLocation) = Linear Location.</line>
+          <line>LinearLocation struct[segments, positiveOffset, negativeOffset] = The location is a road stretch, e.g. the road stretch where there is a traffic jam.</line>
+          <line>LinearLocation.segments ('x') = The database segments of the location.</line>
+          <line>LinearLocation.positiveOffset ('u') = The positive offset is the distance (in meters) between the begin node of the first segment and the start point of the actual location.</line>
+          <line>LinearLocation.negativeOffset ('u') = The negative offset is the distance (in meters) between the end point of the actual location and the end node of the last segment.</line>
+          <line>LocationUnion.areaLocation (of type AreaLocation) = Area Location.</line>
+          <line>AreaLocation struct[] = The location is an area, e.g. an area with fog.</line>
+          <line>TrafficIncident.applicability (of type Applicability) = Applicability.</line>
+          <line>Applicability struct[vehicleType, vehicleRelatedRestrictions] = Applicability.</line>
+          <line>Applicability.vehicleType ('y) = Vehicle Type.</line>
+          <line>Applicability.vehicleRelatedRestrictions (of type VehicleRelatedRestriction) = Restrictions.</line>
+          <line>VehicleRelatedRestriction struct[restrictionType, restrictionValue, restrictionLocation] = Vehicle Related Restriction.</line>
+          <line>VehicleRelatedRestriction.restrictionType ('y') = Restriction Type.</line>
+          <line>VehicleRelatedRestriction.restrictionValue ('i') = Restriction value.</line>
+          <line>VehicleRelatedRestriction.restrictionLocation (of type LocationDiscriminatedUnion) = Restriction location.</line>
+          <line>LocationDiscriminatedUnion struct[locationType, locationUnion] = A type to transfer any type of Location, together with an indication of which Location Type it is.</line>
+          <line>LocationDiscriminatedUnion.locationType ('y') = Indentifies the Location Type contained in the locationUnion.</line>
+          <line>LocationDiscriminatedUnion.locationUnion (of type LocationUnion) = The Location.</line>
+          <line>LocationUnion variant[pointLocation, linearLocation, areaLocation] = Union for the different types of Locations</line>
+          <line>LocationUnion.pointLocation (of type PointLocation) = Point Location.</line>
+          <line>PointLocation struct[] = The location is a single point (along the road), e.g. the location of a broken down vehicle.</line>
+          <line>LocationUnion.linearLocation (of type LinearLocation) = Linear Location.</line>
+          <line>LinearLocation struct[segments, positiveOffset, negativeOffset] = The location is a road stretch, e.g. the road stretch where there is a traffic jam.</line>
+          <line>LinearLocation.segments ('x') = The database segments of the location.</line>
+          <line>LinearLocation.positiveOffset ('u') = The positive offset is the distance (in meters) between the begin node of the first segment and the start point of the actual location.</line>
+          <line>LinearLocation.negativeOffset ('u') = The negative offset is the distance (in meters) between the end point of the actual location and the end node of the last segment.</line>
+          <line>LocationUnion.areaLocation (of type AreaLocation) = Area Location.</line>
+          <line>AreaLocation struct[] = The location is an area, e.g. an area with fog.</line>
+          <line>TrafficIncident.temporarySpeedLimits (array of type TemporarySpeedLimit) = Temporary speed limit information suitable for display to the driver.</line>
+          <line>TemporarySpeedLimit struct[unitsMPH, offset, temporarySpeedLimitSections, applicability] = One of the highly visible attributes of
+                           many roadworks is the imposed Temporary Speed Limit. This component provides the ability to define temporary speed limit
+                           information suitable for display to the driver. Temporary Speed limit info associated with the event is defined in either
+                           kph or mph. Multiple sections with a different speed value may be provided with a length. The offset from the end of the
+                           Location to the start of the first speed limit restriction allows the speed limit zone to be positioned independently of
+                           the cause. Applicability can be added if needed.
+          </line>
+          <line>TemporarySpeedLimit.unitsMPH ('b') = Units definition for this Temporary Speed Limit. If true, the unit is mph, else the unit is km/h.</line>
+          <line>TemporarySpeedLimit.offset ('i') = Offset defines the distance in meters from the start of the Temporary speed limit to the end of the
+                           Location. If not defined then first SpeedLimitSection starts at the beginning of the Location.
+                           Value range: 0, .. , 2147483647 (0x7fffffff)
+          </line>
+          <line>TemporarySpeedLimit.temporarySpeedLimitSections (array of TemporarySpeedLimitSection) = Speed Limit information per section.</line>
+          <line>TemporarySpeedLimitSection struct[speedLimitValue, speedLimitValueWet, speedLimitLength] = Each section of a TemporarySpeedLimit is defined
+                           by a speed value and length.
+                           A speed value for use in Wet conditions is also optionally available.
+          </line>
+          <line>TemporarySpeedLimitSection.speedLimitValue ('n') = Speed Limit numerical value in kph or mph. Value range: 0, .. , 32767 (0x7fff)</line>
+          <line>TemporarySpeedLimitSection.speedLimitValueWet ('n') = Speed Limit numerical value to be used in wet conditions; in kph or mph.
+                           Value range: 0, .. , 32767 (0x7fff)
+          </line>
+          <line>TemporarySpeedLimitSection.speedLimitLength ('i') = Length of the SpeedLimitSection, If this is not defined, then section finishes
+                           at end of the Problem Location. Value range: 0, .. , 2147483647 (0x7fffffff)
+          </line>
+          <line>TemporarySpeedLimit.applicability (of type Applicability) = Applicability.</line>
+          <line>Applicability struct[vehicleType, vehicleRelatedRestrictions] = Applicability.</line>
+          <line>Applicability.vehicleType ('y) = Vehicle Type.</line>
+          <line>Applicability.vehicleRelatedRestrictions (of type VehicleRelatedRestriction) = Restrictions.</line>
+          <line>VehicleRelatedRestriction struct[restrictionType, restrictionValue, restrictionLocationReference] = Vehicle Related Restriction.</line>
+          <line>VehicleRelatedRestriction.restrictionType ('y') = Restriction Type.</line>
+          <line>VehicleRelatedRestriction.restrictionValue ('i') = Restriction value. Optional value, represented by an array with 0 or 1 elements.</line>
+          <line>VehicleRelatedRestriction.restrictionLocationReference (of type LocationReference) = Description of the restriction location.</line>
+          <line>LocationReference struct[locationReferenceType, data] = Map database independent description of a location.</line>
+          <line>LocationReference.locationReferenceType ('y') = The type of location reference.</line>
+          <line>LocationReference.data ('y') = The actual data of the location reference.</line>
+          <line>TrafficIncident.locationInfo (of type LocationInfoDiscriminatedUnion) = Information about the location.</line>
+          <line>LocationInfoDiscriminatedUnion struct[locationInfoType, locationInfoUnion] = A type to transfer any type of Location Information, together with an indication of which Location Information Type it is.</line>
+          <line>LocationInfoDiscriminatedUnion.locationInfoType ('y') = Indentifies the Location Information Type contained in the locationInformationUnion.</line>
+          <line>LocationInfoDiscriminatedUnion.locationInfoUnion (of type LocationInfoUnion) = The Location Information.</line>
+          <line>LocationInfoUnion variant[pointLocationInfo, linearLocationInfo, areaLocationInfo] = Union for the different types of Location Information</line>
+          <line>LocationInfoUnion.pointLocationInfo (of type PointLocationInfo) = Point Location Information.</line>
+          <line>PointLocationInfo struct[name, mainLocation, locationType] = Point Location specific Location Information.</line>
+          <line>PointLocationInfo.name ('s') = Name of the location.</line>
+          <line>PointLocationInfo.mainLocation (of type Coordinate) = Coordinates of the main location.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+          <line>PointLocationInfo.locationType ('y') = The type of point location.</line>
+          <line>LocationInfoUnion.linearLocationInfo (of type LinearLocationInfo) = Linear Location Information.</line>
+          <line>LinearLocationInfo struct[name, mainLocation, fromLocationName, fromLocationParentName, toLocationName, toLocationParentName, coordinates] = Linear Location specific Location Information.</line>
+          <line>LinearLocationInfo.name ('s') = Name of the location.</line>
+          <line>LinearLocationInfo.mainLocation (of type Coordinate) = Coordinates of the main location.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+          <line>LinearLocationInfo.fromLocationName ('s') = Name of the 'from' location.</line>
+          <line>LinearLocationInfo.fromLocationParentName ('s') = Name of parent of the 'from' location.</line>
+          <line>LinearLocationInfo.toLocationName ('s') = Name of the 'to' location.</line>
+          <line>LinearLocationInfo.toLocationParentName ('s') = Name of the parent of the 'to' location.</line>
+          <line>LinearLocationInfo.coordinates (of type Coordinate) = List of coordinates of the location.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+          <line>LocationInfoUnion.areaLocationInfo (of type AreaLocationInfo) = Area Location Information.</line>
+          <line>AreaLocationInfo struct[name, mainLocation] = Area Location specific Location Information.</line>
+          <line>AreaLocationInfo.name ('s') = Name of the location.</line>
+          <line>AreaLocationInfo.mainLocation (of type Coordinate) = Coordinates of the main location.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+          <line>TrafficIncident.causeTexts ('s') = Textual representations of the causes.</line>
+          <line>TrafficIncident.applicabilityTexts ('s') = Textual representations of the applicability.</line>
+          <line>TrafficIncident.adviceTexts ('s') = Textual representations of the advices.</line>
+          <line>TrafficIncident.locationBoundingBox (of type RectangularArea) = A bounding box in around the location.</line>
+          <line>RectangularArea struct[bottomLeft, topRight] = This datatype represents a rectangular area. The area is defined by the WGS84 coordinates of its bottomLeft and topRight corners.</line>
+          <line>RectangularArea.bottomLeft (of type Coordinate) = The bottom-left corner of the area.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+          <line>RectangularArea.topRight (of type Coordinate) = The top-right corner of the area.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+          <line>TrafficIncident.categoryIds ('i') = Category Ids.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetTexts">
+      <doc>
+        <line>getTexts = Get the texts for a number of Traffic Incidents.</line>
+      </doc>
+      <arg direction="in" name="trafficIncidentIds" type="ai">
+        <doc>
+          <line>trafficIncidentIds = The Ids of the Traffic Incidents for which the texts are requested.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="textDetailLevel" type="y">
+        <doc>
+          <line>textDetailLevel = The amount of detail to be provided in the texts.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="texts" type="as">
+        <doc>
+          <line>texts = 
+                Text information per requested traffic incident.
+                The texts will be in the same order as the trafficIncidentIds in the request.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="AddUpdateListener">
+      <doc>
+        <line>addUpdateListener = 
+        Add a listener which is notified in case of any update in the traffic information.
+        In case of an update the Updates() method of the listener is called.</line>
+      </doc>
+      <arg direction="in" name="listenerId" type="i">
+        <doc>
+          <line>listenerId = Unique Id, on this node, generated by the caller.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="warningLevels" type="ay">
+        <doc>
+          <line>warningLevels = 
+                Only incidents with one of the specified warning levels will be returned.
+                In case of an empty list, traffic incidents with any warning level (and no specified warning level) are returned.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="categoryIds" type="ai">
+        <doc>
+          <line>categoryIds = 
+                Only incidents with one of the specified cateory Ids will be returned.
+                In case of an empty list, traffic incidents with any category Id (including no category Id) are returned.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="RemoveUpdateListener">
+      <doc>
+        <line>removeUpdateListener = 
+        Remove an update listener, which was installed via addUpdateListener.</line>
+      </doc>
+      <arg direction="in" name="listenerId" type="i">
+        <doc>
+          <line>listenerId = Unique Id of the listener to be removed.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="AddAreasUpdateListener">
+      <doc>
+        <line>addAreasUpdateListener = 
+        Add a listener which is notified in case of an update in the traffic information in one or more specific area's.
+        In case of an update the UpdatesInAreas() method of the listener is called.</line>
+      </doc>
+      <arg direction="in" name="listenerId" type="i">
+        <doc>
+          <line>listenerId = Unique Id, on this node, generated by the caller.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="warningLevels" type="ay">
+        <doc>
+          <line>warningLevels = 
+                Only incidents with one of the specified warning levels will be returned.
+                In case of an empty list, traffic incidents with any warning level (and no specified warning level) are returned.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="categoryIds" type="ai">
+        <doc>
+          <line>categoryIds = 
+                Only incidents with one of the specified cateory Ids will be returned.
+                In case of an empty list, traffic incidents with any category Id (including no category Id) are returned.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="areas" type="a((ddi)(ddi))">
+        <doc>
+          <line>areas (of type RectangularArea) = The area's to be observed for changes.</line>
+          <line>RectangularArea struct[bottomLeft, topRight] = This datatype represents a rectangular area. The area is defined by the WGS84 coordinates of its bottomLeft and topRight corners.</line>
+          <line>RectangularArea.bottomLeft (of type Coordinate) = The bottom-left corner of the area.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+          <line>RectangularArea.topRight (of type Coordinate) = The top-right corner of the area.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="RemoveAreasUpdateListener">
+      <doc>
+        <line>removeAreasUpdateListener = 
+        Remove an areas update listener, which was installed via addAreasUpdateListener.</line>
+      </doc>
+      <arg direction="in" name="listenerId" type="i">
+        <doc>
+          <line>listenerId = Unique Id of the listener to be removed.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="AddTrafficIncidentsStatusListener">
+      <doc>
+        <line>addTrafficIncidentsStatusListener = 
+        Indicate to the service that this node is interested in the TrafficIncidentsStatus broadcast.</line>
+      </doc>
+    </method>
+    <method name="RemoveTrafficIncidentsStatusListener">
+      <doc>
+        <line>removeTrafficIncidentsStatusListener = 
+        Indicate to the service that this node is no longer interested in the TrafficIncidentsStatus broadcast.</line>
+      </doc>
+    </method>
+    <method name="AddFeedInformationListener">
+      <doc>
+        <line>addFeedInformationListener = 
+        Indicate to the service that this node is interested in the FeedInformation broadcast.</line>
+      </doc>
+    </method>
+    <method name="RemoveFeedInformationListener">
+      <doc>
+        <line>removeFeedInformationListener = 
+        Indicate to the service that this node is no longer interested in the FeedInformation broadcast.</line>
+      </doc>
+    </method>
+    <signal name="Updates">
+      <doc>
+        <line>updates = 
+        If a client has registered itself as a listener for any updates in the traffic incidents,
+        this method is called if there are changes.
+        The list of unchangedTrafficIncidentIds is redundant, but by providing this list, the client
+        doesn't have to maintain a list of 'current traffic incidents'.
+        Example: A client which completely redraws the list if there are changes. The client
+        merges the lists unchangedTrafficIncidentIds, changedTrafficIncidentIds and newTrafficIncidentIds,
+        gets the information for all these incidents from the service and
+        shows the information for these traffic incidents. It can e.g. highlight the new and changed
+        incidents, or put the new incidents on top.
+        Example: A client updates the list on the screen. It removes the deletedTrafficIncidentIds,
+        it updates the changedTrafficIncidentIds and adds the newTrafficIncidentIds.
+        In this case the client only requests the information for the new and changed incidents
+        from the service.</line>
+      </doc>
+      <arg direction="out" name="listenerId" type="i">
+        <doc>
+          <line>listenerId = Unique Id for the listener on a node.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="unchangedTrafficIncidentIds" type="ai">
+        <doc>
+          <line>unchangedTrafficIncidentIds = Ids of the Traffic Incidents which haven't changed.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="changedTrafficIncidentIds" type="ai">
+        <doc>
+          <line>changedTrafficIncidentIds = Ids of the Traffic Incidents which have changed.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="newTrafficIncidentIds" type="ai">
+        <doc>
+          <line>newTrafficIncidentIds = Ids of new Traffic Incidents.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="deletedTrafficIncidentIds" type="ai">
+        <doc>
+          <line>deletedTrafficIncidentIds = Ids of deleted Traffic Incidents.</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="UpdatesInAreas">
+      <doc>
+        <line>updatesInAreas = 
+        If a client has registered itself as a listener for updates in the traffic incidents in one or more area's
+        (via addAreaUpdateListener() or addAreasUpdateListener()),
+        this method is called if there are changes.</line>
+      </doc>
+      <arg direction="out" name="areas" type="a((ddi)(ddi))">
+        <doc>
+          <line>areas (of type RectangularArea) = The area's in which changes have taken place.</line>
+          <line>RectangularArea struct[bottomLeft, topRight] = This datatype represents a rectangular area. The area is defined by the WGS84 coordinates of its bottomLeft and topRight corners.</line>
+          <line>RectangularArea.bottomLeft (of type Coordinate) = The bottom-left corner of the area.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+          <line>RectangularArea.topRight (of type Coordinate) = The top-right corner of the area.</line>
+          <line>Coordinate struct[latitude, longitude, altitude] = This data type represents a 3D WGS84 coordinate.</line>
+          <line>Coordinate.latitude ('d') = latitude &gt;= -90 and &lt;= 90</line>
+          <line>Coordinate.longitude ('d') = longitude &gt;= -180 and &lt;= 180</line>
+          <line>Coordinate.altitude ('i') = altitude relative to WGS84 ellipsoid. Specified in meters.</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="TrafficIncidentsStatus">
+      <doc>
+        <line>trafficIncidentsStatus = 
+        If a client has registered itself as a listener for changes in the Traffic Incidents status,
+        this method is called upon changes in the Traffic Incidents status.
+        The provided status information is the combined status of the available feeds in the system.
+        Details of how the information is combined is given per parameter.</line>
+      </doc>
+      <arg direction="out" name="trafficIncidentFeedStatus" type="y">
+        <doc>
+          <line>trafficIncidentFeedStatus (of type TrafficIncidentFeedStatus) = 
+                The combined status of the Traffic Incident Feeds.
+                If all Feeds are UNAVAILABLE, the status is UNAVAILABLE.
+                Else, if any of the Feeds is CONNECTED, the status is CONNECTED.
+                Else, the status is DISCONNECTED (so there are Feeds available, but none of them is connected).</line>
+          <line>enum[UNAVAILABLE (0), CONNECTED (1), DISCONNECTED (2)]</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="trafficIncidentsStatus" type="y">
+        <doc>
+          <line>trafficIncidentsStatus (of type TrafficIncidentsStatus) = 
+                The combined status of the Traffic Incidents.
+                If the status for all the Feeds is AVAILABLE, , the combined status is AVAILABLE.
+                Else, if the status for one of the Feeds is PARTLY_AVAILABLE, the combined status is PARTLY_AVAILABLE.
+                Else, the combined status is UNAVAILABLE (so there are no Traffic Incidents at all).
+                
+                
+                Meaning of the enum values at this level:
+                UNAVAILABLE: The are no incidents in the system, and currently they can also not be received.
+                PARTLY_AVAILABLE: There are or may be incidents in the system, but the set of incidents is probably not up to date.
+                This means that big changes are possible. Examples: Upon start-up, some incidents have already been received,
+                but there are more incidents to receive. If the user is looking at the map display, new incidents may suddenly appear.
+                When a connection is lost, the information stays valid for some time, but the information may no longer be fully up to date,
+                and at some point in time a lot of incidents may suddenly disappear because they are no longer valid.
+                AVAILABLE: The reception and handling of the incidents is stable, and as up to date as possible with respect to the used protocol(s).
+                It is however still possible that there are currently no Traffic Incidents.</line>
+          <line>enum[UNAVAILABLE (0), PARTLY_AVAILABLE (1), AVAILABLE (2)]</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="FeedInformation">
+      <doc>
+        <line>feedInformation = 
+        If a client has registered itself as a listener for changes in the Feed Information,&#xD;
+        this method is called upon changes in the Feed Information.</line>
+      </doc>
+      <arg direction="out" name="feedsInformation" type="a(sssyy)">
+        <doc>
+          <line>feedsInformation (of type FeedInformation) = The information per Traffic Incident Feed.</line>
+          <line>FeedInformation struct[dataProviderName, protocolName, communicationChannelName, feedStatus, trafficIncidentsStatus] = This data type provides information about a Traffic Incident Feed.</line>
+          <line>FeedInformation.dataProviderName ('s') = The name of the data provider.</line>
+          <line>FeedInformation.protocolName ('s') = 
+            The name of the protocol via which the Traffic Incidents are received.
+            There are no predefined values.</line>
+          <line>FeedInformation.communicationChannelName ('s') = 
+            The name of the communication channel.
+            There are no predefined values.</line>
+          <line>FeedInformation.feedStatus (of type TrafficIncidentFeedStatus) = The status of the Feed.</line>
+          <line>enum[UNAVAILABLE (0), CONNECTED (1), DISCONNECTED (2)]</line>
+          <line>FeedInformation.trafficIncidentsStatus (of type TrafficIncidentsStatus) = The status of the Traffic Incidents delivered by this Feed.</line>
+          <line>enum[UNAVAILABLE (0), PARTLY_AVAILABLE (1), AVAILABLE (2)]</line>
+        </doc>
+      </arg>
+    </signal>
+  </interface>
+</node>

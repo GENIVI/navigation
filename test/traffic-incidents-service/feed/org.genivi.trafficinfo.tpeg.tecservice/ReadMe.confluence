@@ -1,0 +1,2 @@
+This project contains a TPEG TEC service implementation for testing purposes.
+The TestPlayerTecService cycles through a small set of TEC messages.

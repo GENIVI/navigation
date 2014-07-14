@@ -1,0 +1,7 @@
+This project defines the TPEG-TEC data model.
+This model is only used to inject test messages into the TrafficIncidentsService PoC.
+Information on TPEG-TEC can be found in the following document (only available for TISA members):
+Intelligent Transport Systems (ITS) — Traffic and Travel Information (TTI) via Transport Protocol Experts Group, Generation 2 (TPEG2) - Part 15: Traffic Event Compact (TPEG2-TEC_3.1/001)
+
+
+tec-events.ecorediag, in de model folder, provides a good overview of the structure of a TEC Message.

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://org.genivi.filterexpr"
+            class="org.genivi.booleanexpr.FilterexprPackage"
+            genModel="model/FilterExpr.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated Family -->
+      <package
+            uri="http://org.genivi.family"
+            class="org.genivi.family.FamilyPackage"
+            genModel="model/Family.genmodel"/>
+   </extension>
+
+</plugin>

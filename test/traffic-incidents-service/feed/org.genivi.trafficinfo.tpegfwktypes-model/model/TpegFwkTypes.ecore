@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tpegfwktypes" nsURI="http://org.genivi.trafficinfo.tpegfwktypes"
+    nsPrefix="com.tomtom.ti">
+  <eAnnotations source="GenModel">
+    <details key="documentation" value="Copyright (C) 2013 TomTom International B.V.&#xD;&#xA;&#xD;&#xA;This Source Code Form is subject to the terms of the Mozilla Public&#xD;&#xA;License, v. 2.0. If a copy of the MPL was not distributed with this&#xD;&#xA;file, You can obtain one at http://mozilla.org/MPL/2.0/."/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="LocalisedShortString">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="languageCode" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="string" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LocationReferencingContainer">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="method" lowerBound="1"
+        upperBound="-1" eType="#//Method" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransportFrameTemplate">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metaInformationTODO" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="syncWord" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt" defaultValueLiteral="0"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldLength" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="headerCRC" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="frameType" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransportFrameType0" eSuperTypes="#//TransportFrameTemplate">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transportFrameContent"
+        lowerBound="1" eType="#//StreamDirectoryFrame" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TransportFrameType1" eSuperTypes="#//TransportFrameTemplate">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transportFrameContent"
+        lowerBound="1" eType="#//ServiceFrame" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceComponentFrame">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="SCID" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fieldLength" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scHeaderCRC" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceFrame">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="servEncID" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="serviceFrameContent" lowerBound="1"
+        eType="#//ServCompMultiplex" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SID" lowerBound="1" eType="#//ServiceIdentifier"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StreamDirectoryFrame">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="SID" lowerBound="1" upperBound="-1"
+        eType="#//ServiceIdentifier" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="numberOfServices" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="headerCRC" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServCompMultiplex">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="multiplexContent" lowerBound="1"
+        upperBound="-1" eType="#//ServiceComponentFrame" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServiceIdentifier">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sidA" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sidB" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="sidC" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServCompFrameProtected" eSuperTypes="#//ServiceComponentFrame">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="applicationContent" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataCRC" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServCompFrameCountedProtected" eSuperTypes="#//ServiceComponentFrame">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="messageCount" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="applicationContent" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataCRC" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServCompFramePrioritisedProtected" eSuperTypes="#//ServiceComponentFrame">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupPriority" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="applicationContent" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataCRC" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ServCompFramePrioritisedCountedProtected"
+      eSuperTypes="#//ServiceComponentFrame">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="groupPriority" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="messageCount" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="applicationContent" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataCRC" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MMCSwitch">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="messageID" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="versionID" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="messageExpiryTime" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="TODO: Change type to TPEG DateTime"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="cancelFlag" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="messageGenerationTime"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="TODO Change to TPEG DateTime."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="priority" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="TODO Change to TPEG type Priority"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageManagementContainer" eSuperTypes="#//MMCSwitch"/>
+  <eClassifiers xsi:type="ecore:EClass" name="MMCMasterMessage" eSuperTypes="#//MMCSwitch">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="multiPartMessageDirectory"
+        lowerBound="1" upperBound="255" eType="#//MultiPartMessageDirectory" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiPartMessageDirectory">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="partID" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="partType" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="TODO: change type to TPEG PartType"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MMCMessagePart" eSuperTypes="#//MMCSwitch">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="partID" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="updateMode" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="TODO: change type to TPEG type UpdateMode"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="masterMessageVersions"
+        upperBound="255" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Method"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TPEGLocationReference" eSuperTypes="#//Method"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DLR1LocationReference" eSuperTypes="#//Method"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TMCLocationReference" eSuperTypes="#//Method"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VICSLinkReference" eSuperTypes="#//Method"/>
+  <eClassifiers xsi:type="ecore:EClass" name="KoreanNodeLinkLocationReference" eSuperTypes="#//Method"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TETLocationReference" eSuperTypes="#//Method"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GLRLocationReference" eSuperTypes="#//Method"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OLRLocationReference" eSuperTypes="#//Method">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="locationData" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByteArray"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TimeServiceComponentFrame" eSuperTypes="#//ServiceComponentFrame">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="formattedDate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+  </eClassifiers>
+</ecore:EPackage>

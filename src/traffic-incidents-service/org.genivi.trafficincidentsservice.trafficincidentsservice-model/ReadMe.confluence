@@ -1,0 +1,3 @@
+This project defines the main interfaces of the TrafficIncidentsService. The data models for traffic incidents are in sub packages in other projects.
+
+TrafficIncidentsService.ecorediag, in de model folder, provides a good overview of the structure of the interfaces.

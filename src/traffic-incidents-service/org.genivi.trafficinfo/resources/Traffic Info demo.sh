@@ -1,0 +1,1 @@
+java -jar org-genivi-trafficinfo-1.0-SNAPSHOT.jar

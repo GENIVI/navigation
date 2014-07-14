@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="introspect.xsl"?>
+<!-- SPDX-License-Identifier: MPL-2.0
+     Copyright (C) 2014, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD., Neusoft Technology Solutions GmbH
+     This Source Code Form is subject to the terms of the
+     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="introspect.xsd" name="org.genivi.trafficincidentsservice.trafficincidentfeed">
+  <interface name="TrafficIncidentFeed">
+    <version>1.0.0 (06-03-2014)</version>
+    <method name="GetVersion">
+      <doc>
+        <line>getVersion = Get the API version of this interface implemented by the service.</line>
+      </doc>
+      <arg direction="out" name="version" type="(qqqs)">
+        <doc>
+          <line>version (of type Version) = The API version of this interface implemented by the service.</line>
+          <line>Version struct[major, minor, micro, date] = This datatype is used to provide version information.</line>
+          <line>Version.major ('q') = The major version number.</line>
+          <line>Version.minor ('q') = The minor version number.</line>
+          <line>Version.micro ('q') = The micro version number.</line>
+          <line>Version.date ('s') = The date of this version.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetLanguage">
+      <doc>
+        <line>getLanguage = Get the current language. In case of a client/server based Feed, this language can be sent to the server in order to receive any textual information in the right language.</line>
+      </doc>
+      <arg direction="out" name="languageCode" type="s">
+        <doc>
+          <line>languageCode = The currently used language, specified as ISO 639-3 language code (lower case).</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="countryCode" type="s">
+        <doc>
+          <line>countryCode = The currently used, country specific variant of the language, , specified as ISO 3166-1 alpha 3 country code (upper case).</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="AddLanguageListener">
+      <doc>
+        <line>addLanguageListener = Add this client as a listener for changes in the current language.</line>
+      </doc>
+    </method>
+    <method name="RemoveLanguageListener">
+      <doc>
+        <line>removeLanguageListener = Remove this client as a listener for changes in the current language.</line>
+      </doc>
+    </method>
+    <method name="Clear">
+      <doc>
+        <line>clear = Clear the internal store of the Traffic Incidents Service. This may be needed if the source of the Traffic Incidents is changed, or if the server indicates that a reset is needed.</line>
+      </doc>
+    </method>
+    <method name="UpdateIncidents">
+      <doc>
+        <line>updateIncidents = Update the Traffic Incidents in the internal store of the Traffic Incidents Service. These updates can consist of incidents to be removed (cancelledIncidentIds), and/or new or updated incidents (updatedIncidents). The 'cancels' are handled before the 'updates'.</line>
+      </doc>
+      <arg direction="in" name="feedId" type="u">
+        <doc>
+          <line>feedId = Unique Id of the Feed providing the update.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="cancelledIncidentIds" type="as">
+        <doc>
+          <line>cancelledIncidentIds = The unique Ids of the incidents to be deleted.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="updatedIncidents" type="a(syiiyiiiiia(yv)a(yya(sss)a(ya(yaia(yay))))a(ya(yaia(yay)))a(bia(nni)a(ya(yaia(yay))))ii(yay))">
+        <doc>
+          <line>updatedIncidents (of type TrafficIncident) = The new or updated incidents.</line>
+          <line>TrafficIncident struct[trafficIncidentId, effectCode, startTime, stopTime, tendency, lengthAffected, averageSpeedAbsolute, delay, segmentSpeedLimit, expectedSpeedAbsolute, causes, advices, applicability, temporarySpeedLimits, expirationTime, updateTime, locationReference] = Data model description of a Traffic Incident.</line>
+          <line>TrafficIncident.trafficIncidentId ('s') = unique Id</line>
+          <line>TrafficIncident.effectCode ('y') = Effect Code, optional value, NOT_SPECIFIED indicates not specified.</line>
+          <line>TrafficIncident.startTime ('i') = Start Time in minutes since the standard base time known as &quot;the epoch&quot;, namely January 1, 1970, 00:00:00 GMT. Optional value, -1 indicates not specified</line>
+          <line>TrafficIncident.stopTime ('i') = Stop Time in minutes since the standard base time known as &quot;the epoch&quot;, namely January 1, 1970, 00:00:00 GMT. Optional value, -1 indicates not specified</line>
+          <line>TrafficIncident.tendency ('y') = Tendency, optional value, NOT_SPECIFIED indicates not specified.</line>
+          <line>TrafficIncident.lengthAffected ('i') = Length of the event in meters, optional value, -1 indicates not specified.</line>
+          <line>TrafficIncident.averageSpeedAbsolute ('i') = Average speed in m/s at the given location, optional value, -1 indicates not specified.</line>
+          <line>TrafficIncident.delay ('i') = Delay in minutes, optional value, -1 indicates not specified.</line>
+          <line>TrafficIncident.segmentSpeedLimit ('i') = Maximum speed in m/s., optional value, -1 indicates not specified.</line>
+          <line>TrafficIncident.expectedSpeedAbsolute ('i') = The expectedSpeedAbsolute, in m/s, is used to signal the expected
+                  (normal) speed of traffic through the problem location. Value range 0, .. , 127 (0x7f).
+                  Optional value, -1 indicates not specified.</line>
+          <line>TrafficIncident.causes (of type CauseDiscriminatedUnion) = Causes.</line>
+          <line>CauseDiscriminatedUnion struct[causeType, causeUnion] = A type to transfer any Cause sub-type, together with an indication of which sub-type it is.</line>
+          <line>CauseDiscriminatedUnion.causeType ('y') = Indentifies the Cause sub-type contained in the causeUnion.</line>
+          <line>CauseDiscriminatedUnion.causeUnion (of type CauseUnion) = The Cause.</line>
+          <line>CauseUnion variant[directCause, linkedCause] = Union for the Cause sub-types.</line>
+          <line>CauseUnion.directCause (of type DirectCause) = Direct Cause.</line>
+          <line>DirectCause struct[mainCause, warningLevel, unverifiedInformation, subCause, lengthAffected, causeOffset, laneRestrictions, freeText] = A Direct Cause for the incident, i.e. all details of the cause are specified here.</line>
+          <line>DirectCause.mainCause ('y') = Main Cause for the incident.</line>
+          <line>DirectCause.warningLevel ('y') = Warning Level. Optional value, NOT_SPECIFIED indicates not specified.</line>
+          <line>DirectCause.unverifiedInformation ('b') = Indication of whether the information has been verified by an authority (like the police) or not.</line>
+          <line>DirectCause.subCause ('y') = More detailed cause. The actual value of this atttribute depends on the mainCause. So based on the mainCause it has to be cast to the related enum.</line>
+          <line>DirectCause.lengthAffected ('i') = Length of the cause in meters, optional value, -1 indicates not specified.</line>
+          <line>DirectCause.causeOffset ('i') = Offset (in metres) from the start of the Cause to the end of the Problem Location.
+                   When used together with Affected Length the cause can be positioned within the event more accurately.
+                   Without Cause Offset but with Affected Length defined the cause position is not defined.
+                   If neither Affected Length nor Cause Offset are defined the Cause spans the entire Problem Location.
+                   Value range: 0, .. , 2147483647 (0x7fffffff). Optional value, -1 indicates not specified.</line>
+          <line>DirectCause.laneRestrictions (of type LaneRestrictions) = Lane Restrictions. Optional value, represented by an array with 0 or 1 elements.</line>
+          <line>LaneRestrictions struct[laneRestrictionType, numberOfLanes] = Lane Restrictions.</line>
+          <line>LaneRestrictions.laneRestrictionType ('y') = Lane Restriction Type.</line>
+          <line>LaneRestrictions.numberOfLanes ('i') = Number of lanes affected by the Lane Restriction Type. Optional value, -1 indicates not specified.</line>
+          <line>DirectCause.freeText (of type LocalizedString) = Free Text in different languages.</line>
+          <line>LocalizedString struct[languageCode, countryCode, string] = A string in a specified language.</line>
+          <line>LocalizedString.languageCode ('s') = A language, specified as ISO 639-3 language code (lower case).</line>
+          <line>LocalizedString.countryCode ('s') = The country specific variant for the language, specified as ISO 3166-1 alpha 3 country code (upper case).&#xD;
+                               Optional, an empty string indicates not specified.</line>
+          <line>LocalizedString.string ('s') = A string in the specified language.</line>
+          <line>CauseUnion.linkedCause (of type LinkedCause) = Linked Cause.</line>
+          <line>LinkedCause struct[mainCause, causeTrafficIncidentId] = A Cause for the incident, with a reference to another incident, which is a cause for this incident.</line>
+          <line>LinkedCause.mainCause ('y') = Main Cause for the incident.</line>
+          <line>LinkedCause.causeTrafficIncidentId ('s') = Id of a TrafficIncident which is a cause for this incident.</line>
+          <line>TrafficIncident.advices (of type Advice) = Advices</line>
+          <line>Advice struct[mainAdvice, subAdvice, freeText, applicability] = Advice.</line>
+          <line>Advice.mainAdvice ('y') = Main advice.</line>
+          <line>Advice.subAdvice ('y') = More detailed advice. The actual value of this atttribute depends on the adviceCode. So based on the adviceCode it has to be cast to the related enum.</line>
+          <line>Advice.freeText (of type LocalizedString) = Free Text in different languages.</line>
+          <line>LocalizedString struct[languageCode, countryCode, string] = A string in a specified language.</line>
+          <line>LocalizedString.languageCode ('s') = A language, specified as ISO 639-3 language code (lower case).</line>
+          <line>LocalizedString.countryCode ('s') = The country specific variant for the language, specified as ISO 3166-1 alpha 3 country code (upper case).&#xD;
+                               Optional, an empty string indicates not specified.</line>
+          <line>LocalizedString.string ('s') = A string in the specified language.</line>
+          <line>Advice.applicability (of type Applicability) = Applicability of the advice.</line>
+          <line>Applicability struct[vehicleType, vehicleRelatedRestrictions] = Applicability.</line>
+          <line>Applicability.vehicleType ('y) = Vehicle Type.</line>
+          <line>Applicability.vehicleRelatedRestrictions (of type VehicleRelatedRestriction) = Restrictions.</line>
+          <line>VehicleRelatedRestriction struct[restrictionType, restrictionValue, restrictionLocationReference] = Vehicle Related Restriction.</line>
+          <line>VehicleRelatedRestriction.restrictionType ('y') = Restriction Type.</line>
+          <line>VehicleRelatedRestriction.restrictionValue ('i') = Restriction value. Optional value, represented by an array with 0 or 1 elements.</line>
+          <line>VehicleRelatedRestriction.restrictionLocationReference (of type LocationReference) = Description of the restriction location.</line>
+          <line>LocationReference struct[locationReferenceType, data] = Map database independent description of a location.</line>
+          <line>LocationReference.locationReferenceType ('y') = The type of location reference.</line>
+          <line>LocationReference.data ('y') = The actual data of the location reference.</line>
+          <line>TrafficIncident.applicability (of type Applicability) = Applicability.</line>
+          <line>Applicability struct[vehicleType, vehicleRelatedRestrictions] = Applicability.</line>
+          <line>Applicability.vehicleType ('y) = Vehicle Type.</line>
+          <line>Applicability.vehicleRelatedRestrictions (of type VehicleRelatedRestriction) = Restrictions.</line>
+          <line>VehicleRelatedRestriction struct[restrictionType, restrictionValue, restrictionLocationReference] = Vehicle Related Restriction.</line>
+          <line>VehicleRelatedRestriction.restrictionType ('y') = Restriction Type.</line>
+          <line>VehicleRelatedRestriction.restrictionValue ('i') = Restriction value. Optional value, represented by an array with 0 or 1 elements.</line>
+          <line>VehicleRelatedRestriction.restrictionLocationReference (of type LocationReference) = Description of the restriction location.</line>
+          <line>LocationReference struct[locationReferenceType, data] = Map database independent description of a location.</line>
+          <line>LocationReference.locationReferenceType ('y') = The type of location reference.</line>
+          <line>LocationReference.data ('y') = The actual data of the location reference.</line>
+          <line>TrafficIncident.temporarySpeedLimits (array of type TemporarySpeedLimit) = Temporary speed limit information suitable for display to the driver.</line>
+          <line>TemporarySpeedLimit struct[unitsMPH, offset, temporarySpeedLimitSections, applicability] = One of the highly visible attributes of
+                           many roadworks is the imposed Temporary Speed Limit. This component provides the ability to define temporary speed limit
+                           information suitable for display to the driver. Temporary Speed limit info associated with the event is defined in either
+                           kph or mph. Multiple sections with a different speed value may be provided with a length. The offset from the end of the
+                           Location to the start of the first speed limit restriction allows the speed limit zone to be positioned independently of
+                           the cause. Applicability can be added if needed.
+          </line>
+          <line>TemporarySpeedLimit.unitsMPH ('b') = Units definition for this Temporary Speed Limit. If true, the unit is mph, else the unit is km/h.</line>
+          <line>TemporarySpeedLimit.offset ('i') = Offset defines the distance in meters from the start of the Temporary speed limit to the end of the
+                           Location. If not defined then first SpeedLimitSection starts at the beginning of the Location.
+                           Value range: 0, .. , 2147483647 (0x7fffffff)
+          </line>
+          <line>TemporarySpeedLimit.temporarySpeedLimitSections (array of TemporarySpeedLimitSection) = Speed Limit information per section.</line>
+          <line>TemporarySpeedLimitSection struct[speedLimitValue, speedLimitValueWet, speedLimitLength] = Each section of a TemporarySpeedLimit is defined
+                           by a speed value and length.
+                           A speed value for use in Wet conditions is also optionally available.
+          </line>
+          <line>TemporarySpeedLimitSection.speedLimitValue ('n') = Speed Limit numerical value in kph or mph. Value range: 0, .. , 32767 (0x7fff)</line>
+          <line>TemporarySpeedLimitSection.speedLimitValueWet ('n') = Speed Limit numerical value to be used in wet conditions; in kph or mph.
+                           Value range: 0, .. , 32767 (0x7fff)
+          </line>
+          <line>TemporarySpeedLimitSection.speedLimitLength ('i') = Length of the SpeedLimitSection, If this is not defined, then section finishes
+                           at end of the Problem Location. Value range: 0, .. , 2147483647 (0x7fffffff)
+          </line>
+          <line>TemporarySpeedLimit.applicability (of type Applicability) = Applicability.</line>
+          <line>Applicability struct[vehicleType, vehicleRelatedRestrictions] = Applicability.</line>
+          <line>Applicability.vehicleType ('y) = Vehicle Type.</line>
+          <line>Applicability.vehicleRelatedRestrictions (of type VehicleRelatedRestriction) = Restrictions.</line>
+          <line>VehicleRelatedRestriction struct[restrictionType, restrictionValue, restrictionLocationReference] = Vehicle Related Restriction.</line>
+          <line>VehicleRelatedRestriction.restrictionType ('y') = Restriction Type.</line>
+          <line>VehicleRelatedRestriction.restrictionValue ('i') = Restriction value. Optional value, represented by an array with 0 or 1 elements.</line>
+          <line>VehicleRelatedRestriction.restrictionLocationReference (of type LocationReference) = Description of the restriction location.</line>
+          <line>LocationReference struct[locationReferenceType, data] = Map database independent description of a location.</line>
+          <line>LocationReference.locationReferenceType ('y') = The type of location reference.</line>
+          <line>LocationReference.data ('y') = The actual data of the location reference.</line>
+          <line>TrafficIncident.expirationTime ('i') = The time after which this information is no longer valid.
+                           The time is expressed in minutes since the standard base time known as &quot;the epoch&quot;, namely January 1, 1970, 00:00:00 GMT.
+                           Optional value, -1 indicates not specified</line>
+          <line>TrafficIncident.updateTime ('i') = The time at which the information in this incident was updated.
+                           The time is expressed in minutes since the standard base time known as &quot;the epoch&quot;, namely January 1, 1970, 00:00:00 GMT.
+                           Optional value, -1 indicates not specified</line>
+          <line>TrafficIncident.locationReference (of type LocationReference) = Description of the location.</line>
+          <line>LocationReference struct[locationReferenceType, data] = Map database independent description of a location.</line>
+          <line>LocationReference.locationReferenceType ('y') = The type of location reference.</line>
+          <line>LocationReference.data ('y') = The actual data of the location reference.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="UpdateStatus">
+      <doc>
+        <line>updateStatus = Update the status of a Feed.</line>
+      </doc>
+      <arg direction="in" name="feedId" type="u">
+        <doc>
+          <line>feedId = Unique Id of the Feed providing the status update.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="feedStatus" type="y">
+        <doc>
+          <line>feedStatus (of type TrafficIncidentFeedStatus) = Status of the Feed.</line>
+          <line>enum[UNAVAILABLE (0), CONNECTED (1), DISCONNECTED (2)]</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="incidentsStatus" type="y">
+        <doc>
+          <line>incidentsStatus (of type TrafficIncidentsStatus) = Incident Status of the Feed.</line>
+          <line>enum[UNAVAILABLE (0), PARTLY_AVAILABLE (1), AVAILABLE (2)]</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="RegisterFeed">
+      <doc>
+        <line>registerFeed = Register a Feed that is going to provide Traffic Incidents.
+              A Traffic Incident Feed that wants to provide Traffic Incidents to the TrafficIncidentsService has to register itself
+              via this method. The input parameters provide a description of the Feed. The returned feedId is used to identify the Feed in all
+              methods where the Feed is providing information to the TrafficIncidentsService.</line>
+      </doc>
+      <arg direction="in" name="dataProviderName" type="s">
+        <doc>
+          <line>dataProviderName = Name of the data provider for this Feed, e.g. 'TomTom'.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="protocolName" type="s">
+        <doc>
+          <line>protocolName = Name of the protocol used by this Feed, e.g. 'TPG-TEC'.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="communicationChannelName" type="s">
+        <doc>
+          <line>communicationChannelName = Name of the communication channel used by this Feed, e.g. 'FM Tuner'.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="feedId" type="u">
+        <doc>
+          <line>feedId = Unique Id for the registered Feed.</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="LanguageChanged">
+      <doc>
+        <line>LanguageChanged = 
+        When a client registers itself for being notified of language changes (see AddLanguageListener()),
+        this signal is sent to this client only, to inform this client about the currently used language.
+        On a language change inside the TrafficIncidentsService, there is a broadcast with the new language.
+        The broadcast only actually occurs if there is at least one registered listener (see AddLanguageListener).</line>
+      </doc>
+      <arg direction="out" name="languageCode" type="s">
+        <doc>
+          <line>languageCode = The currently used language, specified as ISO 639-3 language code (lower case).</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="countryCode" type="s">
+        <doc>
+          <line>countryCode = The currently used, country specific variant of the language, specified as ISO 3166-1 alpha 3 country code (upper case). Optional value, an empty string indicates 'not specified'.</line>
+        </doc>
+      </arg>
+    </signal>
+  </interface>
+</node>

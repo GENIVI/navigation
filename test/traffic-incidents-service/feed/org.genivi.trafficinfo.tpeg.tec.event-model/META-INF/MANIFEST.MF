@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: %pluginName
+Bundle-SymbolicName: tec-model;singleton:=true
+Bundle-Version: 1.0.0
+Bundle-ClassPath: .
+Bundle-Vendor: %providerName
+Bundle-Localization: plugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Export-Package: org.genivi.trafficinfo.tpeg.tec.event,
+ org.genivi.trafficinfo.tpeg.tec.event.impl,
+ org.genivi.trafficinfo.tpeg.tec.event.util
+Require-Bundle: org.eclipse.core.runtime,
+ org.eclipse.emf.ecore;visibility:=reexport,
+ org.genivi.trafficinfo.tpegfwktypes-model;visibility:=reexport
+Bundle-ActivationPolicy: lazy

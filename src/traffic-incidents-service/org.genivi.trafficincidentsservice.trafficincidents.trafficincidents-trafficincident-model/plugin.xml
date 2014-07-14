@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+ <copyright>
+ </copyright>
+
+ $Id$
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <!-- @generated TrafficIncident -->
+      <package
+            uri="http://org.genivi.trafficinfo"
+            class="org.genivi.trafficincidentsservice.trafficincidents.trafficincident.trafficincidentPackage"
+            genModel="model/TrafficIncident.genmodel"/>
+   </extension>
+
+</plugin>

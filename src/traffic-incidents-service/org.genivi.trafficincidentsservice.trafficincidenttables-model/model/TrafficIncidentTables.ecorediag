@@ -1,0 +1,1726 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_Mlnn8T8-EeCZw9yYN1vKNg" type="EcoreTools" name="TrafficIncidentTables.ecorediag" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_TAWhoFoXEeC3H6JlN9FMhA" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_TAWho1oXEeC3H6JlN9FMhA" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_TAWhpFoXEeC3H6JlN9FMhA" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_Vl61sFoXEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//EffectCode/TRAFFIC_FLOW_UNKNOWN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Vl61sVoXEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_c5zTAFoXEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//EffectCode/FREE_TRAFFIC_FLOW"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_c5zTAVoXEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_G6fGkFoYEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//EffectCode/HEAVY_TRAFFIC"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_G6fGkVoYEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_MUXVUFoYEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//EffectCode/SLOW_TRAFFIC"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_MUXVUVoYEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_QvTPkFoYEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//EffectCode/QUEUING_TRAFFIC"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_QvTPkVoYEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_-7A5IFoYEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//EffectCode/STATIONARY_TRAFFIC"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-7A5IVoYEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_D3Z6oFoZEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//EffectCode/NO_TRAFFIC_FLOW"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_D3Z6oVoZEeC3H6JlN9FMhA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_TAWhpVoXEeC3H6JlN9FMhA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_TAWhploXEeC3H6JlN9FMhA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_TAWhp1oXEeC3H6JlN9FMhA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_TAWhoVoXEeC3H6JlN9FMhA" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//EffectCode"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_TAWholoXEeC3H6JlN9FMhA" x="24" y="48"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_ehxrgFoZEeC3H6JlN9FMhA" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_ehxrg1oZEeC3H6JlN9FMhA" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_ehxrhFoZEeC3H6JlN9FMhA" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_iR8xgFoZEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Tendency/SLIGHTLY_INCREASING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_iR8xgVoZEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_mw7eQFoZEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Tendency/INCREASING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_mw7eQVoZEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_sMRsoFoZEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Tendency/STRONGLY_INCREASING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_sMRsoVoZEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_wbAW4FoZEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Tendency/SLIGHTLY_DECREASING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_wbAW4VoZEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_1vqHYFoZEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Tendency/DECREASING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1vqHYVoZEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_5ac-IFoZEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Tendency/STRONGLY_DECREASING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_5ac-IVoZEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__hCh4FoZEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Tendency/CONSTANT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__hCh4VoZEeC3H6JlN9FMhA"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_ehxrhVoZEeC3H6JlN9FMhA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ehxrhloZEeC3H6JlN9FMhA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ehxrh1oZEeC3H6JlN9FMhA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_ehxrgVoZEeC3H6JlN9FMhA" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//Tendency"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ehxrgloZEeC3H6JlN9FMhA" x="492" y="24"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_4XKfsFoaEeC3H6JlN9FMhA" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_4XKfs1oaEeC3H6JlN9FMhA" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_4XKftFoaEeC3H6JlN9FMhA" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_9erMEFoaEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/TRAFFIC_CONGESTION"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_9erMEVoaEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_AwHusFobEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/ACCIDENT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_AwHusVobEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Cn-BIFobEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/ROADWORKS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Cn-BIVobEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_EtY1gFobEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/NARROW_LANES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_EtY1gVobEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_H6XH0FobEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/IMPASSIBILITY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_H6XH0VobEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Laj4IFobEeC3H6JlN9FMhA" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/SLIPPERY_ROAD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Laj4IVobEeC3H6JlN9FMhA"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_203rcVqnEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/AQUAPLANING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_203rclqnEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_8iU9gFqnEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/FIRE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_8iU9gVqnEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_-y3cwFqnEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/HAZARDOUS_DRIVING_CONDITIONS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-y3cwVqnEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_EZcDsFqoEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/OBJECTS_ON_THE_ROAD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_EZcDsVqoEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_IoNxQFqoEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/ANIMALS_ON_ROADWAY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_IoNxQVqoEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_L516EFqoEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/PEOPLE_ON_ROADWAY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_L516EVqoEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_PSDMAFqoEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/BROKEN_DOWN_VEHICLES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_PSDMAVqoEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VkQJ4FqoEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/VEHICLE_ON_WRONG_CARRIAGEWAY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VkQJ4VqoEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_bBrb4FqoEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/RESCUE_AND_RECOVERY_WORK_IN_PROGRESS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_bBrb4VqoEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_GU9fwFqpEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/REGULATORY_MEASURE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_GU9fwVqpEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_NNIRcFqpEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/EXTREME_WEATHER_CONDITIONS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_NNIRcVqpEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_TbKhAFqpEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/VISIBILITY_REDUCED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_TbKhAVqpEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ZPpoIFqpEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/PRECIPITATION"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ZPpoIVqpEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_fWg4sFqpEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/RECKLESS_PERSONS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_fWg4sVqpEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_nwjFwFqpEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/OVER_HEIGHT_WARNING_SYSTEM_TRIGGERED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_nwjFwVqpEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_xdzOMFqpEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/TRAFFIC_REGULATIONS_CHANGED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_xdzOMVqpEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_3oenwFqpEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/MAJOR_EVENT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_3oenwVqpEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_7O1DYFqpEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/SERVICE_NOT_OPERATING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_7O1DYVqpEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__1RqEFqpEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/SERVICE_NOT_USEABLE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__1RqEVqpEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_F7BgUFqqEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/SLOW_MOVING_VEHICLES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_F7BgUVqqEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_L7ZuYFqqEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/DANGEROUS_END_OF_QUEUE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_L7ZuYVqqEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Ts24gFqqEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/RISK_OF_FIRE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Ts24gVqqEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Z_6K8FqqEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/TIME_DELAY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Z_6K8VqqEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_gR5tcFqqEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/POLICE_CHECKPOINT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_gR5tcVqqEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_q5RUwFqqEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//CauseCode/MALFUNCTIONING_ROADSIDE_EQUIPMENT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_q5RUwVqqEeCUVO0erQdu-A"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_4XKftVoaEeC3H6JlN9FMhA"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_4XKftloaEeC3H6JlN9FMhA"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_4XKft1oaEeC3H6JlN9FMhA"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_4XKfsVoaEeC3H6JlN9FMhA" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//CauseCode"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_4XKfsloaEeC3H6JlN9FMhA" x="24" y="312"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_qWg7EFqsEeCUVO0erQdu-A" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_qWg7E1qsEeCUVO0erQdu-A" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_qWg7FFqsEeCUVO0erQdu-A" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_t9vgcFqsEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//WarningLevel/INFORMATIVE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_t9vgcVqsEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_yiXiMFqsEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//WarningLevel/DANGER_LEVEL_1"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_yiXiMVqsEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_5ChcgFqsEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//WarningLevel/DANGER_LEVEL_2"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_5ChcgVqsEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_9D5AMFqsEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//WarningLevel/DANGER_LEVEL_3"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_9D5AMVqsEeCUVO0erQdu-A"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_qWg7FVqsEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_qWg7FlqsEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_qWg7F1qsEeCUVO0erQdu-A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_qWg7EVqsEeCUVO0erQdu-A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//WarningLevel"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_qWg7ElqsEeCUVO0erQdu-A" x="744" y="36"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_6n3XwFquEeCUVO0erQdu-A" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_6n3Xw1quEeCUVO0erQdu-A" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_6n3XxFquEeCUVO0erQdu-A" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_92l9kFquEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//TrafficCongestion/INCREASED_VOLUME_OF_TRAFFIC"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_92l9kVquEeCUVO0erQdu-A"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_6n3XxVquEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_6n3XxlquEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_6n3Xx1quEeCUVO0erQdu-A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_6n3XwVquEeCUVO0erQdu-A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//TrafficCongestion"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6n3XwlquEeCUVO0erQdu-A" x="372" y="312"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_8ujiAFqvEeCUVO0erQdu-A" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_8ujiA1qvEeCUVO0erQdu-A" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_8ujiBFqvEeCUVO0erQdu-A" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_Ap9AkFqwEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RoadWorks/MAJOR_ROADWORKS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Ap9AkVqwEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_HPoUEFqwEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RoadWorks/ROAD_MARKING_WORK"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_HPoUEVqwEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_OVRhEFqwEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RoadWorks/SLOW_MOVING_ROAD_MAINTENANCE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_OVRhEVqwEeCUVO0erQdu-A"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_8ujiBVqvEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_8ujiBlqvEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_8ujiB1qvEeCUVO0erQdu-A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_8ujiAVqvEeCUVO0erQdu-A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//RoadWorks"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_8ujiAlqvEeCUVO0erQdu-A" x="372" y="552"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_ZH2S0FqwEeCUVO0erQdu-A" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_ZH2S01qwEeCUVO0erQdu-A" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_ZH2S1FqwEeCUVO0erQdu-A" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_bkJ9MFqwEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//NarrowLanes/CONTRAFLOW"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_bkJ9MVqwEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_iVwM0FqwEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//NarrowLanes/HARD_SHOULDER_CLOSED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_iVwM0VqwEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_4TOJsFqwEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//NarrowLanes/SLIP_LANE_CLOSED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_4TOJsVqwEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_9_a3gFqwEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//NarrowLanes/CRAWLER_LANE_CLOSED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_9_a3gVqwEeCUVO0erQdu-A"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_ZH2S1VqwEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_ZH2S1lqwEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_ZH2S11qwEeCUVO0erQdu-A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_ZH2S0VqwEeCUVO0erQdu-A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//NarrowLanes"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ZH2S0lqwEeCUVO0erQdu-A" x="372" y="660"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_HCQxAFqxEeCUVO0erQdu-A" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_HCQxA1qxEeCUVO0erQdu-A" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_HCQxBFqxEeCUVO0erQdu-A" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_RnUrMFqxEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Impassibility/FLOODING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_RnUrMVqxEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_WREdgFqxEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Impassibility/DANGER_OF_AVALANCHES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_WREdgVqxEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_eVF-UFqxEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Impassibility/BLASTING_OF_AVALANCHES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_eVF-UVqxEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_jwZJYFqxEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Impassibility/LANDSLIPS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_jwZJYVqxEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_oleB8FqxEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Impassibility/CHEMICAL_SPILLAGE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_oleB8VqxEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_TBJ5MFZaEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Impassibility/WINTER_CLOSURE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_TBJ5MVZaEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_HCQxBVqxEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_HCQxBlqxEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_HCQxB1qxEeCUVO0erQdu-A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_HCQxAVqxEeCUVO0erQdu-A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//Impassibility"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_HCQxAlqxEeCUVO0erQdu-A" x="372" y="804"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_0iueIFqxEeCUVO0erQdu-A" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_0iueI1qxEeCUVO0erQdu-A" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_0iueJFqxEeCUVO0erQdu-A" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_39f74FqxEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlipperyRoad/HEAVY_FROST_ON_ROAD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_39f74VqxEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_9rmuMFqxEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlipperyRoad/FUEL_ON_ROAD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_9rmuMVqxEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ECeJoFqyEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlipperyRoad/MUD_ON_ROAD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ECeJoVqyEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_JSobsFqyEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlipperyRoad/SNOW_ON_ROAD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_JSobsVqyEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_RNsNwFqyEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlipperyRoad/ICE_ON_ROAD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_RNsNwVqyEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_XPR8wFqyEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlipperyRoad/BLACK_ICE_ON_ROAD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_XPR8wVqyEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_d9Ji8FqyEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlipperyRoad/OIL_ON_ROAD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_d9Ji8VqyEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_iY6joFqyEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlipperyRoad/LOOSE_CHIPPINGS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_iY6joVqyEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_p_cQIFqyEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlipperyRoad/INSTANT_BLACK_ICE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_p_cQIVqyEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_iT9U4FZaEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlipperyRoad/ROADS_SALTED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_iT9U4VZaEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_0iueJVqxEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_0iueJlqxEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_0iueJ1qxEeCUVO0erQdu-A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_0iueIVqxEeCUVO0erQdu-A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//SlipperyRoad"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0iueIlqxEeCUVO0erQdu-A" x="372" y="996"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_z6-sMFqyEeCUVO0erQdu-A" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_z8K_AFqyEeCUVO0erQdu-A" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_z8K_AVqyEeCUVO0erQdu-A" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_4YYEkFqyEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Fire/MAJOR_FIRE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_4YYEkVqyEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_o0b_UFZaEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Fire/FOREST_FIRE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_o0b_UVZaEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_z8K_AlqyEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_z8K_A1qyEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_z8K_BFqyEeCUVO0erQdu-A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_z6-sMVqyEeCUVO0erQdu-A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//Fire"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_z6-sMlqyEeCUVO0erQdu-A" x="756" y="300"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_CHM6UFqzEeCUVO0erQdu-A" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_CHWrUFqzEeCUVO0erQdu-A" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_CHWrUVqzEeCUVO0erQdu-A" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_HyMHMFqzEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//HazardousDrivingConditions/ROCKFALLS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_HyMHMVqzEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Ns4kAFqzEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//HazardousDrivingConditions/EARTHQUAKE_DAMAGE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Ns4kAVqzEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_TlLNEFqzEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//HazardousDrivingConditions/SEWER_COLLAPSE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_TlLNEVqzEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_aOKTQFqzEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//HazardousDrivingConditions/SUBSIDENCE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_aOKTQVqzEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_fOv4QFqzEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//HazardousDrivingConditions/SNOW_DRIFTS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_fOv4QVqzEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_kS6VsFqzEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//HazardousDrivingConditions/STORM_DAMAGE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_kS6VsVqzEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ozwqsFqzEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//HazardousDrivingConditions/BURST_PIPE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ozwqsVqzEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_03TUQFZaEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//HazardousDrivingConditions/VOLCANO_ERUPTION"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_03TUQVZaEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_4K-EcFZaEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//HazardousDrivingConditions/FALLING_ICE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_4K-EcVZaEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_CHWrUlqzEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_CHWrU1qzEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_CHWrVFqzEeCUVO0erQdu-A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_CHM6UVqzEeCUVO0erQdu-A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//HazardousDrivingConditions"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_CHM6UlqzEeCUVO0erQdu-A" x="756" y="420"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_0IGFsFqzEeCUVO0erQdu-A" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_0IGFs1qzEeCUVO0erQdu-A" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_0IGFtFqzEeCUVO0erQdu-A" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_7TcSEFqzEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ObjectsOnTheRoad/SHED_LOAD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_7TcSEVqzEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__j4zkFqzEeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ObjectsOnTheRoad/PARTS_OF_VEHICLES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__j4zkVqzEeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_EpwhMFq0EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ObjectsOnTheRoad/PARTS_OF_TYRES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_EpwhMVq0EeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_J1KPEFq0EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ObjectsOnTheRoad/BIG_OBJECTS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_J1KPEVq0EeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_PDhxYFq0EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ObjectsOnTheRoad/FALLEN_TREES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_PDhxYVq0EeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_VvQCgFq0EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ObjectsOnTheRoad/HUB_CAPS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_VvQCgVq0EeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Ne-0oFZbEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ObjectsOnTheRoad/WAITING_VEHICLES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Ne-0oVZbEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_0IGFtVqzEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_0IGFtlqzEeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_0IGFt1qzEeCUVO0erQdu-A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_0IGFsVqzEeCUVO0erQdu-A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//ObjectsOnTheRoad"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_0IGFslqzEeCUVO0erQdu-A" x="696" y="684"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_lLfHAFq0EeCUVO0erQdu-A" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_lMrZ0Fq0EeCUVO0erQdu-A" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_lMrZ0Vq0EeCUVO0erQdu-A" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_oDDKAFq0EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AnimalsOnRoadway/WILD_ANIMALS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_oDDKAVq0EeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_s7rs4Fq0EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AnimalsOnRoadway/HERD_OF_ANIMALS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_s7rs4Vq0EeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_w-y9AFq0EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AnimalsOnRoadway/SMALL_ANIMALS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_w-y9AVq0EeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_1S2zMFq0EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AnimalsOnRoadway/LARGE_ANIMALS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1S2zMVq0EeCUVO0erQdu-A"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_lMrZ0lq0EeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_lMrZ01q0EeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_lMrZ1Fq0EeCUVO0erQdu-A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_lLfHAVq0EeCUVO0erQdu-A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//AnimalsOnRoadway"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_lLfHAlq0EeCUVO0erQdu-A" x="732" y="876"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_7KKk0Fq0EeCUVO0erQdu-A" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_7KKk01q0EeCUVO0erQdu-A" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_7KKk1Fq0EeCUVO0erQdu-A" type="5008">
+      <children xmi:type="notation:Node" xmi:id="__ATv8Fq0EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//PeopleOnRoadway/CHILDREN_ON_ROADWAY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__ATv8Vq0EeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_E5PSMFq1EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//PeopleOnRoadway/CYCLISTS_ON_ROADWAY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_E5PSMVq1EeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_LkKSEFq1EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//PeopleOnRoadway/MOTOR_CYCLIST_ON_ROADWAY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LkKSEVq1EeCUVO0erQdu-A"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_7KKk1Vq0EeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_7KKk1lq0EeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_7KKk11q0EeCUVO0erQdu-A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_7KKk0Vq0EeCUVO0erQdu-A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//PeopleOnRoadway"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_7KKk0lq0EeCUVO0erQdu-A" x="696" y="1008"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_W8uFwFq1EeCUVO0erQdu-A" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_W8uFw1q1EeCUVO0erQdu-A" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_W8uFxFq1EeCUVO0erQdu-A" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_Z8-xwFq1EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//BrokenDownVehicles/BROKEN_DOWN_VEHICLE_BURNING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Z8-xwVq1EeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_iAcR4Fq1EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//BrokenDownVehicles/BROKEN_DOWN_UNLIT_VEHICLE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_iAcR4Vq1EeCUVO0erQdu-A"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_W8uFxVq1EeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_W8uFxlq1EeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_W8uFx1q1EeCUVO0erQdu-A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_W8uFwVq1EeCUVO0erQdu-A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//BrokenDownVehicles"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_W8uFwlq1EeCUVO0erQdu-A" x="684" y="1116"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_BJt3AFq2EeCUVO0erQdu-A" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_BJt3A1q2EeCUVO0erQdu-A" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_BJt3BFq2EeCUVO0erQdu-A" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_FGhDwFq2EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RescueAndRecoveryWorkInProgress/EMERGENCY_VEHICLES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_FGhDwVq2EeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_KrnrEFq2EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RescueAndRecoveryWorkInProgress/RESCUE_HELICOPTER_LANDING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_KrnrEVq2EeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_SPgH4FZcEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RescueAndRecoveryWorkInProgress/POLICE_ACTIVITY_ONGOING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_SPgH4VZcEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_XWnLoFZcEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RescueAndRecoveryWorkInProgress/MEDICAL_EMERGENCY_ONGOING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_XWnLoVZcEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_dSwZ8FZcEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RescueAndRecoveryWorkInProgress/CHILD_ABDUCTION_IN_PROGRESS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_dSwZ8VZcEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_BJt3BVq2EeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_BJt3Blq2EeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_BJt3B1q2EeCUVO0erQdu-A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_BJt3AVq2EeCUVO0erQdu-A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//RescueAndRecoveryWorkInProgress"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BJt3Alq2EeCUVO0erQdu-A" x="1068" y="300"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_T0XYQFq2EeCUVO0erQdu-A" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_T0XYQ1q2EeCUVO0erQdu-A" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_T0XYRFq2EeCUVO0erQdu-A" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_W4U4gFq2EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RegulatoryMeasure/SECURITY_ALERT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_W4U4gVq2EeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_dGCX8Fq2EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RegulatoryMeasure/CONTAGIOUS_DISEASE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_dGCX8Vq2EeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_jhbHAFq2EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RegulatoryMeasure/ENVIRONMENTAL"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_jhbHAVq2EeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_qlbVQFq2EeCUVO0erQdu-A" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RegulatoryMeasure/SMOG_ALERT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_qlbVQVq2EeCUVO0erQdu-A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_qPtYkFZcEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RegulatoryMeasure/BATCH_SERVICE_IN_PROGRESS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_qPtYkVZcEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_FhlP0J8EEeO2bPxtRJW0gw" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RegulatoryMeasure/ROAD_CLOSED_BY_THE_REGULATORY_AUTHORITIES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_FhlP0Z8EEeO2bPxtRJW0gw"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_T0XYRVq2EeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_T0XYRlq2EeCUVO0erQdu-A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_T0XYR1q2EeCUVO0erQdu-A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_T0XYQVq2EeCUVO0erQdu-A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//RegulatoryMeasure"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_T0XYQlq2EeCUVO0erQdu-A" x="1020" y="468"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_onuXEVM7EeGPO9BWHBmh1Q" type="Note" description="Based on TISA version of TEC:&#xD;&#xA;TPEG2-TEC_3.1/001 2011-11-07" fillColor="8047085" transparency="0" lineColor="6737151" lineWidth="1">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_ooBSAFM7EeGPO9BWHBmh1Q" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_ooBSAVM7EeGPO9BWHBmh1Q" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:TextStyle" xmi:id="_onuXElM7EeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_onuXE1M7EeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_onuXFFM7EeGPO9BWHBmh1Q" x="252" y="60"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_h3F1sFY5EeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_h3F1s1Y5EeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_h3F1tFY5EeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_BBYvsFZUEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//LaneRestrictionType/LANES_CLOSED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_BBYvsVZUEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_IFBxkFZUEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//LaneRestrictionType/LANES_OPEN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_IFBxkVZUEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_LR2S4FZUEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//LaneRestrictionType/RIGHT_LANES_CLOSED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LR2S4VZUEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_PjLlMFZUEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//LaneRestrictionType/LEFT_LANES_CLOSED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_PjLlMVZUEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_h3F1tVY5EeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_h3F1tlY5EeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_h3F1t1Y5EeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_h3F1sVY5EeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//LaneRestrictionType"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_h3F1slY5EeGPO9BWHBmh1Q" x="1380" y="24"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_k6_kMFY8EeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_k6_kM1Y8EeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_k6_kNFY8EeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_okVVgFZUEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/DRIVE_TO_NEXT_AVAILABLE_PARKING_PLACE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_okVVgVZUEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_w5AhcFZUEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/OVERTAKING_NOT_ALLOWED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_w5AhcVZUEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_0uMqUFZUEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/DRIVING_NOT_ALLOWED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_0uMqUVZUEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_34e1AFZUEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/USE_HARD_SHOULDER_AS_LANE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_34e1AVZUEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_7V1FoFZUEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/WAIT_FOR_POLICE_PATROL"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_7V1FoVZUEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="__GZ0QFZUEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/WAIT_FOR_IMPROVED_WEATHER"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="__GZ0QVZUEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_DQJQ0FZVEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/GIVING_PATH_VEHICLES_COMING_FROM_BEHIND"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_DQJQ0VZVEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_KnvwgFZVEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/FOLLOW_DIVERSION"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_KnvwgVZVEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_PBILkFZVEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/NO_DIVERSION_TO_RECOMMEND"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_PBILkVZVEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_T9NrEFZVEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/DO_NOT_DIVERT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_T9NrEVZVEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_W8VHkFZVEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/FOLLOW_POLICE_INSTRUCTIONS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_W8VHkVZVEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Z-a_kFZVEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/AVOID_THE_AREA"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Z-a_kVZVEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_c3k-AFZVEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/DRIVE_CAREFULLY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_c3k-AVZVEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_giyEcFZVEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/DO_NOT_LEAVE_YOUR_VEHICLE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_giyEcVZVEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_kSTqMFZVEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/SWITCH_ON_RADIO"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_kSTqMVZVEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_nkMRsFZVEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/USE_TOLL_LANES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_nkMRsVZVEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_rwAx4FZVEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//AdviceCode/WAIT_FOR_CONVOI"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_rwAx4VZVEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_k6_kNVY8EeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_k6_kNlY8EeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_k6_kN1Y8EeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_k6_kMVY8EeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//AdviceCode"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_k6_kMlY8EeGPO9BWHBmh1Q" x="24" y="1260"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_RdxPIFY_EeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_RdxPI1Y_EeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_RdxPJFY_EeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_5XbicFZYEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VehicleType/CAR"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_5XbicVZYEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_6V_ccFZYEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VehicleType/LORRY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_6V_ccVZYEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_7cmfMFZYEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VehicleType/BUS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_7cmfMVZYEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_8czX8FZYEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VehicleType/TAXI"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_8czX8VZYEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_9n4D8FZYEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VehicleType/TRAIN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_9n4D8VZYEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_-qwdQFZYEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VehicleType/MOTOR_CYCLE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-qwdQVZYEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="___9VoFZYEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VehicleType/VEHICLE_WITH_TRAILER"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="___9VoVZYEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_CMSDQFZZEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VehicleType/MOTOR_VEHICLES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_CMSDQVZZEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Dlpp8FZZEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VehicleType/TRANSPORT_OF_DANGEROUS_GOODS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Dlpp8VZZEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Ge9ZYFZZEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VehicleType/TRANSPORT_OF_ABNORMAL_LOAD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Ge9ZYVZZEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_JVlBMFZZEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VehicleType/HEAVY_VEHICLE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_JVlBMVZZEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_RdxPJVY_EeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_RdxPJlY_EeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_RdxPJ1Y_EeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_RdxPIVY_EeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//VehicleType"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RdxPIlY_EeGPO9BWHBmh1Q" x="972" y="24"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_neSqkFZAEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_neSqk1ZAEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_neSqlFZAEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_LtD9UFZWEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/WIDTH_LESS_THAN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LtD9UVZWEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_OWuHMFZWEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/WIDTH_GREATER_THAN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_OWuHMVZWEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ViQg0FZWEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/HEIGTH_LESS_THAN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ViQg0VZWEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_d1cfAFZWEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/HEIGTH_GREATER_THAN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_d1cfAVZWEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_p1xdUFZWEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/WEIGHT_LESS_THAN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_p1xdUVZWEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_uOaRgFZWEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/WEIGHT_GREATER_THAN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_uOaRgVZWEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_x_RUAFZWEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/WITHOUT_WINTER_TYRE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_x_RUAVZWEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_1P0ewFZWEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/WITHOUT_SNOW_CHAIN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1P0ewVZWEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_41gzEFZWEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/WITH_TRAILER"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_41gzEVZWEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_72aYQFZWEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/WITH_CARAVAN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_72aYQVZWEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_-diykFZWEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/PERSONS_IN_VEHICLE_LESS_THAN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-diykVZWEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_CzDaQFZXEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/PERSONS_IN_VEHICLE_MORE_THAN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_CzDaQVZXEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_JXtaEFZXEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/EVEN_NUMBER_PLATE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_JXtaEVZXEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_MX3YYFZXEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/ODD_NUMBER_PLATE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_MX3YYVZXEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_PRBW0FZXEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/LENGTH_LESS_THAN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_PRBW0VZXEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_SEXoMFZXEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/LENGTH_GREATER_THAN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_SEXoMVZXEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_WqZ_MFZXEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/AXLE_LOAD_LESS_THAN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_WqZ_MVZXEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_aoPGsFZXEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/AXLE_LOAD_GREATER_THAN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_aoPGsVZXEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_d_n5QFZXEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/VEHICLE_FULFILLS_EMISSION_STANDARD_EURO3"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_d_n5QVZXEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_q1upAFZXEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/VEHICLE_FULFILLS_EMISSION_STANDARD_EURO3D4"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_q1upAVZXEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_t4t44FZXEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/VEHICLE_FULFILLS_EMISSION_STANDARD_EURO4"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_t4t44VZXEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_xqeTQFZXEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/VEHICLE_FULFILLS_EMISSION_STANDARD_EURO5"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_xqeTQVZXEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_z44EgFZXEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/WITH_PETROL_ENGINE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_z44EgVZXEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_-jQjkFZXEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/WITH_DIESEL_ENGINE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-jQjkVZXEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_3Gl9sFZXEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/WITH_LPG_ENGINE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_3Gl9sVZXEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_DIGnwFZYEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/THROUGH_TRAFFIC"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_DIGnwVZYEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_G-MIgFZYEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/RESIDENTS_TRAFFIC"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_G-MIgVZYEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_JyRZsFZYEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RestrictionType/WITH_DESTINATION_IN_GIVEN_AREA"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_JyRZsVZYEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_neSqlVZAEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_neSqllZAEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_neSql1ZAEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_neSqkVZAEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//RestrictionType"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_neSqklZAEeGPO9BWHBmh1Q" x="1704" y="1032"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_mlqe0FZTEeGPO9BWHBmh1Q" type="Note" description="Sub Causes" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_mlqe1FZTEeGPO9BWHBmh1Q" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_mlqe1VZTEeGPO9BWHBmh1Q" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:TextStyle" xmi:id="_mlqe0VZTEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_mlqe0lZTEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_mlqe01ZTEeGPO9BWHBmh1Q" x="936" y="636"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_1bmpQFZcEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_1bmpQ1ZcEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_1bmpRFZcEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_CpPIMFZdEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ExtremeWeatherConditions/STRONG_WINDS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_CpPIMVZdEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_EKW8sFZdEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ExtremeWeatherConditions/DAMAGING_HAIL"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_EKW8sVZdEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_GebREFZdEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ExtremeWeatherConditions/HURRICANE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_GebREVZdEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_IC0cAFZdEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ExtremeWeatherConditions/THUNDERSTORM"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_IC0cAVZdEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_JeuZUFZdEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ExtremeWeatherConditions/TORNADO"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_JeuZUVZdEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_LG_-sFZdEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ExtremeWeatherConditions/BLIZARD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LG_-sVZdEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_1bmpRVZcEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_1bmpRlZcEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_1bmpR1ZcEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_1bmpQVZcEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//ExtremeWeatherConditions"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_1bmpQlZcEeGPO9BWHBmh1Q" x="1116" y="684"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_gYLdUFZdEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_gYLdU1ZdEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_gYLdVFZdEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_mauOkFZdEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_FOG"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_mauOkVZdEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_p5uFAFZdEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_SMOKE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_p5uFAVZdEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_vRD9IFZdEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_HEAVY_SNOWFALL"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_vRD9IVZdEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_yc_GkFZdEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_HEAVY_RAIN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_yc_GkVZdEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_2waqoFZdEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_HEAVY_HAIL"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_2waqoVZdEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_42BsQFZdEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_LOW_SUN_GLARE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_42BsQVZdEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_7_uBEFZdEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_SANDSTORMS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_7_uBEVZdEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_9_-BkFZdEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//VisibilityReduced/VISIBILITY_REDUCED_DUE_TO_SWARMS_OF_INSECTS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_9_-BkVZdEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_gYLdVVZdEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_gYLdVlZdEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_gYLdV1ZdEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_gYLdUVZdEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//VisibilityReduced"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_gYLdUlZdEeGPO9BWHBmh1Q" x="984" y="876"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_KUaOsFZeEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_KUaOs1ZeEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_KUaOtFZeEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_NYJFcFZeEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Precipitation/HEAVY_RAIN"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_NYJFcVZeEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_OpeKcFZeEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Precipitation/HEAVY_SNOWFALL"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_OpeKcVZeEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_QMYHoFZeEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//Precipitation/SOFT_HAIL"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_QMYHoVZeEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_KUaOtVZeEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_KUaOtlZeEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_KUaOt1ZeEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_KUaOsVZeEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//Precipitation"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_KUaOslZeEeGPO9BWHBmh1Q" x="1032" y="1080"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_RW6LoFZfEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_RW6Lo1ZfEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_RW6LpFZfEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_Ynp1YFZfEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RecklessPersons/RECKLESS_DRIVER"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Ynp1YVZfEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_bmxR4FZfEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RecklessPersons/GUNFIRE_ON_ROAD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_bmxR4VZfEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_eGAUcFZfEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RecklessPersons/STONE_THROWING_PERSONS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_eGAUcVZfEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_RW6LpVZfEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_RW6LplZfEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_RW6Lp1ZfEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_RW6LoVZfEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//RecklessPersons"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_RW6LolZfEeGPO9BWHBmh1Q" x="1356" y="312"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_jyqVQFZfEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_jyqVQ1ZfEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_jyqVRFZfEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_l7GocFZfEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//MajorEvent/SPORTS_EVENT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_l7GocVZfEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_pVLioFZfEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//MajorEvent/DEMONSTRATION"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_pVLioVZfEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_qkue8FZfEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//MajorEvent/DEMONSTRATION_WITH_VEHICLES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_qkue8VZfEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_tvTkkFZfEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//MajorEvent/CONCERT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_tvTkkVZfEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_vDnsIFZfEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//MajorEvent/FAIR"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_vDnsIVZfEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_wMwecFZfEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//MajorEvent/MILITARY_TRAINING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_wMwecVZfEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ybm7oFZfEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//MajorEvent/EMERGENCY_TRAINING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ybm7oVZfEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_0LxRsFZfEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//MajorEvent/FESTIVITY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_0LxRsVZfEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_1q9MgFZfEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//MajorEvent/PROCESSION"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1q9MgVZfEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_jyqVRVZfEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_jyqVRlZfEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_jyqVR1ZfEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_jyqVQVZfEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//MajorEvent"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_jyqVQlZfEeGPO9BWHBmh1Q" x="1380" y="432"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_6nVm8FZfEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_6nVm81ZfEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_6nVm9FZfEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_-4-bQFZfEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ServiceNotOperating/FERRY_SERVICE_NOT_OPERATING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_-4-bQVZfEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_CIUsIFZgEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ServiceNotOperating/PLANE_SERVICE_NOT_OPERATING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_CIUsIVZgEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ElerEFZgEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ServiceNotOperating/TRAIN_SERVICE_NOT_OPERATING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ElerEVZgEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_GTj9gFZgEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ServiceNotOperating/BUS_SERVICE_NOT_OPERATING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_GTj9gVZgEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_6nVm9VZfEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_6nVm9lZfEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_6nVm91ZfEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_6nVm8VZfEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//ServiceNotOperating"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_6nVm8lZfEeGPO9BWHBmh1Q" x="1356" y="672"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_NhLawFZgEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_NhLaw1ZgEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_NhLaxFZgEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_SO9_kFZgEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ServiceNotUsable/FUEL_STATION_CLOSED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_SO9_kVZgEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_T9Mb8FZgEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ServiceNotUsable/SERVICE_AREA_CLOSED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_T9Mb8VZgEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_WclPgFZgEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ServiceNotUsable/SERVICE_AREA_BUSY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_WclPgVZgEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_ZNBW0FZgEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ServiceNotUsable/PARKING_FULL"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ZNBW0VZgEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_annskFZgEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//ServiceNotUsable/CAR_PARK_CLOSED"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_annskVZgEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_NhLaxVZgEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_NhLaxlZgEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_NhLax1ZgEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_NhLawVZgEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//ServiceNotUsable"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_NhLawlZgEeGPO9BWHBmh1Q" x="1368" y="816"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_f4WmYFZgEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_f4WmY1ZgEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_f4WmZFZgEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_kFnRAFZgEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlowMovingVehicles/SLOW_MOVING_MAINTENANCE_VEHICLE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_kFnRAVZgEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_noyc0FZgEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlowMovingVehicles/VEHICLES_SLOWING_TO_LOOK_AT_ACCIDENT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_noyc0VZgEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_rzW_0FZgEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlowMovingVehicles/ABNORMAL_LOAD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_rzW_0VZgEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_t7MPAFZgEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlowMovingVehicles/ABNORMAL_WIDE_LOAD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_t7MPAVZgEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_wCaaMFZgEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlowMovingVehicles/CONVOY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_wCaaMVZgEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_xe9QsFZgEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlowMovingVehicles/SNOWPLOUGH"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_xe9QsVZgEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_zgg4wFZgEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlowMovingVehicles/DEICING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_zgg4wVZgEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_1Hp1sFZgEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//SlowMovingVehicles/SALTING_VEHICLES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1Hp1sVZgEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_f4WmZVZgEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_f4WmZlZgEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_f4WmZ1ZgEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_f4WmYVZgEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//SlowMovingVehicles"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_f4WmYlZgEeGPO9BWHBmh1Q" x="1368" y="960"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_JeWCAFZhEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_JeWCA1ZhEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_JeWCBFZhEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_Sb82MFZhEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//DangerousEndOfQueue/SUDDEN_END_OF_QUEUE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Sb82MVZhEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_U7cXcFZhEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//DangerousEndOfQueue/QUEUE_OVER_HILL"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_U7cXcVZhEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_WxghMFZhEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//DangerousEndOfQueue/QUEUE_AROUND_BEND"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_WxghMVZhEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Z23voFZhEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//DangerousEndOfQueue/QUEUE_IN_TUNNEL"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Z23voVZhEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_JeWCBVZhEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_JeWCBlZhEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_JeWCB1ZhEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_JeWCAVZhEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//DangerousEndOfQueue"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JeWCAlZhEeGPO9BWHBmh1Q" x="1632" y="300"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_hpy5YFZhEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_hp8qYFZhEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_hp8qYVZhEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_jayV4FZhEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RiskOfFire/LEAKAGE_OF_FUEL"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_jayV4VZhEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_lzR3QFZhEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//RiskOfFire/LEAKAGE_OF_GAS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_lzR3QVZhEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_hp8qYlZhEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_hp8qY1ZhEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_hp8qZFZhEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_hpy5YVZhEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//RiskOfFire"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_hpy5YlZhEeGPO9BWHBmh1Q" x="1668" y="420"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_tcXvkFZhEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_tcXvk1ZhEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_tcXvlFZhEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_xOAOIFZhEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//TimeDelay/TIME_DELAY_AT_FRONTIER"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_xOAOIVZhEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_1dNZgFZhEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//TimeDelay/TIME_DELAY_AT_FERRY_PORT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_1dNZgVZhEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_5MMzwFZhEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//TimeDelay/TIME_DELAY_AT_VEHICLE_ON_RAIL_TERMINAL"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_5MMzwVZhEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_tcXvlVZhEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_tcXvllZhEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_tcXvl1ZhEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_tcXvkVZhEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//TimeDelay"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_tcXvklZhEeGPO9BWHBmh1Q" x="1632" y="516"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_BPbqYFZiEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_BPbqY1ZiEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_BPbqZFZiEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_FDVZ0FZiEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//PoliceCheckpoint/PERMANENT_POLICE_CHECKPOINT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_FDVZ0VZiEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_IBnI0FZiEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//PoliceCheckpoint/TEMPORARY_POLICE_CHECKPOINT"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_IBnI0VZiEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_BPbqZVZiEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_BPbqZlZiEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_BPbqZ1ZiEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_BPbqYVZiEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//PoliceCheckpoint"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_BPbqYlZiEeGPO9BWHBmh1Q" x="1716" y="660"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_3XokwFbjEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_3Xokw1bjEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_3XokxFbjEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_8kg5UFbjEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//MalfunctioningRoadsideEquipment/ROAD_RAIL_CROSSING_FAILURE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_8kg5UVbjEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_APt_wFbkEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//MalfunctioningRoadsideEquipment/TUNNEL_VENTILATION_NOT_WORKING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_APt_wVbkEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_DOA84FbkEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//MalfunctioningRoadsideEquipment/TRAFFIC_CONTROL_SIGNALS_WORKING_INCORRECTLY"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_DOA84VbkEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_IxqLoFbkEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//MalfunctioningRoadsideEquipment/EMERGENCY_TELEPHONES_NOT_WORKING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_IxqLoVbkEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_LlRiwFbkEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//MalfunctioningRoadsideEquipment/AUTOMATIC_PAYMENT_LANES_NOT_WORKING"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_LlRiwVbkEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_3XokxVbjEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_3XokxlbjEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_3Xokx1bjEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_3XokwVbjEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//MalfunctioningRoadsideEquipment"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_3XokwlbjEeGPO9BWHBmh1Q" x="1692" y="804"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_IRSNAFblEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_IRb-AFblEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_IRb-AVblEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_NZOXMFblEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//OvertakingNotAllowed/DO_NOT_USE_OVERTAKING_LANES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_NZOXMVblEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_Phu70FblEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//OvertakingNotAllowed/OVERTAKING_NOT_ALLOWED_DRIVE_ON_CRAWLER_LANE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_Phu70VblEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_TzMJ8FblEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//OvertakingNotAllowed/OVERTAKING_NOT_ALLOWED_DRIVE_ON_LEFT_MOST_LANE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_TzMJ8VblEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_X8T7cFblEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//OvertakingNotAllowed/OVERTAKING_NOT_ALLOWED_DRIVE_ON_RIGHT_MOST_LANE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_X8T7cVblEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_IRb-AlblEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_IRb-A1blEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_IRb-BFblEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_IRSNAVblEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//OvertakingNotAllowed"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_IRSNAlblEeGPO9BWHBmh1Q" x="396" y="1260"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_ejRBUFblEeGPO9BWHBmh1Q" type="Note" description="Sub Advices" fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_ejRBVFblEeGPO9BWHBmh1Q" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_ejRBVVblEeGPO9BWHBmh1Q" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:TextStyle" xmi:id="_ejRBUVblEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_ejRBUlblEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_ejRBU1blEeGPO9BWHBmh1Q" x="960" y="1392"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_tgsC4FblEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_tgsC41blEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_tgsC5FblEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_v16N0FblEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//DrivingNotAllowed/DRIVING_NOT_ALLOWED_TAKE_NEXT_POSSIBLE_PLACE_TO_STOP_VEHICLE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_v16N0VblEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_tgsC5VblEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_tgsC5lblEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_tgsC51blEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_tgsC4VblEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//DrivingNotAllowed"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_tgsC4lblEeGPO9BWHBmh1Q" x="396" y="1404"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_5z1PgFblEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_5z1Pg1blEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_5z1PhFblEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_9etl0FblEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//GivingPathVehiclesFromBehind/GIVING_PATH_FOR_RESCUE_VEHICLE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_9etl0VblEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_CanfIFbmEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//GivingPathVehiclesFromBehind/GIVING_PATH_FOR_SERVICE_VEHICLES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_CanfIVbmEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_5z1PhVblEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_5z1PhlblEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_5z1Ph1blEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_5z1PgVblEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//GivingPathVehiclesFromBehind"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_5z1PglblEeGPO9BWHBmh1Q" x="396" y="1500"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_JDtTAFbmEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_JD2c8FbmEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_JD2c8VbmEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_KW9qoFbmEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//FollowDiversion/FOLLOW_DIVERSION_SIGNS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_KW9qoVbmEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_JD2c8lbmEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_JD2c81bmEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_JD2c9FbmEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_JDtTAVbmEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//FollowDiversion"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_JDtTAlbmEeGPO9BWHBmh1Q" x="888" y="1284"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_bRU6AFbmEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_bRU6A1bmEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_bRU6BFbmEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_emeQ4FbmEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//DriveCarefully/DRIVE_CAREFULLY_DANGEROUS_SITUATION_ON_ENTRY_SLIP_ROAD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_emeQ4VbmEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_l6VgEFbmEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//DriveCarefully/DRIVE_CAREFULLY_DANGEROUS_SITUATION_ON_EXIT_SLIP_ROAD"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_l6VgEVbmEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_rM6M8FbmEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//DriveCarefully/DRIVE_CAREFULLY_ICE_BUILDUP_ON_CABLE_STRUCTURE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_rM6M8VbmEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_bRU6BVbmEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_bRU6BlbmEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_bRU6B1bmEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_bRU6AVbmEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//DriveCarefully"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_bRU6AlbmEeGPO9BWHBmh1Q" x="804" y="1488"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_zYyCMFbmEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_zYyCM1bmEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_zYyCNFbmEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_3k5dUFbmEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//DoNotLeaveYourVehicle/DO_NOT_LEAVE_YOUR_VEHICLE"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_3k5dUVbmEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_7NtXEFbmEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//DoNotLeaveYourVehicle/DO_NOT_LEAVE_YOUR_VEHICLE_CLOSE_WINDOWS"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_7NtXEVbmEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_zYyCNVbmEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_zYyCNlbmEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_zYyCN1bmEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_zYyCMVbmEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//DoNotLeaveYourVehicle"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_zYyCMlbmEeGPO9BWHBmh1Q" x="1306" y="1297"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_AHQf8FbnEeGPO9BWHBmh1Q" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_AHQf81bnEeGPO9BWHBmh1Q" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_AHQf9FbnEeGPO9BWHBmh1Q" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_DbhGAFbnEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//UseTollLanes/USE_MANUAL_PAYMENT_TOLL_LANES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_DbhGAVbnEeGPO9BWHBmh1Q"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_HK4TsFbnEeGPO9BWHBmh1Q" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="TrafficIncidentTables.ecore#//UseTollLanes/USE_AUTOMATIC_PAYMENT_TOLL_LANES"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_HK4TsVbnEeGPO9BWHBmh1Q"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_AHQf9VbnEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_AHQf9lbnEeGPO9BWHBmh1Q"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_AHQf91bnEeGPO9BWHBmh1Q"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_AHQf8VbnEeGPO9BWHBmh1Q" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//UseTollLanes"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AHQf8lbnEeGPO9BWHBmh1Q" x="1332" y="1431"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_Ro3OwM6PEeKeXo0UVa3l6w" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_RpA_wM6PEeKeXo0UVa3l6w" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_RpA_wc6PEeKeXo0UVa3l6w" type="5008">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_RpA_ws6PEeKeXo0UVa3l6w"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_RpA_w86PEeKeXo0UVa3l6w"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_RpA_xM6PEeKeXo0UVa3l6w"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_Ro3Owc6PEeKeXo0UVa3l6w" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="TrafficIncidentTables.ecore#//Accident"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_Ro3Ows6PEeKeXo0UVa3l6w" x="372" y="384"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_Mlnn8j8-EeCZw9yYN1vKNg"/>
+  <element xmi:type="ecore:EPackage" href="TrafficIncidentTables.ecore#/"/>
+  <edges xmi:type="notation:Connector" xmi:id="_pdoKcFZTEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_0iueIFqxEeCUVO0erQdu-A" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_pdoKcVZTEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_pdoKclZTEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_pdoKc1ZTEeGPO9BWHBmh1Q" points="[24, 27, -43, -46]$[68, -4, 1, -77]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_pdoKdFZTEeGPO9BWHBmh1Q" id="(0.055248618784530384,0.430939226519337)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_lj2NwFZZEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_6n3XwFquEeCUVO0erQdu-A" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_lj2NwVZZEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_lj2NwlZZEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_lj2Nw1ZZEeGPO9BWHBmh1Q" points="[-24, -28, 200, 237]$[-222, -268, 2, -3]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_lj2NxFZZEeGPO9BWHBmh1Q" id="(0.8620689655172413,0.07547169811320754)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_t4hZsFZZEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_8ujiAFqvEeCUVO0erQdu-A" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_t4hZsVZZEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_t4hZslZZEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_t4hZs1ZZEeGPO9BWHBmh1Q" points="[-50, 2, 247, -11]$[-172, -12, 125, -25]"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_w_Yc8FZZEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_ZH2S0FqwEeCUVO0erQdu-A" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_w_Yc8VZZEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_w_Yc8lZZEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_w_Yc81ZZEeGPO9BWHBmh1Q" points="[-50, 21, 222, -95]$[-270, 80, 2, -36]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_w_Yc9FZZEeGPO9BWHBmh1Q" id="(0.8172043010752689,0.36633663366336633)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_XI81AFZaEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_HCQxAFqxEeCUVO0erQdu-A" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_XI81AVZaEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_XI81AlZaEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_XI81A1ZaEeGPO9BWHBmh1Q" points="[-28, 27, 241, -230]$[-267, 224, 2, -33]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_XI81BFZaEeGPO9BWHBmh1Q" id="(0.7948717948717948,0.2556390977443609)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_nh6ngFZaEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_z6-sMFqyEeCUVO0erQdu-A" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_nh6ngVZaEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_nh6nglZaEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_nh6ng1ZaEeGPO9BWHBmh1Q" points="[-6, 27, -10, -78]$[-50, 80, -54, -25]"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_wAIJ8FZaEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_CHM6UFqzEeCUVO0erQdu-A" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_wAIJ8VZaEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_wAIJ8lZaEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_wAIJ81ZaEeGPO9BWHBmh1Q" points="[1, 12, -28, -207]$[31, 161, 2, -58]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_wAIJ9FZaEeGPO9BWHBmh1Q" id="(0.89,0.7678571428571429)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_wAIJ9VZaEeGPO9BWHBmh1Q" id="(0.8044692737430168,0.3959731543624161)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_DKDoMFZbEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_0IGFsFqzEeCUVO0erQdu-A" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_DKDoMVZbEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_DKDoMlZbEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_DKDoM1ZbEeGPO9BWHBmh1Q" points="[36, -29, -221, 171]$[258, -173, 1, 27]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_DKDoNFZbEeGPO9BWHBmh1Q" id="(0.20512820512820512,0.7969924812030075)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_TK4ngFZbEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_lLfHAFq0EeCUVO0erQdu-A" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_TK4ngVZbEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_TK4nglZbEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_TK4ng1ZbEeGPO9BWHBmh1Q" points="[49, -10, -260, 53]$[380, -64, 71, -1]"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WvPfEFZbEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_7KKk0Fq0EeCUVO0erQdu-A" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_WvPfEVZbEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_WvPfElZbEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WvPfE1ZbEeGPO9BWHBmh1Q" points="[49, 12, -263, -73]$[221, 44, -91, -41]"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_aoJqUFZbEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_W8uFwFq1EeCUVO0erQdu-A" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_aoJqUVZbEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_aoJqUlZbEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_aoJqU1ZbEeGPO9BWHBmh1Q" points="[29, 27, -206, -188]$[236, 231, 1, 16]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_aoJqVFZbEeGPO9BWHBmh1Q" id="(0.14468085106382977,0.7681159420289855)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_kJb94FZcEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_BJt3AFq2EeCUVO0erQdu-A" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_kJb94VZcEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_kJb94lZcEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_kJb941ZcEeGPO9BWHBmh1Q" points="[19, 27, -204, -287]$[224, 260, 1, -54]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_kJlu4FZcEeGPO9BWHBmh1Q" id="(0.09606986899563319,0.4700854700854701)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_uW7FkFZcEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_T0XYQFq2EeCUVO0erQdu-A" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_uW7FkVZcEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_uW7FklZcEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_uW7Fk1ZcEeGPO9BWHBmh1Q" points="[46, -19, -439, 183]$[486, -177, 1, 25]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_uW7FlFZcEeGPO9BWHBmh1Q" id="(0.25925925925925924,0.7863247863247863)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_TcRAgFZdEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_1bmpQFZcEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_TcRAgVZdEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_TcRAglZdEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_TcRAg1ZdEeGPO9BWHBmh1Q" points="[22, -2, -492, 68]$[473, -4, -41, 66]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_TcRAhFZdEeGPO9BWHBmh1Q" id="(0.77,0.48214285714285715)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_EPLV0FZeEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_gYLdUFZdEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_EPLV0VZeEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_EPLV0lZeEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_EPLV01ZeEeGPO9BWHBmh1Q" points="[49, 8, -469, -80]$[519, 56, 1, -32]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_EPLV1FZeEeGPO9BWHBmh1Q" id="(0.11781609195402298,0.2)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_ToGAkFZeEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_KUaOsFZeEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_ToGAkVZeEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_ToGAklZeEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_ToGAk1ZeEeGPO9BWHBmh1Q" points="[49, 25, -507, -268]$[557, 289, 1, -4]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_ToGAlFZeEeGPO9BWHBmh1Q" id="(0.16312056737588654,0.058823529411764705)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_Va_FEFZfEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_RW6LoFZfEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_Va_FEVZfEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_Va_FElZfEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Va_FE1ZfEeGPO9BWHBmh1Q" points="[18, -15, -195, 150]$[204, -154, -9, 11]"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_4w634FZfEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_jyqVQFZfEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_4w634VZfEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_4w634lZfEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_4w6341ZfEeGPO9BWHBmh1Q" points="[49, -14, -341, 98]$[391, -53, 1, 59]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_4w635FZfEeGPO9BWHBmh1Q" id="(0.13983050847457626,0.6740331491712708)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_LZU9cFZgEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_6nVm8FZfEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_LZU9cVZgEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_LZU9clZgEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_LZU9c1ZgEeGPO9BWHBmh1Q" points="[49, 7, -424, -50]$[358, 65, -115, 8]"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_d99WQFZgEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_NhLawFZgEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_d99WQVZgEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_d99WQlZgEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_d99WQ1ZgEeGPO9BWHBmh1Q" points="[49, 23, -418, -186]$[473, 267, 6, 58]"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_6Hz84FZgEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_f4WmYFZgEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_6Hz84VZgEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_6Hz84lZgEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_6Hz841ZgEeGPO9BWHBmh1Q" points="[34, 27, -375, -294]$[410, 296, 1, -25]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_6Hz85FZgEeGPO9BWHBmh1Q" id="(0.09333333333333334,0.15757575757575756)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_OzGgMFZhEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_JeWCAFZhEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_OzGgMVZhEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_OzGgMlZhEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_OzGgM1ZhEeGPO9BWHBmh1Q" points="[46, -19, -655, 271]$[696, -268, -5, 22]"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_rzbb0FZhEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_hpy5YFZhEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_rzbb0VZhEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_rzbb0lZhEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_rzbb01ZhEeGPO9BWHBmh1Q" points="[24, -4, -342, 52]$[367, -73, 1, -17]"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_Uo3DIFbkEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_tcXvkFZhEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_Uo3DIVbkEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_Uo3DIlbkEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_Uo3DI1bkEeGPO9BWHBmh1Q" points="[24, -4, -325, 48]$[350, -33, 1, 19]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_Uo3DJFbkEeGPO9BWHBmh1Q" id="(0.17704918032786884,0.5411764705882353)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_VbtcYFbkEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_BPbqYFZiEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_VbtcYVbkEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_VbtcYlbkEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_VbtcY1bkEeGPO9BWHBmh1Q" points="[24, 1, -398, -13]$[365, 17, -57, 3]"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_WA4mAFbkEeGPO9BWHBmh1Q" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_3XokwFbjEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_WA4mAVbkEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_WA4mAlbkEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_WA4mA1bkEeGPO9BWHBmh1Q" points="[24, 5, -416, -93]$[353, 95, -87, -3]"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_rRuQ8FblEeGPO9BWHBmh1Q" type="NoteAttachment" source="_ejRBUFblEeGPO9BWHBmh1Q" target="_IRSNAFblEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_rRuQ8VblEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_rRuQ8lblEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_rRuQ81blEeGPO9BWHBmh1Q" points="[-24, -10, 193, 76]$[-215, -36, 2, 50]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_rRuQ9FblEeGPO9BWHBmh1Q" id="(0.24,0.48214285714285715)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_rRuQ9VblEeGPO9BWHBmh1Q" id="(0.8663239074550129,0.49504950495049505)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_5LnY8FblEeGPO9BWHBmh1Q" type="NoteAttachment" source="_ejRBUFblEeGPO9BWHBmh1Q" target="_tgsC4FblEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_5LnY8VblEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_5LnY8lblEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_5LnY81blEeGPO9BWHBmh1Q" points="[-50, 6, 125, -17]$[-173, 8, 2, -15]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_5LnY9FblEeGPO9BWHBmh1Q" id="(0.8544303797468354,0.3018867924528302)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_QHAWoFbmEeGPO9BWHBmh1Q" type="NoteAttachment" source="_5z1PgFblEeGPO9BWHBmh1Q" target="_ejRBUFblEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_QHAWoVbmEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_QHAWolbmEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_QHAWo1bmEeGPO9BWHBmh1Q" points="[41, -14, -295, 106]$[321, -110, -15, 10]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_QHAWpFbmEeGPO9BWHBmh1Q" id="(0.8423076923076923,0.5072463768115942)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_QHAWpVbmEeGPO9BWHBmh1Q" id="(0.25,0.8035714285714286)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_QunwQFbmEeGPO9BWHBmh1Q" type="NoteAttachment" source="_JDtTAFbmEeGPO9BWHBmh1Q" target="_ejRBUFblEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_QunwQVbmEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_QunwQlbmEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_QunwQ1bmEeGPO9BWHBmh1Q" points="[37, -20, -379, 200]$[411, -210, -5, 10]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_QunwRFbmEeGPO9BWHBmh1Q" id="(0.8092783505154639,0.49056603773584906)"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_QunwRVbmEeGPO9BWHBmh1Q" id="(0.43,0.8035714285714286)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_xyc9kFbmEeGPO9BWHBmh1Q" type="NoteAttachment" source="_ejRBUFblEeGPO9BWHBmh1Q" target="_bRU6AFbmEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_xyc9kVbmEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_xyc9klbmEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_xyc9k1bmEeGPO9BWHBmh1Q" points="[14, 27, -56, -104]$[72, 151, 2, 20]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_xyc9lFbmEeGPO9BWHBmh1Q" id="(0.6450116009280742,0.7647058823529411)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_-tvIQFbmEeGPO9BWHBmh1Q" type="NoteAttachment" source="_ejRBUFblEeGPO9BWHBmh1Q" target="_zYyCMFbmEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_-tvIQVbmEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_-tvIQlbmEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_-tvIQ1bmEeGPO9BWHBmh1Q" points="[49, -11, -328, 72]$[378, -56, 1, 27]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_-tvIRFbmEeGPO9BWHBmh1Q" id="(0.24848484848484848,0.6086956521739131)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_MDPw0FbnEeGPO9BWHBmh1Q" type="NoteAttachment" source="_ejRBUFblEeGPO9BWHBmh1Q" target="_AHQf8FbnEeGPO9BWHBmh1Q" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_MDPw0VbnEeGPO9BWHBmh1Q"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_MDPw0lbnEeGPO9BWHBmh1Q"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_MDPw01bnEeGPO9BWHBmh1Q" points="[49, 7, -321, -49]$[371, 78, 1, 22]"/>
+    <targetAnchor xmi:type="notation:IdentityAnchor" xmi:id="_MDPw1FbnEeGPO9BWHBmh1Q" id="(0.17883211678832117,0.6811594202898551)"/>
+  </edges>
+  <edges xmi:type="notation:Connector" xmi:id="_mHQlkM6PEeKeXo0UVa3l6w" type="NoteAttachment" source="_mlqe0FZTEeGPO9BWHBmh1Q" target="_Ro3OwM6PEeKeXo0UVa3l6w" lineWidth="1">
+    <styles xmi:type="notation:ArrowStyle" xmi:id="_mHQlkc6PEeKeXo0UVa3l6w"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_mHQlks6PEeKeXo0UVa3l6w"/>
+    <element xsi:nil="true"/>
+    <bendpoints xmi:type="notation:RelativeBendpoints" xmi:id="_mHQlk86PEeKeXo0UVa3l6w" points="[-19, -11, 409, 197]$[-272, -164, 156, 44]"/>
+    <sourceAnchor xmi:type="notation:IdentityAnchor" xmi:id="_mHQllM6PEeKeXo0UVa3l6w" id="(0.19,0.5178571428571429)"/>
+  </edges>
+</notation:Diagram>

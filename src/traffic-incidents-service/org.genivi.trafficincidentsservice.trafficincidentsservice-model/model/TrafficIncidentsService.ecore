@@ -1,0 +1,683 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="trafficincidentsservice" nsURI="http://org.genivi.trafficinfo.trafficincidentsservice"
+    nsPrefix="trafficincidentsservice">
+  <eAnnotations source="GenModel">
+    <details key="documentation" value="Copyright (C) 2013 TomTom International B.V.&#xD;&#xA;&#xD;&#xA;This Source Code Form is subject to the terms of the Mozilla Public&#xD;&#xA;License, v. 2.0. If a copy of the MPL was not distributed with this&#xD;&#xA;file, You can obtain one at http://mozilla.org/MPL/2.0/."/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="TrafficIncidents">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This is the main interface via which a client obtains Traffic Information."/>
+    </eAnnotations>
+    <eAnnotations source="http://www.tomtom.com/emfidl/2012/GenModel">
+      <details key="versionMajor" value="0"/>
+      <details key="versionMinor" value="1"/>
+    </eAnnotations>
+    <eOperations name="getVersion">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Get the API version of this interface implemented by the service."/>
+      </eAnnotations>
+      <eParameters name="listener" eType="#//TrafficIncidentsListener">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The class on which the callback function is called."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="addUpdateListener">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Add a listener which is notified in case of any update in the traffic information.&#xD;&#xA;In case of an update the updates() method of the listener is called."/>
+      </eAnnotations>
+      <eParameters name="listener" eType="#//TrafficIncidentsListener">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The class on which the callback function is called."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="warningLevels" upperBound="-1" eType="ecore:EEnum ../../org.genivi.trafficincidentsservice.trafficincidenttables-model/model/TrafficIncidentTables.ecore#//WarningLevel">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Only incidents with one of the specified warning levels will be returned.&#xD;&#xA;In case of an empty list, traffic incidents with any warning level (and no specified warning level) are returned."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="categoryIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="updateListener" eType="#//TrafficIncidentsListener"/>
+    </eOperations>
+    <eOperations name="addAreasUpdateListener">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Add a listener which is notified in case of an update in the traffic information in one or more specific area's.&#xD;&#xA;In case of an update the updatesInAreas() method of the listener is called."/>
+      </eAnnotations>
+      <eParameters name="listener" eType="#//TrafficIncidentsListener">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The class on which the callback function is called."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="warningLevels" upperBound="-1" eType="ecore:EEnum ../../org.genivi.trafficincidentsservice.trafficincidenttables-model/model/TrafficIncidentTables.ecore#//WarningLevel">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Only incidents with one of the specified warning levels will be returned.&#xD;&#xA;In case of an empty list, traffic incidents with any warning level (and no specified warning level) are returned."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="categoryIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="areas" upperBound="-1" eType="ecore:EClass ../../org.genivi.basetypes-model/model/Basetypes.ecore#//common/RectangularArea">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The area's to be observed for changes."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="updateListener" eType="#//TrafficIncidentsListener"/>
+    </eOperations>
+    <eOperations name="getLanguage">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Get the current language."/>
+      </eAnnotations>
+      <eParameters name="listener" eType="#//TrafficIncidentsListener">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The class on which the callback function is called."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="setLanguage">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Set the language."/>
+      </eAnnotations>
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="languageCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The language to be used."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="countryCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The country specific variant for the language to be used."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="setTimeFormat">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="timeFormat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="setDateFormat">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="dateFormat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="setLengthUnit">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="lengthUnit" eType="#//LengthUnit"/>
+    </eOperations>
+    <eOperations name="setWeightUnit">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="weightUnit" eType="#//WeightUnit"/>
+    </eOperations>
+    <eOperations name="getApplicability">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+    </eOperations>
+    <eOperations name="setApplicability">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="filterExpression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="reserveIconSetIds">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="numberOfIds" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="freeIconSetIds">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="iconSetIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getIconSets">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+    </eOperations>
+    <eOperations name="addIconSetDefinitions">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="iconSets" upperBound="-1" eType="ecore:EClass ../../org.genivi.iconset-model/model/IconSet.ecore#//IconSet"/>
+    </eOperations>
+    <eOperations name="removeIconSetDefinitions">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="iconSetIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getIconDefinitions">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="iconInfos" upperBound="-1" eType="ecore:EClass ../../org.genivi.iconset-model/model/IconSet.ecore#//IconInfo"/>
+    </eOperations>
+    <eOperations name="addIconDefinitions">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="iconDefinitions" upperBound="-1" eType="ecore:EClass ../../org.genivi.iconset-model/model/IconSet.ecore#//IconDefinition"/>
+    </eOperations>
+    <eOperations name="removeIconDefinitions">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="iconInfos" upperBound="-1" eType="ecore:EClass ../../org.genivi.iconset-model/model/IconSet.ecore#//IconInfo"/>
+    </eOperations>
+    <eOperations name="reserveCategoryIds">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="numberOfIds" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="freeCategoryIds">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="categoryIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getCategoryDefinitions">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+    </eOperations>
+    <eOperations name="addCategoryDefinitions">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="categoryDefinitions" upperBound="-1" eType="#//CategoryDefinition"/>
+    </eOperations>
+    <eOperations name="removeCategoryDefinitions">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="categoryIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getTrafficIncidentIds">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Get all the Ids of the current traffic incidents."/>
+      </eAnnotations>
+      <eParameters name="listener" eType="#//TrafficIncidentsListener">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The class on which the callback function is called."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="warningLevels" upperBound="-1" eType="ecore:EEnum ../../org.genivi.trafficincidentsservice.trafficincidenttables-model/model/TrafficIncidentTables.ecore#//WarningLevel">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Only incidents with one of the specified warning levels will be returned.&#xD;&#xA;In case of an empty list, traffic incidents with any warning level (and no specified warning level) are returned."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="categoryIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getTrafficIncidentIdsInAreas">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Get the Ids of the traffic incidents in a number of areas."/>
+      </eAnnotations>
+      <eParameters name="listener" eType="#//TrafficIncidentsListener">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The class on which the callback function is called."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="warningLevels" upperBound="-1" eType="ecore:EEnum ../../org.genivi.trafficincidentsservice.trafficincidenttables-model/model/TrafficIncidentTables.ecore#//WarningLevel">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Only incidents with one of the specified warning levels will be returned.&#xD;&#xA;In case of an empty list, traffic incidents with any warning level (and no specified warning level) are returned."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="categoryIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="areas" upperBound="-1" eType="ecore:EClass ../../org.genivi.basetypes-model/model/Basetypes.ecore#//common/RectangularArea">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The areas for which the traffic incident Ids are requested."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getTrafficIncidents">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Get a number of Traffic Incidents."/>
+      </eAnnotations>
+      <eParameters name="listener" eType="#//TrafficIncidentsListener">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The class on which the callback function is called."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="trafficIncidentIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The Ids of the requested Traffic Incidents."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="includeTextFields" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The text fields in the returned Traffic Incident will only be filled in if this parameter is set to true."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getTrafficIncidentsFields">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Get a number of Traffic Incidents, where only specific fields are filled in.."/>
+      </eAnnotations>
+      <eParameters name="listener" eType="#//TrafficIncidentsListener">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The class on which the callback function is called."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="trafficIncidentIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The Ids of the requested Traffic Incidents."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="trafficIncidentFields" upperBound="-1" eType="#//TrafficIncidentField">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The fields (attributes) to be filled in in the Traffic Incident."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getTexts">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Get the texts for a number of Traffic Incidents."/>
+      </eAnnotations>
+      <eParameters name="listener" eType="#//TrafficIncidentsListener">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The class on which the callback function is called."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="trafficIncidentIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The Ids of the Traffic Incidents for which the texts are requested."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="textDetailLevel" eType="#//TextDetailLevel">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The amount of detail to be provided in the texts."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="addTrafficIncidentsStatusListener">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Add a listener which is notified in case of any change in Traffic Incidents status.&#xD;&#xA;In case of a status change, the TrafficIncidentsStatus() method of the listener is called."/>
+      </eAnnotations>
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="trafficIncidentsStatusListener" eType="#//TrafficIncidentsListener"/>
+    </eOperations>
+    <eOperations name="addFeedInformationListener">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="feedInformationListener" eType="#//TrafficIncidentsListener"/>
+    </eOperations>
+    <eOperations name="removeUpdateListener">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="updateListener" eType="#//TrafficIncidentsListener"/>
+    </eOperations>
+    <eOperations name="removeAreasUpdateListener">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="updateListener" eType="#//TrafficIncidentsListener"/>
+    </eOperations>
+    <eOperations name="removeTrafficIncidentsStatusListener">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="trafficIncidentsStatusListener" eType="#//TrafficIncidentsListener"/>
+    </eOperations>
+    <eOperations name="removeFeedInformationListener">
+      <eParameters name="listener" eType="#//TrafficIncidentsListener"/>
+      <eParameters name="feedInformationListener" eType="#//TrafficIncidentsListener"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrafficIncidentsListener">
+    <eOperations name="getVersionReply">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This method is called as a response to getVersion()."/>
+      </eAnnotations>
+      <eParameters name="version" eType="ecore:EClass ../../org.genivi.basetypes-model/model/Basetypes.ecore#//common/Version">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The API version of this interface implemented by the service."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="updates">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If a client has registered itself as a listener for any updates in the traffic incidents,&#xD;&#xA;this method is called if there are changes."/>
+      </eAnnotations>
+      <eParameters name="unchangedTrafficIncidentIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="changedTrafficIncidentIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="newTrafficIncidentIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="deletedTrafficIncidentIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="updatesInAreas">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If a client has registered itself as a listener for updates in the traffic incidents in one or more area's&#xD;&#xA;(via addAreaUpdateListener() or addAreasUpdateListener()),&#xD;&#xA;this method is called if there are changes."/>
+      </eAnnotations>
+      <eParameters name="areas" upperBound="-1" eType="ecore:EClass ../../org.genivi.basetypes-model/model/Basetypes.ecore#//common/RectangularArea">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The area's in which changes have taken place."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="trafficIncidentsStatus">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If a client has registered itself as a listener for changes in the Traffic Incidents status,&#xD;&#xA;this method is called upon changes in the Traffic Incidents status.&#xD;&#xA;The provided status information is the combined status of the available feeds in the system.&#xD;&#xA;Details of how the information is combined is given per parameter."/>
+      </eAnnotations>
+      <eParameters name="trafficIncidentFeedStatus" eType="#//TrafficIncidentFeedStatus">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The combined status of the Traffic Incident Feeds.&#xD;&#xA;If all Feeds are UNAVAILABLE, the status is UNAVAILABLE.&#xD;&#xA;Else, if any of the Feeds is CONNECTED, the status is CONNECTED.&#xD;&#xA;Else, the status is DISCONNECTED (so there are Feeds available, but none of them is connected)."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="trafficIncidentsStatus" eType="#//TrafficIncidentsStatus">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The combined status of the Traffic Incidents.&#xD;&#xA;If the status for all the Feeds is AVAILABLE, , the combined status is AVAILABLE.&#xD;&#xA;Else, if the status for one of the Feeds is PARTLY_AVAILABLE, the combined status is PARTLY_AVAILABLE.&#xD;&#xA;Else, the combined status is UNAVAILABLE (so there are no Traffic Incidents at all).&#xD;&#xA;&#xD;&#xA;      &#xD;&#xA;Meaning of the enum values at this level:&#xD;&#xA;UNAVAILABLE: The are no incidents in the system, and currently they can also not be received.&#xD;&#xA;PARTLY_AVAILABLE: There are or may be incidents in the system, but the set of incidents is probably not up to date.&#xD;&#xA;This means that big changes are possible. Examples: Upon start-up, some incidents have already been received,&#xD;&#xA;but there are more incidents to receive. If the user is looking at the map display, new incidents may suddenly appear.&#xD;&#xA;When a connection is lost, the information stays valid for some time, but the information may no longer be fully up to date,&#xD;&#xA;and at some point in time a lot of incidents may suddenly disappear because they are no longer valid.&#xD;&#xA;AVAILABLE: The reception and handling of the incidents is stable, and as up to date as possible with respect to the used protocol(s).&#xD;&#xA;It is however still possible that there are currently no Traffic Incidents."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="feedInformation">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If a client has registered itself as a listener for changes in the Feed Information,&#xD;&#xA;this method is called upon changes in the Feed Information."/>
+      </eAnnotations>
+      <eParameters name="feedsInformation" upperBound="-1" eType="#//FeedInformation">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The information per Traffic Incident Feed."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getLanguageReply">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This method is called as a response to getLanguage()."/>
+      </eAnnotations>
+      <eParameters name="languageCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The language."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="countryCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The country specific variant for the language."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getApplicabilityReply">
+      <eParameters name="filterExpression" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="reserveIconSetIdsReply">
+      <eParameters name="iconSetIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="reserveCategoryIdsReply">
+      <eParameters name="categoryIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="getTrafficIncidentIdsReply">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This method is called as a response to getTrafficIncidentIds()."/>
+      </eAnnotations>
+      <eParameters name="trafficIncidentIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The Ids of the requested traffic incidents."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getTrafficIncidentIdsInAreasReply">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This method is called as a response to getTrafficIncidentIdsInAreas()."/>
+      </eAnnotations>
+      <eParameters name="trafficIncidentIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The Ids of the requested traffic incidents."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getTrafficIncidentsReply">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This method is called as a response to getTrafficIncidents()."/>
+      </eAnnotations>
+      <eParameters name="trafficIncidents" upperBound="-1" eType="ecore:EClass ../../org.genivi.trafficincidentsservice.trafficincidents.trafficincident-model/model/TrafficIncident.ecore#//TrafficIncident">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The requested Traffic Incidents. This list may be shorter than the request list&#xD;&#xA;as nothing is returned for Ids that don't exist (anymore)."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getTrafficIncidentsFieldsReply">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This method is called as a response to getTrafficIncidentsFields()."/>
+      </eAnnotations>
+      <eParameters name="trafficIncidents" upperBound="-1" eType="ecore:EClass ../../org.genivi.trafficincidentsservice.trafficincidents.trafficincident-model/model/TrafficIncident.ecore#//TrafficIncident">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The requested Traffic Incidents, with only the requested fields filled in.&#xD;&#xA;This list may be shorter than the request list as nothing is returned for&#xD;&#xA;Ids that don't exist (anymore)."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getTextsReply">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This method is called as a response to getTexts()."/>
+      </eAnnotations>
+      <eParameters name="texts" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Text information per requested traffic incident.&#xD;&#xA;The texts will be in the same order as the trafficIncidentIds in the request."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="addTrafficIncidentsStatusListenerReply"/>
+    <eOperations name="addFeedInformationListenerReply"/>
+    <eOperations name="addUpdateListenerReply"/>
+    <eOperations name="removeUpdateListenerReply"/>
+    <eOperations name="addAreasUpdateListenerReply"/>
+    <eOperations name="removeAreasUpdateListenerReply"/>
+    <eOperations name="setLanguageReply"/>
+    <eOperations name="setTimeFormatReply"/>
+    <eOperations name="setDateFormatReply"/>
+    <eOperations name="setLengthUnitReply"/>
+    <eOperations name="setWeightUnitReply"/>
+    <eOperations name="setApplicabilityReply"/>
+    <eOperations name="freeCategoryIdsReply"/>
+    <eOperations name="getCategoryDefinitionsReply">
+      <eParameters name="categoryDefinitions" upperBound="-1" eType="#//CategoryDefinition"/>
+    </eOperations>
+    <eOperations name="addCategoryDefinitionsReply"/>
+    <eOperations name="removeCategoryDefinitionsReply"/>
+    <eOperations name="freeIconSetIdsReply"/>
+    <eOperations name="getIconDefinitionsReply">
+      <eParameters name="iconDefinitions" upperBound="-1" eType="ecore:EClass ../../org.genivi.iconset-model/model/IconSet.ecore#//IconDefinition"/>
+    </eOperations>
+    <eOperations name="addIconDefinitionsReply"/>
+    <eOperations name="removeIconDefinitionsReply"/>
+    <eOperations name="getIconSetsReply">
+      <eParameters name="iconSets" upperBound="-1" eType="ecore:EClass ../../org.genivi.iconset-model/model/IconSet.ecore#//IconSet"/>
+    </eOperations>
+    <eOperations name="addIconSetDefinitionsReply"/>
+    <eOperations name="removeIconSetDefinitionsReply"/>
+    <eOperations name="removeFeedInformationListenerReply"/>
+    <eOperations name="removeTrafficIncidentsStatusListenerReply"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TrafficIncidentField">
+    <eLiterals name="TRAFFIC_INCIDENT_ID" value="1"/>
+    <eLiterals name="EFFECT_CODE" value="2"/>
+    <eLiterals name="EFFECT_TEXT" value="3"/>
+    <eLiterals name="START_TIME" value="4"/>
+    <eLiterals name="STOP_TIME" value="5"/>
+    <eLiterals name="TENDENCY" value="6"/>
+    <eLiterals name="TENDENCY_TEXT" value="7"/>
+    <eLiterals name="LENGTH_AFFECTED" value="8"/>
+    <eLiterals name="AVERAGE_SPEED_ABSOLUTE" value="9"/>
+    <eLiterals name="DELAY" value="10"/>
+    <eLiterals name="SEGMENT_SPEED_LIMIT" value="11"/>
+    <eLiterals name="CAUSES" value="13"/>
+    <eLiterals name="CAUSE_TEXTS" value="14"/>
+    <eLiterals name="APPLICABILITY_TEXTS" value="16"/>
+    <eLiterals name="LOCATION" value="17"/>
+    <eLiterals name="LOCATION_INFO" value="18"/>
+    <eLiterals name="LOCATION_BOUNDING_BOX" value="19"/>
+    <eLiterals name="APPLICABILITY" value="15"/>
+    <eLiterals name="ADVICES" value="20"/>
+    <eLiterals name="ADVICE_TEXTS" value="21"/>
+    <eLiterals name="EXPECTED_SPEED_ABSOLUTE" value="12"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TextDetailLevel">
+    <eLiterals name="FULL" value="1"/>
+    <eLiterals name="SUMMARY" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrafficIncidentFeed">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This interface can be used by Traffic Incident Feeds to feed Traffic Incidents into the Traffic Incidents Service."/>
+    </eAnnotations>
+    <eOperations name="getVersion">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Get the API version of this interface implemented by the service."/>
+      </eAnnotations>
+      <eParameters name="listener" eType="#//TrafficIncidentFeedListener">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The class on which the callback function is called."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getLanguage">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Get the current language. In case of a client/server based Feed, this language can be sent to the server in order to receive any textual information in the right language."/>
+      </eAnnotations>
+      <eParameters name="listener" eType="#//TrafficIncidentFeedListener">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The class on which the callback function is called."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="addLanguageListener">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Add this client as a listener for changes in the current language. In case of changes, getLanguageReply() is called on the listener."/>
+      </eAnnotations>
+      <eParameters name="listener" eType="#//TrafficIncidentFeedListener">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The class on which the callback function is called."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="changeListener" eType="#//TrafficIncidentFeedListener"/>
+    </eOperations>
+    <eOperations name="clear">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Clear the internal store of the Traffic Incidents Service. This may be needed if the source of the Traffic Incidents is changed, or if the server indicates that a reset is needed."/>
+      </eAnnotations>
+    </eOperations>
+    <eOperations name="updateIncidents">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Update the Traffic Incidents in the internal store of the Traffic Incidents Service. These updates can consist of incidents to be removed (cancelledIncidentIds), and/or new or updated incidents (updatedIncidents). The 'cancels' are handled before the 'updates'."/>
+      </eAnnotations>
+      <eParameters name="feedId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="cancelledIncidentIds" upperBound="-1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The unique Ids of the incidents to be deleted."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="updatedIncidents" upperBound="-1" eType="ecore:EClass ../../org.genivi.trafficincidentsservice.trafficincidentfeed.trafficincident-model/model/XTrafficIncident.ecore#//TrafficIncident">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The new or updated incidents."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="updateStatus">
+      <eParameters name="feedId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+      <eParameters name="feedStatus" eType="#//TrafficIncidentFeedStatus"/>
+      <eParameters name="incidentsStatus" eType="#//TrafficIncidentsStatus"/>
+    </eOperations>
+    <eOperations name="registerFeed">
+      <eParameters name="listener" eType="#//TrafficIncidentFeedListener"/>
+      <eParameters name="dataProviderName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="protocolName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="communicationChannelName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+    <eOperations name="removeLanguageListener">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Remove this client as a listener for changes in the current language."/>
+      </eAnnotations>
+      <eParameters name="listener" eType="#//TrafficIncidentFeedListener"/>
+      <eParameters name="changeListener" eType="#//TrafficIncidentFeedListener"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TrafficIncidentFeedListener">
+    <eOperations name="getVersionReply">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This method is called as a response to getVersion()."/>
+      </eAnnotations>
+      <eParameters name="version" eType="ecore:EClass ../../org.genivi.basetypes-model/model/Basetypes.ecore#//common/Version">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The API version of this interface implemented by the service."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="getLanguageReply">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This method is called as a response to getLanguage() or addLanguegeListener() when the language is changed."/>
+      </eAnnotations>
+      <eParameters name="languageCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The currently used language."/>
+        </eAnnotations>
+      </eParameters>
+      <eParameters name="countryCode" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="The currently used, country specific variant of the language."/>
+        </eAnnotations>
+      </eParameters>
+    </eOperations>
+    <eOperations name="registerFeedReply">
+      <eParameters name="feedId" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    </eOperations>
+    <eOperations name="addLanguageListenerReply"/>
+    <eOperations name="removeLanguageListenerReply"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TrafficIncidentFeedStatus">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This type provides information on the status of a Traffic Incident Feed, or of a combination of Traffic Incident Feeds.  "/>
+    </eAnnotations>
+    <eLiterals name="UNAVAILABLE" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="There is no Traffic Incident Feed available. A feed is not available if a connection is not possible.&#xD;&#xA;Examples of this are: there is no location table available for the current country (in case of TMC),&#xD;&#xA;or the user has no valid subscription."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="CONNECTED" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="One or more Traffic Incident Feeds are available and connected (a communication channel is operational)."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="DISCONNECTED" value="3">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="One or more Traffic Incident Feeds are available but none of them is currently connected&#xD;&#xA;(the communication channels are not operational).&#xD;&#xA;For example, an RDS/TMC receiver is available but there is no signal,&#xD;&#xA;or a TPEG over HTTP/IP feed is available but the connection to the server failed."/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TrafficIncidentsStatus">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This type provides information on the status of the Traffic Incidents.  "/>
+    </eAnnotations>
+    <eLiterals name="UNAVAILABLE" value="1">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="There is no Traffic Incident data available."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="PARTLY_AVAILABLE" value="2">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="There is incomplete Traffic Incident data available. This happens e.g. if the Feed status has changed from DISCONNECTED to CONNECTED&#xD;&#xA;and the system knows that not all information has been received, or if the Feed status goes temporarily from CONNECTED to DISCONNECTED."/>
+      </eAnnotations>
+    </eLiterals>
+    <eLiterals name="AVAILABLE" value="3">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="There is Traffic Incident data available."/>
+      </eAnnotations>
+    </eLiterals>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeedInformation">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This data type provides information about a Traffic Incident Feed."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="dataProviderName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The name of the data provider."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="protocolName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The name of the protocol via which the Traffic Incidents are received.&#xD;&#xA;There are no predefined values."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="communicationChannelName"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The name of the communication channel.&#xD;&#xA;There are no predefined values."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="feedStatus" lowerBound="1"
+        eType="#//TrafficIncidentFeedStatus" unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The status of the Feed."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="trafficIncidentsStatus"
+        lowerBound="1" eType="#//TrafficIncidentsStatus" unsettable="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The status of the Traffic Incidents delivered by this Feed."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CategoryDefinition">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="localizedNames" upperBound="-1"
+        eType="ecore:EClass ../../org.genivi.basetypes-model/model/Basetypes.ecore#//common/LocalizedString"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="categoryId" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="icons" upperBound="-1"
+        eType="ecore:EClass ../../org.genivi.iconset-model/model/IconSet.ecore#//IconInfo"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="expression" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SpeedUnit">
+    <eLiterals name="KILOMETERS_PER_HOUR" value="1"/>
+    <eLiterals name="MILES_PER_HOUR" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LengthUnit">
+    <eLiterals name="KILOMETERS" value="1"/>
+    <eLiterals name="MILES" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="WeightUnit">
+    <eLiterals name="KILOGRAM" value="1"/>
+    <eLiterals name="POUND" value="2"/>
+  </eClassifiers>
+</ecore:EPackage>

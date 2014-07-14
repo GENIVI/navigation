@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XML-Schema-instance" xmlns="http://maven.apache.org/POM/4.0"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.genivi.trafficinfo</groupId>
+  <artifactId>trafficincidentspoc</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>GENIVI Traffic Incidents Proof Of Concept</name>
+  <description>This project is the top level project for the Traffic Incidents Proof of Concept.</description>
+  <parent>
+    <groupId>org.genivi.trafficinfo</groupId>
+    <artifactId>maven-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../../org.genivi.trafficinfo.maven-parent</relativePath>
+  </parent>
+  <dependencies>
+    <dependency>
+      <groupId>org.genivi.trafficincidentsservice</groupId>
+      <artifactId>dbuswrapper</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.genivi</groupId>
+      <artifactId>trafficinfo</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.genivi</groupId>
+      <artifactId>basetypes-model</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.genivi.trafficincidentsservice</groupId>
+      <artifactId>trafficincidentsservice-model</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.genivi.trafficinfo</groupId>
+      <artifactId>dbus-java</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.genivi.trafficinfo</groupId>
+      <artifactId>libmatthew</artifactId>
+    </dependency>
+  </dependencies>
+  <build>
+    <sourceDirectory>src/main/java</sourceDirectory>
+  </build>
+</project>

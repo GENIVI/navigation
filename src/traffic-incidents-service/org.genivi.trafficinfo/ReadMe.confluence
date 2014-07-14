@@ -1,0 +1,33 @@
+This project contains the main part of the Java only PoC for the TrafficIncidentsService. It makes use of several data models which are defined in other packages.
+On top of this there are projects to add D-Bus layers between the components.
+Packages
+
+org.genivi.locref.decoder
+Interface definition for Location Reference decoders. This interface is used in the implementation of org.genivi.locref.LocationReferenceDecodingService.
+
+org.genivi.locref.decoder.openlr
+OpenLR implementation of decoder interface defined in org.genivi.locref.decoder.
+
+org.genivi.locref.refimpl
+Reference implementation of org.genivi.locref.LocationReferenceDecodingService
+
+org.genivi.tpegtecfeed.refimpl
+Reference implementation of a TPEG-TEC Feed. This Feed receives TPEG Service Component Frames from the TPEG Framework and translates the information to TrafficIncidents which are handed over to the TrafficIncidents service, via the TrafficIncidentFeed interface.
+
+org.genivi.trafficincidentsservice
+Contains default implementations for TrafficIncidentsListener and TrafficIncidentFeedListener.
+
+org.genivi.trafficincidentsservice.refimpl
+Reference implementation of a TrafficIncidentsService (without any D-Bus binding).
+
+org.genivi.trafficincidentsservice.textgenerator
+Defines an interface for a text generator, as a sub component of the TrafficIncidentsService.
+
+org.genivi.trafficincidentsservice.textgenerator.basictextgenerator
+Basic implementation of a textgenerator.
+
+org.genivi.trafficinfo.pocmain
+Contains the Main class for starting the Proof of Concept (without D-Bus IPC).
+
+org.genivi.trafficinfo.trafficincidentsexampleclients
+Contains the example clients of the TrafficIncidentsService.

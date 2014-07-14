@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="booleanexpr" nsURI="http://org.genivi.booleanexpr" nsPrefix="booleanexpr">
+  <eAnnotations source="GenModel">
+    <details key="documentation" value="Copyright (C) 2013 TomTom International B.V.&#xD;&#xA;&#xD;&#xA;This Source Code Form is subject to the terms of the Mozilla Public&#xD;&#xA;License, v. 2.0. If a copy of the MPL was not distributed with this&#xD;&#xA;file, You can obtain one at http://mozilla.org/MPL/2.0/."/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanExpression" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This is the top level class for boolean expressions."/>
+    </eAnnotations>
+    <eOperations name="evaluate" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="object" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    </eOperations>
+    <eOperations name="format" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eParameters name="indent" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      <eParameters name="indentSize" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnaryExpression" eSuperTypes="#//BooleanExpression">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This is an expression of the form UnaryLogicalOperator 'expression', like: NOT 'expression'."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unaryOperator" lowerBound="1"
+        eType="#//UnaryLogicalOperator" defaultValueLiteral="NOT"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+        eType="#//BooleanExpression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DyadicLogicalOperator">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This enumeration defines the operators for DyadicExpressions.&#xD;&#xA;AND has a higher precedence than OR."/>
+    </eAnnotations>
+    <eLiterals name="AND"/>
+    <eLiterals name="OR" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="UnaryLogicalOperator">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This enumeration defines the operators for UnaryExpressions."/>
+    </eAnnotations>
+    <eLiterals name="NOT"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Predicate" abstract="true" eSuperTypes="#//BooleanExpression">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This is the top level class for predicates."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DyadicExpression" eSuperTypes="#//BooleanExpression">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This is an expression of the form 'expression' DyadicLogicalOperator 'expression', like 'expression' AND 'expression'."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="logicalOperator" lowerBound="1"
+        eType="#//DyadicLogicalOperator" defaultValueLiteral="AND" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leftHandTerm" lowerBound="1"
+        eType="#//BooleanExpression" unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rightHandTerm" lowerBound="1"
+        eType="#//BooleanExpression" unsettable="true" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ComparisonPredicate" eSuperTypes="#//Predicate">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This predicate compares the value of an attribute of a class to a literal value (a constant).&#xD;&#xA;For example &quot;myAttribute == 22&quot;."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literal" lowerBound="1"
+        eType="#//Literal" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
+        eType="#//ClassAttribute" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="comparisonOperator" lowerBound="1"
+        eType="#//ComparisonOperator"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InPredicate" eSuperTypes="#//Predicate">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This predicate checks whether an attribute value is in, or not in, a set of values."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
+        eType="#//ClassAttribute" unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="inOperator" lowerBound="1"
+        eType="#//InOperator" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
+        eType="#//Literal" unsettable="true" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ComparisonOperator">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This enumeration defines the operators for comparison."/>
+    </eAnnotations>
+    <eLiterals name="EQUAL"/>
+    <eLiterals name="NOT_EQUAL" value="1"/>
+    <eLiterals name="GREATER_THEN" value="2"/>
+    <eLiterals name="GREATER_OR_EQUAL_THAN" value="3"/>
+    <eLiterals name="LESS_THAN" value="4"/>
+    <eLiterals name="LESS_OR_EQUAL_THAN" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Literal" abstract="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SignedIntegerLiteral" eSuperTypes="#//Literal">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="An optionally signed integer values."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StringLiteral" eSuperTypes="#//Literal">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="A String value."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteral" eSuperTypes="#//Literal">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This class represents the boolean literal values 'true' and 'false'."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubClassPredicate" eSuperTypes="#//Predicate">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This predicate is used to evaluate an expression on a subclass of the current class."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subClassExpression" lowerBound="1"
+        eType="#//BooleanExpression" unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subClassAttribute" lowerBound="1"
+        eType="#//ClassAttribute" unsettable="true" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ListOperator">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This enumeration defines the operators for a MultiplicityPredicate."/>
+    </eAnnotations>
+    <eLiterals name="ANY"/>
+    <eLiterals name="ALL" value="1"/>
+    <eLiterals name="NONE" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ClassAttribute">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This class represents an attribute of a class of a data model. The attribute is identified by its name."/>
+    </eAnnotations>
+    <eOperations name="isSet" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eParameters name="object" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EObject"/>
+    </eOperations>
+    <eOperations name="getListValue">
+      <eGenericType eClassifier="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EEList">
+        <eTypeArguments/>
+      </eGenericType>
+      <eParameters name="object" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    </eOperations>
+    <eOperations name="getValue" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject">
+      <eParameters name="object" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EJavaObject"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="attributeName" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="metaOperator" eType="#//MetaOperator"
+        unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="index" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DownCastPredicate" eSuperTypes="#//Predicate">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This predicate is used to handle expressions on classes which extend a base class.&#xD;&#xA;Example: Class Person has one attribute 'name'. Class Driver extends Person and adds an attribute 'driversLicenseNo'.&#xD;&#xA;Now anywhere that Person can be used in a data model, it may also be a Driver.  But to use a Driver specific attribute, the Person has to be downcast to a Driver."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="className" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString" unsettable="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+        eType="#//BooleanExpression" unsettable="true" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="InOperator">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This enumeration defines the operators for an InPredicate."/>
+    </eAnnotations>
+    <eLiterals name="IN"/>
+    <eLiterals name="NOT_IN" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultiplicityPredicate" eSuperTypes="#//Predicate">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" lowerBound="1"
+        eType="#//BooleanExpression" unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
+        eType="#//ClassAttribute" unsettable="true" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="listOperator" lowerBound="1"
+        eType="#//ListOperator" unsettable="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IsSetPredicate" eSuperTypes="#//Predicate">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This predicate checks whether an optional value is set or not."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="attribute" lowerBound="1"
+        eType="#//ClassAttribute" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MetaOperator">
+    <eLiterals name="SIZE"/>
+  </eClassifiers>
+</ecore:EPackage>

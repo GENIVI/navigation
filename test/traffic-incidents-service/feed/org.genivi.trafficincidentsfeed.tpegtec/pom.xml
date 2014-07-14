@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XML-Schema-instance"
+	xmlns="http://maven.apache.org/POM/4.0"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.genivi.trafficincidentsfeed</groupId>
+	<artifactId>tpegtec</artifactId>
+	<packaging>jar</packaging>
+	<version>1.0-SNAPSHOT</version>
+	<name>GENIVI TPEG-TEC Test Feed</name>
+	<description>This project contains a test TPEG-TEC Feed for testing a TrafficIncidentsService.</description>
+	<parent>
+		<groupId>org.genivi.trafficinfo</groupId>
+		<artifactId>maven-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../../org.genivi.trafficinfo.maven-parent</relativePath>
+	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>org.genivi</groupId>
+			<artifactId>locref-model</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.genivi</groupId>
+			<artifactId>trafficinfo</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.genivi.trafficincidentsservice</groupId>
+			<artifactId>trafficincidentsservice-model</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.genivi.trafficincidentsservice</groupId>
+			<artifactId>trafficincidenttables-model</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.genivi.trafficincidentsservice.trafficincidentfeed</groupId>
+			<artifactId>trafficincidentfeed-trafficincident-model</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.genivi.trafficinfo</groupId>
+			<artifactId>tpegfwk</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.genivi.trafficinfo</groupId>
+			<artifactId>tpegfwktypes-model</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.genivi.trafficinfo</groupId>
+			<artifactId>tpegtables</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.genivi.trafficinfo.tpeg.tec</groupId>
+			<artifactId>event-model</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+	</dependencies>
+	<build>
+	</build>
+</project>

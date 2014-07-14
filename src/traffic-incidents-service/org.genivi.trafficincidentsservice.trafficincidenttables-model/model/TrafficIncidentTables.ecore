@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="trafficincidenttables" nsURI="http://org.genivi.trafficinfo.trafficincidenttables"
+    nsPrefix="TrafficIncidentTables">
+  <eAnnotations source="GenModel">
+    <details key="documentation" value="Copyright (C) 2013 TomTom International B.V.&#xD;&#xA;&#xD;&#xA;This Source Code Form is subject to the terms of the Mozilla Public&#xD;&#xA;License, v. 2.0. If a copy of the MPL was not distributed with this&#xD;&#xA;file, You can obtain one at http://mozilla.org/MPL/2.0/."/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EEnum" name="EffectCode">
+    <eLiterals name="TRAFFIC_FLOW_UNKNOWN" value="1"/>
+    <eLiterals name="FREE_TRAFFIC_FLOW" value="2"/>
+    <eLiterals name="HEAVY_TRAFFIC" value="3" literal="HEAVY_TRAFFIC"/>
+    <eLiterals name="SLOW_TRAFFIC" value="4"/>
+    <eLiterals name="QUEUING_TRAFFIC" value="5"/>
+    <eLiterals name="STATIONARY_TRAFFIC" value="6"/>
+    <eLiterals name="NO_TRAFFIC_FLOW" value="7"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Tendency">
+    <eLiterals name="SLIGHTLY_INCREASING" value="1"/>
+    <eLiterals name="INCREASING" value="2"/>
+    <eLiterals name="STRONGLY_INCREASING" value="3"/>
+    <eLiterals name="SLIGHTLY_DECREASING" value="4"/>
+    <eLiterals name="DECREASING" value="5"/>
+    <eLiterals name="STRONGLY_DECREASING" value="6"/>
+    <eLiterals name="CONSTANT" value="7"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="CauseCode">
+    <eLiterals name="TRAFFIC_CONGESTION" value="1"/>
+    <eLiterals name="ACCIDENT" value="2"/>
+    <eLiterals name="ROADWORKS" value="3"/>
+    <eLiterals name="NARROW_LANES" value="4"/>
+    <eLiterals name="IMPASSIBILITY" value="5"/>
+    <eLiterals name="SLIPPERY_ROAD" value="6"/>
+    <eLiterals name="AQUAPLANING" value="7"/>
+    <eLiterals name="FIRE" value="8"/>
+    <eLiterals name="HAZARDOUS_DRIVING_CONDITIONS" value="9"/>
+    <eLiterals name="OBJECTS_ON_THE_ROAD" value="10"/>
+    <eLiterals name="ANIMALS_ON_ROADWAY" value="11"/>
+    <eLiterals name="PEOPLE_ON_ROADWAY" value="12"/>
+    <eLiterals name="BROKEN_DOWN_VEHICLES" value="13"/>
+    <eLiterals name="VEHICLE_ON_WRONG_CARRIAGEWAY" value="14"/>
+    <eLiterals name="RESCUE_AND_RECOVERY_WORK_IN_PROGRESS" value="15"/>
+    <eLiterals name="REGULATORY_MEASURE" value="16"/>
+    <eLiterals name="EXTREME_WEATHER_CONDITIONS" value="17"/>
+    <eLiterals name="VISIBILITY_REDUCED" value="18"/>
+    <eLiterals name="PRECIPITATION" value="19"/>
+    <eLiterals name="RECKLESS_PERSONS" value="20"/>
+    <eLiterals name="OVER_HEIGHT_WARNING_SYSTEM_TRIGGERED" value="21"/>
+    <eLiterals name="TRAFFIC_REGULATIONS_CHANGED" value="22"/>
+    <eLiterals name="MAJOR_EVENT" value="23"/>
+    <eLiterals name="SERVICE_NOT_OPERATING" value="24"/>
+    <eLiterals name="SERVICE_NOT_USEABLE" value="25"/>
+    <eLiterals name="SLOW_MOVING_VEHICLES" value="26"/>
+    <eLiterals name="DANGEROUS_END_OF_QUEUE" value="27"/>
+    <eLiterals name="RISK_OF_FIRE" value="28"/>
+    <eLiterals name="TIME_DELAY" value="29"/>
+    <eLiterals name="POLICE_CHECKPOINT" value="30"/>
+    <eLiterals name="MALFUNCTIONING_ROADSIDE_EQUIPMENT" value="31"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="WarningLevel">
+    <eLiterals name="INFORMATIVE" value="1"/>
+    <eLiterals name="DANGER_LEVEL_1" value="2"/>
+    <eLiterals name="DANGER_LEVEL_2" value="3"/>
+    <eLiterals name="DANGER_LEVEL_3" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TrafficCongestion">
+    <eLiterals name="INCREASED_VOLUME_OF_TRAFFIC" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Accident">
+    <eLiterals name="MULTI_VEHICLE_ACCIDENT" value="1"/>
+    <eLiterals name="HEAVY_ACCIDENT" value="2"/>
+    <eLiterals name="ACCIDENT_INVOLVING_LORRY" value="3"/>
+    <eLiterals name="ACCIDENT_INVOLVING_BUS" value="4"/>
+    <eLiterals name="ACCIDENT_INVOLVING_HAZARDOUS_MATERIALS" value="5"/>
+    <eLiterals name="ACCIDENT_ON_OPPOSITE_LANE" value="6"/>
+    <eLiterals name="UNSECURED_ACCIDENT" value="7"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RoadWorks">
+    <eLiterals name="MAJOR_ROADWORKS" value="1"/>
+    <eLiterals name="ROAD_MARKING_WORK" value="2"/>
+    <eLiterals name="SLOW_MOVING_ROAD_MAINTENANCE" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="NarrowLanes">
+    <eLiterals name="CONTRAFLOW" value="1"/>
+    <eLiterals name="HARD_SHOULDER_CLOSED" value="2"/>
+    <eLiterals name="SLIP_LANE_CLOSED" value="3"/>
+    <eLiterals name="CRAWLER_LANE_CLOSED" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Impassibility">
+    <eLiterals name="FLOODING" value="1"/>
+    <eLiterals name="DANGER_OF_AVALANCHES" value="2"/>
+    <eLiterals name="BLASTING_OF_AVALANCHES" value="3"/>
+    <eLiterals name="LANDSLIPS" value="4"/>
+    <eLiterals name="CHEMICAL_SPILLAGE" value="5"/>
+    <eLiterals name="WINTER_CLOSURE" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SlipperyRoad">
+    <eLiterals name="HEAVY_FROST_ON_ROAD" value="1"/>
+    <eLiterals name="FUEL_ON_ROAD" value="2"/>
+    <eLiterals name="MUD_ON_ROAD" value="3"/>
+    <eLiterals name="SNOW_ON_ROAD" value="4"/>
+    <eLiterals name="ICE_ON_ROAD" value="5"/>
+    <eLiterals name="BLACK_ICE_ON_ROAD" value="6"/>
+    <eLiterals name="OIL_ON_ROAD" value="7"/>
+    <eLiterals name="LOOSE_CHIPPINGS" value="8"/>
+    <eLiterals name="INSTANT_BLACK_ICE" value="9"/>
+    <eLiterals name="ROADS_SALTED" value="10"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Fire">
+    <eLiterals name="MAJOR_FIRE" value="1"/>
+    <eLiterals name="FOREST_FIRE" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="HazardousDrivingConditions">
+    <eLiterals name="ROCKFALLS" value="1"/>
+    <eLiterals name="EARTHQUAKE_DAMAGE" value="2"/>
+    <eLiterals name="SEWER_COLLAPSE" value="3"/>
+    <eLiterals name="SUBSIDENCE" value="4"/>
+    <eLiterals name="SNOW_DRIFTS" value="5"/>
+    <eLiterals name="STORM_DAMAGE" value="6"/>
+    <eLiterals name="BURST_PIPE" value="7"/>
+    <eLiterals name="VOLCANO_ERUPTION" value="8"/>
+    <eLiterals name="FALLING_ICE" value="9"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ObjectsOnTheRoad">
+    <eLiterals name="SHED_LOAD" value="1"/>
+    <eLiterals name="PARTS_OF_VEHICLES" value="2"/>
+    <eLiterals name="PARTS_OF_TYRES" value="3"/>
+    <eLiterals name="BIG_OBJECTS" value="4"/>
+    <eLiterals name="FALLEN_TREES" value="5"/>
+    <eLiterals name="HUB_CAPS" value="6"/>
+    <eLiterals name="WAITING_VEHICLES" value="7"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AnimalsOnRoadway">
+    <eLiterals name="WILD_ANIMALS" value="1"/>
+    <eLiterals name="HERD_OF_ANIMALS" value="2"/>
+    <eLiterals name="SMALL_ANIMALS" value="3"/>
+    <eLiterals name="LARGE_ANIMALS" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PeopleOnRoadway">
+    <eLiterals name="CHILDREN_ON_ROADWAY" value="1"/>
+    <eLiterals name="CYCLISTS_ON_ROADWAY" value="2"/>
+    <eLiterals name="MOTOR_CYCLIST_ON_ROADWAY" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BrokenDownVehicles">
+    <eLiterals name="BROKEN_DOWN_VEHICLE_BURNING" value="1"/>
+    <eLiterals name="BROKEN_DOWN_UNLIT_VEHICLE" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RescueAndRecoveryWorkInProgress">
+    <eLiterals name="EMERGENCY_VEHICLES" value="1"/>
+    <eLiterals name="RESCUE_HELICOPTER_LANDING" value="2"/>
+    <eLiterals name="POLICE_ACTIVITY_ONGOING" value="3"/>
+    <eLiterals name="MEDICAL_EMERGENCY_ONGOING" value="4"/>
+    <eLiterals name="CHILD_ABDUCTION_IN_PROGRESS" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RegulatoryMeasure">
+    <eLiterals name="SECURITY_ALERT" value="1"/>
+    <eLiterals name="CONTAGIOUS_DISEASE" value="2"/>
+    <eLiterals name="ENVIRONMENTAL" value="3"/>
+    <eLiterals name="SMOG_ALERT" value="4"/>
+    <eLiterals name="BATCH_SERVICE_IN_PROGRESS" value="5"/>
+    <eLiterals name="ROAD_CLOSED_BY_THE_REGULATORY_AUTHORITIES" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="LaneRestrictionType">
+    <eLiterals name="LANES_CLOSED" value="1"/>
+    <eLiterals name="LANES_OPEN" value="2"/>
+    <eLiterals name="RIGHT_LANES_CLOSED" value="3"/>
+    <eLiterals name="LEFT_LANES_CLOSED" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="AdviceCode">
+    <eLiterals name="DRIVE_TO_NEXT_AVAILABLE_PARKING_PLACE" value="1"/>
+    <eLiterals name="OVERTAKING_NOT_ALLOWED" value="2"/>
+    <eLiterals name="DRIVING_NOT_ALLOWED" value="3"/>
+    <eLiterals name="USE_HARD_SHOULDER_AS_LANE" value="4"/>
+    <eLiterals name="WAIT_FOR_POLICE_PATROL" value="5"/>
+    <eLiterals name="WAIT_FOR_IMPROVED_WEATHER" value="6"/>
+    <eLiterals name="GIVING_PATH_VEHICLES_COMING_FROM_BEHIND" value="7"/>
+    <eLiterals name="FOLLOW_DIVERSION" value="8"/>
+    <eLiterals name="NO_DIVERSION_TO_RECOMMEND" value="9"/>
+    <eLiterals name="DO_NOT_DIVERT" value="10"/>
+    <eLiterals name="FOLLOW_POLICE_INSTRUCTIONS" value="11"/>
+    <eLiterals name="AVOID_THE_AREA" value="12"/>
+    <eLiterals name="DRIVE_CAREFULLY" value="13"/>
+    <eLiterals name="DO_NOT_LEAVE_YOUR_VEHICLE" value="14"/>
+    <eLiterals name="SWITCH_ON_RADIO" value="15"/>
+    <eLiterals name="USE_TOLL_LANES" value="16"/>
+    <eLiterals name="WAIT_FOR_CONVOI" value="17"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="VehicleType">
+    <eLiterals name="CAR" value="1"/>
+    <eLiterals name="LORRY" value="2"/>
+    <eLiterals name="BUS" value="3"/>
+    <eLiterals name="TAXI" value="4"/>
+    <eLiterals name="TRAIN" value="5"/>
+    <eLiterals name="MOTOR_CYCLE" value="6"/>
+    <eLiterals name="VEHICLE_WITH_TRAILER" value="7"/>
+    <eLiterals name="MOTOR_VEHICLES" value="8"/>
+    <eLiterals name="TRANSPORT_OF_DANGEROUS_GOODS" value="9"/>
+    <eLiterals name="TRANSPORT_OF_ABNORMAL_LOAD" value="10"/>
+    <eLiterals name="HEAVY_VEHICLE" value="11"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RestrictionType">
+    <eLiterals name="WIDTH_LESS_THAN" value="1"/>
+    <eLiterals name="WIDTH_GREATER_THAN" value="2"/>
+    <eLiterals name="HEIGTH_LESS_THAN" value="3"/>
+    <eLiterals name="HEIGTH_GREATER_THAN" value="4"/>
+    <eLiterals name="WEIGHT_LESS_THAN" value="5"/>
+    <eLiterals name="WEIGHT_GREATER_THAN" value="6"/>
+    <eLiterals name="WITHOUT_WINTER_TYRE" value="7"/>
+    <eLiterals name="WITHOUT_SNOW_CHAIN" value="8"/>
+    <eLiterals name="WITH_TRAILER" value="9"/>
+    <eLiterals name="WITH_CARAVAN" value="10"/>
+    <eLiterals name="PERSONS_IN_VEHICLE_LESS_THAN" value="11"/>
+    <eLiterals name="PERSONS_IN_VEHICLE_MORE_THAN" value="12"/>
+    <eLiterals name="EVEN_NUMBER_PLATE" value="13"/>
+    <eLiterals name="ODD_NUMBER_PLATE" value="14"/>
+    <eLiterals name="LENGTH_LESS_THAN" value="15"/>
+    <eLiterals name="LENGTH_GREATER_THAN" value="16"/>
+    <eLiterals name="AXLE_LOAD_LESS_THAN" value="17"/>
+    <eLiterals name="AXLE_LOAD_GREATER_THAN" value="18"/>
+    <eLiterals name="VEHICLE_FULFILLS_EMISSION_STANDARD_EURO3" value="19"/>
+    <eLiterals name="VEHICLE_FULFILLS_EMISSION_STANDARD_EURO3D4" value="20"/>
+    <eLiterals name="VEHICLE_FULFILLS_EMISSION_STANDARD_EURO4" value="21"/>
+    <eLiterals name="VEHICLE_FULFILLS_EMISSION_STANDARD_EURO5" value="22"/>
+    <eLiterals name="WITH_PETROL_ENGINE" value="23"/>
+    <eLiterals name="WITH_DIESEL_ENGINE" value="24"/>
+    <eLiterals name="WITH_LPG_ENGINE" value="25"/>
+    <eLiterals name="THROUGH_TRAFFIC" value="26"/>
+    <eLiterals name="RESIDENTS_TRAFFIC" value="27"/>
+    <eLiterals name="WITH_DESTINATION_IN_GIVEN_AREA" value="28"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ExtremeWeatherConditions">
+    <eLiterals name="STRONG_WINDS" value="1"/>
+    <eLiterals name="DAMAGING_HAIL" value="2"/>
+    <eLiterals name="HURRICANE" value="3"/>
+    <eLiterals name="THUNDERSTORM" value="4"/>
+    <eLiterals name="TORNADO" value="5"/>
+    <eLiterals name="BLIZARD" value="6"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="VisibilityReduced">
+    <eLiterals name="VISIBILITY_REDUCED_DUE_TO_FOG" value="1"/>
+    <eLiterals name="VISIBILITY_REDUCED_DUE_TO_SMOKE" value="2"/>
+    <eLiterals name="VISIBILITY_REDUCED_DUE_TO_HEAVY_SNOWFALL" value="3"/>
+    <eLiterals name="VISIBILITY_REDUCED_DUE_TO_HEAVY_RAIN" value="4"/>
+    <eLiterals name="VISIBILITY_REDUCED_DUE_TO_HEAVY_HAIL" value="5"/>
+    <eLiterals name="VISIBILITY_REDUCED_DUE_TO_LOW_SUN_GLARE" value="6"/>
+    <eLiterals name="VISIBILITY_REDUCED_DUE_TO_SANDSTORMS" value="7"/>
+    <eLiterals name="VISIBILITY_REDUCED_DUE_TO_SWARMS_OF_INSECTS" value="8"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Precipitation">
+    <eLiterals name="HEAVY_RAIN" value="1"/>
+    <eLiterals name="HEAVY_SNOWFALL" value="2"/>
+    <eLiterals name="SOFT_HAIL" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RecklessPersons">
+    <eLiterals name="RECKLESS_DRIVER" value="1"/>
+    <eLiterals name="GUNFIRE_ON_ROAD" value="2"/>
+    <eLiterals name="STONE_THROWING_PERSONS" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MajorEvent">
+    <eLiterals name="SPORTS_EVENT" value="1"/>
+    <eLiterals name="DEMONSTRATION" value="2"/>
+    <eLiterals name="DEMONSTRATION_WITH_VEHICLES" value="3"/>
+    <eLiterals name="CONCERT" value="4"/>
+    <eLiterals name="FAIR" value="5"/>
+    <eLiterals name="MILITARY_TRAINING" value="6"/>
+    <eLiterals name="EMERGENCY_TRAINING" value="7"/>
+    <eLiterals name="FESTIVITY" value="8"/>
+    <eLiterals name="PROCESSION" value="9"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ServiceNotOperating">
+    <eLiterals name="FERRY_SERVICE_NOT_OPERATING" value="1"/>
+    <eLiterals name="PLANE_SERVICE_NOT_OPERATING" value="2"/>
+    <eLiterals name="TRAIN_SERVICE_NOT_OPERATING" value="3"/>
+    <eLiterals name="BUS_SERVICE_NOT_OPERATING" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ServiceNotUsable">
+    <eLiterals name="FUEL_STATION_CLOSED" value="1"/>
+    <eLiterals name="SERVICE_AREA_CLOSED" value="2"/>
+    <eLiterals name="SERVICE_AREA_BUSY" value="3"/>
+    <eLiterals name="PARKING_FULL" value="4"/>
+    <eLiterals name="CAR_PARK_CLOSED" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="SlowMovingVehicles">
+    <eLiterals name="SLOW_MOVING_MAINTENANCE_VEHICLE" value="1"/>
+    <eLiterals name="VEHICLES_SLOWING_TO_LOOK_AT_ACCIDENT" value="2"/>
+    <eLiterals name="ABNORMAL_LOAD" value="3"/>
+    <eLiterals name="ABNORMAL_WIDE_LOAD" value="4"/>
+    <eLiterals name="CONVOY" value="5"/>
+    <eLiterals name="SNOWPLOUGH" value="6"/>
+    <eLiterals name="DEICING" value="7"/>
+    <eLiterals name="SALTING_VEHICLES" value="8"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DangerousEndOfQueue">
+    <eLiterals name="SUDDEN_END_OF_QUEUE" value="1"/>
+    <eLiterals name="QUEUE_OVER_HILL" value="2"/>
+    <eLiterals name="QUEUE_AROUND_BEND" value="3"/>
+    <eLiterals name="QUEUE_IN_TUNNEL" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="RiskOfFire">
+    <eLiterals name="LEAKAGE_OF_FUEL" value="1"/>
+    <eLiterals name="LEAKAGE_OF_GAS" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TimeDelay">
+    <eLiterals name="TIME_DELAY_AT_FRONTIER" value="1"/>
+    <eLiterals name="TIME_DELAY_AT_FERRY_PORT" value="2"/>
+    <eLiterals name="TIME_DELAY_AT_VEHICLE_ON_RAIL_TERMINAL" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="PoliceCheckpoint">
+    <eLiterals name="PERMANENT_POLICE_CHECKPOINT" value="1"/>
+    <eLiterals name="TEMPORARY_POLICE_CHECKPOINT" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MalfunctioningRoadsideEquipment">
+    <eLiterals name="ROAD_RAIL_CROSSING_FAILURE" value="1"/>
+    <eLiterals name="TUNNEL_VENTILATION_NOT_WORKING" value="2"/>
+    <eLiterals name="TRAFFIC_CONTROL_SIGNALS_WORKING_INCORRECTLY" value="3"/>
+    <eLiterals name="EMERGENCY_TELEPHONES_NOT_WORKING" value="4"/>
+    <eLiterals name="AUTOMATIC_PAYMENT_LANES_NOT_WORKING" value="5"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="OvertakingNotAllowed">
+    <eLiterals name="DO_NOT_USE_OVERTAKING_LANES" value="1"/>
+    <eLiterals name="OVERTAKING_NOT_ALLOWED_DRIVE_ON_CRAWLER_LANE" value="2"/>
+    <eLiterals name="OVERTAKING_NOT_ALLOWED_DRIVE_ON_LEFT_MOST_LANE" value="3"/>
+    <eLiterals name="OVERTAKING_NOT_ALLOWED_DRIVE_ON_RIGHT_MOST_LANE" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DrivingNotAllowed">
+    <eLiterals name="DRIVING_NOT_ALLOWED_TAKE_NEXT_POSSIBLE_PLACE_TO_STOP_VEHICLE"
+        value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="GivingPathVehiclesFromBehind">
+    <eLiterals name="GIVING_PATH_FOR_RESCUE_VEHICLE" value="1"/>
+    <eLiterals name="GIVING_PATH_FOR_SERVICE_VEHICLES" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="FollowDiversion">
+    <eLiterals name="FOLLOW_DIVERSION_SIGNS" value="1"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DriveCarefully">
+    <eLiterals name="DRIVE_CAREFULLY_DANGEROUS_SITUATION_ON_ENTRY_SLIP_ROAD" value="1"/>
+    <eLiterals name="DRIVE_CAREFULLY_DANGEROUS_SITUATION_ON_EXIT_SLIP_ROAD" value="2"/>
+    <eLiterals name="DRIVE_CAREFULLY_ICE_BUILDUP_ON_CABLE_STRUCTURE" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="DoNotLeaveYourVehicle">
+    <eLiterals name="DO_NOT_LEAVE_YOUR_VEHICLE" value="1"/>
+    <eLiterals name="DO_NOT_LEAVE_YOUR_VEHICLE_CLOSE_WINDOWS" value="2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="UseTollLanes">
+    <eLiterals name="USE_MANUAL_PAYMENT_TOLL_LANES" value="1"/>
+    <eLiterals name="USE_AUTOMATIC_PAYMENT_TOLL_LANES" value="2"/>
+  </eClassifiers>
+</ecore:EPackage>

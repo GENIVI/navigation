@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+  <name>org.genivi.trafficincidentsservice.dbuswrapper</name>
+  <comment>This project contains the glue code between D-Bus and the clean Java interfaces. NO_M2ECLIPSE_SUPPORT: Project files created with the maven-eclipse-plugin are not supported in M2Eclipse.</comment>
+  <projects>
+    <project>org.genivi.basetypes-model</project>
+    <project>org.genivi.trafficinfo</project>
+    <project>org.genivi.trafficinfo.dbus-java</project>
+    <project>org.genivi.trafficinfo.libmatthew</project>
+    <project>org.genivi.trafficincidentsservice.trafficincidentsservice-model</project>
+    <project>org.genivi.booleanexpr-model</project>
+    <project>org.genivi.trafficinfo.demo</project>
+    <project>org.genivi.iconset-model</project>
+    <project>org.genivi.locref-model</project>
+    <project>org.genivi.trafficincidentsservice.trafficincidents.trafficincidents-trafficincident-model</project>
+    <project>org.genivi.trafficincidentsservice.trafficincidenttables-model</project>
+    <project>org.genivi.trafficincidentsservice.trafficincidentfeed.trafficincidentfeed-trafficincident-model</project>
+  </projects>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+  </natures>
+</projectDescription>

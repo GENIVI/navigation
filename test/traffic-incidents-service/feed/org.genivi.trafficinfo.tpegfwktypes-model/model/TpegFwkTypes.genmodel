@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (C) 2013 TomTom International B.V.&#xD;&#xA;&#xD;&#xA;This Source Code Form is subject to the terms of the Mozilla Public&#xD;&#xA;License, v. 2.0. If a copy of the MPL was not distributed with this&#xD;&#xA;file, You can obtain one at http://mozilla.org/MPL/2.0/."
+    modelDirectory="/org.genivi.trafficinfo.tpegfwktypes-model/src/main/java" modelPluginID="org.genivi.trafficinfo.tpegfwktypes-model"
+    modelName="TpegFwkTypes" importerID="org.eclipse.emf.importer.ecore" complianceLevel="6.0"
+    copyrightFields="false">
+  <foreignModel>TpegFwkTypes.ecore</foreignModel>
+  <genPackages prefix="Tpegfwktypes" basePackage="org.genivi.trafficinfo.tpeg" disposableProviderFactory="true"
+      ecorePackage="TpegFwkTypes.ecore#/">
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//LocalisedShortString">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//LocalisedShortString/languageCode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//LocalisedShortString/string"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//LocationReferencingContainer">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TpegFwkTypes.ecore#//LocationReferencingContainer/method"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//TransportFrameTemplate">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//TransportFrameTemplate/metaInformationTODO"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//TransportFrameTemplate/syncWord"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//TransportFrameTemplate/fieldLength"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//TransportFrameTemplate/headerCRC"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//TransportFrameTemplate/frameType"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//TransportFrameType0">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TpegFwkTypes.ecore#//TransportFrameType0/transportFrameContent"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//TransportFrameType1">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TpegFwkTypes.ecore#//TransportFrameType1/transportFrameContent"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//ServiceComponentFrame">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServiceComponentFrame/SCID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServiceComponentFrame/fieldLength"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServiceComponentFrame/scHeaderCRC"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//ServiceFrame">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServiceFrame/servEncID"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TpegFwkTypes.ecore#//ServiceFrame/serviceFrameContent"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TpegFwkTypes.ecore#//ServiceFrame/SID"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//StreamDirectoryFrame">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TpegFwkTypes.ecore#//StreamDirectoryFrame/SID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//StreamDirectoryFrame/numberOfServices"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//StreamDirectoryFrame/headerCRC"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//ServCompMultiplex">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TpegFwkTypes.ecore#//ServCompMultiplex/multiplexContent"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//ServiceIdentifier">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServiceIdentifier/sidA"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServiceIdentifier/sidB"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServiceIdentifier/sidC"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//ServCompFrameProtected">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServCompFrameProtected/applicationContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServCompFrameProtected/dataCRC"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//ServCompFrameCountedProtected">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServCompFrameCountedProtected/messageCount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServCompFrameCountedProtected/applicationContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServCompFrameCountedProtected/dataCRC"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//ServCompFramePrioritisedProtected">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServCompFramePrioritisedProtected/groupPriority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServCompFramePrioritisedProtected/applicationContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServCompFramePrioritisedProtected/dataCRC"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//ServCompFramePrioritisedCountedProtected">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServCompFramePrioritisedCountedProtected/groupPriority"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServCompFramePrioritisedCountedProtected/messageCount"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServCompFramePrioritisedCountedProtected/applicationContent"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//ServCompFramePrioritisedCountedProtected/dataCRC"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//MMCSwitch">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//MMCSwitch/messageID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//MMCSwitch/versionID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//MMCSwitch/messageExpiryTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//MMCSwitch/cancelFlag"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//MMCSwitch/messageGenerationTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//MMCSwitch/priority"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//MessageManagementContainer"/>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//MMCMasterMessage">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TpegFwkTypes.ecore#//MMCMasterMessage/multiPartMessageDirectory"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//MultiPartMessageDirectory">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//MultiPartMessageDirectory/partID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//MultiPartMessageDirectory/partType"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//MMCMessagePart">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//MMCMessagePart/partID"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//MMCMessagePart/updateMode"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//MMCMessagePart/masterMessageVersions"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//Method"/>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//TPEGLocationReference"/>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//DLR1LocationReference"/>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//TMCLocationReference"/>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//VICSLinkReference"/>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//KoreanNodeLinkLocationReference"/>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//TETLocationReference"/>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//GLRLocationReference"/>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//OLRLocationReference">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//OLRLocationReference/locationData"/>
+    </genClasses>
+    <genClasses ecoreClass="TpegFwkTypes.ecore#//TimeServiceComponentFrame">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//TimeServiceComponentFrame/date"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TpegFwkTypes.ecore#//TimeServiceComponentFrame/formattedDate"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="src" path="/org.genivi.trafficinfo.tpegfwk"/>
+  <classpathentry kind="var" path="M2_REPO/org/genivi/trafficinfo/demo/1.0-SNAPSHOT/demo-1.0-SNAPSHOT.jar"/>
+  <classpathentry kind="src" path="/org.genivi.trafficinfo.tpegfwktypes-model"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.common/2.8.0.v20130125-0546/org.eclipse.emf.common-2.8.0.v20130125-0546.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.ecore/2.8.3.v20130125-0546/org.eclipse.emf.ecore-2.8.3.v20130125-0546.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.ecore.xmi/2.8.1.v20130125-0546/org.eclipse.emf.ecore.xmi-2.8.1.v20130125-0546.jar"/>
+  <classpathentry kind="src" path="/org.genivi.trafficinfo.tpeg.sni-model"/>
+  <classpathentry kind="src" path="/org.genivi.trafficinfo.tpegtables"/>
+  <classpathentry kind="src" path="/org.genivi.trafficinfo.tpeg.tec.event-model"/>
+  <classpathentry kind="var" path="M2_REPO/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4.jar" sourcepath="M2_REPO/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/D:/maven_repository/repository/commons-logging/commons-logging/1.0.4/commons-logging-1.0.4-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+</classpath>

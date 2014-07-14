@@ -1,0 +1,2 @@
+This project contains a class to start the TrafficInfoListDisplay from 
+org.genivi.trafficinfo.trafficincidentsexampleclients on top of a D-Bus proxy.

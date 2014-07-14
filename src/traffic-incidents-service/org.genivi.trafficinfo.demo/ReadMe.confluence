@@ -1,0 +1,24 @@
+{toc:minLevel=2} 
+
+h1. Introduction
+This project contains components which can be used in demo's and prototypes.
+
+h1. Communication Channel
+
+What communication channels have in common, is that someone receives data. Therefore there is a common interace DataReceptionListener, which is to be implemented by a client that receives the data.
+Based on this interface specific communication channels can be defined. For now there are a broadcast channel and an asynchronous two-way communication channel. The following diagram gives an overview.
+
+!uml/CommunicationChannel.png!
+
+h2. Broadcast Channel
+In case of a broadcast there is one sending side and any number of clients can receive the data.
+
+h3. Sending side
+For the sending side there's the interface Broadcast. This has just one method broadcast(Object object).
+
+h3. Receiving side
+For the receiving side, there's the interface BroadcastReception. Via this interface a client can register (and unregister) itself for receiving any broadcasted data. The actual data is received via the dataReceived(Object object) method of the DataReceptionListener interface.
+
+h1. Logging
+Class EclipseConsoleFormatter is a formatter, which creates a link to the Java code in Console output. Example:\\
+BroadcastFrameworkImplementation: nothing to broadcast +(BroadcastFrameworkImplementation.java:72)+

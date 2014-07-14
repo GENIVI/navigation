@@ -1,0 +1,1 @@
+This project contains a client of the TrafficIncidentsService, which configures this service (using a D-Bus interface). It defines icons and categories which use these icons.

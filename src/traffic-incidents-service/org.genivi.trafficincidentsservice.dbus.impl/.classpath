@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="src" path="/org.genivi.basetypes-model"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.common/2.8.0.v20130125-0546/org.eclipse.emf.common-2.8.0.v20130125-0546.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.ecore/2.8.3.v20130125-0546/org.eclipse.emf.ecore-2.8.3.v20130125-0546.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.ecore.xmi/2.8.1.v20130125-0546/org.eclipse.emf.ecore.xmi-2.8.1.v20130125-0546.jar"/>
+  <classpathentry kind="src" path="/org.genivi.trafficinfo"/>
+  <classpathentry kind="var" path="M2_REPO/openlr/openlr-cli-sqlite-with-dependencies/1.2.2/openlr-cli-sqlite-with-dependencies-1.2.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/openlr/openlr-map/1.2.2/openlr-map-1.2.2.jar"/>
+  <classpathentry kind="var" path="M2_REPO/openlr/openlr-map-sqlite-with-dependencies/1.2.2/openlr-map-sqlite-with-dependencies-1.2.2.jar"/>
+  <classpathentry kind="src" path="/org.genivi.trafficinfo.dbus-java"/>
+  <classpathentry kind="src" path="/org.genivi.trafficinfo.libmatthew"/>
+  <classpathentry kind="src" path="/org.genivi.trafficincidentsservice.trafficincidentsservice-model"/>
+  <classpathentry kind="src" path="/org.genivi.booleanexpr-model"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/4.3.1/junit-4.3.1.jar" sourcepath="M2_REPO/junit/junit/4.3.1/junit-4.3.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/D:/maven_repository/repository/junit/junit/4.3.1/junit-4.3.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="src" path="/org.genivi.trafficinfo.demo"/>
+  <classpathentry kind="src" path="/org.genivi.iconset-model"/>
+  <classpathentry kind="src" path="/org.genivi.locref-model"/>
+  <classpathentry kind="src" path="/org.genivi.trafficincidentsservice.trafficincidents.trafficincidents-trafficincident-model"/>
+  <classpathentry kind="src" path="/org.genivi.trafficincidentsservice.trafficincidenttables-model"/>
+  <classpathentry kind="src" path="/org.genivi.trafficincidentsservice.trafficincidentfeed.trafficincidentfeed-trafficincident-model"/>
+  <classpathentry kind="src" path="/org.genivi.trafficincidentsservice.dbuswrapper"/>
+</classpath>

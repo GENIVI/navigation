@@ -1,0 +1,1 @@
+This project defines the D-Bus version of the interfaces of the TrafficIncidentsService and it contains the Proxies and Adaptors to connect the D-Bus interfaces to the plain java interfaces.

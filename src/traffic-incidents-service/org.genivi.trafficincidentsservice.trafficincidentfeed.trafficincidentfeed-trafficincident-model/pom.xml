@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XML-Schema-instance" xmlns="http://maven.apache.org/POM/4.0"
+xsi:schemaLocation="http://maven.apache.org/POM/4.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.genivi.trafficincidentsservice.trafficincidentfeed</groupId>
+  <artifactId>trafficincidentfeed-trafficincident-model</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>Traffic Incident data model for the TrafficIncidentFeed interface</name>
+  <description>This project contains the data model for Traffic Incidents in the TrafficIncidentFeed interface.</description>
+  <parent>
+    <groupId>org.genivi.trafficinfo</groupId>
+    <artifactId>maven-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <relativePath>../org.genivi.trafficinfo.maven-parent</relativePath>
+  </parent>
+  <dependencies>
+    <dependency>
+      <groupId>org.eclipse.emf</groupId>
+      <artifactId>org.eclipse.emf.common</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.emf</groupId>
+      <artifactId>org.eclipse.emf.ecore</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.emf</groupId>
+      <artifactId>org.eclipse.emf.ecore.xmi</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.genivi</groupId>
+      <artifactId>basetypes-model</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.genivi</groupId>
+      <artifactId>locref-model</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.genivi.trafficincidentsservice</groupId>
+      <artifactId>trafficincidenttables-model</artifactId>
+    </dependency>
+  </dependencies>
+  <build>
+    <sourceDirectory>src</sourceDirectory>
+  </build>
+</project>

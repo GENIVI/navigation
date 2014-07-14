@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<notation:Diagram xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmi:id="_Kymo0L6kEeG2bpJ885_B6A" type="EcoreTools" name="LocationReference.ecorediag" measurementUnit="Pixel">
+  <children xmi:type="notation:Node" xmi:id="_evTAwL6kEeG2bpJ885_B6A" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_evTAw76kEeG2bpJ885_B6A" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_evTAxL6kEeG2bpJ885_B6A" type="5001">
+      <children xmi:type="notation:Node" xmi:id="_tk2fwL6kEeG2bpJ885_B6A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="LocationReference.ecore#//LocationReference/data"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_tk2fwb6kEeG2bpJ885_B6A"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_jMlEYL6kEeG2bpJ885_B6A" type="2001">
+        <element xmi:type="ecore:EAttribute" href="LocationReference.ecore#//LocationReference/locationReferenceType"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_jMlEYb6kEeG2bpJ885_B6A"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_evTAxb6kEeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_evTAxr6kEeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_evTAx76kEeG2bpJ885_B6A"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_evTAyL6kEeG2bpJ885_B6A" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_evTAyb6kEeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_evTAyr6kEeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_evTAy76kEeG2bpJ885_B6A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_evTAwb6kEeG2bpJ885_B6A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="LocationReference.ecore#//LocationReference"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_evTAwr6kEeG2bpJ885_B6A" x="24" y="228"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_AMkSsL6uEeG2bpJ885_B6A" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_AMkSs76uEeG2bpJ885_B6A" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_AMkStL6uEeG2bpJ885_B6A" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_AMkStb6uEeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_AMkStr6uEeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_AMkSt76uEeG2bpJ885_B6A"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_AMkSuL6uEeG2bpJ885_B6A" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_4EzyMDL9EeKmrrjF28z5iw" type="2002">
+        <element xmi:type="ecore:EOperation" href="LocationReference.ecore#//LocationReferenceDecodingService/getLanguage"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_4EzyMTL9EeKmrrjF28z5iw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_tkBUADL9EeKmrrjF28z5iw" type="2002">
+        <element xmi:type="ecore:EOperation" href="LocationReference.ecore#//LocationReferenceDecodingService/setLanguage"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_tkBUATL9EeKmrrjF28z5iw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_0HJfYL61EeG2bpJ885_B6A" type="2002">
+        <element xmi:type="ecore:EOperation" href="LocationReference.ecore#//LocationReferenceDecodingService/decode"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_0HJfYb61EeG2bpJ885_B6A"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_AMkSub6uEeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_AMkSur6uEeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_AMkSu76uEeG2bpJ885_B6A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_AMkSsb6uEeG2bpJ885_B6A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="LocationReference.ecore#//LocationReferenceDecodingService"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_AMkSsr6uEeG2bpJ885_B6A" x="24" y="36"/>
+  </children>
+  <children xmi:type="notation:Shape" xmi:id="_EPwPwL64EeG2bpJ885_B6A" type="Note" description="There is also an interface LocationReferenceTypes.java.&#xD;&#xA;This interface contains constants for known location reference types.&#xD;&#xA;As EMF doesn't support constants (without getters, not being enums) it is not part of the model." fillColor="13369343" transparency="0" lineColor="6737151" lineWidth="1">
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_EPwPxL64EeG2bpJ885_B6A" type="DiagramName">
+      <element xsi:nil="true"/>
+    </children>
+    <children xmi:type="notation:BasicDecorationNode" xmi:id="_EPwPxb64EeG2bpJ885_B6A" type="Description">
+      <element xsi:nil="true"/>
+    </children>
+    <styles xmi:type="notation:TextStyle" xmi:id="_EPwPwb64EeG2bpJ885_B6A"/>
+    <styles xmi:type="notation:LineTypeStyle" xmi:id="_EPwPwr64EeG2bpJ885_B6A"/>
+    <element xsi:nil="true"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_EPwPw764EeG2bpJ885_B6A" x="24" y="324" width="325" height="109"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_-95NML66EeG2bpJ885_B6A" type="1001">
+    <children xmi:type="notation:Node" xmi:id="_-95NM766EeG2bpJ885_B6A" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_-95NNL66EeG2bpJ885_B6A" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_-95NNb66EeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-95NNr66EeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-95NN766EeG2bpJ885_B6A"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_-95NOL66EeG2bpJ885_B6A" type="5002">
+      <children xmi:type="notation:Node" xmi:id="_6U1UEDL9EeKmrrjF28z5iw" type="2002">
+        <element xmi:type="ecore:EOperation" href="LocationReference.ecore#//LocationReferenceDecodingServiceListener/getLanguageReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_6U1UETL9EeKmrrjF28z5iw"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_MV03oL67EeG2bpJ885_B6A" type="2002">
+        <element xmi:type="ecore:EOperation" href="LocationReference.ecore#//LocationReferenceDecodingServiceListener/decodeReply"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_MV03ob67EeG2bpJ885_B6A"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_-95NOb66EeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_-95NOr66EeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_-95NO766EeG2bpJ885_B6A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_-95NMb66EeG2bpJ885_B6A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="LocationReference.ecore#//LocationReferenceDecodingServiceListener"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_-95NMr66EeG2bpJ885_B6A" x="324" y="144"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_W4LxML69EeG2bpJ885_B6A" type="1001">
+    <eAnnotations xmi:type="ecore:EAnnotation" xmi:id="_W4ViML69EeG2bpJ885_B6A" source="Shortcut">
+      <details xmi:type="ecore:EStringToStringMapEntry" xmi:id="_W4ViMb69EeG2bpJ885_B6A" key="modelID" value="EcoreTools"/>
+    </eAnnotations>
+    <children xmi:type="notation:Node" xmi:id="_W4LxM769EeG2bpJ885_B6A" type="4001"/>
+    <children xmi:type="notation:Node" xmi:id="_W4LxNL69EeG2bpJ885_B6A" type="5001">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_W4LxNb69EeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_W4LxNr69EeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_W4LxN769EeG2bpJ885_B6A"/>
+    </children>
+    <children xmi:type="notation:Node" xmi:id="_W4LxOL69EeG2bpJ885_B6A" type="5002">
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_W4LxOb69EeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_W4LxOr69EeG2bpJ885_B6A"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_W4LxO769EeG2bpJ885_B6A"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_W4LxMb69EeG2bpJ885_B6A" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EClass" href="platform:/resource/org.genivi.basetypes-model/model/Basetypes.ecore#//location/Location"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_W4LxMr69EeG2bpJ885_B6A" x="432" y="252"/>
+  </children>
+  <children xmi:type="notation:Node" xmi:id="_oYWUwNJ8EeKeXo0UVa3l6w" type="1005">
+    <children xmi:type="notation:Node" xmi:id="_oYWUw9J8EeKeXo0UVa3l6w" type="4010"/>
+    <children xmi:type="notation:Node" xmi:id="_oYWUxNJ8EeKeXo0UVa3l6w" type="5008">
+      <children xmi:type="notation:Node" xmi:id="_ukOoMNJ8EeKeXo0UVa3l6w" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="LocationReference.ecore#//LocationReferenceType/TMC_LOC"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_ukOoMdJ8EeKeXo0UVa3l6w"/>
+      </children>
+      <children xmi:type="notation:Node" xmi:id="_xcU2sNJ8EeKeXo0UVa3l6w" type="2006">
+        <element xmi:type="ecore:EEnumLiteral" href="LocationReference.ecore#//LocationReferenceType/OPEN_LR"/>
+        <layoutConstraint xmi:type="notation:Location" xmi:id="_xcU2sdJ8EeKeXo0UVa3l6w"/>
+      </children>
+      <styles xmi:type="notation:DrawerStyle" xmi:id="_oYWUxdJ8EeKeXo0UVa3l6w"/>
+      <styles xmi:type="notation:SortingStyle" xmi:id="_oYWUxtJ8EeKeXo0UVa3l6w"/>
+      <styles xmi:type="notation:FilteringStyle" xmi:id="_oYWUx9J8EeKeXo0UVa3l6w"/>
+    </children>
+    <styles xmi:type="notation:ShapeStyle" xmi:id="_oYWUwdJ8EeKeXo0UVa3l6w" fontColor="4210752" fontHeight="10" fillColor="13761016" lineColor="8421504"/>
+    <element xmi:type="ecore:EEnum" href="LocationReference.ecore#//LocationReferenceType"/>
+    <layoutConstraint xmi:type="notation:Bounds" xmi:id="_oYWUwtJ8EeKeXo0UVa3l6w" x="432" y="372"/>
+  </children>
+  <styles xmi:type="notation:DiagramStyle" xmi:id="_Kymo0b6kEeG2bpJ885_B6A"/>
+  <element xmi:type="ecore:EPackage" href="LocationReference.ecore#/"/>
+</notation:Diagram>

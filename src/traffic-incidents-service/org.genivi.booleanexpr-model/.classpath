@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+  <classpathentry kind="src" path="src/test/java" output="target/test-classes" including="**/*.java"/>
+  <classpathentry kind="src" path="src/main/java" including="**/*.java"/>
+  <classpathentry kind="output" path="target/classes"/>
+  <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+  <classpathentry kind="var" path="M2_REPO/junit/junit/4.3.1/junit-4.3.1.jar" sourcepath="M2_REPO/junit/junit/4.3.1/junit-4.3.1-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/D:/maven_repository/repository/junit/junit/4.3.1/junit-4.3.1-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.common/2.8.0.v20130125-0546/org.eclipse.emf.common-2.8.0.v20130125-0546.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.ecore/2.8.3.v20130125-0546/org.eclipse.emf.ecore-2.8.3.v20130125-0546.jar"/>
+  <classpathentry kind="var" path="M2_REPO/org/eclipse/emf/org.eclipse.emf.ecore.xmi/2.8.1.v20130125-0546/org.eclipse.emf.ecore.xmi-2.8.1.v20130125-0546.jar"/>
+  <classpathentry kind="src" path="/org.genivi.trafficinfo.demo"/>
+</classpath>

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" copyrightText="Copyright (C) 2013 TomTom International B.V.&#xD;&#xA;&#xD;&#xA;This Source Code Form is subject to the terms of the Mozilla Public&#xD;&#xA;License, v. 2.0. If a copy of the MPL was not distributed with this&#xD;&#xA;file, You can obtain one at http://mozilla.org/MPL/2.0/."
+    modelDirectory="/org.genivi.trafficincidentsservice-model/src" modelPluginID="org.genivi.trafficinfo.trafficincidents-model"
+    modelName="TrafficIncidentsService" importerID="org.eclipse.emf.importer.ecore"
+    arrayAccessors="true" complianceLevel="6.0" copyrightFields="false" usedGenPackages="../../org.genivi.basetypes-model/model/Basetypes.genmodel#//genivi ../../org.genivi.iconset-model/model/IconSet.genmodel#//iconset ../../org.genivi.locref-model/model/LocationReference.genmodel#//locref ../../org.genivi.trafficincidentsservice.trafficincidents.trafficincident-model/model/TrafficIncident.genmodel#//trafficincident ../../org.genivi.trafficincidentsservice.trafficincidenttables-model/model/TrafficIncidentTables.genmodel#//trafficincidenttables ../../org.genivi.trafficincidentsservice.trafficincidentfeed.trafficincident-model/model/XTrafficIncident.genmodel#//trafficincident">
+  <foreignModel>TrafficIncidentsService.ecore</foreignModel>
+  <genPackages prefix="trafficincidentsservice" basePackage="org.genivi" disposableProviderFactory="true"
+      ecorePackage="TrafficIncidentsService.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentsService.ecore#//TrafficIncidentField">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/TRAFFIC_INCIDENT_ID"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/EFFECT_CODE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/EFFECT_TEXT"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/START_TIME"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/STOP_TIME"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/TENDENCY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/TENDENCY_TEXT"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/LENGTH_AFFECTED"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/AVERAGE_SPEED_ABSOLUTE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/DELAY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/SEGMENT_SPEED_LIMIT"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/CAUSES"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/CAUSE_TEXTS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/APPLICABILITY_TEXTS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/LOCATION"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/LOCATION_INFO"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/LOCATION_BOUNDING_BOX"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/APPLICABILITY"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/ADVICES"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentField/ADVICE_TEXTS"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentsService.ecore#//TextDetailLevel">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TextDetailLevel/FULL"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TextDetailLevel/SUMMARY"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentsService.ecore#//TrafficIncidentFeedStatus">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentFeedStatus/UNAVAILABLE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentFeedStatus/CONNECTED"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentFeedStatus/DISCONNECTED"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentsService.ecore#//TrafficIncidentsStatus">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentsStatus/UNAVAILABLE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentsStatus/PARTLY_AVAILABLE"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//TrafficIncidentsStatus/AVAILABLE"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentsService.ecore#//SpeedUnit">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//SpeedUnit/KILOMETERS_PER_HOUR"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//SpeedUnit/MILES_PER_HOUR"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentsService.ecore#//LengthUnit">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//LengthUnit/KILOMETERS"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//LengthUnit/MILES"/>
+    </genEnums>
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="TrafficIncidentsService.ecore#//WeightUnit">
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//WeightUnit/KILOGRAM"/>
+      <genEnumLiterals ecoreEnumLiteral="TrafficIncidentsService.ecore#//WeightUnit/POUND"/>
+    </genEnums>
+    <genClasses ecoreClass="TrafficIncidentsService.ecore#//TrafficIncidents">
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/getVersion">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getVersion/listener"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/addUpdateListener">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addUpdateListener/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addUpdateListener/warningLevels"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addUpdateListener/categoryIds"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addUpdateListener/updateListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/addAreasUpdateListener">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addAreasUpdateListener/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addAreasUpdateListener/warningLevels"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addAreasUpdateListener/categoryIds"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addAreasUpdateListener/areas"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addAreasUpdateListener/updateListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/getLanguage">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getLanguage/listener"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/setLanguage">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/setLanguage/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/setLanguage/languageCode"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/setLanguage/countryCode"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/setTimeFormat">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/setTimeFormat/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/setTimeFormat/timeFormat"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/setDateFormat">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/setDateFormat/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/setDateFormat/dateFormat"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/setLengthUnit">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/setLengthUnit/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/setLengthUnit/lengthUnit"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/setWeightUnit">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/setWeightUnit/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/setWeightUnit/weightUnit"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/getApplicability">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getApplicability/listener"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/setApplicability">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/setApplicability/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/setApplicability/filterExpression"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/reserveIconSetIds">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/reserveIconSetIds/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/reserveIconSetIds/numberOfIds"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/freeIconSetIds">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/freeIconSetIds/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/freeIconSetIds/iconSetIds"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/getIconSets">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getIconSets/listener"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/addIconSetDefinitions">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addIconSetDefinitions/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addIconSetDefinitions/iconSets"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/removeIconSetDefinitions">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/removeIconSetDefinitions/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/removeIconSetDefinitions/iconSetIds"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/getIconDefinitions">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getIconDefinitions/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getIconDefinitions/iconInfos"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/addIconDefinitions">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addIconDefinitions/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addIconDefinitions/iconDefinitions"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/removeIconDefinitions">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/removeIconDefinitions/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/removeIconDefinitions/iconInfos"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/reserveCategoryIds">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/reserveCategoryIds/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/reserveCategoryIds/numberOfIds"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/freeCategoryIds">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/freeCategoryIds/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/freeCategoryIds/categoryIds"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/getCategoryDefinitions">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getCategoryDefinitions/listener"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/addCategoryDefinitions">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addCategoryDefinitions/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addCategoryDefinitions/categoryDefinitions"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/removeCategoryDefinitions">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/removeCategoryDefinitions/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/removeCategoryDefinitions/categoryIds"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidentIds">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidentIds/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidentIds/warningLevels"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidentIds/categoryIds"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidentIdsInAreas">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidentIdsInAreas/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidentIdsInAreas/warningLevels"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidentIdsInAreas/categoryIds"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidentIdsInAreas/areas"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidents">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidents/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidents/trafficIncidentIds"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidents/includeTextFields"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidentsFields">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidentsFields/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidentsFields/trafficIncidentIds"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getTrafficIncidentsFields/trafficIncidentFields"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/getTexts">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getTexts/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getTexts/trafficIncidentIds"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/getTexts/textDetailLevel"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/addTrafficIncidentsStatusListener">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addTrafficIncidentsStatusListener/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addTrafficIncidentsStatusListener/trafficIncidentsStatusListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/addFeedInformationListener">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addFeedInformationListener/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/addFeedInformationListener/feedInformationListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/removeUpdateListener">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/removeUpdateListener/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/removeUpdateListener/updateListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/removeAreasUpdateListener">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/removeAreasUpdateListener/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/removeAreasUpdateListener/updateListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/removeTrafficIncidentsStatusListener">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/removeTrafficIncidentsStatusListener/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/removeTrafficIncidentsStatusListener/trafficIncidentsStatusListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidents/removeFeedInformationListener">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/removeFeedInformationListener/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidents/removeFeedInformationListener/feedInformationListener"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="TrafficIncidentsService.ecore#//TrafficIncidentsListener">
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getVersionReply">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getVersionReply/version"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/updates">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/updates/unchangedTrafficIncidentIds"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/updates/changedTrafficIncidentIds"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/updates/newTrafficIncidentIds"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/updates/deletedTrafficIncidentIds"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/updatesInAreas">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/updatesInAreas/areas"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/trafficIncidentsStatus">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/trafficIncidentsStatus/trafficIncidentFeedStatus"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/trafficIncidentsStatus/trafficIncidentsStatus"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/feedInformation">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/feedInformation/feedsInformation"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getLanguageReply">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getLanguageReply/languageCode"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getLanguageReply/countryCode"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getApplicabilityReply">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getApplicabilityReply/filterExpression"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/reserveIconSetIdsReply">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/reserveIconSetIdsReply/iconSetIds"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/reserveCategoryIdsReply">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/reserveCategoryIdsReply/categoryIds"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getTrafficIncidentIdsReply">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getTrafficIncidentIdsReply/trafficIncidentIds"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getTrafficIncidentIdsInAreasReply">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getTrafficIncidentIdsInAreasReply/trafficIncidentIds"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getTrafficIncidentsReply">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getTrafficIncidentsReply/trafficIncidents"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getTrafficIncidentsFieldsReply">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getTrafficIncidentsFieldsReply/trafficIncidents"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getTextsReply">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getTextsReply/texts"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/addTrafficIncidentsStatusListenerReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/addFeedInformationListenerReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/addUpdateListenerReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/removeUpdateListenerReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/addAreasUpdateListenerReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/removeAreasUpdateListenerReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/setLanguageReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/setTimeFormatReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/setDateFormatReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/setLengthUnitReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/setWeightUnitReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/setApplicabilityReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/freeCategoryIdsReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getCategoryDefinitionsReply">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getCategoryDefinitionsReply/categoryDefinitions"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/addCategoryDefinitionsReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/removeCategoryDefinitionsReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/freeIconSetIdsReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getIconDefinitionsReply">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getIconDefinitionsReply/iconDefinitions"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/addIconDefinitionsReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/removeIconDefinitionsReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getIconSetsReply">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentsListener/getIconSetsReply/iconSets"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/addIconSetDefinitionsReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/removeIconSetDefinitionsReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/removeFeedInformationListenerReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentsListener/removeTrafficIncidentsStatusListenerReply"/>
+    </genClasses>
+    <genClasses ecoreClass="TrafficIncidentsService.ecore#//TrafficIncidentFeed">
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentFeed/getVersion">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeed/getVersion/listener"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentFeed/getLanguage">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeed/getLanguage/listener"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentFeed/addLanguageListener">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeed/addLanguageListener/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeed/addLanguageListener/changeListener"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentFeed/clear"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentFeed/updateIncidents">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeed/updateIncidents/feedId"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeed/updateIncidents/cancelledIncidentIds"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeed/updateIncidents/updatedIncidents"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentFeed/updateStatus">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeed/updateStatus/feedId"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeed/updateStatus/feedStatus"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeed/updateStatus/incidentsStatus"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentFeed/registerFeed">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeed/registerFeed/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeed/registerFeed/dataProviderName"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeed/registerFeed/protocolName"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeed/registerFeed/communicationChannelName"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentFeed/removeLanguageListener">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeed/removeLanguageListener/listener"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeed/removeLanguageListener/changeListener"/>
+      </genOperations>
+    </genClasses>
+    <genClasses ecoreClass="TrafficIncidentsService.ecore#//TrafficIncidentFeedListener">
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentFeedListener/getVersionReply">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeedListener/getVersionReply/version"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentFeedListener/getLanguageReply">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeedListener/getLanguageReply/languageCode"/>
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeedListener/getLanguageReply/countryCode"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentFeedListener/registerFeedReply">
+        <genParameters ecoreParameter="TrafficIncidentsService.ecore#//TrafficIncidentFeedListener/registerFeedReply/feedId"/>
+      </genOperations>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentFeedListener/addLanguageListenerReply"/>
+      <genOperations ecoreOperation="TrafficIncidentsService.ecore#//TrafficIncidentFeedListener/removeLanguageListenerReply"/>
+    </genClasses>
+    <genClasses ecoreClass="TrafficIncidentsService.ecore#//FeedInformation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TrafficIncidentsService.ecore#//FeedInformation/dataProviderName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TrafficIncidentsService.ecore#//FeedInformation/protocolName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TrafficIncidentsService.ecore#//FeedInformation/communicationChannelName"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TrafficIncidentsService.ecore#//FeedInformation/feedStatus"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TrafficIncidentsService.ecore#//FeedInformation/trafficIncidentsStatus"/>
+    </genClasses>
+    <genClasses ecoreClass="TrafficIncidentsService.ecore#//CategoryDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TrafficIncidentsService.ecore#//CategoryDefinition/localizedNames"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TrafficIncidentsService.ecore#//CategoryDefinition/categoryId"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference TrafficIncidentsService.ecore#//CategoryDefinition/icons"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TrafficIncidentsService.ecore#//CategoryDefinition/expression"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
