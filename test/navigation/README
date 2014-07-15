@@ -1,0 +1,7 @@
+This folder only contains an example of test file.
+In order to test the navigation core, please do:
+cd ../../src/navigation/script
+./run -n &
+cd ../../../test/navigation/
+python test-route-calculation.py
+kill -9 `ps -ef | grep navit | grep -v grep | awk '{print $2}'`

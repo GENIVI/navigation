@@ -1,0 +1,9 @@
+Important notice:
+The order of the files included into the Makefile (by include *.mk) has to follow a specific order:
+positioning.mk
+navit.mk
+and others ..
+So, the way it's managed is the following:
+0 radical added to positioning.mk so now the file name is 0positioning.mk
+1 radical added to navit.mk sonow the file name is 1navit.mk
+

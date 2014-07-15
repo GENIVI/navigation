@@ -21,6 +21,7 @@
 *
 * List of changes:
 * 10-02-2014, Philippe Colliot, refinement and migration to the new repository
+* 15-07-2014, Philippe Colliot, update positioning dbus path 
 * <date>, <name>, <description of change>
 *
 * @licence end@
@@ -286,7 +287,7 @@ void MainWindow::InitUi()
                                                                                                 QDBusConnection::sessionBus(), this);
     m_dbusNavigationGuidanceInterface = new org::genivi::navigationcore::Guidance::DBusGuidanceInterface("org.genivi.navigationcore.Guidance", "/org/genivi/navigationcore",
                                                                                                 QDBusConnection::sessionBus(), this);
-    m_dbusPositioningEnhancedPositionInterface = new org::genivi::positioning::EnhancedPosition::DBusEnhancedPositionInterface("org.genivi.positioning.EnhancedPosition", "/position",
+    m_dbusPositioningEnhancedPositionInterface = new org::genivi::positioning::EnhancedPosition::DBusEnhancedPositionInterface("org.genivi.positioning.EnhancedPosition", "/org/genivi/positioning/EnhancedPosition",
                                                                                                 QDBusConnection::sessionBus(), this);
     m_dbusNavigationCoreSessionInterface = new org::genivi::navigationcore::Session::DBusNavigationCoreSessionInterface("org.genivi.navigationcore.Session", "/org/genivi/navigationcore",
                                                                                                 QDBusConnection::sessionBus(), this );

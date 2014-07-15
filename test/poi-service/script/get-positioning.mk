@@ -23,12 +23,13 @@
 # 
 # 28-04-2014, Philippe Colliot, link to the public repos of positioning, add clean feature
 # 4/6/2014, Philippe Colliot, complete src-clean option
+# 15/7/2014, Philippe Colliot, align with the new version of positioning dbus path
 # 
 # @licence end@
 positioning_SRC=$(ROOT_DIR)/positioning
 positioning_API=$(positioning_SRC)/enhanced-position-service/api
 positioning_URL=http://git.projects.genivi.org/lbs/positioning.git
-positioning_VERSION=183d134e734e157c498f6cff367d104e4c5ad670
+positioning_VERSION=963d70c3d3a1f534146372e24c4d53a57d14ade2
 
 ALL+=positioning
 SRC_CLEAN+=clean-positioning_SRC
