@@ -103,14 +103,17 @@ class EnhancedPosition
                                     "org.genivi.positioning.EnhancedPosition")
 	{
 		m_priv=priv;
-		try {
-			::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string>version;
-			version=GetVersion();
-			dbg(0,"EnhancedPosition version %d.%d.%d\n",version._1,version._2,version._3);
-		} catch(...) {
-			dbg(0,"Exception during GetVersion\n");
-		}
 	}
+
+    ::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string > GetVersion()
+    {
+        DBus::Struct<uint16_t, uint16_t, uint16_t, std::string> Version;
+        Version._1=2;
+        Version._2=0;
+        Version._3=0;
+        Version._4=std::string("04-06-2013");
+        return Version;
+    }
 
 	void
 	PositionUpdate(const std::vector< uint16_t >& changedValues)
