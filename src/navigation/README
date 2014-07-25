@@ -1,4 +1,4 @@
-Release date of the file: 4-06-2014 
+Release date of the file: 25-07-2014 
 Status: OK
 
 Project:
@@ -29,8 +29,9 @@ To get the code:
 git clone http://git.projects.genivi.org/lbs/navigation-service.git $WORKING-DIR
 
 Dependencies:
-<to be completed>
- 
+(to be completed)
+cmake xsltproc libdbus-c++-dev libdbus-1-dev libdbus-c++-bin
+
 Build:
 cd $WORKING-DIR/navigation-service/src/navigation/script
 make all2

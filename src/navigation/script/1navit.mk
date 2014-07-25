@@ -29,7 +29,7 @@ navit_SRC2=$(navit_SRC)/navit
 navit_BIN=$(BIN_DIR)/navit
 navit_URL=http://git.navit-project.org/navit.git
 navit_VERSION=6d7a8e00a67e133981e322ad13a60c9a6a9896de
-navit_DEPS=gtk2.0-dev
+navit_DEPS=gtk2.0-dev cmake
 
 DEPS+=$(navit_DEPS)
 ALL+=navit navit_map

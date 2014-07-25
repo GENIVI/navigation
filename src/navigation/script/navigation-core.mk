@@ -40,6 +40,9 @@ navigationcore-session_BIN=$(BIN_DIR)/navigationcore-session
 navigationcore-enhancedposition_SRC=$(navigationcore_SRC)/enhancedposition-plugin
 navigationcore-enhancedposition_BIN=$(BIN_DIR)/navigationcore-enhancedposition
 
+NAVIGATIONCORE_DEPS=cmake xsltproc libdbus-c++-dev libdbus-1-dev libdbus-c++-bin
+
+DEPS+=$(NAVIGATIONCORE_DEPS)
 ALL+=navigationcore
 
 help::
