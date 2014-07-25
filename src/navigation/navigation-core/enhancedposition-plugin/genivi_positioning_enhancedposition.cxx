@@ -270,11 +270,11 @@ vehicle_process_map(struct vehicle_priv *priv, std::map< uint16_t, ::DBus::Varia
 		case GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE:
 			priv->geo.lng=double_variant((*itr).second);
 			break;
-		case GENIVI_ENHANCEDPOSITIONSERVICE_ALTITUDE:
-			priv->height=double_variant((*itr).second);
+        case GENIVI_ENHANCEDPOSITIONSERVICE_ALTITUDE:
+//			priv->height=double_variant((*itr).second);
 			break;
 		case GENIVI_ENHANCEDPOSITIONSERVICE_HEADING:
-			priv->direction=double_variant((*itr).second);
+//			priv->direction=double_variant((*itr).second);
 			break;
 		case GENIVI_ENHANCEDPOSITIONSERVICE_SPEED:
 			priv->speed=floor(double_variant((*itr).second)*360+0.5)/100;
