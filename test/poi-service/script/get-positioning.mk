@@ -29,7 +29,7 @@
 positioning_SRC=$(ROOT_DIR)/positioning
 positioning_API=$(positioning_SRC)/enhanced-position-service/api
 positioning_URL=http://git.projects.genivi.org/lbs/positioning.git
-positioning_VERSION=963d70c3d3a1f534146372e24c4d53a57d14ade2
+positioning_VERSION=09698f63ea27a24c533b4c015155ee9ebd7a3026
 
 ALL+=positioning
 SRC_CLEAN+=clean-positioning_SRC

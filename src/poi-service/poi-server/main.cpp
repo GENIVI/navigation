@@ -1788,7 +1788,7 @@ uint16_t poiSearchServer::searchPOIRequest(uint16_t categoryIndex, std::string s
         fromString<uint64_t>(poi.segment,sqlQueryLine[1], std::dec);
         fromString<double>(poi.coordinate.latitude,sqlQueryLine[2], std::dec);
         fromString<double>(poi.coordinate.longitude,sqlQueryLine[3], std::dec);
-        fromString<int>(poi.coordinate.altitude,sqlQueryLine[4], std::dec);
+        fromString<double>(poi.coordinate.altitude,sqlQueryLine[4], std::dec);
         sub_index = 5;
 
         for (attribute_index=0;attribute_index<m_availableCategoryTable[categoryIndex].attributeList.size();attribute_index++)
