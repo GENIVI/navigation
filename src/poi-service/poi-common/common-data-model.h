@@ -1093,9 +1093,9 @@ public:
     {
         double latitude;
         double longitude;
-        double altitude;
+        int32_t altitude;
     };
-    typedef ::DBus::Struct< double, double, double > DBus_geoCoordinate3D_t;
+    typedef ::DBus::Struct< double, double, int32_t > DBus_geoCoordinate3D_t;
 
     DBus_geoCoordinate3D(){
         m_geoCoordinate3D.latitude = 48.85792; //by default center of Paris

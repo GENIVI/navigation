@@ -9,3 +9,6 @@ positioning/
 *.pro.user
 
 /.project
+
+positioning_*/
+
