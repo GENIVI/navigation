@@ -105,16 +105,6 @@ class EnhancedPosition
 		m_priv=priv;
 	}
 
-    ::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string > GetVersion()
-    {
-        DBus::Struct<uint16_t, uint16_t, uint16_t, std::string> Version;
-        Version._1=2;
-        Version._2=0;
-        Version._3=0;
-        Version._4=std::string("04-06-2013");
-        return Version;
-    }
-
 	void
 	PositionUpdate(const std::vector< uint16_t >& changedValues)
 	{

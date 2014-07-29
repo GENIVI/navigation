@@ -110,10 +110,11 @@ do
 		;;
 	\?)
 		echo "Usage:"
-		echo "$0 [-a application][-c center][-lnx]"
+		echo "$0 [-a application][-c center][-gnox]"
 		echo "-c: Set center (supported values: paris,tokyo,longitude,latitude). Default is geneve"
 		echo "-g: Run subprocesses within gdb (only with -x)"
 		echo "-n: Don't start enhanced-position-service"
+		echo "-o: Create log file of subprocess output"
 		echo "-x: Run subprocesses in own xterm to get separated log messages"
 		exit 1
 	esac
