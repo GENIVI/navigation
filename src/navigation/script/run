@@ -69,11 +69,12 @@ gdb=0
 xterm=0
 log=0
 enhpos=1
+replayer=1
 center="4612 N 0608 E"
 CUR_DIR=$PWD
 BIN_DIR=$PWD/../bin
 SRC_DIR=$PWD/..
-while getopts b:c:gnox opt
+while getopts b:c:gnorx opt
 do
 	case $opt in
 	b)
@@ -105,15 +106,19 @@ do
 	o)
 		log=1
 		;;
+	r)
+		replayer=0
+		;;
 	x)
 		xterm=1
 		;;
 	\?)
 		echo "Usage:"
-		echo "$0 [-a application][-c center][-gnox]"
+		echo "$0 [-a application][-c center][-gnorx]"
 		echo "-c: Set center (supported values: paris,tokyo,longitude,latitude). Default is geneve"
 		echo "-g: Run subprocesses within gdb (only with -x)"
 		echo "-n: Don't start enhanced-position-service"
+		echo "-r: Don't start replayer"
 		echo "-o: Create log file of subprocess output"
 		echo "-x: Run subprocesses in own xterm to get separated log messages"
 		exit 1
@@ -123,11 +128,14 @@ trap "terminate" EXIT INT
 set -e
 if [ "$enhpos" = 1 ]
 then
-	if [ -z "$REPLAYER_LOG_FILE" ]
+	if [ "$replayer" = 1 ]
 	then
-		REPLAYER_LOG_FILE=$BIN_DIR/positioning/log-replayer/logs/geneve-cologny.log
+		if [ -z "$REPLAYER_LOG_FILE" ]
+		then
+			REPLAYER_LOG_FILE=$BIN_DIR/positioning/log-replayer/logs/geneve-cologny.log
+		fi
+		run LogReplayer $BIN_DIR/positioning/log-replayer/src/log-replayer $REPLAYER_LOG_FILE 
 	fi
-        run LogReplayer $BIN_DIR/positioning/log-replayer/src/log-replayer $REPLAYER_LOG_FILE 
         run EnhancedPositionService $BIN_DIR/positioning/enhanced-position-service/src/enhanced-position-service 
 fi
 cd $BIN_DIR/navit/navit
