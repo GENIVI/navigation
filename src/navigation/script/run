@@ -22,6 +22,7 @@
 # List of changes:
 # 
 # 26-6-2014, Marco Residori, Added support of new EnhancedPositionService
+# 4-8-2014, Philippe Colliot, Add some wait for dbus service
 #
 # @licence end@
 function run
@@ -56,6 +57,19 @@ function run
 		"$@" &
 	fi
 	PIDS="$PIDS $!"
+}
+
+function wait_for_service
+{
+	for i in $(seq 1 50)
+	do
+		if dbus-send --dest=$1 $2 org.freedesktop.DBus.Introspectable.Introspect
+		then
+			return
+		fi
+		echo "Waiting for $1"
+		sleep 0.1
+	done
 }
 
 function terminate
@@ -128,6 +142,9 @@ trap "terminate" EXIT INT
 set -e
 if [ "$enhpos" = 1 ]
 then
+        run EnhancedPositionService $BIN_DIR/positioning/enhanced-position-service/src/enhanced-position-service 
+	wait_for_service org.genivi.positioning.EnhancedPosition /org/genivi/positioning/EnhancedPosition
+
 	if [ "$replayer" = 1 ]
 	then
 		if [ -z "$REPLAYER_LOG_FILE" ]
@@ -136,11 +153,20 @@ then
 		fi
 		run LogReplayer $BIN_DIR/positioning/log-replayer/src/log-replayer $REPLAYER_LOG_FILE 
 	fi
-        run EnhancedPositionService $BIN_DIR/positioning/enhanced-position-service/src/enhanced-position-service 
 fi
 cd $BIN_DIR/navit/navit
 >bookmark.txt
 echo "$center" >center.txt
 run MapViewer ./navit navit_genivi_mapviewer.xml
+wait_for_service org.genivi.mapviewer.Configuration /org/genivi/mapviewer
+wait_for_service org.genivi.mapviewer.MapViewerControl /org/genivi/mapviewer
+wait_for_service org.genivi.mapviewer.Session /org/genivi/mapviewer
+
 run NavigationCore ./navit navit_genivi_navigationcore.xml
+wait_for_service org.genivi.navigationcore.Configuration /org/genivi/navigationcore
+wait_for_service org.genivi.navigationcore.Guidance /org/genivi/navigationcore
+wait_for_service org.genivi.navigationcore.LocationInput /org/genivi/navigationcore
+wait_for_service org.genivi.navigationcore.MapMatchedPosition /org/genivi/navigationcore
+wait_for_service org.genivi.navigationcore.Routing /org/genivi/navigationcore
+wait_for_service org.genivi.navigationcore.Session /org/genivi/navigationcore
 wait
