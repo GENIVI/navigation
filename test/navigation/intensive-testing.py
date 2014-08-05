@@ -34,21 +34,19 @@ from dbus.mainloop.glib import DBusGMainLoop
 from traceback import print_exc
 
 # Define some constants
-PERIODICITY_TESTING = 200 #in ms
 DURATION_TESTING = 20000 #in ms
-MAX_LOOP_TESTING = DURATION_TESTING/PERIODICITY_TESTING
-PATH_ENHANCEDPOSITION='../../src/navigation/bin/positioning/enhanced-position-service/src/'
-PATH_LOGREPLAYER='../../src/navigation/bin/positioning/log-replayer/src/'
 PATH_LOGFILES='./'
 
 def startEnhancedPositionServer(): 
-	enhancedposition=PATH_ENHANCEDPOSITION + 'enhanced-position-service'
+	global pathEnhancedposition
+	enhancedposition=pathEnhancedposition + 'enhanced-position-service'
 	arguments='> /dev/null 2>&1 &'
 	pid = Popen([enhancedposition, arguments])
 	return pid
 
 def launchLog(file): 
-	logreplayer=PATH_LOGREPLAYER + 'log-replayer'
+	global pathLogreplayer
+	logreplayer=pathLogreplayer + 'log-replayer'
 	file=PATH_LOGFILES + file
 	arguments='> /dev/null 2>&1 &'
 	call([logreplayer, file, arguments])
@@ -68,7 +66,7 @@ def loopDbus():
 	longitude=float(geoLocation[dbus.UInt16(Genivi.ENHANCEDPOSITIONSERVICE_LONGITUDE)])
 	testCounter += 1
 	print str(testCounter), str(latitude), str(longitude)
-	if testCounter >= MAX_LOOP_TESTING:
+	if testCounter >= maxLoopTesting:
 		cleanExit()
 	return True 
 
@@ -84,6 +82,22 @@ def exitProg(signum, frame):
 
 # Main program begins here
 parser = argparse.ArgumentParser(description='Intensive testing of enhanced position.')
+parser.add_argument('-p','--path',action='store', dest='path', help='Path for the bin of positioning')
+parser.add_argument('-f','--frame',action='store', dest='frame', type=int, help='Number of messages per second')
+args = parser.parse_args()
+
+if args.path == None:
+	pathEnhancedposition='../../src/navigation/bin/positioning/enhanced-position-service/src/'
+	pathLogreplayer='../../src/navigation/bin/positioning/log-replayer/src/'
+else:
+	pathEnhancedposition = args.path + 'bin/positioning/enhanced-position-service/src/' 
+	pathLogreplayer= args.path + 'bin/positioning/log-replayer/src/'
+
+if args.frame == None:
+	periodicityTesting = 200 #in ms
+else:
+	periodicityTesting = 1000/args.frame #in ms
+maxLoopTesting = DURATION_TESTING/periodicityTesting
 
 # Start the enhanced position server
 enhancedpositionPid = startEnhancedPositionServer()
@@ -110,7 +124,7 @@ enhancedPositionInterface = dbus.Interface(enhancedPositionObject, "org.genivi.p
 testCounter=0
 original_sigint = signal.getsignal(signal.SIGINT)
 signal.signal(signal.SIGINT, exitProg)
-gobject.timeout_add(PERIODICITY_TESTING,loopDbus)
+gobject.timeout_add(periodicityTesting,loopDbus)
 loop = gobject.MainLoop()
 loop.run()
 
