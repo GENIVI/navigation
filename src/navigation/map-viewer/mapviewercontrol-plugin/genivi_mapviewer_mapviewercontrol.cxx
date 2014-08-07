@@ -56,6 +56,7 @@
 #include "navit/callback.h"
 #include "navit/vehicle.h"
 #include "navit/attr.h"
+#include "navit/xmlconfig.h"
 #include "navit/layout.h"
 
 static DBus::Glib::BusDispatcher dispatchers[4];

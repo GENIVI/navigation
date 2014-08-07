@@ -24,7 +24,7 @@
 * @licence end@
 **************************************************************************
 """
-import sys,tty,termios,select,gobject,time,dbus,re,argparse,subprocess,signal
+import sys,tty,termios,select,gobject,time,dbus,re,argparse,subprocess,signal,os
 
 from subprocess import call 
 from subprocess import Popen 
@@ -40,16 +40,16 @@ PATH_LOGFILES='./'
 def startEnhancedPositionServer(): 
 	global pathEnhancedposition
 	enhancedposition=pathEnhancedposition + 'enhanced-position-service'
-	arguments='> /dev/null 2>&1 &'
-	pid = Popen([enhancedposition, arguments])
+	FNULL = open(os.devnull,'w')
+	pid = Popen([enhancedposition], stdout=FNULL, stderr=FNULL)
 	return pid
 
 def launchLog(file): 
 	global pathLogreplayer
 	logreplayer=pathLogreplayer + 'log-replayer'
 	file=PATH_LOGFILES + file
-	arguments='> /dev/null 2>&1 &'
-	call([logreplayer, file, arguments])
+	FNULL = open(os.devnull,'w')
+	call([logreplayer, file], stdout=FNULL, stderr=FNULL)
 
 class Genivi(Enum):
 	ENHANCEDPOSITIONSERVICE_LATITUDE = 0x0020

@@ -47,7 +47,7 @@ help::
 	@echo "positioning: Build positioning"
 
 clean-positioning_SRC::
-	rm -rf $(positioning_SRC)
+	rm -rf $(SRC_DIR)/positioning_*
 
 positioning: $(positioning_BIN)/enhanced-position-service
 

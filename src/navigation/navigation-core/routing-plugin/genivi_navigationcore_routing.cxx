@@ -42,6 +42,7 @@
 #include "navit/command.h"
 #include "navit/callback.h"
 #include "navit/vehicle.h"
+#include "navit/xmlconfig.h"
 #include "navit/vehicleprofile.h"
 #include "navit/roadprofile.h"
 #include "navit/map.h"

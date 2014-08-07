@@ -20,4 +20,5 @@ INCLUDEPATH += ./bin/mapviewer-configuration \
                 ./bin/mapviewer-session \
                 ./bin/navigationcore-configuration \
                 ./bin/navigationcore-guidance \
-                ./bin
+                ./bin \
+                navit/navit
