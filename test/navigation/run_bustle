@@ -1,0 +1,58 @@
+#! /bin/sh
+
+# @licence app begin@
+# SPDX-License-Identifier: MPL-2.0
+#
+# \copyright Copyright (C) 2013-2014, PCA Peugeot Citroen
+#
+# \file run-bustle
+#
+# \brief This file is part of the test tool.
+#
+# \author Martin Schaller <martin.schaller@it-schaller.de>
+#
+# \version 1.1
+#
+# This Source Code Form is subject to the terms of the
+# Mozilla Public License (MPL), v. 2.0.
+# If a copy of the MPL was not distributed with this file,
+# You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# For further information see http://www.genivi.org/.
+#
+# List of changes:
+# 
+# 19/8/2014, Philippe Colliot, update for the OSS migration
+#
+# @licence end@
+
+if [ -z "$1" ]
+then
+	cat <<EOT >&2
+Usage:
+	$0 filter_expr
+
+	filter_expr is a comma separated list of methods/signals to filter, with a prefix of '-' to exclude a method/signal
+Examples:
+	# Only get methods/signals starting with org.genivi.
+	$0 org.genivi.
+
+	# Like above, but exclude positioning
+	$0 org.genivi.,-org.genivi.positioning
+
+	# Like above, but exclude positioning and mapmatching
+	$0 org.genivi.,-org.genivi.positioning.,-org.genivi.navigationcore.MapMatchedPosition.
+
+	#Like above, but include GetPosition of mapmatching
+	$0 org.genivi.,-org.genivi.positioning.,-org.genivi.navigationcore.MapMatchedPosition.,org.genivi.navigationcore.MapMatchedPosition.GetPosition
+
+EOT
+	exit 1
+fi
+
+if [ ! -f ./bin/bustle/build/bustle/bustle ]
+then
+	echo "Build bustle first: make bustle"
+fi
+export BUSTLE_FILTER=$1
+exec ./bin/bustle/build/bustle/bustle

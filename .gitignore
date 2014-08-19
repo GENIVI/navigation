@@ -1,6 +1,8 @@
 #folders used for building the code
 *-debug/
+*-Debug/
 *-release/
+*-Release/
 bin/
 positioning/
 
