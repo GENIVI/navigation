@@ -437,12 +437,13 @@ LocationInputObj::Idle(void)
 			unique=search_list_get_unique(m_sl, NULL);
 		m_spell_backspace=false;
 		if (unique) {
+			g_free(m_search.u.str);
+			m_search.u.str=unique;
 			char *next=search_list_get_unique(m_sl, unique);
 			if (next) {
 				m_locationinput->SpellResult(m_handle, unique, next, false);
 				g_free(next);
 			}
-			g_free(unique);
 		} else
 			m_locationinput->SpellResult(m_handle, "", "\b", false);
 
