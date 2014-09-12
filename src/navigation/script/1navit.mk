@@ -22,14 +22,17 @@
 # List of changes:
 # 
 # 4/6/2014, Philippe Colliot, complete src-clean option
+# 12/9/2014, Philippe Colliot, get navit from the svn
 #
 # @licence end@
 navit_SRC=$(SRC_DIR)/navit
 navit_SRC2=$(navit_SRC)/navit
 navit_BIN=$(BIN_DIR)/navit
 navit_URL=http://git.navit-project.org/navit.git
+navit_URL_SVN=http://svn.code.sf.net/p/navit/code/trunk 
 #navit_VERSION=6d7a8e00a67e133981e322ad13a60c9a6a9896de
 navit_VERSION=8396f6f94ef9a16db679e9de353242899966a735
+navit_VERSION_SVN=5532 #the one that fits the git version primary used
 navit_DEPS=gtk2.0-dev cmake
 
 DEPS+=$(navit_DEPS)
@@ -53,8 +56,9 @@ $(navit_BIN)/Makefile: $(navit_SRC2)/CMakeLists.txt
 	cd $(navit_BIN) && cmake -DDISABLE_QT=1 -DSAMPLE_MAP=0 -Dvehicle/null=1 -Dgraphics/qt_qpainter=0 $(navit_SRC2)
 
 $(navit_SRC2)/CMakeLists.txt:
-	cd $(navit_SRC)/.. && git clone $(navit_URL)
-	cd $(navit_SRC) && git checkout $(navit_VERSION)
+	cd $(navit_SRC)/.. &&  svn checkout $(navit_URL_SVN) navit -r $(navit_VERSION_SVN)
+#	cd $(navit_SRC)/.. && git clone $(navit_URL)
+#	cd $(navit_SRC) && git checkout $(navit_VERSION)
 
 navit_map: $(navit_BIN)/navit/maps/switzerland.xml
 
