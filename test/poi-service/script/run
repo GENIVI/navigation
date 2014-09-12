@@ -45,7 +45,7 @@ if [ ! -f $COMPONENT_EXE_DIR/poi-server ]
 then
     echo $COMPONENT_EXE_DIR/poi-server does not exist, so make it first
 	cd 	$COMPONENT_SCRIPT_DIR
-	make all
+	./build.sh make
 	cd $CURDIR
 fi
 
