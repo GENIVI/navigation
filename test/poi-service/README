@@ -1,4 +1,4 @@
-Release date of the file: 4-06-2014 
+Release date of the file: 21-09-2014 
 Status: OK
 
 Project:
@@ -47,13 +47,29 @@ LC_NUMERIC="en_US.UTF-8"
 Build:
 # Enter into the directory
 cd $WORKING-DIR/navigation-service/test/poi-service/script
-make all
+./build.sh make 
 
 Prepare databases, configure and run:
 As examples, three databases can be generated for Paris, Tokyo and San-Diego
+The input stuff is taken from the OSM, by using this site:
+http://www.overpass-api.de
+
+For instance, in Paris area, the bounding box used for the demo is
+bbox=2.246304,48.814551,2.430325,48.901289
+In case we want to get the hotels and the museums located inside the area defined, request is:
+http://www.overpass-api.de/api/xapi?*[bbox=2.246304,48.814551,2.430325,48.901289][tourism=museum|hotel]
+for the stations:
+http://www.overpass-api.de/api/xapi?*[bbox=2.246304,48.814551,2.430325,48.901289][railway=station]
+for the bicycle
+http://www.overpass-api.de/api/xapi?*[bbox=2.246304,48.814551,2.430325,48.901289][shop=bicycle]
+for the fuel stations
+http://www.overpass-api.de/api/xapi?*[bbox=2.246304,48.814551,2.430325,48.901289][amenity=fuel]
+
+For Tokyo, the bounding box is 139.691048,35.631628,139.832497,35.738153
+
 
 To launch the stuff for Paris:
-./prepare paris
+./prepare -c paris
 ./run
 
 Clean up:

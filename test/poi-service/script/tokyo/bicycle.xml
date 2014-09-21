@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-02-04T12:13:01Z"/>
+<meta osm_base="2014-09-21T11:39:02Z"/>
 
-  <node id="822683026" lat="35.6975631" lon="139.6787833"/>
-  <node id="822683167" lat="35.6975483" lon="139.6789087"/>
-  <node id="822683192" lat="35.6977571" lon="139.6789500"/>
-  <node id="822683233" lat="35.6977757" lon="139.6788222"/>
   <node id="1050803357" lat="35.6720652" lon="139.7122126"/>
   <node id="1050803359" lat="35.6721908" lon="139.7124713"/>
   <node id="1050803363" lat="35.6721954" lon="139.7122238"/>
@@ -22,6 +18,11 @@
     <tag k="name" v="17Bicycle"/>
     <tag k="shop" v="bicycle"/>
   </node>
+  <node id="1508619711" lat="35.6518928" lon="139.7452317">
+    <tag k="name" v="ヤマモトサイクル"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
   <node id="1580614679" lat="35.6709901" lon="139.7414690">
     <tag k="name" v="Y'sROAD赤坂店"/>
     <tag k="name:en" v="Y'sRoad Akasaka"/>
@@ -32,6 +33,10 @@
     <tag k="name" v="Y'sROAD"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="1759744919" lat="35.6492293" lon="139.7002215">
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="survey"/>
   </node>
   <node id="1763146176" lat="35.6591576" lon="139.7279059">
     <tag k="name" v="Trekストア六本木"/>
@@ -48,6 +53,18 @@
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="http://www.lipit-ischtar.jp/"/>
   </node>
+  <node id="1990602001" lat="35.7352927" lon="139.8022728">
+    <tag k="branch" v="南千住店"/>
+    <tag k="name" v="サイクルスポット (CycleSpot)"/>
+    <tag k="name:en" v="CycleSpot"/>
+    <tag k="name:ja" v="サイクルスポット"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="2017887369" lat="35.6489147" lon="139.7459568">
+    <tag k="name" v="石黒サイクル"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="image;Bing"/>
+  </node>
   <node id="2037964080" lat="35.6720467" lon="139.7124643">
     <tag k="name" v="なるしまフレンド神宮店"/>
     <tag k="name:en" v="Nalsima Frend"/>
@@ -58,6 +75,20 @@
     <tag k="name:en" v="bicycle seo harumi"/>
     <tag k="shop" v="bicycle"/>
     <tag k="source" v="bing"/>
+  </node>
+  <node id="2041267345" lat="35.7329414" lon="139.7134610">
+    <tag k="addr:housename" v="D-BOXビル"/>
+    <tag k="addr:housenumber" v="2F"/>
+    <tag k="name" v="Y's Road 池袋チャーリー店"/>
+    <tag k="name:en" v="Y's Road Ikebukuro charie"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="bing,web"/>
+    <tag k="website" v="http://www.jitensya.co.jp/shop/#ikebukuro01"/>
+  </node>
+  <node id="2041267346" lat="35.7292601" lon="139.7166702">
+    <tag k="name" v="Y'sロード 池袋店"/>
+    <tag k="name:en" v="Y's Road Ikebukuro"/>
+    <tag k="shop" v="bicycle"/>
   </node>
   <node id="2041460009" lat="35.6583389" lon="139.7034843">
     <tag k="name" v="Y'sロード 渋谷レディース館"/>
@@ -99,15 +130,32 @@
     <tag k="name" v="MapSports"/>
     <tag k="shop" v="bicycle"/>
   </node>
-  <way id="68327931">
-    <nd ref="822683192"/>
-    <nd ref="822683167"/>
-    <nd ref="822683026"/>
-    <nd ref="822683233"/>
-    <nd ref="822683192"/>
-    <tag k="name" v="東都サイクル"/>
+  <node id="2345209653" lat="35.6366627" lon="139.7332452">
+    <tag k="name" v="小倉自転車店"/>
     <tag k="shop" v="bicycle"/>
-  </way>
+    <tag k="source" v="image,2013-05;Bing"/>
+  </node>
+  <node id="2852903947" lat="35.6568131" lon="139.7445664">
+    <tag k="name" v="ParkSIDER"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="image,2014-05;Bing;GSI/KIBAN"/>
+  </node>
+  <node id="2876217567" lat="35.6700084" lon="139.7141969">
+    <tag k="name" v="Bike Forum Aoyama"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="survey"/>
+    <tag k="website" v="http://www.bikeforum-aoyama.jp/"/>
+  </node>
+  <node id="2902854125" lat="35.6617724" lon="139.7808300">
+    <tag k="name" v="小川サイクル"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="image,2014-06;Bing;GSI/KIBAN 2500"/>
+  </node>
+  <node id="2985876084" lat="35.6667643" lon="139.7199555">
+    <tag k="name" v="Bianchi Community Aoyama"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="survey"/>
+  </node>
   <way id="90555954">
     <nd ref="1050803363"/>
     <nd ref="1050803359"/>

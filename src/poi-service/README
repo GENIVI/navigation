@@ -1,4 +1,4 @@
-Release date of the file: 4-06-2014 
+Release date of the file: 18-09-2014 
 Status: OK
 
 Project:
@@ -34,9 +34,10 @@ Dependencies:
 libqt4-dev libdbus-c++-dev libsqlite3-dev sqlite3 libglib2.0-dev libglibmm-2.4-dev libdbus-1-dev xsltproc
  
 Build:
+# Build is based on cmake
 # Enter into the directory
 cd $WORKING-DIR/navigation-service/src/poi-service/script
-make all
+./build.sh
 
 To launch:
 ./run

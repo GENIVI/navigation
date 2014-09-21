@@ -16,9 +16,16 @@
 #
 # @licence end@
 ###########################################################################
-POI_SERVER_SRC_DIR=$PWD/../poi-server
-POI_SERVER_BIN_DIR=$PWD/../bin
-POSITIONING_SRC_DIR=$PWD/../positioning
+TOP_DIR=$PWD/..
+TOP_BIN_DIR=$PWD/../bin
+
+POI_SERVER=poi-server
+POI_SERVER_SRC_DIR=$TOP_DIR/$POI_SERVER
+POI_SERVER_BIN_DIR=$TOP_BIN_DIR
+POSITIONING_SRC_DIR=$TOP_DIR/positioning
+
+POI_COMMON=poi-common
+POI_COMMON_SRC_DIR=$TOP_DIR/$POI_COMMON
 
 usage() {
     echo "Usage: ./build.sh Build poi-server"
@@ -27,7 +34,7 @@ usage() {
     echo "command:"
     echo "  make            Build"
     echo "  clean           Clean"
-    echo "  src-clean       Clean the cloned sources of positioning"
+    echo "  src-clean       Clean the cloned sources"
     echo "  help            Print Help"
     echo
     echo
@@ -42,12 +49,19 @@ build() {
 }
 
 clean() {
+	echo 'delete' $POI_SERVER_BIN_DIR 
     rm -rf $POI_SERVER_BIN_DIR
+	echo 'delete dbus generated files'
+	rm -f $POI_COMMON_SRC_DIR/*_adaptor.h $POI_COMMON_SRC_DIR/*_proxy.h $POI_COMMON_SRC_DIR/*-constants.h
 }
 
 src-clean() {
+	echo 'delete' $POSITIONING_SRC_DIR 
     rm -rf $POSITIONING_SRC_DIR
+    clean
 }
+
+set -e
 
 if [ $# -ge 1 ]; then
     if [ $1 = help ]; then

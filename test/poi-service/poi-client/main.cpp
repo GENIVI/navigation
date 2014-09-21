@@ -71,7 +71,7 @@ int main(int argc, char *argv[])
     mainWindow.settingsMapHeightInMeter = settings.value("MapHeightInMeter").toUInt();
     mainWindow.settingsTimerPeriodForPosition = settings.value("TimerPeriodForPosition").toInt();
 
-    if (translator.load("poi-client_"+ mainWindow.settingsHMIlanguage,"../poi-common/"))
+    if (QResource::registerResource("../poi-resource.rcc") && translator.load("poi-client_"+ mainWindow.settingsHMIlanguage,"../../poi-common/"))
     {
         app.installTranslator(&translator);
 

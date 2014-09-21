@@ -29,7 +29,7 @@
 CURDIR=$PWD
 ROOT_DIR=$CURDIR/..
 BIN_DIR=$ROOT_DIR/bin
-EXE_DIR=$BIN_DIR
+EXE_DIR=$BIN_DIR/poi-supplier
 CHK_DIR_EXISTS='test -d'
 MKDIR='mkdir -p'
 
@@ -46,8 +46,8 @@ FUEL_FILE=$POI_FILES_DIR/'fuel-station.xml'
 MUSEUM_AND_HOTEL_FILE=$POI_FILES_DIR/'museum-and-hotel.xml'
 STATION_FILE=$POI_FILES_DIR/'station.xml'
 BICYCLE_FILE=$POI_FILES_DIR/'bicycle.xml'
-MAIN_DATABASE=$EXE_DIR/'poi-database.db'
-ADDITIONAL_DATABASE=$EXE_DIR/'poi-database-additional.db'
+MAIN_DATABASE=$BIN_DIR/'poi-database.db'
+ADDITIONAL_DATABASE=$BIN_DIR/'poi-database-additional.db'
 
 if [ ! -f $FUEL_FILE ]
 then
@@ -71,7 +71,7 @@ then
 fi
 
 echo 'clean up'
-rm $EXE_DIR/*.db
+rm -f $BIN_DIR/*.db
 echo 'create empty databases'
 cp poi-database-empty $MAIN_DATABASE
 cp poi-database-empty $ADDITIONAL_DATABASE

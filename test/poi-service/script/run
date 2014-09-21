@@ -40,13 +40,11 @@ echo 'kill orphan process if necessary'
 $CURDIR/kill-all
 
 echo 'run'
-#check is poi-server exists, if not make it 
+
 if [ ! -f $COMPONENT_EXE_DIR/poi-server ]
 then
-    echo $COMPONENT_EXE_DIR/poi-server does not exist, so make it first
-	cd 	$COMPONENT_SCRIPT_DIR
-	./build.sh make
-	cd $CURDIR
+	echo 'no poi-server, do ./build.sh first'
+	exit
 fi
 
 if [ ! -f $MAIN_DATABASE ]
@@ -57,8 +55,10 @@ fi
 
 read language <$EXE_DIR/language.txt
 echo $language
-$EXE_DIR/poi-contentaccess-module -f $ADDITIONAL_DATABASE -i $language &
-$COMPONENT_EXE_DIR/poi-server -f $MAIN_DATABASE &
-
-$EXE_DIR/poi-client &
+cd $EXE_DIR/poi-contentaccess-module/
+./poi-contentaccess-module -f $ADDITIONAL_DATABASE -i $language &
+cd $COMPONENT_EXE_DIR/
+./poi-server -f $MAIN_DATABASE &
+cd $EXE_DIR/poi-client/
+./poi-client &
 

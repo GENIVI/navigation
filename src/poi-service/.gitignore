@@ -4,7 +4,7 @@
 *_adaptor.h
 *_proxy.h
 genivi-*.h
-
+*.user
 
 
 

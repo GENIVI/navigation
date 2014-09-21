@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="en_US">
+<TS version="2.1" language="ja_JP" sourcelanguage="ja_JP">
 <context>
     <name>MainWindow</name>
     <message>
         <location filename="../poi-contentaccess-module/mainwindow.ui" line="222"/>
-        <location filename="../poi-contentaccess-module/mainwindow.cpp" line="82"/>
+        <location filename="../poi-contentaccess-module/mainwindow.cpp" line="89"/>
         <source>REGISTER</source>
-        <translation>REGISTER</translation>
+        <translatorcomment>とうき</translatorcomment>
+        <translation>登記</translation>
     </message>
     <message>
         <location filename="../poi-contentaccess-module/mainwindow.ui" line="203"/>
-        <location filename="../poi-contentaccess-module/mainwindow.cpp" line="83"/>
+        <location filename="../poi-contentaccess-module/mainwindow.cpp" line="90"/>
         <source>UNREGISTER</source>
-        <translation>UNREGISTER</translation>
+        <translatorcomment>ちょうし</translatorcomment>
+        <translation>中止</translation>
     </message>
     <message>
         <location filename="../poi-contentaccess-module/mainwindow.ui" line="26"/>
         <source>Bicycle shop</source>
-        <translation>Bicycle shop</translation>
+        <translatorcomment>じてんしゃてん</translatorcomment>
+        <translation>自転車店</translation>
     </message>
     <message>
         <location filename="../poi-contentaccess-module/mainwindow.ui" line="54"/>
@@ -33,38 +36,42 @@
     <message>
         <location filename="../poi-contentaccess-module/mainwindow.ui" line="118"/>
         <source>Version</source>
-        <translation>Version</translation>
+        <translation>バージョン</translation>
     </message>
     <message>
         <location filename="../poi-contentaccess-module/mainwindow.ui" line="171"/>
-        <location filename="../poi-contentaccess-module/mainwindow.cpp" line="84"/>
+        <location filename="../poi-contentaccess-module/mainwindow.cpp" line="91"/>
         <source>ADDandREG</source>
-        <translation>ADDandREG</translation>
+        <translatorcomment>たす</translatorcomment>
+        <translation>足す</translation>
     </message>
     <message>
         <location filename="../poi-contentaccess-module/mainwindow.ui" line="187"/>
-        <location filename="../poi-contentaccess-module/mainwindow.cpp" line="85"/>
+        <location filename="../poi-contentaccess-module/mainwindow.cpp" line="92"/>
         <source>REMOVE</source>
-        <translation>REMOVE</translation>
+        <translatorcomment>とる</translatorcomment>
+        <translation>取る</translation>
     </message>
     <message>
         <location filename="../poi-contentaccess-module/mainwindow.ui" line="244"/>
         <source>Language</source>
-        <translation>Language</translation>
+        <translatorcomment>げんご</translatorcomment>
+        <translation>言語</translation>
     </message>
     <message>
         <source>NUMBER: </source>
-        <translation type="obsolete">NUMBER: </translation>
+        <translation type="obsolete">番号： </translation>
     </message>
     <message>
-        <location filename="../poi-contentaccess-module/mainwindow.cpp" line="109"/>
+        <location filename="../poi-contentaccess-module/mainwindow.cpp" line="116"/>
         <source>NUMBER</source>
-        <translation>NUMBER</translation>
+        <translation>番号</translation>
     </message>
     <message>
-        <location filename="../poi-contentaccess-module/mainwindow.cpp" line="143"/>
+        <location filename="../poi-contentaccess-module/mainwindow.cpp" line="150"/>
         <source>Categories added</source>
-        <translation>Added</translation>
+        <translatorcomment>たした</translatorcomment>
+        <translation>足した</translation>
     </message>
 </context>
 </TS>

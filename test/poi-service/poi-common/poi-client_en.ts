@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="en_US">
+<TS version="2.1" language="en_US">
 <context>
     <name>MainWindow</name>
     <message>
@@ -49,27 +49,27 @@
     </message>
     <message>
         <location filename="../poi-client/mainwindow.ui" line="184"/>
-        <location filename="../poi-client/mainwindow.cpp" line="217"/>
+        <location filename="../poi-client/mainwindow.cpp" line="225"/>
         <source>NORTH</source>
         <translation>NORTH</translation>
     </message>
     <message>
         <location filename="../poi-client/mainwindow.ui" line="189"/>
-        <location filename="../poi-client/mainwindow.cpp" line="213"/>
-        <location filename="../poi-client/mainwindow.cpp" line="677"/>
+        <location filename="../poi-client/mainwindow.cpp" line="221"/>
+        <location filename="../poi-client/mainwindow.cpp" line="685"/>
         <source>SOUTH</source>
         <translation>SOUTH</translation>
     </message>
     <message>
         <location filename="../poi-client/mainwindow.ui" line="271"/>
-        <location filename="../poi-client/mainwindow.cpp" line="225"/>
+        <location filename="../poi-client/mainwindow.cpp" line="233"/>
         <source>EAST</source>
         <translation>EAST</translation>
     </message>
     <message>
         <location filename="../poi-client/mainwindow.ui" line="276"/>
-        <location filename="../poi-client/mainwindow.cpp" line="221"/>
-        <location filename="../poi-client/mainwindow.cpp" line="680"/>
+        <location filename="../poi-client/mainwindow.cpp" line="229"/>
+        <location filename="../poi-client/mainwindow.cpp" line="688"/>
         <source>WEST</source>
         <translation>WEST</translation>
     </message>
@@ -125,32 +125,32 @@
     <message>
         <location filename="../poi-client/mainwindow.ui" line="893"/>
         <location filename="../poi-client/mainwindow.ui" line="1117"/>
-        <location filename="../poi-client/mainwindow.cpp" line="66"/>
-        <location filename="../poi-client/mainwindow.cpp" line="155"/>
+        <location filename="../poi-client/mainwindow.cpp" line="74"/>
+        <location filename="../poi-client/mainwindow.cpp" line="163"/>
         <source>Brand</source>
         <translation>Brand</translation>
     </message>
     <message>
         <location filename="../poi-client/mainwindow.ui" line="861"/>
         <location filename="../poi-client/mainwindow.ui" line="1085"/>
-        <location filename="../poi-client/mainwindow.cpp" line="66"/>
-        <location filename="../poi-client/mainwindow.cpp" line="139"/>
+        <location filename="../poi-client/mainwindow.cpp" line="74"/>
+        <location filename="../poi-client/mainwindow.cpp" line="147"/>
         <source>Post code</source>
         <translation>Post code</translation>
     </message>
     <message>
         <location filename="../poi-client/mainwindow.ui" line="877"/>
         <location filename="../poi-client/mainwindow.ui" line="1101"/>
-        <location filename="../poi-client/mainwindow.cpp" line="66"/>
-        <location filename="../poi-client/mainwindow.cpp" line="147"/>
+        <location filename="../poi-client/mainwindow.cpp" line="74"/>
+        <location filename="../poi-client/mainwindow.cpp" line="155"/>
         <source>City</source>
         <translation>City</translation>
     </message>
     <message>
         <location filename="../poi-client/mainwindow.ui" line="845"/>
         <location filename="../poi-client/mainwindow.ui" line="1069"/>
-        <location filename="../poi-client/mainwindow.cpp" line="66"/>
-        <location filename="../poi-client/mainwindow.cpp" line="131"/>
+        <location filename="../poi-client/mainwindow.cpp" line="74"/>
+        <location filename="../poi-client/mainwindow.cpp" line="139"/>
         <source>Street</source>
         <translation>Street</translation>
     </message>
@@ -162,16 +162,16 @@
     <message>
         <location filename="../poi-client/mainwindow.ui" line="829"/>
         <location filename="../poi-client/mainwindow.ui" line="1053"/>
-        <location filename="../poi-client/mainwindow.cpp" line="66"/>
-        <location filename="../poi-client/mainwindow.cpp" line="123"/>
+        <location filename="../poi-client/mainwindow.cpp" line="74"/>
+        <location filename="../poi-client/mainwindow.cpp" line="131"/>
         <source>Number</source>
         <translation>Number</translation>
     </message>
     <message>
         <location filename="../poi-client/mainwindow.ui" line="909"/>
         <location filename="../poi-client/mainwindow.ui" line="1133"/>
-        <location filename="../poi-client/mainwindow.cpp" line="66"/>
-        <location filename="../poi-client/mainwindow.cpp" line="163"/>
+        <location filename="../poi-client/mainwindow.cpp" line="74"/>
+        <location filename="../poi-client/mainwindow.cpp" line="171"/>
         <source>Operator</source>
         <translation>Operator</translation>
     </message>
@@ -198,39 +198,39 @@
     <message>
         <location filename="../poi-client/mainwindow.ui" line="717"/>
         <location filename="../poi-client/mainwindow.ui" line="941"/>
-        <location filename="../poi-client/mainwindow.cpp" line="64"/>
+        <location filename="../poi-client/mainwindow.cpp" line="72"/>
         <source>Category</source>
         <translation>Category</translation>
     </message>
     <message>
         <location filename="../poi-client/mainwindow.ui" line="749"/>
         <location filename="../poi-client/mainwindow.ui" line="973"/>
-        <location filename="../poi-client/mainwindow.cpp" line="66"/>
-        <location filename="../poi-client/mainwindow.cpp" line="83"/>
+        <location filename="../poi-client/mainwindow.cpp" line="74"/>
+        <location filename="../poi-client/mainwindow.cpp" line="91"/>
         <source>Source</source>
         <translation>Source</translation>
     </message>
     <message>
         <location filename="../poi-client/mainwindow.ui" line="765"/>
         <location filename="../poi-client/mainwindow.ui" line="989"/>
-        <location filename="../poi-client/mainwindow.cpp" line="66"/>
-        <location filename="../poi-client/mainwindow.cpp" line="91"/>
+        <location filename="../poi-client/mainwindow.cpp" line="74"/>
+        <location filename="../poi-client/mainwindow.cpp" line="99"/>
         <source>WebSite</source>
         <translation>WebSite</translation>
     </message>
     <message>
         <location filename="../poi-client/mainwindow.ui" line="781"/>
         <location filename="../poi-client/mainwindow.ui" line="1005"/>
-        <location filename="../poi-client/mainwindow.cpp" line="66"/>
-        <location filename="../poi-client/mainwindow.cpp" line="99"/>
+        <location filename="../poi-client/mainwindow.cpp" line="74"/>
+        <location filename="../poi-client/mainwindow.cpp" line="107"/>
         <source>Phone</source>
         <translation>Phone</translation>
     </message>
     <message>
         <location filename="../poi-client/mainwindow.ui" line="797"/>
         <location filename="../poi-client/mainwindow.ui" line="1021"/>
-        <location filename="../poi-client/mainwindow.cpp" line="66"/>
-        <location filename="../poi-client/mainwindow.cpp" line="107"/>
+        <location filename="../poi-client/mainwindow.cpp" line="74"/>
+        <location filename="../poi-client/mainwindow.cpp" line="115"/>
         <source>Stars</source>
         <translation>Stars</translation>
     </message>
@@ -243,8 +243,8 @@
     <message>
         <location filename="../poi-client/mainwindow.ui" line="813"/>
         <location filename="../poi-client/mainwindow.ui" line="1037"/>
-        <location filename="../poi-client/mainwindow.cpp" line="66"/>
-        <location filename="../poi-client/mainwindow.cpp" line="115"/>
+        <location filename="../poi-client/mainwindow.cpp" line="74"/>
+        <location filename="../poi-client/mainwindow.cpp" line="123"/>
         <source>Open hours</source>
         <translation>Open hours</translation>
     </message>
@@ -314,27 +314,27 @@
         <translation>Enter the string to search</translation>
     </message>
     <message>
-        <location filename="../poi-client/mainwindow.cpp" line="64"/>
+        <location filename="../poi-client/mainwindow.cpp" line="72"/>
         <source>Name</source>
         <translation>Name</translation>
     </message>
     <message>
-        <location filename="../poi-client/mainwindow.cpp" line="64"/>
+        <location filename="../poi-client/mainwindow.cpp" line="72"/>
         <source>Distance</source>
         <translation>Distance</translation>
     </message>
     <message>
-        <location filename="../poi-client/mainwindow.cpp" line="64"/>
+        <location filename="../poi-client/mainwindow.cpp" line="72"/>
         <source>ID</source>
         <translation>ID</translation>
     </message>
     <message>
-        <location filename="../poi-client/mainwindow.cpp" line="64"/>
+        <location filename="../poi-client/mainwindow.cpp" line="72"/>
         <source>Latitude</source>
         <translation>Latitude</translation>
     </message>
     <message>
-        <location filename="../poi-client/mainwindow.cpp" line="64"/>
+        <location filename="../poi-client/mainwindow.cpp" line="72"/>
         <source>Longitude</source>
         <translation>Longitude</translation>
     </message>
@@ -343,45 +343,45 @@
         <translation type="obsolete">Operator</translation>
     </message>
     <message>
-        <location filename="../poi-client/mainwindow.cpp" line="67"/>
+        <location filename="../poi-client/mainwindow.cpp" line="75"/>
         <source>Icon</source>
         <translation>Icon</translation>
     </message>
     <message>
-        <location filename="../poi-client/mainwindow.cpp" line="199"/>
-        <location filename="../poi-client/mainwindow.cpp" line="715"/>
-        <location filename="../poi-client/mainwindow.cpp" line="1310"/>
+        <location filename="../poi-client/mainwindow.cpp" line="207"/>
+        <location filename="../poi-client/mainwindow.cpp" line="723"/>
+        <location filename="../poi-client/mainwindow.cpp" line="1318"/>
         <source>EMPTY</source>
         <translation>EMPTY</translation>
     </message>
     <message>
-        <location filename="../poi-client/mainwindow.cpp" line="656"/>
+        <location filename="../poi-client/mainwindow.cpp" line="664"/>
         <source>Around the default location</source>
         <translation>Around the default location</translation>
     </message>
     <message>
-        <location filename="../poi-client/mainwindow.cpp" line="663"/>
+        <location filename="../poi-client/mainwindow.cpp" line="671"/>
         <source>Around the vehicle</source>
         <translation>Around the vehicle</translation>
     </message>
     <message>
-        <location filename="../poi-client/mainwindow.cpp" line="673"/>
+        <location filename="../poi-client/mainwindow.cpp" line="681"/>
         <source>Around a location</source>
         <translation>Around a location</translation>
     </message>
     <message>
-        <location filename="../poi-client/mainwindow.cpp" line="1242"/>
+        <location filename="../poi-client/mainwindow.cpp" line="1250"/>
         <source>Proximity search</source>
         <translation>Proximity search</translation>
     </message>
     <message>
-        <location filename="../poi-client/mainwindow.cpp" line="1677"/>
+        <location filename="../poi-client/mainwindow.cpp" line="1685"/>
         <source>Along a route</source>
         <translation>Along a route</translation>
     </message>
     <message>
-        <location filename="../poi-client/mainwindow.cpp" line="745"/>
-        <location filename="../poi-client/mainwindow.cpp" line="1678"/>
+        <location filename="../poi-client/mainwindow.cpp" line="753"/>
+        <location filename="../poi-client/mainwindow.cpp" line="1686"/>
         <source>NUMBER</source>
         <translation>NUMBER</translation>
     </message>

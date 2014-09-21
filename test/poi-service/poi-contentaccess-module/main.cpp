@@ -41,6 +41,7 @@
 
 #include <QApplication>
 #include <QTranslator>
+#include <QResource>
 #include "mainwindow.h"
 
 #include <QSettings>
@@ -773,8 +774,9 @@ void print_usage (FILE* stream, int exit_code)
   fprintf (stream, "Use: %s options [database]\n",program_name);
   fprintf (stream,
            " -h --help               Display this message.\n"
-           " -f --file database      Open the database.\n"
-           " -i --internationalisation database language(en,jp)    Open the database, international version.\n");
+           " -f --file database      Open the database (by default language is english).\n"
+           " -f --file database -i --internationalisation language(en,jp)    Open the database and set the language.\n");
+  fprintf (stream, "Error code %d\n",exit_code);
   exit (exit_code);
 }
 
@@ -800,7 +802,7 @@ int main(int  argc , char**  argv )
     int next_option;
 
     /* Valid letters for short options. */
-    const char* const short_options = "hfi:";
+    const char* const short_options = "hf:i:";
     /* Valid string for long options. */
     const struct option long_options[] = {
         { "help",     0, NULL, 'h' },
@@ -808,8 +810,8 @@ int main(int  argc , char**  argv )
         { "internationalisation", 2, NULL, 'i' },
         { NULL,       0, NULL, 0   }   /* Always at the end of the table.  */
     };
-    char* database_filename = NULL; //database filename passed as first argument
-
+    char* database_filename = NULL; //database filename
+    QString language = "en"; //english by default
 
     program_name = argv[0];
 
@@ -825,112 +827,9 @@ int main(int  argc , char**  argv )
             database_filename = argv[2];
             if (!is_readable(database_filename))
                 print_usage (stderr, 1);
-            else
-            {
-                QApplication a(argc, argv);
-                QTranslator translator;
-                translator.load("POIPOC_en.ts","../POIPOCCommon/"); // english by default
-                a.installTranslator(&translator);
-                MainWindow mainWindow;
-
-                // creating the dispatcher
-                dispatcher = new DBus::Glib::BusDispatcher();
-                DBus::default_dispatcher = dispatcher;
-                dispatcher->attach(NULL);
-
-                // create a connection on the session bus
-                dbusConnection = new DBus::Connection(DBus::Connection::SessionBus());
-                dbusConnection->setup(dispatcher);
-
-                // create the server for contentAccessModule
-                dbusConnection->request_name(contentAccessModule_SERVICE_NAME);
-                servercontentAccessModule=new contentAccessModuleServer(*dbusConnection,database_filename);
-
-                // connect it to the HMI panel
-                mainWindow.ConnectTocontentAccessModuleServer(servercontentAccessModule);
-
-                // connect the HMI panel to it
-                servercontentAccessModule->connectToHMI(&mainWindow);
-
-                // create a client for poiContentAccess
-                clientpoiContentAccess = new poiContentAccess(*dbusConnection);
-
-                // connect it to the HMI panel
-                mainWindow.ConnectTopoiContentAccessClient(clientpoiContentAccess);
-
-                // Create a new GMainLoop with default context and initial state of "not running "
-                mainloop = g_main_loop_new (g_main_context_default() , FALSE );
-
-               // loop listening
-                mainWindow.InitUi();
-                mainWindow.show();
-
-                return a.exec();
-
-                // clean memory
-                delete servercontentAccessModule;
-                delete dbusConnection;
-                delete dispatcher;
-            }
             break;
-        case 'i':   /* -i --internationalisation database language */
-            database_filename = argv[2];
-            if (!is_readable(database_filename))
-                print_usage (stderr, 1);
-            else
-            {
-                QApplication a(argc, argv);
-                QTranslator translator;
-                QString language(argv[3]);
-                if (translator.load("poi-contentaccess-module_"+ language,"../poi-common/"))
-                {
-                    a.installTranslator(&translator);
-                    MainWindow mainWindow;
-
-                    // creating the dispatcher
-                    dispatcher = new DBus::Glib::BusDispatcher();
-                    DBus::default_dispatcher = dispatcher;
-                    dispatcher->attach(NULL);
-
-                    // create a connection on the session bus
-                    dbusConnection = new DBus::Connection(DBus::Connection::SessionBus());
-                    dbusConnection->setup(dispatcher);
-
-                    // create the server for contentAccessModule
-                    dbusConnection->request_name(contentAccessModule_SERVICE_NAME);
-                    servercontentAccessModule=new contentAccessModuleServer(*dbusConnection,database_filename);
-
-                    // connect it to the HMI panel
-                    mainWindow.ConnectTocontentAccessModuleServer(servercontentAccessModule);
-
-                    // connect the HMI panel to it
-                    servercontentAccessModule->connectToHMI(&mainWindow);
-
-                    // create a client for poiContentAccess
-                    clientpoiContentAccess = new poiContentAccess(*dbusConnection);
-
-                    // connect it to the HMI panel
-                    mainWindow.ConnectTopoiContentAccessClient(clientpoiContentAccess);
-
-                    // Create a new GMainLoop with default context and initial state of "not running "
-                    mainloop = g_main_loop_new (g_main_context_default() , FALSE );
-
-                   // loop listening
-                    mainWindow.InitUi();
-                    mainWindow.show();
-
-                    int ret = a.exec();
-
-                    // clean memory
-                    delete servercontentAccessModule;
-                    delete dbusConnection;
-                    delete dispatcher;
-                }
-                else
-                {
-                     print_usage (stderr, 1);
-                }
-            }
+        case 'i':   /* -i --internationalisation language */
+            language = argv[4];
             break;
         case '?':   /* Invalid option. */
             print_usage (stderr, 1);
@@ -942,6 +841,63 @@ int main(int  argc , char**  argv )
     }
     while (next_option != -1);
 
+    QApplication a(argc, argv);
+    QTranslator translator;
+    if (QResource::registerResource("../poi-resource.rcc"))
+    {
+        if (translator.load("poi-contentaccess-module_"+ language,"../../poi-common/"))
+        {
+            a.installTranslator(&translator);
+            MainWindow mainWindow;
+
+            // creating the dispatcher
+            dispatcher = new DBus::Glib::BusDispatcher();
+            DBus::default_dispatcher = dispatcher;
+            dispatcher->attach(NULL);
+
+            // create a connection on the session bus
+            dbusConnection = new DBus::Connection(DBus::Connection::SessionBus());
+            dbusConnection->setup(dispatcher);
+
+            // create the server for contentAccessModule
+            dbusConnection->request_name(contentAccessModule_SERVICE_NAME);
+            servercontentAccessModule=new contentAccessModuleServer(*dbusConnection,database_filename);
+
+            // connect it to the HMI panel
+            mainWindow.ConnectTocontentAccessModuleServer(servercontentAccessModule);
+
+            // connect the HMI panel to it
+            servercontentAccessModule->connectToHMI(&mainWindow);
+
+            // create a client for poiContentAccess
+            clientpoiContentAccess = new poiContentAccess(*dbusConnection);
+
+            // connect it to the HMI panel
+            mainWindow.ConnectTopoiContentAccessClient(clientpoiContentAccess);
+
+            // Create a new GMainLoop with default context and initial state of "not running "
+            mainloop = g_main_loop_new (g_main_context_default() , FALSE );
+
+           // loop listening
+            mainWindow.InitUi();
+            mainWindow.show();
+
+            int ret = a.exec();
+
+            // clean memory
+            delete servercontentAccessModule;
+            delete dbusConnection;
+            delete dispatcher;
+        }
+        else
+        {
+            print_usage (stderr, 2);
+        }
+    }
+    else
+    {
+        print_usage (stderr, 3);
+    }
     return EXIT_SUCCESS;
 }
 

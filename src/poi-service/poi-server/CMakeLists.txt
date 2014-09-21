@@ -21,6 +21,8 @@ cmake_minimum_required(VERSION 2.8)
 message(STATUS "poi-server")
 
 find_package(PkgConfig REQUIRED)
+find_program(XSLTPROC xsltproc REQUIRED)
+find_program(DBUSXML2CPP dbusxx-xml2cpp REQUIRED)
 
 pkg_check_modules(DBUS_CPP dbus-c++-1)
 pkg_check_modules(GLIB REQUIRED glib-2.0)
@@ -39,14 +41,11 @@ include_directories(${GOBJECT_INCLUDE_DIRS})
 include_directories(${DBUS_INCLUDE_DIRS})
 include_directories(${DBUS_CPP_GLIB_INCLUDE_DIRS})
 
-set(API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../api)
-set(TARGET_GENERATED_API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../poi-common)
 set (git_get_src_version git rev-parse HEAD)
 set (git_executable git)
 
 # Check if positioning stuff with the right version has been cloned and make it if necessary
 set(positioning_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../positioning)
-set(positioning_API_DIR ${positioning_SRC}/enhanced-position-service/api)
 set(positioning_URL http://git.projects.genivi.org/lbs/positioning.git)
 set(positioning_VERSION 09698f63ea27a24c533b4c015155ee9ebd7a3026)
 
@@ -90,35 +89,92 @@ else()
 endif()
 
 # Generate the DBus adaptors and proxy before building the client
-add_custom_command(
-  OUTPUT  genivi-poiservice-poisearch_adaptor.h 
-  COMMAND dbusxx-xml2cpp ${API_DIR}/poi-service/genivi-poiservice-poisearch.xml 
-  --adaptor=${TARGET_GENERATED_API_DIR}/genivi-poiservice-poisearch_adaptor.h
-  OUTPUT  genivi-poiservice-poicontentaccess_adaptor.h 
-  COMMAND dbusxx-xml2cpp ${API_DIR}/poi-service/genivi-poiservice-poicontentaccess.xml 
-  --adaptor=${TARGET_GENERATED_API_DIR}/genivi-poiservice-poicontentaccess_adaptor.h
-  OUTPUT  genivi-poiservice-contentaccessmodule_proxy.h 
-  COMMAND dbusxx-xml2cpp ${API_DIR}/poi-service/genivi-poiservice-contentaccessmodule.xml
-  --proxy=${TARGET_GENERATED_API_DIR}/genivi-poiservice-contentaccessmodule_proxy.h
-  OUTPUT genivi-poiservice-constants.h 
-  COMMAND xsltproc ${API_DIR}/poi-service/enum.xsl ${API_DIR}/poi-service/genivi-poiservice-constants.xml > ${TARGET_GENERATED_API_DIR}/genivi-poiservice-constants.h
+set(API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../api)
+set(TARGET_GENERATED_API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../poi-common)
+set(positioning_API_DIR ${positioning_SRC}/enhanced-position-service/api)
 
-  OUTPUT genivi-positioning-constants.h 
-  COMMAND xsltproc ${positioning_SRC_DIR}/enhanced-position-service/api/enum.xsl ${positioning_SRC_DIR}/enhanced-position-service/api/genivi-positioning-constants.xml > ${TARGET_GENERATED_API_DIR}/genivi-positioning-constants.h
-  OUTPUT  genivi-positioning-enhancedposition_proxy.h 
-  COMMAND dbusxx-xml2cpp ${positioning_SRC_DIR}/enhanced-position-service/api/genivi-positioning-enhancedposition.xml
-  --proxy=${TARGET_GENERATED_API_DIR}/genivi-positioning-enhancedposition_proxy.h
-
-  OUTPUT genivi-mapviewer-constants.h 
-  COMMAND xsltproc ${API_DIR}/map-viewer/enum.xsl ${API_DIR}/map-viewer/genivi-mapviewer-constants.xml > ${TARGET_GENERATED_API_DIR}/genivi-mapviewer-constants.h
-
-  OUTPUT genivi-navigationcore-constants.h 
-  COMMAND xsltproc ${API_DIR}/navigation-core/enum.xsl ${API_DIR}/navigation-core/genivi-navigationcore-constants.xml > ${TARGET_GENERATED_API_DIR}/genivi-navigationcore-constants.h
-  OUTPUT  genivi-navigationcore-routing_proxy.h 
-  COMMAND dbusxx-xml2cpp ${API_DIR}/navigation-core/genivi-navigationcore-routing.xml
-  --proxy=${TARGET_GENERATED_API_DIR}/genivi-navigationcore-routing_proxy.h
-
+file (GLOB XML_TO_DBUS_PROXY 
+	${API_DIR}/poi-service/genivi-poiservice-contentaccessmodule.xml
+	${positioning_SRC_DIR}/enhanced-position-service/api/genivi-positioning-enhancedposition.xml
+	${API_DIR}/navigation-core/genivi-navigationcore-routing.xml
 )
+foreach (RAW_FILE ${XML_TO_DBUS_PROXY})
+	get_filename_component(FILE ${RAW_FILE} NAME_WE)
+	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}_proxy.h)
+		execute_process(
+			COMMAND ${DBUSXML2CPP} ${RAW_FILE} --proxy=${TARGET_GENERATED_API_DIR}/${FILE}_proxy.h  
+		)
+	else()
+		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}_proxy.h)
+			execute_process(
+				COMMAND ${DBUSXML2CPP} ${RAW_FILE} --proxy=${TARGET_GENERATED_API_DIR}/${FILE}_proxy.h  
+			)
+		endif()
+	endif()
+endforeach()
+
+file (GLOB XML_TO_DBUS_ADAPTOR
+	${API_DIR}/poi-service/genivi-poiservice-poisearch.xml
+	${API_DIR}/poi-service/genivi-poiservice-poicontentaccess.xml
+)
+foreach (RAW_FILE ${XML_TO_DBUS_ADAPTOR})
+	get_filename_component(FILE ${RAW_FILE} NAME_WE)
+	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h)
+		execute_process(
+			COMMAND ${DBUSXML2CPP} ${RAW_FILE} --adaptor=${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h  
+		)
+	else()
+		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h)
+			execute_process(
+				COMMAND ${DBUSXML2CPP} ${RAW_FILE} --adaptor=${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h  
+			)
+		endif()
+	endif()
+endforeach()
+
+file (GLOB XML_TO_DBUS_CONSTANT
+	${API_DIR}/poi-service/genivi-poiservice-constants.xml
+	${API_DIR}/map-viewer/genivi-mapviewer-constants.xml
+	${API_DIR}/navigation-core/genivi-navigationcore-constants.xml
+)
+foreach (RAW_FILE ${XML_TO_DBUS_CONSTANT})
+	get_filename_component(FILE ${RAW_FILE} NAME_WE)
+	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}.h)
+		execute_process(
+			OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
+			COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}        
+		)
+	else()
+		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}.h)
+			execute_process(
+				OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
+				COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}        
+			)
+		endif()
+	endif()
+endforeach()
+
+file (GLOB XML_TO_DBUS_CONSTANT_FROM_POSITIONING
+	${positioning_SRC_DIR}/enhanced-position-service/api/genivi-positioning-constants.xml
+)
+foreach (RAW_FILE ${XML_TO_DBUS_CONSTANT_FROM_POSITIONING})
+	get_filename_component(FILE ${RAW_FILE} NAME_WE)
+	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}.h)
+		execute_process(
+			OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
+			COMMAND ${XSLTPROC} ${positioning_SRC_DIR}/enhanced-position-service/api/enum.xsl ${RAW_FILE}   
+		)
+	else()
+		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}.h)
+			execute_process(
+				OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
+				COMMAND ${XSLTPROC} ${positioning_SRC_DIR}/enhanced-position-service/api/enum.xsl ${RAW_FILE}   
+			)
+		endif()
+	endif()
+endforeach()
+
+file(GLOB DBUS_DEF_INCLUDE ${DBUS_DEF_DIR}/*_proxy.h ${DBUS_DEF_DIR}/*_adaptor.h ${DBUS_DEF_DIR}/*-constants.h)
 
 link_directories(
     ${DBUS_CPP_LIBRARY_DIRS}
@@ -131,15 +187,7 @@ link_directories(
 )
 
 add_executable(poi-server
-	genivi-poiservice-poisearch_adaptor.h
-	genivi-poiservice-poicontentaccess_adaptor.h
-	genivi-poiservice-contentaccessmodule_proxy.h
-	genivi-poiservice-constants.h
-	genivi-positioning-constants.h
-	genivi-mapviewer-constants.h
-	genivi-navigationcore-constants.h
-	genivi-navigationcore-routing_proxy.h
-	genivi-positioning-enhancedposition_proxy.h
+	${DBUS_DEF_INCLUDE}
     main.cpp
     database.cpp
 	database.h

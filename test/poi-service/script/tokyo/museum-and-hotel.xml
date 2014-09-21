@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-02-04T12:10:01Z"/>
+<meta osm_base="2014-09-21T11:38:01Z"/>
 
   <node id="250668601" lat="35.7174181" lon="139.7737638">
     <tag k="created_by" v="JOSM"/>
@@ -23,13 +23,17 @@
     <tag k="name" v="Bridgestone Museum of Art"/>
     <tag k="tourism" v="museum"/>
   </node>
+  <node id="250668627" lat="35.6415452" lon="139.7132842">
+    <tag k="name" v="Tokyo Metro Museum of Photography"/>
+    <tag k="name:ja" v="東京都写真美術館"/>
+    <tag k="tourism" v="museum"/>
+  </node>
   <node id="251055427" lat="35.6707003" lon="139.7133708">
     <tag k="name" v="Watari-um Museum of Contemporary Art"/>
     <tag k="tourism" v="museum"/>
   </node>
-  <node id="251055429" lat="35.6614129" lon="139.6928144">
-    <tag k="created_by" v="JOSM"/>
-    <tag k="name" v="Toguri Museum of Art"/>
+  <node id="251055430" lat="35.7288374" lon="139.7093019">
+    <tag k="name" v="Japan Traditional Crafts Centre"/>
     <tag k="tourism" v="museum"/>
   </node>
   <node id="251055437" lat="35.6855878" lon="139.7792244">
@@ -52,10 +56,6 @@
     <tag k="name" v="帝国ホテルプラザ"/>
     <tag k="tourism" v="hotel"/>
   </node>
-  <node id="260426067" lat="35.6685856" lon="139.7575258">
-    <tag k="name" v="第一ホテル"/>
-    <tag k="tourism" v="hotel"/>
-  </node>
   <node id="301584380" lat="35.7125281" lon="139.7820268">
     <tag k="name" v="Chisun Hotel Ueno"/>
     <tag k="tourism" v="hotel"/>
@@ -65,38 +65,6 @@
     <tag k="name" v="銀座日航ホテル"/>
     <tag k="tourism" v="hotel"/>
   </node>
-  <node id="309040735" lat="35.6680742" lon="139.6796751"/>
-  <node id="309040736" lat="35.6676370" lon="139.6795225"/>
-  <node id="309040739" lat="35.6675122" lon="139.6801214"/>
-  <node id="309040740" lat="35.6680320" lon="139.6805090"/>
-  <node id="309129365" lat="35.6624327" lon="139.6799370"/>
-  <node id="309129366" lat="35.6622723" lon="139.6799370"/>
-  <node id="309129367" lat="35.6622723" lon="139.6798855"/>
-  <node id="309129368" lat="35.6621747" lon="139.6798855">
-    <tag k="ele" v="48.1915283"/>
-    <tag k="name" v="037"/>
-    <tag k="wpt_description" v="2008-11-01 12:06:03PM"/>
-  </node>
-  <node id="309129369" lat="35.6621747" lon="139.6799456"/>
-  <node id="309129370" lat="35.6620492" lon="139.6799456">
-    <tag k="ele" v="57.8045654"/>
-    <tag k="name" v="021"/>
-    <tag k="wpt_description" v="2008-11-01 11:36:54AM"/>
-  </node>
-  <node id="309129371" lat="35.6620492" lon="139.6802546"/>
-  <node id="309129372" lat="35.6624327" lon="139.6802546">
-    <tag k="ele" v="56.6029053"/>
-    <tag k="name" v="024"/>
-    <tag k="wpt_description" v="2008-11-01 11:38:51AM"/>
-  </node>
-  <node id="309130630" lat="35.6629703" lon="139.6807370"/>
-  <node id="309130632" lat="35.6626155" lon="139.6807575"/>
-  <node id="309130633" lat="35.6626303" lon="139.6811029"/>
-  <node id="309130634" lat="35.6629853" lon="139.6810861"/>
-  <node id="309133105" lat="35.6624118" lon="139.6806237"/>
-  <node id="309133108" lat="35.6622584" lon="139.6806237"/>
-  <node id="309133109" lat="35.6622584" lon="139.6809326"/>
-  <node id="309133111" lat="35.6624118" lon="139.6809326"/>
   <node id="336994074" lat="35.6595403" lon="139.7477720"/>
   <node id="336994076" lat="35.6587872" lon="139.7476089"/>
   <node id="336994079" lat="35.6588221" lon="139.7473256"/>
@@ -108,6 +76,10 @@
   <node id="336995312" lat="35.6596868" lon="139.7483299"/>
   <node id="336995314" lat="35.6597217" lon="139.7480638"/>
   <node id="336995316" lat="35.6595194" lon="139.7480209"/>
+  <node id="340381652" lat="35.6469994" lon="139.7083863">
+    <tag k="name" v="Hotel Excellent"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
   <node id="380527398" lat="35.7169442" lon="139.7767843"/>
   <node id="380527399" lat="35.7175259" lon="139.7756090"/>
   <node id="380527400" lat="35.7177489" lon="139.7751541"/>
@@ -122,10 +94,16 @@
   <node id="380538736" lat="35.7169159" lon="139.7723482"/>
   <node id="380538737" lat="35.7178867" lon="139.7726649"/>
   <node id="380538738" lat="35.7172961" lon="139.7740059"/>
-  <node id="389635163" lat="35.6651396" lon="139.7373146">
-    <tag k="name" v="Hotel Villa Fontaine"/>
-    <tag k="tourism" v="hotel"/>
-  </node>
+  <node id="390376337" lat="35.6355933" lon="139.7210043"/>
+  <node id="390376339" lat="35.6354471" lon="139.7206874"/>
+  <node id="390376342" lat="35.6354372" lon="139.7191485"/>
+  <node id="390376344" lat="35.6360962" lon="139.7184100"/>
+  <node id="390376347" lat="35.6367864" lon="139.7177299"/>
+  <node id="390376348" lat="35.6372023" lon="139.7186147"/>
+  <node id="390376349" lat="35.6371227" lon="139.7194371"/>
+  <node id="390376350" lat="35.6367832" lon="139.7198888"/>
+  <node id="390376351" lat="35.6364269" lon="139.7207021"/>
+  <node id="390376352" lat="35.6357571" lon="139.7212955"/>
   <node id="410166105" lat="35.7042958" lon="139.7640475">
     <tag k="name" v="Japan Football Museum"/>
     <tag k="tourism" v="museum"/>
@@ -141,12 +119,11 @@
     <tag k="tourism" v="museum"/>
     <tag k="wheelchair" v="yes"/>
   </node>
-  <node id="475090861" lat="35.6972950" lon="139.7020790">
-    <tag k="name" v="Vintage Shinjuku Hotel"/>
+  <node id="441692586" lat="35.7302491" lon="139.7992658">
     <tag k="tourism" v="hotel"/>
   </node>
-  <node id="475090874" lat="35.6886160" lon="139.6883990">
-    <tag k="name" v="Shinjuku New City Hotel"/>
+  <node id="475090861" lat="35.6972950" lon="139.7020790">
+    <tag k="name" v="Vintage Shinjuku Hotel"/>
     <tag k="tourism" v="hotel"/>
   </node>
   <node id="475090893" lat="35.6880000" lon="139.7183990">
@@ -161,10 +138,6 @@
     <tag k="name" v="Listel Shinjuku Hotel"/>
     <tag k="tourism" v="hotel"/>
   </node>
-  <node id="475090901" lat="35.6943820" lon="139.6897740">
-    <tag k="name" v="Ascent Shinjuku Hotel"/>
-    <tag k="tourism" v="hotel"/>
-  </node>
   <node id="475090903" lat="35.6864420" lon="139.7003670">
     <tag k="name" v="Century Southern Tower Hotel"/>
     <tag k="tourism" v="hotel"/>
@@ -174,8 +147,8 @@
     <tag k="name" v="Shinjuku Prince Hotel"/>
     <tag k="tourism" v="hotel"/>
   </node>
-  <node id="475090905" lat="35.6993220" lon="139.7079320">
-    <tag k="name" v="Sunroute Higashi Shinjuku Hotel"/>
+  <node id="475090905" lat="35.6985649" lon="139.7079263">
+    <tag k="name" v="ホテルサンルート東新宿"/>
     <tag k="tourism" v="hotel"/>
   </node>
   <node id="475090913" lat="35.6953050" lon="139.7010650">
@@ -204,7 +177,8 @@
     <tag k="tourism" v="hotel"/>
   </node>
   <node id="475090943" lat="35.6944200" lon="139.6937410">
-    <tag k="name" v="Rose Garden Hotel"/>
+    <tag k="name" v="ホテルローズガーデン新宿"/>
+    <tag k="source" v="image,2013-07;Bing"/>
     <tag k="tourism" v="hotel"/>
   </node>
   <node id="475090954" lat="35.6949810" lon="139.6973420">
@@ -220,6 +194,11 @@
     <tag k="name:en" v="Ryokan Sawanoya"/>
     <tag k="note" v="very famous japanese traditional ryokan, where many foreigner stayed"/>
     <tag k="stars" v="4"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="www.sawanoya.com"/>
+  </node>
+  <node id="506214982" lat="35.7266437" lon="139.7646765">
+    <tag k="name" v="アネックス勝太郎旅館"/>
     <tag k="tourism" v="hotel"/>
   </node>
   <node id="559359753" lat="35.6681697" lon="139.7650004"/>
@@ -244,8 +223,18 @@
     <tag k="name:ja" v="渋谷東武ホテル"/>
     <tag k="tourism" v="hotel"/>
   </node>
+  <node id="599892717" lat="35.6498692" lon="139.7555898">
+    <tag k="name" v="チサンホテル"/>
+    <tag k="name:ja" v="チサンホテル"/>
+    <tag k="source" v="Bing 2010"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
   <node id="618102602" lat="35.6713329" lon="139.7331437">
     <tag k="name" v="The b' Akasaka"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="631345241" lat="35.6320301" lon="139.7352902">
+    <tag k="name" v="プリンスホテル高輪"/>
     <tag k="tourism" v="hotel"/>
   </node>
   <node id="654591533" lat="35.6855250" lon="139.7804440">
@@ -256,6 +245,10 @@
   <node id="696656255" lat="35.6560011" lon="139.6988620"/>
   <node id="696656257" lat="35.6563029" lon="139.6987199"/>
   <node id="696656260" lat="35.6567109" lon="139.6998100"/>
+  <node id="728435757" lat="35.6480830" lon="139.7101310">
+    <tag k="name" v="ホテルシエスタ"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
   <node id="739064479" lat="35.6715601" lon="139.7378726">
     <tag k="name" v="Avanshell Akasaka"/>
     <tag k="tourism" v="hotel"/>
@@ -265,6 +258,10 @@
     <tag k="name" v="ホテルメッツ渋谷"/>
     <tag k="tourism" v="hotel"/>
   </node>
+  <node id="752870692" lat="35.6469980" lon="139.7081807"/>
+  <node id="752870704" lat="35.6471557" lon="139.7083460"/>
+  <node id="752870726" lat="35.6468881" lon="139.7083429"/>
+  <node id="752870746" lat="35.6470571" lon="139.7085009"/>
   <node id="760552145" lat="35.7109893" lon="139.7778475">
     <tag k="name" v="Touganeya Hotel"/>
     <tag k="tourism" v="hotel"/>
@@ -283,7 +280,7 @@
     <tag k="tourism" v="hotel"/>
     <tag k="wheelchair" v="yes"/>
   </node>
-  <node id="820849494" lat="35.6661292" lon="139.7613463">
+  <node id="820849494" lat="35.6659438" lon="139.7616309">
     <tag k="name" v="旧新橋停車場鉄道歴史展示室"/>
     <tag k="name:en" v="Old Shimbashi Station Railway History Exhibition Hall"/>
     <tag k="name:ja_rm" v="Kyū Shinbashi Teishajō Tetsudō Rekishi Tenjishitsu"/>
@@ -296,10 +293,24 @@
   <node id="824067474" lat="35.6829363" lon="139.7437872"/>
   <node id="824067475" lat="35.6829983" lon="139.7438275"/>
   <node id="824067476" lat="35.6831099" lon="139.7438944"/>
+  <node id="825084540" lat="35.6530574" lon="139.7622180">
+    <tag k="ele" v="124.3753662109375"/>
+    <tag k="name" v="Inter-Continental Tokyo Bay"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="wpt_description" v="14-JUL-10 10:17:56"/>
+    <tag k="wpt_symbol" v="Lodging"/>
+  </node>
   <node id="898968882" lat="35.6965668" lon="139.7970381"/>
   <node id="898968884" lat="35.6959758" lon="139.7968679"/>
   <node id="898968885" lat="35.6963163" lon="139.7951152"/>
   <node id="898968886" lat="35.6969131" lon="139.7952853"/>
+  <node id="919280876" lat="35.7336241" lon="139.7088041">
+    <tag k="name" v="サクラホテル池袋 (Sakura Hotel Ikebukuro)"/>
+    <tag k="name:en" v="Sakura Hotel Ikebukuro"/>
+    <tag k="name:ja" v="サクラホテル池袋"/>
+    <tag k="operator" v="Sakura Group"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
   <node id="919282036" lat="35.7114008" lon="139.7846196">
     <tag k="name" v="Oak Hotel"/>
     <tag k="operator" v="Oak Hotel"/>
@@ -313,8 +324,9 @@
     <tag k="name" v="Hotel Wing International Korakuen"/>
     <tag k="tourism" v="hotel"/>
   </node>
-  <node id="988763541" lat="35.6953485" lon="139.7512933">
+  <node id="988763541" lat="35.6951109" lon="139.7509066">
     <tag k="name" v="昭和館"/>
+    <tag k="name:ja_rm" v="Shōwakan"/>
     <tag k="opening_hours" v="火-日 10:00-17:30"/>
     <tag k="tourism" v="museum"/>
   </node>
@@ -338,20 +350,16 @@
     <tag k="name" v="Ueno First City Hotel"/>
     <tag k="tourism" v="hotel"/>
   </node>
-  <node id="1014529009" lat="35.6632693" lon="139.7008215"/>
-  <node id="1014529123" lat="35.6633497" lon="139.7010736"/>
-  <node id="1014529179" lat="35.6635545" lon="139.7007809"/>
-  <node id="1014529289" lat="35.6634594" lon="139.7011276"/>
-  <node id="1014529570" lat="35.6633168" lon="139.7007404"/>
-  <node id="1014529701" lat="35.6632802" lon="139.7009295"/>
-  <node id="1014529860" lat="35.6633973" lon="139.7010961"/>
-  <node id="1014529979" lat="35.6635253" lon="139.7011456"/>
   <node id="1016728315" lat="35.6552293" lon="139.7469554"/>
   <node id="1016728556" lat="35.6556471" lon="139.7469041"/>
   <node id="1016728789" lat="35.6552017" lon="139.7471326"/>
   <node id="1016729179" lat="35.6554601" lon="139.7473907"/>
   <node id="1016729374" lat="35.6555279" lon="139.7468094"/>
   <node id="1016729549" lat="35.6555936" lon="139.7473255"/>
+  <node id="1028199574" lat="35.7317121" lon="139.7111086">
+    <tag k="tourism" v="hotel"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
   <node id="1033221771" lat="35.7183533" lon="139.7772327"/>
   <node id="1033221787" lat="35.7182256" lon="139.7773644"/>
   <node id="1033221789" lat="35.7181997" lon="139.7768785"/>
@@ -362,8 +370,20 @@
   <node id="1033221818" lat="35.7182380" lon="139.7767999"/>
   <node id="1033221830" lat="35.7183954" lon="139.7770230"/>
   <node id="1033221837" lat="35.7182400" lon="139.7773348"/>
+  <node id="1059532102" lat="35.6838124" lon="139.7689954"/>
+  <node id="1059532176" lat="35.6835799" lon="139.7682384"/>
+  <node id="1059532213" lat="35.6834299" lon="139.7688541"/>
+  <node id="1059532270" lat="35.6839624" lon="139.7683797"/>
   <node id="1065897459" lat="35.7199148" lon="139.7746352"/>
   <node id="1065943671" lat="35.7176744" lon="139.7773055"/>
+  <node id="1080556891" lat="35.6387915" lon="139.7300593"/>
+  <node id="1080556951" lat="35.6398071" lon="139.7301505"/>
+  <node id="1080556955" lat="35.6396465" lon="139.7302974"/>
+  <node id="1080556961" lat="35.6387392" lon="139.7303115"/>
+  <node id="1080556985" lat="35.6397025" lon="139.7299574"/>
+  <node id="1080557001" lat="35.6394932" lon="139.7301184"/>
+  <node id="1080557020" lat="35.6391662" lon="139.7301899"/>
+  <node id="1080557022" lat="35.6391621" lon="139.7304349"/>
   <node id="1083607983" lat="35.6949709" lon="139.7564675">
     <tag k="name" v="サクラホテル神保町 (Sakura Hotel Jimbocho)"/>
     <tag k="name:en" v="Sakura Hotel Jimbocho"/>
@@ -404,6 +424,9 @@
   <node id="1094104956" lat="35.7101387" lon="139.7219672"/>
   <node id="1094104961" lat="35.7104000" lon="139.7230133"/>
   <node id="1094104987" lat="35.7101496" lon="139.7218465"/>
+  <node id="1105125353" lat="35.6780535" lon="139.7673347"/>
+  <node id="1105125595" lat="35.6776393" lon="139.7670722"/>
+  <node id="1105125729" lat="35.6782616" lon="139.7668370"/>
   <node id="1116808041" lat="35.6619556" lon="139.7076631"/>
   <node id="1116808048" lat="35.6620493" lon="139.7071937"/>
   <node id="1116808050" lat="35.6619708" lon="139.7076416"/>
@@ -465,17 +488,17 @@
     <tag k="tourism" v="hotel"/>
   </node>
   <node id="1177156749" lat="35.6664205" lon="139.6974467">
-    <tag k="name" v="NHK hall"/>
+    <tag k="name" v="NHK Hall"/>
     <tag k="tourism" v="museum"/>
     <tag k="wheelchair" v="yes"/>
   </node>
-  <node id="1177156758" lat="35.6647731" lon="139.6968566">
+  <node id="1177156758" lat="35.6651850" lon="139.6968140">
     <tag k="name" v="NHK Studio Park"/>
     <tag k="tourism" v="museum"/>
     <tag k="wheelchair" v="yes"/>
   </node>
   <node id="1177160380" lat="35.6659065" lon="139.6977256">
-    <tag k="name" v="NHK fureai hall"/>
+    <tag k="name" v="NHK Fureai Hall"/>
     <tag k="tourism" v="museum"/>
     <tag k="wheelchair" v="yes"/>
   </node>
@@ -489,11 +512,20 @@
     <tag k="source" v="bing"/>
     <tag k="tourism" v="hotel"/>
   </node>
+  <node id="1192559456" lat="35.6416305" lon="139.7491256"/>
+  <node id="1192559457" lat="35.6419174" lon="139.7489549"/>
+  <node id="1192559458" lat="35.6420363" lon="139.7492276"/>
+  <node id="1192559460" lat="35.6417612" lon="139.7494347"/>
   <node id="1194227215" lat="35.6647393" lon="139.7277635"/>
   <node id="1194227222" lat="35.6645299" lon="139.7259148"/>
   <node id="1194227225" lat="35.6659787" lon="139.7271584"/>
   <node id="1194227284" lat="35.6659868" lon="139.7257019"/>
   <node id="1194227305" lat="35.6649032" lon="139.7252193"/>
+  <node id="1237995842" lat="35.6514773" lon="139.7912782"/>
+  <node id="1237995847" lat="35.6511826" lon="139.7915552"/>
+  <node id="1237995866" lat="35.6509373" lon="139.7921145"/>
+  <node id="1237995884" lat="35.6522229" lon="139.7930992"/>
+  <node id="1237995891" lat="35.6524922" lon="139.7927902"/>
   <node id="1248297444" lat="35.6937575" lon="139.7716325">
     <tag k="layer" v="0"/>
     <tag k="tourism" v="museum"/>
@@ -502,32 +534,39 @@
     <tag k="name" v="ANA Intercontinental Tokyo"/>
     <tag k="tourism" v="hotel"/>
   </node>
+  <node id="1253627750" lat="35.6666713" lon="139.7436368"/>
+  <node id="1253627753" lat="35.6668282" lon="139.7449966"/>
   <node id="1253627755" lat="35.6678262" lon="139.7441491">
     <tag k="name" v="Hotel Okura North Wing"/>
     <tag k="tourism" v="hotel"/>
   </node>
+  <node id="1253627756" lat="35.6671538" lon="139.7442387"/>
+  <node id="1253627757" lat="35.6666364" lon="139.7448894"/>
+  <node id="1253627758" lat="35.6677804" lon="139.7444039"/>
+  <node id="1253627759" lat="35.6672117" lon="139.7439801"/>
   <node id="1253627992" lat="35.6661219" lon="139.7429607">
     <tag k="name" v="Hotel Okura South Wing"/>
     <tag k="tourism" v="hotel"/>
   </node>
-  <node id="1253630889" lat="35.6675953" lon="139.7302099">
-    <tag k="name" v="21/21 Art Museum"/>
-    <tag k="tourism" v="museum"/>
-  </node>
-  <node id="1314077026" lat="35.6892968" lon="139.6941595"/>
-  <node id="1314077028" lat="35.6893334" lon="139.6940529"/>
-  <node id="1314077029" lat="35.6893507" lon="139.6941476"/>
-  <node id="1314077032" lat="35.6894373" lon="139.6949579"/>
-  <node id="1314077036" lat="35.6896451" lon="139.6939723"/>
-  <node id="1314077037" lat="35.6896567" lon="139.6940339"/>
+  <node id="1253630884" lat="35.6674689" lon="139.7305318"/>
+  <node id="1253630886" lat="35.6673033" lon="139.7299846"/>
+  <node id="1253630887" lat="35.6675692" lon="139.7308483"/>
+  <node id="1253630888" lat="35.6674733" lon="139.7308000"/>
+  <node id="1253630889" lat="35.6675953" lon="139.7302099"/>
+  <node id="1314077026" lat="35.6893014" lon="139.6941591"/>
+  <node id="1314077028" lat="35.6893340" lon="139.6940513"/>
+  <node id="1314077029" lat="35.6893497" lon="139.6941471"/>
+  <node id="1314077032" lat="35.6894316" lon="139.6949517"/>
+  <node id="1314077036" lat="35.6896460" lon="139.6939736"/>
+  <node id="1314077037" lat="35.6896561" lon="139.6940350"/>
   <node id="1314077038" lat="35.6896641" lon="139.6960780"/>
   <node id="1314077039" lat="35.6896756" lon="139.6962709"/>
-  <node id="1314077040" lat="35.6897029" lon="139.6940244"/>
-  <node id="1314077042" lat="35.6897048" lon="139.6939936"/>
+  <node id="1314077040" lat="35.6897061" lon="139.6940226"/>
+  <node id="1314077042" lat="35.6897030" lon="139.6940039"/>
   <node id="1314077045" lat="35.6898199" lon="139.6960649"/>
   <node id="1314077046" lat="35.6898332" lon="139.6962579"/>
-  <node id="1314077053" lat="35.6904687" lon="139.6938231"/>
-  <node id="1314077056" lat="35.6906034" lon="139.6946523"/>
+  <node id="1314077053" lat="35.6904664" lon="139.6938138"/>
+  <node id="1314077056" lat="35.6906053" lon="139.6946594"/>
   <node id="1326424640" lat="35.6684322" lon="139.7651786"/>
   <node id="1326424644" lat="35.6684411" lon="139.7651902"/>
   <node id="1326424652" lat="35.6685458" lon="139.7650675"/>
@@ -542,6 +581,10 @@
   <node id="1327962118" lat="35.6764380" lon="139.7668197"/>
   <node id="1327962126" lat="35.6764609" lon="139.7675715"/>
   <node id="1327962127" lat="35.6767152" lon="139.7669915"/>
+  <node id="1344331849" lat="35.6416692" lon="139.7489190"/>
+  <node id="1344331850" lat="35.6417280" lon="139.7490589"/>
+  <node id="1344331851" lat="35.6417980" lon="139.7488355"/>
+  <node id="1344331854" lat="35.6418638" lon="139.7489890"/>
   <node id="1350269516" lat="35.6854395" lon="139.7716029">
     <tag k="name" v="貨幣博物館"/>
     <tag k="name:en" v="Currency Museum"/>
@@ -579,22 +622,38 @@
     <tag k="name" v="オリエンタル"/>
     <tag k="tourism" v="hotel"/>
   </node>
-  <node id="1420764123" lat="35.6633140" lon="139.6995260">
-    <tag k="KSJ2:ADS" v="神南1-16-8"/>
-    <tag k="KSJ2:AdminArea" v="東京都渋谷区"/>
-    <tag k="KSJ2:PubFacAdmin" v="民間"/>
-    <tag k="name" v="たばこと塩の博物館"/>
+  <node id="1420764091" lat="35.7139151" lon="139.8059164">
+    <tag k="KSJ2:ADS" v="向島2-3-5"/>
+    <tag k="KSJ2:AdminArea" v="東京都墨田区"/>
+    <tag k="KSJ2:PubFacAdmin" v="市区町村"/>
+    <tag k="addr:postcode" v="131-0033"/>
+    <tag k="fax" v="+81-3-36253431"/>
+    <tag k="fee" v="yes"/>
+    <tag k="name" v="すみだ郷土文化資料館"/>
+    <tag k="name:ja" v="すみだ郷土文化資料館"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
-    <tag k="source" v="KSJ2"/>
+    <tag k="opening_hours" v="Tu-Su 09:00-17:00; Mo,Tu[4] off"/>
+    <tag k="operator" v="墨田区役所"/>
+    <tag k="phone" v="+81-3-56197034"/>
+    <tag k="source" v="KSJ2; (URL)"/>
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
+    <tag k="website" v="http://www.city.sumida.lg.jp/"/>
   </node>
   <node id="1420765070" lat="35.7080560" lon="139.7953150">
     <tag k="KSJ2:ADS" v="駒形1-8-10"/>
     <tag k="KSJ2:AdminArea" v="東京都台東区"/>
     <tag k="KSJ2:PubFacAdmin" v="民間"/>
     <tag k="name" v="エース世界のバッグ＆ラゲージ館"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1420765079" lat="35.6504301" lon="139.7914747">
+    <tag k="name" v="ガスの科学館"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
@@ -611,6 +670,25 @@
     <tag k="source" v="KSJ2"/>
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1420765210" lat="35.7267260" lon="139.8132560">
+    <tag k="KSJ2:ADS" v="東向島3-9-7"/>
+    <tag k="KSJ2:AdminArea" v="東京都墨田区"/>
+    <tag k="KSJ2:PubFacAdmin" v="民間"/>
+    <tag k="addr:postcode" v="131-0032"/>
+    <tag k="fee" v="no"/>
+    <tag k="name" v="セイコーミュージアム (SEIKO Museum)"/>
+    <tag k="name:en" v="SEIKO Museum"/>
+    <tag k="name:ja" v="セイコーミュージアム"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="opening_hours" v="Tu-Su 10:00-16:00; Mo,PH off"/>
+    <tag k="operator" v="セイコーホールディングス"/>
+    <tag k="phone" v="+81-3-36106248"/>
+    <tag k="source" v="KSJ2; (URL)"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+    <tag k="website" v="http://museum.seiko.co.jp/"/>
   </node>
   <node id="1420765213" lat="35.7025130" lon="139.7597660">
     <tag k="KSJ2:ADS" v="本郷2-2-9"/>
@@ -645,6 +723,17 @@
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
   </node>
+  <node id="1420765316" lat="35.6941380" lon="139.8094190">
+    <tag k="KSJ2:ADS" v="江東橋1-5-5"/>
+    <tag k="KSJ2:AdminArea" v="東京都墨田区"/>
+    <tag k="KSJ2:PubFacAdmin" v="民間"/>
+    <tag k="name" v="ブレーキ博物館"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
   <node id="1420765367" lat="35.6768730" lon="139.7704970">
     <tag k="KSJ2:ADS" v="京橋2-6-21"/>
     <tag k="KSJ2:AdminArea" v="東京都中央区"/>
@@ -657,15 +746,14 @@
     <tag k="tourism" v="museum"/>
   </node>
   <node id="1420765422" lat="35.6706980" lon="139.7133710">
-    <tag k="KSJ2:ADS" v="神宮前3-7-6"/>
-    <tag k="KSJ2:AdminArea" v="東京都渋谷区"/>
-    <tag k="KSJ2:PubFacAdmin" v="民間"/>
     <tag k="name" v="ワタリウム美術館"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
+    <tag k="website" v="http://www.watarium.co.jp/"/>
+    <tag k="wikipedia" v="ja:ワタリウム美術館"/>
   </node>
   <node id="1420765471" lat="35.6869380" lon="139.7730550">
     <tag k="KSJ2:ADS" v="日本橋室町2-1-1"/>
@@ -700,6 +788,17 @@
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
   </node>
+  <node id="1420766554" lat="35.6345450" lon="139.7147590">
+    <tag k="KSJ2:ADS" v="上大崎2-25-5"/>
+    <tag k="KSJ2:AdminArea" v="東京都品川区"/>
+    <tag k="KSJ2:PubFacAdmin" v="民間"/>
+    <tag k="name" v="久米美術館"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
   <node id="1420766948" lat="35.6816820" lon="139.7149760">
     <tag k="KSJ2:ADS" v="大京町31-10"/>
     <tag k="KSJ2:AdminArea" v="東京都新宿区"/>
@@ -716,17 +815,6 @@
     <tag k="KSJ2:AdminArea" v="東京都中央区"/>
     <tag k="KSJ2:PubFacAdmin" v="民間"/>
     <tag k="name" v="凧の博物館"/>
-    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
-    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
-    <tag k="source" v="KSJ2"/>
-    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
-    <tag k="tourism" v="museum"/>
-  </node>
-  <node id="1420767888" lat="35.6814885" lon="139.6906746">
-    <tag k="KSJ2:ADS" v="代々木4-25-10"/>
-    <tag k="KSJ2:AdminArea" v="東京都渋谷区"/>
-    <tag k="KSJ2:PubFacAdmin" v="民間"/>
-    <tag k="name" v="刀剣博物館"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
@@ -777,11 +865,22 @@
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
   </node>
-  <node id="1420771079" lat="35.6676979" lon="139.6800138">
-    <tag k="KSJ2:ADS" v="上原3-6-12"/>
-    <tag k="KSJ2:AdminArea" v="東京都渋谷区"/>
+  <node id="1420770981" lat="35.6454910" lon="139.7455750">
+    <tag k="KSJ2:ADS" v="芝5-35-1"/>
+    <tag k="KSJ2:AdminArea" v="東京都港区"/>
+    <tag k="KSJ2:PubFacAdmin" v="国"/>
+    <tag k="name" v="厚生労働省産業安全技術館"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1420771074" lat="35.7287322" lon="139.7209684">
+    <tag k="KSJ2:ADS" v="東池袋3-1-4"/>
+    <tag k="KSJ2:AdminArea" v="東京都豊島区"/>
     <tag k="KSJ2:PubFacAdmin" v="民間"/>
-    <tag k="name" v="古賀政男音楽博物館"/>
+    <tag k="name" v="古代オリエント博物館"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
@@ -804,6 +903,27 @@
     <tag k="KSJ2:AdminArea" v="東京都台東区"/>
     <tag k="KSJ2:PubFacAdmin" v="市区町村"/>
     <tag k="name" v="台東区立下町風俗資料館"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1420771103" lat="35.7247630" lon="139.7764530">
+    <tag k="name" v="台東区立書道博物館"/>
+    <tag k="name:fr" v="Musée de la Calligraphie"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+    <tag k="website" v="http://www.taitocity.net/taito/shodou/"/>
+  </node>
+  <node id="1420771104" lat="35.7268470" lon="139.7685630">
+    <tag k="KSJ2:ADS" v="谷中7-18-10"/>
+    <tag k="KSJ2:AdminArea" v="東京都台東区"/>
+    <tag k="KSJ2:PubFacAdmin" v="市区町村"/>
+    <tag k="name" v="台東区立朝倉彫塑館"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
@@ -960,12 +1080,7 @@
     <tag k="tourism" v="museum"/>
   </node>
   <node id="1420779754" lat="35.6912618" lon="139.6925118">
-    <tag k="KSJ2:ADS" v="西新宿2-6-1"/>
-    <tag k="KSJ2:AdminArea" v="東京都新宿区"/>
-    <tag k="KSJ2:PubFacAdmin" v="その他"/>
     <tag k="name" v="平和祈念展示資料館"/>
-    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
-    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
@@ -975,6 +1090,17 @@
     <tag k="KSJ2:AdminArea" v="東京都文京区"/>
     <tag k="KSJ2:PubFacAdmin" v="民間"/>
     <tag k="name" v="弥生美術館・竹久夢二美術館"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1420780290" lat="35.6430880" lon="139.7145410">
+    <tag k="KSJ2:ADS" v="恵比寿4-20-1"/>
+    <tag k="KSJ2:AdminArea" v="東京都渋谷区"/>
+    <tag k="KSJ2:PubFacAdmin" v="民間"/>
+    <tag k="name" v="恵比寿麦酒記念館"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
@@ -992,22 +1118,13 @@
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
   </node>
-  <node id="1420780494" lat="35.6613210" lon="139.6927730">
+  <node id="1420780494" lat="35.6614398" lon="139.6927998">
     <tag k="KSJ2:ADS" v="松濤1-11-3"/>
     <tag k="KSJ2:AdminArea" v="東京都渋谷区"/>
     <tag k="KSJ2:PubFacAdmin" v="民間"/>
-    <tag k="name" v="戸栗美術館"/>
-    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
-    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
-    <tag k="source" v="KSJ2"/>
-    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
-    <tag k="tourism" v="museum"/>
-  </node>
-  <node id="1420780611" lat="35.6927620" lon="139.6961610">
-    <tag k="KSJ2:ADS" v="西新宿1-26-1"/>
-    <tag k="KSJ2:AdminArea" v="東京都新宿区"/>
-    <tag k="KSJ2:PubFacAdmin" v="民間"/>
-    <tag k="name" v="損保ジャパン東郷青児美術館"/>
+    <tag k="name" v="戸栗美術館 (Toguri Museum of Art)"/>
+    <tag k="name:en" v="Toguri Museum of Art"/>
+    <tag k="name:ja" v="戸栗美術館"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
@@ -1026,12 +1143,7 @@
     <tag k="tourism" v="museum"/>
   </node>
   <node id="1420780738" lat="35.6863220" lon="139.6950100">
-    <tag k="KSJ2:ADS" v="代々木3-22-7"/>
-    <tag k="KSJ2:AdminArea" v="東京都渋谷区"/>
-    <tag k="KSJ2:PubFacAdmin" v="民間"/>
     <tag k="name" v="文化学園服飾博物館"/>
-    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
-    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
@@ -1058,7 +1170,7 @@
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
   </node>
-  <node id="1420780980" lat="35.6858970" lon="139.7423940">
+  <node id="1420780980" lat="35.6860582" lon="139.7428472">
     <tag k="KSJ2:ADS" v="一番町25"/>
     <tag k="KSJ2:AdminArea" v="東京都千代田区"/>
     <tag k="KSJ2:PubFacAdmin" v="民間"/>
@@ -1074,28 +1186,6 @@
     <tag k="KSJ2:AdminArea" v="東京都文京区"/>
     <tag k="KSJ2:PubFacAdmin" v="民間"/>
     <tag k="name" v="日本女子大学成瀬記念館"/>
-    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
-    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
-    <tag k="source" v="KSJ2"/>
-    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
-    <tag k="tourism" v="museum"/>
-  </node>
-  <node id="1420781094" lat="35.6608490" lon="139.6792190">
-    <tag k="KSJ2:ADS" v="駒場4-3-33"/>
-    <tag k="KSJ2:AdminArea" v="東京都目黒区"/>
-    <tag k="KSJ2:PubFacAdmin" v="民間"/>
-    <tag k="name" v="日本民藝館"/>
-    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
-    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
-    <tag k="source" v="KSJ2"/>
-    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
-    <tag k="tourism" v="museum"/>
-  </node>
-  <node id="1420781152" lat="35.6853720" lon="139.7718250">
-    <tag k="KSJ2:ADS" v="日本橋本石町1-3-1"/>
-    <tag k="KSJ2:AdminArea" v="東京都中央区"/>
-    <tag k="KSJ2:PubFacAdmin" v="その他"/>
-    <tag k="name" v="日本銀行金融研究所貨幣博物館"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
@@ -1159,34 +1249,13 @@
     <tag k="name:en" v="Meiji Memorial Picture Gallery"/>
     <tag k="name:ja" v="明治神宮聖徳記念絵画館"/>
     <tag k="name:ja_kana" v="めいじじんぐうせいとくきねんかいがかん"/>
+    <tag k="name:ru" v="Мемориальная художественная галерея Мэйдзи"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
     <tag k="wikipedia" v="ja:聖徳記念絵画館"/>
-  </node>
-  <node id="1420781432" lat="35.6949880" lon="139.7507500">
-    <tag k="KSJ2:ADS" v="九段南1-6-1"/>
-    <tag k="KSJ2:AdminArea" v="東京都千代田区"/>
-    <tag k="KSJ2:PubFacAdmin" v="国"/>
-    <tag k="name" v="昭和館"/>
-    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
-    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
-    <tag k="source" v="KSJ2"/>
-    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
-    <tag k="tourism" v="museum"/>
-  </node>
-  <node id="1420782618" lat="35.6830030" lon="139.6867560">
-    <tag k="KSJ2:ADS" v="西新宿3-20-2"/>
-    <tag k="KSJ2:AdminArea" v="東京都新宿区"/>
-    <tag k="KSJ2:PubFacAdmin" v="民間"/>
-    <tag k="name" v="東京オペラシティアートギャラリー"/>
-    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
-    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
-    <tag k="source" v="KSJ2"/>
-    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
-    <tag k="tourism" v="museum"/>
   </node>
   <node id="1420783223" lat="35.7188170" lon="139.7764030">
     <tag k="KSJ2:ADS" v="上野公園13-9"/>
@@ -1207,33 +1276,22 @@
     <tag k="tourism" v="museum"/>
     <tag k="wikipedia" v="ja:東京国立博物館"/>
   </node>
-  <node id="1420783571" lat="35.6598250" lon="139.6848360">
-    <tag k="KSJ2:ADS" v="駒場3-8-1"/>
-    <tag k="KSJ2:AdminArea" v="東京都目黒区"/>
-    <tag k="KSJ2:PubFacAdmin" v="その他"/>
-    <tag k="name" v="東京大学大学院総合文化研究科教養学部美術博物館"/>
-    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
-    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
-    <tag k="source" v="KSJ2"/>
-    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
-    <tag k="tourism" v="museum"/>
-  </node>
-  <node id="1420783585" lat="35.7117690" lon="139.7654830">
-    <tag k="KSJ2:ADS" v="本郷7-3-1"/>
-    <tag k="KSJ2:AdminArea" v="東京都文京区"/>
-    <tag k="KSJ2:PubFacAdmin" v="その他"/>
-    <tag k="name" v="東京大学総合研究博物館"/>
-    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
-    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
-    <tag k="source" v="KSJ2"/>
-    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
-    <tag k="tourism" v="museum"/>
-  </node>
   <node id="1420783591" lat="35.7213300" lon="139.7410080">
     <tag k="KSJ2:ADS" v="白山3-7-1"/>
     <tag k="KSJ2:AdminArea" v="東京都文京区"/>
     <tag k="KSJ2:PubFacAdmin" v="その他"/>
     <tag k="name" v="東京大学総合研究博物館・小石川分館"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1420783697" lat="35.6817440" lon="139.8222640">
+    <tag k="KSJ2:ADS" v="北砂1-5-4"/>
+    <tag k="KSJ2:AdminArea" v="東京都江東区"/>
+    <tag k="KSJ2:PubFacAdmin" v="民間"/>
+    <tag k="name" v="東京大空襲・戦災資料センター"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
@@ -1291,6 +1349,28 @@
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
   </node>
+  <node id="1420785320" lat="35.6418720" lon="139.7145330">
+    <tag k="KSJ2:ADS" v="三田1-13-1"/>
+    <tag k="KSJ2:AdminArea" v="東京都目黒区"/>
+    <tag k="KSJ2:PubFacAdmin" v="都道府県"/>
+    <tag k="name" v="東京都写真美術館"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1420785354" lat="35.6368800" lon="139.7190220">
+    <tag k="KSJ2:ADS" v="白金台5-21-9"/>
+    <tag k="KSJ2:AdminArea" v="東京都港区"/>
+    <tag k="KSJ2:PubFacAdmin" v="民間"/>
+    <tag k="name" v="東京都庭園美術館"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
   <node id="1420785371" lat="35.6997950" lon="139.7969030">
     <tag k="KSJ2:ADS" v="横網2-3-25"/>
     <tag k="KSJ2:AdminArea" v="東京都墨田区"/>
@@ -1307,22 +1387,33 @@
     <tag k="KSJ2:AdminArea" v="東京都文京区"/>
     <tag k="KSJ2:PubFacAdmin" v="都道府県"/>
     <tag k="name" v="東京都水道歴史館"/>
+    <tag k="name:en" v="Tokyo Waterworks Histrical Museum"/>
+    <tag k="name:ja_rm" v="Tōkyōto Suidō Rekishikan"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
   </node>
-  <node id="1420785523" lat="35.6545090" lon="139.6846150">
-    <tag k="KSJ2:ADS" v="大橋2-18-58"/>
-    <tag k="KSJ2:AdminArea" v="東京都目黒区"/>
+  <node id="1420785406" lat="35.6797390" lon="139.8082360">
+    <tag k="KSJ2:ADS" v="三好4-1-1"/>
+    <tag k="KSJ2:AdminArea" v="東京都江東区"/>
     <tag k="KSJ2:PubFacAdmin" v="都道府県"/>
-    <tag k="name" v="東京都立芸術高等学校美術館"/>
+    <tag k="addr:postcode" v="135-0022"/>
+    <tag k="fee" v="yes"/>
+    <tag k="name" v="東京都現代美術館 (Museum Contemporary Tokyo of Art)"/>
+    <tag k="name:en" v="Museum Contemporary Tokyo of Art"/>
+    <tag k="name:ja" v="東京都現代美術館"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
-    <tag k="source" v="KSJ2"/>
+    <tag k="opening_hours" v="Tu-Su 10:00-18:00; Mo off"/>
+    <tag k="operator" v="東京都歴史文化財団"/>
+    <tag k="phone" v="+81-3-52454111"/>
+    <tag k="source" v="KSJ2; (URL)"/>
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
+    <tag k="website" v="http://www.mot-art-museum.jp/"/>
+    <tag k="wikipedia" v="ja:東京都現代美術館"/>
   </node>
   <node id="1420785567" lat="35.7174010" lon="139.7728200">
     <tag k="KSJ2:ADS" v="上野公園8-36"/>
@@ -1342,6 +1433,17 @@
     <tag k="wheelchair" v="yes"/>
     <tag k="wikipedia" v="ja:東京都美術館"/>
   </node>
+  <node id="1420785912" lat="35.7234640" lon="139.8189850">
+    <tag k="KSJ2:ADS" v="東向島4-28-16"/>
+    <tag k="KSJ2:AdminArea" v="東京都墨田区"/>
+    <tag k="KSJ2:PubFacAdmin" v="民間"/>
+    <tag k="name" v="東武博物館"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
   <node id="1420786016" lat="35.6658280" lon="139.7618820">
     <tag k="KSJ2:ADS" v="東新橋1-5-1"/>
     <tag k="KSJ2:AdminArea" v="東京都港区"/>
@@ -1353,16 +1455,26 @@
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
   </node>
-  <node id="1420786226" lat="35.6622100" lon="139.7170210">
-    <tag k="KSJ2:ADS" v="南青山6-5-1"/>
+  <node id="1420786033" lat="35.6400210" lon="139.7218060">
+    <tag k="KSJ2:ADS" v="白金台5-12-6"/>
     <tag k="KSJ2:AdminArea" v="東京都港区"/>
     <tag k="KSJ2:PubFacAdmin" v="民間"/>
+    <tag k="name" v="松岡美術館"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1420786226" lat="35.6622100" lon="139.7170210">
     <tag k="name" v="根津美術館"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
+    <tag k="website" v="http://www.nezu-muse.or.jp/"/>
+    <tag k="wikipedia" v="ja:根津美術館"/>
   </node>
   <node id="1420786660" lat="35.6604320" lon="139.7292610">
     <tag k="KSJ2:ADS" v="六本木6-10-1"/>
@@ -1464,6 +1576,17 @@
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
   </node>
+  <node id="1420789248" lat="35.6470900" lon="139.7452230">
+    <tag k="KSJ2:ADS" v="芝5-28-4"/>
+    <tag k="KSJ2:AdminArea" v="東京都港区"/>
+    <tag k="KSJ2:PubFacAdmin" v="市区町村"/>
+    <tag k="name" v="港区立港郷土資料館"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
   <node id="1420789600" lat="35.6905370" lon="139.7546180">
     <tag k="KSJ2:ADS" v="北の丸公園3-1"/>
     <tag k="KSJ2:AdminArea" v="東京都千代田区"/>
@@ -1499,6 +1622,52 @@
     <tag k="source" v="KSJ2"/>
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1420790339" lat="35.6322420" lon="139.7269380">
+    <tag k="KSJ2:ADS" v="白金台2-20-12"/>
+    <tag k="KSJ2:AdminArea" v="東京都港区"/>
+    <tag k="KSJ2:PubFacAdmin" v="民間"/>
+    <tag k="name" v="畠山記念館"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1420790403" lat="35.7240410" lon="139.8082340">
+    <tag k="KSJ2:ADS" v="橋場1-36-2"/>
+    <tag k="KSJ2:AdminArea" v="東京都台東区"/>
+    <tag k="KSJ2:PubFacAdmin" v="その他"/>
+    <tag k="name" v="皮革産業資料館"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1420790477" lat="35.6355120" lon="139.7084690">
+    <tag k="KSJ2:ADS" v="目黒2-4-36"/>
+    <tag k="KSJ2:AdminArea" v="東京都目黒区"/>
+    <tag k="KSJ2:PubFacAdmin" v="民間"/>
+    <tag k="name" v="目黒区美術館"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1420790484" lat="35.6317000" lon="139.7066660">
+    <tag k="KSJ2:ADS" v="下目黒4-1-1"/>
+    <tag k="KSJ2:AdminArea" v="東京都目黒区"/>
+    <tag k="KSJ2:PubFacAdmin" v="民間"/>
+    <tag k="name" v="目黒寄生虫館 (Meguro Parasitological Museum)"/>
+    <tag k="name:ja_rm" v="Meguro Kiseichū-kan"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+    <tag k="wheelchair" v="no"/>
   </node>
   <node id="1420790652" lat="35.6972706" lon="139.7932372">
     <tag k="KSJ2:ADS" v="横網1-3-28"/>
@@ -1551,6 +1720,17 @@
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
   </node>
+  <node id="1420795772" lat="35.6509581" lon="139.8263521">
+    <tag k="KSJ2:ADS" v="夢の島3-2"/>
+    <tag k="KSJ2:AdminArea" v="東京都江東区"/>
+    <tag k="KSJ2:PubFacAdmin" v="都道府県"/>
+    <tag k="name" v="第五福竜丸展示館"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
   <node id="1420796437" lat="35.6916418" lon="139.7530944">
     <tag k="KSJ2:ADS" v="北の丸公園2-1"/>
     <tag k="KSJ2:AdminArea" v="東京都千代田区"/>
@@ -1559,6 +1739,7 @@
     <tag k="name:en" v="Bicycle culture center"/>
     <tag k="name:ja" v="自転車文化センター"/>
     <tag k="name:ja_kana" v="じてんしゃぶんかセンター"/>
+    <tag k="name:ja_rm" v="Jitensha Bunka Centre"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
@@ -1569,7 +1750,24 @@
     <tag k="KSJ2:ADS" v="赤坂7-2-21"/>
     <tag k="KSJ2:AdminArea" v="東京都港区"/>
     <tag k="KSJ2:PubFacAdmin" v="民間"/>
+    <tag k="addr:city" v="港区"/>
+    <tag k="addr:country" v="JP"/>
+    <tag k="addr:region" v="東京都"/>
     <tag k="name" v="草月美術館"/>
+    <tag k="name:ja" v="草月美術館"/>
+    <tag k="name:ja_kana" v="そうげつびじゅつかん"/>
+    <tag k="name:ja_rm" v="Sogetsu Bijutsukan"/>
+    <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
+    <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1420796626" lat="35.7374610" lon="139.7954180">
+    <tag k="KSJ2:ADS" v="南千住6-63-1"/>
+    <tag k="KSJ2:AdminArea" v="東京都荒川区"/>
+    <tag k="KSJ2:PubFacAdmin" v="市区町村"/>
+    <tag k="name" v="荒川区立荒川ふるさと文化館"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
@@ -1609,13 +1807,11 @@
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
   </node>
-  <node id="1420798594" lat="35.6869870" lon="139.7667940">
-    <tag k="KSJ2:ADS" v="大手町2-3-1"/>
-    <tag k="KSJ2:AdminArea" v="東京都千代田区"/>
-    <tag k="KSJ2:PubFacAdmin" v="国"/>
-    <tag k="name" v="逓信総合博物館"/>
-    <tag k="name:en" v="Communications Museum"/>
-    <tag k="name:ja_rm" v="Teishin Sōgō Hakubutsukan"/>
+  <node id="1420798090" lat="35.7276750" lon="139.7067210">
+    <tag k="KSJ2:ADS" v="西池袋2-37-4"/>
+    <tag k="KSJ2:AdminArea" v="東京都豊島区"/>
+    <tag k="KSJ2:PubFacAdmin" v="市区町村"/>
+    <tag k="name" v="豊島区立郷土資料館"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
@@ -1644,12 +1840,11 @@
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
   </node>
-  <node id="1420799807" lat="35.6634387" lon="139.7010350">
-    <tag k="KSJ2:ADS" v="神南1-12-10"/>
-    <tag k="KSJ2:AdminArea" v="東京都渋谷区"/>
+  <node id="1420799454" lat="35.6359080" lon="139.7030510">
+    <tag k="KSJ2:ADS" v="中目黒4-12-18"/>
+    <tag k="KSJ2:AdminArea" v="東京都目黒区"/>
     <tag k="KSJ2:PubFacAdmin" v="民間"/>
-    <tag k="disused" v="yes"/>
-    <tag k="name" v="電力館"/>
+    <tag k="name" v="長泉院附属現代彫刻美術館"/>
     <tag k="note" v="National-Land Numerical Information (Public Facility) 2006, MLIT Japan"/>
     <tag k="note:ja" v="国土数値情報（公共施設データ）平成19年　国土交通省"/>
     <tag k="source" v="KSJ2"/>
@@ -1689,24 +1884,6 @@
     <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
     <tag k="tourism" v="museum"/>
   </node>
-  <node id="1467794586" lat="35.6608465" lon="139.6788868"/>
-  <node id="1467794587" lat="35.6608483" lon="139.6789615"/>
-  <node id="1467794588" lat="35.6609355" lon="139.6787316"/>
-  <node id="1467794589" lat="35.6609393" lon="139.6788832"/>
-  <node id="1467794590" lat="35.6610195" lon="139.6788855"/>
-  <node id="1467794591" lat="35.6610213" lon="139.6789549"/>
-  <node id="1467794592" lat="35.6610370" lon="139.6787277"/>
-  <node id="1467794593" lat="35.6610410" lon="139.6788847"/>
-  <node id="1467808141" lat="35.6607181" lon="139.6791155"/>
-  <node id="1467808142" lat="35.6607267" lon="139.6794537"/>
-  <node id="1467808147" lat="35.6607854" lon="139.6791128"/>
-  <node id="1467808148" lat="35.6607867" lon="139.6791615"/>
-  <node id="1467808150" lat="35.6607941" lon="139.6794511"/>
-  <node id="1467808169" lat="35.6608605" lon="139.6791115"/>
-  <node id="1467808173" lat="35.6608617" lon="139.6791586"/>
-  <node id="1467808201" lat="35.6609328" lon="139.6791087"/>
-  <node id="1467808203" lat="35.6609340" lon="139.6791558"/>
-  <node id="1467808205" lat="35.6609414" lon="139.6794454"/>
   <node id="1475722975" lat="35.6567729" lon="139.7526240">
     <tag k="name" v="芝大門ホテル"/>
     <tag k="tourism" v="hotel"/>
@@ -1832,6 +2009,12 @@
   <node id="1498427672" lat="35.6576605" lon="139.6960109"/>
   <node id="1498427678" lat="35.6576837" lon="139.6961513"/>
   <node id="1498427687" lat="35.6577303" lon="139.6960814"/>
+  <node id="1508619593" lat="35.6507820" lon="139.7453120"/>
+  <node id="1508619595" lat="35.6508033" lon="139.7450979"/>
+  <node id="1508619596" lat="35.6508321" lon="139.7451518"/>
+  <node id="1508619597" lat="35.6508377" lon="139.7451002"/>
+  <node id="1508619598" lat="35.6509316" lon="139.7453289"/>
+  <node id="1508619601" lat="35.6509416" lon="139.7451641"/>
   <node id="1509430752" lat="35.7106647" lon="139.7630534"/>
   <node id="1509430758" lat="35.7107056" lon="139.7635748"/>
   <node id="1509430782" lat="35.7108967" lon="139.7630258"/>
@@ -1840,29 +2023,58 @@
     <tag k="name" v="IBIS"/>
     <tag k="tourism" v="hotel"/>
   </node>
-  <node id="1511455452" lat="35.6980889" lon="139.7612366">
-    <tag k="name" v="山の上ホテル"/>
-    <tag k="tourism" v="hotel"/>
-  </node>
   <node id="1539225928" lat="35.6562370" lon="139.6999017"/>
   <node id="1539225939" lat="35.6564314" lon="139.6998006"/>
   <node id="1539225940" lat="35.6564742" lon="139.6999207"/>
   <node id="1540357115" lat="35.6559998" lon="139.6991337"/>
   <node id="1540357116" lat="35.6560059" lon="139.6992174"/>
   <node id="1540357117" lat="35.6560742" lon="139.6990991"/>
+  <node id="1541779183" lat="35.6522272" lon="139.6946528"/>
+  <node id="1541779242" lat="35.6523199" lon="139.6945548"/>
+  <node id="1541779256" lat="35.6523326" lon="139.6948039"/>
+  <node id="1541779319" lat="35.6524254" lon="139.6947060"/>
   <node id="1555877197" lat="35.6585267" lon="139.7520568"/>
   <node id="1555877202" lat="35.6585735" lon="139.7517293"/>
   <node id="1555877252" lat="35.6591516" lon="139.7521922"/>
   <node id="1555877253" lat="35.6591985" lon="139.7518646"/>
   <node id="1555877277" lat="35.6558335" lon="139.7513102">
+    <tag k="addr:city" v="港区"/>
+    <tag k="addr:country" v="JP"/>
+    <tag k="addr:full" v="〒105-8582 東京都港区芝公園2-5-20"/>
+    <tag k="addr:postcode" v="105-8582"/>
+    <tag k="addr:province" v="東京都"/>
     <tag k="name" v="メルパルク"/>
+    <tag k="name:ja" v="メルパルク"/>
+    <tag k="name:ja_kana" v="メルパルク"/>
+    <tag k="phone" v="+81 03-3433-7211"/>
     <tag k="source" v="survey; bing"/>
     <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://www.mielparque.jp/tokyo/"/>
   </node>
+  <node id="1580357757" lat="35.7004300" lon="139.7492307"/>
+  <node id="1580357843" lat="35.7005624" lon="139.7497202"/>
+  <node id="1580357892" lat="35.7006396" lon="139.7499189"/>
+  <node id="1580357908" lat="35.7006598" lon="139.7495937"/>
+  <node id="1580357965" lat="35.7007069" lon="139.7495485"/>
+  <node id="1580357975" lat="35.7007116" lon="139.7495560"/>
+  <node id="1580358182" lat="35.7009425" lon="139.7494962"/>
+  <node id="1580358210" lat="35.7009871" lon="139.7486960"/>
+  <node id="1580358240" lat="35.7010197" lon="139.7496949"/>
+  <node id="1580358301" lat="35.7011088" lon="139.7488884"/>
+  <node id="1580358350" lat="35.7011810" lon="139.7488191"/>
+  <node id="1580358355" lat="35.7011882" lon="139.7488305"/>
+  <node id="1580358403" lat="35.7012501" lon="139.7487710"/>
+  <node id="1580358411" lat="35.7012723" lon="139.7489634"/>
+  <node id="1580358422" lat="35.7012938" lon="139.7489973"/>
+  <node id="1580358483" lat="35.7013343" lon="139.7489040"/>
   <node id="1584472133" lat="35.6827911" lon="139.7433796"/>
   <node id="1584472135" lat="35.6828025" lon="139.7434647"/>
   <node id="1584472141" lat="35.6828540" lon="139.7436568"/>
   <node id="1584472149" lat="35.6830522" lon="139.7438638"/>
+  <node id="1584484765" lat="35.6791350" lon="139.7408184"/>
+  <node id="1584484770" lat="35.6792024" lon="139.7411904"/>
+  <node id="1584484781" lat="35.6793668" lon="139.7407547"/>
+  <node id="1584484791" lat="35.6794342" lon="139.7411267"/>
   <node id="1586832840" lat="35.6796250" lon="139.7350485"/>
   <node id="1586832868" lat="35.6796709" lon="139.7351224"/>
   <node id="1586832879" lat="35.6796833" lon="139.7353522"/>
@@ -1884,6 +2096,18 @@
   <node id="1586834663" lat="35.6811803" lon="139.7343131"/>
   <node id="1586834666" lat="35.6811926" lon="139.7339092"/>
   <node id="1586834739" lat="35.6812090" lon="139.7342750"/>
+  <node id="1586835394" lat="35.6816503" lon="139.7384121"/>
+  <node id="1586835406" lat="35.6816682" lon="139.7390787"/>
+  <node id="1586835690" lat="35.6818638" lon="139.7384035"/>
+  <node id="1586835692" lat="35.6818688" lon="139.7385883"/>
+  <node id="1586835699" lat="35.6818776" lon="139.7389162"/>
+  <node id="1586835701" lat="35.6818817" lon="139.7390701"/>
+  <node id="1586835737" lat="35.6819109" lon="139.7385862"/>
+  <node id="1586835752" lat="35.6819215" lon="139.7389140"/>
+  <node id="1586835774" lat="35.6819378" lon="139.7385795"/>
+  <node id="1586835804" lat="35.6819448" lon="139.7383363"/>
+  <node id="1586835876" lat="35.6820371" lon="139.7385839"/>
+  <node id="1586835878" lat="35.6820441" lon="139.7383406"/>
   <node id="1587598199" lat="35.7182905" lon="139.7750216">
     <tag k="building" v="entrance"/>
   </node>
@@ -1903,7 +2127,7 @@
   <node id="1587598329" lat="35.7184986" lon="139.7753384"/>
   <node id="1587598349" lat="35.7185232" lon="139.7752569"/>
   <node id="1587598354" lat="35.7185275" lon="139.7752784"/>
-  <node id="1587598361" lat="35.7185429" lon="139.7753691">
+  <node id="1587598361" lat="35.7185423" lon="139.7753687">
     <tag k="building" v="entrance"/>
   </node>
   <node id="1587598365" lat="35.7185777" lon="139.7751424"/>
@@ -1949,6 +2173,10 @@
   <node id="1588142370" lat="35.6747818" lon="139.7602312"/>
   <node id="1588142372" lat="35.6747944" lon="139.7609561"/>
   <node id="1588142388" lat="35.6749257" lon="139.7603307"/>
+  <node id="1588226127" lat="35.6685203" lon="139.7577208"/>
+  <node id="1588226129" lat="35.6687108" lon="139.7578133"/>
+  <node id="1588226132" lat="35.6687599" lon="139.7569735"/>
+  <node id="1588226135" lat="35.6689503" lon="139.7570660"/>
   <node id="1589723018" lat="35.7068085" lon="139.7945162">
     <tag k="name" v="Chisun Inn Asakusa"/>
     <tag k="operator" v="Solare Hotels"/>
@@ -2001,6 +2229,18 @@
   <node id="1599621869" lat="35.6649497" lon="139.7271746"/>
   <node id="1599621874" lat="35.6650083" lon="139.7254000"/>
   <node id="1599622202" lat="35.6658354" lon="139.7254266"/>
+  <node id="1618484762" lat="35.6664022" lon="139.7441702"/>
+  <node id="1618484777" lat="35.6664716" lon="139.7442125"/>
+  <node id="1618484779" lat="35.6664837" lon="139.7441825"/>
+  <node id="1618484808" lat="35.6665914" lon="139.7437013"/>
+  <node id="1618484814" lat="35.6666356" lon="139.7437283"/>
+  <node id="1618484845" lat="35.6668429" lon="139.7444021"/>
+  <node id="1618600643" lat="35.6639661" lon="139.7398098"/>
+  <node id="1618600646" lat="35.6639887" lon="139.7396752"/>
+  <node id="1618600659" lat="35.6641727" lon="139.7393408"/>
+  <node id="1618600668" lat="35.6642063" lon="139.7398688"/>
+  <node id="1618600684" lat="35.6642790" lon="139.7393641"/>
+  <node id="1623624129" lat="35.6778475" lon="139.7665745"/>
   <node id="1628058654" lat="35.6550467" lon="139.7632261"/>
   <node id="1628058671" lat="35.6551984" lon="139.7629727"/>
   <node id="1628058705" lat="35.6554559" lon="139.7635990"/>
@@ -2022,6 +2262,12 @@
   <node id="1654277681" lat="35.7037776" lon="139.7530761"/>
   <node id="1654277682" lat="35.7037905" lon="139.7531239"/>
   <node id="1657015145" lat="35.7176094" lon="139.7725173"/>
+  <node id="1661350597" lat="35.7266605" lon="139.8007614">
+    <tag k="contact:phone" v="+81 (0)3-3875-5362"/>
+    <tag k="contact:website" v="http://www.juyoh.co.jp/"/>
+    <tag k="name" v="JUYOH HOTEL"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
   <node id="1661350663" lat="35.6933919" lon="139.7104827">
     <tag k="contact:phone" v="+81 (0)3-3356-4605"/>
     <tag k="contact:website" v="http://tbh.co.jp/"/>
@@ -2031,13 +2277,43 @@
     <tag k="tourism" v="hotel"/>
   </node>
   <node id="1666008174" lat="35.7185760" lon="139.7743562"/>
-  <node id="1666008177" lat="35.7186113" lon="139.7743819"/>
-  <node id="1666008180" lat="35.7186778" lon="139.7744303"/>
-  <node id="1676618277" lat="35.6622584" lon="139.6807297"/>
-  <node id="1676618278" lat="35.6622584" lon="139.6806734"/>
-  <node id="1676618279" lat="35.6622584" lon="139.6808451"/>
+  <node id="1666008177" lat="35.7186101" lon="139.7743817"/>
+  <node id="1666008180" lat="35.7186800" lon="139.7744313"/>
+  <node id="1674563042" lat="35.6949365" lon="139.7065549"/>
+  <node id="1674563051" lat="35.6949444" lon="139.7064760"/>
+  <node id="1674563066" lat="35.6949774" lon="139.7067088"/>
+  <node id="1674563135" lat="35.6952270" lon="139.7067615"/>
+  <node id="1674563151" lat="35.6953089" lon="139.7066317"/>
+  <node id="1674563154" lat="35.6953198" lon="139.7065459"/>
+  <node id="1676822332" lat="35.6997136" lon="139.7000279"/>
+  <node id="1676822336" lat="35.6997245" lon="139.6999594"/>
+  <node id="1676822398" lat="35.6998217" lon="139.7000321"/>
+  <node id="1676822402" lat="35.6998239" lon="139.6999642"/>
+  <node id="1676830779" lat="35.7140439" lon="139.7029479"/>
+  <node id="1676830789" lat="35.7140433" lon="139.7030787"/>
+  <node id="1676830855" lat="35.7141837" lon="139.7029126"/>
+  <node id="1676830862" lat="35.7142066" lon="139.7030337"/>
+  <node id="1676900286" lat="35.7279750" lon="139.7082348"/>
+  <node id="1676900310" lat="35.7280383" lon="139.7079824"/>
+  <node id="1676900315" lat="35.7280534" lon="139.7079900"/>
+  <node id="1676900326" lat="35.7280977" lon="139.7078044"/>
+  <node id="1676900328" lat="35.7281025" lon="139.7077620"/>
+  <node id="1676900340" lat="35.7281518" lon="139.7076048"/>
+  <node id="1676900346" lat="35.7281714" lon="139.7078417"/>
+  <node id="1676900349" lat="35.7281855" lon="139.7078015"/>
+  <node id="1676900365" lat="35.7282508" lon="139.7076519"/>
+  <node id="1676900376" lat="35.7282821" lon="139.7075599"/>
+  <node id="1676900403" lat="35.7283968" lon="139.7084398"/>
+  <node id="1676900428" lat="35.7284718" lon="139.7082058"/>
+  <node id="1676900487" lat="35.7286365" lon="139.7082901"/>
+  <node id="1676900500" lat="35.7286604" lon="139.7082194"/>
+  <node id="1676900521" lat="35.7286852" lon="139.7082326"/>
+  <node id="1676900555" lat="35.7287148" lon="139.7080425"/>
+  <node id="1676900563" lat="35.7287461" lon="139.7080592"/>
+  <node id="1676900576" lat="35.7287898" lon="139.7078218"/>
   <node id="1681422026" lat="35.6601130" lon="139.7021214">
-    <tag k="name" v="Tokyu inn"/>
+    <tag k="name" v="Tokyu Inn"/>
+    <tag k="name:en" v="Tokyu Inn"/>
     <tag k="source" v="survey　2012/03/18"/>
     <tag k="tourism" v="hotel"/>
   </node>
@@ -2071,6 +2347,10 @@
     <tag k="source" v="survey"/>
     <tag k="tourism" v="hotel"/>
   </node>
+  <node id="1693666396" lat="35.7227763" lon="139.7946596">
+    <tag k="name" v="Soho　Asakusa 浅草 Hotel"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
   <node id="1717451039" lat="35.6550812" lon="139.7632574"/>
   <node id="1717451048" lat="35.6551885" lon="139.7633547"/>
   <node id="1717451057" lat="35.6553594" lon="139.7635097"/>
@@ -2087,27 +2367,71 @@
     <tag k="source" v="survey"/>
     <tag k="tourism" v="hotel"/>
   </node>
+  <node id="1730076576" lat="35.6367404" lon="139.7191495"/>
+  <node id="1730076582" lat="35.6366532" lon="139.7191925"/>
+  <node id="1730076584" lat="35.6367469" lon="139.7190610"/>
+  <node id="1730076602" lat="35.6367840" lon="139.7185031"/>
+  <node id="1730076605" lat="35.6367295" lon="139.7194714"/>
+  <node id="1730076607" lat="35.6366576" lon="139.7194660"/>
+  <node id="1730076615" lat="35.6367251" lon="139.7195465"/>
+  <node id="1730076642" lat="35.6368886" lon="139.7188411"/>
+  <node id="1730076655" lat="35.6370173" lon="139.7192971"/>
+  <node id="1730076659" lat="35.6366554" lon="139.7191629"/>
+  <node id="1730076666" lat="35.6366837" lon="139.7191495"/>
+  <node id="1730076668" lat="35.6370957" lon="139.7193078"/>
+  <node id="1730076679" lat="35.6370761" lon="139.7195143"/>
+  <node id="1730076687" lat="35.6366816" lon="139.7192246"/>
+  <node id="1730076690" lat="35.6370718" lon="139.7185487"/>
+  <node id="1730076713" lat="35.6367469" lon="139.7188250"/>
+  <node id="1730076727" lat="35.6368756" lon="139.7190718"/>
+  <node id="1730076730" lat="35.6367971" lon="139.7195572"/>
+  <node id="1730076735" lat="35.6368102" lon="139.7194821"/>
+  <node id="1730076747" lat="35.6366685" lon="139.7192112"/>
+  <node id="1733357504" lat="35.6348591" lon="139.7077409">
+    <tag k="name" v="目黒区美術館"/>
+    <tag k="source" v="Bing 2007"/>
+    <tag k="tourism" v="museum"/>
+    <tag k="website" v="http://www.mmat.jp/"/>
+  </node>
   <node id="1734716412" lat="35.6894907" lon="139.7705650">
-    <tag k="designation" v="Hotel"/>
     <tag k="name" v="神田ステーションホテル (Kanda Station Hotel)"/>
     <tag k="name:en" v="Kanda Station Hotel"/>
     <tag k="name:ja" v="神田ステーションホテル"/>
     <tag k="source" v="http://www.kandasth.com/"/>
     <tag k="tourism" v="hotel"/>
   </node>
+  <node id="1742885207" lat="35.7313702" lon="139.7486551">
+    <tag k="name" v="東洋文庫ミュージアム"/>
+    <tag k="source" v="survey;image,Bing,2007-03"/>
+    <tag k="tourism" v="museum"/>
+  </node>
   <node id="1752050674" lat="35.6596278" lon="139.7543337">
+    <tag k="addr:city" v="Tokyo"/>
+    <tag k="addr:housenumber" v="1-2-7"/>
+    <tag k="addr:street" v="Shibadaimon"/>
     <tag k="contact:phone" v="03-5472-2031"/>
     <tag k="name" v="相鉄フレッサイン 浜松町大門"/>
-    <tag k="source" v="survey"/>
+    <tag k="name:en" v="Sotetsu Fresa Inn Hamamatsucho Daimon"/>
+    <tag k="source" v="official hotel page"/>
     <tag k="tourism" v="hotel"/>
-    <tag k="website" v="http://fresa-inn.jp"/>
   </node>
-  <node id="1760401130" lat="35.6818721" lon="139.6849020"/>
-  <node id="1760401138" lat="35.6819291" lon="139.6850103"/>
-  <node id="1760401145" lat="35.6819629" lon="139.6848332"/>
-  <node id="1760401151" lat="35.6819705" lon="139.6849771"/>
-  <node id="1760401152" lat="35.6819749" lon="139.6849855"/>
-  <node id="1760401166" lat="35.6820230" lon="139.6849469"/>
+  <node id="1752138919" lat="35.6392556" lon="139.7301245"/>
+  <node id="1752138921" lat="35.6396563" lon="139.7307598"/>
+  <node id="1752138922" lat="35.6394168" lon="139.7301409"/>
+  <node id="1752138924" lat="35.6397524" lon="139.7313968"/>
+  <node id="1752138925" lat="35.6394090" lon="139.7309210"/>
+  <node id="1752138927" lat="35.6397157" lon="139.7307444"/>
+  <node id="1752138934" lat="35.6393219" lon="139.7309454"/>
+  <node id="1752138936" lat="35.6393230" lon="139.7304066"/>
+  <node id="1752138937" lat="35.6392574" lon="139.7301763"/>
+  <node id="1752138938" lat="35.6393907" lon="139.7314619"/>
+  <node id="1752138940" lat="35.6394097" lon="139.7300869"/>
+  <node id="1752138942" lat="35.6389680" lon="139.7301371"/>
+  <node id="1752138943" lat="35.6395836" lon="139.7308101"/>
+  <node id="1752138944" lat="35.6397233" lon="139.7311914"/>
+  <node id="1752138945" lat="35.6396644" lon="139.7307983"/>
+  <node id="1752138946" lat="35.6389685" lon="139.7301080"/>
+  <node id="1752138947" lat="35.6396390" lon="139.7312068"/>
   <node id="1797919399" lat="35.6737858" lon="139.7692365">
     <tag k="name" v="Moterey Lasoeur Ginza"/>
     <tag k="tourism" v="hotel"/>
@@ -2121,14 +2445,66 @@
   <node id="1815494175" lat="35.7073033" lon="139.7685804"/>
   <node id="1815494234" lat="35.7074202" lon="139.7688425"/>
   <node id="1815494246" lat="35.7074375" lon="139.7685946"/>
+  <node id="1815597928" lat="35.7083018" lon="139.7715817"/>
+  <node id="1815597960" lat="35.7083233" lon="139.7719075"/>
+  <node id="1815598165" lat="35.7084387" lon="139.7715680"/>
+  <node id="1815598209" lat="35.7084603" lon="139.7718937"/>
   <node id="1823741994" lat="35.6751910" lon="139.7698904">
     <tag k="name" v="警察博物馆"/>
     <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1828202693" lat="35.6806244" lon="139.7803728"/>
+  <node id="1828202703" lat="35.6806688" lon="139.7800603"/>
+  <node id="1828202704" lat="35.6806703" lon="139.7802944"/>
+  <node id="1828202717" lat="35.6807457" lon="139.7801663"/>
+  <node id="1828202730" lat="35.6807775" lon="139.7799348"/>
+  <node id="1828202732" lat="35.6807836" lon="139.7804500"/>
+  <node id="1828202733" lat="35.6807873" lon="139.7801329"/>
+  <node id="1828202739" lat="35.6808119" lon="139.7802937"/>
+  <node id="1828202744" lat="35.6808437" lon="139.7802079"/>
+  <node id="1828202757" lat="35.6809278" lon="139.7801321"/>
+  <node id="1828202758" lat="35.6809477" lon="139.7801513"/>
+  <node id="1828202764" lat="35.6809981" lon="139.7802264"/>
+  <node id="1828274059" lat="35.6510465" lon="139.7488488">
+    <tag k="name" v="Celestine Hotel"/>
+    <tag k="tourism" v="hotel"/>
   </node>
   <node id="1832671045" lat="35.6821979" lon="139.7994187">
     <tag k="name" v="コンフォートホテル東京清澄白河"/>
     <tag k="tourism" v="hotel"/>
   </node>
+  <node id="1837996012" lat="35.6695134" lon="139.8200761">
+    <tag k="name" v="R&amp;B Hotel 東陽町"/>
+    <tag k="source" v="survey; bing"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="1840743403" lat="35.6470752" lon="139.7012678"/>
+  <node id="1840743404" lat="35.6470877" lon="139.7011257"/>
+  <node id="1840743405" lat="35.6471579" lon="139.7007994"/>
+  <node id="1840743406" lat="35.6471748" lon="139.7015226"/>
+  <node id="1840743407" lat="35.6472000" lon="139.7013119"/>
+  <node id="1840743409" lat="35.6472375" lon="139.7005671"/>
+  <node id="1840743412" lat="35.6472554" lon="139.7015876">
+    <tag k="access" v="destination"/>
+    <tag k="barrier" v="gate"/>
+    <tag k="source" v="survey; Bing"/>
+  </node>
+  <node id="1840743420" lat="35.6473481" lon="139.7016625"/>
+  <node id="1840743423" lat="35.6473840" lon="139.7015184"/>
+  <node id="1840743425" lat="35.6473888" lon="139.7001333"/>
+  <node id="1840743427" lat="35.6474126" lon="139.7015415"/>
+  <node id="1840743431" lat="35.6474587" lon="139.7013138"/>
+  <node id="1840743432" lat="35.6474668" lon="139.7001679"/>
+  <node id="1840743434" lat="35.6474828" lon="139.7013332"/>
+  <node id="1840743440" lat="35.6476009" lon="139.7002312"/>
+  <node id="1840743441" lat="35.6476412" lon="139.7007610"/>
+  <node id="1840743442" lat="35.6477197" lon="139.7008244"/>
+  <node id="1840743443" lat="35.6477242" lon="139.7003329"/>
+  <node id="1840743444" lat="35.6478068" lon="139.7004506"/>
+  <node id="1859968330" lat="35.7026279" lon="139.7734134"/>
+  <node id="1859968335" lat="35.7026329" lon="139.7733446"/>
+  <node id="1859968341" lat="35.7027243" lon="139.7734240"/>
+  <node id="1859968343" lat="35.7027293" lon="139.7733552"/>
   <node id="1861953842" lat="35.7123260" lon="139.7960882"/>
   <node id="1861953846" lat="35.7123443" lon="139.7959380"/>
   <node id="1861953869" lat="35.7124392" lon="139.7961091"/>
@@ -2149,8 +2525,17 @@
   <node id="1866082080" lat="35.6897776" lon="139.7503060"/>
   <node id="1866082086" lat="35.6898012" lon="139.7503548"/>
   <node id="1866082097" lat="35.6898782" lon="139.7506214"/>
+  <node id="1870080710" lat="35.7331651" lon="139.7274365"/>
+  <node id="1870080715" lat="35.7331920" lon="139.7281998"/>
+  <node id="1870080723" lat="35.7332026" lon="139.7273946"/>
+  <node id="1870080734" lat="35.7332387" lon="139.7282719"/>
+  <node id="1870080740" lat="35.7332614" lon="139.7275677"/>
+  <node id="1870080744" lat="35.7332989" lon="139.7275258"/>
+  <node id="1870080769" lat="35.7333720" lon="139.7280234"/>
+  <node id="1870080781" lat="35.7334186" lon="139.7280955"/>
   <node id="1880419757" lat="35.7050077" lon="139.7678215">
-    <tag k="name" v="Edoya"/>
+    <tag k="name" v="江戸屋"/>
+    <tag k="name:ja_rm" v="Edoya"/>
     <tag k="source" v="survey"/>
     <tag k="tourism" v="hotel"/>
   </node>
@@ -2159,6 +2544,11 @@
     <tag k="tourism" v="hotel"/>
   </node>
   <node id="1909755972" lat="35.6809392" lon="139.7390221"/>
+  <node id="1916548178" lat="35.7278019" lon="139.7156026">
+    <tag k="name" v="京王プレッソイン池袋"/>
+    <tag k="source" v="Bing 2010"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
   <node id="1918061886" lat="35.6959811" lon="139.7968407"/>
   <node id="1918061897" lat="35.6961251" lon="139.7969059"/>
   <node id="1918061898" lat="35.6961326" lon="139.7968593"/>
@@ -2177,14 +2567,32 @@
     <tag k="name" v="ホテルニューオータニ　ガーデンタワー"/>
     <tag k="tourism" v="hotel"/>
   </node>
+  <node id="1928162130" lat="35.6468849" lon="139.7254192"/>
+  <node id="1928162131" lat="35.6470462" lon="139.7254219"/>
+  <node id="1928162132" lat="35.6477057" lon="139.7250799"/>
+  <node id="1928162133" lat="35.6472938" lon="139.7242256"/>
+  <node id="1928162134" lat="35.6469156" lon="139.7254366"/>
+  <node id="1928162135" lat="35.6469601" lon="139.7244335"/>
+  <node id="1928162136" lat="35.6470189" lon="139.7254353"/>
+  <node id="1928162137" lat="35.6468042" lon="139.7252288"/>
+  <node id="1928162138" lat="35.6468620" lon="139.7254018"/>
+  <node id="1928162139" lat="35.6468151" lon="139.7253039"/>
+  <node id="1928162140" lat="35.6470037" lon="139.7243799"/>
+  <node id="1928162141" lat="35.6469505" lon="139.7254460"/>
+  <node id="1928162142" lat="35.6469862" lon="139.7254460"/>
+  <node id="1928162144" lat="35.6468260" lon="139.7253455"/>
+  <node id="1928162145" lat="35.6468315" lon="139.7248157"/>
+  <node id="1928162146" lat="35.6468467" lon="139.7253803"/>
+  <node id="1928162148" lat="35.6468053" lon="139.7252529"/>
+  <node id="1928481625" lat="35.6396852" lon="139.7305475">
+    <tag k="int_name" v="Sheraton Miyako Hotel Tokyo"/>
+    <tag k="name" v="シェラトン 都ホテル東京"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
   <node id="1931795600" lat="35.7184520" lon="139.7924830">
     <tag k="created_by" v="iLOE 1.9"/>
     <tag k="name" v="Toyoko Inn"/>
     <tag k="name:ja" v="東横イン"/>
-    <tag k="tourism" v="hotel"/>
-  </node>
-  <node id="1934478632" lat="35.6910402" lon="139.6867366">
-    <tag k="name" v="東急ステイ"/>
     <tag k="tourism" v="hotel"/>
   </node>
   <node id="1956551782" lat="35.7089395" lon="139.7910022">
@@ -2206,18 +2614,87 @@
     <tag k="addr:full" v="東京都港区南青山６丁目１−１９  107-0062, Japan"/>
     <tag k="name" v="Taro Okamoto Memorial Museum"/>
     <tag k="tourism" v="museum"/>
+    <tag k="website" v="http://www.taro-okamoto.or.jp/"/>
+    <tag k="wikipedia" v="ja:岡本太郎記念館"/>
   </node>
   <node id="1968636429" lat="35.7101985" lon="139.7792091">
     <tag k="name" v=""/>
     <tag k="stars" v=""/>
     <tag k="tourism" v="hotel"/>
   </node>
+  <node id="1975522153" lat="35.6413172" lon="139.7022628">
+    <tag k="name" v="東京都目黒区立 川の資料館"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="1980085108" lat="35.6412986" lon="139.7156149"/>
+  <node id="1980085109" lat="35.6413007" lon="139.7151287"/>
+  <node id="1980085110" lat="35.6414171" lon="139.7151287"/>
+  <node id="1980085111" lat="35.6414184" lon="139.7150995"/>
+  <node id="1980085112" lat="35.6415014" lon="139.7156362"/>
+  <node id="1980085113" lat="35.6415015" lon="139.7156163"/>
+  <node id="1980085114" lat="35.6415316" lon="139.7156614"/>
+  <node id="1980085125" lat="35.6415317" lon="139.7156364"/>
+  <node id="1980085127" lat="35.6415695" lon="139.7156616"/>
+  <node id="1980085129" lat="35.6415738" lon="139.7157092"/>
+  <node id="1980085131" lat="35.6415825" lon="139.7157345"/>
+  <node id="1980085133" lat="35.6416041" lon="139.7157863"/>
+  <node id="1980085135" lat="35.6416440" lon="139.7158142"/>
+  <node id="1980085136" lat="35.6416613" lon="139.7151022"/>
+  <node id="1980085137" lat="35.6416624" lon="139.7151327"/>
+  <node id="1980085138" lat="35.6416872" lon="139.7158301"/>
+  <node id="1980085139" lat="35.6417034" lon="139.7158474"/>
+  <node id="1980085140" lat="35.6417034" lon="139.7158646"/>
+  <node id="1980085141" lat="35.6417293" lon="139.7158646"/>
+  <node id="1980085142" lat="35.6417293" lon="139.7158952"/>
+  <node id="1980085143" lat="35.6417509" lon="139.7158952"/>
+  <node id="1980085144" lat="35.6417509" lon="139.7159815"/>
+  <node id="1980085145" lat="35.6417638" lon="139.7151327"/>
+  <node id="1980085146" lat="35.6417660" lon="139.7151951"/>
+  <node id="1980085147" lat="35.6417822" lon="139.7151951"/>
+  <node id="1980085149" lat="35.6417930" lon="139.7152031"/>
+  <node id="1980085157" lat="35.6417995" lon="139.7152191"/>
+  <node id="1980085161" lat="35.6418210" lon="139.7153592"/>
+  <node id="1980085163" lat="35.6418223" lon="139.7152205"/>
+  <node id="1980085165" lat="35.6419123" lon="139.7153605"/>
+  <node id="1980085167" lat="35.6419549" lon="139.7155392"/>
+  <node id="1980085169" lat="35.6419561" lon="139.7154158"/>
+  <node id="1980085170" lat="35.6420467" lon="139.7155405"/>
+  <node id="1980085172" lat="35.6420650" lon="139.7155684"/>
+  <node id="1980085175" lat="35.6420661" lon="139.7155870"/>
+  <node id="1980085177" lat="35.6420974" lon="139.7158872"/>
+  <node id="1980085178" lat="35.6420974" lon="139.7159815"/>
+  <node id="1980085180" lat="35.6421050" lon="139.7155883"/>
+  <node id="1980085181" lat="35.6421071" lon="139.7156760"/>
+  <node id="1980085182" lat="35.6421244" lon="139.7158779"/>
+  <node id="1980085183" lat="35.6421255" lon="139.7156840"/>
+  <node id="1980085184" lat="35.6421406" lon="139.7156946"/>
+  <node id="1980085185" lat="35.6421428" lon="139.7158620"/>
+  <node id="1980085186" lat="35.6421514" lon="139.7157106"/>
+  <node id="1980085187" lat="35.6421611" lon="139.7158314"/>
+  <node id="1980085188" lat="35.6421622" lon="139.7157291"/>
+  <node id="1980085197" lat="35.6421676" lon="139.7157637"/>
+  <node id="1980085199" lat="35.6421708" lon="139.7157982"/>
   <node id="1986281360" lat="35.6972457" lon="139.7738270">
     <tag k="internet_access" v="yes"/>
     <tag k="name" v="秋葉原ワシントンホテル"/>
     <tag k="name:en" v="Akihabara Washington Hotel"/>
     <tag k="tourism" v="hotel"/>
     <tag k="wheelchair" v="yes"/>
+  </node>
+  <node id="2004025297" lat="35.7249154" lon="139.8193162">
+    <tag k="addr:full" v="東京都墨田区東向島4-28-16"/>
+    <tag k="addr:postcode" v="131-0032"/>
+    <tag k="fee" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="東武博物館 (Tobu Museum)"/>
+    <tag k="name:en" v="Tobu Museum"/>
+    <tag k="name:ja" v="東武博物館"/>
+    <tag k="opening_hours" v="Tu-Su 10:00-16:30; Mo off"/>
+    <tag k="phone" v="+81-3-36148811"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="tourism" v="museum"/>
+    <tag k="website" v="http://www.tobu.co.jp/museum/"/>
+    <tag k="wikipedia" v="ja:東武博物館"/>
   </node>
   <node id="2012214872" lat="35.6940109" lon="139.7830177">
     <tag k="name" v="Comfort Hotel Tokyo Higashi Nihombashi"/>
@@ -2228,7 +2705,8 @@
   <node id="2017978543" lat="35.6681470" lon="139.7599512"/>
   <node id="2017978545" lat="35.6681558" lon="139.7603240"/>
   <node id="2017978547" lat="35.6681675" lon="139.7599422"/>
-  <node id="2021389287" lat="35.6976785" lon="139.7738098">
+  <node id="2021389287" lat="35.6978576" lon="139.7736719">
+    <tag k="name" v="レム秋葉原 (remm AKIHABARA)"/>
     <tag k="name:en" v="Remm Akihabara"/>
     <tag k="tourism" v="hotel"/>
   </node>
@@ -2238,7 +2716,7 @@
   </node>
   <node id="2047918992" lat="35.6608988" lon="139.7393731">
     <tag k="name" v="外務省外交資料館"/>
-    <tag k="name:en" v="Dipromatic Archives Ministry of Foreign Affairs"/>
+    <tag k="name:en" v="Diplomatic Archives Ministry of Foreign Affairs"/>
     <tag k="opening_hours" v="10:00-17:30"/>
     <tag k="source" v="image,2012-11;Bing"/>
     <tag k="tourism" v="museum"/>
@@ -2262,6 +2740,478 @@
   <node id="2139723246" lat="35.7160957" lon="139.7758672"/>
   <node id="2139723247" lat="35.7163057" lon="139.7777189"/>
   <node id="2139723248" lat="35.7169030" lon="139.7764632"/>
+  <node id="2150891056" lat="35.7209070" lon="139.7647913"/>
+  <node id="2150891057" lat="35.7209617" lon="139.7647520"/>
+  <node id="2150891058" lat="35.7210346" lon="139.7649791"/>
+  <node id="2150891059" lat="35.7210795" lon="139.7649378"/>
+  <node id="2163858918" lat="35.6483799" lon="139.7501671">
+    <tag k="name" v="APA HOTEL"/>
+    <tag k="source" v="image,2013-02;Bing"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2167481504" lat="35.6625920" lon="139.6983370">
+    <tag k="name" v="Hotel UNIZO"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2174196123" lat="35.6857870" lon="139.6925540">
+    <tag k="name" v="京王プレッソイン新宿"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2177881157" lat="35.6468098" lon="139.7250403"/>
+  <node id="2179771374" lat="35.7208799" lon="139.6936411">
+    <tag k="name" v="佐伯祐三アトリエ記念館"/>
+    <tag k="name:ja" v="佐伯祐三アトリエ記念館"/>
+    <tag k="name:ja_kana" v="さえきゆうぞうアトリエきねんかん"/>
+    <tag k="phone" v="+81 03-5988-0091"/>
+    <tag k="tourism" v="museum"/>
+    <tag k="website" v="http://www.regasu-shinjuku.or.jp/?p=1667"/>
+    <tag k="wikipedia" v="ja:佐伯祐三アトリエ記念館"/>
+  </node>
+  <node id="2188157258" lat="35.6438484" lon="139.7510102"/>
+  <node id="2188157295" lat="35.6438498" lon="139.7508667"/>
+  <node id="2188157384" lat="35.6434369" lon="139.7508604"/>
+  <node id="2188157387" lat="35.6434355" lon="139.7510040"/>
+  <node id="2193817915" lat="35.6592250" lon="139.7382604"/>
+  <node id="2193817927" lat="35.6592969" lon="139.7387284"/>
+  <node id="2193817932" lat="35.6593263" lon="139.7386318"/>
+  <node id="2193817937" lat="35.6590637" lon="139.7383127"/>
+  <node id="2193817938" lat="35.6591785" lon="139.7388708"/>
+  <node id="2193817946" lat="35.6593753" lon="139.7388075"/>
+  <node id="2193817947" lat="35.6592794" lon="139.7386466"/>
+  <node id="2193817948" lat="35.6592374" lon="139.7383155"/>
+  <node id="2193817949" lat="35.6593503" lon="139.7387110"/>
+  <node id="2193817951" lat="35.6592609" lon="139.7383113"/>
+  <node id="2195628339" lat="35.7371732" lon="139.7954933"/>
+  <node id="2195628340" lat="35.7371794" lon="139.7954560"/>
+  <node id="2195628341" lat="35.7371926" lon="139.7954170"/>
+  <node id="2195628342" lat="35.7372014" lon="139.7954947"/>
+  <node id="2195628343" lat="35.7372014" lon="139.7955329"/>
+  <node id="2195628344" lat="35.7372047" lon="139.7953862"/>
+  <node id="2195628345" lat="35.7372203" lon="139.7953596"/>
+  <node id="2195628346" lat="35.7372404" lon="139.7953328"/>
+  <node id="2195628347" lat="35.7372495" lon="139.7953201"/>
+  <node id="2195628348" lat="35.7372702" lon="139.7953027"/>
+  <node id="2195628349" lat="35.7372714" lon="139.7955510"/>
+  <node id="2195628350" lat="35.7372722" lon="139.7955343"/>
+  <node id="2195628351" lat="35.7372881" lon="139.7952906"/>
+  <node id="2195628352" lat="35.7373129" lon="139.7955525"/>
+  <node id="2195628353" lat="35.7373130" lon="139.7955873"/>
+  <node id="2195628354" lat="35.7373167" lon="139.7952744"/>
+  <node id="2195628355" lat="35.7373541" lon="139.7952638"/>
+  <node id="2195628356" lat="35.7374007" lon="139.7952609"/>
+  <node id="2195628361" lat="35.7375497" lon="139.7955954"/>
+  <node id="2195628362" lat="35.7375505" lon="139.7955606"/>
+  <node id="2195628364" lat="35.7375999" lon="139.7955406"/>
+  <node id="2195628365" lat="35.7376000" lon="139.7955623"/>
+  <node id="2195628369" lat="35.7376808" lon="139.7955421"/>
+  <node id="2195628371" lat="35.7377375" lon="139.7952710"/>
+  <node id="2204492085" lat="35.6891455" lon="139.7857167"/>
+  <node id="2204492086" lat="35.6891897" lon="139.7858263"/>
+  <node id="2204492087" lat="35.6893032" lon="139.7856204"/>
+  <node id="2204492088" lat="35.6893474" lon="139.7857300"/>
+  <node id="2212615112" lat="35.6584870" lon="139.7131560">
+    <tag k="name" v="島根イン 青山"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2237321678" lat="35.7362264" lon="139.7471812">
+    <tag k="name" v="HOTEL METS"/>
+    <tag k="source" v="suevey"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2258202676" lat="35.6852915" lon="139.7796750">
+    <tag k="name" v="西鉄イン日本橋 (Nishitetsu Inn Nihombashi)"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2258202679" lat="35.6862937" lon="139.7773576">
+    <tag k="name" v="Hotel Villa Fontaine"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2271379722" lat="35.6979699" lon="139.7708130">
+    <tag k="name:en" v="Capsule Hotel Anshin Oyado"/>
+    <tag k="name:ja" v="豪華 カプセルホテル安心お宿"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2280500583" lat="35.6906507" lon="139.7063971">
+    <tag k="name" v="AIM"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2283943982" lat="35.6911909" lon="139.7878718">
+    <tag k="name" v="Button Museum"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="2283943990" lat="35.6939444" lon="139.7853398">
+    <tag k="name" v="R&amp;B"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2287895117" lat="35.6593247" lon="139.7285043">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895120" lat="35.6593486" lon="139.7284050">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895151" lat="35.6594988" lon="139.7283026">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895158" lat="35.6595240" lon="139.7280451">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895165" lat="35.6595706" lon="139.7286663">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895175" lat="35.6596296" lon="139.7286985">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895179" lat="35.6596477" lon="139.7284769">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895198" lat="35.6597105" lon="139.7285045">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895252" lat="35.6598236" lon="139.7285944">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895272" lat="35.6598786" lon="139.7285650">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895294" lat="35.6599412" lon="139.7285313">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895305" lat="35.6599982" lon="139.7285008">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895321" lat="35.6600758" lon="139.7284592">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895391" lat="35.6601649" lon="139.7281098">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895398" lat="35.6601734" lon="139.7284068">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895408" lat="35.6601847" lon="139.7281550">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895418" lat="35.6601903" lon="139.7281677">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895424" lat="35.6601959" lon="139.7281804">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895430" lat="35.6602016" lon="139.7281933">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895434" lat="35.6602068" lon="139.7282053">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895459" lat="35.6602121" lon="139.7282172">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895474" lat="35.6602170" lon="139.7282285">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895510" lat="35.6602219" lon="139.7282396">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2287895656" lat="35.6602720" lon="139.7283538">
+    <tag k="level" v="1"/>
+    <tag k="source" v="港区法務局"/>
+  </node>
+  <node id="2298236532" lat="35.6326539" lon="139.7929743">
+    <tag k="name" v="ワシントンホテル"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2327919965" lat="35.7087314" lon="139.7761683">
+    <tag k="name" v="Hotel Sardonyx Ueno"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2331421946" lat="35.6636782" lon="139.7336473">
+    <tag k="addr:city" v="港区"/>
+    <tag k="addr:postcode" v="106-0032"/>
+    <tag k="addr:street" v="六本木3-9-8"/>
+    <tag k="name" v="the b roppongi"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://www.theb-hotels.com/the-b-roppongi/jp/"/>
+    <tag k="website:en" v="http://www.theb-hotels.com/the-b-roppongi/en/"/>
+    <tag k="website:jp" v="http://www.theb-hotels.com/the-b-roppongi/jp/"/>
+  </node>
+  <node id="2367952179" lat="35.6909718" lon="139.7806381"/>
+  <node id="2367952188" lat="35.6910273" lon="139.7807260"/>
+  <node id="2367952202" lat="35.6911910" lon="139.7809482"/>
+  <node id="2367952206" lat="35.6912232" lon="139.7803977"/>
+  <node id="2367952212" lat="35.6912786" lon="139.7804856"/>
+  <node id="2367952214" lat="35.6912885" lon="139.7811028"/>
+  <node id="2367952219" lat="35.6914162" lon="139.7807327"/>
+  <node id="2367952221" lat="35.6915138" lon="139.7808873"/>
+  <node id="2373479944" lat="35.7143255" lon="139.7028828"/>
+  <node id="2373479946" lat="35.7141905" lon="139.7029164"/>
+  <node id="2373479948" lat="35.7142259" lon="139.7031142"/>
+  <node id="2373479950" lat="35.7142994" lon="139.7030932"/>
+  <node id="2373479951" lat="35.7142860" lon="139.7030114"/>
+  <node id="2373479953" lat="35.7143241" lon="139.7030026"/>
+  <node id="2373479955" lat="35.7143268" lon="139.7029976"/>
+  <node id="2373479956" lat="35.7143232" lon="139.7029783"/>
+  <node id="2373479958" lat="35.7143420" lon="139.7029728"/>
+  <node id="2375772187" lat="35.6868499" lon="139.7111310"/>
+  <node id="2375772188" lat="35.6868502" lon="139.7109976"/>
+  <node id="2375772191" lat="35.6868659" lon="139.7109207"/>
+  <node id="2375772193" lat="35.6868777" lon="139.7110098"/>
+  <node id="2375772196" lat="35.6868933" lon="139.7109282"/>
+  <node id="2375772199" lat="35.6869153" lon="139.7108151"/>
+  <node id="2375772200" lat="35.6869545" lon="139.7111962"/>
+  <node id="2375772201" lat="35.6869567" lon="139.7111656"/>
+  <node id="2375772202" lat="35.6869631" lon="139.7108312"/>
+  <node id="2375772203" lat="35.6869669" lon="139.7108151"/>
+  <node id="2375772204" lat="35.6870058" lon="139.7109541"/>
+  <node id="2375772205" lat="35.6870099" lon="139.7109340"/>
+  <node id="2375772206" lat="35.6870106" lon="139.7112126"/>
+  <node id="2375772207" lat="35.6870211" lon="139.7109941"/>
+  <node id="2375772208" lat="35.6870220" lon="139.7110125"/>
+  <node id="2375772209" lat="35.6870255" lon="139.7109972"/>
+  <node id="2375772210" lat="35.6870265" lon="139.7109607"/>
+  <node id="2375772211" lat="35.6870316" lon="139.7108536"/>
+  <node id="2375772212" lat="35.6870329" lon="139.7108352"/>
+  <node id="2375772213" lat="35.6870510" lon="139.7110247"/>
+  <node id="2375772214" lat="35.6870600" lon="139.7109501"/>
+  <node id="2375772215" lat="35.6870768" lon="139.7108677"/>
+  <node id="2388140056" lat="35.6992153" lon="139.7581642"/>
+  <node id="2388140064" lat="35.6992239" lon="139.7582351"/>
+  <node id="2388140065" lat="35.6992026" lon="139.7582016"/>
+  <node id="2388140068" lat="35.6992451" lon="139.7582116"/>
+  <node id="2388140088" lat="35.6992057" lon="139.7581746"/>
+  <node id="2389061843" lat="35.6927620" lon="139.6961610">
+    <tag k="name" v="損保ジャパン東郷青児美術館"/>
+    <tag k="source" v="KSJ2"/>
+    <tag k="source_ref" v="http://nlftp.mlit.go.jp/ksj/jpgis/datalist/KsjTmplt-P02-v2_0.html"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="2390973891" lat="35.6941394" lon="139.6942864">
+    <tag k="name" v="西鉄イン新宿"/>
+    <tag k="source" v="image,2013-07;Bing"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2394614691" lat="35.7140286" lon="139.7029727"/>
+  <node id="2394614692" lat="35.7140330" lon="139.7029580"/>
+  <node id="2400543033" lat="35.6905910" lon="139.7684515"/>
+  <node id="2400543039" lat="35.6906010" lon="139.7683408"/>
+  <node id="2400543150" lat="35.6907869" lon="139.7685695"/>
+  <node id="2400543158" lat="35.6907950" lon="139.7684794"/>
+  <node id="2400543188" lat="35.6908449" lon="139.7685774"/>
+  <node id="2400543203" lat="35.6908630" lon="139.7683766"/>
+  <node id="2428670913" lat="35.7166250" lon="139.7956229">
+    <tag k="name" v="Wasou"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2457988864" lat="35.7249704" lon="139.7606275">
+    <tag k="name" v="森鴎外記念館"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="2512414734" lat="35.6531123" lon="139.7136910">
+    <tag k="name" v="山種美術館"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="2528816507" lat="35.7088736" lon="139.8021508">
+    <tag k="name" v="小さなガラスの本の博物館"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="2571001911" lat="35.7284156" lon="139.7712927">
+    <tag k="name" v="hotel sunny"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2604082855" lat="35.7212932" lon="139.7801311"/>
+  <node id="2604082857" lat="35.7213040" lon="139.7799599"/>
+  <node id="2604082861" lat="35.7213641" lon="139.7800670"/>
+  <node id="2604082862" lat="35.7213659" lon="139.7799068"/>
+  <node id="2604082864" lat="35.7213910" lon="139.7802692"/>
+  <node id="2604082865" lat="35.7214439" lon="139.7802184"/>
+  <node id="2604082866" lat="35.7214529" lon="139.7802106"/>
+  <node id="2604082867" lat="35.7215031" lon="139.7801720"/>
+  <node id="2617001145" lat="35.6944088" lon="139.7043162">
+    <tag k="internet_access" v="yes"/>
+    <tag k="internet_access:fee" v="no"/>
+    <tag k="name" v="ベストウェスタン新宿 アスティナホテル東京"/>
+    <tag k="smoking" v="separated"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://www.bw-shinjuku.com/"/>
+  </node>
+  <node id="2626692397" lat="35.7111037" lon="139.7731249">
+    <tag k="name" v="Kinuya Hotel"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="wifi" v="yes"/>
+  </node>
+  <node id="2672664859" lat="35.6980461" lon="139.7609210"/>
+  <node id="2672664862" lat="35.6981703" lon="139.7612952"/>
+  <node id="2672664863" lat="35.6981943" lon="139.7612976"/>
+  <node id="2672664865" lat="35.6981964" lon="139.7612107"/>
+  <node id="2672664866" lat="35.6980592" lon="139.7611488"/>
+  <node id="2672664867" lat="35.6982411" lon="139.7611702"/>
+  <node id="2672664868" lat="35.6980439" lon="139.7610122"/>
+  <node id="2672664871" lat="35.6982509" lon="139.7611209"/>
+  <node id="2672664874" lat="35.6982400" lon="139.7611209"/>
+  <node id="2672664876" lat="35.6979524" lon="139.7613488"/>
+  <node id="2672664878" lat="35.6980603" lon="139.7610122"/>
+  <node id="2672664879" lat="35.6982509" lon="139.7610404"/>
+  <node id="2672664881" lat="35.6982280" lon="139.7612104"/>
+  <node id="2672664883" lat="35.6982313" lon="139.7611705"/>
+  <node id="2672664885" lat="35.6982618" lon="139.7609438"/>
+  <node id="2672664886" lat="35.6981714" lon="139.7613529"/>
+  <node id="2672664887" lat="35.6982607" lon="139.7610415"/>
+  <node id="2672664888" lat="35.6979553" lon="139.7611565"/>
+  <node id="2700747338" lat="35.6643617" lon="139.7605693">
+    <tag k="addr:city" v="港区"/>
+    <tag k="addr:housenumber" v="1-6-3"/>
+    <tag k="addr:postcode" v="105-8333"/>
+    <tag k="addr:street" v="東新橋"/>
+    <tag k="name" v="ロイヤルパークホテル ザ 汐留"/>
+    <tag k="phone" v="03-6253-1111"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://www.rph-the.co.jp/shiodome/index.php"/>
+    <tag k="wheelchair" v="yes"/>
+  </node>
+  <node id="2702638390" lat="35.6693406" lon="139.8019679">
+    <tag k="name" v="デイナイスホテル東京"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2703934983" lat="35.6997148" lon="139.6999973"/>
+  <node id="2703934986" lat="35.6997238" lon="139.6999991"/>
+  <node id="2704014391" lat="35.6994035" lon="139.7020900">
+    <tag k="name" v="GREEN HOTEL"/>
+    <tag k="source" v="image,2014-03;Bing"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2714679867" lat="35.7334449" lon="139.7075650">
+    <tag k="name" v="貴美旅館 (Kimi Ryokan)"/>
+    <tag k="name:en" v="Kimi Ryokan"/>
+    <tag k="name:fr" v="Kimi Ryokan"/>
+    <tag k="name:ja" v="貴美旅館"/>
+    <tag k="name:ja_kana" v="きみりょかん"/>
+    <tag k="name:ja_rm" v="kimi ryokan"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://www.kimi-ryokan.jp/"/>
+  </node>
+  <node id="2749724506" lat="35.6652428" lon="139.7163372">
+    <tag k="name" v="ホテルフロラシオン青山"/>
+    <tag k="source" v="survey"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://www.floracion-aoyama.com/"/>
+  </node>
+  <node id="2789436036" lat="35.6831750" lon="139.7825686">
+    <tag k="addr:city" v="Tokyo"/>
+    <tag k="addr:housenumber" v="1-15-4"/>
+    <tag k="addr:street" v="Nihonbashi-kakigara-cho"/>
+    <tag k="name" v="Sotetsu Fresa Inn Nihombashi-Ningyocho"/>
+    <tag k="phone" v="03-5695-0203"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://fresa-inn.jp/eng/ningyocho/"/>
+  </node>
+  <node id="2789764098" lat="35.7079549" lon="139.7597906">
+    <tag k="name" v="ホテル機山館"/>
+    <tag k="name:en" v="Hotel Kizankan"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://kizankan.co.jp/"/>
+  </node>
+  <node id="2794707535" lat="35.6427286" lon="139.7478507">
+    <tag k="addr:city" v="Tokyo"/>
+    <tag k="addr:housenumber" v="3-14-21"/>
+    <tag k="addr:postcode" v="108-0023"/>
+    <tag k="addr:street" v="Shibaura"/>
+    <tag k="name" v="Sotetsu Fresa Inn Tokyo-Tamachi"/>
+    <tag k="name:ja" v="相鉄フレッサイン 東京田町"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2838965135" lat="35.7326144" lon="139.7272707">
+    <tag k="addr:postcode" v="170-0004"/>
+    <tag k="fax" v="+81-(0)3-5394-1044"/>
+    <tag k="internet_access" v="yes"/>
+    <tag k="internet_access:fee" v="no"/>
+    <tag k="name" v="東横INN山手線大塚駅北口2"/>
+    <tag k="name:en" v="Toyoko Inn Tokyo Yamanote-sen Otsuka-eki Kita-guchi No.2"/>
+    <tag k="name:ja" v="東横INN山手線大塚駅北口2"/>
+    <tag k="operator" v="Toyoko Inn"/>
+    <tag k="phone" v="+81-(0)3-5394-1045"/>
+    <tag k="ref" v="139"/>
+    <tag k="smoking" v="separated"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="www.toyoko-inn.com"/>
+  </node>
+  <node id="2883449853" lat="35.6728412" lon="139.7689387">
+    <tag k="name" v="ホテルモントレ銀座"/>
+    <tag k="name:en" v="Hotel Monterrey GINZA"/>
+    <tag k="source" v="image,2014-05;Bing;GSI/KIBAN 2500,NARO"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2885338395" lat="35.7125875" lon="139.7048803">
+    <tag k="addr" v="東京都新宿区高田馬場1-27-7"/>
+    <tag k="addr:city" v="Tokyo"/>
+    <tag k="addr:street" v="東京都新宿区高田馬場1-27-7"/>
+    <tag k="name" v="ホテルサンルート高田馬場"/>
+    <tag k="name:en" v="Sunroute Takadanobaba"/>
+    <tag k="name:ja" v="ホテルサンルート高田馬場"/>
+    <tag k="phone" v="+81 (0)3-3232-0101"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://www.sunroutehotel.jp/takadanobaba/"/>
+  </node>
+  <node id="2930640182" lat="35.6706980" lon="139.7133710">
+    <tag k="name" v="ワタリウム美術館"/>
+    <tag k="name:en" v="WATARI-UM, watrium, the museum of contemporary art"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="2930640183" lat="35.6706980" lon="139.7133710">
+    <tag k="addr:city" v="渋谷区 (Shibuya)"/>
+    <tag k="addr:housenumber" v="3-7-6"/>
+    <tag k="addr:postcode" v="150-0001"/>
+    <tag k="addr:street" v="外苑西通り (Gaien nishi dori)"/>
+    <tag k="name" v="watari-um, watrium, the museum of watari contemporary art"/>
+    <tag k="tourism" v="museum"/>
+  </node>
+  <node id="2952666854" lat="35.7087707" lon="139.7727773">
+    <tag k="name" v="サウナ＆カプセルホテル ダンディ"/>
+    <tag k="note" v="通称ペーサウナ"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2974353325" lat="35.6687953" lon="139.7167864">
+    <tag k="name" v="Tokyu Stay"/>
+    <tag k="source" v="survey"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://www.tokyustay.co.jp/hotel/AO/"/>
+  </node>
+  <node id="2976603433" lat="35.6876100" lon="139.6983880">
+    <tag k="name" v="ブラッサム新宿"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
+  <node id="2999882990" lat="35.6633995" lon="139.7176082">
+    <tag k="name" v="秋山庄太郎写真美術館"/>
+    <tag k="source" v="survey"/>
+    <tag k="tourism" v="museum"/>
+    <tag k="website" v="http://akiyama-shotaro.com/"/>
+  </node>
+  <node id="3040270683" lat="35.6866738" lon="139.7419860">
+    <tag k="name" v="ホテルモントレ半蔵門"/>
+    <tag k="name:en" v="Hotel Monterey Hanzomon"/>
+    <tag k="tourism" v="hotel"/>
+  </node>
   <way id="23974980">
     <nd ref="259964039"/>
     <nd ref="259964048"/>
@@ -2275,56 +3225,6 @@
     <tag k="name:ja" v="都市センターホテル"/>
     <tag k="note" v="estimated"/>
     <tag k="tourism" v="hotel"/>
-  </way>
-  <way id="28137295">
-    <nd ref="309040735"/>
-    <nd ref="309040736"/>
-    <nd ref="309040739"/>
-    <nd ref="309040740"/>
-    <nd ref="309040735"/>
-    <tag k="area" v="yes"/>
-    <tag k="name" v="古賀政男音楽博物館"/>
-    <tag k="source" v="Bing,2007-04"/>
-    <tag k="tourism" v="museum"/>
-  </way>
-  <way id="28144706">
-    <nd ref="309129365"/>
-    <nd ref="309129366"/>
-    <nd ref="309129367"/>
-    <nd ref="309129368"/>
-    <nd ref="309129369"/>
-    <nd ref="309129370"/>
-    <nd ref="309129371"/>
-    <nd ref="309129372"/>
-    <nd ref="309129365"/>
-    <tag k="building" v="yes"/>
-    <tag k="created_by" v="Potlatch 0.10f"/>
-    <tag k="name" v="旧前田侯爵邸洋館"/>
-    <tag k="tourism" v="museum"/>
-  </way>
-  <way id="28144849">
-    <nd ref="309130630"/>
-    <nd ref="309130632"/>
-    <nd ref="309130633"/>
-    <nd ref="309130634"/>
-    <nd ref="309130630"/>
-    <tag k="building" v="yes"/>
-    <tag k="created_by" v="Potlatch 0.10f"/>
-    <tag k="name" v="日本近代文学館"/>
-    <tag k="tourism" v="museum"/>
-  </way>
-  <way id="28145214">
-    <nd ref="309133105"/>
-    <nd ref="309133108"/>
-    <nd ref="1676618278"/>
-    <nd ref="1676618277"/>
-    <nd ref="1676618279"/>
-    <nd ref="309133109"/>
-    <nd ref="309133111"/>
-    <nd ref="309133105"/>
-    <tag k="building" v="yes"/>
-    <tag k="name" v="旧前田侯爵邸和館"/>
-    <tag k="tourism" v="museum"/>
   </way>
   <way id="30519438">
     <nd ref="336994074"/>
@@ -2385,6 +3285,22 @@
     <tag k="name:ja_rm" v="Tōkyōto Bijutsukan"/>
     <tag k="tourism" v="museum"/>
   </way>
+  <way id="34067475">
+    <nd ref="390376337"/>
+    <nd ref="390376339"/>
+    <nd ref="390376342"/>
+    <nd ref="390376344"/>
+    <nd ref="390376347"/>
+    <nd ref="390376348"/>
+    <nd ref="390376349"/>
+    <nd ref="390376350"/>
+    <nd ref="390376351"/>
+    <nd ref="390376352"/>
+    <nd ref="390376337"/>
+    <tag k="name" v="東京都庭園美術館"/>
+    <tag k="note" v="estimated"/>
+    <tag k="tourism" v="museum"/>
+  </way>
   <way id="43988826">
     <nd ref="559359753"/>
     <nd ref="559359754"/>
@@ -2406,6 +3322,7 @@
     <nd ref="567845216"/>
     <nd ref="567845217"/>
     <nd ref="567845214"/>
+    <tag k="building" v="yes"/>
     <tag k="name" v="浅草ビュー ホテル (Asakusa View Hotel)"/>
     <tag k="name:ja" v="浅草ビューホテル"/>
     <tag k="tourism" v="hotel"/>
@@ -2450,6 +3367,17 @@
     <tag k="name:en" v="Cerulean Tower Tokyo Hotel"/>
     <tag k="tourism" v="hotel"/>
   </way>
+  <way id="60442261">
+    <nd ref="752870704"/>
+    <nd ref="752870746"/>
+    <nd ref="752870726"/>
+    <nd ref="752870692"/>
+    <nd ref="752870704"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Hotel Excellent"/>
+    <tag k="source" v="Bing,2007-04"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
   <way id="68523635">
     <nd ref="824067470"/>
     <nd ref="824067471"/>
@@ -2484,32 +3412,19 @@
     <nd ref="1918062025"/>
     <nd ref="898968886"/>
     <nd ref="898968882"/>
+    <tag k="addr:city" v="Sumida"/>
+    <tag k="addr:housenumber" v="1-4-1"/>
+    <tag k="addr:postcode" v="130-0015"/>
+    <tag k="addr:street" v="Yokoami"/>
     <tag k="building" v="yes"/>
     <tag k="layer" v="3"/>
     <tag k="name" v="江戸東京博物館 (Edo Tokyo Museum)"/>
     <tag k="name:en" v="Edo Tokyo Museum"/>
     <tag k="name:ja" v="江戸東京博物館"/>
     <tag k="name:ja_rm" v="Edo Tokyo Hakubutsukan"/>
-    <tag k="phone" v="+81 03-3626-9974"/>
+    <tag k="phone" v="+81 3-3626-9974"/>
     <tag k="tourism" v="museum"/>
     <tag k="website" v="http://www.edo-tokyo-museum.or.jp/"/>
-  </way>
-  <way id="87250237">
-    <nd ref="1014529179"/>
-    <nd ref="1014529570"/>
-    <nd ref="1014529009"/>
-    <nd ref="1014529701"/>
-    <nd ref="1014529123"/>
-    <nd ref="1014529860"/>
-    <nd ref="1014529289"/>
-    <nd ref="1014529979"/>
-    <nd ref="1014529179"/>
-    <tag k="disused" v="yes"/>
-    <tag k="name" v="電力館"/>
-    <tag k="source" v="bing"/>
-    <tag k="tourism" v="museum"/>
-    <tag k="wheelchair" v="yes"/>
-    <tag k="wikipedia" v="http://ja.wikipedia.org/wiki/%E9%9B%BB%E5%8A%9B%E9%A4%A8"/>
   </way>
   <way id="87439168">
     <nd ref="1016728556"/>
@@ -2522,6 +3437,7 @@
     <tag k="building" v="yes"/>
     <tag k="name" v="The Prince Park Tower Tokyo"/>
     <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://www.princehotels.com/en/parktower/"/>
   </way>
   <way id="89041321">
     <nd ref="1033221795"/>
@@ -2543,6 +3459,64 @@
     <tag k="name:ja_kana" v="とうようかん"/>
     <tag k="name:ja_rm" v="tōyōkan"/>
     <tag k="tourism" v="museum"/>
+  </way>
+  <way id="91264848">
+    <nd ref="1059532270"/>
+    <nd ref="1059532102"/>
+    <nd ref="1059532213"/>
+    <nd ref="1059532176"/>
+    <nd ref="1059532270"/>
+    <tag k="addr:block_number" v="7"/>
+    <tag k="addr:city" v="千代田区"/>
+    <tag k="addr:country" v="JP"/>
+    <tag k="addr:full" v="東京都千代田区丸の内1-7-12"/>
+    <tag k="addr:housenumber" v="12"/>
+    <tag k="addr:neighbourhood" v="1丁目"/>
+    <tag k="addr:postcode" v="100-0005"/>
+    <tag k="addr:province" v="東京都"/>
+    <tag k="addr:quarter" v="丸の内"/>
+    <tag k="building" v="yes"/>
+    <tag k="height" v="169"/>
+    <tag k="name" v="ホテルメトロポリタン丸の内"/>
+    <tag k="name:en" v="Hotel Metropolitan Marunouchi"/>
+    <tag k="name:ja" v="ホテルメトロポリタン丸の内"/>
+    <tag k="name:ru" v="Отель Метрополитан Маруноути"/>
+    <tag k="phone" v="+81332112233"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://www.hotelmetropolitanmarunouchi.jp"/>
+  </way>
+  <way id="93212943">
+    <nd ref="1080556891"/>
+    <nd ref="1080556961"/>
+    <nd ref="1080557022"/>
+    <nd ref="1752138936"/>
+    <nd ref="1752138925"/>
+    <nd ref="1752138934"/>
+    <nd ref="1752138938"/>
+    <nd ref="1752138924"/>
+    <nd ref="1752138944"/>
+    <nd ref="1752138947"/>
+    <nd ref="1752138943"/>
+    <nd ref="1752138945"/>
+    <nd ref="1752138921"/>
+    <nd ref="1752138927"/>
+    <nd ref="1928481625"/>
+    <nd ref="1080556955"/>
+    <nd ref="1080556951"/>
+    <nd ref="1080556985"/>
+    <nd ref="1080557001"/>
+    <nd ref="1752138922"/>
+    <nd ref="1752138940"/>
+    <nd ref="1752138919"/>
+    <nd ref="1752138937"/>
+    <nd ref="1080557020"/>
+    <nd ref="1752138942"/>
+    <nd ref="1752138946"/>
+    <nd ref="1080556891"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Sheraton Hotel Tokyo"/>
+    <tag k="source" v="Bing, 2007-04"/>
+    <tag k="tourism" v="hotel"/>
   </way>
   <way id="94123727">
     <nd ref="1094104625"/>
@@ -2583,6 +3557,29 @@
     <tag k="building" v="yes"/>
     <tag k="name" v="Rihga Royal Hotel"/>
     <tag k="source" v="survey; Bing, 2007-04"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="95274368">
+    <nd ref="1105125729"/>
+    <nd ref="1105125353"/>
+    <nd ref="1105125595"/>
+    <nd ref="1623624129"/>
+    <nd ref="1105125729"/>
+    <tag k="addr:block_number" v="11"/>
+    <tag k="addr:city" v="千代田区"/>
+    <tag k="addr:full" v="東京都千代田区丸の内1-11-1"/>
+    <tag k="addr:housenumber" v="1"/>
+    <tag k="addr:neighbourhood" v="1丁目"/>
+    <tag k="addr:province" v="東京都"/>
+    <tag k="addr:quarter" v="丸の内"/>
+    <tag k="building" v="yes"/>
+    <tag k="building:material" v="glass"/>
+    <tag k="height" v="153"/>
+    <tag k="name" v="パシフィックセンチュリープレイス丸の内"/>
+    <tag k="name:en" v="Pacific Century Place Marunouchi"/>
+    <tag k="name:ja" v="パシフィックセンチュリープレイス丸の内"/>
+    <tag k="name:ru" v="Пасифик Сенчери Плейс Маруноути"/>
+    <tag k="source" v="Bing,2007"/>
     <tag k="tourism" v="hotel"/>
   </way>
   <way id="96368966">
@@ -2635,6 +3632,20 @@
     <tag k="source" v="Bing, 2007-04"/>
     <tag k="tourism" v="museum"/>
   </way>
+  <way id="103272499">
+    <nd ref="1192559456"/>
+    <nd ref="1344331850"/>
+    <nd ref="1344331849"/>
+    <nd ref="1344331851"/>
+    <nd ref="1344331854"/>
+    <nd ref="1192559457"/>
+    <nd ref="1192559458"/>
+    <nd ref="1192559460"/>
+    <nd ref="1192559456"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="JAL City Hotel"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
   <way id="103425086">
     <nd ref="1194227215"/>
     <nd ref="1599621808"/>
@@ -2656,6 +3667,51 @@
     <nd ref="1194227225"/>
     <nd ref="1194227215"/>
     <tag k="source" v="Bing,2007-04"/>
+    <tag k="tourism" v="museum"/>
+  </way>
+  <way id="107771604">
+    <nd ref="1237995866"/>
+    <nd ref="1237995847"/>
+    <nd ref="1237995842"/>
+    <nd ref="1237995891"/>
+    <nd ref="1237995884"/>
+    <nd ref="1237995866"/>
+    <tag k="name" v="東京ガス「がすてなーに ガスの科学館」"/>
+    <tag k="opening_hours" v="火-日9:30～17:00"/>
+    <tag k="source" v="Bing"/>
+    <tag k="tourism" v="museum"/>
+    <tag k="wikipedia" v="http://ja.wikipedia.org/wiki/%E3%82%AC%E3%82%B9%E3%81%AE%E7%A7%91%E5%AD%A6%E9%A4%A8"/>
+  </way>
+  <way id="109502705">
+    <nd ref="1618484814"/>
+    <nd ref="1253627750"/>
+    <nd ref="1253627759"/>
+    <nd ref="1253627755"/>
+    <nd ref="1253627758"/>
+    <nd ref="1253627756"/>
+    <nd ref="1253627753"/>
+    <nd ref="1253627757"/>
+    <nd ref="1618484845"/>
+    <nd ref="1618484779"/>
+    <nd ref="1618484777"/>
+    <nd ref="1618484762"/>
+    <nd ref="1618484808"/>
+    <nd ref="1618484814"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="ホテルオークラ"/>
+    <tag k="source" v="Bing,2007"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="109503139">
+    <nd ref="1253630889"/>
+    <nd ref="1253630887"/>
+    <nd ref="1253630888"/>
+    <nd ref="1253630884"/>
+    <nd ref="1253630886"/>
+    <nd ref="1253630889"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="21_21"/>
+    <tag k="source" v="image,2012-10-12;Bing"/>
     <tag k="tourism" v="museum"/>
   </way>
   <way id="116596172">
@@ -2684,7 +3740,7 @@
     <nd ref="1314077040"/>
     <nd ref="1314077042"/>
     <nd ref="1314077053"/>
-    <tag k="building" v="yes"/>
+    <tag k="building" v="hotel"/>
     <tag k="name" v="京王プラザホテル (Keio Plaza Hotel)"/>
     <tag k="name:en" v="Keio Plaza Hotel"/>
     <tag k="source" v="Bing,2007-04"/>
@@ -2701,8 +3757,10 @@
     <nd ref="1327332417"/>
     <tag k="building" v="yes"/>
     <tag k="name" v="警察博物館"/>
+    <tag k="name:ja" v="警察博物館"/>
+    <tag k="name:ja_kana" v="けいさつはくぶつかん"/>
     <tag k="tourism" v="museum"/>
-    <tag k="wikipedia" v="http://ja.wikipedia.org/wiki/%E8%AD%A6%E5%AF%9F%E5%8D%9A%E7%89%A9%E9%A4%A8"/>
+    <tag k="wikipedia" v="ja:警察博物館"/>
   </way>
   <way id="117980980">
     <nd ref="1327962126"/>
@@ -2750,39 +3808,6 @@
     <tag k="name" v="ホテルニューオータニ　Hotel New Otani"/>
     <tag k="source" v="Bing, 2007-03"/>
     <tag k="tourism" v="hotel"/>
-  </way>
-  <way id="133339481">
-    <nd ref="1467794589"/>
-    <nd ref="1467794588"/>
-    <nd ref="1467794592"/>
-    <nd ref="1467794593"/>
-    <nd ref="1467794590"/>
-    <nd ref="1467794591"/>
-    <nd ref="1467794587"/>
-    <nd ref="1467794586"/>
-    <nd ref="1467794589"/>
-    <tag k="building" v="yes"/>
-    <tag k="name" v="日本民芸館"/>
-    <tag k="source" v="Bing"/>
-    <tag k="tourism" v="museum"/>
-  </way>
-  <way id="133340564">
-    <nd ref="1467808173"/>
-    <nd ref="1467808169"/>
-    <nd ref="1467808201"/>
-    <nd ref="1467808203"/>
-    <nd ref="1467808205"/>
-    <nd ref="1467808150"/>
-    <nd ref="1467808142"/>
-    <nd ref="1467808141"/>
-    <nd ref="1467808147"/>
-    <nd ref="1467808148"/>
-    <nd ref="1467808173"/>
-    <tag k="building" v="yes"/>
-    <tag k="name" v="日本民芸館"/>
-    <tag k="name:en" v="Japan Folk Crafts Museum"/>
-    <tag k="source" v="Bing"/>
-    <tag k="tourism" v="museum"/>
   </way>
   <way id="135733581">
     <nd ref="1490205492"/>
@@ -2878,7 +3903,11 @@
     <nd ref="1492967190"/>
     <nd ref="1492967170"/>
     <tag k="building" v="yes"/>
-    <tag k="name" v="国立新美術館 (The National Art Center, Tokyo)"/>
+    <tag k="building:levels" v="7"/>
+    <tag k="name" v="国立新美術館"/>
+    <tag k="name:en" v="The National Art Center, Tokyo"/>
+    <tag k="name:ja" v="国立新美術館"/>
+    <tag k="name:ja_kana" v="しんこくりつびじゅつかん"/>
     <tag k="source" v="Bing"/>
     <tag k="tourism" v="museum"/>
     <tag k="website" v="http://www.nact.jp/"/>
@@ -2959,7 +3988,7 @@
     <nd ref="1496232779"/>
     <tag k="building" v="yes"/>
     <tag k="name" v="東急ステイ"/>
-    <tag k="name:en" v="Tokyo Stay Shibuya"/>
+    <tag k="name:en" v="Tokyu Stay Shibuya"/>
     <tag k="source" v="Bing,2007-04"/>
     <tag k="tourism" v="hotel"/>
   </way>
@@ -2981,8 +4010,22 @@
     <nd ref="1498427666"/>
     <nd ref="1498427672"/>
     <tag k="building" v="yes"/>
+    <tag k="name" v="ストークビル道玄坂"/>
     <tag k="source" v="Bing,2007-04"/>
     <tag k="tourism" v="museum"/>
+  </way>
+  <way id="137539232">
+    <nd ref="1508619595"/>
+    <nd ref="1508619593"/>
+    <nd ref="1508619598"/>
+    <nd ref="1508619601"/>
+    <nd ref="1508619596"/>
+    <nd ref="1508619597"/>
+    <nd ref="1508619595"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="春日旅館"/>
+    <tag k="source" v="Bing, 2007-03"/>
+    <tag k="tourism" v="hotel"/>
   </way>
   <way id="137625439">
     <nd ref="1509430782"/>
@@ -2993,6 +4036,17 @@
     <tag k="building" v="yes"/>
     <tag k="name" v="健康と医学の博物館 (Museum of Health and Medicine)"/>
     <tag k="opening_hours" v="10:00-17:00; Dec 24-Jan 4 off"/>
+    <tag k="tourism" v="museum"/>
+  </way>
+  <way id="140795399">
+    <nd ref="1541779183"/>
+    <nd ref="1541779242"/>
+    <nd ref="1541779319"/>
+    <nd ref="1541779256"/>
+    <nd ref="1541779183"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="凰鳴館"/>
+    <tag k="source" v="Bing,2007-04"/>
     <tag k="tourism" v="museum"/>
   </way>
   <way id="142156957">
@@ -3007,6 +4061,73 @@
     <tag k="name" v="Shiba Park Hotel"/>
     <tag k="phone" v="+181334334141"/>
     <tag k="source" v="Bing"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="144480545">
+    <nd ref="1580358422"/>
+    <nd ref="1580357975"/>
+    <nd ref="1580357965"/>
+    <nd ref="1580357908"/>
+    <nd ref="1580357757"/>
+    <nd ref="1580358210"/>
+    <nd ref="1580358301"/>
+    <nd ref="1580358350"/>
+    <nd ref="1580358355"/>
+    <nd ref="1580358403"/>
+    <nd ref="1580358483"/>
+    <nd ref="1580358411"/>
+    <nd ref="1580358422"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="ホテルメトロポリタンエドモント"/>
+    <tag k="source" v="Bing,2007-04"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="144480590">
+    <nd ref="1580358240"/>
+    <nd ref="1580357892"/>
+    <nd ref="1580357843"/>
+    <nd ref="1580358182"/>
+    <nd ref="1580358240"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="ホテルメトロポリタン エドモント EAST WING"/>
+    <tag k="source" v="Bing,2007-04"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="144974361">
+    <nd ref="1584484781"/>
+    <nd ref="1584484791"/>
+    <nd ref="1584484770"/>
+    <nd ref="1584484765"/>
+    <nd ref="1584484781"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="北野アームス"/>
+    <tag k="source" v="Bing,2007-04, survey"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="145247076">
+    <nd ref="1586835878"/>
+    <nd ref="1586835876"/>
+    <nd ref="1586835774"/>
+    <nd ref="1586835804"/>
+    <nd ref="1586835878"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="ビューロー紀尾井町"/>
+    <tag k="source" v="Bing,2007-04"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="145247148">
+    <nd ref="1586835737"/>
+    <nd ref="1586835752"/>
+    <nd ref="1586835699"/>
+    <nd ref="1586835701"/>
+    <nd ref="1586835406"/>
+    <nd ref="1586835394"/>
+    <nd ref="1586835690"/>
+    <nd ref="1586835692"/>
+    <nd ref="1586835737"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="ルポール麹町"/>
+    <tag k="source" v="Bing,2007-04, survey"/>
     <tag k="tourism" v="hotel"/>
   </way>
   <way id="145344062">
@@ -3099,6 +4220,17 @@
     <tag k="source" v="Bing,2007-04"/>
     <tag k="tourism" v="hotel"/>
   </way>
+  <way id="145403158">
+    <nd ref="1588226135"/>
+    <nd ref="1588226129"/>
+    <nd ref="1588226127"/>
+    <nd ref="1588226132"/>
+    <nd ref="1588226135"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="第一ホテル東京"/>
+    <tag k="source" v="image,2013-05;Bing"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
   <way id="146277353">
     <nd ref="1595509846"/>
     <nd ref="1595509966"/>
@@ -3114,6 +4246,17 @@
     <tag k="source" v="Bing,2007-04"/>
     <tag k="tourism" v="hotel"/>
     <tag k="website" v="http://fresa-inn.jp/akasaka/"/>
+  </way>
+  <way id="148788607">
+    <nd ref="1618600684"/>
+    <nd ref="1618600668"/>
+    <nd ref="1618600643"/>
+    <nd ref="1618600646"/>
+    <nd ref="1618600659"/>
+    <nd ref="1618600684"/>
+    <tag k="name" v="Hotel Villa Fontaine Roppongi"/>
+    <tag k="source" v="Bing,2007"/>
+    <tag k="tourism" v="hotel"/>
   </way>
   <way id="149860751">
     <nd ref="1628058671"/>
@@ -3152,6 +4295,70 @@
     <tag k="source" v="Bing, 2007-04"/>
     <tag k="tourism" v="hotel"/>
   </way>
+  <way id="155009819">
+    <nd ref="1674563154"/>
+    <nd ref="1674563051"/>
+    <nd ref="1674563042"/>
+    <nd ref="1674563066"/>
+    <nd ref="1674563135"/>
+    <nd ref="1674563151"/>
+    <nd ref="1674563154"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Bali-an"/>
+    <tag k="source" v="bing"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="155278617">
+    <nd ref="1676830855"/>
+    <nd ref="1676830862"/>
+    <nd ref="1676830789"/>
+    <nd ref="2394614691"/>
+    <nd ref="2394614692"/>
+    <nd ref="1676830779"/>
+    <nd ref="1676830855"/>
+    <tag k="amenity" v="love_hotel"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="ホテルニュー高田"/>
+    <tag k="source" v="Bing"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="155279198">
+    <nd ref="1676822402"/>
+    <nd ref="1676822398"/>
+    <nd ref="1676822332"/>
+    <nd ref="2703934983"/>
+    <nd ref="2703934986"/>
+    <nd ref="1676822336"/>
+    <nd ref="1676822402"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="新宿ノースホテル"/>
+    <tag k="source" v="image,2014-03;Bing"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="155288972">
+    <nd ref="1676900376"/>
+    <nd ref="1676900576"/>
+    <nd ref="1676900555"/>
+    <nd ref="1676900563"/>
+    <nd ref="1676900521"/>
+    <nd ref="1676900500"/>
+    <nd ref="1676900487"/>
+    <nd ref="1676900428"/>
+    <nd ref="1676900403"/>
+    <nd ref="1676900286"/>
+    <nd ref="1676900315"/>
+    <nd ref="1676900310"/>
+    <nd ref="1676900326"/>
+    <nd ref="1676900346"/>
+    <nd ref="1676900349"/>
+    <nd ref="1676900328"/>
+    <nd ref="1676900340"/>
+    <nd ref="1676900365"/>
+    <nd ref="1676900376"/>
+    <tag k="name" v="Hotel Metropolitan"/>
+    <tag k="source" v="Bing"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
   <way id="156471338">
     <nd ref="1687215357"/>
     <nd ref="1687215356"/>
@@ -3164,9 +4371,9 @@
     <nd ref="1687215355"/>
     <nd ref="1687215358"/>
     <nd ref="1687215357"/>
-    <tag k="building" v="yes"/>
+    <tag k="building" v="hotel"/>
     <tag k="name" v="GRANDBEL HOTEL"/>
-    <tag k="source" v="BIng"/>
+    <tag k="source" v="Bing"/>
     <tag k="tourism" v="hotel"/>
   </way>
   <way id="159801887">
@@ -3185,22 +4392,39 @@
     <nd ref="1719041512"/>
     <nd ref="1719041749"/>
     <tag k="building" v="yes"/>
-    <tag k="name" v="hotel com's"/>
+    <tag k="name" v="ホテルコムズ銀座"/>
+    <tag k="name:en" v="hotel com's Ginza"/>
     <tag k="source" v="Bing, 2007"/>
     <tag k="tourism" v="hotel"/>
   </way>
-  <way id="164400382">
-    <nd ref="1760401145"/>
-    <nd ref="1760401166"/>
-    <nd ref="1760401152"/>
-    <nd ref="1760401151"/>
-    <nd ref="1760401138"/>
-    <nd ref="1760401130"/>
-    <nd ref="1760401145"/>
+  <way id="161011785">
+    <nd ref="1730076602"/>
+    <nd ref="1730076690"/>
+    <nd ref="1730076655"/>
+    <nd ref="1730076668"/>
+    <nd ref="1730076679"/>
+    <nd ref="1730076735"/>
+    <nd ref="1730076730"/>
+    <nd ref="1730076615"/>
+    <nd ref="1730076605"/>
+    <nd ref="1730076607"/>
+    <nd ref="1730076687"/>
+    <nd ref="1730076747"/>
+    <nd ref="1730076582"/>
+    <nd ref="1730076659"/>
+    <nd ref="1730076666"/>
+    <nd ref="1730076576"/>
+    <nd ref="1730076584"/>
+    <nd ref="1730076727"/>
+    <nd ref="1730076642"/>
+    <nd ref="1730076713"/>
+    <nd ref="1730076602"/>
     <tag k="building" v="yes"/>
-    <tag k="name" v="旅館 山楽"/>
-    <tag k="source" v="image;Bing,2007-03"/>
-    <tag k="tourism" v="hotel"/>
+    <tag k="int_name" v="Tokyo Metropolitan Teien Art Museum"/>
+    <tag k="name" v="東京都庭園美術館"/>
+    <tag k="tourism" v="museum"/>
+    <tag k="url" v="http://www.teien-art-museum.ne.jp/index.html"/>
+    <tag k="wikipedia" v="http://ja.wikipedia.org/wiki/%E6%9D%B1%E4%BA%AC%E9%83%BD%E5%BA%AD%E5%9C%92%E7%BE%8E%E8%A1%93%E9%A4%A8"/>
   </way>
   <way id="170407884">
     <nd ref="1815494246"/>
@@ -3213,9 +4437,90 @@
     <nd ref="1815494175"/>
     <nd ref="1815494246"/>
     <tag k="building" v="yes"/>
+    <tag k="building:levels" v="5"/>
+    <tag k="building:use" v="hotel"/>
     <tag k="internet_access" v="yes"/>
     <tag k="internet_access:fee" v="no"/>
     <tag k="name" v="Elite-Inn Yushima"/>
+    <tag k="source" v="Bing"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="170419797">
+    <nd ref="1815597928"/>
+    <nd ref="1815598165"/>
+    <nd ref="1815598209"/>
+    <nd ref="1815597960"/>
+    <nd ref="1815597928"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="センチュリオンホテル上野"/>
+    <tag k="source" v="Bing"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="171848772">
+    <nd ref="1828202730"/>
+    <nd ref="1828202757"/>
+    <nd ref="1828202744"/>
+    <nd ref="1828202733"/>
+    <nd ref="1828202717"/>
+    <nd ref="1828202703"/>
+    <nd ref="1828202730"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="相鉄フレッサイン 日本橋茅場町 (Sotetsu Fresa Inn Nihombashi Kayabacho)"/>
+    <tag k="source" v="Bing"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="171848774">
+    <nd ref="1828202758"/>
+    <nd ref="1828202739"/>
+    <nd ref="1828202704"/>
+    <nd ref="1828202693"/>
+    <nd ref="1828202732"/>
+    <nd ref="1828202764"/>
+    <nd ref="1828202758"/>
+    <tag k="building" v="commercial"/>
+    <tag k="name" v="Keyo Presso In"/>
+    <tag k="source" v="survey"/>
+    <tag k="survey:date" v="2013-01-05"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="173226201">
+    <nd ref="1840743444"/>
+    <nd ref="1840743441"/>
+    <nd ref="1840743442"/>
+    <nd ref="1840743431"/>
+    <nd ref="1840743434"/>
+    <nd ref="1840743423"/>
+    <nd ref="1840743427"/>
+    <nd ref="1840743420"/>
+    <nd ref="1840743412"/>
+    <nd ref="1840743406"/>
+    <nd ref="1840743407"/>
+    <nd ref="1840743403"/>
+    <nd ref="1840743404"/>
+    <nd ref="1840743405"/>
+    <nd ref="1840743409"/>
+    <nd ref="1840743425"/>
+    <nd ref="1840743432"/>
+    <nd ref="1840743440"/>
+    <nd ref="1840743443"/>
+    <nd ref="1840743444"/>
+    <tag k="fee" v="yes"/>
+    <tag k="fixme" v="3/1-10/31 10-6  11/1-2/end 10-4:30"/>
+    <tag k="name" v="旧朝倉家住宅"/>
+    <tag k="name:en" v="Kyu Asakura tei"/>
+    <tag k="opening_hours" v="10-6"/>
+    <tag k="source" v="Bing"/>
+    <tag k="tourism" v="museum"/>
+    <tag k="wheelchair" v="unknown"/>
+  </way>
+  <way id="175405062">
+    <nd ref="1859968343"/>
+    <nd ref="1859968341"/>
+    <nd ref="1859968330"/>
+    <nd ref="1859968335"/>
+    <nd ref="1859968343"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="ホテル ドーミーイン"/>
     <tag k="source" v="Bing"/>
     <tag k="tourism" v="hotel"/>
   </way>
@@ -3228,6 +4533,129 @@
     <tag k="building" v="yes"/>
     <tag k="name" v="Ryokan Asakusa Shigetsu"/>
     <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="176491577">
+    <nd ref="1870080723"/>
+    <nd ref="1870080744"/>
+    <nd ref="1870080740"/>
+    <nd ref="1870080710"/>
+    <nd ref="1870080723"/>
+    <tag k="addr:postcode" v="170-0004"/>
+    <tag k="building" v="yes"/>
+    <tag k="fax" v="+81-(0)3-5394-1046"/>
+    <tag k="internet_access" v="yes"/>
+    <tag k="internet_access:fee" v="no"/>
+    <tag k="name" v="東横INN大塚駅北口１"/>
+    <tag k="name:en" v="Toyoko Inn Tokyo Otsuka-eki Kita-guchi No.1"/>
+    <tag k="name:ja" v="東横INN大塚駅北口１"/>
+    <tag k="operator" v="Toyoko Inn"/>
+    <tag k="phone" v="+81-(0)3-5394-1045"/>
+    <tag k="ref" v="26"/>
+    <tag k="smoking" v="separated"/>
+    <tag k="source" v="Bing, 1980-2007"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="www.toyoko-inn.com"/>
+  </way>
+  <way id="176491604">
+    <nd ref="1870080781"/>
+    <nd ref="1870080734"/>
+    <nd ref="1870080715"/>
+    <nd ref="1870080769"/>
+    <nd ref="1870080781"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="ホテルサンターガス大塚店 (Hotel Suntargas Otsuka)"/>
+    <tag k="name:en" v="Hotel Suntargas Otsuka"/>
+    <tag k="name:ja" v="ホテルサンターガス大塚店"/>
+    <tag k="source" v="Bing, 1980-2007"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="182462868">
+    <nd ref="1928162145"/>
+    <nd ref="1928162135"/>
+    <nd ref="1928162140"/>
+    <nd ref="1928162133"/>
+    <nd ref="1928162132"/>
+    <nd ref="1928162131"/>
+    <nd ref="1928162136"/>
+    <nd ref="1928162142"/>
+    <nd ref="1928162141"/>
+    <nd ref="1928162134"/>
+    <nd ref="1928162130"/>
+    <nd ref="1928162138"/>
+    <nd ref="1928162146"/>
+    <nd ref="1928162144"/>
+    <nd ref="1928162139"/>
+    <nd ref="1928162148"/>
+    <nd ref="1928162137"/>
+    <nd ref="2177881157"/>
+    <nd ref="1928162145"/>
+    <tag k="addr:city" v="Tokyo"/>
+    <tag k="addr:country" v="JP"/>
+    <tag k="addr:housenumber" v="4-12-20"/>
+    <tag k="addr:place" v="Minami-Azabu, Minato-ku"/>
+    <tag k="addr:postcode" v="106-0047"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="New Sanno Hotel"/>
+    <tag k="source" v="Bing"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="187289869">
+    <nd ref="1980085109"/>
+    <nd ref="1980085108"/>
+    <nd ref="1980085113"/>
+    <nd ref="1980085112"/>
+    <nd ref="1980085125"/>
+    <nd ref="1980085114"/>
+    <nd ref="1980085127"/>
+    <nd ref="1980085129"/>
+    <nd ref="1980085131"/>
+    <nd ref="1980085133"/>
+    <nd ref="1980085135"/>
+    <nd ref="1980085138"/>
+    <nd ref="1980085139"/>
+    <nd ref="1980085140"/>
+    <nd ref="1980085141"/>
+    <nd ref="1980085142"/>
+    <nd ref="1980085143"/>
+    <nd ref="1980085144"/>
+    <nd ref="1980085178"/>
+    <nd ref="1980085177"/>
+    <nd ref="1980085182"/>
+    <nd ref="1980085185"/>
+    <nd ref="1980085187"/>
+    <nd ref="1980085199"/>
+    <nd ref="1980085197"/>
+    <nd ref="1980085188"/>
+    <nd ref="1980085186"/>
+    <nd ref="1980085184"/>
+    <nd ref="1980085183"/>
+    <nd ref="1980085181"/>
+    <nd ref="1980085180"/>
+    <nd ref="1980085175"/>
+    <nd ref="1980085172"/>
+    <nd ref="1980085170"/>
+    <nd ref="1980085167"/>
+    <nd ref="1980085169"/>
+    <nd ref="1980085165"/>
+    <nd ref="1980085161"/>
+    <nd ref="1980085163"/>
+    <nd ref="1980085157"/>
+    <nd ref="1980085149"/>
+    <nd ref="1980085147"/>
+    <nd ref="1980085146"/>
+    <nd ref="1980085145"/>
+    <nd ref="1980085137"/>
+    <nd ref="1980085136"/>
+    <nd ref="1980085111"/>
+    <nd ref="1980085110"/>
+    <nd ref="1980085109"/>
+    <tag k="building" v="yes"/>
+    <tag k="internet_access" v="yes"/>
+    <tag k="internet_access:fee" v="1500 JPY"/>
+    <tag k="name" v="ウェスティンホテル東京"/>
+    <tag k="source" v="image;Bing"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://www.westin-tokyo.co.jp/"/>
   </way>
   <way id="203960902">
     <nd ref="2139723248"/>
@@ -3280,5 +4708,274 @@
     <tag k="wheelchair" v="yes"/>
     <tag k="wikipedia" v="ja:国立西洋美術館"/>
   </way>
+  <way id="205118794">
+    <nd ref="2150891056"/>
+    <nd ref="2150891057"/>
+    <nd ref="2150891059"/>
+    <nd ref="2150891058"/>
+    <nd ref="2150891056"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="208525531">
+    <nd ref="2188157295"/>
+    <nd ref="2188157384"/>
+    <nd ref="2188157387"/>
+    <nd ref="2188157258"/>
+    <nd ref="2188157295"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Hotel Gracery"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="209147930">
+    <nd ref="2193817937"/>
+    <nd ref="2193817938"/>
+    <nd ref="2193817946"/>
+    <nd ref="2193817949"/>
+    <nd ref="2193817927"/>
+    <nd ref="2193817947"/>
+    <nd ref="2193817932"/>
+    <nd ref="2193817951"/>
+    <nd ref="2193817948"/>
+    <nd ref="2193817915"/>
+    <nd ref="2193817937"/>
+    <tag k="name" v="ブリヂストン美術館永坂分室"/>
+    <tag k="tourism" v="museum"/>
+  </way>
+  <way id="209340435">
+    <nd ref="2195628371"/>
+    <nd ref="2195628369"/>
+    <nd ref="2195628364"/>
+    <nd ref="2195628365"/>
+    <nd ref="2195628362"/>
+    <nd ref="2195628361"/>
+    <nd ref="2195628353"/>
+    <nd ref="2195628352"/>
+    <nd ref="2195628349"/>
+    <nd ref="2195628350"/>
+    <nd ref="2195628343"/>
+    <nd ref="2195628342"/>
+    <nd ref="2195628339"/>
+    <nd ref="2195628340"/>
+    <nd ref="2195628341"/>
+    <nd ref="2195628344"/>
+    <nd ref="2195628345"/>
+    <nd ref="2195628346"/>
+    <nd ref="2195628347"/>
+    <nd ref="2195628348"/>
+    <nd ref="2195628351"/>
+    <nd ref="2195628354"/>
+    <nd ref="2195628355"/>
+    <nd ref="2195628356"/>
+    <nd ref="2195628371"/>
+    <tag k="amenity" v="public_building"/>
+    <tag k="building" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="荒川ふるさと文化館"/>
+    <tag k="opening_hours" v="Tuesday-Sunday 9:30-17:00"/>
+    <tag k="tourism" v="museum"/>
+  </way>
+  <way id="210370337">
+    <nd ref="2204492087"/>
+    <nd ref="2204492088"/>
+    <nd ref="2204492086"/>
+    <nd ref="2204492085"/>
+    <nd ref="2204492087"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="東横INN日本橋浜町明治座前"/>
+    <tag k="source" v="Bing"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="219645624">
+    <nd ref="2287895398"/>
+    <nd ref="2287895321"/>
+    <nd ref="2287895305"/>
+    <nd ref="2287895294"/>
+    <nd ref="2287895272"/>
+    <nd ref="2287895252"/>
+    <nd ref="2287895175"/>
+    <nd ref="2287895198"/>
+    <nd ref="2287895179"/>
+    <nd ref="2287895165"/>
+    <nd ref="2287895117"/>
+    <nd ref="2287895120"/>
+    <nd ref="2287895151"/>
+    <nd ref="2287895158"/>
+    <nd ref="2287895391"/>
+    <nd ref="2287895408"/>
+    <nd ref="2287895418"/>
+    <nd ref="2287895424"/>
+    <nd ref="2287895430"/>
+    <nd ref="2287895434"/>
+    <nd ref="2287895459"/>
+    <nd ref="2287895474"/>
+    <nd ref="2287895510"/>
+    <nd ref="2287895656"/>
+    <nd ref="2287895398"/>
+    <tag k="building" v="yes"/>
+    <tag k="indoor" v="yes"/>
+    <tag k="level" v="1"/>
+    <tag k="name" v="グランド ハイアット 東京"/>
+    <tag k="name:en" v="Grand Hyatt Tokyo"/>
+    <tag k="operator" v="Grand Hyatt Tokyo"/>
+    <tag k="phone" v="+81 3 4333 1234"/>
+    <tag k="source" v="港区法務局"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="228162155">
+    <nd ref="2367952202"/>
+    <nd ref="2367952219"/>
+    <nd ref="2367952221"/>
+    <nd ref="2367952214"/>
+    <nd ref="2367952202"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Tokyo Inn"/>
+    <tag k="source" v="Bing;GSI/KIBAN 25000; NARO"/>
+    <tag k="source_ref" v="http://wiki.osm.org/wiki/GSI_KIBAN"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="228162190">
+    <nd ref="2367952212"/>
+    <nd ref="2367952188"/>
+    <nd ref="2367952179"/>
+    <nd ref="2367952206"/>
+    <nd ref="2367952212"/>
+    <tag k="fax" v="03-5642-2112"/>
+    <tag k="internet_access" v="yes"/>
+    <tag k="name" v="Kodenmacho Ekimae"/>
+    <tag k="operator" v="APA Hotel"/>
+    <tag k="phone" v="03-5642-2111"/>
+    <tag k="smoking" v="separated"/>
+    <tag k="source" v="Bing;GSI/KIBAN 25000; NARO"/>
+    <tag k="source_ref" v="http://wiki.osm.org/wiki/GSI_KIBAN"/>
+    <tag k="tourism" v="hotel"/>
+    <tag k="website" v="http://www.apahotel.com.e.ju.hp.transer.com/language/shutoken/22_kodenma-cho-ekimae/"/>
+  </way>
+  <way id="228685269">
+    <nd ref="2373479944"/>
+    <nd ref="2373479946"/>
+    <nd ref="2373479948"/>
+    <nd ref="2373479950"/>
+    <nd ref="2373479951"/>
+    <nd ref="2373479953"/>
+    <nd ref="2373479955"/>
+    <nd ref="2373479956"/>
+    <nd ref="2373479958"/>
+    <nd ref="2373479944"/>
+    <tag k="amenity" v="love_hotel"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="ホテルエクセルシオ"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="228926584">
+    <nd ref="2375772191"/>
+    <nd ref="2375772188"/>
+    <nd ref="2375772193"/>
+    <nd ref="2375772187"/>
+    <nd ref="2375772201"/>
+    <nd ref="2375772200"/>
+    <nd ref="2375772206"/>
+    <nd ref="2375772213"/>
+    <nd ref="2375772208"/>
+    <nd ref="2375772209"/>
+    <nd ref="2375772207"/>
+    <nd ref="2375772210"/>
+    <nd ref="2375772204"/>
+    <nd ref="2375772205"/>
+    <nd ref="2375772214"/>
+    <nd ref="2375772215"/>
+    <nd ref="2375772211"/>
+    <nd ref="2375772212"/>
+    <nd ref="2375772203"/>
+    <nd ref="2375772202"/>
+    <nd ref="2375772199"/>
+    <nd ref="2375772196"/>
+    <nd ref="2375772191"/>
+    <tag k="building" v="yes"/>
+    <tag k="historic" v="manor"/>
+    <tag k="name" v="重要文化財指定 旧洋館後休所"/>
+    <tag k="tourism" v="museum"/>
+  </way>
+  <way id="230292042">
+    <nd ref="2388140068"/>
+    <nd ref="2388140056"/>
+    <nd ref="2388140088"/>
+    <nd ref="2388140065"/>
+    <nd ref="2388140064"/>
+    <nd ref="2388140068"/>
+    <tag k="building" v="yes"/>
+    <tag k="source" v="Bing"/>
+    <tag k="tourism" v="museum"/>
+  </way>
+  <way id="231716243">
+    <nd ref="2400543039"/>
+    <nd ref="2400543203"/>
+    <nd ref="2400543188"/>
+    <nd ref="2400543150"/>
+    <nd ref="2400543158"/>
+    <nd ref="2400543033"/>
+    <nd ref="2400543039"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="ホテル ユニゾ 神田 (Hotel Unizo Kanda)"/>
+    <tag k="name:en" v="Hotel Unizo Kanda"/>
+    <tag k="name:ja" v="ホテル ユニゾ 神田"/>
+    <tag k="source" v="GSI/KIBAN 25000; NARO"/>
+    <tag k="source_ref" v="http://wiki.osm.org/wiki/GSI_KIBAN"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="254602418">
+    <nd ref="2604082864"/>
+    <nd ref="2604082855"/>
+    <nd ref="2604082861"/>
+    <nd ref="2604082865"/>
+    <nd ref="2604082864"/>
+    <tag k="name" v="プリンセスⅡ"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="254602420">
+    <nd ref="2604082866"/>
+    <nd ref="2604082857"/>
+    <nd ref="2604082862"/>
+    <nd ref="2604082867"/>
+    <nd ref="2604082866"/>
+    <tag k="branch" v="鶯谷駅前"/>
+    <tag k="name" v="東横イン"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <way id="261667349">
+    <nd ref="2672664888"/>
+    <nd ref="2672664866"/>
+    <nd ref="2672664878"/>
+    <nd ref="2672664868"/>
+    <nd ref="2672664859"/>
+    <nd ref="2672664885"/>
+    <nd ref="2672664887"/>
+    <nd ref="2672664879"/>
+    <nd ref="2672664871"/>
+    <nd ref="2672664874"/>
+    <nd ref="2672664867"/>
+    <nd ref="2672664883"/>
+    <nd ref="2672664881"/>
+    <nd ref="2672664865"/>
+    <nd ref="2672664863"/>
+    <nd ref="2672664862"/>
+    <nd ref="2672664886"/>
+    <nd ref="2672664876"/>
+    <nd ref="2672664888"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="山の上ホテル"/>
+    <tag k="name:en" v="Yamanoue Hotel"/>
+    <tag k="tourism" v="hotel"/>
+  </way>
+  <relation id="2982309">
+    <member type="way" ref="137625432" role="outer"/>
+    <member type="way" ref="224468775" role="outer"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="東京大学総合研究博物館"/>
+    <tag k="name:en" v="the University Museum, the University of Tokyo"/>
+    <tag k="name:ja" v="東京大学総合研究博物館"/>
+    <tag k="source" v="Bing"/>
+    <tag k="tourism" v="museum"/>
+    <tag k="type" v="multipolygon"/>
+  </relation>
 
 </osm>

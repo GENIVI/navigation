@@ -70,12 +70,6 @@ do
 	esac
 done
 
-echo 'generate the translation files for the APIs'
-lupdate $ROOT_DIR/poi-client/poi-client.pro
-lupdate $ROOT_DIR/poi-contentaccess-module/poi-contentaccess-module.pro
-lrelease $ROOT_DIR/poi-client/poi-client.pro
-lrelease $ROOT_DIR/poi-contentaccess-module/poi-contentaccess-module.pro 
-
 echo 'generate the databases'
 ./make-database $city
 

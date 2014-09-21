@@ -1,0 +1,1221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="Overpass API">
+<note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
+<meta osm_base="2014-09-21T11:37:02Z"/>
+
+  <node id="241821674" lat="35.6795668" lon="139.7946657">
+    <tag k="amenity" v="fuel"/>
+    <tag k="created_by" v="JOSM"/>
+    <tag k="name" v="Kygnus"/>
+  </node>
+  <node id="344363780" lat="35.6685173" lon="139.8028667">
+    <tag k="amenity" v="fuel"/>
+    <tag k="created_by" v="Potlatch 0.10f"/>
+  </node>
+  <node id="439115832" lat="35.6657087" lon="139.7363677">
+    <tag k="addr:full" v="東京都港区六本木2-4-10"/>
+    <tag k="addr:postcode" v="106-0032"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="六本木SS"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="opening_hours" v="wd 07:30-20:30; Sa 07:30-19:30; Su,PH 09:00-18:30"/>
+    <tag k="operator" v="イシイ・オイル"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-35846778"/>
+    <tag k="smoking" v="separated"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.cosmo-oil.co.jp/"/>
+  </node>
+  <node id="552677711" lat="35.7213395" lon="139.8259725">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="581969911" lat="35.7009830" lon="139.8091510">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="name" v="ENEOS"/>
+    <tag k="name:en" v="ENEOS"/>
+    <tag k="name:ja" v="エネオス"/>
+    <tag k="name:ja_rm" v="Eneosu"/>
+  </node>
+  <node id="599547919" lat="35.7002245" lon="139.7532905">
+    <tag k="amenity" v="fuel"/>
+    <tag k="operator" v="ENEOS"/>
+  </node>
+  <node id="631497261" lat="35.6356840" lon="139.7095419">
+    <tag k="amenity" v="fuel"/>
+    <tag k="operator" v="ENEOS"/>
+  </node>
+  <node id="679199038" lat="35.6555033" lon="139.7453619"/>
+  <node id="679199039" lat="35.6556503" lon="139.7456578"/>
+  <node id="679199040" lat="35.6556477" lon="139.7453218"/>
+  <node id="679199041" lat="35.6554228" lon="139.7454947"/>
+  <node id="679199043" lat="35.6554291" lon="139.7454122"/>
+  <node id="679199045" lat="35.6556730" lon="139.7455383"/>
+  <node id="705190040" lat="35.6490938" lon="139.7187416">
+    <tag k="amenity" v="fuel"/>
+    <tag k="operator" v="ENEOS"/>
+  </node>
+  <node id="748883693" lat="35.6518360" lon="139.7044825">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="JOMO"/>
+  </node>
+  <node id="885679761" lat="35.6715765" lon="139.7129274">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+  </node>
+  <node id="888472994" lat="35.7048185" lon="139.7696712">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Eneos"/>
+  </node>
+  <node id="990964403" lat="35.6502200" lon="139.7362140">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Eneos"/>
+  </node>
+  <node id="1094677978" lat="35.7067085" lon="139.7165787"/>
+  <node id="1094677981" lat="35.7069481" lon="139.7164715"/>
+  <node id="1094678110" lat="35.7067433" lon="139.7164715"/>
+  <node id="1094679695" lat="35.7068784" lon="139.7162301"/>
+  <node id="1114992524" lat="35.7046447" lon="139.7089291">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="name" v="ENEOS"/>
+    <tag k="name:en" v="ENEOS"/>
+    <tag k="name:ja" v="エネオス"/>
+    <tag k="name:ja_rm" v="Eneosu"/>
+  </node>
+  <node id="1148542963" lat="35.7175847" lon="139.7908759">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Jomo"/>
+  </node>
+  <node id="1177105253" lat="35.7102592" lon="139.7239906">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ゼネラル"/>
+    <tag k="name" v="ゼネラル"/>
+    <tag k="name:en" v="General"/>
+    <tag k="name:ja" v="ゼネラル"/>
+    <tag k="name:ja_rm" v="Zeneraru"/>
+  </node>
+  <node id="1226770515" lat="35.7364282" lon="139.7794385">
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="三河島ＳＳ"/>
+    <tag k="brand" v="Shell"/>
+    <tag k="fuel:biodiesel" v="no"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:ethanol" v="no"/>
+    <tag k="fuel:lpg" v="no"/>
+    <tag k="fuel:octane_100" v="yes"/>
+    <tag k="fuel:octane_95" v="no"/>
+    <tag k="fuel:octane_98" v="no"/>
+    <tag k="name" v="昭和シェル"/>
+    <tag k="name:en" v="Showa-shell"/>
+    <tag k="name:ja" v="昭和シェル"/>
+    <tag k="name:ja_rm" v="Showa Sheru"/>
+    <tag k="operator" v="新光自動車興業"/>
+  </node>
+  <node id="1231861292" lat="35.6961040" lon="139.7673700">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Eneos"/>
+  </node>
+  <node id="1352041874" lat="35.7003570" lon="139.8011190">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Eneos"/>
+  </node>
+  <node id="1352143854" lat="35.7026820" lon="139.8024830">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Eneos"/>
+  </node>
+  <node id="1417894903" lat="35.6944620" lon="139.7961630">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Eneos"/>
+  </node>
+  <node id="1417894930" lat="35.6971372" lon="139.8043221">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Kygnus"/>
+  </node>
+  <node id="1417894970" lat="35.6973770" lon="139.7999650">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Cosmo"/>
+  </node>
+  <node id="1484755097" lat="35.6673392" lon="139.7725820">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="name" v="ENEOS"/>
+    <tag k="name:en" v="ENEOS"/>
+    <tag k="name:ja" v="エネオス"/>
+    <tag k="name:ja_rm" v="Eneosu"/>
+  </node>
+  <node id="1515172690" lat="35.6554930" lon="139.7393090">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ゼネラル"/>
+    <tag k="name" v="ゼネラル"/>
+    <tag k="name:en" v="General"/>
+    <tag k="name:ja" v="ゼネラル"/>
+    <tag k="name:ja_rm" v="Zeneraru"/>
+  </node>
+  <node id="1515172693" lat="35.6553440" lon="139.7412420">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Idemitsu"/>
+  </node>
+  <node id="1559944778" lat="35.6509844" lon="139.7071591">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Mobil"/>
+    <tag k="fuel:diesel" v="no"/>
+    <tag k="shop" v="yes"/>
+  </node>
+  <node id="1565011773" lat="35.6966083" lon="139.7705210">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Shell"/>
+    <tag k="name" v="昭和シェル"/>
+    <tag k="name:en" v="Showa-shell"/>
+    <tag k="name:ja" v="昭和シェル"/>
+    <tag k="name:ja_rm" v="Showa Sheru"/>
+    <tag k="source" v="survey"/>
+  </node>
+  <node id="1590215985" lat="35.6989375" lon="139.7845387">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="ENEOS 浅草橋"/>
+    <tag k="source" v="survey, bing"/>
+  </node>
+  <node id="1590371254" lat="35.7242857" lon="139.7972014"/>
+  <node id="1590371275" lat="35.7243595" lon="139.7973132"/>
+  <node id="1590371280" lat="35.7243813" lon="139.7971115"/>
+  <node id="1590371311" lat="35.7244506" lon="139.7972367"/>
+  <node id="1590371314" lat="35.7244585" lon="139.7972105"/>
+  <node id="1655440013" lat="35.6588065" lon="139.7239093">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="name" v="ENEOS"/>
+    <tag k="name:en" v="ENEOS"/>
+    <tag k="name:ja" v="エネオス"/>
+    <tag k="name:ja_rm" v="Eneosu"/>
+    <tag k="source" v="survey; bing"/>
+  </node>
+  <node id="1674565313" lat="35.6423471" lon="139.7506673"/>
+  <node id="1674565315" lat="35.6423498" lon="139.7508465"/>
+  <node id="1674565317" lat="35.6423502" lon="139.7509004"/>
+  <node id="1674565326" lat="35.6423752" lon="139.7509648"/>
+  <node id="1674565327" lat="35.6423837" lon="139.7507124"/>
+  <node id="1674565328" lat="35.6425334" lon="139.7508438"/>
+  <node id="1674565329" lat="35.6425343" lon="139.7509626"/>
+  <node id="1674565350" lat="35.6426339" lon="139.7504807"/>
+  <node id="1674565352" lat="35.6426390" lon="139.7506953"/>
+  <node id="1674565375" lat="35.6426858" lon="139.7506067"/>
+  <node id="1674804802" lat="35.6939244" lon="139.8154406"/>
+  <node id="1674804803" lat="35.6939301" lon="139.8155586"/>
+  <node id="1674804809" lat="35.6939443" lon="139.8154100"/>
+  <node id="1674804834" lat="35.6941338" lon="139.8153960"/>
+  <node id="1674804840" lat="35.6941416" lon="139.8155420"/>
+  <node id="1724848562" lat="35.7027149" lon="139.7686554"/>
+  <node id="1724848564" lat="35.7027193" lon="139.7687218"/>
+  <node id="1724848573" lat="35.7027880" lon="139.7686480"/>
+  <node id="1724848575" lat="35.7027925" lon="139.7687144"/>
+  <node id="1748438458" lat="35.6395276" lon="139.8017145"/>
+  <node id="1748438459" lat="35.6395628" lon="139.8016909"/>
+  <node id="1748438461" lat="35.6396156" lon="139.8026431"/>
+  <node id="1748438470" lat="35.6399290" lon="139.8025920"/>
+  <node id="1748438471" lat="35.6399705" lon="139.8024955"/>
+  <node id="1755998486" lat="35.6333597" lon="139.7313729"/>
+  <node id="1755998490" lat="35.6333798" lon="139.7312008"/>
+  <node id="1755998493" lat="35.6335588" lon="139.7314116"/>
+  <node id="1755998496" lat="35.6335820" lon="139.7312314"/>
+  <node id="1829793170" lat="35.7036717" lon="139.7620784"/>
+  <node id="1829793178" lat="35.7036828" lon="139.7619269"/>
+  <node id="1829793181" lat="35.7036907" lon="139.7620470"/>
+  <node id="1829793192" lat="35.7037823" lon="139.7622033"/>
+  <node id="1829793193" lat="35.7038681" lon="139.7619067"/>
+  <node id="1829793195" lat="35.7039132" lon="139.7620155"/>
+  <node id="1832730931" lat="35.6823078" lon="139.8007895">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="name" v="ENEOS"/>
+    <tag k="name:en" v="ENEOS"/>
+    <tag k="name:ja" v="エネオス"/>
+    <tag k="name:ja_rm" v="Eneosu"/>
+  </node>
+  <node id="1832730932" lat="35.6815801" lon="139.7937835">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="name" v="ENEOS"/>
+    <tag k="name:en" v="ENEOS"/>
+    <tag k="name:ja" v="エネオス"/>
+    <tag k="name:ja_rm" v="Eneosu"/>
+  </node>
+  <node id="1869526226" lat="35.7319461" lon="139.7407115"/>
+  <node id="1869526247" lat="35.7320357" lon="139.7405949"/>
+  <node id="1869526266" lat="35.7321094" lon="139.7408899"/>
+  <node id="1869526319" lat="35.7322046" lon="139.7407742"/>
+  <node id="1886283112" lat="35.6598787" lon="139.7053135">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="1891003112" lat="35.6377949" lon="139.7231641">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="1892464886" lat="35.6840317" lon="139.7880708">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="1930084069" lat="35.7271060" lon="139.7982800">
+    <tag k="amenity" v="fuel"/>
+    <tag k="created_by" v="iLOE 1.9"/>
+    <tag k="name" v="bison"/>
+  </node>
+  <node id="1949172509" lat="35.6375984" lon="139.7230271">
+    <tag k="source_ref" v="bing"/>
+  </node>
+  <node id="1949172512" lat="35.6376121" lon="139.7231133">
+    <tag k="source_ref" v="bing"/>
+  </node>
+  <node id="1949172530" lat="35.6376258" lon="139.7231039">
+    <tag k="source_ref" v="bing"/>
+  </node>
+  <node id="1949172548" lat="35.6376642" lon="139.7232417">
+    <tag k="source_ref" v="bing"/>
+  </node>
+  <node id="1949172588" lat="35.6377600" lon="139.7231796">
+    <tag k="source_ref" v="bing"/>
+  </node>
+  <node id="1949172624" lat="35.6378241" lon="139.7233437">
+    <tag k="source_ref" v="bing"/>
+  </node>
+  <node id="1949172626" lat="35.6378318" lon="139.7230376">
+    <tag k="source_ref" v="bing"/>
+  </node>
+  <node id="1949172632" lat="35.6378403" lon="139.7228872">
+    <tag k="source_ref" v="bing"/>
+  </node>
+  <node id="1949172648" lat="35.6378651" lon="139.7228935">
+    <tag k="source_ref" v="bing"/>
+  </node>
+  <node id="1949172664" lat="35.6379087" lon="139.7229913">
+    <tag k="source_ref" v="bing"/>
+  </node>
+  <node id="1949172676" lat="35.6379267" lon="139.7232795">
+    <tag k="source_ref" v="bing"/>
+  </node>
+  <node id="1962488006" lat="35.6348452" lon="139.7137628">
+    <tag k="addr:full" v="東京都目黒区目黒1-3-14"/>
+    <tag k="addr:postcode" v="153-0063"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="目黒駅前SS"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="opening_hours" v="Mo-Sa 06:30-21:00; Su,PH 08:00-20:00"/>
+    <tag k="operator" v="新出光東京支店"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-34908715"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.cosmo-oil.co.jp/"/>
+  </node>
+  <node id="1966501634" lat="35.7378321" lon="139.7120502">
+    <tag k="addr:full" v="東京都豊島区池袋1-16-28"/>
+    <tag k="addr:postcode" v="171-0014"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="セルフ池袋SS"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="ENEOS"/>
+    <tag k="name:en" v="ENEOS"/>
+    <tag k="name:ja" v="エネオス"/>
+    <tag k="name:ja_rm" v="Eneosu"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="operator" v="幸伸興業"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-39715559"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.noe.jx-group.co.jp/"/>
+  </node>
+  <node id="1966514496" lat="35.7170518" lon="139.6941524">
+    <tag k="addr:full" v="東京都新宿区中落合2-8-15"/>
+    <tag k="addr:postcode" v="161-0032"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="下落合駅前SS"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="ENEOS"/>
+    <tag k="name:en" v="ENEOS"/>
+    <tag k="name:ja" v="エネオス"/>
+    <tag k="name:ja_rm" v="Eneosu"/>
+    <tag k="opening_hours" v="wd 07:30-21:00; Sa 07:30-20:00; Su,PH 08:00-20:00"/>
+    <tag k="operator" v="東新エナジー"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-39535858"/>
+    <tag k="website" v="http://www.noe.jx-group.co.jp/"/>
+  </node>
+  <node id="1967407110" lat="35.6321893" lon="139.7209700">
+    <tag k="addr:full" v="東京都品川区東五反田5-1-1"/>
+    <tag k="addr:postcode" v="141-0022"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="クレール池田山"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="opening_hours" v="wd 07:00-20:00; Sa 08:00-18:00; PH 08:00-17:00; Su off"/>
+    <tag k="operator" v="小浦石油東京支店"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-34431475"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.cosmo-oil.co.jp/"/>
+  </node>
+  <node id="1967476199" lat="35.6532444" lon="139.7460691">
+    <tag k="addr:full" v="東京都港区芝3-12-1"/>
+    <tag k="addr:postcode" v="105-0014"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="芝園橋SS"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="opening_hours" v="Mo-Fr 08:00-20:00; Sa 08:00-19:00; PH,Su 08:30-18:00"/>
+    <tag k="operator" v="東京コスモ石油協同組合"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-34512866"/>
+    <tag k="source" v="(URL)"/>
+    <tag k="website" v="http://www.cosmo-oil.co.jp/"/>
+  </node>
+  <node id="1967481604" lat="35.6513787" lon="139.7542179">
+    <tag k="addr:full" v="東京都港区芝1-10-11"/>
+    <tag k="addr:postcode" v="105-0014"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="KEIHIN芝SS"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="opening_hours" v="23/7"/>
+    <tag k="operator" v="京浜商事"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-34510808"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.cosmo-oil.co.jp/"/>
+  </node>
+  <node id="1967495812" lat="35.6661850" lon="139.7514231">
+    <tag k="addr:full" v="東京都港区西新橋2-18-4"/>
+    <tag k="addr:postcode" v="105-0003"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="西新橋SS"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="opening_hours" v="wd 07:30-19:00; Sa 07:30-16:00; Su,PH off"/>
+    <tag k="operator" v="千歳商会"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-34344847"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.cosmo-oil.co.jp/"/>
+  </node>
+  <node id="1967505192" lat="35.6647621" lon="139.7689117">
+    <tag k="addr:full" v="東京都中央区築地5-2-1"/>
+    <tag k="addr:postcode" v="104-0045"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="築地SS"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="opening_hours" v="Mo-Sa 04:30-19:00; PH 07:00-18:00; Su off"/>
+    <tag k="operator" v="アサヒ石油販売"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-35412255"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.cosmo-oil.co.jp/"/>
+  </node>
+  <node id="1968127324" lat="35.7119675" lon="139.6976282">
+    <tag k="addr:full" v="東京都新宿区高田馬場3-23-7"/>
+    <tag k="addr:postcode" v="169-0075"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="高田馬場SS"/>
+    <tag k="brand" v="IDEMITSU"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="出光"/>
+    <tag k="name:en" v="IDEMITSU"/>
+    <tag k="name:ja" v="出光"/>
+    <tag k="name:ja_rm" v="Idemitsu"/>
+    <tag k="opening_hours" v="Mo-Su 07:00-21:00"/>
+    <tag k="operator" v="大家商店"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-33718124"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.idemitsu.co.jp/"/>
+  </node>
+  <node id="1968203509" lat="35.7221822" lon="139.6983968">
+    <tag k="addr:full" v="東京都新宿区下落合4-27-2"/>
+    <tag k="addr:postcode" v="161-0033"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="コプローサめじろSS"/>
+    <tag k="brand" v="IDEMITSU"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="出光"/>
+    <tag k="name:en" v="IDEMITSU"/>
+    <tag k="name:ja" v="出光"/>
+    <tag k="name:ja_rm" v="Idemitsu"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="operator" v="コプローサいのうえ"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-39542168"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.idemitsu.co.jp/"/>
+  </node>
+  <node id="1970493735" lat="35.6668649" lon="139.8056769">
+    <tag k="addr:full" v="東京都江東区木場6-4-7"/>
+    <tag k="addr:postcode" v="135-0042"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="木場SS"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="opening_hours" v="wd 07:00-20:00; Sa 08:30-18:00; Su,PH 08:00-18:00"/>
+    <tag k="operator" v="江東鉱産"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-36479572"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.cosmo-oil.co.jp/"/>
+  </node>
+  <node id="1970519444" lat="35.6758894" lon="139.8228048">
+    <tag k="addr:full" v="東京都江東区南砂町2-31-13"/>
+    <tag k="addr:postcode" v="136-0076"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="セルフNEW江東SS"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="operator" v="新出光東京支店"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-36443241"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.cosmo-oil.co.jp/"/>
+  </node>
+  <node id="1970535104" lat="35.6388585" lon="139.8234997">
+    <tag k="addr:full" v="東京都江東区新木場2-3-6"/>
+    <tag k="addr:postcode" v="136-0082"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="新木場SS"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="opening_hours" v="wd 07:00-21:00; Sa 07:00-19:00; Sa 08:00-18:00; Su off"/>
+    <tag k="operator" v="コスモ石油販売東京カンパニー"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-35221236"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.cosmo-oil.co.jp/"/>
+  </node>
+  <node id="1970575621" lat="35.6923504" lon="139.7972548">
+    <tag k="addr:full" v="東京都墨田区両国4-1-10"/>
+    <tag k="addr:postcode" v="130-0026"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="二の橋SS"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="opening_hours" v="Mo-Sa 07:30-18:00; Su,PH off"/>
+    <tag k="operator" v="イシイ・オイル"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-36336901"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.cosmo-oil.co.jp/"/>
+  </node>
+  <node id="1970612090" lat="35.6977593" lon="139.8001873">
+    <tag k="addr:full" v="東京都墨田区亀沢2-18-1"/>
+    <tag k="addr:postcode" v="130-0014"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="墨田SS"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="opening_hours" v="Mo-Sa 08:00-19:00; PH 06:00-19:00; Su off"/>
+    <tag k="operator" v="越村商事"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-36235922"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.cosmo-oil.co.jp/"/>
+  </node>
+  <node id="1970654133" lat="35.7097830" lon="139.7898076">
+    <tag k="addr:full" v="東京都台東区寿2-9-9"/>
+    <tag k="addr:postcode" v="111-0042"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="寿町SS"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="opening_hours" v="Mo-Sa 08:00-19:00; Su,PH off"/>
+    <tag k="operator" v="北村商店"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-38442008"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.cosmo-oil.co.jp/"/>
+  </node>
+  <node id="1970678172" lat="35.7052537" lon="139.7624168">
+    <tag k="addr:full" v="東京都文京区本郷3-14-8"/>
+    <tag k="addr:postcode" v="113-0033"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="本郷SS"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="opening_hours" v="wd 08:00-20:00; Sa 08:00-19:00; Su,PH 09:00-18:00"/>
+    <tag k="operator" v="東罐商事"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-38117723"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.cosmo-oil.co.jp/"/>
+  </node>
+  <node id="1970724093" lat="35.7264996" lon="139.7891848">
+    <tag k="addr:full" v="東京都台東区竜泉2-17-10"/>
+    <tag k="addr:postcode" v="110-0012"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="サンフィールド竜泉"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="operator" v="鈴木商会"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-38720857"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.cosmo-oil.co.jp/"/>
+  </node>
+  <node id="1970750939" lat="35.7358208" lon="139.7747282">
+    <tag k="addr:full" v="東京都荒川区西日暮里1-35-5"/>
+    <tag k="addr:postcode" v="116-0013"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="西日暮里SS"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="opening_hours" v="Mo-Sa 08:00-19:00; Su,PH off"/>
+    <tag k="operator" v="太田砿油店"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-38917873"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.cosmo-oil.co.jp/"/>
+  </node>
+  <node id="1971958287" lat="35.6416410" lon="139.7220134">
+    <tag k="addr:full" v="東京都港区白金台5-4-8"/>
+    <tag k="addr:postcode" v="108-0071"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="白金プラチナ通りSS"/>
+    <tag k="brand" v="IDEMITSU"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="Bing 2010; (URL)"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="出光"/>
+    <tag k="name:en" v="IDEMITSU"/>
+    <tag k="name:ja" v="出光"/>
+    <tag k="name:ja_rm" v="Idemitsu"/>
+    <tag k="opening_hours" v="wd 08:00-20:00; Sa,Su,PH 09:00-20:00"/>
+    <tag k="operator" v="丸新石油"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-34414652"/>
+    <tag k="website" v="http://www.idemitsu.co.jp/"/>
+  </node>
+  <node id="1973600294" lat="35.7351222" lon="139.6940262">
+    <tag k="addr:full" v="東京都豊島区要町2:17:1"/>
+    <tag k="addr:postcode" v="171-0043"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="セルフ西池袋SS"/>
+    <tag k="brand" v="Shell"/>
+    <tag k="fax" v="+81-3-39571515"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="昭和シェル"/>
+    <tag k="name:en" v="Showa-shell"/>
+    <tag k="name:ja" v="昭和シェル"/>
+    <tag k="name:ja_rm" v="Showa Sheru"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="operator" v="三栄石油"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-39571411"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.showa-shell.co.jp/"/>
+    <tag k="wifi" v="yes"/>
+  </node>
+  <node id="1973615548" lat="35.6819399" lon="139.6991983">
+    <tag k="addr:full" v="東京都渋谷区代々木1-11-2"/>
+    <tag k="addr:postcode" v="151-0053"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="セルフ代々木SS"/>
+    <tag k="brand" v="Shell"/>
+    <tag k="fax" v="+81-3-63005781"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="昭和シェル"/>
+    <tag k="name:en" v="Showa-shell"/>
+    <tag k="name:ja" v="昭和シェル"/>
+    <tag k="name:ja_rm" v="Showa Sheru"/>
+    <tag k="operator" v="ヤマヒロ"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-63005780"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.showa-shell.co.jp/"/>
+  </node>
+  <node id="1973619896" lat="35.6848723" lon="139.7040368">
+    <tag k="addr:full" v="東京都渋谷区千駄ヶ谷5-28"/>
+    <tag k="addr:postcode" v="151-0051"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="セルフ高島屋前SS"/>
+    <tag k="brand" v="Shell"/>
+    <tag k="fax" v="+81-3-33542473"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="昭和シェル"/>
+    <tag k="name:en" v="Showa-shell"/>
+    <tag k="name:ja" v="昭和シェル"/>
+    <tag k="name:ja_rm" v="Showa Sheru"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="operator" v="ヤマヒロ"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-33541951"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.showa-shell.co.jp/"/>
+  </node>
+  <node id="1973626287" lat="35.7088510" lon="139.6981355">
+    <tag k="addr:full" v="東京都新宿区高田馬場4-32-3"/>
+    <tag k="addr:postcode" v="169-0075"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="セルフ高田馬場SS"/>
+    <tag k="brand" v="Shell"/>
+    <tag k="fax" v="+81-3-33641388"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="昭和シェル"/>
+    <tag k="name:en" v="Showa-shell"/>
+    <tag k="name:ja" v="昭和シェル"/>
+    <tag k="name:ja_rm" v="Showa Sheru"/>
+    <tag k="operator" v="ヤマヒロ"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-33641336"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.showa-shell.co.jp/"/>
+  </node>
+  <node id="1973639170" lat="35.7041704" lon="139.6945956">
+    <tag k="addr:full" v="東京都新宿区北新宿4-1-1"/>
+    <tag k="addr:postcode" v="169-0074"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="大久保SS"/>
+    <tag k="brand" v="Shell"/>
+    <tag k="fax" v="+81-3-32277671"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="昭和シェル"/>
+    <tag k="name:en" v="Showa-shell"/>
+    <tag k="name:ja" v="昭和シェル"/>
+    <tag k="name:ja_rm" v="Showa Sheru"/>
+    <tag k="operator" v="ヤマヒロ"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-33676160"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.showa-shell.co.jp/"/>
+    <tag k="wifi" v="yes"/>
+  </node>
+  <node id="1975174933" lat="35.6422327" lon="139.7007447">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="ENEOS 中目黒SS"/>
+  </node>
+  <node id="1994969485" lat="35.7343588" lon="139.7945586">
+    <tag k="addr:full" v="東京都荒川区南千住5-11-1"/>
+    <tag k="addr:postcode" v="116-0003"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="プレステージミノワSS"/>
+    <tag k="brand" v="IDEMITSU"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="出光"/>
+    <tag k="name:en" v="IDEMITSU"/>
+    <tag k="name:ja" v="出光"/>
+    <tag k="name:ja_rm" v="Idemitsu"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="operator" v="東和興産"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-38079151"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.idemitsu.co.jp/"/>
+  </node>
+  <node id="1994976786" lat="35.7357357" lon="139.7817858">
+    <tag k="addr:full" v="東京都荒川区荒川4-1-3"/>
+    <tag k="addr:postcode" v="116-0002"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="三河島SS"/>
+    <tag k="brand" v="IDEMITSU"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_91" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="kerosene" v="yes"/>
+    <tag k="level" v="0"/>
+    <tag k="name" v="出光"/>
+    <tag k="name:en" v="IDEMITSU"/>
+    <tag k="name:ja" v="出光"/>
+    <tag k="name:ja_rm" v="Idemitsu"/>
+    <tag k="opening_hours" v="Mo-Su 07:00-19:00; Su,PH off"/>
+    <tag k="operator" v="門倉油店"/>
+    <tag k="payment:cash" v="yes"/>
+    <tag k="phone" v="+81-3-38071522"/>
+    <tag k="source" v="Bing 2010; (URL)"/>
+    <tag k="website" v="http://www.idemitsu.co.jp/"/>
+  </node>
+  <node id="2004496812" lat="35.7311710" lon="139.8149101">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="2184622657" lat="35.6815426" lon="139.7855066">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Eneos"/>
+    <tag k="name" v="Eneos"/>
+    <tag k="operator" v="Eneos"/>
+  </node>
+  <node id="2184622662" lat="35.6820776" lon="139.7812814"/>
+  <node id="2184622667" lat="35.6823017" lon="139.7814243"/>
+  <node id="2184622668" lat="35.6823227" lon="139.7811016"/>
+  <node id="2184622669" lat="35.6823537" lon="139.7813750"/>
+  <node id="2209622492" lat="35.6587380" lon="139.7151600">
+    <tag k="amenity" v="fuel"/>
+    <tag k="atm" v="no"/>
+    <tag k="car_wash" v="yes"/>
+    <tag k="name" v="ENEOS高樹町SS"/>
+  </node>
+  <node id="2270731355" lat="35.6398604" lon="139.7404007">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="source" v="image,2013-04;Bing"/>
+  </node>
+  <node id="2282509700" lat="35.6656854" lon="139.7289175">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="出光"/>
+    <tag k="source" v="image,2013-04;Bing"/>
+  </node>
+  <node id="2285608910" lat="35.6752520" lon="139.7901464">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Shell"/>
+  </node>
+  <node id="2292251707" lat="35.6973510" lon="139.7762540">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="name" v="ENEOS"/>
+    <tag k="name:en" v="ENEOS"/>
+    <tag k="name:ja" v="エネオス"/>
+    <tag k="name:ja_rm" v="Eneosu"/>
+  </node>
+  <node id="2350665847" lat="35.6635670" lon="139.7381740">
+    <tag k="amenity" v="fuel"/>
+    <tag k="atm" v="no"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="car_wash" v="no"/>
+    <tag k="name" v="ENEOS"/>
+    <tag k="name:en" v="ENEOS"/>
+    <tag k="name:ja" v="エネオス"/>
+    <tag k="name:ja_rm" v="Eneosu"/>
+    <tag k="opening_hours" v="Mo-Fr 07:30-22:00; Sa-Su 09:00-19:00"/>
+  </node>
+  <node id="2371741850" lat="35.6869030" lon="139.6917780">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="name" v="ENEOS"/>
+    <tag k="name:en" v="ENEOS"/>
+    <tag k="name:ja" v="エネオス"/>
+    <tag k="name:ja_rm" v="Eneosu"/>
+  </node>
+  <node id="2430718100" lat="35.6939653" lon="139.8154644">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="昭和シェル"/>
+    <tag k="name" v="昭和シェル石油・錦糸町"/>
+  </node>
+  <node id="2476235567" lat="35.6650580" lon="139.7853070">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="name" v="ENEOS"/>
+    <tag k="name:en" v="ENEOS"/>
+    <tag k="name:ja" v="エネオス"/>
+    <tag k="name:ja_rm" v="Eneosu"/>
+  </node>
+  <node id="2577057307" lat="35.6846757" lon="139.7413421">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="source" v="Bing,survey"/>
+  </node>
+  <node id="2606133438" lat="35.7287673" lon="139.7766129">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="name" v="ENEOS 日暮里SS"/>
+  </node>
+  <node id="2628346256" lat="35.6564839" lon="139.7352602">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+  </node>
+  <node id="2636085062" lat="35.6479720" lon="139.7573680">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="name" v="ENEOS"/>
+    <tag k="name:en" v="ENEOS"/>
+    <tag k="name:ja" v="エネオス"/>
+    <tag k="name:ja_rm" v="Eneosu"/>
+  </node>
+  <node id="2637894172" lat="35.6670100" lon="139.6922142">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="name" v="ENEOS"/>
+    <tag k="name:en" v="ENEOS"/>
+    <tag k="name:ja" v="エネオス"/>
+    <tag k="name:ja_rm" v="Eneosu"/>
+    <tag k="source" v="image,2014-01;Bing"/>
+  </node>
+  <node id="2779523194" lat="35.6678023" lon="139.7187688">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="IDEMITSU"/>
+    <tag k="name" v="出光"/>
+    <tag k="name:en" v="IDEMITSU"/>
+    <tag k="name:ja" v="出光"/>
+    <tag k="name:ja_rm" v="Idemitsu"/>
+    <tag k="source" v="survey"/>
+  </node>
+  <node id="2786935722" lat="35.7322215" lon="139.7408845"/>
+  <node id="2786935723" lat="35.7321651" lon="139.7408263"/>
+  <node id="2786935724" lat="35.7321769" lon="139.7409422"/>
+  <node id="2786935725" lat="35.7321578" lon="139.7409382"/>
+  <node id="2795666669" lat="35.6829480" lon="139.7418870">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="car_wash" v="no"/>
+    <tag k="name" v="ENEOS"/>
+    <tag k="name:en" v="ENEOS"/>
+    <tag k="name:ja" v="エネオス"/>
+    <tag k="name:ja_rm" v="Eneosu"/>
+    <tag k="source" v="survey"/>
+  </node>
+  <node id="2977915666" lat="35.6470714" lon="139.7237268">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="3058656210" lat="35.6724833" lon="139.7223909">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="出光"/>
+    <tag k="source" v="survey"/>
+  </node>
+  <way id="53804491">
+    <nd ref="679199038"/>
+    <nd ref="679199043"/>
+    <nd ref="679199041"/>
+    <nd ref="679199039"/>
+    <nd ref="679199045"/>
+    <nd ref="679199040"/>
+    <nd ref="679199038"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="name" v="Dr. Drive セルフ芝公園SS"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="operator" v="ENEOS"/>
+    <tag k="shop" v="yes"/>
+    <tag k="source" v="image;Bing"/>
+  </way>
+  <way id="94177755">
+    <nd ref="1094677978"/>
+    <nd ref="1094677981"/>
+    <nd ref="1094679695"/>
+    <nd ref="1094678110"/>
+    <nd ref="1094677978"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="yes"/>
+    <tag k="source" v="Bing, 2007-04"/>
+  </way>
+  <way id="145667027">
+    <nd ref="1590371280"/>
+    <nd ref="1590371314"/>
+    <nd ref="1590371311"/>
+    <nd ref="1590371275"/>
+    <nd ref="1590371254"/>
+    <nd ref="1590371280"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="branch" v="セルフ千束ＳＳ"/>
+    <tag k="brand" v="Shell"/>
+    <tag k="building" v="yes"/>
+    <tag k="diesel" v="yes"/>
+    <tag k="ethanol" v="no"/>
+    <tag k="fuel:biodiesel" v="no"/>
+    <tag k="fuel:lpg" v="no"/>
+    <tag k="fuel:octane_100" v="yes"/>
+    <tag k="fuel:octane_95" v="no"/>
+    <tag k="fuel:octane_98" v="no"/>
+    <tag k="name" v="昭和シェル"/>
+    <tag k="name:en" v="Showa-shell"/>
+    <tag k="name:ja" v="昭和シェル"/>
+    <tag k="name:ja_rm" v="Showa Sheru"/>
+    <tag k="source" v="Bing,2007-04"/>
+  </way>
+  <way id="155010023">
+    <nd ref="1674565328"/>
+    <nd ref="1674565329"/>
+    <nd ref="1674565326"/>
+    <nd ref="1674565317"/>
+    <nd ref="1674565315"/>
+    <nd ref="1674565328"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="building" v="roof"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="source" v="Bing, 2007-03"/>
+  </way>
+  <way id="155010024">
+    <nd ref="1674565350"/>
+    <nd ref="1674565313"/>
+    <nd ref="1674565327"/>
+    <nd ref="1674565352"/>
+    <nd ref="1674565375"/>
+    <nd ref="1674565350"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="COSMO"/>
+    <tag k="name" v="コスモ石油"/>
+    <tag k="name:en" v="COSMO"/>
+    <tag k="name:ja" v="コスモ石油"/>
+    <tag k="name:ja_rm" v="Kosumo Sekiyu"/>
+    <tag k="source" v="Bing, 2007-03"/>
+  </way>
+  <way id="155035355">
+    <nd ref="1674804834"/>
+    <nd ref="1674804840"/>
+    <nd ref="1674804803"/>
+    <nd ref="1674804802"/>
+    <nd ref="1674804809"/>
+    <nd ref="1674804834"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="yes"/>
+    <tag k="source" v="bing"/>
+  </way>
+  <way id="160438998">
+    <nd ref="1724848573"/>
+    <nd ref="1724848575"/>
+    <nd ref="1724848564"/>
+    <nd ref="1724848562"/>
+    <nd ref="1724848573"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Eneos"/>
+    <tag k="building" v="roof"/>
+    <tag k="name" v="Eneos"/>
+    <tag k="operator" v="Eneos"/>
+    <tag k="source" v="survey"/>
+    <tag k="survey:date" v="2012-11-01"/>
+  </way>
+  <way id="163069395">
+    <nd ref="1748438458"/>
+    <nd ref="1748438461"/>
+    <nd ref="1748438470"/>
+    <nd ref="1748438471"/>
+    <nd ref="1748438459"/>
+    <nd ref="1748438458"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="source" v="image;Bing,2007-03"/>
+  </way>
+  <way id="163936428">
+    <nd ref="1755998496"/>
+    <nd ref="1755998493"/>
+    <nd ref="1755998486"/>
+    <nd ref="1755998490"/>
+    <nd ref="1755998496"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="yes"/>
+    <tag k="source" v="image;Bing,2007-03"/>
+  </way>
+  <way id="172028964">
+    <nd ref="1829793193"/>
+    <nd ref="1829793195"/>
+    <nd ref="1829793192"/>
+    <nd ref="1829793170"/>
+    <nd ref="1829793181"/>
+    <nd ref="1829793178"/>
+    <nd ref="1829793193"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Shell"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Shell"/>
+    <tag k="operator" v="Shell"/>
+    <tag k="source" v="survey"/>
+    <tag k="survey:date" v="2012-11-01"/>
+  </way>
+  <way id="176418638">
+    <nd ref="1869526319"/>
+    <nd ref="1869526247"/>
+    <nd ref="1869526226"/>
+    <nd ref="1869526266"/>
+    <nd ref="2786935725"/>
+    <nd ref="2786935724"/>
+    <nd ref="2786935722"/>
+    <nd ref="2786935723"/>
+    <nd ref="1869526319"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="yes"/>
+    <tag k="source" v="Bing, 1980/1-2007/4"/>
+  </way>
+  <way id="184438477">
+    <nd ref="1949172664"/>
+    <nd ref="1949172648"/>
+    <nd ref="1949172632"/>
+    <nd ref="1949172509"/>
+    <nd ref="1949172530"/>
+    <nd ref="1949172512"/>
+    <nd ref="1949172548"/>
+    <nd ref="1949172588"/>
+    <nd ref="1949172624"/>
+    <nd ref="1949172676"/>
+    <nd ref="1949172626"/>
+    <nd ref="1949172664"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="ENEOS"/>
+    <tag k="name" v="ENEOS"/>
+    <tag k="name:en" v="ENEOS"/>
+    <tag k="name:ja" v="エネオス"/>
+    <tag k="name:ja_rm" v="Eneosu"/>
+    <tag k="shop" v="no"/>
+    <tag k="source_ref" v="bing"/>
+  </way>
+  <way id="208140813">
+    <nd ref="2184622662"/>
+    <nd ref="2184622667"/>
+    <nd ref="2184622669"/>
+    <nd ref="2184622668"/>
+    <nd ref="2184622662"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Idemitsu"/>
+    <tag k="name" v="Idemitsu"/>
+    <tag k="operator" v="Idemitsu"/>
+    <tag k="source" v="survey"/>
+    <tag k="survey:date" v="2013-01-05"/>
+  </way>
+
+</osm>
