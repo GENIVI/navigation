@@ -49,7 +49,7 @@
 
 #include <dbus-c++/glib-integration.h>
 #include "constants/genivi-navigationcore-constants.h"
-#include "constants/genivi-enhancedpositionservice-constants.h"
+#include "constants/genivi-positioning-constants.h"
 #include <glib.h>
 #include <string.h>
 #include <stdbool.h>

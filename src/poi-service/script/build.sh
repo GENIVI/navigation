@@ -42,7 +42,7 @@ usage() {
 
 build() {
     echo ''
-    echo 'Building poi-server ->' $POI_SERVER_SRC_DIR
+    echo 'Building poi-server' 
     mkdir -p $POI_SERVER_BIN_DIR
     cd $POI_SERVER_BIN_DIR 
     cmake $POI_SERVER_SRC_DIR && make

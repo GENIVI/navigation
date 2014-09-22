@@ -162,13 +162,13 @@ foreach (RAW_FILE ${XML_TO_DBUS_CONSTANT_FROM_POSITIONING})
 	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}.h)
 		execute_process(
 			OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-			COMMAND ${XSLTPROC} ${positioning_SRC_DIR}/enhanced-position-service/api/enum.xsl ${RAW_FILE}   
+			COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}   
 		)
 	else()
 		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}.h)
 			execute_process(
 				OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-				COMMAND ${XSLTPROC} ${positioning_SRC_DIR}/enhanced-position-service/api/enum.xsl ${RAW_FILE}   
+				COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}   
 			)
 		endif()
 	endif()
