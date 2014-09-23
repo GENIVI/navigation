@@ -36,7 +36,7 @@ set (svn_get_src_version svnversion)
 set(cmake_create_dir cmake -E make_directory)
 
 # Check if positioning stuff with the right version has been cloned and do it if necessary
-set(positioning_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/positioning)
+# positioning_SRC_DIR is set by cmake -Dpositioning_SRC_DIR=<path to positioning src dir> 
 set(positioning_URL http://git.projects.genivi.org/lbs/positioning.git)
 set(positioning_VERSION 09698f63ea27a24c533b4c015155ee9ebd7a3026)
 

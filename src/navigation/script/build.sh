@@ -134,7 +134,7 @@ build() {
     cd $TOP_DIR
     mkdir -p bin
     cd $TOP_BIN_DIR
-	cmake $TOP_DIR
+	cmake -Dpositioning_SRC_DIR=$target_positioning $TOP_DIR
 
 	# make navit first, because plugins need navit built stuff
     echo ''
