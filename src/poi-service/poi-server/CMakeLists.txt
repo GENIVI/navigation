@@ -45,7 +45,8 @@ set (git_get_src_version git rev-parse HEAD)
 set (git_executable git)
 
 # Check if positioning stuff with the right version has been cloned and make it if necessary
-set(positioning_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../positioning)
+# set(positioning_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../positioning)
+# positioning_SRC_DIR is set by cmake -Dpositioning_SRC_DIR=<path to positioning src dir>
 set(positioning_URL http://git.projects.genivi.org/lbs/positioning.git)
 set(positioning_VERSION 09698f63ea27a24c533b4c015155ee9ebd7a3026)
 

@@ -45,7 +45,7 @@ build() {
     echo 'Building poi-server' 
     mkdir -p $POI_SERVER_BIN_DIR
     cd $POI_SERVER_BIN_DIR 
-    cmake $POI_SERVER_SRC_DIR && make
+    cmake -Dpositioning_SRC_DIR=$POSITIONING_SRC_DIR $POI_SERVER_SRC_DIR && make
 }
 
 clean() {
