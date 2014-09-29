@@ -120,7 +120,7 @@ usage() {
     echo "command:"
     echo "  make       	Build"
     echo "  make <target bin> <target positioning>	Build and set targets "
-	echo "       	<target bin>				Path of the binaries"
+    echo "       	<target bin>				Path of the binaries"
     echo "       	<target positioning> 			Path of the positioning code"
     echo "  clean      	Clean"
     echo "  src-clean  	Clean the cloned sources"
@@ -264,6 +264,7 @@ if [ $# -ge 1 ]; then
         usage
     fi
 elif [ $# -eq 0 ]; then
+    set-path
     build
 else
     usage
