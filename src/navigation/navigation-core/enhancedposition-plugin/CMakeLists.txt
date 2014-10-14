@@ -35,6 +35,8 @@ include_directories(compat_includes)
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/compat_libs)
 add_definitions(-DPLUGIN=1)
 pkg_search_module(DBUS_CPP dbus-c++-glib-1 dbus-c++-1)
+pkg_search_module(GLIB glib-2.0)
+include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${DBUS_CPP_INCLUDE_DIRS})
 set(genivi_positioning_enhancedposition_LIBS ${DBUS_CPP_LDFLAGS})
 ADD_CUSTOM_COMMAND(OUTPUT genivi_positioning_enhancedposition_proxy.h

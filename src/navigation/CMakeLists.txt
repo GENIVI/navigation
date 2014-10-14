@@ -35,6 +35,71 @@ set (svn_get_src_version svnversion)
 
 set(cmake_create_dir cmake -E make_directory)
 
+# Check if ivi layer management stuff with the right version has been cloned and do it if necessary
+set(layer-management_URL http://git.projects.genivi.org/wayland-ivi-extension.git)
+set(layer-management_VERSION 278437417d1ac0958a800eecfebd2a388d6d9ca7)
+set(layer-management_PATCH_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/patches)
+set(layer-management_PATCH_DUMMY_FILE ${layer-management_SRC_DIR}/.patched)
+
+if (EXISTS ${layer-management_SRC_DIR})
+	execute_process(	
+		COMMAND ${git_get_src_version}  
+		WORKING_DIRECTORY "${layer-management_SRC_DIR}"
+		RESULT_VARIABLE result
+		OUTPUT_VARIABLE version
+	)
+	if (${version} MATCHES ${layer-management_VERSION})
+		message(STATUS "version of layer-management up to date")	
+	else()
+		message(STATUS "get the right version")
+	 	execute_process(
+			COMMAND "${git_executable}" pull
+			COMMAND "${git_executable}" checkout ${layer-management_VERSION}
+			WORKING_DIRECTORY "${layer-management_SRC_DIR}"
+			RESULT_VARIABLE error_code
+		)
+		if(error_code)
+			message(FATAL_ERROR "Failed to checkout version: '${layer-management_VERSION}'")
+		endif()	
+	endif()
+else()
+	message(STATUS "clone layer-management")
+	execute_process(
+		COMMAND "${git_executable}" clone "${layer-management_URL}" "${layer-management_SRC_DIR}"
+		RESULT_VARIABLE error_code
+	)
+ 	if(error_code)
+		message(FATAL_ERROR "Failed to clone repository: '${layer-management_URL}'")
+	endif()
+	message(STATUS "get the right version")
+ 	execute_process(
+		COMMAND "${git_executable}" pull
+		COMMAND "${git_executable}" checkout ${layer-management_VERSION}
+		WORKING_DIRECTORY "${layer-management_SRC_DIR}"
+		RESULT_VARIABLE error_code
+	)
+	if(error_code)
+		message(FATAL_ERROR "Failed to checkout version: '${layer-management_VERSION}'")
+	endif()	
+endif()
+
+set (PATCH_EXECUTABLE patch -p1 -s) 
+if (EXISTS ${layer-management_PATCH_DUMMY_FILE})
+	message(STATUS "patch already applied")
+else()
+	message(STATUS "apply the patches")
+	execute_process(
+		COMMAND ${PATCH_EXECUTABLE} -i ${layer-management_PATCH_SRC_DIR}/0001-client.pro-Disable-create_cmake-configuration.patch
+		COMMAND ${PATCH_EXECUTABLE} -i ${layer-management_PATCH_SRC_DIR}/0002-Update-ivi-application.xml-and-fix-inplementation-of.patch
+		COMMAND ${create_file} ${layer-management_PATCH_DUMMY_FILE}
+		TIMEOUT 0.1 #cmake -E touch never ends so add a timeout here
+		WORKING_DIRECTORY "${layer-management_SRC_DIR}"
+		RESULT_VARIABLE error_code
+	)
+	message( STATUS "Patch result: ${error_code}, PROF SOURCE DIR: ${layer-management_SRC_DIR}" )
+endif()
+
+
 # Check if positioning stuff with the right version has been cloned and do it if necessary
 # positioning_SRC_DIR is set by cmake -Dpositioning_SRC_DIR=<path to positioning src dir> 
 set(positioning_URL http://git.projects.genivi.org/lbs/positioning.git)
@@ -50,6 +115,7 @@ if (EXISTS ${positioning_SRC_DIR})
 	else()
 		message(STATUS "get the right version")
 	 	execute_process(
+			COMMAND "${git_executable}" pull
 			COMMAND "${git_executable}" checkout ${positioning_VERSION}
 			WORKING_DIRECTORY "${positioning_SRC_DIR}"
 			RESULT_VARIABLE error_code
@@ -70,6 +136,7 @@ else()
 
 	message(STATUS "get the right version")
  	execute_process(
+		COMMAND "${git_executable}" pull
 		COMMAND "${git_executable}" checkout ${positioning_VERSION}
 		WORKING_DIRECTORY "${positioning_SRC_DIR}"
 		RESULT_VARIABLE error_code

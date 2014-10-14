@@ -1,0 +1,25 @@
+From 9112aeed43f40eeeefd20484e14eedcee6c80544 Mon Sep 17 00:00:00 2001
+From: Nobuhiko Tanibata <NOBUHIKO_TANIBATA@denso.co.jp>
+Date: Fri, 3 Oct 2014 14:43:37 +0900
+Subject: [PATCH] client.pro: Disable create_cmake configuration
+
+Signed-off-by: Nobuhiko Tanibata <NOBUHIKO_TANIBATA@denso.co.jp>
+---
+ src/client/client.pro | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/client/client.pro b/src/client/client.pro
+index fd094fd..c9dc668 100644
+--- a/src/client/client.pro
++++ b/src/client/client.pro
+@@ -8,6 +8,7 @@ MODULE_PLUGIN_TYPES = wayland-graphics-integration-client
+ load(qt_module)
+ 
+ CONFIG += link_pkgconfig qpa/genericunixfontdatabase wayland-scanner
++CONFIG -= create_cmake
+ 
+ !equals(QT_WAYLAND_GL_CONFIG, nogl) {
+     DEFINES += QT_WAYLAND_GL_SUPPORT
+-- 
+1.9.1
+

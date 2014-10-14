@@ -37,10 +37,12 @@ GNSS_SERVICE=gnss-service
 SENSORS_SERVICE=sensors-service
 ENHANCED_POSITION_SERVICE=enhanced-position-service
 NAVIT=navit
+IVI_LAYER_MANAGER=ilm
 
 target_root=$PWD/..
 target_bin=$PWD/../bin #by default
 target_positioning=$PWD/../$POSITIONING #by default
+target_ilm=$PWD/../$IVI_LAYER_MANAGER #by default
 
 #--------------------------------------------------------------------------
 # Compiler Flags
@@ -109,19 +111,25 @@ set-path()
 
 	NAVIT_SRC_DIR=$TOP_DIR/$NAVIT
 	NAVIT_BIN_DIR=$TOP_BIN_DIR/$NAVIT
+
+	IVI_LAYER_MANAGER_SRC_DIR=$target_ilm
+	IVI_LAYER_MANAGER_BIN_DIR=$TOP_BIN_DIR/$IVI_LAYER_MANAGER
 }
 
 
 usage() {
     echo "Usage: ./build.sh Build navigation"
     echo "   or: ./build.sh [command])"
-    echo "   or: ./build.sh [command] <target bin> <target positioning>)"
+    echo "   or: ./build.sh [command] <target bin> <target positioning> <target ilm>)"
     echo
     echo "command:"
     echo "  make       	Build"
-    echo "  make <target bin> <target positioning>	Build and set targets "
+    echo "  make   <target bin> <target positioning>"
+    echo "  makelm      Build with layer manager"
+    echo "  makelm <target bin> <target positioning> <target ilm> "
     echo "       	<target bin>				Path of the binaries"
-    echo "       	<target positioning> 			Path of the positioning code"
+    echo "       	<target positioning> 		Path of the positioning code"
+    echo "       	<target ilm> 			    Path of the ilm code"
     echo "  clean      	Clean"
     echo "  src-clean  	Clean the cloned sources"
     echo "  help       	Print Help"
@@ -134,7 +142,7 @@ build() {
     cd $TOP_DIR
     mkdir -p bin
     cd $TOP_BIN_DIR
-	cmake -Dpositioning_SRC_DIR=$target_positioning $TOP_DIR
+	cmake -Dpositioning_SRC_DIR=$target_positioning -Dlayer-management_SRC_DIR=$target_ilm $TOP_DIR
 
 	# make navit first, because plugins need navit built stuff
     echo ''
@@ -143,6 +151,14 @@ build() {
 	mkdir -p $NAVIT
 	cd $NAVIT_BIN_DIR
   	cmake $NAVIT_FLAGS $NAVIT_SRC_DIR/navit && make 
+
+    echo ''
+    echo 'Building layer manager'
+    cd $TOP_BIN_DIR 
+    mkdir -p $IVI_LAYER_MANAGER
+    cd $IVI_LAYER_MANAGER_BIN_DIR
+#    cmake $IVI_LAYER_MANAGER_SRC_DIR && make
+#	sudo make install 
 
     echo ''
     echo 'Building positioning'
@@ -214,7 +230,7 @@ build() {
     cd $TOP_BIN_DIR
     mkdir -p $MAP_VIEWER_MAPVIEWERCONTROL
     cd $MAP_VIEWER_MAPVIEWERCONTROL_BIN_DIR 
-    cmake -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dlayer_management_INST=$(layer_management_INST) -Dmapviewer_API=$MAP_VIEWER_API_DIR -Dnavigationcore_API=$NAVIGATION_CORE_API_DIR $MAP_VIEWER_MAPVIEWERCONTROL_SRC_DIR && make 
+    cmake -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -DLM=$lm -Dlayer_management_INST=$layer_management_INST -Dmapviewer_API=$MAP_VIEWER_API_DIR -Dnavigationcore_API=$NAVIGATION_CORE_API_DIR $MAP_VIEWER_MAPVIEWERCONTROL_SRC_DIR && make 
 
     cd $TOP_BIN_DIR
     mkdir -p $MAP_VIEWER_SESSION
@@ -238,6 +254,8 @@ src-clean() {
     rm -rf $POSITIONING_SRC_DIR
 	echo 'delete' $NAVIT_SRC_DIR 
     rm -rf $NAVIT_SRC_DIR
+	echo 'delete' $IVI_LAYER_MANAGER_SRC_DIR 
+    rm -rf $IVI_LAYER_MANAGER_SRC_DIR
     clean
 }
 
@@ -253,6 +271,17 @@ if [ $# -ge 1 ]; then
 			target_positioning=$(readlink -f $3)
 		fi
 		set-path
+		lm=0
+        build
+    elif [ $1 = makelm ]; then
+		if [ $# -eq 4 ]; then
+			#use for remote build
+			target_bin=$(readlink -f $2)
+			target_positioning=$(readlink -f $3)
+			target_ilm=$(readlink -f $4)
+		fi
+		set-path
+		lm=1
         build
     elif [ $1 = clean ]; then
 		set-path

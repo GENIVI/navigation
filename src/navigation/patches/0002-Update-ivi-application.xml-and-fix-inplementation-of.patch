@@ -1,0 +1,103 @@
+From 8f61a686557ae1b8930f8a4771415586c22cb628 Mon Sep 17 00:00:00 2001
+From: Nobuhiko Tanibata <NOBUHIKO_TANIBATA@denso.co.jp>
+Date: Mon, 6 Oct 2014 10:49:07 +0900
+Subject: [PATCH] Update ivi-application.xml, and fix inplementation of
+ qwaylandivisurface class
+
+Signed-off-by: Nobuhiko Tanibata <NOBUHIKO_TANIBATA@denso.co.jp>
+---
+ src/3rdparty/protocol/ivi-application.xml | 41 +++++++++++--------------------
+ src/client/qwaylandivisurface.cpp         |  5 +++-
+ src/client/qwaylandivisurface_p.h         |  2 +-
+ 3 files changed, 19 insertions(+), 29 deletions(-)
+
+diff --git a/src/3rdparty/protocol/ivi-application.xml b/src/3rdparty/protocol/ivi-application.xml
+index 833fd38..0c3fb8c 100644
+--- a/src/3rdparty/protocol/ivi-application.xml
++++ b/src/3rdparty/protocol/ivi-application.xml
+@@ -42,36 +42,23 @@
+             <arg name="visibility" type="int"/>
+         </event>
+ 
+-        <enum name="warning_code">
+-            <description summary="possible warning codes returned by ivi compositor">
+-                These define all possible warning codes returned by ivi compositor on server-side warnings.
+-                invalid_wl_surface:
+-                    - wl_surface already has a another role.
+-		    - wl_surface is destroyed before the ivi_surface is destroyed.
+-                ivi_id_in_use: ivi_id is already assigned by another application.
+-            </description>
+-            <entry name="invalid_wl_surface" value="1" summary="wl_surface is invalid"/>
+-            <entry name="ivi_id_in_use" value="2" summary="ivi_id is in use and can not be shared"/>
+-        </enum>
++	<event name="configure">
++	    <description summary="suggest resize">
++	      The configure event asks the client to resize its surface.
+ 
+-        <event name="warning">
+-            <description summary="server-side warning detected">
+-                The ivi compositor encountered warning while processing a request by this
+-                application. The warning is defined by argument warning_code and optional
+-                warning_text. If the warning is detected, client shall destroy the ivi_surface
+-                object.
++	      The size is a hint, in the sense that the client is free to
++	      ignore it if it doesn't resize, pick a smaller size (to
++	      satisfy aspect ratio or resize in steps of NxM pixels).
+ 
+-		When a warning event is sent, the compositor turns the ivi_surface object inert.
+-		The ivi_surface will not deliver further events, all requests on it are ignored
+-		except 'destroy', and the association to the ivi_id is removed. The client
+-		should destroy the ivi_surface object. If an inert ivi_surface object is used as
+-		an argument to any other object's request, that request will [produce a fatal
+-		error / produce a warning / be ignored].
+-            </description>
+-            <arg name="warning_code" type="int"/>
+-            <arg name="warning_text" type="string" allow-null="true"/>
+-        </event>
++	      The client is free to dismiss all but the last configure
++	      event it received.
+ 
++	      The width and height arguments specify the size of the window
++	      in surface local coordinates.
++	    </description>
++	    <arg name="width" type="int"/>
++	    <arg name="height" type="int"/>
++	</event>
+     </interface>
+ 
+     <interface name="ivi_application" version="1">
+diff --git a/src/client/qwaylandivisurface.cpp b/src/client/qwaylandivisurface.cpp
+index d3fd096..1c2c24a 100644
+--- a/src/client/qwaylandivisurface.cpp
++++ b/src/client/qwaylandivisurface.cpp
+@@ -63,10 +63,13 @@ QWaylandIviSurface::~QWaylandIviSurface()
+ 
+ void QWaylandIviSurface::ivi_surface_visibility(int32_t visibility)
+ {
++    Q_UNUSED(visibility);
+ }
+ 
+-void QWaylandIviSurface::ivi_surface_warning(int32_t warning_code, const QString &warning_text)
++void QWaylandIviSurface::ivi_surface_configure(int32_t width, int32_t height)
+ {
++    Q_UNUSED(width);
++    Q_UNUSED(height);
+ }
+ 
+ QT_END_NAMESPACE
+diff --git a/src/client/qwaylandivisurface_p.h b/src/client/qwaylandivisurface_p.h
+index 2283f99..f4038e6 100644
+--- a/src/client/qwaylandivisurface_p.h
++++ b/src/client/qwaylandivisurface_p.h
+@@ -63,7 +63,7 @@ public:
+ 
+ private:
+     void ivi_surface_visibility(int32_t visibility) Q_DECL_OVERRIDE;
+-    void ivi_surface_warning(int32_t warning_code, const QString &warning_text) Q_DECL_OVERRIDE;
++    void ivi_surface_configure(int32_t width, int32_t height) Q_DECL_OVERRIDE;
+ 
+     friend class QWaylandWindow;
+     QWaylandWindow *m_window;
+-- 
+1.9.1
+
