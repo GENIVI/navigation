@@ -10,7 +10,7 @@
 *
 * \author Martin Schaller <martin.schaller@it-schaller.de>
 * \author Philippe Colliot <philippe.colliot@mpsa.com>
-* \author Tanibata, Nobuhiko (ADITJ/SWG) <ntanibata@jp.adit-jv.com>
+* \author Tanibata, Nobuhiko <NOBUHIKO_TANIBATA@denso.co.jp>
 *
 * \version 1.0
 *
