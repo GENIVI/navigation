@@ -29,6 +29,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 set (git_get_src_version git rev-parse HEAD)
 set (git_executable ${GIT})
+set (create_file cmake -E touch)
 
 set (svn_executable ${SVN})
 set (svn_get_src_version svnversion)
@@ -36,74 +37,126 @@ set (svn_get_src_version svnversion)
 set(cmake_create_dir cmake -E make_directory)
 
 # Check if ivi layer management stuff with the right version has been cloned and do it if necessary
-set(layer-management_URL http://git.projects.genivi.org/wayland-ivi-extension.git)
-set(layer-management_VERSION 278437417d1ac0958a800eecfebd2a388d6d9ca7)
-set(layer-management_PATCH_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/patches)
-set(layer-management_PATCH_DUMMY_FILE ${layer-management_SRC_DIR}/.patched)
+# ilm is cloned into sub dir
+set(wayland-ivi-extension_SRC_DIR ${layer-management_SRC_DIR}/wayland-ivi-extension)
+set(weston-ivi-shell_SRC_DIR ${layer-management_SRC_DIR}/weston-ivi-shell)
 
-if (EXISTS ${layer-management_SRC_DIR})
+# Get the wayland-ivi-extension
+set(wayland-ivi-extension_URL http://git.projects.genivi.org/wayland-ivi-extension.git)
+set(wayland-ivi-extension_VERSION 278437417d1ac0958a800eecfebd2a388d6d9ca7)
+
+if (EXISTS ${wayland-ivi-extension_SRC_DIR})
 	execute_process(	
 		COMMAND ${git_get_src_version}  
-		WORKING_DIRECTORY "${layer-management_SRC_DIR}"
+		WORKING_DIRECTORY "${wayland-ivi-extension_SRC_DIR}"
 		RESULT_VARIABLE result
 		OUTPUT_VARIABLE version
 	)
-	if (${version} MATCHES ${layer-management_VERSION})
-		message(STATUS "version of layer-management up to date")	
+	if (${version} MATCHES ${wayland-ivi-extension_VERSION})
+		message(STATUS "version of wayland-ivi-extension up to date")	
 	else()
-		message(STATUS "get the right version")
+		message(STATUS "get the right version of wayland-ivi-extension")
 	 	execute_process(
 			COMMAND "${git_executable}" pull
-			COMMAND "${git_executable}" checkout ${layer-management_VERSION}
-			WORKING_DIRECTORY "${layer-management_SRC_DIR}"
+			COMMAND "${git_executable}" checkout ${wayland-ivi-extension_VERSION}
+			WORKING_DIRECTORY "${wayland-ivi-extension_SRC_DIR}"
 			RESULT_VARIABLE error_code
 		)
 		if(error_code)
-			message(FATAL_ERROR "Failed to checkout version: '${layer-management_VERSION}'")
+			message(FATAL_ERROR "Failed to checkout version: '${wayland-ivi-extension_VERSION}'")
 		endif()	
 	endif()
 else()
-	message(STATUS "clone layer-management")
+	message(STATUS "clone wayland-ivi-extension")
 	execute_process(
-		COMMAND "${git_executable}" clone "${layer-management_URL}" "${layer-management_SRC_DIR}"
+		COMMAND "${git_executable}" clone "${wayland-ivi-extension_URL}" "${wayland-ivi-extension_SRC_DIR}"
 		RESULT_VARIABLE error_code
 	)
  	if(error_code)
-		message(FATAL_ERROR "Failed to clone repository: '${layer-management_URL}'")
+		message(FATAL_ERROR "Failed to clone repository: '${wayland-ivi-extension_URL}'")
 	endif()
-	message(STATUS "get the right version")
+	message(STATUS "get the right version of wayland-ivi-extension")
  	execute_process(
 		COMMAND "${git_executable}" pull
-		COMMAND "${git_executable}" checkout ${layer-management_VERSION}
-		WORKING_DIRECTORY "${layer-management_SRC_DIR}"
+		COMMAND "${git_executable}" checkout ${wayland-ivi-extension_VERSION}
+		WORKING_DIRECTORY "${wayland-ivi-extension_SRC_DIR}"
 		RESULT_VARIABLE error_code
 	)
 	if(error_code)
-		message(FATAL_ERROR "Failed to checkout version: '${layer-management_VERSION}'")
+		message(FATAL_ERROR "Failed to checkout version: '${wayland-ivi-extension_VERSION}'")
+	endif()	
+endif()
+
+# Get the weston-ivi-shell
+set(weston-ivi-shell_URL https://github.com/ntanibata/weston-ivi-shell.git)
+set(weston-ivi-shell_VERSION a3dd3192343e573e9cbf349022cb81b77bfbdaca)
+set(weston-ivi-shell_PATCH_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/patches)
+set(weston-ivi-shell_PATCH_DUMMY_FILE ${weston-ivi-shell_SRC_DIR}/.patched)
+
+if (EXISTS ${weston-ivi-shell_SRC_DIR})
+	execute_process(	
+		COMMAND ${git_get_src_version}  
+		WORKING_DIRECTORY "${weston-ivi-shell_SRC_DIR}"
+		RESULT_VARIABLE result
+		OUTPUT_VARIABLE version
+	)
+	if (${version} MATCHES ${weston-ivi-shell_VERSION})
+		message(STATUS "version of weston-ivi-shell up to date")	
+	else()
+		message(STATUS "get the right version of weston-ivi-shell")
+	 	execute_process(
+			COMMAND "${git_executable}" pull
+			COMMAND "${git_executable}" checkout ${weston-ivi-shell_VERSION}
+			WORKING_DIRECTORY "${weston-ivi-shell_SRC_DIR}"
+			RESULT_VARIABLE error_code
+		)
+		if(error_code)
+			message(FATAL_ERROR "Failed to checkout version: '${weston-ivi-shell_VERSION}'")
+		endif()	
+	endif()
+else()
+	message(STATUS "clone weston-ivi-shell")
+	execute_process(
+		COMMAND "${git_executable}" clone "${weston-ivi-shell_URL}" "${weston-ivi-shell_SRC_DIR}"
+		RESULT_VARIABLE error_code
+	)
+ 	if(error_code)
+		message(FATAL_ERROR "Failed to clone repository: '${weston-ivi-shell_URL}'")
+	endif()
+	message(STATUS "get the right version of weston-ivi-shell")
+ 	execute_process(
+		COMMAND "${git_executable}" pull
+		COMMAND "${git_executable}" checkout ${weston-ivi-shell_VERSION}
+		WORKING_DIRECTORY "${weston-ivi-shell_SRC_DIR}"
+		RESULT_VARIABLE error_code
+	)
+	if(error_code)
+		message(FATAL_ERROR "Failed to checkout version: '${weston-ivi-shell_VERSION}'")
 	endif()	
 endif()
 
 set (PATCH_EXECUTABLE patch -p1 -s) 
-if (EXISTS ${layer-management_PATCH_DUMMY_FILE})
-	message(STATUS "patch already applied")
+if (EXISTS ${weston-ivi-shell_PATCH_DUMMY_FILE})
+	message(STATUS "patch already applied to weston-ivi-shell")
 else()
-	message(STATUS "apply the patches")
+	message(STATUS "apply the patches to weston-ivi-shell")
 	execute_process(
-		COMMAND ${PATCH_EXECUTABLE} -i ${layer-management_PATCH_SRC_DIR}/0001-client.pro-Disable-create_cmake-configuration.patch
-		COMMAND ${PATCH_EXECUTABLE} -i ${layer-management_PATCH_SRC_DIR}/0002-Update-ivi-application.xml-and-fix-inplementation-of.patch
-		COMMAND ${create_file} ${layer-management_PATCH_DUMMY_FILE}
+		COMMAND ${PATCH_EXECUTABLE} -i ${weston-ivi-shell_PATCH_SRC_DIR}/0001-client.pro-Disable-create_cmake-configuration.patch
+		COMMAND ${PATCH_EXECUTABLE} -i ${weston-ivi-shell_PATCH_SRC_DIR}/0002-Update-ivi-application.xml-and-fix-inplementation-of.patch
+		COMMAND ${create_file} ${weston-ivi-shell_PATCH_DUMMY_FILE}
 		TIMEOUT 0.1 #cmake -E touch never ends so add a timeout here
-		WORKING_DIRECTORY "${layer-management_SRC_DIR}"
+		WORKING_DIRECTORY "${weston-ivi-shell_SRC_DIR}"
 		RESULT_VARIABLE error_code
 	)
-	message( STATUS "Patch result: ${error_code}, PROF SOURCE DIR: ${layer-management_SRC_DIR}" )
+	if(error_code)
+		message(FATAL_ERROR "Failed to apply the patch")
+	endif()	
 endif()
-
 
 # Check if positioning stuff with the right version has been cloned and do it if necessary
 # positioning_SRC_DIR is set by cmake -Dpositioning_SRC_DIR=<path to positioning src dir> 
 set(positioning_URL http://git.projects.genivi.org/lbs/positioning.git)
-set(positioning_VERSION 09698f63ea27a24c533b4c015155ee9ebd7a3026)
+set(positioning_VERSION fde1a780f531389d5a05e3b0486c98ad34df3dcb)
 
 if (EXISTS ${positioning_SRC_DIR})
 	execute_process(COMMAND ${git_get_src_version}  
@@ -113,7 +166,7 @@ if (EXISTS ${positioning_SRC_DIR})
 	if (${version} MATCHES ${positioning_VERSION})
 		message(STATUS "version of positioning up to date")	
 	else()
-		message(STATUS "get the right version")
+		message(STATUS "get the right version of positioning")
 	 	execute_process(
 			COMMAND "${git_executable}" pull
 			COMMAND "${git_executable}" checkout ${positioning_VERSION}
@@ -134,7 +187,7 @@ else()
 		message(FATAL_ERROR "Failed to clone repository: '${positioning_URL}'")
 	endif()
 
-	message(STATUS "get the right version")
+	message(STATUS "get the right version of positioning")
  	execute_process(
 		COMMAND "${git_executable}" pull
 		COMMAND "${git_executable}" checkout ${positioning_VERSION}
@@ -159,7 +212,7 @@ if (EXISTS ${navit_SRC_DIR})
 	if (${version} MATCHES ${navit_VERSION})
 		message(STATUS "version of navit up to date")	
 	else()
-		message(STATUS "get the right version")
+		message(STATUS "get the right version of navit")
 	 	execute_process(
 			COMMAND "${svn_executable}" checkout ${navit_URL} navit -r ${navit_VERSION}
 			WORKING_DIRECTORY "${navit_SRC_DIR}/.."

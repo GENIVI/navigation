@@ -38,7 +38,10 @@ SENSORS_SERVICE=sensors-service
 ENHANCED_POSITION_SERVICE=enhanced-position-service
 NAVIT=navit
 IVI_LAYER_MANAGER=ilm
+WAYLAND_IVI_EXTENSION=wayland-ivi-extension
+WESTON_IVI_SHELL=weston-ivi-shell
 
+SCRIPT_DIR=$PWD
 target_root=$PWD/..
 target_bin=$PWD/../bin #by default
 target_positioning=$PWD/../$POSITIONING #by default
@@ -50,6 +53,9 @@ target_ilm=$PWD/../$IVI_LAYER_MANAGER #by default
 # modify the following flags as needed:
 NAVIT_FLAGS='-DDISABLE_QT=1 -DSAMPLE_MAP=0 -Dvehicle/null=1 -Dgraphics/qt_qpainter=0'
 #
+
+# by default no ilm 
+lm=0
 
 set-path()
 {
@@ -114,35 +120,76 @@ set-path()
 
 	IVI_LAYER_MANAGER_SRC_DIR=$target_ilm
 	IVI_LAYER_MANAGER_BIN_DIR=$TOP_BIN_DIR/$IVI_LAYER_MANAGER
+	WAYLAND_IVI_EXTENSION_SRC_DIR=$IVI_LAYER_MANAGER_SRC_DIR/$WAYLAND_IVI_EXTENSION
+	WAYLAND_IVI_EXTENSION_BIN_DIR=$IVI_LAYER_MANAGER_BIN_DIR/$WAYLAND_IVI_EXTENSION
+	WESTON_IVI_SHELL_SRC_DIR=$IVI_LAYER_MANAGER_SRC_DIR/$WESTON_IVI_SHELL
+	WESTON_IVI_SHELL_BIN_DIR=$IVI_LAYER_MANAGER_BIN_DIR/$WESTON_IVI_SHELL
+
 }
 
 
 usage() {
-    echo "Usage: ./build.sh Build navigation"
-    echo "   or: ./build.sh [command])"
-    echo "   or: ./build.sh [command] <target bin> <target positioning> <target ilm>)"
+    echo "Usage: ./build.sh [command]"
+    echo "   or: ./build.sh [command] [paths]"
     echo
     echo "command:"
-    echo "  make       	Build"
-    echo "  make   <target bin> <target positioning>"
+    echo "  make        Build"
     echo "  makelm      Build with layer manager"
-    echo "  makelm <target bin> <target positioning> <target ilm> "
-    echo "       	<target bin>				Path of the binaries"
-    echo "       	<target positioning> 		Path of the positioning code"
-    echo "       	<target ilm> 			    Path of the ilm code"
-    echo "  clean      	Clean"
-    echo "  src-clean  	Clean the cloned sources"
-    echo "  help       	Print Help"
+    echo "  clean       Clean the bin"
+    echo "  src-clean   Clean the cloned sources and the bin"
+    echo "  clone       Clone the sources"
+    echo "  help        Print Help"
+    echo "paths:" 
+	echo "(used for remote build)"
+    echo "  <target bin>         Path of the binaries"
+    echo "  <target positioning> Path of the positioning code"
+    echo "  <target ilm>         Path of the ilm code"
+}
+
+clone() {
+    echo ''
+    echo 'Clone/update version of additional sources if needed'
+    cd $TOP_DIR 
+    mkdir -p bin
+    cd $TOP_BIN_DIR
+	cmake -Dpositioning_SRC_DIR=$target_positioning -Dlayer-management_SRC_DIR=$target_ilm $TOP_DIR
 }
 
 build() {
     echo ''
     echo 'Building navigation'
 
-    cd $TOP_DIR
-    mkdir -p bin
-    cd $TOP_BIN_DIR
-	cmake -Dpositioning_SRC_DIR=$target_positioning -Dlayer-management_SRC_DIR=$target_ilm $TOP_DIR
+	clone
+
+	if [ $lm -eq 1 ]; then
+		echo ''
+		echo 'Building layer manager'
+
+		if [ -z $WLD ]; then
+			echo 'need to build QtWayland first'
+			echo 'see the README file for details'
+			exit 1
+		fi
+		cd $TOP_BIN_DIR 
+		mkdir -p $IVI_LAYER_MANAGER
+
+		cd $IVI_LAYER_MANAGER_BIN_DIR
+		mkdir -p $WAYLAND_IVI_EXTENSION
+		cd $WAYLAND_IVI_EXTENSION_BIN_DIR
+		cp $SCRIPT_DIR/toolchain.cmake $WAYLAND_IVI_EXTENSION_SRC_DIR
+		cmake -DCMAKE_TOOLCHAIN_FILE=$WAYLAND_IVI_EXTENSION_SRC_DIR/toolchain.cmake $WAYLAND_IVI_EXTENSION_SRC_DIR
+		cmake -DCMAKE_TOOLCHAIN_FILE=$WAYLAND_IVI_EXTENSION_SRC_DIR/toolchain.cmake $WAYLAND_IVI_EXTENSION_SRC_DIR
+		make -j4
+		sudo make install
+
+		cd $IVI_LAYER_MANAGER_BIN_DIR
+		mkdir -p $WESTON_IVI_SHELL
+		cd $WESTON_IVI_SHELL_SRC_DIR
+		./autogen.sh --prefix=$WESTON_IVI_SHELL_BIN_DIR
+		make -j4 
+		sudo make install
+
+	fi
 
 	# make navit first, because plugins need navit built stuff
     echo ''
@@ -151,14 +198,6 @@ build() {
 	mkdir -p $NAVIT
 	cd $NAVIT_BIN_DIR
   	cmake $NAVIT_FLAGS $NAVIT_SRC_DIR/navit && make 
-
-    echo ''
-    echo 'Building layer manager'
-    cd $TOP_BIN_DIR 
-    mkdir -p $IVI_LAYER_MANAGER
-    cd $IVI_LAYER_MANAGER_BIN_DIR
-#    cmake $IVI_LAYER_MANAGER_SRC_DIR && make
-#	sudo make install 
 
     echo ''
     echo 'Building positioning'
@@ -265,15 +304,6 @@ if [ $# -ge 1 ]; then
     if [ $1 = help ]; then
         usage
     elif [ $1 = make ]; then
-		if [ $# -eq 3 ]; then
-			#use for remote build
-			target_bin=$(readlink -f $2)
-			target_positioning=$(readlink -f $3)
-		fi
-		set-path
-		lm=0
-        build
-    elif [ $1 = makelm ]; then
 		if [ $# -eq 4 ]; then
 			#use for remote build
 			target_bin=$(readlink -f $2)
@@ -281,20 +311,41 @@ if [ $# -ge 1 ]; then
 			target_ilm=$(readlink -f $4)
 		fi
 		set-path
+        build
+    elif [ $1 = makelm ]; then
 		lm=1
+		if [ $# -eq 4 ]; then
+			#use for remote build
+			target_bin=$(readlink -f $2)
+			target_positioning=$(readlink -f $3)
+			target_ilm=$(readlink -f $4)
+		fi
+		set-path
         build
     elif [ $1 = clean ]; then
 		set-path
         clean
     elif [ $1 = src-clean ]; then
+		if [ $# -eq 4 ]; then
+			#use for remote build
+			target_bin=$(readlink -f $2)
+			target_positioning=$(readlink -f $3)
+			target_ilm=$(readlink -f $4)
+		fi
 		set-path
         src-clean
+    elif [ $1 = clone ]; then
+		if [ $# -eq 4 ]; then
+			#use for remote build
+			target_bin=$(readlink -f $2)
+			target_positioning=$(readlink -f $3)
+			target_ilm=$(readlink -f $4)
+		fi
+		set-path
+        clone
     else
         usage
     fi
-elif [ $# -eq 0 ]; then
-    set-path
-    build
 else
     usage
 fi
