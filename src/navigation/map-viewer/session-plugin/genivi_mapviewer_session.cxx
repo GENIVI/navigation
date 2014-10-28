@@ -26,8 +26,8 @@
 * @licence end@
 */
 #include <dbus-c++/glib-integration.h>
-#include "constants/genivi-mapviewer-constants.h"
-#include "genivi_mapviewer_session_adaptor.h"
+#include "genivi-mapviewer-constants.h"
+#include "genivi-mapviewer-session_adaptor.h"
 #include "navit/config.h"
 #define USE_PLUGINS 1
 #include "navit/debug.h"

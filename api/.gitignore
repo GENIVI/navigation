@@ -1,11 +1,7 @@
 #folder used for downloading external APIs
-# enhanced-position-service/
 .project
-
-
-
-
-
-
-
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+include/
 

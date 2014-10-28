@@ -12,5 +12,7 @@ positioning/
 
 /.project
 
-positioning_*/
+CMakeFiles/
+CMakeCache.txt
+*.cmake
 

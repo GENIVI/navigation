@@ -17,7 +17,7 @@
 # @licence end@
 ###########################################################################
 TOP_DIR=$PWD/..
-TOP_BIN_DIR=$PWD/../bin
+TOP_BIN_DIR=$TOP_DIR/bin
 
 POI_COMMON=poi-common
 POI_COMMON_SRC_DIR=$TOP_DIR/$POI_COMMON
@@ -42,8 +42,11 @@ POI_SERVER_BIN_DIR=$POI_SERVER_TOP_DIR/bin
 POI_SERVER_SCRIPT_DIR=$POI_SERVER_TOP_DIR/script
 POI_SERVER_BUILD_SCRIPT=./build.sh
 
-GENIVI_NAVIGATION_ROUTING_API=$NAVIGATION_SERVICE_API_DIR/navigation-core/genivi-navigationcore-routing.xml
-GENIVI_NAVIGATION_CONSTANTS_API=$NAVIGATION_SERVICE_API_DIR/navigation-core/genivi-navigationcore-constants.xml
+API_DIR=$TOP_DIR/../../api
+
+NAVIGATION_CORE=navigation-core
+MAP_VIEWER=map-viewer
+POI_SERVICE=poi-service
 
 #--------------------------------------------------------------------------
 # Compiler Flags
@@ -68,6 +71,12 @@ usage() {
 build() {
     echo ''
     echo 'Building poi-service'
+
+    echo 'Generate DBus include files'
+
+	cmake $API_DIR/$NAVIGATION_CORE
+	cmake $API_DIR/$MAP_VIEWER
+	cmake $API_DIR/$POI_SERVICE
 
     echo 'Check and build poi-server if needed'
     cd $POI_SERVER_SCRIPT_DIR && bash $POI_SERVER_BUILD_SCRIPT make
@@ -96,8 +105,6 @@ clean() {
     cd $POI_SERVER_SCRIPT_DIR && bash $POI_SERVER_BUILD_SCRIPT clean
 	echo 'delete' $TOP_BIN_DIR 
 	rm -rf $TOP_BIN_DIR
-	echo 'delete dbus generated files'
-	rm -f $POI_COMMON_SRC_DIR/*_adaptor.h $POI_COMMON_SRC_DIR/*_proxy.h $POI_COMMON_SRC_DIR/*-constants.h
 	echo 'delete qm generated files'
 	rm -f $POI_COMMON_SRC_DIR/*.qm 
 }
@@ -106,8 +113,6 @@ src-clean() {
     cd $POI_SERVER_SCRIPT_DIR && bash $POI_SERVER_BUILD_SCRIPT src-clean
 	echo 'delete' $TOP_BIN_DIR 
 	rm -rf $TOP_BIN_DIR
-	echo 'delete dbus generated files'
-	rm -f $POI_COMMON_SRC_DIR/*_adaptor.h $POI_COMMON_SRC_DIR/*_proxy.h $POI_COMMON_SRC_DIR/*-constants.h
 	echo 'delete qm generated files'
 	rm -f $POI_COMMON_SRC_DIR/*.qm 
 }

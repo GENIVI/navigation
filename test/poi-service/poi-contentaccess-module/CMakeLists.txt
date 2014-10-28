@@ -71,105 +71,10 @@ set(qt_uic ${QTUIC} -o)
 set(qt_release ${QTLRELEASE})
 set(qt_rcc ${QTRCC})
 
-set(positioning_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../src/poi-service/positioning)
-if (NOT IS_DIRECTORY ${positioning_SRC_DIR})
-  message(FATAL_ERROR "positioning has not been cloned before")
-endif()
-
-# Generate the DBus adaptors and proxy before building the client
 set(API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../api)
-set(TARGET_GENERATED_API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../poi-common)
-set(positioning_API_DIR ${positioning_SRC}/enhanced-position-service/api)
+set(TARGET_GENERATED_API_DIR ${API_DIR}/include)
 
-file (GLOB XML_TO_DBUS_PROXY 
-	${API_DIR}/poi-service/genivi-poiservice-poisearch.xml
-	${API_DIR}/poi-service/genivi-poiservice-poicontentaccess.xml
-	${API_DIR}/poi-service/genivi-poiservice-contentaccessmodule.xml
-	${positioning_SRC_DIR}/enhanced-position-service/api/genivi-positioning-enhancedposition.xml
-	${API_DIR}/navigation-core/genivi-navigationcore-routing.xml
-	${API_DIR}/navigation-core/genivi-navigationcore-guidance.xml
-)
-foreach (RAW_FILE ${XML_TO_DBUS_PROXY})
-	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}_proxy.h)
-		execute_process(
-			COMMAND ${DBUSXML2CPP} ${RAW_FILE} --proxy=${TARGET_GENERATED_API_DIR}/${FILE}_proxy.h  
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}_proxy.h)
-			execute_process(
-				COMMAND ${DBUSXML2CPP} ${RAW_FILE} --proxy=${TARGET_GENERATED_API_DIR}/${FILE}_proxy.h  
-			)
-		endif()
-	endif()
-endforeach()
-
-file (GLOB XML_TO_DBUS_ADAPTOR
-	${API_DIR}/poi-service/genivi-poiservice-poisearch.xml
-	${API_DIR}/poi-service/genivi-poiservice-poicontentaccess.xml
-	${API_DIR}/poi-service/genivi-poiservice-contentaccessmodule.xml
-	${positioning_SRC_DIR}/enhanced-position-service/api/genivi-positioning-enhancedposition.xml
-	${API_DIR}/navigation-core/genivi-navigationcore-routing.xml
-	${API_DIR}/navigation-core/genivi-navigationcore-guidance.xml
-)
-foreach (RAW_FILE ${XML_TO_DBUS_ADAPTOR})
-	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h)
-		execute_process(
-			COMMAND ${DBUSXML2CPP} ${RAW_FILE} --adaptor=${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h  
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h)
-			execute_process(
-				COMMAND ${DBUSXML2CPP} ${RAW_FILE} --adaptor=${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h  
-			)
-		endif()
-	endif()
-endforeach()
-
-file (GLOB XML_TO_DBUS_CONSTANT
-	${API_DIR}/poi-service/genivi-poiservice-constants.xml
-	${API_DIR}/map-viewer/genivi-mapviewer-constants.xml
-	${API_DIR}/navigation-core/genivi-navigationcore-constants.xml
-)
-foreach (RAW_FILE ${XML_TO_DBUS_CONSTANT})
-	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}.h)
-		execute_process(
-			OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-			COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}        
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}.h)
-			execute_process(
-				OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-				COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}        
-			)
-		endif()
-	endif()
-endforeach()
-
-file (GLOB XML_TO_DBUS_CONSTANT_FROM_POSITIONING
-	${positioning_SRC_DIR}/enhanced-position-service/api/genivi-positioning-constants.xml
-)
-foreach (RAW_FILE ${XML_TO_DBUS_CONSTANT_FROM_POSITIONING})
-	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}.h)
-		execute_process(
-			OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-			COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}   
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}.h)
-			execute_process(
-				OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-				COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}   
-			)
-		endif()
-	endif()
-endforeach()
-
-file(GLOB DBUS_DEF_INCLUDE ${DBUS_DEF_DIR}/*_proxy.h ${DBUS_DEF_DIR}/*_adaptor.h ${DBUS_DEF_DIR}/*-constants.h)
+file(GLOB DBUS_DEF_INCLUDE ${TARGET_GENERATED_API_DIR}/*_proxy.h ${TARGET_GENERATED_API_DIR}/*_adaptor.h ${TARGET_GENERATED_API_DIR}/*-constants.h)
 
 link_directories(
     ${DBUS_CPP_LIBRARY_DIRS}
@@ -286,6 +191,7 @@ add_executable(poi-contentaccess-module
     ${MOC_SOURCES}
     ${DBUS_DEF_INCLUDE}
     ${UI_FILES}
+	poi-contentaccess-module-class.h
     main.cpp
     database.cpp
     mainwindow.cpp

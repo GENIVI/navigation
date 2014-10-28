@@ -54,59 +54,10 @@ set(qt_uic ${QTUIC} -o)
 set(qt_release ${QTLRELEASE})
 set(qt_rcc ${QTRCC} -binary)
 
-set(positioning_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../src/poi-service/positioning)
-if (NOT IS_DIRECTORY ${positioning_SRC_DIR})
-  message(FATAL_ERROR "positioning has not been cloned before")
-endif()
-
-# Generate the DBus adaptors and proxy before building the client
 set(API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../api)
-set(TARGET_GENERATED_API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../poi-common)
-set(positioning_API_DIR ${positioning_SRC}/enhanced-position-service/api)
+set(TARGET_GENERATED_API_DIR ${API_DIR}/include)
 
-file (GLOB XML_TO_DBUS_CONSTANT
-	${API_DIR}/poi-service/genivi-poiservice-constants.xml
-	${API_DIR}/map-viewer/genivi-mapviewer-constants.xml
-	${API_DIR}/navigation-core/genivi-navigationcore-constants.xml
-)
-foreach (RAW_FILE ${XML_TO_DBUS_CONSTANT})
-	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}.h)
-		execute_process(
-			OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-			COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}        
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}.h)
-			execute_process(
-				OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-				COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}        
-			)
-		endif()
-	endif()
-endforeach()
-
-file (GLOB XML_TO_DBUS_CONSTANT_FROM_POSITIONING
-	${positioning_SRC_DIR}/enhanced-position-service/api/genivi-positioning-constants.xml
-)
-foreach (RAW_FILE ${XML_TO_DBUS_CONSTANT_FROM_POSITIONING})
-	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}.h)
-		execute_process(
-			OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-			COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}   
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}.h)
-			execute_process(
-				OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-				COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}   
-			)
-		endif()
-	endif()
-endforeach()
-
-file(GLOB DBUS_DEF_INCLUDE ${DBUS_DEF_DIR}/*-constants.h)
+file(GLOB DBUS_DEF_INCLUDE ${TARGET_GENERATED_API_DIR}/*-constants.h)
 
 link_directories(
 	${QT5_CORE_LIBRARY_DIRS}

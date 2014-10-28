@@ -26,8 +26,8 @@
 * @licence end@
 */
 #include <dbus-c++/glib-integration.h>
-#include "constants/genivi-navigationcore-constants.h"
-#include "genivi_navigationcore_locationinput_adaptor.h"
+#include "genivi-navigationcore-constants.h"
+#include "genivi-navigationcore-locationinput_adaptor.h"
 #include "navit/config.h"
 #define USE_PLUGINS 1
 #include "navit/debug.h"

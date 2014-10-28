@@ -37,10 +37,10 @@
 #include <QListWidgetItem>
 #include <QGraphicsScene>
 #include <QGraphicsEllipseItem>
-#include "../poi-common/genivi-positioning-constants.h"
-#include "../poi-common/genivi-mapviewer-constants.h"
-#include "../poi-common/genivi-navigationcore-constants.h"
-#include "../poi-common/genivi-poiservice-constants.h"
+#include "../../../api/include/genivi-positioning-constants.h"
+#include "../../../api/include/genivi-mapviewer-constants.h"
+#include "../../../api/include/genivi-navigationcore-constants.h"
+#include "../../../api/include/genivi-poiservice-constants.h"
 
 #include "poi-client-DBusSearchInterface.h"
 #include "poi-client-DBusContentAccessInterface.h"

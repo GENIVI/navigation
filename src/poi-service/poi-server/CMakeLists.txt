@@ -43,6 +43,7 @@ include_directories(${DBUS_CPP_GLIB_INCLUDE_DIRS})
 
 set (git_get_src_version git rev-parse HEAD)
 set (git_executable git)
+set(cmake_create_dir cmake -E make_directory)
 
 # Check if positioning stuff with the right version has been cloned and make it if necessary
 # set(positioning_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../positioning)
@@ -89,15 +90,20 @@ else()
 	endif()	
 endif()
 
-# Generate the DBus adaptors and proxy before building the client
+# Generate the DBus adaptors and proxy of positioning
 set(API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../api)
-set(TARGET_GENERATED_API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../poi-common)
+
+execute_process(
+	WORKING_DIRECTORY ${API_DIR}
+        COMMAND ${cmake_create_dir} include
+)
+
+set(TARGET_GENERATED_API_DIR ${API_DIR}/include)
+
 set(positioning_API_DIR ${positioning_SRC}/enhanced-position-service/api)
 
 file (GLOB XML_TO_DBUS_PROXY 
-	${API_DIR}/poi-service/genivi-poiservice-contentaccessmodule.xml
 	${positioning_SRC_DIR}/enhanced-position-service/api/genivi-positioning-enhancedposition.xml
-	${API_DIR}/navigation-core/genivi-navigationcore-routing.xml
 )
 foreach (RAW_FILE ${XML_TO_DBUS_PROXY})
 	get_filename_component(FILE ${RAW_FILE} NAME_WE)
@@ -115,8 +121,7 @@ foreach (RAW_FILE ${XML_TO_DBUS_PROXY})
 endforeach()
 
 file (GLOB XML_TO_DBUS_ADAPTOR
-	${API_DIR}/poi-service/genivi-poiservice-poisearch.xml
-	${API_DIR}/poi-service/genivi-poiservice-poicontentaccess.xml
+	${positioning_SRC_DIR}/enhanced-position-service/api/genivi-positioning-enhancedposition.xml
 )
 foreach (RAW_FILE ${XML_TO_DBUS_ADAPTOR})
 	get_filename_component(FILE ${RAW_FILE} NAME_WE)
@@ -128,28 +133,6 @@ foreach (RAW_FILE ${XML_TO_DBUS_ADAPTOR})
 		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h)
 			execute_process(
 				COMMAND ${DBUSXML2CPP} ${RAW_FILE} --adaptor=${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h  
-			)
-		endif()
-	endif()
-endforeach()
-
-file (GLOB XML_TO_DBUS_CONSTANT
-	${API_DIR}/poi-service/genivi-poiservice-constants.xml
-	${API_DIR}/map-viewer/genivi-mapviewer-constants.xml
-	${API_DIR}/navigation-core/genivi-navigationcore-constants.xml
-)
-foreach (RAW_FILE ${XML_TO_DBUS_CONSTANT})
-	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}.h)
-		execute_process(
-			OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-			COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}        
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}.h)
-			execute_process(
-				OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-				COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}        
 			)
 		endif()
 	endif()
@@ -169,13 +152,13 @@ foreach (RAW_FILE ${XML_TO_DBUS_CONSTANT_FROM_POSITIONING})
 		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}.h)
 			execute_process(
 				OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-				COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}   
+				COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}   #use another enum.xsl for radix consistency
 			)
 		endif()
 	endif()
 endforeach()
 
-file(GLOB DBUS_DEF_INCLUDE ${DBUS_DEF_DIR}/*_proxy.h ${DBUS_DEF_DIR}/*_adaptor.h ${DBUS_DEF_DIR}/*-constants.h)
+file(GLOB DBUS_DEF_INCLUDE ${TARGET_GENERATED_API_DIR}/*_proxy.h ${TARGET_GENERATED_API_DIR}/*_adaptor.h ${TARGET_GENERATED_API_DIR}/*-constants.h)
 
 link_directories(
     ${DBUS_CPP_LIBRARY_DIRS}

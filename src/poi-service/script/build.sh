@@ -17,7 +17,7 @@
 # @licence end@
 ###########################################################################
 TOP_DIR=$PWD/..
-TOP_BIN_DIR=$PWD/../bin
+TOP_BIN_DIR=$TOP_DIR/bin
 
 POI_SERVER=poi-server
 POI_SERVER_SRC_DIR=$TOP_DIR/$POI_SERVER
@@ -27,6 +27,12 @@ POSITIONING_SRC_DIR=$TOP_DIR/positioning
 POI_COMMON=poi-common
 POI_COMMON_SRC_DIR=$TOP_DIR/$POI_COMMON
 
+API_DIR=$TOP_DIR/../../api
+
+NAVIGATION_CORE=navigation-core
+MAP_VIEWER=map-viewer
+POI_SERVICE=poi-service
+
 usage() {
     echo "Usage: ./build.sh Build poi-server"
     echo "   or: ./build.sh [command]"
@@ -35,6 +41,7 @@ usage() {
     echo "  make            Build"
     echo "  clean           Clean"
     echo "  src-clean       Clean the cloned sources"
+    echo "  clone           Clone the sources"
     echo "  help            Print Help"
     echo
     echo
@@ -43,16 +50,33 @@ usage() {
 build() {
     echo ''
     echo 'Building poi-server' 
-    mkdir -p $POI_SERVER_BIN_DIR
-    cd $POI_SERVER_BIN_DIR 
-    cmake -Dpositioning_SRC_DIR=$POSITIONING_SRC_DIR $POI_SERVER_SRC_DIR && make
+
+	if [ ! -d "$POSITIONING_SRC_DIR" ]; then
+	  	echo 'Do clone first'
+		exit 1
+	fi
+
+    echo 'Generate DBus include files'
+
+	cmake $API_DIR/$NAVIGATION_CORE
+	cmake $API_DIR/$MAP_VIEWER
+	cmake $API_DIR/$POI_SERVICE
+
+	make
+}
+
+clone() {
+    echo ''
+    echo 'Clone/update version of additional sources if needed'
+    cd $TOP_DIR 
+    mkdir -p bin
+    cd $TOP_BIN_DIR
+	cmake -Dpositioning_SRC_DIR=$POSITIONING_SRC_DIR $POI_SERVER_SRC_DIR
 }
 
 clean() {
 	echo 'delete' $POI_SERVER_BIN_DIR 
     rm -rf $POI_SERVER_BIN_DIR
-	echo 'delete dbus generated files'
-	rm -f $POI_COMMON_SRC_DIR/*_adaptor.h $POI_COMMON_SRC_DIR/*_proxy.h $POI_COMMON_SRC_DIR/*-constants.h
 }
 
 src-clean() {
@@ -72,6 +96,8 @@ if [ $# -ge 1 ]; then
         clean
     elif [ $1 = src-clean ]; then
         src-clean
+    elif [ $1 = clone ]; then
+        clone
     else
         usage
     fi

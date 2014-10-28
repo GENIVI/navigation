@@ -24,23 +24,30 @@
 #
 # @licence end@
 cmake_minimum_required(VERSION 2.8)
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+
 include(FindPkgConfig)
-include(${navit_SOURCE_DIR}/cmake/navit_macros.cmake)
-include_directories(${INCLUDE_DIRECTORIES})
-include_directories(.)
-include_directories(compat_includes)
-include_directories(${navit_SOURCE_DIR}/..)
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/..)
-link_directories(${CMAKE_CURRENT_SOURCE_DIR}/compat_libs)
+
+include(${navit_SRC_DIR}/navit/cmake/navit_macros.cmake)
+
 add_definitions(-DPLUGIN=1)
+
 pkg_search_module(DBUS_CPP dbus-c++-glib-1 dbus-c++-1)
 pkg_search_module(GLIB glib-2.0)
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${DBUS_CPP_INCLUDE_DIRS})
+
+include_directories(${INCLUDE_DIRECTORIES})
+include_directories(.)
+include_directories(${navit_SRC_DIR}/navit)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+include_directories(${CMAKE_CURRENT_BINARY_DIR}/../..)
+
+include_directories(${generated_api_DIR})
+
 set(genivi_navigationcore_configuration_LIBS ${DBUS_CPP_LDFLAGS})
-ADD_CUSTOM_COMMAND(OUTPUT genivi_navigationcore_configuration_adaptor.h
-		   COMMAND dbusxx-xml2cpp ${navigationcore_API}/genivi-navigationcore-configuration.xml --adaptor=genivi_navigationcore_configuration_adaptor.h
-		   DEPENDS ${navigationcore_API}/genivi-navigationcore-configuration.xml
-		   )
-module_add_library(genivi_navigationcore_configuration genivi_navigationcore_configuration.cxx genivi_navigationcore_configuration_adaptor.h) 
+
+module_add_library(genivi_navigationcore_configuration genivi_navigationcore_configuration.cxx ${generated_api_DIR}/genivi-navigationcore-configuration_adaptor.h) 
+
+

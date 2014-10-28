@@ -1,9 +1,20 @@
-Important notice:
-The order of the files included into the Makefile (by include *.mk) has to follow a specific order:
-positioning.mk
-navit.mk
-and others ..
-So, the way it's managed is the following:
-0 radical added to positioning.mk so now the file name is 0positioning.mk
-1 radical added to navit.mk sonow the file name is 1navit.mk
+For using the layer manager, you need to set the env variable and the paths:
+source set-ilm-env.sh
+
+To build the navigation middleware you need first to clone some additional stuff:
+./build.sh clone
+
+To build without the layer manager:
+./build.sh make
+
+To build with the layer manager:
+./build.sh makelm
+
+CMakeLists.txt organization:
+
+src/navigation/CMakeLists.txt
+To clone the sources located into different repositories
+To get the map
+
+src/navigation/map/CMakeLists.txt
 

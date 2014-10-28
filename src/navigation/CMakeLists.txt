@@ -30,11 +30,15 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 set (git_get_src_version git rev-parse HEAD)
 set (git_executable ${GIT})
 set (create_file cmake -E touch)
+set (remove_file cmake -E rm)
 
 set (svn_executable ${SVN})
 set (svn_get_src_version svnversion)
 
 set(cmake_create_dir cmake -E make_directory)
+set (apply_patch patch -p1 -s) 
+
+set(WITH_LM $ENV{WLD}) 
 
 # Check if ivi layer management stuff with the right version has been cloned and do it if necessary
 # ilm is cloned into sub dir
@@ -135,14 +139,13 @@ else()
 	endif()	
 endif()
 
-set (PATCH_EXECUTABLE patch -p1 -s) 
 if (EXISTS ${weston-ivi-shell_PATCH_DUMMY_FILE})
 	message(STATUS "patch already applied to weston-ivi-shell")
 else()
 	message(STATUS "apply the patches to weston-ivi-shell")
 	execute_process(
-		COMMAND ${PATCH_EXECUTABLE} -i ${weston-ivi-shell_PATCH_SRC_DIR}/0001-client.pro-Disable-create_cmake-configuration.patch
-		COMMAND ${PATCH_EXECUTABLE} -i ${weston-ivi-shell_PATCH_SRC_DIR}/0002-Update-ivi-application.xml-and-fix-inplementation-of.patch
+		COMMAND ${apply_patch} -i ${weston-ivi-shell_PATCH_SRC_DIR}/0001-client.pro-Disable-create_cmake-configuration.patch
+		COMMAND ${apply_patch} -i ${weston-ivi-shell_PATCH_SRC_DIR}/0002-Update-ivi-application.xml-and-fix-inplementation-of.patch
 		COMMAND ${create_file} ${weston-ivi-shell_PATCH_DUMMY_FILE}
 		TIMEOUT 0.1 #cmake -E touch never ends so add a timeout here
 		WORKING_DIRECTORY "${weston-ivi-shell_SRC_DIR}"
@@ -203,6 +206,8 @@ endif()
 set(navit_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/navit)
 set(navit_URL http://svn.code.sf.net/p/navit/code/trunk)
 set(navit_VERSION 5532)
+set(navit_PATCH_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/patches)
+set(navit_PATCH_DUMMY_FILE ${navit_SRC_DIR}/.patched)
 
 if (EXISTS ${navit_SRC_DIR})
 	execute_process(COMMAND ${svn_get_src_version}  
@@ -234,17 +239,29 @@ else()
 	endif()
 endif()
 
-# Check if the map has been got and do it if necessary (no version checked for the moment)
+if (WITH_LM)
+	if (EXISTS ${navit_PATCH_DUMMY_FILE})
+		message(STATUS "patch already applied to navit")
+	else()
+		message(STATUS "apply the patches to navit")
+		execute_process(
+			COMMAND ${apply_patch} -i ${navit_PATCH_SRC_DIR}/0001-add-wayland-ilm-support-navit.patch
+			COMMAND ${create_file} ${navit_PATCH_DUMMY_FILE}
+			TIMEOUT 0.1 #cmake -E touch never ends so add a timeout here
+			WORKING_DIRECTORY "${navit_SRC_DIR}"
+			RESULT_VARIABLE error_code
+		)
+		if(error_code)
+			message(FATAL_ERROR "Failed to apply the patch")
+		endif()	
+	endif()
+endif()
+
+# Check if the map data base have been got and do it if necessary (no version checked for the moment)
 set(map_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/map)
 set(MAP_FILE switzerland.bin)
-set(MAP_XML_FILE switzerland.xml)
 set(map_URL http://www.navit-project.org/${MAP_FILE})
-set(NAVIT_BIN_DIR ${CMAKE_CURRENT_BINARY_DIR}/navit)
 set(wget wget -O)
-execute_process(
-	WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-	COMMAND ${cmake_create_dir} map
-)
 
 if (NOT EXISTS ${map_SRC_DIR}/${MAP_FILE})
 	message(STATUS "get the map")
@@ -258,137 +275,5 @@ if (NOT EXISTS ${map_SRC_DIR}/${MAP_FILE})
 	endif()
 endif()
 
-if (NOT EXISTS ${NAVIT_BIN_DIR}/navit/maps/${MAP_XML_FILE})
-	message(STATUS "generate xml file for the map")
-	file(WRITE ${NAVIT_BIN_DIR}/navit/maps/${MAP_XML_FILE} "<map type=\"binfile\" data=\"${map_SRC_DIR}/${MAP_FILE}\" />")
-endif()
 
-# Generate the DBus files used by the plugins before building the code
-set(API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../api)
-execute_process(
-	COMMAND ${cmake_create_dir} navit
-)
-execute_process(
-	WORKING_DIRECTORY "${NAVIT_BIN_DIR}"
-	COMMAND ${cmake_create_dir} navit
-)
-set(CONSTANTS_BIN_DIR ${CMAKE_CURRENT_BINARY_DIR}/constants)
-execute_process(
-	COMMAND ${cmake_create_dir} constants
-)
 
-# Do it for navigation-core
-set(NAVIGATION_CORE_SRC ${CMAKE_CURRENT_SOURCE_DIR}/navigation-core)
-set(positioning_API_DIR ${positioning_SRC}/enhanced-position-service/api)
-
-if(NOT EXISTS ${NAVIT_BIN_DIR}/navit/navit_genivi_navigationcore.xml)
-	execute_process(
-		OUTPUT_FILE ${NAVIT_BIN_DIR}/navit/navit_genivi_navigationcore.xml
-		COMMAND ${XSLTPROC} ${NAVIGATION_CORE_SRC}/navit_genivi_navigationcore.xsl ${navit_SRC_DIR}/navit/navit/navit_shipped.xml        
-	)
-else()
-	if(${NAVIGATION_CORE_SRC}/navit_genivi_navigationcore.xsl IS_NEWER_THAN ${NAVIT_BIN_DIR}/navit/navit_genivi_navigationcore.xml)
-		execute_process(
-			OUTPUT_FILE ${NAVIT_BIN_DIR}/navit/navit_genivi_navigationcore.xml
-			COMMAND ${XSLTPROC} ${NAVIGATION_CORE_SRC}/navit_genivi_navigationcore.xsl ${navit_SRC_DIR}/navit/navit/navit_shipped.xml        
-		)
-	endif()
-endif()
-
-file (GLOB XML_TO_DBUS_CONSTANT
-	${API_DIR}/navigation-core/genivi-navigationcore-constants.xml
-)
-foreach (RAW_FILE ${XML_TO_DBUS_CONSTANT})
-	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${CONSTANTS_BIN_DIR}/${FILE}.h)
-		execute_process(
-			OUTPUT_FILE ${CONSTANTS_BIN_DIR}/${FILE}.h
-			COMMAND ${XSLTPROC} ${API_DIR}/navigation-core/enum.xsl ${RAW_FILE}        
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${CONSTANTS_BIN_DIR}/${FILE}.h)
-			execute_process(
-				OUTPUT_FILE ${CONSTANTS_BIN_DIR}/${FILE}.h
-				COMMAND ${XSLTPROC} ${API_DIR}/navigation-core/enum.xsl ${RAW_FILE}        
-			)
-		endif()
-	endif()
-endforeach()
-
-file (GLOB XML_TO_DBUS_CONSTANT_FROM_POSITIONING
-	${positioning_SRC_DIR}/enhanced-position-service/api/genivi-positioning-constants.xml
-)
-foreach (RAW_FILE ${XML_TO_DBUS_CONSTANT_FROM_POSITIONING})
-	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${CONSTANTS_BIN_DIR}/${FILE}.h)
-		execute_process(
-			OUTPUT_FILE ${CONSTANTS_BIN_DIR}/${FILE}.h
-			COMMAND ${XSLTPROC} ${API_DIR}/navigation-core/enum.xsl ${RAW_FILE}   
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${CONSTANTS_BIN_DIR}/${FILE}.h)
-			execute_process(
-				OUTPUT_FILE ${CONSTANTS_BIN_DIR}/${FILE}.h
-				COMMAND ${XSLTPROC} ${API_DIR}/navigation-core/enum.xsl ${RAW_FILE}   
-			)
-		endif()
-	endif()
-endforeach()
-
-# Do it for map-viewer
-set(MAP_VIEWER_SRC ${CMAKE_CURRENT_SOURCE_DIR}/map-viewer)
-
-if(NOT EXISTS ${NAVIT_BIN_DIR}/navit/navit_genivi_mapviewer.xml)
-	execute_process(
-		OUTPUT_FILE ${NAVIT_BIN_DIR}/navit/navit_genivi_mapviewer.xml
-		COMMAND ${XSLTPROC} ${MAP_VIEWER_SRC}/navit_genivi_mapviewer.xsl ${navit_SRC_DIR}/navit/navit/navit_shipped.xml        
-	)
-else()
-	if(${MAP_VIEWER_SRC}/navit_genivi_mapviewer.xsl IS_NEWER_THAN ${NAVIT_BIN_DIR}/navit/navit_genivi_mapviewer.xml)
-		execute_process(
-			OUTPUT_FILE ${NAVIT_BIN_DIR}/navit/navit_genivi_mapviewer.xml
-			COMMAND ${XSLTPROC} ${MAP_VIEWER_SRC}/navit_genivi_mapviewer.xsl ${navit_SRC_DIR}/navit/navit/navit_shipped.xml        
-		)
-	endif()
-endif()
-
-file (GLOB XML_TO_DBUS_CONSTANT
-	${API_DIR}/map-viewer/genivi-mapviewer-constants.xml
-)
-foreach (RAW_FILE ${XML_TO_DBUS_CONSTANT})
-	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${CONSTANTS_BIN_DIR}/${FILE}.h)
-		execute_process(
-			OUTPUT_FILE ${CONSTANTS_BIN_DIR}/${FILE}.h
-			COMMAND ${XSLTPROC} ${API_DIR}/map-viewer/enum.xsl ${RAW_FILE}        
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${CONSTANTS_BIN_DIR}/${FILE}.h)
-			execute_process(
-				OUTPUT_FILE ${CONSTANTS_BIN_DIR}/${FILE}.h
-				COMMAND ${XSLTPROC} ${API_DIR}/map-viewer/enum.xsl ${RAW_FILE}        
-			)
-		endif()
-	endif()
-endforeach()
-
-# Do it for poi-service
-file (GLOB XML_TO_DBUS_CONSTANT
-	${API_DIR}/poi-service/genivi-poiservice-constants.xml
-)
-foreach (RAW_FILE ${XML_TO_DBUS_CONSTANT})
-	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${CONSTANTS_BIN_DIR}/${FILE}.h)
-		execute_process(
-			OUTPUT_FILE ${CONSTANTS_BIN_DIR}/${FILE}.h
-			COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}        
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${CONSTANTS_BIN_DIR}/${FILE}.h)
-			execute_process(
-				OUTPUT_FILE ${CONSTANTS_BIN_DIR}/${FILE}.h
-				COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}        
-			)
-		endif()
-	endif()
-endforeach()

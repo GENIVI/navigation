@@ -48,8 +48,8 @@
  */
 
 #include <dbus-c++/glib-integration.h>
-#include "constants/genivi-navigationcore-constants.h"
-#include "constants/genivi-positioning-constants.h"
+#include "genivi-navigationcore-constants.h"
+#include "genivi-positioning-constants.h"
 #include <glib.h>
 #include <string.h>
 #include <stdbool.h>
@@ -68,7 +68,7 @@
 
 #include "time.h"
 
-#include "genivi_positioning_enhancedposition_proxy.h"
+#include "genivi-positioning-enhancedposition_proxy.h"
 
 DBus::Glib::BusDispatcher dispatcher;
 DBus::Connection *conn;

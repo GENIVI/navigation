@@ -29,8 +29,8 @@
 #include <dbus-c++/glib-integration.h>
 #include <locale.h>
 #include <stdlib.h>
-#include "constants/genivi-navigationcore-constants.h"
-#include "genivi_navigationcore_configuration_adaptor.h"
+#include "genivi-navigationcore-constants.h"
+#include "genivi-navigationcore-configuration_adaptor.h"
 #include "navit/config.h"
 #define USE_PLUGINS 1
 #include "navit/debug.h"

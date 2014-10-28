@@ -40,9 +40,9 @@
 #include "navit/transform.h"
 #include "navit/map.h"
 #include "navit/mapset.h"
-#include "constants/genivi-poiservice-constants.h"
-#include "genivi_poiservice_poicontentaccess_proxy.h"
-#include "genivi_poiservice_contentaccessmodule_adaptor.h"
+#include "genivi-poiservice-constants.h"
+#include "genivi-poiservice-poicontentaccess_proxy.h"
+#include "genivi-poiservice-contentaccessmodule_adaptor.h"
 
 #include <algorithm>
 

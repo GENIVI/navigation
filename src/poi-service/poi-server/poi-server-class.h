@@ -28,15 +28,15 @@
 #ifndef POIPOCSERVERCLASS_H
 #define POIPOCSERVERCLASS_H
 
-#include "../poi-common/genivi-positioning-constants.h"
-#include "../poi-common/genivi-mapviewer-constants.h"
-#include "../poi-common/genivi-navigationcore-constants.h"
-#include "../poi-common/genivi-poiservice-constants.h"
-#include "../poi-common/genivi-poiservice-poisearch_adaptor.h"
-#include "../poi-common/genivi-poiservice-poicontentaccess_adaptor.h"
-#include "../poi-common/genivi-navigationcore-routing_proxy.h"
-#include "../poi-common/genivi-positioning-enhancedposition_proxy.h"
-#include "../poi-common/genivi-poiservice-contentaccessmodule_proxy.h"
+#include "../../../api/include/genivi-positioning-constants.h"
+#include "../../../api/include/genivi-mapviewer-constants.h"
+#include "../../../api/include/genivi-navigationcore-constants.h"
+#include "../../../api/include/genivi-poiservice-constants.h"
+#include "../../../api/include/genivi-poiservice-poisearch_adaptor.h"
+#include "../../../api/include/genivi-poiservice-poicontentaccess_adaptor.h"
+#include "../../../api/include/genivi-navigationcore-routing_proxy.h"
+#include "../../../api/include/genivi-positioning-enhancedposition_proxy.h"
+#include "../../../api/include/genivi-poiservice-contentaccessmodule_proxy.h"
 #include "../poi-common/common-data-model.h"
 #include <dbus-c++/glib-integration.h>
 

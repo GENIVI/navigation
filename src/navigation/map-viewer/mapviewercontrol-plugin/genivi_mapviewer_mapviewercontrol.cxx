@@ -39,12 +39,12 @@
 #define FSA_LAYER 2000
 #endif
 #endif
-#include "genivi_mapviewer_mapviewercontrol_adaptor.h"
-#include "genivi_navigationcore_routing_proxy.h"
-#include "genivi_navigationcore_session_proxy.h"
-#include "genivi_navigationcore_mapmatchedposition_proxy.h"
-#include "constants/genivi-navigationcore-constants.h"
-#include "constants/genivi-mapviewer-constants.h"
+#include "genivi-mapviewer-mapviewercontrol_adaptor.h"
+#include "genivi-navigationcore-routing_proxy.h"
+#include "genivi-navigationcore-session_proxy.h"
+#include "genivi-navigationcore-mapmatchedposition_proxy.h"
+#include "genivi-navigationcore-constants.h"
+#include "genivi-mapviewer-constants.h"
 #include "navit/config.h"
 #define USE_PLUGINS 1
 #include "navit/debug.h"

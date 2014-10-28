@@ -1,4 +1,4 @@
-Release date of the file: 25-07-2014 
+Release date of the file: 27-10-2014 
 Status: OK
 
 Project:
@@ -28,15 +28,12 @@ Ubuntu 14.04 LTS
 To get the code:
 git clone http://git.projects.genivi.org/lbs/navigation-service.git $WORKING-DIR
 
-Dependencies:
-(to be completed)
-cmake xsltproc libdbus-c++-dev libdbus-1-dev libdbus-c++-bin
-
-Build:
+Build scripts (cmake based) are located into:
 cd $WORKING-DIR/navigation-service/src/navigation/script
-make all2
 
-To launch (several options available):
+./build.sh clone
+./build.sh make
+
 ./run 
 
-
+See the README into the script dir for further explanations
