@@ -29,7 +29,7 @@
 echo '------------------------start the server------------------------'
 CURDIR=$PWD
 ROOT_DIR=$CURDIR/..
-BIN_DIR=$ROOT_DIR/bin
+BIN_DIR=$ROOT_DIR/bin/poi-server
 EXE_DIR=$BIN_DIR
 MAIN_DATABASE='poi-database-sample.db'
 

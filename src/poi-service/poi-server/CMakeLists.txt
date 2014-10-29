@@ -45,120 +45,27 @@ set (git_get_src_version git rev-parse HEAD)
 set (git_executable git)
 set(cmake_create_dir cmake -E make_directory)
 
-# Check if positioning stuff with the right version has been cloned and make it if necessary
-# set(positioning_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../positioning)
-# positioning_SRC_DIR is set by cmake -Dpositioning_SRC_DIR=<path to positioning src dir>
-set(positioning_URL http://git.projects.genivi.org/lbs/positioning.git)
-set(positioning_VERSION fde1a780f531389d5a05e3b0486c98ad34df3dcb)
+include_directories(${generated_api_DIR})
 
-if (EXISTS ${positioning_SRC_DIR})
-	execute_process(COMMAND ${git_get_src_version}  
-					WORKING_DIRECTORY "${positioning_SRC_DIR}"
-					RESULT_VARIABLE result
-					OUTPUT_VARIABLE version)
-	if (${version} MATCHES ${positioning_VERSION})
-		message(STATUS "version of positioning up to date")	
-	else()
-		message(STATUS "get the right version")
-	 	execute_process(
-			COMMAND "${git_executable}" checkout ${positioning_VERSION}
-			WORKING_DIRECTORY "${positioning_SRC_DIR}"
-			RESULT_VARIABLE error_code
-		)
-		if(error_code)
-			message(FATAL_ERROR "Failed to checkout version: '${positioning_VERSION}'")
-		endif()	
-	endif()
-else()
-	message(STATUS "clone positioning")
+ADD_CUSTOM_COMMAND(OUTPUT ${generated_api_DIR}/genivi-positioning-enhancedposition_proxy.h
+		   COMMAND dbusxx-xml2cpp ${positioning_API}/genivi-positioning-enhancedposition.xml --proxy=${generated_api_DIR}/genivi-positioning-enhancedposition_proxy.h 
+		   DEPENDS ${positioning_API}/genivi-positioning-enhancedposition.xml
+		   )
+
+if(NOT EXISTS ${generated_api_DIR}/genivi-positioning-constants.h)
 	execute_process(
-		COMMAND "${git_executable}" clone "${positioning_URL}" "${positioning_SRC_DIR}"
-		RESULT_VARIABLE error_code
+		OUTPUT_FILE ${generated_api_DIR}/genivi-positioning-constants.h
+		COMMAND xsltproc ${api_DIR}/poi-service/enum.xsl ${positioning_API}/genivi-positioning-constants.xml   
 	)
- 	if(error_code)
-		message(FATAL_ERROR "Failed to clone repository: '${positioning_URL}'")
+else()
+	if(${positioning_API}/genivi-positioning-constants.xml IS_NEWER_THAN ${generated_api_DIR}/genivi-positioning-constants.h)
+		execute_process(
+			OUTPUT_FILE ${generated_api_DIR}/genivi-positioning-constants.h
+			COMMAND xsltproc ${api_DIR}/poi-service/enum.xsl ${positioning_API}/genivi-positioning-constants.xml   #use another enum.xsl for radix consistency
+		)
 	endif()
-
-	message(STATUS "get the right version")
- 	execute_process(
-		COMMAND "${git_executable}" checkout ${positioning_VERSION}
-		WORKING_DIRECTORY "${positioning_SRC_DIR}"
-		RESULT_VARIABLE error_code
-	)
-	if(error_code)
-		message(FATAL_ERROR "Failed to checkout version: '${positioning_VERSION}'")
-	endif()	
 endif()
 
-# Generate the DBus adaptors and proxy of positioning
-set(API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../api)
-
-execute_process(
-	WORKING_DIRECTORY ${API_DIR}
-        COMMAND ${cmake_create_dir} include
-)
-
-set(TARGET_GENERATED_API_DIR ${API_DIR}/include)
-
-set(positioning_API_DIR ${positioning_SRC}/enhanced-position-service/api)
-
-file (GLOB XML_TO_DBUS_PROXY 
-	${positioning_SRC_DIR}/enhanced-position-service/api/genivi-positioning-enhancedposition.xml
-)
-foreach (RAW_FILE ${XML_TO_DBUS_PROXY})
-	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}_proxy.h)
-		execute_process(
-			COMMAND ${DBUSXML2CPP} ${RAW_FILE} --proxy=${TARGET_GENERATED_API_DIR}/${FILE}_proxy.h  
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}_proxy.h)
-			execute_process(
-				COMMAND ${DBUSXML2CPP} ${RAW_FILE} --proxy=${TARGET_GENERATED_API_DIR}/${FILE}_proxy.h  
-			)
-		endif()
-	endif()
-endforeach()
-
-file (GLOB XML_TO_DBUS_ADAPTOR
-	${positioning_SRC_DIR}/enhanced-position-service/api/genivi-positioning-enhancedposition.xml
-)
-foreach (RAW_FILE ${XML_TO_DBUS_ADAPTOR})
-	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h)
-		execute_process(
-			COMMAND ${DBUSXML2CPP} ${RAW_FILE} --adaptor=${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h  
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h)
-			execute_process(
-				COMMAND ${DBUSXML2CPP} ${RAW_FILE} --adaptor=${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h  
-			)
-		endif()
-	endif()
-endforeach()
-
-file (GLOB XML_TO_DBUS_CONSTANT_FROM_POSITIONING
-	${positioning_SRC_DIR}/enhanced-position-service/api/genivi-positioning-constants.xml
-)
-foreach (RAW_FILE ${XML_TO_DBUS_CONSTANT_FROM_POSITIONING})
-	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}.h)
-		execute_process(
-			OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-			COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}   
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}.h)
-			execute_process(
-				OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-				COMMAND ${XSLTPROC} ${API_DIR}/poi-service/enum.xsl ${RAW_FILE}   #use another enum.xsl for radix consistency
-			)
-		endif()
-	endif()
-endforeach()
-
-file(GLOB DBUS_DEF_INCLUDE ${TARGET_GENERATED_API_DIR}/*_proxy.h ${TARGET_GENERATED_API_DIR}/*_adaptor.h ${TARGET_GENERATED_API_DIR}/*-constants.h)
 
 link_directories(
     ${DBUS_CPP_LIBRARY_DIRS}
@@ -171,13 +78,13 @@ link_directories(
 )
 
 add_executable(poi-server
-	${DBUS_DEF_INCLUDE}
     main.cpp
     database.cpp
 	database.h
     poi-server-class.h
     poi-datamodel.h
 	../poi-common/common-data-model.h
+	${generated_api_DIR}/genivi-positioning-enhancedposition_proxy.h
 )
 
 set(LIBRARIES 

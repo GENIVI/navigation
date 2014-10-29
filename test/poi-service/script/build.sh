@@ -74,12 +74,16 @@ build() {
 
     echo 'Generate DBus include files'
 
+	cd $API_DIR
+	mkdir -p include
 	cmake $API_DIR/$NAVIGATION_CORE
 	cmake $API_DIR/$MAP_VIEWER
 	cmake $API_DIR/$POI_SERVICE
 
     echo 'Check and build poi-server if needed'
-    cd $POI_SERVER_SCRIPT_DIR && bash $POI_SERVER_BUILD_SCRIPT make
+    cd $POI_SERVER_SCRIPT_DIR
+	bash $POI_SERVER_BUILD_SCRIPT clone
+	bash $POI_SERVER_BUILD_SCRIPT make
 
     cd $TOP_DIR 
     mkdir -p bin

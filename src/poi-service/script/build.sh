@@ -16,26 +16,34 @@
 #
 # @licence end@
 ###########################################################################
-TOP_DIR=$PWD/..
-TOP_BIN_DIR=$TOP_DIR/bin
-
 POI_SERVER=poi-server
-POI_SERVER_SRC_DIR=$TOP_DIR/$POI_SERVER
-POI_SERVER_BIN_DIR=$TOP_BIN_DIR
-POSITIONING_SRC_DIR=$TOP_DIR/positioning
-
 POI_COMMON=poi-common
-POI_COMMON_SRC_DIR=$TOP_DIR/$POI_COMMON
-
-API_DIR=$TOP_DIR/../../api
-
 NAVIGATION_CORE=navigation-core
 MAP_VIEWER=map-viewer
 POI_SERVICE=poi-service
+POSITIONING=positioning
+ENHANCED_POSITION_SERVICE=enhanced-position-service
+
+target_root=$PWD/..
+target_bin=$PWD/../bin #by default
+target_positioning=$PWD/../$POSITIONING #by default
+
+set-path()
+{
+	TOP_DIR=$target_root
+	TOP_BIN_DIR=$target_bin
+	API_DIR=$TOP_DIR/../../api
+	GENERATED_API_DIR=$API_DIR/include
+
+	POI_SERVER_SRC_DIR=$TOP_DIR/$POI_SERVER
+	POI_SERVER_BIN_DIR=$TOP_BIN_DIR/$POI_SERVER
+	POI_COMMON_SRC_DIR=$TOP_DIR/$POI_COMMON
+	POSITIONING_SRC_DIR=$target_positioning
+	POSITIONING_API_DIR=$POSITIONING_SRC_DIR/$ENHANCED_POSITION_SERVICE/api
+}
 
 usage() {
-    echo "Usage: ./build.sh Build poi-server"
-    echo "   or: ./build.sh [command]"
+    echo "Usage: ./build.sh [command]"
     echo
     echo "command:"
     echo "  make            Build"
@@ -58,11 +66,18 @@ build() {
 
     echo 'Generate DBus include files'
 
+	cd $API_DIR
+	mkdir -p include
 	cmake $API_DIR/$NAVIGATION_CORE
 	cmake $API_DIR/$MAP_VIEWER
 	cmake $API_DIR/$POI_SERVICE
 
-	make
+    cd $TOP_DIR 
+    mkdir -p bin
+    cd $TOP_BIN_DIR 
+    mkdir -p $POI_SERVER
+    cd $POI_SERVER_BIN_DIR
+	cmake -Dapi_DIR=$API_DIR -Dpositioning_API=$POSITIONING_API_DIR -Dgenerated_api_DIR=$GENERATED_API_DIR  $POI_SERVER_SRC_DIR && make
 }
 
 clone() {
@@ -71,12 +86,12 @@ clone() {
     cd $TOP_DIR 
     mkdir -p bin
     cd $TOP_BIN_DIR
-	cmake -Dpositioning_SRC_DIR=$POSITIONING_SRC_DIR $POI_SERVER_SRC_DIR
+	cmake -Dpositioning_SRC_DIR=$POSITIONING_SRC_DIR $TOP_DIR
 }
 
 clean() {
-	echo 'delete' $POI_SERVER_BIN_DIR 
-    rm -rf $POI_SERVER_BIN_DIR
+	echo 'delete' $TOP_BIN_DIR 
+    rm -rf $TOP_BIN_DIR
 }
 
 src-clean() {
@@ -91,18 +106,20 @@ if [ $# -ge 1 ]; then
     if [ $1 = help ]; then
         usage
     elif [ $1 = make ]; then
+		set-path
         build
     elif [ $1 = clean ]; then
+		set-path
         clean
     elif [ $1 = src-clean ]; then
+		set-path
         src-clean
     elif [ $1 = clone ]; then
+		set-path
         clone
     else
         usage
     fi
-elif [ $# -eq 0 ]; then
-    build
 else
     usage
 fi

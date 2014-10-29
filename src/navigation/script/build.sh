@@ -243,6 +243,8 @@ build() {
     echo ''
     echo 'Generate DBus include files'
 
+	cd $API_DIR
+	mkdir -p include
 	cmake $API_DIR/$NAVIGATION_CORE
 	cmake $API_DIR/$MAP_VIEWER
 	cmake $API_DIR/$POI_SERVICE
