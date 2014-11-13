@@ -267,12 +267,14 @@ if (NOT EXISTS ${map_SRC_DIR}/${MAP_FILE})
 	message(STATUS "get the map")
 	execute_process(
 		COMMAND ${wget} "${map_SRC_DIR}/${MAP_FILE}.tmp" "${map_URL}"
-		COMMAND mv "${map_SRC_DIR}/${MAP_FILE}.tmp" ${map_SRC_DIR}/${MAP_FILE}
 		RESULT_VARIABLE error_code
 	)
  	if(error_code)
 		message(FATAL_ERROR "Failed to get map: '${MAP_FILE}', what about your proxy ?")
 	endif()
+	execute_process(
+		COMMAND mv "${map_SRC_DIR}/${MAP_FILE}.tmp" ${map_SRC_DIR}/${MAP_FILE}
+	)
 endif()
 
 
