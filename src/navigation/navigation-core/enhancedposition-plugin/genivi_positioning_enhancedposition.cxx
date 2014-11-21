@@ -68,6 +68,11 @@
 
 #include "time.h"
 
+#if (!DEBUG_ENABLED)
+#undef dbg
+#define dbg(level,...) ;
+#endif
+
 #include "genivi-positioning-enhancedposition_proxy.h"
 
 DBus::Glib::BusDispatcher dispatcher;

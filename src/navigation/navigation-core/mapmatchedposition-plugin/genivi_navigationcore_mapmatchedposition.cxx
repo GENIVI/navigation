@@ -44,6 +44,11 @@
 #include "navit/route.h"
 #include "navit/config_.h"
 
+#if (!DEBUG_ENABLED)
+#undef dbg
+#define dbg(level,...) ;
+#endif
+
 static DBus::Glib::BusDispatcher dispatcher;
 static DBus::Connection *conn;
 static class MapMatchedPosition *server;

@@ -31,6 +31,12 @@ include(${navit_SRC_DIR}/navit/cmake/navit_macros.cmake)
 
 add_definitions(-DPLUGIN=1)
 
+message(STATUS "WITH_DEBUG = ${WITH_DEBUG}")
+
+if(WITH_DEBUG)
+    add_definitions("-DDEBUG_ENABLED=1")
+endif()
+
 pkg_search_module(DBUS_CPP dbus-c++-glib-1 dbus-c++-1)
 pkg_search_module(GLIB glib-2.0)
 include_directories(${GLIB_INCLUDE_DIRS})

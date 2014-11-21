@@ -65,6 +65,11 @@
 #include "navit/xmlconfig.h"
 #include "navit/layout.h"
 
+#if (!DEBUG_ENABLED)
+#undef dbg
+#define dbg(level,...) ;
+#endif
+
 static DBus::Glib::BusDispatcher dispatchers[4];
 static DBus::Connection *conns[4];
 static int32_t navigationcore_session=-1;

@@ -40,6 +40,12 @@
 #include "navit/transform.h"
 #include "navit/map.h"
 #include "navit/mapset.h"
+
+#if (!DEBUG_ENABLED)
+#undef dbg
+#define dbg(level,...) ;
+#endif
+
 #include "genivi-poiservice-constants.h"
 #include "genivi-poiservice-poicontentaccess_proxy.h"
 #include "genivi-poiservice-contentaccessmodule_adaptor.h"

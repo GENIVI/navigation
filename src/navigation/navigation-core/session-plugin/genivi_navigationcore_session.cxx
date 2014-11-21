@@ -34,6 +34,11 @@
 #include "navit/plugin.h"
 #include "navit/event.h"
 
+#if (!DEBUG_ENABLED)
+#undef dbg
+#define dbg(level,...) ;
+#endif
+
 static DBus::Glib::BusDispatcher dispatcher;
 static DBus::Connection *conn;
 
