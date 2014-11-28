@@ -25,7 +25,7 @@
 # @licence end@
 bustle_URL="http://anongit.freedesktop.org/git/bustle.git"
 bustle_VERSION=61ac45d195476edb810a1c2345c886fdc51a20cc
-bustle_SRC=$(SRC_DIR)/bustle_$(bustle_VERSION)
+bustle_SRC=$(SRC_DIR)/bustle
 bustle_BIN=$(BIN_DIR)/bustle
 bustle_DEPS+= gtk2.0-dev haskell-platform libghc-gtk-dev libghc-glade-dev libpcap-dev language-pack-de language-pack-fr gtk2hs-buildtools libdbus-1-dev
 
@@ -40,7 +40,7 @@ clean-bustle_SRC::
 	rm -rf $(SRC_DIR)/bustle_*
 
 $(bustle_SRC)/Makefile:
-	cd $(bustle_SRC)/.. && git clone $(bustle_URL) $(bustle_SRC)
+	git clone $(bustle_URL) $(bustle_SRC)
 	cd $(bustle_SRC) && git checkout $(bustle_VERSION)
 
 $(bustle_SRC)/.patched: $(bustle_SRC)/Makefile
