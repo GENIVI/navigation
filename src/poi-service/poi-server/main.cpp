@@ -45,8 +45,6 @@ static const char* poiSearch_OBJECT_PATH = "/org/genivi/poiservice/POISearch";
 static const char* poiContentAccess_SERVICE_NAME = "org.genivi.poiservice.POIContentAccess";
 static const char* poiContentAccess_OBJECT_PATH = "/org/genivi/poiservice/POIContentAccess";
 static const char* contentAccessModule_OBJECT_PATH = "/org/genivi/poiservice/POIContentAccessModule";
-static const char* EnhancedPosition_SERVICE_NAME = "org.genivi.positioning.EnhancedPosition";
-static const char* EnhancedPosition_OBJECT_PATH = "/position";
 static const char* Routing_SERVICE_NAME = "org.genivi.navigationcore.Routing";
 static const char* Routing_OBJECT_PATH = "/org/genivi/navigationcore";
 
@@ -63,7 +61,6 @@ static DBus::Glib::BusDispatcher *dispatcher;
 static DBus::Connection *dbusConnection;
 static poiSearchServer *serverPoiSearch;
 static poiContentAccessServer *serverpoiContentAccess;
-static EnhancedPosition *clientEnhancedPosition;
 static Routing *clientRouting;
 
 // class Routing
@@ -107,63 +104,6 @@ void Routing::AlternativeRoutesAvailable (const std::vector<uint32_t>& routeHand
 
 }
 
-
-
-// class EnhancedPosition
-
-EnhancedPosition::EnhancedPosition(DBus::Connection &connection)
-    : DBus::ObjectProxy(connection,EnhancedPosition_OBJECT_PATH,EnhancedPosition_SERVICE_NAME)
-{
-    m_currentLocation.latitude = 48.85792; //by default center of Paris
-    m_currentLocation.longitude = 2.3383145;
-    m_currentLocation.altitude = 0;
-}
-EnhancedPosition::~EnhancedPosition()
-{
-}
-void EnhancedPosition::PositionUpdate(const std::vector< uint16_t >& changedValues)
-{
-    std::map< uint16_t, ::DBus::Variant > reply;
-    std::map< uint16_t, ::DBus::Variant >::iterator iter;
-
-    reply = GetPosition();
-    iter = reply.find(GENIVI_NAVIGATIONCORE_LATITUDE);
-    if (iter != reply.end())
-        m_currentLocation.latitude = reply.at(GENIVI_NAVIGATIONCORE_LATITUDE);
-    iter = reply.find(GENIVI_NAVIGATIONCORE_LONGITUDE);
-    if (iter != reply.end())
-        m_currentLocation.longitude = reply.at(GENIVI_NAVIGATIONCORE_LONGITUDE);
-    iter = reply.find(GENIVI_NAVIGATIONCORE_ALTITUDE);
-    if (iter != reply.end())
-        m_currentLocation.altitude = reply.at(GENIVI_NAVIGATIONCORE_ALTITUDE);
-}
-
-void EnhancedPosition::RotationRateUpdate(const std::vector< uint16_t >& changedValues)
-{
-
-}
-
-void EnhancedPosition::AccuracyUpdate(const std::vector< uint16_t >& changedValues)
-{
-
-}
-
-void EnhancedPosition::SatelliteInfoUpdate(const std::vector< uint16_t >& changedValues)
-{
-
-}
-
-void EnhancedPosition::StatusUpdate(const std::vector< uint16_t >& changedValues)
-{
-
-}
-
-// Specific methods
-
-DBus_geoCoordinate3D::geoCoordinate3D_t EnhancedPosition::GetCurrentLocation()
-{
-    return(m_currentLocation);
-}
 
 // class  contentAccessModule
 
@@ -1658,11 +1598,6 @@ std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > poiSearchSer
 
 // Specific methods
 
-void poiSearchServer::ConnectToEnhancedPositionClient(EnhancedPosition *client)
-{
-    mp_enhancedPosition = client; //link to the instance of enhancedPosition
-}
-
 void poiSearchServer::ConnectToRoutingClient(Routing *client)
 {
     mp_Routing = client; //link to the instance of routing
@@ -2089,12 +2024,6 @@ int main(int  argc , char**  argv )
                 // connect the serverPoiSearch to the serverpoiContentAccess
                 serverpoiContentAccess->ConnectTopoiSearchServer(serverPoiSearch);
 
-                // create a client for EnhancedPosition
-                clientEnhancedPosition = new EnhancedPosition(*dbusConnection);
-
-                // connect it to the POISearch server
-                serverPoiSearch->ConnectToEnhancedPositionClient(clientEnhancedPosition);
-
                 // create a client for Routing
                 clientRouting = new Routing(*dbusConnection);
 
@@ -2114,7 +2043,6 @@ int main(int  argc , char**  argv )
                 // clean memory
                 delete serverPoiSearch;
                 delete serverpoiContentAccess;
-                delete clientEnhancedPosition;
                 delete clientRouting;
                 delete dbusConnection;
                 delete dispatcher;

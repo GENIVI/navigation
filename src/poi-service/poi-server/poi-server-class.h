@@ -35,7 +35,6 @@
 #include "../../../api/include/genivi-poiservice-poisearch_adaptor.h"
 #include "../../../api/include/genivi-poiservice-poicontentaccess_adaptor.h"
 #include "../../../api/include/genivi-navigationcore-routing_proxy.h"
-#include "../../../api/include/genivi-positioning-enhancedposition_proxy.h"
 #include "../../../api/include/genivi-poiservice-contentaccessmodule_proxy.h"
 #include "../poi-common/common-data-model.h"
 #include <dbus-c++/glib-integration.h>
@@ -57,7 +56,6 @@ using namespace DBus;
 using namespace Glib;
 
 class Routing;
-class EnhancedPosition;
 class contentAccessModule;
 class poiSearchServer;
 class poiContentAccessServer;
@@ -85,35 +83,6 @@ class Routing
 
     void AlternativeRoutesAvailable (const std::vector<uint32_t>& routeHandlesList);
 
-};
-
-class EnhancedPosition
-: public org::genivi::positioning::EnhancedPosition_proxy,
-  public DBus::IntrospectableProxy,
-  public DBus::ObjectProxy
-{
-
-    public:
-
-    EnhancedPosition(DBus::Connection &connection);
-
-    ~EnhancedPosition();
-
-    void PositionUpdate(const std::vector< uint16_t >& changedValues);
-
-    void RotationRateUpdate(const std::vector< uint16_t >& changedValues);
-
-    void AccuracyUpdate(const std::vector< uint16_t >& changedValues);
-
-    void SatelliteInfoUpdate(const std::vector< uint16_t >& changedValues);
-
-    void StatusUpdate(const std::vector< uint16_t >& changedValues);
-
-    DBus_geoCoordinate3D::geoCoordinate3D_t GetCurrentLocation();
-
-    private:
-
-    DBus_geoCoordinate3D::geoCoordinate3D_t m_currentLocation;
 };
 
 class  contentAccessModule
@@ -250,8 +219,6 @@ public:
 
 //connection to the DBus proxy clients
 
-    void ConnectToEnhancedPositionClient(EnhancedPosition *client);
-
     void ConnectToRoutingClient(Routing *client);
 
 
@@ -349,7 +316,6 @@ private:
     uint16_t m_endSearchOffset;
     ushort m_searchStatus;
     uint32_t m_totalNumberOfSegments;
-    EnhancedPosition *mp_enhancedPosition;
     Routing *mp_Routing;
     poiContentAccessServer *mp_poiContentAccess;
 

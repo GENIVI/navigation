@@ -9,7 +9,7 @@ positioning/
 #files
 *~
 *.pro.user
-
+*.txt.user
 /.project
 
 CMakeFiles/
