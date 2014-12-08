@@ -49,28 +49,9 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/../..)
 
 include_directories(${generated_api_DIR})
+include_directories(${positioning_API})
 
 set(genivi_positioning_enhancedposition_LIBS ${DBUS_CPP_LDFLAGS})
 
-message(STATUS "${positioning_API}")
-
-ADD_CUSTOM_COMMAND(OUTPUT ${generated_api_DIR}/genivi-positioning-enhancedposition_proxy.h
-		   COMMAND dbusxx-xml2cpp ${positioning_API}/genivi-positioning-enhancedposition.xml --proxy=${generated_api_DIR}/genivi-positioning-enhancedposition_proxy.h 
-		   DEPENDS ${positioning_API}/genivi-positioning-enhancedposition.xml
-		   )
-
-if(NOT EXISTS ${generated_api_DIR}/genivi-positioning-constants.h)
-	execute_process(
-		OUTPUT_FILE ${generated_api_DIR}/genivi-positioning-constants.h
-		COMMAND xsltproc ${api_DIR}/poi-service/enum.xsl ${positioning_API}/genivi-positioning-constants.xml   
-	)
-else()
-	if(${positioning_API}/genivi-positioning-constants.xml IS_NEWER_THAN ${generated_api_DIR}/genivi-positioning-constants.h)
-		execute_process(
-			OUTPUT_FILE ${generated_api_DIR}/genivi-positioning-constants.h
-			COMMAND xsltproc ${api_DIR}/poi-service/enum.xsl ${positioning_API}/genivi-positioning-constants.xml   #use another enum.xsl for radix consistency
-		)
-	endif()
-endif()
 
 module_add_library(genivi_positioning_enhancedposition genivi_positioning_enhancedposition.cxx ${generated_api_DIR}/genivi-positioning-enhancedposition_proxy.h) 

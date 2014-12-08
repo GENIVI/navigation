@@ -64,11 +64,11 @@ public Q_SLOTS: // METHODS
     inline QDBusPendingReply<boundingBox_t> GetRouteBoundingBox(uchar sessionHandle, uchar routeHandle)
     { // "y" "y" in "((dd)(dd))" out
         QList<QVariant> argumentList;
-        argumentList << qVariantFromValue(routeHandle);
+        argumentList << qVariantFromValue(sessionHandle) << qVariantFromValue(routeHandle);
         return asyncCallWithArgumentList(QLatin1String("GetRouteBoundingBox"), argumentList);
     }
 
-    inline QDBusPendingReply<uint,QList<tupleVariant_t> > GetRouteSegments(uchar routeHandle, short detailLevel, QList<ushort> valuesToReturn, uint numberOfSegments, uint offset)
+    inline QDBusPendingReply<uint,QList<tupleUshortVariant> > GetRouteSegments(uchar routeHandle, short detailLevel, QList<ushort> valuesToReturn, uint numberOfSegments, uint offset)
     { // "y" "n" "aq" "u" "u" in "u" "aa{qv}" out
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(routeHandle) << qVariantFromValue(detailLevel) << qVariantFromValue(valuesToReturn) << qVariantFromValue(numberOfSegments) << qVariantFromValue(offset);
@@ -77,7 +77,7 @@ public Q_SLOTS: // METHODS
 
 Q_SIGNALS: // SIGNALS
 //D-Bus signals here
-    void RouteCalculationSuccessful(uchar,tupleUshort_t); // "y" "a{qq}" out
+    void RouteCalculationSuccessful(uchar,tupleUshortUshort); // "y" "a{qq}" out
     void RouteDeleted(uchar); // "y" out
 private:
 

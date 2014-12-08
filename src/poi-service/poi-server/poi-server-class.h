@@ -28,7 +28,6 @@
 #ifndef POIPOCSERVERCLASS_H
 #define POIPOCSERVERCLASS_H
 
-#include "../../../api/include/genivi-positioning-constants.h"
 #include "../../../api/include/genivi-mapviewer-constants.h"
 #include "../../../api/include/genivi-navigationcore-constants.h"
 #include "../../../api/include/genivi-poiservice-constants.h"

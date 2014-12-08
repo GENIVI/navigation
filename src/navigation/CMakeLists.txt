@@ -159,7 +159,7 @@ endif()
 # Check if positioning stuff with the right version has been cloned and do it if necessary
 # positioning_SRC_DIR is set by cmake -Dpositioning_SRC_DIR=<path to positioning src dir> 
 set(positioning_URL http://git.projects.genivi.org/lbs/positioning.git)
-set(positioning_VERSION fde1a780f531389d5a05e3b0486c98ad34df3dcb)
+set(positioning_VERSION 98c626c1a3856f444e9441950f6500db6ae9b997)
 
 if (EXISTS ${positioning_SRC_DIR})
 	execute_process(COMMAND ${git_get_src_version}  

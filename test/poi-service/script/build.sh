@@ -48,6 +48,14 @@ NAVIGATION_CORE=navigation-core
 MAP_VIEWER=map-viewer
 POI_SERVICE=poi-service
 
+POSITIONING=positioning
+target_positioning=$PWD/../$POSITIONING #by default
+POSITIONING_SRC_DIR=$target_positioning
+ENHANCED_POSITION_SERVICE=enhanced-position-service
+ENHANCED_POSITION_SERVICE_API_DIR=$POSITIONING_SRC_DIR/$ENHANCED_POSITION_SERVICE/api
+ENHANCED_POSITION_SERVICE_GENERATED_API_DIR=$ENHANCED_POSITION_SERVICE_API_DIR/include
+
+
 #--------------------------------------------------------------------------
 # Compiler Flags
 #--------------------------------------------------------------------------
@@ -56,33 +64,43 @@ POI_SERVICE=poi-service
 #--------------------------------------------------------------------------
 
 usage() {
-    echo "Usage: ./build.sh Build poi-service"
-    echo "   or: ./build.sh [command]"
+    echo "Usage: ./build.sh [command]"
     echo
     echo "command:"
     echo "  make            Build"
     echo "  clean           Clean"
     echo "  src-clean       Clean the cloned sources"
+    echo "  clone           Clone the sources"
     echo "  help            Print Help"
     echo
     echo
+}
+
+clone() {
+    echo ''
+    echo 'Clone/update version of additional sources if needed'
+    cd $TOP_DIR 
+	cmake -Dpositioning_SRC_DIR=$target_positioning $TOP_DIR
 }
 
 build() {
     echo ''
     echo 'Building poi-service'
 
-    echo 'Generate DBus include files'
-
+    echo 'Generate DBus include files for navigation, mapviewer and poiservice'
 	cd $API_DIR
 	mkdir -p include
 	cmake $API_DIR/$NAVIGATION_CORE
 	cmake $API_DIR/$MAP_VIEWER
 	cmake $API_DIR/$POI_SERVICE
 
+	echo 'Generate DBus include files for positioning'
+	cd $ENHANCED_POSITION_SERVICE_API_DIR
+	cmake .
+
+	cd 
     echo 'Check and build poi-server if needed'
     cd $POI_SERVER_SCRIPT_DIR
-	bash $POI_SERVER_BUILD_SCRIPT clone
 	bash $POI_SERVER_BUILD_SCRIPT make
 
     cd $TOP_DIR 
@@ -91,7 +109,7 @@ build() {
     cd $TOP_BIN_DIR
     mkdir -p $POI_CLIENT
     cd $POI_CLIENT_BIN_DIR 
-    cmake $POI_CLIENT_SRC_DIR && make
+    cmake -Dpositioning_API=$ENHANCED_POSITION_SERVICE_GENERATED_API_DIR $POI_CLIENT_SRC_DIR && make
 
     cd $TOP_BIN_DIR
     mkdir -p $POI_SUPPLIER
@@ -114,11 +132,9 @@ clean() {
 }
 
 src-clean() {
-    cd $POI_SERVER_SCRIPT_DIR && bash $POI_SERVER_BUILD_SCRIPT src-clean
-	echo 'delete' $TOP_BIN_DIR 
-	rm -rf $TOP_BIN_DIR
-	echo 'delete qm generated files'
-	rm -f $POI_COMMON_SRC_DIR/*.qm 
+	echo 'delete' $POSITIONING_SRC_DIR 
+    rm -rf $POSITIONING_SRC_DIR
+	clean
 }
 
 
@@ -133,11 +149,11 @@ if [ $# -ge 1 ]; then
         clean
     elif [ $1 = src-clean ]; then
         src-clean
+    elif [ $1 = clone ]; then
+        clone
     else
         usage
     fi
-elif [ $# -eq 0 ]; then
-    build
 else
     usage
 fi

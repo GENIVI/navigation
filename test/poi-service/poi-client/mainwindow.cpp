@@ -297,10 +297,10 @@ void MainWindow::InitUi()
     QObject::connect(m_dbusPoiSearchInterface, SIGNAL(ResultListChanged(uchar,ushort)), this, SLOT(on_DBusSignalResultListChanged(uchar,ushort)));
     QObject::connect(m_dbusPoiSearchInterface, SIGNAL(CategoriesUpdated(QList<poiCategoryAndReason_t>)), this, SLOT(on_DBusSignalCategoriesUpdated(QList<poiCategoryAndReason_t>)));
 
-    QObject::connect(m_dbusNavigationRoutingInterface, SIGNAL(RouteCalculationSuccessful(uchar,tupleUshort_t)),this,SLOT(on_DBusSignalRouteCalculationSuccessful(uchar, tupleUshort_t)));
+    QObject::connect(m_dbusNavigationRoutingInterface, SIGNAL(RouteCalculationSuccessful(uchar,tupleUshortUshort)),this,SLOT(on_DBusSignalRouteCalculationSuccessful(uchar, tupleUshortUshort)));
     QObject::connect(m_dbusNavigationRoutingInterface, SIGNAL(RouteDeleted(uchar)),this,SLOT(on_DBusSignalRouteDeleted(uchar)));
 
-    QObject::connect(m_dbusPositioningEnhancedPositionInterface, SIGNAL(PositionUpdate(QList<ushort>)),this,SLOT(on_DBusSignalPositionUpdate(QList<ushort>)));
+    QObject::connect(m_dbusPositioningEnhancedPositionInterface, SIGNAL(PositionUpdate(ulong)),this,SLOT(on_DBusSignalPositionUpdate(ulong)));
 
     // start periodic timer for position
     m_dbusPositioningEnhancedPositionInterface->startTimerForPosition(settingsTimerPeriodForPosition);
@@ -1616,50 +1616,26 @@ void MainWindow::on_DBusSignalCategoriesUpdated(QList<poiCategoryAndReason_t> po
  * \param
  * \return
  */
-void MainWindow::on_DBusSignalPositionUpdate(QList<ushort> changedValues)
+void MainWindow::on_DBusSignalPositionUpdate(ulong changedValues)
 {
-    tupleVariant_t position;
-    tupleVariant_t satelliteInfo;
-    QList<satellitedetails_t> satelliteDetailsList;
-    QVariant value1;
+    qulonglong timestamp;
+    tupleUlongVariant data;
 
-    //todo management of kind of values updated
-
-    // GetPosition
-    QDBusPendingReply<tupleVariant_t>reply_0 = m_dbusPositioningEnhancedPositionInterface->GetPosition();
+    // GetPositionInfo
+    QDBusPendingReply<qulonglong, tupleUlongVariant>reply_0 = m_dbusPositioningEnhancedPositionInterface->GetPositionInfo(changedValues);
     reply_0.waitForFinished();
     if (reply_0.isError())
         manageDBusError(reply_0.reply()); // call failed
     else
     {
-        position = reply_0.value();
-        if (position.contains(GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE))
-            ui->currentLocationLatitude->setText(QString::number(position.value(GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE).variant().toDouble()));
-        if (position.contains(GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE))
-            ui->currentLocationLongitude->setText(QString::number(position.value(GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE).variant().toDouble()));
+        timestamp = qdbus_cast<qulonglong>(reply_0.argumentAt(0));
+        data = qdbus_cast<tupleUlongVariant>(reply_0.argumentAt(1));
+        if (data.contains(GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE))
+            ui->currentLocationLatitude->setText(QString::number(data.value(GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE).variant().toDouble()));
+        if (data.contains(GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE))
+            ui->currentLocationLongitude->setText(QString::number(data.value(GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE).variant().toDouble()));
 
     }
-
-    // GetSatelliteInfo
-    QDBusPendingReply<tupleVariant_t>reply_1 = m_dbusPositioningEnhancedPositionInterface->GetSatelliteInfo();
-    reply_1.waitForFinished();
-    if (reply_1.isError())
-        manageDBusError(reply_1.reply()); // call failed
-    else
-    {
-        satelliteInfo = reply_1.value();
-        if (satelliteInfo.contains(GENIVI_ENHANCEDPOSITIONSERVICE_VISIBLE_SATELLITES))
-        {
-            m_satelliteAmount = satelliteInfo.value(GENIVI_ENHANCEDPOSITIONSERVICE_VISIBLE_SATELLITES).variant().toUInt();
-        }
-        if (satelliteInfo.contains(GENIVI_ENHANCEDPOSITIONSERVICE_SATELLITE_DETAILS))
-        {
-            value1 = satelliteInfo.value(GENIVI_ENHANCEDPOSITIONSERVICE_SATELLITE_DETAILS).variant();
-            satelliteDetailsList.clear();
-            value1.value<QDBusArgument>() >> satelliteDetailsList;
-        }
-    }
-
 }
 
 /**
@@ -1670,7 +1646,7 @@ void MainWindow::on_DBusSignalPositionUpdate(QList<ushort> changedValues)
  * \param QList<ushort> unfullfilledPreferences
  * \return
  */
-void MainWindow::on_DBusSignalRouteCalculationSuccessful(uchar routeHandle, tupleUshort_t unfullfilledPreferences)
+void MainWindow::on_DBusSignalRouteCalculationSuccessful(uchar routeHandle, tupleUshortUshort unfullfilledPreferences)
 {
     QString str;
     short detailLevel;
@@ -1679,7 +1655,7 @@ void MainWindow::on_DBusSignalRouteCalculationSuccessful(uchar routeHandle, tupl
     uint offset;
     int index;
     route_vector_t routeVector;
-    QList<tupleVariant_t> routeSegments;
+    QList<tupleUshortVariant> routeSegments;
 
     m_routeHandle = routeHandle;
     ui->searchMode->setText(tr("Along a route"));
@@ -1713,7 +1689,7 @@ void MainWindow::on_DBusSignalRouteCalculationSuccessful(uchar routeHandle, tupl
     valuesToReturn.push_back(GENIVI_NAVIGATIONCORE_START_LONGITUDE);
     valuesToReturn.push_back(GENIVI_NAVIGATIONCORE_END_LONGITUDE);
 
-    QDBusPendingReply<uint,QList<tupleVariant_t> > reply_2 = m_dbusNavigationRoutingInterface->GetRouteSegments(m_routeHandle,detailLevel,valuesToReturn,numberOfSegments,offset);
+    QDBusPendingReply<uint,QList<tupleUshortVariant> > reply_2 = m_dbusNavigationRoutingInterface->GetRouteSegments(m_routeHandle,detailLevel,valuesToReturn,numberOfSegments,offset);
     reply_2.waitForFinished();
     if (reply_2.isError())
         manageDBusError(reply_2.reply()); // call failed
@@ -1725,13 +1701,13 @@ void MainWindow::on_DBusSignalRouteCalculationSuccessful(uchar routeHandle, tupl
 
     //Get the whole route
     numberOfSegments = m_totalNumberOfSegments;
-    QDBusPendingReply<uint,QList<tupleVariant_t> > reply_3 = m_dbusNavigationRoutingInterface->GetRouteSegments(m_routeHandle,detailLevel,valuesToReturn,numberOfSegments,offset);
+    QDBusPendingReply<uint,QList<tupleUshortVariant> > reply_3 = m_dbusNavigationRoutingInterface->GetRouteSegments(m_routeHandle,detailLevel,valuesToReturn,numberOfSegments,offset);
     reply_3.waitForFinished();
     if (reply_3.isError())
         manageDBusError(reply_3.reply()); // call failed
     else
     {
-        routeSegments << (qdbus_cast<QList<tupleVariant_t> >(reply_3.argumentAt(1))); //get the list
+        routeSegments << (qdbus_cast<QList<tupleUshortVariant> >(reply_3.argumentAt(1))); //get the list
         for (index=0;index<routeSegments.size();index++)
         {
             if (routeSegments.at(index).contains(GENIVI_NAVIGATIONCORE_START_LATITUDE))

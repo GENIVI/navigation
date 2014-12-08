@@ -111,44 +111,19 @@ class EnhancedPosition
 	}
 
 	void
-	PositionUpdate(const std::vector< uint16_t >& changedValues)
+    PositionUpdate(const uint64_t& changedValues)
 	{
 		dbg(1,"enter\n");
 		int i;
 		bool position_found=false;
-		for (i = 0 ; i < changedValues.size() ; i++) {
-			if (changedValues[i] ==  GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE ||
-                            changedValues[i] ==  GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE) {
-				position_found=true;
-				break;
-			}
+        if ((changedValues & (GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE || GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE)) == (GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE || GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE))
+        {
+            position_found=true;
 		}
 		if (position_found && !m_priv->cb_pending) {
 			event_add_timeout(0, 0, m_priv->cb);
 			m_priv->cb_pending=1;
 		}
-	}
-
-	void
-	RotationRateUpdate(const std::vector< uint16_t >& changedValues)
-	{
-		dbg(0,"enter\n");
-	}
-
-	void
-	AccuracyUpdate(const std::vector< uint16_t >& changedValues)
-	{
-		dbg(0,"enter\n");
-	}
-
-	void SatelliteInfoUpdate(const std::vector< uint16_t >& changedValues)
-	{
-		dbg(0,"enter\n");
-	}
-
-	void StatusUpdate(const std::vector< uint16_t >& changedValues)
-	{
-		dbg(0,"enter\n");
 	}
 };
 
@@ -255,13 +230,11 @@ double_variant(DBus::Variant variant)
 
 
 static void
-vehicle_process_map(struct vehicle_priv *priv, std::map< uint16_t, ::DBus::Variant >&map)
+vehicle_process_map(struct vehicle_priv *priv, std::map< uint64_t, ::DBus::Variant >&map)
 {
-	std::map< uint16_t, ::DBus::Variant >::const_iterator itr;
+    std::map< uint64_t, ::DBus::Variant >::const_iterator itr;
 	for(itr = map.begin(); itr != map.end(); ++itr) {
 		switch ((*itr).first) {
-		case GENIVI_ENHANCEDPOSITIONSERVICE_TIMESTAMP:
-			break;
 		case GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE:
 			priv->geo.lat=double_variant((*itr).second);
 			break;
@@ -285,7 +258,10 @@ static void
 vehicle_enhancedposition_callback(struct vehicle_priv *priv)
 {
 	dbg(1,"enter\n");
-	std::map< uint16_t, ::DBus::Variant >position=priv->enhanced_position->GetPosition();
+    uint64_t valuesToReturn = (GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE || GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE || GENIVI_ENHANCEDPOSITIONSERVICE_SPEED);
+    std::map< uint64_t, ::DBus::Variant > position;
+    uint64_t timestamp;
+    priv->enhanced_position->GetPositionInfo(valuesToReturn,timestamp,position);
 	vehicle_process_map(priv, position);
 	time(&priv->fix_time); /* FIXME: Use actual value */
 	priv->fix_type=2; /* 3d, FIXME: Use actual value */

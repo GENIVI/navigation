@@ -54,46 +54,26 @@ public Q_SLOTS: // METHODS
         return asyncCall(QLatin1String("GetVersion"));
     }
 
-    inline QDBusPendingReply<tupleVariant_t> GetData(QList<ushort> valuesToReturn)
-    { // "aq" in "a{qv}" out
+    inline QDBusPendingReply<qulonglong, tupleUlongVariant> GetPositionInfo(ulong valuesToReturn)
+    { // "t" in "t" "a{tv}" out
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(valuesToReturn);
-        return asyncCallWithArgumentList(QLatin1String("GetData"), argumentList);
+        return asyncCallWithArgumentList(QLatin1String("GetPositionInfo"), argumentList);
     }
 
-    inline QDBusPendingReply<tupleVariant_t> GetPosition()
-    { // "a{qv}" out
-        return asyncCall(QLatin1String("GetPosition"));
-    }
-
-    inline QDBusPendingReply<tupleVariant_t> GetRotationRate()
-    { // "a{qv}" out
-        return asyncCall(QLatin1String("GetRotationRate"));
-    }
-
-    inline QDBusPendingReply<tupleVariant_t> GetAccuracy()
-    { // "a{qv}" out
-        return asyncCall(QLatin1String("GetAccuracy"));
-    }
-
-    inline QDBusPendingReply<tupleVariant_t> GetSatelliteInfo()
-    { // "a{qv}" out
+    inline QDBusPendingReply<qulonglong, QList<satelliteInfo_t> > GetSatelliteInfo()
+    { // "t" "a(qqqqqb)" out
         return asyncCall(QLatin1String("GetSatelliteInfo"));
     }
 
-    inline QDBusPendingReply<tupleVariant_t> GetStatus()
-    { // "a{qv}" out
-        return asyncCall(QLatin1String("GetStatus"));
-    }
-
-    inline QDBusPendingReply<tupleVariant_t> GetTime()
-    { // "a{qv}" out
+    inline QDBusPendingReply<qulonglong, tupleUlongVariant> GetTime()
+    { // "t" "a{tv}" out
         return asyncCall(QLatin1String("GetTime"));
     }
 
     void onTimerPositionTimeout()
     {
-        QDBusPendingReply<tupleVariant_t> reply = GetTime();
+        QDBusPendingReply<qulonglong, tupleUlongVariant> reply = GetTime();
         reply.waitForFinished();
     }
 

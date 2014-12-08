@@ -166,9 +166,11 @@ struct categoryDetailsList_t
     QList<categorySortOption_t> sortOptions;
 };
 
-typedef QMap<ushort,QDBusVariant> tupleVariant_t;
+typedef QMap<ushort,QDBusVariant> tupleUshortVariant;
 
-typedef QMap<ushort,ushort> tupleUshort_t;
+typedef QMap<qulonglong,QDBusVariant> tupleUlongVariant;
+
+typedef QMap<ushort,ushort> tupleUshortUshort;
 
 struct resultCamSearch_t
 { //(usq(ddi)qa(sqv))
@@ -210,13 +212,14 @@ struct poiCategoryCamUpdate_t
    QList<categorySortOption_t> sortOptions;
 };
 
-struct satellitedetails_t
-{ //(ubuuu)
-    uint satId;
+struct satelliteInfo_t
+{ //(qqqqqb)
+    ushort system;
+    ushort satelliteId;
+    ushort azimuth;
+    ushort elevation;
+    ushort snr;
     bool inUse;
-    uint elevation;
-    uint azimuth;
-    uint snr;
 };
 
 struct route_vector_t

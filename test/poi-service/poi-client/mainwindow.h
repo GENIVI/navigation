@@ -37,7 +37,7 @@
 #include <QListWidgetItem>
 #include <QGraphicsScene>
 #include <QGraphicsEllipseItem>
-#include "../../../api/include/genivi-positioning-constants.h"
+#include "../../positioning/enhanced-position-service/api/include/genivi-positioning-constants.h"
 #include "../../../api/include/genivi-mapviewer-constants.h"
 #include "../../../api/include/genivi-navigationcore-constants.h"
 #include "../../../api/include/genivi-poiservice-constants.h"
@@ -122,9 +122,9 @@ private slots:
 
     void on_DBusSignalCategoriesUpdated(QList<poiCategoryAndReason_t> poiCategories);
 
-    void on_DBusSignalPositionUpdate(QList<ushort> changedValues);
+    void on_DBusSignalPositionUpdate(ulong changedValues);
 
-    void on_DBusSignalRouteCalculationSuccessful(uchar routeHandle,tupleUshort_t unfullfilledPreferences);
+    void on_DBusSignalRouteCalculationSuccessful(uchar routeHandle,tupleUshortUshort unfullfilledPreferences);
 
     void on_DBusSignalRouteDeleted(uchar routeHandle);
 
@@ -250,7 +250,7 @@ private:
     bool isSetProximityModeSelected;
     bool isSearchAroundTheVehicleSelected;
 
-    QList<satellitedetails_t> m_satelliteDetails;
+    QList<satelliteInfo_t> m_satelliteInfo;
     uchar m_satelliteAmount;
 };
 

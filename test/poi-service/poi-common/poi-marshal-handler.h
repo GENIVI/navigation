@@ -128,9 +128,9 @@ Q_DECLARE_METATYPE(categoryDetailsList_t)
 const QDBusArgument &operator >> (const QDBusArgument &argument,categoryDetailsList_t &dest);
 QDBusArgument &operator << (QDBusArgument &argument, const categoryDetailsList_t &source);
 Q_DECLARE_METATYPE(QList<categoryDetailsList_t>)
-Q_DECLARE_METATYPE(tupleVariant_t)
-Q_DECLARE_METATYPE(QList<tupleVariant_t>)
-Q_DECLARE_METATYPE(tupleUshort_t)
+Q_DECLARE_METATYPE(tupleUshortVariant)
+Q_DECLARE_METATYPE(tupleUlongVariant)
+Q_DECLARE_METATYPE(tupleUshortUshort)
 Q_DECLARE_METATYPE(resultCamSearch_t)
 const QDBusArgument &operator >> (const QDBusArgument &argument,resultCamSearch_t &dest);
 QDBusArgument &operator << (QDBusArgument &argument, const resultCamSearch_t &source);
@@ -150,9 +150,9 @@ Q_DECLARE_METATYPE(poiCategoryCamUpdate_t)
 const QDBusArgument &operator >> (const QDBusArgument &argument,poiCategoryCamUpdate_t &dest);
 QDBusArgument &operator << (QDBusArgument &argument, const poiCategoryCamUpdate_t &source);
 Q_DECLARE_METATYPE(QList<poiCategoryCamUpdate_t>)
-Q_DECLARE_METATYPE(satellitedetails_t)
-const QDBusArgument &operator >> (const QDBusArgument &argument,satellitedetails_t &dest);
-QDBusArgument &operator << (QDBusArgument &argument, const satellitedetails_t &source);
-Q_DECLARE_METATYPE(QList<satellitedetails_t>)
+Q_DECLARE_METATYPE(satelliteInfo_t)
+const QDBusArgument &operator >> (const QDBusArgument &argument,satelliteInfo_t &dest);
+QDBusArgument &operator << (QDBusArgument &argument, const satelliteInfo_t &source);
+Q_DECLARE_METATYPE(QList<satelliteInfo_t>)
 
 #endif // MARSHALHANDLER_H

@@ -41,31 +41,6 @@ include_directories(${GOBJECT_INCLUDE_DIRS})
 include_directories(${DBUS_INCLUDE_DIRS})
 include_directories(${DBUS_CPP_GLIB_INCLUDE_DIRS})
 
-set (git_get_src_version git rev-parse HEAD)
-set (git_executable git)
-set(cmake_create_dir cmake -E make_directory)
-
-include_directories(${generated_api_DIR})
-
-ADD_CUSTOM_COMMAND(OUTPUT ${generated_api_DIR}/genivi-positioning-enhancedposition_proxy.h
-		   COMMAND dbusxx-xml2cpp ${positioning_API}/genivi-positioning-enhancedposition.xml --proxy=${generated_api_DIR}/genivi-positioning-enhancedposition_proxy.h 
-		   DEPENDS ${positioning_API}/genivi-positioning-enhancedposition.xml
-		   )
-
-if(NOT EXISTS ${generated_api_DIR}/genivi-positioning-constants.h)
-	execute_process(
-		OUTPUT_FILE ${generated_api_DIR}/genivi-positioning-constants.h
-		COMMAND xsltproc ${api_DIR}/poi-service/enum.xsl ${positioning_API}/genivi-positioning-constants.xml   
-	)
-else()
-	if(${positioning_API}/genivi-positioning-constants.xml IS_NEWER_THAN ${generated_api_DIR}/genivi-positioning-constants.h)
-		execute_process(
-			OUTPUT_FILE ${generated_api_DIR}/genivi-positioning-constants.h
-			COMMAND xsltproc ${api_DIR}/poi-service/enum.xsl ${positioning_API}/genivi-positioning-constants.xml   #use another enum.xsl for radix consistency
-		)
-	endif()
-endif()
-
 
 link_directories(
     ${DBUS_CPP_LIBRARY_DIRS}
@@ -84,7 +59,6 @@ add_executable(poi-server
     poi-server-class.h
     poi-datamodel.h
 	../poi-common/common-data-model.h
-	${generated_api_DIR}/genivi-positioning-enhancedposition_proxy.h
 )
 
 set(LIBRARIES 

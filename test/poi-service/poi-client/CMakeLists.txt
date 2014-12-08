@@ -58,6 +58,7 @@ set(API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../api)
 set(TARGET_GENERATED_API_DIR ${API_DIR}/include)
 
 file(GLOB DBUS_DEF_INCLUDE ${TARGET_GENERATED_API_DIR}/*-constants.h)
+include_directories(${positioning_API})
 
 link_directories(
 	${QT5_CORE_LIBRARY_DIRS}
@@ -186,6 +187,7 @@ add_executable(poi-client
     poi-client-DBusNavigationCoreSessionInterface.h
     poi-client-DBusContentAccessInterface.h
     ../poi-common/poi-marshal-handler.h
+    ../poi-common/poi-common-types.h
 )
 
 target_link_libraries(poi-client ${LIBRARIES})

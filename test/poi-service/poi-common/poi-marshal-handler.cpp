@@ -332,18 +332,18 @@ QDBusArgument &operator << (QDBusArgument &argument, const results_t &source)
     return argument;
 }
 
-const QDBusArgument &operator >> (const QDBusArgument &argument,satellitedetails_t &dest)
+const QDBusArgument &operator >> (const QDBusArgument &argument,satelliteInfo_t &dest)
 {
     argument.beginStructure();
-    argument >> dest.satId >> dest.inUse >> dest.elevation >> dest.azimuth  >> dest.snr;
+    argument >> dest.system >> dest.satelliteId >> dest.azimuth >> dest.elevation >> dest.snr >> dest.inUse;
     argument.endStructure();
     return argument;
 }
 
-QDBusArgument &operator << (QDBusArgument &argument, const satellitedetails_t &source)
+QDBusArgument &operator << (QDBusArgument &argument, const satelliteInfo_t &source)
 {
     argument.beginStructure();
-    argument << source.satId << source.inUse << source.elevation << source.azimuth << source.snr;
+    argument << source.system << source.satelliteId << source.azimuth << source.elevation << source.snr << source.inUse;
     argument.endStructure();
     return argument;
 }
@@ -501,10 +501,11 @@ void MarshalHandler::registerMetaType()
     qDBusRegisterMetaType<QList<categorySortOption_t> >();
     qDBusRegisterMetaType<categoryDetailsList_t>();
     qDBusRegisterMetaType<QList<categoryDetailsList_t> >();
-    qDBusRegisterMetaType<satellitedetails_t>();
-    qDBusRegisterMetaType<QList<satellitedetails_t> >();
-    qDBusRegisterMetaType<tupleVariant_t>();
-    qDBusRegisterMetaType<QList<tupleVariant_t> >();
+    qDBusRegisterMetaType<tupleUshortVariant>();
+    qDBusRegisterMetaType<QList<tupleUshortVariant> >();
+    qDBusRegisterMetaType<tupleUlongVariant>();
+    qDBusRegisterMetaType<QList<tupleUlongVariant> >();
+    qDBusRegisterMetaType<tupleUshortUshort>();
     qDBusRegisterMetaType<sessions_t>();
     qDBusRegisterMetaType<QList<sessions_t> >();
     qDBusRegisterMetaType<detailsCamCategory_t>();
@@ -516,7 +517,6 @@ void MarshalHandler::registerMetaType()
     qDBusRegisterMetaType<QList<resultCamSearch_t> >();
     qDBusRegisterMetaType<resultCamSearchDetails_t>();
     qDBusRegisterMetaType<QList<resultCamSearchDetails_t> >();
-
     qRegisterMetaType<results_t>();
     qRegisterMetaType<QList<results_t> >();
     qRegisterMetaType<poiCategoryAndReason_t>();
@@ -551,10 +551,8 @@ void MarshalHandler::registerMetaType()
     qRegisterMetaType<QList<categorySortOption_t> >();
     qRegisterMetaType<categoryDetailsList_t>();
     qRegisterMetaType<QList<categoryDetailsList_t> >();
-    qRegisterMetaType<satellitedetails_t>();
-    qRegisterMetaType<QList<satellitedetails_t> >();
-    qRegisterMetaType<tupleVariant_t>();
-    qRegisterMetaType<QList<tupleVariant_t> >();
+    qRegisterMetaType<satelliteInfo_t>();
+    qRegisterMetaType<QList<satelliteInfo_t> >();
     qRegisterMetaType<sessions_t>();
     qRegisterMetaType<QList<sessions_t> >();
     qRegisterMetaType<detailsCamCategory_t>();
