@@ -48,10 +48,13 @@ include_directories(${navit_SRC_DIR}/navit)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/../..)
 
-include_directories(${generated_api_DIR})
 include_directories(${positioning_API})
 
 set(genivi_positioning_enhancedposition_LIBS ${DBUS_CPP_LDFLAGS})
 
 
-module_add_library(genivi_positioning_enhancedposition genivi_positioning_enhancedposition.cxx ${generated_api_DIR}/genivi-positioning-enhancedposition_proxy.h) 
+module_add_library(genivi_positioning_enhancedposition 
+					genivi_positioning_enhancedposition.cxx 
+					${positioning_API}/genivi-positioning-enhancedposition_proxy.h
+					${positioning_API}/genivi-positioning-constants.h
+) 

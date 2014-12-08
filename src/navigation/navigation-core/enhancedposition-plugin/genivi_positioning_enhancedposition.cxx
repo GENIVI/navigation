@@ -48,8 +48,6 @@
  */
 
 #include <dbus-c++/glib-integration.h>
-#include "genivi-navigationcore-constants.h"
-#include "genivi-positioning-constants.h"
 #include <glib.h>
 #include <string.h>
 #include <stdbool.h>
@@ -73,6 +71,7 @@
 #define dbg(level,...) ;
 #endif
 
+#include "genivi-positioning-constants.h"
 #include "genivi-positioning-enhancedposition_proxy.h"
 
 DBus::Glib::BusDispatcher dispatcher;
