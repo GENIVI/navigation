@@ -8,7 +8,7 @@
 -->
 <node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/navigationcore" xsi:noNamespaceSchemaLocation="introspect.xsd">
   <interface name="org.genivi.navigationcore.Guidance">
-    <version>3.1.0-alpha (03-03-2014)</version>
+    <version>3.1.0 (03-03-2014)</version>
     <doc>
       <line>Guidance = This interface offers functions that implement the route-guidance functionality of a navigation system</line>
     </doc>
