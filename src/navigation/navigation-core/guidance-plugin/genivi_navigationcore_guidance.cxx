@@ -62,6 +62,9 @@ class GuidanceObj
 	uint32_t m_session,m_route_handle;
 	Guidance *m_guidance;
 	bool m_paused;
+	bool m_voice_guidance;
+    uint16_t m_prompt_mode;
+    std::string m_kind_of_voice;
 	struct item *get_item(struct map_rect *mr);
 	struct map_rect *get_map_rect(void);
     void SetSimulationMode(uint32_t SessionHandle, bool Activate);
@@ -69,6 +72,10 @@ class GuidanceObj
     void SetSimulationSpeed(uint32_t sessionHandle);
     void PauseGuidance(uint32_t sessionHandle);
     void ResumeGuidance(uint32_t sessionHandle);
+	void SetVoiceGuidance(const bool& activate, const std::string& voice);
+    void SetVoiceGuidanceSettings(const uint16_t& promptMode);
+    uint16_t GetVoiceGuidanceSettings();
+	void PlayVoiceManeuver();
 	void GetGuidanceStatus(uint16_t& guidanceStatus, uint32_t& routeHandle);
 	void GetDestinationInformation(uint32_t& offset, uint32_t& TravelTime, int32_t& Direction, int16_t& TimeZone);
     void GetManeuver(struct item *item, uint32_t& DistanceToManeuver, uint16_t& Maneuver, std::string& RoadAfterManeuver, ::DBus::Struct< uint16_t, ::DBus::Variant >& ManeuverData);
@@ -185,7 +192,6 @@ class  Guidance
 	void	
     StartGuidance(const uint32_t& SessionHandle, const uint32_t& RouteHandle)
 	{
-		uint32_t Result;
 		dbg(0,"enter\n");
 		if (guidance) {
 			dbg(0,"guidance already active\n");
@@ -265,7 +271,7 @@ class  Guidance
 	void
 	SetVoiceGuidance(const bool& activate, const std::string& voice)
 	{
-		throw DBus::ErrorNotSupported("Not yet supported");
+        guidance->SetVoiceGuidance(activate,voice);
 	}
 
 	void
@@ -281,7 +287,11 @@ class  Guidance
 	void
 	PlayVoiceManeuver()
 	{
-		throw DBus::ErrorNotSupported("Not yet supported");
+        if (!guidance) {
+            dbg(0,"no guidance active\n");
+            throw DBus::ErrorFailed("no guidance active");
+        }
+        guidance->PlayVoiceManeuver();
 	}
 
 
@@ -327,13 +337,13 @@ class  Guidance
 	void
 	SetVoiceGuidanceSettings(const uint16_t& promptMode)
 	{
-		throw DBus::ErrorNotSupported("Not yet supported");
+        guidance->SetVoiceGuidanceSettings(promptMode);
 	}
 
 	uint16_t
 	GetVoiceGuidanceSettings()
 	{
-		throw DBus::ErrorNotSupported("Not yet supported");
+        return guidance->GetVoiceGuidanceSettings();
 	}
 
     void
@@ -509,6 +519,19 @@ GuidanceObj::GetManeuver(struct item *item, uint32_t& DistanceToManeuver, uint16
 void
 GuidanceObj::GetGuidanceDetails(bool& voiceGuidance, bool& vehicleOnTheRoad, bool& isDestinationReached, uint16_t& maneuver)
 {
+    struct map_rect *mr=get_map_rect();
+    struct item *item;
+    item=get_item(mr);
+    std::string road_name_after_maneuver;
+    uint32_t offset_maneuver;
+    ::DBus::Struct< uint16_t, ::DBus::Variant > maneuver_data;
+
+    voiceGuidance = m_voice_guidance;
+    vehicleOnTheRoad = true; //by default, no off-road managed
+    isDestinationReached = false; //to be done
+
+    GetManeuver(item, offset_maneuver, maneuver, road_name_after_maneuver, maneuver_data);
+
 }
 
 void
@@ -564,20 +587,44 @@ void
 GuidanceObj::ResumeGuidance(uint32_t sessionHandle)
 {
 	struct vehicle *vehicle=get_vehicle("demo:");
-	m_paused=false;
 	GuidanceObj_Callback(this);
 	if (vehicle) 
+    {
 		vehicle_set_attr(vehicle, &vehicle_speed);
+    }
+    m_paused=false;
+}
+
+void GuidanceObj::SetVoiceGuidance(const bool& activate, const std::string& voice)
+{
+    m_voice_guidance = activate;
+    m_kind_of_voice.clear();
+    m_kind_of_voice.append(voice);
+}
+
+void GuidanceObj::PlayVoiceManeuver()
+{
+    message *messages;
+    messages = navit_get_messages(get_navit());
+}
+
+void GuidanceObj::SetVoiceGuidanceSettings(const uint16_t& promptMode)
+{
+    m_prompt_mode = promptMode;
+}
+
+uint16_t GuidanceObj::GetVoiceGuidanceSettings()
+{
+    return m_prompt_mode;
 }
 
 void
 GuidanceObj::GetGuidanceStatus(uint16_t& guidanceStatus, uint32_t& routeHandle)
 {
-#if 0
 	if (m_paused)
-		return GENIVI_NAVIGATIONCORE_PAUSED;
-#endif
-	guidanceStatus=GENIVI_NAVIGATIONCORE_ACTIVE;
+        guidanceStatus = GENIVI_NAVIGATIONCORE_INACTIVE;
+    else
+        guidanceStatus = GENIVI_NAVIGATIONCORE_ACTIVE;
 	routeHandle=m_route_handle;
 }
 
@@ -675,6 +722,9 @@ GuidanceObj::GuidanceObj(Guidance *guidance, uint32_t SessionHandle, uint32_t Ro
 	m_route_handle=RouteHandle;
 	m_guidance_callback=callback_new_1(reinterpret_cast<void (*)(void)>(GuidanceObj_Callback), this);
 	m_paused=false;
+	m_voice_guidance=false;
+    m_kind_of_voice="DEFAULT";
+    m_prompt_mode=GENIVI_NAVIGATIONCORE_MANUAL_PROMPT;
 	m_tracking_callback.type=attr_callback;
 	m_tracking_callback.u.callback=NULL;
 	struct attr id={attr_id};
