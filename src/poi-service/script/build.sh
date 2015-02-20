@@ -55,9 +55,9 @@ build() {
 
 	cd $API_DIR
 	mkdir -p include
-	cmake $API_DIR/$NAVIGATION_CORE
-	cmake $API_DIR/$MAP_VIEWER
-	cmake $API_DIR/$POI_SERVICE
+	cd $API_DIR/$NAVIGATION_CORE && cmake .
+	cd $API_DIR/$MAP_VIEWER && cmake .
+	cd $API_DIR/$POI_SERVICE && cmake .
 
     cd $TOP_DIR 
     mkdir -p bin
