@@ -11,11 +11,11 @@ typeCollection NavigationTypes {
 	<** @description: version.**>			
 	struct Version {
 		<** @description : when the major changes, then backward compatibility with previous releases is not granted.**>
-		UInt16 ^major
+		UInt16 ^versionMajor
 		<** @description : when the minor changes, then backward compatibility with previous releases is granted, but something changed in the implementation of the API (e.g. new methods may have been added).**>
-		UInt16 ^minor
+		UInt16 ^versionMinor
 		<** @description : when the micro changes, then backward compatibility with previous releases is granted (bug fixes or documentation modifications).**>
-		UInt16 ^micro
+		UInt16 ^versionMicro
 		<** @description : release date (e.g. 21-06-2011).**>
 		String date
 	}

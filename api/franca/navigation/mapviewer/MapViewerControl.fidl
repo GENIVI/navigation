@@ -13,25 +13,25 @@ import org.genivi.navigation.navigationcore.MapViewerControlTypes.* from "MapVie
 	@description : MapViewerControl = This interface offers functions to control the MapViewer
 **>
 
-interface org.genivi.mapviewer.MapViewerControl {
+interface MapViewerControl {
 	version {
 		major 0
 		minor 0
 	}
 
 	<**
-		@description : GetVersion = This method returns the API version implemented by the server application
+		@description : getVersion = This method returns the API version implemented by the server application
 	**>
-	method GetVersion {
+	method getVersion {
 		out {
 			Version ^version
 		}
 	}
 
 	<**
-		@description : CreateMapViewInstance = This method creates a new map instance
+		@description : createMapViewInstance = This method creates a new map instance
 	**>
-	method CreateMapViewInstance {
+	method createMapViewInstance {
 		in {
 
 			<**
@@ -56,9 +56,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : ReleaseMapViewInstance = This method releases (i.e. destroys) a given map instance. Only invisible map instances can be released
+		@description : releaseMapViewInstance = This method releases (i.e. destroys) a given map instance. Only invisible map instances can be released
 	**>
-	method ReleaseMapViewInstance {
+	method releaseMapViewInstance {
 		in {
 
 			<**
@@ -74,9 +74,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetMapViewType = This method returns the map type of a map instance as it was set using CreateMapViewInstance
+		@description : getMapViewType = This method returns the map type of a map instance as it was set using CreateMapViewInstance
 	**>
-	method GetMapViewType {
+	method getMapViewType {
 		in {
 
 			<**
@@ -94,18 +94,18 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetSupportedMapViewTypes = This method retrieves the supported map view types
+		@description : getSupportedMapViewTypes = This method retrieves the supported map view types
 	**>
-	method GetSupportedMapViewTypes {
+	method getSupportedMapViewTypes {
 		out {
 			MapViewType [] mapViewTypeList
 		}
 	}
 
 	<**
-		@description : SetTargetPoint = This method sets the position of the point the camera is always aimed at
+		@description : setTargetPoint = This method sets the position of the point the camera is always aimed at
 	**>
-	method SetTargetPoint {
+	method setTargetPoint {
 		in {
 
 			<**
@@ -123,9 +123,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetTargetPoint = This method retrieves the target point position
+		@description : getTargetPoint = This method retrieves the target point position
 	**>
-	method GetTargetPoint {
+	method getTargetPoint {
 		in {
 
 			<**
@@ -139,9 +139,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : SetFollowCarMode = This method sets the FollowCar mode
+		@description : setFollowCarMode = This method sets the FollowCar mode
 	**>
-	method SetFollowCarMode {
+	method setFollowCarMode {
 		in {
 
 			<**
@@ -162,9 +162,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetFollowCarMode = This method returns the current FollowCar-mode
+		@description : getFollowCarMode = This method returns the current FollowCar-mode
 	**>
-	method GetFollowCarMode {
+	method getFollowCarMode {
 		in {
 
 			<**
@@ -182,9 +182,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : SetCameraPosition = This method sets the coordinates of the point at which the camera must be positioned
+		@description : setCameraPosition = This method sets the coordinates of the point at which the camera must be positioned
 	**>
-	method SetCameraPosition {
+	method setCameraPosition {
 		in {
 
 			<**
@@ -202,9 +202,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetCameraPosition = This method returns the coordinates of the point at which the camera is positioned
+		@description : getCameraPosition = This method returns the coordinates of the point at which the camera is positioned
 	**>
-	method GetCameraPosition {
+	method getCameraPosition {
 		in {
 
 			<**
@@ -218,9 +218,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : SetCameraHeadingAngle = This method sets the map view heading angle
+		@description : setCameraHeadingAngle = This method sets the map view heading angle
 	**>
-	method SetCameraHeadingAngle {
+	method setCameraHeadingAngle {
 		in {
 
 			<**
@@ -241,9 +241,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : SetCameraHeadingToTarget = This method sets the camera heading in such a way, that the camera always looks at a given target
+		@description : setCameraHeadingToTarget = This method sets the camera heading in such a way, that the camera always looks at a given target
 	**>
-	method SetCameraHeadingToTarget {
+	method setCameraHeadingToTarget {
 		in {
 
 			<**
@@ -261,9 +261,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : SetCameraHeadingTrackUp = This method sets the camera heading in such a way, that the camera always looks in the direction in which the car is moving
+		@description : setCameraHeadingTrackUp = This method sets the camera heading in such a way, that the camera always looks in the direction in which the car is moving
 	**>
-	method SetCameraHeadingTrackUp {
+	method setCameraHeadingTrackUp {
 		in {
 
 			<**
@@ -279,9 +279,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetCameraHeading = This method returns the current camera heading
+		@description : getCameraHeading = This method returns the current camera heading
 	**>
-	method GetCameraHeading {
+	method getCameraHeading {
 		in {
 
 			<**
@@ -306,9 +306,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : SetCameraTiltAngle = This method sets the camera tilt angle
+		@description : setCameraTiltAngle = This method sets the camera tilt angle
 	**>
-	method SetCameraTiltAngle {
+	method setCameraTiltAngle {
 		in {
 
 			<**
@@ -329,9 +329,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetMapViewTiltAngle = This method returns the camera tilt angle
+		@description : getMapViewTiltAngle = This method returns the camera tilt angle
 	**>
-	method GetCameraTiltAngle {
+	method getCameraTiltAngle {
 		in {
 
 			<**
@@ -349,9 +349,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : SetCameraRollAngle = This method sets the camera roll angle
+		@description : setCameraRollAngle = This method sets the camera roll angle
 	**>
-	method SetCameraRollAngle {
+	method setCameraRollAngle {
 		in {
 
 			<**
@@ -372,9 +372,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetCameraRollAngle = This method returns the camera roll angle
+		@description : getCameraRollAngle = This method returns the camera roll angle
 	**>
-	method GetCameraRollAngle {
+	method getCameraRollAngle {
 		in {
 
 			<**
@@ -392,9 +392,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : SetCameraDistanceFromTargetPoint = This method sets the mode and the camera distance from the target point
+		@description : setCameraDistanceFromTargetPoint = This method sets the mode and the camera distance from the target point
 	**>
-	method SetCameraDistanceFromTargetPoint {
+	method setCameraDistanceFromTargetPoint {
 		in {
 
 			<**
@@ -415,9 +415,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetCameraDistanceFromTargetPoint = This method gets the mode and the camera distance from the target point
+		@description : getCameraDistanceFromTargetPoint = This method gets the mode and the camera distance from the target point
 	**>
-	method GetCameraDistanceFromTargetPoint {
+	method getCameraDistanceFromTargetPoint {
 		in {
 
 			<**
@@ -435,9 +435,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : SetMapViewScaleMode = This method sets the scaling mode.
+		@description : setMapViewScaleMode = This method sets the scaling mode.
 	**>
-	method SetMapViewScaleMode {
+	method setMapViewScaleMode {
 		in {
 
 			<**
@@ -458,9 +458,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetMapViewScaleMode = This method gets the scaling mode.
+		@description : getMapViewScaleMode = This method gets the scaling mode.
 	**>
-	method GetMapViewScaleMode {
+	method getMapViewScaleMode {
 		in {
 
 			<**
@@ -478,9 +478,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetSupportedMapViewScaleModes = This method gets the supported scaling modes.
+		@description : getSupportedMapViewScaleModes = This method gets the supported scaling modes.
 	**>
-	method GetSupportedMapViewScaleModes {
+	method getSupportedMapViewScaleModes {
 		in {
 
 			<**
@@ -494,21 +494,21 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : AddMapViewScaleChangedListener = This method adds a listener which is notified when map view scale changes.
+		@description : addMapViewScaleChangedListener = This method adds a listener which is notified when map view scale changes.
 	**>
-	method AddMapViewScaleChangedListener {
+	method addMapViewScaleChangedListener {
 	}
 
 	<**
-		@description : RemoveMapViewScaleChangedListener = This method removes a listener which is notified when map view scale changes.
+		@description : removeMapViewScaleChangedListener = This method removes a listener which is notified when map view scale changes.
 	**>
-	method RemoveMapViewScaleChangedListener {
+	method removeMapViewScaleChangedListener {
 	}
 
 	<**
-		@description : SetCameraHeight = This method sets the camera height
+		@description : setCameraHeight = This method sets the camera height
 	**>
-	method SetCameraHeight {
+	method setCameraHeight {
 		in {
 
 			<**
@@ -529,9 +529,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetCameraHeight = This method gets the camera height
+		@description : getCameraHeight = This method gets the camera height
 	**>
-	method GetCameraHeight {
+	method getCameraHeight {
 		in {
 
 			<**
@@ -549,9 +549,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : SetMapViewPerspective = This method sets the map perspective
+		@description : setMapViewPerspective = This method sets the map perspective
 	**>
-	method SetMapViewPerspective {
+	method setMapViewPerspective {
 		in {
 
 			<**
@@ -572,9 +572,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetMapViewPerspective = This method returns the current map perspective
+		@description : getMapViewPerspective = This method returns the current map perspective
 	**>
-	method GetMapViewPerspective {
+	method getMapViewPerspective {
 		in {
 
 			<**
@@ -592,18 +592,18 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetSupportedMapViewPerspectives = This method retrieves the supported mapview perspectives
+		@description : getSupportedMapViewPerspectives = This method retrieves the supported mapview perspectives
 	**>
-	method GetSupportedMapViewPerspectives {
+	method getSupportedMapViewPerspectives {
 		out {
 			MapPerspective[] perspectiveList
 		}
 	}
 
 	<**
-		@description : SetMapViewObjectVisibility = This method specifies the type of objects to show on the map.
+		@description : setMapViewObjectVisibility = This method specifies the type of objects to show on the map.
 	**>
-	method SetMapViewObjectVisibility {
+	method setMapViewObjectVisibility {
 		in {
 
 			<**
@@ -621,9 +621,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetMapViewObjectVisibility = This method gets the type of objects shown on the map.
+		@description : getMapViewObjectVisibility = This method gets the type of objects shown on the map.
 	**>
-	method GetMapViewObjectVisibility {
+	method getMapViewObjectVisibility {
 		in {
 
 			<**
@@ -637,9 +637,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetSupportedMapViewObjectVisibilities = This method gets the supported object visibilities.
+		@description : getSupportedMapViewObjectVisibilities = This method gets the supported object visibilities.
 	**>
-	method GetSupportedMapViewObjectVisibilities {
+	method getSupportedMapViewObjectVisibilities {
 		in {
 
 			<**
@@ -653,9 +653,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetScaleList = This method returns a list of supported map scales
+		@description : getScaleList = This method returns a list of supported map scales
 	**>
-	method GetScaleList {
+	method getScaleList {
 		in {
 
 			<**
@@ -669,9 +669,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : SetMapViewScale = This method sets the map scale by specifying a ScaleID
+		@description : setMapViewScale = This method sets the map scale by specifying a ScaleID
 	**>
-	method SetMapViewScale {
+	method setMapViewScale {
 		in {
 
 			<**
@@ -692,9 +692,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : SetMapViewScaleByDelta = This method sets the map scale by specifying a delta value with respect to the currently set ScaleID
+		@description : setMapViewScaleByDelta = This method sets the map scale by specifying a delta value with respect to the currently set ScaleID
 	**>
-	method SetMapViewScaleByDelta {
+	method setMapViewScaleByDelta {
 		in {
 
 			<**
@@ -715,9 +715,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : SetMapViewScaleByMetersPerPixel = This method sets the map scale by specifying the number of meters that a pixel represents
+		@description : setMapViewScaleByMetersPerPixel = This method sets the map scale by specifying the number of meters that a pixel represents
 	**>
-	method SetMapViewScaleByMetersPerPixel {
+	method setMapViewScaleByMetersPerPixel {
 		in {
 
 			<**
@@ -738,9 +738,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetMapViewScale = This method returns the currently used map scale
+		@description : getMapViewScale = This method returns the currently used map scale
 	**>
-	method GetMapViewScale {
+	method getMapViewScale {
 		in {
 
 			<**
@@ -763,9 +763,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : SetMapViewBoundingBox = This method sets the map bounding box
+		@description : setMapViewBoundingBox = This method sets the map bounding box
 	**>
-	method SetMapViewBoundingBox {
+	method setMapViewBoundingBox {
 		in {
 
 			<**
@@ -783,9 +783,9 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : GetMapViewBoundingBox = This method returns the bounding box of a given map instance
+		@description : getMapViewBoundingBox = This method returns the bounding box of a given map instance
 	**>
-	method GetMapViewBoundingBox {
+	method getMapViewBoundingBox {
 		in {
 
 			<**
@@ -799,10 +799,10 @@ interface org.genivi.mapviewer.MapViewerControl {
 	}
 
 	<**
-		@description : SetMapViewSaveArea = This methods defines the area that the HMI guarantees not to 
+		@description : setMapViewSaveArea = This methods defines the area that the HMI guarantees not to 
 cover with other windows or user interface elements
 	**>
-	method SetMapViewSaveArea {
+	method setMapViewSaveArea {
 		in {
 
 			<**
@@ -820,10 +820,10 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : SetMapViewSaveArea = This methods defines the area that the HMI guarantees not to 
+		@description : setMapViewSaveArea = This methods defines the area that the HMI guarantees not to 
 cover with other windows or user interface elements
 	**>
-	method GetMapViewSaveArea {
+	method getMapViewSaveArea {
 		in {
 
 			<**
@@ -837,9 +837,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : SetMapViewPan = This method pans a given map instance
+		@description : setMapViewPan = This method pans a given map instance
 	**>
-	method SetMapViewPan {
+	method setMapViewPan {
 		in {
 
 			<**
@@ -862,9 +862,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : GetMapViewPan
+		@description : getMapViewPan
 	**>
-	method GetMapViewPan {
+	method getMapViewPan {
 		in {
 
 			<**
@@ -882,9 +882,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : SetMapViewRotation = This method rotates the map
+		@description : setMapViewRotation = This method rotates the map
 	**>
-	method SetMapViewRotation {
+	method setMapViewRotation {
 		in {
 
 			<**
@@ -910,9 +910,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : GetMapViewRotation = This method is particularly interesting for debugging purposes
+		@description : getMapViewRotation = This method is particularly interesting for debugging purposes
 	**>
-	method GetMapViewRotation {
+	method getMapViewRotation {
 		in {
 
 			<**
@@ -935,9 +935,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : SetMapViewVisibilityMode = This method sets the current visibility mode
+		@description : setMapViewVisibilityMode = This method sets the current visibility mode
 	**>
-	method SetMapViewVisibilityMode {
+	method setMapViewVisibilityMode {
 		in {
 
 			<**
@@ -958,9 +958,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : GetMapViewVisibilityMode = This method returns the current visibility mode
+		@description : getMapViewVisibilityMode = This method returns the current visibility mode
 	**>
-	method GetMapViewVisibilityMode {
+	method getMapViewVisibilityMode {
 		in {
 
 			<**
@@ -978,18 +978,18 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : GetSupportedMapViewVisibilityModes = This method retrieves the supported mapview visibility modes
+		@description : getSupportedMapViewVisibilityModes = This method retrieves the supported mapview visibility modes
 	**>
-	method GetSupportedMapViewVisibilityModes {
+	method getSupportedMapViewVisibilityModes {
 		out {
 			Visibility [] visibilityModeList
 		}
 	}
 
 	<**
-		@description : SetMapViewPerformanceLevel = This method sets the perfomance level of a given map instance
+		@description : setMapViewPerformanceLevel = This method sets the perfomance level of a given map instance
 	**>
-	method SetMapViewPerformanceLevel {
+	method setMapViewPerformanceLevel {
 		in {
 
 			<**
@@ -1010,9 +1010,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : GetMapViewPerformanceLevel = This method returns the perfomance level of a given map instance
+		@description : getMapViewPerformanceLevel = This method returns the perfomance level of a given map instance
 	**>
-	method GetMapViewPerformanceLevel {
+	method getMapViewPerformanceLevel {
 		in {
 
 			<**
@@ -1030,18 +1030,18 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : GetSupportedMapViewPerformanceLevels = This method retrieves the supported perfomance levels
+		@description : getSupportedMapViewPerformanceLevels = This method retrieves the supported perfomance levels
 	**>
-	method GetSupportedMapViewPerformanceLevels {
+	method getSupportedMapViewPerformanceLevels {
 		out {
 			Level [] performanceLevelList
 		}
 	}
 
 	<**
-		@description : DisplayRoute = This method visualizes one of the calculated routes
+		@description : displayRoute = This method visualizes one of the calculated routes
 	**>
-	method DisplayRoute {
+	method displayRoute {
 		in {
 
 			<**
@@ -1067,9 +1067,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : HideRoute = This method hides one of the visible routes
+		@description : hideRoute = This method hides one of the visible routes
 	**>
-	method HideRoute {
+	method hideRoute {
 		in {
 
 			<**
@@ -1090,9 +1090,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : GetDisplayedRoutes = This method returns a list of displayed routes
+		@description : getDisplayedRoutes = This method returns a list of displayed routes
 	**>
-	method GetDisplayedRoutes {
+	method getDisplayedRoutes {
 		in {
 
 			<**
@@ -1106,9 +1106,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : GetPoiCategoriesVisible = Get the set of POI categories displayed on the map.
+		@description : getPoiCategoriesVisible = Get the set of POI categories displayed on the map.
 	**>
-	method GetPoiCategoriesVisible {
+	method getPoiCategoriesVisible {
 		in {
 
 			<**
@@ -1122,10 +1122,10 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : SetPoiCategoriesVisible = Add POI categories to the set of POI categories displayed on the map.
+		@description : setPoiCategoriesVisible = Add POI categories to the set of POI categories displayed on the map.
                    Any specified category that until now was displayed with scale limits is now displayed without limits.
 	**>
-	method SetPoiCategoriesVisible {
+	method setPoiCategoriesVisible {
 		in {
 
 			<**
@@ -1142,10 +1142,10 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : SetPoiCategoriesVisible = Add POI categories to the set of POI categories displayed on the map, where the POI's are only displayed in a specific range of scales.
+		@description : setPoiCategoriesVisible = Add POI categories to the set of POI categories displayed on the map, where the POI's are only displayed in a specific range of scales.
                    Any specified category that until now was displayed without scale limits is now displayed with limits.
 	**>
-	method SetPoiCategoriesVisibleWithinLimits {
+	method setPoiCategoriesVisibleWithinLimits {
 		in {
 
 			<**
@@ -1172,9 +1172,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : SetPoiCategoriesNotVisible = Remove POI categories from the set of POI categories displayed on the map.
+		@description : setPoiCategoriesNotVisible = Remove POI categories from the set of POI categories displayed on the map.
 	**>
-	method SetPoiCategoriesNotVisible {
+	method setPoiCategoriesNotVisible {
 		in {
 
 			<**
@@ -1191,9 +1191,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : SetTrafficIncidentsVisibility = Set the visibility of Traffic Incidents on the map.
+		@description : setTrafficIncidentsVisibility = Set the visibility of Traffic Incidents on the map.
 	**>
-	method SetTrafficIncidentsVisibility {
+	method setTrafficIncidentsVisibility {
 		in {
 
 			<**
@@ -1214,9 +1214,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : SetMapViewTheme = This method configures the theme of a given map view instance
+		@description : setMapViewTheme = This method configures the theme of a given map view instance
 	**>
-	method SetMapViewTheme {
+	method setMapViewTheme {
 		in {
 
 			<**
@@ -1237,9 +1237,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : GetMapViewTheme = This method returns the current theme of a given map view instance
+		@description : getMapViewTheme = This method returns the current theme of a given map view instance
 	**>
-	method GetMapViewTheme {
+	method getMapViewTheme {
 		in {
 
 			<**
@@ -1257,18 +1257,18 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : GetSupportedMapViewThemes = This method retrieves the supported mapview themes
+		@description : getSupportedMapViewThemes = This method retrieves the supported mapview themes
 	**>
-	method GetSupportedMapViewThemes {
+	method getSupportedMapViewThemes {
 		out {
 			MapTheme [] mapViewThemeList
 		}
 	}
 
 	<**
-		@description : ConvertPixelCoordsToGeoCoords = This method converts pixel coordinates to geographical coordinates
+		@description : convertPixelCoordsToGeoCoords = This method converts pixel coordinates to geographical coordinates
 	**>
-	method ConvertPixelCoordsToGeoCoords {
+	method convertPixelCoordsToGeoCoords {
 		in {
 
 			<**
@@ -1289,9 +1289,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : ConvertGeoCoordsToPixelCoords = This method converts geographical coordinates into pixel coordinates
+		@description : convertGeoCoordsToPixelCoords = This method converts geographical coordinates into pixel coordinates
 	**>
-	method ConvertGeoCoordsToPixelCoords {
+	method convertGeoCoordsToPixelCoords {
 		in {
 
 			<**
@@ -1314,9 +1314,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : DisplayCustomElements = This method visualizes a set of custom elements on the map
+		@description : displayCustomElements = This method visualizes a set of custom elements on the map
 	**>
-	method DisplayCustomElements {
+	method displayCustomElements {
 		in {
 
 			<**
@@ -1336,9 +1336,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : HideCustomElements = This method hides a set of custom elements which were visualized by DisplayCustomElements
+		@description : hideCustomElements = This method hides a set of custom elements which were visualized by DisplayCustomElements
 	**>
-	method HideCustomElements {
+	method hideCustomElements {
 		in {
 
 			<**
@@ -1356,9 +1356,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : GetDisplayedCustomElements = This method retrieves the visualized custom elements on the map
+		@description : getDisplayedCustomElements = This method retrieves the visualized custom elements on the map
 	**>
-	method GetDisplayedCustomElements {
+	method getDisplayedCustomElements {
 		in {
 
 			<**
@@ -1372,9 +1372,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : SelectElementsOnMap = This method selects elements on the map view which are at the position specified by user input
+		@description : selectElementsOnMap = This method selects elements on the map view which are at the position specified by user input
 	**>
-	method SelectElementsOnMap {
+	method selectElementsOnMap {
 		in {
 
 			<**
@@ -1397,9 +1397,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : MapViewScaleChanged = This signal is emitted when the mapview scale changes
+		@description : mapViewScaleChanged = This signal is emitted when the mapview scale changes
 	**>
-	broadcast MapViewScaleChanged {
+	broadcast mapViewScaleChanged {
 		out {
 
 			<**
@@ -1420,9 +1420,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : MapViewVisibilityChanged = This signal is emitted when the MapView visibility changes
+		@description : mapViewVisibilityChanged = This signal is emitted when the MapView visibility changes
 	**>
-	broadcast MapViewVisibilityChanged {
+	broadcast mapViewVisibilityChanged {
 		out {
 
 			<**
@@ -1438,9 +1438,9 @@ cover with other windows or user interface elements
 	}
 
 	<**
-		@description : DisplayedRoutes = This signal is emitted when the list of displayed routes change
+		@description : displayedRoutes = This signal is emitted when the list of displayed routes change
 	**>
-	broadcast DisplayedRoutes {
+	broadcast displayedRoutes {
 		out {
 
 			<**

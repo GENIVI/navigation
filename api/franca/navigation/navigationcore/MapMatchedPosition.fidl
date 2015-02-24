@@ -15,25 +15,25 @@ import org.genivi.navigation.navigationcore.MapMatchedPositionTypes.* from "MapM
 	@description : MapMatchedPosition = This interface offers functions to retrieve the map matched position and to simulate positioning
 **>
 
-interface org.genivi.navigationcore.MapMatchedPosition {
+interface MapMatchedPosition {
 	version {
 		major 0
 		minor 0
 	}
 
 	<**
-		@description : GetVersion = This method returns the API version implemented by the server application
+		@description : getVersion = This method returns the API version implemented by the server application
 	**>
-	method GetVersion {
+	method getVersion {
 		out {
 			Version ^version
 		}
 	}
 
 	<**
-		@description : SetSimulationMode = This method activates or deactivates the simulation mode
+		@description : setSimulationMode = This method activates or deactivates the simulation mode
 	**>
-	method SetSimulationMode {
+	method setSimulationMode {
 		in {
 
 			<**
@@ -49,9 +49,9 @@ interface org.genivi.navigationcore.MapMatchedPosition {
 	}
 
 	<**
-		@description : GetSimulationStatus = This method retrieves the simulation status
+		@description : getSimulationStatus = This method retrieves the simulation status
 	**>
-	method GetSimulationStatus {
+	method getSimulationStatus {
 		out {
 
 			<**
@@ -64,19 +64,19 @@ interface org.genivi.navigationcore.MapMatchedPosition {
 	<**
 		@description :  AddSimulationStatusListener = Add this node as a listener to Simulation Status changes.
 	**>
-	method AddSimulationStatusListener {
+	method addSimulationStatusListener {
 	}
 
 	<**
 		@description :  RemoveSimulationStatusListener = Remove this node as a listener to Simulation Status changes.
 	**>
-	method RemoveSimulationStatusListener {
+	method removeSimulationStatusListener {
 	}
 
 	<**
-		@description : SetSimulationSpeed = This method sets the speed factor for the simulation mode
+		@description : setSimulationSpeed = This method sets the speed factor for the simulation mode
 	**>
-	method SetSimulationSpeed {
+	method setSimulationSpeed {
 		in {
 
 			<**
@@ -92,9 +92,9 @@ interface org.genivi.navigationcore.MapMatchedPosition {
 	}
 
 	<**
-		@description : GetSimulationSpeed = returns the speed factor for the simulation mode
+		@description : getSimulationSpeed = returns the speed factor for the simulation mode
 	**>
-	method GetSimulationSpeed {
+	method getSimulationSpeed {
 		out {
 
 			<**
@@ -107,19 +107,19 @@ interface org.genivi.navigationcore.MapMatchedPosition {
 	<**
 		@description :  AddSimulationSpeedListener = Add this node as a listener to simulation speed factor changes.
 	**>
-	method AddSimulationSpeedListener {
+	method addSimulationSpeedListener {
 	}
 
 	<**
 		@description :  RemoveSimulationSpeedListener = Remove this node as a listener to simulation speed factor changes.
 	**>
-	method RemoveSimulationSpeedListener {
+	method removeSimulationSpeedListener {
 	}
 
 	<**
-		@description : StartSimulation = This method starts, or resumes, a Follow Active Route simulation
+		@description : startSimulation = This method starts, or resumes, a Follow Active Route simulation
 	**>
-	method StartSimulation {
+	method startSimulation {
 		in {
 
 			<**
@@ -130,9 +130,9 @@ interface org.genivi.navigationcore.MapMatchedPosition {
 	}
 
 	<**
-		@description : PauseSimulation = This method freezes the current location
+		@description : pauseSimulation = This method freezes the current location
 	**>
-	method PauseSimulation {
+	method pauseSimulation {
 		in {
 
 			<**
@@ -143,9 +143,9 @@ interface org.genivi.navigationcore.MapMatchedPosition {
 	}
 
 	<**
-		@description : GetPosition = This method returns the current position
+		@description : getPosition = This method returns the current position
 	**>
-	method GetPosition {
+	method getPosition {
 		in {
 			PositionItemKey[] valuesToReturn
 		}
@@ -155,9 +155,9 @@ interface org.genivi.navigationcore.MapMatchedPosition {
 	}
 
 	<**
-		@description : SetPosition = This method sets the position to a specific location
+		@description : setPosition = This method sets the position to a specific location
 	**>
-	method SetPosition {
+	method setPosition {
 		in {
 
 			<**
@@ -170,9 +170,9 @@ interface org.genivi.navigationcore.MapMatchedPosition {
 	}
 
 	<**
-		@description : GetAddress = This method returns the current address
+		@description : getAddress = This method returns the current address
 	**>
-	method GetAddress {
+	method getAddress {
 		in {
 			AddressItemKey[] valuesToReturn
 		}
@@ -184,7 +184,7 @@ interface org.genivi.navigationcore.MapMatchedPosition {
 	<**
 		@description : positionOnSegment = This method returns the vehicle position on a route segment
 	**>
-	method GetPositionOnSegment {
+	method getPositionOnSegment {
 		in {
 			PositionOnSegmentKey [] valuesToReturn
 		}
@@ -194,9 +194,9 @@ interface org.genivi.navigationcore.MapMatchedPosition {
 	}
 
 	<**
-		@description : GetStatus = This method returns the current status
+		@description : getStatus = This method returns the current status
 	**>
-	method GetStatus {
+	method getStatus {
 		in {
 			PositionStatus [] valuesToReturn
 		}
@@ -206,9 +206,9 @@ interface org.genivi.navigationcore.MapMatchedPosition {
 	}
 
 	<**
-		@description : SimulationStatusChanged = This signal is emitted when the Simulation Status has changed
+		@description : simulationStatusChanged = This signal is emitted when the Simulation Status has changed
 	**>
-	broadcast SimulationStatusChanged {
+	broadcast simulationStatusChanged {
 		out {
 
 			<**
@@ -219,9 +219,9 @@ interface org.genivi.navigationcore.MapMatchedPosition {
 	}
 
 	<**
-		@description : SimulationSpeedChanged = This signal is emitted when the simulation speed factor has changed
+		@description : simulationSpeedChanged = This signal is emitted when the simulation speed factor has changed
 	**>
-	broadcast SimulationSpeedChanged {
+	broadcast simulationSpeedChanged {
 		out {
 
 			<**
@@ -232,45 +232,45 @@ interface org.genivi.navigationcore.MapMatchedPosition {
 	}
 
 	<**
-		@description : PositionUpdate = This signal is called to notify a client application of a position change. The update frequency is implementation specific. The maximal allowed frequency is 10Hz
+		@description : positionUpdate = This signal is called to notify a client application of a position change. The update frequency is implementation specific. The maximal allowed frequency is 10Hz
 	**>
-	broadcast PositionUpdate {
+	broadcast positionUpdate {
 		out {
 			PositionItemKey [] changedValues
 		}
 	}
 
 	<**
-		@description : AddressUpdate = This signal is called to notify a client application that the current address changed
+		@description : addressUpdate = This signal is called to notify a client application that the current address changed
 	**>
-	broadcast AddressUpdate {
+	broadcast addressUpdate {
 		out {
 			AddressItemKey[] changedValues
 		}
 	}
 
 	<**
-		@description : PositionOnSegmentUpdate = This signal is called to notify the client that the vehicle position on the route segment changed
+		@description : positionOnSegmentUpdate = This signal is called to notify the client that the vehicle position on the route segment changed
 	**>
-	broadcast PositionOnSegmentUpdate {
+	broadcast positionOnSegmentUpdate {
 		out {
 			PositionOnSegmentKey[] changedValues
 		}
 	}
 
 	<**
-		@description : StatusUpdate = This signal is emitted to notifiy a client application that the current status changed
+		@description : statusUpdate = This signal is emitted to notifiy a client application that the current status changed
 	**>
-	broadcast StatusUpdate {
+	broadcast statusUpdate {
 		out {
 			PositionStatus [] changedValues
 		}
 	}
 
 	<**
-		@description : OffroadPositionChanged = This signal is emitted when the heading and the distance to the closest point on the road network changes
+		@description : offroadPositionChanged = This signal is emitted when the heading and the distance to the closest point on the road network changes
 	**>
-	broadcast OffRoadPositionChanged {
+	broadcast offRoadPositionChanged {
 		out {
 
 			<**

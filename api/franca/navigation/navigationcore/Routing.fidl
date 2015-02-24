@@ -16,7 +16,7 @@ import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 	@description : This interface offers functions that implement the routing functionality of a navigation system
 **>
 
-interface org.genivi.navigationcore.Routing {
+interface Routing {
 	version {
 		major 0
 		minor 0
@@ -25,7 +25,7 @@ interface org.genivi.navigationcore.Routing {
 	<**
 		@description : This method returns the API version implemented by the server application
 	**>
-	method GetVersion {
+	method getVersion {
 		out {
 			Version ^version
 		}
@@ -34,7 +34,7 @@ interface org.genivi.navigationcore.Routing {
 	<**
 		@description : This method creates a route
 	**>
-	method CreateRoute {
+	method createRoute {
 		in {
 
 			<**
@@ -54,7 +54,7 @@ interface org.genivi.navigationcore.Routing {
 	<**
 		@description : This method deletes a route and its associated resources
 	**>
-	method DeleteRoute {
+	method deleteRoute {
 		in {
 
 			<**
@@ -72,7 +72,7 @@ interface org.genivi.navigationcore.Routing {
 	<**
 		@description : This method sets the cost model
 	**>
-	method SetCostModel {
+	method setCostModel {
 		in {
 
 			<**
@@ -95,7 +95,7 @@ interface org.genivi.navigationcore.Routing {
 	<**
 		@description : This method retrieves the selected cost model
 	**>
-	method GetCostModel {
+	method getCostModel {
 		in {
 
 			<**
@@ -115,7 +115,7 @@ interface org.genivi.navigationcore.Routing {
 	<**
 		@description : This method retrieves a list of supported cost models
 	**>
-	method GetSupportedCostModels {
+	method getSupportedCostModels {
 		out {
 			CostModel [] costModelsList
 		}
@@ -124,7 +124,7 @@ interface org.genivi.navigationcore.Routing {
 	<**
 		@description : This method sets a list of route preferences
 	**>
-	method SetRoutePreferences {
+	method setRoutePreferences {
 		in {
 
 			<**
@@ -151,7 +151,7 @@ interface org.genivi.navigationcore.Routing {
 	<**
 		@description : This method retrieves a list of selected route preferences
 	**>
-	method GetRoutePreferences {
+	method getRoutePreferences {
 		in {
 
 			<**
@@ -173,7 +173,7 @@ interface org.genivi.navigationcore.Routing {
 	<**
 		@description : This method retrieves a list of supported route preferences
 	**>
-	method GetSupportedRoutePreferences {
+	method getSupportedRoutePreferences {
 		out {
 			RoutePreference[] routePreferencesList
 			ConiditionPreference[] conditionPreferenceList
@@ -183,7 +183,7 @@ interface org.genivi.navigationcore.Routing {
 	<**
 		@description :  This method sets the time schedule for the route to be calculated
 	**>
-	method SetRouteSchedule {
+	method setRouteSchedule {
 		in {
 
 			<**
@@ -203,7 +203,7 @@ interface org.genivi.navigationcore.Routing {
 	<**
 		@description :  This method gets the time schedule for the route to be calculated
 	**>
-	method GetRouteSchedule {
+	method getRouteSchedule {
 		in {
 
 			<**
@@ -222,7 +222,7 @@ interface org.genivi.navigationcore.Routing {
 	<**
 		@description : This method sets a list of means of transportation that must be considered when calculating a route
 	**>
-	method SetTransportationMeans {
+	method setTransportationMeans {
 		in {
 
 			<**
@@ -240,9 +240,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : GetTransportationMeans = This method retrieves the selected means of transportation
+		@description : getTransportationMeans = This method retrieves the selected means of transportation
 	**>
-	method GetTransportationMeans {
+	method getTransportationMeans {
 		in {
 
 			<**
@@ -256,18 +256,18 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : GetSupportedTransportationMeans = This method retrieves a list of supported means of transportation
+		@description : getSupportedTransportationMeans = This method retrieves a list of supported means of transportation
 	**>
-	method GetSupportedTransportationMeans {
+	method getSupportedTransportationMeans {
 		out {
 			TransportationMeans[] transportationMeansList
 		}
 	}
 
 	<**
-		@description : SetExcludedAreas = This method sets the areas to be excluded when calculating a route
+		@description : setExcludedAreas = This method sets the areas to be excluded when calculating a route
 	**>
-	method SetExcludedAreas {
+	method setExcludedAreas {
 		in {
 
 			<**
@@ -285,9 +285,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : GetExcludedAreas = This method retrieves the areas to be excluded when calculating a route
+		@description : getExcludedAreas = This method retrieves the areas to be excluded when calculating a route
 	**>
-	method GetExcludedAreas {
+	method getExcludedAreas {
 		in {
 
 			<**
@@ -301,9 +301,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : SetWaypoints = This method sets a list of waypoints
+		@description : setWaypoints = This method sets a list of waypoints
 	**>
-	method SetWaypoints {
+	method setWaypoints {
 		in {
 
 			<**
@@ -326,9 +326,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : GetWaypoints = This method retrieves a list of waypoints
+		@description : getWaypoints = This method retrieves a list of waypoints
 	**>
-	method GetWaypoints {
+	method getWaypoints {
 		in {
 
 			<**
@@ -348,9 +348,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : CalculateRoute = This method starts a route calculation
+		@description : calculateRoute = This method starts a route calculation
 	**>
-	method CalculateRoute {
+	method calculateRoute {
 		in {
 
 			<**
@@ -366,9 +366,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : CancelRouteCalculation = This method cancels a route calculation
+		@description : cancelRouteCalculation = This method cancels a route calculation
 	**>
-	method CancelRouteCalculation {
+	method cancelRouteCalculation {
 		in {
 
 			<**
@@ -384,9 +384,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : CalculateRoutes = This method allows a client to calculate alternative routes that differs from a list of already calculated routes
+		@description : calculateRoutes = This method allows a client to calculate alternative routes that differs from a list of already calculated routes
 	**>
-	method CalculateRoutes {
+	method calculateRoutes {
 		in {
 
 			<**
@@ -401,9 +401,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : GetRouteSegments = This method retrieves a list of segments for a given route starting from the one closest to the current position to the one closest to the destination
+		@description : getRouteSegments = This method retrieves a list of segments for a given route starting from the one closest to the current position to the one closest to the destination
 	**>
-	method GetRouteSegments {
+	method getRouteSegments {
 		in {
 
 			<**
@@ -440,9 +440,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description :  GetRouteOverview = This method retrieves general information about a given route
+		@description :  getRouteOverview = This method retrieves general information about a given route
 	**>
-	method GetRouteOverview {
+	method getRouteOverview {
 		in {
 
 			<**
@@ -458,9 +458,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : GetRouteBoundingBox = This method retrieves the bounding box containing a calculated route
+		@description : getRouteBoundingBox = This method retrieves the bounding box containing a calculated route
 	**>
-	method GetRouteBoundingBox {
+	method getRouteBoundingBox {
 		in {
 
 			<**
@@ -474,18 +474,18 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : GetAllRoutes = This method retrieves the handles of all created routes
+		@description : getAllRoutes = This method retrieves the handles of all created routes
 	**>
-	method GetAllRoutes {
+	method getAllRoutes {
 		out {
 			Handle [] routesList
 		}
 	}
 
 	<**
-		@description : SetBlockedRouteStretches = This method sets blocked streches on a given route
+		@description : setBlockedRouteStretches = This method sets blocked streches on a given route
 	**>
-	method SetBlockedRouteStretches {
+	method setBlockedRouteStretches {
 		in {
 
 			<**
@@ -503,9 +503,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : GetBlockedRouteStretches = This method retrieves all blocked streches on a given route
+		@description : getBlockedRouteStretches = This method retrieves all blocked streches on a given route
 	**>
-	method GetBlockedRouteStretches {
+	method getBlockedRouteStretches {
 		in {
 
 			<**
@@ -519,9 +519,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : RouteDeleted = This signal is emitted to inform clients that the current route has been deleted
+		@description : routeDeleted = This signal is emitted to inform clients that the current route has been deleted
 	**>
-	broadcast RouteDeleted {
+	broadcast routeDeleted {
 		out {
 
 			<**
@@ -532,9 +532,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : RouteCalculationCancelled = This signal informs a client that a route calculation was cancelled
+		@description : routeCalculationCancelled = This signal informs a client that a route calculation was cancelled
 	**>
-	broadcast RouteCalculationCancelled {
+	broadcast routeCalculationCancelled {
 		out {
 
 			<**
@@ -545,9 +545,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : RouteCalculationSuccessful = This signal informs a client that a route calculation was successful
+		@description : routeCalculationSuccessful = This signal informs a client that a route calculation was successful
 	**>
-	broadcast RouteCalculationSuccessful {
+	broadcast routeCalculationSuccessful {
 		out {
 
 			<**
@@ -560,9 +560,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : RouteCalculationFailed = This signal informs a client that a route calculation failed
+		@description : routeCalculationFailed = This signal informs a client that a route calculation failed
 	**>
-	broadcast RouteCalculationFailed {
+	broadcast routeCalculationFailed {
 		out {
 
 			<**
@@ -580,9 +580,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : RouteCalculationProgressUpdate = This signal informs a client about a route calculation progress
+		@description : routeCalculationProgressUpdate = This signal informs a client about a route calculation progress
 	**>
-	broadcast RouteCalculationProgressUpdate {
+	broadcast routeCalculationProgressUpdate {
 		out {
 
 			<**
@@ -603,9 +603,9 @@ interface org.genivi.navigationcore.Routing {
 	}
 
 	<**
-		@description : AlternativeRoutesAvailable = This signal is emitted when alternative routes have been computed in the background and are available for guidance.
+		@description : alternativeRoutesAvailable = This signal is emitted when alternative routes have been computed in the background and are available for guidance.
 	**>
-	broadcast AlternativeRoutesAvailable {
+	broadcast alternativeRoutesAvailable {
 		out {
 			Handle[] routeHandlesList
 		}

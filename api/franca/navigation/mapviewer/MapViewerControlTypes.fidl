@@ -13,6 +13,8 @@ typeCollection MapViewerControlTypes {
 	enumeration MapViewType extends BasicEnum {
 		MAIN_MAP		= "0x0010"
 		SPLIT_SCREEN	= "0x0011"
+		
+		GUIDING_MAP
 	}
 	
 	enumeration MapScaleMode extends BasicEnum {
@@ -27,8 +29,57 @@ typeCollection MapViewerControlTypes {
 	}
 
 	enumeration MapObject extends BasicEnum {
-		BUILDINGS		= "0x0080"
-		TERRAIN			= "0x0081"
+		// TODO: Check which elements are really visible
+		DET_POI                           //Points Of Interest
+		DET_TTI                           //TTI elements
+		DET_ONE_WAY_STREET_ARROW          //Arrows marking one way streets
+		DET_CITY_NAME                     //City names
+		DET_ROAD_NAME                     //Road names
+		DET_MOTORWAY_EXIT_MARKER          //Motorway exit signs
+		DET_TRAFFIC_LIGHT                 //Traffic lights
+		DET_TRAFFIC_LIGHTS_ALONG_ROUTE    //Traffic lights along the route
+		DET_ROAD_ICON                     //Road icons
+		DET_DTM                           //Digital Terrain Model
+		DET_LANDMARKS_3D                  //3D landmarks
+		DET_FAVORITES                     //Saved favorite destinations
+		DET_ROUTE_BLOCKING                //Highlighting of blocked routes
+		DET_ROAD                          //Roads
+		DET_POLYGON                       //Polygons
+		DET_DESTINATION                   //Destination flag
+		DET_MANOEUVRE_MARKER              //Manoeuvre point markers
+		DET_LANE_GUIDANCE_MARKER          //Lange guidance point markers
+		DET_ROUTE                         //Route
+		DET_MANOEUVRE_ARROW               //Manoeuvre arrows
+		DET_TREKKING_TOUR                 //Trekking tours
+		DET_TTI_EDGE_HIGHLIGHTING         //TTI highlighted edges
+		DET_CITY_MARKER                   //City markers
+		DET_VEHICLE                       //Vehicle
+		DET_POLYGON_NAME                  //Name of polygons
+		DET_OFF_ROAD_ROUTE                //Connection line between end of a route and an off-road destination
+		DET_TTI_ARROW                     //Direction arrow for TTI messages
+		DET_POI_NAME                      //Points Of Interest with a label
+		DET_RASTER_MAP                    //Raster maps
+		DET_BREAD_CRUMB_TRAIL             //Line that connects bread crumbs (past positions)
+		DET_EDGE_HIGHLIGHTING             //Draw highlighted edges that were selected by MAP_POINT_QUERY0 - MAP_POINT_QUERY4.
+		DET_DIRECTION_ARROW               //Draw arrows that indicate driving or walking direction.
+		DET_CITY_BUILDINGS                //Render city buildings.
+		DET_FPS_DISPLAY                   //Measure and display frames per second.
+		DET_CROSSHAIR                     //Display crosshair.
+		DET_DEVDROP_BANNER                //Enables drawing of a banner. The banner indicates that the current version is a developer's version. The banner is rendered across the display.
+		DET_FRAME_AROUND_MAP 			   //a frame is rendered around the map.
+		DET_CORONA                        //a corona is drawn around the earth.
+		DET_WATEREFFECT                   //Demo effect for water.
+		DET_TREES                         //Demo effect for trees.
+		DET_RAIN                          //Demo effect for rain.
+		DET_CITYMODEL_ROUTE_TRANSPARENCY  //Render buildings transparently around route.
+		DET_ROUTE_DESTINATION             //Render destination POIs (e.g. destination flags).
+		DET_RANGE_DISPLAY                 //Display range display.
+		DET_POI_BRANDS                    //Display branded POIs.
+		DET_WEATHER_MARKER                //DrawingElementType_DET_WEATHER_MARKER
+		DET_WEATHER_OVERLAY               //Weather map overlay
+		DET_WAYPOINT_ROUTE
+		DET_WAYPOINT_ROUTE_MARKER
+		DET_STENCIL		
 	}
 
 	enumeration PanAction extends BasicEnum {
@@ -51,10 +102,36 @@ typeCollection MapViewerControlTypes {
 		LEVEL_5			= "0x0054"
 	}
 
-	enumeration MapTheme extends BasicEnum {
-		THEME_1			= "0x0060"
-		THEME_2			= "0x0061"
-		THEME_3			= "0x0062"
+	enumeration MapTheme extends BasicEnum {		
+		THEME_BMW_CLASSIC_DAY
+		THEME_BMW_CLASSIC_NIGHT
+		THEME_BMW_CLASSIC_TRAFFIC_DAY
+		THEME_BMW_CLASSIC_TRAFFIC_NIGHT
+		THEME_BMW_ALTERNATIVE_DAY
+		THEME_BMW_ALTERNATIVE_NIGHT
+		THEME_BMW_ALTERNATIVE_TRAFFIC_DAY
+		THEME_BMW_ALTERNATIVE_TRAFFIC_NIGHT
+		THEME_BMW_GUIDING
+
+		THEME_MINI_CLASSIC_DAY
+		THEME_MINI_CLASSIC_NIGHT
+		THEME_MINI_CLASSIC_TRAFFIC_DAY
+		THEME_MINI_CLASSIC_TRAFFIC_NIGHT
+		THEME_MINI_ALTERNATIVE_DAY
+		THEME_MINI_ALTERNATIVE_NIGHT
+		THEME_MINI_ALTERNATIVE_TRAFFIC_DAY
+		THEME_MINI_ALTERNATIVE_TRAFFIC_NIGHT
+		THEME_MINI_GUIDING
+
+		THEME_I_CLASSIC_DAY
+		THEME_I_CLASSIC_NIGHT
+		THEME_I_CLASSIC_TRAFFIC_DAY
+		THEME_I_CLASSIC_TRAFFIC_NIGHT
+		THEME_I_ALTERNATIVE_DAY
+		THEME_I_ALTERNATIVE_NIGHT
+		THEME_I_ALTERNATIVE_TRAFFIC_DAY
+		THEME_I_ALTERNATIVE_TRAFFIC_NIGHT
+		THEME_I_GUIDING						
 	}
 
 	<**
@@ -84,6 +161,23 @@ typeCollection MapViewerControlTypes {
 	}
 
 	enumeration SelectableMapType extends BasicEnum {
+        MET_POI = "2"                            //POI.
+        MET_POLYGON = "3"                        //Polygons.
+        MET_EDGE = "4"                           //All edges except roads. E.g. railways rivers ferries.
+        MET_ROAD = "5"                           //Road edges.
+        MET_ROAD_ICON = "6"                      //Road icons.
+        MET_TTI_ICON = "7"                       //TTI icons.
+        MET_TTI_EDGE = "8"                       //TTI edge [Not yet supported].
+        MET_CITY_MARKER = "9"                    //City names and city markers.
+        MET_ROUTE = "10"                         //Tours.
+        MET_TREKKING_ROUTE = "11"                //Trekking tours.
+        MET_POSITION = "12"                      //Position.
+        MET_LANDMARK = "13"                      //Landmarks.
+        MET_DESTINATION = "14"                   //Destinations.
+        MET_FAVORITE = "15"                      //Favorites.
+        MET_PICTURE = "16"                       //Picture.
+        MET_GENERIC_MARKER  = "17"                //Generic markers like weather markers.
+		
 		CUSTOM_ELEMENT		= "0x0120"
 		CURRENT_POSITION	= "0x0121"
 		WAYPOINT			= "0x0122"

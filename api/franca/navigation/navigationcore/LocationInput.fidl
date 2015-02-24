@@ -15,25 +15,25 @@ import org.genivi.navigation.navigationcore.LocationInputTypes.* from "LocationI
 	@description : LocationInput = This interface offers functions that implement the location-input functionality of a navigation system
 **>
 
-interface org.genivi.navigationcore.LocationInput {
+interface LocationInput {
 	version {
 		major 3
 		minor 0
 	}
 
 	<**
-		@description : GetVersion = This method returns the API version implemented by the server application
+		@description : getVersion = This method returns the API version implemented by the server application
 	**>
-	method GetVersion {
+	method getVersion {
 		out {
 			Version ^version
 		}
 	}
 
 	<**
-		@description : CreateLocationInput = This method creates a new location input and retrieves a handle
+		@description : createLocationInput = This method creates a new location input and retrieves a handle
 	**>
-	method CreateLocationInput {
+	method createLocationInput {
 		in {
 
 			<**
@@ -54,9 +54,9 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : DeleteLocationInput = This method deletes a location input and its associated resources
+		@description : deleteLocationInput = This method deletes a location input and its associated resources
 	**>
-	method DeleteLocationInput {
+	method deleteLocationInput {
 		in {
 
 			<**
@@ -72,18 +72,18 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : GetSupportedAddressAttributes = This method retrieves the supported address attributes
+		@description : getSupportedAddressAttributes = This method retrieves the supported address attributes
 	**>
-	method GetSupportedAddressAttributes {
+	method getSupportedAddressAttributes {
 		out {
 			AddressAttributeList addressAttributesList
 		}
 	}
 
 	<**
-		@description : SetAddress = This method sets the address to start with for the LocationInput identified by the given handle
+		@description : setAddress = This method sets the address to start with for the LocationInput identified by the given handle
 	**>
-	method SetAddress {
+	method setAddress {
 		in {
 
 			<**
@@ -101,9 +101,9 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : SetSelectionCriterion = This method sets the selection criterion for the current speller, search input and the corresponding result-lists for the current session
+		@description : setSelectionCriterion = This method sets the selection criterion for the current speller, search input and the corresponding result-lists for the current session
 	**>
-	method SetSelectionCriterion {
+	method setSelectionCriterion {
 		in {
 
 			<**
@@ -124,9 +124,9 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : Spell = This method sends the next spell input for the current session
+		@description : spell = This method sends the next spell input for the current session
 	**>
-	method Spell {
+	method spell {
 		in {
 
 			<**
@@ -152,9 +152,9 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : Search = This method sends the search input for the current session
+		@description : search = This method sends the search input for the current session
 	**>
-	method Search {
+	method search {
 		in {
 
 			<**
@@ -180,9 +180,9 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : RequestListUpdate = This method sends a request for more list elements for the current session
+		@description : requestListUpdate = This method sends a request for more list elements for the current session
 	**>
-	method RequestListUpdate {
+	method requestListUpdate {
 		in {
 
 			<**
@@ -208,9 +208,9 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : SelectEntry = This method triggers selection of a result list entry by index
+		@description : selectEntry = This method triggers selection of a result list entry by index
 	**>
-	method SelectEntry {
+	method selectEntry {
 		in {
 
 			<**
@@ -231,9 +231,9 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : GetEntry = This method synchronously gets the address for the given result list entry
+		@description : getEntry = This method synchronously gets the address for the given result list entry
 	**>
-	method GetEntry {
+	method getEntry {
 		in {
 
 			<**
@@ -252,9 +252,9 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : ValidateAddress = This method validates an address from different sources than Navigation
+		@description : validateAddress = This method validates an address from different sources than Navigation
 	**>
-	method ValidateAddress {
+	method validateAddress {
 		in {
 
 			<**
@@ -272,9 +272,9 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : ReverseGeocode = This method transforms a geocoordinate into an address
+		@description : reverseGeocode = This method transforms a geocoordinate into an address
 	**>
-	method ReverseGeocode {
+	method reverseGeocode {
 		in {
 
 			<**
@@ -292,9 +292,9 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : CurrentSelectionCriterion = This signal notifies the SelectionCriterion for the current speller input or search.
+		@description : currentSelectionCriterion = This signal notifies the SelectionCriterion for the current speller input or search.
 	**>
-	broadcast CurrentSelectionCriterion {
+	broadcast currentSelectionCriterion {
 		out {
 
 			<**
@@ -310,9 +310,9 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : SearchStatus = This signal updates the search status of the specified session
+		@description : searchStatus = This signal updates the search status of the specified session
 	**>
-	broadcast SearchStatus {
+	broadcast searchStatus {
 		out {
 
 			<**
@@ -328,9 +328,9 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : SpellResult = This signal notifies the result of the previous Spell method
+		@description : spellResult = This signal notifies the result of the previous Spell method
 	**>
-	broadcast SpellResult {
+	broadcast spellResult {
 		out {
 
 			<**
@@ -356,9 +356,9 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : SearchResultList = This signal updates the address result list (e.g. after a Search/Spell/Scroll call)
+		@description : searchResultList = This signal updates the address result list (e.g. after a Search/Spell/Scroll call)
 	**>
-	broadcast SearchResultList {
+	broadcast searchResultList {
 		out {
 
 			<**
@@ -386,9 +386,9 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : SearchResultListSizeChanged = This signal updates the size of the address result list
+		@description : searchResultListSizeChanged = This signal updates the size of the address result list
 	**>
-	broadcast SearchResultListSizeChanged {
+	broadcast searchResultListSizeChanged {
 		out {
 
 			<**
@@ -404,9 +404,9 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : ContentUpdated = This signal updates the input content data for the specified session
+		@description : contentUpdated = This signal updates the input content data for the specified session
 	**>
-	broadcast ContentUpdated {
+	broadcast contentUpdated {
 		out {
 
 			<**
@@ -426,9 +426,9 @@ interface org.genivi.navigationcore.LocationInput {
 	}
 
 	<**
-		@description : AddressValidationResult = This signal notifies the validation result of a former ValidateAddress call
+		@description : addressValidationResult = This signal notifies the validation result of a former ValidateAddress call
 	**>
-	broadcast AddressValidationResult {
+	broadcast addressValidationResult {
 		out {
 
 			<**

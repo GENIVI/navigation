@@ -14,25 +14,25 @@ import org.genivi.navigation.navigationcore.GuidanceTypes.* from "GuidanceTypes.
 	@description : Guidance = This interface offers functions that implement the route-guidance functionality of a navigation system
 **>
 
-interface org.genivi.navigationcore.Guidance {
+interface Guidance {
 	version {
 		major 0
 		minor 0
 	}
 
 	<**
-		@description : GetVersion = This method returns the API version implemented by the server application
+		@description : getVersion = This method returns the API version implemented by the server application
 	**>
-	method GetVersion {
+	method getVersion {
 		out {
 			Version ^version
 		}
 	}
 
 	<**
-		@description : StartGuidance = This method starts the guidance for a given route
+		@description : startGuidance = This method starts the guidance for a given route
 	**>
-	method StartGuidance {
+	method startGuidance {
 		in {
 
 			<**
@@ -48,9 +48,9 @@ interface org.genivi.navigationcore.Guidance {
 	}
 
 	<**
-		@description : StopGuidance = This method stops the guidance
+		@description : stopGuidance = This method stops the guidance
 	**>
-	method StopGuidance {
+	method stopGuidance {
 		in {
 
 			<**
@@ -61,9 +61,9 @@ interface org.genivi.navigationcore.Guidance {
 	}
 
 	<**
-		@description : SetVoiceGuidance = This method switch on/off the voice guidance
+		@description : setVoiceGuidance = This method switch on/off the voice guidance
 	**>
-	method SetVoiceGuidance {
+	method setVoiceGuidance {
 		in {
 
 			<**
@@ -79,9 +79,9 @@ interface org.genivi.navigationcore.Guidance {
 	}
 
 	<**
-		@description : GetGuidanceDetails = This method retrieves guidance information 
+		@description : getGuidanceDetails = This method retrieves guidance information 
 	**>
-	method GetGuidanceDetails {
+	method getGuidanceDetails {
 		out {
 
 			<**
@@ -107,15 +107,15 @@ interface org.genivi.navigationcore.Guidance {
 	}
 
 	<**
-		@description : PlayVoiceManeuver = This method plays or repeats the last voice guidance
+		@description : playVoiceManeuver = This method plays or repeats the last voice guidance
 	**>
-	method PlayVoiceManeuver {
+	method playVoiceManeuver {
 	}
 
 	<**
-		@description : GetWaypointInformation = This method retrieves the information on the remaining way points of the route. A point can be the final destination as well as a stage defined by the user. The returned waypoints are ordered by their 'number'.
+		@description : getWaypointInformation = This method retrieves the information on the remaining way points of the route. A point can be the final destination as well as a stage defined by the user. The returned waypoints are ordered by their 'number'.
 	**>
-	method GetWaypointInformation {
+	method getWaypointInformation {
 		in {
 
 			<**
@@ -136,7 +136,7 @@ interface org.genivi.navigationcore.Guidance {
 	<**
 		@description : This method retrieves the information on the final destination
 	**>
-	method GetDestinationInformation {
+	method getDestinationInformation {
 		out {
 
 			<**
@@ -172,9 +172,9 @@ interface org.genivi.navigationcore.Guidance {
 	}
 
 	<**
-		@description : GetManeuversList = This method retrieves the list of next maneuvers
+		@description : getManeuversList = This method retrieves the list of next maneuvers
 	**>
-	method GetManeuversList {
+	method getManeuversList {
 		in {
 
 			<**
@@ -199,9 +199,9 @@ interface org.genivi.navigationcore.Guidance {
 	}
 
 	<**
-		@description : SetRouteCalculationMode = This method configures the way the navigation application wants the navigation core to behave of reroute trigger
+		@description : setRouteCalculationMode = This method configures the way the navigation application wants the navigation core to behave of reroute trigger
 	**>
-	method SetRouteCalculationMode {
+	method setRouteCalculationMode {
 		in {
 
 			<**
@@ -217,9 +217,9 @@ interface org.genivi.navigationcore.Guidance {
 	}
 
 	<**
-		@description : SkipNextManeuver = This method allows to jump behind the current maneuver
+		@description : skipNextManeuver = This method allows to jump behind the current maneuver
 	**>
-	method SkipNextManeuver {
+	method skipNextManeuver {
 		in {
 
 			<**
@@ -230,9 +230,9 @@ interface org.genivi.navigationcore.Guidance {
 	}
 
 	<**
-		@description : GetGuidanceStatus = This method retrieves the guidance status
+		@description : getGuidanceStatus = This method retrieves the guidance status
 	**>
-	method GetGuidanceStatus {
+	method getGuidanceStatus {
 		out {
 
 			<**
@@ -248,9 +248,9 @@ interface org.genivi.navigationcore.Guidance {
 	}
 
 	<**
-		@description : SetVoiceGuidanceSettings = This method sets the voice guidance settings
+		@description : setVoiceGuidanceSettings = This method sets the voice guidance settings
 	**>
-	method SetVoiceGuidanceSettings {
+	method setVoiceGuidanceSettings {
 		in {
 
 			<**
@@ -261,9 +261,9 @@ interface org.genivi.navigationcore.Guidance {
 	}
 
 	<**
-		@description : GetVoiceGuidanceSettings = This method returns the used voice guidance settings
+		@description : getVoiceGuidanceSettings = This method returns the used voice guidance settings
 	**>
-	method GetVoiceGuidanceSettings {
+	method getVoiceGuidanceSettings {
 		out {
 
 			<**
@@ -274,15 +274,15 @@ interface org.genivi.navigationcore.Guidance {
 	}
 
 	<**
-		@description : VehicleLeftTheRoadNetwork = This signal is emitted when the vehicle exits from the road network
+		@description : vehicleLeftTheRoadNetwork = This signal is emitted when the vehicle exits from the road network
 	**>
-	broadcast VehicleLeftTheRoadNetwork {
+	broadcast vehicleLeftTheRoadNetwork {
 	}
 
 	<**
-		@description : GuidanceStatusChanged = This signal is emitted when the guidance status changes
+		@description : guidanceStatusChanged = This signal is emitted when the guidance status changes
 	**>
-	broadcast GuidanceStatusChanged {
+	broadcast guidanceStatusChanged {
 		out {
 
 			<**
@@ -298,9 +298,9 @@ interface org.genivi.navigationcore.Guidance {
 	}
 
 	<**
-		@description : WaypointReached = This signal is emitted when the destination is reached
+		@description : waypointReached = This signal is emitted when the destination is reached
 	**>
-	broadcast WaypointReached {
+	broadcast waypointReached {
 		out {
 
 			<**
@@ -313,7 +313,7 @@ interface org.genivi.navigationcore.Guidance {
 	<**
 		@description : This signal is emitted each time a maneuver event is going
 	**>
-	broadcast ManeuverChanged {
+	broadcast maneuverChanged {
 		out {
 
 			<**
@@ -324,9 +324,9 @@ interface org.genivi.navigationcore.Guidance {
 	}
 
 	<**
-		@description : PositionOnRouteChanged = This signal is emitted when the position on the route changes
+		@description : positionOnRouteChanged = This signal is emitted when the position on the route changes
 	**>
-	broadcast PositionOnRouteChanged {
+	broadcast positionOnRouteChanged {
 		out {
 
 			<**
@@ -337,15 +337,15 @@ interface org.genivi.navigationcore.Guidance {
 	}
 
 	<**
-		@description : VehicleLeftTheRoute = This signal is emitted when the vehicle has left the route
+		@description : vehicleLeftTheRoute = This signal is emitted when the vehicle has left the route
 	**>
-	broadcast VehicleLeftTheRoute {
+	broadcast vehicleLeftTheRoute {
 	}
 
 	<**
-		@description : PositionToRouteChanged = This signal is emitted when the vehicle is off-the-road network and either the heading or the distance (or both) to the closest point on the active route changes
+		@description : positionToRouteChanged = This signal is emitted when the vehicle is off-the-road network and either the heading or the distance (or both) to the closest point on the active route changes
 	**>
-	broadcast PositionToRouteChanged {
+	broadcast positionToRouteChanged {
 		out {
 
 			<**
@@ -361,9 +361,9 @@ interface org.genivi.navigationcore.Guidance {
 	}
 
 	<**
-		@description : ActiveRouteChanged = This signal is emitted when the active route changes
+		@description : activeRouteChanged = This signal is emitted when the active route changes
 	**>
-	broadcast ActiveRouteChanged {
+	broadcast activeRouteChanged {
 		out {
 
 			<**

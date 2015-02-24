@@ -1,6 +1,6 @@
 /* 
 SPDX-License-Identifier: MPL-2.0
-Copyright (C) 2014, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
+Copyright (C) 2014, PCA Peugeot Citroï¿½n, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
 This Source Code Form is subject to the terms of the
 Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
 this file, you can obtain one at http://mozilla.org/MPL/2.0/.
@@ -27,6 +27,7 @@ typeCollection LocationInputTypes {
 		PHONENUMBER		= "0x00ae"
 		POINAME			= "0x00af"
 		TOWNCENTER		= "0x00b0"
+        INTERNAL_DATA   = "0x00FF"
 	}
 	
 	enumeration ValidationType extends BasicEnum {
@@ -43,9 +44,13 @@ typeCollection LocationInputTypes {
 	
 	array AddressAttributeList of AddressAttribute
 
-	union AddressValue {
-		
-	}
+    union AddressValue {
+	    Int32 intValue
+	    Double doubleValue
+	    String stringValue
+	    Coordinate3D coordinateValue
+	    ByteBuffer internalData
+    }
 
 	map Address {
 		AddressAttribute to AddressValue

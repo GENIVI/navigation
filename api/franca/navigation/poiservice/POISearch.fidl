@@ -1,6 +1,6 @@
 /* 
 SPDX-License-Identifier: MPL-2.0
-Copyright (C) 2014, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
+Copyright (C) 2014, PCA Peugeot CitroÃ«n, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
 This Source Code Form is subject to the terms of the
 Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
 this file, you can obtain one at http://mozilla.org/MPL/2.0/.
@@ -19,7 +19,7 @@ interface POISearch {
 		minor 0
 	}
 	<**	@description : This method returns the API version implemented by the content access module.**>
-	method GetVersion {
+	method getVersion {
 		out {
 			<** @description: .**>
 			Version ^version				
@@ -28,7 +28,7 @@ interface POISearch {
 		
 	<**	@description : Get the current language set for the search.
     The language defines the poi and categories name and details language. If the language is not supported, the default details will be returned in the native language. **>
-	method GetLanguage {
+	method getLanguage {
 		out {
 			<** @description : The language.**>
 			String languageCode				
@@ -39,7 +39,7 @@ interface POISearch {
 	
 	<**	@description : Set the language.
     The language defines the poi and categories name and details language. If the language is not supported, the default details will be returned in the native language.**>
-	method SetLanguage {
+	method setLanguage {
 		in {
 			<** @description : The language to be used.**>
 			String languageCode				
@@ -49,94 +49,94 @@ interface POISearch {
 	}
 	
 	<**	@description : This method allows the application to validate that POI categories are supported by the POI component and the Content access modules.**>
-	method ValidateCategories {
+	method validateCategories {
 		in {
 			<** @description : list of categories enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)
             Note: A POI category is a unique ID. It could be a predifined category or a custom one defined by a POI plug-in.**>
-			UInt16[] categories				
+			CategoryID[] categories				
 		}	
 		out {
 			<** @description : List of status for all the POI categories.**>
-			poiCategoryAndStatus_t[] results				
+			CategoryAndStatus[] results				
 		}
 	}
 	
 	<**	@description : This method retrieves the list od POI categories available (pre-defined and custom).**>
-	method GetAvailableCategories {
+	method getAvailableCategories {
 		out {
 			<** @description : List of categories (id, name and top_level).**>
-			poiCategoryAndName_t[] categories				
+			CategoryAndName[] categories				
 		}
 	}
 	
 	<**	@description : Get the root category id. That would be ALL_CATEGORIES.**>
-	method GetRootCategory {
+	method getRootCategory {
 		out {
 			<** @description : The root category is a top level one by design.**>
-			UInt16 category				
+			CategoryID category				
 		}
 	}
 	
 	<**	@description : Get the children categories id and type (top level) from the a parent unique id.**>
-	method GetChildrenCategories {
+	method getChildrenCategories {
 		in {
 			<** @description : unique category id.**>
-			UInt16 category				
+			CategoryID category				
 		}	
 		out {
 			<** @description : List of categories (id and top_level).**>
-			poiCategoryAndLevel_t[] categories				
+			CategoryAndLevel[] categories				
 		}
 	}
 	
 	<**	@description : Get the parent categories id and type (top level) from the a unique id.**>
-	method GetParentCategories {
+	method getParentCategories {
 		in {
 			<** @description : unique category id.**>
-			UInt16 category				
+			CategoryID category				
 		}	
 		out {
 			<** @description : List of categories (id and top_level).**>
-			poiCategoryAndLevel_t[] categories				
+			CategoryAndLevel[] categories				
 		}
 	}
 	
 	<**	@description : GetCategoriesDetails = This method retrieves the details associated to one or more POI categories.
         It contains the name, the parent categories, the top level attribute, the list of attributes, the icons, ... .**>
-	method GetCategoriesDetails {
+	method getCategoriesDetails {
 		in {
 			<** @description : list of categories enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)
             Note: A POI category is a unique ID. It could be a predefined category or a custom one defined by a POI plug-in. **>
-			UInt16[] categories				
+			CategoryID[] categories				
 		}	
 		out {
 			<** @description : List of details for all the POI categories.**>
-			category_t[] results
+			Category[] results
 		}
 	}
 	
 	<** @description : This method creates a new search input and retrieves a handle .**>
-	method CreatePoiSearchHandle {
+	method createPoiSearchHandle {
 		out {
 			<** @description : poi search unique handle.**>
-			UInt8 poiSearchHandle				
+			Handle poiSearchHandle				
 		}
 	}
 
 	<**	@description : This method deletes a search input and its associated resources.**>
-	method DeletePoiSearchHandle {
+	method deletePoiSearchHandle {
 		in {
 			<** @description : poi search unique handle.**>
-			UInt8 poiSearchHandle				
+			Handle poiSearchHandle				
 		}	
 	}
 
 	<**	@description : This method sets the location to start the search around.
         If a route handle was defined before, it will be replaced by this location.**>
-	method SetCenter {
+	method setCenter {
 		in {
 			<** @description : poi search unique handle.**>
-			UInt8 poiSearchHandle				
+			Handle poiSearchHandle				
 			<** @description : location of the center.**>
 			Coordinate3D location				
 		}	
@@ -145,48 +145,48 @@ interface POISearch {
 	<**	@description : This method allows to start a POI search along a guided route.
         The route handle must be valid or the POI search will failed.
         If a search location was defined before, it will be replaced by the route.**>
-	method SetRouteHandle {
+	method setRouteHandle {
 		in {
 			<** @description : poi search unique handle.**>
-			UInt8 poiSearchHandle				
+			Handle poiSearchHandle				
 			<** @description : session handle.**>
-			UInt8 sessionHandle
+			Handle sessionHandle
 			<** @description : route handle.**>
-			UInt8 routeHandle
+			Handle routeHandle
 			<** @description : (optional) Distance from vehicle (in meters) from where to start the search along. 0 or invalid distance means start from vehicle.**>
-			UInt16 startSearchOffset				
+			UInt32 startSearchOffset				
 			<** @description : (optional) Length of the route (in meters) from where to start the search along. 0 or invalid lenght means end is the destination.**>
-			UInt16 endSearchOffset				
+			UInt32 endSearchOffset				
 		}		
 	}
 	
 	<**	@description : This method sets the POI categories for the current search input and the corresponding result-lists for the current session .**>
-	method SetCategories {
+	method setCategories {
 		in {
 			<** @description : poi search unique handle.**>
-			UInt8 poiSearchHandle				
+			Handle poiSearchHandle				
 			<** @description: array[struct(id,radius)].**>						
-			categoryRadius_t[] poiCategories		
+			CategoryAndRadius[] poiCategories		
 			}	
 	}
 	<**	@description : This method set POI attributes (optional) for the current search input and the corresponding result-lists for the current session
         An attribute is attached to a category.**>
-	method SetAttributes {
+	method setAttributes {
 		in {
 			<** @description : poi search unique handle.**>
-			UInt8 poiSearchHandle				
+			Handle poiSearchHandle				
 			<** @description : array[struct(name, poiCategory, type, value, operator, mandatory)].**>
-			attributeDetails_t[] poiAttributes 
+			AttributeDetails[] poiAttributes 
 		}
 	}	
 	
 	<**	@description : This method sends the search input for the search handle.
         The search will start with the either the location or the route handle.
         If no positon or route handle were configured, the search will use the vehicle position are center location.**>
-	method StartPoiSearch {
+	method startPoiSearch {
 		in {
 			<** @description : poi search unique handle.**>
-			UInt8 poiSearchHandle				
+			Handle poiSearchHandle				
 			<** @description : contains the name of the poi that is searched. It could be a partial name or an empty string.**>
 			String inputString				
 			<** @description : enum(SORT_DEFAULT,SORT_BY_DISTANCE,SORT_BY_TIME,ATTRIBUTE_CUSTOM, ... )
@@ -196,20 +196,20 @@ interface POISearch {
 	}
 	
 	<**	@description : This method cancels the search for the current session.**>
-	method CancelPoiSearch {
+	method cancelPoiSearch {
 		in {
 			<** @description : poi search unique handle.**>
-			UInt8 poiSearchHandle				
+			Handle poiSearchHandle				
 		}
 	}
 	
 	<**	@description : This method starts to check for POI aound vehicle according to the criteria defined with the unique handle.
         By default, it will search for POI around vehicle position with default radius defined for each categories.
         If a route handle was defined, it will search along the route with default categorie's radius.**>
-	method StartPoiProximityAlert {
+	method startPoiProximityAlert {
 		in {
 			<** @description : poi alert unique handle.**>
-			UInt8 poiSearchHandle				
+			Handle poiSearchHandle				
 			<** @description : contains the name of the poi that is searched. It could be a partial name or an empty string.**>
 			String inputString				
 			<** @description : enum(SORT_DEFAULT,SORT_BY_DISTANCE,SORT_BY_TIME,ATTRIBUTE_CUSTOM, ... )
@@ -219,18 +219,18 @@ interface POISearch {
 	}
 	
 	<**	@description : This method cancels the search for the current session.**>
-	method CancelPoiProximityAlert {
+	method cancelPoiProximityAlert {
 		in {
 			<** @description : poi alert unique handle.**>
-			UInt8 poiSearchHandle				
+			Handle poiSearchHandle				
 		}
 	}
 	
 	<**	@description : This method gets the poi result list (e.g. after a Search/Scroll call) .**>
-	method RequestResultList {
+	method requestResultList {
 		in {
 			<** @description : poi search unique handle.**>
-			UInt8 poiSearchHandle				
+			Handle poiSearchHandle				
 			<** @description : starting offset of the newly requested list elements. If invalid (more that total list for instance) it starts from the begining.**>
 			UInt16 offset				
 			<** @description : maximum number of elements that should be returned as result.**>
@@ -244,20 +244,20 @@ interface POISearch {
 			<** @description : Number of items of the results list.**>
 			UInt16 resultListSize				
 			<** @description : array[unique_id, distance, route_status, attributes].**>
-			searchResult_t[] resultListWindow				
+			SearchResult[] resultListWindow				
 		}
 	}
 	
 	<**	@description : This method retrieves the details associated to one or more POI.
         It contains the name, the parent categories, the list of attributes, the icons, ... ..**>
-	method GetPoiDetails {
+	method getPoiDetails {
 		in {
 			<** @description : list of poi.**>
-			UInt32[] id				
+			POI_ID[] id				
 		}	
 		out {
 			<** @description : array[details, categories, attributes].**>
-			searchResultDetails_t[] results				
+			SearchResultDetails[] results				
 		}
 	}	
 		
@@ -265,7 +265,7 @@ interface POISearch {
 	broadcast CategoriesUpdated {
 		out {
 			<**	@description : List of POI categories modified or added.**>
-			poiCategoryAndReason_t[] poiCategories			
+			CategoryAndReason[] poiCategories			
 		}
 	}
 	
@@ -273,9 +273,9 @@ interface POISearch {
 	broadcast PoiStatus {
 		out {
 			<** @description : poi search unique handle.**>
-			UInt8 poiSearchHandle				
+			Handle poiSearchHandle				
 			<** @description : enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... ).**>
-			UInt16 statusValue				
+			SearchStatusState statusValue				
 		}
 	}
 	
@@ -283,7 +283,7 @@ interface POISearch {
 	broadcast ResultListChanged {
 		out {
 			<** @description : poi search unique handle.**>
-			UInt8 poiSearchHandle				
+			Handle poiSearchHandle				
 			<** @description : Number of items of the results list.**>
 			UInt16 resultListSize				
 		}
