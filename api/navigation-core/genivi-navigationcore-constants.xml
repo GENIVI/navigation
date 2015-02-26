@@ -103,6 +103,7 @@
   <id name="FULL_ADDRESS" value="0x00b2" />
   <id name="COUNTRYCODE" value="0x00b3" />
   <id name="HOUSENAME" value="0x00b4" />
+  <id name="POSTAL_CODE" value="0x00b5" /> 
 
   <id name="NOT_STARTED" value="0x0c0" />
   <id name="SEARCHING" value="0x00c1" />
@@ -184,7 +185,10 @@
   <id name="PUBLIC_TRANSPORTATION" value="0x0183" />
   <id name="BY_BICYCLE" value="0x0184" />
   <id name="BY_TRUCK" value="0x0185" />
-
+  <id name="BLOCK_NUMBER" value="0x0186" />
+  <id name="UNIT_NUMBER" value="0x0187" />
+  <id name="BEGIN_STREET" value="0x0188" />
+  <id name="ROAD_INTERSECTION" value="0x0189" /> 
   <id name="ARRIVAL_TIME" value="0x018a" />
   <id name="ARRIVAL_DATE" value="0x018b" />
   <id name="DEPARTURE_TIME" value="0x018c" />
