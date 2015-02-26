@@ -136,8 +136,8 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("SetCategories"), argumentList);
     }
 
-    inline QDBusPendingReply<>SetRouteHandle(uchar poiSearchHandle, uchar sessionHandle, uchar routeHandle, ushort startSearchOffset, ushort endSearchOffset)
-    { // "y" "y" "y" "q" "q" in
+    inline QDBusPendingReply<>SetRouteHandle(uchar poiSearchHandle, uchar sessionHandle, uchar routeHandle, uint startSearchOffset, uint endSearchOffset)
+    { // "y" "y" "y" "u" "u" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle) << qVariantFromValue(sessionHandle) << qVariantFromValue(routeHandle) << qVariantFromValue(startSearchOffset) << qVariantFromValue(endSearchOffset);
         return asyncCallWithArgumentList(QLatin1String("SetRouteHandle"), argumentList);

@@ -245,7 +245,7 @@ public:
 
     void DeletePoiSearchHandle(const uint8_t& poiSearchHandle);
 
-    void SetRouteHandle(const uint8_t& poiSearchHandle, const uint8_t& sessionHandle, const uint8_t& routeHandle, const uint16_t& startSearchOffset, const uint16_t& endSearchOffset);
+    void SetRouteHandle(const uint8_t& poiSearchHandle, const uint8_t& sessionHandle, const uint8_t& routeHandle, const uint32_t& startSearchOffset, const uint32_t& endSearchOffset);
 
     void SetCategories(const uint8_t& poiSearchHandle, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories);
 

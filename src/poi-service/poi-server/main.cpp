@@ -1025,7 +1025,7 @@ void poiSearchServer::DeletePoiSearchHandle(const uint8_t& poiSearchHandle)
     }
 }
 
-void poiSearchServer::SetRouteHandle(const uint8_t& poiSearchHandle, const uint8_t& sessionHandle, const uint8_t& routeHandle, const uint16_t& startSearchOffset, const uint16_t& endSearchOffset)
+void poiSearchServer::SetRouteHandle(const uint8_t& poiSearchHandle, const uint8_t& sessionHandle, const uint8_t& routeHandle, const uint32_t& startSearchOffset, const uint32_t& endSearchOffset)
 {
     uint32_t index;
     int16_t detailLevel;

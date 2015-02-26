@@ -1,4 +1,4 @@
-Release date of the file: 21-09-2014 
+Release date of the file: 26-02-2015 
 Status: OK
 
 Project:
@@ -69,6 +69,12 @@ For Tokyo, the bounding box is 139.691048,35.631628,139.832497,35.738153
 
 
 To launch the stuff for Paris:
+NB: In case you get such error message during runtime:
+D-Bus library appears to be incorrectly set up; failed to read machine uuid: Failed to open "/etc/machine-id": No such file or directory
+You need to fix it by:
+sudo su
+dbus-uuidgen  > /etc/machine-id
+
 ./prepare -c paris
 ./run
 

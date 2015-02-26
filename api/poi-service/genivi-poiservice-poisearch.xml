@@ -285,12 +285,12 @@
           <line>routeHandle = route handle.</line>
         </doc>
       </arg>
-      <arg name="startSearchOffset" type="q" direction="in">
+      <arg name="startSearchOffset" type="u" direction="in">
         <doc>
           <line>startSearchOffset (optional) = Distance from vehicle (in meters) from where to start the search along. 0 or invalid distance means start from vehicle.</line>
         </doc>
       </arg>
-      <arg name="endSearchOffset" type="q" direction="in">
+      <arg name="endSearchOffset" type="u" direction="in">
         <doc>
           <line>endSearchOffset (optional) = Lenght of the route (in meters) from where to start the search along. 0 or invalid lenght means end is the destination.</line>
         </doc>
