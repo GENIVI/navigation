@@ -147,21 +147,21 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("SetLanguage"), argumentList);
     }
 
-    inline QDBusPendingReply<>PoiSearchStarted(uchar poiSearchHandle,ushort maxSize, geoCoordinate3D_t location, QList<poiSearch_t> poiCategories, QList<poiAttributeFull_t> poiAttributes, std::string inputString, ushort sortOption)
+    inline QDBusPendingReply<>PoiSearchStarted(uint poiSearchHandle,ushort maxSize, geoCoordinate3D_t location, QList<poiSearch_t> poiCategories, QList<poiAttributeFull_t> poiAttributes, std::string inputString, ushort sortOption)
     { // "y" "q" "(ddi)" "a(qu)" "a(sqqvqb)" "s" "q" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle) << qVariantFromValue(maxSize) << qVariantFromValue(location) << qVariantFromValue(poiCategories) << qVariantFromValue(poiAttributes) << qVariantFromValue(inputString) << qVariantFromValue(sortOption);
         return asyncCallWithArgumentList(QLatin1String("PoiSearchStarted"), argumentList);
     }
 
-    inline QDBusPendingReply<> PoiSearchCanceled(uchar poiSearchHandle)
+    inline QDBusPendingReply<> PoiSearchCanceled(uint poiSearchHandle)
     { //"y" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle);
         return asyncCallWithArgumentList(QLatin1String("PoiSearchCanceled"), argumentList);
     }
 
-    inline QDBusPendingReply<ushort, ushort, QList<resultCamSearch_t> >ResultListRequested(uchar camId, uchar poiSearchHandle, QList<std::string> attributes)
+    inline QDBusPendingReply<ushort, ushort, QList<resultCamSearch_t> >ResultListRequested(uchar camId, uint poiSearchHandle, QList<std::string> attributes)
     { // "y" "y" "as" in "q" "q" "a(usq(ddi)qa(sqv))" out
         QList<QVariant> argumentList;
         QStringList dst;

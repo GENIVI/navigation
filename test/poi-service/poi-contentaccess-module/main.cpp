@@ -271,7 +271,7 @@ void contentAccessModuleServer::SetLanguage(const std::string& languageCode, con
         mp_HMI->on_SetLanguage(languageCode,countryCode);
     }
 
-void contentAccessModuleServer::PoiSearchStarted(const uint8_t& poiSearchHandle, const uint16_t& maxSize, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes, const std::string& inputString, const uint16_t& sortOption)
+void contentAccessModuleServer::PoiSearchStarted(const uint32_t& poiSearchHandle, const uint16_t& maxSize, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes, const std::string& inputString, const uint16_t& sortOption)
     {
         uint16_t index,sub_index,category_index;
         bool isCategoryFound, isAttributeFound;
@@ -360,7 +360,7 @@ void contentAccessModuleServer::PoiSearchStarted(const uint8_t& poiSearchHandle,
         }
     }
 
-void contentAccessModuleServer::PoiSearchCanceled(const uint8_t& poiSearchHandle)
+void contentAccessModuleServer::PoiSearchCanceled(const uint32_t& poiSearchHandle)
     {
         if ((m_poiSearchHandle == INVALID_HANDLE) || (poiSearchHandle != m_poiSearchHandle))
             // try to cancel an unavailable handle
@@ -373,7 +373,7 @@ void contentAccessModuleServer::PoiSearchCanceled(const uint8_t& poiSearchHandle
         }
     }
 
-void contentAccessModuleServer::ResultListRequested(const uint8_t& camId, const uint8_t& poiSearchHandle, const std::vector< std::string >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_poiCAMDetails::DBus_poiCAMDetails_t >& resultList)
+void contentAccessModuleServer::ResultListRequested(const uint8_t& camId, const uint32_t& poiSearchHandle, const std::vector< std::string >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_poiCAMDetails::DBus_poiCAMDetails_t >& resultList)
     {
 
         //this method is supposed to check the camId, but into the POC, it's the HMI that declares the CAM (for the moment)

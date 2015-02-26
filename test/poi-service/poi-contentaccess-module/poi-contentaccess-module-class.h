@@ -93,11 +93,11 @@ public:
 
     void SetLanguage(const std::string& languageCode, const std::string& countryCode);
 
-    void PoiSearchStarted(const uint8_t& poiSearchHandle, const uint16_t& maxSize, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes, const std::string& inputString, const uint16_t& sortOption);
+    void PoiSearchStarted(const uint32_t& poiSearchHandle, const uint16_t& maxSize, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes, const std::string& inputString, const uint16_t& sortOption);
 
-    void PoiSearchCanceled(const uint8_t& poiSearchHandle);
+    void PoiSearchCanceled(const uint32_t& poiSearchHandle);
 
-    void ResultListRequested(const uint8_t& camId, const uint8_t& poiSearchHandle, const std::vector< std::string >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_poiCAMDetails::DBus_poiCAMDetails_t >& resultList);
+    void ResultListRequested(const uint8_t& camId, const uint32_t& poiSearchHandle, const std::vector< std::string >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_poiCAMDetails::DBus_poiCAMDetails_t >& resultList);
 
     std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > PoiDetailsRequested(const std::vector< uint32_t >& source_id);
 
@@ -153,7 +153,7 @@ private:
 
     std::string m_languageCode, m_countryCode;
 
-    uint8_t m_poiSearchHandle; // the POC is limited to the management of one handle !
+    uint32_t m_poiSearchHandle; // the POC is limited to the management of one handle !
 
     Database *mp_database; // database access
     DBus_geoCoordinate3D::geoCoordinate3D_t m_leftBottomLocation;

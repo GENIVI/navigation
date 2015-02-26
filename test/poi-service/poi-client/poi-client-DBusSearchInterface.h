@@ -117,62 +117,62 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("GetCategoriesDetails"), argumentList);
     }
 
-    inline QDBusPendingReply<uchar> CreatePoiSearchHandle()
-    { //"y" out
+    inline QDBusPendingReply<uint> CreatePoiSearchHandle()
+    { //"u" out
         return asyncCall(QLatin1String("CreatePoiSearchHandle"));
     }
 
-    inline QDBusPendingReply<> DeletePoiSearchHandle(uchar poiSearchHandle)
-    { //"y" in
+    inline QDBusPendingReply<> DeletePoiSearchHandle(uint poiSearchHandle)
+    { //"u" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle);
         return asyncCallWithArgumentList(QLatin1String("DeletePoiSearchHandle"), argumentList);
     }
 
-    inline QDBusPendingReply<> SetCategories(uchar poiSearchHandle, QList<poiSearch_t> poiSearchCategories)
-    { // "y" "a(qu)" in
+    inline QDBusPendingReply<> SetCategories(uint poiSearchHandle, QList<poiSearch_t> poiSearchCategories)
+    { // "u" "a(qu)" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle) << qVariantFromValue(poiSearchCategories);
         return asyncCallWithArgumentList(QLatin1String("SetCategories"), argumentList);
     }
 
-    inline QDBusPendingReply<>SetRouteHandle(uchar poiSearchHandle, uchar sessionHandle, uchar routeHandle, uint startSearchOffset, uint endSearchOffset)
-    { // "y" "y" "y" "u" "u" in
+    inline QDBusPendingReply<>SetRouteHandle(uint poiSearchHandle, uchar sessionHandle, uchar routeHandle, uint startSearchOffset, uint endSearchOffset)
+    { // "u" "y" "y" "u" "u" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle) << qVariantFromValue(sessionHandle) << qVariantFromValue(routeHandle) << qVariantFromValue(startSearchOffset) << qVariantFromValue(endSearchOffset);
         return asyncCallWithArgumentList(QLatin1String("SetRouteHandle"), argumentList);
     }
 
-    inline QDBusPendingReply<>StartPoiSearch(uchar poiSearchHandle, const QString &inputString, ushort sortOption)
-    { // "y" "s" "q" in
+    inline QDBusPendingReply<>StartPoiSearch(uint poiSearchHandle, const QString &inputString, ushort sortOption)
+    { // "u" "s" "q" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle) << qVariantFromValue(inputString) << qVariantFromValue(sortOption);
         return asyncCallWithArgumentList(QLatin1String("StartPoiSearch"), argumentList);
     }
 
-    inline QDBusPendingReply<>CancelPoiSearch(uchar poiSearchHandle)
-    { // "y" in
+    inline QDBusPendingReply<>CancelPoiSearch(uint poiSearchHandle)
+    { // "u" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle);
         return asyncCallWithArgumentList(QLatin1String("CancelPoiSearch"), argumentList);
     }
 
-    inline QDBusPendingReply<>StartPoiProximityAlert(uchar poiSearchHandle, const QString &inputString, ushort sortOption)
-    { // "y" "s" "q" in
+    inline QDBusPendingReply<>StartPoiProximityAlert(uint poiSearchHandle, const QString &inputString, ushort sortOption)
+    { // "u" "s" "q" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle) << qVariantFromValue(inputString) << qVariantFromValue(sortOption);
         return asyncCallWithArgumentList(QLatin1String("StartPoiProximityAlert"), argumentList);
     }
 
-    inline QDBusPendingReply<>CancelPoiProximityAlert(uchar poiSearchHandle)
-    { // "y" in
+    inline QDBusPendingReply<>CancelPoiProximityAlert(uint poiSearchHandle)
+    { // "u" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle);
         return asyncCallWithArgumentList(QLatin1String("CancelPoiProximityAlert"), argumentList);
     }
 
-    inline QDBusPendingReply<ushort, ushort, QList<resultSearch_t> >RequestResultList(uchar poiSearchHandle, ushort offset, ushort maxWindowSize, QList<std::string> attributes)
-    { // "y" "q" "q" "as" in "q" "q" "a(uuqa(sqv))" out
+    inline QDBusPendingReply<ushort, ushort, QList<resultSearch_t> >RequestResultList(uint poiSearchHandle, ushort offset, ushort maxWindowSize, QList<std::string> attributes)
+    { // "u" "q" "q" "as" in "q" "q" "a(uuqa(sqv))" out
         QList<QVariant> argumentList;
         QStringList dst;
         foreach(const std::string &s,attributes)
@@ -181,8 +181,8 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("RequestResultList"), argumentList);
     }
 
-    inline QDBusPendingReply<>SetCenter(uchar poiSearchHandle, geoCoordinate3D_t location)
-    { // "y" "(ddi)" in
+    inline QDBusPendingReply<>SetCenter(uint poiSearchHandle, geoCoordinate3D_t location)
+    { // "u" "(ddi)" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle) << qVariantFromValue(location);
         return asyncCallWithArgumentList(QLatin1String("SetCenter"), argumentList);
@@ -195,8 +195,8 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("GetPoiDetails"), argumentList);
     }
 
-    inline QDBusPendingReply<>SetAttributes(uchar poiSearchHandle,QList<poiAttributeFull_t> poiAttributes)
-    { // "y" "a(sqqvqb)" in
+    inline QDBusPendingReply<>SetAttributes(uint poiSearchHandle,QList<poiAttributeFull_t> poiAttributes)
+    { // "u" "a(sqqvqb)" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle) << qVariantFromValue(poiAttributes);
         return asyncCallWithArgumentList(QLatin1String("SetAttributes"), argumentList);
@@ -205,8 +205,8 @@ public Q_SLOTS: // METHODS
 
 Q_SIGNALS: // SIGNALS
     void crashed();
-    void PoiStatus(uchar,ushort); // "y" "q" out
-    void ResultListChanged(uchar,ushort); // "y" "q" out
+    void PoiStatus(uint,ushort); // "u" "q" out
+    void ResultListChanged(uint,ushort); // "u" "q" out
     void CategoriesUpdated(QList<poiCategoryAndReason_t>); // "a(qq)" out
 private:
 

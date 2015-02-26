@@ -116,9 +116,9 @@ private slots:
 
     void on_getPrevList_clicked();
 
-    void on_DBusSignalPoiStatus(uchar poiSearchHandle,ushort statusValue);
+    void on_DBusSignalPoiStatus(uint poiSearchHandle,ushort statusValue);
 
-    void on_DBusSignalResultListChanged(uchar poiSearchHandle,ushort resultListSize);
+    void on_DBusSignalResultListChanged(uint poiSearchHandle,ushort resultListSize);
 
     void on_DBusSignalCategoriesUpdated(QList<poiCategoryAndReason_t> poiCategories);
 

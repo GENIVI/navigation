@@ -156,11 +156,11 @@ public:
 
     uint16_t searchAroundALocation(DBus_geoCoordinate3D::geoCoordinate3D_t location,const std::string* inputString, uint16_t sortOption);
 
-    void SetPoiSearchHandle(uint8_t poiSearchHandle);
+    void SetPoiSearchHandle(uint32_t poiSearchHandle);
 
     void ResetPoiSearchHandle();
 
-    void PoiSearchCanceled(uint8_t poiSearchHandle);
+    void PoiSearchCanceled(uint32_t poiSearchHandle);
 
     DBus_poiCAMDetails::DBus_poiCAMDetails_t GetResultPoi(uint16_t index);
 
@@ -180,7 +180,7 @@ private:
 
     void sendDBusError(const char* message);
 
-    uint8_t m_poiSearchHandle; // the POC is limited to the management of one handle !
+    uint32_t m_poiSearchHandle; // the POC is limited to the management of one handle !
 
     contentAccessModule *mp_contentAccessModule;
     poiSearchServer *mp_poiSearch;
@@ -241,27 +241,27 @@ public:
 
     std::vector< DBus_category::DBus_category_t > GetCategoriesDetails(const std::vector< uint16_t >& categories);
 
-    uint8_t CreatePoiSearchHandle();
+    uint32_t CreatePoiSearchHandle();
 
-    void DeletePoiSearchHandle(const uint8_t& poiSearchHandle);
+    void DeletePoiSearchHandle(const uint32_t& poiSearchHandle);
 
-    void SetRouteHandle(const uint8_t& poiSearchHandle, const uint8_t& sessionHandle, const uint8_t& routeHandle, const uint32_t& startSearchOffset, const uint32_t& endSearchOffset);
+    void SetRouteHandle(const uint32_t& poiSearchHandle, const uint8_t& sessionHandle, const uint8_t& routeHandle, const uint32_t& startSearchOffset, const uint32_t& endSearchOffset);
 
-    void SetCategories(const uint8_t& poiSearchHandle, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories);
+    void SetCategories(const uint32_t& poiSearchHandle, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories);
 
-    void SetAttributes(const uint8_t& poiSearchHandle, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes);
+    void SetAttributes(const uint32_t& poiSearchHandle, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes);
 
-    void StartPoiSearch(const uint8_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption);
+    void StartPoiSearch(const uint32_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption);
 
-    void CancelPoiSearch(const uint8_t& poiSearchHandle);
+    void CancelPoiSearch(const uint32_t& poiSearchHandle);
 
-    void SetCenter(const uint8_t& poiSearchHandle, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location);
+    void SetCenter(const uint32_t& poiSearchHandle, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location);
 
-    void StartPoiProximityAlert(const uint8_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption);
+    void StartPoiProximityAlert(const uint32_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption);
 
-    void CancelPoiProximityAlert(const uint8_t& poiSearchHandle);
+    void CancelPoiProximityAlert(const uint32_t& poiSearchHandle);
 
-    void RequestResultList(const uint8_t& poiSearchHandle, const uint16_t& offset, const uint16_t& maxWindowSize, const std::vector< std::string >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_searchResult::DBus_searchResult_t >& resultListWindow);
+    void RequestResultList(const uint32_t& poiSearchHandle, const uint16_t& offset, const uint16_t& maxWindowSize, const std::vector< std::string >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_searchResult::DBus_searchResult_t >& resultListWindow);
 
     std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > GetPoiDetails(const std::vector< uint32_t >& id);
 
@@ -307,10 +307,10 @@ private:
 // DBus data
     DBus_version m_version;
     std::string m_languageCode, m_countryCode;
-    uint8_t m_poiSearchHandle; // the POC is limited to the management of one handle !
+    uint32_t m_poiSearchHandle; // the POC is limited to the management of one handle !
     uint16_t m_rootCategory;
     uint8_t m_sessionHandle;
-    uint8_t m_routeHandle;
+    uint32_t m_routeHandle;
     uint16_t m_startSearchOffset;
     uint16_t m_endSearchOffset;
     ushort m_searchStatus;

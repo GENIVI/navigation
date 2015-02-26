@@ -204,7 +204,7 @@
       <doc>
         <line>CreatePoiSearchHandle = This method creates a new location input and retrieves a handle</line>
       </doc>
-      <arg name="poiSearchHandle" type="y" direction="out">
+      <arg name="poiSearchHandle" type="u" direction="out">
         <doc>
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
@@ -219,7 +219,7 @@
       <doc>
         <line>DeletePoiSearchHandle = This method deletes a location input and its associated resources</line>
       </doc>
-      <arg name="poiSearchHandle" type="y" direction="in">
+      <arg name="poiSearchHandle" type="u" direction="in">
         <doc>
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
@@ -235,7 +235,7 @@
         <line>SetCenter  = This method sets the location to start the search around.</line>
         <line>If a route handle was defined before, it will be replaced by this location.</line>
       </doc>
-      <arg name="poiSearchHandle" type="y" direction="in">
+      <arg name="poiSearchHandle" type="u" direction="in">
         <doc>
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
@@ -270,7 +270,7 @@
         <line>The route handle must be valid or the POI search will failed.</line>
         <line>If a search location was defined before, it will be replaced by the route.</line>
       </doc>
-      <arg name="poiSearchHandle" type="y" direction="in">
+      <arg name="poiSearchHandle" type="u" direction="in">
         <doc>
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
@@ -315,7 +315,7 @@
       <doc>
         <line>SetCategories = This method sets the POI categories for the current search input and the corresponding result-lists for the current session</line>
       </doc>
-      <arg name="poiSearchHandle" type="y" direction="in">
+      <arg name="poiSearchHandle" type="u" direction="in">
         <doc>
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
@@ -349,7 +349,7 @@
         <line>SetAttributes = This method set POI attributes (optional) for the current search input and the corresponding result-lists for the current session</line>
         <line>An attribute is attached to a category</line>
       </doc>
-      <arg name="poiSearchHandle" type="y" direction="in">
+      <arg name="poiSearchHandle" type="u" direction="in">
         <doc>
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
@@ -387,7 +387,7 @@
         <line>The search will start with the either the location or the route handle.</line>
         <line>If no positon or route handle were configured, the search will use the vehicle position are center location.</line>
       </doc>
-      <arg name="poiSearchHandle" type="y" direction="in">
+      <arg name="poiSearchHandle" type="u" direction="in">
         <doc>
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
@@ -423,7 +423,7 @@
       <doc>
         <line>CancelPoiSearch = This method cancels the search for the current session</line>
       </doc>
-      <arg name="poiSearchHandle" type="y" direction="in">
+      <arg name="poiSearchHandle" type="u" direction="in">
         <doc>
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
@@ -440,7 +440,7 @@
         <line>Bt default, it will search for POI around vehicle position with default radius defined for each categories.</line>
         <line>If a route handle was defined, it will search along the route with default categorie's radius.</line>
       </doc>
-      <arg name="poiSearchHandle" type="y" direction="in">
+      <arg name="poiSearchHandle" type="u" direction="in">
         <doc>
           <line>poiSearchHandle = poi alert unique handle</line>
         </doc>
@@ -471,7 +471,7 @@
       <doc>
         <line>CancelPoiProximityAlert = This method cancels the search for the current session</line>
       </doc>
-      <arg name="poiSearchHandle" type="y" direction="in">
+      <arg name="poiSearchHandle" type="u" direction="in">
         <doc>
           <line>poiSearchHandle = poi alert unique handle</line>
         </doc>
@@ -486,7 +486,7 @@
       <doc>
         <line>PoiStatus = This signal updates the search or proximity alert status of the specified handle.</line>
       </doc>
-      <arg name="poiSearchHandle" type="y" direction="out">
+      <arg name="poiSearchHandle" type="u" direction="out">
         <doc>
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
@@ -501,7 +501,7 @@
       <doc>
         <line>ResultListChanged = This signal updates in the poi results list</line>
       </doc>
-      <arg name="poiSearchHandle" type="y" direction="out">
+      <arg name="poiSearchHandle" type="u" direction="out">
         <doc>
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
@@ -516,7 +516,7 @@
       <doc>
         <line>RequestResultList = This method gets the poi result list (e.g. after a Search/Scroll call)</line>
       </doc>
-      <arg name="poiSearchHandle" type="y" direction="in">
+      <arg name="poiSearchHandle" type="u" direction="in">
         <doc>
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>

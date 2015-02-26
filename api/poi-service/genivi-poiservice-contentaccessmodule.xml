@@ -47,7 +47,7 @@
         <line>PoiSearchStarted = This method is sent by the POI service component to inform all the CAM that a new POI search was started.</line>
         <line>It provides all the relevant search parameters. Of course the CAM will only be aware of the search if it registers one of the search categories.</line>
       </doc>
-      <arg name="poiSearchHandle" type="y" direction="in">
+      <arg name="poiSearchHandle" type="u" direction="in">
         <doc>
           <line>poiSearchHandle = poi search unique handle. It must be used by the CAM to send the list of results to the component.</line>
         </doc>
@@ -100,7 +100,7 @@
       <doc>
         <line>PoiSearchCanceled = This method cancels the search for the current id</line>
       </doc>
-      <arg name="poiSearchHandle" type="y" direction="in">
+      <arg name="poiSearchHandle" type="u" direction="in">
         <doc>
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
@@ -116,7 +116,7 @@
           <line>camId = Content access module unique id as known by the POI service component.</line>
         </doc>
       </arg>
-      <arg name="poiSearchHandle" type="y" direction="in">
+      <arg name="poiSearchHandle" type="u" direction="in">
         <doc>
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>

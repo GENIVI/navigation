@@ -511,7 +511,7 @@ void poiContentAccessServer::SetLanguage(std::string LanguageCode, std::string C
     }
 }
 
-void poiContentAccessServer::SetPoiSearchHandle(uint8_t poiSearchHandle)
+void poiContentAccessServer::SetPoiSearchHandle(uint32_t poiSearchHandle)
 {
     m_poiSearchHandle =  poiSearchHandle;
 }
@@ -521,7 +521,7 @@ void poiContentAccessServer::ResetPoiSearchHandle()
     m_poiSearchHandle = INVALID_HANDLE;
 }
 
-void poiContentAccessServer::PoiSearchCanceled(uint8_t poiSearchHandle)
+void poiContentAccessServer::PoiSearchCanceled(uint32_t poiSearchHandle)
 {
     m_poiTable.clear();
     m_poiDetailsTable.clear();
@@ -989,7 +989,7 @@ std::vector< DBus_category::DBus_category_t > poiSearchServer::GetCategoriesDeta
     return (return_value);
 }
 
-uint8_t poiSearchServer::CreatePoiSearchHandle()
+uint32_t poiSearchServer::CreatePoiSearchHandle()
 {
     // the POC is limited to the management of one handle !
     if (m_poiSearchHandle != INVALID_HANDLE)
@@ -1005,7 +1005,7 @@ uint8_t poiSearchServer::CreatePoiSearchHandle()
     return (m_poiSearchHandle);
 }
 
-void poiSearchServer::DeletePoiSearchHandle(const uint8_t& poiSearchHandle)
+void poiSearchServer::DeletePoiSearchHandle(const uint32_t& poiSearchHandle)
 {
     cam_t cam;
     bool reply;
@@ -1025,7 +1025,7 @@ void poiSearchServer::DeletePoiSearchHandle(const uint8_t& poiSearchHandle)
     }
 }
 
-void poiSearchServer::SetRouteHandle(const uint8_t& poiSearchHandle, const uint8_t& sessionHandle, const uint8_t& routeHandle, const uint32_t& startSearchOffset, const uint32_t& endSearchOffset)
+void poiSearchServer::SetRouteHandle(const uint32_t& poiSearchHandle, const uint8_t& sessionHandle, const uint8_t& routeHandle, const uint32_t& startSearchOffset, const uint32_t& endSearchOffset)
 {
     uint32_t index;
     int16_t detailLevel;
@@ -1086,7 +1086,7 @@ void poiSearchServer::SetRouteHandle(const uint8_t& poiSearchHandle, const uint8
     }
 }
 
-void poiSearchServer::SetCategories(const uint8_t& poiSearchHandle, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories)
+void poiSearchServer::SetCategories(const uint32_t& poiSearchHandle, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories)
 {
     uint16_t index;
     uint16_t category_index;
@@ -1132,7 +1132,7 @@ void poiSearchServer::SetCategories(const uint8_t& poiSearchHandle, const std::v
     }
 }
 
-void poiSearchServer::SetAttributes(const uint8_t& poiSearchHandle, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes)
+void poiSearchServer::SetAttributes(const uint32_t& poiSearchHandle, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes)
 {
     DBus_attributeDetails attribDet;
     DBus_attributeDetails::attributeDetails_t attributeDetails;
@@ -1182,7 +1182,7 @@ void poiSearchServer::SetAttributes(const uint8_t& poiSearchHandle, const std::v
     }
 }
 
-void poiSearchServer::StartPoiSearch(const uint8_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption)
+void poiSearchServer::StartPoiSearch(const uint32_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption)
 {
 
     if ((m_poiSearchHandle == INVALID_HANDLE) || (poiSearchHandle != m_poiSearchHandle))
@@ -1208,7 +1208,7 @@ void poiSearchServer::StartPoiSearch(const uint8_t& poiSearchHandle, const std::
     }
 }
 
-void poiSearchServer::CancelPoiSearch(const uint8_t& poiSearchHandle)
+void poiSearchServer::CancelPoiSearch(const uint32_t& poiSearchHandle)
 {
     if ((m_poiSearchHandle == INVALID_HANDLE) || (poiSearchHandle != m_poiSearchHandle))
         // to do send an error message
@@ -1223,7 +1223,7 @@ void poiSearchServer::CancelPoiSearch(const uint8_t& poiSearchHandle)
     }
 }
 
-void poiSearchServer::SetCenter(const uint8_t& poiSearchHandle, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location)
+void poiSearchServer::SetCenter(const uint32_t& poiSearchHandle, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location)
 {
     DBus_geoCoordinate3D geoCoord;
 
@@ -1237,7 +1237,7 @@ void poiSearchServer::SetCenter(const uint8_t& poiSearchHandle, const DBus_geoCo
     }
 }
 
-void poiSearchServer::StartPoiProximityAlert(const uint8_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption)
+void poiSearchServer::StartPoiProximityAlert(const uint32_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption)
 {
     if ((m_poiSearchHandle == INVALID_HANDLE) || (poiSearchHandle != m_poiSearchHandle))
         // to do send an error message
@@ -1253,7 +1253,7 @@ void poiSearchServer::StartPoiProximityAlert(const uint8_t& poiSearchHandle, con
     }
 }
 
-void poiSearchServer::CancelPoiProximityAlert(const uint8_t& poiSearchHandle)
+void poiSearchServer::CancelPoiProximityAlert(const uint32_t& poiSearchHandle)
 {
     if ((m_poiSearchHandle == INVALID_HANDLE) || (poiSearchHandle != m_poiSearchHandle))
         // to do send an error message
@@ -1269,7 +1269,7 @@ void poiSearchServer::CancelPoiProximityAlert(const uint8_t& poiSearchHandle)
     }
 }
 
-void poiSearchServer::RequestResultList(const uint8_t& poiSearchHandle, const uint16_t& offset, const uint16_t& maxWindowSize, const std::vector< std::string >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_searchResult::DBus_searchResult_t >& resultListWindow)
+void poiSearchServer::RequestResultList(const uint32_t& poiSearchHandle, const uint16_t& offset, const uint16_t& maxWindowSize, const std::vector< std::string >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_searchResult::DBus_searchResult_t >& resultListWindow)
 {
     DBus_searchResult::searchResult_t element; //id distance status attributes[]
     DBus_searchResult el;

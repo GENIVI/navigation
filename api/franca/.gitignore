@@ -1,1 +1,4 @@
 *.xml
+*.project
+src-gen/
+

@@ -293,8 +293,8 @@ void MainWindow::InitUi()
                                                                                                 QDBusConnection::sessionBus(), this );
 
     //connect to signals
-    QObject::connect(m_dbusPoiSearchInterface, SIGNAL(PoiStatus(uchar,ushort)), this, SLOT(on_DBusSignalPoiStatus(uchar,ushort)));
-    QObject::connect(m_dbusPoiSearchInterface, SIGNAL(ResultListChanged(uchar,ushort)), this, SLOT(on_DBusSignalResultListChanged(uchar,ushort)));
+    QObject::connect(m_dbusPoiSearchInterface, SIGNAL(PoiStatus(uint,ushort)), this, SLOT(on_DBusSignalPoiStatus(uint,ushort)));
+    QObject::connect(m_dbusPoiSearchInterface, SIGNAL(ResultListChanged(uint,ushort)), this, SLOT(on_DBusSignalResultListChanged(uint,ushort)));
     QObject::connect(m_dbusPoiSearchInterface, SIGNAL(CategoriesUpdated(QList<poiCategoryAndReason_t>)), this, SLOT(on_DBusSignalCategoriesUpdated(QList<poiCategoryAndReason_t>)));
 
     QObject::connect(m_dbusNavigationRoutingInterface, SIGNAL(RouteCalculationSuccessful(uchar,tupleUshortUshort)),this,SLOT(on_DBusSignalRouteCalculationSuccessful(uchar, tupleUshortUshort)));
@@ -743,7 +743,7 @@ void MainWindow::on_cancelSearch_clicked()
 void MainWindow::on_createpoiHandle_clicked()
 {
     QString str;
-    QDBusPendingReply<uchar> reply = m_dbusPoiSearchInterface->CreatePoiSearchHandle();
+    QDBusPendingReply<uint> reply = m_dbusPoiSearchInterface->CreatePoiSearchHandle();
     reply.waitForFinished();
     if (reply.isError())
         manageDBusError(reply.reply()); // call failed
@@ -1285,14 +1285,14 @@ void MainWindow::on_cancelProximity_clicked()
 
 //Management of DBus signals
 /**
- * \fn on_DBusSignalPoiStatus(uchar poiSearchHandle,ushort statusValue)
+ * \fn on_DBusSignalPoiStatus(uint poiSearchHandle,ushort statusValue)
  * \brief Signal received when the POI status changed.
  *
- * \param uchar poiSearchHandle
+ * \param uint poiSearchHandle
  * \param ushort statusValue
  * \return
  */
-void MainWindow::on_DBusSignalPoiStatus(uchar poiSearchHandle,ushort statusValue)
+void MainWindow::on_DBusSignalPoiStatus(uint poiSearchHandle,ushort statusValue)
 {
     if (poiSearchHandle == m_poiSearchHandle)
     {
@@ -1301,14 +1301,14 @@ void MainWindow::on_DBusSignalPoiStatus(uchar poiSearchHandle,ushort statusValue
 }
 
 /**
- * \fn on_DBusSignalResultListChanged(uchar poiSearchHandle,ushort totalSize)
+ * \fn on_DBusSignalResultListChanged(uint poiSearchHandle,ushort totalSize)
  * \brief Signal received when the result list changed.
  *
- * \param uchar poiSearchHandle
+ * \param uint poiSearchHandle
  * \param ushort totalSize
  * \return
  */
-void MainWindow::on_DBusSignalResultListChanged(uchar poiSearchHandle,ushort resultListSize)
+void MainWindow::on_DBusSignalResultListChanged(uint poiSearchHandle,ushort resultListSize)
 {
     QString str;
     if (poiSearchHandle == m_poiSearchHandle)
