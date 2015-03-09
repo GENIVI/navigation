@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <osm version="0.6" generator="Overpass API">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2013-12-19T09:07:02Z"/>
+<meta osm_base="2015-03-09T10:27:02Z"/>
 
   <node id="25209547" lat="48.8316281" lon="2.3594731">
     <tag k="amenity" v="fuel"/>
@@ -19,26 +19,7 @@
     <tag k="name" v="Relais Total de la Porte de Montreuil"/>
     <tag k="operator" v="Total"/>
     <tag k="source" v="stations.gpl.online.fr"/>
-  </node>
-  <node id="25210943" lat="48.8337497" lon="2.2848189">
-    <tag k="addr:postcode" v="75015"/>
-    <tag k="address" v="44 Bd Victor"/>
-    <tag k="amenity" v="fuel"/>
-    <tag k="fuel:lpg" v="yes"/>
-    <tag k="is_in" v="PARIS"/>
-    <tag k="name" v="Station BP"/>
-    <tag k="operator" v="BP"/>
-    <tag k="source" v="stations.gpl.online.fr"/>
-  </node>
-  <node id="25211773" lat="48.8169651" lon="2.3597405">
-    <tag k="addr:postcode" v="75013"/>
-    <tag k="address" v="Porte D'Italie"/>
-    <tag k="amenity" v="fuel"/>
-    <tag k="fuel:lpg" v="yes"/>
-    <tag k="is_in" v="PARIS"/>
-    <tag k="name" v="Relais Total Porte D'italie"/>
-    <tag k="operator" v="Total"/>
-    <tag k="source" v="stations.gpl.online.fr"/>
+    <tag k="wheelchair" v="limited"/>
   </node>
   <node id="25213384" lat="48.8346251" lon="2.2657680">
     <tag k="addr:postcode" v="75015"/>
@@ -54,7 +35,10 @@
     <tag k="addr:postcode" v="94220"/>
     <tag k="address" v="N 6 , 114, rue de Paris - Porte de Charenton"/>
     <tag k="amenity" v="fuel"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:e10" v="yes"/>
     <tag k="fuel:lpg" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
     <tag k="is_in" v="CHARENTON-LE-PONT"/>
     <tag k="name" v="Station Avia"/>
     <tag k="operator" v="Avia"/>
@@ -118,9 +102,11 @@
   <node id="272631884" lat="48.8826632" lon="2.2476348">
     <tag k="amenity" v="fuel"/>
     <tag k="brand" v="BP"/>
+    <tag k="wheelchair" v="yes"/>
   </node>
-  <node id="298915407" lat="48.8563192" lon="2.3153625">
+  <node id="298915407" lat="48.8563247" lon="2.3152562">
     <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Elan"/>
   </node>
   <node id="307372951" lat="48.8611046" lon="2.3413657">
     <tag k="amenity" v="fuel"/>
@@ -136,7 +122,7 @@
     <tag k="amenity" v="fuel"/>
     <tag k="created_by" v="Potlatch 0.10f"/>
   </node>
-  <node id="320203219" lat="48.9002724" lon="2.3738351">
+  <node id="320203219" lat="48.9003252" lon="2.3734463">
     <tag k="amenity" v="fuel"/>
     <tag k="operator" v="Total"/>
   </node>
@@ -144,11 +130,6 @@
     <tag k="amenity" v="fuel"/>
     <tag k="name" v="Total"/>
     <tag k="operator" v="Total"/>
-  </node>
-  <node id="385442502" lat="48.8178365" lon="2.2768143">
-    <tag k="amenity" v="fuel"/>
-    <tag k="name" v="Esso"/>
-    <tag k="operator" v="Esso"/>
   </node>
   <node id="423836418" lat="48.8804901" lon="2.2865619">
     <tag k="amenity" v="fuel"/>
@@ -181,11 +162,13 @@
   </node>
   <node id="605504117" lat="48.8229206" lon="2.2952295">
     <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Total"/>
   </node>
   <node id="614321106" lat="48.8213817" lon="2.3123435">
     <tag k="amenity" v="fuel"/>
     <tag k="name" v="Elf"/>
     <tag k="operator" v="Elf"/>
+    <tag k="source" v="survey"/>
   </node>
   <node id="625171506" lat="48.8323948" lon="2.3645635">
     <tag k="amenity" v="fuel"/>
@@ -195,6 +178,17 @@
   </node>
   <node id="648114671" lat="48.8645440" lon="2.4097670">
     <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="652862411" lat="48.8991280" lon="2.2938509">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="BP"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:e10" v="yes"/>
+    <tag k="name" v="BP"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+    <tag k="toilets" v="yes"/>
   </node>
   <node id="661296854" lat="48.8765664" lon="2.4182091">
     <tag k="amenity" v="fuel"/>
@@ -206,14 +200,24 @@
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="667281518" lat="48.8457817" lon="2.3802229">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:postcode" v="75012"/>
+    <tag k="addr:street" v="Rue de Charenton"/>
     <tag k="amenity" v="fuel"/>
+    <tag k="fuel:lpg" v="no"/>
   </node>
   <node id="667281519" lat="48.8443860" lon="2.3959250">
     <tag k="amenity" v="fuel"/>
     <tag k="name" v="Total"/>
     <tag k="operator" v="Total"/>
   </node>
-  <node id="766791661" lat="48.9007433" lon="2.3748278">
+  <node id="669879965" lat="48.8337062" lon="2.2849223"/>
+  <node id="669879966" lat="48.8337518" lon="2.2849590"/>
+  <node id="669879967" lat="48.8338214" lon="2.2849237"/>
+  <node id="669879968" lat="48.8338827" lon="2.2845968"/>
+  <node id="669879969" lat="48.8338370" lon="2.2845593"/>
+  <node id="669879974" lat="48.8339006" lon="2.2847056"/>
+  <node id="766791661" lat="48.9007525" lon="2.3748724">
     <tag k="amenity" v="fuel"/>
     <tag k="brand" v="Total"/>
     <tag k="fuel:GTL_diesel" v="yes"/>
@@ -224,12 +228,6 @@
     <tag k="name" v="Relais du périphérique exterieur"/>
     <tag k="opening_hours" v="Mo-Su 06:00-22:00"/>
     <tag k="operator" v="Total"/>
-  </node>
-  <node id="797969992" lat="48.8959689" lon="2.3111720">
-    <tag k="amenity" v="fuel"/>
-    <tag k="is_in" v="PARIS"/>
-    <tag k="name" v="BP"/>
-    <tag k="operator" v="BP"/>
   </node>
   <node id="870422866" lat="48.8829736" lon="2.4265647"/>
   <node id="870438422" lat="48.8828425" lon="2.4266683"/>
@@ -246,6 +244,18 @@
   <node id="916641569" lat="48.8463602" lon="2.3873388"/>
   <node id="916642317" lat="48.8464517" lon="2.3873379"/>
   <node id="916644392" lat="48.8463645" lon="2.3875220"/>
+  <node id="918151873" lat="48.8415807" lon="2.3730797"/>
+  <node id="918152457" lat="48.8413930" lon="2.3733843"/>
+  <node id="918153081" lat="48.8413656" lon="2.3733303"/>
+  <node id="918153256" lat="48.8416082" lon="2.3731335"/>
+  <node id="921510465" lat="48.8351676" lon="2.3577385"/>
+  <node id="921511742" lat="48.8351356" lon="2.3575574"/>
+  <node id="921514668" lat="48.8349637" lon="2.3573805"/>
+  <node id="921516938" lat="48.8351046" lon="2.3574849"/>
+  <node id="921522755" lat="48.8349148" lon="2.3574223"/>
+  <node id="921524284" lat="48.8348576" lon="2.3575097"/>
+  <node id="921531876" lat="48.8351870" lon="2.3576826"/>
+  <node id="921544860" lat="48.8348729" lon="2.3574578"/>
   <node id="924687591" lat="48.8198012" lon="2.3969429"/>
   <node id="924688914" lat="48.8198831" lon="2.3960761"/>
   <node id="924689439" lat="48.8194129" lon="2.3975138"/>
@@ -341,8 +351,9 @@
   <node id="969204047" lat="48.9008594" lon="2.3744733"/>
   <node id="969204051" lat="48.9007807" lon="2.3752015"/>
   <node id="969204055" lat="48.9008578" lon="2.3746127"/>
-  <node id="973809220" lat="48.8760276" lon="2.3806123">
+  <node id="973809220" lat="48.8758907" lon="2.3810965">
     <tag k="amenity" v="fuel"/>
+    <tag k="name" v="BP"/>
     <tag k="operator" v="BP"/>
     <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"/>
   </node>
@@ -363,13 +374,19 @@
   <node id="995502815" lat="48.8257564" lon="2.2481734"/>
   <node id="995502826" lat="48.8256992" lon="2.2482054"/>
   <node id="1119984190" lat="48.8273666" lon="2.2716056"/>
-  <node id="1119984194" lat="48.8277579" lon="2.2713308"/>
+  <node id="1119984194" lat="48.8277676" lon="2.2713086"/>
   <node id="1119984196" lat="48.8281523" lon="2.2728394">
     <tag k="amenity" v="fuel"/>
     <tag k="brand" v="Esso Express"/>
   </node>
   <node id="1119984227" lat="48.8275149" lon="2.2719489"/>
-  <node id="1119984230" lat="48.8277712" lon="2.2717015"/>
+  <node id="1119984230" lat="48.8277736" lon="2.2717101"/>
+  <node id="1165363003" lat="48.8177370" lon="2.2767670"/>
+  <node id="1165363475" lat="48.8177190" lon="2.2770930"/>
+  <node id="1165363693" lat="48.8177160" lon="2.2770700"/>
+  <node id="1165364492" lat="48.8176270" lon="2.2769520"/>
+  <node id="1165365103" lat="48.8178340" lon="2.2768990"/>
+  <node id="1165365653" lat="48.8177100" lon="2.2770800"/>
   <node id="1172665573" lat="48.8168431" lon="2.3604808">
     <tag k="amenity" v="fuel"/>
     <tag k="name" v="Relais Total Porte D'Italie"/>
@@ -397,25 +414,19 @@
   <node id="1266563433" lat="48.8607706" lon="2.3747898">
     <tag k="amenity" v="fuel"/>
   </node>
-  <node id="1280606426" lat="48.8772002" lon="2.3615138">
-    <tag k="amenity" v="fuel"/>
-    <tag k="name" v="Esso"/>
-    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"/>
-  </node>
   <node id="1282166627" lat="48.8787212" lon="2.3698437">
     <tag k="amenity" v="fuel"/>
-    <tag k="name" v="Esso"/>
+    <tag k="name" v="Esso Express"/>
     <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"/>
   </node>
   <node id="1319463008" lat="48.8204344" lon="2.3051655">
     <tag k="amenity" v="fuel"/>
     <tag k="name" v="BP"/>
   </node>
-  <node id="1339598425" lat="48.8958396" lon="2.3104767"/>
-  <node id="1339598434" lat="48.8957807" lon="2.3104495"/>
-  <node id="1339598472" lat="48.8958597" lon="2.3100537"/>
-  <node id="1339598520" lat="48.8957917" lon="2.3104546"/>
-  <node id="1339598702" lat="48.8959187" lon="2.3100810"/>
+  <node id="1390843628" lat="48.8414780" lon="2.3731994">
+    <tag k="addr:housenumber" v="36"/>
+    <tag k="addr:street" v="Quai de la Rapée"/>
+  </node>
   <node id="1547720813" lat="48.8586303" lon="2.3897622">
     <tag k="amenity" v="fuel"/>
   </node>
@@ -513,6 +524,7 @@
   </node>
   <node id="2330020604" lat="48.9000487" lon="2.3617903">
     <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="BP"/>
   </node>
   <node id="2377881055" lat="48.8936152" lon="2.3152934">
     <tag k="addr:housenumber" v="190"/>
@@ -531,24 +543,328 @@
   </node>
   <node id="2409683708" lat="48.8191934" lon="2.2957144">
     <tag k="amenity" v="fuel"/>
-    <tag k="source" v="local_knowledge"/>
+    <tag k="name" v="Avia"/>
+    <tag k="source" v="survey"/>
   </node>
   <node id="2419607653" lat="48.8935024" lon="2.3027161"/>
   <node id="2419607655" lat="48.8936066" lon="2.3031200"/>
   <node id="2419607656" lat="48.8936156" lon="2.3027024"/>
   <node id="2419607657" lat="48.8937234" lon="2.3031035"/>
-  <node id="2449638808" lat="48.8550277" lon="2.3255601">
-    <tag k="amenity" v="fuel"/>
-    <tag k="brand" v="Avia"/>
-    <tag k="operator" v="Avia"/>
-    <tag k="shop" v="convenience"/>
-  </node>
   <node id="2526480478" lat="48.8962481" lon="2.3594957">
     <tag k="amenity" v="fuel"/>
     <tag k="brand" v="Total"/>
+    <tag k="fuel:GTL_diesel" v="yes"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_95" v="yes"/>
+    <tag k="fuel:octane_98" v="no"/>
     <tag k="opening_hours" v="24/7"/>
     <tag k="shop" v="no"/>
   </node>
+  <node id="2635358750" lat="48.9001725" lon="2.3444887">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Total"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:e10" v="yes"/>
+    <tag k="fuel:lpg" v="no"/>
+    <tag k="fuel:octane_98" v="yes"/>
+  </node>
+  <node id="2642295714" lat="48.8467942" lon="2.4149487">
+    <tag k="amenity" v="fuel"/>
+    <tag k="operator" v="BP"/>
+  </node>
+  <node id="2642295718" lat="48.8466936" lon="2.4141038">
+    <tag k="amenity" v="fuel"/>
+    <tag k="operator" v="BP"/>
+  </node>
+  <node id="2655943000" lat="48.8711680" lon="2.3244832">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Parking du marché de la madeleine"/>
+  </node>
+  <node id="2681814563" lat="48.8436106" lon="2.3422313">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="2931788253" lat="48.8839109" lon="2.3897638">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Total"/>
+  </node>
+  <node id="3140383554" lat="48.8470173" lon="2.4162807">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Avia"/>
+    <tag k="source" v="survey"/>
+  </node>
+  <node id="3140383568" lat="48.8467382" lon="2.4163242"/>
+  <node id="3140383569" lat="48.8467523" lon="2.4161418"/>
+  <node id="3140383570" lat="48.8468423" lon="2.4163428"/>
+  <node id="3140383571" lat="48.8468564" lon="2.4161603"/>
+  <node id="3149588793" lat="48.8277343" lon="2.2717074"/>
+  <node id="3157148176" lat="48.8784033" lon="2.3659429">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="3207437073" lat="48.8650847" lon="2.3656389">
+    <tag k="amenity" v="fuel"/>
+  </node>
+  <node id="3224147783" lat="48.8233460" lon="2.3160166">
+    <tag k="amenity" v="fuel"/>
+    <tag k="operator" v="BP"/>
+  </node>
+  <node id="3240835095" lat="48.8816209" lon="2.2803057">
+    <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="BP"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="shop" v="convenience"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+    <tag k="toilets" v="yes"/>
+  </node>
+  <node id="3286282646" lat="48.8380740" lon="2.3312952">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_95" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+  </node>
+  <node id="3286282647" lat="48.8449642" lon="2.2715165">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="fixme" v="99 Avenue de Versailles"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:e10" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+    <tag k="toilets" v="yes"/>
+  </node>
+  <node id="3286282648" lat="48.8473675" lon="2.2588537">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+  </node>
+  <node id="3286282649" lat="48.8532253" lon="2.3080493">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_95" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+  </node>
+  <node id="3286282650" lat="48.8696482" lon="2.3095132">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="shop" v="convenience"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+  </node>
+  <node id="3286282651" lat="48.8720375" lon="2.2998901">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:e10" v="yes"/>
+    <tag k="note" v="Parking Georges 5"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="shop" v="convenience"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+    <tag k="toilets" v="yes"/>
+  </node>
+  <node id="3286282652" lat="48.8738003" lon="2.2922634">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_95" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="shop" v="convenience"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+    <tag k="toilets" v="yes"/>
+  </node>
+  <node id="3286282653" lat="48.8751861" lon="2.3096416">
+    <tag k="amenity" v="fuel"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_95" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+    <tag k="toilets" v="yes"/>
+  </node>
+  <node id="3286282654" lat="48.8937900" lon="2.3314100">
+    <tag k="amenity" v="fuel"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+  </node>
+  <node id="3286368391" lat="48.8380740" lon="2.3312952">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_95" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+  </node>
+  <node id="3286368392" lat="48.8449642" lon="2.2715165">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="fixme" v="99 Avenue de Versailles"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:e10" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+    <tag k="toilets" v="yes"/>
+  </node>
+  <node id="3286368393" lat="48.8473675" lon="2.2588537">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+  </node>
+  <node id="3286368394" lat="48.8532253" lon="2.3080493">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_95" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+  </node>
+  <node id="3286368395" lat="48.8696482" lon="2.3095132">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="shop" v="convenience"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+  </node>
+  <node id="3286368396" lat="48.8720375" lon="2.2998901">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:e10" v="yes"/>
+    <tag k="note" v="Parking Georges 5"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="shop" v="convenience"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+    <tag k="toilets" v="yes"/>
+  </node>
+  <node id="3286368397" lat="48.8738003" lon="2.2922634">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_95" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="shop" v="convenience"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+    <tag k="toilets" v="yes"/>
+  </node>
+  <node id="3286368398" lat="48.8751861" lon="2.3096416">
+    <tag k="amenity" v="fuel"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_95" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+    <tag k="toilets" v="yes"/>
+  </node>
+  <node id="3286368399" lat="48.8937900" lon="2.3314100">
+    <tag k="amenity" v="fuel"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+  </node>
+  <node id="3286386321" lat="48.8941507" lon="2.3733344">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:e10" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="shop" v="convenience"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+    <tag k="vending" v="fuel"/>
+    <tag k="vending_machine" v="fuel"/>
+  </node>
+  <node id="3286420963" lat="48.8258806" lon="2.3446643">
+    <tag k="amenity" v="fuel"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+  </node>
+  <node id="3286430496" lat="48.8679452" lon="2.4057911">
+    <tag k="amenity" v="fuel"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:e10" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+  </node>
+  <node id="3286430497" lat="48.8711571" lon="2.4084569">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:e10" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="shop" v="convenience"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+    <tag k="toilets" v="yes"/>
+  </node>
+  <node id="3286543311" lat="48.8565470" lon="2.3790561">
+    <tag k="amenity" v="fuel"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:octane_95" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+  </node>
+  <node id="3286567614" lat="48.8457849" lon="2.4008634">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:e10" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+    <tag k="toilets" v="yes"/>
+  </node>
+  <node id="3286571162" lat="48.8390378" lon="2.4083902">
+    <tag k="amenity" v="fuel"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+  </node>
+  <node id="3286583966" lat="48.8390378" lon="2.4083902">
+    <tag k="amenity" v="fuel"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+  </node>
+  <node id="3286659165" lat="48.8202004" lon="2.2586036">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="shop" v="convenience"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+    <tag k="toilets" v="yes"/>
+  </node>
+  <node id="3287386187" lat="48.8384296" lon="2.3723291">
+    <tag k="amenity" v="fuel"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="shop" v="convenience"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+  </node>
+  <node id="3348610471" lat="48.8270093" lon="2.3590302">
+    <tag k="amenity" v="fuel"/>
+    <tag k="name" v="Station Service Choisy"/>
+    <tag k="source" v="survey"/>
+  </node>
+  <way id="52823933">
+    <nd ref="669879965"/>
+    <nd ref="669879966"/>
+    <nd ref="669879967"/>
+    <nd ref="669879974"/>
+    <nd ref="669879968"/>
+    <nd ref="669879969"/>
+    <nd ref="669879965"/>
+    <tag k="addr:postcode" v="75015"/>
+    <tag k="address" v="44 Bd Victor"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="yes"/>
+    <tag k="fuel:lpg" v="yes"/>
+    <tag k="is_in" v="PARIS"/>
+    <tag k="name" v="Station BP"/>
+    <tag k="operator" v="BP"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010;stations.gpl.online.fr"/>
+  </way>
   <way id="73428044">
     <nd ref="870422866"/>
     <nd ref="870438422"/>
@@ -585,8 +901,47 @@
     <nd ref="916644392"/>
     <nd ref="916640221"/>
     <tag k="amenity" v="fuel"/>
+    <tag k="brand" v="Total"/>
     <tag k="building" v="roof"/>
     <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"/>
+  </way>
+  <way id="78158556">
+    <nd ref="918151873"/>
+    <nd ref="1390843628"/>
+    <nd ref="918153081"/>
+    <nd ref="918152457"/>
+    <nd ref="918153256"/>
+    <nd ref="918151873"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="yes"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:e10" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+    <tag k="wall" v="no"/>
+  </way>
+  <way id="78536213">
+    <nd ref="921522755"/>
+    <nd ref="921544860"/>
+    <nd ref="921524284"/>
+    <nd ref="921510465"/>
+    <nd ref="921531876"/>
+    <nd ref="921511742"/>
+    <nd ref="921516938"/>
+    <nd ref="921514668"/>
+    <nd ref="921522755"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="roof"/>
+    <tag k="compressed_air" v="yes"/>
+    <tag k="fuel:diesel" v="yes"/>
+    <tag k="fuel:e10" v="yes"/>
+    <tag k="fuel:octane_98" v="yes"/>
+    <tag k="name" v="Total"/>
+    <tag k="opening_hours" v="24/7"/>
+    <tag k="shop" v="convenience"/>
+    <tag k="source" v="Ministère de l'Economie, de l'Industrie et du Numérique - 15/09/2014"/>
+    <tag k="toilets" v="yes"/>
   </way>
   <way id="79147677">
     <nd ref="924702277"/>
@@ -636,6 +991,7 @@
     <tag k="building" v="roof"/>
     <tag k="operator" v="Carrefour"/>
     <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"/>
+    <tag k="wheelchair" v="limited"/>
   </way>
   <way id="81839193">
     <nd ref="951948436"/>
@@ -647,6 +1003,7 @@
     <tag k="building" v="roof"/>
     <tag k="name" v="Elf"/>
     <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"/>
+    <tag k="wheelchair" v="limited"/>
   </way>
   <way id="82250343">
     <nd ref="957783769"/>
@@ -706,6 +1063,7 @@
   <way id="96711347">
     <nd ref="1119984194"/>
     <nd ref="1119984230"/>
+    <nd ref="3149588793"/>
     <nd ref="1119984227"/>
     <nd ref="1119984190"/>
     <nd ref="1119984194"/>
@@ -714,22 +1072,19 @@
     <tag k="name" v="Total"/>
     <tag k="shop" v="yes"/>
   </way>
-  <way id="119155614">
-    <nd ref="1339598702"/>
-    <nd ref="1339598472"/>
-    <nd ref="1339598434"/>
-    <nd ref="1339598520"/>
-    <nd ref="1339598425"/>
-    <nd ref="1339598702"/>
-    <tag k="addr:postcode" v="75017"/>
-    <tag k="address" v="Porte De Clichy"/>
+  <way id="100840943">
+    <nd ref="1165365653"/>
+    <nd ref="1165363475"/>
+    <nd ref="1165365103"/>
+    <nd ref="1165363003"/>
+    <nd ref="1165364492"/>
+    <nd ref="1165363693"/>
+    <nd ref="1165365653"/>
     <tag k="amenity" v="fuel"/>
     <tag k="building" v="yes"/>
-    <tag k="fuel:lpg" v="yes"/>
-    <tag k="is_in" v="PARIS"/>
-    <tag k="name" v="Relais Total Des Batignolles"/>
-    <tag k="operator" v="Total"/>
-    <tag k="source" v="stations.gpl.online.fr"/>
+    <tag k="name" v="Esso Express"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"/>
+    <tag k="wall" v="no"/>
   </way>
   <way id="152205002">
     <nd ref="894264753"/>
@@ -809,6 +1164,19 @@
     <tag k="operator" v="E. Leclerc"/>
     <tag k="shop" v="no"/>
     <tag k="source" v="stations.gpl.online.fr"/>
+    <tag k="wall" v="no"/>
+  </way>
+  <way id="308771053">
+    <nd ref="3140383571"/>
+    <nd ref="3140383569"/>
+    <nd ref="3140383568"/>
+    <nd ref="3140383570"/>
+    <nd ref="3140383571"/>
+    <tag k="amenity" v="fuel"/>
+    <tag k="building" v="yes"/>
+    <tag k="name" v="Avia"/>
+    <tag k="shelter" v="yes"/>
+    <tag k="source" v="survey"/>
     <tag k="wall" v="no"/>
   </way>
 

@@ -52,14 +52,14 @@
     <method name="RegisterPoiCategories">
       <doc>
         <line>RegisterPoiCategories = Register to the POI provider module the categories you can search for POI.</line>
-        <line>The categories could be predifined one or customized ones. In order to register a customized category, you might need to create it before and add it to the POI service component.</line>
+        <line>The categories could be predefined one or customized ones. In order to register a customized category, you might need to create it before and add it to the POI service component.</line>
       </doc>
       <arg name="camId" type="y" direction="in">
         <doc>
           <line>camId = Content access module unique id as known by the POI service component.</line>
         </doc>
       </arg>
-      <arg name="poiCategories" type="aq" direction="in">
+      <arg name="poiCategories" type="au" direction="in">
         <doc>
           <line>poiCategories = array[unique_id]</line>
           <line>List of POI categories to register.</line>
@@ -87,7 +87,7 @@
           <line>camId = Content access module unique id as known by the POI service component.</line>
         </doc>
       </arg>
-      <arg name="poiCategories" type="a((aqvssv)a(sqa(qs))a(qs))" direction="in">
+      <arg name="poiCategories" type="a((auvssv)a(usia(isv))a(us))" direction="in">
         <doc>
           <line>poiCategories = array[details, attributes, sortOptions]</line>
           <line>List of details for all the POI categories.</line>
@@ -96,18 +96,20 @@
           <line>icons = visual icons set</line>
           <line>name = name</line>
           <line>short_desc = short category description (optional)</line>
-          <line>media = medial associated (html web site, audio, video, ...) (optional)</line>
-          <line>attributes = array[struct(name, type, array[struct(operator_id, operator_name)])</line>
+          <line>media = media associated (html web site, audio, video, ...) (optional)</line>
+          <line>attributes = array[struct(id, name, type, array[struct(operator_type, operator_name, operator_value)])</line>
+          <line>id = attribute unique id</line>
           <line>name = attribute unique name</line>
           <line>type = enum(INVALID,STRING,INTEGER,COORDINATES ...)</line>
-          <line>operator_id = enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....)</line>
+          <line>operator_type = enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....)</line>
           <line>operator_name = attribute operator name</line>
+          <line>operator_value = attribute value</line>
           <line>sortOptions = array[struct(id, name)]</line>
           <line>id = enum(SORT_DEFAULT,SORT_BY_DISTANCE,SORT_BY_TIME,ATTRIBUTE_CUSTOM, ... )</line>
           <line>name = name to be displayed by application</line>
         </doc>
       </arg>
-      <arg name="poiCategoriesId" type="aq" direction="out">
+      <arg name="poiCategoriesId" type="au" direction="out">
         <doc>
           <line>poiCategoriesId = array of unique POI categories as registered by the POI service component.</line>
           <line>Note: A POI category is a unique ID.</line>
@@ -136,18 +138,20 @@
           <line>camId = Content access module unique id as known by the POI service component.</line>
         </doc>
       </arg>
-      <arg name="poiCategories" type="a(qa(sqa(qs))a(qs))" direction="in">
+      <arg name="poiCategories" type="a(ua(usia(isv))a(us))" direction="in">
         <doc>
           <line>poiCategories = array[unique_id, attributes, sortOptions]</line>
           <line>List of attributes to update.</line>
           <line>unique_id = unique category id</line>
-          <line>attributes = array[struct(name, type, array[struct(operator_id, operator_name)])</line>
+          <line>attributes = array[struct(id, name, type, array[struct(operator_type, operator_name, operator_value)])</line>
+          <line>id = attribute unique id</line>
           <line>name = attribute unique name</line>
           <line>type = enum(INVALID,STRING,INTEGER,COORDINATES ...)</line>
-          <line>operator_id = enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....)</line>
+          <line>operator_type = enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....)</line>
           <line>operator_name = attribute operator name</line>
+          <line>operator_value = attribute value</line>
           <line>sortOptions = array[struct(id, name)]</line>
-          <line>id = enum(SORT_DEFAULT,BY_DISTANCE,BY_TIME,ATTRIBUTE_CUSTOM, ... )</line>
+          <line>id = enum(SORT_DEFAULT,SORT_BY_DISTANCE,SORT_BY_TIME,ATTRIBUTE_CUSTOM, ... )</line>
           <line>name = name to be displayed by application</line>
         </doc>
       </arg>
@@ -178,7 +182,7 @@
           <line>camId = Content access module unique id as known by the POI service component.</line>
         </doc>
       </arg>
-      <arg name="poiCategories" type="aq" direction="in">
+      <arg name="poiCategories" type="au" direction="in">
         <doc>
           <line>poiCategories = array[unique_id]</line>
           <line>List of categories to remove.</line>

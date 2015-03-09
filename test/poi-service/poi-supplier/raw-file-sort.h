@@ -46,8 +46,8 @@
  *
  */
 enum CONSTANTS {
-	GEO_NODE_BUFFER_SIZE = 5000,
-	POI_BUFFER_SIZE = 2000,
+    GEO_NODE_BUFFER_SIZE = 10000,
+    POI_BUFFER_SIZE = 10000,
     NODE_BUFFER_SIZE = 10000
 };
 
@@ -62,6 +62,6 @@ enum CONSTANTS {
 
 
 void clear_string(Glib::ustring *str);
-void xml_parser(Glib::ustring file_to_parse, std::string sort_primary_key, std::string* sort_list, uint8_t sort_list_size, poi_t* poi_buffer,uint16_t* poi_buffer_index);
+void xml_parser(Glib::ustring file_to_parse, std::string sort_primary_key, std::string* sort_list, uint8_t sort_list_size, poi_t* poi_buffer, poiId_t *poi_buffer_index);
 
 #endif

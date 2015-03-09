@@ -37,6 +37,9 @@
 #include <sys/types.h>
 #include <glibmm/ustring.h>
 
+typedef uint32_t poiId_t;
+typedef uint32_t categoryId_t;
+
 typedef enum {
     INVALID = 0,
     NOT_STARTED,
@@ -46,7 +49,7 @@ typedef enum {
 
 typedef struct
 {
-    uint8_t id; // unique id
+    categoryId_t id; // unique id
     Glib::ustring name; // unique name
     bool top_level; //true if the category is a pre-defined one (top level with only ALL_CATEGORIES as parent), false for customized categories created by plug-in.
 	uint32_t radius;

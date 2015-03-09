@@ -56,17 +56,22 @@ int main(int argc, char *argv[])
     mainWindow.settingsCountryCode = settings.value("Language/country").toString();
     mainWindow.settingsHMIlanguage = settings.value("Language/HMI").toString();
 
-    mainWindow.settingsAttributeSource = settings.value("Attribute/Source").toString();
-    mainWindow.settingsAttributeWebSite = settings.value("Attribute/WebSite").toString();
-    mainWindow.settingsAttributePhone = settings.value("Attribute/Phone").toString();
-    mainWindow.settingsAttributeStars = settings.value("Attribute/Stars").toString();
-    mainWindow.settingsAttributeOpeningHours = settings.value("Attribute/OpeningHours").toString();
-    mainWindow.settingsAttributeAddrHouseNumber = settings.value("Attribute/Number").toString();
-    mainWindow.settingsAttributeAddrStreet = settings.value("Attribute/Street").toString();
-    mainWindow.settingsAttributeAddrPostCode = settings.value("Attribute/PostCode").toString();
-    mainWindow.settingsAttributeAddrCity = settings.value("Attribute/City").toString();
-    mainWindow.settingsAttributeBrand = settings.value("Attribute/Brand").toString();
-    mainWindow.settingsAttributeOperateur = settings.value("Attribute/Operateur").toString();
+    mainWindow.settingsCategoryAllCategories = settings.value("Category/AllCategories").toUInt();
+
+    mainWindow.settingsAttributeSource = settings.value("Attribute/Source").toUInt();
+    mainWindow.settingsAttributeWebSite = settings.value("Attribute/WebSite").toUInt();
+    mainWindow.settingsAttributePhone = settings.value("Attribute/Phone").toUInt();
+    mainWindow.settingsAttributeStars = settings.value("Attribute/Stars").toUInt();
+    mainWindow.settingsAttributeOpeningHours = settings.value("Attribute/OpeningHours").toUInt();
+    mainWindow.settingsAttributeAddrHouseNumber = settings.value("Attribute/Number").toUInt();
+    mainWindow.settingsAttributeAddrStreet = settings.value("Attribute/Street").toUInt();
+    mainWindow.settingsAttributeAddrPostCode = settings.value("Attribute/PostCode").toUInt();
+    mainWindow.settingsAttributeAddrCity = settings.value("Attribute/City").toUInt();
+    mainWindow.settingsAttributeBrand = settings.value("Attribute/Brand").toUInt();
+    mainWindow.settingsAttributeOperateur = settings.value("Attribute/Operateur").toUInt();
+
+    mainWindow.settingsCAMOffset = settings.value("CAMOffset").toUInt();
+
     mainWindow.settingsMapWidthInMeter = settings.value("MapWidthInMeter").toUInt();
     mainWindow.settingsMapHeightInMeter = settings.value("MapHeightInMeter").toUInt();
     mainWindow.settingsTimerPeriodForPosition = settings.value("TimerPeriodForPosition").toInt();

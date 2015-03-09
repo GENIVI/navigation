@@ -47,7 +47,6 @@ public:
     MarshalHandler();
     static void registerMetaType();
 };
-
 Q_DECLARE_METATYPE(std::string)
 const QDBusArgument &operator>>(const QDBusArgument  &argument, std::string &dest);
 QDBusArgument &operator << (QDBusArgument &argument, const std::string &source);

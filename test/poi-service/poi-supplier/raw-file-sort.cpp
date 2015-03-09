@@ -81,7 +81,7 @@ void clear_string(Glib::ustring* str)
  * \param uint16_t* poi_buffer_index	-Number of poi found
  * \return void.
  */
-void xml_parser(Glib::ustring file_to_parse, std::string sort_primary_key, std::string* sort_list, uint8_t sort_list_size, poi_t* poi_buffer,uint16_t* poi_buffer_index)
+void xml_parser(Glib::ustring file_to_parse, std::string sort_primary_key, std::string* sort_list, uint8_t sort_list_size, poi_t* poi_buffer,poiId_t* poi_buffer_index)
 {
 	geo_node_t geo_node_buffer[GEO_NODE_BUFFER_SIZE]; // table to store the geo locations, for the time being, all the lat lon node are stored
 	uint16_t geo_node_buffer_index = 0; //index of the next free row in the geo_node_buffer

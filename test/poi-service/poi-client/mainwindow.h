@@ -80,18 +80,24 @@ public:
     QString settingsCountryCode;
     QString settingsHMIlanguage;
 
-    // Must fit that list and order of attributes: "Source","WebSite","Phone","Stars","Open hours","HouseNumber","Street","Post code","City","Brand","Operateur"
-    QString settingsAttributeSource;
-    QString settingsAttributeWebSite;
-    QString settingsAttributePhone;
-    QString settingsAttributeStars;
-    QString settingsAttributeOpeningHours;
-    QString settingsAttributeAddrHouseNumber;
-    QString settingsAttributeAddrStreet;
-    QString settingsAttributeAddrPostCode;
-    QString settingsAttributeAddrCity;
-    QString settingsAttributeBrand;
-    QString settingsAttributeOperateur;
+    // The list of ids that is shared with the poi-server
+    // It's needed to pass it as configuration values, because the type of the value (variant) is hard coded
+
+    categoryId_t settingsCategoryAllCategories;
+
+    attributeId_t settingsAttributeSource;
+    attributeId_t settingsAttributeWebSite;
+    attributeId_t settingsAttributePhone;
+    attributeId_t settingsAttributeStars;
+    attributeId_t settingsAttributeOpeningHours;
+    attributeId_t settingsAttributeAddrHouseNumber;
+    attributeId_t settingsAttributeAddrStreet;
+    attributeId_t settingsAttributeAddrPostCode;
+    attributeId_t settingsAttributeAddrCity;
+    attributeId_t settingsAttributeBrand;
+    attributeId_t settingsAttributeOperateur;
+
+    uint settingsCAMOffset;
 
     uint settingsMapWidthInMeter;
     uint settingsMapHeightInMeter;
@@ -116,7 +122,7 @@ private slots:
 
     void on_getPrevList_clicked();
 
-    void on_DBusSignalPoiStatus(uint poiSearchHandle,ushort statusValue);
+    void on_DBusSignalPoiStatus(uint poiSearchHandle, int statusValue);
 
     void on_DBusSignalResultListChanged(uint poiSearchHandle,ushort resultListSize);
 
@@ -132,18 +138,21 @@ private slots:
 
     void on_cancelProximity_clicked();
 
+    void on_embeddedAllCategoryCheckBox_stateChanged(int state);
+
+    void on_addedAllCategoryCheckBox_stateChanged(int state);
 
 private:
 
     void select_category();
     void manageDBusError(QDBusMessage reply);
     void initSettings();
-    void manageStatus(ushort statusValue);
+    void manageStatus(int statusValue);
     void refreshViewTable(ushort windowSize);
     void clearViewTable();
-    bool giveCategoryIndex(ushort id,ushort *index_in_table);
-    bool giveCategoryIndexAdditional(ushort id,ushort *index_in_table);
-    bool isNewCategory(ushort id,QList<poiCategoryAndReason_t> poiList);
+    bool giveCategoryIndex(categoryId_t id, ushort *index_in_table);
+    bool giveCategoryIndexAdditional(categoryId_t id,ushort *index_in_table);
+    bool isNewCategory(categoryId_t id,QList<poiCategoryAndReason_t> poiList);
 
     enum tableViewPoiConstants
     {
@@ -153,6 +162,7 @@ private:
         columnId = 3,
         columnLatitude = 4,
         columnLongitude = 5,
+        columnBeginAttributes = 6,
         columnSource = 6,
         columnWebSite = 7,
         columnPhone = 8,
@@ -183,14 +193,14 @@ private:
     geoCoordinate3D_t m_geoLocation;
 
     //handles to managed elements by GENIVI components
-    uint m_poiSearchHandle;
+    handleId_t m_poiSearchHandle;
     uchar m_routeHandle;
     uchar m_sessionHandle;
 
     std::string m_languageCode;
     std::string m_countryCode;
 
-    ushort m_searchStatus;
+    int m_searchStatus;
 
     poiCategoryFull_t m_rootCategory;
 

@@ -62,27 +62,27 @@
       <doc>
         <line>ValidateCategories = This method allows the application to validate that POI categories are supported by the POI component and the Content access modules.</line>
       </doc>
-      <arg name="categories" type="aq" direction="in">
+      <arg name="categories" type="au" direction="in">
         <doc>
           <line>categories = array[id]</line>
           <line>id = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
           <line>Note: A POI category is a unique ID.</line>
         </doc>
       </arg>
-      <arg name="results" type="a(qb)" direction="out">
+      <arg name="results" type="a(ub)" direction="out">
         <doc>
           <line>results = array[unique_id, status]</line>
           <line>results = List of status for all the POI categories.</line>
-          <line>unique id = POI id</line>
+          <line>unique id = category id</line>
           <line>status = true if the category is available.</line>
         </doc>
       </arg>
     </method>
     <method name="GetAvailableCategories">
       <doc>
-        <line>GetAvailableCategories = This method retrieves the list od POI categories available (pre-defined and custom).</line>
+        <line>GetAvailableCategories = This method retrieves the list of POI categories available (pre-defined and custom).</line>
       </doc>
-      <arg name="categories" type="a(qsb)" direction="out">
+      <arg name="categories" type="a(usb)" direction="out">
         <doc>
           <line>categories = array[struct(id, name, top_level)]</line>
           <line>id = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
@@ -96,7 +96,7 @@
       <doc>
         <line>GetRootCategory = Get the root category id. That would be ALL_CATEGORIES.</line>
       </doc>
-      <arg name="category" type="q" direction="out">
+      <arg name="category" type="u" direction="out">
         <doc>
           <line>id = ALL_CATEGORIES</line>
           <line>The root category is a top level one by design.</line>
@@ -107,12 +107,12 @@
       <doc>
         <line>GetChildrenCategories = Get the children categories id and type (top level) from the a parent unique id.</line>
       </doc>
-      <arg name="category" type="q" direction="in">
+      <arg name="category" type="u" direction="in">
         <doc>
           <line>unique category id</line>
         </doc>
       </arg>
-      <arg name="categories" type="a(qb)" direction="out">
+      <arg name="categories" type="a(ub)" direction="out">
         <doc>
           <line>categories = array[struct(id, top_level)]</line>
           <line>id = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
@@ -129,12 +129,12 @@
       <doc>
         <line>GetParentCategories = Get the parent categories id and type (top level) from the a unique id.</line>
       </doc>
-      <arg name="category" type="q" direction="in">
+      <arg name="category" type="u" direction="in">
         <doc>
           <line>unique category id</line>
         </doc>
       </arg>
-      <arg name="categories" type="a(qb)" direction="out">
+      <arg name="categories" type="a(ub)" direction="out">
         <doc>
           <line>categories = array[struct(id, top_level)]</line>
           <line>id = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
@@ -152,13 +152,13 @@
         <line>GetCategoriesDetails = This method retrieves the details associated to one or more POI categories.</line>
         <line>It contains the name, the parent categories, the top level attribute, the list of attributes, the icons, ... .</line>
       </doc>
-      <arg name="categories" type="aq" direction="in">
+      <arg name="categories" type="au" direction="in">
         <doc>
           <line>list of categories = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
           <line>Note: A POI category is a unique ID. It could be a predifined category or a custom one defined by a POI plug-in.</line>
         </doc>
       </arg>
-      <arg name="results" type="a((qaqvsbsv)a(sqa(qs))a(qs))" direction="out">
+      <arg name="results" type="a((uauvsbsv)a(usia(isv))a(us))" direction="out">
         <doc>
           <line>results = array[details, attributes, sortOptions]</line>
           <line>results = List of details for all the POI categories.</line>
@@ -167,14 +167,16 @@
           <line>parents_id = list of parent categories unique id</line>
           <line>icons = visual icons set</line>
           <line>name = name</line>
-          <line>top_level = true if the category is a pre-defined one (top level), false for customized categories created by plug-in.</line>
+          <line>top_level = true if the category is a predefined one (top level), false for customized categories created by plug-in.</line>
           <line>short_desc = short category description (optional)</line>
-          <line>media = medial associated (html web site, audio, video, ...) (optional)</line>
-          <line>attributes = array[struct(name, type, array[struct(operator_id, operator_name)])</line>
+          <line>media = media associated (html web site, audio, video, ...) (optional)</line>
+          <line>attributes = array[struct(id, name, type, array[struct(operator_type, operator_name, operator_value)])</line>
+          <line>id = attribute unique id</line>
           <line>name = attribute unique name</line>
           <line>type = enum(INVALID,STRING,INTEGER,COORDINATES ...)</line>
-          <line>operator_id = enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....)</line>
+          <line>operator_type = enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....)</line>
           <line>operator_name = attribute operator name</line>
+          <line>operator_value = attribute value</line>
           <line>sortOptions = array[struct(id, name)]</line>
           <line>id = enum(SORT_DEFAULT,SORT_BY_DISTANCE,SORT_BY_TIME,ATTRIBUTE_CUSTOM, ... )</line>
           <line>name = name to be displayed by application</line>
@@ -191,7 +193,7 @@
       <doc>
         <line>CategoriesUpdated = This signal indicates that one or more POI categories were added, updated or removed.</line>
       </doc>
-      <arg name="poiCategories" type="a(qq)" direction="out">
+      <arg name="poiCategories" type="a(uq)" direction="out">
         <doc>
           <line>poiCategories = array[struct(unique_id, reason)]</line>
           <line>List of POI categories modified or added.</line>
@@ -320,7 +322,7 @@
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
       </arg>
-      <arg name="poiCategories" type="a(qu)" direction="in">
+      <arg name="poiCategories" type="a(uu)" direction="in">
         <doc>
           <line>poiCategories = array[struct(category, radius)]</line>
           <line>category = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
@@ -354,14 +356,14 @@
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
       </arg>
-      <arg name="poiAttributes" type="a(sqqvqb)" direction="in">
+      <arg name="poiAttributes" type="a(uuivib)" direction="in">
         <doc>
-          <line>poiAtttributes = array[struct(name, poiCategory, type, value, operator, mandatory)]</line>
-          <line>name = attribute unique name (see data model)</line>
-          <line>poiCategory = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
+          <line>poiAtttributes = array[struct(id, categoryId, type, value, oper, mandatory)]</line>
+          <line>id = attribute unique id (see data model)</line>
+          <line>categoryId = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
           <line>type = enum(INVALID,STRING,INTEGER,COORDINATES ...)</line>
           <line>value = value or partial value. The value depends on the attribute specifications and type.</line>
-          <line>operator = enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....)</line>
+          <line>oper = enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....)</line>
           <line>mandatory = true if the attribute is mandatory for the search and false for optional.</line>
         </doc>
       </arg>
@@ -491,7 +493,7 @@
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
       </arg>
-      <arg name="statusValue" type="q" direction="out">
+      <arg name="statusValue" type="i" direction="out">
         <doc>
           <line>statusValue = enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... )</line>
         </doc>
@@ -531,9 +533,9 @@
           <line>maxWindowSize = maximum number of elements that should be returned as result</line>
         </doc>
       </arg>
-      <arg name="attributes" type="as" direction="in">
+      <arg name="attributes" type="au" direction="in">
         <doc>
-          <line>attributes = List of attributes name to retrieve. This is optional and the list could be empty.</line>
+          <line>attributes = List of attributes id to retrieve. This is optional and the list could be empty.</line>
         </doc>
       </arg>
       <arg name="statusValue" type="q" direction="out">
@@ -546,15 +548,15 @@
           <line>resultListSize = Number of items of the results list</line>
         </doc>
       </arg>
-      <arg name="resultListWindow" type="a(uuqa(sqv))" direction="out">
+      <arg name="resultListWindow" type="a(uuqa(uiv))" direction="out">
         <doc>
           <line>resultListWindow = array[unique_id, distance, route_status, attributes]</line>
           <line>unique_id = POI unique id</line>
           <line>distance = distance in meters to poi from center of the search or from vehicle if search along</line>
           <line>route_status = enum(OFF_ROUTE,ON_ROUTE,INSIDE_CORRIDOR, ... )</line>
-          <line>attributes = array[struct(name, type, value)]</line>
+          <line>attributes = array[struct(id, type, value)]</line>
           <line>List of attributes requested. It could be empty.</line>
-          <line>name = attribute unique name (see data model)</line>
+          <line>id = attribute unique id (see data model)</line>
           <line>type = enum(INVALID,STRING,INTEGER,COORDINATES ...)</line>
           <line>value = value. The value depends on the attribute specifications and type.</line>
         </doc>
@@ -580,23 +582,24 @@
           <line>list of poi = Unique poi id</line>
         </doc>
       </arg>
-      <arg name="results" type="a((usddi)aqa(sqv))" direction="out">
+      <arg name="results" type="a((us(ddi))aua(uiv))" direction="out">
         <doc>
           <line>results = array[details, categories, attributes]</line>
           <line>results = List of details for all the POI.</line>
-          <line>details = struct(unique id, name, lat, lon, alt)</line>
+          <line>details = struct(unique id, name, location)</line>
           <line>unique id = POI id</line>
           <line>name = POI name</line>
+          <line>location = struct(lat,lon,alt)</line>
           <line>lat = latitude of a vertex of the polygon in format %3.6f. Range [-90:+90]. Example: 48.053250</line>
           <line>lon = longitude of a vertex of the polygon in format %3.6f. Range [-180:+180]. Example: 48.053250</line>
           <line>alt = altitude above the sea level of the current position in meters</line>
           <line>categories = array[id]</line>
           <line>id = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
-          <line>attributes = array[struct(name, type, value)]</line>
-          <line>name = attribute unique name (see data model)</line>
+          <line>attributes = array[struct(id, type, value)]</line>
+          <line>List of attributes requested. It could be empty.</line>
+          <line>id = attribute unique id (see data model)</line>
           <line>type = enum(INVALID,STRING,INTEGER,COORDINATES ...)</line>
           <line>value = value. The value depends on the attribute specifications and type.</line>
-          <line>Note: This list only contains the available attributes. If there is no value for an optional attributes, it is not returned.</line>
         </doc>
       </arg>
       <error name="org.genivi.poiservice.poiSearch.Error.InvalidPoiId">

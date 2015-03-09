@@ -58,7 +58,7 @@ add_executable(poi-server
 	database.h
     poi-server-class.h
     poi-datamodel.h
-	../poi-common/common-data-model.h
+        ../poi-common/poi-common-data-model.h
 )
 
 set(LIBRARIES 

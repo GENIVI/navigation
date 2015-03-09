@@ -35,7 +35,7 @@
 #include "../../../api/include/genivi-poiservice-poicontentaccess_adaptor.h"
 #include "../../../api/include/genivi-navigationcore-routing_proxy.h"
 #include "../../../api/include/genivi-poiservice-contentaccessmodule_proxy.h"
-#include "../poi-common/common-data-model.h"
+#include "../../../src/poi-service/poi-common/poi-common-data-model.h"
 #include <dbus-c++/glib-integration.h>
 
 #include "poi-datamodel.h"
@@ -126,49 +126,49 @@ public:
 
     uint8_t RegisterContentAccessModule(const std::string& moduleName);
 
-    void UnRegisterContentAccessModule(const uint8_t& camId);
+    void UnRegisterContentAccessModule(const camId_t& camId);
 
-    void RegisterPoiCategories(const uint8_t& camId, const std::vector< uint16_t >& poiCategories);
+    void RegisterPoiCategories(const camId_t& camId, const std::vector< categoryId_t >& poiCategories);
 
-    std::vector< uint16_t > AddCategories(const uint8_t& camId, const std::vector< DBus_CAMcategory::DBus_CAMcategory_t >& poiCategories);
+    std::vector< categoryId_t > AddCategories(const camId_t& camId, const std::vector< DBus_CAMcategory::DBus_CAMcategory_t >& poiCategories);
 
-    void UpdateCategories(const uint8_t& camId, const std::vector< DBus_CAMcategoryUpdate::DBus_CAMcategoryUpdate_t >& poiCategories);
+    void UpdateCategories(const camId_t& camId, const std::vector< DBus_CAMcategoryUpdate::DBus_CAMcategoryUpdate_t >& poiCategories);
 
-    void RemoveCategories(const uint8_t& camId, const std::vector< uint16_t >& poiCategories);
+    void RemoveCategories(const camId_t& camId, const std::vector< categoryId_t >& poiCategories);
 
 // Specific methods
 
-    bool GetRegisteredContentAccessModule(cam_t *cam);
+    bool GetRegisteredContentAccessModule(camIdName_t *cam);
 
-    bool GetRegisteredCategories(uint8_t camId, std::vector< DBus_categoryIdName::DBus_categoryIdName_t > *categoryList);
+    bool GetRegisteredCategories(camId_t camId, std::vector< DBus_categoryIdName::DBus_categoryIdName_t > *categoryList);
 
-    bool GetRegisteredCategoriesDetails(uint8_t camId, std::vector<DBus_category> *categoryList);
+    bool GetRegisteredCategoriesDetails(camId_t camId, std::vector<DBus_category> *categoryList);
 
-    void ResetRegisteredSearchCategoriesFlags(uint8_t camId);
+    void ResetRegisteredSearchCategoriesFlags(camId_t camId);
 
-    void ResetRegisteredAttributeCategoriesFlags(uint8_t camId);
+    void ResetRegisteredAttributeCategoriesFlags(camId_t camId);
 
-    void SetRegisteredSearchCategory(uint8_t camId,DBus_categoryRadius::categoryRadius_t category);
+    void SetRegisteredSearchCategory(camId_t camId,DBus_categoryRadius::categoryRadius_t category);
 
-    void SetRegisteredAttributeCategoryFlag(uint8_t camId,uint32_t categoryId, std::string attributeName, uint16_t attributeId);
+    void SetRegisteredAttributeCategoryFlag(camId_t camId,categoryId_t categoryId, attributeId_t attributeId);
 
     void SetLanguage(std::string LanguageCode, std::string CountryCode);
 
     uint16_t searchAroundALocation(DBus_geoCoordinate3D::geoCoordinate3D_t location,const std::string* inputString, uint16_t sortOption);
 
-    void SetPoiSearchHandle(uint32_t poiSearchHandle);
+    void SetPoiSearchHandle(handleId_t poiSearchHandle);
 
     void ResetPoiSearchHandle();
 
-    void PoiSearchCanceled(uint32_t poiSearchHandle);
+    void PoiSearchCanceled(handleId_t poiSearchHandle);
 
     DBus_poiCAMDetails::DBus_poiCAMDetails_t GetResultPoi(uint16_t index);
 
-    DBus_searchResultDetails::DBus_searchResultDetails_t GetPoiDetails(uint32_t id);
+    DBus_searchResultDetails::DBus_searchResultDetails_t GetPoiDetails(poiId_t id);
 
-    bool isAttributeAvailable(std::string attributeName);
+    bool isAttributeAvailable(attributeId_t attributeId);
 
-    bool removeCategoryFromTables(uint16_t id);
+    bool removeCategoryFromTables(categoryId_t id);
 
 private:
 
@@ -229,41 +229,42 @@ public:
 
     void SetLanguage(const std::string& languageCode, const std::string& countryCode);
 
-    std::vector< ::DBus::Struct< uint16_t, bool > > ValidateCategories(const std::vector< uint16_t >& categories);
+    std::vector< ::DBus::Struct< categoryId_t, bool > > ValidateCategories(const std::vector< categoryId_t >& categories);
 
     std::vector< DBus_categoryIdName::DBus_categoryIdName_t > GetAvailableCategories();
 
-    uint16_t GetRootCategory();
+    categoryId_t GetRootCategory();
 
-    std::vector< DBus_categoryId::DBus_categoryId_t > GetChildrenCategories(const uint16_t& category);
+    std::vector< DBus_categoryIdLevel::DBus_categoryIdLevel_t > GetChildrenCategories(const categoryId_t& category);
 
-    std::vector< DBus_categoryId::DBus_categoryId_t > GetParentCategories(const uint16_t& category);
+    std::vector< DBus_categoryIdLevel::DBus_categoryIdLevel_t > GetParentCategories(const categoryId_t& category);
 
-    std::vector< DBus_category::DBus_category_t > GetCategoriesDetails(const std::vector< uint16_t >& categories);
+    std::vector< DBus_category::DBus_category_t > GetCategoriesDetails(const std::vector< categoryId_t >& categories);
 
-    uint32_t CreatePoiSearchHandle();
+    handleId_t CreatePoiSearchHandle();
 
-    void DeletePoiSearchHandle(const uint32_t& poiSearchHandle);
+    void DeletePoiSearchHandle(const handleId_t& poiSearchHandle);
 
-    void SetRouteHandle(const uint32_t& poiSearchHandle, const uint8_t& sessionHandle, const uint8_t& routeHandle, const uint32_t& startSearchOffset, const uint32_t& endSearchOffset);
+    void SetRouteHandle(const handleId_t& poiSearchHandle, const uint8_t& sessionHandle, const uint8_t& routeHandle, const uint32_t& startSearchOffset, const uint32_t& endSearchOffset);
 
-    void SetCategories(const uint32_t& poiSearchHandle, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories);
+    void SetCategories(const handleId_t& poiSearchHandle, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories);
 
-    void SetAttributes(const uint32_t& poiSearchHandle, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes);
+    void SetAttributes(const handleId_t& poiSearchHandle, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes);
 
-    void StartPoiSearch(const uint32_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption);
+    void StartPoiSearch(const handleId_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption);
 
-    void CancelPoiSearch(const uint32_t& poiSearchHandle);
+    void CancelPoiSearch(const handleId_t& poiSearchHandle);
 
-    void SetCenter(const uint32_t& poiSearchHandle, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location);
+    void SetCenter(const handleId_t& poiSearchHandle, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location);
 
-    void StartPoiProximityAlert(const uint32_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption);
+    void StartPoiProximityAlert(const handleId_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption);
 
-    void CancelPoiProximityAlert(const uint32_t& poiSearchHandle);
+    void CancelPoiProximityAlert(const handleId_t& poiSearchHandle);
 
-    void RequestResultList(const uint32_t& poiSearchHandle, const uint16_t& offset, const uint16_t& maxWindowSize, const std::vector< std::string >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_searchResult::DBus_searchResult_t >& resultListWindow);
+    void RequestResultList(const handleId_t& poiSearchHandle, const uint16_t& offset, const uint16_t& maxWindowSize, const std::vector< uint32_t >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_searchResult::DBus_searchResult_t >& resultListWindow);
 
-    std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > GetPoiDetails(const std::vector< uint32_t >& id);
+    std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > GetPoiDetails(const std::vector< poiId_t >& id);
+
 
 private:
 
@@ -286,11 +287,11 @@ private:
 
 // category and attribute routines
 
-    bool isCategoryAvailable(uint16_t id, uint16_t *category_id);
+    bool isCategoryAvailable(categoryId_t id, categoryId_t *categoryId_t);
 
     bool isAllCategoriesSelected(uint16_t* index);
 
-    bool isAttributeRequired(std::string attribute,std::vector< std::string > attributes);
+    bool isAttributeRequired(attributeId_t attribute,std::vector< attributeId_t > attributes);
 
 // geometrical routines
 
@@ -307,13 +308,13 @@ private:
 // DBus data
     DBus_version m_version;
     std::string m_languageCode, m_countryCode;
-    uint32_t m_poiSearchHandle; // the POC is limited to the management of one handle !
-    uint16_t m_rootCategory;
+    handleId_t m_poiSearchHandle; // the POC is limited to the management of one handle !
+    categoryId_t m_rootCategory;
     uint8_t m_sessionHandle;
-    uint32_t m_routeHandle;
+    handleId_t m_routeHandle;
     uint16_t m_startSearchOffset;
     uint16_t m_endSearchOffset;
-    ushort m_searchStatus;
+    int32_t m_searchStatus;
     uint32_t m_totalNumberOfSegments;
     Routing *mp_Routing;
     poiContentAccessServer *mp_poiContentAccess;

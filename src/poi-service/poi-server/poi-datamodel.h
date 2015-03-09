@@ -35,7 +35,7 @@
 #include <stdint.h>
 #include <iostream>
 #include <fstream>
-#include "../poi-common/common-data-model.h"
+#include "../../../src/poi-service/poi-common/poi-common-data-model.h"
 
 /**
  * \struct category_attribute_t
@@ -46,7 +46,7 @@
  */
 typedef struct
 {
-    ushort id; //unique id
+    attributeId_t id; //unique id
     std::string name; //attribute unique name
     bool isSearched; //attributes is into the search scope
 } category_attribute_t;
@@ -61,7 +61,7 @@ typedef struct
  */
 typedef struct
 {
-    uint32_t id; // unique id
+    categoryId_t id; // unique id
     std::string name; // unique name
     std::string icon; // url of the associated icon
     bool top_level; //true if the category is a pre-defined one (top level with only ALL_CATEGORIES as parent), false for customized categories created by plug-in.
@@ -70,8 +70,8 @@ typedef struct
     bool hasRecordsInTheDatabase; //records exist in the database
     bool isSearch; //true if the category is into the scope of the search
     std::vector<category_attribute_t> attributeList; //list of attributes
-    std::vector<uint16_t> parentList; //list of parents
-	std::vector<uint16_t> childList; //list of children
+    std::vector<categoryId_t> parentList; //list of parents
+    std::vector<categoryId_t> childList; //list of children
 } poi_category_t;
 
 
@@ -132,16 +132,16 @@ typedef struct {
 } poi_t;
 
 /**
- * \struct cam_t
+ * \struct camIdName_t
  * \brief cam related informations.
  *
  *  Used to store data of a cam
  *
  */
 typedef struct {
-    uint8_t id;
+    camId_t id;
     std::string name;
-} cam_t;
+} camIdName_t;
 
 
 #endif

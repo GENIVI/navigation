@@ -91,8 +91,8 @@ contentAccessModuleServer::contentAccessModuleServer(DBus::Connection &connectio
         vector<string>  query_line, additionnal_query_line;
         size_t index,sub_index;
         category_attribute_t attribute;
-        uint16_t value;
-        uint16_t parent,child;
+        categoryId_t value;
+        categoryId_t parent,child;
 
         //version is hard coded
         DBus_version::version_t version;
@@ -129,7 +129,7 @@ contentAccessModuleServer::contentAccessModuleServer(DBus::Connection &connectio
             {
                 // read the result of the query and store it
                 query_line = query_result.at(index);
-                fromString<uint16_t>(value,query_line[0], std::dec);
+                fromString<categoryId_t>(value,query_line[0], std::dec);
                 m_availableCategoryTable[index].id = value;
 
                 // retrieve the associated icons (for the moment, just one)
@@ -169,7 +169,7 @@ contentAccessModuleServer::contentAccessModuleServer(DBus::Connection &connectio
                     for (sub_index = 0; sub_index <additionnal_query_result.size(); sub_index++)
                     {
                         additionnal_query_line = additionnal_query_result.at(sub_index);
-                        fromString<ushort>(attribute.id,additionnal_query_line[0], std::dec);
+                        fromString<attributeId_t>(attribute.id,additionnal_query_line[0], std::dec);
                         attribute.name = additionnal_query_line[1];
                         attribute.isSearched = false;
                         m_availableCategoryTable[index].attributeList.push_back(attribute);
@@ -200,7 +200,7 @@ contentAccessModuleServer::contentAccessModuleServer(DBus::Connection &connectio
                 for (parent=0;parent<query_result.size();parent++)
                 {
                     query_line = query_result.at(parent);
-                    fromString<uint16_t>(value,query_line[0], std::dec);
+                    fromString<categoryId_t>(value,query_line[0], std::dec);
                     if (index == value)
                         m_rootCategory = index; //child is parent, so it's the root
                     m_availableCategoryTable[index].parentList.push_back(value);
@@ -226,7 +226,7 @@ contentAccessModuleServer::contentAccessModuleServer(DBus::Connection &connectio
                 for (child=0;child<query_result.size();child++)
                 {
                     query_line = query_result.at(child);
-                    fromString<uint16_t>(value,query_line[0], std::dec);
+                    fromString<categoryId_t>(value,query_line[0], std::dec);
                     m_availableCategoryTable[index].childList.push_back(value);
                 }
             }
@@ -271,9 +271,10 @@ void contentAccessModuleServer::SetLanguage(const std::string& languageCode, con
         mp_HMI->on_SetLanguage(languageCode,countryCode);
     }
 
-void contentAccessModuleServer::PoiSearchStarted(const uint32_t& poiSearchHandle, const uint16_t& maxSize, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes, const std::string& inputString, const uint16_t& sortOption)
+void contentAccessModuleServer::PoiSearchStarted(const handleId_t& poiSearchHandle, const uint16_t& maxSize, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes, const std::string& inputString, const uint16_t& sortOption)
     {
-        uint16_t index,sub_index,category_index;
+        uint16_t index,sub_index;
+        categoryId_t category_index;
         bool isCategoryFound, isAttributeFound;
         DBus_attributeDetails attribDet;
         DBus_attributeDetails::attributeDetails_t attribDetails;
@@ -333,13 +334,13 @@ void contentAccessModuleServer::PoiSearchStarted(const uint32_t& poiSearchHandle
                 isAttributeFound = false;
                 attribDet.setDBus(poiAttributes.at(index));
                 attribDetails = attribDet.get();
-                if ( isCategoryAvailable(attribDetails.poiCategory,&category_index) == true)
+                if ( isCategoryAvailable(attribDetails.categoryId,&category_index) == true)
                 { //category found into the database!
                     if (m_availableCategoryTable[category_index].isSearch)
                     { //category selected for the search
                         for (sub_index=0;sub_index<(m_availableCategoryTable[category_index].attributeList.size());sub_index++)
-                        { //check attribute by name
-                            if ((m_availableCategoryTable[category_index].attributeList.at(sub_index)).name == attribDetails.attribute.name)
+                        { //check attribute by id
+                            if ((m_availableCategoryTable[category_index].attributeList.at(sub_index)).id == attribDetails.attribute.id)
                                 (m_availableCategoryTable[category_index].attributeList.at(sub_index)).isSearched =true;
                         }
                     }
@@ -360,7 +361,7 @@ void contentAccessModuleServer::PoiSearchStarted(const uint32_t& poiSearchHandle
         }
     }
 
-void contentAccessModuleServer::PoiSearchCanceled(const uint32_t& poiSearchHandle)
+void contentAccessModuleServer::PoiSearchCanceled(const handleId_t& poiSearchHandle)
     {
         if ((m_poiSearchHandle == INVALID_HANDLE) || (poiSearchHandle != m_poiSearchHandle))
             // try to cancel an unavailable handle
@@ -373,7 +374,7 @@ void contentAccessModuleServer::PoiSearchCanceled(const uint32_t& poiSearchHandl
         }
     }
 
-void contentAccessModuleServer::ResultListRequested(const uint8_t& camId, const uint32_t& poiSearchHandle, const std::vector< std::string >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_poiCAMDetails::DBus_poiCAMDetails_t >& resultList)
+void contentAccessModuleServer::ResultListRequested(const camId_t& camId, const handleId_t& poiSearchHandle, const std::vector< attributeId_t >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_poiCAMDetails::DBus_poiCAMDetails_t >& resultList)
     {
 
         //this method is supposed to check the camId, but into the POC, it's the HMI that declares the CAM (for the moment)
@@ -391,7 +392,7 @@ void contentAccessModuleServer::ResultListRequested(const uint8_t& camId, const 
         }
     }
 
-std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > contentAccessModuleServer::PoiDetailsRequested(const std::vector< uint32_t >& source_id)
+std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > contentAccessModuleServer::PoiDetailsRequested(const std::vector< poiId_t >& source_id)
     {
         std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t >  return_value;
         DBus_searchResultDetails searchDet;
@@ -444,7 +445,7 @@ void contentAccessModuleServer::connectToHMI(MainWindow *w)
     mp_HMI = w;
 }
 
-void contentAccessModuleServer::connectCAM(uint8_t camId)
+void contentAccessModuleServer::connectCAM(camId_t camId)
 {
     m_camId = camId;
 }
@@ -477,11 +478,13 @@ std::vector<DBus_CAMcategory::DBus_CAMcategory_t> contentAccessModuleServer::get
         CAMCategory.attributes.clear();
         for (sub_index=0;sub_index<m_availableCategoryTable[index].attributeList.size();sub_index++)
         {
+            categoryAttribute.id = (m_availableCategoryTable[index].attributeList.at(sub_index)).id;
             categoryAttribute.name = (m_availableCategoryTable[index].attributeList.at(sub_index)).name;
             categoryAttribute.type = 0;
             categoryAttribute.oper.clear();
-            categoryOperator.id = GENIVI_POISERVICE_EQUAL;
+            categoryOperator.type = GENIVI_POISERVICE_EQUAL;
             categoryOperator.name = "EQUAL";
+            categoryOperator.value = "";
             categoryAttribute.oper.push_back(categoryOperator);
             CAMCategory.attributes.push_back(categoryAttribute);
         }
@@ -493,7 +496,7 @@ std::vector<DBus_CAMcategory::DBus_CAMcategory_t> contentAccessModuleServer::get
     return(return_value);
 }
 
-void contentAccessModuleServer::setCategoriesID(std::vector<uint16_t> categoryIDList)
+void contentAccessModuleServer::setCategoriesID(std::vector<categoryId_t> categoryIDList)
 {
     size_t index;
     for (index=0;index<m_availableCategories;index++)
@@ -508,7 +511,7 @@ std::string contentAccessModuleServer::getCAMName()
     return(str);
 }
 
-uint8_t contentAccessModuleServer::getCAMId()
+camId_t contentAccessModuleServer::getCAMId()
 {
     return(m_camId);
 }
@@ -546,7 +549,7 @@ uint16_t contentAccessModuleServer::searchPOIRequest(uint16_t categoryIndex, std
         size_t index,sub_index,attribute_index;
         DBus_poiCAMDetails poiCAMDet;
         DBus_poiCAMDetails::poiCAMDetails_t poi; //source_id, name, category, location, distance, attributes
-        DBus_poiAttribute::poiAttribute_t  poiAttrib;
+        DBus_attribute::attribute_t  poiAttrib;
         DBus_searchResultDetails poiDet;
         DBus_searchResultDetails::searchResultDetails_t poiDetails; //details(unique id, name, lat, lon, alt), categories, attributes(name, type, value)
         std::string name;
@@ -594,17 +597,17 @@ uint16_t contentAccessModuleServer::searchPOIRequest(uint16_t categoryIndex, std
         for (index=0;index<sqlQueryResult.size();index++)
         {
             sqlQueryLine = sqlQueryResult.at(index);
-            fromString<uint32_t>(poi.source_id,sqlQueryLine[1], std::dec); //source_id
-            fromString<uint32_t>(poiDetails.details.id,sqlQueryLine[1], std::dec); //source_id for the table of details
+            fromString<poiId_t>(poi.source_id,sqlQueryLine[1], std::dec); //source_id
+            fromString<poiId_t>(poiDetails.details.id,sqlQueryLine[1], std::dec); //source_id for the table of details
             poi.name = sqlQueryLine[0]; //name
             poiDetails.details.name = sqlQueryLine[0]; //name for the table of details
             fromString<double>(poi.location.latitude,sqlQueryLine[2], std::dec); //location lat
             fromString<double>(poi.location.longitude,sqlQueryLine[3], std::dec); //location lon
             fromString<int>(poi.location.altitude,sqlQueryLine[4], std::dec); //location alt
 
-            fromString<double>(poiDetails.details.latitude,sqlQueryLine[2], std::dec); //location lat for the table of details
-            fromString<double>(poiDetails.details.longitude,sqlQueryLine[3], std::dec); //location lon for the table of details
-            fromString<int>(poiDetails.details.altitude,sqlQueryLine[4], std::dec); //location alt for the table of details
+            fromString<double>(poiDetails.details.location.latitude,sqlQueryLine[2], std::dec); //location lat for the table of details
+            fromString<double>(poiDetails.details.location.longitude,sqlQueryLine[3], std::dec); //location lon for the table of details
+            fromString<int>(poiDetails.details.location.altitude,sqlQueryLine[4], std::dec); //location alt for the table of details
 
             sub_index = 5; //next index to scan into the query line
             for (attribute_index=0;attribute_index<m_availableCategoryTable[categoryIndex].attributeList.size();attribute_index++)
@@ -613,7 +616,7 @@ uint16_t contentAccessModuleServer::searchPOIRequest(uint16_t categoryIndex, std
                 {
                     if ((m_availableCategoryTable[categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_SOURCE)
                     {
-                        poiAttrib.name = (m_availableCategoryTable[categoryIndex].attributeList.at(attribute_index)).name;
+                        poiAttrib.id = (m_availableCategoryTable[categoryIndex].attributeList.at(attribute_index)).id;
                         poiAttrib.type = GENIVI_POISERVICE_STRING;
                         poiAttrib.value = sqlQueryLine[sub_index];
                         poi.attributes.push_back(poiAttrib);
@@ -622,7 +625,7 @@ uint16_t contentAccessModuleServer::searchPOIRequest(uint16_t categoryIndex, std
                     else
                         if ((m_availableCategoryTable[categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_WEBSITE)
                         {
-                            poiAttrib.name = (m_availableCategoryTable[categoryIndex].attributeList.at(attribute_index)).name;
+                            poiAttrib.id = (m_availableCategoryTable[categoryIndex].attributeList.at(attribute_index)).id;
                             poiAttrib.type = GENIVI_POISERVICE_STRING;
                             poiAttrib.value = sqlQueryLine[sub_index];
                             poi.attributes.push_back(poiAttrib);
@@ -631,7 +634,7 @@ uint16_t contentAccessModuleServer::searchPOIRequest(uint16_t categoryIndex, std
                         else
                             if ((m_availableCategoryTable[categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_PHONE)
                             {
-                                poiAttrib.name = (m_availableCategoryTable[categoryIndex].attributeList.at(attribute_index)).name;
+                                poiAttrib.id = (m_availableCategoryTable[categoryIndex].attributeList.at(attribute_index)).id;
                                 poiAttrib.type = GENIVI_POISERVICE_STRING;
                                 poiAttrib.value = sqlQueryLine[sub_index];
                                 poi.attributes.push_back(poiAttrib);
@@ -640,7 +643,7 @@ uint16_t contentAccessModuleServer::searchPOIRequest(uint16_t categoryIndex, std
                             else
                                 if ((m_availableCategoryTable[categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_STARS)
                                 {
-                                    poiAttrib.name = (m_availableCategoryTable[categoryIndex].attributeList.at(attribute_index)).name;
+                                    poiAttrib.id = (m_availableCategoryTable[categoryIndex].attributeList.at(attribute_index)).id;
                                     poiAttrib.type = GENIVI_POISERVICE_INTEGER;
                                     poiAttrib.value = sqlQueryLine[sub_index];
                                     poi.attributes.push_back(poiAttrib);
@@ -649,7 +652,7 @@ uint16_t contentAccessModuleServer::searchPOIRequest(uint16_t categoryIndex, std
                                 else
                                     if ((m_availableCategoryTable[categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_OPENINGHOURS)
                                     {
-                                        poiAttrib.name = (m_availableCategoryTable[categoryIndex].attributeList.at(attribute_index)).name;
+                                        poiAttrib.id = (m_availableCategoryTable[categoryIndex].attributeList.at(attribute_index)).id;
                                         poiAttrib.type = GENIVI_POISERVICE_STRING;
                                         poiAttrib.value = sqlQueryLine[sub_index];
                                         poi.attributes.push_back(poiAttrib);
@@ -680,7 +683,7 @@ void contentAccessModuleServer::onError()
 {
 }
 
-bool contentAccessModuleServer::isCategoryAvailable(uint16_t id, uint16_t *category_id)
+bool contentAccessModuleServer::isCategoryAvailable(categoryId_t id, categoryId_t *category_id)
 {
     bool isFound = false;
     uint16_t index = 0;

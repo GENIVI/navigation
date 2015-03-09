@@ -32,7 +32,7 @@
 #include "../../../api/include/genivi-poiservice-constants.h"
 #include "../../../api/include/genivi-poiservice-contentaccessmodule_adaptor.h"
 #include "../../../api/include/genivi-poiservice-poicontentaccess_proxy.h"
-#include "../poi-common/poi-common-data-model.h"
+#include "../../../src/poi-service/poi-common/poi-common-data-model.h"
 #include <dbus-c++/glib-integration.h>
 
 #include "poi-datamodel.h"
@@ -93,27 +93,27 @@ public:
 
     void SetLanguage(const std::string& languageCode, const std::string& countryCode);
 
-    void PoiSearchStarted(const uint32_t& poiSearchHandle, const uint16_t& maxSize, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes, const std::string& inputString, const uint16_t& sortOption);
+    void PoiSearchStarted(const handleId_t& poiSearchHandle, const uint16_t& maxSize, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes, const std::string& inputString, const uint16_t& sortOption);
 
-    void PoiSearchCanceled(const uint32_t& poiSearchHandle);
+    void PoiSearchCanceled(const handleId_t& poiSearchHandle);
 
-    void ResultListRequested(const uint8_t& camId, const uint32_t& poiSearchHandle, const std::vector< std::string >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_poiCAMDetails::DBus_poiCAMDetails_t >& resultList);
+    void ResultListRequested(const camId_t& camId, const handleId_t& poiSearchHandle, const std::vector< attributeId_t >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_poiCAMDetails::DBus_poiCAMDetails_t >& resultList);
 
-    std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > PoiDetailsRequested(const std::vector< uint32_t >& source_id);
+    std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > PoiDetailsRequested(const std::vector< poiId_t >& source_id);
 
     void connectToHMI(MainWindow *w);
 
-    void connectCAM(uint8_t camId);
+    void connectCAM(camId_t camId);
 
     void disconnectCAM();
 
     std::vector<DBus_CAMcategory::DBus_CAMcategory_t> getCategories();
 
-    void setCategoriesID(std::vector<uint16_t> categoryIDList);
+    void setCategoriesID(std::vector<categoryId_t> categoryIDList);
 
     std::string getCAMName();
 
-    uint8_t getCAMId();
+    camId_t getCAMId();
 
 
 private:
@@ -137,7 +137,7 @@ private:
     void onError();
 
 //
-    bool isCategoryAvailable(uint16_t id, uint16_t *category_id);
+    bool isCategoryAvailable(categoryId_t id, categoryId_t *category_id);
 
 // geometrical routines
 
@@ -153,7 +153,7 @@ private:
 
     std::string m_languageCode, m_countryCode;
 
-    uint32_t m_poiSearchHandle; // the POC is limited to the management of one handle !
+    handleId_t m_poiSearchHandle; // the POC is limited to the management of one handle !
 
     Database *mp_database; // database access
     DBus_geoCoordinate3D::geoCoordinate3D_t m_leftBottomLocation;
@@ -167,7 +167,7 @@ private:
 
     uint16_t m_totalSize;
 
-    uint8_t m_camId;
+    camId_t m_camId;
 
 
 // buffers
@@ -176,9 +176,9 @@ private:
 
 
 // category and attribute management
-    uint16_t m_availableCategories;
+    categoryId_t m_availableCategories;
     poi_category_t m_availableCategoryTable[MAX_CATEGORIES];
-    uint16_t m_rootCategory;
+    categoryId_t m_rootCategory;
 };
 
 

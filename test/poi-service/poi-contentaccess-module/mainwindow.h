@@ -72,7 +72,7 @@ private:
     Ui::MainWindow *ui;
     contentAccessModuleServer* mp_contentAccessModule;
     poiContentAccess* mp_poiContentAccess;
-    std::vector<ushort> m_categoriesID;
+    std::vector<uint> m_categoriesID;
 };
 
 #endif // MAINWINDOW_H

@@ -98,20 +98,24 @@ typeCollection POIServiceTypes {
 	
 	<** @description:**>			
 	struct Operator {
-		<**	@description : enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....).**>
-		UInt16 operatorId
-		<**	@description : attribute operator name.**>
-		String operatorName
+        <** @description : enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....).**>
+        OperatorType type
+        <** @description : localized display name.**>
+        String name
+        <** @description : value to use if this comparator is selected.**>
+        AttributeValue value
 	}
 	
 	
 	<**	@description: Describes an attribte which is associcated to an category. Use more than one operator to specify choice options i.e. differtent accpeted credid cards 
 	used in categor details and update category**>
 	struct CategoryAttribute {
-		<**	@description : attribute unique name.**>
-		String name
-		<**	@description : enum(INVALID,STRING,INTEGER,COORDINATES ...).**>
-		UInt16 type
+        <** @description : id of attribute .**>
+        AttributeID id
+        <** @description : localized display name.**>
+        String name
+        <** @description : enum(INVALID,STRING,INTEGER,COORDINATES ...).**>
+        AttributeType type
 		<**	@description:**>
 		Operator[] operators
 	}
@@ -152,10 +156,10 @@ typeCollection POIServiceTypes {
   	<** @description: Attribute associcated to an POI used in addPOI and POI Search Result(both CAM and Service)**>			
     struct PoiAttribute
     {
-		<** @description:attribute unique name (see data model)**>			
-        String name
+		<** @description:attribute unique id (see data model)**>			
+        AttributeID id
  		<** @description:enum(INVALID,STRING,INTEGER,COORDINATES ...)**>			
-        UInt16 type
+        AttributeType type
 		<** @description:The value depends on the attribute specifications and type**>			
         AttributeValue value
     }
@@ -230,17 +234,17 @@ typeCollection POIServiceTypes {
   	<** @description: used in setAttrbutes and CAM startPOISearch**>			
     struct AttributeDetails
     {
- 		<**	@description : attribute unique name (see data model).**>
-        String name
-  		<**	@description : enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...). Note: A POI category is a unique ID. It could be a predefined category or a custom one defined by a POI plug-in **>			
-		CategoryID  poiCategory 
-  		<**	@description : enum(INVALID,STRING,INTEGER,COORDINATES ...).**>
-        UInt16 type
-  		<**	@description : value or partial value. The value depends on the attribute specifications and type.**>
+        <** @description : id of attribute .**>
+        AttributeID id
+        <** @description : enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...). Note: A POI category is a unique ID. It could be a predefined category or a custom one defined by a POI plug-in **>         
+        CategoryID categoryId 
+        <** @description : enum(INVALID,STRING,INTEGER,COORDINATES ...).**>
+        AttributeType type
+        <** @description : value or partial value. The value depends on the attribute specifications and type.**>
         AttributeValue value
-  		<**	@description : enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....).**>
-        UInt16 oper
-  		<**	@description : true if the attribute is mandatory for the search and false for optional.**>
+        <** @description : enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....).**>
+        OperatorType oper
+        <** @description : true if the attribute is mandatory for the search and false for optional.**>
         Boolean mandatory
     }
 

@@ -50,8 +50,13 @@ INSERT INTO iconset VALUES (1,32,37,'../resource/world','png');
 /* link between categories and attributes */
 INSERT INTO hasattribute VALUES (0,0,2);
 INSERT INTO hasattribute VALUES (1,0,4);
-INSERT INTO hasattribute VALUES (2,55,2);
-INSERT INTO hasattribute VALUES (3,55,4);
+INSERT INTO hasattribute VALUES (2,55,1);
+INSERT INTO hasattribute VALUES (3,55,2);
+INSERT INTO hasattribute VALUES (4,55,4);
+INSERT INTO hasattribute VALUES (5,55,5);
+INSERT INTO hasattribute VALUES (6,55,6);
+INSERT INTO hasattribute VALUES (7,55,7);
+INSERT INTO hasattribute VALUES (8,55,8);
 /* link between icons and categories */
 INSERT INTO isdisplayedas VALUES (0,0,1);
 INSERT INTO isdisplayedas VALUES (0,55,0);

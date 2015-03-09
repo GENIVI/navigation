@@ -76,8 +76,8 @@ interface POIContentAccessModule {
 			UInt8 camId				
 			<** @description : poi search unique handle.**>
 			Handle poiSearchHandle				
-			<** @description : List of attributes name to retrieve. This is optional and the list could be empty.**>
-			String[] attributes				
+			<** @description : List of attributes id to retrieve. This is optional and the list could be empty.**>
+			AttributeID[] attributes				
 		}	
 		out {
 			<** @description : enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... ).**>

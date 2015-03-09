@@ -191,10 +191,11 @@ add_executable(poi-contentaccess-module
     ${MOC_SOURCES}
     ${DBUS_DEF_INCLUDE}
     ${UI_FILES}
-	poi-contentaccess-module-class.h
+    poi-contentaccess-module-class.h
     main.cpp
     database.cpp
     mainwindow.cpp
+    poi-datamodel.h
 )
 
 target_link_libraries(poi-contentaccess-module ${LIBRARIES})

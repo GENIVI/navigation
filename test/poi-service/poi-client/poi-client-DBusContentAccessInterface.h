@@ -61,43 +61,43 @@ public:
 
 public Q_SLOTS: // METHODS
 
-    inline QDBusPendingReply<uchar> RegisterContentAccessModule(QString moduleName)
+    inline QDBusPendingReply<camId_t> RegisterContentAccessModule(QString moduleName)
     { //"s" in "y" out
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(moduleName);
         return asyncCallWithArgumentList(QLatin1String("RegisterContentAccessModule"), argumentList);
     }
 
-    inline QDBusPendingReply<> UnRegisterContentAccessModule(uchar camId)
+    inline QDBusPendingReply<> UnRegisterContentAccessModule(camId_t camId)
     { // "y" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(camId);
         return asyncCallWithArgumentList(QLatin1String("UnRegisterContentAccessModule"), argumentList);
     }
 
-    inline QDBusPendingReply<> RegisterPoiCategories(uchar camId, QList<ushort> poiCategories)
-    { // "y" "aq" in
+    inline QDBusPendingReply<> RegisterPoiCategories(camId_t camId, QList<categoryId_t> poiCategories)
+    { // "y" "au" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(camId) << qVariantFromValue(poiCategories);
         return asyncCallWithArgumentList(QLatin1String("RegisterPoiCategories"), argumentList);
     }
 
-    inline QDBusPendingReply<QList<ushort> > AddCategories(uchar camId, QList<poiCategoryCamAdd_t> poiCategories)
-    { // "y" "a((aqvssv)a(sqa(qs))a(qs))" in "aq" out
+    inline QDBusPendingReply<QList<ushort> > AddCategories(camId_t camId, QList<poiCategoryCamAdd_t> poiCategories)
+    { // "y" "a((auvssv)a(usia(isv))a(us))" in "au" out
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(camId) << qVariantFromValue(poiCategories);
         return asyncCallWithArgumentList(QLatin1String("AddCategories"), argumentList);
     }
 
-    inline QDBusPendingReply<> UpdateCategories(uchar camId, poiCategoryCamUpdate_t poiCategories)
-    { // "y" "(qa(sqa(qs))a(qs))" in
+    inline QDBusPendingReply<> UpdateCategories(camId_t camId, QList<poiCategoryCamUpdate_t> poiCategories)
+    { // "y" "a(ua(usia(isv))a(us))" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(camId) << qVariantFromValue(poiCategories);
         return asyncCallWithArgumentList(QLatin1String("UpdateCategories"), argumentList);
     }
 
-    inline QDBusPendingReply<> RemoveCategories(uchar camId, QList<ushort> poiCategories)
-    { // "y" "aq" in
+    inline QDBusPendingReply<> RemoveCategories(camId_t camId, QList<categoryId_t> poiCategories)
+    { // "y" "au" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(camId) << qVariantFromValue(poiCategories);
         return asyncCallWithArgumentList(QLatin1String("RemoveCategories"), argumentList);
@@ -147,32 +147,29 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("SetLanguage"), argumentList);
     }
 
-    inline QDBusPendingReply<>PoiSearchStarted(uint poiSearchHandle,ushort maxSize, geoCoordinate3D_t location, QList<poiSearch_t> poiCategories, QList<poiAttributeFull_t> poiAttributes, std::string inputString, ushort sortOption)
-    { // "y" "q" "(ddi)" "a(qu)" "a(sqqvqb)" "s" "q" in
+    inline QDBusPendingReply<>PoiSearchStarted(handleId_t poiSearchHandle,ushort maxSize, geoCoordinate3D_t location, QList<poiSearch_t> poiCategories, QList<poiAttributeFull_t> poiAttributes, std::string inputString, ushort sortOption)
+    { // "u" "q" "(ddi)" "a(uu)" "a(uuivqb)" "s" "q" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle) << qVariantFromValue(maxSize) << qVariantFromValue(location) << qVariantFromValue(poiCategories) << qVariantFromValue(poiAttributes) << qVariantFromValue(inputString) << qVariantFromValue(sortOption);
         return asyncCallWithArgumentList(QLatin1String("PoiSearchStarted"), argumentList);
     }
 
-    inline QDBusPendingReply<> PoiSearchCanceled(uint poiSearchHandle)
-    { //"y" in
+    inline QDBusPendingReply<> PoiSearchCanceled(handleId_t poiSearchHandle)
+    { //"u" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle);
         return asyncCallWithArgumentList(QLatin1String("PoiSearchCanceled"), argumentList);
     }
 
-    inline QDBusPendingReply<ushort, ushort, QList<resultCamSearch_t> >ResultListRequested(uchar camId, uint poiSearchHandle, QList<std::string> attributes)
-    { // "y" "y" "as" in "q" "q" "a(usq(ddi)qa(sqv))" out
+    inline QDBusPendingReply<ushort, ushort, QList<resultCamSearch_t> >ResultListRequested(camId_t camId, handleId_t poiSearchHandle, QList<attributeId_t> attributes)
+    { // "y" "u" "au" in "q" "q" "a(usu(ddi)qa(uiv))" out
         QList<QVariant> argumentList;
-        QStringList dst;
-        foreach(const std::string &s,attributes)
-            dst.append(QString::fromStdString(s));
-        argumentList << qVariantFromValue(camId) << qVariantFromValue(poiSearchHandle) << qVariantFromValue(dst);
+        argumentList << qVariantFromValue(camId) << qVariantFromValue(poiSearchHandle) << qVariantFromValue(attributes);
         return asyncCallWithArgumentList(QLatin1String("ResultListRequested"), argumentList);
     }
 
-    inline QDBusPendingReply<QList<resultCamSearchDetails_t> >PoiDetailsRequested(QList<ushort> source_id)
-    { // "aq" in "a((usddi)aqa(sqv))" out
+    inline QDBusPendingReply<QList<resultCamSearchDetails_t> >PoiDetailsRequested(QList<poiId_t> source_id)
+    { // "au" in "a((us(ddi))aua(uiv))" out
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(source_id);
         return asyncCallWithArgumentList(QLatin1String("PoiDetailsRequested"), argumentList);

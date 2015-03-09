@@ -159,7 +159,7 @@ QDBusArgument &operator << (QDBusArgument &argument, const geoCoordinate3D_t &so
 const QDBusArgument &operator >> (const QDBusArgument &argument,poiAttribute_t &dest)
 {
     argument.beginStructure();
-    argument >> dest.name >> dest.type >> dest.value;
+    argument >> dest.id >> dest.type >> dest.value;
     argument.endStructure();
     return argument;
 }
@@ -167,7 +167,7 @@ const QDBusArgument &operator >> (const QDBusArgument &argument,poiAttribute_t &
 QDBusArgument &operator << (QDBusArgument &argument, const poiAttribute_t &source)
 {
     argument.beginStructure();
-    argument << source.name << source.type << source.value;
+    argument << source.id << source.type << source.value;
     argument.endStructure();
     return argument;
 }
@@ -175,7 +175,7 @@ QDBusArgument &operator << (QDBusArgument &argument, const poiAttribute_t &sourc
 const QDBusArgument &operator >> (const QDBusArgument &argument,poiAttributeFull_t &dest)
 {
     argument.beginStructure();
-    argument >> dest.name >> dest.poiCategory >> dest.type >> dest.value >> dest.id >> dest.mandatory;
+    argument >> dest.id >> dest.poiCategory >> dest.type >> dest.value >> dest.oper >> dest.mandatory;
     argument.endStructure();
     return argument;
 }
@@ -183,7 +183,7 @@ const QDBusArgument &operator >> (const QDBusArgument &argument,poiAttributeFull
 QDBusArgument &operator << (QDBusArgument &argument, const poiAttributeFull_t &source)
 {
     argument.beginStructure();
-    argument << source.name << source.poiCategory << source.type << source.value << source.id << source.mandatory;
+    argument << source.id << source.poiCategory << source.type << source.value << source.oper << source.mandatory;
     argument.endStructure();
     return argument;
 }
@@ -223,7 +223,7 @@ QDBusArgument &operator << (QDBusArgument &argument, const categoryDetails_t &so
 const QDBusArgument &operator >> (const QDBusArgument &argument,categoryOperator_t &dest)
 {
     argument.beginStructure();
-    argument  >> dest.id >> dest.name;
+    argument  >> dest.type >> dest.name >> dest.value;
     argument.endStructure();
     return argument;
 }
@@ -231,7 +231,7 @@ const QDBusArgument &operator >> (const QDBusArgument &argument,categoryOperator
 QDBusArgument &operator << (QDBusArgument &argument, const categoryOperator_t &source)
 {
     argument.beginStructure();
-    argument << source.id << source.name;
+    argument << source.type << source.name << source.value;
     argument.endStructure();
     return argument;
 }
@@ -239,7 +239,7 @@ QDBusArgument &operator << (QDBusArgument &argument, const categoryOperator_t &s
 const QDBusArgument &operator >> (const QDBusArgument &argument,categoryAttribute_t &dest)
 {
     argument.beginStructure();
-    argument >> dest.name >> dest.type >> dest.oper;
+    argument >> dest.id >> dest.name >> dest.type >> dest.oper;
     argument.endStructure();
     return argument;
 }
@@ -247,7 +247,7 @@ const QDBusArgument &operator >> (const QDBusArgument &argument,categoryAttribut
 QDBusArgument &operator << (QDBusArgument &argument, const categoryAttribute_t &source)
 {
     argument.beginStructure();
-    argument << source.name << source.type << source.oper ;
+    argument << source.id << source.name << source.type << source.oper ;
     argument.endStructure();
     return argument;
 }
@@ -287,7 +287,7 @@ QDBusArgument &operator << (QDBusArgument &argument, const categoryDetailsList_t
 const QDBusArgument &operator >> (const QDBusArgument &argument,detailsPOISearch_t &dest)
 {
     argument.beginStructure();
-    argument >> dest.id  >> dest.name >> dest.latitude >> dest.longitude >> dest.altitude;
+    argument >> dest.id  >> dest.name >> dest.location;
     argument.endStructure();
     return argument;
 }
@@ -295,7 +295,7 @@ const QDBusArgument &operator >> (const QDBusArgument &argument,detailsPOISearch
 QDBusArgument &operator << (QDBusArgument &argument, const detailsPOISearch_t &source)
 {
     argument.beginStructure();
-    argument << source.id << source.name  << source.latitude << source.longitude << source.altitude;
+    argument << source.id << source.name  << source.location;
     argument.endStructure();
     return argument;
 }

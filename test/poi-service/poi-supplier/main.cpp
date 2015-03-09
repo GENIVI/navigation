@@ -90,7 +90,7 @@ void print_usage (FILE* stream, int exit_code)
 int main(int  argc , char**  argv )
 {
     poi_t poi_buffer[POI_BUFFER_SIZE]; //table to store the POIs
-    uint16_t poi_buffer_index; //number of POIs found
+    poiId_t poi_buffer_index; //number of POIs found
 
     std::string sort_primary_key; //primary key (set as a parameter)
     std::string *sort_list; //list of secondary keys (set as parameters)
@@ -102,7 +102,7 @@ int main(int  argc , char**  argv )
     vector<Glib::ustring>  sqlQueryLine;
 
     std::ostringstream  strStream; //temporary stream used for transformation into string
-    uint16_t offset_id; //offset to the next free item in the database
+    poiId_t offset_id; //offset to the next free item in the database
 
     // Set the global C and C++ locale to the user-configured locale,
     // so we can use std::cout with UTF-8, via Glib::ustring, without exceptions.
@@ -223,7 +223,7 @@ int main(int  argc , char**  argv )
                 offset_id = 0; //table is empty
             else
             {
-                from_string<uint16_t>(offset_id,sqlQueryLine[0], std::dec);
+                from_string<poiId_t>(offset_id,sqlQueryLine[0], std::dec);
                 offset_id +=1; //to next free index
             }
 

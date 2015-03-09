@@ -74,32 +74,32 @@ Routing::~Routing()
 {
 }
 
-void Routing::RouteDeleted(const uint32_t &routeHandle)
+void Routing::RouteDeleted(const handleId_t &routeHandle)
 {
 
 }
 
-void Routing::RouteCalculationCancelled(const uint32_t &routeHandle)
+void Routing::RouteCalculationCancelled(const handleId_t &routeHandle)
 {
 
 }
 
-void Routing::RouteCalculationSuccessful(const uint32_t& routeHandle, const std::map< uint16_t, uint16_t >& unfullfilledPreferences)
+void Routing::RouteCalculationSuccessful(const handleId_t& routeHandle, const std::map< uint16_t, uint16_t >& unfullfilledPreferences)
 {
 
 }
 
-void Routing::RouteCalculationFailed(const uint32_t& routeHandle, const uint16_t& errorCode, const std::map< uint16_t, uint16_t >& unfullfilledPreferences)
+void Routing::RouteCalculationFailed(const handleId_t& routeHandle, const uint16_t& errorCode, const std::map< uint16_t, uint16_t >& unfullfilledPreferences)
 {
 
 }
 
-void Routing::RouteCalculationProgressUpdate(const uint32_t& routeHandle, const uint16_t &status, const uint8_t &percentage)
+void Routing::RouteCalculationProgressUpdate(const handleId_t& routeHandle, const uint16_t &status, const uint8_t &percentage)
 {
 
 }
 
-void Routing::AlternativeRoutesAvailable (const std::vector<uint32_t>& routeHandlesList)
+void Routing::AlternativeRoutesAvailable (const std::vector<handleId_t>& routeHandlesList)
 {
 
 }
@@ -157,7 +157,7 @@ uint8_t poiContentAccessServer::RegisterContentAccessModule(const std::string& m
     return(m_camId);
 }
 
-void poiContentAccessServer::UnRegisterContentAccessModule(const uint8_t& camId)
+void poiContentAccessServer::UnRegisterContentAccessModule(const camId_t& camId)
 {
     if ((m_camId == INVALID_HANDLE) || (camId != m_camId))
         // to do send an error message
@@ -173,7 +173,7 @@ void poiContentAccessServer::UnRegisterContentAccessModule(const uint8_t& camId)
     }
 }
 
-void poiContentAccessServer::RegisterPoiCategories(const uint8_t& camId, const std::vector< uint16_t >& poiCategories)
+void poiContentAccessServer::RegisterPoiCategories(const camId_t& camId, const std::vector< categoryId_t >& poiCategories)
 {
     std::vector< DBus_categoryReason::DBus_categoryReason_t > poiCategoriesAndReason;
     DBus_categoryReason::categoryReason_t categoryAndReason;
@@ -205,14 +205,14 @@ void poiContentAccessServer::RegisterPoiCategories(const uint8_t& camId, const s
     }
 }
 
-std::vector< uint16_t > poiContentAccessServer::AddCategories(const uint8_t& camId, const std::vector< DBus_CAMcategory::DBus_CAMcategory_t >& poiCategories)
+std::vector< categoryId_t > poiContentAccessServer::AddCategories(const camId_t& camId, const std::vector< DBus_CAMcategory::DBus_CAMcategory_t >& poiCategories)
 {
     DBus_CAMcategory CAMcat;
     DBus_CAMcategory::CAMcategory_t CAMCategory;
     DBus_CAMcategoryDetails::CAMcategoryDetails_t details;
     poi_category_t category;
     category_attribute_t attribute;
-    std::vector<uint16_t> return_value;
+    std::vector<categoryId_t> return_value;
     size_t category_index,attribute_index;
 
     return_value.clear();
@@ -239,7 +239,7 @@ std::vector< uint16_t > poiContentAccessServer::AddCategories(const uint8_t& cam
                 for (attribute_index=0;attribute_index<CAMCategory.attributes.size();attribute_index++)
                 {
                     attribute.name = (CAMCategory.attributes.at(attribute_index)).name;
-                    attribute.id = (camId*CAM_ATTRIBUTE_OFFSET) + attribute_index;
+                    attribute.id = (CAMCategory.attributes.at(attribute_index)).id;
                     attribute.isSearched = false;
                     category.attributeList.push_back(attribute);
                 }
@@ -253,7 +253,7 @@ std::vector< uint16_t > poiContentAccessServer::AddCategories(const uint8_t& cam
     return(return_value);
 }
 
-void poiContentAccessServer::UpdateCategories(const uint8_t& camId, const std::vector< DBus_CAMcategoryUpdate::DBus_CAMcategoryUpdate_t >& poiCategories)
+void poiContentAccessServer::UpdateCategories(const camId_t& camId, const std::vector< DBus_CAMcategoryUpdate::DBus_CAMcategoryUpdate_t >& poiCategories)
 {
     if ((m_camId == INVALID_HANDLE) || (camId != m_camId))
         // to do send an error message
@@ -264,7 +264,7 @@ void poiContentAccessServer::UpdateCategories(const uint8_t& camId, const std::v
     }
 }
 
-void poiContentAccessServer::RemoveCategories(const uint8_t& camId, const std::vector< uint16_t >& poiCategories)
+void poiContentAccessServer::RemoveCategories(const camId_t& camId, const std::vector< categoryId_t >& poiCategories)
 {
     std::vector< DBus_categoryReason::DBus_categoryReason_t > poiCategoriesAndReason;
     DBus_categoryReason::categoryReason_t categoryAndReason;
@@ -325,7 +325,7 @@ DBus::Variant poiContentAccessServer::createVariantUint16(uint16_t value)
     return var;
 }
 
-bool poiContentAccessServer::GetRegisteredContentAccessModule(cam_t *cam)
+bool poiContentAccessServer::GetRegisteredContentAccessModule(camIdName_t *cam)
 {
     if (m_camId == INVALID_HANDLE)
         return(false);
@@ -337,7 +337,7 @@ bool poiContentAccessServer::GetRegisteredContentAccessModule(cam_t *cam)
     }
 }
 
-bool poiContentAccessServer::GetRegisteredCategories(uint8_t camId, std::vector< DBus_categoryIdName::DBus_categoryIdName_t > *categoryList)
+bool poiContentAccessServer::GetRegisteredCategories(camId_t camId, std::vector< DBus_categoryIdName::DBus_categoryIdName_t > *categoryList)
 {
     DBus_categoryIdName::categoryIdName_t category;
     DBus_categoryIdName cat;
@@ -359,7 +359,7 @@ bool poiContentAccessServer::GetRegisteredCategories(uint8_t camId, std::vector<
     }
 }
 
-bool poiContentAccessServer::GetRegisteredCategoriesDetails(uint8_t camId, std::vector<DBus_category> *categoryList)
+bool poiContentAccessServer::GetRegisteredCategoriesDetails(camId_t camId, std::vector<DBus_category> *categoryList)
 {
     DBus_category cat;
     DBus_category::category_t category;
@@ -394,10 +394,12 @@ bool poiContentAccessServer::GetRegisteredCategoriesDetails(uint8_t camId, std::
             for (index=0;index<((m_poiCategoriesRegistered.at(category_index)).attributeList.size());index++)
             {
                 categoryAttribute.name = ((m_poiCategoriesRegistered.at(category_index)).attributeList.at(index)).name;
+                categoryAttribute.id = ((m_poiCategoriesRegistered.at(category_index)).attributeList.at(index)).id;
                 categoryAttribute.type = 0;
                 categoryAttribute.oper.clear();
-                categoryOperator.id = GENIVI_POISERVICE_EQUAL;
+                categoryOperator.type = GENIVI_POISERVICE_EQUAL;
                 categoryOperator.name = "EQUAL";
+                categoryOperator.value = "";
                 categoryAttribute.oper.push_back(categoryOperator);
                 categoryAttributeList.push_back(categoryAttribute);
             }
@@ -416,7 +418,7 @@ bool poiContentAccessServer::GetRegisteredCategoriesDetails(uint8_t camId, std::
     }
 }
 
-void poiContentAccessServer::ResetRegisteredSearchCategoriesFlags(uint8_t camId)
+void poiContentAccessServer::ResetRegisteredSearchCategoriesFlags(camId_t camId)
 {
     size_t index;
 
@@ -431,7 +433,7 @@ void poiContentAccessServer::ResetRegisteredSearchCategoriesFlags(uint8_t camId)
     }
 }
 
-void poiContentAccessServer::ResetRegisteredAttributeCategoriesFlags(uint8_t camId)
+void poiContentAccessServer::ResetRegisteredAttributeCategoriesFlags(camId_t camId)
 {
     size_t index,sub_index;
 
@@ -447,7 +449,7 @@ void poiContentAccessServer::ResetRegisteredAttributeCategoriesFlags(uint8_t cam
     }
 }
 
-void poiContentAccessServer::SetRegisteredSearchCategory(uint8_t camId, DBus_categoryRadius::categoryRadius_t category)
+void poiContentAccessServer::SetRegisteredSearchCategory(camId_t camId, DBus_categoryRadius::categoryRadius_t category)
 {
     size_t index;
     DBus_categoryRadius catRad;
@@ -470,7 +472,7 @@ void poiContentAccessServer::SetRegisteredSearchCategory(uint8_t camId, DBus_cat
     }
 }
 
-void poiContentAccessServer::SetRegisteredAttributeCategoryFlag(uint8_t camId,uint32_t categoryId, std::string attributeName, uint16_t attributeId)
+void poiContentAccessServer::SetRegisteredAttributeCategoryFlag(camId_t camId, categoryId_t categoryId, attributeId_t attributeId)
 {
     size_t index, sub_index;
     DBus_attributeDetails attrib;
@@ -488,12 +490,12 @@ void poiContentAccessServer::SetRegisteredAttributeCategoryFlag(uint8_t camId,ui
             {
                 for (sub_index=0;sub_index<((m_poiCategoriesRegistered.at(index)).attributeList).size();sub_index++)
                 {
-                    if ((m_poiCategoriesRegistered.at(index)).attributeList.at(sub_index).name == attributeName)
+                    if ((m_poiCategoriesRegistered.at(index)).attributeList.at(sub_index).id == attributeId)
                     {
                         (m_poiCategoriesRegistered.at(index)).attributeList.at(sub_index).isSearched =true;
-                        attribute.id = attributeId;
-                        attribute.attribute.name = attributeName;
-                        attribute.poiCategory = categoryId;
+                        attribute.attribute.id = attributeId;
+                        attribute.categoryId = categoryId;
+//                        attribute.oper =
                         attrib.set(attribute);
                         m_poiAttributes.push_back(attrib.getDBus());
                     }
@@ -511,7 +513,7 @@ void poiContentAccessServer::SetLanguage(std::string LanguageCode, std::string C
     }
 }
 
-void poiContentAccessServer::SetPoiSearchHandle(uint32_t poiSearchHandle)
+void poiContentAccessServer::SetPoiSearchHandle(handleId_t poiSearchHandle)
 {
     m_poiSearchHandle =  poiSearchHandle;
 }
@@ -521,7 +523,7 @@ void poiContentAccessServer::ResetPoiSearchHandle()
     m_poiSearchHandle = INVALID_HANDLE;
 }
 
-void poiContentAccessServer::PoiSearchCanceled(uint32_t poiSearchHandle)
+void poiContentAccessServer::PoiSearchCanceled(handleId_t poiSearchHandle)
 {
     m_poiTable.clear();
     m_poiDetailsTable.clear();
@@ -533,7 +535,7 @@ DBus_poiCAMDetails::DBus_poiCAMDetails_t poiContentAccessServer::GetResultPoi(ui
     return(m_poiTable.at(index));
 }
 
-DBus_searchResultDetails::DBus_searchResultDetails_t poiContentAccessServer::GetPoiDetails(uint32_t id)
+DBus_searchResultDetails::DBus_searchResultDetails_t poiContentAccessServer::GetPoiDetails(poiId_t id)
 {
     uint16_t index;
     bool isPOIFound;
@@ -557,10 +559,10 @@ uint16_t poiContentAccessServer::searchAroundALocation(DBus_geoCoordinate3D::geo
 {
     uint16_t maxSize;
     DBus_geoCoordinate3D loc;
-    std::vector< std::string > attributes;
+    std::vector< attributeId_t > attributes;
     uint16_t statusValue;
     uint16_t resultListSize;
-    std::vector<uint32_t> poiList;
+    std::vector<poiId_t> poiList;
     uint16_t index;
 
     resultListSize = 0;
@@ -591,13 +593,13 @@ uint16_t poiContentAccessServer::searchAroundALocation(DBus_geoCoordinate3D::geo
     return(resultListSize);
 }
 
-bool poiContentAccessServer::isAttributeAvailable(std::string attributeName)
+bool poiContentAccessServer::isAttributeAvailable(attributeId_t attributeId)
 {
     //to do
     return(true);
 }
 
-bool poiContentAccessServer::removeCategoryFromTables(uint16_t id)
+bool poiContentAccessServer::removeCategoryFromTables(categoryId_t id)
 {
     size_t index;
     bool isFound;
@@ -651,8 +653,8 @@ poiSearchServer::poiSearchServer(DBus::Connection &connection, const char* poiDa
         vector<string>  query_line, additionnal_query_line;
         size_t index,sub_index;
         category_attribute_t attribute;
-        uint16_t value;
-        uint16_t parent,child;
+        categoryId_t value;
+        categoryId_t parent,child;
 
         //version is hard coded
         DBus_version::version_t version;
@@ -667,7 +669,7 @@ poiSearchServer::poiSearchServer(DBus::Connection &connection, const char* poiDa
         m_poiSearchProximity = false; //by default search around the current location
         mp_database = new Database(poiDatabaseFileName);
         mp_poiContentAccess = poiContentAccess;
-	mp_dbusConnection = &connection;
+        mp_dbusConnection = &connection;
         m_availableCategories = 0;
         m_rootCategory = 0;
         m_searchStatus = GENIVI_POISERVICE_NOT_STARTED;
@@ -690,7 +692,7 @@ poiSearchServer::poiSearchServer(DBus::Connection &connection, const char* poiDa
             {
                 // read the result of the query and store it
                 query_line = query_result.at(index);
-                fromString<uint16_t>(value,query_line[0], std::dec);
+                fromString<categoryId_t>(value,query_line[0], std::dec);
                 m_availableCategoryTable[index].id = value;
 
                 // retrieve the associated icons (for the moment, just one)
@@ -730,7 +732,7 @@ poiSearchServer::poiSearchServer(DBus::Connection &connection, const char* poiDa
                     for (sub_index = 0; sub_index <additionnal_query_result.size(); sub_index++)
                     {
                         additionnal_query_line = additionnal_query_result.at(sub_index);
-                        fromString<ushort>(attribute.id,additionnal_query_line[0], std::dec);
+                        fromString<attributeId_t>(attribute.id,additionnal_query_line[0], std::dec);
                         attribute.name = additionnal_query_line[1];
                         attribute.isSearched = false;
                         m_availableCategoryTable[index].attributeList.push_back(attribute);
@@ -761,7 +763,7 @@ poiSearchServer::poiSearchServer(DBus::Connection &connection, const char* poiDa
                 for (parent=0;parent<query_result.size();parent++)
                 {
                     query_line = query_result.at(parent);
-                    fromString<uint16_t>(value,query_line[0], std::dec);
+                    fromString<categoryId_t>(value,query_line[0], std::dec);
                     if (index == value)
                         m_rootCategory = index; //child is parent, so it's the root
                     m_availableCategoryTable[index].parentList.push_back(value);
@@ -787,7 +789,7 @@ poiSearchServer::poiSearchServer(DBus::Connection &connection, const char* poiDa
                 for (child=0;child<query_result.size();child++)
                 {
                     query_line = query_result.at(child);
-                    fromString<uint16_t>(value,query_line[0], std::dec);
+                    fromString<categoryId_t>(value,query_line[0], std::dec);
                     m_availableCategoryTable[index].childList.push_back(value);
                 }
             }
@@ -837,9 +839,9 @@ void poiSearchServer::SetLanguage(const std::string& languageCode, const std::st
     m_countryCode = countryCode;
 }
 
-std::vector< ::DBus::Struct< uint16_t, bool > > poiSearchServer::ValidateCategories(const std::vector< uint16_t >& categories)
+std::vector< ::DBus::Struct< categoryId_t, bool > > poiSearchServer::ValidateCategories(const std::vector< categoryId_t >& categories)
 {
-    std::vector< ::DBus::Struct< uint16_t, bool > > table;
+    std::vector< ::DBus::Struct< categoryId_t, bool > > table;
     return(table);
 }
 
@@ -850,7 +852,7 @@ std::vector< DBus_categoryIdName::DBus_categoryIdName_t > poiSearchServer::GetAv
     DBus_categoryIdName::categoryIdName_t category;
     DBus_categoryIdName cat;
     uint16_t index;
-    cam_t cam;
+    camIdName_t cam;
 
     // load categories from the embedded database
     for (index = 0; index < m_availableCategories; index++)
@@ -874,16 +876,16 @@ std::vector< DBus_categoryIdName::DBus_categoryIdName_t > poiSearchServer::GetAv
     return (return_value);
 }
 
-uint16_t poiSearchServer::GetRootCategory()
+categoryId_t poiSearchServer::GetRootCategory()
 {
     return(m_rootCategory);
 }
 
-std::vector< DBus_categoryId::DBus_categoryId_t > poiSearchServer::GetChildrenCategories(const uint16_t& category)
+std::vector< DBus_categoryIdLevel::DBus_categoryIdLevel_t > poiSearchServer::GetChildrenCategories(const categoryId_t& category)
 {
-    std::vector< DBus_categoryId::DBus_categoryId_t > return_value;
-    DBus_categoryId::categoryId_t child_category;
-    DBus_categoryId child_cat;
+    std::vector< DBus_categoryIdLevel::DBus_categoryIdLevel_t > return_value;
+    DBus_categoryIdLevel::categoryIdLevel_t child_category;
+    DBus_categoryIdLevel child_cat;
     uint16_t index;
     return_value.clear();
     for (index=0;index<m_availableCategoryTable[category].childList.size();index++)
@@ -896,11 +898,11 @@ std::vector< DBus_categoryId::DBus_categoryId_t > poiSearchServer::GetChildrenCa
     return(return_value);
 }
 
-std::vector< DBus_categoryId::DBus_categoryId_t > poiSearchServer::GetParentCategories(const uint16_t& category)
+std::vector< DBus_categoryIdLevel::DBus_categoryIdLevel_t > poiSearchServer::GetParentCategories(const categoryId_t& category)
 {
-    std::vector< DBus_categoryId::DBus_categoryId_t > return_value;
-    DBus_categoryId::categoryId_t parent_category;
-    DBus_categoryId parent_cat;
+    std::vector< DBus_categoryIdLevel::DBus_categoryIdLevel_t > return_value;
+    DBus_categoryIdLevel::categoryIdLevel_t parent_category;
+    DBus_categoryIdLevel parent_cat;
     uint16_t index;
     return_value.clear();
     for (index=0;index<m_availableCategoryTable[category].parentList.size();index++)
@@ -913,7 +915,7 @@ std::vector< DBus_categoryId::DBus_categoryId_t > poiSearchServer::GetParentCate
     return(return_value);
 }
 
-std::vector< DBus_category::DBus_category_t > poiSearchServer::GetCategoriesDetails(const std::vector< uint16_t >& categories)
+std::vector< DBus_category::DBus_category_t > poiSearchServer::GetCategoriesDetails(const std::vector< categoryId_t >& categories)
 {
     std::vector<DBus_category::DBus_category_t > return_value;
     std::vector<DBus_category> categoryCAMList;
@@ -926,8 +928,8 @@ std::vector< DBus_category::DBus_category_t > poiSearchServer::GetCategoriesDeta
     std::vector<DBus_categorySortOption::categorySortOption_t> categorySortOptionList;;
     DBus_categorySortOption::categorySortOption_t categorySortOption;;
     size_t index,sub_index;
-    uint16_t category_index;
-    cam_t cam;
+    categoryId_t category_index;
+    camIdName_t cam;
 
     // load categories details from the embedded database
     index=0;
@@ -952,11 +954,12 @@ std::vector< DBus_category::DBus_category_t > poiSearchServer::GetCategoriesDeta
             //scan the attributes
             for (sub_index=0;sub_index<m_availableCategoryTable[category_index].attributeList.size();sub_index++)
             {
+                categoryAttribute.id = (m_availableCategoryTable[category_index].attributeList.at(sub_index)).id;
                 categoryAttribute.name = (m_availableCategoryTable[category_index].attributeList.at(sub_index)).name;
                 categoryAttribute.type = 0;
                 categoryAttribute.oper.clear();
-                categoryOperator.id = GENIVI_POISERVICE_EQUAL;
-                categoryOperator.name = "EQUAL";
+                categoryOperator.type = GENIVI_POISERVICE_EQUAL;
+                categoryOperator.name = "";
                 categoryAttribute.oper.push_back(categoryOperator);
                 categoryAttributeList.push_back(categoryAttribute);
             }
@@ -989,7 +992,7 @@ std::vector< DBus_category::DBus_category_t > poiSearchServer::GetCategoriesDeta
     return (return_value);
 }
 
-uint32_t poiSearchServer::CreatePoiSearchHandle()
+handleId_t poiSearchServer::CreatePoiSearchHandle()
 {
     // the POC is limited to the management of one handle !
     if (m_poiSearchHandle != INVALID_HANDLE)
@@ -1005,9 +1008,9 @@ uint32_t poiSearchServer::CreatePoiSearchHandle()
     return (m_poiSearchHandle);
 }
 
-void poiSearchServer::DeletePoiSearchHandle(const uint32_t& poiSearchHandle)
+void poiSearchServer::DeletePoiSearchHandle(const handleId_t& poiSearchHandle)
 {
-    cam_t cam;
+    camIdName_t cam;
     bool reply;
     if ((m_poiSearchHandle == INVALID_HANDLE) || (poiSearchHandle != m_poiSearchHandle))
         // to do send an error message
@@ -1025,7 +1028,7 @@ void poiSearchServer::DeletePoiSearchHandle(const uint32_t& poiSearchHandle)
     }
 }
 
-void poiSearchServer::SetRouteHandle(const uint32_t& poiSearchHandle, const uint8_t& sessionHandle, const uint8_t& routeHandle, const uint32_t& startSearchOffset, const uint32_t& endSearchOffset)
+void poiSearchServer::SetRouteHandle(const handleId_t& poiSearchHandle, const uint8_t& sessionHandle, const uint8_t& routeHandle, const uint32_t& startSearchOffset, const uint32_t& endSearchOffset)
 {
     uint32_t index;
     int16_t detailLevel;
@@ -1086,11 +1089,11 @@ void poiSearchServer::SetRouteHandle(const uint32_t& poiSearchHandle, const uint
     }
 }
 
-void poiSearchServer::SetCategories(const uint32_t& poiSearchHandle, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories)
+void poiSearchServer::SetCategories(const handleId_t& poiSearchHandle, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories)
 {
     uint16_t index;
-    uint16_t category_index;
-    cam_t cam;
+    categoryId_t category_index;
+    camIdName_t cam;
     DBus_categoryRadius catRad;
     DBus_categoryRadius::categoryRadius_t categoryRadius;
 
@@ -1132,13 +1135,13 @@ void poiSearchServer::SetCategories(const uint32_t& poiSearchHandle, const std::
     }
 }
 
-void poiSearchServer::SetAttributes(const uint32_t& poiSearchHandle, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes)
+void poiSearchServer::SetAttributes(const handleId_t& poiSearchHandle, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes)
 {
     DBus_attributeDetails attribDet;
     DBus_attributeDetails::attributeDetails_t attributeDetails;
     size_t index,sub_index;
-    uint16_t category_index;
-    cam_t cam;
+    categoryId_t category_index;
+    camIdName_t cam;
 
     if ((m_poiSearchHandle == INVALID_HANDLE) || (poiSearchHandle != m_poiSearchHandle))
         // to do send an error message
@@ -1163,11 +1166,11 @@ void poiSearchServer::SetAttributes(const uint32_t& poiSearchHandle, const std::
         {
             attribDet.setDBus(poiAttributes[index]);
             attributeDetails = attribDet.get(); //get the attribute in readable format
-            if ( isCategoryAvailable(attributeDetails.poiCategory,&category_index) == true)
+            if ( isCategoryAvailable(attributeDetails.categoryId,&category_index) == true)
             { //category found into the embedded database!
                 for (sub_index=0;sub_index<(m_availableCategoryTable[category_index].attributeList.size());sub_index++)
                 { //check attribute by name
-                    if ((m_availableCategoryTable[category_index].attributeList.at(sub_index)).name == attributeDetails.attribute.name)
+                    if ((m_availableCategoryTable[category_index].attributeList.at(sub_index)).id == attributeDetails.attribute.id)
                         (m_availableCategoryTable[category_index].attributeList.at(sub_index)).isSearched =true;
                 }
             }
@@ -1175,14 +1178,14 @@ void poiSearchServer::SetAttributes(const uint32_t& poiSearchHandle, const std::
             { //set the flags of attributes to be searched into the additional database
                 if ((mp_poiContentAccess->GetRegisteredContentAccessModule(&cam)) == true)
                 {
-                    mp_poiContentAccess->SetRegisteredAttributeCategoryFlag(cam.id,attributeDetails.poiCategory,attributeDetails.attribute.name,attributeDetails.id);
+                    mp_poiContentAccess->SetRegisteredAttributeCategoryFlag(cam.id,attributeDetails.categoryId,attributeDetails.attribute.id);
                 }
             }
         }
     }
 }
 
-void poiSearchServer::StartPoiSearch(const uint32_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption)
+void poiSearchServer::StartPoiSearch(const handleId_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption)
 {
 
     if ((m_poiSearchHandle == INVALID_HANDLE) || (poiSearchHandle != m_poiSearchHandle))
@@ -1194,7 +1197,7 @@ void poiSearchServer::StartPoiSearch(const uint32_t& poiSearchHandle, const std:
         if (m_poiSearchProximity == false)
         { //no proximity search started on this session !
             m_searchStatus = GENIVI_POISERVICE_SEARCHING;
-            PoiStatus(poiSearchHandle,(uint16_t)m_searchStatus);
+            PoiStatus(poiSearchHandle,m_searchStatus);
             //sortOption is not used yet
             //for the moment, no thread used, because just one handle managed
             // search on the embedded database first
@@ -1202,13 +1205,13 @@ void poiSearchServer::StartPoiSearch(const uint32_t& poiSearchHandle, const std:
             //and now search on the additional database if the cam has been registered before the creation of the poi search handle
             m_totalSize += mp_poiContentAccess->searchAroundALocation(m_centerLocation,&inputString,sortOption);
             m_searchStatus = GENIVI_POISERVICE_FINISHED;
-            PoiStatus(poiSearchHandle,(uint16_t)m_searchStatus);
+            PoiStatus(poiSearchHandle,m_searchStatus);
             ResultListChanged(poiSearchHandle,m_totalSize);
         }
     }
 }
 
-void poiSearchServer::CancelPoiSearch(const uint32_t& poiSearchHandle)
+void poiSearchServer::CancelPoiSearch(const handleId_t& poiSearchHandle)
 {
     if ((m_poiSearchHandle == INVALID_HANDLE) || (poiSearchHandle != m_poiSearchHandle))
         // to do send an error message
@@ -1218,12 +1221,12 @@ void poiSearchServer::CancelPoiSearch(const uint32_t& poiSearchHandle)
         if (m_poiSearchProximity == false)
         { //no proximity search started on this session !
             m_searchStatus = GENIVI_POISERVICE_NOT_STARTED;
-            PoiStatus(poiSearchHandle,(uint16_t)m_searchStatus);
+            PoiStatus(poiSearchHandle,m_searchStatus);
         }
     }
 }
 
-void poiSearchServer::SetCenter(const uint32_t& poiSearchHandle, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location)
+void poiSearchServer::SetCenter(const handleId_t& poiSearchHandle, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location)
 {
     DBus_geoCoordinate3D geoCoord;
 
@@ -1237,7 +1240,7 @@ void poiSearchServer::SetCenter(const uint32_t& poiSearchHandle, const DBus_geoC
     }
 }
 
-void poiSearchServer::StartPoiProximityAlert(const uint32_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption)
+void poiSearchServer::StartPoiProximityAlert(const handleId_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption)
 {
     if ((m_poiSearchHandle == INVALID_HANDLE) || (poiSearchHandle != m_poiSearchHandle))
         // to do send an error message
@@ -1248,12 +1251,12 @@ void poiSearchServer::StartPoiProximityAlert(const uint32_t& poiSearchHandle, co
         {
             m_poiSearchProximity = true; //start proximity search !
             m_searchStatus = GENIVI_POISERVICE_SEARCHING;
-            PoiStatus(poiSearchHandle,(uint16_t)m_searchStatus);
+            PoiStatus(poiSearchHandle,m_searchStatus);
         }
     }
 }
 
-void poiSearchServer::CancelPoiProximityAlert(const uint32_t& poiSearchHandle)
+void poiSearchServer::CancelPoiProximityAlert(const handleId_t& poiSearchHandle)
 {
     if ((m_poiSearchHandle == INVALID_HANDLE) || (poiSearchHandle != m_poiSearchHandle))
         // to do send an error message
@@ -1264,18 +1267,18 @@ void poiSearchServer::CancelPoiProximityAlert(const uint32_t& poiSearchHandle)
         {
             m_poiSearchProximity = false; //stop proximity search !
             m_searchStatus = GENIVI_POISERVICE_NOT_STARTED;
-            PoiStatus(poiSearchHandle,(uint16_t)m_searchStatus);
+            PoiStatus(poiSearchHandle,m_searchStatus);
         }
     }
 }
 
-void poiSearchServer::RequestResultList(const uint32_t& poiSearchHandle, const uint16_t& offset, const uint16_t& maxWindowSize, const std::vector< std::string >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_searchResult::DBus_searchResult_t >& resultListWindow)
+void poiSearchServer::RequestResultList(const handleId_t& poiSearchHandle, const uint16_t& offset, const uint16_t& maxWindowSize, const std::vector< attributeId_t >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_searchResult::DBus_searchResult_t >& resultListWindow)
 {
     DBus_searchResult::searchResult_t element; //id distance status attributes[]
     DBus_searchResult el;
     DBus_poiCAMDetails::poiCAMDetails_t camElement; //id name category location distance attributes[]
     DBus_poiCAMDetails camEl;
-    DBus_poiAttribute::poiAttribute_t attribute; //name type value
+    DBus_attribute::attribute_t attribute; //name type value
     uint16_t index,size,sub_index;
     size_t attribute_index;
     poi_t poi;
@@ -1313,7 +1316,7 @@ void poiSearchServer::RequestResultList(const uint32_t& poiSearchHandle, const u
                     element.attributes.clear(); //clean list of attributes
                     for (sub_index=0;sub_index<camElement.attributes.size();sub_index++)
                     { //need to be improved here, no management of different types of value, by default set to string
-                        attribute.name = (camElement.attributes.at(sub_index)).name; //name
+                        attribute.id = (camElement.attributes.at(sub_index)).id; //name
                         attribute.type= (camElement.attributes.at(sub_index)).type;
                         attribute.value = (camElement.attributes.at(sub_index)).value;
                         element.attributes.push_back(attribute);
@@ -1335,8 +1338,8 @@ void poiSearchServer::RequestResultList(const uint32_t& poiSearchHandle, const u
                     { //scan the attributes for the category
                         if ((m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_SOURCE)
                         {
-                            attribute.name = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).name;
-                            if (isAttributeRequired(attribute.name,attributes)==true)
+                            attribute.id = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id;
+                            if (isAttributeRequired(attribute.id,attributes)==true)
                             {
                                 attribute.type = GENIVI_POISERVICE_STRING;
                                 attribute.value = poi.source;
@@ -1347,8 +1350,8 @@ void poiSearchServer::RequestResultList(const uint32_t& poiSearchHandle, const u
                         {
                             if ((m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_WEBSITE)
                             {
-                                attribute.name = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).name;
-                                if (isAttributeRequired(attribute.name,attributes)==true)
+                                attribute.id = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id;
+                                if (isAttributeRequired(attribute.id,attributes)==true)
                                 {
                                     attribute.type = GENIVI_POISERVICE_STRING;
                                     attribute.value = poi.website;
@@ -1359,8 +1362,8 @@ void poiSearchServer::RequestResultList(const uint32_t& poiSearchHandle, const u
                             {
                                 if ((m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_PHONE)
                                 {
-                                    attribute.name = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).name;
-                                    if (isAttributeRequired(attribute.name,attributes)==true)
+                                    attribute.id = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id;
+                                    if (isAttributeRequired(attribute.id,attributes)==true)
                                     {
                                         attribute.type = GENIVI_POISERVICE_STRING;
                                         attribute.value = poi.phone;
@@ -1371,8 +1374,8 @@ void poiSearchServer::RequestResultList(const uint32_t& poiSearchHandle, const u
                                 {
                                     if ((m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_STARS)
                                     {
-                                        attribute.name = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).name;
-                                        if (isAttributeRequired(attribute.name,attributes)==true)
+                                        attribute.id = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id;
+                                        if (isAttributeRequired(attribute.id,attributes)==true)
                                         {
                                             attribute.type = GENIVI_POISERVICE_INTEGER;
                                             strStream.str("");
@@ -1385,8 +1388,8 @@ void poiSearchServer::RequestResultList(const uint32_t& poiSearchHandle, const u
                                     {
                                         if ((m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_OPENINGHOURS)
                                         {
-                                            attribute.name = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).name;
-                                            if (isAttributeRequired(attribute.name,attributes)==true)
+                                            attribute.id = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id;
+                                            if (isAttributeRequired(attribute.id,attributes)==true)
                                             {
                                                 attribute.type = GENIVI_POISERVICE_STRING;
                                                 attribute.value = poi.openinghours;
@@ -1397,8 +1400,8 @@ void poiSearchServer::RequestResultList(const uint32_t& poiSearchHandle, const u
                                         {
                                             if ((m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_ADDRHOUSENUMBER)
                                             {
-                                                attribute.name = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).name;
-                                                if (isAttributeRequired(attribute.name,attributes)==true)
+                                                attribute.id = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id;
+                                                if (isAttributeRequired(attribute.id,attributes)==true)
                                                 {
                                                     attribute.type = GENIVI_POISERVICE_STRING;
                                                     attribute.value = poi.addr_house_number;
@@ -1409,8 +1412,8 @@ void poiSearchServer::RequestResultList(const uint32_t& poiSearchHandle, const u
                                             {
                                                 if ((m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_ADDRSTREET)
                                                 {
-                                                    attribute.name = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).name;
-                                                    if (isAttributeRequired(attribute.name,attributes)==true)
+                                                    attribute.id = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id;
+                                                    if (isAttributeRequired(attribute.id,attributes)==true)
                                                     {
                                                         attribute.type = GENIVI_POISERVICE_STRING;
                                                         attribute.value = poi.addr_street;
@@ -1421,21 +1424,22 @@ void poiSearchServer::RequestResultList(const uint32_t& poiSearchHandle, const u
                                                 {
                                                     if ((m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_ADDRPOSTCODE)
                                                     {
-                                                        attribute.name = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).name;
-                                                        if (isAttributeRequired(attribute.name,attributes)==true)
+                                                        attribute.id = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id;
+                                                        if (isAttributeRequired(attribute.id,attributes)==true)
                                                         {
                                                             attribute.type = GENIVI_POISERVICE_INTEGER;
                                                             strStream.str("");
                                                             strStream << poi.addr_postcode;
-                                                            attribute.value = strStream.str();                                                            element.attributes.push_back(attribute);
+                                                            attribute.value = strStream.str();
+                                                            element.attributes.push_back(attribute);
                                                         }
                                                     }
                                                     else
                                                     {
                                                         if ((m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_ADDRCITY)
                                                         {
-                                                            attribute.name = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).name;
-                                                            if (isAttributeRequired(attribute.name,attributes)==true)
+                                                            attribute.id = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id;
+                                                            if (isAttributeRequired(attribute.id,attributes)==true)
                                                             {
                                                                 attribute.type = GENIVI_POISERVICE_STRING;
                                                                 attribute.value = poi.addr_city;
@@ -1446,8 +1450,8 @@ void poiSearchServer::RequestResultList(const uint32_t& poiSearchHandle, const u
                                                         {
                                                             if ((m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_BRAND)
                                                             {
-                                                                attribute.name = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).name;
-                                                                if (isAttributeRequired(attribute.name,attributes)==true)
+                                                                attribute.id = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id;
+                                                                if (isAttributeRequired(attribute.id,attributes)==true)
                                                                 {
                                                                     attribute.type = GENIVI_POISERVICE_STRING;
                                                                     attribute.value = poi.brand;
@@ -1458,8 +1462,8 @@ void poiSearchServer::RequestResultList(const uint32_t& poiSearchHandle, const u
                                                             {
                                                                 if ((m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_OPERATEUR)
                                                                 {
-                                                                    attribute.name = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).name;
-                                                                    if (isAttributeRequired(attribute.name,attributes)==true)
+                                                                    attribute.id = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id;
+                                                                    if (isAttributeRequired(attribute.id,attributes)==true)
                                                                     {
                                                                         attribute.type = GENIVI_POISERVICE_STRING;
                                                                         attribute.value = poi.operateur;
@@ -1488,12 +1492,12 @@ void poiSearchServer::RequestResultList(const uint32_t& poiSearchHandle, const u
     }
 }
 
-std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > poiSearchServer::GetPoiDetails(const std::vector< uint32_t >& id)
+std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > poiSearchServer::GetPoiDetails(const std::vector< poiId_t >& id)
 {
     std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > return_value;
     DBus_searchResultDetails searchResDet;
     DBus_searchResultDetails::searchResultDetails_t searchResDetails;
-    DBus_poiAttribute::poiAttribute_t attribute;
+    DBus_attribute::attribute_t attribute;
     uint16_t indexPOIList,indexIDList;
     size_t attribute_index;
     poi_t poi;
@@ -1517,9 +1521,9 @@ std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > poiSearchSer
                 isPOIFound = true;
                 searchResDetails.details.id = poi.segment;
                 searchResDetails.details.name = poi.name;
-                searchResDetails.details.latitude = poi.coordinate.latitude;
-                searchResDetails.details.longitude = poi.coordinate.longitude;
-                searchResDetails.details.altitude = poi.coordinate.altitude;
+                searchResDetails.details.location.latitude = poi.coordinate.latitude;
+                searchResDetails.details.location.longitude = poi.coordinate.longitude;
+                searchResDetails.details.location.altitude = poi.coordinate.altitude;
                 searchResDetails.categories.clear();
                 searchResDetails.categories.push_back(m_availableCategoryTable[poi.categoryIndex].id); //POI only owns to one category for the moment !
                 searchResDetails.attributes.clear();
@@ -1529,7 +1533,7 @@ std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > poiSearchSer
                 { //scan the attributes for the category
                     if ((m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_SOURCE)
                     {
-                        attribute.name = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).name;
+                        attribute.id = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id;
                         attribute.type = GENIVI_POISERVICE_STRING;
                         attribute.value = poi.source;
                         searchResDetails.attributes.push_back(attribute);
@@ -1538,7 +1542,7 @@ std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > poiSearchSer
                     {
                         if ((m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_WEBSITE)
                         {
-                            attribute.name = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).name;
+                            attribute.id = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id;
                             attribute.type = GENIVI_POISERVICE_STRING;
                             attribute.value = poi.website;
                             searchResDetails.attributes.push_back(attribute);
@@ -1547,7 +1551,7 @@ std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > poiSearchSer
                         {
                             if ((m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_PHONE)
                             {
-                                attribute.name = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).name;
+                                attribute.id = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id;
                                 attribute.type = GENIVI_POISERVICE_STRING;
                                 attribute.value = poi.phone;
                                 searchResDetails.attributes.push_back(attribute);
@@ -1556,7 +1560,7 @@ std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > poiSearchSer
                             {
                                 if ((m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_STARS)
                                 {
-                                    attribute.name = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).name;
+                                    attribute.id = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id;
                                     attribute.type = GENIVI_POISERVICE_INTEGER;
                                     strStream.str("");
                                     strStream << poi.stars;
@@ -1567,7 +1571,7 @@ std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > poiSearchSer
                                 {
                                     if ((m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id == ATTRIBUTE_OPENINGHOURS)
                                     {
-                                        attribute.name = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).name;
+                                        attribute.id = (m_availableCategoryTable[poi.categoryIndex].attributeList.at(attribute_index)).id;
                                         attribute.type = GENIVI_POISERVICE_STRING;
                                         attribute.value = poi.openinghours;
                                         searchResDetails.attributes.push_back(attribute);
@@ -1775,10 +1779,10 @@ uint16_t poiSearchServer::searchPOIRequest(uint16_t categoryIndex, std::string s
     return(sqlQueryResult.size());
 }
 
-bool poiSearchServer::isCategoryAvailable(uint16_t id, uint16_t *category_id)
+bool poiSearchServer::isCategoryAvailable(categoryId_t id, categoryId_t *category_id)
 {
     bool isFound = false;
-    uint16_t index = 0;
+    categoryId_t index = 0;
     do
     {
         if (m_availableCategoryTable[index].id == id)
@@ -1810,7 +1814,7 @@ bool poiSearchServer::isAllCategoriesSelected(uint16_t* index)
     return(isSelected);
 }
 
-bool poiSearchServer::isAttributeRequired(std::string attribute,std::vector<std::string> attributes)
+bool poiSearchServer::isAttributeRequired(attributeId_t attribute,std::vector<attributeId_t> attributes)
 {
     bool isRequired = false;
     size_t index;

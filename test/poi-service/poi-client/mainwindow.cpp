@@ -293,7 +293,7 @@ void MainWindow::InitUi()
                                                                                                 QDBusConnection::sessionBus(), this );
 
     //connect to signals
-    QObject::connect(m_dbusPoiSearchInterface, SIGNAL(PoiStatus(uint,ushort)), this, SLOT(on_DBusSignalPoiStatus(uint,ushort)));
+    QObject::connect(m_dbusPoiSearchInterface, SIGNAL(PoiStatus(uint,int)), this, SLOT(on_DBusSignalPoiStatus(uint,int)));
     QObject::connect(m_dbusPoiSearchInterface, SIGNAL(ResultListChanged(uint,ushort)), this, SLOT(on_DBusSignalResultListChanged(uint,ushort)));
     QObject::connect(m_dbusPoiSearchInterface, SIGNAL(CategoriesUpdated(QList<poiCategoryAndReason_t>)), this, SLOT(on_DBusSignalCategoriesUpdated(QList<poiCategoryAndReason_t>)));
 
@@ -380,8 +380,7 @@ void MainWindow::select_category()
                 if (mp_attributeSourceCheckBox.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).name;
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -391,8 +390,7 @@ void MainWindow::select_category()
                 if (mp_attributeWebSiteCheckBox.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).name;
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -402,8 +400,7 @@ void MainWindow::select_category()
                 if (mp_attributePhoneCheckBox.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).name;
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -413,8 +410,7 @@ void MainWindow::select_category()
                 if (mp_attributeStarsCheckBox.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_INTEGER;
-                    poi_attribute.name = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).name;
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -424,8 +420,7 @@ void MainWindow::select_category()
                 if (mp_attributeOpeningHoursCheckBox.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).name; // dirty, to be enhanced !
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -435,8 +430,7 @@ void MainWindow::select_category()
                 if (mp_attributeAddrHouseNumberCheckBox.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).name; // dirty, to be enhanced !
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -446,8 +440,7 @@ void MainWindow::select_category()
                 if (mp_attributeAddrStreetCheckBox.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).name; // dirty, to be enhanced !
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -457,8 +450,7 @@ void MainWindow::select_category()
                 if (mp_attributeAddrPostCodeCheckBox.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_INTEGER;
-                    poi_attribute.name = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).name; // dirty, to be enhanced !
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -468,8 +460,7 @@ void MainWindow::select_category()
                 if (mp_attributeAddrCityCheckBox.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).name; // dirty, to be enhanced !
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -479,8 +470,7 @@ void MainWindow::select_category()
                 if (mp_attributeBrandCheckBox.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).name; // dirty, to be enhanced !
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -490,8 +480,7 @@ void MainWindow::select_category()
                 if (mp_attributeOperateurCheckBox.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).name; // dirty, to be enhanced !
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsList.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -515,8 +504,7 @@ void MainWindow::select_category()
                 if (mp_attributeSourceCheckBoxAdditional.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).name;
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -526,8 +514,7 @@ void MainWindow::select_category()
                 if (mp_attributeWebSiteCheckBoxAdditional.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).name;
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -537,8 +524,7 @@ void MainWindow::select_category()
                 if (mp_attributePhoneCheckBoxAdditional.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).name;
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -548,8 +534,7 @@ void MainWindow::select_category()
                 if (mp_attributeStarsCheckBoxAdditional.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_INTEGER;
-                    poi_attribute.name = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).name;
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -559,8 +544,7 @@ void MainWindow::select_category()
                 if (mp_attributeOpeningHoursCheckBoxAdditional.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).name; // dirty, to be enhanced !
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -570,8 +554,7 @@ void MainWindow::select_category()
                 if (mp_attributeAddrHouseNumberCheckBoxAdditional.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).name; // dirty, to be enhanced !
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -581,8 +564,7 @@ void MainWindow::select_category()
                 if (mp_attributeAddrStreetCheckBoxAdditional.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).name; // dirty, to be enhanced !
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -592,8 +574,7 @@ void MainWindow::select_category()
                 if (mp_attributeAddrPostCodeCheckBoxAdditional.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_INTEGER;
-                    poi_attribute.name = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).name; // dirty, to be enhanced !
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -603,8 +584,7 @@ void MainWindow::select_category()
                 if (mp_attributeAddrCityCheckBoxAdditional.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).name; // dirty, to be enhanced !
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -614,8 +594,7 @@ void MainWindow::select_category()
                 if (mp_attributeBrandCheckBoxAdditional.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).name; // dirty, to be enhanced !
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -625,8 +604,7 @@ void MainWindow::select_category()
                 if (mp_attributeOperateurCheckBoxAdditional.at(index)->isChecked())
                 {
                     poi_attribute.type = GENIVI_POISERVICE_STRING;
-                    poi_attribute.name = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).name; // dirty, to be enhanced !
-                    poi_attribute.id = attribute_index;
+                    poi_attribute.id = m_poiCategoryDetailsListAdditional.at(index).attributes.at(attribute_index).id;
                     poi_attribute_list.append(poi_attribute);
                 }
                 attribute_index++;
@@ -793,7 +771,7 @@ void MainWindow::initSettings()
     ushort index,sub_index;
     uint radius;
     version_t version;
-    QList<ushort> categories;
+    QList<categoryId_t> categories;
 
     // dbus must be connected !
 
@@ -836,6 +814,12 @@ void MainWindow::initSettings()
             QCheckBox *cat = new QCheckBox();
             cat->setText(QString::fromStdString(m_poiCategoryList.at(index).name));
             cat->setChecked(Qt::Unchecked);
+
+            // Check if it's the all categories id
+            if (m_poiCategoryList.at(index).id == settingsCategoryAllCategories)
+            {
+                connect(cat, SIGNAL(stateChanged(int)), this, SLOT(on_embeddedAllCategoryCheckBox_stateChanged(int)));
+            }
             mp_categoryCheckBox.append(cat);
             ui->CategoryLayout->addWidget(cat);
 
@@ -938,41 +922,63 @@ void MainWindow::initSettings()
                 mp_attributeBrandCheckBox.at(index)->setEnabled(false);
                 mp_attributeOperateurCheckBox.at(index)->setEnabled(false);
                 //get the available attributes for the category
-                // dirty code here (use of #define), need to be improved !!
-                for (sub_index=0;sub_index<m_poiCategoryDetailsList.at(index).attributes.size();sub_index++)
+                //and set the attribute names
+                 for (sub_index=0;sub_index<m_poiCategoryDetailsList.at(index).attributes.size();sub_index++)
                 {
-                    if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).name == settingsAttributeSource.toStdString())
+                    if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).id == settingsAttributeSource)
+                    {
                         mp_attributeSourceCheckBox.at(index)->setEnabled(true);
+                    }
                     else
-                        if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).name == settingsAttributeWebSite.toStdString())
+                        if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).id == settingsAttributeWebSite)
+                        {
                             mp_attributeWebSiteCheckBox.at(index)->setEnabled(true);
+                        }
                         else
-                            if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).name == settingsAttributePhone.toStdString())
+                            if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).id == settingsAttributePhone)
+                            {
                                 mp_attributePhoneCheckBox.at(index)->setEnabled(true);
+                            }
                             else
-                                if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).name == settingsAttributeStars.toStdString())
+                                if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).id == settingsAttributeStars)
+                                {
                                     mp_attributeStarsCheckBox.at(index)->setEnabled(true);
+                                }
                                 else
-                                    if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).name == settingsAttributeOpeningHours.toStdString())
+                                    if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).id == settingsAttributeOpeningHours)
+                                    {
                                         mp_attributeOpeningHoursCheckBox.at(index)->setEnabled(true);
+                                    }
                                     else
-                                        if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).name == settingsAttributeAddrHouseNumber.toStdString())
+                                        if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).id == settingsAttributeAddrHouseNumber)
+                                        {
                                             mp_attributeAddrHouseNumberCheckBox.at(index)->setEnabled(true);
+                                        }
                                         else
-                                            if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).name == settingsAttributeAddrStreet.toStdString())
+                                            if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).id == settingsAttributeAddrStreet)
+                                            {
                                                 mp_attributeAddrStreetCheckBox.at(index)->setEnabled(true);
+                                            }
                                             else
-                                                if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).name == settingsAttributeAddrPostCode.toStdString())
+                                                if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).id == settingsAttributeAddrPostCode)
+                                                {
                                                     mp_attributeAddrPostCodeCheckBox.at(index)->setEnabled(true);
+                                                }
                                                 else
-                                                    if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).name == settingsAttributeAddrCity.toStdString())
+                                                    if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).id == settingsAttributeAddrCity)
+                                                    {
                                                         mp_attributeAddrCityCheckBox.at(index)->setEnabled(true);
+                                                    }
                                                     else
-                                                        if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).name == settingsAttributeBrand.toStdString())
+                                                        if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).id == settingsAttributeBrand)
+                                                        {
                                                             mp_attributeBrandCheckBox.at(index)->setEnabled(true);
+                                                        }
                                                         else
-                                                            if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).name == settingsAttributeOperateur.toStdString())
+                                                            if (m_poiCategoryDetailsList.at(index).attributes.at(sub_index).id == settingsAttributeOperateur)
+                                                            {
                                                                 mp_attributeOperateurCheckBox.at(index)->setEnabled(true);
+                                                            }
                 }
             }
         }
@@ -990,7 +996,7 @@ void MainWindow::initSettings()
     }
 
     // GetRootCategory
-    QDBusPendingReply<ushort > reply_3 = m_dbusPoiSearchInterface->GetRootCategory();
+    QDBusPendingReply<categoryId_t > reply_3 = m_dbusPoiSearchInterface->GetRootCategory();
     reply_3.waitForFinished();
     if (reply_3.isError())
         manageDBusError(reply_3.reply()); // call failed
@@ -1026,35 +1032,34 @@ void MainWindow::refreshViewTable(ushort windowSize)
 {
     ushort index,sub_index,index_in_table;
     QString str;
-    QList<std::string> attributes;
+    QList<attributeId_t> attributes;
     QList<resultSearch_t> poiList;
     QList<resultSearchDetails_t> poiDetailsList;
     QList<uint> idList;
 
-    //populate attributes list with the requested attributes (dirty, to be improved)
-    // Must fit that list and order of attributes: "Source","WebSite","Phone","Stars","Open hours","HouseNumber","Street","Post code","City","Brand","Operateur"
-    if (mp_attributeGetCheckBox.at(ATTRIBUTE_SOURCE)->isChecked())
-        attributes << settingsAttributeSource.toStdString();
-     if (mp_attributeGetCheckBox.at(ATTRIBUTE_WEBSITE)->isChecked())
-        attributes << settingsAttributeWebSite.toStdString();
-     if (mp_attributeGetCheckBox.at(ATTRIBUTE_PHONE)->isChecked())
-        attributes << settingsAttributePhone.toStdString();
-     if (mp_attributeGetCheckBox.at(ATTRIBUTE_STARS)->isChecked())
-        attributes << settingsAttributeStars.toStdString();
-     if (mp_attributeGetCheckBox.at(ATTRIBUTE_OPENINGHOURS)->isChecked())
-        attributes << settingsAttributeOpeningHours.toStdString();
-     if (mp_attributeGetCheckBox.at(ATTRIBUTE_ADDRHOUSENUMBER)->isChecked())
-        attributes << settingsAttributeAddrHouseNumber.toStdString();
-     if (mp_attributeGetCheckBox.at(ATTRIBUTE_ADDRSTREET)->isChecked())
-        attributes << settingsAttributeAddrStreet.toStdString();
-     if (mp_attributeGetCheckBox.at(ATTRIBUTE_ADDRPOSTCODE)->isChecked())
-        attributes << settingsAttributeAddrPostCode.toStdString();
-     if (mp_attributeGetCheckBox.at(ATTRIBUTE_ADDRCITY)->isChecked())
-        attributes << settingsAttributeAddrCity.toStdString();
-     if (mp_attributeGetCheckBox.at(ATTRIBUTE_BRAND)->isChecked())
-        attributes << settingsAttributeBrand.toStdString();
-     if (mp_attributeGetCheckBox.at(ATTRIBUTE_OPERATEUR)->isChecked())
-        attributes << settingsAttributeOperateur.toStdString();
+    //populate attributes list with the requested attributes
+    if (mp_attributeGetCheckBox.at(settingsAttributeSource)->isChecked())
+        attributes << settingsAttributeSource;
+     if (mp_attributeGetCheckBox.at(settingsAttributeWebSite)->isChecked())
+        attributes << settingsAttributeWebSite;
+     if (mp_attributeGetCheckBox.at(settingsAttributePhone)->isChecked())
+        attributes << settingsAttributePhone;
+     if (mp_attributeGetCheckBox.at(settingsAttributeStars)->isChecked())
+        attributes << settingsAttributeStars;
+     if (mp_attributeGetCheckBox.at(settingsAttributeOpeningHours)->isChecked())
+        attributes << settingsAttributeOpeningHours;
+     if (mp_attributeGetCheckBox.at(settingsAttributeAddrHouseNumber)->isChecked())
+        attributes << settingsAttributeAddrHouseNumber;
+     if (mp_attributeGetCheckBox.at(settingsAttributeAddrStreet)->isChecked())
+        attributes << settingsAttributeAddrStreet;
+     if (mp_attributeGetCheckBox.at(settingsAttributeAddrPostCode)->isChecked())
+        attributes << settingsAttributeAddrPostCode;
+     if (mp_attributeGetCheckBox.at(settingsAttributeAddrCity)->isChecked())
+        attributes << settingsAttributeAddrCity;
+     if (mp_attributeGetCheckBox.at(settingsAttributeBrand)->isChecked())
+        attributes << settingsAttributeBrand;
+     if (mp_attributeGetCheckBox.at(settingsAttributeOperateur)->isChecked())
+        attributes << settingsAttributeOperateur;
 
     clearViewTable();
 
@@ -1079,42 +1084,10 @@ void MainWindow::refreshViewTable(ushort windowSize)
                     mp_tableViewPoi->item(index,columnDistance)->setText(QString::number(poiList.at(index).distance));
                     mp_tableViewPoi->item(index,columnId)->setText(QString::number(poiList.at(index).id));
                     idList.push_back(poiList.at(index).id);
-                    // Must fit that list and order of attributes: "Source","WebSite","Phone","Stars","Open hours","HouseNumber","Street","Post code","City","Brand","Operateur"
                     for (sub_index=0;sub_index<poiList.at(index).attributes.size();sub_index++)
                     {
                         str = poiList.at(index).attributes.at(sub_index).value.variant().toString();
-                        if (poiList.at(index).attributes.at(sub_index).name == settingsAttributeSource.toStdString())
-                            mp_tableViewPoi->item(index,columnSource)->setText(str);
-                        else
-                            if (poiList.at(index).attributes.at(sub_index).name == settingsAttributeWebSite.toStdString())
-                                mp_tableViewPoi->item(index,columnWebSite)->setText(str);
-                            else
-                                if (poiList.at(index).attributes.at(sub_index).name == settingsAttributePhone.toStdString())
-                                    mp_tableViewPoi->item(index,columnPhone)->setText(str);
-                                else
-                                    if (poiList.at(index).attributes.at(sub_index).name == settingsAttributeStars.toStdString())
-                                        mp_tableViewPoi->item(index,columnStars)->setText(str);
-                                    else
-                                        if (poiList.at(index).attributes.at(sub_index).name == settingsAttributeOpeningHours.toStdString())
-                                            mp_tableViewPoi->item(index,columnOpeningHours)->setText(str);
-                                        else
-                                            if (poiList.at(index).attributes.at(sub_index).name == settingsAttributeAddrHouseNumber.toStdString())
-                                                mp_tableViewPoi->item(index,columnAddrHouseNumber)->setText(str);
-                                            else
-                                                if (poiList.at(index).attributes.at(sub_index).name == settingsAttributeAddrStreet.toStdString())
-                                                    mp_tableViewPoi->item(index,columnAddrStreet)->setText(str);
-                                                else
-                                                    if (poiList.at(index).attributes.at(sub_index).name == settingsAttributeAddrPostCode.toStdString())
-                                                        mp_tableViewPoi->item(index,columnAddrPostcode)->setText(str);
-                                                    else
-                                                        if (poiList.at(index).attributes.at(sub_index).name == settingsAttributeAddrCity.toStdString())
-                                                            mp_tableViewPoi->item(index,columnAddrCity)->setText(str);
-                                                        else
-                                                            if (poiList.at(index).attributes.at(sub_index).name == settingsAttributeBrand.toStdString())
-                                                                mp_tableViewPoi->item(index,columnBrand)->setText(str);
-                                                            else
-                                                                if (poiList.at(index).attributes.at(sub_index).name == settingsAttributeOperateur.toStdString())
-                                                                    mp_tableViewPoi->item(index,columnOperateur)->setText(str);
+                        mp_tableViewPoi->item(index,columnBeginAttributes+poiList.at(index).attributes.at(sub_index).id)->setText(str);
                     }
                  }
             }
@@ -1151,8 +1124,8 @@ void MainWindow::refreshViewTable(ushort windowSize)
                         m_tableIconPOI.append(pixmap);
                     }
                 }
-                mp_tableViewPoi->item(index,columnLatitude)->setText(QString::number(poiDetailsList.at(index).details.latitude));
-                mp_tableViewPoi->item(index,columnLongitude)->setText(QString::number(poiDetailsList.at(index).details.longitude));
+                mp_tableViewPoi->item(index,columnLatitude)->setText(QString::number(poiDetailsList.at(index).details.location.latitude));
+                mp_tableViewPoi->item(index,columnLongitude)->setText(QString::number(poiDetailsList.at(index).details.location.longitude));
             }
         }
     }
@@ -1283,16 +1256,60 @@ void MainWindow::on_cancelProximity_clicked()
 }
 
 
+void MainWindow::on_embeddedAllCategoryCheckBox_stateChanged(int state)
+{
+    if (state)
+    {
+        mp_attributeSourceCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        mp_attributeWebSiteCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        mp_attributePhoneCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        mp_attributeStarsCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        mp_attributeOpeningHoursCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        mp_attributeAddrHouseNumberCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        mp_attributeAddrStreetCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        mp_attributeAddrPostCodeCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        mp_attributeAddrCityCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        mp_attributeBrandCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        mp_attributeOperateurCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+    }
+    else
+    {
+        mp_attributeSourceCheckBox.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeWebSiteCheckBox.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributePhoneCheckBox.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeStarsCheckBox.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeOpeningHoursCheckBox.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeAddrHouseNumberCheckBox.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeAddrStreetCheckBox.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeAddrPostCodeCheckBox.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeAddrCityCheckBox.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeBrandCheckBox.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeOperateurCheckBox.at(settingsCategoryAllCategories)->setChecked(false);
+    }
+}
+
+void MainWindow::on_addedAllCategoryCheckBox_stateChanged(int state)
+{
+    if (state)
+    {
+
+    }
+    else
+    {
+
+    }
+}
+
 //Management of DBus signals
 /**
- * \fn on_DBusSignalPoiStatus(uint poiSearchHandle,ushort statusValue)
+ * \fn on_DBusSignalPoiStatus(handleId_t poiSearchHandle,int statusValue)
  * \brief Signal received when the POI status changed.
  *
  * \param uint poiSearchHandle
- * \param ushort statusValue
+ * \param int statusValue
  * \return
  */
-void MainWindow::on_DBusSignalPoiStatus(uint poiSearchHandle,ushort statusValue)
+void MainWindow::on_DBusSignalPoiStatus(uint poiSearchHandle, int statusValue)
 {
     if (poiSearchHandle == m_poiSearchHandle)
     {
@@ -1301,14 +1318,14 @@ void MainWindow::on_DBusSignalPoiStatus(uint poiSearchHandle,ushort statusValue)
 }
 
 /**
- * \fn on_DBusSignalResultListChanged(uint poiSearchHandle,ushort totalSize)
+ * \fn on_DBusSignalResultListChanged(handleId_t poiSearchHandle,ushort resultListSize)
  * \brief Signal received when the result list changed.
  *
  * \param uint poiSearchHandle
  * \param ushort totalSize
  * \return
  */
-void MainWindow::on_DBusSignalResultListChanged(uint poiSearchHandle,ushort resultListSize)
+void MainWindow::on_DBusSignalResultListChanged(uint poiSearchHandle, ushort resultListSize)
 {
     QString str;
     if (poiSearchHandle == m_poiSearchHandle)
@@ -1329,10 +1346,10 @@ void MainWindow::on_DBusSignalResultListChanged(uint poiSearchHandle,ushort resu
 }
 
 /**
- * \fn on_DBusSignalCategoriesRegistered(QList<ushort> poiCategories)
+ * \fn on_DBusSignalCategoriesRegistered(QList<poiCategoryAndReason_t> poiCategoriesAndReason)
  * \brief Signal received when new categories have been registered, invokes the DBus method GetAvailableCategories and GetCategoriesDetails.
  *
- * \param QList<ushort> poiCategories
+ * \param QList<poiCategoryAndReason_t> poiCategories
  * \param
  * \return
  */
@@ -1341,7 +1358,7 @@ void MainWindow::on_DBusSignalCategoriesUpdated(QList<poiCategoryAndReason_t> po
     ushort index,sub_index;
     uint radius;
     QList<poiCategoryFull_t> poiList;
-    QList<ushort> categories;
+    QList<categoryId_t> categories;
     QCheckBox *item;
     QLineEdit *line;
     QGraphicsEllipseItem *ellipse;
@@ -1464,6 +1481,13 @@ void MainWindow::on_DBusSignalCategoriesUpdated(QList<poiCategoryAndReason_t> po
                 QCheckBox *cat = new QCheckBox();
                 cat->setText(QString::fromStdString((poiList.at(index)).name));
                 cat->setChecked(Qt::Unchecked);
+
+                // Check if it's the all categories id
+                if (poiList.at(index).id == settingsCategoryAllCategories + settingsCAMOffset)
+                {
+                    connect(cat, SIGNAL(stateChanged(int)), this, SLOT(on_addedAllCategoryCheckBox_stateChanged(int)));
+                }
+
                 mp_categoryCheckBoxAdditional.append(cat);
                 ui->CategoryLayoutAdditional->addWidget(cat);
 
@@ -1565,41 +1589,40 @@ void MainWindow::on_DBusSignalCategoriesUpdated(QList<poiCategoryAndReason_t> po
             else
             {
                 //get the available attributes for the category
-                // dirty code here (use of #define), need to be improved !!
                 // Must fit that list and order of attributes: "Source","WebSite","Phone","Stars","Open hours","HouseNumber","Street","Post code","City","Brand","Operateur"
                 for (sub_index=0;sub_index<m_poiCategoryDetailsListAdditional.at(index).attributes.size();sub_index++)
                 {
-                    if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).name == settingsAttributeSource.toStdString())
+                    if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).id == settingsAttributeSource)
                         mp_attributeSourceCheckBoxAdditional.at(index)->setEnabled(true);
                     else
-                        if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).name == settingsAttributeWebSite.toStdString())
+                        if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).id == settingsAttributeWebSite)
                             mp_attributeWebSiteCheckBoxAdditional.at(index)->setEnabled(true);
                         else
-                            if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).name == settingsAttributePhone.toStdString())
+                            if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).id == settingsAttributePhone)
                                 mp_attributePhoneCheckBoxAdditional.at(index)->setEnabled(true);
                             else
-                                if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).name == settingsAttributeStars.toStdString())
+                                if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).id == settingsAttributeStars)
                                     mp_attributeStarsCheckBoxAdditional.at(index)->setEnabled(true);
                                 else
-                                    if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).name == settingsAttributeOpeningHours.toStdString())
+                                    if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).id == settingsAttributeOpeningHours)
                                         mp_attributeOpeningHoursCheckBoxAdditional.at(index)->setEnabled(true);
                                     else
-                                        if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).name == settingsAttributeAddrHouseNumber.toStdString())
+                                        if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).id == settingsAttributeAddrHouseNumber)
                                             mp_attributeAddrHouseNumberCheckBoxAdditional.at(index)->setEnabled(true);
                                         else
-                                            if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).name == settingsAttributeAddrStreet.toStdString())
+                                            if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).id == settingsAttributeAddrStreet)
                                                 mp_attributeAddrStreetCheckBoxAdditional.at(index)->setEnabled(true);
                                             else
-                                                if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).name == settingsAttributeAddrPostCode.toStdString())
+                                                if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).id == settingsAttributeAddrPostCode)
                                                     mp_attributeAddrPostCodeCheckBoxAdditional.at(index)->setEnabled(true);
                                                 else
-                                                    if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).name == settingsAttributeAddrCity.toStdString())
+                                                    if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).id == settingsAttributeAddrCity)
                                                         mp_attributeAddrCityCheckBoxAdditional.at(index)->setEnabled(true);
                                                     else
-                                                        if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).name == settingsAttributeBrand.toStdString())
+                                                        if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).id == settingsAttributeBrand)
                                                             mp_attributeBrandCheckBoxAdditional.at(index)->setEnabled(true);
                                                         else
-                                                            if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).name == settingsAttributeOperateur.toStdString())
+                                                            if (m_poiCategoryDetailsListAdditional.at(index).attributes.at(sub_index).id == settingsAttributeOperateur)
                                                                 mp_attributeOperateurCheckBoxAdditional.at(index)->setEnabled(true);
                 }
             }
@@ -1781,11 +1804,11 @@ void MainWindow::manageDBusError(QDBusMessage reply)
  * \fn manageStatus(ushort statusValue)
  * \brief manage the string displayed according to the status.
  *
- * \param ushort statusValue
+ * \param int statusValue
  * \param
  * \return
  */
-void MainWindow::manageStatus(ushort statusValue)
+void MainWindow::manageStatus(int statusValue)
 {
     QString str;
 
@@ -1822,7 +1845,7 @@ void MainWindow::manageStatus(ushort statusValue)
  * \param
  * \return true if index found
  */
-bool MainWindow::giveCategoryIndex(ushort id,ushort* index_in_table)
+bool MainWindow::giveCategoryIndex(categoryId_t id,ushort* index_in_table)
 {
     bool isFound;
 
@@ -1849,7 +1872,7 @@ bool MainWindow::giveCategoryIndex(ushort id,ushort* index_in_table)
  * \param
  * \return true if index found
  */
-bool MainWindow::giveCategoryIndexAdditional(ushort id,ushort* index_in_table)
+bool MainWindow::giveCategoryIndexAdditional(categoryId_t id,ushort* index_in_table)
 {
     bool isFound;
 
@@ -1867,7 +1890,7 @@ bool MainWindow::giveCategoryIndexAdditional(ushort id,ushort* index_in_table)
     return(isFound);
 }
 
-bool MainWindow::isNewCategory(ushort id,QList<poiCategoryAndReason_t> poiList)
+bool MainWindow::isNewCategory(categoryId_t id,QList<poiCategoryAndReason_t> poiList)
 {
     bool isFound;
     ushort index = 0;
