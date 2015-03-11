@@ -58,7 +58,7 @@ include_directories(${QT5_GUI_INCLUDE_DIRS})
 set(cmake_create_dir cmake -E make_directory)
 
 #settings for Qt
-set(CMAKE_XXX_FLAGS "${CMAKE_XXX_FLAGS} ${QT5_EXECUTABLE_COMPILE_FLAGS}")
+set(CMAKE_XXX_FLAGS "${CMAKE_XXX_FLAGS} ${QT5_EXECUTABLE_COMPILE_FLAGS} -std=gnu++11")
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 add_definitions(${QT5_CORE_DEFINITIONS})

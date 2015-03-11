@@ -26,38 +26,6 @@
         </doc>
       </arg>
     </method>
-    <method name="GetLanguage">
-      <doc>
-        <line>GetLanguage = Get the current language set for the search.</line>
-        <line>The language defines the poi and categories name and details language. If the language is not supported, the default details will be returned in the native language.</line>
-      </doc>
-      <arg direction="out" name="languageCode" type="s">
-        <doc>
-          <line>languageCode = The language.</line>
-        </doc>
-      </arg>
-      <arg direction="out" name="countryCode" type="s">
-        <doc>
-          <line>countryCode = The country specific variant for the language.</line>
-        </doc>
-      </arg>
-    </method>
-    <method name="SetLanguage">
-      <doc>
-        <line>SetLanguage = Set the language.</line>
-        <line>The language defines the poi and categories name and details language. If the language is not supported, the default details will be returned in the native language.</line>
-      </doc>
-      <arg direction="in" name="languageCode" type="s">
-        <doc>
-          <line>languageCode = The language to be used.</line>
-        </doc>
-      </arg>
-      <arg direction="in" name="countryCode" type="s">
-        <doc>
-          <line>countryCode = The country specific variant for the language to be used.</line>
-        </doc>
-      </arg>
-    </method>
     <method name="ValidateCategories">
       <doc>
         <line>ValidateCategories = This method allows the application to validate that POI categories are supported by the POI component and the Content access modules.</line>

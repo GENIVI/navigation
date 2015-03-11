@@ -38,6 +38,7 @@ file (GLOB XML_TO_DBUS_PROXY
 	${CMAKE_CURRENT_SOURCE_DIR}/genivi-poiservice-contentaccessmodule.xml
 	${CMAKE_CURRENT_SOURCE_DIR}/genivi-poiservice-poicontentaccess.xml
 	${CMAKE_CURRENT_SOURCE_DIR}/genivi-poiservice-poisearch.xml
+	${CMAKE_CURRENT_SOURCE_DIR}/genivi-poiservice-configuration.xml
 )
 foreach (RAW_FILE ${XML_TO_DBUS_PROXY})
 	get_filename_component(FILE ${RAW_FILE} NAME_WE)
@@ -58,6 +59,7 @@ file (GLOB XML_TO_DBUS_ADAPTOR
 	${CMAKE_CURRENT_SOURCE_DIR}/genivi-poiservice-contentaccessmodule.xml
 	${CMAKE_CURRENT_SOURCE_DIR}/genivi-poiservice-poicontentaccess.xml
 	${CMAKE_CURRENT_SOURCE_DIR}/genivi-poiservice-poisearch.xml
+	${CMAKE_CURRENT_SOURCE_DIR}/genivi-poiservice-configuration.xml
 )
 foreach (RAW_FILE ${XML_TO_DBUS_ADAPTOR})
 	get_filename_component(FILE ${RAW_FILE} NAME_WE)

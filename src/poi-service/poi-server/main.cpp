@@ -42,6 +42,8 @@
 
 static const char* poiSearch_SERVICE_NAME = "org.genivi.poiservice.POISearch";
 static const char* poiSearch_OBJECT_PATH = "/org/genivi/poiservice/POISearch";
+static const char* poiConfiguration_SERVICE_NAME = "org.genivi.poiservice.Configuration";
+static const char* poiConfiguration_OBJECT_PATH = "/org/genivi/poiservice/Configuration";
 static const char* poiContentAccess_SERVICE_NAME = "org.genivi.poiservice.POIContentAccess";
 static const char* poiContentAccess_OBJECT_PATH = "/org/genivi/poiservice/POIContentAccess";
 static const char* contentAccessModule_OBJECT_PATH = "/org/genivi/poiservice/POIContentAccessModule";
@@ -61,6 +63,7 @@ static DBus::Glib::BusDispatcher *dispatcher;
 static DBus::Connection *dbusConnection;
 static poiSearchServer *serverPoiSearch;
 static poiContentAccessServer *serverpoiContentAccess;
+static poiConfigurationServer *serverpoiConfiguration;
 static Routing *clientRouting;
 
 // class Routing
@@ -114,6 +117,11 @@ contentAccessModule::contentAccessModule(DBus::Connection &connection, const std
 
 contentAccessModule::~contentAccessModule()
 {
+}
+
+void contentAccessModule::ConfigurationChanged(const std::vector< uint16_t >& changedSettings)
+{
+
 }
 
 // class  poiContentAccessServer
@@ -505,11 +513,11 @@ void poiContentAccessServer::SetRegisteredAttributeCategoryFlag(camId_t camId, c
     }
 }
 
-void poiContentAccessServer::SetLanguage(std::string LanguageCode, std::string CountryCode)
+void poiContentAccessServer::SetLocale(std::string languageCode, std::string countryCode, string scriptCode)
 {
     if (m_camId != INVALID_HANDLE)
     { //only one cam managed
-        mp_contentAccessModule->SetLanguage(LanguageCode,CountryCode);
+        mp_contentAccessModule->SetLocale(languageCode,countryCode, scriptCode);
     }
 }
 
@@ -663,8 +671,6 @@ poiSearchServer::poiSearchServer(DBus::Connection &connection, const char* poiDa
         version.micro = 0;
         version.date = "19-12-2012";
         m_version.set(version);
-        m_languageCode = "fra"; //french by default (ISO 639-2)
-        m_countryCode = "FRA"; //france by default (ISO 3166-1 alpha-3)
         m_poiSearchHandle = INVALID_HANDLE;
         m_poiSearchProximity = false; //by default search around the current location
         mp_database = new Database(poiDatabaseFileName);
@@ -824,19 +830,6 @@ poiSearchServer::~poiSearchServer()
 DBus_version::DBus_version_t poiSearchServer::GetVersion()
 {
     return(m_version.getDBus());
-}
-
-void poiSearchServer::GetLanguage(std::string& languageCode, std::string& countryCode)
-{
-    // in fact only one language and one country available
-    languageCode = m_languageCode;
-    countryCode = m_countryCode;
-}
-
-void poiSearchServer::SetLanguage(const std::string& languageCode, const std::string& countryCode)
-{
-    m_languageCode = languageCode;
-    m_countryCode = countryCode;
 }
 
 std::vector< ::DBus::Struct< categoryId_t, bool > > poiSearchServer::ValidateCategories(const std::vector< categoryId_t >& categories)
@@ -1003,7 +996,7 @@ handleId_t poiSearchServer::CreatePoiSearchHandle()
         //set the handle for the content access server
         mp_poiContentAccess->SetPoiSearchHandle(m_poiSearchHandle);
         //set the language used by the content access server
-         mp_poiContentAccess->SetLanguage(m_languageCode,m_countryCode);
+         mp_poiContentAccess->SetLocale(m_languageCode,m_countryCode, m_scriptCode);
     }
     return (m_poiSearchHandle);
 }
@@ -1602,6 +1595,15 @@ std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > poiSearchSer
 
 // Specific methods
 
+void poiSearchServer::SetLocale(std::string languageCode, std::string countryCode, std::string scriptCode)
+{
+    m_languageCode = languageCode;
+    m_countryCode = countryCode;
+    m_scriptCode = scriptCode;
+
+    mp_poiContentAccess->SetLocale(languageCode,countryCode,scriptCode); //update poi content access data (to set the cam data)
+}
+
 void poiSearchServer::ConnectToRoutingClient(Routing *client)
 {
     mp_Routing = client; //link to the instance of routing
@@ -1931,6 +1933,141 @@ uint32_t poiSearchServer::calculateOrthoDistance(const double a,const double b,c
     return ((uint32_t)((a*pointP.longitude - pointP.latitude + b)/sqrt(1 + a*a)));
 }
 
+// class  poiConfigurationServer
+
+// DBus methods
+
+poiConfigurationServer::poiConfigurationServer(DBus::Connection &connection)
+    : DBus::ObjectAdaptor(connection, poiConfiguration_OBJECT_PATH)
+{
+    //version is hard coded
+    DBus_version::version_t version;
+    version.major = 1;
+    version.minor = 0;
+    version.micro = 0;
+    version.date = "19-12-2012";
+    m_version.set(version);
+    m_languageCode = "fra"; //french by default (ISO 639-2)
+    m_countryCode = "FRA"; //france by default (ISO 3166-1 alpha-3)
+    m_scriptCode = "Latn"; //Latin by default (4-letter ISO 15924 codes)
+    m_timeFormat = GENIVI_NAVIGATIONCORE_24H;
+    std::vector< uint16_t > length;
+    DBus_dataFormatConverter dataConverter;
+    length.push_back(GENIVI_NAVIGATIONCORE_METER);
+    m_unitsOfMeasurementList[GENIVI_NAVIGATIONCORE_LENGTH]=dataConverter.createVariantArrayUint16(length);
+    m_coordinatesFormat = GENIVI_NAVIGATIONCORE_DEGREES;
+}
+
+poiConfigurationServer::~poiConfigurationServer()
+{
+
+}
+
+
+DBus_version::DBus_version_t poiConfigurationServer::GetVersion()
+{
+    return(m_version.getDBus());
+}
+
+void poiConfigurationServer::SetUnitsOfMeasurement(const std::map< uint16_t, ::DBus::Variant >& unitsOfMeasurementList)
+{
+    m_unitsOfMeasurementList = unitsOfMeasurementList;
+    std::vector< uint16_t > changed;
+    changed.push_back(GENIVI_NAVIGATIONCORE_UNITS_OF_MEASUREMENT);
+    ConfigurationChanged(changed);
+}
+
+std::map< uint16_t, ::DBus::Variant > poiConfigurationServer::GetUnitsOfMeasurement()
+{
+    return m_unitsOfMeasurementList;
+}
+
+std::map< uint16_t, ::DBus::Variant > poiConfigurationServer::GetSupportedUnitsOfMeasurement()
+{
+    std::map< uint16_t, ::DBus::Variant > ret;
+    std::vector< uint16_t > length;
+    DBus_dataFormatConverter dataConverter;
+    length.push_back(GENIVI_NAVIGATIONCORE_METER);
+    ret[GENIVI_NAVIGATIONCORE_LENGTH]=dataConverter.createVariantArrayUint16(length);
+    return ret;
+}
+
+void poiConfigurationServer::SetTimeFormat(const uint16_t& timeFormat)
+{
+    m_timeFormat = timeFormat;
+    std::vector< uint16_t > changed;
+    changed.push_back(GENIVI_NAVIGATIONCORE_TIME_FORMAT);
+    ConfigurationChanged(changed);
+}
+
+uint16_t poiConfigurationServer::GetTimeFormat()
+{
+    return m_timeFormat;
+}
+
+std::vector< uint16_t > poiConfigurationServer::GetSupportedTimeFormats()
+{
+    std::vector< uint16_t > ret;
+    ret.push_back(GENIVI_NAVIGATIONCORE_24H);
+    return ret;
+}
+
+void poiConfigurationServer::SetCoordinatesFormat(const uint16_t& coordinatesFormat)
+{
+    m_coordinatesFormat = coordinatesFormat;
+    std::vector< uint16_t > changed;
+    changed.push_back(GENIVI_NAVIGATIONCORE_COORDINATES_FORMAT);
+    ConfigurationChanged(changed);
+}
+
+uint16_t poiConfigurationServer::GetCoordinatesFormat()
+{
+    return m_coordinatesFormat;
+}
+
+std::vector< uint16_t > poiConfigurationServer::GetSupportedCoordinatesFormats()
+{
+    std::vector< uint16_t > ret;
+    ret.push_back(GENIVI_NAVIGATIONCORE_DEGREES);
+    return ret;
+}
+
+void poiConfigurationServer::SetLocale(const std::string& languageCode, const std::string& countryCode, const std::string& scriptCode)
+{
+    m_languageCode = languageCode;
+    m_countryCode = countryCode;
+    m_scriptCode = scriptCode;
+    std::vector< uint16_t > changed;
+    changed.push_back(GENIVI_NAVIGATIONCORE_LOCALE);
+    ConfigurationChanged(changed);
+
+    mp_poiSearch->SetLocale(languageCode,countryCode,scriptCode); //update poi search data
+}
+
+void poiConfigurationServer::GetLocale(std::string& languageCode, std::string& countryCode, std::string& scriptCode)
+{
+    languageCode = m_languageCode;
+    countryCode = m_countryCode;
+    scriptCode = m_scriptCode;
+}
+
+std::vector< ::DBus::Struct< std::string, std::string, std::string > > poiConfigurationServer::GetSupportedLocales()
+{
+    std::vector< ::DBus::Struct< std::string, std::string, std::string > > ret;
+    ::DBus::Struct< std::string, std::string, std::string > en_US { "eng","USA", "Latn" };
+    ::DBus::Struct< std::string, std::string, std::string > fr_FR { "fra","FRA", "Latn" };
+    ret.push_back(en_US);
+    ret.push_back(fr_FR);
+    return ret;
+}
+
+//specific methods
+
+void poiConfigurationServer::ConnectTopoiSearchServer(poiSearchServer *poiSearch)
+{
+    mp_poiSearch = poiSearch;  //link to the instance of poi search
+}
+
 
 const char* program_name; //file to sink outputs
 
@@ -2025,8 +2162,15 @@ int main(int  argc , char**  argv )
                 dbusConnection->request_name(poiSearch_SERVICE_NAME);
                 serverPoiSearch=new poiSearchServer(*dbusConnection,database_filename,serverpoiContentAccess);
 
+                // create the server for Configuration
+                dbusConnection->request_name(poiConfiguration_SERVICE_NAME);
+                serverpoiConfiguration=new poiConfigurationServer(*dbusConnection);
+
                 // connect the serverPoiSearch to the serverpoiContentAccess
                 serverpoiContentAccess->ConnectTopoiSearchServer(serverPoiSearch);
+
+                // connect the serverPoiSearch to the serverpoiConfiguration
+                serverpoiConfiguration->ConnectTopoiSearchServer(serverPoiSearch);
 
                 // create a client for Routing
                 clientRouting = new Routing(*dbusConnection);
@@ -2047,6 +2191,7 @@ int main(int  argc , char**  argv )
                 // clean memory
                 delete serverPoiSearch;
                 delete serverpoiContentAccess;
+                delete serverpoiConfiguration;
                 delete clientRouting;
                 delete dbusConnection;
                 delete dispatcher;

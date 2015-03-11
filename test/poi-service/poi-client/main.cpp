@@ -54,6 +54,7 @@ int main(int argc, char *argv[])
     mainWindow.settingsDefaultRadius = settings.value("DefaultRadius").toUInt();
     mainWindow.settingsLanguageCode = settings.value("Language/language").toString();
     mainWindow.settingsCountryCode = settings.value("Language/country").toString();
+    mainWindow.settingsScriptCode = settings.value("Language/script").toString();
     mainWindow.settingsHMIlanguage = settings.value("Language/HMI").toString();
 
     mainWindow.settingsCategoryAllCategories = settings.value("Category/AllCategories").toUInt();

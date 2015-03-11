@@ -84,6 +84,7 @@ void MainWindow::InitUi()
     //no language set
     ui->languageCode->setText(noValue);
     ui->countryCode->setText(noValue);
+    ui->scriptCode->setText(noValue);
 
     //internationalisation
     ui->registerCAM->setText(tr("REGISTER"));
@@ -99,10 +100,11 @@ void MainWindow::initSettings()
     m_categoriesID.clear();
 }
 
-void MainWindow::on_SetLanguage(const std::string languageCode, const std::string countryCode)
+void MainWindow::on_SetLocale(const std::string languageCode, const std::string countryCode, const std::string scriptCode)
 {
     ui->languageCode->setText(QString::fromStdString(languageCode));
     ui->countryCode->setText(QString::fromStdString(countryCode));
+    ui->scriptCode->setText(QString::fromStdString(scriptCode));
 }
 
 
@@ -119,13 +121,16 @@ void MainWindow::on_registerCAM_clicked()
 
 void MainWindow::on_unregisterCAM_clicked()
 {
-    //first remove the categories
-    on_removeCAMCategory_clicked();
+    if (mp_contentAccessModule->getCAMId() != contentAccessModuleServer::INVALID_HANDLE)
+    {
+        //first remove the categories
+        on_removeCAMCategory_clicked();
 
-    // and now unregister the CAM
-    mp_poiContentAccess->UnRegisterContentAccessModule(mp_contentAccessModule->getCAMId());
-    mp_contentAccessModule->disconnectCAM();
-    ui->camID->setText(noValue);
+        // and now unregister the CAM
+        mp_poiContentAccess->UnRegisterContentAccessModule(mp_contentAccessModule->getCAMId());
+        mp_contentAccessModule->disconnectCAM();
+        ui->camID->setText(noValue);
+    }
 }
 
 void MainWindow::on_addCAMCategory_clicked()

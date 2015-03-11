@@ -83,6 +83,7 @@ file (GLOB SRC_TO_MOC ${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.h
     ${CMAKE_CURRENT_SOURCE_DIR}/poi-client-DBusEnhancedPositionInterface.h 
     ${CMAKE_CURRENT_SOURCE_DIR}/poi-client-DBusNavigationCoreSessionInterface.h 
     ${CMAKE_CURRENT_SOURCE_DIR}/poi-client-DBusContentAccessInterface.h 
+    ${CMAKE_CURRENT_SOURCE_DIR}/poi-client-DBusConfigurationInterface.h
 )
 execute_process(
 	COMMAND ${cmake_create_dir} ${MOC}
@@ -176,6 +177,7 @@ add_executable(poi-client
     poi-client-DBusEnhancedPositionInterface.cpp
     poi-client-DBusNavigationCoreSessionInterface.cpp
     poi-client-DBusContentAccessInterface.cpp
+    poi-client-DBusConfigurationInterface.cpp
     ../poi-common/poi-marshal-handler.cpp
     mainwindow.h
     poi-client-config.h
@@ -186,6 +188,7 @@ add_executable(poi-client
     poi-client-DBusEnhancedPositionInterface.h
     poi-client-DBusNavigationCoreSessionInterface.h
     poi-client-DBusContentAccessInterface.h
+    poi-client-DBusConfigurationInterface.h
     ../poi-common/poi-marshal-handler.h
     ../poi-common/poi-common-types.h
 )

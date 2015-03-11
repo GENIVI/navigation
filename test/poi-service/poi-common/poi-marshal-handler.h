@@ -153,5 +153,9 @@ Q_DECLARE_METATYPE(satelliteInfo_t)
 const QDBusArgument &operator >> (const QDBusArgument &argument,satelliteInfo_t &dest);
 QDBusArgument &operator << (QDBusArgument &argument, const satelliteInfo_t &source);
 Q_DECLARE_METATYPE(QList<satelliteInfo_t>)
+Q_DECLARE_METATYPE(configurationLocale_t)
+const QDBusArgument &operator >> (const QDBusArgument &argument,configurationLocale_t &dest);
+QDBusArgument &operator << (QDBusArgument &argument, const configurationLocale_t &source);
+Q_DECLARE_METATYPE(QList<configurationLocale_t>)
 
 #endif // MARSHALHANDLER_H

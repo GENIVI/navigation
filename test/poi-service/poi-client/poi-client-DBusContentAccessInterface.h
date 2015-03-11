@@ -140,11 +140,21 @@ public Q_SLOTS: // METHODS
         return asyncCall(QLatin1String("GetVersion"));
     }
 
-    inline QDBusPendingReply<>SetLanguage(QString languageCode,QString countryCode)
-    { // "s" "s" in
+    inline QDBusPendingReply<>SetLocale(QString languageCode,QString countryCode,QString scriptCode)
+    { // "s" "s" "s" in
         QList<QVariant> argumentList;
-        argumentList << qVariantFromValue(languageCode) << qVariantFromValue(countryCode);
-        return asyncCallWithArgumentList(QLatin1String("SetLanguage"), argumentList);
+        argumentList << qVariantFromValue(languageCode) << qVariantFromValue(countryCode) << qVariantFromValue(scriptCode);
+        return asyncCallWithArgumentList(QLatin1String("SetLocale"), argumentList);
+    }
+
+    inline QDBusPendingReply<QString,QString,QString> GetLocale()
+    { //"s" "s" "s" out
+        return asyncCall(QLatin1String("GetLocale"));
+    }
+
+    inline QDBusPendingReply<QList<configurationLocale_t> > GetSupportedLocales()
+    { //"a(sss)" out
+        return asyncCall(QLatin1String("GetSupportedLocales"));
     }
 
     inline QDBusPendingReply<>PoiSearchStarted(handleId_t poiSearchHandle,ushort maxSize, geoCoordinate3D_t location, QList<poiSearch_t> poiCategories, QList<poiAttributeFull_t> poiAttributes, std::string inputString, ushort sortOption)

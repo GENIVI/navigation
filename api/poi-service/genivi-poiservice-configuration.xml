@@ -6,9 +6,9 @@
      Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
      this file, you can obtain one at http://mozilla.org/MPL/2.0/.
 -->
-<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/mapviewer" xsi:noNamespaceSchemaLocation="introspect.xsd">
-  <interface name="org.genivi.mapviewer.Configuration">
-    <version>3.0.0 (21-01-2014)</version>
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/navigationcore" xsi:noNamespaceSchemaLocation="introspect.xsd">
+  <interface name="org.genivi.poiservice.Configuration">
+    <version>1.0.0 (10-03-2015)</version>
     <doc>
       <line>Configuration = This interface offers functions to set and retrieve configuration parameters</line>
     </doc>
@@ -181,7 +181,7 @@
       <doc>
         <line>GetSupportedLocales = This method retrieves the supported languages and countries</line>
       </doc>
-      <arg name="localeList" type="a(ss)" direction="out">
+      <arg name="localeList" type="a(sss)" direction="out">
         <doc>
           <line>localeList = array[struct(languageCode,countryCode)]</line>
           <line>languageCode = ISO 639-3 language code (lower case)</line>

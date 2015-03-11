@@ -54,7 +54,7 @@ public:
 
     void InitUi();
 
-    void on_SetLanguage(const std::string languageCode, const std::string countryCode);
+    void on_SetLocale(const std::string languageCode, const std::string countryCode, const std::string scriptCode);
 
 
 private slots:

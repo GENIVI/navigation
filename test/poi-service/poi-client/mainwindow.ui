@@ -35,7 +35,7 @@
    <string>POI Search Proof Of Concept</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../poi-common/POIPOCResource.qrc">
+   <iconset>
     <normaloff>:/new/image/POIPOCClient.png</normaloff>:/new/image/POIPOCClient.png</iconset>
   </property>
   <property name="styleSheet">
@@ -683,7 +683,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="searchSettings">
      <property name="accessibleName">
@@ -1438,7 +1438,7 @@
         <x>10</x>
         <y>120</y>
         <width>121</width>
-        <height>81</height>
+        <height>121</height>
        </rect>
       </property>
       <property name="title">
@@ -1470,6 +1470,19 @@
         <string>countryCode</string>
        </property>
       </widget>
+      <widget class="QLabel" name="scriptCode">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>90</y>
+         <width>55</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>scriptCode</string>
+       </property>
+      </widget>
      </widget>
      <widget class="QPushButton" name="About">
       <property name="geometry">
@@ -1496,14 +1509,14 @@
      <x>0</x>
      <y>0</y>
      <width>910</width>
-     <height>25</height>
+     <height>27</height>
     </rect>
    </property>
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>
-  <include location="../poi-common/POIPOCResource.qrc"/>
+  <include location="../poi-common/poi-resource.qrc"/>
  </resources>
  <connections/>
 </ui>

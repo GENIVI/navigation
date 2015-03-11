@@ -33,6 +33,7 @@
 #include "../../../api/include/genivi-poiservice-constants.h"
 #include "../../../api/include/genivi-poiservice-poisearch_adaptor.h"
 #include "../../../api/include/genivi-poiservice-poicontentaccess_adaptor.h"
+#include "../../../api/include/genivi-poiservice-configuration_adaptor.h"
 #include "../../../api/include/genivi-navigationcore-routing_proxy.h"
 #include "../../../api/include/genivi-poiservice-contentaccessmodule_proxy.h"
 #include "../../../src/poi-service/poi-common/poi-common-data-model.h"
@@ -96,6 +97,8 @@ public:
 
     ~contentAccessModule();
 
+    void ConfigurationChanged(const std::vector< uint16_t >& changedSettings);
+
 private:
 
 };
@@ -152,7 +155,7 @@ public:
 
     void SetRegisteredAttributeCategoryFlag(camId_t camId,categoryId_t categoryId, attributeId_t attributeId);
 
-    void SetLanguage(std::string LanguageCode, std::string CountryCode);
+    void SetLocale(std::string languageCode, std::string countryCode, std::string scriptCode);
 
     uint16_t searchAroundALocation(DBus_geoCoordinate3D::geoCoordinate3D_t location,const std::string* inputString, uint16_t sortOption);
 
@@ -225,10 +228,6 @@ public:
 
     DBus_version::DBus_version_t GetVersion();
 
-    void GetLanguage(std::string& languageCode, std::string& countryCode);
-
-    void SetLanguage(const std::string& languageCode, const std::string& countryCode);
-
     std::vector< ::DBus::Struct< categoryId_t, bool > > ValidateCategories(const std::vector< categoryId_t >& categories);
 
     std::vector< DBus_categoryIdName::DBus_categoryIdName_t > GetAvailableCategories();
@@ -264,6 +263,10 @@ public:
     void RequestResultList(const handleId_t& poiSearchHandle, const uint16_t& offset, const uint16_t& maxWindowSize, const std::vector< uint32_t >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_searchResult::DBus_searchResult_t >& resultListWindow);
 
     std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > GetPoiDetails(const std::vector< poiId_t >& id);
+
+    // Specific methods
+
+    void SetLocale(std::string languageCode, std::string countryCode, std::string scriptCode);
 
 
 private:
@@ -307,7 +310,7 @@ private:
 
 // DBus data
     DBus_version m_version;
-    std::string m_languageCode, m_countryCode;
+    std::string m_languageCode, m_countryCode, m_scriptCode;
     handleId_t m_poiSearchHandle; // the POC is limited to the management of one handle !
     categoryId_t m_rootCategory;
     uint8_t m_sessionHandle;
@@ -337,6 +340,54 @@ private:
 // category and attribute management
     uint16_t m_availableCategories;
     poi_category_t m_availableCategoryTable[MAX_CATEGORIES];
+};
+
+class  poiConfigurationServer
+: public org::genivi::poiservice::Configuration_adaptor,
+  public DBus::IntrospectableAdaptor,
+  public DBus::ObjectAdaptor
+{
+
+public:
+
+    poiConfigurationServer(DBus::Connection &connection);
+
+    ~poiConfigurationServer();
+
+//implementation of the DBus methods of the Configuration component
+
+    DBus_version::DBus_version_t GetVersion();
+
+    void SetUnitsOfMeasurement(const std::map< uint16_t, ::DBus::Variant >& unitsOfMeasurementList);
+    std::map< uint16_t, ::DBus::Variant > GetUnitsOfMeasurement();
+    std::map< uint16_t, ::DBus::Variant > GetSupportedUnitsOfMeasurement();
+    void SetTimeFormat(const uint16_t& timeFormat);
+    uint16_t GetTimeFormat();
+    std::vector< uint16_t > GetSupportedTimeFormats();
+    void SetCoordinatesFormat(const uint16_t& coordinatesFormat);
+    uint16_t GetCoordinatesFormat();
+    std::vector< uint16_t > GetSupportedCoordinatesFormats();
+    void SetLocale(const std::string& languageCode, const std::string& countryCode, const std::string& scriptCode);
+    void GetLocale(std::string& languageCode, std::string& countryCode, std::string& scriptCode);
+    std::vector< ::DBus::Struct< std::string, std::string , std::string> > GetSupportedLocales();
+
+// specific methods
+
+    void ConnectTopoiSearchServer(poiSearchServer *poiSearch);
+
+private:
+
+
+// private data
+
+    poiSearchServer *mp_poiSearch;
+
+// DBus data
+    DBus_version m_version;
+    std::string m_languageCode, m_countryCode, m_scriptCode;
+    uint16_t m_coordinatesFormat;
+    std::map< uint16_t, ::DBus::Variant > m_unitsOfMeasurementList;
+    uint16_t m_timeFormat;
 };
 
 

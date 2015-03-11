@@ -108,6 +108,15 @@ public:
         iter.append_uint16(value);
         return var;
     }
+
+    DBus::Variant createVariantArrayUint16(std::vector< uint16_t > value)
+    {
+        DBus::Variant var;
+        DBus::MessageIter iter=var.writer();
+        iter << value;
+        return var;
+    }
+
 };
 
 class DBus_version : DBus_dataFormatConverter // (qqqs)

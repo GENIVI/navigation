@@ -26,22 +26,70 @@
         </doc>
       </arg>
     </method>
-    <method name="SetLanguage">
+    <method name="SetLocale">
       <doc>
-        <line>SetLanguage = Set the current language set for the search by poi provider module.</line>
-        <line>The language defines the poi and categories name and details language. If the language is not supported, the default details will be returned in the native language.</line>
+        <line>SetLocale = This method sets the current language and country</line>
       </doc>
-      <arg direction="in" name="languageCode" type="s">
+      <arg name="languageCode" type="s" direction="in">
         <doc>
-          <line>languageCode = The language.</line>
+          <line>languageCode = ISO 639‐3 language code (lower case)</line>
         </doc>
       </arg>
-      <arg direction="in" name="countryCode" type="s">
+      <arg name="countryCode" type="s" direction="in">
         <doc>
-          <line>countryCode = The country specific variant for the language.</line>
+          <line>countryCode = ISO 3166‐1 alpha 3 country code (upper case)</line>
+        </doc>
+      </arg>
+      <arg name="scriptCode" type="s" direction="in">
+        <doc>
+          <line>scriptCode= ISO 15924 alpha 4 script code (upper case)</line>
         </doc>
       </arg>
     </method>
+    <method name="GetLocale">
+      <doc>
+        <line>GetLocale = This method retrieves the current language and country</line>
+      </doc>
+      <arg name="languageCode" type="s" direction="out">
+        <doc>
+          <line>languageCode = ISO 639‐3 language code (lower case)</line>
+        </doc>
+      </arg>
+      <arg name="countryCode" type="s" direction="out">
+        <doc>
+          <line>countryCode = ISO 3166‐1 alpha 3 country code (upper case)</line>
+        </doc>
+      </arg>
+      <arg name="scriptCode" type="s" direction="out">
+        <doc>
+          <line>scriptCode= ISO 15924 alpha 4 script code (upper case)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="GetSupportedLocales">
+      <doc>
+        <line>GetSupportedLocales = This method retrieves the supported languages and countries</line>
+      </doc>
+      <arg name="localeList" type="a(sss)" direction="out">
+        <doc>
+          <line>localeList = array[struct(languageCode,countryCode)]</line>
+          <line>languageCode = ISO 639-3 language code (lower case)</line>
+          <line>countryCode = ISO 3166-1 alpha 3 country code (upper case)</line>
+          <line>scriptCode = ISO 15924 alpha 4 script code (upper case)</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="ConfigurationChanged">
+      <doc>
+        <line>ConfigurationChanged = This signal is sent to the clients when one or more configuration settings changes</line>
+      </doc>
+      <arg name="changedSettings" type="aq">
+        <doc>
+          <line>changedSettings = array[setting]</line>
+          <line>setting = enum(INVALID,UNITS_OF_MEASUREMENT,LOCALE,TIME_FORMAT,COORDINATES_FORMAT, ... )</line>
+        </doc>
+      </arg>
+    </signal>
     <method name="PoiSearchStarted">
       <doc>
         <line>PoiSearchStarted = This method is sent by the POI service component to inform all the CAM that a new POI search was started.</line>

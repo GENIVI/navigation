@@ -264,12 +264,31 @@ DBus_version::DBus_version_t contentAccessModuleServer::GetVersion()
         return(m_version.getDBus());
     }
 
-void contentAccessModuleServer::SetLanguage(const std::string& languageCode, const std::string& countryCode)
+void contentAccessModuleServer::SetLocale(const std::string& languageCode, const std::string& countryCode, const string &scriptCode)
     {
         m_languageCode = languageCode;
         m_countryCode = countryCode;
-        mp_HMI->on_SetLanguage(languageCode,countryCode);
+        m_scriptCode = scriptCode;
+        mp_HMI->on_SetLocale(languageCode,countryCode,scriptCode);
     }
+
+void contentAccessModuleServer::GetLocale(std::string& languageCode, std::string& countryCode, std::string& scriptCode)
+{
+    languageCode = m_languageCode;
+    countryCode = m_countryCode;
+    scriptCode = m_scriptCode;
+}
+
+std::vector< ::DBus::Struct< std::string, std::string , std::string> > contentAccessModuleServer::GetSupportedLocales()
+{
+    std::vector< ::DBus::Struct< std::string, std::string, std::string > > ret;
+    ::DBus::Struct< std::string, std::string, std::string > en_US { "eng","USA", "Latn" };
+    ::DBus::Struct< std::string, std::string, std::string > fr_FR { "fra","FRA", "Latn" };
+    ret.push_back(en_US);
+    ret.push_back(fr_FR);
+    return ret;
+}
+
 
 void contentAccessModuleServer::PoiSearchStarted(const handleId_t& poiSearchHandle, const uint16_t& maxSize, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes, const std::string& inputString, const uint16_t& sortOption)
     {

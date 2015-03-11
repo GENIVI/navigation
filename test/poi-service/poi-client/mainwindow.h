@@ -48,6 +48,7 @@
 #include "poi-client-DBusGuidanceInterface.h"
 #include "poi-client-DBusEnhancedPositionInterface.h"
 #include "poi-client-DBusNavigationCoreSessionInterface.h"
+#include "poi-client-DBusConfigurationInterface.h"
 
 namespace Ui {
     class MainWindow;
@@ -78,6 +79,7 @@ public:
     version_t settingsVersion;
     QString settingsLanguageCode;
     QString settingsCountryCode;
+    QString settingsScriptCode;
     QString settingsHMIlanguage;
 
     // The list of ids that is shared with the poi-server
@@ -127,6 +129,8 @@ private slots:
     void on_DBusSignalResultListChanged(uint poiSearchHandle,ushort resultListSize);
 
     void on_DBusSignalCategoriesUpdated(QList<poiCategoryAndReason_t> poiCategories);
+
+    void on_DBusSignalConfigurationChanged(QList<ushort> changedSettings);
 
     void on_DBusSignalPositionUpdate(ulong changedValues);
 
@@ -184,6 +188,7 @@ private:
 
     //handles to DBus interfaces
     org::genivi::poiservice::poiSearch::DBusSearchInterface *m_dbusPoiSearchInterface;
+    org::genivi::poiservice::poiSearch::DBusConfigurationInterface *m_dbusConfigurationInterface;
     org::genivi::navigationcore::Routing::DBusRoutingInterface *m_dbusNavigationRoutingInterface;
     org::genivi::navigationcore::Guidance::DBusGuidanceInterface *m_dbusNavigationGuidanceInterface;
     DBusEnhancedPositionInterface *m_dbusPositioningEnhancedPositionInterface;
@@ -199,6 +204,7 @@ private:
 
     std::string m_languageCode;
     std::string m_countryCode;
+    std::string m_scriptCode;
 
     int m_searchStatus;
 

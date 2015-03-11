@@ -17,6 +17,7 @@
 ###########################################################################
 project(poi-server)
 cmake_minimum_required(VERSION 2.8)
+set(CMAKE_XXX_FLAGS "${CMAKE_XXX_FLAGS} -std=gnu++11")
 
 message(STATUS "poi-server")
 
@@ -40,7 +41,6 @@ include_directories(${GLIBMM_INCLUDE_DIRS})
 include_directories(${GOBJECT_INCLUDE_DIRS})
 include_directories(${DBUS_INCLUDE_DIRS})
 include_directories(${DBUS_CPP_GLIB_INCLUDE_DIRS})
-
 
 link_directories(
     ${DBUS_CPP_LIBRARY_DIRS}

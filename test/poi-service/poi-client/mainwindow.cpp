@@ -42,6 +42,7 @@ MainWindow::~MainWindow()
 {
     delete mp_tableViewPoi;
     delete m_dbusPoiSearchInterface;
+    delete m_dbusConfigurationInterface;
     delete m_dbusNavigationRoutingInterface;
     delete m_dbusNavigationGuidanceInterface;
     delete m_dbusPositioningEnhancedPositionInterface;
@@ -281,6 +282,8 @@ void MainWindow::InitUi()
     //create instances of clients
     m_dbusPoiSearchInterface = new org::genivi::poiservice::poiSearch::DBusSearchInterface("org.genivi.poiservice.POISearch", "/org/genivi/poiservice/POISearch",
                                                                                                 QDBusConnection::sessionBus(), this);
+    m_dbusConfigurationInterface = new org::genivi::poiservice::poiSearch::DBusConfigurationInterface("org.genivi.poiservice.Configuration", "/org/genivi/poiservice/Configuration",
+                                                                                                QDBusConnection::sessionBus(), this);
     m_dbusContentAccessInterface = new org::genivi::poiservice::poiContentAccess::DBusContentAccessInterface("org.genivi.poiservice.POIContentAccess","/org/genivi/poiservice/POIContentAccess",
                                                                                                 QDBusConnection::sessionBus(), this);
     m_dbusNavigationRoutingInterface = new org::genivi::navigationcore::Routing::DBusRoutingInterface("org.genivi.navigationcore.Routing", "/org/genivi/navigationcore",
@@ -296,6 +299,8 @@ void MainWindow::InitUi()
     QObject::connect(m_dbusPoiSearchInterface, SIGNAL(PoiStatus(uint,int)), this, SLOT(on_DBusSignalPoiStatus(uint,int)));
     QObject::connect(m_dbusPoiSearchInterface, SIGNAL(ResultListChanged(uint,ushort)), this, SLOT(on_DBusSignalResultListChanged(uint,ushort)));
     QObject::connect(m_dbusPoiSearchInterface, SIGNAL(CategoriesUpdated(QList<poiCategoryAndReason_t>)), this, SLOT(on_DBusSignalCategoriesUpdated(QList<poiCategoryAndReason_t>)));
+
+    QObject::connect(m_dbusConfigurationInterface, SIGNAL(ConfigurationChanged(QList<ushort>)), this, SLOT(on_DBusSignalConfigurationChanged(QList<ushort>)));
 
     QObject::connect(m_dbusNavigationRoutingInterface, SIGNAL(RouteCalculationSuccessful(uchar,tupleUshortUshort)),this,SLOT(on_DBusSignalRouteCalculationSuccessful(uchar, tupleUshortUshort)));
     QObject::connect(m_dbusNavigationRoutingInterface, SIGNAL(RouteDeleted(uchar)),this,SLOT(on_DBusSignalRouteDeleted(uchar)));
@@ -777,22 +782,23 @@ void MainWindow::initSettings()
 
     // init the languages
     // for the poi search
-    QDBusPendingReply<> reply_4 = m_dbusPoiSearchInterface->SetLanguage(settingsLanguageCode,settingsCountryCode);
+    QDBusPendingReply<> reply_4 = m_dbusConfigurationInterface->SetLocale(settingsLanguageCode,settingsCountryCode,settingsScriptCode);
     reply_4.waitForFinished();
     if (reply_4.isError())
         manageDBusError(reply_4.reply()); // call failed
     else
     { // get the language to check if it's ok
-       QDBusPendingReply<QString,QString> reply_5 = m_dbusPoiSearchInterface->GetLanguage();
+       QDBusPendingReply<QString,QString,QString> reply_5 = m_dbusConfigurationInterface->GetLocale();
        reply_5.waitForFinished();
        if (reply_5.isError())
            manageDBusError(reply_5.reply()); // call failed
        else
        {
-           if ((qdbus_cast<QString>(reply_5.argumentAt(0)) == settingsLanguageCode) && (qdbus_cast<QString>(reply_5.argumentAt(1)) == settingsCountryCode))
+           if ((qdbus_cast<QString>(reply_5.argumentAt(0)) == settingsLanguageCode) && (qdbus_cast<QString>(reply_5.argumentAt(1)) == settingsCountryCode)&& (qdbus_cast<QString>(reply_5.argumentAt(2)) == settingsScriptCode))
            {
                ui->languageCode->setText(settingsLanguageCode);
                ui->countryCode->setText(settingsCountryCode);
+               ui->scriptCode->setText(settingsScriptCode);
            }
        }
     }
@@ -1260,17 +1266,28 @@ void MainWindow::on_embeddedAllCategoryCheckBox_stateChanged(int state)
 {
     if (state)
     {
-        mp_attributeSourceCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
-        mp_attributeWebSiteCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
-        mp_attributePhoneCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
-        mp_attributeStarsCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
-        mp_attributeOpeningHoursCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
-        mp_attributeAddrHouseNumberCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
-        mp_attributeAddrStreetCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
-        mp_attributeAddrPostCodeCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
-        mp_attributeAddrCityCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
-        mp_attributeBrandCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
-        mp_attributeOperateurCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeSourceCheckBox.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeSourceCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeWebSiteCheckBox.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeWebSiteCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributePhoneCheckBox.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributePhoneCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeStarsCheckBox.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeStarsCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeOpeningHoursCheckBox.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeOpeningHoursCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeAddrHouseNumberCheckBox.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeAddrHouseNumberCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeAddrStreetCheckBox.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeAddrStreetCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeAddrPostCodeCheckBox.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeAddrPostCodeCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeAddrCityCheckBox.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeAddrCityCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeBrandCheckBox.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeBrandCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeOperateurCheckBox.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeOperateurCheckBox.at(settingsCategoryAllCategories)->setChecked(true);
     }
     else
     {
@@ -1292,11 +1309,42 @@ void MainWindow::on_addedAllCategoryCheckBox_stateChanged(int state)
 {
     if (state)
     {
-
+        if (mp_attributeSourceCheckBoxAdditional.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeSourceCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeWebSiteCheckBoxAdditional.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeWebSiteCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributePhoneCheckBoxAdditional.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributePhoneCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeStarsCheckBoxAdditional.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeStarsCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeOpeningHoursCheckBoxAdditional.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeOpeningHoursCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeAddrHouseNumberCheckBoxAdditional.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeAddrHouseNumberCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeAddrStreetCheckBoxAdditional.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeAddrStreetCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeAddrPostCodeCheckBoxAdditional.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeAddrPostCodeCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeAddrCityCheckBoxAdditional.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeAddrCityCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeBrandCheckBoxAdditional.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeBrandCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(true);
+        if (mp_attributeOperateurCheckBoxAdditional.at(settingsCategoryAllCategories)->isEnabled())
+            mp_attributeOperateurCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(true);
     }
     else
     {
-
+        mp_attributeSourceCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeWebSiteCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributePhoneCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeStarsCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeOpeningHoursCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeAddrHouseNumberCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeAddrStreetCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeAddrPostCodeCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeAddrCityCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeBrandCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(false);
+        mp_attributeOperateurCheckBoxAdditional.at(settingsCategoryAllCategories)->setChecked(false);
     }
 }
 
@@ -1628,6 +1676,11 @@ void MainWindow::on_DBusSignalCategoriesUpdated(QList<poiCategoryAndReason_t> po
             }
         }
     }
+}
+
+void MainWindow::on_DBusSignalConfigurationChanged(QList<ushort> changedSettings)
+{
+
 }
 
 

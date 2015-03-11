@@ -235,4 +235,11 @@ struct route_vector_t //(dd)(dd)
     geoCoordinate2D_t endPoint;
 };
 
+struct configurationLocale_t //(sss)
+{
+    std::string languageCode;
+    std::string countryCode;
+    std::string scriptCode;
+};
+
 #endif // POIPOCCOMMONTYPES_H

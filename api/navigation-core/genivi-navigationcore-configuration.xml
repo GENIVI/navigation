@@ -151,6 +151,11 @@
           <line>countryCode = ISO 3166‐1 alpha 3 country code (upper case)</line>
         </doc>
       </arg>
+      <arg name="scriptCode" type="s" direction="in">
+        <doc>
+          <line>scriptCode= ISO 15924 alpha 4 script code (upper case)</line>
+        </doc>
+      </arg>
     </method>
     <method name="GetLocale">
       <doc>
@@ -166,6 +171,11 @@
           <line>countryCode = ISO 3166‐1 alpha 3 country code (upper case)</line>
         </doc>
       </arg>
+      <arg name="scriptCode" type="s" direction="out">
+        <doc>
+          <line>scriptCode= ISO 15924 alpha 4 script code (upper case)</line>
+        </doc>
+      </arg>
     </method>
     <method name="GetSupportedLocales">
       <doc>
@@ -176,6 +186,7 @@
           <line>localeList = array[struct(languageCode,countryCode)]</line>
           <line>languageCode = ISO 639-3 language code (lower case)</line>
           <line>countryCode = ISO 3166-1 alpha 3 country code (upper case)</line>
+          <line>scriptCode = ISO 15924 alpha 4 script code (upper case)</line>
         </doc>
       </arg>
     </method>

@@ -91,7 +91,11 @@ public:
 
     DBus_version::DBus_version_t GetVersion();
 
-    void SetLanguage(const std::string& languageCode, const std::string& countryCode);
+    void SetLocale(const std::string& languageCode, const std::string& countryCode, const std::string& scriptCode);
+
+    void GetLocale(std::string& languageCode, std::string& countryCode, std::string& scriptCode);
+
+    std::vector< ::DBus::Struct< std::string, std::string , std::string> > GetSupportedLocales();
 
     void PoiSearchStarted(const handleId_t& poiSearchHandle, const uint16_t& maxSize, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes, const std::string& inputString, const uint16_t& sortOption);
 
@@ -151,7 +155,7 @@ private:
 
     DBus_version m_version;
 
-    std::string m_languageCode, m_countryCode;
+    std::string m_languageCode, m_countryCode, m_scriptCode;
 
     handleId_t m_poiSearchHandle; // the POC is limited to the management of one handle !
 

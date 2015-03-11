@@ -67,18 +67,6 @@ public Q_SLOTS: // METHODS
         return asyncCall(QLatin1String("GetVersion"));
     }
 
-    inline QDBusPendingReply<QString,QString> GetLanguage()
-    { //"s" "s" out
-        return asyncCall(QLatin1String("GetLanguage"));
-    }
-
-    inline QDBusPendingReply<>SetLanguage(QString languageCode,QString countryCode)
-    { // "s" "s" in
-        QList<QVariant> argumentList;
-        argumentList << qVariantFromValue(languageCode) << qVariantFromValue(countryCode);
-        return asyncCallWithArgumentList(QLatin1String("SetLanguage"), argumentList);
-    }
-
     inline QDBusPendingReply<QList<categoryId_t> >ValidateCategories(QList<categoryId_t> categories)
     {// "au" in "a(ub)" out
         QList<QVariant> argumentList;
