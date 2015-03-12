@@ -264,7 +264,7 @@ DBus_version::DBus_version_t contentAccessModuleServer::GetVersion()
         return(m_version.getDBus());
     }
 
-void contentAccessModuleServer::SetLocale(const std::string& languageCode, const std::string& countryCode, const string &scriptCode)
+void contentAccessModuleServer::SetLocale(const std::string& languageCode, const std::string& countryCode, const std::string &scriptCode)
     {
         m_languageCode = languageCode;
         m_countryCode = countryCode;

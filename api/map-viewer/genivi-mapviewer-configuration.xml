@@ -181,7 +181,7 @@
       <doc>
         <line>GetSupportedLocales = This method retrieves the supported languages and countries</line>
       </doc>
-      <arg name="localeList" type="a(ss)" direction="out">
+      <arg name="localeList" type="a(sss)" direction="out">
         <doc>
           <line>localeList = array[struct(languageCode,countryCode)]</line>
           <line>languageCode = ISO 639-3 language code (lower case)</line>

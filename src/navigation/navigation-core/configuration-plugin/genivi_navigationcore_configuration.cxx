@@ -72,6 +72,8 @@ static struct map32 country_map[] = {
 	{"JPN","JP"},
 };
 
+static std::string scriptCode = "Latn";
+
 static const char *
 map_3_to_2(struct map32 *map, int len, const char *in)
 {
@@ -186,18 +188,19 @@ class  Configuration
     }
 
     void
-	SetLocale(const std::string& language, const std::string& country)
+    SetLocale(const std::string& language, const std::string& country, const std::string& script)
 	{
 		char *lang=g_strdup_printf("%s_%s.UTF-8",language_3_to_2(language.c_str()),country_3_to_2(country.c_str()));
 		setenv("LANG",lang,1);
 		setlocale(LC_ALL,"");
+        scriptCode = script;
 		std::vector< uint16_t > changed;
 		changed.push_back(GENIVI_NAVIGATIONCORE_LOCALE);
 		ConfigurationChanged(changed);
 	}
 
 	void
-	GetLocale(std::string& language, std::string& country)
+    GetLocale(std::string& language, std::string& country, std::string& script)
 	{
 		char *lang=g_strdup(getenv("LANG"));
 		char *sep,*dot;
@@ -211,22 +214,23 @@ class  Configuration
 		if (dot)
 			*dot='\0';
 		country=country_2_to_3(sep);
+        script = scriptCode;
 		g_free(lang);
 	}
 
-    std::vector< ::DBus::Struct< std::string, std::string > >
+    std::vector< ::DBus::Struct< std::string, std::string, std::string > >
     GetSupportedLocales()
     {
-        std::vector< ::DBus::Struct< std::string, std::string > > ret;
-        ::DBus::Struct< std::string, std::string > en_US { "eng","USA" };
-        ::DBus::Struct< std::string, std::string > de_DE { "deu","DEU" };
-        ::DBus::Struct< std::string, std::string > fr_FR { "fra","FRA" };
-        ::DBus::Struct< std::string, std::string > jp_JP { "jpn","JPN" };
-	ret.push_back(en_US);
-	ret.push_back(de_DE);
-	ret.push_back(fr_FR);
-	ret.push_back(jp_JP);
-	return ret;
+        std::vector< ::DBus::Struct< std::string, std::string, std::string > > ret;
+        ::DBus::Struct< std::string, std::string, std::string > en_US { "eng","USA", "Latn" };
+        ::DBus::Struct< std::string, std::string, std::string > de_DE { "deu","DEU", "Latn" };
+        ::DBus::Struct< std::string, std::string, std::string > fr_FR { "fra","FRA", "Latn" };
+        ::DBus::Struct< std::string, std::string, std::string > jp_JP { "jpn","JPN", "Hrkt" };
+        ret.push_back(en_US);
+        ret.push_back(de_DE);
+        ret.push_back(fr_FR);
+        ret.push_back(jp_JP);
+        return ret;
     }
 
 	void
