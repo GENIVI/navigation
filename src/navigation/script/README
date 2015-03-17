@@ -30,30 +30,30 @@ To build the code:
 To build the navigation middleware you need first to clone some additional stuff:
 ./build.sh clone
 
+Apply a patch (see below for a short history of upgrade)
+cd ../navit
+patch -p0 -i ../patches/search_list_get_unique.diff
+cd ../script
+
 So, build it:
 ./build.sh make
 
 And run:
 ./run 
 
-Issues with Navit:
-The current version of Navit used by the code is the r5532. It's an already old version (but the POC runs with it).
+Annexe:
 
-Upgrade is under progress, with some issues listed below:
+Issues during upgrade of Navit:
+The version has been upgraded from version r5532 to version r6025
 
-Note 1: There's an issue with the latest version of ksvg2png, that doesn't requires --output into the command line
-It's a problem because the png are not correctly generated.
-So, please apply the patch
-patch -p0 -i ../patches/ksvg2png_remove_output_param.diff
+Note 1: There was an issue with the latest version of ksvg2png, that doesn't requires --output into the command line
 The issue is fixed by the r5827
 
-Note 2: Issues during upgrade
-r5549 removed the  get_unique features used by GetSpell
+Note 2: The r5549 removed the  get_unique features used by GetSpell
 So, please apply the patch
 patch -p0 -i ../patches/search_list_get_unique.diff
-r5822 removed the attribute distance_metric, it's fixed by the r5898
 
-r5970 Test route calculation is OK, but stability problems when testing the full FSA stuff, to be investigated
+Note 3: The r5822 removed the attribute distance_metric, it's fixed by the r5898
 
 
 CMakeLists.txt organization:

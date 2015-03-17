@@ -159,7 +159,7 @@ endif()
 # Check if positioning stuff with the right version has been cloned and do it if necessary
 # positioning_SRC_DIR is set by cmake -Dpositioning_SRC_DIR=<path to positioning src dir> 
 set(positioning_URL http://git.projects.genivi.org/lbs/positioning.git)
-set(positioning_VERSION fe164c14aa9594736656ff5c2ec0251a5f561376)
+set(positioning_VERSION 3a1254f9ac4f5e2d088d24598e76764874a40b99)
 
 if (EXISTS ${positioning_SRC_DIR})
 	execute_process(COMMAND ${git_get_src_version}  
@@ -205,7 +205,7 @@ endif()
 # Check if navit stuff with the right version has been cloned and do it if necessary
 set(navit_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/navit)
 set(navit_URL http://svn.code.sf.net/p/navit/code/trunk)
-set(navit_VERSION 5532)
+set(navit_VERSION 6025)
 set(navit_PATCH_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/patches)
 set(navit_PATCH_DUMMY_FILE ${navit_SRC_DIR}/.patched)
 
