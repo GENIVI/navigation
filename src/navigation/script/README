@@ -1,14 +1,60 @@
-For using the layer manager, you need to set the env variable and the paths:
-source set-ilm-env.sh
+Release date of the file: 17-03-2015 
+Status: OK
+
+Project:
+Navigation software based on Navit and compliant with the Navigation APIs standardized by the GENIVI Alliance
+This project is one of the navigation-service common projects that implements the GENIVI navigation APIs.
+
+More:
+The GENIVI APIs are implemented into navit plugins, running on DBus. The HMI is made in Qml
+See also other navigation projects like proof of concepts implemented for poi-service, traffic-info and positioning 
+
+What is in:
+This folder contains scripts for building Navit and the GENIVI plugins. It runs only the navigation middleware (without the HMI)
+FYI: the application (with the HMI) is located into git://git.projects.genivi.org/lbs/navigation-application.git
+     it's possible to build and run the whole stuff directly from that repository
+
+Author: 
+Martin Schaller <martin.schaller@it-schaller.de>
+Philippe Colliot philippe.colliot@mpsa.com
+Marco Residori marco.residori@xse.de
+
+License: 
+See headers and LICENSE file
+
+Test target: 
+Ubuntu 14.04 LTS
+
+To build the code:
 
 To build the navigation middleware you need first to clone some additional stuff:
 ./build.sh clone
 
-To build without the layer manager:
+So, build it:
 ./build.sh make
 
-To build with the layer manager:
-./build.sh makelm
+And run:
+./run 
+
+Issues with Navit:
+The current version of Navit used by the code is the r5532. It's an already old version (but the POC runs with it).
+
+Upgrade is under progress, with some issues listed below:
+
+Note 1: There's an issue with the latest version of ksvg2png, that doesn't requires --output into the command line
+It's a problem because the png are not correctly generated.
+So, please apply the patch
+patch -p0 -i ../patches/ksvg2png_remove_output_param.diff
+The issue is fixed by the r5827
+
+Note 2: Issues during upgrade
+r5549 removed the  get_unique features used by GetSpell
+So, please apply the patch
+patch -p0 -i ../patches/search_list_get_unique.diff
+r5822 removed the attribute distance_metric, it's fixed by the r5898
+
+r5970 Test route calculation is OK, but stability problems when testing the full FSA stuff, to be investigated
+
 
 CMakeLists.txt organization:
 
@@ -17,4 +63,10 @@ To clone the sources located into different repositories
 To get the map
 
 src/navigation/map/CMakeLists.txt
+
+For using the layer manager, you need to set the env variable and the paths:
+source set-ilm-env.sh
+
+To build with the layer manager:
+./build.sh makelm
 

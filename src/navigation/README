@@ -1,4 +1,4 @@
-Release date of the file: 5-02-2015 
+Release date of the file: 17-03-2015 
 Status: OK
 
 Project:
@@ -10,7 +10,7 @@ The GENIVI APIs are implemented into navit plugins, running on DBus. The HMI is 
 See also other navigation projects like proof of concepts implemented for poi-service, traffic-info and positioning 
 
 What is in:
-This folder contains scripts for building Navit and the GENIVI plugins. It runs only the navigation middleware (without the HMI)
+This folder contains the code for building Navit and the GENIVI plugins. It runs only the navigation middleware (without the HMI)
 FYI: the application (with the HMI) is located into git://git.projects.genivi.org/lbs/navigation-application.git
      it's possible to build and run the whole stuff directly from that repository
 
@@ -30,12 +30,30 @@ git clone http://git.projects.genivi.org/lbs/navigation-service.git $WORKING-DIR
 
 NB: potential issue may occur due to path change of freetype stuff. If necessary, add a link to /usr/include/freetype2/ into /usr/include 
 
+Folders:
+The code is shared between:
+map-viewer/
+the plugins for the map rendering and manipulation (zoom, scroll..)
+navigation-core/
+the plugins for basic navigation features (location input, route calculation...)
+poi-cam/
+the plugins for poi content access module 
+patches/
+some patches to complete the navit code
+
+After cloning the additional code and building it, some folders will be added:
+bin/
+the built code
+ilm/
+the code of layer manager (not tested)
+map/
+the map
+navit/
+basic code of navit
+positioning/
+the code of positioning
+
 Build scripts (cmake based) are located into:
 cd $WORKING-DIR/navigation-service/src/navigation/script
 
-./build.sh clone
-./build.sh make
-
-./run 
-
-See the README into the script dir for further explanations
+See the README into the script dir for further explanations about how to build and run the code

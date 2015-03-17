@@ -9,10 +9,10 @@ positioning/
 #files
 *~
 *.pro.user
-*.txt.user
+*.txt.user*
 /.project
 
 CMakeFiles/
 CMakeCache.txt
-*.cmake
+cmake_install.cmake
 src-gen

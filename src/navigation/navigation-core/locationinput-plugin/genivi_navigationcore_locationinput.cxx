@@ -434,12 +434,13 @@ LocationInputObj::Idle(void)
 		}
 		count++;
 	}
-	if (m_spell) {
+	// the search_list_get_unique has been removed from the svn in the r5549, so navit needs to be patched for upper versions
+    	if (m_spell) {
 		char *unique;
 		if (m_spell_backspace)
 			unique=g_strdup(m_search.u.str);
 		else
-			unique=search_list_get_unique(m_sl, NULL);
+            unique=search_list_get_unique(m_sl, NULL);
 		m_spell_backspace=false;
 		if (unique) {
 			g_free(m_search.u.str);
@@ -452,7 +453,7 @@ LocationInputObj::Idle(void)
 		} else
 			m_locationinput->SpellResult(m_handle, "", "\b", false);
 
-	}
+    } 
 	for (int i = 0 ; i <= chunk ; i++) {
 		uint16_t window=m_data[i].size();
 		if (window != 0 || i == 0) 
