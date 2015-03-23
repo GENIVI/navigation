@@ -13,7 +13,7 @@ import org.genivi.navigation.poiservice.POIServiceTypes.* from "POIServiceTypes.
 
 
 <** @description : This interface offers methods that implement the POI search functionality of a navigation system.**>
-interface POIContentAccessModule {
+interface POIContentManager {
 	version {
 		major 1 
 		minor 0
@@ -59,7 +59,90 @@ interface POIContentAccessModule {
 			Locales[] localeList				
 		}	
 	}	
+
+	<**	@description : This method retrieves the list od POI categories available (pre-defined and custom).**>
+	method getAvailableCategories {
+		out {
+			<** @description : List of categories (id, name and top_level).**>
+			CategoryAndName[] categories				
+		}
+	}
 	
+	<**	@description : Get the root category id. That would be ALL_CATEGORIES.**>
+	method getRootCategory {
+		out {
+			<** @description : The root category is a top level one by design.**>
+			CategoryID category				
+		}
+	}
+	
+	<**	@description : Get the children categories id and type (top level) from the a parent unique id.**>
+	method getChildrenCategories {
+		in {
+			<** @description : unique category id.**>
+			CategoryID category				
+		}	
+		out {
+			<** @description : List of categories (id and top_level).**>
+			CategoryAndLevel[] categories				
+		}
+	}
+	
+	<**	@description : Get the parent categories id and type (top level) from the a unique id.**>
+	method getParentCategories {
+		in {
+			<** @description : unique category id.**>
+			CategoryID category				
+		}	
+		out {
+			<** @description : List of categories (id and top_level).**>
+			CategoryAndLevel[] categories				
+		}
+	}
+
+	<**	@description : Creates a category by name and return an unique id.**>
+	method createCategory {
+		in {
+			<** @description : Name of the category to create.**>
+			String name				
+
+			<** @description : The parent category (if id of the root category, the category created is a parent one).**>
+			CategoryID category				
+		}	
+		out {
+			<** @description : Category unique id.**>
+			CategoryID unique_id				
+		}	
+	}
+	
+	<**	@description : Removes a list of categories. Because of required time to remove it from the database, a signal is emitted when the deletion is done.**>
+	method removeCategories {
+		in {
+			<** @description : List of categories to be removed.**>
+			CategoryID[] categories				
+		}
+	}
+
+	<**	@description : Adds a list of POIs to a category. Because of required time to add it to the database, a signal is emitted when the update is done, that gives the id of the elements added**>
+	method addPOIs {
+		in {
+			<** @description : Category unique id.**>
+			CategoryID unique_id	
+
+			<** @description : List of POIs and all their content. Note that there's no id sent, because it's up to the component to give it**>
+			PoiAddedDetails[] poiList			
+		}	
+		
+	}
+	
+	<**	@description : Removes a list of POIs to a category. Because of required time to remove it from the database, a signal is emitted when the update is done.**>
+	method removePOIs {
+		in {
+			<** @description : List of unique ids of POIs to remove.**>
+			POI_ID[] ids				
+		}
+	}
+
 	<**	@description : This method is sent by the POI service component to inform all the CAM that a new POI search was started.
         It provides all the relevant search parameters. Of course the CAM will only be aware of the search if it registers one of the search categories.**>
 	method poiSearchStarted {
@@ -124,7 +207,7 @@ interface POIContentAccessModule {
 		}	
 	}
 	
-	<**	@description : ConfigurationChanged = This signal is sent to the clients when one or more configuration settings changes.**>
+	<**	@description : guidanceStatusChanged = This signal is sent to the clients when one or more configuration settings changes.**>
 	broadcast ConfigurationChanged {
 		out {
 			<**	@description : changedSettings array[setting].**>
@@ -132,5 +215,28 @@ interface POIContentAccessModule {
 		}
 	}
 
+	<**	@description : CategoriesRemoved = This signal is emitted when a list of categories and associated content has been removed from the database.**>
+	broadcast CategoriesRemoved {
+		out {
+			<**	@description : List of categories removed.**>
+			CategoryID[] categories
+		}
+	}
+
+	<**	@description : POIAdded = This signal is emitted when a list of POIs and associated content has been added to the database. It returns the ids.**>
+	broadcast POIAdded {
+		out {
+			<**	@description : List of unique ids of POIs added. The order is the same as the order in the AddPOIs method.**>
+			POI_ID[] pois
+		}
+	}
+
+	<**	@description : POIRemoved = This signal is emitted when a list of POIs and associated content has been removed from the database.**>
+	broadcast POIRemoved {
+		out {
+			<**	@description : List of unique ids of POIs removed.**>
+			POI_ID[] pois
+		}
+	}
 
 }

@@ -17,6 +17,7 @@
 # @licence end@
 ###########################################################################
 POI_SERVER=poi-server
+POI_MANAGER_SERVER=poi-manager-server
 POI_COMMON=poi-common
 NAVIGATION_CORE=navigation-core
 MAP_VIEWER=map-viewer
@@ -33,6 +34,8 @@ set-path()
 
 	POI_SERVER_SRC_DIR=$TOP_DIR/$POI_SERVER
 	POI_SERVER_BIN_DIR=$TOP_BIN_DIR/$POI_SERVER
+	POI_MANAGER_SERVER_SRC_DIR=$TOP_DIR/$POI_MANAGER_SERVER
+	POI_MANAGER_SERVER_BIN_DIR=$TOP_BIN_DIR/$POI_MANAGER_SERVER
 	POI_COMMON_SRC_DIR=$TOP_DIR/$POI_COMMON
 }
 
@@ -65,6 +68,15 @@ build() {
     mkdir -p $POI_SERVER
     cd $POI_SERVER_BIN_DIR
 	cmake -Dapi_DIR=$API_DIR -Dgenerated_api_DIR=$GENERATED_API_DIR  $POI_SERVER_SRC_DIR && make
+
+    echo ''
+    echo 'Building poi-manager-server' 
+
+    cd $TOP_BIN_DIR 
+    mkdir -p $POI_MANAGER_SERVER
+    cd $POI_MANAGER_SERVER_BIN_DIR
+	cmake -DCOMMON_API_PATH_GENERATED_FILES=../../../api/franca/navigation/src-gen -DDBUS_LIB_PATH=/usr/local/lib  $POI_MANAGER_SERVER_SRC_DIR && make
+
 }
 
 clean() {

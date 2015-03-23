@@ -29,13 +29,18 @@
 echo '------------------------start the server------------------------'
 CURDIR=$PWD
 ROOT_DIR=$CURDIR/..
-BIN_DIR=$ROOT_DIR/bin/poi-server
-EXE_DIR=$BIN_DIR
+BIN_DIR=$ROOT_DIR/bin
+SERVER_EXE_DIR=$BIN_DIR/poi-server
+MANAGER_SERVER_EXE_DIR=$BIN_DIR/poi-manager-server
 MAIN_DATABASE='poi-database-sample.db'
 
 echo 'kill orphan process if necessary'
 $CURDIR/kill-all
 
 echo 'run'
-$EXE_DIR/poi-server -f $MAIN_DATABASE &
+$SERVER_EXE_DIR/poi-server -f $MAIN_DATABASE &
+
+echo '------------------------start the manager server------------------------'
+$MANAGER_SERVER_EXE_DIR/poi-manager-server &
+
 
