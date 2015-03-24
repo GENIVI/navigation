@@ -1,3 +1,20 @@
+###########################################################################
+# @licence app begin@
+# SPDX-License-Identifier: MPL-2.0
+#
+# Component Name: poi-manager-server
+#
+# Author: Philippe Colliot
+#
+# Copyright (C) 2015, PCA Peugeot Citroën
+#
+# License:
+# This Source Code Form is subject to the terms of the
+# Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+# this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# @licence end@
+###########################################################################
 project(poi-manager-server)
 set(PARENT_API poiservice)
 set(ROOT_API navigation)
