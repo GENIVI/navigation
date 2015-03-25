@@ -37,10 +37,11 @@ pkg_check_modules(DBUS "dbus-1 >= 1.4")
 pkg_check_modules(COMMONAPI "CommonAPI >= 2.1")
 pkg_check_modules(COMMONAPI_DBUS "CommonAPI-DBus >= 2.1")
 pkg_check_modules(SQLITE3 REQUIRED sqlite3)
+pkg_check_modules(GLIBMM glibmm-2.4)
 
 # Source Files
 set(PRJ_SRC_PATH .)
-set(PRJ_COMMON_SRC_PATH ../poi-common)
+set(PRJ_COMMON_SRC_PATH ../../../src/poi-service/poi-common)
 set(PRJ_SRC_GEN_PATH ${COMMON_API_PATH_GENERATED_FILES}/org/genivi)
 FILE(GLOB PRJ_LOCAL_SRCS ${PRJ_SRC_PATH}/*.cpp)
 FILE(GLOB PRJ_COMMON_SRCS ${PRJ_COMMON_SRC_PATH}/*.cpp)
@@ -56,6 +57,7 @@ include_directories(
     ${DBUS_INCLUDE_DIRS}
     ${COMMONAPI_INCLUDEDIR}/${COMMON_API_VERSION}
     ${COMMONAPI_DBUS_INCLUDEDIR}
+    ${GLIBMM_INCLUDE_DIRS}
     ${SQLITE3_INCLUDE_DIRS}
 )
 
@@ -63,12 +65,14 @@ link_directories(
     ${DBUS_LIB_PATH}
     ${COMMONAPI_LIBDIR}
     ${COMMONAPI_DBUS_LIBDIR}
+    ${GLIBMM_LIBRARY_DIRS}
     ${SQLITE3_LIBRARY_DIRS}
 )
 
 set(LIBRARIES
     ${COMMONAPI_LIBRARIES}
     ${COMMONAPI_DBUS_LIBRARIES}
+    ${GLIBMM_LIBRARIES}
     ${SQLITE3_LIBRARIES}
 )
 

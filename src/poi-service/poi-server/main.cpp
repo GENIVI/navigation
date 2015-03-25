@@ -42,6 +42,7 @@
 
 #include "poi-server-class.h"
 
+
 static const char* poiSearch_SERVICE_NAME = "org.genivi.poiservice.POISearch";
 static const char* poiSearch_OBJECT_PATH = "/org/genivi/poiservice/POISearch";
 static const char* poiConfiguration_SERVICE_NAME = "org.genivi.poiservice.Configuration";
@@ -682,6 +683,9 @@ poiSearchServer::poiSearchServer(DBus::Connection &connection, const char* poiDa
         m_rootCategory = 0;
         m_searchStatus = GENIVI_POISERVICE_NOT_STARTED;
         m_routeHandle = INVALID_HANDLE;
+        m_languageCode = "eng";
+        m_countryCode = "USA";
+        m_scriptCode = "Latn";
 
         // all the pois and the related stuff are included into the database at the startup
         // so we can update some tables into the constructor

@@ -24,32 +24,127 @@
 *
 * @licence end@
 */
+#include <stdbool.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <sys/types.h>
 #include <iostream>
+#include <fstream>
+#include <cmath>
 #include <thread>
+#include <typeinfo>
+#include <getopt.h>
+
 #include <CommonAPI/CommonAPI.h> //Defined in the Common API Runtime library
 #include "poi-manager-server-stub.h"
 
-int main()
+const char* program_name; //file to sink outputs
+
+/**
+ * \fn is_readable (const std::string & file)
+ * \brief Check if file can be opened.
+ *
+ * \param  const std::string & file	-name of the file
+ * \return true if file readable.
+ */
+bool is_readable( const std::string & file )
 {
+    std::ifstream fi( file.c_str() );
+    return !fi.fail();
+}
+
+/**
+ * \fn print_usage (FILE* stream, int exit_code)
+ * \brief Display the available options.
+ *
+ * \param  const FILE* stream	-name of stream to use
+ * \param  int exit_code	-exit code
+ * \return void.
+ */
+void print_usage (FILE* stream, int exit_code)
+{
+  fprintf (stream, "Use: %s options [database]\n",program_name);
+  fprintf (stream,
+           " -h --help               Display this message.\n"
+           " -f --file database   Open the database.\n");
+  exit (exit_code);
+}
+
+int main(int  argc , char**  argv )
+{
+    // Set the global C and C++ locale to the user-configured locale,
+    // so we can use std::cout with UTF-8, via Glib::ustring, without exceptions.
+    std::locale::global(std::locale(""));
+
+    // Common API data init
     std::shared_ptr<CommonAPI::Runtime> runtime = CommonAPI::Runtime::load();
     std::shared_ptr<CommonAPI::Factory> factory = runtime->createFactory();
     std::shared_ptr<CommonAPI::ServicePublisher> servicePublisher = runtime->getServicePublisher();
     const std::string& serviceAddress = "local:org.genivi.poiservice.POIContentManager:org.genivi.poiservice.POIContentManager";
     std::shared_ptr<PoiManagerServerStub> myService = std::make_shared<PoiManagerServerStub>();
 
-    //register Interface for Management of a POI Content Access Module with add/remove features
-    bool registerResult = servicePublisher->registerService(myService, serviceAddress, factory);
-    if (registerResult != true) {
-        std::cerr << "Registering of POI Manager stub failed." << std::endl;
-        exit(1);
-    }
+    //index used for argument analysis
+    int next_option;
 
-    std::cout << "Welcome to Genivi POI Manager simulation (Server part)" << std::endl << std::endl;
+    /* Valid letters for short options. */
+    const char* const short_options = "hf:";
+    /* Valid string for long options. */
+    const struct option long_options[] = {
+        { "help",     0, NULL, 'h' },
+        { "file", 2, NULL, 'f' },
+        { NULL,       0, NULL, 0   }   /* Always at the end of the table.  */
+    };
+    char* database_filename = NULL; //database filename passed as first argument
+    program_name = argv[0];
 
-    while(true) {
-        std::cout << "Waiting for calls... (Abort with CTRL+C)" << std::endl;
-        std::this_thread::sleep_for(std::chrono::seconds(60));
+    GMainLoop * mainloop ;
+
+    bool registerResult;
+    do {
+        next_option = getopt_long (argc, argv, short_options,
+                                  long_options, NULL);
+        switch (next_option)
+        {
+        case 'h':   /* -h --help */
+            print_usage (stdout, 0);
+            break;
+        case 'f':   /* -f --file database*/
+            database_filename = argv[2];
+            if (!is_readable(database_filename))
+                print_usage (stderr, 1);
+            else
+            {
+                myService->initDatabase(database_filename);
+
+                //register Interface for Management of a POI Content Access Module with add/remove features
+                registerResult = servicePublisher->registerService(myService, serviceAddress, factory);
+                if (registerResult != true) {
+                    std::cerr << "Registering of POI Manager stub failed." << std::endl;
+                    exit(EXIT_FAILURE);
+                }
+
+                // Create a new GMainLoop with default context and initial state of "not running "
+                mainloop = g_main_loop_new (g_main_context_default() , FALSE );
+
+                // Send a feedback to the user
+                cout << "poi manager server started" << endl;
+
+                g_main_loop_run ( mainloop );
+
+            }
+            break;
+        case '?':   /* Invalid option. */
+            print_usage (stderr, 1);
+        case -1:    /* End of options.  */
+            break;
+        default:    /* Error  */
+            print_usage (stderr, 1);
+        }
     }
-    return 0;
+    while (next_option != -1);
+
+    return EXIT_SUCCESS;
 }
 

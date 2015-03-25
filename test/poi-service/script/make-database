@@ -48,6 +48,7 @@ STATION_FILE=$POI_FILES_DIR/'station.xml'
 BICYCLE_FILE=$POI_FILES_DIR/'bicycle.xml'
 MAIN_DATABASE=$BIN_DIR/'poi-database.db'
 ADDITIONAL_DATABASE=$BIN_DIR/'poi-database-additional.db'
+MANAGED_DATABASE=$BIN_DIR/'poi-database-managed.db'
 
 if [ ! -f $FUEL_FILE ]
 then
@@ -75,7 +76,8 @@ rm -f $BIN_DIR/*.db
 echo 'create empty databases'
 cp poi-database-empty $MAIN_DATABASE
 cp poi-database-empty $ADDITIONAL_DATABASE
-echo 'create the main databases for the poi-client'
+cp poi-database-empty $MANAGED_DATABASE
+echo 'create the main database for the poi-client'
 sqlite3 $MAIN_DATABASE < create-scheme.sql
 sqlite3 $MAIN_DATABASE < populate-database.sql
 $EXE_DIR/poi-supplier -p $MAIN_DATABASE $FUEL_FILE primary=amenity secondary=fuel,
@@ -85,4 +87,7 @@ echo 'create the additional database for the poi-content-access-client'
 sqlite3 $ADDITIONAL_DATABASE < create-scheme.sql
 sqlite3 $ADDITIONAL_DATABASE < populate-database-additional.sql
 $EXE_DIR/poi-supplier -p $ADDITIONAL_DATABASE $BICYCLE_FILE primary=shop secondary=bicycle,
+echo 'create the ready to use database for the poi-manager-client'
+sqlite3 $MANAGED_DATABASE < create-scheme.sql
+sqlite3 $MANAGED_DATABASE < populate-database.sql
 

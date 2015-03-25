@@ -54,7 +54,7 @@ enum ATTRIBUTE_LIST{
 };
 
 
-// Data types used by the CAM
+// Data types used by the CAM and the server
 /**
  * \struct category_attribute_t
  * \brief attributes.

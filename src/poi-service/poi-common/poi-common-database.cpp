@@ -4,7 +4,7 @@
 *
 * \copyright Copyright (C) 2013-2014, PCA Peugeot Citroen
 *
-* \file database.cpp
+* \file poi-common-database.cpp
 *
 * \brief This file is part of the poi proof of concept.
 *

@@ -102,6 +102,11 @@ contentAccessModuleServer::contentAccessModuleServer(DBus::Connection &connectio
         version.date = "19-12-2012";
         m_version.set(version);
 
+        // language code is hard coded
+        m_languageCode = "eng";
+        m_countryCode = "USA";
+        m_scriptCode = "Latn";
+
         //status
         m_poiSearchHandle = INVALID_HANDLE;
         m_camId = INVALID_HANDLE;
