@@ -25,8 +25,7 @@
 *
 * @licence end@
 */
-
-#include "database.h"
+#include "poi-common-database.h"
 #include <stdio.h>
 #include <iostream>
 
@@ -37,10 +36,10 @@
  * \param  const char* filename	-name of the database file to open
  * \return void.
  */
-Database::Database(char* filename)
+Database::Database(const char* filename)
 {
 	database = NULL;
-    open(filename);
+    open(filename); //no check for valid file
 	m_filename = filename;
 }
 
@@ -62,7 +61,7 @@ Database::~Database()
  * \param  const char* filename -name of the database file to open
  * \return bool. -true if database consistant
  */
-bool Database::open(char* filename)
+bool Database::open(const char* filename)
 {
     if(sqlite3_open(filename, &database) == SQLITE_OK)
         return true;
@@ -158,8 +157,7 @@ void Database::beginTransaction()
  */
 void Database::appendTransaction(const char* query)
 {
-    char* errorMessage = "";
-    sqlite3_exec(database, query, NULL, NULL, &errorMessage);
+	sqlite3_exec(database, query, NULL, NULL, NULL);
 }
 
 /**
@@ -171,8 +169,8 @@ void Database::appendTransaction(const char* query)
  */
 void Database::commitTransaction()
 {
-    char* errorMessage = "";
-    sqlite3_exec(database, "COMMIT;", NULL, NULL, &errorMessage);
+	char* errorMessage;
+	sqlite3_exec(database, "COMMIT;", NULL, NULL, &errorMessage);
 }
 
 /**
@@ -180,13 +178,13 @@ void Database::commitTransaction()
  * \brief Query a SQL request.
  *
  * \param const char* query -SQL request
- * \return vector<vector<string> > -Result of the query
+ * \return vector<vector<Glib::ustring> > -Result of the query
  */
 vector<vector<Glib::ustring> > Database::query(const char* query)
 {
     sqlite3_stmt *statement;
     vector<vector<Glib::ustring> > results;
-	 
+	
     if(sqlite3_prepare_v2(database, query, -1, &statement, 0) == SQLITE_OK)
     {
         int cols = sqlite3_column_count(statement);
@@ -224,7 +222,57 @@ vector<vector<Glib::ustring> > Database::query(const char* query)
     if(error != "not an error") cout << query << " " << error << endl;   
 	    return results; 
 }
-	 
+
+/**
+ * \fn query(const char* query)
+ * \brief Query a SQL request.
+ *
+ * \param const char* query -SQL request
+ * \return vector<vector<Glib::ustring> > -Result of the query
+ */
+vector<vector<string> > Database::queryNotUTF(const char* query)
+{
+    sqlite3_stmt *statement;
+    vector<vector<string> > results;
+
+    if(sqlite3_prepare_v2(database, query, -1, &statement, 0) == SQLITE_OK)
+    {
+        int cols = sqlite3_column_count(statement);
+        int result = 0;
+        while(true)
+        {
+            result = sqlite3_step(statement);
+
+            if(result == SQLITE_ROW)
+            {
+                vector<string> values;
+                for(int col = 0; col < cols; col++)
+                {
+                    string  val;
+                    char * ptr = (char*)sqlite3_column_text(statement, col);
+                    if(ptr)
+                    {
+                        val = ptr;
+                    }
+                    else val = ""; // this can be commented out since std::string  val;
+                    values.push_back(val);  // now we will never push NULL
+                }
+                results.push_back(values);
+            }
+            else
+            {
+                break;
+            }
+        }
+
+        sqlite3_finalize(statement);
+    }
+
+    string error = sqlite3_errmsg(database);
+    if(error != "not an error") cout << query << " " << error << endl;
+        return results;
+}
+
 /**
  * \fn close()
  * \brief Close the database.

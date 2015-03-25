@@ -41,24 +41,10 @@ pkg_check_modules(QT5_DBUS REQUIRED Qt5DBus)
 pkg_check_modules(QT5_WIDGETS REQUIRED Qt5Widgets)
 pkg_check_modules(QT5_GUI REQUIRED Qt5Gui)
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
-include_directories(${DBUS_CPP_INCLUDE_DIRS})
-include_directories(${GLIB_INCLUDE_DIRS})
-include_directories(${SQLITE3_INCLUDE_DIRS})
-include_directories(${GLIBMM_INCLUDE_DIRS})
-include_directories(${GOBJECT_INCLUDE_DIRS})
-include_directories(${DBUS_INCLUDE_DIRS})
-include_directories(${DBUS_CPP_GLIB_INCLUDE_DIRS})
-include_directories(${QT5_CORE_INCLUDE_DIRS})
-include_directories(${QT5_QUICK_INCLUDE_DIRS})
-include_directories(${QT5_DBUS_INCLUDE_DIRS})
-include_directories(${QT5_WIDGETS_INCLUDE_DIRS})
-include_directories(${QT5_GUI_INCLUDE_DIRS})
-
 set(cmake_create_dir cmake -E make_directory)
 
 #settings for Qt
-set(CMAKE_XXX_FLAGS "${CMAKE_XXX_FLAGS} ${QT5_EXECUTABLE_COMPILE_FLAGS} -std=gnu++11")
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} ${QT5_EXECUTABLE_COMPILE_FLAGS} -std=gnu++11)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 add_definitions(${QT5_CORE_DEFINITIONS})
@@ -73,46 +59,21 @@ set(qt_rcc ${QTRCC})
 
 set(API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../api)
 set(TARGET_GENERATED_API_DIR ${API_DIR}/include)
+set(PRJ_SRC_PATH .)
+set(PRJ_COMMON_SRC_PATH ../../../src/poi-service/poi-common)
 
 file(GLOB DBUS_DEF_INCLUDE ${TARGET_GENERATED_API_DIR}/*_proxy.h ${TARGET_GENERATED_API_DIR}/*_adaptor.h ${TARGET_GENERATED_API_DIR}/*-constants.h)
 
-link_directories(
-    ${DBUS_CPP_LIBRARY_DIRS}
-    ${GLIB_LIBRARY_DIRS}
-	${SQLITE3_LIBRARY_DIRS}
-	${GLIBMM_LIBRARY_DIRS}
-	${GOBJECT_LIBRARY_DIRS}
-	${DBUS_LIBRARY_DIRS}
-	${DBUS_CPP_GLIB_DIRS}
-	${QT5_CORE_LIBRARY_DIRS}
-	${QT5_QUICK_LIBRARY_DIRS}
-	${QT5_DBUS_LIBRARY_DIRS}
-	${QT5_WIDGETS_LIBRARY_DIRS}
-	${QT5_GUI_LIBRARY_DIRS}
-)
-
-set(LIBRARIES 
-    ${DBUS_CPP_LIBRARIES}
-    ${GLIB_LIBRARIES}
-	${SQLITE3_LIBRARIES}
-	${GLIBMM_LIBRARIES}
-	${GOBJECT_LIBRARIES}
-	${DBUS_LIBRARIES}
-	${DBUS_CPP_GLIB_LIBRARIES}
-    ${QT5_CORE_LIBRARIES}
-    ${QT5_QUICK_LIBRARIES}
-    ${QT5_DBUS_LIBRARIES}
-    ${QT5_WIDGETS_LIBRARIES}
-    ${QT5_GUI_LIBRARIES}
-)
+#common files shared with poi server
+file(GLOB PRJ_COMMON_SRCS ${PRJ_COMMON_SRC_PATH}/*.cpp)
 
 # for some reason, automoc doesn't run, so moc is made manually
-file (GLOB SRC_TO_MOC ${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.h
+file(GLOB SRC_TO_MOC ${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.h
 )
 execute_process(
 	COMMAND ${cmake_create_dir} ${MOC}
 )
-foreach (RAW_FILE ${SRC_TO_MOC})
+foreach(RAW_FILE ${SRC_TO_MOC})
 	get_filename_component(FILE ${RAW_FILE} NAME_WE)
 	if(NOT EXISTS ${MOC_DIR}/moc_${FILE}.cpp)
 		execute_process(
@@ -129,9 +90,8 @@ endforeach()
 file(GLOB MOC_SOURCES ${MOC_DIR}/moc_*.cpp)
 
 #generate ui files
-file (GLOB DEF_TO_UIC ${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.ui
+file(GLOB DEF_TO_UIC ${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.ui
 )
-
 foreach (RAW_FILE ${DEF_TO_UIC})
 	get_filename_component(FILE ${RAW_FILE} NAME_WE)
 	if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/ui_${FILE}.h)
@@ -150,11 +110,10 @@ file(GLOB UI_FILES ${CMAKE_CURRENT_BINARY_DIR}/ui_*.h)
 
 #generate qm files
 set(COMMON_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../poi-common)
-file (GLOB TS_TO_RELEASE ${COMMON_DIR}/poi-contentaccess-module_en.ts
+file(GLOB TS_TO_RELEASE ${COMMON_DIR}/poi-contentaccess-module_en.ts
         ${COMMON_DIR}/poi-contentaccess-module_jp.ts
 )
-
-foreach (RAW_FILE ${TS_TO_RELEASE})
+foreach(RAW_FILE ${TS_TO_RELEASE})
     get_filename_component(FILE ${RAW_FILE} NAME_WE)
     if(NOT EXISTS ${COMMON_DIR}/${FILE}.qm)
         execute_process(
@@ -187,17 +146,62 @@ else()
     endif()
 endif()
 
+include_directories(
+    ${PRJ_SRC_PATH}
+    ${PRJ_COMMON_SRC_PATH}
+    ${CMAKE_CURRENT_BINARY_DIR}
+    ${DBUS_CPP_INCLUDE_DIRS}
+    ${GLIB_INCLUDE_DIRS}
+    ${SQLITE3_INCLUDE_DIRS}
+    ${GLIBMM_INCLUDE_DIRS}
+    ${GOBJECT_INCLUDE_DIRS}
+    ${DBUS_INCLUDE_DIRS}
+    ${DBUS_CPP_GLIB_INCLUDE_DIRS}
+    ${QT5_CORE_INCLUDE_DIRS}
+    ${QT5_QUICK_INCLUDE_DIRS}
+    ${QT5_DBUS_INCLUDE_DIRS}
+    ${QT5_WIDGETS_INCLUDE_DIRS}
+    ${QT5_GUI_INCLUDE_DIRS}
+)
+
+link_directories(
+    ${DBUS_CPP_LIBRARY_DIRS}
+    ${GLIB_LIBRARY_DIRS}
+    ${SQLITE3_LIBRARY_DIRS}
+    ${GLIBMM_LIBRARY_DIRS}
+    ${GOBJECT_LIBRARY_DIRS}
+    ${DBUS_LIBRARY_DIRS}
+    ${DBUS_CPP_GLIB_DIRS}
+    ${QT5_CORE_LIBRARY_DIRS}
+    ${QT5_QUICK_LIBRARY_DIRS}
+    ${QT5_DBUS_LIBRARY_DIRS}
+    ${QT5_WIDGETS_LIBRARY_DIRS}
+    ${QT5_GUI_LIBRARY_DIRS}
+)
+
 add_executable(poi-contentaccess-module
     ${MOC_SOURCES}
     ${DBUS_DEF_INCLUDE}
     ${UI_FILES}
     poi-contentaccess-module-class.h
     main.cpp
-    database.cpp
+    ${PRJ_COMMON_SRCS}
     mainwindow.cpp
-    poi-datamodel.h
+)
+
+set(LIBRARIES
+    ${DBUS_CPP_LIBRARIES}
+    ${GLIB_LIBRARIES}
+    ${SQLITE3_LIBRARIES}
+    ${GLIBMM_LIBRARIES}
+    ${GOBJECT_LIBRARIES}
+    ${DBUS_LIBRARIES}
+    ${DBUS_CPP_GLIB_LIBRARIES}
+    ${QT5_CORE_LIBRARIES}
+    ${QT5_QUICK_LIBRARIES}
+    ${QT5_DBUS_LIBRARIES}
+    ${QT5_WIDGETS_LIBRARIES}
+    ${QT5_GUI_LIBRARIES}
 )
 
 target_link_libraries(poi-contentaccess-module ${LIBRARIES})
-
-

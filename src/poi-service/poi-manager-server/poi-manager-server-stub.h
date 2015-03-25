@@ -31,6 +31,10 @@
 
 #include "org/genivi/navigation/poiservice/POIContentManagerStubDefault.h"
 
+#include "poi-common-database.h"
+
+#include "poi-common-data-model.h"
+
 using namespace org;
 using namespace genivi;
 using namespace navigation;
@@ -42,8 +46,18 @@ public:
     PoiManagerServerStub();
     ~PoiManagerServerStub();
     void getVersion(const std::shared_ptr<CommonAPI::ClientId> clientId, NavigationTypes::Version& version);
+    void setLocale(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string languageCode, std::string countryCode, std::string scriptCode);
+    void getLocale(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& languageCode, std::string& countryCode, std::string& scriptCode);
+    void getSupportedLocales(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<POIServiceTypes::Locales>& localeList);
 private:
     NavigationTypes::Version m_version;
+    std::string m_languageCode, m_countryCode, m_scriptCode;
+
+    Database *mp_database; // database access
+    POIServiceTypes::CategoryID m_availableCategories;
+    poi_category_common_t m_availableCategoryTable[MAX_CATEGORIES];
+    POIServiceTypes::CategoryID m_rootCategory;
+
 };
 
 #endif /* POIMANAGERSERVERSTUBIMPL_H_ */

@@ -36,11 +36,11 @@
 #include "../../../api/include/genivi-poiservice-configuration_adaptor.h"
 #include "../../../api/include/genivi-navigationcore-routing_proxy.h"
 #include "../../../api/include/genivi-poiservice-contentaccessmodule_proxy.h"
-#include "../../../src/poi-service/poi-common/poi-common-data-model.h"
 #include <dbus-c++/glib-integration.h>
 
+#include "poi-common-dbus-data-model.h"
+
 #include "poi-datamodel.h"
-#include "database.h"
 
 
 // string conversion to numeric: the third parameter of fromString() should be one of std::hex, std::dec or std::oct
@@ -53,7 +53,8 @@ bool fromString(T& t, const std::string& s, std::ios_base& (*f)(std::ios_base&))
 
 
 using namespace DBus;
-using namespace Glib;
+using namespace std;
+
 
 class Routing;
 class contentAccessModule;

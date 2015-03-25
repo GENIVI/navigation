@@ -41,3 +41,25 @@ void PoiManagerServerStub::getVersion(const std::shared_ptr<CommonAPI::ClientId>
 {
     version = m_version;
 }
+
+void PoiManagerServerStub::setLocale(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string languageCode, std::string countryCode, std::string scriptCode)
+{
+    m_languageCode = languageCode;
+    m_countryCode = countryCode;
+    m_scriptCode = scriptCode;
+}
+
+void PoiManagerServerStub::getLocale(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& languageCode, std::string& countryCode, std::string& scriptCode)
+{
+    languageCode = m_languageCode;
+    countryCode = m_countryCode;
+    scriptCode = m_scriptCode;
+}
+
+void PoiManagerServerStub::getSupportedLocales(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<POIServiceTypes::Locales>& localeList)
+{
+    POIServiceTypes::Locales en_US { "eng","USA", "Latn" };
+    POIServiceTypes::Locales fr_FR { "fra","FRA", "Latn" };
+    localeList.push_back(en_US);
+    localeList.push_back(fr_FR);
+}

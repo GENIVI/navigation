@@ -27,10 +27,12 @@
 */
 
 #include <getopt.h>
+
+#include "poi-common-database.h"
+
 #include "poi-datamodel.h"
 
 #include "raw-file-sort.h"
-#include "database.h"
 
 #ifndef SAFE_DELETE
 #define SAFE_DELETE(_p)			{ if ((_p) != NULL) { delete(_p); (_p) = NULL; } }

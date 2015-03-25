@@ -17,7 +17,7 @@
 ###########################################################################
 project(poi-server)
 cmake_minimum_required(VERSION 2.8)
-set(CMAKE_XXX_FLAGS "${CMAKE_XXX_FLAGS} -std=gnu++11")
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -std=gnu++11)
 
 message(STATUS "poi-server")
 
@@ -33,45 +33,50 @@ pkg_check_modules(GOBJECT gobject-2.0)
 pkg_check_modules(DBUS dbus-1)
 pkg_check_modules(DBUS_CPP_GLIB dbus-c++-glib-1)
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
-include_directories(${DBUS_CPP_INCLUDE_DIRS})
-include_directories(${GLIB_INCLUDE_DIRS})
-include_directories(${SQLITE3_INCLUDE_DIRS})
-include_directories(${GLIBMM_INCLUDE_DIRS})
-include_directories(${GOBJECT_INCLUDE_DIRS})
-include_directories(${DBUS_INCLUDE_DIRS})
-include_directories(${DBUS_CPP_GLIB_INCLUDE_DIRS})
+set(PRJ_SRC_PATH .)
+set(PRJ_COMMON_SRC_PATH ../../../src/poi-service/poi-common)
+
+#common files shared with poi server
+file(GLOB PRJ_COMMON_SRCS ${PRJ_COMMON_SRC_PATH}/*.cpp)
+
+include_directories(
+    ${PRJ_SRC_PATH}
+    ${PRJ_COMMON_SRC_PATH}
+    ${CMAKE_CURRENT_BINARY_DIR}
+    ${DBUS_CPP_INCLUDE_DIRS}
+    ${GLIB_INCLUDE_DIRS}
+    ${SQLITE3_INCLUDE_DIRS}
+    ${GLIBMM_INCLUDE_DIRS}
+    ${GOBJECT_INCLUDE_DIRS}
+    ${DBUS_INCLUDE_DIRS}
+    ${DBUS_CPP_GLIB_INCLUDE_DIRS}
+)
 
 link_directories(
     ${DBUS_CPP_LIBRARY_DIRS}
     ${GLIB_LIBRARY_DIRS}
-	${SQLITE3_LIBRARY_DIRS}
-	${GLIBMM_LIBRARY_DIRS}
-	${GOBJECT_LIBRARY_DIRS}
-	${DBUS_LIBRARY_DIRS}
-	${DBUS_CPP_GLIB_DIRS}
+    ${SQLITE3_LIBRARY_DIRS}
+    ${GLIBMM_LIBRARY_DIRS}
+    ${GOBJECT_LIBRARY_DIRS}
+    ${DBUS_LIBRARY_DIRS}
+    ${DBUS_CPP_GLIB_DIRS}
 )
 
 add_executable(poi-server
     main.cpp
-    database.cpp
-	database.h
     poi-server-class.h
     poi-datamodel.h
-        ../poi-common/poi-common-data-model.h
+    ${PRJ_COMMON_SRCS}
 )
 
 set(LIBRARIES 
     ${DBUS_CPP_LIBRARIES}
     ${GLIB_LIBRARIES}
-	${SQLITE3_LIBRARIES}
-	${GLIBMM_LIBRARIES}
-	${GOBJECT_LIBRARIES}
-	${DBUS_LIBRARIES}
-	${DBUS_CPP_GLIB_LIBRARIES}
+    ${SQLITE3_LIBRARIES}
+    ${GLIBMM_LIBRARIES}
+    ${GOBJECT_LIBRARIES}
+    ${DBUS_LIBRARIES}
+    ${DBUS_CPP_GLIB_LIBRARIES}
 )
 
 target_link_libraries(poi-server ${LIBRARIES})
-
-
-

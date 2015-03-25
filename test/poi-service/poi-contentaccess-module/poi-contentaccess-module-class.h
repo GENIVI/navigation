@@ -32,11 +32,13 @@
 #include "../../../api/include/genivi-poiservice-constants.h"
 #include "../../../api/include/genivi-poiservice-contentaccessmodule_adaptor.h"
 #include "../../../api/include/genivi-poiservice-poicontentaccess_proxy.h"
-#include "../../../src/poi-service/poi-common/poi-common-data-model.h"
+#include "poi-common-dbus-data-model.h"
+
 #include <dbus-c++/glib-integration.h>
 
-#include "poi-datamodel.h"
-#include "database.h"
+#include "poi-common-database.h"
+
+#include "poi-common-data-model.h"
 
 #include "mainwindow.h"
 
@@ -50,7 +52,6 @@ bool fromString(T& t, const std::string& s, std::ios_base& (*f)(std::ios_base&))
 }
 
 using namespace DBus;
-using namespace Glib;
 
 class contentAccessModuleServer;
 class poiContentAccess;
@@ -181,7 +182,7 @@ private:
 
 // category and attribute management
     categoryId_t m_availableCategories;
-    poi_category_t m_availableCategoryTable[MAX_CATEGORIES];
+    poi_category_common_t m_availableCategoryTable[MAX_CATEGORIES];
     categoryId_t m_rootCategory;
 };
 

@@ -25,7 +25,6 @@
 *
 * @licence end@
 */
-
 #ifndef __DATABASE_H__
 #define __DATABASE_H__
 	 
@@ -34,20 +33,20 @@
 #include <sqlite3.h>
 #include <glibmm/ustring.h>
 
-
 using namespace std;
 	 
 class Database
 {
 	public:
-		Database(char* filename);
+		Database(const char* filename);
 	    ~Database();
 	     
-	    bool open(char* filename);
+	    bool open(const char* filename);
 		bool schema();
 		bool add(const char* scheme_filename); 
         vector<vector<Glib::ustring> > query(const char* query);
-	    void close();
+        vector<vector<string> > queryNotUTF(const char* query);
+        void close();
 		void beginTransaction();
 		void appendTransaction(const char* query);
 		void commitTransaction();

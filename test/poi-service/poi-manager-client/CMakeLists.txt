@@ -2,7 +2,7 @@
 # @licence app begin@
 # SPDX-License-Identifier: MPL-2.0
 #
-# Component Name: poi-manager-server
+# Component Name: poi-manager-client
 #
 # Author: Philippe Colliot
 #
@@ -15,14 +15,14 @@
 #
 # @licence end@
 ###########################################################################
-project(poi-manager-server)
+project(poi-manager-client)
 set(PARENT_API poiservice)
 set(ROOT_API navigation)
 set(COMMON_API_VERSION CommonAPI-2.1)
 
 set(CMAKE_VERBOSE_MAKEFILE off)
 cmake_minimum_required(VERSION 2.8)
-set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-Wall -O0 -std=c++0x -std=gnu++11")
+set(CMAKE_CXX_FLAGS "-Wall -O0 -std=c++0x")
 
 # DBus Path
 if (DBUS_LIB_PATH)
@@ -37,7 +37,6 @@ pkg_check_modules(DBUS "dbus-1 >= 1.4")
 pkg_check_modules(COMMONAPI "CommonAPI >= 2.1")
 pkg_check_modules(COMMONAPI_DBUS "CommonAPI-DBus >= 2.1")
 pkg_check_modules(SQLITE3 REQUIRED sqlite3)
-pkg_check_modules(GLIBMM glibmm-2.4)
 
 # Source Files
 set(PRJ_SRC_PATH .)
@@ -57,7 +56,6 @@ include_directories(
     ${DBUS_INCLUDE_DIRS}
     ${COMMONAPI_INCLUDEDIR}/${COMMON_API_VERSION}
     ${COMMONAPI_DBUS_INCLUDEDIR}
-    ${GLIBMM_INCLUDE_DIRS}
     ${SQLITE3_INCLUDE_DIRS}
 )
 
@@ -65,17 +63,16 @@ link_directories(
     ${DBUS_LIB_PATH}
     ${COMMONAPI_LIBDIR}
     ${COMMONAPI_DBUS_LIBDIR}
-    ${GLIBMM_LIBRARY_DIRS}
     ${SQLITE3_LIBRARY_DIRS}
 )
 
 set(LIBRARIES
     ${COMMONAPI_LIBRARIES}
     ${COMMONAPI_DBUS_LIBRARIES}
-    ${GLIBMM_LIBRARIES}
     ${SQLITE3_LIBRARIES}
 )
 
 # Build service
 add_executable(${PROJECT_NAME} ${PRJ_SRCS})
 target_link_libraries(${PROJECT_NAME} ${LIBRARIES})
+

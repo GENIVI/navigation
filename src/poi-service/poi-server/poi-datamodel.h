@@ -35,7 +35,7 @@
 #include <stdint.h>
 #include <iostream>
 #include <fstream>
-#include "../../../src/poi-service/poi-common/poi-common-data-model.h"
+#include "poi-common-dbus-data-model.h"
 
 /**
  * \struct category_attribute_t
@@ -87,21 +87,6 @@ typedef struct
     DBus_geoCoordinate3D::geoCoordinate3D_t startPoint;
     DBus_geoCoordinate3D::geoCoordinate3D_t endPoint;
 } route_vector_t;
-
-enum ATTRIBUTE_LIST{
-    ATTRIBUTE_SOURCE = 0,
-    ATTRIBUTE_WEBSITE,
-    ATTRIBUTE_PHONE,
-    ATTRIBUTE_STARS,
-    ATTRIBUTE_OPENINGHOURS,
-    ATTRIBUTE_ADDRHOUSENUMBER,
-    ATTRIBUTE_ADDRSTREET,
-    ATTRIBUTE_ADDRPOSTCODE,
-    ATTRIBUTE_ADDRCITY,
-    ATTRIBUTE_BRAND,
-    ATTRIBUTE_OPERATEUR,
-    ATTRIBUTE_SIZE
-};
 
 
 /**

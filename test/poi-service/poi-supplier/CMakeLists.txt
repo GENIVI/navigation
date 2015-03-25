@@ -29,39 +29,48 @@ pkg_check_modules(GOBJECT gobject-2.0)
 pkg_check_modules(XML2 libxml-2.0)
 pkg_check_modules(XMLCPP libxml++-2.6)
 
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
-include_directories(${GLIB_INCLUDE_DIRS})
-include_directories(${SQLITE3_INCLUDE_DIRS})
-include_directories(${GLIBMM_INCLUDE_DIRS})
-include_directories(${GOBJECT_INCLUDE_DIRS})
-include_directories(${XML2_INCLUDE_DIRS})
-include_directories(${XMLCPP_INCLUDE_DIRS})
+set(PRJ_SRC_PATH .)
+set(PRJ_COMMON_SRC_PATH ../../../src/poi-service/poi-common)
+
+#common files shared with poi server
+file(GLOB PRJ_COMMON_SRCS ${PRJ_COMMON_SRC_PATH}/*.cpp)
+
+include_directories(
+    ${PRJ_SRC_PATH}
+    ${PRJ_COMMON_SRC_PATH}
+    ${CMAKE_CURRENT_BINARY_DIR}
+    ${GLIB_INCLUDE_DIRS}
+    ${SQLITE3_INCLUDE_DIRS}
+    ${GLIBMM_INCLUDE_DIRS}
+    ${GOBJECT_INCLUDE_DIRS}
+    ${XML2_INCLUDE_DIRS}
+    ${XMLCPP_INCLUDE_DIRS}
+)
 
 link_directories(
     ${GLIB_LIBRARY_DIRS}
-	${SQLITE3_LIBRARY_DIRS}
-	${GLIBMM_LIBRARY_DIRS}
-	${GOBJECT_LIBRARY_DIRS}
-	${XML2_LIBRARY_DIRS}
-	${XMLCPP_LIBRARY_DIRS}
+    ${SQLITE3_LIBRARY_DIRS}
+    ${GLIBMM_LIBRARY_DIRS}
+    ${GOBJECT_LIBRARY_DIRS}
+    ${XML2_LIBRARY_DIRS}
+    ${XMLCPP_LIBRARY_DIRS}
 )
 
 add_executable(poi-supplier
-	main.cpp 
-    database.cpp 
+    main.cpp
     raw-file-sort.cpp
-	database.h 
-    raw-file-sort.h 
+    raw-file-sort.h
     poi-datamodel.h
+    ${PRJ_COMMON_SRCS}
 )
 
 set(LIBRARIES 
     ${GLIB_LIBRARIES}
-	${SQLITE3_LIBRARIES}
-	${GLIBMM_LIBRARIES}
-	${GOBJECT_LIBRARIES}
-	${XML2_LIBRARIES}
-	${XMLCPP_LIBRARIES}
+    ${SQLITE3_LIBRARIES}
+    ${GLIBMM_LIBRARIES}
+    ${GOBJECT_LIBRARIES}
+    ${XML2_LIBRARIES}
+    ${XMLCPP_LIBRARIES}
 )
 
 target_link_libraries(poi-supplier ${LIBRARIES})
