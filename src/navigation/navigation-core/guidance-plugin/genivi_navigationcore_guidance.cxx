@@ -385,7 +385,7 @@ GuidanceObj::GetDestinationInformation(uint32_t& Distance, uint32_t& TravelTime,
 	if (!idx)
 		throw DBus::ErrorFailed("internal error:navigation has only one coordinate");
 	if (destination_time.u.num == -1 || destination_length.u.num == -1) {
-        dbg(lvl_debug,"time %d length %d\n",destination_time.u.num, destination_length.u.num);
+        dbg(lvl_debug,"time %d length %d\n",(int) destination_time.u.num, (int) destination_length.u.num);
 		throw DBus::ErrorFailed("internal error:failed to get time or length");
 	}
 	Distance=destination_length.u.num;
@@ -646,7 +646,7 @@ GuidanceObj_Callback(GuidanceObj *obj)
 	item=obj->get_item(mr);
 	if (item && item_attr_get(item, attr_level, &level)) {
 		int maneuver;
-        dbg(lvl_debug,"level=%d\n",level.u.num);
+        dbg(lvl_debug,"level=%d\n",(int) level.u.num);
 		switch(level.u.num) {
 		case 3:
 			maneuver=GENIVI_NAVIGATIONCORE_CRUISE;

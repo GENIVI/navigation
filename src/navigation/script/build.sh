@@ -146,7 +146,7 @@ usage() {
     echo "command:"
     echo "  make        Build"
     echo "  makelm      Build with layer manager"
-    echo "  maked           Build in debug mode"
+    echo "  maked       Build in debug mode"
     echo "  clean       Clean the bin"
     echo "  src-clean   Clean the cloned sources and the bin"
     echo "  clone       Clone the sources"

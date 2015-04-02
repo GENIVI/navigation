@@ -36,16 +36,17 @@ set (svn_executable ${SVN})
 set (svn_get_src_version svnversion)
 
 set(cmake_create_dir cmake -E make_directory)
-set (apply_patch patch -p1 -s) 
+set (apply_patch_git patch -p1 -s) 
+set (apply_patch_svn patch -p0 -s) 
 
 set(WITH_LM $ENV{WLD}) 
+
+# ..............................Get the wayland-ivi-extension code..............................
 
 # Check if ivi layer management stuff with the right version has been cloned and do it if necessary
 # ilm is cloned into sub dir
 set(wayland-ivi-extension_SRC_DIR ${layer-management_SRC_DIR}/wayland-ivi-extension)
 set(weston-ivi-shell_SRC_DIR ${layer-management_SRC_DIR}/weston-ivi-shell)
-
-# Get the wayland-ivi-extension
 set(wayland-ivi-extension_URL http://git.projects.genivi.org/wayland-ivi-extension.git)
 set(wayland-ivi-extension_VERSION 278437417d1ac0958a800eecfebd2a388d6d9ca7)
 
@@ -91,7 +92,8 @@ else()
 	endif()	
 endif()
 
-# Get the weston-ivi-shell
+# ..............................Get the weston-ivi-shell code..............................
+
 set(weston-ivi-shell_URL https://github.com/ntanibata/weston-ivi-shell.git)
 set(weston-ivi-shell_VERSION a3dd3192343e573e9cbf349022cb81b77bfbdaca)
 set(weston-ivi-shell_PATCH_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/patches)
@@ -144,8 +146,8 @@ if (EXISTS ${weston-ivi-shell_PATCH_DUMMY_FILE})
 else()
 	message(STATUS "apply the patches to weston-ivi-shell")
 	execute_process(
-		COMMAND ${apply_patch} -i ${weston-ivi-shell_PATCH_SRC_DIR}/0001-client.pro-Disable-create_cmake-configuration.patch
-		COMMAND ${apply_patch} -i ${weston-ivi-shell_PATCH_SRC_DIR}/0002-Update-ivi-application.xml-and-fix-inplementation-of.patch
+		COMMAND ${apply_patch_git} -i ${weston-ivi-shell_PATCH_SRC_DIR}/0001-client.pro-Disable-create_cmake-configuration.patch
+		COMMAND ${apply_patch_git} -i ${weston-ivi-shell_PATCH_SRC_DIR}/0002-Update-ivi-application.xml-and-fix-inplementation-of.patch
 		COMMAND ${create_file} ${weston-ivi-shell_PATCH_DUMMY_FILE}
 		TIMEOUT 0.1 #cmake -E touch never ends so add a timeout here
 		WORKING_DIRECTORY "${weston-ivi-shell_SRC_DIR}"
@@ -155,6 +157,8 @@ else()
 		message(FATAL_ERROR "Failed to apply the patch")
 	endif()	
 endif()
+
+# ..............................Get the positioning code..............................
 
 # Check if positioning stuff with the right version has been cloned and do it if necessary
 # positioning_SRC_DIR is set by cmake -Dpositioning_SRC_DIR=<path to positioning src dir> 
@@ -202,12 +206,15 @@ else()
 	endif()	
 endif()
 
+# ..............................Get the navit code..............................
+
 # Check if navit stuff with the right version has been cloned and do it if necessary
 set(navit_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/navit)
 set(navit_URL http://svn.code.sf.net/p/navit/code/trunk)
 set(navit_VERSION 6025)
 set(navit_PATCH_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/patches)
-set(navit_PATCH_DUMMY_FILE ${navit_SRC_DIR}/.patched)
+set(navit_PATCH_DUMMY_FILE_SPELL ${navit_SRC_DIR}/.patched-spell)
+set(navit_PATCH_DUMMY_FILE_LM ${navit_SRC_DIR}/.patched-lm)
 
 if (EXISTS ${navit_SRC_DIR})
 	execute_process(COMMAND ${svn_get_src_version}  
@@ -239,23 +246,43 @@ else()
 	endif()
 endif()
 
+# apply spell patch if necessary
+if (EXISTS ${navit_PATCH_DUMMY_FILE_SPELL})
+	message(STATUS "patch spell already applied to navit")
+else()
+	message(STATUS "apply the patch spell to navit")
+	execute_process(
+		COMMAND ${apply_patch_svn} -i ${navit_PATCH_SRC_DIR}/search_list_get_unique.diff
+		COMMAND ${create_file} ${navit_PATCH_DUMMY_FILE_SPELL}
+		TIMEOUT 0.1 #cmake -E touch never ends so add a timeout here
+		WORKING_DIRECTORY "${navit_SRC_DIR}"
+		RESULT_VARIABLE error_code
+	)
+	if(error_code)
+		message(FATAL_ERROR "Failed to apply the patch spell")
+	endif()	
+endif()
+
+# apply layer manager patch if necessary
 if (WITH_LM)
-	if (EXISTS ${navit_PATCH_DUMMY_FILE})
-		message(STATUS "patch already applied to navit")
+	if (EXISTS ${navit_PATCH_DUMMY_FILE_LM})
+		message(STATUS "patch lm already applied to navit")
 	else()
 		message(STATUS "apply the patches to navit")
 		execute_process(
-			COMMAND ${apply_patch} -i ${navit_PATCH_SRC_DIR}/0001-add-wayland-ilm-support-navit.patch
-			COMMAND ${create_file} ${navit_PATCH_DUMMY_FILE}
+			COMMAND ${apply_patch_git} -i ${navit_PATCH_SRC_DIR}/0001-add-wayland-ilm-support-navit.patch
+			COMMAND ${create_file} ${navit_PATCH_DUMMY_FILE_LM}
 			TIMEOUT 0.1 #cmake -E touch never ends so add a timeout here
 			WORKING_DIRECTORY "${navit_SRC_DIR}"
 			RESULT_VARIABLE error_code
 		)
 		if(error_code)
-			message(FATAL_ERROR "Failed to apply the patch")
+			message(FATAL_ERROR "Failed to apply the patch lm")
 		endif()	
 	endif()
 endif()
+
+# ..............................Get the database..............................
 
 # Check if the map data base have been got and do it if necessary (no version checked for the moment)
 set(map_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/map)
