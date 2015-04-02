@@ -140,7 +140,7 @@ class  Routing
     uint32_t
     CreateRoute(const uint32_t& SessionHandle)
 	{
-                dbg(0,"enter\n");
+                dbg(lvl_debug,"enter\n");
 		uint32_t RouteHandle=1;
 		while (handles[RouteHandle]) {
 			RouteHandle++;
@@ -175,7 +175,7 @@ class  Routing
     GetCostModel(const uint32_t& RouteHandle)
 	{
 		uint16_t CostModel;
-		dbg(0,"enter\n");
+		dbg(lvl_debug,"enter\n");
 		RoutingObj *obj=handles[RouteHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Route handle invalid");
@@ -196,7 +196,7 @@ class  Routing
 	void	
     SetWaypoints(const uint32_t& SessionHandle , const uint32_t& RouteHandle , const bool& StartFromCurrentPosition , const std::vector< std::map< uint16_t, ::DBus::Variant > >& Waypoints)
 	{
-		dbg(0,"enter\n");
+		dbg(lvl_debug,"enter\n");
 		RoutingObj *obj=handles[RouteHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Route handle invalid");
@@ -206,7 +206,7 @@ class  Routing
 	void
     GetWaypoints(const uint32_t& RouteHandle , bool& StartFromCurrentPosition , std::vector< std::map< uint16_t, ::DBus::Variant > >& Waypoints)
 	{
-		dbg(0,"enter\n");
+		dbg(lvl_debug,"enter\n");
 		RoutingObj *obj=handles[RouteHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Route handle invalid");
@@ -216,7 +216,7 @@ class  Routing
 	void	
     CalculateRoute(const uint32_t& SessionHandle , const uint32_t& RouteHandle )
 	{
-		dbg(0,"enter\n");
+		dbg(lvl_debug,"enter\n");
 		RoutingObj *obj=handles[RouteHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Route handle invalid");
@@ -226,7 +226,7 @@ class  Routing
 	void
     GetRouteSegments(const uint32_t& routeHandle, const int16_t& detailLevel, const std::vector< uint16_t >& valuesToReturn, const uint32_t& numberOfSegments, const uint32_t& offset, uint32_t& totalNumberOfSegments, std::vector< std::map< uint16_t, ::DBus::Variant > >& routeSegments)
 	{
-		dbg(0,"enter\n");
+		dbg(lvl_debug,"enter\n");
 		RoutingObj *obj=handles[routeHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Route handle invalid");
@@ -531,7 +531,7 @@ RoutingObj::map_to_pcoord(std::map< uint16_t, ::DBus::Variant >map, struct pcoor
 	pc->pro=projection_mg;
 	pc->x=c.x;
 	pc->y=c.y;
-	dbg(0,"lat %f lon %f is 0x%x,0x%x\n",g.lat,g.lng,pc->x,pc->y);
+	dbg(lvl_debug,"lat %f lon %f is 0x%x,0x%x\n",g.lat,g.lng,pc->x,pc->y);
 
 }
 
@@ -752,15 +752,15 @@ RoutingObj::GetRouteBoundingBox(::DBus::Struct< ::DBus::Struct< double, double >
 	map_rect_destroy(mr);
 	if (first) 
 		throw DBus::ErrorFailed("no route available");
-	dbg(0,"bounding box 0x%x,0x%x-0x%x,0x%x\n",r.lu.x,r.lu.y,r.rl.x,r.rl.y);
+	dbg(lvl_debug,"bounding box 0x%x,0x%x-0x%x,0x%x\n",r.lu.x,r.lu.y,r.rl.x,r.rl.y);
 	transform_to_geo(projection_mg, &r.lu, &g);
 	boundingBox._1._1=g.lat;
 	boundingBox._1._2=g.lng;
-	dbg(0,"%f,%f\n",g.lat,g.lng);
+	dbg(lvl_debug,"%f,%f\n",g.lat,g.lng);
 	transform_to_geo(projection_mg, &r.rl, &g);
 	boundingBox._2._1=g.lat;
 	boundingBox._2._2=g.lng;
-	dbg(0,"-%f,%f\n",g.lat,g.lng);
+	dbg(lvl_debug,"-%f,%f\n",g.lat,g.lng);
 }
 
 void
@@ -774,7 +774,7 @@ RoutingObj_Callback(struct RoutingObj *obj)
 {
 	struct attr route_status;
 	if (!route_get_attr(obj->m_route.u.route, attr_route_status, &route_status, NULL)) {
-		dbg(0,"failed to get route status\n");
+		dbg(lvl_debug,"failed to get route status\n");
 		return;
 	}
 	if (route_status.u.num == route_status_destination_set) {
@@ -793,13 +793,13 @@ RoutingObj_Callback(struct RoutingObj *obj)
 		if (route_status.u.num == route_status_path_done_new)
             obj->m_routing->RouteCalculationProgressUpdate(obj->m_handle, GENIVI_NAVIGATIONCORE_OK, 100);
 		obj->m_route_status=route_status.u.num;
-		dbg(0,"callback routing ok\n");
+		dbg(lvl_debug,"callback routing ok\n");
         std::map< uint16_t, uint16_t > unfulfilled_preferences;
         obj->m_routing->RouteCalculationSuccessful(obj->m_handle, unfulfilled_preferences);
 	}
 	if (route_status.u.num == route_status_not_found) {
 		obj->m_route_status=route_status.u.num;
-		dbg(0,"callback routing failed\n");
+		dbg(lvl_debug,"callback routing failed\n");
         std::map< uint16_t, uint16_t > unfulfilled_preferences;
         obj->m_routing->RouteCalculationFailed(obj->m_handle, GENIVI_NAVIGATIONCORE_UNREACHABLE_DESTINATION, unfulfilled_preferences);
 	}

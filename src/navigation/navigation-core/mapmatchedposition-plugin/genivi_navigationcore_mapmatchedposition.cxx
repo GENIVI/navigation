@@ -155,7 +155,7 @@ class  MapMatchedPosition
 	std::map< uint16_t, ::DBus::Variant >
 	GetPosition(const std::vector< uint16_t >& valuesToReturn)
 	{
-		dbg(1,"enter\n");
+        dbg(lvl_debug,"enter\n");
 		std::map< uint16_t, ::DBus::Variant >map;
 		struct attr attr;
 		for (int i = 0 ; i < valuesToReturn.size() ; i++) {
@@ -260,7 +260,7 @@ class  MapMatchedPosition
 	void
     SetSimulationMode(const uint32_t& SessionHandle, const bool& Activate)
 	{
-		dbg(0,"enter Activate=%d\n",Activate);
+        dbg(lvl_debug,"enter Activate=%d\n",Activate);
 		uint16_t newSimulationMode;
 		struct attr vehicle;
 		vehicle.type=attr_vehicle;
@@ -275,7 +275,7 @@ class  MapMatchedPosition
 			struct navit *navit=get_navit();
 			navit_set_attr(navit, &vehicle);
 		} else {
-			dbg(0,"Failed to get vehicle\n");
+            dbg(lvl_debug,"Failed to get vehicle\n");
         	}
 	}
 
@@ -309,7 +309,7 @@ static void
 tracking_attr_position_coord_geo(void)
 {
 	struct attr position_coord_geo, current_item;
-	dbg(1,"enter\n");
+    dbg(lvl_debug,"enter\n");
 	if (tracking_get_attr(tracking, attr_position_coord_geo, &position_coord_geo, NULL)) {
 		std::vector< uint16_t >changes;
 		changes.push_back(GENIVI_NAVIGATIONCORE_LATITUDE);

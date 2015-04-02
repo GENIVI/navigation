@@ -99,7 +99,7 @@ class  LocationInput
     uint32_t CreateLocationInput(const uint32_t& SessionHandle)
 	{
 		uint32_t LocationInputHandle;
-		dbg(0,"enter\n");
+		dbg(lvl_debug,"enter\n");
 		LocationInputHandle=1;
 		while (handles[LocationInputHandle]) {
 			LocationInputHandle++;
@@ -112,7 +112,7 @@ class  LocationInput
 
     void DeleteLocationInput(const uint32_t& SessionHandle, const uint32_t& LocationInputHandle)
 	{
-		dbg(0,"enter\n");
+		dbg(lvl_debug,"enter\n");
 		LocationInputObj *obj=handles[LocationInputHandle];
 		if (!obj)
 			 throw DBus::ErrorInvalidArgs("location handle invalid");
@@ -134,7 +134,7 @@ class  LocationInput
 
     void SetAddress(const uint32_t& SessionHandle, const uint32_t& LocationInputHandle, const std::map< uint16_t, ::DBus::Variant >& Address)
 	{
-		dbg(0,"enter\n");
+		dbg(lvl_debug,"enter\n");
 		LocationInputObj *obj=handles[LocationInputHandle];
 		if (!obj)
 			 throw DBus::ErrorInvalidArgs("location handle invalid");
@@ -143,7 +143,7 @@ class  LocationInput
 
     void SetSelectionCriterion(const uint32_t& SessionHandle, const uint32_t& LocationInputHandle, const uint16_t& SelectionCriterion)
 	{
-		dbg(0,"enter\n");
+		dbg(lvl_debug,"enter\n");
 		LocationInputObj *obj=handles[LocationInputHandle];
 		if (!obj)
 			 throw DBus::ErrorInvalidArgs("location handle invalid");
@@ -152,7 +152,7 @@ class  LocationInput
 
     void Search(const uint32_t& SessionHandle, const uint32_t& LocationInputHandle, const std::string& InputString, const uint16_t& MaxWindowSize)
 	{
-		dbg(0,"enter\n");
+		dbg(lvl_debug,"enter\n");
 		LocationInputObj *obj=handles[LocationInputHandle];
 		if (!obj)
 			 throw DBus::ErrorInvalidArgs("location handle invalid");
@@ -161,7 +161,7 @@ class  LocationInput
 
     void SelectEntry(const uint32_t& SessionHandle, const uint32_t& LocationInputHandle, const uint16_t& Index)
 	{
-		dbg(0,"enter\n");
+		dbg(lvl_debug,"enter\n");
 		LocationInputObj *obj=handles[LocationInputHandle];
 		if (!obj)
 			 throw DBus::ErrorInvalidArgs("location handle invalid");
@@ -287,14 +287,14 @@ LocationInputObj::Spell(uint32_t SessionHandle, const std::string& InputCharacte
 	char *newstr;
 	const char *input=InputCharacter.c_str();
 	int len=strlen(input)+1;
-	dbg(0,"input '%s' (%d)\n",input,strlen(input));
+	dbg(lvl_debug,"input '%s' (%d)\n",input,strlen(input));
 	if (m_search.u.str && strlen(m_search.u.str)) {
 		const char *i=input;
 		char c;
 		newstr=g_strdup(m_search.u.str);
-		dbg(1,"string %s\n",newstr);
+		dbg(lvl_debug,"string %s\n",newstr);
 		while ((c=*i++)) {
-			dbg(1,"char '%c'\n",c);
+			dbg(lvl_debug,"char '%c'\n",c);
 			if (c == '\b') {
 				m_spell_backspace=true;
 				*g_utf8_prev_char(newstr+strlen(newstr))='\0';
@@ -304,7 +304,7 @@ LocationInputObj::Spell(uint32_t SessionHandle, const std::string& InputCharacte
 				newstr[len]=c;
 				newstr[len+1]='\0';
 			}
-			dbg(1,"string now %s\n",newstr);
+			dbg(lvl_debug,"string now %s\n",newstr);
 		}
 	} else { 
 		if (strcmp(input,"\b")) 
@@ -313,12 +313,12 @@ LocationInputObj::Spell(uint32_t SessionHandle, const std::string& InputCharacte
 			newstr=NULL;
 	}
 	g_free(m_search.u.str);
-	dbg(1,"search string '%s' (%d)\n",newstr,strlen(newstr));
+	dbg(lvl_debug,"search string '%s' (%d)\n",newstr,strlen(newstr));
 	m_search.u.str=newstr;
 	m_windowsize=MaxWindowSize;
 
 	search_list_search(m_sl, &m_search, 1);
-	dbg(1,"backspace %d\n",m_spell_backspace);
+	dbg(lvl_debug,"backspace %d\n",m_spell_backspace);
 	m_event=event_add_idle(0, m_callback);
 
 }
@@ -393,7 +393,7 @@ variant_double(double d)
 void
 LocationInputObj::Idle(void)
 {
-	dbg(1,"enter\n");
+	dbg(lvl_debug,"enter\n");
 	m_locationinput->SearchStatus(m_handle, GENIVI_NAVIGATIONCORE_SEARCHING);
 	struct search_list_result *res;
 	int chunk=0;
@@ -403,19 +403,19 @@ LocationInputObj::Idle(void)
 	while ((res=search_list_get_result(m_sl))) {
 		std::map< uint16_t, ::DBus::Variant> entry;
 		if (res->country && res->country->name) {
-			dbg(0,"country %s\n",res->country->name);
+			dbg(lvl_debug,"country %s\n",res->country->name);
 			entry[GENIVI_NAVIGATIONCORE_COUNTRY]=variant_string(std::string(res->country->name));
 		}
 		if (res->town && res->town->common.town_name) {
-			dbg(0,"town %s\n",res->town->common.town_name);
+			dbg(lvl_debug,"town %s\n",res->town->common.town_name);
 			entry[GENIVI_NAVIGATIONCORE_CITY]=variant_string(std::string(res->town->common.town_name));
 		}
 		if (res->street && res->street->name) {
-			dbg(0,"street %s\n",res->street->name);
+			dbg(lvl_debug,"street %s\n",res->street->name);
 			entry[GENIVI_NAVIGATIONCORE_STREET]=variant_string(std::string(res->street->name));
 		}
 		if (res->house_number && res->house_number->house_number) {
-			dbg(0,"house number %s\n",res->house_number->house_number);
+			dbg(lvl_debug,"house number %s\n",res->house_number->house_number);
 			entry[GENIVI_NAVIGATIONCORE_HOUSENUMBER]=variant_string(std::string(res->house_number->house_number));
 		}
 		if (res->c) {

@@ -52,11 +52,10 @@ target_ilm=$PWD/../$IVI_LAYER_MANAGER #by default
 #--------------------------------------------------------------------------
 # modify the following flags as needed:
 NAVIT_FLAGS='-DDISABLE_QT=1 -DSAMPLE_MAP=0 -Dvehicle/null=1 -Dgraphics/qt_qpainter=0'
-NAVIT_PLUGIN_FLAGS='-DWITH_DEBUG=OFF'
-GNSS_SERVICE_FLAGS='-DWITH_DLT=OFF -DWITH_GPSD=OFF -DWITH_REPLAYER=ON -DWITH_TESTS=ON -DWITH_DEBUG=OFF'
-SENSORS_SERVICE_FLAGS='-DWITH_DLT=OFF -DWITH_REPLAYER=ON -DWITH_IPHONE=OFF -DWITH_TESTS=ON -DWITH_DEBUG=OFF'
-ENHANCED_POSITION_SERVICE_FLAGS='-DWITH_DLT=OFF -DWITH_GPSD=OFF -DWITH_REPLAYER=ON -DWITH_IPHONE=OFF -DWITH_TESTS=ON -DWITH_DEBUG=OFF'
-LOG_REPLAYER_FLAGS='-DWITH_DLT=OFF -DWITH_TESTS=ON -DWITH_DEBUG=OFF'
+GNSS_SERVICE_FLAGS='-DWITH_DLT=OFF -DWITH_GPSD=OFF -DWITH_REPLAYER=ON -DWITH_TESTS=ON'
+SENSORS_SERVICE_FLAGS='-DWITH_DLT=OFF -DWITH_REPLAYER=ON -DWITH_IPHONE=OFF -DWITH_TESTS=ON'
+ENHANCED_POSITION_SERVICE_FLAGS='-DWITH_DLT=OFF -DWITH_GPSD=OFF -DWITH_REPLAYER=ON -DWITH_IPHONE=OFF -DWITH_TESTS=ON'
+LOG_REPLAYER_FLAGS='-DWITH_DLT=OFF -DWITH_TESTS=ON'
 #
 
 # by default no ilm 
@@ -147,6 +146,7 @@ usage() {
     echo "command:"
     echo "  make        Build"
     echo "  makelm      Build with layer manager"
+    echo "  maked           Build in debug mode"
     echo "  clean       Clean the bin"
     echo "  src-clean   Clean the cloned sources and the bin"
     echo "  clone       Clone the sources"
@@ -232,22 +232,22 @@ build() {
 	cd $POSITIONING_BIN_DIR
 	mkdir -p $GNSS_SERVICE
 	cd $GNSS_SERVICE_BIN_DIR
-	cmake $GNSS_SERVICE_FLAGS $GNSS_SERVICE_SRC_DIR && make
+	cmake $GNSS_SERVICE_FLAGS $DEBUG_FLAG $GNSS_SERVICE_SRC_DIR && make
 
 	cd $POSITIONING_BIN_DIR
 	mkdir -p $SENSORS_SERVICE
 	cd $SENSORS_SERVICE_BIN_DIR
-	cmake $SENSORS_SERVICE_FLAGS $SENSORS_SERVICE_SRC_DIR && make
+	cmake $SENSORS_SERVICE_FLAGS $DEBUG_FLAG $SENSORS_SERVICE_SRC_DIR && make
 
 	cd $POSITIONING_BIN_DIR
 	mkdir -p $LOG_REPLAYER
 	cd $LOG_REPLAYER_BIN_DIR
-	cmake $LOG_REPLAYER_FLAGS $LOG_REPLAYER_SRC_DIR && make
+	cmake $LOG_REPLAYER_FLAGS $DEBUG_FLAG $LOG_REPLAYER_SRC_DIR && make
 
 	cd $POSITIONING_BIN_DIR
 	mkdir -p $ENHANCED_POSITION_SERVICE
 	cd $ENHANCED_POSITION_SERVICE_BIN_DIR
-	cmake $ENHANCED_POSITION_SERVICE_FLAGS $ENHANCED_POSITION_SERVICE_SRC_DIR && make
+	cmake $ENHANCED_POSITION_SERVICE_FLAGS $DEBUG_FLAG $ENHANCED_POSITION_SERVICE_SRC_DIR && make
 
     echo ''
     echo 'Generate DBus include files for navigation, mapviewer and poiservice'
@@ -269,37 +269,37 @@ build() {
     cd $NAVIGATION_CORE_BIN_DIR
     mkdir -p $NAVIGATION_CORE_CONFIGURATION
     cd $NAVIGATION_CORE_CONFIGURATION_BIN_DIR 
-    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $NAVIT_PLUGIN_FLAGS $NAVIGATION_CORE_CONFIGURATION_SRC_DIR && make 
+    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $DEBUG_FLAG $NAVIGATION_CORE_CONFIGURATION_SRC_DIR && make 
 
     cd $NAVIGATION_CORE_BIN_DIR
     mkdir -p $NAVIGATION_CORE_GUIDANCE
     cd $NAVIGATION_CORE_GUIDANCE_BIN_DIR 
-    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $NAVIT_PLUGIN_FLAGS $NAVIGATION_CORE_GUIDANCE_SRC_DIR && make 
+    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $DEBUG_FLAG $NAVIGATION_CORE_GUIDANCE_SRC_DIR && make 
 
     cd $NAVIGATION_CORE_BIN_DIR
     mkdir -p $NAVIGATION_CORE_LOCATIONINPUT
     cd $NAVIGATION_CORE_LOCATIONINPUT_BIN_DIR 
-    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $NAVIT_PLUGIN_FLAGS $NAVIGATION_CORE_LOCATIONINPUT_SRC_DIR && make 
+    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $DEBUG_FLAG $NAVIGATION_CORE_LOCATIONINPUT_SRC_DIR && make 
 
     cd $NAVIGATION_CORE_BIN_DIR
     mkdir -p $NAVIGATION_CORE_MAPMATCHEDPOSITION
     cd $NAVIGATION_CORE_MAPMATCHEDPOSITION_BIN_DIR 
-    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $NAVIT_PLUGIN_FLAGS $NAVIGATION_CORE_MAPMATCHEDPOSITION_SRC_DIR && make 
+    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $DEBUG_FLAG $NAVIGATION_CORE_MAPMATCHEDPOSITION_SRC_DIR && make 
 
     cd $NAVIGATION_CORE_BIN_DIR
     mkdir -p $NAVIGATION_CORE_ROUTING
     cd $NAVIGATION_CORE_ROUTING_BIN_DIR 
-    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $NAVIT_PLUGIN_FLAGS $NAVIGATION_CORE_ROUTING_SRC_DIR && make 
+    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $DEBUG_FLAG $NAVIGATION_CORE_ROUTING_SRC_DIR && make 
 
     cd $NAVIGATION_CORE_BIN_DIR
     mkdir -p $NAVIGATION_CORE_SESSION
     cd $NAVIGATION_CORE_SESSION_BIN_DIR 
-    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $NAVIT_PLUGIN_FLAGS $NAVIGATION_CORE_SESSION_SRC_DIR && make 
+    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $DEBUG_FLAG $NAVIGATION_CORE_SESSION_SRC_DIR && make 
 
     cd $NAVIGATION_CORE_BIN_DIR
     mkdir -p $NAVIGATION_CORE_ENHANCEDPOSITION
     cd $NAVIGATION_CORE_ENHANCEDPOSITION_BIN_DIR 
-    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dpositioning_API=$ENHANCED_POSITION_SERVICE_GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $NAVIT_PLUGIN_FLAGS $NAVIGATION_CORE_ENHANCEDPOSITION_SRC_DIR && make 
+    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dpositioning_API=$ENHANCED_POSITION_SERVICE_GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $DEBUG_FLAG $NAVIGATION_CORE_ENHANCEDPOSITION_SRC_DIR && make 
 
 	cd $TOP_BIN_DIR
 	mkdir -p $MAP_VIEWER
@@ -309,22 +309,22 @@ build() {
     cd $MAP_VIEWER_BIN_DIR
     mkdir -p $MAP_VIEWER_CONFIGURATION
     cd $MAP_VIEWER_CONFIGURATION_BIN_DIR 
-    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $NAVIT_PLUGIN_FLAGS $MAP_VIEWER_CONFIGURATION_SRC_DIR && make 
+    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $DEBUG_FLAG $MAP_VIEWER_CONFIGURATION_SRC_DIR && make 
 
     cd $MAP_VIEWER_BIN_DIR
     mkdir -p $MAP_VIEWER_MAPVIEWERCONTROL
     cd $MAP_VIEWER_MAPVIEWERCONTROL_BIN_DIR 
-    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -DLM=$lm -Dlayer_management_INST=$target_ilm -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $NAVIT_PLUGIN_FLAGS $MAP_VIEWER_MAPVIEWERCONTROL_SRC_DIR && make 
+    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -DLM=$lm -Dlayer_management_INST=$target_ilm -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $DEBUG_FLAG $MAP_VIEWER_MAPVIEWERCONTROL_SRC_DIR && make 
 
     cd $MAP_VIEWER_BIN_DIR
     mkdir -p $MAP_VIEWER_SESSION
     cd $MAP_VIEWER_SESSION_BIN_DIR 
-    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $NAVIT_PLUGIN_FLAGS $MAP_VIEWER_SESSION_SRC_DIR && make 
+    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $DEBUG_FLAG $MAP_VIEWER_SESSION_SRC_DIR && make 
 
     cd $TOP_BIN_DIR
     mkdir -p $POI_CAM
     cd $POI_CAM_BIN_DIR 
-    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $NAVIT_PLUGIN_FLAGS $POI_CAM_SRC_DIR && make 
+    cmake -Wno-dev -C $NAVIT_BIN_DIR/cmake_plugin_settings.txt -Dgenerated_api_DIR=$GENERATED_API_DIR -Dnavit_SRC_DIR=$NAVIT_SRC_DIR $DEBUG_FLAG $POI_CAM_SRC_DIR && make 
 
 }
 
@@ -361,6 +361,17 @@ if [ $# -ge 1 ]; then
 			target_ilm=$(readlink -f $4)
 		fi
 		set-path
+		DEBUG_FLAG='-DWITH_DEBUG=OFF'
+        build
+    elif [ $1 = maked ]; then
+		if [ $# -eq 4 ]; then
+			#use for remote build
+			target_bin=$(readlink -f $2)
+			target_positioning=$(readlink -f $3)
+			target_ilm=$(readlink -f $4)
+		fi
+		set-path
+		DEBUG_FLAG='-DWITH_DEBUG=ON'
         build
     elif [ $1 = makelm ]; then
 		lm=1
@@ -371,6 +382,7 @@ if [ $# -ge 1 ]; then
 			target_ilm=$(readlink -f $4)
 		fi
 		set-path
+		DEBUG_FLAG='-DWITH_DEBUG=OFF'
         build
     elif [ $1 = clean ]; then
 		set-path

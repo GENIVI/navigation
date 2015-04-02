@@ -91,7 +91,7 @@ class EnhancedPosition
 	void
     PositionUpdate(const uint64_t& changedValues)
 	{
-		dbg(1,"enter\n");
+        dbg(lvl_debug,"enter\n");
 		int i;
 		bool position_found=false;
         if ((changedValues & (GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE || GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE)) == (GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE || GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE))
@@ -110,7 +110,7 @@ class EnhancedPosition
  */
 static void vehicle_enhancedposition_destroy(struct vehicle_priv *priv)
 {
-	dbg(0,"enter\n");
+    dbg(lvl_debug,"enter\n");
 	DBus::default_dispatcher = &dispatcher;
 	delete(priv->enhanced_position);
 	callback_destroy(priv->cb);
@@ -125,7 +125,7 @@ static void vehicle_enhancedposition_destroy(struct vehicle_priv *priv)
  */
 static int vehicle_enhancedposition_position_attr_get(struct vehicle_priv *priv, enum attr_type type, struct attr *attr)
 {
-	dbg(1, "enter\n");
+    dbg(lvl_debug, "enter\n");
 
 	switch (type) {
 	case attr_position_fix_type:
@@ -168,7 +168,7 @@ static int vehicle_enhancedposition_position_attr_get(struct vehicle_priv *priv,
 	case attr_position_time_iso8601: {
 		struct tm tm;
 		if (!priv->fix_time) {
-			dbg(0,"no fix time\n");
+            dbg(lvl_debug,"no fix time\n");
 		    	return 0;
 		}
 		if (gmtime_r(&priv->fix_time, &tm)) {
@@ -187,7 +187,7 @@ static int vehicle_enhancedposition_position_attr_get(struct vehicle_priv *priv,
 
 static int vehicle_enhancedposition_set_attr(struct vehicle_priv *priv, struct attr *attr)
 {
-	dbg(0, "enter\n");
+    dbg(lvl_debug, "enter\n");
 }
 
 // navit plugin callbacks
@@ -235,7 +235,7 @@ vehicle_process_map(struct vehicle_priv *priv, std::map< uint64_t, ::DBus::Varia
 static void
 vehicle_enhancedposition_callback(struct vehicle_priv *priv)
 {
-	dbg(1,"enter\n");
+    dbg(lvl_debug,"enter\n");
     uint64_t valuesToReturn = (GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE || GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE || GENIVI_ENHANCEDPOSITIONSERVICE_SPEED);
     std::map< uint64_t, ::DBus::Variant > position;
     uint64_t timestamp;
@@ -258,7 +258,7 @@ vehicle_enhancedposition_new(struct vehicle_methods *meth,
 {
 	struct vehicle_priv *ret;
 
-	dbg(0, "enter\n");
+    dbg(lvl_debug, "enter\n");
 
 	*meth=vehicle_enhancedposition_methods;
 	ret = g_new0(struct vehicle_priv, 1);
@@ -276,7 +276,7 @@ void plugin_init(void)
 	DBus::default_dispatcher = &dispatcher;
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
 	conn->setup(&dispatcher);
-	dbg(0,"enter\n");
+    dbg(lvl_debug,"enter\n");
 
 	plugin_register_vehicle_type("enhancedposition", vehicle_enhancedposition_new);
 }

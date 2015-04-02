@@ -313,7 +313,7 @@ position_update(MapMatchedPosition *pos, struct vehicle *v)
 		position_coord_geo.u.coord_geo=&g;
 		g.lat=double_variant(map[GENIVI_NAVIGATIONCORE_LATITUDE]);
 		g.lng=double_variant(map[GENIVI_NAVIGATIONCORE_LONGITUDE]);
-		dbg(1,"update %f %f\n",g.lat,g.lng);
+        dbg(lvl_debug,"update %f %f\n",g.lat,g.lng);
 		vehicle_set_attr(v, &position_coord_geo);
 	}
 }
@@ -332,7 +332,7 @@ class  MapViewerControl
     uint32_t
     CreateMapViewInstance(const uint32_t& sessionHandle, const ::DBus::Struct< uint16_t, uint16_t >& mapViewSize, const uint16_t& mapViewType)
 	{
-		dbg(0,"enter\n");
+        dbg(lvl_debug,"enter\n");
 		if (mapViewType != GENIVI_MAPVIEWER_MAIN_MAP) 
 			throw DBus::ErrorInvalidArgs("Unsupported mapViewType");
 		uint32_t MapViewInstanceHandle=1;
@@ -384,7 +384,7 @@ class  MapViewerControl
 	void
     SetMapViewScale(const uint32_t& SessionHandle, const uint32_t& MapViewInstanceHandle, const uint16_t& ScaleID)
 	{
-		dbg(0,"enter\n");
+        dbg(lvl_debug,"enter\n");
 		MapViewerControlObj *obj=handles[MapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
@@ -988,7 +988,7 @@ MapViewerControlObj::SetMapViewTheme(uint32_t sessionHandle, uint16_t mapViewThe
 	struct attr layout,name;
 	struct attr_iter *iter;
 	const char *layout_name=NULL;
-	dbg(0,"Theme %d\n",mapViewTheme);
+    dbg(lvl_debug,"Theme %d\n",mapViewTheme);
 	switch (mapViewTheme) {
 	case GENIVI_MAPVIEWER_THEME_1:
 		layout_name="Car";
@@ -997,17 +997,17 @@ MapViewerControlObj::SetMapViewTheme(uint32_t sessionHandle, uint16_t mapViewThe
 		layout_name="Car-dark";
 		break;
 	default:
-		dbg(0,"Invalid mapViewTheme\n");
+        dbg(lvl_debug,"Invalid mapViewTheme\n");
 		throw DBus::ErrorInvalidArgs("Invalid mapViewTheme");
 	}
 	iter=navit_attr_iter_new();
 	while (navit_get_attr(m_navit.u.navit, attr_layout, &layout, iter)) {
-		dbg(0,"layout\n");
+        dbg(lvl_debug,"layout\n");
 		if (!layout_get_attr(layout.u.layout, attr_name, &name, NULL)) {
 			navit_attr_iter_destroy(iter);
 			throw DBus::ErrorFailed("Internal error: Failed to get layout name");
 		}
-		dbg(0,"%s vs %s\n",name.u.str,layout_name);
+        dbg(lvl_debug,"%s vs %s\n",name.u.str,layout_name);
 		if (!strcmp(name.u.str,layout_name)) {
 			navit_set_attr(m_navit.u.navit, &layout);
 			navit_attr_iter_destroy(iter);
@@ -1026,7 +1026,7 @@ MapViewerControlObj::GetMapViewTheme(uint16_t& mapViewTheme)
 		throw DBus::ErrorFailed("Internal error: Failed to get map layout");
 	if (!layout_get_attr(layout.u.layout, attr_name, &name, NULL)) 
 		throw DBus::ErrorFailed("Internal error: Failed to get layout name");
-	dbg(0,"name %s\n",name.u.str);
+    dbg(lvl_debug,"name %s\n",name.u.str);
 	if (!strcmp(name.u.str,"Car-dark"))
 		mapViewTheme=GENIVI_MAPVIEWER_THEME_2;
 	else
@@ -1042,7 +1042,7 @@ MapViewerControlObj::SetFollowCarMode(uint32_t SessionHandle, bool active)
 		follow.u.num=1;
 	else
 		follow.u.num=100000;
-	dbg(0,"setting follow to %d\n",follow.u.num);
+    dbg(lvl_debug,"setting follow to %d\n",(int) follow.u.num);
 	navit_set_attr(m_navit.u.navit,&follow);
 	vehicle_set_attr(m_vehicle.u.vehicle,&follow);
 	follow.type=attr_timeout;
@@ -1107,7 +1107,7 @@ MapViewerControlObj::SetCameraDistanceFromTargetPoint(uint32_t sessionHandle, do
 {
 	struct transformation *t=navit_get_trans(m_navit.u.navit);
 	transform_set_distance(t, distance);
-	dbg(0,"distance %f\n",distance);
+    dbg(lvl_debug,"distance %f\n",distance);
 	transform_set_scales(t, 100, 100, 100 << 8);
 	navit_draw(m_navit.u.navit);
 }
@@ -1128,7 +1128,7 @@ MapViewerControlObj::SetCameraHeight(uint32_t sessionHandle, double height)
 		throw DBus::ErrorInvalidArgs("Height > Distance");
 	double angle=acos(height/distance)*180.0/M_PI;
 	transform_set_pitch(t, angle);
-	dbg(0,"distance %f angle %f height %f\n",distance,angle,height);
+    dbg(lvl_debug,"distance %f angle %f height %f\n",distance,angle,height);
 	navit_draw(m_navit.u.navit);
 }
 
@@ -1139,7 +1139,7 @@ MapViewerControlObj::GetCameraHeight(double &height)
 	double distance=transform_get_distance(t);
 	double angle=transform_get_pitch(t);
 	height=cos(angle*M_PI/180)*distance;
-	dbg(0,"distance %f angle %f height %f\n",distance,angle,height);
+    dbg(lvl_debug,"distance %f angle %f height %f\n",distance,angle,height);
 }
 
 void
@@ -1226,7 +1226,7 @@ MapViewerControlObj::SetMapViewPan(uint32_t SessionHandle, uint16_t panningActio
     struct coord co,cn,c,*cp;
     struct point pan;
     SetFollowCarMode(SessionHandle, false);
-    dbg(1,"enter %d\n",panningAction);
+    dbg(lvl_debug,"enter %d\n",panningAction);
     switch(panningAction) {
     case GENIVI_MAPVIEWER_PAN_START:
 	break;
@@ -1237,7 +1237,7 @@ MapViewerControlObj::SetMapViewPan(uint32_t SessionHandle, uint16_t panningActio
 	pan.x=p._1;
 	pan.y=p._2;
 	transform_reverse(tr, &pan, &cn);
-	dbg(1,"%d,%d - %d,%d\n",m_pan.x,m_pan.y,pan.x,pan.y);
+    dbg(lvl_debug,"%d,%d - %d,%d\n",m_pan.x,m_pan.y,pan.x,pan.y);
 	cp=transform_get_center(tr);
 	c.x=cp->x+co.x-cn.x;
 	c.y=cp->y+co.y-cn.y;
@@ -1281,14 +1281,14 @@ MapViewerControlObj::SetMapViewBoundingBox(uint32_t sessionHandle, const ::DBus:
 	struct coord_rect r;
 	struct coord_geo g;
 	SetFollowCarMode(sessionHandle, false);
-	dbg(0,"%f,%f-%f,%f\n",boundingBox._1._1,boundingBox._1._2,boundingBox._2._1,boundingBox._2._2);
+    dbg(lvl_debug,"%f,%f-%f,%f\n",boundingBox._1._1,boundingBox._1._2,boundingBox._2._1,boundingBox._2._2);
 	g.lat=boundingBox._1._1;
 	g.lng=boundingBox._1._2;
 	transform_from_geo(projection_mg, &g, &r.lu);
 	g.lat=boundingBox._2._1;
 	g.lng=boundingBox._2._2;
 	transform_from_geo(projection_mg, &g, &r.rl);
-	dbg(0,"0x%x,0x%x-0x%x,0x%x\n",r.lu.x,r.lu.y,r.rl.x,r.rl.y);
+    dbg(lvl_debug,"0x%x,0x%x-0x%x,0x%x\n",r.lu.x,r.lu.y,r.rl.x,r.rl.y);
 	navit_zoom_to_rect(m_navit.u.navit, &r);
 }
 
@@ -1356,7 +1356,7 @@ MapViewerControlObj::HideRoute(uint32_t SessionHandle, uint32_t RouteHandle)
 			event_add_timeout(0, 0, m_move_callback);
 		}
 	}
-	dbg(0,"Route not displayed\n");
+    dbg(lvl_debug,"Route not displayed\n");
 }
 
 void
@@ -1415,12 +1415,12 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
 	struct attr navit_flags={attr_flags};navit_flags.u.num=2;
 	struct attr *navit_attrs[]={&navit_flags,NULL};
 	if (!config_get_attr(config, attr_navit, &navit_template, NULL)) {
-		dbg(0,"failed to get navit template from config\n");
+        dbg(lvl_debug,"failed to get navit template from config\n");
 		return;
 	}
 	m_navit.u.navit=navit_new(NULL,navit_attrs);
 	if (!m_navit.u.navit) {
-		dbg(0,"failed to create new navit instance\n");
+        dbg(lvl_debug,"failed to create new navit instance\n");
 		return;
 	}
 	const char *graphics=getenv("NAVIT_GRAPHICS");
@@ -1436,7 +1436,7 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
 	g_free(graphics_window_title.u.str);
 
 	if (!m_graphics.u.graphics) {
-		dbg(0,"failed to create new graphics\n");
+        dbg(lvl_debug,"failed to create new graphics\n");
 		return;
 	}
 	m_postdraw_callback=callback_new_attr_1(reinterpret_cast<void (*)(void)>(MapViewerControlObj_PostDraw), attr_postdraw, this);
@@ -1446,7 +1446,7 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
 
 	struct attr mapset;
 	if (!navit_get_attr(navit_template.u.navit, attr_mapset, &mapset, NULL)) {
-		dbg(0,"failed to get mapset\n");
+        dbg(lvl_debug,"failed to get mapset\n");
 		return;
 	}
 	mapset.u.mapset=mapset_dup(mapset.u.mapset);
@@ -1480,18 +1480,18 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
 #if LM
 	t_ilm_nativedisplay display = (t_ilm_nativedisplay)graphics_get_data(m_graphics.u.graphics, "display");
 	if (ilm_initWithNativedisplay(display) != ILM_SUCCESS) {
-		dbg(0, "error on ilm_initWidthNativeDisplay\n");
+        dbg(lvl_debug, "error on ilm_initWidthNativeDisplay\n");
 	}
 
 	t_ilm_nativehandle nativehandle=(t_ilm_nativehandle)graphics_get_data(m_graphics.u.graphics,"xwindow_id");
 	t_ilm_surface surfaceId=FSA_LAYER+m_handle;
 	t_ilm_layer layerId=FSA_LAYER;
 	if (ilm_surfaceCreate(nativehandle, MapViewSize._1, MapViewSize._2, ILM_PIXELFORMAT_RGBA_8888, &surfaceId) != ILM_SUCCESS) {
-		dbg(0,"error on ilm_surfaceCreate\n");
+        dbg(lvl_debug,"error on ilm_surfaceCreate\n");
 	}
 #if 0
 	if (ilm_layerAddSurface(layerId, surfaceId) != ILM_SUCCESS) {
-		dbg(0,"error on ilm_layerAddSurface\n");
+        dbg(lvl_debug,"error on ilm_layerAddSurface\n");
 	}
 #else
 	t_ilm_surface surfaceId_order[2] = {
@@ -1499,11 +1499,11 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
 		FSA_LAYER + m_handle + 1
 	};
 	if (ilm_layerSetRenderOrder(layerId, surfaceId_order, 2) != ILM_SUCCESS) {
-		dbg(0,"error on ilm_layerSetRenderOrder\n");
+        dbg(lvl_debug,"error on ilm_layerSetRenderOrder\n");
 	}
 #endif
 	if (ilm_commitChanges() != ILM_SUCCESS) {
-		dbg(0,"error on ilm_commitChanges\n");
+        dbg(lvl_debug,"error on ilm_commitChanges\n");
 	}
 #endif
 }
@@ -1514,13 +1514,13 @@ MapViewerControlObj::~MapViewerControlObj()
 	t_ilm_surface surfaceId=FSA_LAYER+m_handle;
 	t_ilm_layer layerId=FSA_LAYER;
 	if (ilm_surfaceRemove(surfaceId) != ILM_SUCCESS) {
-		dbg(0,"error on ilm_surfaceRemove\n");
+        dbg(lvl_debug,"error on ilm_surfaceRemove\n");
 	}
 	if (ilm_layerRemoveSurface(layerId, surfaceId) != ILM_SUCCESS) {
-		dbg(0,"error on ilm_layerAddSurface\n");
+        dbg(lvl_debug,"error on ilm_layerAddSurface\n");
 	}
 	if (ilm_commitChanges() != ILM_SUCCESS) {
-		dbg(0,"error on ilm_commitChanges\n");
+        dbg(lvl_debug,"error on ilm_commitChanges\n");
 	}
 #endif
 	
@@ -1620,7 +1620,7 @@ DisplayedRoute::WriteSegment(FILE *out)
 
 DisplayedRoute::DisplayedRoute(class MapViewerControlObj *mapviewer, uint8_t RouteSession, uint32_t RouteHandle, struct mapset *mapset)
 {	
-	dbg(0,"enter\n");
+    dbg(lvl_debug,"enter\n");
 	std::vector< std::map< uint16_t, ::DBus::Variant > > RouteShape;
 	std::vector< uint16_t > valuesToReturn;
 	valuesToReturn.push_back(GENIVI_NAVIGATIONCORE_START_LATITUDE);
@@ -1646,13 +1646,13 @@ DisplayedRoute::DisplayedRoute(class MapViewerControlObj *mapviewer, uint8_t Rou
 			if (map.find(GENIVI_NAVIGATIONCORE_START_LATITUDE) != map.end() && map.find(GENIVI_NAVIGATIONCORE_START_LONGITUDE) != map.end()) 
 				AddGeoCoordinate(map[GENIVI_NAVIGATIONCORE_START_LATITUDE],map[GENIVI_NAVIGATIONCORE_START_LONGITUDE]);
 			else
-				dbg(0,"previous segment is missing end, but current segment is missing start also");
+                dbg(lvl_debug,"previous segment is missing end, but current segment is missing start also");
 			WriteSegment(f);
 		}
 		complete=AddSegment(map);
 	}
 	if (!complete)
-		dbg(0,"last segment is missing end");
+        dbg(lvl_debug,"last segment is missing end");
 	WriteSegment(f);
 	fclose(f);
 	struct attr map_attr_type={attr_type};
@@ -1665,7 +1665,7 @@ DisplayedRoute::DisplayedRoute(class MapViewerControlObj *mapviewer, uint8_t Rou
 
 DisplayedRoute::~DisplayedRoute()
 {
-	dbg(0,"enter\n");
+    dbg(lvl_debug,"enter\n");
 	if (m_map.u.map)
 		map_destroy(m_map.u.map);
 	if (m_filename) {
@@ -1692,7 +1692,7 @@ plugin_init(void)
 #if LM
 #if 0
 	if (ilm_init() != ILM_SUCCESS) {
-		dbg(0,"error on ilm_init\n");
+        dbg(lvl_debug,"error on ilm_init\n");
 	}
 #endif
 #endif

@@ -58,7 +58,7 @@ class  Session
 	::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string > GetVersion()
 	{
 		::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string > Version;
-		dbg(1,"enter\n");
+		dbg(lvl_debug,"enter\n");
 		Version._1=3;
 		Version._2=0;
 		Version._3=0;
@@ -68,7 +68,7 @@ class  Session
 
     uint32_t CreateSession(const std::string &client)
 	{
-		dbg(0,"enter\n");
+		dbg(lvl_debug,"enter\n");
 		uint32_t SessionHandle=1;
 		while (handles[SessionHandle]) {
 			SessionHandle++;
@@ -89,7 +89,7 @@ class  Session
 
     void DeleteSession(const uint32_t& SessionHandle)
 	{
-		dbg(0,"enter\n");
+		dbg(lvl_debug,"enter\n");
 		if (!handles[SessionHandle])
 			throw DBus::Error("org.genivi.mapviewer.Session.Error.NotAvailableSessionHandle","Session handle invalid");
 		delete(handles[SessionHandle]);

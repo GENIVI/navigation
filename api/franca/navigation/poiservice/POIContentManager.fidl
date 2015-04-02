@@ -103,11 +103,8 @@ interface POIContentManager {
 	<**	@description : Creates a category by name and return an unique id.**>
 	method createCategory {
 		in {
-			<** @description : Name of the category to create.**>
-			String name				
-
-			<** @description : The parent category (if id of the root category, the category created is a parent one).**>
-			CategoryID category				
+			<** @description : List of details for the category to create.**>
+			CAMCategory category				
 		}	
 		out {
 			<** @description : Category unique id.**>

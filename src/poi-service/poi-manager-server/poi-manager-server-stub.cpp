@@ -26,21 +26,289 @@
 */
 #include "poi-manager-server-stub.h"
 
-// SQL requests
-const char SQL_REQUEST_GET_AVAILABLE_CATEGORIES[] = "SELECT Id,name FROM poicategory WHERE Id IN (SELECT poicategory_Id FROM belongsto GROUP BY poicategory_Id);";
-const char SQL_REQUEST_GET_CATEGORY_ATTRIBUTES[] = "SELECT Id,name FROM poiattribute WHERE Id IN (SELECT poiattribute_Id FROM hasattribute WHERE poicategory_Id IS ";
-static const char* SQL_REQUEST_GET_AVAILABLE_AREA = "SELECT leftlongitude,bottomlatitude,rightlongitude,toplatitude FROM availablearea;";
-static const char* SQL_REQUEST_GET_PARENT_CATEGORIES = "SELECT parentId FROM poicategorykinship WHERE childId IS ";
-static const char* SQL_REQUEST_GET_CHILD_CATEGORIES = "SELECT childId FROM poicategorykinship WHERE parentId IS ";
-static const char* SQL_REQUEST_GET_CATEGORY_ICONS = "SELECT url,format FROM iconset WHERE Id IS (SELECT iconset_Id FROM isdisplayedas WHERE poicategory_Id IS  ";
 
-// string conversion to numeric: the third parameter of fromString() should be one of std::hex, std::dec or std::oct
-template <class T>
-bool fromString(T& t, const std::string& s, std::ios_base& (*f)(std::ios_base&))
+
+sqlRequest::sqlRequest()
 {
-  std::istringstream iss(s);
-  return !(iss >> f >> t).fail();
 }
+
+sqlRequest::~sqlRequest()
+{
+    delete mp_database;
+}
+
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::setDatabase(const char *poiDatabaseFileName)
+{
+    mp_database = new Database(poiDatabaseFileName);
+    return sqlRequest::OK; //todo check if database OK
+}
+
+void sqlRequest::onError()
+{
+
+}
+
+vector<poi_category_common_t> sqlRequest::getAvailableCategories(POIServiceTypes::CategoryID &rootCategory)
+{
+    std::string sqlQuery; //SQL request on database
+    std::ostringstream  strStream; //temporary stream used for transformation into string
+    vector<vector<string> > query_result, additionnal_query_result;
+    vector<string >  query_line, additionnal_query_line;
+    size_t index,sub_index;
+    categoryId_t value;
+    categoryId_t parent,child;
+    category_attribute_common_t attribute;
+    uint16_t availableCategories;
+    vector<poi_category_common_t> availableCategoryTable;
+    poi_category_common_t poiCategory;
+
+    // retrieve the available categories (the ones that have at least one record)
+    query_result = mp_database->queryNotUTF(m_SQL_REQUEST_GET_AVAILABLE_CATEGORIES);
+    if (query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+    }
+    else
+    { // Id,name
+        availableCategories = query_result.size(); //store the number of categories
+        for (index = 0; index < availableCategories; index++)
+        {
+            // read the result of the query and store it
+            query_line = query_result.at(index);
+            fromString<categoryId_t>(value,query_line[0], std::dec);
+            poiCategory.id = value;
+
+            // retrieve the associated icons (for the moment, just one)
+            sqlQuery = m_SQL_REQUEST_GET_CATEGORY_ICONS;
+            strStream.str("");
+            strStream << value;
+            sqlQuery += strStream.str();
+            sqlQuery += ");";
+            additionnal_query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+            if (additionnal_query_result.empty())
+            {
+                onError(); //database is not well populated
+                //todo something with table ?
+            }
+            else
+            {
+                additionnal_query_line = additionnal_query_result.at(0);
+                poiCategory.icon = additionnal_query_line[0] + '.' + additionnal_query_line[1];
+            }
+
+            poiCategory.name = query_line[1];
+
+            // retrieve the associated attributes
+            sqlQuery = m_SQL_REQUEST_GET_CATEGORY_ATTRIBUTES;
+            strStream.str("");
+            strStream << poiCategory.id;
+            sqlQuery += strStream.str();
+            sqlQuery += ");";
+            additionnal_query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+            if (additionnal_query_result.empty())
+            {
+                onError(); //database is not well populated
+                //todo something with table ?
+            }
+            else
+            {
+                for (sub_index = 0; sub_index <additionnal_query_result.size(); sub_index++)
+                {
+                    additionnal_query_line = additionnal_query_result.at(sub_index);
+                    fromString<attributeId_t>(attribute.id,additionnal_query_line[0], std::dec);
+                    attribute.name = additionnal_query_line[1];
+                    attribute.isSearched = false;
+                    poiCategory.attributeList.push_back(attribute);
+                }
+            }
+            poiCategory.top_level = true; //this POC only manages predefined categories
+            poiCategory.isSearch = false; //for the moment no categories selected
+
+            availableCategoryTable.push_back(poiCategory);
+        }
+    }
+
+    //retrieve the parents of the categories
+    //root category is the only one that is its own parent
+    for (index = 0; index < availableCategories; index++)
+    {
+        sqlQuery = m_SQL_REQUEST_GET_PARENT_CATEGORIES;
+        strStream.str("");
+        strStream << availableCategoryTable.at(index).id;
+        sqlQuery += strStream.str();
+        sqlQuery += ";";
+        query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+        if (query_result.empty())
+        {
+            onError(); //database is not well populated
+            //todo something with table ?
+        }
+        else
+        {
+            for (parent=0;parent<query_result.size();parent++)
+            {
+                query_line = query_result.at(parent);
+                fromString<categoryId_t>(value,query_line[0], std::dec);
+                if (index == value)
+                    rootCategory = index; //child is parent, so it's the root
+                availableCategoryTable.at(index).parentList.push_back(value);
+            }
+        }
+    }
+
+    //retrieve the children of the categories
+    for (index = 0; index < availableCategories; index++)
+    {
+        sqlQuery = m_SQL_REQUEST_GET_CHILD_CATEGORIES;
+        strStream.str("");
+        strStream << availableCategoryTable.at(index).id;
+        sqlQuery += strStream.str();
+        sqlQuery += ";";
+        query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+        if (query_result.empty())
+        {
+            //no child
+        }
+        else
+        {
+            for (child=0;child<query_result.size();child++)
+            {
+                query_line = query_result.at(child);
+                fromString<categoryId_t>(value,query_line[0], std::dec);
+                availableCategoryTable.at(index).childList.push_back(value);
+            }
+        }
+    }
+
+    return availableCategoryTable;
+}
+
+void sqlRequest::getAvailableArea()
+{
+    vector<vector<string> > query_result;
+    vector<string >  query_line;
+
+    //retrieve the available area into the database
+    query_result = mp_database->queryNotUTF(m_SQL_REQUEST_GET_AVAILABLE_AREA);
+    if (query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+    }
+    else
+    {
+        // read the result of the query, for the moment only the first area !
+        query_line = query_result.at(0);
+        fromString<double>(m_leftBottomLocation.latitude,query_line[0], std::dec);
+        fromString<double>(m_leftBottomLocation.longitude,query_line[1], std::dec);
+        fromString<double>(m_rightTopLocation.latitude,query_line[2], std::dec);
+        fromString<double>(m_rightTopLocation.longitude,query_line[3], std::dec);
+    }
+}
+
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCategory category, POIServiceTypes::CategoryID& unique_id)
+{
+    sqlRequest::SQL_REQUEST_ERRORS ret;
+    size_t index;
+
+    //Check if all the parent categories exist
+    for (index=0;index < category.details.parentsId.size();index++)
+    {
+        ret = checkIfCategoryIdExist(category.details.parentsId.at(index));
+        if (ret != OK)
+            return ret;
+    }
+
+    //Check if the name doesn't exist into the database to avoid duplications
+    ret = checkIfCategoryNameDoesntExist(category.details.name);
+    if (ret == OK)
+    {
+        //Now create the new category and get the unique id
+
+
+    }
+
+    return ret;
+}
+
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfCategoryNameDoesntExist(std::string name)
+{
+    std::string sqlQuery; //SQL request on database
+    vector<vector<string> > query_result;
+    vector<string >  query_line;
+    std::ostringstream  strStream; //temporary stream used for transformation into string
+    sqlRequest::SQL_REQUEST_ERRORS ret;
+    bool retSqlRequest;
+
+    sqlQuery = m_SQL_CHECK_IF_CATEGORY_NAME_EXIST;
+    strStream.str("");
+    strStream << name;
+    sqlQuery += strStream.str();
+    sqlQuery += m_SQL_RETURN_BOOL_VALUE;
+    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    if (query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+        ret = DATABASE_ACCESS_ERROR;
+    }
+    else
+    {
+        // read the result of the query
+        query_line = query_result.at(0);
+        fromString<bool>(retSqlRequest,query_line[0], std::dec);
+        if (retSqlRequest)
+            ret = CATEGORY_NAME_ALREADY_EXIST;
+        else
+            ret = OK;
+    }
+    return ret;
+}
+
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfCategoryIdExist(POIServiceTypes::CategoryID unique_id)
+{
+    std::string sqlQuery; //SQL request on database
+    vector<vector<string> > query_result;
+    vector<string >  query_line;
+    std::ostringstream  strStream; //temporary stream used for transformation into string
+    sqlRequest::SQL_REQUEST_ERRORS ret;
+    bool retSqlRequest;
+
+    sqlQuery = m_SQL_CHECK_IF_CATEGORY_ID_EXIST;
+    strStream.str("");
+    strStream << unique_id;
+    sqlQuery += strStream.str();
+    sqlQuery += m_SQL_RETURN_BOOL_VALUE;
+    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    if (query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+        ret = DATABASE_ACCESS_ERROR;
+    }
+    else
+    {
+        // read the result of the query
+        query_line = query_result.at(0);
+        fromString<bool>(retSqlRequest,query_line[0], std::dec);
+        if (retSqlRequest)
+            ret = OK;
+        else
+            ret = CATEGORY_ID_NOT_EXIST;
+    }
+    return ret;
+}
+
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removeCategory(POIServiceTypes::CategoryID unique_id)
+{
+    sqlRequest::SQL_REQUEST_ERRORS ret;
+
+    return ret;
+
+}
+
+
 
 
 PoiManagerServerStub::PoiManagerServerStub() {
@@ -52,10 +320,15 @@ PoiManagerServerStub::PoiManagerServerStub() {
     m_languageCode = "eng";
     m_countryCode = "USA";
     m_scriptCode = "Latn";
+    m_centerLocation.latitude = 48.85792; //by default center of Paris
+    m_centerLocation.longitude = 2.3383145;
+    m_centerLocation.altitude = 0;
 
+    mp_sqlRequest = new sqlRequest;
 }
 
 PoiManagerServerStub::~PoiManagerServerStub() {
+    delete mp_sqlRequest;
 }
 
 void PoiManagerServerStub::getVersion(const std::shared_ptr<CommonAPI::ClientId> clientId, NavigationTypes::Version& version)
@@ -93,159 +366,74 @@ void PoiManagerServerStub::getAvailableCategories(const std::shared_ptr<CommonAP
     // load categories from the embedded database
     for (index = 0; index < m_availableCategories; index++)
     {
-        category.uniqueId = m_availableCategoryTable[index].id;
-        category.topLevel = m_availableCategoryTable[index].top_level;
-        category.name = m_availableCategoryTable[index].name;
+        category.uniqueId = m_availableCategoryTable.at(index).id;
+        category.topLevel = m_availableCategoryTable.at(index).top_level;
+        category.name = m_availableCategoryTable.at(index).name;
         categories.push_back(category);
     }
 
 }
-
 
 void PoiManagerServerStub::getRootCategory(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CategoryID& category)
 {
     category = m_rootCategory;
 }
 
-bool PoiManagerServerStub::initDatabase(const char* poiDatabaseFileName)
+void PoiManagerServerStub::getParentCategories(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CategoryID category, std::vector<POIServiceTypes::CategoryAndLevel>& categories)
 {
-    mp_database = new Database(poiDatabaseFileName);
-    refreshCategoryList();
-    return true; //maybe add some check of the file here
+    uint16_t index;
+    POIServiceTypes::CategoryAndLevel categoryAndLevel;
+    for (index=0;index<m_availableCategoryTable.at(category).parentList.size();index++)
+    {
+        categoryAndLevel.uniqueId = m_availableCategoryTable.at(category).parentList[index];
+        categoryAndLevel.topLevel = m_availableCategoryTable.at(categoryAndLevel.uniqueId).top_level;
+        categories.push_back(categoryAndLevel);
+    }
 }
 
-void PoiManagerServerStub::onError()
+void PoiManagerServerStub::getChildrenCategories(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CategoryID category, std::vector<POIServiceTypes::CategoryAndLevel>& categories)
+{
+    uint16_t index;
+    POIServiceTypes::CategoryAndLevel categoryAndLevel;
+    for (index=0;index<m_availableCategoryTable.at(category).childList.size();index++)
+    {
+        categoryAndLevel.uniqueId = m_availableCategoryTable.at(category).childList[index];
+        categoryAndLevel.topLevel = m_availableCategoryTable.at(categoryAndLevel.uniqueId).top_level;
+        categories.push_back(categoryAndLevel);
+    }
+}
+
+void PoiManagerServerStub::createCategory(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CAMCategory category, POIServiceTypes::CategoryID& unique_id)
 {
 
+}
+
+void PoiManagerServerStub::removeCategories(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<POIServiceTypes::CategoryID> categories)
+{
+
+}
+
+void PoiManagerServerStub::addPOIs(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CategoryID unique_id, std::vector<POIServiceTypes::PoiAddedDetails> poiList)
+{
+
+}
+
+void PoiManagerServerStub::removePOIs(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<POIServiceTypes::POI_ID> ids)
+{
+
+}
+
+bool PoiManagerServerStub::initDatabase(const char* poiDatabaseFileName)
+{
+    mp_sqlRequest->setDatabase(poiDatabaseFileName);
+    refreshCategoryList(); //read the database and buffer the category list locally
+    return true; //maybe add some check of the file here
 }
 
 // refresh the buffer that contains the categories related data, called each time a category is added or removed
 void PoiManagerServerStub::refreshCategoryList()
 {
-    std::string sqlQuery; //SQL request on database
-    std::ostringstream  strStream; //temporary stream used for transformation into string
-    vector<vector<string> > query_result, additionnal_query_result;
-    vector<string >  query_line, additionnal_query_line;
-    size_t index,sub_index;
-    categoryId_t value;
-    categoryId_t parent,child;
-    category_attribute_common_t attribute;
-
-    // retrieve the available categories (the ones that have at least one record)
-    query_result = mp_database->queryNotUTF(SQL_REQUEST_GET_AVAILABLE_CATEGORIES);
-    if (query_result.empty())
-    {
-        onError(); //database is not well populated
-        //todo something with table ?
-    }
-    else
-    { // Id,name
-        m_availableCategories = query_result.size(); //store the number of categories
-        for (index = 0; index < m_availableCategories; index++)
-        {
-            // read the result of the query and store it
-            query_line = query_result.at(index);
-            fromString<categoryId_t>(value,query_line[0], std::dec);
-            m_availableCategoryTable[index].id = value;
-
-            // retrieve the associated icons (for the moment, just one)
-            sqlQuery = SQL_REQUEST_GET_CATEGORY_ICONS;
-            strStream.str("");
-            strStream << value;
-            sqlQuery += strStream.str();
-            sqlQuery += ");";
-            additionnal_query_result = mp_database->queryNotUTF(sqlQuery.c_str());
-            if (additionnal_query_result.empty())
-            {
-                onError(); //database is not well populated
-                //todo something with table ?
-            }
-            else
-            {
-                additionnal_query_line = additionnal_query_result.at(0);
-                m_availableCategoryTable[index].icon = additionnal_query_line[0] + '.' + additionnal_query_line[1];
-            }
-
-            m_availableCategoryTable[index].name = query_line[1];
-
-            // retrieve the associated attributes
-            sqlQuery = SQL_REQUEST_GET_CATEGORY_ATTRIBUTES;
-            strStream.str("");
-            strStream << m_availableCategoryTable[index].id;
-            sqlQuery += strStream.str();
-            sqlQuery += ");";
-            additionnal_query_result = mp_database->queryNotUTF(sqlQuery.c_str());
-            if (additionnal_query_result.empty())
-            {
-                onError(); //database is not well populated
-                //todo something with table ?
-            }
-            else
-            {
-                for (sub_index = 0; sub_index <additionnal_query_result.size(); sub_index++)
-                {
-                    additionnal_query_line = additionnal_query_result.at(sub_index);
-                    fromString<attributeId_t>(attribute.id,additionnal_query_line[0], std::dec);
-                    attribute.name = additionnal_query_line[1];
-                    attribute.isSearched = false;
-                    m_availableCategoryTable[index].attributeList.push_back(attribute);
-                }
-            }
-            m_availableCategoryTable[index].top_level = true; //this POC only manages predefined categories
-            m_availableCategoryTable[index].isSearch = false; //for the moment no categories selected
-        }
-    }
-
-    //retrieve the parents of the categories
-    //root category is the only one that is its own parent
-    for (index = 0; index < m_availableCategories; index++)
-    {
-        sqlQuery = SQL_REQUEST_GET_PARENT_CATEGORIES;
-        strStream.str("");
-        strStream << m_availableCategoryTable[index].id;
-        sqlQuery += strStream.str();
-        sqlQuery += ";";
-        query_result = mp_database->queryNotUTF(sqlQuery.c_str());
-        if (query_result.empty())
-        {
-            onError(); //database is not well populated
-            //todo something with table ?
-        }
-        else
-        {
-            for (parent=0;parent<query_result.size();parent++)
-            {
-                query_line = query_result.at(parent);
-                fromString<categoryId_t>(value,query_line[0], std::dec);
-                if (index == value)
-                    m_rootCategory = index; //child is parent, so it's the root
-                m_availableCategoryTable[index].parentList.push_back(value);
-            }
-        }
-    }
-
-    //retrieve the children of the categories
-    for (index = 0; index < m_availableCategories; index++)
-    {
-        sqlQuery = SQL_REQUEST_GET_CHILD_CATEGORIES;
-        strStream.str("");
-        strStream << m_availableCategoryTable[index].id;
-        sqlQuery += strStream.str();
-        sqlQuery += ";";
-        query_result = mp_database->queryNotUTF(sqlQuery.c_str());
-        if (query_result.empty())
-        {
-            //no child
-        }
-        else
-        {
-            for (child=0;child<query_result.size();child++)
-            {
-                query_line = query_result.at(child);
-                fromString<categoryId_t>(value,query_line[0], std::dec);
-                m_availableCategoryTable[index].childList.push_back(value);
-            }
-        }
-    }
-
+    m_availableCategoryTable.clear();
+    m_availableCategoryTable = mp_sqlRequest->getAvailableCategories(m_rootCategory);
+    m_availableCategories = m_availableCategoryTable.size();
 }
