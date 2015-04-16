@@ -94,7 +94,7 @@ class EnhancedPosition
         dbg(lvl_debug,"enter\n");
 		int i;
 		bool position_found=false;
-        if ((changedValues & (GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE || GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE)) == (GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE || GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE))
+        if ((changedValues & (GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE | GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE)) == (GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE | GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE))
         {
             position_found=true;
 		}
@@ -235,12 +235,12 @@ vehicle_process_map(struct vehicle_priv *priv, std::map< uint64_t, ::DBus::Varia
 static void
 vehicle_enhancedposition_callback(struct vehicle_priv *priv)
 {
-    dbg(lvl_debug,"enter\n");
-    uint64_t valuesToReturn = (GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE || GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE || GENIVI_ENHANCEDPOSITIONSERVICE_SPEED);
+    uint64_t valuesToReturn = (GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE | GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE | GENIVI_ENHANCEDPOSITIONSERVICE_SPEED);
     std::map< uint64_t, ::DBus::Variant > position;
     uint64_t timestamp;
     priv->enhanced_position->GetPositionInfo(valuesToReturn,timestamp,position);
-	vehicle_process_map(priv, position);
+    dbg(lvl_debug,"enter GetPositionInfo\n");
+    vehicle_process_map(priv, position);
 	time(&priv->fix_time); /* FIXME: Use actual value */
 	priv->fix_type=2; /* 3d, FIXME: Use actual value */
 	callback_list_call_attr_0(priv->cbl, attr_position_coord_geo);
