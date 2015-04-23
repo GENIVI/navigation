@@ -50,6 +50,7 @@ public:
         CATEGORY_NOT_EXIST,
         CATEGORY_NAME_ALREADY_EXIST,
         CATEGORY_ID_NOT_EXIST,
+        ATTRIBUTE_ID_NOT_EXIST,
         PARENT_CATEGORY_NOT_EXIST,
         DATABASE_ACCESS_ERROR,
         OK
@@ -70,12 +71,18 @@ private:
     const char* m_SQL_REQUEST_GET_CHILD_CATEGORIES = "SELECT childId FROM poicategorykinship WHERE parentId IS ";
     const char* m_SQL_REQUEST_GET_CATEGORY_ICONS = "SELECT url,format FROM iconset WHERE Id IS (SELECT iconset_Id FROM isdisplayedas WHERE poicategory_Id IS  ";
     const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_CATEGORY_ID = "SELECT a.id+1 FROM poicategory a WHERE NOT EXISTS (SELECT * FROM poicategory b WHERE a.id+1 = b.id) ORDER BY a.id";
+    const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_ATTRIBUTE_ID = "SELECT a.id+1 FROM poiattribute a WHERE NOT EXISTS (SELECT * FROM poicategory b WHERE a.id+1 = b.id) ORDER BY a.id";
     const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_POI_ID = "SELECT a.id+1 FROM poi a WHERE NOT EXISTS (SELECT * FROM poi b WHERE a.id+1 = b.id) ORDER BY a.id";
-    const char* m_SQL_INSERT_CATEGORY = "INSERT INTO poicategory VALUES (";
-    const char* m_SQL_DELETE_CATEGORY = "DELETE from poicategory WHERE id = ";
-    const char* m_SQL_CHECK_IF_CATEGORY_ID_EXIST = "SELECT CASE WHEN EXISTS (SELECT * FROM poicategory WHERE id = ";
-    const char* m_SQL_CHECK_IF_CATEGORY_NAME_EXIST = "SELECT CASE WHEN EXISTS (SELECT * FROM poicategory WHERE name = ";
-    const char* m_SQL_RETURN_BOOL_VALUE = "THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END";
+    const char* m_SQL_REQUEST_INSERT_CATEGORY = "INSERT INTO poicategory VALUES (";
+    const char* m_SQL_REQUEST_DELETE_CATEGORY = "DELETE from poicategory WHERE id = ";
+    const char* m_SQL_REQUEST_CHECK_IF_CATEGORY_ID_EXIST = "SELECT CASE WHEN EXISTS (SELECT * FROM poicategory WHERE id = ";
+    const char* m_SQL_REQUEST_CHECK_IF_CATEGORY_NAME_EXIST = "SELECT CASE WHEN EXISTS (SELECT * FROM poicategory WHERE name = ";
+    const char* m_SQL_REQUEST_INSERT_ATTRIBUTE = "INSERT INTO poiattribute VALUES (";
+    const char* m_SQL_REQUEST_DELETE_ATTRIBUTE = "DELETE from poiattribute WHERE id = ";
+    const char* m_SQL_REQUEST_CHECK_IF_ATTRIBUTE_ID_EXIST = "SELECT CASE WHEN EXISTS (SELECT * FROM poiattribute WHERE id = ";
+    const char* m_SQL_REQUEST_GET_POI_PROVIDER_ID = "(SELECT Id FROM poiprovider WHERE name='OpenStreetMap')";
+    const char* m_SQL_RETURN_BOOL_VALUE = " THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;";
+    const char* m_SQL_REQUEST_INSERT_BELONGSTO = "INSERT INTO belongsto (Id,poiprovider_Id,poicategory_Id,poi_Id) ";
 
     Database *mp_database; // database access
 
@@ -92,6 +99,12 @@ private:
     SQL_REQUEST_ERRORS checkIfCategoryNameDoesntExist(std::string name);
 
     SQL_REQUEST_ERRORS checkIfCategoryIdExist(POIServiceTypes::CategoryID unique_id);
+
+    SQL_REQUEST_ERRORS checkIfAttributeExist(POIServiceTypes::AttributeID unique_id);
+
+    SQL_REQUEST_ERRORS getFreeCategoryId(POIServiceTypes::CategoryID &unique_id);
+
+    SQL_REQUEST_ERRORS getFreeAttributeId(POIServiceTypes::AttributeID &unique_id);
 
     void getAvailableArea();
 

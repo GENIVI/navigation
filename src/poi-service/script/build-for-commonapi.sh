@@ -16,11 +16,7 @@
 #
 # @licence end@
 ###########################################################################
-POI_SERVER=poi-server
-POI_COMMON=poi-common
-NAVIGATION_CORE=navigation-core
-MAP_VIEWER=map-viewer
-POI_SERVICE=poi-service
+POI_MANAGER_SERVER=poi-manager-server
 
 target_root=$PWD/..
 target_bin=$PWD/../bin #by default
@@ -29,11 +25,8 @@ set-path()
 {
 	TOP_DIR=$target_root
 	TOP_BIN_DIR=$target_bin
-	API_DIR=$TOP_DIR/../../api
-
-	POI_SERVER_SRC_DIR=$TOP_DIR/$POI_SERVER
-	POI_SERVER_BIN_DIR=$TOP_BIN_DIR/$POI_SERVER
-	POI_COMMON_SRC_DIR=$TOP_DIR/$POI_COMMON
+	POI_MANAGER_SERVER_SRC_DIR=$TOP_DIR/$POI_MANAGER_SERVER
+	POI_MANAGER_SERVER_BIN_DIR=$TOP_BIN_DIR/$POI_MANAGER_SERVER
 }
 
 usage() {
@@ -48,23 +41,15 @@ usage() {
 }
 
 build() {
+
     echo ''
-    echo 'Building poi-server' 
+    echo 'Building poi-manager-server' 
 
-    echo 'Generate DBus include files'
-
-	cd $API_DIR
-	mkdir -p include
-	cd $API_DIR/$NAVIGATION_CORE && cmake .
-	cd $API_DIR/$MAP_VIEWER && cmake .
-	cd $API_DIR/$POI_SERVICE && cmake .
-
-    cd $TOP_DIR 
-    mkdir -p bin
     cd $TOP_BIN_DIR 
-    mkdir -p $POI_SERVER
-    cd $POI_SERVER_BIN_DIR
-	cmake -Dapi_DIR=$API_DIR -Dgenerated_api_DIR=$GENERATED_API_DIR  $POI_SERVER_SRC_DIR && make
+    mkdir -p $POI_MANAGER_SERVER
+    cd $POI_MANAGER_SERVER_BIN_DIR
+	cmake -DCOMMON_API_PATH_GENERATED_FILES=../../../api/franca/navigation/src-gen -DDBUS_LIB_PATH=/usr/local/lib  $POI_MANAGER_SERVER_SRC_DIR && make
+
 }
 
 clean() {
