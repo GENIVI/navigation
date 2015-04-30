@@ -113,6 +113,7 @@ vector<poi_category_common_t> sqlRequest::getAvailableCategories(POIServiceTypes
             }
             else
             {
+                poiCategory.attributeList.clear();
                 for (sub_index = 0; sub_index <additionnal_query_result.size(); sub_index++)
                 {
                     additionnal_query_line = additionnal_query_result.at(sub_index);
@@ -213,16 +214,9 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
     size_t index;
     std::string sqlQuery; //SQL request on database
     vector<vector<string> > query_result;
-    vector<string >  query_line;
     std::ostringstream  strStream; //temporary stream used for transformation into string
-
-    //Check if all the parent categories exist
-    for (index=0;index < category.details.parentsId.size();index++)
-    {
-        ret = checkIfCategoryIdExist(category.details.parentsId.at(index));
-        if (ret != OK)
-            return ret;
-    }
+    recordId_t recordId;
+    iconId_t iconId;
 
     //Check if the name doesn't exist into the database to avoid duplications
     ret = checkIfCategoryNameDoesntExist(category.details.name);
@@ -273,20 +267,136 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
                 ret = DATABASE_ACCESS_ERROR;
                 return ret;
             }
-
         }
         else
         {
             if (ret != OK)
+                return ret;
+        }
+
+        //Complete the table of attributes for the category (hasattribute)
+        ret = getFreeRecordId(m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_HAS_ATTRIBUTE,recordId);
+        if (ret != OK)
+            return ret;
+        //Create the entry into the table hasattribute
+        sqlQuery = m_SQL_REQUEST_INSERT_HAS_ATTRIBUTE;
+        strStream.str("");
+        strStream << recordId;
+        sqlQuery += strStream.str();
+        sqlQuery += ",";
+        strStream.str("");
+        strStream << unique_id;
+        sqlQuery += strStream.str();
+        sqlQuery += ",";
+        strStream.str("");
+        strStream << (category.attributes.at(index)).id;
+        sqlQuery += strStream.str();
+        sqlQuery += ");";
+        query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+        if (!query_result.empty())
+        {
+            onError(); //database is not well populated
+            //todo something with table ?
+            ret = DATABASE_ACCESS_ERROR;
             return ret;
         }
     }
 
-    //Complete the table of attributes for the category (hasattribute)
+    //Check if all the parent categories exist and complete the table of family categories (poicategorykinship)
+    for (index=0;index < category.details.parentsId.size();index++)
+    {
+        ret = checkIfCategoryExist(category.details.parentsId.at(index));
+        if (ret != OK)
+            return ret;
 
-    //Complete the table of family categories (poicategorykinship)
+        ret = getFreeRecordId(m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_POI_CATEGORY_KINSHIP,recordId);
+        if (ret != OK)
+            return ret;
+        //Create the entry into the table poicategorykinship
+        sqlQuery = m_SQL_REQUEST_INSERT_POI_CATEGORY_KINSHIP;
+        strStream.str("");
+        strStream << recordId;
+        sqlQuery += strStream.str();
+        sqlQuery += ",";
+        strStream.str("");
+        strStream << unique_id;
+        sqlQuery += strStream.str();
+        sqlQuery += ",";
+        strStream.str("");
+        strStream << category.details.parentsId.at(index);
+        sqlQuery += strStream.str();
+        sqlQuery += ");";
+        query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+        if (!query_result.empty())
+        {
+            onError(); //database is not well populated
+            //todo something with table ?
+            ret = DATABASE_ACCESS_ERROR;
+            return ret;
+        }
+    }
 
     //Complete the table of icons (iconset and isdisplayedas)
+    //Get a free id (iconset)
+    ret = getFreeIconId(iconId);
+    if (ret != OK)
+        return ret;
+
+    //Create the icon
+    sqlQuery = m_SQL_REQUEST_INSERT_ICON;
+    strStream.str("");
+    strStream << iconId;
+    sqlQuery += strStream.str();
+    sqlQuery += ",";
+    strStream.str("");
+    strStream << ICON_WIDTH;
+    sqlQuery += strStream.str();
+    sqlQuery += ",";
+    strStream.str("");
+    strStream << ICON_HEIGHT;
+    sqlQuery += strStream.str();
+    sqlQuery += ",'";
+    sqlQuery.append(ICON_URL);
+    strStream.str("");
+    strStream << iconId;
+    sqlQuery += strStream.str();
+    sqlQuery += "','";
+    sqlQuery.append(ICON_FORMAT);
+    sqlQuery += "');";
+    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    if (!query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+        ret = DATABASE_ACCESS_ERROR;
+        return ret;
+    }
+
+    ret = getFreeRecordId(m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_IS_DISPLAYED_HAS,recordId);
+    if (ret != OK)
+        return ret;
+    //Create the entry into the table isdisplayedas
+    sqlQuery = m_SQL_REQUEST_INSERT_IS_DISPLAYED_HAS;
+    strStream.str("");
+    strStream << recordId;
+    sqlQuery += strStream.str();
+    sqlQuery += ",";
+    strStream.str("");
+    strStream << unique_id;
+    sqlQuery += strStream.str();
+    sqlQuery += ",";
+    strStream.str("");
+    strStream << iconId;
+    sqlQuery += strStream.str();
+    sqlQuery += ");";
+    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    if (!query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+        ret = DATABASE_ACCESS_ERROR;
+        return ret;
+    }
 
 
     return ret;
@@ -329,7 +439,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfCategoryNameDoesntExist(std::s
     return ret;
 }
 
-sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfCategoryIdExist(POIServiceTypes::CategoryID unique_id)
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfCategoryExist(POIServiceTypes::CategoryID unique_id)
 {
     std::string sqlQuery; //SQL request on database
     vector<vector<string> > query_result;
@@ -372,6 +482,30 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removeCategory(POIServiceTypes::Categ
 
     return ret;
 
+}
+
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::getFreePoiId(POIServiceTypes::POI_ID &unique_id)
+{
+    sqlRequest::SQL_REQUEST_ERRORS ret;
+    vector<vector<string> > query_result;
+    vector<string >  query_line;
+
+    // retrieve the next free category id
+    query_result = mp_database->queryNotUTF(m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_POI_ID);
+    if (query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+        ret = DATABASE_ACCESS_ERROR;
+    }
+    else
+    { // Id
+        query_line = query_result.at(0);
+        fromString<categoryId_t>(unique_id,query_line[0], std::dec);
+        ret = OK;
+    }
+
+    return ret;
 }
 
 sqlRequest::SQL_REQUEST_ERRORS sqlRequest::getFreeCategoryId(POIServiceTypes::CategoryID& unique_id)
@@ -422,6 +556,54 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::getFreeAttributeId(POIServiceTypes::A
     return ret;
 }
 
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::getFreeIconId(iconId_t &unique_id)
+{
+    sqlRequest::SQL_REQUEST_ERRORS ret;
+    vector<vector<string> > query_result;
+    vector<string >  query_line;
+
+    // retrieve the next free category id
+    query_result = mp_database->queryNotUTF(m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_ICON_ID);
+    if (query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+        ret = DATABASE_ACCESS_ERROR;
+    }
+    else
+    { // Id
+        query_line = query_result.at(0);
+        fromString<iconId_t>(unique_id,query_line[0], std::dec);
+        ret = OK;
+    }
+
+    return ret;
+}
+
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::getFreeRecordId(const char* request, recordId_t &unique_id)
+{
+    sqlRequest::SQL_REQUEST_ERRORS ret;
+    vector<vector<string> > query_result;
+    vector<string >  query_line;
+
+    // retrieve the next free category id
+    query_result = mp_database->queryNotUTF(request);
+    if (query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+        ret = DATABASE_ACCESS_ERROR;
+    }
+    else
+    { // Id
+        query_line = query_result.at(0);
+        fromString<recordId_t>(unique_id,query_line[0], std::dec);
+        ret = OK;
+    }
+
+    return ret;
+}
+
 sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfAttributeExist(POIServiceTypes::AttributeID unique_id)
 {
     std::string sqlQuery; //SQL request on database
@@ -454,6 +636,75 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfAttributeExist(POIServiceTypes
         else
             ret = ATTRIBUTE_ID_NOT_EXIST;
     }
+    return ret;
+}
+
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createPoi(POIServiceTypes::CategoryID categoryId, POIServiceTypes::PoiAddedDetails poi, POIServiceTypes::POI_ID &unique_id)
+{
+    sqlRequest::SQL_REQUEST_ERRORS ret;
+    std::string sqlQuery; //SQL request on database
+    vector<vector<string> > query_result;
+    vector<string >  query_line;
+    std::ostringstream  strStream; //temporary stream used for transformation into string
+    recordId_t recordId;
+    poiproviderId_t poiproviderId;
+
+    //Get a free id (poi)
+    ret = getFreePoiId(unique_id);
+    if (ret != OK)
+        return ret;
+
+    //Complete the table belongsto
+
+    // Get the id of the default POI_PROVIDER
+    sqlQuery = m_SQL_REQUEST_GET_POI_PROVIDER_ID;
+    sqlQuery += "'";
+    sqlQuery.append(POI_PROVIDER);
+    sqlQuery += "');";
+    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    if (query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+        ret = DATABASE_ACCESS_ERROR;
+        return ret;
+    }
+    else
+    { // Id
+        query_line = query_result.at(0);
+        fromString<poiproviderId_t>(poiproviderId,query_line[0], std::dec);
+    }
+
+    ret = getFreeRecordId(m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_BELONGS_TO,recordId);
+    if (ret != OK)
+        return ret;
+    //Create the entry into the table belongsto
+    sqlQuery = m_SQL_REQUEST_INSERT_BELONGSTO;
+    strStream.str("");
+    strStream << recordId;
+    sqlQuery += strStream.str();
+    sqlQuery += ",";
+    strStream.str("");
+    strStream << unique_id;
+    sqlQuery += strStream.str();
+    sqlQuery += ",";
+    strStream.str("");
+    strStream << categoryId;
+    sqlQuery += strStream.str();
+    sqlQuery += ",";
+    strStream.str("");
+    strStream << poiproviderId;
+    sqlQuery += strStream.str();
+    sqlQuery += ");";
+    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    if (!query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+        ret = DATABASE_ACCESS_ERROR;
+        return ret;
+    }
+
     return ret;
 }
 

@@ -56,31 +56,53 @@ public:
         OK
     } SQL_REQUEST_ERRORS;
 
+    #define ICON_WIDTH 32
+    #define ICON_HEIGHT 37
+    #define ICON_URL "../resource/file"
+    #define ICON_FORMAT "png"
+    #define POI_PROVIDER "OpenStreetMap"
+
+    typedef uint32_t recordId_t;
+    typedef uint32_t iconId_t;
+    typedef uint32_t poiproviderId_t;
+
     sqlRequest();
     ~sqlRequest();
     SQL_REQUEST_ERRORS setDatabase(const char* poiDatabaseFileName);
     vector<poi_category_common_t> getAvailableCategories(POIServiceTypes::CategoryID& rootCategory);
     SQL_REQUEST_ERRORS createCategory(POIServiceTypes::CAMCategory category,POIServiceTypes::CategoryID& unique_id);
     SQL_REQUEST_ERRORS removeCategory(POIServiceTypes::CategoryID unique_id);
+    SQL_REQUEST_ERRORS createPoi(POIServiceTypes::CategoryID categoryId, POIServiceTypes::PoiAddedDetails poi, POIServiceTypes::POI_ID& unique_id);
 
 private:
-    const char* m_SQL_REQUEST_GET_AVAILABLE_CATEGORIES = "SELECT Id,name FROM poicategory WHERE Id IN (SELECT poicategory_Id FROM belongsto GROUP BY poicategory_Id);";
+    const char* m_SQL_REQUEST_GET_AVAILABLE_CATEGORIES = "SELECT Id,name FROM poicategory;";
+    const char* m_SQL_REQUEST_GET_CATEGORIES_USED_BY_POI = "SELECT Id,name FROM poicategory WHERE Id IN (SELECT poicategory_Id FROM belongsto GROUP BY poicategory_Id);";
     const char* m_SQL_REQUEST_GET_CATEGORY_ATTRIBUTES = "SELECT Id,name FROM poiattribute WHERE Id IN (SELECT poiattribute_Id FROM hasattribute WHERE poicategory_Id IS ";
     const char* m_SQL_REQUEST_GET_AVAILABLE_AREA = "SELECT leftlongitude,bottomlatitude,rightlongitude,toplatitude FROM availablearea;";
     const char* m_SQL_REQUEST_GET_PARENT_CATEGORIES = "SELECT parentId FROM poicategorykinship WHERE childId IS ";
     const char* m_SQL_REQUEST_GET_CHILD_CATEGORIES = "SELECT childId FROM poicategorykinship WHERE parentId IS ";
     const char* m_SQL_REQUEST_GET_CATEGORY_ICONS = "SELECT url,format FROM iconset WHERE Id IS (SELECT iconset_Id FROM isdisplayedas WHERE poicategory_Id IS  ";
     const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_CATEGORY_ID = "SELECT a.id+1 FROM poicategory a WHERE NOT EXISTS (SELECT * FROM poicategory b WHERE a.id+1 = b.id) ORDER BY a.id";
-    const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_ATTRIBUTE_ID = "SELECT a.id+1 FROM poiattribute a WHERE NOT EXISTS (SELECT * FROM poicategory b WHERE a.id+1 = b.id) ORDER BY a.id";
+    const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_ATTRIBUTE_ID = "SELECT a.id+1 FROM poiattribute a WHERE NOT EXISTS (SELECT * FROM poiattribute b WHERE a.id+1 = b.id) ORDER BY a.id";
     const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_POI_ID = "SELECT a.id+1 FROM poi a WHERE NOT EXISTS (SELECT * FROM poi b WHERE a.id+1 = b.id) ORDER BY a.id";
+    const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_ICON_ID = "SELECT a.id+1 FROM iconset a WHERE NOT EXISTS (SELECT * FROM iconset b WHERE a.id+1 = b.id) ORDER BY a.id";
+    const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_HAS_ATTRIBUTE = "SELECT a.id+1 FROM hasattribute a WHERE NOT EXISTS (SELECT * FROM hasattribute b WHERE a.id+1 = b.id) ORDER BY a.id";
+    const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_POI_CATEGORY_KINSHIP = "SELECT a.id+1 FROM poicategorykinship a WHERE NOT EXISTS (SELECT * FROM poicategorykinship b WHERE a.id+1 = b.id) ORDER BY a.id";
+    const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_IS_DISPLAYED_HAS = "SELECT a.id+1 FROM isdisplayedas a WHERE NOT EXISTS (SELECT * FROM isdisplayedas b WHERE a.id+1 = b.id) ORDER BY a.id";
+    const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_BELONGS_TO = "SELECT a.id+1 FROM belongsto a WHERE NOT EXISTS (SELECT * FROM isdisplayedas b WHERE a.id+1 = b.id) ORDER BY a.id";
+    const char* m_SQL_REQUEST_INSERT_POI = "INSERT INTO poi VALUES (";
     const char* m_SQL_REQUEST_INSERT_CATEGORY = "INSERT INTO poicategory VALUES (";
     const char* m_SQL_REQUEST_DELETE_CATEGORY = "DELETE from poicategory WHERE id = ";
     const char* m_SQL_REQUEST_CHECK_IF_CATEGORY_ID_EXIST = "SELECT CASE WHEN EXISTS (SELECT * FROM poicategory WHERE id = ";
     const char* m_SQL_REQUEST_CHECK_IF_CATEGORY_NAME_EXIST = "SELECT CASE WHEN EXISTS (SELECT * FROM poicategory WHERE name = ";
     const char* m_SQL_REQUEST_INSERT_ATTRIBUTE = "INSERT INTO poiattribute VALUES (";
     const char* m_SQL_REQUEST_DELETE_ATTRIBUTE = "DELETE from poiattribute WHERE id = ";
+    const char* m_SQL_REQUEST_INSERT_HAS_ATTRIBUTE = "INSERT INTO hasattribute VALUES (";
+    const char* m_SQL_REQUEST_INSERT_POI_CATEGORY_KINSHIP = "INSERT INTO poicategorykinship VALUES (";
+    const char* m_SQL_REQUEST_INSERT_IS_DISPLAYED_HAS = "INSERT INTO isdisplayedas VALUES (";
+    const char* m_SQL_REQUEST_INSERT_ICON = "INSERT INTO iconset VALUES (";
     const char* m_SQL_REQUEST_CHECK_IF_ATTRIBUTE_ID_EXIST = "SELECT CASE WHEN EXISTS (SELECT * FROM poiattribute WHERE id = ";
-    const char* m_SQL_REQUEST_GET_POI_PROVIDER_ID = "(SELECT Id FROM poiprovider WHERE name='OpenStreetMap')";
+    const char* m_SQL_REQUEST_GET_POI_PROVIDER_ID = "(SELECT Id FROM poiprovider WHERE name=";
     const char* m_SQL_RETURN_BOOL_VALUE = " THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;";
     const char* m_SQL_REQUEST_INSERT_BELONGSTO = "INSERT INTO belongsto (Id,poiprovider_Id,poicategory_Id,poi_Id) ";
 
@@ -98,13 +120,19 @@ private:
 
     SQL_REQUEST_ERRORS checkIfCategoryNameDoesntExist(std::string name);
 
-    SQL_REQUEST_ERRORS checkIfCategoryIdExist(POIServiceTypes::CategoryID unique_id);
+    SQL_REQUEST_ERRORS checkIfCategoryExist(POIServiceTypes::CategoryID unique_id);
 
     SQL_REQUEST_ERRORS checkIfAttributeExist(POIServiceTypes::AttributeID unique_id);
+
+    SQL_REQUEST_ERRORS getFreePoiId(POIServiceTypes::POI_ID &unique_id);
 
     SQL_REQUEST_ERRORS getFreeCategoryId(POIServiceTypes::CategoryID &unique_id);
 
     SQL_REQUEST_ERRORS getFreeAttributeId(POIServiceTypes::AttributeID &unique_id);
+
+    SQL_REQUEST_ERRORS getFreeRecordId(const char* request, recordId_t &unique_id);
+
+    SQL_REQUEST_ERRORS getFreeIconId(iconId_t &unique_id);
 
     void getAvailableArea();
 
