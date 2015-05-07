@@ -52,6 +52,7 @@ public:
         CATEGORY_ID_NOT_EXIST,
         ATTRIBUTE_ID_NOT_EXIST,
         PARENT_CATEGORY_NOT_EXIST,
+        POI_ID_NOT_EXIST,
         DATABASE_ACCESS_ERROR,
         OK
     } SQL_REQUEST_ERRORS;
@@ -61,10 +62,27 @@ public:
     #define ICON_URL "../resource/file"
     #define ICON_FORMAT "png"
     #define POI_PROVIDER "OpenStreetMap"
+    #define POI_NAME "mySweetHome"
+    #define SEARCH_STRING "Sweet"
 
     typedef uint32_t recordId_t;
     typedef uint32_t iconId_t;
     typedef uint32_t poiproviderId_t;
+
+    typedef struct {
+        std::string source;
+        std::string website;
+        std::string phone;
+        uint16_t stars;
+        std::string openinghours;
+        std::string addr_house_number;
+        std::string addr_street;
+        uint16_t addr_postcode;
+        std::string addr_city;
+        std::string brand;
+        std::string operateur;
+        std::string credit_card;
+    } poiRecorded_t;
 
     sqlRequest();
     ~sqlRequest();
@@ -73,6 +91,8 @@ public:
     SQL_REQUEST_ERRORS createCategory(POIServiceTypes::CAMCategory category,POIServiceTypes::CategoryID& unique_id);
     SQL_REQUEST_ERRORS removeCategory(POIServiceTypes::CategoryID unique_id);
     SQL_REQUEST_ERRORS createPoi(POIServiceTypes::CategoryID categoryId, POIServiceTypes::PoiAddedDetails poi, POIServiceTypes::POI_ID& unique_id);
+    SQL_REQUEST_ERRORS removePoi(POIServiceTypes::POI_ID unique_id);
+    SQL_REQUEST_ERRORS searchPoi(string &categoryName, string &search_string, NavigationTypes::Coordinate3D &left_bottom_location, NavigationTypes::Coordinate3D &right_top_location, std::vector<POIServiceTypes::POI_ID> poi_id_list);
 
 private:
     const char* m_SQL_REQUEST_GET_AVAILABLE_CATEGORIES = "SELECT Id,name FROM poicategory;";
@@ -89,7 +109,7 @@ private:
     const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_HAS_ATTRIBUTE = "SELECT a.id+1 FROM hasattribute a WHERE NOT EXISTS (SELECT * FROM hasattribute b WHERE a.id+1 = b.id) ORDER BY a.id";
     const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_POI_CATEGORY_KINSHIP = "SELECT a.id+1 FROM poicategorykinship a WHERE NOT EXISTS (SELECT * FROM poicategorykinship b WHERE a.id+1 = b.id) ORDER BY a.id";
     const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_IS_DISPLAYED_HAS = "SELECT a.id+1 FROM isdisplayedas a WHERE NOT EXISTS (SELECT * FROM isdisplayedas b WHERE a.id+1 = b.id) ORDER BY a.id";
-    const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_BELONGS_TO = "SELECT a.id+1 FROM belongsto a WHERE NOT EXISTS (SELECT * FROM isdisplayedas b WHERE a.id+1 = b.id) ORDER BY a.id";
+    const char* m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_BELONGS_TO = "SELECT a.id+1 FROM belongsto a WHERE NOT EXISTS (SELECT * FROM belongsto b WHERE a.id+1 = b.id) ORDER BY a.id";
     const char* m_SQL_REQUEST_INSERT_POI = "INSERT INTO poi VALUES (";
     const char* m_SQL_REQUEST_INSERT_CATEGORY = "INSERT INTO poicategory VALUES (";
     const char* m_SQL_REQUEST_DELETE_CATEGORY = "DELETE from poicategory WHERE id = ";
@@ -98,13 +118,18 @@ private:
     const char* m_SQL_REQUEST_INSERT_ATTRIBUTE = "INSERT INTO poiattribute VALUES (";
     const char* m_SQL_REQUEST_DELETE_ATTRIBUTE = "DELETE from poiattribute WHERE id = ";
     const char* m_SQL_REQUEST_INSERT_HAS_ATTRIBUTE = "INSERT INTO hasattribute VALUES (";
+    const char* m_SQL_REQUEST_DELETE_HAS_ATTRIBUTE = "DELETE from hasattribute WHERE poicategory_Id = ";
     const char* m_SQL_REQUEST_INSERT_POI_CATEGORY_KINSHIP = "INSERT INTO poicategorykinship VALUES (";
+    const char* m_SQL_REQUEST_DELETE_POI_CATEGORY_KINSHIP = "DELETE from poicategorykinship WHERE childId = ";
     const char* m_SQL_REQUEST_INSERT_IS_DISPLAYED_HAS = "INSERT INTO isdisplayedas VALUES (";
+    const char* m_SQL_REQUEST_DELETE_IS_DISPLAYED_HAS = "DELETE from isdisplayedas WHERE poicategory_Id = ";
     const char* m_SQL_REQUEST_INSERT_ICON = "INSERT INTO iconset VALUES (";
+    const char* m_SQL_REQUEST_DELETE_ICON = "DELETE from iconset WHERE Id = ";
     const char* m_SQL_REQUEST_CHECK_IF_ATTRIBUTE_ID_EXIST = "SELECT CASE WHEN EXISTS (SELECT * FROM poiattribute WHERE id = ";
-    const char* m_SQL_REQUEST_GET_POI_PROVIDER_ID = "(SELECT Id FROM poiprovider WHERE name=";
+    const char* m_SQL_REQUEST_GET_POI_PROVIDER_ID = "SELECT Id FROM poiprovider WHERE name=";
     const char* m_SQL_RETURN_BOOL_VALUE = " THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END;";
-    const char* m_SQL_REQUEST_INSERT_BELONGSTO = "INSERT INTO belongsto (Id,poiprovider_Id,poicategory_Id,poi_Id) ";
+    const char* m_SQL_REQUEST_INSERT_BELONGSTO = "INSERT INTO belongsto (Id,poi_Id,poicategory_Id,poiprovider_Id) VALUES (";
+    const char* m_SQL_REQUEST_SEARCH_POI = "SELECT Id FROM poi WHERE (Id IN (SELECT poi_Id FROM belongsto,poicategory WHERE (belongsto.poicategory_Id = poicategory.Id) AND (poicategory.name = '";
 
     Database *mp_database; // database access
 
@@ -158,7 +183,9 @@ public:
     void removeCategories(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<POIServiceTypes::CategoryID> categories);
     void addPOIs(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CategoryID unique_id, std::vector<POIServiceTypes::PoiAddedDetails> poiList);
     void removePOIs(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<POIServiceTypes::POI_ID> ids);
+
     bool initDatabase(const char* poiDatabaseFileName);
+
 
 private:
     NavigationTypes::Version m_version;

@@ -229,6 +229,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
         return ret;
 
     //Create the category
+    // example INSERT INTO poicategory VALUES (8,'recreation');
     sqlQuery = m_SQL_REQUEST_INSERT_CATEGORY;
     strStream.str("");
     strStream << unique_id;
@@ -267,6 +268,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
                 ret = DATABASE_ACCESS_ERROR;
                 return ret;
             }
+            //todo extend the fields of poi with this new attribute
         }
         else
         {
@@ -477,11 +479,93 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfCategoryExist(POIServiceTypes:
 sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removeCategory(POIServiceTypes::CategoryID unique_id)
 {
     sqlRequest::SQL_REQUEST_ERRORS ret;
+    std::string sqlQuery; //SQL request on database
+    vector<vector<string> > query_result;
+    std::ostringstream  strStream; //temporary stream used for transformation into string
 
-    ret = OK;
+    //Check if the id exists into the database
+    ret = checkIfCategoryExist(unique_id);
+    if (ret != OK)
+        return ret;
+
+    // Remove category (poicategory)
+    sqlQuery = m_SQL_REQUEST_DELETE_CATEGORY;
+    strStream.str("");
+    strStream << unique_id;
+    sqlQuery += strStream.str();
+    sqlQuery += ";";
+    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    if (!query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+        ret = DATABASE_ACCESS_ERROR;
+        return ret;
+    }
+
+    // Clean up poicategorykinship
+    sqlQuery = m_SQL_REQUEST_DELETE_POI_CATEGORY_KINSHIP;
+    strStream.str("");
+    strStream << unique_id;
+    sqlQuery += strStream.str();
+    sqlQuery += ";";
+    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    if (!query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+        ret = DATABASE_ACCESS_ERROR;
+        return ret;
+    }
+
+    // Clean up iconset
+    sqlQuery = m_SQL_REQUEST_DELETE_ICON;
+    strStream.str("");
+    strStream << unique_id;
+    sqlQuery += strStream.str();
+    sqlQuery += ";";
+    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    if (!query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+        ret = DATABASE_ACCESS_ERROR;
+        return ret;
+    }
+
+    // Clean up hasattribute
+    sqlQuery = m_SQL_REQUEST_DELETE_HAS_ATTRIBUTE;
+    strStream.str("");
+    strStream << unique_id;
+    sqlQuery += strStream.str();
+    sqlQuery += ";";
+    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    if (!query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+        ret = DATABASE_ACCESS_ERROR;
+        return ret;
+    }
+
+    // Clean up isdisplayedas
+    sqlQuery = m_SQL_REQUEST_DELETE_IS_DISPLAYED_HAS;
+    strStream.str("");
+    strStream << unique_id;
+    sqlQuery += strStream.str();
+    sqlQuery += ";";
+    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    if (!query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+        ret = DATABASE_ACCESS_ERROR;
+        return ret;
+    }
+
+    // Clean up orphan poi
 
     return ret;
-
 }
 
 sqlRequest::SQL_REQUEST_ERRORS sqlRequest::getFreePoiId(POIServiceTypes::POI_ID &unique_id)
@@ -648,19 +732,150 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createPoi(POIServiceTypes::CategoryID
     std::ostringstream  strStream; //temporary stream used for transformation into string
     recordId_t recordId;
     poiproviderId_t poiproviderId;
+    poiRecorded_t  poiRecorded;
+    size_t index;
 
     //Get a free id (poi)
     ret = getFreePoiId(unique_id);
     if (ret != OK)
         return ret;
 
+    //Extract the attributes
+
+    //First set default values
+    poiRecorded.addr_city = "";
+    poiRecorded.addr_house_number = "";
+    poiRecorded.addr_postcode = 0;
+    poiRecorded.addr_street = "";
+    poiRecorded.brand = "";
+    poiRecorded.openinghours = "";
+    poiRecorded.operateur = "";
+    poiRecorded.phone = "";
+    poiRecorded.source = "";
+    poiRecorded.stars = 0;
+    poiRecorded.website = "";
+
+    //and scan the poi attributes
+    for (index=0; index < poi.attributes.size();index++)
+    {
+        switch ((poi.attributes.at(index)).id)
+        {
+        case ATTRIBUTE_SOURCE:
+            poiRecorded.source = (poi.attributes.at(index)).value.get<std::string>();
+            break;
+        case ATTRIBUTE_WEBSITE:
+            poiRecorded.website = (poi.attributes.at(index)).value.get<std::string>();
+            break;
+        case ATTRIBUTE_PHONE :
+            poiRecorded.phone = (poi.attributes.at(index)).value.get<std::string>();
+            break;
+        case ATTRIBUTE_STARS:
+            poiRecorded.stars = (poi.attributes.at(index)).value.get<int>();
+            break;
+        case ATTRIBUTE_OPENINGHOURS:
+            poiRecorded.openinghours = (poi.attributes.at(index)).value.get<std::string>();
+            break;
+        case ATTRIBUTE_ADDRHOUSENUMBER:
+            poiRecorded.addr_house_number = (poi.attributes.at(index)).value.get<std::string>();
+            break;
+        case ATTRIBUTE_ADDRSTREET:
+            poiRecorded.addr_street = (poi.attributes.at(index)).value.get<std::string>();
+            break;
+        case ATTRIBUTE_ADDRPOSTCODE:
+            poiRecorded.addr_postcode = (poi.attributes.at(index)).value.get<int>();
+            break;
+        case ATTRIBUTE_ADDRCITY:
+            poiRecorded.addr_city = (poi.attributes.at(index)).value.get<std::string>();
+            break;
+        case ATTRIBUTE_BRAND:
+            poiRecorded.brand = (poi.attributes.at(index)).value.get<std::string>();
+            break;
+        case ATTRIBUTE_OPERATEUR:
+            poiRecorded.operateur = (poi.attributes.at(index)).value.get<std::string>();
+            break;
+        case ATTRIBUTE_CREDIT_CARD:
+            poiRecorded.credit_card = (poi.attributes.at(index)).value.get<std::string>();
+            break;
+        default:
+            return ATTRIBUTE_ID_NOT_EXIST;
+        }
+    }
+
+    //Create the poi with the associated data
+    //Example INSERT INTO poi VALUES (1,'mySweetHome',48.7798390,2.2172600,120,0,0,'Genivi','','',5,'','','',0,'Velizy','','');
+    sqlQuery = m_SQL_REQUEST_INSERT_POI;
+    strStream.str("");
+    strStream << unique_id;
+    sqlQuery += strStream.str();
+    sqlQuery += ",'";
+    sqlQuery.append(poi.name);
+    sqlQuery += "',";
+    strStream.str("");
+    strStream.precision(7);
+    strStream << fixed << poi.location.latitude;
+    sqlQuery += strStream.str();
+    sqlQuery += ",";
+    strStream.str("");
+    strStream.precision(7);
+    strStream << fixed << poi.location.longitude;
+    sqlQuery += strStream.str();
+    sqlQuery += ",";
+    strStream.str("");
+    strStream << poi.location.altitude;
+    sqlQuery += strStream.str();
+    sqlQuery += ",";
+    strStream.str("");
+    strStream << 0; //segment not used
+    sqlQuery += strStream.str();
+    sqlQuery += ",";
+    strStream.str("");
+    strStream << 0; //offset not used
+    sqlQuery += strStream.str();
+    sqlQuery += ",'";
+    sqlQuery.append(poiRecorded.source); //source
+    sqlQuery += "','";
+    sqlQuery.append(poiRecorded.website); //web site
+    sqlQuery += "','";
+    sqlQuery.append(poiRecorded.phone); //phone
+    sqlQuery += "',";
+    strStream.str("");
+    strStream << poiRecorded.stars; //stars
+    sqlQuery += strStream.str();
+    sqlQuery += ",'";
+    sqlQuery.append(poiRecorded.openinghours); //opening hours
+    sqlQuery += "','";
+    sqlQuery.append(poiRecorded.addr_house_number); //house number
+    sqlQuery += "','";
+    sqlQuery.append(poiRecorded.addr_street); //addr street
+    sqlQuery += "',";
+    strStream.str("");
+    strStream << poiRecorded.addr_postcode; // addr postcode
+    sqlQuery += strStream.str();
+    sqlQuery += ",'";
+    sqlQuery.append(poiRecorded.addr_city); // addr city
+    sqlQuery += "','";
+    sqlQuery.append(poiRecorded.brand); // brand
+    sqlQuery += "','";
+    sqlQuery.append(poiRecorded.operateur); // operateur
+    sqlQuery += "')";
+    sqlQuery += m_SQL_RETURN_BOOL_VALUE;
+    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    if (!query_result.empty())
+    {
+        onError(); //database is not well populated
+        //todo something with table ?
+        ret = DATABASE_ACCESS_ERROR;
+        return ret;
+    }
+
     //Complete the table belongsto
 
     // Get the id of the default POI_PROVIDER
+    // example SELECT Id FROM poiprovider WHERE name='OpenStreetMap';
     sqlQuery = m_SQL_REQUEST_GET_POI_PROVIDER_ID;
     sqlQuery += "'";
     sqlQuery.append(POI_PROVIDER);
-    sqlQuery += "');";
+    sqlQuery += "';";
     query_result = mp_database->queryNotUTF(sqlQuery.c_str());
     if (query_result.empty())
     {
@@ -679,6 +894,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createPoi(POIServiceTypes::CategoryID
     if (ret != OK)
         return ret;
     //Create the entry into the table belongsto
+    // example INSERT INTO belongsto (Id,poi_Id,poicategory_Id,poiprovider_Id) VALUES (1,1,8,0);
     sqlQuery = m_SQL_REQUEST_INSERT_BELONGSTO;
     strStream.str("");
     strStream << recordId;
@@ -703,6 +919,92 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createPoi(POIServiceTypes::CategoryID
         //todo something with table ?
         ret = DATABASE_ACCESS_ERROR;
         return ret;
+    }
+
+    return ret;
+}
+
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removePoi(POIServiceTypes::POI_ID unique_id)
+{
+    sqlRequest::SQL_REQUEST_ERRORS ret;
+
+    return ret;
+}
+
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::searchPoi(string &categoryName, string &search_string, NavigationTypes::Coordinate3D &left_bottom_location, NavigationTypes::Coordinate3D &right_top_location, std::vector<POIServiceTypes::POI_ID> poi_id_list)
+{
+    sqlRequest::SQL_REQUEST_ERRORS ret;
+    std::string sqlQuery; //SQL request on database
+    vector<vector<string> > query_result; //result of the query on database
+    vector<string>  query_line;
+    std::ostringstream  strStream; //temporary stream used for transformation into string
+    size_t index;
+    NavigationTypes::Coordinate3D recordedBottom, recordedTop;
+
+    // example of query     SELECT Id FROM poi
+    //                      WHERE (Id IN (SELECT poi_Id FROM belongsto,poicategory
+    //                      WHERE (belongsto.poicategory_Id = poicategory.Id)
+    //                      AND (poicategory.name = 'recreation')))
+    //                      AND ((latitude > 48.76) AND (latitude < 48.78))
+    //                      AND ((longitude > 2.20) AND (longitude < 2.22))
+    //                      AND (name LIKE '%Sweet%');
+
+    // it's needed to reorder the latitude and longitude for the test coherency
+    if (left_bottom_location.latitude > right_top_location.latitude)
+    {
+        recordedBottom.latitude = right_top_location.latitude;
+        recordedTop.latitude = left_bottom_location.latitude;
+    }
+    else
+    {
+        recordedBottom.latitude = left_bottom_location.latitude;
+        recordedTop.latitude = right_top_location.latitude;
+    }
+    if (left_bottom_location.longitude > right_top_location.longitude)
+    {
+        recordedBottom.longitude = right_top_location.longitude;
+        recordedTop.longitude = left_bottom_location.longitude;
+    }
+    else
+    {
+        recordedBottom.longitude = left_bottom_location.longitude;
+        recordedTop.longitude = right_top_location.longitude;
+    }
+    sqlQuery = m_SQL_REQUEST_SEARCH_POI;
+    sqlQuery += categoryName;
+    sqlQuery += "'))) AND ((latitude > ";
+    strStream.str("");
+    strStream << recordedBottom.latitude;
+    sqlQuery += strStream.str();
+    sqlQuery += ") AND (latitude < ";
+    strStream.str("");
+    strStream << recordedTop.latitude;
+    sqlQuery += strStream.str();
+    sqlQuery += ")) AND ((longitude > ";
+    strStream.str("");
+    strStream << recordedBottom.longitude;
+    sqlQuery += strStream.str();
+    sqlQuery += ") AND (longitude < ";
+    strStream.str("");
+    strStream << recordedTop.longitude;
+    sqlQuery += strStream.str();
+    sqlQuery += ")) AND (name LIKE '%";
+    sqlQuery += search_string;
+    sqlQuery += "%');";
+    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    // read the result of the query
+    if (query_result.size() == 0) //get the amount of poi searched
+    {
+        ret = POI_ID_NOT_EXIST;
+    }
+    else
+    {
+        for (index = 0; index < query_result.size(); index++)
+        {
+            query_line = query_result.at(index);
+            fromString<POIServiceTypes::POI_ID>(poi_id_list[index],query_line.at(0), std::dec);
+        }
+        ret = OK;
     }
 
     return ret;
@@ -841,22 +1143,58 @@ bool PoiManagerServerStub::initDatabase(const char* poiDatabaseFileName)
     mp_sqlRequest->setDatabase(poiDatabaseFileName);
     refreshCategoryList(); //read the database and buffer the category list locally
 
+    // test: create a new category and add a poi under this category
     POIServiceTypes::CAMCategory category;
-    POIServiceTypes::CategoryAttribute attribute;
-    POIServiceTypes::CategoryID unique_id;
-
+    POIServiceTypes::CategoryAttribute category_attribute;
+    POIServiceTypes::CategoryID category_id;
+    POIServiceTypes::POI_ID poi_id;
+    POIServiceTypes::PoiAddedDetails poi;
+    POIServiceTypes::PoiAttribute poi_attribute;
+    NavigationTypes::Coordinate3D left_bottom_location,right_top_location;
+    std::vector<POIServiceTypes::POI_ID> poi_id_list;
+    std::string str;
     category.details.name = "recreation";
-    attribute.id = 2;
-    attribute.name = "phone";
-    category.attributes.push_back(attribute);
-    attribute.id = 13;
-    attribute.name = "credit card";
-    category.attributes.push_back(attribute);
+    category_attribute.id = ATTRIBUTE_PHONE;
+    category_attribute.name = "phone";
+    category.attributes.push_back(category_attribute);
+    category_attribute.id = ATTRIBUTE_CREDIT_CARD;
+    category_attribute.name = "credit card";
+    category.attributes.push_back(category_attribute);
     category.details.parentsId.push_back(0);
-    mp_sqlRequest->createCategory(category,unique_id);
+    poi.name = POI_NAME;
+    poi.location.altitude = 120;
+    poi.location.latitude = 48.779839;
+    poi.location.longitude = 2.217260;
+    poi_attribute.id = ATTRIBUTE_ADDRCITY;
+    POIServiceTypes::AttributeValue vs(string("Velizy"));
+    poi_attribute.value = vs;
+    poi.attributes.push_back(poi_attribute);
+    poi_attribute.id = ATTRIBUTE_STARS;
+    POIServiceTypes::AttributeValue v(5);
+    poi_attribute.value = v;
+    poi.attributes.push_back(poi_attribute);
+    left_bottom_location.latitude = 48.76;
+    left_bottom_location.longitude = 2.22;
+    right_top_location.latitude = 48.78;
+    right_top_location.longitude = 2.20;
+    if (mp_sqlRequest->createCategory(category,category_id) != sqlRequest::OK)
+        return false;
+
     refreshCategoryList(); //read the database and buffer the category list locally
 
-    mp_sqlRequest->removeCategory(unique_id);
+    if (mp_sqlRequest->createPoi(category_id,poi,poi_id) != sqlRequest::OK)
+        return false;
+
+    str = SEARCH_STRING;
+    if (mp_sqlRequest->searchPoi(category.details.name,str,left_bottom_location,right_top_location,poi_id_list) != sqlRequest::OK)
+        return false;
+
+//    if (mp_sqlRequest->removePoi(poi_id) != sqlRequest::OK)
+//        return false;
+
+    if (mp_sqlRequest->removeCategory(category_id) != sqlRequest::OK)
+        return false;
+
     refreshCategoryList(); //read the database and buffer the category list locally
 
     return true; //maybe add some check of the file here

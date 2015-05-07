@@ -65,22 +65,33 @@ typeCollection POIServiceTypes {
         String url
     }
     
-    <** @description: Differtent type of media**>
+    <** @description: Different type of media**>
     union Media {
         ResourceID[] id
         String url
     }
     
 
-  <** @description: values for attributes. **>
+  <** @description: values for attribute. **>
     union AttributeValue {
-        Int32[] intListValue
-        String[] stringListValue
-        Boolean[] boolListValue
-        Coordinate2D[] coordinateListValue
+        Int32 intValue
+        String stringValue
+        Boolean boolValue
     }
     
+    struct AttributeValueStruct polymorphic {}
 	
+	struct AttributeValueStructInt32 extends AttributeValueStruct {
+           Int32 intValue 
+    }
+    
+	struct AttributeValueStructString extends AttributeValueStruct {
+           String stringValue 
+    }
+
+	struct AttributeValueStructBoolean extends AttributeValueStruct {
+           Boolean boolValue 
+    }
 	
 	<**	@description:**>
 	struct Details {
