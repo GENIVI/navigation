@@ -23,18 +23,7 @@ message(STATUS "generation of DBus files for navigation-core")
 find_program(XSLTPROC xsltproc REQUIRED)
 find_program(DBUSXML2CPP dbusxx-xml2cpp REQUIRED)
 
-set(cmake_create_dir cmake -E make_directory)
-
-set(API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
-
-execute_process(
-	WORKING_DIRECTORY ${API_DIR}
-        COMMAND ${cmake_create_dir} include
-)
-
-set(TARGET_GENERATED_API_DIR ${API_DIR}/include)
-
-file (GLOB XML_TO_DBUS_PROXY 
+file (GLOB XML_TO_DBUS 
 	${CMAKE_CURRENT_SOURCE_DIR}/genivi-navigationcore-configuration.xml
 	${CMAKE_CURRENT_SOURCE_DIR}/genivi-navigationcore-guidance.xml
 	${CMAKE_CURRENT_SOURCE_DIR}/genivi-navigationcore-locationinput.xml
@@ -42,42 +31,12 @@ file (GLOB XML_TO_DBUS_PROXY
 	${CMAKE_CURRENT_SOURCE_DIR}/genivi-navigationcore-routing.xml
 	${CMAKE_CURRENT_SOURCE_DIR}/genivi-navigationcore-session.xml
 )
-foreach (RAW_FILE ${XML_TO_DBUS_PROXY})
+foreach (RAW_FILE ${XML_TO_DBUS})
 	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}_proxy.h)
-		execute_process(
-			COMMAND ${DBUSXML2CPP} ${RAW_FILE} --proxy=${TARGET_GENERATED_API_DIR}/${FILE}_proxy.h  
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}_proxy.h)
-			execute_process(
-				COMMAND ${DBUSXML2CPP} ${RAW_FILE} --proxy=${TARGET_GENERATED_API_DIR}/${FILE}_proxy.h  
-			)
-		endif()
-	endif()
-endforeach()
-
-file (GLOB XML_TO_DBUS_ADAPTOR
-	${CMAKE_CURRENT_SOURCE_DIR}/genivi-navigationcore-configuration.xml
-	${CMAKE_CURRENT_SOURCE_DIR}/genivi-navigationcore-guidance.xml
-	${CMAKE_CURRENT_SOURCE_DIR}/genivi-navigationcore-locationinput.xml
-	${CMAKE_CURRENT_SOURCE_DIR}/genivi-navigationcore-mapmatchedposition.xml
-	${CMAKE_CURRENT_SOURCE_DIR}/genivi-navigationcore-routing.xml
-	${CMAKE_CURRENT_SOURCE_DIR}/genivi-navigationcore-session.xml
-)
-foreach (RAW_FILE ${XML_TO_DBUS_ADAPTOR})
-	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h)
-		execute_process(
-			COMMAND ${DBUSXML2CPP} ${RAW_FILE} --adaptor=${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h  
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h)
-			execute_process(
-				COMMAND ${DBUSXML2CPP} ${RAW_FILE} --adaptor=${TARGET_GENERATED_API_DIR}/${FILE}_adaptor.h  
-			)
-		endif()
-	endif()
+	execute_process(
+		COMMAND ${DBUSXML2CPP} ${RAW_FILE} --proxy=${CMAKE_CURRENT_BINARY_DIR}/${FILE}_proxy.h  
+		COMMAND ${DBUSXML2CPP} ${RAW_FILE} --adaptor=${CMAKE_CURRENT_BINARY_DIR}/${FILE}_adaptor.h  
+	)
 endforeach()
 
 file (GLOB XML_TO_DBUS_CONSTANT
@@ -85,17 +44,8 @@ file (GLOB XML_TO_DBUS_CONSTANT
 )
 foreach (RAW_FILE ${XML_TO_DBUS_CONSTANT})
 	get_filename_component(FILE ${RAW_FILE} NAME_WE)
-	if(NOT EXISTS ${TARGET_GENERATED_API_DIR}/${FILE}.h)
-		execute_process(
-			OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-			COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/enum.xsl ${RAW_FILE}        
-		)
-	else()
-		if(${RAW_FILE} IS_NEWER_THAN ${TARGET_GENERATED_API_DIR}/${FILE}.h)
-			execute_process(
-				OUTPUT_FILE ${TARGET_GENERATED_API_DIR}/${FILE}.h
-				COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/enum.xsl ${RAW_FILE}        
-			)
-		endif()
-	endif()
+	execute_process(
+		OUTPUT_FILE ${CMAKE_CURRENT_BINARY_DIR}/${FILE}.h
+		COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/enum.xsl ${RAW_FILE}        
+	)
 endforeach()

@@ -2,7 +2,7 @@ Index: navit/navit/search.c
 ===================================================================
 --- navit/navit/search.c	(revision 5827)
 +++ navit/navit/search.c	(working copy)
-@@ -1043,3 +1043,138 @@
+@@ -1048,3 +1048,138 @@
  search_init(void)
  {
  }

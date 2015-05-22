@@ -1,4 +1,4 @@
-Release date of the file: 17-03-2015 
+Release date of the file: 21-05-2015 
 Status: OK
 
 Project:
@@ -25,48 +25,52 @@ See headers and LICENSE file
 Test target: 
 Ubuntu 14.04 LTS
 
-To build the code:
+===============================
+Current versions of additional code 
+===============================
+<current version of positioning> (git): bf00492981d71fead8c0615fae59b73b03a4fbac
+<current version of navit> (svn): 6084
 
-To build the navigation middleware you need first to clone some additional stuff:
-./build.sh clone
+===============================
+How to get additional code 
+===============================
+Get positioning:
+git clone http://git.projects.genivi.org/lbs/positioning.git ./positioning
+cd positioning
+git checkout <current version of positioning>
+cd ../
 
-Apply a patch (see below for a short history of upgrade)
-cd ../navit
+Get navit:
+svn checkout http://svn.code.sf.net/p/navit/code/trunk navit -r <current version of navit>
+
+Now apply patches to navit (The r5549 removed the  get_unique features used by GetSpell and the cmakelists needs to be modified):
+cd navit
 patch -p0 -i ../patches/search_list_get_unique.diff
-cd ../script
+patch -p0 -i ../patches/cmake_current_source_dir_for_navit.diff
+cd ../
 
-So, build it:
-./build.sh make
+Get the sample map:
+wget -O ./map/switzerland.bin.tmp http://www.navit-project.org/switzerland.bin
+mv ./map/switzerland.bin.tmp ./map/switzerland.bin
 
-And run:
+===============================
+How To Build
+===============================
+(you're supposed to have got additional code before)
+
+Create and enter the build folder:
+mkdir ./build
+cd build
+
+Build:
+cmake ../
+make
+
+===============================
+How To Run
+===============================
+
 ./run 
 
-Annexe:
 
-Issues during upgrade of Navit:
-The version has been upgraded from version r5532 to version r6025
-
-Note 1: There was an issue with the latest version of ksvg2png, that doesn't requires --output into the command line
-The issue is fixed by the r5827
-
-Note 2: The r5549 removed the  get_unique features used by GetSpell
-So, please apply the patch
-patch -p0 -i ../patches/search_list_get_unique.diff
-
-Note 3: The r5822 removed the attribute distance_metric, it's fixed by the r5898
-
-
-CMakeLists.txt organization:
-
-src/navigation/CMakeLists.txt
-To clone the sources located into different repositories
-To get the map
-
-src/navigation/map/CMakeLists.txt
-
-For using the layer manager, you need to set the env variable and the paths:
-source set-ilm-env.sh
-
-To build with the layer manager:
-./build.sh makelm
 

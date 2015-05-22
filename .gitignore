@@ -5,6 +5,7 @@
 *-Release/
 bin/
 positioning/
+build/
 
 #files
 *~
