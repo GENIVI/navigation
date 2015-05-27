@@ -33,15 +33,15 @@
 #include <assert.h>
 #include <math.h>
 
-#include "navit/debug.h"
-#include "navit/item.h"
-#include "navit/navit.h"
-#include "navit/map.h"
-#include "navit/callback.h"
-#include "navit/transform.h"
-#include "navit/plugin.h"
-#include "navit/event.h"
-#include "navit/vehicle.h"
+#include "debug.h"
+#include "item.h"
+#include "navit.h"
+#include "map.h"
+#include "callback.h"
+#include "transform.h"
+#include "plugin.h"
+#include "event.h"
+#include "vehicle.h"
 
 #include "time.h"
 
@@ -50,8 +50,8 @@
 #define dbg(level,...) ;
 #endif
 
-#include "genivi-positioning-constants.h"
-#include "genivi-positioning-enhancedposition_proxy.h"
+#include "positioning-constants.h"
+#include "enhanced-position-proxy.h"
 
 DBus::Glib::BusDispatcher dispatcher;
 DBus::Connection *conn;

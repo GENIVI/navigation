@@ -1,3 +1,4 @@
+###########################################################################
 # @licence app begin@
 # SPDX-License-Identifier: MPL-2.0
 #
@@ -23,38 +24,31 @@
 # <date>, <name>, <description of change>
 #
 # @licence end@
+###########################################################################
+project(navigation)
 cmake_minimum_required(VERSION 2.8)
+
+message(STATUS "enhanced position")
 
 include(FindPkgConfig)
 
-include(${navit_SRC_DIR}/navit/cmake/navit_macros.cmake)
-
-add_definitions(-DPLUGIN=1)
-
-message(STATUS "WITH_DEBUG = ${WITH_DEBUG}")
-
-if(WITH_DEBUG)
-    add_definitions("-DDEBUG_ENABLED=1")
-endif()
+include(${NAVIT_SRC_DIR}/navit/cmake/navit_macros.cmake)
 
 pkg_search_module(DBUS_CPP dbus-c++-glib-1 dbus-c++-1)
 pkg_search_module(GLIB glib-2.0)
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${DBUS_CPP_INCLUDE_DIRS})
 
-include_directories(${INCLUDE_DIRECTORIES})
-include_directories(.)
-include_directories(${navit_SRC_DIR}/navit)
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/../..)
+include_directories(${NAVIT_SRC_DIR}/navit/navit)
 
-include_directories(${positioning_API})
+include_directories(${NAVIT_BIN_DIR}) # this one contains config.h that is generated
+
+include_directories(${DBUS_GENERATED_INCLUDE_DIR_POSITIONING})
 
 set(genivi_positioning_enhancedposition_LIBS ${DBUS_CPP_LDFLAGS})
 
-
 module_add_library(genivi_positioning_enhancedposition 
 					genivi_positioning_enhancedposition.cxx 
-					${positioning_API}/genivi-positioning-enhancedposition_proxy.h
-					${positioning_API}/genivi-positioning-constants.h
+					${DBUS_GENERATED_INCLUDE_DIR_POSITIONING}/enhanced-position-proxy.h
+					${DBUS_GENERATED_INCLUDE_DIR_POSITIONING}/positioning-constants.h
 ) 

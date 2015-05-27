@@ -18,24 +18,34 @@
 project(navigation)
 cmake_minimum_required(VERSION 2.8)
 
-message(STATUS "navigation")
+message(STATUS "navigation-core")
 
 find_program(XSLTPROC xsltproc REQUIRED)
 
 # Generate the config file for navit/navigation-core
-set(NAVIGATION_CORE_SRC ${CMAKE_CURRENT_SOURCE_DIR})
-
-if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/../navit/navit/navit_genivi_navigationcore.xml)
-	execute_process(
-		OUTPUT_FILE ${CMAKE_CURRENT_BINARY_DIR}/../navit/navit/navit_genivi_navigationcore.xml
-		COMMAND ${XSLTPROC} ${NAVIGATION_CORE_SRC}/navit_genivi_navigationcore.xsl ${navit_SRC_DIR}/navit/navit/navit_shipped.xml        
+execute_process(
+		OUTPUT_FILE ${NAVIT_BIN_DIR}/navit_genivi_navigationcore.xml
+		COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_navigationcore.xsl ${NAVIT_SRC_DIR}/navit/navit/navit_shipped.xml        
 	)
-else()
-	if(${NAVIGATION_CORE_SRC}/navit_genivi_navigationcore.xsl IS_NEWER_THAN ${CMAKE_CURRENT_BINARY_DIR}/../navit/navit/navit_genivi_navigationcore.xml)
-		execute_process(
-			OUTPUT_FILE ${CMAKE_CURRENT_BINARY_DIR}/../navit/navit/navit_genivi_navigationcore.xml
-			COMMAND ${XSLTPROC} ${NAVIGATION_CORE_SRC}/navit_genivi_navigationcore.xsl ${navit_SRC_DIR}/navit/navit/navit_shipped.xml        
-		)
-	endif()
+
+# Add sub directories for the plugins
+add_definitions(-DPLUGIN=1)
+if(WITH_DEBUG)
+    add_definitions("-DDEBUG_ENABLED=1")
 endif()
+
+add_subdirectory(configuration-plugin)
+
+add_subdirectory(guidance-plugin)
+
+add_subdirectory(locationinput-plugin)
+
+add_subdirectory(mapmatchedposition-plugin)
+
+add_subdirectory(routing-plugin)
+
+add_subdirectory(session-plugin)
+
+add_subdirectory(enhancedposition-plugin)
+
 

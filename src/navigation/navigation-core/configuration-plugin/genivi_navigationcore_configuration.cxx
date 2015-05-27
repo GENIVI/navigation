@@ -31,11 +31,11 @@
 #include <stdlib.h>
 #include "genivi-navigationcore-constants.h"
 #include "genivi-navigationcore-configuration_adaptor.h"
-#include "navit/config.h"
+#include "config.h"
 #define USE_PLUGINS 1
-#include "navit/debug.h"
-#include "navit/plugin.h"
-#include "navit/event.h"
+#include "debug.h"
+#include "plugin.h"
+#include "event.h"
 
 #if (!DEBUG_ENABLED)
 #undef dbg

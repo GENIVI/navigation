@@ -17,10 +17,10 @@
 ###########################################################################
 project(navigation)
 cmake_minimum_required(VERSION 2.8)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
-set(API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api")
-set(navit_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/navit")
-
+option(CMAKE_INSTALL_LOCAL_ONLY
+	"Install locally" ON)
 option(WITH_FRANCA_INTERFACE
        "Build using the Franca interfaces" OFF)
 option(WITH_DBUS_INTERFACE
@@ -36,25 +36,54 @@ option(NAVIT_NULL_VEHICLE
 option(NAVIT_QTPAINTER
 	"qtqpainter for navit" 0)
 
+message(STATUS "WITH_FRANCA_INTERFACE = ${WITH_FRANCA_INTERFACE}")
+message(STATUS "WITH_DBUS_INTERFACE = ${WITH_DBUS_INTERFACE}")
+message(STATUS "WITH_DEBUG = ${WITH_DEBUG}")
+message(STATUS "NAVIT_DISABLE_QT = ${NAVIT_DISABLE_QT}")
+message(STATUS "NAVIT_SAMPLE_MAP = ${NAVIT_SAMPLE_MAP}")
+message(STATUS "NAVIT_NULL_VEHICLE = ${NAVIT_NULL_VEHICLE}")
+message(STATUS "NAVIT_QTPAINTER = ${NAVIT_QTPAINTER}")
+
 set(DISABLE_QT "${NAVIT_DISABLE_QT}")
 set(SAMPLE_MAP "${NAVIT_SAMPLE_MAP}")
 set(vehicle/null "${NAVIT_NULL_VEHICLE}")
 set(graphics/qt_qpainter "${NAVIT_QTPAINTER}")
 
+set(API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api")
+set(NAVIT_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/navit")
+execute_process(
+COMMAND cmake -E make_directory ${EXE_DIR}
+	WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+	RESULT_VARIABLE error_code
+)
+if(error_code)
+	message(FATAL_ERROR "Failed to create exe directory: '${EXE_DIR}'")
+endif() 
+set(EXE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/bin")
+
 add_subdirectory(navit/navit)
 
-set(NAVIT_MAPS_DIR "${CMAKE_CURRENT_BINARY_DIR}/navit/navit/navit/maps")
+set(NAVIT_BIN_DIR "${CMAKE_CURRENT_BINARY_DIR}/navit/navit")
+set(NAVIT_MAPS_DIR "${NAVIT_BIN_DIR}/navit/maps")
 
 add_subdirectory(map)
 
 add_subdirectory(positioning)
 
-add_subdirectory(${API_DIR}/navigation-core "${CMAKE_CURRENT_BINARY_DIR}/navigation-core")
+set(DBUS_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/dbus-include")
+set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/api") # this one is for positioning
 
-add_subdirectory(${API_DIR}/map-viewer "${CMAKE_CURRENT_BINARY_DIR}/map-viewer")
+add_subdirectory(${API_DIR}/navigation-core "${DBUS_GENERATED_INCLUDE_DIR}/navigation-core")
 
-add_subdirectory(${API_DIR}/poi-service "${CMAKE_CURRENT_BINARY_DIR}/poi-service")
+add_subdirectory(${API_DIR}/map-viewer "${DBUS_GENERATED_INCLUDE_DIR}/map-viewer")
+
+add_subdirectory(${API_DIR}/poi-service "${DBUS_GENERATED_INCLUDE_DIR}/poi-service")
 
 add_subdirectory(navigation-core)
+
+add_subdirectory(map-viewer)
+
+add_subdirectory(poi-cam)
+
 
 

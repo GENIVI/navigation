@@ -18,24 +18,24 @@
 project(navigation)
 cmake_minimum_required(VERSION 2.8)
 
-message(STATUS "navigation")
+message(STATUS "map-viewer")
 
 find_program(XSLTPROC xsltproc REQUIRED)
 
 # Generate the config file for navit/mapviewer
-set(MAP_VIEWER_SRC ${CMAKE_CURRENT_SOURCE_DIR})
-
-if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/../navit/navit/navit_genivi_mapviewer.xml)
-	execute_process(
-		OUTPUT_FILE ${CMAKE_CURRENT_BINARY_DIR}/../navit/navit/navit_genivi_mapviewer.xml
-		COMMAND ${XSLTPROC} ${MAP_VIEWER_SRC}/navit_genivi_mapviewer.xsl ${navit_SRC_DIR}/navit/navit/navit_shipped.xml        
+execute_process(
+		OUTPUT_FILE ${NAVIT_BIN_DIR}/navit_genivi_mapviewer.xml
+		COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_mapviewer.xsl ${NAVIT_SRC_DIR}/navit/navit/navit_shipped.xml        
 	)
-else()
-	if(${MAP_VIEWER_SRC}/navit_genivi_mapviewer.xsl IS_NEWER_THAN ${CMAKE_CURRENT_BINARY_DIR}/../navit/navit/navit_genivi_mapviewer.xml)
-		execute_process(
-			OUTPUT_FILE ${CMAKE_CURRENT_BINARY_DIR}/../navit/navit/navit_genivi_mapviewer.xml
-			COMMAND ${XSLTPROC} ${MAP_VIEWER_SRC}/navit_genivi_mapviewer.xsl ${navit_SRC_DIR}/navit/navit/navit_shipped.xml        
-		)
-	endif()
+
+# Add sub directories for the plugins
+add_definitions(-DPLUGIN=1)
+if(WITH_DEBUG)
+    add_definitions("-DDEBUG_ENABLED=1")
 endif()
 
+add_subdirectory(configuration-plugin)
+
+add_subdirectory(mapviewercontrol-plugin)
+
+add_subdirectory(session-plugin)

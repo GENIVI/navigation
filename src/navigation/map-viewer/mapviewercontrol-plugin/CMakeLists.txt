@@ -1,3 +1,4 @@
+###########################################################################
 # @licence app begin@
 # SPDX-License-Identifier: MPL-2.0
 #
@@ -23,49 +24,28 @@
 # <date>, <name>, <description of change>
 #
 # @licence end@
+###########################################################################
+project(navigation)
 cmake_minimum_required(VERSION 2.8)
 
+message(STATUS "mapviewer control")
+
 include(FindPkgConfig)
-include(CheckIncludeFiles)
 
-include(${navit_SRC_DIR}/navit/cmake/navit_macros.cmake)
-
-add_definitions(-DPLUGIN=1)
-
-message(STATUS "WITH_DEBUG = ${WITH_DEBUG}")
-
-if(WITH_DEBUG)
-    add_definitions("-DDEBUG_ENABLED=1")
-endif()
+include(${NAVIT_SRC_DIR}/navit/cmake/navit_macros.cmake)
 
 pkg_search_module(DBUS_CPP dbus-c++-glib-1 dbus-c++-1)
 pkg_search_module(GLIB glib-2.0)
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${DBUS_CPP_INCLUDE_DIRS})
 
-include_directories(${INCLUDE_DIRECTORIES})
-include_directories(.)
-include_directories(${navit_SRC_DIR}/navit)
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
-include_directories(${CMAKE_CURRENT_BINARY_DIR}/../..)
+include_directories(${NAVIT_SRC_DIR}/navit/navit)
 
-include_directories(${generated_api_DIR})
+include_directories(${NAVIT_BIN_DIR}) # this one contains config.h that is generated
 
-check_include_files (ilm/ilm_client.h LM)
+include_directories(${DBUS_GENERATED_INCLUDE_DIR}/map-viewer)
+include_directories(${DBUS_GENERATED_INCLUDE_DIR}/navigation-core)
 
-if (LM)
-	message("building with layer management")
-	include_directories(${layer_management_INST}/include)
-	include_directories(${layer_management_INST}/include/ilm)
-	include_directories(${layer_management_INST}/include/layermanager)
-	set(CMAKE_REQUIRED_INCLUDES ${layer_management_INST}/include;${layer_management_INST}/include/ilm;${layer_management_INST}/include/layermanager)
-	link_directories(${layer_management_INST}/lib)
-	set(genivi_mapviewer_mapviewercontrol_LIBS ${DBUS_CPP_LDFLAGS} "-lilmCommon" "-lilmClient" "-lilmControl")
-	add_definitions(-DLM=1)
-else()
-	message("building without layer management")
-	set(genivi_mapviewer_mapviewercontrol_LIBS ${DBUS_CPP_LDFLAGS})
-	add_definitions(-DLM=0)
-endif()
+set(genivi_mapviewer_mapviewercontrol_LIBS ${DBUS_CPP_LDFLAGS})
 
-module_add_library(genivi_mapviewer_mapviewercontrol genivi_mapviewer_mapviewercontrol.cxx ${generated_api_DIR}/genivi-mapviewer-mapviewercontrol_adaptor.h ${generated_api_DIR}/genivi-navigationcore-routing_proxy.h ${generated_api_DIR}/genivi-navigationcore-session_proxy.h ${generated_api_DIR}/genivi-navigationcore-mapmatchedposition_proxy.h) 
+module_add_library(genivi_mapviewer_mapviewercontrol genivi_mapviewer_mapviewercontrol.cxx ${DBUS_GENERATED_INCLUDE_DIR}/map-viewer/genivi-mapviewer-mapviewercontrol_adaptor.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-routing_proxy.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-session_proxy.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-mapmatchedposition_proxy.h) 

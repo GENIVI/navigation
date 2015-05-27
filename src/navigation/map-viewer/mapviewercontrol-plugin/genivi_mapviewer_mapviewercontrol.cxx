@@ -21,49 +21,37 @@
 *
 * For further information see http://www.genivi.org/.
 *
-* List of changes:
-* 
-* 13-10-2014, Tanibata, Nobuhiko, adaptation to layer management
-*
 * @licence end@
 */
 #include <dbus-c++/glib-integration.h>
 #include <math.h>
 #include <unistd.h>
 #include <stdlib.h>
-#if LM
-#include <ilm/ilm_client.h>
-#include <ilm/ilm_client.h>
-#include <ilm/ilm_control.h>
-#ifndef FSA_LAYER
-#define FSA_LAYER 2000
-#endif
-#endif
 #include "genivi-mapviewer-mapviewercontrol_adaptor.h"
 #include "genivi-navigationcore-routing_proxy.h"
 #include "genivi-navigationcore-session_proxy.h"
 #include "genivi-navigationcore-mapmatchedposition_proxy.h"
 #include "genivi-navigationcore-constants.h"
 #include "genivi-mapviewer-constants.h"
-#include "navit/config.h"
+#include "config.h"
 #define USE_PLUGINS 1
-#include "navit/debug.h"
-#include "navit/plugin.h"
-#include "navit/item.h"
-#include "navit/config_.h"
-#include "navit/navit.h"
-#include "navit/event.h"
-#include "navit/point.h"
-#include "navit/graphics.h"
-#include "navit/coord.h"
-#include "navit/transform.h"
-#include "navit/map.h"
-#include "navit/mapset.h"
-#include "navit/callback.h"
-#include "navit/vehicle.h"
-#include "navit/attr.h"
-#include "navit/xmlconfig.h"
-#include "navit/layout.h"
+#include "debug.h"
+#include "plugin.h"
+#include "item.h"
+#include "config_.h"
+#include "navit.h"
+#include "event.h"
+#include "point.h"
+#include "graphics.h"
+#include "coord.h"
+#include "transform.h"
+#include "map.h"
+#include "mapset.h"
+#include "callback.h"
+#include "vehicle.h"
+#include "attr.h"
+#include "xmlconfig.h"
+#include "layout.h"
 
 #if (!DEBUG_ENABLED)
 #undef dbg
@@ -1477,53 +1465,11 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
 	sel.u.p_rect.rl.x=MapViewSize._1;
 	sel.u.p_rect.rl.y=MapViewSize._2;
 	transform_set_screen_selection(trans, &sel);
-#if LM
-	t_ilm_nativedisplay display = (t_ilm_nativedisplay)graphics_get_data(m_graphics.u.graphics, "display");
-	if (ilm_initWithNativedisplay(display) != ILM_SUCCESS) {
-        dbg(lvl_debug, "error on ilm_initWidthNativeDisplay\n");
-	}
-
-	t_ilm_nativehandle nativehandle=(t_ilm_nativehandle)graphics_get_data(m_graphics.u.graphics,"xwindow_id");
-	t_ilm_surface surfaceId=FSA_LAYER+m_handle;
-	t_ilm_layer layerId=FSA_LAYER;
-	if (ilm_surfaceCreate(nativehandle, MapViewSize._1, MapViewSize._2, ILM_PIXELFORMAT_RGBA_8888, &surfaceId) != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_surfaceCreate\n");
-	}
-#if 0
-	if (ilm_layerAddSurface(layerId, surfaceId) != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_layerAddSurface\n");
-	}
-#else
-	t_ilm_surface surfaceId_order[2] = {
-		FSA_LAYER + m_handle,
-		FSA_LAYER + m_handle + 1
-	};
-	if (ilm_layerSetRenderOrder(layerId, surfaceId_order, 2) != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_layerSetRenderOrder\n");
-	}
-#endif
-	if (ilm_commitChanges() != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_commitChanges\n");
-	}
-#endif
 }
 
 MapViewerControlObj::~MapViewerControlObj()
 {
-#if LM
-	t_ilm_surface surfaceId=FSA_LAYER+m_handle;
-	t_ilm_layer layerId=FSA_LAYER;
-	if (ilm_surfaceRemove(surfaceId) != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_surfaceRemove\n");
-	}
-	if (ilm_layerRemoveSurface(layerId, surfaceId) != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_layerAddSurface\n");
-	}
-	if (ilm_commitChanges() != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_commitChanges\n");
-	}
-#endif
-	
+
 	graphics_remove_callback(m_graphics.u.graphics, m_postdraw_callback);
 #if 0
 	graphics_free(m_graphics.u.graphics);
@@ -1611,7 +1557,8 @@ void
 DisplayedRoute::WriteSegment(FILE *out)
 {
 	if (m_coordinates.size()) {
-		int i,header[3]={2+2*m_coordinates.size(),type_street_route,2*m_coordinates.size()};
+		int i;
+		uint32_t header[3]={2+2*m_coordinates.size(),type_street_route,2*m_coordinates.size()};
 		fwrite(header, sizeof(header), 1, out);
 		for (i = 0 ; i < m_coordinates.size() ; i++) 
 			fwrite(&m_coordinates[i], sizeof(struct coord), 1, out);
@@ -1689,11 +1636,5 @@ plugin_init(void)
 	}
 	conns[0]->request_name("org.genivi.mapviewer.MapViewerControl");
 	server=new MapViewerControl(*conns[0]);
-#if LM
-#if 0
-	if (ilm_init() != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_init\n");
-	}
-#endif
-#endif
+
 }
