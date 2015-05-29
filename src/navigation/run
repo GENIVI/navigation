@@ -1,4 +1,6 @@
-#! /bin/bash
+#!/bin/bash
+
+###########################################################################
 # @licence app begin@
 # SPDX-License-Identifier: MPL-2.0
 #
@@ -25,6 +27,7 @@
 # 4-8-2014, Philippe Colliot, Add some wait for dbus service
 #
 # @licence end@
+###########################################################################
 function run
 {
 	local x=$xterm
@@ -85,9 +88,16 @@ log=0
 enhpos=1
 replayer=1
 center="4612 N 0608 E"
+
+# due to an issue with the make install (it fails for navit at the moment), the paths to the exe still need to be hard coded
 CUR_DIR=$PWD
-BIN_DIR=$PWD/../bin
-SRC_DIR=$PWD/..
+BIN_DIR=$PWD/build
+SRC_DIR=$PWD
+EnhancedPositionService_BIN_DIR=$BIN_DIR/positioning/enhanced-position-service/dbus/src
+LogReplayer_BIN_DIR=$BIN_DIR/positioning/log-replayer/src
+LogReplayer_logs_BIN_DIR=$BIN_DIR/positioning/log-replayer/logs
+navit_BIN_DIR=$BIN_DIR/navit/navit/navit
+
 while getopts b:c:gnorx opt
 do
 	case $opt in
@@ -142,19 +152,19 @@ trap "terminate" EXIT INT
 set -e
 if [ "$enhpos" = 1 ]
 then
-        run EnhancedPositionService $BIN_DIR/positioning/enhanced-position-service/src/enhanced-position-service 
+        run EnhancedPositionService $EnhancedPositionService_BIN_DIR/enhanced-position-service 
 	wait_for_service org.genivi.positioning.EnhancedPosition /org/genivi/positioning/EnhancedPosition
 
 	if [ "$replayer" = 1 ]
 	then
 		if [ -z "$REPLAYER_LOG_FILE" ]
 		then
-			REPLAYER_LOG_FILE=$BIN_DIR/positioning/log-replayer/logs/geneve-cologny.log
+			REPLAYER_LOG_FILE=$LogReplayer_logs_BIN_DIR/geneve-cologny.log
 		fi
-		run LogReplayer $BIN_DIR/positioning/log-replayer/src/log-replayer $REPLAYER_LOG_FILE 
+		run LogReplayer $LogReplayer_BIN_DIR/log-replayer $REPLAYER_LOG_FILE 
 	fi
 fi
-cd $BIN_DIR/navit/navit
+cd $navit_BIN_DIR
 >bookmark.txt
 echo "$center" >center.txt
 run MapViewer ./navit navit_genivi_mapviewer.xml

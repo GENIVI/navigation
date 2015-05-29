@@ -32,8 +32,6 @@ message(STATUS "routing")
 
 include(FindPkgConfig)
 
-include(${NAVIT_SRC_DIR}/navit/cmake/navit_macros.cmake)
-
 pkg_search_module(DBUS_CPP dbus-c++-glib-1 dbus-c++-1)
 pkg_search_module(GLIB glib-2.0)
 include_directories(${GLIB_INCLUDE_DIRS})
@@ -41,10 +39,16 @@ include_directories(${DBUS_CPP_INCLUDE_DIRS})
 
 include_directories(${NAVIT_SRC_DIR}/navit/navit)
 
-include_directories(${NAVIT_BIN_DIR}) # this one contains config.h that is generated
+include_directories(${NAVIT_CONFIG_H_DIR}) # this one contains config.h that is generated
 
 include_directories(${DBUS_GENERATED_INCLUDE_DIR}/navigation-core)
 
 set(genivi_navigationcore_routing_LIBS ${DBUS_CPP_LDFLAGS})
 
-module_add_library(genivi_navigationcore_routing genivi_navigationcore_routing.cxx ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-routing_adaptor.h) 
+#preload the cache with some navit settings that use the current module name
+LOAD_CACHE(${PRELOAD_CACHE_FOR_PLUGINS})
+
+include(${NAVIT_SRC_DIR}/navit/cmake/navit_macros.cmake)
+
+module_add_library(genivi_navigationcore_routing genivi_navigationcore_routing.cxx ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-routing_adaptor.h)
+

@@ -28,11 +28,17 @@ execute_process(
 		COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_navigationcore.xsl ${NAVIT_SRC_DIR}/navit/navit/navit_shipped.xml        
 	)
 
-# Add sub directories for the plugins
 add_definitions(-DPLUGIN=1)
 if(WITH_DEBUG)
     add_definitions("-DDEBUG_ENABLED=1")
 endif()
+
+# Suppress dev warnings
+if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
+	set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
+endif()
+
+# Add sub directories for the plugins
 
 add_subdirectory(configuration-plugin)
 

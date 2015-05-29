@@ -32,7 +32,7 @@
 #include <stdbool.h>
 #include <assert.h>
 #include <math.h>
-
+#define USE_PLUGINS 1
 #include "debug.h"
 #include "item.h"
 #include "navit.h"

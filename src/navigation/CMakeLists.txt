@@ -19,8 +19,6 @@ project(navigation)
 cmake_minimum_required(VERSION 2.8)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
-option(CMAKE_INSTALL_LOCAL_ONLY
-	"Install locally" ON)
 option(WITH_FRANCA_INTERFACE
        "Build using the Franca interfaces" OFF)
 option(WITH_DBUS_INTERFACE
@@ -51,27 +49,18 @@ set(graphics/qt_qpainter "${NAVIT_QTPAINTER}")
 
 set(API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api")
 set(NAVIT_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/navit")
-execute_process(
-COMMAND cmake -E make_directory ${EXE_DIR}
-	WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
-	RESULT_VARIABLE error_code
-)
-if(error_code)
-	message(FATAL_ERROR "Failed to create exe directory: '${EXE_DIR}'")
-endif() 
-set(EXE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/bin")
-
-add_subdirectory(navit/navit)
-
-set(NAVIT_BIN_DIR "${CMAKE_CURRENT_BINARY_DIR}/navit/navit")
-set(NAVIT_MAPS_DIR "${NAVIT_BIN_DIR}/navit/maps")
-
-add_subdirectory(map)
+set(NAVIT_BIN_DIR "${CMAKE_CURRENT_BINARY_DIR}/navit/navit/navit")
+set(NAVIT_CONFIG_H_DIR "${CMAKE_CURRENT_BINARY_DIR}/navit/navit")
+set(NAVIT_MAPS_DIR "${NAVIT_BIN_DIR}/maps")
+set(DBUS_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/dbus-include")
+set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/api") # this one is for positioning
+set(PRELOAD_CACHE_FOR_PLUGINS "${CMAKE_CURRENT_BINARY_DIR}/cmake_plugin_settings.txt")
 
 add_subdirectory(positioning)
 
-set(DBUS_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/dbus-include")
-set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/api") # this one is for positioning
+add_subdirectory(navit/navit)
+
+add_subdirectory(map)
 
 add_subdirectory(${API_DIR}/navigation-core "${DBUS_GENERATED_INCLUDE_DIR}/navigation-core")
 
