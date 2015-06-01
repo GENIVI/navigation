@@ -37,7 +37,12 @@ pkg_search_module(GLIB glib-2.0)
 include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${DBUS_CPP_INCLUDE_DIRS})
 
-include_directories(${NAVIT_SRC_DIR}/navit/navit)
+include(${PRELOAD_CACHE_FOR_PLUGINS})
+
+include_directories(${INCLUDE_DIRECTORIES})
+include_directories(.)
+include_directories(${navit_SOURCE_DIR}/navit)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 include_directories(${NAVIT_CONFIG_H_DIR}) # this one contains config.h that is generated
 
@@ -46,10 +51,7 @@ include_directories(${DBUS_GENERATED_INCLUDE_DIR}/navigation-core)
 
 set(genivi_mapviewer_mapviewercontrol_LIBS ${DBUS_CPP_LDFLAGS})
 
-#preload the cache with some navit settings that use the current module name
-LOAD_CACHE(${PRELOAD_CACHE_FOR_PLUGINS})
-
-include(${NAVIT_SRC_DIR}/navit/cmake/navit_macros.cmake)
+include(${navit_SOURCE_DIR}/cmake/navit_macros.cmake)
 
 module_add_library(genivi_mapviewer_mapviewercontrol genivi_mapviewer_mapviewercontrol.cxx ${DBUS_GENERATED_INCLUDE_DIR}/map-viewer/genivi-mapviewer-mapviewercontrol_adaptor.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-routing_proxy.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-session_proxy.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-mapmatchedposition_proxy.h)
 

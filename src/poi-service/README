@@ -33,15 +33,27 @@ git clone http://git.projects.genivi.org/lbs/navigation-service.git $WORKING-DIR
 Dependencies:
 libqt4-dev libdbus-c++-dev libsqlite3-dev sqlite3 libglib2.0-dev libglibmm-2.4-dev libdbus-1-dev xsltproc
  
+===============================
+How To Build
+===============================
+
+Create and enter the build folder:
+mkdir ./build
+cd build
+
 Build:
-# Build is based on cmake
-# Enter into the directory
-cd $WORKING-DIR/navigation-service/src/poi-service/script
-./build.sh
+cmake ../
+make
+cd ..
 
-To launch:
-./run
+Build the Franca based code (unreleased version) in debug mode
+cmake -DCMAKE_BUILD_TYPE=Debug . -DWITH_FRANCA_INTERFACE=ON  ../
+make 
+cd ..
 
-Clean up:
-./kill-all
+===============================
+How To Run
+===============================
+
+./run 
 

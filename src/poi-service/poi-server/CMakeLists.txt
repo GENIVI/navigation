@@ -17,13 +17,10 @@
 ###########################################################################
 project(poi-server)
 cmake_minimum_required(VERSION 2.8)
-set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} -std=gnu++11)
 
 message(STATUS "poi-server")
 
 find_package(PkgConfig REQUIRED)
-find_program(XSLTPROC xsltproc REQUIRED)
-find_program(DBUSXML2CPP dbusxx-xml2cpp REQUIRED)
 
 pkg_check_modules(DBUS_CPP dbus-c++-1)
 pkg_check_modules(GLIB REQUIRED glib-2.0)
@@ -33,16 +30,15 @@ pkg_check_modules(GOBJECT gobject-2.0)
 pkg_check_modules(DBUS dbus-1)
 pkg_check_modules(DBUS_CPP_GLIB dbus-c++-glib-1)
 
-set(PRJ_SRC_PATH .)
-set(PRJ_COMMON_SRC_PATH ../../../src/poi-service/poi-common)
-
 #common files shared with poi server
-file(GLOB PRJ_COMMON_SRCS ${PRJ_COMMON_SRC_PATH}/*.cpp)
+file(GLOB PRJ_COMMON_SRCS ${COMMON_DIR}/*.cpp)
 
 include_directories(
-    ${PRJ_SRC_PATH}
-    ${PRJ_COMMON_SRC_PATH}
-    ${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${COMMON_DIR}
+    ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core
+    ${DBUS_GENERATED_INCLUDE_DIR}/map-viewer
+    ${DBUS_GENERATED_INCLUDE_DIR}/poi-service
     ${DBUS_CPP_INCLUDE_DIRS}
     ${GLIB_INCLUDE_DIRS}
     ${SQLITE3_INCLUDE_DIRS}

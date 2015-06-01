@@ -28,14 +28,14 @@
 #ifndef POIPOCSERVERCLASS_H
 #define POIPOCSERVERCLASS_H
 
-#include "../../../api/include/genivi-mapviewer-constants.h"
-#include "../../../api/include/genivi-navigationcore-constants.h"
-#include "../../../api/include/genivi-poiservice-constants.h"
-#include "../../../api/include/genivi-poiservice-poisearch_adaptor.h"
-#include "../../../api/include/genivi-poiservice-poicontentaccess_adaptor.h"
-#include "../../../api/include/genivi-poiservice-configuration_adaptor.h"
-#include "../../../api/include/genivi-navigationcore-routing_proxy.h"
-#include "../../../api/include/genivi-poiservice-contentaccessmodule_proxy.h"
+#include "genivi-mapviewer-constants.h"
+#include "genivi-navigationcore-constants.h"
+#include "genivi-poiservice-constants.h"
+#include "genivi-poiservice-poisearch_adaptor.h"
+#include "genivi-poiservice-poicontentaccess_adaptor.h"
+#include "genivi-poiservice-configuration_adaptor.h"
+#include "genivi-navigationcore-routing_proxy.h"
+#include "genivi-poiservice-contentaccessmodule_proxy.h"
 #include <dbus-c++/glib-integration.h>
 
 #include "poi-common-dbus-data-model.h"

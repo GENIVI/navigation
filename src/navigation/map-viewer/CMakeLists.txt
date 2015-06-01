@@ -25,7 +25,7 @@ find_program(XSLTPROC xsltproc REQUIRED)
 # Generate the config file for navit/mapviewer
 execute_process(
 		OUTPUT_FILE ${NAVIT_BIN_DIR}/navit_genivi_mapviewer.xml
-		COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_mapviewer.xsl ${NAVIT_SRC_DIR}/navit/navit/navit_shipped.xml        
+                COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_mapviewer.xsl ${navit_SOURCE_DIR}/navit/navit_shipped.xml
 	)
 
 add_definitions(-DPLUGIN=1)

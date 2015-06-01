@@ -167,6 +167,7 @@ fi
 cd $navit_BIN_DIR
 >bookmark.txt
 echo "$center" >center.txt
+
 run MapViewer ./navit navit_genivi_mapviewer.xml
 wait_for_service org.genivi.mapviewer.Configuration /org/genivi/mapviewer
 wait_for_service org.genivi.mapviewer.MapViewerControl /org/genivi/mapviewer
