@@ -29,9 +29,9 @@
 #define POICONTENTACCESSMODULECLASS_H
 
 
-#include "../../../api/include/genivi-poiservice-constants.h"
-#include "../../../api/include/genivi-poiservice-contentaccessmodule_adaptor.h"
-#include "../../../api/include/genivi-poiservice-poicontentaccess_proxy.h"
+#include "genivi-poiservice-constants.h"
+#include "genivi-poiservice-contentaccessmodule_adaptor.h"
+#include "genivi-poiservice-poicontentaccess_proxy.h"
 #include "poi-common-dbus-data-model.h"
 
 #include <dbus-c++/glib-integration.h>

@@ -29,16 +29,12 @@ pkg_check_modules(GOBJECT gobject-2.0)
 pkg_check_modules(XML2 libxml-2.0)
 pkg_check_modules(XMLCPP libxml++-2.6)
 
-set(PRJ_SRC_PATH .)
-set(PRJ_COMMON_SRC_PATH ../../../src/poi-service/poi-common)
-
 #common files shared with poi server
-file(GLOB PRJ_COMMON_SRCS ${PRJ_COMMON_SRC_PATH}/*.cpp)
+file(GLOB PRJ_COMMON_SRCS ${COMMON_DIR_POI_SERVER}/*.cpp)
 
 include_directories(
-    ${PRJ_SRC_PATH}
-    ${PRJ_COMMON_SRC_PATH}
-    ${CMAKE_CURRENT_BINARY_DIR}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${COMMON_DIR_POI_SERVER}
     ${GLIB_INCLUDE_DIRS}
     ${SQLITE3_INCLUDE_DIRS}
     ${GLIBMM_INCLUDE_DIRS}
@@ -59,8 +55,6 @@ link_directories(
 add_executable(poi-supplier
     main.cpp
     raw-file-sort.cpp
-    raw-file-sort.h
-    poi-datamodel.h
     ${PRJ_COMMON_SRCS}
 )
 
@@ -75,4 +69,4 @@ set(LIBRARIES
 
 target_link_libraries(poi-supplier ${LIBRARIES})
 
-
+install(TARGETS poi-supplier DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})

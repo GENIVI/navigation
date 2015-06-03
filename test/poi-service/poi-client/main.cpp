@@ -77,19 +77,24 @@ int main(int argc, char *argv[])
     mainWindow.settingsMapHeightInMeter = settings.value("MapHeightInMeter").toUInt();
     mainWindow.settingsTimerPeriodForPosition = settings.value("TimerPeriodForPosition").toInt();
 
-    if (QResource::registerResource("../poi-resource.rcc") && translator.load("poi-client_"+ mainWindow.settingsHMIlanguage,"../../poi-common/"))
+    if (translator.load("poi-client_"+ mainWindow.settingsHMIlanguage))
     {
-        app.installTranslator(&translator);
+        if (QResource::registerResource("poi-client-resource.rcc","./"))
+        {
+            app.installTranslator(&translator);
 
-        //init ui
-        mainWindow.InitUi();
+            //init ui
+            mainWindow.InitUi();
 
-        mainWindow.show();
+            mainWindow.show();
 
-        QDBusConnection connection = QDBusConnection::sessionBus();
+            QDBusConnection connection = QDBusConnection::sessionBus();
 
 
-        return app.exec();
+            return app.exec();
+        }
+        else
+            return(-1);
     }
     else
         return(-1);

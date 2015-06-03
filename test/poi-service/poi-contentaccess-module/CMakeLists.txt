@@ -21,8 +21,6 @@ cmake_minimum_required(VERSION 2.8)
 message(STATUS "poi-contentaccess-module")
 
 find_package(PkgConfig REQUIRED)
-find_program(XSLTPROC xsltproc REQUIRED)
-find_program(DBUSXML2CPP dbusxx-xml2cpp REQUIRED)
 find_program(QTUIC uic REQUIRED)
 find_program(QTMOC moc REQUIRED)
 find_program(QTLRELEASE lrelease REQUIRED)
@@ -44,7 +42,7 @@ pkg_check_modules(QT5_GUI REQUIRED Qt5Gui)
 set(cmake_create_dir cmake -E make_directory)
 
 #settings for Qt
-set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} ${QT5_EXECUTABLE_COMPILE_FLAGS} -std=gnu++11)
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} ${QT5_EXECUTABLE_COMPILE_FLAGS})
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 add_definitions(${QT5_CORE_DEFINITIONS})
@@ -57,22 +55,18 @@ set(qt_uic ${QTUIC} -o)
 set(qt_release ${QTLRELEASE})
 set(qt_rcc ${QTRCC})
 
-set(API_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../../../api)
-set(TARGET_GENERATED_API_DIR ${API_DIR}/include)
-set(PRJ_SRC_PATH .)
-set(PRJ_COMMON_SRC_PATH ../../../src/poi-service/poi-common)
-
-file(GLOB DBUS_DEF_INCLUDE ${TARGET_GENERATED_API_DIR}/*_proxy.h ${TARGET_GENERATED_API_DIR}/*_adaptor.h ${TARGET_GENERATED_API_DIR}/*-constants.h)
-
 #common files shared with poi server
-file(GLOB PRJ_COMMON_SRCS ${PRJ_COMMON_SRC_PATH}/*.cpp)
+file(GLOB PRJ_COMMON_SRCS ${COMMON_DIR_POI_SERVER}/*.cpp)
 
 # for some reason, automoc doesn't run, so moc is made manually
 file(GLOB SRC_TO_MOC ${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.h
 )
+
 execute_process(
+	WORKING_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}"
 	COMMAND ${cmake_create_dir} ${MOC}
 )
+
 foreach(RAW_FILE ${SRC_TO_MOC})
 	get_filename_component(FILE ${RAW_FILE} NAME_WE)
 	if(NOT EXISTS ${MOC_DIR}/moc_${FILE}.cpp)
@@ -92,7 +86,7 @@ file(GLOB MOC_SOURCES ${MOC_DIR}/moc_*.cpp)
 #generate ui files
 file(GLOB DEF_TO_UIC ${CMAKE_CURRENT_SOURCE_DIR}/mainwindow.ui
 )
-foreach (RAW_FILE ${DEF_TO_UIC})
+foreach(RAW_FILE ${DEF_TO_UIC})
 	get_filename_component(FILE ${RAW_FILE} NAME_WE)
 	if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/ui_${FILE}.h)
 		execute_process(
@@ -109,47 +103,49 @@ endforeach()
 file(GLOB UI_FILES ${CMAKE_CURRENT_BINARY_DIR}/ui_*.h)
 
 #generate qm files
-set(COMMON_DIR ${CMAKE_CURRENT_SOURCE_DIR}/../poi-common)
-file(GLOB TS_TO_RELEASE ${COMMON_DIR}/poi-contentaccess-module_en.ts
-        ${COMMON_DIR}/poi-contentaccess-module_jp.ts
+file(GLOB TS_TO_RELEASE
+    ${COMMON_DIR}/poi-contentaccess-module_en.ts
+    ${COMMON_DIR}/poi-contentaccess-module_jp.ts
 )
 foreach(RAW_FILE ${TS_TO_RELEASE})
     get_filename_component(FILE ${RAW_FILE} NAME_WE)
-    if(NOT EXISTS ${COMMON_DIR}/${FILE}.qm)
+    if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/${FILE}.qm)
         execute_process(
-                OUTPUT_FILE ${COMMON_DIR}/${FILE}.qm
-                COMMAND ${qt_release} ${RAW_FILE}
+            COMMAND ${qt_release} ${RAW_FILE} -qm ${CMAKE_CURRENT_BINARY_DIR}/${FILE}.qm
         )
     else()
-        if(${RAW_FILE} IS_NEWER_THAN ${COMMON_DIR}/${FILE}.qm)
+        if(${RAW_FILE} IS_NEWER_THAN ${CMAKE_CURRENT_BINARY_DIR}/${FILE}.qm)
             execute_process(
-                    OUTPUT_FILE ${COMMON_DIR}/${FILE}.qm
-                    COMMAND ${qt_release} ${RAW_FILE}
+                COMMAND ${qt_release} ${RAW_FILE} -qm ${CMAKE_CURRENT_BINARY_DIR}/${FILE}.qm
             )
         endif()
     endif()
 endforeach()
 
 #generate resource file
-get_filename_component(FILE ${COMMON_DIR}/poi-resource.qrc NAME_WE)
-if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/../${FILE}.rcc)
+get_filename_component(FILE ${COMMON_DIR}/poi-cam-resource.qrc NAME_WE)
+if(NOT EXISTS ${CMAKE_CURRENT_BINARY_DIR}/${FILE}.rcc)
     execute_process(
-        OUTPUT_FILE ${CMAKE_CURRENT_BINARY_DIR}/../${FILE}.rcc
-        COMMAND ${qt_rcc} ${COMMON_DIR}/poi-resource.qrc
+        OUTPUT_FILE ${CMAKE_CURRENT_BINARY_DIR}/${FILE}.rcc
+        COMMAND ${qt_rcc} ${COMMON_DIR}/poi-cam-resource.qrc
     )
 else()
-    if(${COMMON_DIR}/poi-resource.qrc IS_NEWER_THAN ${CMAKE_CURRENT_BINARY_DIR}/../${FILE}.rcc)
+    if(${COMMON_DIR}/poi-cam-resource.qrc IS_NEWER_THAN ${CMAKE_CURRENT_BINARY_DIR}/${FILE}.rcc)
         execute_process(
-            OUTPUT_FILE ${CMAKE_CURRENT_BINARY_DIR}/../${FILE}.rcc
-            COMMAND ${qt_rcc} ${COMMON_DIR}/poi-resource.qrc
+            OUTPUT_FILE ${CMAKE_CURRENT_BINARY_DIR}/${FILE}.rcc
+            COMMAND ${qt_rcc} ${COMMON_DIR}/poi-cam-resource.qrc
         )
     endif()
 endif()
 
 include_directories(
-    ${PRJ_SRC_PATH}
-    ${PRJ_COMMON_SRC_PATH}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${COMMON_DIR}
+    ${COMMON_DIR_POI_SERVER}
     ${CMAKE_CURRENT_BINARY_DIR}
+    ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core
+    ${DBUS_GENERATED_INCLUDE_DIR}/map-viewer
+    ${DBUS_GENERATED_INCLUDE_DIR}/poi-service
     ${DBUS_CPP_INCLUDE_DIRS}
     ${GLIB_INCLUDE_DIRS}
     ${SQLITE3_INCLUDE_DIRS}
@@ -181,12 +177,10 @@ link_directories(
 
 add_executable(poi-contentaccess-module
     ${MOC_SOURCES}
-    ${DBUS_DEF_INCLUDE}
     ${UI_FILES}
-    poi-contentaccess-module-class.h
     main.cpp
-    ${PRJ_COMMON_SRCS}
     mainwindow.cpp
+    ${PRJ_COMMON_SRCS}
 )
 
 set(LIBRARIES
@@ -205,3 +199,14 @@ set(LIBRARIES
 )
 
 target_link_libraries(poi-contentaccess-module ${LIBRARIES})
+
+install(TARGETS poi-contentaccess-module DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+
+file(GLOB FILES_TO_INSTALL "${CMAKE_CURRENT_BINARY_DIR}/*.qm" "${CMAKE_CURRENT_BINARY_DIR}/*.rcc")
+
+foreach(RAW_FILE ${FILES_TO_INSTALL})
+    add_custom_command(TARGET poi-contentaccess-module
+                       POST_BUILD
+                       COMMAND cp ${RAW_FILE} ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}
+    )
+endforeach()

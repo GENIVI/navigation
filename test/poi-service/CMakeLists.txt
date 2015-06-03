@@ -17,59 +17,42 @@
 ###########################################################################
 project(poi-service)
 cmake_minimum_required(VERSION 2.8)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
 message(STATUS "poi-service")
 
-find_program(GIT git)
+option(WITH_FRANCA_INTERFACE
+       "Build using the Franca interfaces" OFF)
+option(WITH_DBUS_INTERFACE
+       "Build using the D-Bus interfaces" ON)
+option(WITH_DEBUG
+        "Enable the debug messages" OFF)
 
-set (git_get_src_version ${GIT} rev-parse HEAD)
-set (git_executable ${GIT})
+message(STATUS "WITH_FRANCA_INTERFACE = ${WITH_FRANCA_INTERFACE}")
+message(STATUS "WITH_DBUS_INTERFACE = ${WITH_DBUS_INTERFACE}")
+message(STATUS "WITH_DEBUG = ${WITH_DEBUG}")
 
-# Check if positioning stuff with the right version has been cloned and do it if necessary
-# positioning_SRC_DIR is set by cmake -Dpositioning_SRC_DIR=<path to positioning src dir> 
-set(positioning_URL http://git.projects.genivi.org/lbs/positioning.git)
-set(positioning_VERSION 3a1254f9ac4f5e2d088d24598e76764874a40b99)
+set(API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api")
+set(DBUS_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/dbus-include")
+set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/api") # this one is for positioning
+set(POI_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../src")
+set(COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/poi-common")
+set(COMMON_DIR_POI_SERVER "${POI_SRC_DIR}/poi-service/poi-common")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
-if (EXISTS ${positioning_SRC_DIR})
-	execute_process(COMMAND ${git_get_src_version}  
-					WORKING_DIRECTORY "${positioning_SRC_DIR}"
-					RESULT_VARIABLE result
-					OUTPUT_VARIABLE version)
-	if (${version} MATCHES ${positioning_VERSION})
-		message(STATUS "version of positioning up to date")	
-	else()
-		message(STATUS "get the right version of positioning")
-	 	execute_process(
-			COMMAND "${git_executable}" pull
-			COMMAND "${git_executable}" checkout ${positioning_VERSION}
-			WORKING_DIRECTORY "${positioning_SRC_DIR}"
-			RESULT_VARIABLE error_code
-		)
-		if(error_code)
-			message(FATAL_ERROR "Failed to checkout version: '${positioning_VERSION}'")
-		endif()	
-	endif()
-else()
-	message(STATUS "clone positioning")
-	execute_process(
-		COMMAND "${git_executable}" clone "${positioning_URL}" "${positioning_SRC_DIR}"
-		RESULT_VARIABLE error_code
-	)
- 	if(error_code)
-		message(FATAL_ERROR "Failed to clone repository: '${positioning_URL}'")
-	endif()
+add_subdirectory(positioning)
 
-	message(STATUS "get the right version of positioning")
- 	execute_process(
-		COMMAND "${git_executable}" pull
-		COMMAND "${git_executable}" checkout ${positioning_VERSION}
-		WORKING_DIRECTORY "${positioning_SRC_DIR}"
-		RESULT_VARIABLE error_code
-	)
-	if(error_code)
-		message(FATAL_ERROR "Failed to checkout version: '${positioning_VERSION}'")
-	endif()	
-endif()
+add_subdirectory(${API_DIR}/navigation-core "${DBUS_GENERATED_INCLUDE_DIR}/navigation-core")
 
+add_subdirectory(${API_DIR}/map-viewer "${DBUS_GENERATED_INCLUDE_DIR}/map-viewer")
 
+add_subdirectory(${API_DIR}/poi-service "${DBUS_GENERATED_INCLUDE_DIR}/poi-service")
 
+add_subdirectory(${POI_SRC_DIR}/poi-service "${CMAKE_CURRENT_BINARY_DIR}/poi-service-src")
+
+add_subdirectory(poi-supplier)
+
+add_subdirectory(poi-client)
+
+add_subdirectory(poi-contentaccess-module)

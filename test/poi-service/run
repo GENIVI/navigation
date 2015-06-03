@@ -26,39 +26,33 @@
 #
 # @licence end@
 
-echo '------------------------start the proof of concept------------------------'
 CURDIR=$PWD
-ROOT_DIR=$CURDIR/..
+
+ROOT_DIR=$CURDIR
 BIN_DIR=$ROOT_DIR/bin
-EXE_DIR=$BIN_DIR
-COMPONENT_EXE_DIR=$ROOT_DIR/../../src/poi-service/bin/poi-server
-COMPONENT_SCRIPT_DIR=$ROOT_DIR/../../src/poi-service/script
-MAIN_DATABASE=$EXE_DIR/'poi-database.db'
-ADDITIONAL_DATABASE=$EXE_DIR/'poi-database-additional.db'
+POI_SERVER_BIN_DIR=$ROOT_DIR/../../src/poi-service/bin
+MAIN_DATABASE=poi-database.db
+ADDITIONAL_DATABASE=poi-database-additional.db
+
+echo '------------------------start the proof of concept------------------------'
 
 echo 'kill orphan process if necessary'
 $CURDIR/kill-all
 
 echo 'run'
 
-if [ ! -f $COMPONENT_EXE_DIR/poi-server ]
-then
-	echo 'no poi-server, do ./build.sh first'
-	exit
-fi
-
-if [ ! -f $MAIN_DATABASE ]
+if [ ! -f $BIN_DIR/$MAIN_DATABASE ]
 then
 	echo 'no database available, do ./prepare <name of city> first'
 	exit
 fi
 
-read language <$EXE_DIR/language.txt
+read language <$BIN_DIR/language.txt
 echo $language
-cd $EXE_DIR/poi-contentaccess-module/
+cd $BIN_DIR
 ./poi-contentaccess-module -f $ADDITIONAL_DATABASE -i $language &
-cd $COMPONENT_EXE_DIR/
-./poi-server -f $MAIN_DATABASE &
-cd $EXE_DIR/poi-client/
+cd $POI_SERVER_BIN_DIR
+./poi-server -f $BIN_DIR/$MAIN_DATABASE &
+cd $BIN_DIR
 ./poi-client &
 

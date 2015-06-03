@@ -1,4 +1,4 @@
-Release date of the file: 26-02-2015 
+Release date of the file: 02-06-2015 
 Status: OK
 
 Project:
@@ -44,12 +44,41 @@ locale | grep 'LC_NUMERIC'
 # you must get
 LC_NUMERIC="en_US.UTF-8"
 
-Build:
-# Enter into the directory
-cd $WORKING-DIR/navigation-service/test/poi-service/script
-./build.sh make 
+===============================
+Current versions of additional code 
+===============================
+<current version of positioning> (git): bf00492981d71fead8c0615fae59b73b03a4fbac
 
-Prepare databases, configure and run:
+===============================
+How to get additional code 
+===============================
+Get positioning:
+git clone http://git.projects.genivi.org/lbs/positioning.git ./positioning
+cd positioning
+git checkout <current version of positioning>
+cd ../
+
+===============================
+How To Build
+===============================
+(you're supposed to have got additional code before)
+
+Create and enter the build folder:
+mkdir ./build
+cd build
+
+Build:
+cmake ../
+make
+cd ..
+
+===============================
+How To Prepare the database and the configuration for a country
+===============================
+To launch the stuff for Paris:
+./prepare -c paris
+
+NB:
 As examples, three databases can be generated for Paris, Tokyo and San-Diego
 The input stuff is taken from the OSM, by using this site:
 http://www.overpass-api.de
@@ -67,17 +96,15 @@ http://www.overpass-api.de/api/xapi?*[bbox=2.246304,48.814551,2.430325,48.901289
 
 For Tokyo, the bounding box is 139.691048,35.631628,139.832497,35.738153
 
-
-To launch the stuff for Paris:
 NB: In case you get such error message during runtime:
 D-Bus library appears to be incorrectly set up; failed to read machine uuid: Failed to open "/etc/machine-id": No such file or directory
 You need to fix it by:
 sudo su
 dbus-uuidgen  > /etc/machine-id
 
-./prepare -c paris
-./run
+===============================
+How To Run
+===============================
 
-Clean up:
-./kill-all
+./run 
 

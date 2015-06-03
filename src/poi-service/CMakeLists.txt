@@ -37,6 +37,8 @@ set(API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api")
 set(DBUS_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/dbus-include")
 set(COMMON_API_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api/franca/navigation/src-gen")
 set(DBUS_LIB_PATH "/usr/local/lib")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
 add_subdirectory(${API_DIR}/navigation-core "${DBUS_GENERATED_INCLUDE_DIR}/navigation-core")
 

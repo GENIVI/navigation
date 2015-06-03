@@ -25,10 +25,12 @@
 # <date>, <name>, <description of change>
 #
 # @licence end@
+
 CURDIR=$PWD
-ROOT_DIR=$CURDIR/..
+
+ROOT_DIR=$CURDIR
 BIN_DIR=$ROOT_DIR/bin
-EXE_DIR=$BIN_DIR
+SCRIPT_DIR=$ROOT_DIR/script
 CONFIG_DIR=$HOME"/.config/poi-service"
 CHK_DIR_EXISTS='test -d'
 MKDIR='mkdir -p'
@@ -71,7 +73,7 @@ do
 done
 
 echo 'generate the databases'
-./make-database $city
+$SCRIPT_DIR/make-database $city
 
 echo 'set the config file'
 if [ ! -d $CONFIG_DIR ]
@@ -79,10 +81,10 @@ then
 	echo create config directory
 	mkdir -p $CONFIG_DIR
 fi
-CONFIG_FILE=$ROOT_DIR/script/$city/poi-client.conf
+CONFIG_FILE=$SCRIPT_DIR/$city/poi-client.conf
 cp $CONFIG_FILE $CONFIG_DIR/poi-client.conf
 
 echo 'set the language for the content access module' 
-rm -rf $EXE_DIR/language.txt
-echo "$language" > $EXE_DIR/language.txt
+rm -rf $BIN_DIR/language.txt
+echo "$language" > $BIN_DIR/language.txt
 

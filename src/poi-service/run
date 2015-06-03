@@ -26,21 +26,19 @@
 #
 # @licence end@
 
-echo '------------------------start the server------------------------'
 CURDIR=$PWD
+
 ROOT_DIR=$CURDIR
-SCRIPT_DIR=$ROOT_DIR/script
-BIN_DIR=$ROOT_DIR/build
-SERVER_EXE_DIR=$BIN_DIR/poi-server
-MANAGER_SERVER_EXE_DIR=$BIN_DIR/poi-manager-server
-MAIN_DATABASE=$SCRIPT_DIR/poi-database-sample.db
-ADDITIONAL_DATABASE=$SCRIPT_DIR/poi-database-managed.db
+BIN_DIR=$ROOT_DIR/bin
+RESOURCE_DIR=$ROOT_DIR/resource
+MAIN_DATABASE=$RESOURCE_DIR/poi-database-sample.db
+ADDITIONAL_DATABASE=$RESOURCE_DIR/poi-database-managed.db
 
-echo 'kill orphan process if necessary'
-$SCRIPT_DIR/kill-all
+echo 'kill reminding orphan process if necessary'
+./kill-all
 
-echo 'run'
-$SERVER_EXE_DIR/poi-server -f $MAIN_DATABASE &
+echo '------------------------start the server------------------------'
+$BIN_DIR/poi-server -f $MAIN_DATABASE &
 
 echo '------------------------start the manager server------------------------'
 #$MANAGER_SERVER_EXE_DIR/poi-manager-server -f $ADDITIONAL_DATABASE &

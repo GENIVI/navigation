@@ -76,3 +76,5 @@ set(LIBRARIES
 )
 
 target_link_libraries(poi-server ${LIBRARIES})
+
+install(TARGETS poi-server DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})

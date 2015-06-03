@@ -870,9 +870,9 @@ int main(int  argc , char**  argv )
 
     QApplication a(argc, argv);
     QTranslator translator;
-    if (QResource::registerResource("../poi-resource.rcc"))
+    if (QResource::registerResource("poi-client-resource.rcc","./"))
     {
-        if (translator.load("poi-contentaccess-module_"+ language,"../../poi-common/"))
+        if (translator.load("poi-contentaccess-module_"+ language))
         {
             a.installTranslator(&translator);
             MainWindow mainWindow;
