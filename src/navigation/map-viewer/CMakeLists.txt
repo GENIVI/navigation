@@ -20,11 +20,30 @@ cmake_minimum_required(VERSION 2.8)
 
 message(STATUS "map-viewer")
 
+include(FindPkgConfig)
+
+pkg_search_module(DBUS_CPP_GLIB dbus-c++-glib-1)
+pkg_search_module(DBUS_CPP dbus-c++-1)
+pkg_search_module(GLIB glib-2.0)
+
+include_directories(${GLIB_INCLUDE_DIRS})
+include_directories(${DBUS_CPP_INCLUDE_DIRS})
+include_directories(${DBUS_CPP_GLIB_INCLUDE_DIRS})
+
+include(${PRELOAD_CACHE_FOR_PLUGINS})
+
+include_directories(${INCLUDE_DIRECTORIES})
+include_directories(.)
+include_directories(${navit_SOURCE_DIR}/navit)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
+
+include_directories(${NAVIT_CONFIG_H_DIR}) # this one contains config.h that is generated
+
 find_program(XSLTPROC xsltproc REQUIRED)
 
 # Generate the config file for navit/mapviewer
 execute_process(
-		OUTPUT_FILE ${NAVIT_BIN_DIR}/navit_genivi_mapviewer.xml
+                OUTPUT_FILE ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/navit_genivi_mapviewer.xml
                 COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_mapviewer.xsl ${navit_SOURCE_DIR}/navit/navit_shipped.xml
 	)
 
@@ -39,6 +58,9 @@ if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
 endif()
 
 # Add sub directories for the plugins
+
+set(PLUGIN_LDFLAGS ${DBUS_CPP_LDFLAGS} ${DBUS_CPP_GLIB_LDFLAGS} ${GLIB_LDFLAGS})
+set(PLUGIN_LIBRARIES ${DBUS_CPP_LIBRARY_DIRS} ${GLIB_LIBRARY_DIRS} ${DBUS_CPP_GLIB_DIRS})
 
 add_subdirectory(configuration-plugin)
 

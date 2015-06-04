@@ -30,28 +30,11 @@ cmake_minimum_required(VERSION 2.8)
 
 message(STATUS "mapviewer control")
 
-include(FindPkgConfig)
-
-pkg_search_module(DBUS_CPP dbus-c++-glib-1 dbus-c++-1)
-pkg_search_module(GLIB glib-2.0)
-include_directories(${GLIB_INCLUDE_DIRS})
-include_directories(${DBUS_CPP_INCLUDE_DIRS})
-
-include(${PRELOAD_CACHE_FOR_PLUGINS})
-
-include_directories(${INCLUDE_DIRECTORIES})
-include_directories(.)
-include_directories(${navit_SOURCE_DIR}/navit)
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
-
-include_directories(${NAVIT_CONFIG_H_DIR}) # this one contains config.h that is generated
-
 include_directories(${DBUS_GENERATED_INCLUDE_DIR}/map-viewer)
 include_directories(${DBUS_GENERATED_INCLUDE_DIR}/navigation-core)
 
-set(genivi_mapviewer_mapviewercontrol_LIBS ${DBUS_CPP_LDFLAGS})
+set(genivi_mapviewer_mapviewercontrol_LIBS ${PLUGIN_LDFLAGS})
+set(genivi_mapviewer_mapviewercontrol_LIBRARY_DIRS ${PLUGIN_LIBRARIES})
 
-include(${navit_SOURCE_DIR}/cmake/navit_macros.cmake)
-
-module_add_library(genivi_mapviewer_mapviewercontrol genivi_mapviewer_mapviewercontrol.cxx ${DBUS_GENERATED_INCLUDE_DIR}/map-viewer/genivi-mapviewer-mapviewercontrol_adaptor.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-routing_proxy.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-session_proxy.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-mapmatchedposition_proxy.h)
+add_library_plugin(genivi_mapviewer_mapviewercontrol genivi_mapviewer_mapviewercontrol.cxx ${DBUS_GENERATED_INCLUDE_DIR}/map-viewer/genivi-mapviewer-mapviewercontrol_adaptor.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-routing_proxy.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-session_proxy.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-mapmatchedposition_proxy.h)
 

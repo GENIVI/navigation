@@ -23,11 +23,11 @@
         <xsl:template match="/config/plugins/plugin[1]" priority="1" >
 		<xsl:copy><xsl:apply-templates select="@*|node()"/></xsl:copy>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../../map-viewer/configuration-plugin/.libs/libgenivi_mapviewer_configuration.so" ondemand="no"/>
+		<plugin path="../lib/libgenivi_mapviewer_configuration.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../../map-viewer/session-plugin/.libs/libgenivi_mapviewer_session.so" ondemand="no"/>
+		<plugin path="../lib/libgenivi_mapviewer_session.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../../map-viewer/mapviewercontrol-plugin/.libs/libgenivi_mapviewer_mapviewercontrol.so" ondemand="no"/>
+		<plugin path="../lib/libgenivi_mapviewer_mapviewercontrol.so" ondemand="no"/>
         </xsl:template>
         <xsl:template match="/config/plugins/plugin">
 		<xsl:copy><xsl:apply-templates select="@*|node()"/></xsl:copy>

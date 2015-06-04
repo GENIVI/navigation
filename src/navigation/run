@@ -89,21 +89,14 @@ enhpos=1
 replayer=1
 center="4612 N 0608 E"
 
-# due to an issue with the make install (it fails for navit at the moment), the paths to the exe still need to be hard coded
 CUR_DIR=$PWD
-BIN_DIR=$PWD/build
+BIN_DIR=$CUR_DIR/bin
 SRC_DIR=$PWD
-EnhancedPositionService_BIN_DIR=$BIN_DIR/positioning/enhanced-position-service/dbus/src
-LogReplayer_BIN_DIR=$BIN_DIR/positioning/log-replayer/src
-LogReplayer_logs_BIN_DIR=$BIN_DIR/positioning/log-replayer/logs
-navit_BIN_DIR=$BIN_DIR/navit/navit/navit
+LOGREPLAYER_LOGS_DIR=$SRC_DIR/positioning/log-replayer/logs
 
-while getopts b:c:gnorx opt
+while getopts c:gnorx opt
 do
 	case $opt in
-	b)
-		BIN_DIR=$OPTARG
-		;;
 	c)
 		case "$OPTARG" in
 		paris)
@@ -138,7 +131,7 @@ do
 		;;
 	\?)
 		echo "Usage:"
-		echo "$0 [-a application][-c center][-gnorx]"
+		echo "$0 [-c center][-gnorx]"
 		echo "-c: Set center (supported values: paris,tokyo,longitude,latitude). Default is geneve"
 		echo "-g: Run subprocesses within gdb (only with -x)"
 		echo "-n: Don't start enhanced-position-service"
@@ -150,21 +143,24 @@ do
 done
 trap "terminate" EXIT INT
 set -e
+
+cd $BIN_DIR
+
 if [ "$enhpos" = 1 ]
 then
-        run EnhancedPositionService $EnhancedPositionService_BIN_DIR/enhanced-position-service 
+    run EnhancedPositionService ./enhanced-position-service 
 	wait_for_service org.genivi.positioning.EnhancedPosition /org/genivi/positioning/EnhancedPosition
 
 	if [ "$replayer" = 1 ]
 	then
 		if [ -z "$REPLAYER_LOG_FILE" ]
 		then
-			REPLAYER_LOG_FILE=$LogReplayer_logs_BIN_DIR/geneve-cologny.log
+			REPLAYER_LOG_FILE=$LOGREPLAYER_LOGS_DIR/geneve-cologny.log
 		fi
-		run LogReplayer $LogReplayer_BIN_DIR/log-replayer $REPLAYER_LOG_FILE 
+		run LogReplayer ./log-replayer $REPLAYER_LOG_FILE 
 	fi
 fi
-cd $navit_BIN_DIR
+
 >bookmark.txt
 echo "$center" >center.txt
 

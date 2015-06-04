@@ -54,6 +54,8 @@ set(NAVIT_MAPS_DIR "${NAVIT_BIN_DIR}/maps")
 set(DBUS_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/dbus-include")
 set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/api") # this one is for positioning
 set(PRELOAD_CACHE_FOR_PLUGINS "${CMAKE_CURRENT_BINARY_DIR}/cmake_plugin_settings.txt")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
 add_subdirectory(positioning)
 
@@ -66,6 +68,8 @@ add_subdirectory(${API_DIR}/navigation-core "${DBUS_GENERATED_INCLUDE_DIR}/navig
 add_subdirectory(${API_DIR}/map-viewer "${DBUS_GENERATED_INCLUDE_DIR}/map-viewer")
 
 add_subdirectory(${API_DIR}/poi-service "${DBUS_GENERATED_INCLUDE_DIR}/poi-service")
+
+include(macro-generate-plugin.cmake)
 
 add_subdirectory(navigation-core)
 

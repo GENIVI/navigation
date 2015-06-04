@@ -68,5 +68,3 @@ set(LIBRARIES
 )
 
 target_link_libraries(poi-supplier ${LIBRARIES})
-
-install(TARGETS poi-supplier DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})

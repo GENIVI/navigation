@@ -200,8 +200,6 @@ set(LIBRARIES
 
 target_link_libraries(poi-contentaccess-module ${LIBRARIES})
 
-install(TARGETS poi-contentaccess-module DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
-
 file(GLOB FILES_TO_INSTALL "${CMAKE_CURRENT_BINARY_DIR}/*.qm" "${CMAKE_CURRENT_BINARY_DIR}/*.rcc")
 
 foreach(RAW_FILE ${FILES_TO_INSTALL})

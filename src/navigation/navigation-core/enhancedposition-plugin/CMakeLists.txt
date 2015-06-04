@@ -29,30 +29,12 @@ project(navigation)
 cmake_minimum_required(VERSION 2.8)
 
 message(STATUS "enhanced position")
-
-include(FindPkgConfig)
-
-pkg_search_module(DBUS_CPP dbus-c++-glib-1 dbus-c++-1)
-pkg_search_module(GLIB glib-2.0)
-include_directories(${GLIB_INCLUDE_DIRS})
-include_directories(${DBUS_CPP_INCLUDE_DIRS})
-
-include(${PRELOAD_CACHE_FOR_PLUGINS})
-
-include_directories(${INCLUDE_DIRECTORIES})
-include_directories(.)
-include_directories(${navit_SOURCE_DIR}/navit)
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
-
-include_directories(${NAVIT_CONFIG_H_DIR}) # this one contains config.h that is generated
-
 include_directories(${DBUS_GENERATED_INCLUDE_DIR_POSITIONING})
 
-set(genivi_positioning_enhancedposition_LIBS ${DBUS_CPP_LDFLAGS})
+set(genivi_positioning_enhancedposition_LIBS ${PLUGIN_LDFLAGS})
+set(genivi_positioning_enhancedposition_LIBRARY_DIRS ${PLUGIN_LIBRARIES})
 
-include(${navit_SOURCE_DIR}/cmake/navit_macros.cmake)
-
-module_add_library(genivi_positioning_enhancedposition
+add_library_plugin(genivi_positioning_enhancedposition
 					genivi_positioning_enhancedposition.cxx 
 					${DBUS_GENERATED_INCLUDE_DIR_POSITIONING}/enhanced-position-proxy.h
 					${DBUS_GENERATED_INCLUDE_DIR_POSITIONING}/positioning-constants.h

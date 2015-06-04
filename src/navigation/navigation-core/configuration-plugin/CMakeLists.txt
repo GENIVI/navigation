@@ -29,29 +29,11 @@ project(navigation)
 cmake_minimum_required(VERSION 2.8)
 
 message(STATUS "configuration")
-
-include(FindPkgConfig)
-
-pkg_search_module(DBUS_CPP dbus-c++-glib-1 dbus-c++-1)
-pkg_search_module(GLIB glib-2.0)
-include_directories(${GLIB_INCLUDE_DIRS})
-include_directories(${DBUS_CPP_INCLUDE_DIRS})
-
-include(${PRELOAD_CACHE_FOR_PLUGINS})
-
-include_directories(${INCLUDE_DIRECTORIES})
-include_directories(.)
-include_directories(${navit_SOURCE_DIR}/navit)
-include_directories(${CMAKE_CURRENT_BINARY_DIR})
-
-include_directories(${NAVIT_CONFIG_H_DIR}) # this one contains config.h that is generated
-
 include_directories(${DBUS_GENERATED_INCLUDE_DIR}/navigation-core)
 
-set(genivi_navigationcore_configuration_LIBS ${DBUS_CPP_LDFLAGS})
+set(genivi_navigationcore_configuration_LIBS ${PLUGIN_LDFLAGS})
+set(genivi_navigationcore_configuration_LIBRARY_DIRS ${PLUGIN_LIBRARIES})
 
-include(${navit_SOURCE_DIR}/cmake/navit_macros.cmake)
-
-module_add_library(genivi_navigationcore_configuration genivi_navigationcore_configuration.cxx ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-configuration_adaptor.h) 
+add_library_plugin(genivi_navigationcore_configuration genivi_navigationcore_configuration.cxx ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-configuration_adaptor.h) 
 
 
