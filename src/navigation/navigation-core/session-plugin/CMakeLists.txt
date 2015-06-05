@@ -35,5 +35,5 @@ include_directories(${DBUS_GENERATED_INCLUDE_DIR}/navigation-core)
 set(genivi_navigationcore_session_LIBS ${PLUGIN_LDFLAGS})
 set(genivi_navigationcore_session_LIBRARY_DIRS ${PLUGIN_LIBRARIES})
 
-add_library_plugin(genivi_navigationcore_session genivi_navigationcore_session.cxx ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-session_adaptor.h)
+module_add_library(genivi_navigationcore_session genivi_navigationcore_session.cxx ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-session_adaptor.h)
 

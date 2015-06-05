@@ -67,6 +67,6 @@ if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
 	set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
 endif()
 
-add_library_plugin(genivi_poiservice_cam_navit genivi_poiservice_cam_navit.cxx ${DBUS_GENERATED_INCLUDE_DIR}/poi-service/genivi-poiservice-poicontentaccess_proxy.h ${DBUS_GENERATED_INCLUDE_DIR}/poi-service/genivi-poiservice-contentaccessmodule_adaptor.h)
+module_add_library(genivi_poiservice_cam_navit genivi_poiservice_cam_navit.cxx ${DBUS_GENERATED_INCLUDE_DIR}/poi-service/genivi-poiservice-poicontentaccess_proxy.h ${DBUS_GENERATED_INCLUDE_DIR}/poi-service/genivi-poiservice-contentaccessmodule_adaptor.h)
 
 

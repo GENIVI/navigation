@@ -93,6 +93,7 @@ CUR_DIR=$PWD
 BIN_DIR=$CUR_DIR/bin
 SRC_DIR=$PWD
 LOGREPLAYER_LOGS_DIR=$SRC_DIR/positioning/log-replayer/logs
+NAVIT_BIN_DIR=$CUR_DIR/build/navit/navit/navit/
 
 while getopts c:gnorx opt
 do
@@ -161,6 +162,8 @@ then
 	fi
 fi
 
+cd $NAVIT_BIN_DIR
+
 >bookmark.txt
 echo "$center" >center.txt
 
@@ -176,4 +179,5 @@ wait_for_service org.genivi.navigationcore.LocationInput /org/genivi/navigationc
 wait_for_service org.genivi.navigationcore.MapMatchedPosition /org/genivi/navigationcore
 wait_for_service org.genivi.navigationcore.Routing /org/genivi/navigationcore
 wait_for_service org.genivi.navigationcore.Session /org/genivi/navigationcore
+
 wait

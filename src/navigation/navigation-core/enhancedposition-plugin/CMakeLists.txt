@@ -34,7 +34,7 @@ include_directories(${DBUS_GENERATED_INCLUDE_DIR_POSITIONING})
 set(genivi_positioning_enhancedposition_LIBS ${PLUGIN_LDFLAGS})
 set(genivi_positioning_enhancedposition_LIBRARY_DIRS ${PLUGIN_LIBRARIES})
 
-add_library_plugin(genivi_positioning_enhancedposition
+module_add_library(genivi_positioning_enhancedposition
 					genivi_positioning_enhancedposition.cxx 
 					${DBUS_GENERATED_INCLUDE_DIR_POSITIONING}/enhanced-position-proxy.h
 					${DBUS_GENERATED_INCLUDE_DIR_POSITIONING}/positioning-constants.h

@@ -35,5 +35,5 @@ include_directories(${DBUS_GENERATED_INCLUDE_DIR}/map-viewer)
 set(genivi_mapviewer_configuration_LIBS ${PLUGIN_LDFLAGS})
 set(genivi_mapviewer_configuration_LIBRARY_DIRS ${PLUGIN_LIBRARIES})
 
-add_library_plugin(genivi_mapviewer_configuration genivi_mapviewer_configuration.cxx ${DBUS_GENERATED_INCLUDE_DIR}/map-viewer/genivi-mapviewer-configuration_adaptor.h)
+module_add_library(genivi_mapviewer_configuration genivi_mapviewer_configuration.cxx ${DBUS_GENERATED_INCLUDE_DIR}/map-viewer/genivi-mapviewer-configuration_adaptor.h)
 

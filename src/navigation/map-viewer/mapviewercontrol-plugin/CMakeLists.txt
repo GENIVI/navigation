@@ -36,5 +36,5 @@ include_directories(${DBUS_GENERATED_INCLUDE_DIR}/navigation-core)
 set(genivi_mapviewer_mapviewercontrol_LIBS ${PLUGIN_LDFLAGS})
 set(genivi_mapviewer_mapviewercontrol_LIBRARY_DIRS ${PLUGIN_LIBRARIES})
 
-add_library_plugin(genivi_mapviewer_mapviewercontrol genivi_mapviewer_mapviewercontrol.cxx ${DBUS_GENERATED_INCLUDE_DIR}/map-viewer/genivi-mapviewer-mapviewercontrol_adaptor.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-routing_proxy.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-session_proxy.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-mapmatchedposition_proxy.h)
+module_add_library(genivi_mapviewer_mapviewercontrol genivi_mapviewer_mapviewercontrol.cxx ${DBUS_GENERATED_INCLUDE_DIR}/map-viewer/genivi-mapviewer-mapviewercontrol_adaptor.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-routing_proxy.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-session_proxy.h ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-mapmatchedposition_proxy.h)
 

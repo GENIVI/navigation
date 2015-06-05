@@ -51,13 +51,19 @@ set(API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api")
 set(NAVIT_BIN_DIR "${CMAKE_CURRENT_BINARY_DIR}/navit/navit/navit")
 set(NAVIT_CONFIG_H_DIR "${CMAKE_CURRENT_BINARY_DIR}/navit/navit")
 set(NAVIT_MAPS_DIR "${NAVIT_BIN_DIR}/maps")
+set(NAVIT_CMAKE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/navit/navit/cmake")
+
 set(DBUS_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/dbus-include")
 set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/api") # this one is for positioning
 set(PRELOAD_CACHE_FOR_PLUGINS "${CMAKE_CURRENT_BINARY_DIR}/cmake_plugin_settings.txt")
+
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
 add_subdirectory(positioning)
+
+unset(CMAKE_LIBRARY_OUTPUT_DIRECTORY)
+unset(CMAKE_RUNTIME_OUTPUT_DIRECTORY)
 
 add_subdirectory(navit/navit)
 
@@ -69,7 +75,7 @@ add_subdirectory(${API_DIR}/map-viewer "${DBUS_GENERATED_INCLUDE_DIR}/map-viewer
 
 add_subdirectory(${API_DIR}/poi-service "${DBUS_GENERATED_INCLUDE_DIR}/poi-service")
 
-include(macro-generate-plugin.cmake)
+include(${NAVIT_CMAKE_DIR}/navit_macros.cmake)
 
 add_subdirectory(navigation-core)
 
