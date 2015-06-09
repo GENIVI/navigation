@@ -26,13 +26,13 @@ option(WITH_DBUS_INTERFACE
 option(WITH_DEBUG
         "Enable the debug messages" OFF)
 option(NAVIT_DISABLE_QT
-	"Disable Qt to build navit" 1)
+        "Disable Qt to build navit" 1)
 option(NAVIT_SAMPLE_MAP
-	"Use a sample map for navit" 0)
+        "Use a sample map for navit" 0)
 option(NAVIT_NULL_VEHICLE
-	"Vehicle null for navit" 1)
+        "Vehicle null for navit" 1)
 option(NAVIT_QTPAINTER
-	"qtqpainter for navit" 0)
+        "qtqpainter for navit" 0)
 
 message(STATUS "WITH_FRANCA_INTERFACE = ${WITH_FRANCA_INTERFACE}")
 message(STATUS "WITH_DBUS_INTERFACE = ${WITH_DBUS_INTERFACE}")
@@ -55,7 +55,7 @@ set(NAVIT_CMAKE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/navit/navit/cmake")
 
 set(DBUS_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/dbus-include")
 set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/api") # this one is for positioning
-set(PRELOAD_CACHE_FOR_PLUGINS "${CMAKE_CURRENT_BINARY_DIR}/cmake_plugin_settings.txt")
+set(PRELOAD_CACHE_FOR_PLUGINS "${NAVIT_CONFIG_H_DIR}/cmake_plugin_settings.txt")
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
@@ -65,7 +65,12 @@ add_subdirectory(positioning)
 unset(CMAKE_LIBRARY_OUTPUT_DIRECTORY)
 unset(CMAKE_RUNTIME_OUTPUT_DIRECTORY)
 
-add_subdirectory(navit/navit)
+if(NOT EXISTS ${PRELOAD_CACHE_FOR_PLUGINS})
+    message(FATAL_ERROR "Build navit first, see README")
+endif()
+
+# For the moment, there's still an issue there
+#add_subdirectory(navit/navit)
 
 add_subdirectory(map)
 

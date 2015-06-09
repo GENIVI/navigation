@@ -52,7 +52,7 @@ include_directories(${NAVIT_CONFIG_H_DIR}) # this one contains config.h that is 
 include_directories(${DBUS_GENERATED_INCLUDE_DIR}/poi-service)
 
 set(PLUGIN_LDFLAGS ${DBUS_CPP_LDFLAGS} ${DBUS_CPP_GLIB_LDFLAGS} ${GLIB_LDFLAGS})
-set(PLUGIN_LIBRARIES ${DBUS_CPP_LIBRARY_DIRS} ${GLIB_LIBRARY_DIRS} ${DBUS_CPP_GLIB_DIRS})
+set(PLUGIN_LIBRARIES ${DBUS_CPP_LIBRARY_DIRS} ${GLIB_LIBRARY_DIRS} ${DBUS_CPP_GLIB_LIBRARY_DIRS})
 
 set(genivi_poiservice_cam_navit_LIBS ${PLUGIN_LDFLAGS})
 set(genivi_poiservice_cam_navit_LIBRARY_DIRS ${PLUGIN_LIBRARIES})

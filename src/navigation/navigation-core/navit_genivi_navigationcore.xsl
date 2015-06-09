@@ -23,19 +23,19 @@
         <xsl:template match="/config/plugins/plugin[1]" priority="1" >
 		<xsl:copy><xsl:apply-templates select="@*|node()"/></xsl:copy>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../../navigation-core/navigationcore-configuration/.libs/libgenivi_navigationcore_configuration.so" ondemand="no"/>
+		<plugin path="../../../navigation-core/configuration-plugin/.libs/libgenivi_navigationcore_configuration.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../../navigation-core/navigationcore-locationinput/.libs/libgenivi_navigationcore_locationinput.so" ondemand="no"/>
+		<plugin path="../../../navigation-core/locationinput-plugin/.libs/libgenivi_navigationcore_locationinput.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../../navigation-core/navigationcore-routing/.libs/libgenivi_navigationcore_routing.so" ondemand="no"/>
+		<plugin path="../../../navigation-core/routing-plugin/.libs/libgenivi_navigationcore_routing.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../../navigation-core/navigationcore-session/.libs/libgenivi_navigationcore_session.so" ondemand="no"/>
+		<plugin path="../../../navigation-core/session-plugin/.libs/libgenivi_navigationcore_session.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../../navigation-core/navigationcore-guidance/.libs/libgenivi_navigationcore_guidance.so" ondemand="no"/>
+		<plugin path="../../../navigation-core/guidance-plugin/.libs/libgenivi_navigationcore_guidance.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../../navigation-core/navigationcore-mapmatchedposition/.libs/libgenivi_navigationcore_mapmatchedposition.so" ondemand="no"/>
+		<plugin path="../../../navigation-core/mapmatchedposition-plugin/.libs/libgenivi_navigationcore_mapmatchedposition.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../../navigation-core/navigationcore-enhancedposition/.libs/libgenivi_positioning_enhancedposition.so" ondemand="no"/>
+		<plugin path="../../../navigation-core/enhancedposition-plugin/.libs/libgenivi_positioning_enhancedposition.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
 		<plugin path="../../../poi-cam/.libs/libgenivi_poiservice_cam_navit.so" ondemand="no"/>
         </xsl:template>
