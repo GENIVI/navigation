@@ -1,11 +1,14 @@
-Release date of the file: 27-10-2014 
+Release date of the file: 09-06-2015 
 Status: OK
 
 What is in:
 This repository gathers several sub projects hosted by GENIVI, based on a common set of APIs defined by the GENIVI Alliance
 
 ./api
-APIs in DBus xml. The proxy/adaptor/constants generation is managed by CMakeLists.txt into each sub directory and generated into the include dir
+APIs in DBus xml. 
+
+./api/franca
+APIs in Franca IDL (experimental, not validated yet)
 
 Proof of concept for traffic-incidents is split between
 ./src/traffic-incidents-service
@@ -18,7 +21,7 @@ Proof of concept of poi-service is split between
 The navigation middleware is located here
 ./src/navigation
 
-Some test scripts are available here
+Some test scripts for navigation are available here
 ./test/navigation
 
-Build/run scripts are located into script dir for each of the sub projects
+See the README for each of the projects for building the code
