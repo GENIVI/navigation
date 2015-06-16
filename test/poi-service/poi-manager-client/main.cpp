@@ -27,11 +27,29 @@
 #include <iostream>
 #include <thread>
 #include <CommonAPI/CommonAPI.h> //Defined in the Common API Runtime library
+#include "org/genivi/navigation/poiservice/POIContentManagerProxy.h"
 
+using namespace org::genivi::navigation::poiservice;
 
 int main()
 {
-    std::cout << "Hello World!" << std::endl;
+    // Common API data init
+    std::shared_ptr<CommonAPI::Runtime> runtime = CommonAPI::Runtime::load();
+    std::shared_ptr<CommonAPI::Factory> factory = runtime->createFactory();
+
+    const std::string& serviceAddress = "local:org.genivi.poiservice.POIContentManager:org.genivi.poiservice.POIContentManager";
+    std::shared_ptr<POIContentManagerProxyDefault> myProxy = factory->buildProxy<POIContentManagerProxy>(serviceAddress);
+
+
+    while (!myProxy->isAvailable()) {
+        usleep(10);
+    }
+
+
+    while (true) {
+        std::this_thread::sleep_for(std::chrono::seconds(5));
+    }
+
     return 0;
 }
 
