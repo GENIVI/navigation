@@ -25,6 +25,7 @@ find_program(DBUSXML2CPP dbusxx-xml2cpp REQUIRED)
 
 file (GLOB XML_TO_DBUS 
 	${CMAKE_CURRENT_SOURCE_DIR}/genivi-poiservice-contentaccessmodule.xml
+        ${CMAKE_CURRENT_SOURCE_DIR}/genivi-poiservice-contentmanager.xml
 	${CMAKE_CURRENT_SOURCE_DIR}/genivi-poiservice-poicontentaccess.xml
 	${CMAKE_CURRENT_SOURCE_DIR}/genivi-poiservice-poisearch.xml
 	${CMAKE_CURRENT_SOURCE_DIR}/genivi-poiservice-configuration.xml

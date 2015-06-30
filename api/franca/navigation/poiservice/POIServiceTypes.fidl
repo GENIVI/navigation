@@ -78,21 +78,7 @@ typeCollection POIServiceTypes {
         String stringValue
         Boolean boolValue
     }
-    
-    struct AttributeValueStruct polymorphic {}
-	
-	struct AttributeValueStructInt32 extends AttributeValueStruct {
-           Int32 intValue 
-    }
-    
-	struct AttributeValueStructString extends AttributeValueStruct {
-           String stringValue 
-    }
-
-	struct AttributeValueStructBoolean extends AttributeValueStruct {
-           Boolean boolValue 
-    }
-	
+    	
 	<**	@description:**>
 	struct Details {
 		<**	@description : list of parent categories unique id.**>
@@ -333,7 +319,7 @@ typeCollection POIServiceTypes {
         String name
         <** @description:POI location.**>           
         Coordinate3D location
-   		<** @description: array[struct(name,type,value)].**>			
+   		<** @description: array[struct(id,type,value)].**>			
         PoiAttribute[] attributes
     }
 

@@ -573,7 +573,7 @@ uint16_t contentAccessModuleServer::searchPOIRequest(uint16_t categoryIndex, std
         size_t index,sub_index,attribute_index;
         DBus_poiCAMDetails poiCAMDet;
         DBus_poiCAMDetails::poiCAMDetails_t poi; //source_id, name, category, location, distance, attributes
-        DBus_attribute::attribute_t  poiAttrib;
+        DBus_poiAttribute::poiAttribute_t  poiAttrib;
         DBus_searchResultDetails poiDet;
         DBus_searchResultDetails::searchResultDetails_t poiDetails; //details(unique id, name, lat, lon, alt), categories, attributes(name, type, value)
         std::string name;

@@ -60,8 +60,6 @@ link_directories(
 
 add_executable(poi-server
     main.cpp
-    poi-server-class.h
-    poi-datamodel.h
     ${PRJ_COMMON_SRCS}
 )
 

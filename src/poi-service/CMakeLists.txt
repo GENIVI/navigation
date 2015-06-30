@@ -32,11 +32,10 @@ message(STATUS "WITH_FRANCA_INTERFACE = ${WITH_FRANCA_INTERFACE}")
 message(STATUS "WITH_DBUS_INTERFACE = ${WITH_DBUS_INTERFACE}")
 message(STATUS "WITH_DEBUG = ${WITH_DEBUG}")
 
-set(COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/poi-common")
 set(API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api")
 set(DBUS_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/dbus-include")
-set(COMMON_API_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api/franca/navigation/src-gen")
-set(DBUS_LIB_PATH "/usr/local/lib")
+set(COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/poi-common")
+
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
@@ -49,5 +48,7 @@ add_subdirectory(${API_DIR}/poi-service "${DBUS_GENERATED_INCLUDE_DIR}/poi-servi
 add_subdirectory(poi-server)
 
 if (WITH_FRANCA_INTERFACE)
+    set(COMMON_API_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api/franca/navigation/src-gen")
+    set(DBUS_LIB_PATH "/usr/local/lib")
    add_subdirectory(poi-manager-server)
 endif()

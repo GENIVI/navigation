@@ -102,4 +102,14 @@ typedef struct
 #define CAM_CATEGORY_OFFSET 0x0100 //offset added to create the id of a category provided by a CAM (to be multiplied by the camId)
 #define CAM_ATTRIBUTE_OFFSET 0x0100 //offset added to create the id of an attribute provided by a CAM (to be multiplied by the camId)
 
+// some test defines
+#define ICON_WIDTH 32
+#define ICON_HEIGHT 37
+#define ICON_URL "../resource/file"
+#define ICON_FORMAT "png"
+#define POI_PROVIDER "OpenStreetMap"
+#define POI_NAME "mySweetHome"
+#define SEARCH_STRING "Sweet"
+#define MEDIASET 1
+
 #endif

@@ -125,86 +125,6 @@ namespace POIServiceTypes {
      * values for attribute.
      */
     typedef CommonAPI::Variant<int32_t, std::string, bool>  AttributeValue;
-    struct AttributeValueStruct: CommonAPI::SerializablePolymorphicStruct {
-    
-        AttributeValueStruct() = default;
-    
-        enum: uint32_t { SERIAL_ID = 0x1d47fc57 };
-    
-        static AttributeValueStruct* createInstance(const uint32_t& serialId);
-    
-        virtual uint32_t getSerialId() const;
-        virtual void createTypeSignature(CommonAPI::TypeOutputStream& typeOutputStream) const;
-    
-        virtual void readFromInputStream(CommonAPI::InputStream& inputStream);
-        virtual void writeToOutputStream(CommonAPI::OutputStream& outputStream) const;
-    
-        static inline void writeToTypeOutputStream(CommonAPI::TypeOutputStream& typeOutputStream) {
-        }
-    };
-    struct AttributeValueStructInt32: AttributeValueStruct {
-         int32_t intValue;
-    
-        AttributeValueStructInt32() = default;
-        AttributeValueStructInt32(const int32_t& intValue);
-    
-        enum: uint32_t { SERIAL_ID = 0xebabbc39 };
-    
-        static AttributeValueStructInt32* createInstance(const uint32_t& serialId);
-    
-        virtual uint32_t getSerialId() const;
-        virtual void createTypeSignature(CommonAPI::TypeOutputStream& typeOutputStream) const;
-    
-        virtual void readFromInputStream(CommonAPI::InputStream& inputStream);
-        virtual void writeToOutputStream(CommonAPI::OutputStream& outputStream) const;
-    
-        static inline void writeToTypeOutputStream(CommonAPI::TypeOutputStream& typeOutputStream) {
-            AttributeValueStruct::writeToTypeOutputStream(typeOutputStream);
-            typeOutputStream.writeInt32Type();
-        }
-    };
-    struct AttributeValueStructString: AttributeValueStruct {
-         std::string stringValue;
-    
-        AttributeValueStructString() = default;
-        AttributeValueStructString(const std::string& stringValue);
-    
-        enum: uint32_t { SERIAL_ID = 0x84441672 };
-    
-        static AttributeValueStructString* createInstance(const uint32_t& serialId);
-    
-        virtual uint32_t getSerialId() const;
-        virtual void createTypeSignature(CommonAPI::TypeOutputStream& typeOutputStream) const;
-    
-        virtual void readFromInputStream(CommonAPI::InputStream& inputStream);
-        virtual void writeToOutputStream(CommonAPI::OutputStream& outputStream) const;
-    
-        static inline void writeToTypeOutputStream(CommonAPI::TypeOutputStream& typeOutputStream) {
-            AttributeValueStruct::writeToTypeOutputStream(typeOutputStream);
-            typeOutputStream.writeStringType();
-        }
-    };
-    struct AttributeValueStructBoolean: AttributeValueStruct {
-         bool boolValue;
-    
-        AttributeValueStructBoolean() = default;
-        AttributeValueStructBoolean(const bool& boolValue);
-    
-        enum: uint32_t { SERIAL_ID = 0xa6ee8ff6 };
-    
-        static AttributeValueStructBoolean* createInstance(const uint32_t& serialId);
-    
-        virtual uint32_t getSerialId() const;
-        virtual void createTypeSignature(CommonAPI::TypeOutputStream& typeOutputStream) const;
-    
-        virtual void readFromInputStream(CommonAPI::InputStream& inputStream);
-        virtual void writeToOutputStream(CommonAPI::OutputStream& outputStream) const;
-    
-        static inline void writeToTypeOutputStream(CommonAPI::TypeOutputStream& typeOutputStream) {
-            AttributeValueStruct::writeToTypeOutputStream(typeOutputStream);
-            typeOutputStream.writeBoolType();
-        }
-    };
     /**
      * 
      */
@@ -977,7 +897,7 @@ namespace POIServiceTypes {
          */
          NavigationTypes::Coordinate3D location;
         /**
-         * array[struct(name,type,value)].
+         * array[struct(id,type,value)].
          */
          std::vector<PoiAttribute> attributes;
     
@@ -1085,22 +1005,6 @@ struct UpdateReasonComparator {
     }
 };
 
-bool operator==(const AttributeValueStruct& lhs, const AttributeValueStruct& rhs);
-inline bool operator!=(const AttributeValueStruct& lhs, const AttributeValueStruct& rhs) {
-    return !(lhs == rhs);
-}
-bool operator==(const AttributeValueStructInt32& lhs, const AttributeValueStructInt32& rhs);
-inline bool operator!=(const AttributeValueStructInt32& lhs, const AttributeValueStructInt32& rhs) {
-    return !(lhs == rhs);
-}
-bool operator==(const AttributeValueStructString& lhs, const AttributeValueStructString& rhs);
-inline bool operator!=(const AttributeValueStructString& lhs, const AttributeValueStructString& rhs) {
-    return !(lhs == rhs);
-}
-bool operator==(const AttributeValueStructBoolean& lhs, const AttributeValueStructBoolean& rhs);
-inline bool operator!=(const AttributeValueStructBoolean& lhs, const AttributeValueStructBoolean& rhs) {
-    return !(lhs == rhs);
-}
 bool operator==(const Details& lhs, const Details& rhs);
 inline bool operator!=(const Details& lhs, const Details& rhs) {
     return !(lhs == rhs);

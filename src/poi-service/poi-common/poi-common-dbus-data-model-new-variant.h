@@ -105,11 +105,27 @@ public:
         return var;
     }
 
+    DBus::Variant createVariantBool(bool value)
+    {
+        DBus::Variant var;
+        DBus::MessageIter iter = var.writer();
+        iter.append_bool(value);
+        return var;
+    }
+
     DBus::Variant createVariantUint16(uint16_t value)
     {
         DBus::Variant var;
         DBus::MessageIter iter = var.writer();
         iter.append_uint16(value);
+        return var;
+    }
+
+    DBus::Variant createVariantInt32(int32_t value)
+    {
+        DBus::Variant var;
+        DBus::MessageIter iter = var.writer();
+        iter.append_int32(value);
         return var;
     }
 
@@ -137,6 +153,300 @@ public:
         return var;
     }
 
+};
+
+class DBus_variantIcon : DBus_dataFormatConverter // (yv)
+{
+public:
+    enum {
+        AS_VECTOR_OF_ID = 0,
+        AS_STRING = 1,
+    };
+
+    struct Icon_t
+    {
+        std::vector<resourceId_t> id;
+        std::string url;
+    };
+
+    struct variantIcon_t
+    {
+        uint8_t index;
+        Icon_t content;
+    };
+
+    typedef ::DBus::Struct< uint8_t, ::DBus::Variant > DBus_variantIcon_t;
+
+
+    DBus_variantIcon(){
+        m_variantIcon.index = AS_STRING;
+        m_variantIcon.content.id.clear();
+        m_variantIcon.content.url = "";
+    }
+
+    ~DBus_variantIcon(){}
+
+    void set(variantIcon_t value){
+        size_t index;
+
+        switch (value.index) {
+        case 0:
+            m_variantIcon.content.id.clear();
+            for (index=0;index<value.content.id.size();index++)
+            {
+                m_variantIcon.content.id.push_back(value.content.id.at(index));
+            }
+            break;
+        case 1:
+            m_variantIcon.content.url = value.content.url;
+        default:
+            break;
+        }
+    }
+
+    variantIcon_t get(){
+        return(m_variantIcon);
+    }
+
+    void setDBus(DBus_variantIcon_t value){
+        size_t index;
+        std::string *str;
+
+        m_variantIcon.index = value._1;
+        switch (value._1) {
+        case 0:
+            value._2.reader().get_array(str);
+            m_variantIcon.content.id.clear();
+
+            for (index=0;index<str->size();index++)
+            {
+                m_variantIcon.content.id.push_back(str->at(index));
+            }
+            break;
+        case 1:
+            m_variantIcon.content.url = value._2.reader().get_string();
+        default:
+            break;
+        }
+    }
+
+    DBus_variantIcon_t getDBus(){
+        size_t index;
+        DBus_variantIcon_t return_value;
+
+        return_value._1 = m_variantIcon.index;
+
+        switch (m_variantIcon.index) {
+        case 0:
+            return_value._2.clear();
+            for (index=0;index<m_variantIcon.content.id.size();index++)
+            {
+                return_value._2 = createVariantArrayUint32(m_variantIcon.content.id);
+            }
+            break;
+        case 1:
+            return_value._2 = createVariantString(m_variantIcon.content.url);
+        default:
+            break;
+        }
+
+        return(return_value);
+    }
+
+private:
+    variantIcon_t m_variantIcon;
+};
+
+class DBus_variantMedia : DBus_dataFormatConverter // (yv)
+{
+public:
+    enum {
+        AS_VECTOR_OF_ID = 0,
+        AS_STRING = 1,
+    };
+
+    struct Media_t
+    {
+        std::vector<resourceId_t> id;
+        std::string url;
+    };
+
+    struct variantMedia_t
+    {
+        uint8_t index;
+        Media_t content;
+    };
+
+    typedef ::DBus::Struct< uint8_t, ::DBus::Variant > DBus_variantMedia_t;
+
+    DBus_variantMedia(){
+        m_variantMedia.index = AS_STRING;
+        m_variantMedia.content.id.clear();
+        m_variantMedia.content.url = "";
+    }
+
+    ~DBus_variantMedia(){}
+
+    void set(variantMedia_t value){
+        size_t index;
+
+        switch (value.index) {
+        case 0:
+            m_variantMedia.content.id.clear();
+            for (index=0;index<value.content.id.size();index++)
+            {
+                m_variantMedia.content.id.push_back(value.content.id.at(index));
+            }
+            break;
+        case 1:
+            m_variantMedia.content.url = value.content.url;
+        default:
+            break;
+        }
+    }
+
+    variantMedia_t get(){
+        return(m_variantMedia);
+    }
+
+    void setDBus(DBus_variantMedia_t value){
+        size_t index;
+        std::string *str;
+
+        m_variantMedia.index = value._1;
+        switch (value._1) {
+        case 0:
+            value._2.reader().get_array(str);
+            m_variantMedia.content.id.clear();
+
+            for (index=0;index<str->size();index++)
+            {
+                m_variantMedia.content.id.push_back(str->at(index));
+            }
+            break;
+        case 1:
+            m_variantMedia.content.url = value._2.reader().get_string();
+        default:
+            break;
+        }
+    }
+
+    DBus_variantMedia_t getDBus(){
+        size_t index;
+        DBus_variantMedia_t return_value;
+
+        return_value._1 = m_variantMedia.index;
+
+        switch (m_variantMedia.index) {
+        case 0:
+            return_value._2.clear();
+            for (index=0;index<m_variantMedia.content.id.size();index++)
+            {
+                return_value._2 = createVariantArrayUint32(m_variantMedia.content.id);
+            }
+            break;
+        case 1:
+            return_value._2 = createVariantString(m_variantMedia.content.url);
+        default:
+            break;
+        }
+
+        return(return_value);
+    }
+
+private:
+    variantMedia_t m_variantMedia;
+};
+
+class DBus_variantAttributeValue : DBus_dataFormatConverter // (yv)
+{
+public:
+    enum {
+        AS_INT32 = 0,
+        AS_STRING = 1,
+        AS_BOOL = 2
+    };
+
+    struct AttributeValue_t
+    {
+        int32_t intValue;
+        std::string stringValue;
+        bool boolValue;
+    };
+
+    struct variantAttributeValue_t
+    {
+        uint8_t index;
+        AttributeValue_t content;
+    };
+
+    typedef ::DBus::Struct< uint8_t, ::DBus::Variant > DBus_variantAttributeValue_t;
+
+    DBus_variantAttributeValue(){
+        m_variantAttributeValue.index = AS_INT32;
+        m_variantAttributeValue.content.intValue = 0;
+        m_variantAttributeValue.content.stringValue = "";
+        m_variantAttributeValue.content.boolValue = false;
+    }
+
+    ~DBus_variantAttributeValue(){}
+
+    void set(variantAttributeValue_t value){
+
+        switch (value.index) {
+        case 0:
+            m_variantAttributeValue.content.intValue = value.content.intValue;
+            break;
+        case 1:
+            m_variantAttributeValue.content.stringValue = value.content.stringValue;
+        case 2:
+            m_variantAttributeValue.content.boolValue = value.content.boolValue;
+        default:
+            break;
+        }
+    }
+
+    variantAttributeValue_t get(){
+        return(m_variantAttributeValue);
+    }
+
+    void setDBus(DBus_variantAttributeValue_t value){
+        m_variantAttributeValue.index = value._1;
+        switch (value._1) {
+        case 0:
+            m_variantAttributeValue.content.intValue = value._2.reader().get_int32();
+            break;
+        case 1:
+            m_variantAttributeValue.content.stringValue = value._2.reader().get_string();
+        case 2:
+            m_variantAttributeValue.content.boolValue = value._2.reader().get_bool();
+        default:
+            break;
+        }
+    }
+
+    DBus_variantAttributeValue_t getDBus(){
+        DBus_variantAttributeValue_t return_value;
+
+        return_value._1 = m_variantAttributeValue.index;
+
+        switch (m_variantAttributeValue.index) {
+        case 0:
+            return_value._2 = createVariantInt32(m_variantAttributeValue.content.intValue);
+            break;
+        case 1:
+            return_value._2 = createVariantString(m_variantAttributeValue.content.stringValue);
+        case 2:
+            return_value._2 = createVariantBool(m_variantAttributeValue.content.boolValue);
+        default:
+            break;
+        }
+
+        return(return_value);
+    }
+
+private:
+    variantAttributeValue_t m_variantAttributeValue;
 };
 
 class DBus_version : DBus_dataFormatConverter // (qqqs)
@@ -192,32 +502,34 @@ private:
     version_t m_version;
 };
 
-class DBus_categoryDetails : DBus_dataFormatConverter // (uauvsbsv) -->in this implementation, the two variant data are string
+class DBus_categoryDetails : DBus_dataFormatConverter // (uau(yv)sbs(yv))
 {
 public:
     struct categoryDetails_t
     {
         categoryId_t id; //Category unique id
         std::vector<categoryId_t> parents_id; //list of parent categories unique id
-        std::string icons; //visual icons set
+        DBus_variantIcon::variantIcon_t icons; //visual icons set
         std::string name;
         bool top_level; //false if predefined, true if created by plugin
         std::string description; //short category description (optional)
-        std::string media; //media associated (html web site, audio, video, ...) (optional)
+        DBus_variantMedia::variantMedia_t media; //media associated (html web site, audio, video, ...) (optional)
     };
 
-    typedef ::DBus::Struct< uint32_t, std::vector< uint32_t >, ::DBus::Variant, std::string, bool, std::string, ::DBus::Variant > DBus_categoryDetails_t;
+    typedef ::DBus::Struct< uint32_t, std::vector< uint32_t >, ::DBus::Struct< uint8_t, ::DBus::Variant >, std::string, bool, std::string, ::DBus::Struct< uint8_t, ::DBus::Variant > > DBus_categoryDetails_t;
 
     DBus_categoryDetails()
     {
+        DBus_variantIcon icons;
+        DBus_variantMedia media;
+
         m_categoryDetails.id = 0;
         m_categoryDetails.parents_id.clear();
-        m_categoryDetails.parents_id.push_back(0); //one element by default
-        m_categoryDetails.icons = "";
+        m_categoryDetails.icons = icons.get();
         m_categoryDetails.name = "";
         m_categoryDetails.top_level = true;
         m_categoryDetails.description = "";
-        m_categoryDetails.media = "";
+        m_categoryDetails.media = media.get();
     }
 
     ~DBus_categoryDetails(){}
@@ -246,22 +558,29 @@ public:
     void setDBus(DBus_categoryDetails_t value)
     {
         size_t index;
+        DBus_variantIcon icons;
+        DBus_variantMedia media;
+
         m_categoryDetails.id =  value._1;
         m_categoryDetails.parents_id.clear();
         for (index=0;index<value._2.size();index++)
         {
             m_categoryDetails.parents_id.push_back(value._2.at(index));
         }
-        m_categoryDetails.icons = value._3.reader().get_string();
+        icons.setDBus(value._3);
+        m_categoryDetails.icons = icons.get();
         m_categoryDetails.name = value._4;
         m_categoryDetails.top_level = value._5;
         m_categoryDetails.description = value._6;
-        m_categoryDetails.description = value._7.reader().get_string();
+        media.setDBus(value._7);
+        m_categoryDetails.media = media.get();
     }
 
     DBus_categoryDetails_t getDBus()
     {
         size_t index;
+        DBus_variantIcon icons;
+        DBus_variantMedia media;
         DBus_categoryDetails_t return_value;
 
         return_value._1 = m_categoryDetails.id;
@@ -270,11 +589,13 @@ public:
         {
             return_value._2.push_back(m_categoryDetails.parents_id.at(index));
         }
-        return_value._3 = createVariantString(m_categoryDetails.icons);
+        icons.set(m_categoryDetails.icons);
+        return_value._3 = icons.getDBus();
         return_value._4 = m_categoryDetails.name;
         return_value._5 = m_categoryDetails.top_level;
         return_value._6 = m_categoryDetails.description;
-        return_value._7 = createVariantString(m_categoryDetails.media);
+        media.set(m_categoryDetails.media);
+        return_value._7 = media.getDBus();
         return(return_value);
     }
 
@@ -282,22 +603,24 @@ private:
     categoryDetails_t m_categoryDetails;
 };
 
-class DBus_categoryOperator : DBus_dataFormatConverter // (isv) -->in this implementation, the variant data is a string
+class DBus_categoryOperator : DBus_dataFormatConverter // (is(yv))
 {
 public:
     struct categoryOperator_t
     {
         int32_t type; //attribute operator type enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....)
         std::string name; //attribute operator name
-        std::string value; //attribute operator value
+        DBus_variantAttributeValue::variantAttributeValue_t value; //attribute operator value
     };
 
-    typedef ::DBus::Struct< int32_t, std::string, ::DBus::Variant > DBus_categoryOperator_t;
+    typedef ::DBus::Struct< int32_t, std::string, ::DBus::Struct< uint8_t, ::DBus::Variant > > DBus_categoryOperator_t;
 
     DBus_categoryOperator(){
+        DBus_variantAttributeValue attributeValue;
+
         m_categoryOperator.type = 0;
         m_categoryOperator.name = "";
-        m_categoryOperator.value = "";
+        m_categoryOperator.value = attributeValue.get();
     }
 
     ~DBus_categoryOperator(){
@@ -314,16 +637,25 @@ public:
     }
 
     void setDBus(DBus_categoryOperator_t value){
+        DBus_variantAttributeValue attributeValue;
+
         m_categoryOperator.type = value._1;
         m_categoryOperator.name = value._2;
-        m_categoryOperator.value = value._3.reader().get_string();
+
+        attributeValue.setDBus(value._3);
+        m_categoryOperator.value = attributeValue.get();
     }
 
     DBus_categoryOperator_t getDBus(){
         DBus_categoryOperator_t return_value;
+        DBus_variantAttributeValue attributeValue;
+
         return_value._1 = m_categoryOperator.type;
         return_value._2 = m_categoryOperator.name;
-        return_value._3 = createVariantString(m_categoryOperator.value);
+
+        attributeValue.set(m_categoryOperator.value);
+        return_value._3 = attributeValue.getDBus();
+
         return(return_value);
     }
 
@@ -331,7 +663,7 @@ private:
     categoryOperator_t m_categoryOperator;
 };
 
-class DBus_categoryAttribute : DBus_dataFormatConverter // (usia(isv))
+class DBus_categoryAttribute : DBus_dataFormatConverter // (usia(is(yv)))
 {
 public:
     struct categoryAttribute_t
@@ -342,15 +674,13 @@ public:
         std::vector<DBus_categoryOperator::categoryOperator_t > oper;
     };
 
-    typedef ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, ::DBus::Variant > > > DBus_categoryAttribute_t;
+    typedef ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > DBus_categoryAttribute_t;
 
     DBus_categoryAttribute(){
-        DBus_categoryOperator op;
         m_categoryAttribute.id = 0;
         m_categoryAttribute.name = "";
         m_categoryAttribute.type = 0;
         m_categoryAttribute.oper.clear();
-        m_categoryAttribute.oper.push_back(op.get()); //one element by default
     }
 
     ~DBus_categoryAttribute(){
@@ -450,7 +780,7 @@ private:
     categorySortOption_t m_categorySortOption;
 };
 
-class DBus_category : DBus_dataFormatConverter // ( (uauvsbsv) a(usia(isv)) a(us) )
+class DBus_category : DBus_dataFormatConverter // ( (uau(yv)sbs(yv)) a(usia(is(yv))) a(us) )
 {
 public:
     struct category_t
@@ -460,19 +790,15 @@ public:
         std::vector<DBus_categorySortOption::categorySortOption_t> sortOptions;
     };
 
-    typedef ::DBus::Struct< ::DBus::Struct< uint32_t, std::vector< uint32_t >, ::DBus::Variant, std::string, bool, std::string, ::DBus::Variant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, ::DBus::Variant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > DBus_category_t;
+    typedef ::DBus::Struct< ::DBus::Struct< uint32_t, std::vector< uint32_t >, ::DBus::Struct< uint8_t, ::DBus::Variant >, std::string, bool, std::string, ::DBus::Struct< uint8_t, ::DBus::Variant > >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > DBus_category_t;
 
     DBus_category()
     {
         DBus_categoryDetails details;
-        DBus_categoryAttribute attrib;
-        DBus_categorySortOption sortOption;
 
         m_category.details = details.get();
         m_category.attributes.clear();
-        m_category.attributes.push_back(attrib.get()); //one element by default
         m_category.sortOptions.clear();
-        m_category.sortOptions.push_back(sortOption.get()); //one element by default
     }
 
     ~ DBus_category(){}
@@ -734,23 +1060,25 @@ private:
     categoryRadius_t m_categoryRadius;
 };
 
-class DBus_poiAttribute : DBus_dataFormatConverter // (uiv) -->in this implementation, the variant data is a string
+class DBus_poiAttribute : DBus_dataFormatConverter // (ui(yv))
 {
 public:
     struct poiAttribute_t
     {
         attributeId_t id;
         int32_t type;
-        std::string value;
+        DBus_variantAttributeValue::variantAttributeValue_t value;
     };
 
-    typedef ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > DBus_poiAttribute_t;
+    typedef ::DBus::Struct< uint32_t, int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant  > > DBus_poiAttribute_t;
 
 
     DBus_poiAttribute(){
+        DBus_variantAttributeValue attributeValue;
+
         m_attribute.id = 0;
         m_attribute.type = 0;
-        m_attribute.value = "";
+        m_attribute.value = attributeValue.get();
     }
 
     ~DBus_poiAttribute(){}
@@ -766,16 +1094,22 @@ public:
     }
 
     void setDBus(DBus_poiAttribute_t value){
+        DBus_variantAttributeValue attributeValue;
+
         m_attribute.id = value._1;
         m_attribute.type = value._2;
-        m_attribute.value = value._3.reader().get_string();
+        attributeValue.setDBus(value._3);
+        m_attribute.value = attributeValue.get();
     }
 
     DBus_poiAttribute_t getDBus(){
         DBus_poiAttribute_t return_value;
+        DBus_variantAttributeValue attributeValue;
+
         return_value._1 = m_attribute.id;
         return_value._2 = m_attribute.type;
-        return_value._3 = createVariantString(m_attribute.value);
+        attributeValue.set(m_attribute.value);
+        return_value._3 = attributeValue.getDBus();
         return(return_value);
     }
 
@@ -783,7 +1117,7 @@ private:
     poiAttribute_t m_attribute;
 };
 
-class DBus_attributeDetails : DBus_poiAttribute //(uuivib) -->in this implementation, the variant data is string
+class DBus_attributeDetails : DBus_poiAttribute //(uui(yv)ib)
 {
 public:
     struct attributeDetails_t
@@ -794,10 +1128,13 @@ public:
         bool mandatory; //true if the attribute is mandatory for the search and false for optional
     };
 
-    typedef ::DBus::Struct< uint32_t, uint32_t, int32_t, ::DBus::Variant, int32_t, bool > DBus_attributeDetails_t;
+    typedef ::DBus::Struct< uint32_t, uint32_t, int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant >, int32_t, bool > DBus_attributeDetails_t;
 
 
     DBus_attributeDetails(){
+        DBus_poiAttribute attribute;
+
+        m_attributeDetails.attribute = attribute.get();
         m_attributeDetails.categoryId = 0;
         m_attributeDetails.oper = 0;
         m_attributeDetails.mandatory = true;
@@ -950,7 +1287,7 @@ private:
     poiDetails_t m_poiDetails;
 };
 
-class DBus_searchResult : DBus_dataFormatConverter //(uuqa(uiv)) -->in this implementation, the variant data depends on the value of 'type'
+class DBus_searchResult : DBus_dataFormatConverter //(uuqa(ui(yv)))
 {
 public:
     struct searchResult_t
@@ -961,15 +1298,13 @@ public:
         std::vector<DBus_poiAttribute::poiAttribute_t> attributes;
     };
 
-    typedef ::DBus::Struct< uint32_t, uint32_t, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > DBus_searchResult_t;
+    typedef ::DBus::Struct< uint32_t, uint32_t, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > DBus_searchResult_t;
 
     DBus_searchResult(){
-        DBus_poiAttribute attrib;
         m_searchResult.id = 0;
         m_searchResult.distance = 0;
         m_searchResult.route_status = 0;
         m_searchResult.attributes.clear();
-        m_searchResult.attributes.push_back(attrib.get());
     }
 
     ~DBus_searchResult(){
@@ -1025,7 +1360,7 @@ private:
     searchResult_t m_searchResult;
 };
 
-class DBus_searchResultDetails : DBus_dataFormatConverter // ((us(ddi))aua(uiv)) -->in this implementation, the variant data depends on the value of 'type'
+class DBus_searchResultDetails : DBus_dataFormatConverter // ((us(ddi))aua(ui(yv)))
 {
 public:
     struct searchResultDetails_t
@@ -1035,17 +1370,15 @@ public:
         std::vector<DBus_poiAttribute::poiAttribute_t> attributes;
     };
 
-    typedef ::DBus::Struct< ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, int32_t > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > DBus_searchResultDetails_t;
+    typedef ::DBus::Struct< ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, int32_t > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > DBus_searchResultDetails_t;
 
 
     DBus_searchResultDetails(){
         DBus_poiDetails details;
-        DBus_poiAttribute attrib;
+
         m_searchResultDetails.details = details.get();
         m_searchResultDetails.categories.clear();
-        m_searchResultDetails.categories.push_back(0); //one element by default
         m_searchResultDetails.attributes.clear();
-        m_searchResultDetails.attributes.push_back(attrib.get()); //one element by default
     }
 
     ~DBus_searchResultDetails(){}
@@ -1116,10 +1449,10 @@ private:
     searchResultDetails_t m_searchResultDetails;
 };
 
-class DBus_poiCAMDetails : DBus_dataFormatConverter // (usq(ddi)qa(uiv)) -->in this implementation, the variant data depends on the value of 'type'
+class DBus_poiCAMDetails : DBus_dataFormatConverter // (usq(ddi)qa(ui(yv)))
 {
 public:
-    struct poiCAMDetails_t //no class used into this public structure
+    struct poiCAMDetails_t
     {
         poiId_t source_id;
         std::string name;
@@ -1129,10 +1462,9 @@ public:
         std::vector<DBus_poiAttribute::poiAttribute_t> attributes;
     };
 
-    typedef ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, int32_t >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > DBus_poiCAMDetails_t;
+    typedef ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, int32_t >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > DBus_poiCAMDetails_t;
 
     DBus_poiCAMDetails(){
-        DBus_poiAttribute attrib;
         DBus_geoCoordinate3D loc;
 
         m_poiCAMDetails.source_id = 0;
@@ -1141,7 +1473,6 @@ public:
         m_poiCAMDetails.location = loc.get();
         m_poiCAMDetails.distance = 0;
         m_poiCAMDetails.attributes.clear();
-        m_poiCAMDetails.attributes.push_back(attrib.get());
     }
 
     ~DBus_poiCAMDetails(){}
@@ -1209,33 +1540,36 @@ private:
     poiCAMDetails_t m_poiCAMDetails;
 };
 
-class DBus_CAMcategoryDetails : DBus_dataFormatConverter // (auvssv) -->in this implementation, the variant data is string
+class DBus_CAMcategoryDetails : DBus_dataFormatConverter // (au(yv)ss(yv))
 {
 public:
     struct CAMcategoryDetails_t
     {
         std::vector<categoryId_t> parents_id;
-        std::string icons;
+        DBus_variantIcon::variantIcon_t icons;
         std::string name;
         std::string short_desc;
-        std::string media;
+        DBus_variantMedia::variantMedia_t media;
     };
 
-    typedef ::DBus::Struct< std::vector< uint32_t >, ::DBus::Variant, std::string, std::string, ::DBus::Variant > DBus_CAMcategoryDetails_t;
+    typedef ::DBus::Struct< std::vector< uint32_t >, ::DBus::Struct< uint8_t, ::DBus::Variant >, std::string, std::string, ::DBus::Struct< uint8_t, ::DBus::Variant > > DBus_CAMcategoryDetails_t;
 
     DBus_CAMcategoryDetails(){
+        DBus_variantIcon icons;
+        DBus_variantMedia media;
+
         m_CAMcategoryDetails.parents_id.clear();
-        m_CAMcategoryDetails.parents_id.push_back(0); //one element by default
-        m_CAMcategoryDetails.icons = "";
+        m_CAMcategoryDetails.icons = icons.get();
         m_CAMcategoryDetails.name = "";
         m_CAMcategoryDetails.short_desc = "";
-        m_CAMcategoryDetails.media = "";
+        m_CAMcategoryDetails.media = media.get();
     }
 
     ~DBus_CAMcategoryDetails(){}
 
     void set(CAMcategoryDetails_t value){
         size_t index;
+
         m_CAMcategoryDetails.parents_id.clear();
         for (index=0;index<value.parents_id.size();index++)
         {
@@ -1253,29 +1587,44 @@ public:
 
     void setDBus(DBus_CAMcategoryDetails_t value){
         size_t index;
+        DBus_variantIcon icons;
+        DBus_variantMedia media;
+
         m_CAMcategoryDetails.parents_id.clear();
         for (index=0;index<value._1.size();index++)
         {
             m_CAMcategoryDetails.parents_id.push_back(value._1.at(index));
         }
-        m_CAMcategoryDetails.icons = value._2.reader().get_string();
+
+        icons.setDBus(value._2);
+        m_CAMcategoryDetails.icons = icons.get();
+
         m_CAMcategoryDetails.name = value._3;
         m_CAMcategoryDetails.short_desc = value._4;
-        m_CAMcategoryDetails.media = value._5.reader().get_string();
+
+        media.setDBus(value._5);
+        m_CAMcategoryDetails.media = media.get();
     }
 
     DBus_CAMcategoryDetails_t getDBus(){
         DBus_CAMcategoryDetails_t return_value;
         size_t index;
+        DBus_variantIcon icons;
+        DBus_variantMedia media;
+
         return_value._1.clear();
         for (index=0;index<m_CAMcategoryDetails.parents_id.size();index++)
         {
             return_value._1.push_back(m_CAMcategoryDetails.parents_id.at(index));
         }
-        return_value._2 = createVariantString(m_CAMcategoryDetails.icons);
+
+        icons.set(m_CAMcategoryDetails.icons);
+        return_value._2 = icons.getDBus();
         return_value._3 = m_CAMcategoryDetails.name;
         return_value._4 = m_CAMcategoryDetails.short_desc;
-        return_value._5 = createVariantString(m_CAMcategoryDetails.media);
+
+        media.set(m_CAMcategoryDetails.media);
+        return_value._5 = media.getDBus();
         return(return_value);
     }
 
@@ -1283,7 +1632,7 @@ private:
     CAMcategoryDetails_t m_CAMcategoryDetails;
 };
 
-class DBus_CAMcategory : DBus_dataFormatConverter // ((auvssv)a(usia(isv))a(us)) -->in this implementation, the variant data is string
+class DBus_CAMcategory : DBus_dataFormatConverter // ((au(yv)ss(yv))a(usia(is(yv)))a(us)) -->in this implementation, the variant data is string
 {
 public:
     struct CAMcategory_t //no class used into this public structure
@@ -1293,7 +1642,7 @@ public:
         std::vector<DBus_categorySortOption::categorySortOption_t> sortOptions;
     };
 
-    typedef ::DBus::Struct< ::DBus::Struct< std::vector< uint32_t >, ::DBus::Variant, std::string, std::string, ::DBus::Variant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, ::DBus::Variant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > DBus_CAMcategory_t;
+    typedef ::DBus::Struct< ::DBus::Struct< std::vector< uint32_t >, ::DBus::Struct< uint8_t, ::DBus::Variant >, std::string, std::string, ::DBus::Struct< uint8_t, ::DBus::Variant > >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > DBus_CAMcategory_t;
 
     DBus_CAMcategory(){
         DBus_CAMcategoryDetails details;
@@ -1302,9 +1651,7 @@ public:
 
         m_CAMcategory.details = details.get();
         m_CAMcategory.attributes.clear();
-        m_CAMcategory.attributes.push_back(attrib.get()); //one element by default
         m_CAMcategory.sortOptions.clear();
-        m_CAMcategory.sortOptions.push_back(sortOption.get()); //one element by default
     }
 
     ~DBus_CAMcategory(){}
@@ -1378,27 +1725,22 @@ private:
     CAMcategory_t m_CAMcategory;
 };
 
-class DBus_CAMcategoryUpdate : DBus_dataFormatConverter // (ua(usia(isv))a(us)) -->in this implementation, the variant data is string
+class DBus_CAMcategoryUpdate : DBus_dataFormatConverter // (ua(usia(is(yv)))a(us))
 {
 public:
-    struct CAMcategoryUpdate_t //no class used into this public structure
+    struct CAMcategoryUpdate_t
     {
         categoryId_t unique_id;
         std::vector<DBus_categoryAttribute::categoryAttribute_t> attributes;
         std::vector<DBus_categorySortOption::categorySortOption_t> sortOptions;
     };
 
-    typedef ::DBus::Struct< uint32_t, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, ::DBus::Variant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > DBus_CAMcategoryUpdate_t;
+    typedef ::DBus::Struct< uint32_t, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > DBus_CAMcategoryUpdate_t;
 
     DBus_CAMcategoryUpdate(){
-        DBus_categoryAttribute attrib;
-        DBus_categorySortOption sortOption;
-
         m_CAMcategoryUpdate.unique_id = 0;
         m_CAMcategoryUpdate.attributes.clear();
-        m_CAMcategoryUpdate.attributes.push_back(attrib.get()); //one element by default
         m_CAMcategoryUpdate.sortOptions.clear();
-        m_CAMcategoryUpdate.sortOptions.push_back(sortOption.get()); //one element by default
     }
 
     ~DBus_CAMcategoryUpdate(){}
@@ -1468,7 +1810,7 @@ private:
     CAMcategoryUpdate_t m_CAMcategoryUpdate;
 };
 
-class DBus_PoiAddedDetails : DBus_dataFormatConverter // (s(ddi)a(uiv)) -->in this implementation, the variant data depends on the value of 'type'
+class DBus_PoiAddedDetails : DBus_dataFormatConverter // (s(ddi)a(ui(yv)))
 {
 public:
     struct PoiAddedDetails_t
@@ -1478,17 +1820,15 @@ public:
         std::vector<DBus_poiAttribute::poiAttribute_t> attributes;
     };
 
-    typedef ::DBus::Struct< std::string, ::DBus::Struct< double, double, int32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > DBus_PoiAddedDetails_t;
+    typedef ::DBus::Struct< std::string, ::DBus::Struct< double, double, int32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > DBus_PoiAddedDetails_t;
 
 
     DBus_PoiAddedDetails(){
         DBus_geoCoordinate3D loc;
-        DBus_poiAttribute attrib;
 
         m_PoiAddedDetails.name = "";
         m_PoiAddedDetails.location = loc.get();
         m_PoiAddedDetails.attributes.clear();
-        m_PoiAddedDetails.attributes.push_back(attrib.get()); //one element by default
     }
 
     ~DBus_PoiAddedDetails(){}

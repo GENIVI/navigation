@@ -1277,7 +1277,7 @@ void poiSearchServer::RequestResultList(const handleId_t& poiSearchHandle, const
     DBus_searchResult el;
     DBus_poiCAMDetails::poiCAMDetails_t camElement; //id name category location distance attributes[]
     DBus_poiCAMDetails camEl;
-    DBus_attribute::attribute_t attribute; //name type value
+    DBus_poiAttribute::poiAttribute_t attribute; //name type value
     uint16_t index,size,sub_index;
     size_t attribute_index;
     poi_t poi;
@@ -1496,7 +1496,7 @@ std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > poiSearchSer
     std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > return_value;
     DBus_searchResultDetails searchResDet;
     DBus_searchResultDetails::searchResultDetails_t searchResDetails;
-    DBus_attribute::attribute_t attribute;
+    DBus_poiAttribute::poiAttribute_t attribute;
     uint16_t indexPOIList,indexIDList;
     size_t attribute_index;
     poi_t poi;

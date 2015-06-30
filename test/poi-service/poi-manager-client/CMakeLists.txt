@@ -16,64 +16,65 @@
 # @licence end@
 ###########################################################################
 project(poi-manager-client)
-set(PARENT_API poiservice)
-set(ROOT_API navigation)
 set(COMMON_API_VERSION CommonAPI-2.1)
 
 set(CMAKE_VERBOSE_MAKEFILE off)
 cmake_minimum_required(VERSION 2.8)
-set(CMAKE_CXX_FLAGS "-Wall -O0 -std=c++0x")
 
-# DBus Path
-if (DBUS_LIB_PATH)
-  message(STATUS "DBUS_LIB_PATH = " ${DBUS_LIB_PATH})
-else()
-  message(FATAL_ERROR "Please specify the path to your patched DBus library using -D DBUS_LIB_PATH=yourPath")
-endif()
+message(STATUS "poi-manager-client")
 
-# Packages
 find_package(PkgConfig REQUIRED)
-pkg_check_modules(DBUS "dbus-1 >= 1.4")
-pkg_check_modules(COMMONAPI "CommonAPI >= 2.1")
-pkg_check_modules(COMMONAPI_DBUS "CommonAPI-DBus >= 2.1")
-pkg_check_modules(SQLITE3 REQUIRED sqlite3)
-pkg_check_modules(GLIBMM glibmm-2.4)
 
-# Source Files
-set(PRJ_SRC_PATH .)
-set(PRJ_SRC_GEN_PATH ${COMMON_API_GENERATED_INCLUDE_DIR}/org/genivi)
+pkg_check_modules(DBUS_CPP dbus-c++-1)
+pkg_check_modules(GLIB REQUIRED glib-2.0)
+pkg_check_modules(GLIBMM glibmm-2.4)
+pkg_check_modules(GOBJECT gobject-2.0)
+pkg_check_modules(DBUS dbus-1)
+pkg_check_modules(DBUS_CPP_GLIB dbus-c++-glib-1)
+pkg_check_modules(GTK gtk+-3.0)
+
 FILE(GLOB PRJ_LOCAL_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
-FILE(GLOB PRJ_STUB_GEN_SRCS ${PRJ_SRC_GEN_PATH}/${ROOT_API}/${PARENT_API}/*Stub*.cpp)
-FILE(GLOB PRJ_STUB_GEN_TYPES ${PRJ_SRC_GEN_PATH}/${ROOT_API}/${PARENT_API}/*Types*.cpp ${PRJ_SRC_GEN_PATH}/${ROOT_API}/*Types*.cpp)
-FILE(GLOB PRJ_STUB_IMPL_SRCS ${PRJ_SRC_PATH}/*stub*.cpp)
-set(PRJ_SRCS ${PRJ_LOCAL_SRCS} ${PRJ_STUB_GEN_SRCS} ${PRJ_STUB_GEN_TYPES} ${PRJ_STUB_IMPL_SRCS})
+set(PRJ_SRCS ${PRJ_LOCAL_SRCS})
 
 include_directories(
-    ${PRJ_SRC_PATH}
-    ${COMMON_API_GENERATED_INCLUDE_DIR}
-    ${DBUS_INCLUDE_DIRS}
-    ${COMMONAPI_INCLUDEDIR}/${COMMON_API_VERSION}
-    ${COMMONAPI_DBUS_INCLUDEDIR}
-    ${GLIBMM_INCLUDE_DIRS}
+    ${CMAKE_CURRENT_SOURCE_DIR}
+    ${COMMON_DIR}
+    ${COMMON_DIR_POI_SERVER}
+    ${DBUS_GENERATED_INCLUDE_DIR}/poi-service
+    ${DBUS_CPP_INCLUDE_DIRS}
+    ${GLIB_INCLUDE_DIRS}
     ${SQLITE3_INCLUDE_DIRS}
+    ${GLIBMM_INCLUDE_DIRS}
+    ${GOBJECT_INCLUDE_DIRS}
+    ${DBUS_INCLUDE_DIRS}
+    ${DBUS_CPP_GLIB_INCLUDE_DIRS}
+    ${GTK_INCLUDE_DIRS}
 )
 
 link_directories(
-    ${DBUS_LIB_PATH}
-    ${COMMONAPI_LIBDIR}
-    ${COMMONAPI_DBUS_LIBDIR}
-    ${GLIBMM_LIBRARY_DIRS}
+    ${DBUS_CPP_LIBRARY_DIRS}
+    ${GLIB_LIBRARY_DIRS}
     ${SQLITE3_LIBRARY_DIRS}
+    ${GLIBMM_LIBRARY_DIRS}
+    ${GOBJECT_LIBRARY_DIRS}
+    ${DBUS_LIBRARY_DIRS}
+    ${DBUS_CPP_GLIB_DIRS}
+    ${GTK_DIRS}
+)
+
+add_executable(${PROJECT_NAME}
+    ${PRJ_SRCS}
 )
 
 set(LIBRARIES
-    ${COMMONAPI_LIBRARIES}
-    ${COMMONAPI_DBUS_LIBRARIES}
-    ${GLIBMM_LIBRARIES}
+    ${DBUS_CPP_LIBRARIES}
+    ${GLIB_LIBRARIES}
     ${SQLITE3_LIBRARIES}
+    ${GLIBMM_LIBRARIES}
+    ${GOBJECT_LIBRARIES}
+    ${DBUS_LIBRARIES}
+    ${DBUS_CPP_GLIB_LIBRARIES}
+    ${GTK_LIBRARIES}
 )
 
-# Build service
-add_executable(${PROJECT_NAME} ${PRJ_SRCS})
 target_link_libraries(${PROJECT_NAME} ${LIBRARIES})
-

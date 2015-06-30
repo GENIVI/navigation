@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="introspect.xsl"?>
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="introspect.xsd" name="org.genivi.navigation.poiservice">
+  <interface name="org.genivi.poiservice.POIContentManager">
+    <version>1.0</version>
+    <method name="getVersion">
+      <doc>
+        <line>getVersion = This method returns the API version implemented by the content access module.</line>
+      </doc>
+      <arg direction="out" name="version" type="(qqqs)">
+        <doc>
+          <line>version (of type Version) = .</line>
+          <line>Version struct[versionMajor, versionMinor, versionMicro, date] = version.</line>
+          <line>Version.versionMajor ('q') = when the major changes, then backward compatibility with previous releases is not granted.</line>
+          <line>Version.versionMinor ('q') = when the minor changes, then backward compatibility with previous releases is granted, but something changed in the implementation of the API (e.g. new methods may have been added).</line>
+          <line>Version.versionMicro ('q') = when the micro changes, then backward compatibility with previous releases is granted (bug fixes or documentation modifications).</line>
+          <line>Version.date ('s') = release date (e.g. 21-06-2011).</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="setLocale">
+      <doc>
+        <line>setLocale = Set the current language set for the search by poi provider module.</line>
+        <line>The language defines the poi and categories name and details language. If the language is not supported, the default details will be returned in the native language.</line>
+      </doc>
+      <arg direction="in" name="languageCode" type="s">
+        <doc>
+          <line>languageCode = the language to be used. ISO 639‐3 language code (lower case)</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="countryCode" type="s">
+        <doc>
+          <line>countryCode = the country specific variant for the language to be used. ISO 3166‐1 alpha 3 country code (upper case)</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="scriptCode" type="s">
+        <doc>
+          <line>scriptCode = the script specific variant for the language to be used. ISO 15924 alpha 4 script code (upper case)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="getLocale">
+      <doc>
+        <line>getLocale = Get the current language set for the search by poi provider module.</line>
+      </doc>
+      <arg direction="out" name="languageCode" type="s">
+        <doc>
+          <line>languageCode = the language used. ISO 639‐3 language code (lower case)</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="countryCode" type="s">
+        <doc>
+          <line>countryCode = the country specific variant for the language used. ISO 3166‐1 alpha 3 country code (upper case)</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="scriptCode" type="s">
+        <doc>
+          <line>scriptCode = the script specific variant for the language used. ISO 15924 alpha 4 script code (upper case)</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="getSupportedLocales">
+      <doc>
+        <line>getSupportedLocales = Get the supported set of locales for the search by poi provider module.</line>
+      </doc>
+      <arg direction="out" name="localeList" type="a(sss)">
+        <doc>
+          <line>localeList = array[struct(languageCode,countryCode,scriptCode)]</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="getAvailableCategories">
+      <doc>
+        <line>getAvailableCategories = This method retrieves the list od POI categories available (pre-defined and custom).</line>
+      </doc>
+      <arg direction="out" name="categories" type="a(usb)">
+        <doc>
+          <line>categories (of type CategoryAndName) = List of categories (id, name and top_level).</line>
+          <line>CategoryAndName struct[uniqueId, name, topLevel] = pair of category and name</line>
+          <line>CategoryAndName.uniqueId ('?') = Category unique id.</line>
+          <line>CategoryAndName.name ('s') = name.</line>
+          <line>CategoryAndName.topLevel ('b') = true if the category is a pre-defined one (top level), false for customized categories created by plug-in.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="getRootCategory">
+      <doc>
+        <line>getRootCategory = Get the root category id. That would be ALL_CATEGORIES.</line>
+      </doc>
+      <arg direction="out" name="category" type="u">
+        <doc>
+          <line>category (of type CategoryID) = The root category is a top level one by design.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="getChildrenCategories">
+      <doc>
+        <line>getChildrenCategories = Get the children categories id and type (top level) from the a parent unique id.</line>
+      </doc>
+      <arg direction="in" name="category" type="u">
+        <doc>
+          <line>category (of type CategoryID) = unique category id.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="categories" type="a(ub)">
+        <doc>
+          <line>categories (of type CategoryAndLevel) = List of categories (id and top_level).</line>
+          <line>CategoryAndLevel struct[uniqueId, topLevel] = Pair of catgory and description of level</line>
+          <line>CategoryAndLevel.uniqueId ('?') = Category unique id.</line>
+          <line>CategoryAndLevel.topLevel ('b') = true if the category is a pre-defined one (top level), false for customized categories created by plug-in.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="getParentCategories">
+      <doc>
+        <line>getParentCategories = Get the parent categories id and type (top level) from the a unique id.</line>
+      </doc>
+      <arg direction="in" name="category" type="u">
+        <doc>
+          <line>category (of type CategoryID) = unique category id.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="categories" type="a(ub)">
+        <doc>
+          <line>categories (of type CategoryAndLevel) = List of categories (id and top_level).</line>
+          <line>CategoryAndLevel struct[uniqueId, topLevel] = Pair of catgory and description of level</line>
+          <line>CategoryAndLevel.uniqueId ('?') = Category unique id.</line>
+          <line>CategoryAndLevel.topLevel ('b') = true if the category is a pre-defined one (top level), false for customized categories created by plug-in.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="createCategory">
+      <doc>
+        <line>createCategory = Creates a category by name and return an unique id.</line>
+      </doc>
+      <arg direction="in" name="category" type="((au(yv)ss(yv))a(usia(is(yv)))a(us))">
+        <doc>
+          <line>category (of type CAMCategory) = List of details for the category to create.</line>
+          <line>CAMCategory struct[details, attributes, sortOptions] = </line>
+          <line>CAMCategory.details ('?') = struct(list of parents_id, icons, name, short_desc, media).</line>
+          <line>CAMCategory.attributes ('?') = array[struct(name, type, array[struct(operator_id, operator_name)])].</line>
+          <line>CAMCategory.sortOptions ('?') = array[struct(id, name)].</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="unique_id" type="u">
+        <doc>
+          <line>unique_id (of type CategoryID) = Category unique id.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="removeCategories">
+      <doc>
+        <line>removeCategories = Removes a list of categories. Because of required time to remove it from the database, a signal is emitted when the deletion is done.</line>
+      </doc>
+      <arg direction="in" name="categories" type="au">
+        <doc>
+          <line>categories (of type CategoryID) = List of categories to be removed.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="addPOIs">
+      <doc>
+        <line>addPOIs = Adds a list of POIs to a category. Because of required time to add it to the database, a signal is emitted when the update is done, that gives the id of the elements added</line>
+      </doc>
+      <arg direction="in" name="unique_id" type="u">
+        <doc>
+          <line>unique_id (of type CategoryID) = Category unique id.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="poiList" type="a(s(ddi)a(ui(yv)))">
+        <doc>
+          <line>poiList (of type PoiAddedDetails) = List of POIs and all their content. Note that there's no id sent, because it's up to the component to give it</line>
+          <line>PoiAddedDetails struct[name, location, attributes] = </line>
+          <line>PoiAddedDetails.name ('s') = POI name</line>
+          <line>PoiAddedDetails.location ('?') = POI location.</line>
+          <line>PoiAddedDetails.attributes ('?') = array[struct(id,type,value)].</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="removePOIs">
+      <doc>
+        <line>removePOIs = Removes a list of POIs to a category. Because of required time to remove it from the database, a signal is emitted when the update is done.</line>
+      </doc>
+      <arg direction="in" name="ids" type="au">
+        <doc>
+          <line>ids (of type POI_ID) = List of unique ids of POIs to remove.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="poiSearchStarted">
+      <doc>
+        <line>poiSearchStarted = This method is sent by the POI service component to inform all the CAM that a new POI search was started.</line>
+        <line>It provides all the relevant search parameters. Of course the CAM will only be aware of the search if it registers one of the search categories.</line>
+      </doc>
+      <arg direction="in" name="poiSearchHandle" type="u">
+        <doc>
+          <line>poiSearchHandle = poi search unique handle. It must be used by the CAM to send the list of results to the component.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="maxSize" type="q">
+        <doc>
+          <line>maxSize = max size of the results list.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="location" type="(ddi)">
+        <doc>
+          <line>location = struct(lat,lon,alt).</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="poiCategories" type="a(uu)">
+        <doc>
+          <line>poiCategories (of type CategoryAndRadius) = array[struct(id,radius)].</line>
+          <line>CategoryAndRadius struct[id, radius] = </line>
+          <line>CategoryAndRadius.id ('?') = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...). Note: A POI category is a unique ID. It could be a predefined category or a custom one defined by a POI plug-in</line>
+          <line>CategoryAndRadius.radius ('u') = activation or search radius around the position (in 10 meters) for the category. If value is 0 (zero), the default radius (defined for a category) is applied.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="poiAttributes" type="a(uui(yv)ib)">
+        <doc>
+          <line>poiAttributes (of type AttributeDetails) = array[struct(name, poiCategory, type, value, operator, mandatory)].</line>
+          <line>AttributeDetails struct[id, categoryId, type, value, oper, mandatory] = used in setAttrbutes and CAM startPOISearch</line>
+          <line>AttributeDetails.id ('?') = id of attribute .</line>
+          <line>AttributeDetails.categoryId ('?') = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...). Note: A POI category is a unique ID. It could be a predefined category or a custom one defined by a POI plug-in</line>
+          <line>AttributeDetails.type ('?') = enum(INVALID,STRING,INTEGER,COORDINATES ...).</line>
+          <line>AttributeDetails.value ('?') = value or partial value. The value depends on the attribute specifications and type.</line>
+          <line>AttributeDetails.oper ('?') = enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....).</line>
+          <line>AttributeDetails.mandatory ('b') = true if the attribute is mandatory for the search and false for optional.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="inputString" type="s">
+        <doc>
+          <line>inputString = contains the name of the poi that is searched. It could be a partial name or an empty string.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="sortOption" type="q">
+        <doc>
+          <line>sortOption = enum(SORT_DEFAULT,SORT_BY_DISTANCE,SORT_BY_TIME,ATTRIBUTE_CUSTOM, ... )</line>
+          <line>If more than one category was defined for this search, the sort criteria should be compliant with all categories.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="poiSearchCanceled">
+      <doc>
+        <line>poiSearchCanceled = This method cancels the search for the current id.</line>
+      </doc>
+      <arg direction="in" name="poiSearchHandle" type="u">
+        <doc>
+          <line>poiSearchHandle = poi search unique handle.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="resultListRequested">
+      <doc>
+        <line>resultListRequested = This method provides the poi results list found by the CAM.</line>
+        <line>As the POI unique id is managed by the POI component, the CAM only provides the POI name, the category and coordinates as well as all the relevant detailed information.</line>
+      </doc>
+      <arg direction="in" name="camId" type="y">
+        <doc>
+          <line>camId = Content access module unique id as known by the POI service component.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="poiSearchHandle" type="u">
+        <doc>
+          <line>poiSearchHandle = poi search unique handle.</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="attributes" type="au">
+        <doc>
+          <line>attributes = List of attributes id to retrieve. This is optional and the list could be empty.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="statusValue" type="i">
+        <doc>
+          <line>statusValue (of type SearchStatusState) = enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... ).</line>
+          <line>enum[INVALID (null), NOT_STARTED (null), SEARCHING (null), FINISHED (null)]</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="resultListSize" type="q">
+        <doc>
+          <line>resultListSize = Number of items of the results list.</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="resultList" type="a(usu(ddi)qa(ui(yv)))">
+        <doc>
+          <line>resultList (of type PoiCAMDetails) = array[struct(source_id, name, category, location, distance, attributes)].</line>
+          <line>PoiCAMDetails struct[sourceId, name, category, location, distance, attributes] = </line>
+          <line>PoiCAMDetails.sourceId ('?') = POI unique id as known by the content access module. This id will be used by POI service to request POI details.</line>
+          <line>PoiCAMDetails.name ('s') = POI name.</line>
+          <line>PoiCAMDetails.category ('?') = POI category unique id.</line>
+          <line>PoiCAMDetails.location ('?') = POI location.</line>
+          <line>PoiCAMDetails.distance ('q') = distance in meters to poi from center of the search.</line>
+          <line>PoiCAMDetails.attributes ('?') = List of attributes requested. It could be empty.</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="poiDetailsRequested">
+      <doc>
+        <line>poiDetailsRequested = This method retrieves the details associated to one or more POI.</line>
+        <line>It contains the name, the parent categories, the list of attributes, the icons, ... .</line>
+      </doc>
+      <arg direction="in" name="source_id" type="au">
+        <doc>
+          <line>source_id (of type POI_ID) = array[unique_poi_id].</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="results" type="a((us(ddi))aua(ui(yv)))">
+        <doc>
+          <line>results (of type SearchResultDetails) = array[(details, categories, attributes)] .</line>
+          <line>SearchResultDetails struct[details, categories, attributes] = </line>
+          <line>SearchResultDetails.details ('?') = struct(id,name,latitude,longitude,altitude).</line>
+          <line>SearchResultDetails.categories ('?') = array[unique_id].</line>
+          <line>SearchResultDetails.attributes ('?') = array[struct(name,type,value)].</line>
+        </doc>
+      </arg>
+    </method>
+    <signal name="ConfigurationChanged">
+      <doc>
+        <line>ConfigurationChanged = guidanceStatusChanged = This signal is sent to the clients when one or more configuration settings changes.</line>
+      </doc>
+      <arg direction="out" name="changedSettings" type="aq">
+        <doc>
+          <line>changedSettings = changedSettings array[setting].</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="CategoriesRemoved">
+      <doc>
+        <line>CategoriesRemoved = CategoriesRemoved = This signal is emitted when a list of categories and associated content has been removed from the database.</line>
+      </doc>
+      <arg direction="out" name="categories" type="au">
+        <doc>
+          <line>categories (of type CategoryID) = List of categories removed.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="POIAdded">
+      <doc>
+        <line>POIAdded = POIAdded = This signal is emitted when a list of POIs and associated content has been added to the database. It returns the ids.</line>
+      </doc>
+      <arg direction="out" name="pois" type="au">
+        <doc>
+          <line>pois (of type POI_ID) = List of unique ids of POIs added. The order is the same as the order in the AddPOIs method.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="POIRemoved">
+      <doc>
+        <line>POIRemoved = POIRemoved = This signal is emitted when a list of POIs and associated content has been removed from the database.</line>
+      </doc>
+      <arg direction="out" name="pois" type="au">
+        <doc>
+          <line>pois (of type POI_ID) = List of unique ids of POIs removed.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+    </signal>
+  </interface>
+</node>

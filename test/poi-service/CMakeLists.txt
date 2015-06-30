@@ -17,6 +17,7 @@
 ###########################################################################
 project(poi-service)
 cmake_minimum_required(VERSION 2.8)
+
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
 message(STATUS "poi-service")
@@ -35,11 +36,11 @@ message(STATUS "WITH_DEBUG = ${WITH_DEBUG}")
 set(API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api")
 set(DBUS_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/dbus-include")
 set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/api") # this one is for positioning
-set(COMMON_API_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api/franca/navigation/src-gen")
 set(POI_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../src")
+
 set(COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/poi-common")
 set(COMMON_DIR_POI_SERVER "${POI_SRC_DIR}/poi-service/poi-common")
-set(DBUS_LIB_PATH "/usr/local/lib")
+
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
@@ -60,5 +61,7 @@ add_subdirectory(poi-client)
 add_subdirectory(poi-contentaccess-module)
 
 if (WITH_FRANCA_INTERFACE)
-   add_subdirectory(poi-manager-client)
+    set(COMMON_API_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api/franca/navigation/src-gen")
+    set(DBUS_LIB_PATH "/usr/local/lib")
+    add_subdirectory(poi-manager-client)
 endif()

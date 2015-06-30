@@ -3,18 +3,15 @@
 *-Debug/
 *-release/
 *-Release/
-bin/
-lib/
-positioning/
-build/
+bin
+lib
+build
+
 
 #files
 *~
-*.pro.user
+*.pro.user*
 *.txt.user*
 /.project
 
-CMakeFiles/
-CMakeCache.txt
-cmake_install.cmake
 

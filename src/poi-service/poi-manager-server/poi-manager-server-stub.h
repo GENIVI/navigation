@@ -36,9 +36,7 @@
 #include "poi-common-data-model.h"
 
 using namespace std;
-using namespace org;
-using namespace genivi;
-using namespace navigation;
+using namespace org::genivi::navigation;
 using namespace poiservice;
 
 class sqlRequest
@@ -57,15 +55,6 @@ public:
         DATABASE_ACCESS_ERROR,
         OK
     } SQL_REQUEST_ERRORS;
-
-    #define ICON_WIDTH 32
-    #define ICON_HEIGHT 37
-    #define ICON_URL "../resource/file"
-    #define ICON_FORMAT "png"
-    #define POI_PROVIDER "OpenStreetMap"
-    #define POI_NAME "mySweetHome"
-    #define SEARCH_STRING "Sweet"
-    #define MEDIASET 1
 
     typedef uint32_t recordId_t;
     typedef uint32_t iconId_t;
@@ -192,7 +181,7 @@ private:
 };
 
 
-class PoiManagerServerStub: public org::genivi::navigation::poiservice::POIContentManagerStubDefault {
+class PoiManagerServerStub: public POIContentManagerStubDefault {
 
 public:
     PoiManagerServerStub();
