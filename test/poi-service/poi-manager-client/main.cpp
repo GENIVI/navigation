@@ -95,7 +95,7 @@ private:
     GtkWidget *mp_popupWindow;
     DBus_CAMcategory m_category;
     categoryId_t m_category_id;
-    poiId_t m_poi_id;
+    std::vector<poiId_t> m_poi_ids;
     DBus_PoiAddedDetails m_poi;
     DBus_geoCoordinate3D m_left_bottom_location,m_right_top_location;
     std::string m_strTest;
@@ -150,6 +150,8 @@ contentManager::contentManager(DBus::Connection &connection)
     poi_attribute.value.content.stringValue = v;
     poi.attributes.push_back(poi_attribute);
 
+    m_poi_ids.clear(); //list empty for the moment
+
     m_poi.set(poi);
 
     // init of data test for location
@@ -163,7 +165,7 @@ contentManager::contentManager(DBus::Connection &connection)
     m_left_bottom_location.set(left_bottom_location);
     m_right_top_location.set(right_top_location);
 
-    // initi of the data test for search string
+    // init of the data test for search string
     m_strTest = SEARCH_STRING;
 
 }
@@ -199,10 +201,12 @@ void contentManager::POIAdded(const std::vector< uint32_t >& pois)
 {
     size_t index;
 
+    m_poi_ids.clear();
     cout << "POI Added"  << endl;
     for(index=0;index<pois.size();index++)
     {
         cout << "Id: " << pois.at(index)  << endl;
+        m_poi_ids.push_back(pois.at(index));
     }
 }
 
@@ -239,12 +243,14 @@ void contentManager::testRemoveCategory()
 
 void contentManager::testCreatePOI()
 {
-
+    std::vector<DBus_PoiAddedDetails::DBus_PoiAddedDetails_t> poiList;
+    poiList.push_back(m_poi.getDBus());
+    addPOIs(m_category_id,poiList);
 }
 
 void contentManager::testRemovePOI()
 {
-
+    removePOIs(m_poi_ids);
 }
 
 void contentManager::testSearch()
@@ -295,6 +301,24 @@ static void onDeleteCategory( GtkWidget *widget,
     clientContentManager->testRemoveCategory();
 }
 
+static void onCreatePoi( GtkWidget *widget,
+                      contentManager *clientContentManager )
+{
+    clientContentManager->testCreatePOI();
+}
+
+static void onDeletePoi( GtkWidget *widget,
+                      contentManager *clientContentManager )
+{
+    clientContentManager->testRemovePOI();
+}
+
+static void onSearch( GtkWidget *widget,
+                      contentManager *clientContentManager )
+{
+    clientContentManager->testSearch();
+}
+
 void populateWindow(GtkWidget *window,contentManager *clientContentManager)
 {
     GtkWidget *button;
@@ -326,6 +350,35 @@ void populateWindow(GtkWidget *window,contentManager *clientContentManager)
               G_CALLBACK (onDeleteCategory), clientContentManager);
 
     gtk_box_pack_start(GTK_BOX (box), button, TRUE, TRUE, 0);
+
+    gtk_widget_show (button);
+
+    gtk_widget_show (box);
+
+    button = gtk_button_new_with_label ("Create POI");
+
+    g_signal_connect (button, "clicked",
+              G_CALLBACK (onCreatePoi), clientContentManager);
+
+    gtk_box_pack_start (GTK_BOX(box), button, TRUE, TRUE, 0);
+
+    gtk_widget_show (button);
+
+    button = gtk_button_new_with_label ("Delete POI");
+
+    g_signal_connect (button, "clicked",
+              G_CALLBACK (onDeletePoi), clientContentManager);
+
+    gtk_box_pack_start(GTK_BOX (box), button, TRUE, TRUE, 0);
+
+    gtk_widget_show (button);
+
+    button = gtk_button_new_with_label ("Search");
+
+    g_signal_connect (button, "clicked",
+              G_CALLBACK (onSearch), clientContentManager);
+
+    gtk_box_pack_start (GTK_BOX(box), button, TRUE, TRUE, 0);
 
     gtk_widget_show (button);
 

@@ -108,3 +108,24 @@ How To Run
 
 ./run 
 
+===============================
+How To for poi-common-manager-client
+===============================
+First you need to build the server
+cd ../../src/poi-service
+cd build
+cmake -DWITH_FRANCA_INTERFACE=ON ../
+make
+cd ..
+Launch the server
+cp ./resource/poi-database-managed.db ~/Desktop
+./bin/poi-manager-server -f ~/Desktop/poi-database-managed.db
+Now build the client
+cd ../../test/poi-service
+cd build
+cmake -DWITH_FRANCA_INTERFACE=ON ../
+make
+cd ../
+Launch the client
+./poi-manager-client -t
+
