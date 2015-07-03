@@ -189,6 +189,7 @@ public:
     void set(variantIcon_t value){
         size_t index;
 
+        m_variantIcon.index = value.index;
         switch (value.index) {
         case 0:
             m_variantIcon.content.id.clear();
@@ -199,6 +200,7 @@ public:
             break;
         case 1:
             m_variantIcon.content.url = value.content.url;
+            break;
         default:
             break;
         }
@@ -225,6 +227,7 @@ public:
             break;
         case 1:
             m_variantIcon.content.url = value._2.reader().get_string();
+            break;
         default:
             break;
         }
@@ -246,6 +249,7 @@ public:
             break;
         case 1:
             return_value._2 = createVariantString(m_variantIcon.content.url);
+            break;
         default:
             break;
         }
@@ -290,6 +294,7 @@ public:
     void set(variantMedia_t value){
         size_t index;
 
+        m_variantMedia.index = value.index;
         switch (value.index) {
         case 0:
             m_variantMedia.content.id.clear();
@@ -300,6 +305,7 @@ public:
             break;
         case 1:
             m_variantMedia.content.url = value.content.url;
+            break;
         default:
             break;
         }
@@ -326,6 +332,7 @@ public:
             break;
         case 1:
             m_variantMedia.content.url = value._2.reader().get_string();
+            break;
         default:
             break;
         }
@@ -347,6 +354,7 @@ public:
             break;
         case 1:
             return_value._2 = createVariantString(m_variantMedia.content.url);
+            break;
         default:
             break;
         }
@@ -383,7 +391,7 @@ public:
     typedef ::DBus::Struct< uint8_t, ::DBus::Variant > DBus_variantAttributeValue_t;
 
     DBus_variantAttributeValue(){
-        m_variantAttributeValue.index = AS_INT32;
+        m_variantAttributeValue.index = AS_STRING;
         m_variantAttributeValue.content.intValue = 0;
         m_variantAttributeValue.content.stringValue = "";
         m_variantAttributeValue.content.boolValue = false;
@@ -393,14 +401,17 @@ public:
 
     void set(variantAttributeValue_t value){
 
+        m_variantAttributeValue.index = value.index;
         switch (value.index) {
         case 0:
             m_variantAttributeValue.content.intValue = value.content.intValue;
             break;
         case 1:
             m_variantAttributeValue.content.stringValue = value.content.stringValue;
+            break;
         case 2:
             m_variantAttributeValue.content.boolValue = value.content.boolValue;
+            break;
         default:
             break;
         }
@@ -418,8 +429,10 @@ public:
             break;
         case 1:
             m_variantAttributeValue.content.stringValue = value._2.reader().get_string();
+            break;
         case 2:
             m_variantAttributeValue.content.boolValue = value._2.reader().get_bool();
+            break;
         default:
             break;
         }
@@ -436,8 +449,10 @@ public:
             break;
         case 1:
             return_value._2 = createVariantString(m_variantAttributeValue.content.stringValue);
+            break;
         case 2:
             return_value._2 = createVariantBool(m_variantAttributeValue.content.boolValue);
+            break;
         default:
             break;
         }
@@ -1084,9 +1099,12 @@ public:
     ~DBus_poiAttribute(){}
 
     void set(poiAttribute_t value){
+        DBus_variantAttributeValue attributeValue;
+
         m_attribute.id = value.id;
         m_attribute.type = value.type;
-        m_attribute.value = value.value;
+        attributeValue.set(value.value);
+        m_attribute.value = attributeValue.get();
     }
 
     poiAttribute_t get(){

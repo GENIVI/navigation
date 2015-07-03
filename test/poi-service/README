@@ -109,7 +109,7 @@ How To Run
 ./run 
 
 ===============================
-How To for poi-common-manager-client
+How To for poi-common-manager-client (experimental)
 ===============================
 First you need to build the server
 cd ../../src/poi-service
@@ -118,8 +118,10 @@ cmake -DWITH_FRANCA_INTERFACE=ON ../
 make
 cd ..
 Launch the server
-cp ./resource/poi-database-managed.db ~/Desktop
-./bin/poi-manager-server -f ~/Desktop/poi-database-managed.db
+cp ./resource/poi-database-managed.db ./bin
+./bin/poi-manager-server -f ./bin/poi-database-managed.db
+poi manager server started
+
 Now build the client
 cd ../../test/poi-service
 cd build
@@ -128,4 +130,11 @@ make
 cd ../
 Launch the client
 ./poi-manager-client -t
+poi manager client started
+For the time being, Create category and Delete category worked:
+
+Category Created
+Id: 8
+Categories Removed
+Id: 8
 

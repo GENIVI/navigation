@@ -106,53 +106,61 @@ static contentManager *clientContentManager;
 contentManager::contentManager(DBus::Connection &connection)
     : DBus::ObjectProxy(connection, contentManager_OBJECT_PATH, contentManager_SERVICE_NAME)
 {
-    DBus_poiAttribute::poiAttribute_t poi_attribute;
-    DBus_categoryAttribute::categoryAttribute_t category_attribute;   
-    DBus_CAMcategory::CAMcategory_t category;
-    DBus_PoiAddedDetails::PoiAddedDetails_t poi;
+    DBus_poiAttribute c_DBus_poiAttribute;
+    DBus_poiAttribute::poiAttribute_t poiAttribute;
+    DBus_categoryAttribute c_DBus_categoryAttribute;
+    DBus_categoryAttribute::categoryAttribute_t categoryAttribute;
+
+    DBus_CAMcategory::CAMcategory_t CAMcategory;
+    DBus_PoiAddedDetails::PoiAddedDetails_t PoiAddedDetails;
+
     DBus_geoCoordinate3D::geoCoordinate3D_t left_bottom_location,right_top_location;
 
     // init of data test for category
-    category = m_category.get();
-    category.details.name = "recreation";               //new category
+    CAMcategory = m_category.get();
 
-    category_attribute.id = ATTRIBUTE_PHONE;
-    category_attribute.name = "phone";                  //existing attribute
-    category_attribute.type = GENIVI_POISERVICE_STRING;
-    category.attributes.push_back(category_attribute);
+    CAMcategory.details.name = "recreation";               //new category
 
-    category_attribute.id = ATTRIBUTE_CREDIT_CARD;      //new attribute id
-    category_attribute.name = "credit card";            //new attribute
-    category_attribute.type = GENIVI_POISERVICE_STRING;
-    category.attributes.push_back(category_attribute);
+    categoryAttribute = c_DBus_categoryAttribute.get();
+    categoryAttribute.id = ATTRIBUTE_PHONE;
+    categoryAttribute.name = "phone";                  //existing attribute
+    categoryAttribute.type = GENIVI_POISERVICE_STRING;
+    CAMcategory.attributes.push_back(categoryAttribute);
 
-    category.details.parents_id.push_back(0);
+    categoryAttribute.id = ATTRIBUTE_CREDIT_CARD;      //new attribute id
+    categoryAttribute.name = "credit card";            //new attribute
+    categoryAttribute.type = GENIVI_POISERVICE_STRING;
+    CAMcategory.attributes.push_back(categoryAttribute);
 
-    m_category.set(category);
+    CAMcategory.details.parents_id.push_back(0);
+
+    m_category.set(CAMcategory);
 
     // init of data test for poi
-    poi = m_poi.get();
-    poi.name = POI_NAME;
+    PoiAddedDetails = m_poi.get();
 
-    poi.location.altitude = 120;
-    poi.location.latitude = 48.779839;
-    poi.location.longitude = 2.217260;
+    PoiAddedDetails.name = POI_NAME;
 
-    poi_attribute.id = ATTRIBUTE_ADDRCITY;
+    PoiAddedDetails.location.altitude = 120;
+    PoiAddedDetails.location.latitude = 48.779839;
+    PoiAddedDetails.location.longitude = 2.217260;
+
+    poiAttribute = c_DBus_poiAttribute.get();
+    poiAttribute.id = ATTRIBUTE_ADDRCITY;
     std::string vs(string("Velizy"));
-    poi_attribute.value.index = DBus_variantAttributeValue::AS_STRING;
-    poi_attribute.value.content.stringValue = vs;
-    poi.attributes.push_back(poi_attribute);
+    poiAttribute.value.index = DBus_variantAttributeValue::AS_STRING;
+    poiAttribute.value.content.stringValue = vs;
+    PoiAddedDetails.attributes.push_back(poiAttribute);
 
-    poi_attribute.id = ATTRIBUTE_STARS;
+    poiAttribute.id = ATTRIBUTE_STARS;
     std::string v("5");
-    poi_attribute.value.index = DBus_variantAttributeValue::AS_STRING;
-    poi_attribute.value.content.stringValue = v;
-    poi.attributes.push_back(poi_attribute);
+    poiAttribute.value.index = DBus_variantAttributeValue::AS_INT32;
+    poiAttribute.value.content.stringValue = v;
+    PoiAddedDetails.attributes.push_back(poiAttribute);
 
     m_poi_ids.clear(); //list empty for the moment
 
-    m_poi.set(poi);
+    m_poi.set(PoiAddedDetails);
 
     // init of data test for location
     left_bottom_location = m_left_bottom_location.get();
