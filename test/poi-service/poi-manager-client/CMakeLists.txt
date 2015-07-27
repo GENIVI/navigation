@@ -16,65 +16,94 @@
 # @licence end@
 ###########################################################################
 project(poi-manager-client)
-set(COMMON_API_VERSION CommonAPI-2.1)
+set(PARENT_API poiservice)
+set(ROOT_API navigation)
+set(API_VERSION_MAJOR 0)
+set(API_VERSION_MINOR 1)
+set(API_VERSION "v${API_VERSION_MAJOR}_${API_VERSION_MINOR}")
+set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/franca-gen")
+set(PRJ_SRC_GEN_PATH ${COMMONAPI_GEN_DIR}/${API_VERSION}/org/genivi/${ROOT_API}/${PARENT_API})
+set(PRJ_SRC_GEN_NAVIGATION_TYPES_PATH ${COMMONAPI_GEN_DIR}/org/genivi/${ROOT_API})
+set(PRJ_SRC_GEN_POISERVICE_TYPES_PATH ${COMMONAPI_GEN_DIR}/v1_0/org/genivi/${ROOT_API}/${PARENT_API})
+
+set(DBUS_LIB_PATH "/usr/local/lib")
 
 set(CMAKE_VERBOSE_MAKEFILE off)
 cmake_minimum_required(VERSION 2.8)
 
-message(STATUS "poi-manager-client")
+# DBus Path
+if (DBUS_LIB_PATH)
+  message(STATUS "DBUS_LIB_PATH = " ${DBUS_LIB_PATH})
+else()
+  message(FATAL_ERROR "Please specify the path to your patched DBus library using -D DBUS_LIB_PATH=yourPath")
+endif()
 
+# Packages
 find_package(PkgConfig REQUIRED)
+find_package(CommonAPI 3.1.2 REQUIRED)
+find_package(CommonAPI-DBus 3.1.2 REQUIRED)
 
-pkg_check_modules(DBUS_CPP dbus-c++-1)
-pkg_check_modules(GLIB REQUIRED glib-2.0)
+pkg_check_modules(DBUS "dbus-1 >= 1.4")
+pkg_check_modules(COMMONAPI "CommonAPI >= 3.1")
+pkg_check_modules(COMMONAPI_DBUS "CommonAPI-DBus >= 3.1")
+pkg_check_modules(SQLITE3 REQUIRED sqlite3)
 pkg_check_modules(GLIBMM glibmm-2.4)
 pkg_check_modules(GOBJECT gobject-2.0)
-pkg_check_modules(DBUS dbus-1)
-pkg_check_modules(DBUS_CPP_GLIB dbus-c++-glib-1)
+
+pkg_check_modules(GLIB REQUIRED glib-2.0)
 pkg_check_modules(GTK gtk+-3.0)
 
+# Source Files
 FILE(GLOB PRJ_LOCAL_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
-set(PRJ_SRCS ${PRJ_LOCAL_SRCS})
+
+add_subdirectory(${FRANCA_DIR}/poiservice "${CMAKE_CURRENT_BINARY_DIR}/franca")
+
+FILE(GLOB PRJ_PROXY_GEN_SRCS ${PRJ_SRC_GEN_PATH}/*Proxy.cpp)
+FILE(GLOB PRJ_STUB_GEN_TYPES ${PRJ_SRC_GEN_NAVIGATION_TYPES_PATH}/*Types*.cpp ${PRJ_SRC_GEN_POISERVICE_TYPES_PATH}/*Types*.cpp)
+set(PRJ_SRCS ${PRJ_LOCAL_SRCS} ${PRJ_COMMON_SRCS} ${PRJ_PROXY_GEN_SRCS} ${PRJ_STUB_GEN_TYPES})
 
 include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}
     ${COMMON_DIR}
-    ${COMMON_DIR_POI_SERVER}
-    ${DBUS_GENERATED_INCLUDE_DIR}/poi-service
-    ${DBUS_CPP_INCLUDE_DIRS}
-    ${GLIB_INCLUDE_DIRS}
-    ${SQLITE3_INCLUDE_DIRS}
+    ${PRJ_SRC_GEN_PATH}
+    ${COMMONAPI_GEN_DIR}
+    ${DBUS_INCLUDE_DIRS}
+    ${COMMONAPI_INCLUDE_DIRS}
+    ${COMMONAPI_DBUS_INCLUDE_DIRS}
     ${GLIBMM_INCLUDE_DIRS}
     ${GOBJECT_INCLUDE_DIRS}
-    ${DBUS_INCLUDE_DIRS}
-    ${DBUS_CPP_GLIB_INCLUDE_DIRS}
+    ${SQLITE3_INCLUDE_DIRS}
+
+    ${COMMON_DIR_POI_SERVER}
+    ${GLIB_INCLUDE_DIRS}
     ${GTK_INCLUDE_DIRS}
 )
 
 link_directories(
-    ${DBUS_CPP_LIBRARY_DIRS}
-    ${GLIB_LIBRARY_DIRS}
-    ${SQLITE3_LIBRARY_DIRS}
+    ${DBUS_LIB_PATH}
+    ${COMMONAPI_LIBDIR}
+    ${COMMONAPI_DBUS_LIBDIR}
     ${GLIBMM_LIBRARY_DIRS}
     ${GOBJECT_LIBRARY_DIRS}
-    ${DBUS_LIBRARY_DIRS}
-    ${DBUS_CPP_GLIB_DIRS}
+    ${SQLITE3_LIBRARY_DIRS}
+
+    ${GLIB_LIBRARY_DIRS}
     ${GTK_DIRS}
+)
+
+set(LIBRARIES
+    ${COMMONAPI_LIBRARIES}
+    ${COMMONAPI_DBUS_LIBRARIES}
+    ${GOBJECT_LIBRARIES}
+    ${GLIBMM_LIBRARIES}
+    ${SQLITE3_LIBRARIES}
+
+    ${GLIB_LIBRARIES}
+    ${GTK_LIBRARIES}
 )
 
 add_executable(${PROJECT_NAME}
     ${PRJ_SRCS}
 )
 
-set(LIBRARIES
-    ${DBUS_CPP_LIBRARIES}
-    ${GLIB_LIBRARIES}
-    ${SQLITE3_LIBRARIES}
-    ${GLIBMM_LIBRARIES}
-    ${GOBJECT_LIBRARIES}
-    ${DBUS_LIBRARIES}
-    ${DBUS_CPP_GLIB_LIBRARIES}
-    ${GTK_LIBRARIES}
-)
-
 target_link_libraries(${PROJECT_NAME} ${LIBRARIES})
+install(TARGETS ${PROJECT_NAME} DESTINATION ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})

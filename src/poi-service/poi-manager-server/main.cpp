@@ -37,7 +37,7 @@
 #include <typeinfo>
 #include <getopt.h>
 
-#include <CommonAPI/CommonAPI.h> //Defined in the Common API Runtime library
+#include <CommonAPI/CommonAPI.hpp> //Defined in the Common API Runtime library
 #include "poi-manager-server-stub.h"
 
 const char* program_name; //file to sink outputs
@@ -79,11 +79,20 @@ int main(int  argc , char**  argv )
     std::locale::global(std::locale(""));
 
     // Common API data init
-    std::shared_ptr<CommonAPI::Runtime> runtime = CommonAPI::Runtime::load();
-    std::shared_ptr<CommonAPI::Factory> factory = runtime->createFactory();
-    std::shared_ptr<CommonAPI::ServicePublisher> servicePublisher = runtime->getServicePublisher();
-    const std::string& serviceAddress = "local:org.genivi.poiservice.POIContentManager:org.genivi.poiservice.POIContentManager";
-    std::shared_ptr<PoiManagerServerStub> myService = std::make_shared<PoiManagerServerStub>();
+    std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
+
+    const std::string &domain = "local";
+    const std::string &instance = "POIContentManager";
+
+    std::string connection = "POIContentManager";
+
+    std::shared_ptr<PoiManagerServerStub> myServicePOIContentManager = std::make_shared<PoiManagerServerStub>();
+
+    bool successfullyRegistered = runtime->registerService(domain, instance, myServicePOIContentManager, connection);
+    while (!successfullyRegistered) {
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+        successfullyRegistered = runtime->registerService(domain, instance, myServicePOIContentManager, connection);
+    }
 
     //index used for argument analysis
     int next_option;
@@ -101,7 +110,6 @@ int main(int  argc , char**  argv )
 
     GMainLoop * mainloop ;
 
-    bool registerResult;
     do {
         next_option = getopt_long (argc, argv, short_options,
                                   long_options, NULL);
@@ -116,14 +124,10 @@ int main(int  argc , char**  argv )
                 print_usage (stderr, 1);
             else
             {
-                myService->initDatabase(database_filename);
+                myServicePOIContentManager->initDatabase(database_filename);
 
                 //register Interface for Management of a POI Content Access Module with add/remove features
-                registerResult = servicePublisher->registerService(myService, serviceAddress, factory);
-                if (registerResult != true) {
-                    std::cerr << "Registering of POI Manager stub failed." << std::endl;
-                    exit(EXIT_FAILURE);
-                }
+                myServicePOIContentManager->run();
 
                 // Create a new GMainLoop with default context and initial state of "not running "
                 mainloop = g_main_loop_new (g_main_context_default() , FALSE );

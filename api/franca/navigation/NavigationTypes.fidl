@@ -58,4 +58,6 @@ typeCollection NavigationTypes {
 	typedef Distance is Double
 	
 	typedef LinkId is ByteBuffer
+	
+	typedef Radius is UInt32
 }

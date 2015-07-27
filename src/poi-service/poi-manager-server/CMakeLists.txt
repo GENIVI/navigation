@@ -18,7 +18,15 @@
 project(poi-manager-server)
 set(PARENT_API poiservice)
 set(ROOT_API navigation)
-set(COMMON_API_VERSION CommonAPI-2.1)
+set(API_VERSION_MAJOR 0)
+set(API_VERSION_MINOR 1)
+set(API_VERSION "v${API_VERSION_MAJOR}_${API_VERSION_MINOR}")
+set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/franca-gen")
+set(PRJ_SRC_GEN_PATH ${COMMONAPI_GEN_DIR}/${API_VERSION}/org/genivi/${ROOT_API}/${PARENT_API})
+set(PRJ_SRC_GEN_NAVIGATION_TYPES_PATH ${COMMONAPI_GEN_DIR}/org/genivi/${ROOT_API})
+set(PRJ_SRC_GEN_POISERVICE_TYPES_PATH ${COMMONAPI_GEN_DIR}/v1_0/org/genivi/${ROOT_API}/${PARENT_API})
+
+set(DBUS_LIB_PATH "/usr/local/lib")
 
 set(CMAKE_VERBOSE_MAKEFILE off)
 cmake_minimum_required(VERSION 2.8)
@@ -32,28 +40,33 @@ endif()
 
 # Packages
 find_package(PkgConfig REQUIRED)
+find_package(CommonAPI 3.1.2 REQUIRED)
+find_package(CommonAPI-DBus 3.1.2 REQUIRED)
+
 pkg_check_modules(DBUS "dbus-1 >= 1.4")
-pkg_check_modules(COMMONAPI "CommonAPI >= 2.1")
-pkg_check_modules(COMMONAPI_DBUS "CommonAPI-DBus >= 2.1")
+pkg_check_modules(COMMONAPI "CommonAPI >= 3.1")
+pkg_check_modules(COMMONAPI_DBUS "CommonAPI-DBus >= 3.1")
 pkg_check_modules(SQLITE3 REQUIRED sqlite3)
 pkg_check_modules(GLIBMM glibmm-2.4)
 pkg_check_modules(GOBJECT gobject-2.0)
 
 # Source Files
-set(PRJ_SRC_GEN_PATH ${COMMON_API_GENERATED_INCLUDE_DIR}/org/genivi)
 FILE(GLOB PRJ_LOCAL_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 FILE(GLOB PRJ_COMMON_SRCS ${COMMON_DIR}/*.cpp)
-FILE(GLOB PRJ_STUB_GEN_SRCS ${PRJ_SRC_GEN_PATH}/${ROOT_API}/${PARENT_API}/*Stub*.cpp)
-FILE(GLOB PRJ_STUB_GEN_TYPES ${PRJ_SRC_GEN_PATH}/${ROOT_API}/${PARENT_API}/*Types*.cpp ${PRJ_SRC_GEN_PATH}/${ROOT_API}/*Types*.cpp)
+
+add_subdirectory(${FRANCA_DIR}/poiservice "${CMAKE_CURRENT_BINARY_DIR}/franca")
+
+FILE(GLOB PRJ_STUB_GEN_SRCS ${PRJ_SRC_GEN_PATH}/*Stub*.cpp)
+FILE(GLOB PRJ_STUB_GEN_TYPES ${PRJ_SRC_GEN_NAVIGATION_TYPES_PATH}/*Types*.cpp ${PRJ_SRC_GEN_POISERVICE_TYPES_PATH}/*Types*.cpp)
 set(PRJ_SRCS ${PRJ_LOCAL_SRCS} ${PRJ_COMMON_SRCS} ${PRJ_STUB_GEN_SRCS} ${PRJ_STUB_GEN_TYPES})
 
 include_directories(
-    ${CMAKE_CURRENT_SOURCE_DIR}
     ${COMMON_DIR}
-    ${COMMON_API_GENERATED_INCLUDE_DIR}
+    ${PRJ_SRC_GEN_PATH}
+    ${COMMONAPI_GEN_DIR}
     ${DBUS_INCLUDE_DIRS}
-    ${COMMONAPI_INCLUDEDIR}/${COMMON_API_VERSION}
-    ${COMMONAPI_DBUS_INCLUDEDIR}
+    ${COMMONAPI_INCLUDE_DIRS}
+    ${COMMONAPI_DBUS_INCLUDE_DIRS}
     ${GLIBMM_INCLUDE_DIRS}
     ${GOBJECT_INCLUDE_DIRS}
     ${SQLITE3_INCLUDE_DIRS}

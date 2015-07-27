@@ -38,45 +38,34 @@
 #include <fstream>
 #include <gtk/gtk.h>
 
+#include <CommonAPI/CommonAPI.hpp> //Defined in the Common API Runtime library
+#include <v0_1/org/genivi/navigation/poiservice/POIContentManagerProxy.hpp>
 
-#include "genivi-poiservice-contentmanager_proxy.h"
-#include "genivi-poiservice-constants.h"
+#include "poi-common-data-model.h"
 
-#include <dbus-c++/glib-integration.h>
-
-#include "poi-common-dbus-data-model-new-variant.h"
-
-static const char* contentManager_OBJECT_PATH = "/org/genivi/poiservice/POIContentManager";
-static const char* contentManager_SERVICE_NAME = "org.genivi.poiservice.POIContentManager";
-
-using namespace DBus;
 using namespace std;
-using namespace org::genivi::poiservice;
+using namespace v0_1::org::genivi::navigation;
+using namespace poiservice;
+using namespace org::genivi::navigation;
 
-// DBus instances
-static DBus::Glib::BusDispatcher *dispatcher;
-static DBus::Connection *dbusConnection;
 
 // class  contentManager
 class  contentManager
-: public org::genivi::poiservice::POIContentManager_proxy,
-  public DBus::IntrospectableProxy,
-  public DBus::ObjectProxy
 {
 
 public:
 
-    contentManager(DBus::Connection &connection);
+    contentManager(std::shared_ptr<POIContentManagerProxyDefault> proxy);
 
     ~contentManager();
 
     void ConfigurationChanged(const std::vector< uint16_t >& changedSettings);
 
-    void CategoriesRemoved(const std::vector< uint32_t >& categories);
+    void CategoriesRemoved(const std::vector< POIServiceTypes::CategoryID >& categories);
 
-    void POIAdded(const std::vector< uint32_t >& pois);
+    void POIAdded(const std::vector< POIServiceTypes::POI_ID >& pois);
 
-    void POIRemoved(const std::vector< uint32_t >& pois);
+    void POIRemoved(const std::vector< POIServiceTypes::POI_ID >& pois);
 
     void connectPopupWindow(GtkWidget *window);
 
@@ -93,88 +82,75 @@ public:
 private:
 
     GtkWidget *mp_popupWindow;
-    DBus_CAMcategory m_category;
-    categoryId_t m_category_id;
-    std::vector<poiId_t> m_poi_ids;
-    DBus_PoiAddedDetails m_poi;
-    DBus_geoCoordinate3D m_left_bottom_location,m_right_top_location;
+    std::shared_ptr<POIContentManagerProxyDefault> mp_proxy;
+    POIServiceTypes::CAMCategory m_category;
+    POIServiceTypes::CategoryID m_category_id;
+    std::vector<POIServiceTypes::POI_ID> m_poi_ids;
+    POIServiceTypes::PoiAddedDetails m_poi;
+    NavigationTypes::Coordinate3D m_left_bottom_location,m_right_top_location;
     std::string m_strTest;
 };
 
 static contentManager *clientContentManager;
 
-contentManager::contentManager(DBus::Connection &connection)
-    : DBus::ObjectProxy(connection, contentManager_OBJECT_PATH, contentManager_SERVICE_NAME)
+contentManager::contentManager(std::shared_ptr<POIContentManagerProxyDefault> proxy)
 {
-    DBus_poiAttribute c_DBus_poiAttribute;
-    DBus_poiAttribute::poiAttribute_t poiAttribute;
-    DBus_categoryAttribute c_DBus_categoryAttribute;
-    DBus_categoryAttribute::categoryAttribute_t categoryAttribute;
+    // test: create a new category, with a new attribute and add a poi under this category
+    POIServiceTypes::Details categoryDetails;
+    POIServiceTypes::CategoryAttribute categoryAttribute;
+    std::vector<POIServiceTypes::CategoryAttribute> categoryAttributeList;
+    std::vector<POIServiceTypes::CategoryID> categoryParentsId;
+    POIServiceTypes::PoiAttribute poiAttribute;
+    std::vector<POIServiceTypes::PoiAttribute> poiAttributeList;
+    NavigationTypes::Coordinate3D location;
+    mp_proxy = proxy;
 
-    DBus_CAMcategory::CAMcategory_t CAMcategory;
-    DBus_PoiAddedDetails::PoiAddedDetails_t PoiAddedDetails;
+    categoryDetails = m_category.getDetails();
+    categoryDetails.setName(NEW_CATEGORY_NAME);
+    categoryParentsId = categoryDetails.getParentsId();
+    categoryParentsId.clear();
+    categoryParentsId.push_back(PARENT_ID);
+    categoryDetails.setParentsId(categoryParentsId);
+    m_category.setDetails(categoryDetails);              //new category
 
-    DBus_geoCoordinate3D::geoCoordinate3D_t left_bottom_location,right_top_location;
+    categoryAttributeList = m_category.getAttributes();
+    categoryAttributeList.clear();
+    categoryAttribute.setId(ATTRIBUTE_PHONE);
+    categoryAttribute.setName(ATTRIBUTE_PHONE_NAME);   //existing attribute
+    categoryAttributeList.push_back(categoryAttribute);
+    categoryAttribute.setId(ATTRIBUTE_CREDIT_CARD);      //new attribute id
+    categoryAttribute.setName(ATTRIBUTE_CREDIT_CARD_NAME);  //new attribute
+    categoryAttributeList.push_back(categoryAttribute);
+    m_category.setAttributes(categoryAttributeList);
 
-    // init of data test for category
-    CAMcategory = m_category.get();
+    m_poi.setName(POI_NAME);
 
-    CAMcategory.details.name = "recreation";               //new category
+    location.setLatitude(POI_LOCATION_LATITUDE);
+    location.setLongitude(POI_LOCATION_LONGITUDE);
+    location.setAltitude(POI_LOCATION_ALTITUDE);
+    m_poi.setLocation(location);
 
-    categoryAttribute = c_DBus_categoryAttribute.get();
-    categoryAttribute.id = ATTRIBUTE_PHONE;
-    categoryAttribute.name = "phone";                  //existing attribute
-    categoryAttribute.type = GENIVI_POISERVICE_STRING;
-    CAMcategory.attributes.push_back(categoryAttribute);
+    poiAttributeList = m_poi.getAttributes();
+    poiAttributeList.clear();
+    poiAttribute.setId(ATTRIBUTE_ADDRCITY);
+    POIServiceTypes::AttributeValue vs(string(NEW_CITY_NAME));
+    poiAttribute.setValue(vs);
+    poiAttributeList.push_back(poiAttribute);
+    poiAttribute.setId(ATTRIBUTE_STARS);
+    POIServiceTypes::AttributeValue v(NEW_STARS_VALUE);
+    poiAttribute.setValue(v);
+    poiAttributeList.push_back(poiAttribute);
+    m_poi.setAttributes(poiAttributeList);
 
-    categoryAttribute.id = ATTRIBUTE_CREDIT_CARD;      //new attribute id
-    categoryAttribute.name = "credit card";            //new attribute
-    categoryAttribute.type = GENIVI_POISERVICE_STRING;
-    CAMcategory.attributes.push_back(categoryAttribute);
-
-    CAMcategory.details.parents_id.push_back(0);
-
-    m_category.set(CAMcategory);
-
-    // init of data test for poi
-    PoiAddedDetails = m_poi.get();
-
-    PoiAddedDetails.name = POI_NAME;
-
-    PoiAddedDetails.location.altitude = 120;
-    PoiAddedDetails.location.latitude = 48.779839;
-    PoiAddedDetails.location.longitude = 2.217260;
-
-    poiAttribute = c_DBus_poiAttribute.get();
-    poiAttribute.id = ATTRIBUTE_ADDRCITY;
-    std::string vs(string("Velizy"));
-    poiAttribute.value.index = DBus_variantAttributeValue::AS_STRING;
-    poiAttribute.value.content.stringValue = vs;
-    PoiAddedDetails.attributes.push_back(poiAttribute);
-
-    poiAttribute.id = ATTRIBUTE_STARS;
-    std::string v("5");
-    poiAttribute.value.index = DBus_variantAttributeValue::AS_INT32;
-    poiAttribute.value.content.stringValue = v;
-    PoiAddedDetails.attributes.push_back(poiAttribute);
-
-    m_poi_ids.clear(); //list empty for the moment
-
-    m_poi.set(PoiAddedDetails);
-
-    // init of data test for location
-    left_bottom_location = m_left_bottom_location.get();
-    right_top_location = m_right_top_location.get();
-    left_bottom_location.latitude = 48.76;
-    left_bottom_location.longitude = 2.22;
-    right_top_location.latitude = 48.78;
-    right_top_location.longitude = 2.20;
-
-    m_left_bottom_location.set(left_bottom_location);
-    m_right_top_location.set(right_top_location);
+    m_left_bottom_location.setLatitude(LEFT_BOTTOM_LOCATION_LATITUDE);
+    m_left_bottom_location.setLongitude(LEFT_BOTTOM_LOCATION_LONGITUDE);
+    m_right_top_location.setLatitude(RIGHT_TOP_LOCATION_LATITUDE);
+    m_right_top_location.setLongitude(RIGHT_TOP_LOCATION_LONGITUDE);
 
     // init of the data test for search string
     m_strTest = SEARCH_STRING;
+
+    m_poi_ids.clear(); //list empty for the moment
 
 }
 
@@ -194,7 +170,7 @@ void contentManager::ConfigurationChanged(const std::vector< uint16_t >& changed
     cout << endl;
 }
 
-void contentManager::CategoriesRemoved(const std::vector< uint32_t >& categories)
+void contentManager::CategoriesRemoved(const std::vector<POIServiceTypes::CategoryID> &categories)
 {
     size_t index;
 
@@ -205,7 +181,7 @@ void contentManager::CategoriesRemoved(const std::vector< uint32_t >& categories
     }
 }
 
-void contentManager::POIAdded(const std::vector< uint32_t >& pois)
+void contentManager::POIAdded(const std::vector<POIServiceTypes::POI_ID> &pois)
 {
     size_t index;
 
@@ -218,7 +194,7 @@ void contentManager::POIAdded(const std::vector< uint32_t >& pois)
     }
 }
 
-void contentManager::POIRemoved(const std::vector< uint32_t >& pois)
+void contentManager::POIRemoved(const std::vector<POIServiceTypes::POI_ID> &pois)
 {
     size_t index;
 
@@ -236,29 +212,37 @@ void contentManager::connectPopupWindow(GtkWidget *window)
 
 void contentManager::testCreateCategory()
 {
-    m_category_id = createCategory(m_category.getDBus());
+    CommonAPI::CallStatus status;
+    mp_proxy->createCategory(m_category,status,m_category_id);
+    cout << "Status: " << m_category_id << endl;
     cout << "Category Created" << endl << "Id: " << m_category_id << endl;
 
 }
 
 void contentManager::testRemoveCategory()
 {
-    std::vector<categoryId_t> categories;
+    std::vector<POIServiceTypes::CategoryID> categories;
+    CommonAPI::CallStatus status;
+
     categories.push_back(m_category_id);
 
-    removeCategories(categories);
+    mp_proxy->removeCategories(categories,status);
 }
 
 void contentManager::testCreatePOI()
 {
-    std::vector<DBus_PoiAddedDetails::DBus_PoiAddedDetails_t> poiList;
-    poiList.push_back(m_poi.getDBus());
-    addPOIs(m_category_id,poiList);
+    std::vector<POIServiceTypes::PoiAddedDetails> poiList;
+    CommonAPI::CallStatus status;
+
+    poiList.push_back(m_poi);
+    mp_proxy->addPOIs(m_category_id,poiList,status);
 }
 
 void contentManager::testRemovePOI()
 {
-    removePOIs(m_poi_ids);
+    CommonAPI::CallStatus status;
+
+    mp_proxy->removePOIs(m_poi_ids,status);
 }
 
 void contentManager::testSearch()
@@ -429,6 +413,17 @@ int main(int  argc , char**  argv )
     // so we can use std::cout with UTF-8, via Glib::ustring, without exceptions.
     std::locale::global(std::locale(""));
 
+    std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
+
+    const std::string &domain = "local";
+    const std::string &instance = "POIContentManager";
+
+    std::shared_ptr<POIContentManagerProxyDefault> myProxy = runtime->buildProxy<POIContentManagerProxy>(domain,instance);
+
+    while (!myProxy->isAvailable()) {
+        usleep(10);
+    }
+
     //index used for argument analysis
     int next_option;
 
@@ -453,17 +448,9 @@ int main(int  argc , char**  argv )
             print_usage (stdout, 0);
             break;
         case 't':   /* -t --test */
-            // creating the dispatcher
-            dispatcher = new DBus::Glib::BusDispatcher();
-            DBus::default_dispatcher = dispatcher;
-            dispatcher->attach(NULL);
-
-            // create a connection on the session bus
-            dbusConnection = new DBus::Connection(DBus::Connection::SessionBus());
-            dbusConnection->setup(dispatcher);
 
             // create a client for ContentManager
-            clientContentManager = new contentManager(*dbusConnection);
+            clientContentManager = new contentManager(myProxy);
 
             // Create the interface panel
             gtk_init (&argc, &argv);
@@ -471,11 +458,25 @@ int main(int  argc , char**  argv )
             // Create a new window
             window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 
-            // Connect the dbus client to the popup window (for feedback on signals)
+            // Connect the client to the popup window (for feedback on signals)
             clientContentManager->connectPopupWindow(window);
 
-            // Populate the window and connect it to the dbus client (for commands)
+            // Populate the window and connect it to the client (for commands)
             populateWindow(window,clientContentManager);
+
+            // Connect the DBus signals
+            myProxy->getCategoriesRemovedEvent().subscribe([&](const std::vector<POIServiceTypes::CategoryID>& categories) {
+                clientContentManager->CategoriesRemoved(categories);
+            });
+            myProxy->getConfigurationChangedEvent().subscribe([&](const std::vector< uint16_t >& changedSettings) {
+                clientContentManager->ConfigurationChanged(changedSettings);
+            });
+            myProxy->getPOIAddedEvent().subscribe([&](const std::vector< POIServiceTypes::POI_ID >& pois) {
+                clientContentManager->POIAdded(pois);
+            });
+            myProxy->getPOIRemovedEvent().subscribe([&](const std::vector< POIServiceTypes::POI_ID >& pois) {
+                clientContentManager->POIRemoved(pois);
+            });
 
             // Send a feedback to the user
             cout << "poi manager client started" << endl;
@@ -496,6 +497,7 @@ int main(int  argc , char**  argv )
             break;
         case '?':   /* Invalid option. */
             print_usage (stderr, 1);
+            break;
         case -1:    /* End of options.  */
             break;
         default:    /* Error  */

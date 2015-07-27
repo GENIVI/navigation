@@ -19,7 +19,7 @@ project(poi-server)
 cmake_minimum_required(VERSION 2.8)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
-message(STATUS "poi-server")
+message(STATUS "poi-service-server")
 
 option(WITH_FRANCA_INTERFACE
        "Build using the Franca interfaces" OFF)
@@ -48,7 +48,6 @@ add_subdirectory(${API_DIR}/poi-service "${DBUS_GENERATED_INCLUDE_DIR}/poi-servi
 add_subdirectory(poi-server)
 
 if (WITH_FRANCA_INTERFACE)
-    set(COMMON_API_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api/franca/navigation/src-gen")
-    set(DBUS_LIB_PATH "/usr/local/lib")
-   add_subdirectory(poi-manager-server)
+    set(FRANCA_DIR "${API_DIR}/franca/navigation")
+    add_subdirectory(poi-manager-server)
 endif()

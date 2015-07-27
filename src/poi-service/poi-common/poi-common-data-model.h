@@ -94,22 +94,34 @@ typedef struct
     std::vector<categoryId_t> childList; //list of children
 } poi_category_common_t;
 
-// some remaining defines
 
+// some defines to be used by the test
 #define ALL_CATEGORIES 0
 #define INVALID_CATEGORY 0x00
 #define MAX_CATEGORIES 256 //to be improved
 #define CAM_CATEGORY_OFFSET 0x0100 //offset added to create the id of a category provided by a CAM (to be multiplied by the camId)
 #define CAM_ATTRIBUTE_OFFSET 0x0100 //offset added to create the id of an attribute provided by a CAM (to be multiplied by the camId)
-
-// some test defines
 #define ICON_WIDTH 32
 #define ICON_HEIGHT 37
+#define NEW_CATEGORY_NAME "recreation"
+#define ATTRIBUTE_PHONE_NAME "phone"
+#define ATTRIBUTE_CREDIT_CARD_NAME "credit card"
+#define NEW_CITY_NAME "Velizy"
+#define NEW_STARS_VALUE 5
 #define ICON_URL "../resource/file"
 #define ICON_FORMAT "png"
 #define POI_PROVIDER "OpenStreetMap"
 #define POI_NAME "mySweetHome"
+#define POI_LOCATION_LATITUDE 48.779839
+#define POI_LOCATION_LONGITUDE 2.217260
+#define POI_LOCATION_ALTITUDE 120
+#define LEFT_BOTTOM_LOCATION_LATITUDE 48.76
+#define LEFT_BOTTOM_LOCATION_LONGITUDE 2.22
+#define RIGHT_TOP_LOCATION_LATITUDE 48.78
+#define RIGHT_TOP_LOCATION_LONGITUDE 2.20
+
 #define SEARCH_STRING "Sweet"
 #define MEDIASET 1
+#define PARENT_ID 0
 
 #endif

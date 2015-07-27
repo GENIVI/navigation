@@ -27,17 +27,18 @@
 #ifndef POIMANAGERSERVERSTUBIMPL_H_
 #define POIMANAGERSERVERSTUBIMPL_H_
 
-#include <CommonAPI/CommonAPI.h>
+#include <CommonAPI/CommonAPI.hpp>
 
-#include "org/genivi/navigation/poiservice/POIContentManagerStubDefault.h"
+#include <v0_1/org/genivi/navigation/poiservice/POIContentManagerStubDefault.hpp>
 
 #include "poi-common-database.h"
 
 #include "poi-common-data-model.h"
 
 using namespace std;
-using namespace org::genivi::navigation;
+using namespace v0_1::org::genivi::navigation;
 using namespace poiservice;
+using namespace org::genivi::navigation;
 
 class sqlRequest
 {
@@ -83,7 +84,7 @@ public:
     SQL_REQUEST_ERRORS removeCategory(POIServiceTypes::CategoryID unique_id);
     SQL_REQUEST_ERRORS createPoi(POIServiceTypes::CategoryID categoryId, POIServiceTypes::PoiAddedDetails poi, POIServiceTypes::POI_ID& unique_id);
     SQL_REQUEST_ERRORS removePoi(POIServiceTypes::POI_ID unique_id);
-    SQL_REQUEST_ERRORS searchPoi(string &categoryName, string &search_string, NavigationTypes::Coordinate3D &left_bottom_location, NavigationTypes::Coordinate3D &right_top_location, std::vector<POIServiceTypes::POI_ID> &poi_id_list);
+    SQL_REQUEST_ERRORS searchPoi(const string &categoryName, const string &search_string, NavigationTypes::Coordinate3D &left_bottom_location, NavigationTypes::Coordinate3D &right_top_location, std::vector<POIServiceTypes::POI_ID> &poi_id_list);
 
 private:
     const char* m_SQL_REQUEST_GET_AVAILABLE_CATEGORIES = "SELECT Id,name FROM poicategory;";
@@ -198,6 +199,8 @@ public:
     void removeCategories(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<POIServiceTypes::CategoryID> categories);
     void addPOIs(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CategoryID unique_id, std::vector<POIServiceTypes::PoiAddedDetails> poiList);
     void removePOIs(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<POIServiceTypes::POI_ID> ids);
+
+    void run();
 
     bool initDatabase(const char* poiDatabaseFileName);
 

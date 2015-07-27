@@ -15,8 +15,8 @@ import org.genivi.navigation.poiservice.POIServiceTypes.* from "POIServiceTypes.
 <** @description : This interface offers methods that implement the POI search functionality of a navigation system.**>
 interface POIContentManager {
 	version {
-		major 1 
-		minor 0
+		major 0 
+		minor 1
 	}
 	
 	<**	@description : This method returns the API version implemented by the content access module.**>

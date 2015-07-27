@@ -189,6 +189,7 @@ void sqlRequest::getAvailableArea()
 {
     vector<vector<string> > query_result;
     vector<string >  query_line;
+    double doubleValue;
 
     //retrieve the available area into the database
     query_result = mp_database->queryNotUTF(m_SQL_REQUEST_GET_AVAILABLE_AREA);
@@ -201,10 +202,14 @@ void sqlRequest::getAvailableArea()
     {
         // read the result of the query, for the moment only the first area !
         query_line = query_result.at(0);
-        fromString<double>(m_leftBottomLocation.latitude,query_line[0], std::dec);
-        fromString<double>(m_leftBottomLocation.longitude,query_line[1], std::dec);
-        fromString<double>(m_rightTopLocation.latitude,query_line[2], std::dec);
-        fromString<double>(m_rightTopLocation.longitude,query_line[3], std::dec);
+        fromString<double>(doubleValue,query_line[0], std::dec);
+        m_leftBottomLocation.setLatitude(doubleValue);
+        fromString<double>(doubleValue,query_line[1], std::dec);
+        m_leftBottomLocation.setLongitude(doubleValue);
+        fromString<double>(doubleValue,query_line[2], std::dec);
+        m_rightTopLocation.setLatitude(doubleValue);
+        fromString<double>(doubleValue,query_line[3], std::dec);
+        m_rightTopLocation.setLongitude(doubleValue);
     }
 }
 
@@ -219,7 +224,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
     iconId_t iconId;
 
     //Check if the name doesn't exist into the database to avoid duplications
-    ret = checkIfCategoryNameDoesntExist(category.details.name);
+    ret = checkIfCategoryNameDoesntExist(category.getDetails().getName());
     if (ret != OK)
         return ret;
 
@@ -235,7 +240,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
     strStream << unique_id;
     sqlQuery += strStream.str();
     sqlQuery += ",'";
-    sqlQuery.append(category.details.name);
+    sqlQuery.append(category.getDetails().getName());
     sqlQuery += "');";
     query_result = mp_database->queryNotUTF(sqlQuery.c_str());
     if (!query_result.empty())
@@ -247,18 +252,18 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
     }
 
     //Check the attributes and complete the table if necessary (poiattribute)
-    for (index=0;index < category.attributes.size();index++)
+    for (index=0;index < category.getAttributes().size();index++)
     {
-        ret = checkIfAttributeExist((category.attributes.at(index)).id,(category.attributes.at(index)).name);
+        ret = checkIfAttributeExist((category.getAttributes().at(index)).getId(),(category.getAttributes().at(index)).getName());
         if (ret == ATTRIBUTE_ID_NOT_EXIST)
         {
             //Create the attribute
             sqlQuery = m_SQL_REQUEST_INSERT_ATTRIBUTE;
             strStream.str("");
-            strStream << (category.attributes.at(index)).id;
+            strStream << (category.getAttributes().at(index)).getId();
             sqlQuery += strStream.str();
             sqlQuery += ",'";
-            sqlQuery.append((category.attributes.at(index)).name);
+            sqlQuery.append((category.getAttributes().at(index)).getName());
             sqlQuery += "');";
             query_result = mp_database->queryNotUTF(sqlQuery.c_str());
             if (!query_result.empty())
@@ -305,7 +310,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
         sqlQuery += strStream.str();
         sqlQuery += ",";
         strStream.str("");
-        strStream << (category.attributes.at(index)).id;
+        strStream << (category.getAttributes().at(index)).getId();
         sqlQuery += strStream.str();
         sqlQuery += ");";
         query_result = mp_database->queryNotUTF(sqlQuery.c_str());
@@ -319,9 +324,9 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
     }
 
     //Check if all the parent categories exist and complete the table of family categories (poicategorykinship)
-    for (index=0;index < category.details.parentsId.size();index++)
+    for (index=0;index < category.getDetails().getParentsId().size();index++)
     {
-        ret = checkIfCategoryExist(category.details.parentsId.at(index));
+        ret = checkIfCategoryExist(category.getDetails().getParentsId().at(index));
         if (ret != OK)
             return ret;
 
@@ -339,7 +344,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
         sqlQuery += strStream.str();
         sqlQuery += ",";
         strStream.str("");
-        strStream << category.details.parentsId.at(index);
+        strStream << category.getDetails().getParentsId().at(index);
         sqlQuery += strStream.str();
         sqlQuery += ");";
         query_result = mp_database->queryNotUTF(sqlQuery.c_str());
@@ -866,45 +871,45 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createPoi(POIServiceTypes::CategoryID
     poiRecorded.website = "";
 
     //and scan the poi attributes
-    for (index=0; index < poi.attributes.size();index++)
+    for (index=0; index < poi.getAttributes().size();index++)
     {
-        switch ((poi.attributes.at(index)).id)
+        switch ((poi.getAttributes().at(index)).getId())
         {
         case ATTRIBUTE_SOURCE:
-            poiRecorded.source = (poi.attributes.at(index)).value.get<std::string>();
+            poiRecorded.source = (poi.getAttributes().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_WEBSITE:
-            poiRecorded.website = (poi.attributes.at(index)).value.get<std::string>();
+            poiRecorded.website = (poi.getAttributes().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_PHONE :
-            poiRecorded.phone = (poi.attributes.at(index)).value.get<std::string>();
+            poiRecorded.phone = (poi.getAttributes().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_STARS:
-            poiRecorded.stars = (poi.attributes.at(index)).value.get<int>();
+            poiRecorded.stars = (poi.getAttributes().at(index)).getValue().get<int>();
             break;
         case ATTRIBUTE_OPENINGHOURS:
-            poiRecorded.openinghours = (poi.attributes.at(index)).value.get<std::string>();
+            poiRecorded.openinghours = (poi.getAttributes().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_ADDRHOUSENUMBER:
-            poiRecorded.addr_house_number = (poi.attributes.at(index)).value.get<std::string>();
+            poiRecorded.addr_house_number = (poi.getAttributes().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_ADDRSTREET:
-            poiRecorded.addr_street = (poi.attributes.at(index)).value.get<std::string>();
+            poiRecorded.addr_street = (poi.getAttributes().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_ADDRPOSTCODE:
-            poiRecorded.addr_postcode = (poi.attributes.at(index)).value.get<int>();
+            poiRecorded.addr_postcode = (poi.getAttributes().at(index)).getValue().get<int>();
             break;
         case ATTRIBUTE_ADDRCITY:
-            poiRecorded.addr_city = (poi.attributes.at(index)).value.get<std::string>();
+            poiRecorded.addr_city = (poi.getAttributes().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_BRAND:
-            poiRecorded.brand = (poi.attributes.at(index)).value.get<std::string>();
+            poiRecorded.brand = (poi.getAttributes().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_OPERATEUR:
-            poiRecorded.operateur = (poi.attributes.at(index)).value.get<std::string>();
+            poiRecorded.operateur = (poi.getAttributes().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_CREDIT_CARD:
-            poiRecorded.credit_card = (poi.attributes.at(index)).value.get<std::string>();
+            poiRecorded.credit_card = (poi.getAttributes().at(index)).getValue().get<std::string>();
             break;
         default:
             return ATTRIBUTE_ID_NOT_EXIST;
@@ -919,20 +924,20 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createPoi(POIServiceTypes::CategoryID
     strStream << unique_id;
     sqlQuery += strStream.str();
     sqlQuery += ",'";
-    sqlQuery.append(poi.name);
+    sqlQuery.append(poi.getName());
     sqlQuery += "',";
     strStream.str("");
     strStream.precision(7);
-    strStream << fixed << poi.location.latitude;
+    strStream << fixed << poi.getLocation().getLatitude();
     sqlQuery += strStream.str();
     sqlQuery += ",";
     strStream.str("");
     strStream.precision(7);
-    strStream << fixed << poi.location.longitude;
+    strStream << fixed << poi.getLocation().getLongitude();
     sqlQuery += strStream.str();
     sqlQuery += ",";
     strStream.str("");
-    strStream << poi.location.altitude;
+    strStream << poi.getLocation().getAltitude();
     sqlQuery += strStream.str();
     sqlQuery += ",";
     strStream.str("");
@@ -1122,7 +1127,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removePoi(POIServiceTypes::POI_ID uni
     return ret;
 }
 
-sqlRequest::SQL_REQUEST_ERRORS sqlRequest::searchPoi(string &categoryName, string &search_string, NavigationTypes::Coordinate3D &left_bottom_location, NavigationTypes::Coordinate3D &right_top_location, std::vector<POIServiceTypes::POI_ID> &poi_id_list)
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::searchPoi(const string &categoryName,const string &search_string, NavigationTypes::Coordinate3D &left_bottom_location, NavigationTypes::Coordinate3D &right_top_location, std::vector<POIServiceTypes::POI_ID> &poi_id_list)
 {
     sqlRequest::SQL_REQUEST_ERRORS ret;
     std::string sqlQuery; //SQL request on database
@@ -1142,43 +1147,43 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::searchPoi(string &categoryName, strin
     //                      AND (name LIKE '%Sweet%');
 
     // it's needed to reorder the latitude and longitude for the test coherency
-    if (left_bottom_location.latitude > right_top_location.latitude)
+    if (left_bottom_location.getLatitude() > right_top_location.getLatitude())
     {
-        recordedBottom.latitude = right_top_location.latitude;
-        recordedTop.latitude = left_bottom_location.latitude;
+        recordedBottom.setLatitude(right_top_location.getLatitude());
+        recordedTop.setLatitude(left_bottom_location.getLatitude());
     }
     else
     {
-        recordedBottom.latitude = left_bottom_location.latitude;
-        recordedTop.latitude = right_top_location.latitude;
+        recordedBottom.setLatitude(left_bottom_location.getLatitude());
+        recordedTop.setLatitude(right_top_location.getLatitude());
     }
-    if (left_bottom_location.longitude > right_top_location.longitude)
+    if (left_bottom_location.getLongitude() > right_top_location.getLongitude())
     {
-        recordedBottom.longitude = right_top_location.longitude;
-        recordedTop.longitude = left_bottom_location.longitude;
+        recordedBottom.setLongitude(right_top_location.getLongitude());
+        recordedTop.setLongitude(left_bottom_location.getLongitude());
     }
     else
     {
-        recordedBottom.longitude = left_bottom_location.longitude;
-        recordedTop.longitude = right_top_location.longitude;
+        recordedBottom.setLongitude(left_bottom_location.getLongitude());
+        recordedTop.setLongitude(right_top_location.getLongitude());
     }
     sqlQuery = m_SQL_REQUEST_SEARCH_POI;
     sqlQuery += categoryName;
     sqlQuery += "'))) AND ((latitude > ";
     strStream.str("");
-    strStream << recordedBottom.latitude;
+    strStream << recordedBottom.getLatitude();
     sqlQuery += strStream.str();
     sqlQuery += ") AND (latitude < ";
     strStream.str("");
-    strStream << recordedTop.latitude;
+    strStream << recordedTop.getLatitude();
     sqlQuery += strStream.str();
     sqlQuery += ")) AND ((longitude > ";
     strStream.str("");
-    strStream << recordedBottom.longitude;
+    strStream << recordedBottom.getLongitude();
     sqlQuery += strStream.str();
     sqlQuery += ") AND (longitude < ";
     strStream.str("");
-    strStream << recordedTop.longitude;
+    strStream << recordedTop.getLongitude();
     sqlQuery += strStream.str();
     sqlQuery += ")) AND (name LIKE '%";
     sqlQuery += search_string;
@@ -1204,17 +1209,17 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::searchPoi(string &categoryName, strin
 }
 
 PoiManagerServerStub::PoiManagerServerStub() {
-    m_version.versionMajor = 1;
-    m_version.versionMicro = 0;
-    m_version.versionMinor = 0;
-    m_version.date = "19-13-2015";
+    m_version.setVersionMajor(1);
+    m_version.setVersionMicro(0);
+    m_version.setVersionMicro(0);
+    m_version.setDate("19-13-2015");
     m_rootCategory = ALL_CATEGORIES; //by default
     m_languageCode = "eng";
     m_countryCode = "USA";
     m_scriptCode = "Latn";
-    m_centerLocation.latitude = 48.85792; //by default center of Paris
-    m_centerLocation.longitude = 2.3383145;
-    m_centerLocation.altitude = 0;
+    m_centerLocation.setLatitude(48.85792); //by default center of Paris
+    m_centerLocation.setLongitude(2.3383145);
+    m_centerLocation.setAltitude(30);
 
     mp_sqlRequest = new sqlRequest;
 }
@@ -1258,9 +1263,9 @@ void PoiManagerServerStub::getAvailableCategories(const std::shared_ptr<CommonAP
     // load categories from the embedded database
     for (index = 0; index < m_availableCategories; index++)
     {
-        category.uniqueId = m_availableCategoryTable.at(index).id;
-        category.topLevel = m_availableCategoryTable.at(index).top_level;
-        category.name = m_availableCategoryTable.at(index).name;
+        category.setUniqueId(m_availableCategoryTable.at(index).id);
+        category.setTopLevel(m_availableCategoryTable.at(index).top_level);
+        category.setName(m_availableCategoryTable.at(index).name);
         categories.push_back(category);
     }
 
@@ -1277,8 +1282,8 @@ void PoiManagerServerStub::getParentCategories(const std::shared_ptr<CommonAPI::
     POIServiceTypes::CategoryAndLevel categoryAndLevel;
     for (index=0;index<m_availableCategoryTable.at(category).parentList.size();index++)
     {
-        categoryAndLevel.uniqueId = m_availableCategoryTable.at(category).parentList[index];
-        categoryAndLevel.topLevel = m_availableCategoryTable.at(categoryAndLevel.uniqueId).top_level;
+        categoryAndLevel.setUniqueId(m_availableCategoryTable.at(category).parentList[index]);
+        categoryAndLevel.setTopLevel(m_availableCategoryTable.at(categoryAndLevel.getUniqueId()).top_level);
         categories.push_back(categoryAndLevel);
     }
 }
@@ -1289,8 +1294,8 @@ void PoiManagerServerStub::getChildrenCategories(const std::shared_ptr<CommonAPI
     POIServiceTypes::CategoryAndLevel categoryAndLevel;
     for (index=0;index<m_availableCategoryTable.at(category).childList.size();index++)
     {
-        categoryAndLevel.uniqueId = m_availableCategoryTable.at(category).childList[index];
-        categoryAndLevel.topLevel = m_availableCategoryTable.at(categoryAndLevel.uniqueId).top_level;
+        categoryAndLevel.setUniqueId(m_availableCategoryTable.at(category).childList[index]);
+        categoryAndLevel.setTopLevel(m_availableCategoryTable.at(categoryAndLevel.getUniqueId()).top_level);
         categories.push_back(categoryAndLevel);
     }
 }
@@ -1363,6 +1368,10 @@ void PoiManagerServerStub::removePOIs(const std::shared_ptr<CommonAPI::ClientId>
     }
 }
 
+void PoiManagerServerStub::run()
+{
+}
+
 bool PoiManagerServerStub::initDatabase(const char* poiDatabaseFileName)
 {
     mp_sqlRequest->setDatabase(poiDatabaseFileName);
@@ -1377,76 +1386,101 @@ bool PoiManagerServerStub::test()
 {
     // test: create a new category, with a new attribute and add a poi under this category
     POIServiceTypes::CAMCategory category;
-    POIServiceTypes::CategoryAttribute category_attribute;
-    POIServiceTypes::CategoryID category_id;
-    POIServiceTypes::POI_ID poi_id;
+    POIServiceTypes::Details categoryDetails;
+    POIServiceTypes::CategoryAttribute categoryAttribute;
+    std::vector<POIServiceTypes::CategoryAttribute> categoryAttributeList;
+    std::vector<POIServiceTypes::CategoryID> categoryParentsId;
+
+    POIServiceTypes::CategoryID categoryId;
+    POIServiceTypes::POI_ID poiId;
+    std::vector<POIServiceTypes::POI_ID> poiIdList;
+
     POIServiceTypes::PoiAddedDetails poi;
-    POIServiceTypes::PoiAttribute poi_attribute;
-    NavigationTypes::Coordinate3D left_bottom_location,right_top_location;
-    std::vector<POIServiceTypes::POI_ID> poi_id_list;
+    POIServiceTypes::PoiAttribute poiAttribute;
+    std::vector<POIServiceTypes::PoiAttribute> poiAttributeList;
+
+    NavigationTypes::Coordinate3D left_bottom_location,right_top_location,location;
     std::string str;
-    category.details.name = "recreation";               //new category
-    category_attribute.id = ATTRIBUTE_PHONE;
-    category_attribute.name = "phone";                  //existing attribute
-    category.attributes.push_back(category_attribute);
-    category_attribute.id = ATTRIBUTE_CREDIT_CARD;      //new attribute id
-    category_attribute.name = "credit card";            //new attribute
-    category.attributes.push_back(category_attribute);
-    category.details.parentsId.push_back(0);
-    poi.name = POI_NAME;
-    poi.location.altitude = 120;
-    poi.location.latitude = 48.779839;
-    poi.location.longitude = 2.217260;
-    poi_attribute.id = ATTRIBUTE_ADDRCITY;
-    POIServiceTypes::AttributeValue vs(string("Velizy"));
-    poi_attribute.value = vs;
-    poi.attributes.push_back(poi_attribute);
-    poi_attribute.id = ATTRIBUTE_STARS;
-    POIServiceTypes::AttributeValue v(5);
-    poi_attribute.value = v;
-    poi.attributes.push_back(poi_attribute);
-    left_bottom_location.latitude = 48.76;
-    left_bottom_location.longitude = 2.22;
-    right_top_location.latitude = 48.78;
-    right_top_location.longitude = 2.20;
+
+    categoryDetails = category.getDetails();
+    categoryDetails.setName(NEW_CATEGORY_NAME);
+    categoryParentsId = categoryDetails.getParentsId();
+    categoryParentsId.clear();
+    categoryParentsId.push_back(PARENT_ID);
+    categoryDetails.setParentsId(categoryParentsId);
+    category.setDetails(categoryDetails);              //new category
+
+    categoryAttributeList = category.getAttributes();
+    categoryAttributeList.clear();
+    categoryAttribute.setId(ATTRIBUTE_PHONE);
+    categoryAttribute.setName(ATTRIBUTE_PHONE_NAME);   //existing attribute
+    categoryAttributeList.push_back(categoryAttribute);
+    categoryAttribute.setId(ATTRIBUTE_CREDIT_CARD);      //new attribute id
+    categoryAttribute.setName(ATTRIBUTE_CREDIT_CARD_NAME);  //new attribute
+    categoryAttributeList.push_back(categoryAttribute);
+    category.setAttributes(categoryAttributeList);
+
+    poi.setName(POI_NAME);
+
+    location.setLatitude(POI_LOCATION_LATITUDE);
+    location.setLongitude(POI_LOCATION_LONGITUDE);
+    location.setAltitude(POI_LOCATION_ALTITUDE);
+    poi.setLocation(location);
+
+    poiAttributeList = poi.getAttributes();
+    poiAttributeList.clear();
+    poiAttribute.setId(ATTRIBUTE_ADDRCITY);
+    POIServiceTypes::AttributeValue vs(string(NEW_CITY_NAME));
+    poiAttribute.setValue(vs);
+    poiAttributeList.push_back(poiAttribute);
+    poiAttribute.setId(ATTRIBUTE_STARS);
+    POIServiceTypes::AttributeValue v(NEW_STARS_VALUE);
+    poiAttribute.setValue(v);
+    poiAttributeList.push_back(poiAttribute);
+    poi.setAttributes(poiAttributeList);
+
+    left_bottom_location.setLatitude(LEFT_BOTTOM_LOCATION_LATITUDE);
+    left_bottom_location.setLongitude(LEFT_BOTTOM_LOCATION_LONGITUDE);
+    right_top_location.setLatitude(RIGHT_TOP_LOCATION_LATITUDE);
+    right_top_location.setLongitude(RIGHT_TOP_LOCATION_LONGITUDE);
 
     // Create category, create poi, search, remove poi, remove category
-    if (mp_sqlRequest->createCategory(category,category_id) != sqlRequest::OK)
+    if (mp_sqlRequest->createCategory(category,categoryId) != sqlRequest::OK)
         return false;
 
     refreshCategoryList(); //read the database and buffer the category list locally
 
-    if (mp_sqlRequest->createPoi(category_id,poi,poi_id) != sqlRequest::OK)
+    if (mp_sqlRequest->createPoi(categoryId,poi,poiId) != sqlRequest::OK)
         return false;
 
     str = SEARCH_STRING;
-    if (mp_sqlRequest->searchPoi(category.details.name,str,left_bottom_location,right_top_location,poi_id_list) != sqlRequest::OK)
+    if (mp_sqlRequest->searchPoi(category.getDetails().getName(),str,left_bottom_location,right_top_location,poiIdList) != sqlRequest::OK)
         return false;
 
-    if (mp_sqlRequest->removePoi(poi_id) != sqlRequest::OK)
+    if (mp_sqlRequest->removePoi(poiId) != sqlRequest::OK)
         return false;
 
-    if (mp_sqlRequest->removeCategory(category_id) != sqlRequest::OK)
+    if (mp_sqlRequest->removeCategory(categoryId) != sqlRequest::OK)
         return false;
 
     refreshCategoryList(); //read the database and buffer the category list locally
 
     // Create category, create poi,  remove category (auto remove orphan poi), search
-    if (mp_sqlRequest->createCategory(category,category_id) != sqlRequest::OK)
+    if (mp_sqlRequest->createCategory(category,categoryId) != sqlRequest::OK)
         return false;
 
     refreshCategoryList(); //read the database and buffer the category list locally
 
-    if (mp_sqlRequest->createPoi(category_id,poi,poi_id) != sqlRequest::OK)
+    if (mp_sqlRequest->createPoi(categoryId,poi,poiId) != sqlRequest::OK)
         return false;
 
-    if (mp_sqlRequest->removeCategory(category_id) != sqlRequest::OK)
+    if (mp_sqlRequest->removeCategory(categoryId) != sqlRequest::OK)
         return false;
 
     refreshCategoryList(); //read the database and buffer the category list locally
 
     str = SEARCH_STRING;
-    if (mp_sqlRequest->searchPoi(category.details.name,str,left_bottom_location,right_top_location,poi_id_list) != sqlRequest::POI_ID_NOT_EXIST)
+    if (mp_sqlRequest->searchPoi(category.getDetails().getName(),str,left_bottom_location,right_top_location,poiIdList) != sqlRequest::POI_ID_NOT_EXIST)
         return false;
 
     return true;

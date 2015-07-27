@@ -169,7 +169,7 @@ typeCollection POIServiceTypes {
  		<**	@description : enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...). Note: A POI category is a unique ID. It could be a predefined category or a custom one defined by a POI plug-in **>			
         CategoryID id
  		<**	@description : activation or search radius around the position (in 10 meters) for the category. If value is 0 (zero), the default radius (defined for a category) is applied.**>
-        UInt32 radius
+        Radius radius
     }
 	
 	
