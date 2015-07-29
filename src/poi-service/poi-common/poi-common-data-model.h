@@ -120,6 +120,10 @@ typedef struct
 #define RIGHT_TOP_LOCATION_LATITUDE 48.78
 #define RIGHT_TOP_LOCATION_LONGITUDE 2.20
 
+#define LANGUAGE_CODE "fra"
+#define COUNTRY_CODE "FRA"
+#define SCRIPT_CODE "Latn"
+
 #define SEARCH_STRING "Sweet"
 #define MEDIASET 1
 #define PARENT_ID 0

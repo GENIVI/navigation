@@ -59,6 +59,19 @@ typeCollection POIServiceTypes {
         ATTR_REMOVED
     }
 
+    <** @description: Configuration changed**>
+    enumeration ConfigurationChangedReason {
+        LOCALES
+    }
+
+    <** @description: Reason of update**>
+    enumeration SortOption {
+        SORT_DEFAULT
+        SORT_BY_DISTANCE
+        SORT_BY_TIME
+        ATTRIBUTE_CUSTOM
+    }
+
     <** @description: Different types of resources for icons**>
     union Icon {
         ResourceID[] id

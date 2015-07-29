@@ -1208,11 +1208,12 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::searchPoi(const string &categoryName,
     return ret;
 }
 
+
 PoiManagerServerStub::PoiManagerServerStub() {
     m_version.setVersionMajor(1);
+    m_version.setVersionMinor(0);
     m_version.setVersionMicro(0);
-    m_version.setVersionMicro(0);
-    m_version.setDate("19-13-2015");
+    m_version.setDate("19-03-2015");
     m_rootCategory = ALL_CATEGORIES; //by default
     m_languageCode = "eng";
     m_countryCode = "USA";
@@ -1228,36 +1229,47 @@ PoiManagerServerStub::~PoiManagerServerStub() {
     delete mp_sqlRequest;
 }
 
-void PoiManagerServerStub::getVersion(const std::shared_ptr<CommonAPI::ClientId> clientId, NavigationTypes::Version& version)
+void PoiManagerServerStub::getVersion(const std::shared_ptr<CommonAPI::ClientId> _client, getVersionReply_t _reply)
 {
-    version = m_version;
+     NavigationTypes::Version POIContentManagerVersion(m_version);
+
+    _reply(POIContentManagerVersion);
 }
 
-void PoiManagerServerStub::setLocale(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string languageCode, std::string countryCode, std::string scriptCode)
+void PoiManagerServerStub::setLocale(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _languageCode, std::string _countryCode, std::string _scriptCode, setLocaleReply_t _reply)
 {
-    m_languageCode = languageCode;
-    m_countryCode = countryCode;
-    m_scriptCode = scriptCode;
+    std::vector<uint16_t> changedSettings;
+
+    m_languageCode = _languageCode;
+    m_countryCode = _countryCode;
+    m_scriptCode = _scriptCode;
+
+    changedSettings.push_back(POIServiceTypes::ConfigurationChangedReason::LOCALES);
+
+    fireConfigurationChangedEvent(changedSettings);
 }
 
-void PoiManagerServerStub::getLocale(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& languageCode, std::string& countryCode, std::string& scriptCode)
+void PoiManagerServerStub::getLocale(const std::shared_ptr<CommonAPI::ClientId> _client, getLocaleReply_t _reply)
 {
-    languageCode = m_languageCode;
-    countryCode = m_countryCode;
-    scriptCode = m_scriptCode;
+    _reply(m_languageCode,m_countryCode,m_scriptCode);
 }
 
-void PoiManagerServerStub::getSupportedLocales(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<POIServiceTypes::Locales>& localeList)
+void PoiManagerServerStub::getSupportedLocales(const std::shared_ptr<CommonAPI::ClientId> _client, getSupportedLocalesReply_t _reply)
 {
+    std::vector< POIServiceTypes::Locales> localeList;
     POIServiceTypes::Locales en_US { "eng","USA", "Latn" };
     POIServiceTypes::Locales fr_FR { "fra","FRA", "Latn" };
     localeList.push_back(en_US);
     localeList.push_back(fr_FR);
+
+    _reply(localeList);
 }
 
-void PoiManagerServerStub::getAvailableCategories(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<POIServiceTypes::CategoryAndName>& categories)
+void PoiManagerServerStub::getAvailableCategories(const std::shared_ptr<CommonAPI::ClientId> _client, getAvailableCategoriesReply_t _reply)
 {
     POIServiceTypes::CategoryAndName category;
+    std::vector< POIServiceTypes::CategoryAndName> categories;
+
     uint16_t index;
 
     // load categories from the embedded database
@@ -1269,76 +1281,89 @@ void PoiManagerServerStub::getAvailableCategories(const std::shared_ptr<CommonAP
         categories.push_back(category);
     }
 
+    _reply(categories);
 }
 
-void PoiManagerServerStub::getRootCategory(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CategoryID& category)
+void PoiManagerServerStub::getRootCategory(const std::shared_ptr<CommonAPI::ClientId> _client, getRootCategoryReply_t _reply)
 {
-    category = m_rootCategory;
+    _reply(m_rootCategory);
 }
 
-void PoiManagerServerStub::getParentCategories(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CategoryID category, std::vector<POIServiceTypes::CategoryAndLevel>& categories)
-{
-    uint16_t index;
-    POIServiceTypes::CategoryAndLevel categoryAndLevel;
-    for (index=0;index<m_availableCategoryTable.at(category).parentList.size();index++)
-    {
-        categoryAndLevel.setUniqueId(m_availableCategoryTable.at(category).parentList[index]);
-        categoryAndLevel.setTopLevel(m_availableCategoryTable.at(categoryAndLevel.getUniqueId()).top_level);
-        categories.push_back(categoryAndLevel);
-    }
-}
-
-void PoiManagerServerStub::getChildrenCategories(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CategoryID category, std::vector<POIServiceTypes::CategoryAndLevel>& categories)
+void PoiManagerServerStub::getParentCategories(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CategoryID _category, getParentCategoriesReply_t _reply)
 {
     uint16_t index;
     POIServiceTypes::CategoryAndLevel categoryAndLevel;
-    for (index=0;index<m_availableCategoryTable.at(category).childList.size();index++)
+    std::vector< POIServiceTypes::CategoryAndLevel> categories;
+
+    for (index=0;index<m_availableCategoryTable.at(_category).parentList.size();index++)
     {
-        categoryAndLevel.setUniqueId(m_availableCategoryTable.at(category).childList[index]);
+        categoryAndLevel.setUniqueId(m_availableCategoryTable.at(_category).parentList[index]);
         categoryAndLevel.setTopLevel(m_availableCategoryTable.at(categoryAndLevel.getUniqueId()).top_level);
         categories.push_back(categoryAndLevel);
     }
+
+    _reply(categories);
 }
 
-void PoiManagerServerStub::createCategory(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CAMCategory category, POIServiceTypes::CategoryID& unique_id)
+void PoiManagerServerStub::getChildrenCategories(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CategoryID _category, getChildrenCategoriesReply_t _reply)
 {
-    mp_sqlRequest->createCategory(category,unique_id);
+    uint16_t index;
+    POIServiceTypes::CategoryAndLevel categoryAndLevel;
+    std::vector< POIServiceTypes::CategoryAndLevel> categories;
+
+    for (index=0;index<m_availableCategoryTable.at(_category).childList.size();index++)
+    {
+        categoryAndLevel.setUniqueId(m_availableCategoryTable.at(_category).childList[index]);
+        categoryAndLevel.setTopLevel(m_availableCategoryTable.at(categoryAndLevel.getUniqueId()).top_level);
+        categories.push_back(categoryAndLevel);
+    }
+
+    _reply(categories);
+}
+
+void PoiManagerServerStub::createCategory(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CAMCategory _category, createCategoryReply_t _reply)
+{
+    POIServiceTypes::CategoryID unique_id;
+
+    mp_sqlRequest->createCategory(_category,unique_id);
     refreshCategoryList();
+
+    _reply(unique_id);
 }
 
-void PoiManagerServerStub::removeCategories(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<POIServiceTypes::CategoryID> categories)
+void PoiManagerServerStub::removeCategories(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< POIServiceTypes::CategoryID> _categories, removeCategoriesReply_t _reply)
 {
     size_t index;
 
-    for(index=0;index<categories.size();index++)
+    for(index=0;index<_categories.size();index++)
     {
-        if (mp_sqlRequest->removeCategory(categories.at(index)) != sqlRequest::OK)
+        if (mp_sqlRequest->removeCategory(_categories.at(index)) != sqlRequest::OK)
             break;
     }
-    if (index<categories.size())
+    if (index<_categories.size())
     { //it failed
 //to do something
     }
     else
     {
-        fireCategoriesRemovedEvent(categories);
+        fireCategoriesRemovedEvent(_categories);
         refreshCategoryList();
     }
 }
 
-void PoiManagerServerStub::addPOIs(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CategoryID unique_id, std::vector<POIServiceTypes::PoiAddedDetails> poiList)
+void PoiManagerServerStub::addPOIs(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CategoryID _unique_id, std::vector< POIServiceTypes::PoiAddedDetails> _poiList, addPOIsReply_t _reply)
 {
     size_t index;
     std::vector<POIServiceTypes::POI_ID> addedPoiList;
     POIServiceTypes::POI_ID poiId;
 
-    for(index=0;index<poiList.size();index++)
+    for(index=0;index<_poiList.size();index++)
     {
-        if (mp_sqlRequest->createPoi(unique_id,poiList.at(index),poiId) != sqlRequest::OK)
+        if (mp_sqlRequest->createPoi(_unique_id,_poiList.at(index),poiId) != sqlRequest::OK)
             break;
         addedPoiList.push_back(poiId);
     }
-    if (index<poiList.size())
+    if (index<_poiList.size())
     { //it failed
 //to do something
     }
@@ -1349,22 +1374,22 @@ void PoiManagerServerStub::addPOIs(const std::shared_ptr<CommonAPI::ClientId> cl
 
 }
 
-void PoiManagerServerStub::removePOIs(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<POIServiceTypes::POI_ID> ids)
+void PoiManagerServerStub::removePOIs(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< POIServiceTypes::POI_ID> _ids, removePOIsReply_t _reply)
 {
     size_t index;
 
-    for(index=0;index<ids.size();index++)
+    for(index=0;index<_ids.size();index++)
     {
-        if (mp_sqlRequest->removePoi(ids.at(index)) != sqlRequest::OK)
+        if (mp_sqlRequest->removePoi(_ids.at(index)) != sqlRequest::OK)
             break;
     }
-    if (index<ids.size())
+    if (index<_ids.size())
     { //it failed
 //to do something
     }
     else
     {
-        firePOIRemovedEvent(ids);
+        firePOIRemovedEvent(_ids);
     }
 }
 

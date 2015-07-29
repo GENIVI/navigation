@@ -37,6 +37,7 @@
 #include <getopt.h>
 #include <fstream>
 #include <gtk/gtk.h>
+#include <functional>
 
 #include <CommonAPI/CommonAPI.hpp> //Defined in the Common API Runtime library
 #include <v0_1/org/genivi/navigation/poiservice/POIContentManagerProxy.hpp>
@@ -59,6 +60,8 @@ public:
 
     ~contentManager();
 
+    void getServerStatus();
+
     void ConfigurationChanged(const std::vector< uint16_t >& changedSettings);
 
     void CategoriesRemoved(const std::vector< POIServiceTypes::CategoryID >& categories);
@@ -79,15 +82,24 @@ public:
 
     void testSearch();
 
+    void createCategory(const POIServiceTypes::CategoryID& category);
+
+    void createPOIs(const std::vector< POIServiceTypes::POI_ID >& pois);
+
+    void removePOIs(const std::vector< POIServiceTypes::POI_ID >& pois);
+
 private:
 
     GtkWidget *mp_popupWindow;
     std::shared_ptr<POIContentManagerProxyDefault> mp_proxy;
     POIServiceTypes::CAMCategory m_category;
     POIServiceTypes::CategoryID m_category_id;
+    std::vector<POIServiceTypes::CategoryID> m_category_ids;
     std::vector<POIServiceTypes::POI_ID> m_poi_ids;
     POIServiceTypes::PoiAddedDetails m_poi;
     NavigationTypes::Coordinate3D m_left_bottom_location,m_right_top_location;
+    POIServiceTypes::Locales m_locales;
+
     std::string m_strTest;
 };
 
@@ -97,23 +109,32 @@ contentManager::contentManager(std::shared_ptr<POIContentManagerProxyDefault> pr
 {
     // test: create a new category, with a new attribute and add a poi under this category
     POIServiceTypes::Details categoryDetails;
+    std::vector<POIServiceTypes::CategoryID> categoryParentsIDs;
+    POIServiceTypes::Icon categoryIcons;
+    POIServiceTypes::Media categoryMedia;
+
     POIServiceTypes::CategoryAttribute categoryAttribute;
+    POIServiceTypes::CategorySortOption categorySortOption;
+    std::vector<POIServiceTypes::CategorySortOption> categorySortOptions;
+
     std::vector<POIServiceTypes::CategoryAttribute> categoryAttributeList;
-    std::vector<POIServiceTypes::CategoryID> categoryParentsId;
     POIServiceTypes::PoiAttribute poiAttribute;
     std::vector<POIServiceTypes::PoiAttribute> poiAttributeList;
     NavigationTypes::Coordinate3D location;
+
     mp_proxy = proxy;
 
-    categoryDetails = m_category.getDetails();
+    categoryParentsIDs.clear();
+    categoryParentsIDs.push_back(PARENT_ID);
+    categoryDetails.setParentsId(categoryParentsIDs);
+//    categoryIcons = ICON_URL;
+    categoryDetails.setIcons(categoryIcons);
     categoryDetails.setName(NEW_CATEGORY_NAME);
-    categoryParentsId = categoryDetails.getParentsId();
-    categoryParentsId.clear();
-    categoryParentsId.push_back(PARENT_ID);
-    categoryDetails.setParentsId(categoryParentsId);
+    categoryDetails.setShortDesc("");
+//    categoryMedia = "";
+    categoryDetails.setMedia(categoryMedia);
     m_category.setDetails(categoryDetails);              //new category
 
-    categoryAttributeList = m_category.getAttributes();
     categoryAttributeList.clear();
     categoryAttribute.setId(ATTRIBUTE_PHONE);
     categoryAttribute.setName(ATTRIBUTE_PHONE_NAME);   //existing attribute
@@ -123,6 +144,10 @@ contentManager::contentManager(std::shared_ptr<POIContentManagerProxyDefault> pr
     categoryAttributeList.push_back(categoryAttribute);
     m_category.setAttributes(categoryAttributeList);
 
+    categorySortOption.setId(POIServiceTypes::SortOption::SORT_DEFAULT);
+    categorySortOption.setName("");
+    categorySortOptions.push_back(categorySortOption);
+    m_category.setSortOptions(categorySortOptions);
     m_poi.setName(POI_NAME);
 
     location.setLatitude(POI_LOCATION_LATITUDE);
@@ -130,7 +155,6 @@ contentManager::contentManager(std::shared_ptr<POIContentManagerProxyDefault> pr
     location.setAltitude(POI_LOCATION_ALTITUDE);
     m_poi.setLocation(location);
 
-    poiAttributeList = m_poi.getAttributes();
     poiAttributeList.clear();
     poiAttribute.setId(ATTRIBUTE_ADDRCITY);
     POIServiceTypes::AttributeValue vs(string(NEW_CITY_NAME));
@@ -150,6 +174,14 @@ contentManager::contentManager(std::shared_ptr<POIContentManagerProxyDefault> pr
     // init of the data test for search string
     m_strTest = SEARCH_STRING;
 
+    m_category_id = INVALID_CATEGORY;
+
+    m_locales.setLanguageCode(LANGUAGE_CODE);
+    m_locales.setCountryCode(COUNTRY_CODE);
+    m_locales.setScriptCode(SCRIPT_CODE);
+
+    m_category_ids.clear(); //list empty for the moment
+
     m_poi_ids.clear(); //list empty for the moment
 
 }
@@ -158,26 +190,70 @@ contentManager::~contentManager()
 {
 }
 
+static void getVersionAsyncCallback(const CommonAPI::CallStatus& callStatus, const NavigationTypes::Version& version)
+{
+    if (callStatus != CommonAPI::CallStatus::SUCCESS) {
+        cout << "Remote getVersion failed with status: " << static_cast<std::underlying_type<CommonAPI::CallStatus>::type>(callStatus) << endl;
+        return;
+    }
+
+    cout << "Server:" << endl;
+    cout << "Version " << version.getVersionMajor() << "." << version.getVersionMinor() << "." << version.getVersionMicro() << endl;
+    cout << "Date " << version.getDate() << endl;
+}
+
+static void getLocaleAsyncCallBack(const CommonAPI::CallStatus& callStatus, const std::string& languageCode, const std::string& countryCode, const std::string& scriptCode)
+{
+    if (callStatus != CommonAPI::CallStatus::SUCCESS) {
+        cout << "Remote getLocale failed with status: " << static_cast<std::underlying_type<CommonAPI::CallStatus>::type>(callStatus) << endl;
+        return;
+    }
+
+    cout << "languageCode " << languageCode << " " << "countryCode " << countryCode << " " << "scriptCode " << scriptCode << " " << endl;
+}
+
+void contentManager::getServerStatus()
+{
+    function<void(const CommonAPI::CallStatus&, const NavigationTypes::Version&)> getVersion = getVersionAsyncCallback;
+    function<void(const CommonAPI::CallStatus&, const std::string&, const std::string&, const std::string&)> getLocale = getLocaleAsyncCallBack;
+    std::string languageCode, countryCode, scriptCode;
+    CommonAPI::CallStatus callStatus;
+
+    mp_proxy->getVersionAsync(getVersionAsyncCallback);
+
+    mp_proxy->getLocale(callStatus,languageCode,countryCode,scriptCode);
+
+    cout << "languageCode " << languageCode << " " << "countryCode " << countryCode << " " << "scriptCode " << scriptCode << " " << endl;
+
+    mp_proxy->setLocale(m_locales.getLanguageCode(),m_locales.getCountryCode(),m_locales.getScriptCode(),callStatus);
+
+    mp_proxy->getLocaleAsync(getLocaleAsyncCallBack);
+}
+
 void contentManager::ConfigurationChanged(const std::vector< uint16_t >& changedSettings)
 {
     size_t index;
 
-    cout << "ConfigurationChanged";
+    cout << "ConfigurationChanged: ";
     for(index=0;index<changedSettings.size();index++)
     {
         cout << changedSettings.at(index);
+        cout << endl;
     }
-    cout << endl;
 }
 
 void contentManager::CategoriesRemoved(const std::vector<POIServiceTypes::CategoryID> &categories)
 {
     size_t index;
 
-    cout << "Categories Removed" << endl;
     for(index=0;index<categories.size();index++)
     {
         cout << "Id: " << categories.at(index) << endl;
+        if (m_category_id == categories.at(index))
+        {
+            m_category_id = INVALID_CATEGORY;
+            cout << "Category removed" << endl;
+        }
     }
 }
 
@@ -210,12 +286,28 @@ void contentManager::connectPopupWindow(GtkWidget *window)
     mp_popupWindow = window;
 }
 
+static void createCategoryAsyncCallback(const CommonAPI::CallStatus& callStatus, const POIServiceTypes::CategoryID& categoryID)
+{
+    if (callStatus != CommonAPI::CallStatus::SUCCESS) {
+        cout << "Remote createCategory failed with status: " << static_cast<std::underlying_type<CommonAPI::CallStatus>::type>(callStatus) << endl;
+        return;
+    }
+
+    cout << "Category Created" << endl << "Id: " << categoryID << endl;
+
+    clientContentManager->createCategory(categoryID);
+}
+
+void contentManager::createCategory(const POIServiceTypes::CategoryID& category)
+{
+    m_category_id = category;
+}
+
 void contentManager::testCreateCategory()
 {
-    CommonAPI::CallStatus status;
-    mp_proxy->createCategory(m_category,status,m_category_id);
-    cout << "Status: " << m_category_id << endl;
-    cout << "Category Created" << endl << "Id: " << m_category_id << endl;
+    function<void(const CommonAPI::CallStatus&, const POIServiceTypes::CategoryID&)> fcb = createCategoryAsyncCallback;
+
+    mp_proxy->createCategoryAsync(m_category,createCategoryAsyncCallback);
 
 }
 
@@ -229,6 +321,11 @@ void contentManager::testRemoveCategory()
     mp_proxy->removeCategories(categories,status);
 }
 
+void contentManager::createPOIs(const std::vector< POIServiceTypes::POI_ID >& pois)
+{
+
+}
+
 void contentManager::testCreatePOI()
 {
     std::vector<POIServiceTypes::PoiAddedDetails> poiList;
@@ -236,6 +333,11 @@ void contentManager::testCreatePOI()
 
     poiList.push_back(m_poi);
     mp_proxy->addPOIs(m_category_id,poiList,status);
+}
+
+void contentManager::removePOIs(const std::vector< POIServiceTypes::POI_ID >& pois)
+{
+
 }
 
 void contentManager::testRemovePOI()
@@ -480,6 +582,9 @@ int main(int  argc , char**  argv )
 
             // Send a feedback to the user
             cout << "poi manager client started" << endl;
+
+            // Get server status
+            clientContentManager->getServerStatus();
 
             // loop listening
             gtk_main();

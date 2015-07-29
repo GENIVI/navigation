@@ -204,7 +204,7 @@ interface POIContentManager {
 		}	
 	}
 	
-	<**	@description : guidanceStatusChanged = This signal is sent to the clients when one or more configuration settings changes.**>
+	<**	@description : ConfigurationChanged = This signal is sent to the clients when one or more configuration settings changes.**>
 	broadcast ConfigurationChanged {
 		out {
 			<**	@description : changedSettings array[setting].**>

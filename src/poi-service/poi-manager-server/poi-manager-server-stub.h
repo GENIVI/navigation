@@ -29,6 +29,8 @@
 
 #include <CommonAPI/CommonAPI.hpp>
 
+#include <v0_1/org/genivi/navigation/poiservice/POIServiceTypes.hpp>
+#include <org/genivi/navigation/NavigationTypes.hpp>
 #include <v0_1/org/genivi/navigation/poiservice/POIContentManagerStubDefault.hpp>
 
 #include "poi-common-database.h"
@@ -36,8 +38,7 @@
 #include "poi-common-data-model.h"
 
 using namespace std;
-using namespace v0_1::org::genivi::navigation;
-using namespace poiservice;
+using namespace v0_1::org::genivi::navigation::poiservice;
 using namespace org::genivi::navigation;
 
 class sqlRequest
@@ -181,24 +182,23 @@ private:
 
 };
 
-
 class PoiManagerServerStub: public POIContentManagerStubDefault {
 
 public:
     PoiManagerServerStub();
     ~PoiManagerServerStub();
-    void getVersion(const std::shared_ptr<CommonAPI::ClientId> clientId, NavigationTypes::Version& version);
-    void setLocale(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string languageCode, std::string countryCode, std::string scriptCode);
-    void getLocale(const std::shared_ptr<CommonAPI::ClientId> clientId, std::string& languageCode, std::string& countryCode, std::string& scriptCode);
-    void getSupportedLocales(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<POIServiceTypes::Locales>& localeList);
-    void getAvailableCategories(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<POIServiceTypes::CategoryAndName>& categories);
-    void getRootCategory(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CategoryID& category);
-    void getChildrenCategories(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CategoryID category, std::vector<POIServiceTypes::CategoryAndLevel>& categories);
-    void getParentCategories(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CategoryID category, std::vector<POIServiceTypes::CategoryAndLevel>& categories);
-    void createCategory(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CAMCategory category, POIServiceTypes::CategoryID& unique_id);
-    void removeCategories(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<POIServiceTypes::CategoryID> categories);
-    void addPOIs(const std::shared_ptr<CommonAPI::ClientId> clientId, POIServiceTypes::CategoryID unique_id, std::vector<POIServiceTypes::PoiAddedDetails> poiList);
-    void removePOIs(const std::shared_ptr<CommonAPI::ClientId> clientId, std::vector<POIServiceTypes::POI_ID> ids);
+    void getVersion(const std::shared_ptr<CommonAPI::ClientId> _client, getVersionReply_t _reply);
+    void setLocale(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _languageCode, std::string _countryCode, std::string _scriptCode, setLocaleReply_t _reply);
+    void getLocale(const std::shared_ptr<CommonAPI::ClientId> _client, getLocaleReply_t _reply);
+    void getSupportedLocales(const std::shared_ptr<CommonAPI::ClientId> _client, getSupportedLocalesReply_t _reply);
+    void getAvailableCategories(const std::shared_ptr<CommonAPI::ClientId> _client, getAvailableCategoriesReply_t _reply);
+    void getRootCategory(const std::shared_ptr<CommonAPI::ClientId> _client, getRootCategoryReply_t _reply);
+    void getChildrenCategories(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CategoryID _category, getChildrenCategoriesReply_t _reply);
+    void getParentCategories(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CategoryID _category, getParentCategoriesReply_t _reply);
+    void createCategory(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CAMCategory _category, createCategoryReply_t _reply);
+    void removeCategories(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< POIServiceTypes::CategoryID> _categories, removeCategoriesReply_t _reply);
+    void addPOIs(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CategoryID _unique_id, std::vector< POIServiceTypes::PoiAddedDetails> _poiList, addPOIsReply_t _reply);
+    void removePOIs(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< POIServiceTypes::POI_ID> _ids, removePOIsReply_t _reply);
 
     void run();
 
