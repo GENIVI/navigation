@@ -37,6 +37,8 @@
 
 #include "poi-common-data-model.h"
 
+#include "poi-common-math.h"
+
 using namespace std;
 using namespace v0_1::org::genivi::navigation::poiservice;
 using namespace org::genivi::navigation;
@@ -199,6 +201,10 @@ public:
     void removeCategories(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< POIServiceTypes::CategoryID> _categories, removeCategoriesReply_t _reply);
     void addPOIs(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CategoryID _unique_id, std::vector< POIServiceTypes::PoiAddedDetails> _poiList, addPOIsReply_t _reply);
     void removePOIs(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< POIServiceTypes::POI_ID> _ids, removePOIsReply_t _reply);
+    void poiSearchStarted(const std::shared_ptr<CommonAPI::ClientId> _client, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, uint16_t _maxSize, ::org::genivi::navigation::NavigationTypes::Coordinate3D _location, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::CategoryAndRadius> _poiCategories, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::AttributeDetails> _poiAttributes, std::string _inputString, uint16_t _sortOption, poiSearchStartedReply_t _reply);
+    void poiSearchCanceled(const std::shared_ptr<CommonAPI::ClientId> _client, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, poiSearchCanceledReply_t _reply);
+    void resultListRequested(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _camId, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::AttributeID> _attributes, resultListRequestedReply_t _reply);
+    void poiDetailsRequested(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::POI_ID> _source_id, poiDetailsRequestedReply_t _reply);
 
     void run();
 
@@ -214,6 +220,8 @@ private:
     POIServiceTypes::CategoryID m_rootCategory;
     NavigationTypes::Coordinate3D m_centerLocation;
 
+    NavigationTypes::Handle m_search_handle;
+
     sqlRequest* mp_sqlRequest;
     void refreshCategoryList();
 
@@ -225,7 +233,6 @@ private:
       return !(iss >> f >> t).fail();
     }
 
-    bool test();
 };
 
 #endif /* POIMANAGERSERVERSTUBIMPL_H_ */

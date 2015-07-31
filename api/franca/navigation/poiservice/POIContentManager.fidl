@@ -236,4 +236,14 @@ interface POIContentManager {
 		}
 	}
 
+	<**	@description : SearchStatusChanged = This signal updates the search or proximity alert status of the specified handle.**>	
+	broadcast SearchStatusChanged {
+		out {
+			<** @description : poi search unique handle.**>
+			Handle poiSearchHandle				
+			<** @description : enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... ).**>
+			SearchStatusState statusValue				
+		}
+	}
+
 }

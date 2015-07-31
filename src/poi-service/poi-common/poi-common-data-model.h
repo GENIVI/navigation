@@ -37,6 +37,12 @@ typedef uint32_t attributeId_t;
 typedef uint32_t handleId_t;
 typedef uint8_t camId_t;
 
+typedef struct
+{
+    double latitude;
+    double longitude;
+    int altitude;
+} geocoordinate3D_t;
 
 enum ATTRIBUTE_LIST{
     ATTRIBUTE_SOURCE = 0,
@@ -94,7 +100,6 @@ typedef struct
     std::vector<categoryId_t> childList; //list of children
 } poi_category_common_t;
 
-
 // some defines to be used by the test
 #define ALL_CATEGORIES 0
 #define INVALID_CATEGORY 0x00
@@ -115,17 +120,22 @@ typedef struct
 #define POI_LOCATION_LATITUDE 48.779839
 #define POI_LOCATION_LONGITUDE 2.217260
 #define POI_LOCATION_ALTITUDE 120
-#define LEFT_BOTTOM_LOCATION_LATITUDE 48.76
-#define LEFT_BOTTOM_LOCATION_LONGITUDE 2.22
-#define RIGHT_TOP_LOCATION_LATITUDE 48.78
-#define RIGHT_TOP_LOCATION_LONGITUDE 2.20
+#define SEARCH_CENTER_LOCATION_LATITUDE 48.76
+#define SEARCH_CENTER_LOCATION_LONGITUDE 2.22
+#define SEARCH_CENTER_LOCATION_ALTITUDE 100
+#define SEARCH_RADIUS 200 //in tens of meters
+#define SEARCH_STRING "Sweet"
 
 #define LANGUAGE_CODE "fra"
 #define COUNTRY_CODE "FRA"
 #define SCRIPT_CODE "Latn"
 
-#define SEARCH_STRING "Sweet"
 #define MEDIASET 1
 #define PARENT_ID 0
+
+#define SEARCH_HANDLE 1
+#define SEARCH_MAX_SIZE 50
+
+#define NO_HANDLE 0
 
 #endif

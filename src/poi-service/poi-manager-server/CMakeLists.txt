@@ -51,7 +51,7 @@ pkg_check_modules(GLIBMM glibmm-2.4)
 pkg_check_modules(GOBJECT gobject-2.0)
 
 # Source Files
-FILE(GLOB PRJ_LOCAL_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
+FILE(GLOB PRJ_LOCAL_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp ${COMMON_DIR}/*.cpp)
 FILE(GLOB PRJ_COMMON_SRCS ${COMMON_DIR}/*.cpp)
 
 add_subdirectory(${FRANCA_DIR}/poiservice "${CMAKE_CURRENT_BINARY_DIR}/franca")

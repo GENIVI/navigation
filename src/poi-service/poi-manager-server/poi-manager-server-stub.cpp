@@ -1223,6 +1223,8 @@ PoiManagerServerStub::PoiManagerServerStub() {
     m_centerLocation.setAltitude(30);
 
     mp_sqlRequest = new sqlRequest;
+
+    m_search_handle = NO_HANDLE;
 }
 
 PoiManagerServerStub::~PoiManagerServerStub() {
@@ -1393,6 +1395,69 @@ void PoiManagerServerStub::removePOIs(const std::shared_ptr<CommonAPI::ClientId>
     }
 }
 
+void PoiManagerServerStub::poiSearchStarted(const std::shared_ptr<CommonAPI::ClientId> _client, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, uint16_t _maxSize, ::org::genivi::navigation::NavigationTypes::Coordinate3D _location, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::CategoryAndRadius> _poiCategories, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::AttributeDetails> _poiAttributes, std::string _inputString, uint16_t _sortOption, poiSearchStartedReply_t _reply)
+{
+    POIServiceTypes::CategoryAndRadius categoryAndRadius;
+    size_t index;
+    string categoryName;
+    double angle;
+    NavigationTypes::Coordinate3D leftBottomLocation, rightTopLocation;
+    std::vector<POIServiceTypes::POI_ID> poiIDList;
+
+    //For the moment, just search for one category
+    categoryAndRadius = _poiCategories.at(0);
+
+    //First step is to check the consistency of the request
+    for(index=0;index<m_availableCategoryTable.size();index++)
+    {
+        if ((m_availableCategoryTable.at(index)).id == categoryAndRadius.getId())
+        {
+            categoryName = (m_availableCategoryTable.at(index)).name;
+            break;
+        }
+    }
+    if (index>=m_availableCategoryTable.size())
+    {
+        //no id found, error to be sent
+        fireSearchStatusChangedEvent(_poiSearchHandle,POIServiceTypes::SearchStatusState::INVALID);
+        return;
+    }
+
+    //calculate the angle
+    angle = calculateAngle(categoryAndRadius.getRadius()*10); // radius unit is 10 m
+
+    leftBottomLocation.setLatitude(_location.getLatitude() - angle);
+    leftBottomLocation.setLongitude(_location.getLongitude() - angle);
+    rightTopLocation.setLatitude(_location.getLatitude() + angle);
+    rightTopLocation.setLongitude(_location.getLongitude() + angle);
+
+
+    m_search_handle = _poiSearchHandle; //for the moment, only one handle is managed
+
+    fireSearchStatusChangedEvent(_poiSearchHandle,POIServiceTypes::SearchStatusState::SEARCHING);
+
+    mp_sqlRequest->searchPoi(categoryName,_inputString, leftBottomLocation, rightTopLocation, poiIDList);
+
+    fireSearchStatusChangedEvent(_poiSearchHandle,POIServiceTypes::SearchStatusState::FINISHED);
+
+}
+
+void PoiManagerServerStub::poiSearchCanceled(const std::shared_ptr<CommonAPI::ClientId> _client, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, poiSearchCanceledReply_t _reply)
+{
+    m_search_handle = NO_HANDLE;
+    fireSearchStatusChangedEvent(_poiSearchHandle,POIServiceTypes::SearchStatusState::NOT_STARTED);
+}
+
+void PoiManagerServerStub::resultListRequested(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _camId, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::AttributeID> _attributes, resultListRequestedReply_t _reply)
+{
+
+}
+
+void PoiManagerServerStub::poiDetailsRequested(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::POI_ID> _source_id, poiDetailsRequestedReply_t _reply)
+{
+
+}
+
 void PoiManagerServerStub::run()
 {
 }
@@ -1402,113 +1467,7 @@ bool PoiManagerServerStub::initDatabase(const char* poiDatabaseFileName)
     mp_sqlRequest->setDatabase(poiDatabaseFileName);
     refreshCategoryList(); //read the database and buffer the category list locally
 
-//    return test();
-
     return true; //maybe add some check of the file here
-}
-
-bool PoiManagerServerStub::test()
-{
-    // test: create a new category, with a new attribute and add a poi under this category
-    POIServiceTypes::CAMCategory category;
-    POIServiceTypes::Details categoryDetails;
-    POIServiceTypes::CategoryAttribute categoryAttribute;
-    std::vector<POIServiceTypes::CategoryAttribute> categoryAttributeList;
-    std::vector<POIServiceTypes::CategoryID> categoryParentsId;
-
-    POIServiceTypes::CategoryID categoryId;
-    POIServiceTypes::POI_ID poiId;
-    std::vector<POIServiceTypes::POI_ID> poiIdList;
-
-    POIServiceTypes::PoiAddedDetails poi;
-    POIServiceTypes::PoiAttribute poiAttribute;
-    std::vector<POIServiceTypes::PoiAttribute> poiAttributeList;
-
-    NavigationTypes::Coordinate3D left_bottom_location,right_top_location,location;
-    std::string str;
-
-    categoryDetails = category.getDetails();
-    categoryDetails.setName(NEW_CATEGORY_NAME);
-    categoryParentsId = categoryDetails.getParentsId();
-    categoryParentsId.clear();
-    categoryParentsId.push_back(PARENT_ID);
-    categoryDetails.setParentsId(categoryParentsId);
-    category.setDetails(categoryDetails);              //new category
-
-    categoryAttributeList = category.getAttributes();
-    categoryAttributeList.clear();
-    categoryAttribute.setId(ATTRIBUTE_PHONE);
-    categoryAttribute.setName(ATTRIBUTE_PHONE_NAME);   //existing attribute
-    categoryAttributeList.push_back(categoryAttribute);
-    categoryAttribute.setId(ATTRIBUTE_CREDIT_CARD);      //new attribute id
-    categoryAttribute.setName(ATTRIBUTE_CREDIT_CARD_NAME);  //new attribute
-    categoryAttributeList.push_back(categoryAttribute);
-    category.setAttributes(categoryAttributeList);
-
-    poi.setName(POI_NAME);
-
-    location.setLatitude(POI_LOCATION_LATITUDE);
-    location.setLongitude(POI_LOCATION_LONGITUDE);
-    location.setAltitude(POI_LOCATION_ALTITUDE);
-    poi.setLocation(location);
-
-    poiAttributeList = poi.getAttributes();
-    poiAttributeList.clear();
-    poiAttribute.setId(ATTRIBUTE_ADDRCITY);
-    POIServiceTypes::AttributeValue vs(string(NEW_CITY_NAME));
-    poiAttribute.setValue(vs);
-    poiAttributeList.push_back(poiAttribute);
-    poiAttribute.setId(ATTRIBUTE_STARS);
-    POIServiceTypes::AttributeValue v(NEW_STARS_VALUE);
-    poiAttribute.setValue(v);
-    poiAttributeList.push_back(poiAttribute);
-    poi.setAttributes(poiAttributeList);
-
-    left_bottom_location.setLatitude(LEFT_BOTTOM_LOCATION_LATITUDE);
-    left_bottom_location.setLongitude(LEFT_BOTTOM_LOCATION_LONGITUDE);
-    right_top_location.setLatitude(RIGHT_TOP_LOCATION_LATITUDE);
-    right_top_location.setLongitude(RIGHT_TOP_LOCATION_LONGITUDE);
-
-    // Create category, create poi, search, remove poi, remove category
-    if (mp_sqlRequest->createCategory(category,categoryId) != sqlRequest::OK)
-        return false;
-
-    refreshCategoryList(); //read the database and buffer the category list locally
-
-    if (mp_sqlRequest->createPoi(categoryId,poi,poiId) != sqlRequest::OK)
-        return false;
-
-    str = SEARCH_STRING;
-    if (mp_sqlRequest->searchPoi(category.getDetails().getName(),str,left_bottom_location,right_top_location,poiIdList) != sqlRequest::OK)
-        return false;
-
-    if (mp_sqlRequest->removePoi(poiId) != sqlRequest::OK)
-        return false;
-
-    if (mp_sqlRequest->removeCategory(categoryId) != sqlRequest::OK)
-        return false;
-
-    refreshCategoryList(); //read the database and buffer the category list locally
-
-    // Create category, create poi,  remove category (auto remove orphan poi), search
-    if (mp_sqlRequest->createCategory(category,categoryId) != sqlRequest::OK)
-        return false;
-
-    refreshCategoryList(); //read the database and buffer the category list locally
-
-    if (mp_sqlRequest->createPoi(categoryId,poi,poiId) != sqlRequest::OK)
-        return false;
-
-    if (mp_sqlRequest->removeCategory(categoryId) != sqlRequest::OK)
-        return false;
-
-    refreshCategoryList(); //read the database and buffer the category list locally
-
-    str = SEARCH_STRING;
-    if (mp_sqlRequest->searchPoi(category.getDetails().getName(),str,left_bottom_location,right_top_location,poiIdList) != sqlRequest::POI_ID_NOT_EXIST)
-        return false;
-
-    return true;
 }
 
 // refresh the buffer that contains the categories related data, called each time a category is added or removed

@@ -84,9 +84,9 @@ public:
 
     void createCategory(const POIServiceTypes::CategoryID& category);
 
-    void createPOIs(const std::vector< POIServiceTypes::POI_ID >& pois);
+    void dumpCategories();
 
-    void removePOIs(const std::vector< POIServiceTypes::POI_ID >& pois);
+    void dumpLocales();
 
 private:
 
@@ -97,7 +97,6 @@ private:
     std::vector<POIServiceTypes::CategoryID> m_category_ids;
     std::vector<POIServiceTypes::POI_ID> m_poi_ids;
     POIServiceTypes::PoiAddedDetails m_poi;
-    NavigationTypes::Coordinate3D m_left_bottom_location,m_right_top_location;
     POIServiceTypes::Locales m_locales;
 
     std::string m_strTest;
@@ -109,45 +108,61 @@ contentManager::contentManager(std::shared_ptr<POIContentManagerProxyDefault> pr
 {
     // test: create a new category, with a new attribute and add a poi under this category
     POIServiceTypes::Details categoryDetails;
-    std::vector<POIServiceTypes::CategoryID> categoryParentsIDs;
-    POIServiceTypes::Icon categoryIcons;
-    POIServiceTypes::Media categoryMedia;
+    std::vector<POIServiceTypes::CategoryID> categoryParentsIDList;
+    POIServiceTypes::Icon categoryIcons(std::string(ICON_URL));
+    POIServiceTypes::Media categoryMedia(std::string(""));
 
     POIServiceTypes::CategoryAttribute categoryAttribute;
-    POIServiceTypes::CategorySortOption categorySortOption;
-    std::vector<POIServiceTypes::CategorySortOption> categorySortOptions;
+    POIServiceTypes::Operator categoryOperator;
+    POIServiceTypes::AttributeValue categoryOperatorAttributeValue(int32_t(0));
+    std::vector<POIServiceTypes::Operator> categoryOperatorList;
 
     std::vector<POIServiceTypes::CategoryAttribute> categoryAttributeList;
+
+    POIServiceTypes::CategorySortOption categorySortOption;
+    std::vector<POIServiceTypes::CategorySortOption> categorySortOptionList;
+
     POIServiceTypes::PoiAttribute poiAttribute;
     std::vector<POIServiceTypes::PoiAttribute> poiAttributeList;
     NavigationTypes::Coordinate3D location;
 
     mp_proxy = proxy;
 
-    categoryParentsIDs.clear();
-    categoryParentsIDs.push_back(PARENT_ID);
-    categoryDetails.setParentsId(categoryParentsIDs);
-//    categoryIcons = ICON_URL;
+    categoryParentsIDList.clear();
+    categoryParentsIDList.push_back(PARENT_ID);
+    categoryDetails.setParentsId(categoryParentsIDList);
     categoryDetails.setIcons(categoryIcons);
     categoryDetails.setName(NEW_CATEGORY_NAME);
     categoryDetails.setShortDesc("");
-//    categoryMedia = "";
     categoryDetails.setMedia(categoryMedia);
     m_category.setDetails(categoryDetails);              //new category
 
     categoryAttributeList.clear();
     categoryAttribute.setId(ATTRIBUTE_PHONE);
     categoryAttribute.setName(ATTRIBUTE_PHONE_NAME);   //existing attribute
-    categoryAttributeList.push_back(categoryAttribute);
+    categoryAttribute.setType(POIServiceTypes::AttributeType::INTEGER);
+    categoryOperator.setName("");
+    categoryOperator.setType(POIServiceTypes::OperatorType::EQUAL);
+    categoryOperator.setValue(categoryOperatorAttributeValue);
+    categoryOperatorList.push_back(categoryOperator);
+    categoryAttribute.setOperators(categoryOperatorList);
+    categoryAttributeList.push_back(categoryAttribute);    
     categoryAttribute.setId(ATTRIBUTE_CREDIT_CARD);      //new attribute id
     categoryAttribute.setName(ATTRIBUTE_CREDIT_CARD_NAME);  //new attribute
+    categoryAttribute.setType(POIServiceTypes::AttributeType::INTEGER);
+    categoryOperator.setName("");
+    categoryOperator.setType(POIServiceTypes::OperatorType::EQUAL);
+    categoryOperator.setValue(categoryOperatorAttributeValue);
+    categoryOperatorList.push_back(categoryOperator);
+    categoryAttribute.setOperators(categoryOperatorList);
     categoryAttributeList.push_back(categoryAttribute);
     m_category.setAttributes(categoryAttributeList);
 
     categorySortOption.setId(POIServiceTypes::SortOption::SORT_DEFAULT);
     categorySortOption.setName("");
-    categorySortOptions.push_back(categorySortOption);
-    m_category.setSortOptions(categorySortOptions);
+    categorySortOptionList.push_back(categorySortOption);
+    m_category.setSortOptions(categorySortOptionList);
+
     m_poi.setName(POI_NAME);
 
     location.setLatitude(POI_LOCATION_LATITUDE);
@@ -157,19 +172,16 @@ contentManager::contentManager(std::shared_ptr<POIContentManagerProxyDefault> pr
 
     poiAttributeList.clear();
     poiAttribute.setId(ATTRIBUTE_ADDRCITY);
+    poiAttribute.setType(POIServiceTypes::AttributeType::BOOLEAN);
     POIServiceTypes::AttributeValue vs(string(NEW_CITY_NAME));
     poiAttribute.setValue(vs);
     poiAttributeList.push_back(poiAttribute);
     poiAttribute.setId(ATTRIBUTE_STARS);
+    poiAttribute.setType(POIServiceTypes::AttributeType::BOOLEAN);
     POIServiceTypes::AttributeValue v(NEW_STARS_VALUE);
     poiAttribute.setValue(v);
     poiAttributeList.push_back(poiAttribute);
     m_poi.setAttributes(poiAttributeList);
-
-    m_left_bottom_location.setLatitude(LEFT_BOTTOM_LOCATION_LATITUDE);
-    m_left_bottom_location.setLongitude(LEFT_BOTTOM_LOCATION_LONGITUDE);
-    m_right_top_location.setLatitude(RIGHT_TOP_LOCATION_LATITUDE);
-    m_right_top_location.setLongitude(RIGHT_TOP_LOCATION_LONGITUDE);
 
     // init of the data test for search string
     m_strTest = SEARCH_STRING;
@@ -197,44 +209,34 @@ static void getVersionAsyncCallback(const CommonAPI::CallStatus& callStatus, con
         return;
     }
 
-    cout << "Server:" << endl;
     cout << "Version " << version.getVersionMajor() << "." << version.getVersionMinor() << "." << version.getVersionMicro() << endl;
     cout << "Date " << version.getDate() << endl;
-}
-
-static void getLocaleAsyncCallBack(const CommonAPI::CallStatus& callStatus, const std::string& languageCode, const std::string& countryCode, const std::string& scriptCode)
-{
-    if (callStatus != CommonAPI::CallStatus::SUCCESS) {
-        cout << "Remote getLocale failed with status: " << static_cast<std::underlying_type<CommonAPI::CallStatus>::type>(callStatus) << endl;
-        return;
-    }
-
-    cout << "languageCode " << languageCode << " " << "countryCode " << countryCode << " " << "scriptCode " << scriptCode << " " << endl;
 }
 
 void contentManager::getServerStatus()
 {
     function<void(const CommonAPI::CallStatus&, const NavigationTypes::Version&)> getVersion = getVersionAsyncCallback;
-    function<void(const CommonAPI::CallStatus&, const std::string&, const std::string&, const std::string&)> getLocale = getLocaleAsyncCallBack;
-    std::string languageCode, countryCode, scriptCode;
     CommonAPI::CallStatus callStatus;
 
     mp_proxy->getVersionAsync(getVersionAsyncCallback);
 
-    mp_proxy->getLocale(callStatus,languageCode,countryCode,scriptCode);
-
-    cout << "languageCode " << languageCode << " " << "countryCode " << countryCode << " " << "scriptCode " << scriptCode << " " << endl;
+    dumpLocales();
 
     mp_proxy->setLocale(m_locales.getLanguageCode(),m_locales.getCountryCode(),m_locales.getScriptCode(),callStatus);
 
-    mp_proxy->getLocaleAsync(getLocaleAsyncCallBack);
+    cout << "Change locales" << endl;
+
+    dumpLocales();
+
+    dumpCategories();
+
 }
 
 void contentManager::ConfigurationChanged(const std::vector< uint16_t >& changedSettings)
 {
     size_t index;
 
-    cout << "ConfigurationChanged: ";
+    cout << "Configuration changed:  ";
     for(index=0;index<changedSettings.size();index++)
     {
         cout << changedSettings.at(index);
@@ -248,13 +250,14 @@ void contentManager::CategoriesRemoved(const std::vector<POIServiceTypes::Catego
 
     for(index=0;index<categories.size();index++)
     {
-        cout << "Id: " << categories.at(index) << endl;
         if (m_category_id == categories.at(index))
         {
             m_category_id = INVALID_CATEGORY;
-            cout << "Category removed" << endl;
+            cout << "Category " << categories.at(index) << " removed" << endl;
         }
     }
+
+    dumpCategories();
 }
 
 void contentManager::POIAdded(const std::vector<POIServiceTypes::POI_ID> &pois)
@@ -262,10 +265,9 @@ void contentManager::POIAdded(const std::vector<POIServiceTypes::POI_ID> &pois)
     size_t index;
 
     m_poi_ids.clear();
-    cout << "POI Added"  << endl;
     for(index=0;index<pois.size();index++)
     {
-        cout << "Id: " << pois.at(index)  << endl;
+        cout << "POI " << pois.at(index) << " added" << endl;
         m_poi_ids.push_back(pois.at(index));
     }
 }
@@ -274,11 +276,11 @@ void contentManager::POIRemoved(const std::vector<POIServiceTypes::POI_ID> &pois
 {
     size_t index;
 
-    cout << "POI Removed" << endl;
     for(index=0;index<pois.size();index++)
     {
-        cout << "Id: " << pois.at(index) << endl;
+        cout << "POI " << pois.at(index) << "removed" << endl;
     }
+
 }
 
 void contentManager::connectPopupWindow(GtkWidget *window)
@@ -293,14 +295,40 @@ static void createCategoryAsyncCallback(const CommonAPI::CallStatus& callStatus,
         return;
     }
 
-    cout << "Category Created" << endl << "Id: " << categoryID << endl;
+    cout << "Category " << categoryID << " created" << endl;
 
     clientContentManager->createCategory(categoryID);
+
+    clientContentManager->dumpCategories();
 }
 
 void contentManager::createCategory(const POIServiceTypes::CategoryID& category)
 {
     m_category_id = category;
+}
+
+void contentManager::dumpCategories()
+{
+    std::vector<POIServiceTypes::CategoryAndName> categories;
+    CommonAPI::CallStatus callStatus;
+    size_t index;
+
+    mp_proxy->getAvailableCategories(callStatus,categories);
+
+    for(index=0;index<categories.size();index++)
+    {
+        cout << "id: " << categories.at(index).getUniqueId() << " name: " << categories.at(index).getName() << " top level: " << categories.at(index).getTopLevel() << endl;
+    }
+}
+
+void contentManager::dumpLocales()
+{
+    std::string languageCode, countryCode, scriptCode;
+    CommonAPI::CallStatus callStatus;
+
+    mp_proxy->getLocale(callStatus,languageCode,countryCode,scriptCode);
+
+    cout << "languageCode: " << languageCode << " " << "countryCode: " << countryCode << " " << "scriptCode: " << scriptCode << " " << endl;
 }
 
 void contentManager::testCreateCategory()
@@ -321,11 +349,6 @@ void contentManager::testRemoveCategory()
     mp_proxy->removeCategories(categories,status);
 }
 
-void contentManager::createPOIs(const std::vector< POIServiceTypes::POI_ID >& pois)
-{
-
-}
-
 void contentManager::testCreatePOI()
 {
     std::vector<POIServiceTypes::PoiAddedDetails> poiList;
@@ -333,11 +356,6 @@ void contentManager::testCreatePOI()
 
     poiList.push_back(m_poi);
     mp_proxy->addPOIs(m_category_id,poiList,status);
-}
-
-void contentManager::removePOIs(const std::vector< POIServiceTypes::POI_ID >& pois)
-{
-
 }
 
 void contentManager::testRemovePOI()
@@ -349,8 +367,27 @@ void contentManager::testRemovePOI()
 
 void contentManager::testSearch()
 {
-    std::vector<poiId_t> poi_id_list;
+    NavigationTypes::Coordinate3D location;
+    POIServiceTypes::AttributeDetails attributeDetails;
+    std::vector<POIServiceTypes::AttributeDetails> poiAttributes;
+    POIServiceTypes::CategoryAndRadius categoryAndRadius;
+    std::vector<POIServiceTypes::CategoryAndRadius> poiCategories;
+    CommonAPI::CallStatus status;
 
+    location.setLatitude(SEARCH_CENTER_LOCATION_LATITUDE);
+    location.setLongitude(SEARCH_CENTER_LOCATION_LONGITUDE);
+    location.setAltitude(SEARCH_CENTER_LOCATION_ALTITUDE);
+
+    poiCategories.clear();
+    categoryAndRadius.setId(m_category_id);
+    categoryAndRadius.setRadius(SEARCH_RADIUS);
+    poiCategories.push_back(categoryAndRadius);
+
+    attributeDetails.setCategoryId(m_category_id);
+    attributeDetails.setId(ATTRIBUTE_ADDRCITY);
+    poiAttributes.push_back(attributeDetails);
+
+    mp_proxy->poiSearchStarted(SEARCH_HANDLE,SEARCH_MAX_SIZE,location,poiCategories,poiAttributes,SEARCH_STRING,POIServiceTypes::SortOption::ATTRIBUTE_CUSTOM,status);
 }
 
 const char* program_name; //file to sink outputs
