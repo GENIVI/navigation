@@ -47,7 +47,6 @@ pkg_check_modules(DBUS "dbus-1 >= 1.4")
 pkg_check_modules(COMMONAPI "CommonAPI >= 3.1")
 pkg_check_modules(COMMONAPI_DBUS "CommonAPI-DBus >= 3.1")
 pkg_check_modules(SQLITE3 REQUIRED sqlite3)
-pkg_check_modules(GLIBMM glibmm-2.4)
 pkg_check_modules(GOBJECT gobject-2.0)
 
 pkg_check_modules(GLIB REQUIRED glib-2.0)
@@ -69,7 +68,6 @@ include_directories(
     ${DBUS_INCLUDE_DIRS}
     ${COMMONAPI_INCLUDE_DIRS}
     ${COMMONAPI_DBUS_INCLUDE_DIRS}
-    ${GLIBMM_INCLUDE_DIRS}
     ${GOBJECT_INCLUDE_DIRS}
     ${SQLITE3_INCLUDE_DIRS}
 
@@ -82,7 +80,6 @@ link_directories(
     ${DBUS_LIB_PATH}
     ${COMMONAPI_LIBDIR}
     ${COMMONAPI_DBUS_LIBDIR}
-    ${GLIBMM_LIBRARY_DIRS}
     ${GOBJECT_LIBRARY_DIRS}
     ${SQLITE3_LIBRARY_DIRS}
 
@@ -94,7 +91,6 @@ set(LIBRARIES
     ${COMMONAPI_LIBRARIES}
     ${COMMONAPI_DBUS_LIBRARIES}
     ${GOBJECT_LIBRARIES}
-    ${GLIBMM_LIBRARIES}
     ${SQLITE3_LIBRARIES}
 
     ${GLIB_LIBRARIES}

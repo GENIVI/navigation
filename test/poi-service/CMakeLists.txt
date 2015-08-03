@@ -28,10 +28,13 @@ option(WITH_DBUS_INTERFACE
        "Build using the D-Bus interfaces" ON)
 option(WITH_DEBUG
         "Enable the debug messages" OFF)
+option(WITH_DATABASE_SUPPLIER
+        "Build the database supplier" OFF)
 
 message(STATUS "WITH_FRANCA_INTERFACE = ${WITH_FRANCA_INTERFACE}")
 message(STATUS "WITH_DBUS_INTERFACE = ${WITH_DBUS_INTERFACE}")
 message(STATUS "WITH_DEBUG = ${WITH_DEBUG}")
+message(STATUS "WITH_DATABASE_SUPPLIER = ${WITH_DATABASE_SUPPLIER}")
 
 set(API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api")
 set(DBUS_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/dbus-include")
@@ -54,13 +57,15 @@ add_subdirectory(${API_DIR}/poi-service "${DBUS_GENERATED_INCLUDE_DIR}/poi-servi
 
 add_subdirectory(${POI_SRC_DIR}/poi-service "${CMAKE_CURRENT_BINARY_DIR}/poi-service-src")
 
-add_subdirectory(poi-supplier)
+if(WITH_DATABASE_SUPPLIER)
+    add_subdirectory(poi-supplier)
+endif()
 
 add_subdirectory(poi-client)
 
 add_subdirectory(poi-contentaccess-module)
 
-if (WITH_FRANCA_INTERFACE)
+if(WITH_FRANCA_INTERFACE)
     set(FRANCA_DIR "${API_DIR}/franca/navigation")
     add_subdirectory(poi-manager-client)
 endif()

@@ -63,7 +63,7 @@ vector<poi_category_common_t> sqlRequest::getAvailableCategories(POIServiceTypes
     poi_category_common_t poiCategory;
 
     // retrieve the available categories (the ones that have at least one record)
-    query_result = mp_database->queryNotUTF(m_SQL_REQUEST_GET_AVAILABLE_CATEGORIES);
+    query_result = mp_database->query(m_SQL_REQUEST_GET_AVAILABLE_CATEGORIES);
     if (query_result.empty())
     {
         onError(); //database is not well populated
@@ -85,7 +85,7 @@ vector<poi_category_common_t> sqlRequest::getAvailableCategories(POIServiceTypes
             strStream << value;
             sqlQuery += strStream.str();
             sqlQuery += ");";
-            additionnal_query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+            additionnal_query_result = mp_database->query(sqlQuery.c_str());
             if (additionnal_query_result.empty())
             {
                 onError(); //database is not well populated
@@ -105,7 +105,7 @@ vector<poi_category_common_t> sqlRequest::getAvailableCategories(POIServiceTypes
             strStream << poiCategory.id;
             sqlQuery += strStream.str();
             sqlQuery += ");";
-            additionnal_query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+            additionnal_query_result = mp_database->query(sqlQuery.c_str());
             if (additionnal_query_result.empty())
             {
                 onError(); //database is not well populated
@@ -139,7 +139,7 @@ vector<poi_category_common_t> sqlRequest::getAvailableCategories(POIServiceTypes
         strStream << availableCategoryTable.at(index).id;
         sqlQuery += strStream.str();
         sqlQuery += ";";
-        query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+        query_result = mp_database->query(sqlQuery.c_str());
         if (query_result.empty())
         {
             onError(); //database is not well populated
@@ -166,7 +166,7 @@ vector<poi_category_common_t> sqlRequest::getAvailableCategories(POIServiceTypes
         strStream << availableCategoryTable.at(index).id;
         sqlQuery += strStream.str();
         sqlQuery += ";";
-        query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+        query_result = mp_database->query(sqlQuery.c_str());
         if (query_result.empty())
         {
             //no child
@@ -192,7 +192,7 @@ void sqlRequest::getAvailableArea()
     double doubleValue;
 
     //retrieve the available area into the database
-    query_result = mp_database->queryNotUTF(m_SQL_REQUEST_GET_AVAILABLE_AREA);
+    query_result = mp_database->query(m_SQL_REQUEST_GET_AVAILABLE_AREA);
     if (query_result.empty())
     {
         onError(); //database is not well populated
@@ -242,7 +242,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
     sqlQuery += ",'";
     sqlQuery.append(category.getDetails().getName());
     sqlQuery += "');";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (!query_result.empty())
     {
         onError(); //database is not well populated
@@ -265,7 +265,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
             sqlQuery += ",'";
             sqlQuery.append((category.getAttributes().at(index)).getName());
             sqlQuery += "');";
-            query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+            query_result = mp_database->query(sqlQuery.c_str());
             if (!query_result.empty())
             {
                 onError(); //database is not well populated
@@ -313,7 +313,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
         strStream << (category.getAttributes().at(index)).getId();
         sqlQuery += strStream.str();
         sqlQuery += ");";
-        query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+        query_result = mp_database->query(sqlQuery.c_str());
         if (!query_result.empty())
         {
             onError(); //database is not well populated
@@ -347,7 +347,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
         strStream << category.getDetails().getParentsId().at(index);
         sqlQuery += strStream.str();
         sqlQuery += ");";
-        query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+        query_result = mp_database->query(sqlQuery.c_str());
         if (!query_result.empty())
         {
             onError(); //database is not well populated
@@ -384,7 +384,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
     sqlQuery += "','";
     sqlQuery.append(ICON_FORMAT);
     sqlQuery += "');";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (!query_result.empty())
     {
         onError(); //database is not well populated
@@ -410,7 +410,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
     strStream << iconId;
     sqlQuery += strStream.str();
     sqlQuery += ");";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (!query_result.empty())
     {
         onError(); //database is not well populated
@@ -439,7 +439,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfCategoryNameDoesntExist(std::s
     sqlQuery += "'";
     sqlQuery += ")";
     sqlQuery += m_SQL_RETURN_BOOL_VALUE;
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (query_result.empty())
     {
         onError(); //database is not well populated
@@ -474,7 +474,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfCategoryExist(POIServiceTypes:
     sqlQuery += strStream.str();
     sqlQuery += ")";
     sqlQuery += m_SQL_RETURN_BOOL_VALUE;
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (query_result.empty())
     {
         onError(); //database is not well populated
@@ -509,7 +509,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfPoiExist(POIServiceTypes::POI_
     sqlQuery += strStream.str();
     sqlQuery += ")";
     sqlQuery += m_SQL_RETURN_BOOL_VALUE;
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (query_result.empty())
     {
         onError(); //database is not well populated
@@ -550,7 +550,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removeCategory(POIServiceTypes::Categ
     strStream << unique_id;
     sqlQuery += strStream.str();
     sqlQuery += ";";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (!query_result.empty())
     {
         onError(); //database is not well populated
@@ -565,7 +565,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removeCategory(POIServiceTypes::Categ
     strStream << unique_id;
     sqlQuery += strStream.str();
     sqlQuery += ";";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (!query_result.empty())
     {
         onError(); //database is not well populated
@@ -580,7 +580,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removeCategory(POIServiceTypes::Categ
     strStream << unique_id;
     sqlQuery += strStream.str();
     sqlQuery += ";";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (!query_result.empty())
     {
         onError(); //database is not well populated
@@ -595,7 +595,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removeCategory(POIServiceTypes::Categ
     strStream << unique_id;
     sqlQuery += strStream.str();
     sqlQuery += ";";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (!query_result.empty())
     {
         onError(); //database is not well populated
@@ -610,7 +610,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removeCategory(POIServiceTypes::Categ
     strStream << unique_id;
     sqlQuery += strStream.str();
     sqlQuery += ";";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (!query_result.empty())
     {
         onError(); //database is not well populated
@@ -625,7 +625,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removeCategory(POIServiceTypes::Categ
     strStream << unique_id;
     sqlQuery += strStream.str();
     sqlQuery += ";";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (!query_result.empty())
     {
         onError(); //database is not well populated
@@ -641,7 +641,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removeCategory(POIServiceTypes::Categ
     strStream << unique_id;
     sqlQuery += strStream.str();
     sqlQuery += ";";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     // and remove it if necessary
     if (query_result.size() != 0)
     {
@@ -665,7 +665,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::getFreePoiId(POIServiceTypes::POI_ID 
     vector<string >  query_line;
 
     // retrieve the next free category id
-    query_result = mp_database->queryNotUTF(m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_POI_ID);
+    query_result = mp_database->query(m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_POI_ID);
     if (query_result.empty())
     {
         onError(); //database is not well populated
@@ -689,7 +689,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::getFreeCategoryId(POIServiceTypes::Ca
     vector<string >  query_line;
 
     // retrieve the next free category id
-    query_result = mp_database->queryNotUTF(m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_CATEGORY_ID);
+    query_result = mp_database->query(m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_CATEGORY_ID);
     if (query_result.empty())
     {
         onError(); //database is not well populated
@@ -713,7 +713,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::getFreeAttributeId(POIServiceTypes::A
     vector<string >  query_line;
 
     // retrieve the next free category id
-    query_result = mp_database->queryNotUTF(m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_ATTRIBUTE_ID);
+    query_result = mp_database->query(m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_ATTRIBUTE_ID);
     if (query_result.empty())
     {
         onError(); //database is not well populated
@@ -737,7 +737,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::getFreeIconId(iconId_t &unique_id)
     vector<string >  query_line;
 
     // retrieve the next free category id
-    query_result = mp_database->queryNotUTF(m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_ICON_ID);
+    query_result = mp_database->query(m_SQL_REQUEST_GET_AVAILABLE_NEXT_FREE_ICON_ID);
     if (query_result.empty())
     {
         onError(); //database is not well populated
@@ -761,7 +761,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::getFreeRecordId(const char* request, 
     vector<string >  query_line;
 
     // retrieve the next free category id
-    query_result = mp_database->queryNotUTF(request);
+    query_result = mp_database->query(request);
     if (query_result.empty())
     {
         onError(); //database is not well populated
@@ -794,7 +794,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfAttributeExist(POIServiceTypes
     sqlQuery += strStream.str();
     sqlQuery += ")";
     sqlQuery += m_SQL_RETURN_BOOL_VALUE;
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (query_result.empty())
     {
         onError(); //database is not well populated
@@ -815,7 +815,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfAttributeExist(POIServiceTypes
             sqlQuery += name;
             sqlQuery += "')";
             sqlQuery += m_SQL_RETURN_BOOL_VALUE;
-            query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+            query_result = mp_database->query(sqlQuery.c_str());
             if (query_result.empty())
             {
                 onError(); //database is not well populated
@@ -974,7 +974,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createPoi(POIServiceTypes::CategoryID
     sqlQuery += "','";
     sqlQuery.append(poiRecorded.operateur); // operateur
     sqlQuery += "');";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (!query_result.empty())
     {
         onError(); //database is not well populated
@@ -991,7 +991,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createPoi(POIServiceTypes::CategoryID
     sqlQuery += "'";
     sqlQuery.append(POI_PROVIDER);
     sqlQuery += "';";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (query_result.empty())
     {
         onError(); //database is not well populated
@@ -1027,7 +1027,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createPoi(POIServiceTypes::CategoryID
     strStream << poiproviderId;
     sqlQuery += strStream.str();
     sqlQuery += ");";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (!query_result.empty())
     {
         onError(); //database is not well populated
@@ -1054,7 +1054,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createPoi(POIServiceTypes::CategoryID
     strStream << MEDIASET;
     sqlQuery += strStream.str();
     sqlQuery += ");";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (!query_result.empty())
     {
         onError(); //database is not well populated
@@ -1084,7 +1084,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removePoi(POIServiceTypes::POI_ID uni
     strStream << unique_id;
     sqlQuery += strStream.str();
     sqlQuery += ";";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (!query_result.empty())
     {
         onError(); //database is not well populated
@@ -1099,7 +1099,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removePoi(POIServiceTypes::POI_ID uni
     strStream << unique_id;
     sqlQuery += strStream.str();
     sqlQuery += ";";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (!query_result.empty())
     {
         onError(); //database is not well populated
@@ -1115,7 +1115,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removePoi(POIServiceTypes::POI_ID uni
     strStream << unique_id;
     sqlQuery += strStream.str();
     sqlQuery += ";";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     if (!query_result.empty())
     {
         onError(); //database is not well populated
@@ -1188,7 +1188,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::searchPoi(const string &categoryName,
     sqlQuery += ")) AND (name LIKE '%";
     sqlQuery += search_string;
     sqlQuery += "%');";
-    query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+    query_result = mp_database->query(sqlQuery.c_str());
     // read the result of the query
     if (query_result.size() == 0) //get the amount of poi searched
     {

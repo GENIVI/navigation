@@ -121,7 +121,7 @@ contentAccessModuleServer::contentAccessModuleServer(DBus::Connection &connectio
         // so we can update some tables into the constructor
 
         // retrieve the available categories (the ones that have at least one record)
-        query_result = mp_database->queryNotUTF(SQL_REQUEST_GET_AVAILABLE_CATEGORIES);
+        query_result = mp_database->query(SQL_REQUEST_GET_AVAILABLE_CATEGORIES);
         if (query_result.empty())
         {
             onError(); //database is not well populated
@@ -143,7 +143,7 @@ contentAccessModuleServer::contentAccessModuleServer(DBus::Connection &connectio
                 strStream << value;
                 sqlQuery += strStream.str();
                 sqlQuery += ");";
-                additionnal_query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+                additionnal_query_result = mp_database->query(sqlQuery.c_str());
                 if (additionnal_query_result.empty())
                 {
                     onError(); //database is not well populated
@@ -163,7 +163,7 @@ contentAccessModuleServer::contentAccessModuleServer(DBus::Connection &connectio
                 strStream << m_availableCategoryTable[index].id;
                 sqlQuery += strStream.str();
                 sqlQuery += ");";
-                additionnal_query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+                additionnal_query_result = mp_database->query(sqlQuery.c_str());
                 if (additionnal_query_result.empty())
                 {
                     onError(); //database is not well populated
@@ -194,7 +194,7 @@ contentAccessModuleServer::contentAccessModuleServer(DBus::Connection &connectio
             strStream << m_availableCategoryTable[index].id;
             sqlQuery += strStream.str();
             sqlQuery += ";";
-            query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+            query_result = mp_database->query(sqlQuery.c_str());
             if (query_result.empty())
             {
                 onError(); //database is not well populated
@@ -221,7 +221,7 @@ contentAccessModuleServer::contentAccessModuleServer(DBus::Connection &connectio
             strStream << m_availableCategoryTable[index].id;
             sqlQuery += strStream.str();
             sqlQuery += ";";
-            query_result = mp_database->queryNotUTF(sqlQuery.c_str());
+            query_result = mp_database->query(sqlQuery.c_str());
             if (query_result.empty())
             {
                 //no child
@@ -238,7 +238,7 @@ contentAccessModuleServer::contentAccessModuleServer(DBus::Connection &connectio
         }
 
         //retrieve the available area into the database
-        query_result = mp_database->queryNotUTF(SQL_REQUEST_GET_AVAILABLE_AREA);
+        query_result = mp_database->query(SQL_REQUEST_GET_AVAILABLE_AREA);
         if (query_result.empty())
         {
             onError(); //database is not well populated
@@ -612,7 +612,7 @@ uint16_t contentAccessModuleServer::searchPOIRequest(uint16_t categoryIndex, std
         sqlQuery += ")) AND (name LIKE '%";
         sqlQuery += search_string;
         sqlQuery += "%');";
-        sqlQueryResult = mp_database->queryNotUTF(sqlQuery.c_str());
+        sqlQueryResult = mp_database->query(sqlQuery.c_str());
 
         //populate the tables of poi
         poi.category = categoryIndex; //category

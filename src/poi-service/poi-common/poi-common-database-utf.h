@@ -4,7 +4,7 @@
 *
 * \copyright Copyright (C) 2013-2014, PCA Peugeot Citroen
 *
-* \file poi-common-database.h
+* \file poi-common-database-utf.h
 *
 * \brief This file is part of the poi proof of concept.
 *
@@ -31,28 +31,29 @@
 #include <string>
 #include <vector>
 #include <sqlite3.h>
+#include <glibmm/ustring.h>
 
 using namespace std;
 	 
-class Database
+class DatabaseUTF
 {
 	public:
-		Database(const char* filename);
-	    ~Database();
+        DatabaseUTF(const char* filename);
+        ~DatabaseUTF();
 	     
 	    bool open(const char* filename);
 		bool schema();
 		bool add(const char* scheme_filename); 
-        vector<vector<string> > query(const char* query);
+        vector<vector<Glib::ustring> > query(const char* query);
         void close();
 		void beginTransaction();
 		void appendTransaction(const char* query);
 		void commitTransaction();
 	     
-    private:
-        static int callback(void *NotUsed, int argc, char **argv, char **azColName);
+	private:
+		static int callback(void *NotUsed, int argc, char **argv, char **azColName);
 	    sqlite3 *database;
-        std::string m_filename;
+		std::string m_filename;
 };
 	 
 #endif

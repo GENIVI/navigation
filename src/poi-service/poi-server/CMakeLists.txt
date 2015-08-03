@@ -25,13 +25,12 @@ find_package(PkgConfig REQUIRED)
 pkg_check_modules(DBUS_CPP dbus-c++-1)
 pkg_check_modules(GLIB REQUIRED glib-2.0)
 pkg_check_modules(SQLITE3 REQUIRED sqlite3)
-pkg_check_modules(GLIBMM glibmm-2.4)
 pkg_check_modules(GOBJECT gobject-2.0)
 pkg_check_modules(DBUS dbus-1)
 pkg_check_modules(DBUS_CPP_GLIB dbus-c++-glib-1)
 
 #common files shared with poi server
-file(GLOB PRJ_COMMON_SRCS ${COMMON_DIR}/*.cpp)
+file(GLOB PRJ_COMMON_SRCS ${COMMON_DIR}/poi-common-database.cpp)
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
@@ -42,7 +41,6 @@ include_directories(
     ${DBUS_CPP_INCLUDE_DIRS}
     ${GLIB_INCLUDE_DIRS}
     ${SQLITE3_INCLUDE_DIRS}
-    ${GLIBMM_INCLUDE_DIRS}
     ${GOBJECT_INCLUDE_DIRS}
     ${DBUS_INCLUDE_DIRS}
     ${DBUS_CPP_GLIB_INCLUDE_DIRS}
@@ -52,7 +50,6 @@ link_directories(
     ${DBUS_CPP_LIBRARY_DIRS}
     ${GLIB_LIBRARY_DIRS}
     ${SQLITE3_LIBRARY_DIRS}
-    ${GLIBMM_LIBRARY_DIRS}
     ${GOBJECT_LIBRARY_DIRS}
     ${DBUS_LIBRARY_DIRS}
     ${DBUS_CPP_GLIB_DIRS}
@@ -67,7 +64,6 @@ set(LIBRARIES
     ${DBUS_CPP_LIBRARIES}
     ${GLIB_LIBRARIES}
     ${SQLITE3_LIBRARIES}
-    ${GLIBMM_LIBRARIES}
     ${GOBJECT_LIBRARIES}
     ${DBUS_LIBRARIES}
     ${DBUS_CPP_GLIB_LIBRARIES}

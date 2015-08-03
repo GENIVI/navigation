@@ -30,7 +30,7 @@ pkg_check_modules(XML2 libxml-2.0)
 pkg_check_modules(XMLCPP libxml++-2.6)
 
 #common files shared with poi server
-file(GLOB PRJ_COMMON_SRCS ${COMMON_DIR_POI_SERVER}/*.cpp)
+file(GLOB PRJ_COMMON_SRCS ${COMMON_DIR_POI_SERVER}/poi-common-database-utf.cpp)
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}

@@ -28,11 +28,12 @@
 
 #include <getopt.h>
 
-#include "poi-common-database.h"
+#include "poi-common-database-utf.h"
 
 #include "poi-datamodel.h"
 
 #include "raw-file-sort.h"
+
 
 #ifndef SAFE_DELETE
 #define SAFE_DELETE(_p)			{ if ((_p) != NULL) { delete(_p); (_p) = NULL; } }
@@ -98,7 +99,7 @@ int main(int  argc , char**  argv )
     std::string *sort_list; //list of secondary keys (set as parameters)
     uint8_t sort_list_size; //number of secondary keys
 
-    Database *sqlDatabase; //sqlite3 database
+    DatabaseUTF *sqlDatabase; //sqlite3 database
     Glib::ustring sqlQuery; //SQL request on database
     vector<vector<Glib::ustring> > sqlQueryResult; //result of the query on database
     vector<Glib::ustring>  sqlQueryLine;
@@ -144,21 +145,21 @@ int main(int  argc , char**  argv )
         case 'a':   /* -a --add_scheme database scheme */
             database_filename = argv[2];
             scheme_filename = argv[3];
-            sqlDatabase = new Database(database_filename);
+            sqlDatabase = new DatabaseUTF(database_filename);
             sqlDatabase->add(scheme_filename);
             sqlDatabase->close();
             delete sqlDatabase;
             break;
         case 'v':   /* -v --view database */
             database_filename = argv[2];
-            sqlDatabase = new Database(database_filename);
+            sqlDatabase = new DatabaseUTF(database_filename);
             sqlDatabase->schema();
             sqlDatabase->close();
             delete sqlDatabase;
             break;
         case 's':   /* -s --select database */
             database_filename = argv[2];
-            sqlDatabase = new Database(database_filename);
+            sqlDatabase = new DatabaseUTF(database_filename);
             sqlQueryResult = sqlDatabase->query(SQL_POI_TABLE_SELECT);
             for(vector<vector<Glib::ustring> >::iterator it = sqlQueryResult.begin(); it < sqlQueryResult.end(); ++it)
             {
@@ -217,7 +218,7 @@ int main(int  argc , char**  argv )
             xml_parser(xml_filename, sort_primary_key, sort_list, sort_list_size, poi_buffer, &poi_buffer_index);
             // database update
             database_filename = argv[2];
-            sqlDatabase = new Database(database_filename);
+            sqlDatabase = new DatabaseUTF(database_filename);
             //get id
             sqlQueryResult = sqlDatabase->query(SQL_POI_MAX_ID);
             sqlQueryLine = sqlQueryResult.at(0);

@@ -36,6 +36,7 @@
 #include <thread>
 #include <typeinfo>
 #include <getopt.h>
+#include <glib.h>
 
 #include <CommonAPI/CommonAPI.hpp> //Defined in the Common API Runtime library
 #include "poi-manager-server-stub.h"

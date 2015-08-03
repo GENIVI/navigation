@@ -1,4 +1,4 @@
-Release date of the file: 18-09-2014 
+Release date of the file: 03-08-2015 
 Status: OK
 
 Project:
@@ -6,15 +6,16 @@ Search engine for Point Of Interest with a content access module mechanism to ex
 This project is one of the navigation-service common projects that implements the GENIVI navigation APIs.
 
 More:
-The project is made of four parts:
+The project is made of sub parts:
 - poi-supplier that populates a sqlite3 based database from OSM data in xml format
 - poi-server that implements the poi search API and access an embedded database
 - poi-contentaccess-module that implements a content access module that access an additional database, and a simple HMI 
 - poi-client that implements a client with a test HMI 
+- poi-manager-server and poi-manager-client that implements a CommonAPI based proof of concept of an extension of the poi-contentaccess-module
 See also other navigation projects like navigation or proof of concepts implemented for traffic-info and positioning 
 
 What is in:
-This folder contains scripts for building poi-server
+This folder contains scripts for building poi-server and poi-manager-server
 FYI: poi-supplier, poi-contentaccess-module and poi-client are located under test/poi-service
 
 Author: 
@@ -27,14 +28,11 @@ Test target:
 Ubuntu 14.04 LTS
 
 To get the code:
-Code is part of the navigation-service repository, so you need to clone all:
+Code is part of the navigation-service repository, so you need to clone the whole content:
 git clone http://git.projects.genivi.org/lbs/navigation-service.git $WORKING-DIR
-
-Dependencies:
-libqt4-dev libdbus-c++-dev libsqlite3-dev sqlite3 libglib2.0-dev libglibmm-2.4-dev libdbus-1-dev xsltproc
  
 ===============================
-How To Build
+How To Build poi-server
 ===============================
 
 Create and enter the build folder:
@@ -46,17 +44,25 @@ cmake ../
 make
 cd ..
 
-Build the Franca based code (unreleased version) in debug mode
-cmake -DCMAKE_BUILD_TYPE=Debug . -DWITH_FRANCA_INTERFACE=ON  ../
+===============================
+How To Run poi-server
+===============================
+
+./bin/poi-server  -f ./resource/poi-database-sample.db
+
+===============================
+How To Build poi-manager-server
+===============================
+NB: You need CommonAPI 3.1.2 and Franca 0.9.1 installed 
+
+cd build
+cmake -DWITH_FRANCA_INTERFACE=ON -DCOMMONAPI_DBUS_TOOL_GENERATOR=<common-api-dbus-tools folder>/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/x86/commonapi-dbus-generator-linux-x86 -DCOMMONAPI_TOOL_GENERATOR=<common-api-tools folder>/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/x86/commonapi-generator-linux-x86 -DWITH_DEBUG=ON ../
 make 
 cd ..
 
 ===============================
-How To Run
+How To Run poi-manager-server
 ===============================
-
-./run 
-
 
 Copy the configuration file commonapi-dbus.ini in a directory of your choice
 
@@ -64,4 +70,8 @@ Set the environment variable COMMONAPI_DBUS_DEFAULT_CONFIG before starting the E
 
 Example:
 export COMMONAPI_DBUS_DEFAULT_CONFIG=<your path>/commonapi-dbus.ini
+
+cp ./resource/poi-database-managed.db ./bin
+./bin/poi-manager-server -f ./bin/poi-database-managed.db
+
 

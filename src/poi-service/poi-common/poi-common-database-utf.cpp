@@ -4,7 +4,7 @@
 *
 * \copyright Copyright (C) 2013-2014, PCA Peugeot Citroen
 *
-* \file poi-common-database.cpp
+* \file poi-common-database-utf.cpp
 *
 * \brief This file is part of the poi proof of concept.
 *
@@ -25,18 +25,18 @@
 *
 * @licence end@
 */
-#include "poi-common-database.h"
+#include "poi-common-database-utf.h"
 #include <stdio.h>
 #include <iostream>
 
 /**
- * \fn DatabaseUTF(const char* filename)
+ * \fn Database(const char* filename)
  * \brief Constructor.
  *
  * \param  const char* filename	-name of the database file to open
  * \return void.
  */
-Database::Database(const char* filename)
+DatabaseUTF::DatabaseUTF(const char* filename)
 {
 	database = NULL;
     open(filename); //no check for valid file
@@ -44,13 +44,13 @@ Database::Database(const char* filename)
 }
 
 /**
- * \fn ~DatabaseUTF()
+ * \fn ~Database()
  * \brief Destructor.
  *
  * \param
  * \return void.
  */
-Database::~Database()
+DatabaseUTF::~DatabaseUTF()
 {
 }
 
@@ -61,7 +61,7 @@ Database::~Database()
  * \param  const char* filename -name of the database file to open
  * \return bool. -true if database consistant
  */
-bool Database::open(const char* filename)
+bool DatabaseUTF::open(const char* filename)
 {
     if(sqlite3_open(filename, &database) == SQLITE_OK)
         return true;
@@ -76,7 +76,7 @@ bool Database::open(const char* filename)
  * \param
  * \return bool. -true if SQL command succeed
  */
-bool Database::schema()
+bool DatabaseUTF::schema()
 {
 	FILE *fpipe;
 	std::string command = "";
@@ -110,7 +110,7 @@ bool Database::schema()
  * \param  const char* scheme_filename -filename that contains the scheme
  * \return bool. -true if SQL command succeed
  */
-bool Database::add(const char* scheme_filename)
+bool DatabaseUTF::add(const char* scheme_filename)
 {
 	FILE *fpipe;
 	std::string command = "";
@@ -142,7 +142,7 @@ bool Database::add(const char* scheme_filename)
  * \param
  * \return void
  */
-void Database::beginTransaction()
+void DatabaseUTF::beginTransaction()
 {
     char* errorMessage;
     sqlite3_exec(database, "BEGIN TRANSACTION;", NULL, NULL, &errorMessage);
@@ -155,7 +155,7 @@ void Database::beginTransaction()
  * \param const char* query -SQL request
  * \return void
  */
-void Database::appendTransaction(const char* query)
+void DatabaseUTF::appendTransaction(const char* query)
 {
 	sqlite3_exec(database, query, NULL, NULL, NULL);
 }
@@ -167,7 +167,7 @@ void Database::appendTransaction(const char* query)
  * \param
  * \return void
  */
-void Database::commitTransaction()
+void DatabaseUTF::commitTransaction()
 {
 	char* errorMessage;
 	sqlite3_exec(database, "COMMIT;", NULL, NULL, &errorMessage);
@@ -178,12 +178,12 @@ void Database::commitTransaction()
  * \brief Query a SQL request.
  *
  * \param const char* query -SQL request
- * \return vector<vector<string> > -Result of the query
+ * \return vector<vector<Glib::ustring> > -Result of the query
  */
-vector<vector<string> > Database::query(const char* query)
+vector<vector<Glib::ustring> > DatabaseUTF::query(const char* query)
 {
     sqlite3_stmt *statement;
-    vector<vector<string> > results;
+    vector<vector<Glib::ustring> > results;
 
     if(sqlite3_prepare_v2(database, query, -1, &statement, 0) == SQLITE_OK)
     {
@@ -195,10 +195,10 @@ vector<vector<string> > Database::query(const char* query)
 
             if(result == SQLITE_ROW)
             {
-                vector<string> values;
+                vector<Glib::ustring> values;
                 for(int col = 0; col < cols; col++)
                 {
-                    string  val;
+                    Glib::ustring  val;
                     char * ptr = (char*)sqlite3_column_text(statement, col);
                     if(ptr)
                     {
@@ -230,7 +230,7 @@ vector<vector<string> > Database::query(const char* query)
  * \param
  * \return void
  */
-void Database::close()
+void DatabaseUTF::close()
 {
     sqlite3_close(database);  
 }
@@ -245,7 +245,7 @@ void Database::close()
  * \param char **azColName
  * \return int
  */
-int Database::callback(void *NotUsed, int argc, char **argv, char **azColName)
+int DatabaseUTF::callback(void *NotUsed, int argc, char **argv, char **azColName)
 {
 	NotUsed=0;
 	int i;

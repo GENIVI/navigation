@@ -1,4 +1,4 @@
-Release date of the file: 02-06-2015 
+Release date of the file: 03-08-2015 
 Status: OK
 
 Project:
@@ -7,7 +7,7 @@ This project is one of the navigation-service common projects that implements th
 
 More:
 The project is made of four parts:
-- poi-supplier that populates a sqlite3 based database from OSM data in xml format
+- poi-supplier that populates a sqlite3 based database from OSM data in xml format (you need -DWITH_DATABASE_SUPPLIER=ON)
 - poi-server that implements the poi search API and access an embedded database
 - poi-contentaccess-module that implements a content access module that access an additional database, and a simple HMI 
 - poi-client that implements a client with a test HMI 
@@ -32,9 +32,6 @@ Qt5 (to get the version -> qtchooser -print-env, to set the version -> export QT
 To get the code:
 Code is part of the navigation-service repository, so you need to clone all:
 git clone http://git.projects.genivi.org/lbs/navigation-service.git $WORKING-DIR
-
-Dependencies:
-libqt4-dev libdbus-c++-dev libxml2-dev libsqlite3-dev sqlite3 libglib2.0-dev libglibmm-2.4-dev libdbus-1-dev libxml++2.6-dev xsltproc
  
 Important notice before building the POC:
 # The software is using stream conversion, so please care if your local settings are right
@@ -75,6 +72,11 @@ cd ..
 ===============================
 How To Prepare the database and the configuration for a country
 ===============================
+NB: You need to build the poi-supplier first:
+cd build
+cmake -DWITH_DATABASE_SUPPLIER=ON ../
+make
+
 To launch the stuff for Paris:
 ./prepare -c paris
 
@@ -109,32 +111,24 @@ How To Run
 ./run 
 
 ===============================
-How To for poi-common-manager-client (experimental)
+How To Build poi-common-manager-client (experimental)
 ===============================
-First you need to build the server
-cd ../../src/poi-service
+First you need to build the poi-manager-server, see the README in ../../src/poi-service
+
 cd build
-cmake -DWITH_FRANCA_INTERFACE=ON ../
+cmake -DWITH_FRANCA_INTERFACE=ON -DCOMMONAPI_DBUS_TOOL_GENERATOR=<common-api-dbus-tools folder>/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/x86/commonapi-dbus-generator-linux-x86 -DCOMMONAPI_TOOL_GENERATOR=<common-api-tools folder>/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/x86/commonapi-generator-linux-x86 -DWITH_DEBUG=ON ../
 make
-cd ..
-Launch the server
+
+===============================
+How To Run
+===============================
+
+Launch the server (into ../../src/poi-service)
 cp ./resource/poi-database-managed.db ./bin
 ./bin/poi-manager-server -f ./bin/poi-database-managed.db
 poi manager server started
 
-Now build the client
-cd ../../test/poi-service
-cd build
-cmake -DWITH_FRANCA_INTERFACE=ON ../
-make
-cd ../
 Launch the client
 ./poi-manager-client -t
 poi manager client started
-For the time being, Create category and Delete category worked:
-
-Category Created
-Id: 8
-Categories Removed
-Id: 8
 
