@@ -123,7 +123,7 @@ typedef struct
 #define SEARCH_CENTER_LOCATION_LATITUDE 48.76
 #define SEARCH_CENTER_LOCATION_LONGITUDE 2.22
 #define SEARCH_CENTER_LOCATION_ALTITUDE 100
-#define SEARCH_RADIUS 200 //in tens of meters
+#define SEARCH_RADIUS 300 //in tens of meters
 #define SEARCH_STRING "Sweet"
 
 #define LANGUAGE_CODE "fra"

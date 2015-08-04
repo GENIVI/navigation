@@ -70,6 +70,8 @@ public:
 
     void POIRemoved(const std::vector< POIServiceTypes::POI_ID >& pois);
 
+    void SearchStatusChanged(const NavigationTypes::Handle &handle, const POIServiceTypes::SearchStatusState &searchStatusState, const std::vector<POIServiceTypes::POI_ID> &pois);
+
     void connectPopupWindow(GtkWidget *window);
 
     void testCreateCategory();
@@ -278,9 +280,30 @@ void contentManager::POIRemoved(const std::vector<POIServiceTypes::POI_ID> &pois
 
     for(index=0;index<pois.size();index++)
     {
-        cout << "POI " << pois.at(index) << "removed" << endl;
+        cout << "POI " << pois.at(index) << " removed" << endl;
     }
 
+}
+
+void contentManager::SearchStatusChanged(const NavigationTypes::Handle &handle, const POIServiceTypes::SearchStatusState &searchStatusState, const std::vector<POIServiceTypes::POI_ID> &pois)
+{
+    size_t index;
+
+    if(handle == SEARCH_HANDLE)
+    {
+        cout << "Search state " << searchStatusState << endl;
+        if(searchStatusState == POIServiceTypes::SearchStatusState::FINISHED)
+        {
+            cout << "Result list size " << pois.size() << endl;
+            if(pois.size()>0)
+            {
+                for(index=0;index<pois.size();index++)
+                {
+                    cout << "POI id "  << pois.at(index) << endl;
+                }
+            }
+        }
+    }
 }
 
 void contentManager::connectPopupWindow(GtkWidget *window)
@@ -615,6 +638,9 @@ int main(int  argc , char**  argv )
             });
             myProxy->getPOIRemovedEvent().subscribe([&](const std::vector< POIServiceTypes::POI_ID >& pois) {
                 clientContentManager->POIRemoved(pois);
+            });
+            myProxy->getSearchStatusChangedEvent().subscribe([&](const NavigationTypes::Handle handle, const POIServiceTypes::SearchStatusState searchStatusState, const std::vector< POIServiceTypes::POI_ID >& pois ) {
+                clientContentManager->SearchStatusChanged(handle,searchStatusState,pois);
             });
 
             // Send a feedback to the user

@@ -242,7 +242,9 @@ interface POIContentManager {
 			<** @description : poi search unique handle.**>
 			Handle poiSearchHandle				
 			<** @description : enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... ).**>
-			SearchStatusState statusValue				
+			SearchStatusState statusValue		
+			<** @description : List of pois that match the search (only valid if status is set to SEARCHING or FINISHED, by default empty list).**>
+			POI_ID[] pois		
 		}
 	}
 

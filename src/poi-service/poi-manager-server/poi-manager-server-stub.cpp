@@ -1189,6 +1189,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::searchPoi(const string &categoryName,
     sqlQuery += search_string;
     sqlQuery += "%');";
     query_result = mp_database->query(sqlQuery.c_str());
+
     // read the result of the query
     if (query_result.size() == 0) //get the amount of poi searched
     {
@@ -1404,6 +1405,8 @@ void PoiManagerServerStub::poiSearchStarted(const std::shared_ptr<CommonAPI::Cli
     NavigationTypes::Coordinate3D leftBottomLocation, rightTopLocation;
     std::vector<POIServiceTypes::POI_ID> poiIDList;
 
+    poiIDList.clear(); // by default no hints
+
     //For the moment, just search for one category
     categoryAndRadius = _poiCategories.at(0);
 
@@ -1419,7 +1422,7 @@ void PoiManagerServerStub::poiSearchStarted(const std::shared_ptr<CommonAPI::Cli
     if (index>=m_availableCategoryTable.size())
     {
         //no id found, error to be sent
-        fireSearchStatusChangedEvent(_poiSearchHandle,POIServiceTypes::SearchStatusState::INVALID);
+        fireSearchStatusChangedEvent(_poiSearchHandle,POIServiceTypes::SearchStatusState::INVALID,poiIDList);
         return;
     }
 
@@ -1434,18 +1437,21 @@ void PoiManagerServerStub::poiSearchStarted(const std::shared_ptr<CommonAPI::Cli
 
     m_search_handle = _poiSearchHandle; //for the moment, only one handle is managed
 
-    fireSearchStatusChangedEvent(_poiSearchHandle,POIServiceTypes::SearchStatusState::SEARCHING);
-
     mp_sqlRequest->searchPoi(categoryName,_inputString, leftBottomLocation, rightTopLocation, poiIDList);
 
-    fireSearchStatusChangedEvent(_poiSearchHandle,POIServiceTypes::SearchStatusState::FINISHED);
+    fireSearchStatusChangedEvent(_poiSearchHandle,POIServiceTypes::SearchStatusState::FINISHED,poiIDList);
 
 }
 
 void PoiManagerServerStub::poiSearchCanceled(const std::shared_ptr<CommonAPI::ClientId> _client, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, poiSearchCanceledReply_t _reply)
 {
+    std::vector<POIServiceTypes::POI_ID> poiIDList;
+
     m_search_handle = NO_HANDLE;
-    fireSearchStatusChangedEvent(_poiSearchHandle,POIServiceTypes::SearchStatusState::NOT_STARTED);
+
+    poiIDList.clear();
+
+    fireSearchStatusChangedEvent(_poiSearchHandle,POIServiceTypes::SearchStatusState::NOT_STARTED,poiIDList);
 }
 
 void PoiManagerServerStub::resultListRequested(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _camId, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::AttributeID> _attributes, resultListRequestedReply_t _reply)
