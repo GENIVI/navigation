@@ -1,4 +1,4 @@
-Release date of the file: 09-06-2015 
+Release date of the file: 04-08-2015 
 Status: OK
 
 Project:
@@ -109,3 +109,13 @@ cd ../../test/navigation
 If everything is OK, you must see:
 
 Test PASSED
+
+===============================
+How To for Yocto
+===============================
+Due to a different way to manage the build, some specific settings are required:
+
+cmake -DYOCTO_BUILD=ON ../
+
+
+

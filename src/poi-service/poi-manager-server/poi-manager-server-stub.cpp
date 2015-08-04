@@ -1454,7 +1454,7 @@ void PoiManagerServerStub::poiSearchCanceled(const std::shared_ptr<CommonAPI::Cl
     fireSearchStatusChangedEvent(_poiSearchHandle,POIServiceTypes::SearchStatusState::NOT_STARTED,poiIDList);
 }
 
-void PoiManagerServerStub::resultListRequested(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _camId, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::AttributeID> _attributes, resultListRequestedReply_t _reply)
+void PoiManagerServerStub::resultListRequested(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::ContentAccessModuleID _camId, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::AttributeID> _attributes, resultListRequestedReply_t _reply)
 {
 
 }

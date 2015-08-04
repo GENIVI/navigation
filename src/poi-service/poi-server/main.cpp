@@ -159,7 +159,7 @@ uint8_t poiContentAccessServer::RegisterContentAccessModule(const std::string& m
     else
     {
         m_camName = moduleName;
-        m_camId = VALID_HANDLE;
+        m_camId = CAM_ID;
         // create a client for contentAccessModule
         mp_clientcontentAccessModule = new contentAccessModule(*dbusConnection, moduleName);
 	// connect it to the POISearch server

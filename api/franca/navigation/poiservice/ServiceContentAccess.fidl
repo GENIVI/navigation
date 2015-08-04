@@ -28,7 +28,7 @@ interface POIContentAccess {
 		
 		out {
 			<** @description : Content access module unique id as known by the POI service component.**>
-			UInt8 camId
+			ContentAccessModuleID camId
 		}
 
 	}
@@ -36,7 +36,7 @@ interface POIContentAccess {
 	method unRegisterContentAccessModule {
 		in {
 			<** @description : Content access module unique id as known by the POI service component.**>
-			UInt8 camId				
+			ContentAccessModuleID camId				
 		}
 	}
 	<**	@description : Register to the POI provider module the categories you can search for POI.
@@ -44,7 +44,7 @@ interface POIContentAccess {
 	method registerPoiCategories {
 		in {
 			<** @description : Content access module unique id as known by the POI service component.**>
-			UInt8 camId		
+			ContentAccessModuleID camId		
 			<**	@description : array[unique_id].
 			List of POI categories to register.
 			unique_id = Unique category id.
@@ -58,7 +58,7 @@ interface POIContentAccess {
 	method updateCategories {
 		in {
 			<** @description : Content access module unique id as known by the POI service component.**>
-			UInt8 camId		
+			ContentAccessModuleID camId		
 			<**	@description : array[unique_id, attributes, sortOptions].**>
 			CAMCategoryUpdate[] poiCategories		
 		}
@@ -68,7 +68,7 @@ interface POIContentAccess {
 	method addCategories {
 		in {
 			<** @description : Content access module unique id as known by the POI service component.**>
-			UInt8 camId		
+			ContentAccessModuleID camId		
 			<**	@description : List of details for all the POI categories.**>
 			CAMCategory[] poiCategories
 		}	
@@ -85,7 +85,7 @@ interface POIContentAccess {
 	method removeCategories {
 		in {
 			<** @description : Content access module unique id as known by the POI service component.**>
-			UInt8 camId		
+			ContentAccessModuleID camId		
 			<**	@description : array[unique_id].
 			List of POI categories to remove.**>
 			CategoryID[] poiCategories		

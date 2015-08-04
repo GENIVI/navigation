@@ -175,7 +175,7 @@ interface POIContentManager {
 	method resultListRequested {
 		in {
 			<** @description : Content access module unique id as known by the POI service component.**>
-			UInt8 camId				
+			ContentAccessModuleID camId				
 			<** @description : poi search unique handle.**>
 			Handle poiSearchHandle				
 			<** @description : List of attributes id to retrieve. This is optional and the list could be empty.**>

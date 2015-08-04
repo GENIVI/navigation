@@ -203,7 +203,7 @@ public:
     void removePOIs(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< POIServiceTypes::POI_ID> _ids, removePOIsReply_t _reply);
     void poiSearchStarted(const std::shared_ptr<CommonAPI::ClientId> _client, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, uint16_t _maxSize, ::org::genivi::navigation::NavigationTypes::Coordinate3D _location, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::CategoryAndRadius> _poiCategories, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::AttributeDetails> _poiAttributes, std::string _inputString, uint16_t _sortOption, poiSearchStartedReply_t _reply);
     void poiSearchCanceled(const std::shared_ptr<CommonAPI::ClientId> _client, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, poiSearchCanceledReply_t _reply);
-    void resultListRequested(const std::shared_ptr<CommonAPI::ClientId> _client, uint8_t _camId, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::AttributeID> _attributes, resultListRequestedReply_t _reply);
+    void resultListRequested(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::ContentAccessModuleID _camId, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::AttributeID> _attributes, resultListRequestedReply_t _reply);
     void poiDetailsRequested(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::POI_ID> _source_id, poiDetailsRequestedReply_t _reply);
 
     void run();
@@ -221,6 +221,8 @@ private:
     NavigationTypes::Coordinate3D m_centerLocation;
 
     NavigationTypes::Handle m_search_handle;
+
+    POIServiceTypes::ContentAccessModuleID m_camID;
 
     sqlRequest* mp_sqlRequest;
     void refreshCategoryList();

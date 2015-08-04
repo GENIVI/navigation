@@ -76,6 +76,7 @@ NB: You need to build the poi-supplier first:
 cd build
 cmake -DWITH_DATABASE_SUPPLIER=ON ../
 make
+cd ..
 
 To launch the stuff for Paris:
 ./prepare -c paris

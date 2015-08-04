@@ -30,7 +30,9 @@ include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${DBUS_CPP_INCLUDE_DIRS})
 include_directories(${DBUS_CPP_GLIB_INCLUDE_DIRS})
 
-include(${PRELOAD_CACHE_FOR_PLUGINS})
+if(NOT ${YOCTO_CONFIG})
+    include(${PRELOAD_CACHE_FOR_PLUGINS})
+endif()
 
 include_directories(${INCLUDE_DIRECTORIES})
 include_directories(.)
@@ -42,10 +44,17 @@ include_directories(${NAVIT_CONFIG_H_DIR}) # this one contains config.h that is 
 find_program(XSLTPROC xsltproc REQUIRED)
 
 # Generate the config file for navit/navigation-core
-execute_process(
-                OUTPUT_FILE ${NAVIT_BIN_DIR}/navit_genivi_navigationcore.xml
-                COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_navigationcore.xsl ${navit_SOURCE_DIR}/navit/navit_shipped.xml
-	)
+if(NOT ${YOCTO_CONFIG})
+    execute_process(
+        OUTPUT_FILE ${NAVIT_BIN_DIR}/navit_genivi_navigationcore.xml
+        COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_navigationcore.xsl ${navit_SOURCE_DIR}/navit/navit_shipped.xml
+    )
+else()
+    execute_process(
+        OUTPUT_FILE ${CMAKE_CURRENT_BINARY_DIR}/navit_genivi_navigationcore.xml
+        COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_navigationcore.xsl ${NAVIT_CMAKE_DIR}/../navit/navit_shipped.xml
+    )
+endif()
 
 add_definitions(-DPLUGIN=1)
 if(WITH_DEBUG)
@@ -61,6 +70,10 @@ endif()
 
 set(PLUGIN_LDFLAGS ${DBUS_CPP_LDFLAGS} ${DBUS_CPP_GLIB_LDFLAGS} ${GLIB_LDFLAGS})
 set(PLUGIN_LIBRARIES ${DBUS_CPP_LIBRARY_DIRS} ${GLIB_LIBRARY_DIRS} ${DBUS_CPP_GLIB_LIBRARY_DIRS})
+
+if(${YOCTO_CONFIG})
+    include_directories(${STAGING_INCDIR}/navit)
+endif()
 
 add_subdirectory(configuration-plugin)
 

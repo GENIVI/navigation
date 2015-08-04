@@ -29,6 +29,7 @@ project(navigation)
 cmake_minimum_required(VERSION 2.8)
 
 message(STATUS "configuration")
+
 include_directories(${DBUS_GENERATED_INCLUDE_DIR}/navigation-core)
 
 set(genivi_navigationcore_configuration_LIBS ${PLUGIN_LDFLAGS})

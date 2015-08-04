@@ -26,6 +26,8 @@ typeCollection POIServiceTypes {
     typedef ResourceID is UInt32
     
     typedef AttributeID is UInt32
+ 
+    typedef ContentAccessModuleID is UInt8
     
     <** @description: Current state of the search**>
     enumeration SearchStatusState {

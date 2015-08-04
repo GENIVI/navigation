@@ -38,7 +38,7 @@ message(STATUS "WITH_DATABASE_SUPPLIER = ${WITH_DATABASE_SUPPLIER}")
 
 set(API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api")
 set(DBUS_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/dbus-include")
-set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/api") # this one is for positioning
+set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/enhanced-position-service/dbus/api") # this one is for positioning
 set(POI_SRC_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../src")
 
 set(COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/poi-common")

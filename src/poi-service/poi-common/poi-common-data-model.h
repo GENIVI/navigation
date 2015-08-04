@@ -136,6 +136,8 @@ typedef struct
 #define SEARCH_HANDLE 1
 #define SEARCH_MAX_SIZE 50
 
+#define CAM_ID 1
+
 #define NO_HANDLE 0
 
 #endif
