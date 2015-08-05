@@ -27,6 +27,16 @@
 #include <math.h>
 #include <unistd.h>
 #include <stdlib.h>
+
+#if LM
+#include <ilm/ilm_client.h>
+#include <ilm/ilm_client.h>
+#include <ilm/ilm_control.h>
+#ifndef FSA_LAYER
+#define FSA_LAYER 2000
+#endif
+#endif
+
 #include "genivi-mapviewer-mapviewercontrol_adaptor.h"
 #include "genivi-navigationcore-routing_proxy.h"
 #include "genivi-navigationcore-session_proxy.h"
@@ -1465,10 +1475,54 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
 	sel.u.p_rect.rl.x=MapViewSize._1;
 	sel.u.p_rect.rl.y=MapViewSize._2;
 	transform_set_screen_selection(trans, &sel);
+
+#if LM
+    t_ilm_nativedisplay display = (t_ilm_nativedisplay)graphics_get_data(m_graphics.u.graphics, "display");
+    if (ilm_initWithNativedisplay(display) != ILM_SUCCESS) {
+        dbg(lvl_debug, "error on ilm_initWidthNativeDisplay\n");
+    }
+
+    t_ilm_nativehandle nativehandle=(t_ilm_nativehandle)graphics_get_data(m_graphics.u.graphics,"xwindow_id");
+    t_ilm_surface surfaceId=FSA_LAYER+m_handle;
+    t_ilm_layer layerId=FSA_LAYER;
+    if (ilm_surfaceCreate(nativehandle, MapViewSize._1, MapViewSize._2, ILM_PIXELFORMAT_RGBA_8888, &surfaceId) != ILM_SUCCESS) {
+        dbg(lvl_debug,"error on ilm_surfaceCreate\n");
+    }
+#if 0
+    if (ilm_layerAddSurface(layerId, surfaceId) != ILM_SUCCESS) {
+        dbg(lvl_debug,"error on ilm_layerAddSurface\n");
+    }
+#else
+    t_ilm_surface surfaceId_order[2] = {
+        FSA_LAYER + m_handle,
+        FSA_LAYER + m_handle + 1
+    };
+    if (ilm_layerSetRenderOrder(layerId, surfaceId_order, 2) != ILM_SUCCESS) {
+        dbg(lvl_debug,"error on ilm_layerSetRenderOrder\n");
+    }
+#endif
+    if (ilm_commitChanges() != ILM_SUCCESS) {
+        dbg(lvl_debug,"error on ilm_commitChanges\n");
+    }
+#endif
+
 }
 
 MapViewerControlObj::~MapViewerControlObj()
 {
+#if LM
+    t_ilm_surface surfaceId=FSA_LAYER+m_handle;
+    t_ilm_layer layerId=FSA_LAYER;
+    if (ilm_surfaceRemove(surfaceId) != ILM_SUCCESS) {
+        dbg(lvl_debug,"error on ilm_surfaceRemove\n");
+    }
+    if (ilm_layerRemoveSurface(layerId, surfaceId) != ILM_SUCCESS) {
+        dbg(lvl_debug,"error on ilm_layerAddSurface\n");
+    }
+    if (ilm_commitChanges() != ILM_SUCCESS) {
+        dbg(lvl_debug,"error on ilm_commitChanges\n");
+    }
+#endif
 
 	graphics_remove_callback(m_graphics.u.graphics, m_postdraw_callback);
 #if 0
@@ -1637,4 +1691,11 @@ plugin_init(void)
 	conns[0]->request_name("org.genivi.mapviewer.MapViewerControl");
 	server=new MapViewerControl(*conns[0]);
 
+#if LM
+#if 0
+    if (ilm_init() != ILM_SUCCESS) {
+        dbg(lvl_debug,"error on ilm_init\n");
+    }
+#endif
+#endif
 }
