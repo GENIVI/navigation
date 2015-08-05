@@ -80,12 +80,11 @@ if(NOT ${YOCTO_CONFIG})
     if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/positioning")
         message(FATAL_ERROR "Don't you forget to download additional code ? Please see README first")
     endif()
+    add_subdirectory(positioning)
 endif()
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
-
-add_subdirectory(positioning)
 
 unset(CMAKE_LIBRARY_OUTPUT_DIRECTORY)
 unset(CMAKE_RUNTIME_OUTPUT_DIRECTORY)
