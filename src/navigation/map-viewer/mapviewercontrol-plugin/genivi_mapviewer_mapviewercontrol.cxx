@@ -33,7 +33,8 @@
 #include <ilm/ilm_client.h>
 #include <ilm/ilm_control.h>
 #ifndef FSA_LAYER
-#define FSA_LAYER 2000
+#define FSA_LAYER 600
+#define FSA_VERTICAL_OFFSET 68
 #endif
 #endif
 
@@ -1487,20 +1488,22 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
     t_ilm_layer layerId=FSA_LAYER;
     if (ilm_surfaceCreate(nativehandle, MapViewSize._1, MapViewSize._2, ILM_PIXELFORMAT_RGBA_8888, &surfaceId) != ILM_SUCCESS) {
         dbg(lvl_debug,"error on ilm_surfaceCreate\n");
+    } 
+    if (ilm_surfaceSetSourceRectangle(surfaceId, 0, 0, MapViewSize._1, MapViewSize._2)  != ILM_SUCCESS) {
+        dbg(lvl_debug,"error on ilm_surfaceSetSourceRectangle\n");
+
+    if (ilm_surfaceSetDestinationRectangle(surfaceId, 0, 0, MapViewSize._1, MapViewSize._2-FSA_VERTICAL_OFFSET) != ILM_SUCCESS) {
+        dbg(lvl_debug,"error on ilm_surfaceSetDestinationRectangle\n");
     }
-#if 0
+
+    if (ilm_surfaceSetVisibility(surfaceId, ILM_TRUE) != ILM_SUCCESS) {
+        dbg(lvl_debug,"error on ilm_surfaceSetVisibility\n");
+    }
+
     if (ilm_layerAddSurface(layerId, surfaceId) != ILM_SUCCESS) {
         dbg(lvl_debug,"error on ilm_layerAddSurface\n");
     }
-#else
-    t_ilm_surface surfaceId_order[2] = {
-        FSA_LAYER + m_handle,
-        FSA_LAYER + m_handle + 1
-    };
-    if (ilm_layerSetRenderOrder(layerId, surfaceId_order, 2) != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_layerSetRenderOrder\n");
-    }
-#endif
+
     if (ilm_commitChanges() != ILM_SUCCESS) {
         dbg(lvl_debug,"error on ilm_commitChanges\n");
     }
