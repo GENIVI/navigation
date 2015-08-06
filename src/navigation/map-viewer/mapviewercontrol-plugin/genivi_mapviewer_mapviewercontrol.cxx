@@ -1489,8 +1489,10 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
     if (ilm_surfaceCreate(nativehandle, MapViewSize._1, MapViewSize._2, ILM_PIXELFORMAT_RGBA_8888, &surfaceId) != ILM_SUCCESS) {
         dbg(lvl_debug,"error on ilm_surfaceCreate\n");
     } 
+
     if (ilm_surfaceSetSourceRectangle(surfaceId, 0, 0, MapViewSize._1, MapViewSize._2)  != ILM_SUCCESS) {
         dbg(lvl_debug,"error on ilm_surfaceSetSourceRectangle\n");
+    }
 
     if (ilm_surfaceSetDestinationRectangle(surfaceId, 0, 0, MapViewSize._1, MapViewSize._2-FSA_VERTICAL_OFFSET) != ILM_SUCCESS) {
         dbg(lvl_debug,"error on ilm_surfaceSetDestinationRectangle\n");
