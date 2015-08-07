@@ -54,7 +54,7 @@ set(API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api")
 
 if(NOT ${YOCTO_CONFIG})
     set(NAVIT_CMAKE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/navit/navit/cmake")
-    set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/api") # this one is for positioning
+    set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/enhanced-position-service/dbus/api") # this one is for positioning
     set(NAVIT_CONFIG_H_DIR "${CMAKE_CURRENT_BINARY_DIR}/navit/navit")
 else()
     set(NAVIT_CMAKE_DIR "${STAGING_LIBDIR}/navit/cmake")
