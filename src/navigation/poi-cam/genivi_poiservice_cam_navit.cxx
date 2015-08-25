@@ -46,14 +46,20 @@
 #define dbg(level,...) ;
 #endif
 
+enum {
+    POI_CONTENTACCESSMODULE_CONNECTION=0,
+    POI_CONTENTACCESS_CONNECTION,
+    CONNECTION_AMOUNT
+};
+
 #include "genivi-poiservice-constants.h"
 #include "genivi-poiservice-poicontentaccess_proxy.h"
 #include "genivi-poiservice-contentaccessmodule_adaptor.h"
 
 #include <algorithm>
 
-static DBus::Glib::BusDispatcher dispatchers[2];
-static DBus::Connection *conns[2];
+static DBus::Glib::BusDispatcher dispatchers[CONNECTION_AMOUNT];
+static DBus::Connection *conns[CONNECTION_AMOUNT];
 static const char *cam_name="org.genivi.poiservice.POIContentAccessModuleNavit";
 
 static DBus::Variant
@@ -118,7 +124,7 @@ class ContentAccessModule
 	register_cam(void)
 	{
 		class PoiContentAccess *pca;
-		pca=new PoiContentAccess(*conns[1]);
+        pca=new PoiContentAccess(*conns[POI_CONTENTACCESS_CONNECTION]);
 		int camid=pca->RegisterContentAccessModule(cam_name);
 		dbg(lvl_debug,"camid=%d\n",camid);
 
@@ -332,16 +338,18 @@ void
 plugin_init(void)
 {
 	dbg(lvl_debug,"enter\n");
-        event_request_system("glib","genivi_poiservice");
-        int i;
-        for (i = 0 ; i < 2 ; i++) {
-                conns[i] = new DBus::Connection(DBus::Connection::SessionBus());
-                dispatchers[i].attach(NULL);
-                DBus::default_dispatcher = &dispatchers[i];
-                conns[i]->setup(&dispatchers[i]);
-        }
-        conns[0]->request_name(cam_name);
-        server=new ContentAccessModule(*conns[0]);
+    event_request_system("glib","genivi_poiservice");
+    int i;
+    for (i = 0 ; i < CONNECTION_AMOUNT ; i++) {
+        // init the dispatcher
+        DBus::default_dispatcher = &dispatchers[i];
+        dispatchers[i].attach(NULL);
+        // create a connection on the session bus and connect the dispatcher
+        conns[i] = new DBus::Connection(DBus::Connection::SessionBus());
+        conns[i]->setup(&dispatchers[i]);
+    }
+    conns[POI_CONTENTACCESSMODULE_CONNECTION]->request_name(cam_name);
+    server=new ContentAccessModule(*conns[POI_CONTENTACCESSMODULE_CONNECTION]);
 	try {
 		server->register_cam();
 	} catch(...) {

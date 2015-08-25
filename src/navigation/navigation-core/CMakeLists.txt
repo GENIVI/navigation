@@ -30,9 +30,7 @@ include_directories(${GLIB_INCLUDE_DIRS})
 include_directories(${DBUS_CPP_INCLUDE_DIRS})
 include_directories(${DBUS_CPP_GLIB_INCLUDE_DIRS})
 
-if(NOT ${YOCTO_CONFIG})
-    include(${PRELOAD_CACHE_FOR_PLUGINS})
-endif()
+include(${PRELOAD_CACHE_FOR_PLUGINS})
 
 include_directories(${INCLUDE_DIRECTORIES})
 include_directories(.)

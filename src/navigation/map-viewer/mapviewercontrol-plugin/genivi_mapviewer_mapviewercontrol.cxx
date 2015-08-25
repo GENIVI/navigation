@@ -69,8 +69,16 @@
 #define dbg(level,...) ;
 #endif
 
-static DBus::Glib::BusDispatcher dispatchers[4];
-static DBus::Connection *conns[4];
+enum {
+    MAPVIEWER_CONTROL_CONNECTION=0,
+    NAVIGATIONCORE_SESSION_CONNECTION,
+    NAVIGATIONCORE_ROUTING_CONNECTION,
+    NAVIGATIONCORE_MAPMATCHEDPOSITION_CONNECTION,
+    CONNECTION_AMOUNT
+};
+
+static DBus::Glib::BusDispatcher dispatchers[CONNECTION_AMOUNT];
+static DBus::Connection *conns[CONNECTION_AMOUNT];
 static int32_t navigationcore_session=-1;
 
 static double double_variant(DBus::Variant variant);
@@ -1331,7 +1339,7 @@ MapViewerControlObj::DisplayRoute(uint32_t SessionHandle, uint32_t RouteHandle, 
 {
 	HideRoute(SessionHandle, RouteHandle);
 	if (navigationcore_session == -1) {
-		NavigationCoreSession session(*conns[1]);
+        NavigationCoreSession session(*conns[NAVIGATIONCORE_SESSION_CONNECTION]);
 		navigationcore_session=session.CreateSession("MapViewerControl");
 	}
 	DisplayedRoute *route=new DisplayedRoute(this,navigationcore_session,RouteHandle,m_mapset);
@@ -1409,7 +1417,7 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
 	m_force_draw=false;
 	m_perspective=GENIVI_MAPVIEWER_2D;
 	m_follow_car=true;
-	m_routing=new Routing(*conns[2], this);
+    m_routing=new Routing(*conns[NAVIGATIONCORE_ROUTING_CONNECTION], this);
 	struct attr navit_template;
 	struct attr navit_flags={attr_flags};navit_flags.u.num=2;
 	struct attr *navit_attrs[]={&navit_flags,NULL};
@@ -1466,7 +1474,7 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
 	m_vehicle.u.vehicle=vehicle_new(&m_navit,vehicle_attrs);
 	navit_add_attr(m_navit.u.navit, &m_vehicle);
 	navit_set_attr(m_navit.u.navit, &m_vehicle);
-	m_mapmatchedposition=new MapMatchedPosition(*conns[3], m_vehicle.u.vehicle);
+    m_mapmatchedposition=new MapMatchedPosition(*conns[NAVIGATIONCORE_MAPMATCHEDPOSITION_CONNECTION], m_vehicle.u.vehicle);
 
 	navit_init(m_navit.u.navit);
 	graphics_get_data(m_graphics.u.graphics,"window");
@@ -1687,14 +1695,16 @@ plugin_init(void)
 {
 	event_request_system("glib","genivi_mapviewercontrol");
 	int i;
-	for (i = 0 ; i < 4 ; i++) {
+    for (i = 0 ; i < CONNECTION_AMOUNT ; i++) {
+        // init the dispatcher
+        DBus::default_dispatcher = &dispatchers[i];
+        dispatchers[i].attach(NULL);
+        // create a connection on the session bus and connect the dispatcher
 		conns[i] = new DBus::Connection(DBus::Connection::SessionBus());
-		dispatchers[i].attach(NULL);
-		DBus::default_dispatcher = &dispatchers[i];
 		conns[i]->setup(&dispatchers[i]);
 	}
-	conns[0]->request_name("org.genivi.mapviewer.MapViewerControl");
-	server=new MapViewerControl(*conns[0]);
+    conns[MAPVIEWER_CONTROL_CONNECTION]->request_name("org.genivi.mapviewer.MapViewerControl");
+    server=new MapViewerControl(*conns[MAPVIEWER_CONTROL_CONNECTION]);
 
 #if LM
 #if 0
