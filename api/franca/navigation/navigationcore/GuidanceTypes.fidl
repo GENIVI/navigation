@@ -1,6 +1,6 @@
 /* 
 SPDX-License-Identifier: MPL-2.0
-Copyright (C) 2014, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
+Copyright (C) 2014, PCA Peugeot Citroï¿½n, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
 This Source Code Form is subject to the terms of the
 Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
 this file, you can obtain one at http://mozilla.org/MPL/2.0/.
@@ -11,103 +11,125 @@ import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 
 typeCollection GuidanceTypes {
 	
-	enumeration ManueverPhase extends BasicEnum {
-		CRUISE = "0x0050"
-		MANEUVER_APPEARED = "0x0051"
-		PRE_ADVICE = "0x0052"
-		ADVICE = "0x0053"
-		PASSED = "0x0054"
+//	enumeration Side extends BasicEnum {
+	enumeration Side {
+		INVALID 	= 0
+		LEFT = 128
+		RIGHT = 131
+		NOT_AVAILABLE = 2
 	}
 
-	enumeration Side extends BasicEnum {
-		LEFT = "0x0080"
-		RIGHT = "0x0083"
-		NOT_AVAILABLE = "0x0002"
-	}
-
-	enumeration RoadProperty extends BasicEnum {
+//	enumeration RoadProperty extends BasicEnum {
+	enumeration RoadProperty {
+		INVALID 	= 0
 		
 	}
 	
-	enumeration ManeuverType extends BasicEnum {
-		STRAIGHT_ON					= "0x0070"
-		TURN						= "0x0078"
-		CROSSROAD					= "0x0071"
-		ROUNDABOUT					= "0x0072"
-		HIGHWAY_ENTER				= "0x0073"
-		HIGHWAY_EXIT				= "0x0074"
-		BIFURCATION					= "0x0079"
-		HIGHWAY_CHANGE_LANE			= "0x0075"
-		DESTINATION					= "0x0076"
-		WAYPOINT					= "0x0077"
+//	enumeration LaneType extends BasicEnum {
+	enumeration LaneType {
+		INVALID 	= 0
+		LANE_INFO_BITMASK_STRAIGHT		= 1
+		LANE_INFO_BITMASK_SLIGHTRIGHT	= 2
+		LANE_INFO_BITMASK_RIGHT			= 4
+		LANE_INFO_BITMASK_SHARPRIGHT	= 8
+		LANE_INFO_BITMASK_RIGHTUTURN	= 16
+		LANE_INFO_BITMASK_SLIGHTLEFT	= 32
+		LANE_INFO_BITMASK_LEFT			= 64
+		LANE_INFO_BITMASK_SHARPLEFT		= 128
+		LANE_INFO_BITMASK_LEFTUTURN		= 256
+	}
+	
+//	enumeration PromptMode extends BasicEnum { //Base 0x0040
+	enumeration PromptMode { //Base 0x0040
+		INVALID 	= 0
+		DISABLED_PROMPT					= 65
+		AUTOMATIC_PROMPT				= 66
+		MANUAL_PROMPT					= 67
+	}
+	
+//	enumeration ManeuverPhase extends BasicEnum { //Base 0x0050
+	enumeration ManeuverPhase { //Base 0x0050
+		INVALID 	= 0
+		CRUISE 				= 80
+		MANEUVER_APPEARED 	= 81
+		PRE_ADVICE 			= 82
+		ADVICE 				= 83
+		PASSED 				= 84
 	}
 
-	enumeration ManeuverDirectionType extends BasicEnum {
-		LENGTH						= "0x0031"
-		DIRECTION					= "0x0240"
-		EXIT_NUMBER					= "0x0241"
-		ROAD_FORM					= "0x0242"
-		LANE_INFO					= "0x0243"
+//	enumeration GuidanceStatus extends BasicEnum { //Base 0x0060
+	enumeration GuidanceStatus{ //Base 0x0060
+		INVALID 	= 0
+		ACTIVE							= 96
+		INACTIVE						= 97
+	}
+	
+//	enumeration ManeuverType extends BasicEnum { //Base 0x0070
+	enumeration ManeuverType { //Base 0x0070
+		INVALID 	= 0
+		STRAIGHT_ON					= 112
+		CROSSROAD					= 113
+		ROUNDABOUT					= 114
+		HIGHWAY_ENTER				= 115
+		HIGHWAY_EXIT				= 116
+		FOLLOW_SPECIFIC_LANE		= 117
+		DESTINATION					= 118
+		WAYPOINT					= 119
+		TURN						= 120
+		BIFURCATION					= 121
+	}
+	
+//	enumeration ManeuverDirection extends BasicEnum { //Base 0x0080
+	enumeration ManeuverDirection { //Base 0x0080
+		INVALID 	= 0
+		LEFT							= 128
+		SLIGHT_LEFT						= 129
+		HARD_LEFT						= 130
+		RIGHT							= 131
+		SLIGHT_RIGHT					= 132
+		HARD_RIGHT						= 133
+		UTURN_RIGHT						= 134
+		UTURN_LEFT						= 135
+	}
+	
+//	enumeration CalculationMode extends BasicEnum { //Base 0x0090
+	enumeration CalculationMode { //Base 0x0090
+		INVALID 	= 0
+		ALL_MANUAL						= 144
+		ALL_AUTOMATIC					= 145
+		TRAFFIC_MANUAL					= 146
+		OFF_ROUTE_MANUAL				= 147
 	}
 
-	enumeration LaneType extends BasicEnum {
-		LANE_INFO_BITMASK_STRAIGHT		= "0x0001"
-		LANE_INFO_BITMASK_SLIGHTRIGHT	= "0x0002"
-		LANE_INFO_BITMASK_RIGHT			= "0x0004"
-		LANE_INFO_BITMASK_SHARPRIGHT	= "0x0008"
-		LANE_INFO_BITMASK_RIGHTUTURN	= "0x0010"
-		LANE_INFO_BITMASK_SLIGHTLEFT	= "0x0020"
-		LANE_INFO_BITMASK_LEFT			= "0x0040"
-		LANE_INFO_BITMASK_SHARPLEFT		= "0x0080"
-		LANE_INFO_BITMASK_LEFTUTURN		= "0x1000"
-	}
-	
-	enumeration LaneDivider extends BasicEnum {
-		DIVIDER_UNDEFINED				= "0x0250"
-		DIVIDER_INTERRUPTEDLONG			= "0x0251"
-		DIVIDER_INTERRUPTEDSHORT		= "0x0252"
-		DIVIDER_SOLIDSINGLE				= "0x0253"
-		DIVIDER_SOLIDDOUBLE				= "0x0254"
-		DIVIDER_SOLIDINTERRUPTED		= "0x0255"
-		DIVIDER_INTERRUPTEDSOLID		= "0x0256"
+//	enumeration RouteChangedCause extends BasicEnum { //Base 0x0210
+	enumeration RouteChangedCause { //Base 0x0210
+		INVALID 	= 0
+		TRAFFIC							= 528
+		OFF_ROUTE						= 529
+		MANUAL							= 530
 	}
 
-	enumeration CalculationMode extends BasicEnum {
-		ALL_MANUAL						= "0x0090"
-		ALL_AUTOMATIC					= "0x0091"
-		TRAFFIC_MANUAL					= "0x0092"
-		OFF_ROUTE_MANUAL				= "0x0093"
+//	enumeration ManeuverDirectionType extends BasicEnum { //Base 0x0240
+	enumeration ManeuverDirectionType{ //Base 0x0240
+		INVALID 	= 0
+		DIRECTION					= 576
+		EXIT_NUMBER					= 577
+		ROAD_FORM					= 578
+		LANE_INFO					= 579
 	}
 
-	enumeration GuidanceStatus extends BasicEnum {
-		ACTIVE							= "0x0060"
-		INACTIVE						= "0x0061"
+//	enumeration LaneDivider extends BasicEnum { //Base 0x0250
+	enumeration LaneDivider { //Base 0x0250
+		INVALID 	= 0
+		DIVIDER_UNDEFINED				= 592
+		DIVIDER_INTERRUPTEDLONG			= 593
+		DIVIDER_INTERRUPTEDSHORT		= 594
+		DIVIDER_SOLIDSINGLE				= 595
+		DIVIDER_SOLIDDOUBLE				= 596
+		DIVIDER_SOLIDINTERRUPTED		= 597
+		DIVIDER_INTERRUPTEDSOLID		= 598
 	}
-	
-	enumeration PromptMode extends BasicEnum {
-		DISABLED_PROMPT					= "0x0041"
-		AUTOMATIC_PROMPT				= "0x0042"
-		MANUAL_PROMPT					= "0x0043"
-	}
-	
-	enumeration RouteChangedCause extends BasicEnum {
-		TRAFFIC							= "0x0210"
-		OFF_ROUTE						= "0x0211"
-		MANUAL							= "0x0212"
-	}
-	
-	enumeration ManeuverDirection extends BasicEnum {
-		STRAIGHT_ON						= "0x0070"
-		LEFT							= "0x0080"
-		SLIGHT_LEFT						= "0x0081"
-		HARD_LEFT						= "0x0082"
-		RIGHT							= "0x0083"
-		SLIGHT_RIGHT					= "0x0084"
-		HARD_RIGHT						= "0x0085"
-		UTURN_RIGHT						= "0x0086"
-		UTURN_LEFT						= "0x0087"
-	}
-	
+
 	struct tWaypointStruct {
 		UInt32 waypointOffset
 		UInt32 travelTime

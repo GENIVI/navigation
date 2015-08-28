@@ -29,8 +29,8 @@
 
 #include <CommonAPI/CommonAPI.hpp>
 
-#include <v0_1/org/genivi/navigation/poiservice/POIServiceTypes.hpp>
 #include <org/genivi/navigation/NavigationTypes.hpp>
+#include <v0_1/org/genivi/navigation/poiservice/POIServiceTypes.hpp>
 #include <v0_1/org/genivi/navigation/poiservice/POIContentManagerStubDefault.hpp>
 
 #include "poi-common-database.h"

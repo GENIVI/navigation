@@ -40,18 +40,40 @@ typeCollection NavigationTypes {
 		Coordinate2D bottomRight
 	}
 
+// for the time being, no use of extends for the enum, to be implemented later
 	enumeration BasicEnum {
-		INVALID = "0x0000"
+		INVALID 	= 0
+	}
+
+ 	enumeration TimeStampedEnum extends BasicEnum {
+		TIMESTAMP	= 16
+	}
+
+//	enumeration GeoLocalizedEnum extends TimeStampedEnum {
+	enumeration GeoLocalizedEnum {
+		INVALID 	= 0
+		TIMESTAMP	= 16
+		LATITUDE	= 160
+		LONGITUDE	= 161
+		ALTITUDE	= 162
 	}
 
     <** @description: Settings**>
     enumeration Settings {
-        INVALID = "0x0000"
-        UNITS_OF_MEASUREMENT = "0x0030"
-        LOCALE = "0x0025"
-        TIME_FORMAT = "0x0003"
-        COORDINATES_FORMAT = "0x0006"
+        INVALID 				= 0
+        UNITS_OF_MEASUREMENT 	= 48 //Base 0x0030
+        LOCALE 					= 37
+        TIME_FORMAT 			= 3
+        COORDINATES_FORMAT 		= 6
     }
+
+	enumeration Units {
+		METER		= 50
+		MILE		= 51
+		KM			= 52
+		YARD		= 53
+		FOOT		= 54
+	}
 
 	typedef Timestamp is UInt64
 	

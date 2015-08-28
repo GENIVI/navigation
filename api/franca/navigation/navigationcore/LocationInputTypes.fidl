@@ -11,35 +11,39 @@ import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 
 typeCollection LocationInputTypes {
 	
-	enumeration AddressAttribute extends BasicEnum {
-		LATITUDE		= "0x00a0"
-		LONGITUDE		= "0x00a1"
-		ALTITUDE		= "0x00a2"
-		FULL_ADDRESS	= "0x00b2"
-		COUNTRY			= "0x00a6"
-		STATE			= "0x00a7"
-		CITY			= "0x00a8"
-		ZIPCODE			= "0x00a9"
-		STREET			= "0x00aa"
-		HOUSENUMBER		= "0x00ab"
-		CROSSING		= "0x00ac"
-		DISTRICT		= "0x00ad"
-		PHONENUMBER		= "0x00ae"
-		POINAME			= "0x00af"
-		TOWNCENTER		= "0x00b0"
-        INTERNAL_DATA   = "0x00FF"
+	enumeration AddressAttribute extends GeoLocalizedEnum { //Base 0x00a0
+		COUNTRY			= 166
+		STATE			= 167
+		CITY			= 168
+		ZIPCODE			= 169
+		STREET			= 170
+		HOUSENUMBER		= 171
+		CROSSING		= 172
+		DISTRICT		= 173
+		PHONENUMBER		= 174
+		POINAME			= 175
+		TOWNCENTER		= 176
+		LOCATION_INPUT  = 177
+		FULL_ADDRESS	= 178
+		COUNTRYCODE		= 179
+		HOUSENAME		= 180
+		POSTAL_CODE		= 181
 	}
 	
-	enumeration ValidationType extends BasicEnum {
-		OK				= "0x00d0"
-		UNKNOWN			= "0x00d1"
-		AMBIGUOUS		= "0x00d2"
-		INCONSISTENT	= "0x00d3"
+//	enumeration SearchStatus extends BasicEnum {
+	enumeration SearchStatus { //Base 0x00c0
+		INVALID 	= 0
+  		SEARCHING		= 193
+  		FINISHED 		= 194		
 	}
 	
-	enumeration SearchStatus extends BasicEnum {
-  		SEARCHING		= "0x00c1"
-  		FINISHED 		= "0x00c2"		
+//	enumeration ValidationType extends BasicEnum { //Base 0x00d0
+	enumeration ValidationType { //Base 0x00d0
+		INVALID 	= 0
+		OK				= 208
+		UNKNOWN			= 209
+		AMBIGUOUS		= 210
+		INCONSISTENT	= 211
 	}
 	
 	array AddressAttributeList of AddressAttribute

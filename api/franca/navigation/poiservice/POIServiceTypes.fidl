@@ -29,49 +29,85 @@ typeCollection POIServiceTypes {
  
     typedef ContentAccessModuleID is UInt8
     
-    <** @description: Current state of the search**>
-    enumeration SearchStatusState {
-        INVALID
-        NOT_STARTED
-        SEARCHING
-        FINISHED
-    }
-    
-    <** @description: Type of Attribute**>
-    enumeration AttributeType {
-        INTEGER
-        BOOLEAN
-        COORDINATE
+      <** @description: Set of CategoryID**>
+//    enumeration CategoryIDSet extends BasicEnum { 
+    enumeration CategoryIDSet { 
+		INVALID 	= 0
+		AIRPORT   			= 1
+		SPORTING   			= 2
+		FERRY_TERMINAL   	= 3
+		ENTERTAINMENT   	= 4
+		HOTEL_MOTEL   		= 5
+		RESTAURANT   		= 6
+		PARKING   			= 7
+		FUEL_STATION   		= 8
+		SERVICE_AREA   		= 9
+		CAR_REPAIR_SHOP   	= 10
+		CAR_DEALER   		= 11
+		CAR_RENTAL_AGENCY   = 12
+		MEDICAL   			= 13
+		SHOPPING   			= 14
+		BUSINESS_AREA   	= 15
+		LANDMARK   			= 16
+		FLASH_RADAR   		= 17
+		POI_TRUCK   		= 18
+		SANCTUARY   		= 19
+		TOLLBOOTH   		= 20
+		KIOSK   			= 21
+		WATER_CLOSET   		= 22
+		BANK_AND_FINANCIAL 	= 23
+		TRAVEL   			= 24
+		TOURIST   			= 25
+		PUBLIC_BUILDING   	= 26
+		RAILWAY_STATION   	= 27
+     }
+ 
+     <** @description: Type of Attribute**>
+    enumeration AttributeType { //Base 0x0500
+    	STRING		= 1280
+        INTEGER		= 1281
+        BOOLEAN		= 1282
+        COORDINATES	= 1283
     }
 
+   <** @description: Current state of the search**>
+//    enumeration SearchStatusState extends BasicEnum { //Base 0x0510
+    enumeration SearchStatusState { //Base 0x0510
+		INVALID 	= 0
+        NOT_STARTED		= 1296
+        SEARCHING		= 1297
+        FINISHED		= 1298
+    }
+    
     <** @description: Type of Operator**>
-    enumeration OperatorType {
-        INVALID
-        MORE_THAN
-        LESS_THAN
-        EQUAL
+//    enumeration OperatorType extends BasicEnum  { //Base 0x0520
+    enumeration OperatorType { //Base 0x0520
+		INVALID 	= 0
+        MORE_THAN		= 1312
+        LESS_THAN		= 1313
+        EQUAL			= 1314
     }
 
     <** @description: Reason of update**>
-    enumeration UpdateReason {
-        ADDED
-        REMOVED
-        ATTR_ADDED
-        ATTR_MODIFIED
-        ATTR_REMOVED
+    enumeration SortOption { //Base 0x0560
+        SORT_DEFAULT		= 1376
+        SORT_BY_DISTANCE	= 1377
+        SORT_BY_TIME		= 1378
+        ATTRIBUTE_CUSTOM	= 1379
+    }
+
+    <** @description: Reason of update**>
+    enumeration UpdateReason { //Base 0x0700
+        ADDED			= 1792
+        REMOVED			= 1793
+        ATTR_ADDED		= 1794
+        ATTR_MODIFIED	= 1795
+        ATTR_REMOVED  	= 1796
     }
 
     <** @description: Configuration changed**>
     enumeration ConfigurationChangedReason {
         LOCALES
-    }
-
-    <** @description: Reason of update**>
-    enumeration SortOption {
-        SORT_DEFAULT
-        SORT_BY_DISTANCE
-        SORT_BY_TIME
-        ATTRIBUTE_CUSTOM
     }
 
     <** @description: Different types of resources for icons**>

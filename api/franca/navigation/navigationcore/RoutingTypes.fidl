@@ -1,6 +1,6 @@
 /* 
 SPDX-License-Identifier: MPL-2.0
-Copyright (C) 2014, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
+Copyright (C) 2014, PCA Peugeot Citroï¿½n, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
 This Source Code Form is subject to the terms of the
 Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
 this file, you can obtain one at http://mozilla.org/MPL/2.0/.
@@ -12,66 +12,87 @@ import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 
 typeCollection RoutingTypes {
 	
-	enumeration CostModel extends BasicEnum {
-		FASTEST			= "0x0160"	
-		SHORTEST		= "0x0161"
-		ECOLOGICAL		= "0x0162"
-		SCENIC			= "0x0163"
-		EASY			= "0x0164"
-		OFF_ROAD		= "0x0165"
-		BALANCED		= "0x0166"
-		CHEAPEST		= "0x0167"
+//	enumeration CalculationStatus extends BasicEnum { //Base 0x0130
+	enumeration CalculationStatus { //Base 0x0130
+ 		INVALID 	= 0
+  		CALCULATION_OK				= 304
+		NO_POSITION					= 305		
 	}
- 
- 
- 	enumeration PreferenceMode extends BasicEnum { 
- 		PROHIBIT		= "0x0190"
- 		AVOID			= "0x0191"
- 		USE				= "0x0192"
- 		PREFER			= "0x0193"	
- 		IGNORE			= "0x0194"	
- 	}
- 	 	
-	enumeration RoutePreferenceSource extends BasicEnum { 
-		FERRY				= "0x0170"
-		TOLL_ROADS			= "0x0171"
-		TUNNELS				= "0x0172"
-		HIGHWAYS_MOTORWAYS	= "0x0173"
-		VEHICLE_SIZE_LIMIT	= "0x0174"
-		CRIME_AREAS			= "0x0175"	
+	
+//	enumeration CalculationError extends BasicEnum {
+	enumeration CalculationError {
+		INVALID 	= 0
+		UNMATCHED_POSITION			= 306
+		UNREACHABLE_DESTINATION		= 307
+		UNFULFILLED_PREFERENCE_MODE	= 308
+	}
+	
+//	enumeration CostModel extends BasicEnum { //Base 0x0160
+	enumeration CostModel { //Base 0x0160
+		INVALID 	= 0
+		FASTEST			= 352	
+		SHORTEST		= 353
+		ECOLOGICAL		= 354
+		SCENIC			= 355
+		EASY			= 356
+		OFF_ROAD		= 357 //to be confirmed
+		BALANCED		= 358
+		CHEAPEST		= 359
+	}
+  
+//	enumeration RoutePreferenceSource extends BasicEnum { //Base 0x0170
+	enumeration RoutePreferenceSource { //Base 0x0170
+		INVALID 	= 0
+		FERRY				= 368
+		TOLL_ROADS			= 369
+		TUNNELS				= 370
+		HIGHWAYS_MOTORWAYS	= 371
+		VEHICLE_SIZE_LIMIT	= 372
+		CRIME_AREAS			= 373	
 	} 	 	
   
-  	enumeration ConditionPreferenceSource extends BasicEnum {
-  		TRAFFIC_REALTIME	= "0x0200"
+ //	enumeration TransportationMeans extends BasicEnum { //Base 0x0180
+ 	enumeration TransportationMeans { //Base 0x0180
+		INVALID 	= 0
+		BY_CAR						= 384 
+		ON_FOOT						= 385
+		LONG_RANGE_TRAINS			= 386
+		PUBLIC_TRANSPORTATION		= 387
+		BY_BICYCLE					= 388
+		BY_TRUCK					= 389
+	}
+	
+//	enumeration Schedule extends BasicEnum { 
+	enumeration Schedule { 
+		INVALID 	= 0
+		ARRIVAL_TIME  		= 394
+ 		ARRIVAL_DATE		= 395
+		DEPARTURE_TIME		= 396
+		DEPARTURE_DATE		= 397 
+	}
+
+	enumeration RouteOverviewType extends Schedule  {
+		TOTAL_TIME			= 398
+		TOTAL_DISTANCE		= 399
+	}
+	
+//	enumeration PreferenceMode extends BasicEnum { //Base 0x0190
+	enumeration PreferenceMode { //Base 0x0190
+		INVALID 	= 0
+ 		PROHIBIT		= 400
+ 		AVOID			= 401
+ 		USE				= 402
+ 		PREFER			= 403	
+ 		IGNORE			= 404	
+ 	}
+ 	 	
+//  	enumeration ConditionPreferenceSource extends BasicEnum { //Base 0x0200
+  	enumeration ConditionPreferenceSource { //Base 0x0200
+		INVALID 	= 0
+  		TRAFFIC_REALTIME	= 512
   	}
  	 	
  	 	
-	enumeration Schedule extends BasicEnum { 
-		ARRIVAL_TIME  		= "0x018a"
- 		ARRIVAL_DATE		= "0x018b"
-		DEPARTURE_TIME		= "0x018c"
-		DEPARTURE_DATE		= "0x018d" 
-	}
-
-	enumeration TransportationMeans extends BasicEnum {
-		BY_CAR						= "0x0180" 
-		ON_FOOT						= "0x0181"
-		LONG_RANGE_TRAINS			= "0x0182"
-		PUBLIC_TRANSPORTATION		= "0x0183"
-		BY_BICYCLE					= "0x0184"
-		BY_TRUCK					= "0x0185"
-	}
-	
-	enumeration CalculationStatus extends BasicEnum {
-  		CALCULATION_OK				= "0x0130"
-		NO_POSITION					= "0x0131"		
-	}
-	
-	enumeration CalculationError extends BasicEnum {
-		UNREACHABLE_DESTINATION		= "0x0133"
-		UNFULFILLED_PREFERENCE_MODE	= "0x0134"
-	}
-	
 	<**
 		@description : struct generated for DBus argument SetRoutePreferences_roadPreferenceList
 	**>
@@ -83,7 +104,7 @@ typeCollection RoutingTypes {
 	<**
 		@description : struct generated for DBus argument SetRoutePreferences_conditionPreferenceList
 	**>
-	struct ConiditionPreference {
+	struct ConditionPreference {
 		PreferenceMode mode
 		ConditionPreferenceSource source
 	}
@@ -94,43 +115,38 @@ typeCollection RoutingTypes {
 	}
 
 	
-	enumeration WapointElementType extends BasicEnum {
-		WAYPOINT_TYPE		= "0x0121"
-		LOCATION_INPUT		= "0x00b1"
-		LATITUDE			= "0x00a0"
-		LONGITUDE			= "0x00a1"
-		ALTITUDE			= "0x00a2"		
+	enumeration WaypointElementType extends GeoLocalizedEnum {
+		WAYPOINT_TYPE		= 289
+		LOCATION_INPUT		= 17
 	}
 	
-	enumeration RouteSegmentType extends BasicEnum {
-		LINK_ID					= "0x0140"
-		INTERMEDIATE_POINTS		= "0x0120"
-		START_LATITUDE			= "0x0141"
-		START_LONGITUDE			= "0x0143"
-		START_ALTITUDE			= "0x0145"
-		END_LATITUDE			= "0x0142"
-		END_LONGITUDE			= "0x0144"
-		END_ALTITUDE			= "0x0146"
-		ROAD_NAME				= "0x0147"
-		ROAD_NUMBER				= "0x014e"
-		DISTANCE				= "0x0148"
-		TIME					= "0x0149"
-		MANEUVER				= "0x014a"
-		INSTRUCTION				= "0x014b"
-        BORDER_CROSSING			= "0x014c"
-        ADDITIONAL_INFORMATION	= "0x014d"
-        HIGHWAY_EXIT			= "0x0074"
-        ALL						= "0xffff"
+//	enumeration RouteSegmentType extends BasicEnum {
+	enumeration RouteSegmentType {
+		INVALID 	= 0
+		LINK_ID					= 320 		//Base 0x0140
+		START_LATITUDE			= 321
+		END_LATITUDE			= 322
+		START_LONGITUDE			= 323
+		END_LONGITUDE			= 324
+		START_ALTITUDE			= 325
+		END_ALTITUDE			= 326
+		ROAD_NAME				= 327
+		DISTANCE				= 328
+		TIME					= 329
+		MANEUVER				= 330
+		INSTRUCTION				= 331
+        BORDER_CROSSING			= 332
+        ADDITIONAL_INFORMATION	= 333
+		ROAD_NUMBER				= 334
+		START_OFFSET			= 335
+		INTERMEDIATE_POINTS		= 288
+        HIGHWAY_EXIT			= 116
+        ALL						= 65535
 	}
 	
 	enumeration IntermediatePointType {
 		HARD_POINT
 		SOFT_POINT
-	}
-	
-	enumeration RouteOverviewType extends Schedule  {
-		TOTAL_DISTANCE			= "0x018f"
-		TOTAL_TIME				= "0x018e"
 	}
 	
 	union RouteOverviewItem {
@@ -160,7 +176,7 @@ typeCollection RoutingTypes {
 	}
 	
 	map WayPoint {
-		WapointElementType to WayPointItem
+		WaypointElementType to WayPointItem
 	}
 
 	map RouteSegment {

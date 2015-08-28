@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: MPL-2.0
-// Copyright (C) 2014, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
+// Copyright (C) 2014, PCA Peugeot Citroï¿½n, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
 // This Source Code Form is subject to the terms of the
 // Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
 // this file, you can obtain one at http://mozilla.org/MPL/2.0/.
@@ -10,25 +10,32 @@ import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 
 typeCollection MapViewerControlTypes {
 	
-	enumeration MapViewType extends BasicEnum {
-		MAIN_MAP		= "0x0010"
-		SPLIT_SCREEN	= "0x0011"
-		
-		GUIDING_MAP
+//	enumeration MapViewType extends BasicEnum { //Base 0x0010
+	enumeration MapViewType { //Base 0x0010
+		INVALID 	= 0
+		MAIN_MAP		= 16
+		SPLIT_SCREEN	= 17		
+		GUIDING_MAP		= 18
 	}
 	
-	enumeration MapScaleMode extends BasicEnum {
-		AUTOMATIC		= "0x0110"
-		MANUAL			= "0x0111"
-		HYBRID			= "0x0112"
+//	enumeration MapScaleMode extends BasicEnum { //Base 0x0110
+	enumeration MapScaleMode { //Base 0x0110
+		INVALID 	= 0
+		AUTOMATIC		= 272
+		MANUAL			= 273
+		HYBRID			= 274
 	}
 
-	enumeration MapPerspective extends BasicEnum {
-		PERSPECTIVE_2D	= "0x0020"
-		PERSPECTIVE_3D	= "0x0021"
+//	enumeration MapPerspective extends BasicEnum { //Base 0x0020
+	enumeration MapPerspective { //Base 0x0020
+		INVALID 	= 0
+		PERSPECTIVE_2D	= 32
+		PERSPECTIVE_3D	= 33
 	}
 
-	enumeration MapObject extends BasicEnum {
+//	enumeration MapObject extends BasicEnum {
+	enumeration MapObject {
+		INVALID 	= 0
 		// TODO: Check which elements are really visible
 		DET_POI                           //Points Of Interest
 		DET_TTI                           //TTI elements
@@ -46,10 +53,10 @@ typeCollection MapViewerControlTypes {
 		DET_ROAD                          //Roads
 		DET_POLYGON                       //Polygons
 		DET_DESTINATION                   //Destination flag
-		DET_MANOEUVRE_MARKER              //Manoeuvre point markers
-		DET_LANE_GUIDANCE_MARKER          //Lange guidance point markers
+		DET_MANOEUVRE_MARKER              //Maneuvre point markers
+		DET_LANE_GUIDANCE_MARKER          //Lane guidance point markers
 		DET_ROUTE                         //Route
-		DET_MANOEUVRE_ARROW               //Manoeuvre arrows
+		DET_MANOEUVRE_ARROW               //Maneuvre arrows
 		DET_TREKKING_TOUR                 //Trekking tours
 		DET_TTI_EDGE_HIGHLIGHTING         //TTI highlighted edges
 		DET_CITY_MARKER                   //City markers
@@ -64,7 +71,7 @@ typeCollection MapViewerControlTypes {
 		DET_DIRECTION_ARROW               //Draw arrows that indicate driving or walking direction.
 		DET_CITY_BUILDINGS                //Render city buildings.
 		DET_FPS_DISPLAY                   //Measure and display frames per second.
-		DET_CROSSHAIR                     //Display crosshair.
+		DET_CROSSHAIR                     //Display cross-hair.
 		DET_DEVDROP_BANNER                //Enables drawing of a banner. The banner indicates that the current version is a developer's version. The banner is rendered across the display.
 		DET_FRAME_AROUND_MAP 			   //a frame is rendered around the map.
 		DET_CORONA                        //a corona is drawn around the earth.
@@ -82,27 +89,35 @@ typeCollection MapViewerControlTypes {
 		DET_STENCIL		
 	}
 
-	enumeration PanAction extends BasicEnum {
-		PAN_START		= "0x0100"
-		PAN_TO			= "0x0101"
-		PAN_END			= "0x0102"
+//	enumeration PanAction extends BasicEnum { //Base 0x0100
+	enumeration PanAction { //Base 0x0100
+		INVALID 	= 0
+		PAN_START		= 256
+		PAN_TO			= 257
+		PAN_END			= 258
 	}
 	
-	enumeration Visibility extends BasicEnum {
-		VISIBLE			= "0x0043"
-		INVISIBLE		= "0x0044"
-		FROZEN			= "0x0045"
+//	enumeration Visibility extends BasicEnum { //Base 0x0040
+	enumeration Visibility { //Base 0x0040
+		INVALID 	= 0
+		VISIBLE			= 67
+		INVISIBLE		= 68
+		FROZEN			= 69
 	}
 
-	enumeration Level extends BasicEnum {
-		LEVEL_1			= "0x0050"
-		LEVEL_2			= "0x0051"
-		LEVEL_3			= "0x0052"
-		LEVEL_4			= "0x0053"
-		LEVEL_5			= "0x0054"
+//	enumeration Level extends BasicEnum { //Base 0x0050
+	enumeration Level { //Base 0x0050
+		INVALID 	= 0
+		LEVEL_1			= 80
+		LEVEL_2			= 81
+		LEVEL_3			= 82
+		LEVEL_4			= 83
+		LEVEL_5			= 84
 	}
 
-	enumeration MapTheme extends BasicEnum {		
+//	enumeration MapTheme extends BasicEnum {		
+	enumeration MapTheme {		
+		INVALID 	= 0
 		THEME_BMW_CLASSIC_DAY
 		THEME_BMW_CLASSIC_NIGHT
 		THEME_BMW_CLASSIC_TRAFFIC_DAY
@@ -146,45 +161,51 @@ typeCollection MapViewerControlTypes {
 		MapObject to Boolean
 	}
 
-	enumeration MapScaleUnit extends BasicEnum {
-		METER		= "0x0032"
-		MILE		= "0x0033"
-		KM			= "0x0034"
-		YARD		= "0x0035"
-		FOOT		= "0x0036"
+//	enumeration MapScaleUnit extends BasicEnum { //Base 0x0030
+	enumeration MapScaleUnit { //Base 0x0030
+		INVALID 	= 0
+		METER		= 50
+		MILE		= 51
+		KM			= 52
+		YARD		= 53
+		FOOT		= 54
 	}
 
-	enumeration MapScaleType extends BasicEnum {
-		MIN			= "0x0040"
-		MAX			= "0x0041"
-		MID			= "0x0042"
+//	enumeration MapScaleType extends BasicEnum { //Base 0x0040
+	enumeration MapScaleType { //Base 0x0040
+		INVALID 	= 0
+		MIN			= 64
+		MAX			= 65
+		MID			= 66
 	}
 
-	enumeration SelectableMapType extends BasicEnum {
-        MET_POI = "2"                            //POI.
-        MET_POLYGON = "3"                        //Polygons.
-        MET_EDGE = "4"                           //All edges except roads. E.g. railways rivers ferries.
-        MET_ROAD = "5"                           //Road edges.
-        MET_ROAD_ICON = "6"                      //Road icons.
-        MET_TTI_ICON = "7"                       //TTI icons.
-        MET_TTI_EDGE = "8"                       //TTI edge [Not yet supported].
-        MET_CITY_MARKER = "9"                    //City names and city markers.
-        MET_ROUTE = "10"                         //Tours.
-        MET_TREKKING_ROUTE = "11"                //Trekking tours.
-        MET_POSITION = "12"                      //Position.
-        MET_LANDMARK = "13"                      //Landmarks.
-        MET_DESTINATION = "14"                   //Destinations.
-        MET_FAVORITE = "15"                      //Favorites.
-        MET_PICTURE = "16"                       //Picture.
-        MET_GENERIC_MARKER  = "17"                //Generic markers like weather markers.
+//	enumeration SelectableMapType extends BasicEnum {
+	enumeration SelectableMapType {
+		INVALID 	= 0
+        MET_POI = 2                            //POI.
+        MET_POLYGON = 3                        //Polygons.
+        MET_EDGE = 4                           //All edges except roads. E.g. railways rivers ferries.
+        MET_ROAD = 5                           //Road edges.
+        MET_ROAD_ICON = 6                      //Road icons.
+        MET_TTI_ICON = 7                       //TTI icons.
+        MET_TTI_EDGE = 8                       //TTI edge [Not yet supported].
+        MET_CITY_MARKER = 9                    //City names and city markers.
+        MET_ROUTE = 10                         //Tours.
+        MET_TREKKING_ROUTE = 11                //Trekking tours.
+        MET_POSITION = 12                      //Position.
+        MET_LANDMARK = 13                      //Landmarks.
+        MET_DESTINATION = 14                   //Destinations.
+        MET_FAVORITE = 15                      //Favorites.
+        MET_PICTURE = 16                       //Picture.
+        MET_GENERIC_MARKER  = 17                //Generic markers like weather markers.
 		
-		CUSTOM_ELEMENT		= "0x0120"
-		CURRENT_POSITION	= "0x0121"
-		WAYPOINT			= "0x0122"
-		POI					= "0x0123"
-		TRAFFIC_INCIDENT	= "0x0124"	
-		ROUTE				= "0x0125"
-		GEOCOORDINATES		= "0x0126"
+		CUSTOM_ELEMENT		= 288 //Base 0x0120
+		CURRENT_POSITION	= 289
+		WAYPOINT			= 290
+		POI					= 291
+		TRAFFIC_INCIDENT	= 292	
+		ROUTE				= 293
+		GEOCOORDINATES		= 294
 	}
 
 	<**

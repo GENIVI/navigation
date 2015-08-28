@@ -117,7 +117,7 @@ How To Build poi-common-manager-client (experimental)
 First you need to build the poi-manager-server, see the README in ../../src/poi-service
 
 cd build
-cmake -DWITH_FRANCA_INTERFACE=ON -DCOMMONAPI_DBUS_TOOL_GENERATOR=<common-api-dbus-tools folder>/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/x86/commonapi-dbus-generator-linux-x86 -DCOMMONAPI_TOOL_GENERATOR=<common-api-tools folder>/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/x86/commonapi-generator-linux-x86 -DWITH_DEBUG=ON ../
+cmake -DWITH_FRANCA_INTERFACE=ON -DCOMMONAPI_DBUS_TOOL_GENERATOR=<common-api-dbus-tools folder>/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/x86/commonapi-dbus-generator-linux-x86 -DCOMMONAPI_TOOL_GENERATOR=<common-api-tools folder>/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/x86/commonapi-generator-linux-x86 -DWITH_DEBUG=ON . ../
 make
 
 ===============================
@@ -130,6 +130,60 @@ cp ./resource/poi-database-managed.db ./bin
 poi manager server started
 
 Launch the client
-./poi-manager-client -t
+./bin/poi-manager-client -t
 poi manager client started
+
+What is logged (no DLT started):
+
+DLT| WARNING:   Loging disabled, FIFO /tmp/dlt cannot be opened with open()!
+[CAPI][INFO] Using default binding 'dbus'
+[CAPI][INFO] Using default shared library folder '/usr/local/lib/commonapi'
+[CAPI][INFO] Using default configuration file '/etc/commonapi.ini'
+[CAPI][DEBUG] Registering factory for binding=dbus
+poi manager server started
+
+DLT| WARNING:   Loging disabled, FIFO /tmp/dlt cannot be opened with open()!
+[CAPI][INFO] Using default binding 'dbus'
+[CAPI][INFO] Using default shared library folder '/usr/local/lib/commonapi'
+[CAPI][INFO] Using default configuration file '/etc/commonapi.ini'
+[CAPI][DEBUG] Registering factory for binding=dbus
+poi manager client started
+Version 1.0.0
+Date 19-03-2015
+languageCode: eng countryCode: USA scriptCode: Latn 
+Configuration changed:  0
+Change locales
+languageCode: fra countryCode: FRA scriptCode: Latn 
+id: 0 name: all categories top level: 1
+
+Create category
+
+Category 1 created
+id: 0 name: all categories top level: 1
+id: 1 name: recreation top level: 1
+
+Create POI
+
+POI 1 added
+
+Search
+
+Search state 1298
+Result list size 1
+POI id 1
+
+Delete POI
+
+POI 1 removed
+
+Delete category
+
+Category 1 removed
+id: 0 name: all categories top level: 1
+
+Exit
+poi manager client closed
+DLT| ERROR:     Lost log messages in user buffer when exiting: 2
+
+
 
