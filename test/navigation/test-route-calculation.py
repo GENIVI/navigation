@@ -35,6 +35,7 @@ import dbus.mainloop.glib
 LATITUDE = 0x00a0
 LONGITUDE = 0x00a1
 TOTAL_DISTANCE = 0x018f
+TIME_OUT = 10000
 
 print '\n--------------------------'
 print 'Route Calculation Test'
@@ -111,7 +112,7 @@ routing_interface.SetWaypoints(dbus.UInt32(sessionhandle), \
 routing_interface.CalculateRoute(dbus.UInt32(sessionhandle),dbus.UInt32(routehandle))
 
 #main loop 
-gobject.timeout_add(5000, timeout)
+gobject.timeout_add(TIME_OUT, timeout)
 loop = gobject.MainLoop()
 loop.run()
 

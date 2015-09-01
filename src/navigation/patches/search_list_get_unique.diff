@@ -13,10 +13,10 @@ Index: navit/navit/search.c
 +static char *
 +search_list_get_unique_truncate(char *common, char *result)
 +{
-+	dbg(1,"%s vs %s\n",common,result);
++	dbg(lvl_debug,"%s vs %s\n",common,result);
 +	while (*common) {
 +		if (g_utf8_get_char(common) != g_utf8_get_char(result)) {
-+			dbg(1,"truncating at %s vs %s\n",common,result);
++			dbg(lvl_debug,"truncating at %s vs %s\n",common,result);
 +			return common;
 +		}
 +		result=g_utf8_next_char(result);
@@ -60,7 +60,7 @@ Index: navit/navit/search.c
 +	int i,count=sizeof(strings)/sizeof(char *);
 +	GList *l;
 +
-+	//dbg(0,"enter level=%d %s %s\n",level,search,unique);
++	//dbg(lvl_debug,"enter level=%d %s %s\n",level,search,unique);
 +	l=le->list;
 +	while (l) {
 +		switch (level) {
@@ -90,30 +90,30 @@ Index: navit/navit/search.c
 +				strings[i]=linguistics_expand_special(name, i);
 +			break;
 +		default:
-+			dbg(0,"entry\n");
++			dbg(lvl_warning,"entry\n");
 +		}
-+		dbg(1,"entry %s %s %s %s\n",strings[0],strings[1],strings[2],strings[3]);
++		dbg(lvl_debug,"entry %s %s %s %s\n",strings[0],strings[1],strings[2],strings[3]);
 +		max=NULL;
 +		for (i = 0 ; i < count ; i++) {
 +			char *str=strings[i];
 +			while (str) {
 +				char *strf=g_utf8_casefold(str,-1);
-+				dbg(1,"word %s\n",strf);
++				dbg(lvl_debug,"word %s\n",strf);
 +				if (!strncmp(strf, search, search_len)) {
-+					dbg(1,"match\n");
++					dbg(lvl_debug,"match\n");
 +					if (unique) {
-+						dbg(1,"possible next %s %s ret %s\n",strf+search_len,str+search_len,ret);
++						dbg(lvl_debug,"possible next %s %s ret %s\n",strf+search_len,str+search_len,ret);
 +						ret=search_list_get_unique_append(ret, strf+search_len);
 +						ret=search_list_get_unique_append(ret, str+search_len);
-+						dbg(1,"ret now %s\n",ret);
++						dbg(lvl_debug,"ret now %s\n",ret);
 +					} else {
 +						if (!ret) {
 +							ret=g_strdup(str);
 +							retf=g_utf8_casefold(ret,-1);
-+							dbg(1,"ret now %s\n",ret);
++							dbg(lvl_debug,"ret now %s\n",ret);
 +						} else {
 +							char *end=search_list_get_unique_truncate(retf,strf);
-+							dbg(1,"%d characters\n",end-retf);
++							dbg(lvl_debug,"%d characters\n",end-retf);
 +							if (!max || max < end)
 +								max=end;
 +						}
@@ -126,18 +126,18 @@ Index: navit/navit/search.c
 +		}
 +		if (!unique) {
 +			if (max) {
-+				dbg(1,"max %s (%d characters)\n",max,max-retf);
++				dbg(lvl_debug,"max %s (%d characters)\n",max,max-retf);
 +				ret[max-retf]='\0';
 +			} else {
-+				dbg(1,"new max\n");
++				dbg(lvl_debug,"new max\n");
 +			}
 +		}
-+		dbg(1,"common %s\n",ret);
++		dbg(lvl_debug,"common %s\n",ret);
 +		l=g_list_next(l);
 +	}
 +	g_free(search);
 +	g_free(retf);
-+	//dbg(0,"return %s\n",ret);
++	//dbg(lvl_debug,"return %s\n",ret);
 +	return ret;
 +}
 +

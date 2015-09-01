@@ -87,6 +87,7 @@ xterm=0
 log=0
 enhpos=1
 replayer=1
+verbose=0 #no debug or log messages displayed
 center="4612 N 0608 E"
 
 CUR_DIR=$PWD
@@ -95,7 +96,7 @@ SRC_DIR=$PWD
 LOGREPLAYER_LOGS_DIR=$SRC_DIR/positioning/log-replayer/logs
 NAVIT_BIN_DIR=$CUR_DIR/build/navit/navit/navit/
 
-while getopts c:gnorx opt
+while getopts c:gnorvx opt
 do
 	case $opt in
 	c)
@@ -127,17 +128,21 @@ do
 	r)
 		replayer=0
 		;;
+	v) #enable log messages
+		verbose=1
+		;;
 	x)
 		xterm=1
 		;;
 	\?)
 		echo "Usage:"
-		echo "$0 [-c center][-gnorx]"
+		echo "$0 [-c center][-gnorvx]"
 		echo "-c: Set center (supported values: paris,tokyo,longitude,latitude). Default is geneve"
 		echo "-g: Run subprocesses within gdb (only with -x)"
 		echo "-n: Don't start enhanced-position-service"
 		echo "-r: Don't start replayer"
 		echo "-o: Create log file of subprocess output"
+		echo "-v: Enable the output debug messages"
 		echo "-x: Run subprocesses in own xterm to get separated log messages"
 		exit 1
 	esac
@@ -167,12 +172,24 @@ cd $NAVIT_BIN_DIR
 >bookmark.txt
 echo "$center" >center.txt
 
-run MapViewer ./navit navit_genivi_mapviewer.xml
+if [ "$verbose" = "1" ]
+then
+	run MapViewer ./navit -d 3 -c navit_genivi_mapviewer.xml
+else
+	run MapViewer ./navit -d 0 -c navit_genivi_mapviewer.xml
+fi
+
 wait_for_service org.genivi.mapviewer.Configuration /org/genivi/mapviewer
 wait_for_service org.genivi.mapviewer.MapViewerControl /org/genivi/mapviewer
 wait_for_service org.genivi.mapviewer.Session /org/genivi/mapviewer
 
-run NavigationCore ./navit navit_genivi_navigationcore.xml
+if [ "$verbose" = "1" ]
+then
+	run NavigationCore ./navit -d 3 -c navit_genivi_navigationcore.xml
+else
+	run NavigationCore ./navit -d 0 -c navit_genivi_navigationcore.xml
+fi
+
 wait_for_service org.genivi.navigationcore.Configuration /org/genivi/navigationcore
 wait_for_service org.genivi.navigationcore.Guidance /org/genivi/navigationcore
 wait_for_service org.genivi.navigationcore.LocationInput /org/genivi/navigationcore
