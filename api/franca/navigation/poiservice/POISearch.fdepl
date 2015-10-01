@@ -1,0 +1,3 @@
+import "platform:/plugin/org.genivi.commonapi.dbus/deployment/CommonAPI-DBus_deployment_spec.fdepl"
+import "POISearch.fidl"
+

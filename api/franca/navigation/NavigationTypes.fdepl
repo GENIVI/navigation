@@ -1,0 +1,28 @@
+import "platform:/plugin/org.genivi.commonapi.dbus/deployment/CommonAPI-DBus_deployment_spec.fdepl"
+import "NavigationTypes.fidl"
+
+specification org.genivi.navigation.deployment
+{
+   for enumerations {
+      EnumBackingType: {UseDefault, UInt8, UInt16, UInt32, UInt64, Int8, Int16, Int32, Int64} (default: UInt64);
+   }
+}
+
+define org.genivi.navigation.deployment for typeCollection org.genivi.navigation.NavigationTypes
+{
+    enumeration BasicEnum {
+       EnumBackingType = UInt64
+    }
+    enumeration TimeStampedEnum {
+       EnumBackingType = UInt64
+    }
+    enumeration GeoLocalizedEnum {
+       EnumBackingType = UInt64
+    }
+    enumeration Settings {
+       EnumBackingType = UInt64
+    }
+    enumeration Units {
+       EnumBackingType = UInt64
+    }
+}

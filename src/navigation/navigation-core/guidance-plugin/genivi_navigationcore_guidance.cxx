@@ -509,7 +509,7 @@ GuidanceObj::GetManeuver(struct item *item, uint32_t& DistanceToManeuver, uint16
         ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
 		break;
 	default:
-        dbg(lvl_debug,"Unable to convert type %s\n",item_to_name(item->type));
+        dbg(lvl_error,"Unable to convert type %s\n",item_to_name(item->type));
         Maneuver=GENIVI_NAVIGATIONCORE_INVALID;
         ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_INVALID);
 	}

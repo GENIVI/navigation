@@ -11,7 +11,13 @@ import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 
 typeCollection LocationInputTypes {
 	
-	enumeration AddressAttribute extends GeoLocalizedEnum { //Base 0x00a0
+//	enumeration AddressAttribute extends GeoLocalizedEnum { //Base 0x00a0
+	enumeration AddressAttribute  { //Base 0x00a0
+		INVALID 	= 0
+		TIMESTAMP	= 16
+		LATITUDE	= 160
+		LONGITUDE	= 161
+		ALTITUDE	= 162
 		COUNTRY			= 166
 		STATE			= 167
 		CITY			= 168
