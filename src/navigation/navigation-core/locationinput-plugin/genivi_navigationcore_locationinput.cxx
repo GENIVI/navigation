@@ -66,7 +66,8 @@ class LocationInputObj
 	bool m_spell;
 	bool m_spell_backspace;
 	std::vector< std::vector< std::map< uint16_t, ::DBus::Variant > > > m_data;
-
+    int m_chunk;
+    int m_count;
     void SetSelectionCriterion(uint32_t SessionHandle, uint32_t SelectionCriterion);
     void Search(uint32_t SessionHandle, const std::string& InputString, uint32_t MaxWindowSize);
     void SelectEntry(const uint32_t& SessionHandle, const uint32_t& Index);
@@ -75,6 +76,7 @@ class LocationInputObj
 	void IdleStop(void);
 	void Idle(void);
     void Spell(uint32_t SessionHandle, const std::string& InputCharacter, uint32_t MaxWindowSize);
+    void RequestListUpdate(uint32_t sessionHandle, const uint16_t& offset, uint16_t maxWindowSize);
     void GetEntry(uint16_t index, std::map< uint16_t, ::DBus::Variant >& entry);
     void ValidateAddress(uint32_t sessionHandle, const std::map< uint16_t, ::DBus::Variant >& inputAddress);
     LocationInputObj(LocationInput *locationinput, uint32_t handle);
@@ -188,7 +190,11 @@ class  LocationInput
 
     void RequestListUpdate(const uint32_t& sessionHandle, const uint32_t& locationInputHandle, const uint16_t& offset, const uint16_t& maxWindowSize)
 	{
-		throw DBus::ErrorNotSupported("Not yet supported");
+        LocationInputObj *obj=handles[locationInputHandle];
+        if (!obj)
+             throw DBus::ErrorInvalidArgs("location handle invalid");
+
+        obj->RequestListUpdate(sessionHandle, offset, maxWindowSize);
 	}
 
     std::map< uint16_t, ::DBus::Variant > GetEntry(const uint32_t& locationInputHandle, const uint16_t& index)
@@ -324,6 +330,23 @@ LocationInputObj::Spell(uint32_t SessionHandle, const std::string& InputCharacte
 }
 
 void
+LocationInputObj::RequestListUpdate(uint32_t sessionHandle, const uint16_t& offset, uint16_t maxWindowSize)
+{
+    //for the time being, maxWindowSize is not used, the size is set during the Spell or the Search
+    //note that it gets all the results in one shot (to be improved!), per bunch of maxWindowSize data
+    //not really what is specified..
+    //offset is supposed to be n*maxWindowSize in that case
+
+    if (m_windowsize > 0)
+    {
+        int i = offset/m_windowsize;
+        int shift = offset%m_windowsize;
+        uint16_t window=m_data[i].size();
+        m_locationinput->SearchResultList(m_handle, m_count, (offset-shift), window, m_data[i]);
+    }
+}
+
+void
 LocationInputObj::SelectEntry(const uint32_t& SessionHandle, const uint32_t& Index)
 {
 	std::map< uint16_t, ::DBus::Variant > *res=NULL;
@@ -434,8 +457,9 @@ LocationInputObj::Idle(void)
 		}
 		count++;
 	}
-	// the search_list_get_unique has been removed from the svn in the r5549, so navit needs to be patched for upper versions
-    	if (m_spell) {
+
+    // the search_list_get_unique has been removed from the svn in the r5549, so navit needs to be patched for upper versions
+    if (m_spell) {
 		char *unique;
 		if (m_spell_backspace)
 			unique=g_strdup(m_search.u.str);
@@ -450,16 +474,14 @@ LocationInputObj::Idle(void)
 				m_locationinput->SpellResult(m_handle, unique, next, false);
 				g_free(next);
 			}
-		} else
+        }
+        else
 			m_locationinput->SpellResult(m_handle, "", "\b", false);
-
     } 
-	for (int i = 0 ; i <= chunk ; i++) {
-		uint16_t window=m_data[i].size();
-		if (window != 0 || i == 0) 
-			m_locationinput->SearchResultList(m_handle, count, offset, window, m_data[i]);
-		offset+=window;
-	}
+
+    m_count = count; //amount of data
+    m_chunk = chunk; //amount of lists of data
+
 	m_locationinput->SearchStatus(m_handle, GENIVI_NAVIGATIONCORE_FINISHED);
 	IdleStop();
 
@@ -486,6 +508,8 @@ LocationInputObj::LocationInputObj(LocationInput *locationinput, uint32_t handle
 	m_locationinput=locationinput;
 	m_handle=handle;
 	m_sl=search_list_new(get_mapset(get_navit()));
+    m_count=0;
+    m_chunk=0;
 	m_search.type=attr_none;
 	m_search.u.str=NULL;
 	m_event=NULL;
