@@ -1,4 +1,4 @@
-Release date of the file: 03-08-2015 
+Release date of the file: 18-11-2015 
 Status: OK
 
 Project:
@@ -24,7 +24,8 @@ License:
 See headers and LICENSE file (mainly MPL V2)
 
 Test target: 
-Ubuntu 14.04 LTS
+Ubuntu 14.04 LTS 32bits
+Ubuntu 15.10 64bits
 
 Qt version:
 Qt5 (to get the version -> qtchooser -print-env, to set the version -> export QT-SELECT=<version>)
@@ -117,7 +118,11 @@ How To Build poi-common-manager-client (experimental)
 First you need to build the poi-manager-server, see the README in ../../src/poi-service
 
 cd build
+
+NB: For the 64 bits version, replace 'x86' with 'x86_64' in the command below:
+
 cmake -DWITH_FRANCA_INTERFACE=ON -DCOMMONAPI_DBUS_TOOL_GENERATOR=<common-api-dbus-tools folder>/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/x86/commonapi-dbus-generator-linux-x86 -DCOMMONAPI_TOOL_GENERATOR=<common-api-tools folder>/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/x86/commonapi-generator-linux-x86 -DWITH_DEBUG=ON . ../
+
 make
 
 ===============================
@@ -125,6 +130,11 @@ How To Run
 ===============================
 
 Launch the server (into ../../src/poi-service)
+
+Copy the configuration file ./resource/commonapi-dbus.ini in a directory of your choice
+Set the environment variable COMMONAPI_DBUS_DEFAULT_CONFIG before starting the poi-manager-server.
+Example:
+export COMMONAPI_DBUS_DEFAULT_CONFIG=<your path>/commonapi-dbus.ini
 cp ./resource/poi-database-managed.db ./bin
 ./bin/poi-manager-server -f ./bin/poi-database-managed.db
 poi manager server started

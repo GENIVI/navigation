@@ -16,6 +16,10 @@
 # @licence end@
 ###########################################################################
 project(poi-manager-client)
+message(STATUS ${PROJECT_NAME})
+
+add_definitions("-std=gnu++11")
+
 set(PARENT_API poiservice)
 set(ROOT_API navigation)
 set(API_VERSION_MAJOR 0)

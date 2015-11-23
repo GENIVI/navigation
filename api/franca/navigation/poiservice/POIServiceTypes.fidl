@@ -25,6 +25,7 @@ typeCollection POIServiceTypes {
     <** @description:Unique ID for a POI Icon Resource**>
     typedef ResourceID is UInt32
     
+    <** @description:Unique ID for an attribute**>
     typedef AttributeID is UInt32
  
     typedef ContentAccessModuleID is UInt8
@@ -373,14 +374,4 @@ typeCollection POIServiceTypes {
    		<** @description: array[struct(id,type,value)].**>			
         PoiAttribute[] attributes
     }
-
-	struct Locales
-	{
-		<** @description : the language used. ISO 639‐3 language code (lower case)**>
-		String languageCode				
-		<** @description : the country specific variant for the language used. ISO 3166‐1 alpha 3 country code (upper case)**>
-		String countryCode				
-		<** @description : the script specific variant for the language used. ISO 15924 alpha 4 script code (upper case)**>
-		String scriptCode						
-	}
 }

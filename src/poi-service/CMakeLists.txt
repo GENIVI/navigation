@@ -2,7 +2,7 @@
 # @licence app begin@
 # SPDX-License-Identifier: MPL-2.0
 #
-# Component Name: poi-server
+# Component Name: poi-service-server
 #
 # Author: Philippe Colliot
 #
@@ -15,11 +15,10 @@
 #
 # @licence end@
 ###########################################################################
-project(poi-server)
+project(poi-service-server)
 cmake_minimum_required(VERSION 2.8)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
-message(STATUS "poi-service-server")
+message(STATUS ${PROJECT_NAME})
 
 option(WITH_FRANCA_INTERFACE
        "Build using the Franca interfaces" OFF)

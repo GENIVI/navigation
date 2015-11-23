@@ -1,4 +1,4 @@
-Release date of the file: 03-08-2015 
+Release date of the file: 18-11-2015 
 Status: OK
 
 Project:
@@ -25,7 +25,8 @@ License:
 See headers and LICENSE file
 
 Test target: 
-Ubuntu 14.04 LTS
+Ubuntu 14.04 LTS 32bits
+Ubuntu 15.10 64bits
 
 To get the code:
 Code is part of the navigation-service repository, so you need to clone the whole content:
@@ -54,14 +55,57 @@ How To Run poi-server
 How To Build poi-manager-server
 ===============================
 NB: You need CommonAPI 3.1.2 and Franca 0.9.1 installed 
+
+=============
 If the CommonAPI stuff has been generated into /usr/local/
-Check if the links are well set into ./lib
+Check if the links are well set into /usr/local/lib
+if not do it yourself
+
+cd /usr/local/lib
+rm libCommonAPI-DBus.so.3
+rm libCommonAPI.so.3 
 ln -s libCommonAPI-DBus.so.3.1.2 libCommonAPI-DBus.so.3
 ln -s libCommonAPI.so.3.1.2 libCommonAPI.so.3
-The folder ./include/CommonAPI-3.1/CommonAPI must contain 3.1.2 includes
+
+The folder /usr/local/include/CommonAPI-3.1/CommonAPI must contain 3.1.2 include files
+
+=============
+In case the .pc are not well generated, please add these files to /usr/local/lib/pkgconfig
+
+CommonAPI.pc
+
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Common API C++
+Description: GENIVI Common API C++ Library
+Version: 3.1.2
+Libs: -L${libdir} -lCommonAPI 
+Cflags: -I${includedir}/CommonAPI-3.1
+
+CommonAPI-DBus.pc
+
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Common API C++ D-Bus Middleware
+Description: GENIVI Common API C++ D-Bus Middleware
+Version: 3.1.2
+Requires: CommonAPI dbus-1
+Libs: -L${libdir} -Wl,--no-as-needed -lCommonAPI-DBus -Wl,--as-needed 
+Cflags: -I${includedir}/CommonAPI-3.1
+
+=============
+You need to pass as parameter to the cmake the link to your patched dbus library (required by CommonAPI)
+
+NB: For the 64 bits version, replace 'x86' with 'x86_64' in the command below:
 
 cd build
-cmake -DWITH_FRANCA_INTERFACE=ON -DCOMMONAPI_DBUS_TOOL_GENERATOR=<common-api-dbus-tools folder>/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/x86/commonapi-dbus-generator-linux-x86 -DCOMMONAPI_TOOL_GENERATOR=<common-api-tools folder>/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/x86/commonapi-generator-linux-x86 -DWITH_DEBUG=ON . ../
+cmake -DWITH_FRANCA_INTERFACE=ON -DDBUS_LIB_PATH=yourPath -DCOMMONAPI_DBUS_TOOL_GENERATOR=<common-api-dbus-tools folder>/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/x86/commonapi-dbus-generator-linux-x86 -DCOMMONAPI_TOOL_GENERATOR=<common-api-tools folder>/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/x86/commonapi-generator-linux-x86 -DWITH_DEBUG=ON ../
 make 
 cd ..
 
@@ -69,9 +113,9 @@ cd ..
 How To Run poi-manager-server
 ===============================
 
-Copy the configuration file commonapi-dbus.ini in a directory of your choice
+Copy the configuration file ./resource/commonapi-dbus.ini in a directory of your choice
 
-Set the environment variable COMMONAPI_DBUS_DEFAULT_CONFIG before starting the EnhancedPositionService.
+Set the environment variable COMMONAPI_DBUS_DEFAULT_CONFIG before starting the poi-manager-server.
 
 Example:
 export COMMONAPI_DBUS_DEFAULT_CONFIG=<your path>/commonapi-dbus.ini

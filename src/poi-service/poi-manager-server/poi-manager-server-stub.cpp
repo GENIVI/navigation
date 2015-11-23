@@ -1259,9 +1259,9 @@ void PoiManagerServerStub::getLocale(const std::shared_ptr<CommonAPI::ClientId> 
 
 void PoiManagerServerStub::getSupportedLocales(const std::shared_ptr<CommonAPI::ClientId> _client, getSupportedLocalesReply_t _reply)
 {
-    std::vector< POIServiceTypes::Locales> localeList;
-    POIServiceTypes::Locales en_US { "eng","USA", "Latn" };
-    POIServiceTypes::Locales fr_FR { "fra","FRA", "Latn" };
+    std::vector< NavigationTypes::Locales> localeList;
+    NavigationTypes::Locales en_US { "eng","USA", "Latn" };
+    NavigationTypes::Locales fr_FR { "fra","FRA", "Latn" };
     localeList.push_back(en_US);
     localeList.push_back(fr_FR);
 

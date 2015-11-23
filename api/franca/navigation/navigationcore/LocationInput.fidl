@@ -1,6 +1,6 @@
 /* 
 SPDX-License-Identifier: MPL-2.0
-Copyright (C) 2014, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
+Copyright (C) 2014, PCA Peugeot Citroï¿½n, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
 This Source Code Form is subject to the terms of the
 Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
 this file, you can obtain one at http://mozilla.org/MPL/2.0/.
@@ -46,10 +46,10 @@ interface LocationInput {
 			<**
 				@description : Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 		}
 		error {
-			NoMoreLocationInpuHandles
+			NoMoreLocationInputHandles
 		}
 	}
 
@@ -67,7 +67,7 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 		}
 	}
 
@@ -94,7 +94,7 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 			
 			Address address
 		}
@@ -114,7 +114,7 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 
 			<**
 				@description : selectionCriterion = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )
@@ -137,7 +137,7 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 
 			<**
 				@description : inputString = last input character (UTF-8) (0x08(Backspace) for delete last character, 0x0D(Carriage Return) for delete entire input)
@@ -165,7 +165,7 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 
 			<**
 				@description : inputString = contains the String, that is searched
@@ -193,7 +193,7 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 
 			<**
 				@description : offset = starting offset of the newly requested list elements
@@ -221,7 +221,7 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 
 			<**
 				@description : index = absolute list index of the entry to be selected
@@ -239,7 +239,7 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 
 			<**
 				@description : index = list index of the entry to be returned
@@ -265,7 +265,7 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 			
 			Address inputAddress
 		}
@@ -285,7 +285,7 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 			
 			Coordinate2D coordinate
 		}
@@ -300,7 +300,7 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 
 			<**
 				@description : selectionCriterion = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )
@@ -318,7 +318,7 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 
 			<**
 				@description : statusValue = enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... )
@@ -336,7 +336,7 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 
 			<**
 				@description : uniqueString = unique string derived from spell input (i.e. including auto-completion if applicable)
@@ -364,7 +364,7 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 
 			<**
 				@description : totalSize = total size of the result list
@@ -394,7 +394,7 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 
 			<**
 				@description : totalSize = total size of the result list
@@ -412,7 +412,7 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 
 			<**
 				@description : guidable = flag indicating whether the current address is guidable
@@ -434,15 +434,12 @@ interface LocationInput {
 			<**
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
-			Handle locationInpuHandle
+			LocationHandle locationInputHandle
 			
 			Address [] validatedAddressList
 			
 			ValidationStatus [] validationStatusList
 		}
 	}
-
-	
-
 
 }

@@ -22,6 +22,18 @@ typeCollection NavigationTypes {
 
 	typedef Handle is UInt32
 
+	typedef Timestamp is UInt64
+	
+	typedef LinkId is ByteBuffer
+	
+    <** @description: Handle to a location.
+    	Range[0:0x7fffffff]
+	**>
+    typedef LocationHandle is Handle	
+
+
+/* geometric types */		
+
 	struct Coordinate2D {
 		Double latitude
 		Double longitude
@@ -31,16 +43,40 @@ typeCollection NavigationTypes {
 		Int32 altitude
 	}
 
-	array Polygon of Coordinate2D
-	
-	typedef Area is Polygon
-
 	struct Rectangle {
 		Coordinate2D topLeft
 		Coordinate2D bottomRight
 	}
+	
+	array Polygon of Coordinate2D
+	
+	typedef Area is Polygon
 
-// for the time being, no use of extends for the enum, to be implemented later
+    <** @description: Kind of shapes. **>
+    enumeration ShapeType {
+        CIRCLE
+        RECTANGLE
+        POLYGON
+    }
+    
+    <** @description: A radius in meters.
+        Range[0x0:0xffffffff]
+    **>	
+	typedef Radius is UInt32
+
+	<** @description: A circle given as center and radius. **>			
+	struct Circle {
+		<**	@description : The center of the circle.**>
+		Coordinate2D center
+		<**	@description : The radius of the circle.**>
+		Radius radius
+	}
+
+	typedef Distance is Double
+
+/* enumerations */
+	
+// for the time being, no use of inheritance (extends) for the enumerations, to be implemented later
 	enumeration BasicEnum {
 		INVALID 	= 0
 	}
@@ -75,11 +111,29 @@ typeCollection NavigationTypes {
 		FOOT		= 54
 	}
 
-	typedef Timestamp is UInt64
-	
-	typedef Distance is Double
-	
-	typedef LinkId is ByteBuffer
-	
-	typedef Radius is UInt32
+	enumeration TimeFormat {
+		INVALID		= 0
+		TWELVEH     = 1
+		TWENTYFOURH	= 2
+	}
+
+	enumeration CoordinatesFormat {
+		INVALID		= 0
+		<** @description:DEGREES format = d.dº**>
+		DEGREES     = 1
+        <** @description:MINUTES format = dºm.m'**>		
+		MINUTES		= 2
+        <** @description:SECONDS format = dºm's"**>
+		SECONDS		= 3
+	}
+
+	struct Locales
+	{
+		<** @description : the language used. ISO 639‐3 language code (lower case)**>
+		String languageCode				
+		<** @description : the country specific variant for the language used. ISO 3166‐1 alpha 3 country code (upper case)**>
+		String countryCode				
+		<** @description : the script specific variant for the language used. ISO 15924 alpha 4 script code (upper case)**>
+		String scriptCode						
+	}
 }

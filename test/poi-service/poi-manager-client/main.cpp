@@ -99,7 +99,7 @@ private:
     std::vector<POIServiceTypes::CategoryID> m_category_ids;
     std::vector<POIServiceTypes::POI_ID> m_poi_ids;
     POIServiceTypes::PoiAddedDetails m_poi;
-    POIServiceTypes::Locales m_locales;
+    NavigationTypes::Locales m_locales;
 
     std::string m_strTest;
 };
@@ -585,6 +585,7 @@ int main(int  argc , char**  argv )
     while (!myProxy->isAvailable()) {
         usleep(10);
     }
+    cout << "poi manager client started" << endl;
 
     //index used for argument analysis
     int next_option;

@@ -101,7 +101,7 @@ interface POISearch {
 		}
 	}
 	
-	<**	@description : GetCategoriesDetails = This method retrieves the details associated to one or more POI categories.
+	<**	@description : This method retrieves the details associated to one or more POI categories.
         It contains the name, the parent categories, the top level attribute, the list of attributes, the icons, ... .**>
 	method getCategoriesDetails {
 		in {

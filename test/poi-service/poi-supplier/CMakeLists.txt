@@ -16,9 +16,9 @@
 # @licence end@
 ###########################################################################
 project(poi-supplier)
-cmake_minimum_required(VERSION 2.8)
+message(STATUS ${PROJECT_NAME})
 
-message(STATUS "poi-supplier")
+add_definitions("-std=gnu++11")
 
 find_package(PkgConfig REQUIRED)
 
