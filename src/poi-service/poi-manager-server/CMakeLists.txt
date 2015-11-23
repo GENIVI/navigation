@@ -18,7 +18,7 @@
 project(poi-manager-server)
 message(STATUS ${PROJECT_NAME})
 
-add_definitions("-std=gnu++11")
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
 set(PARENT_API poiservice)
 set(ROOT_API navigation)
@@ -33,7 +33,6 @@ set(PRJ_SRC_GEN_POISERVICE_TYPES_PATH ${COMMONAPI_GEN_DIR}/v1_0/org/genivi/${ROO
 set(DBUS_LIB_PATH "/usr/local/lib")
 
 set(CMAKE_VERBOSE_MAKEFILE off)
-cmake_minimum_required(VERSION 2.8)
 
 # DBus Path
 if (DBUS_LIB_PATH)

@@ -16,7 +16,7 @@ import org.genivi.navigation.navigationcore.GuidanceTypes.* from "GuidanceTypes.
 
 interface Guidance {
 	version {
-		major 0
+		major 1 
 		minor 0
 	}
 

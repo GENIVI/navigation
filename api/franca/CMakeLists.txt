@@ -2,7 +2,7 @@
 # @licence app begin@
 # SPDX-License-Identifier: MPL-2.0
 #
-# Component Name: poi-manager-server
+# Component Name: whole franca generation
 #
 # Author: Marco Residori
 #
@@ -22,7 +22,7 @@
 
 cmake_minimum_required (VERSION 2.8.1)
 
-project(poi-manager-server)
+project(whole-franca)
 
 option(COMMONAPI_TOOL_GENERATOR
        "Absolute path to CommonAPI code generator" "")
@@ -30,14 +30,23 @@ option(COMMONAPI_DBUS_TOOL_GENERATOR
        "Absolute path to CommonAPI-DBus code generator" "")
 
 set(COMMONAPI_FIDL_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
+set(COMMONAPI_FIDL_DIR_NAVIGATION "${COMMONAPI_FIDL_DIR}/navigation")
+set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/src-gen")
 
 find_package(PkgConfig REQUIRED)
 
 include(FindPkgConfig)
 
-# generate code from fidl
-file(GLOB FIDL_FILES "${COMMONAPI_FIDL_DIR}/*.fidl")
-message("FIDL_FILES: ${FIDL_FILES}")
+# generate code from fidl files of navigation
+file(GLOB FIDL_FILES 
+${COMMONAPI_FIDL_DIR_NAVIGATION}/*.fidl
+${COMMONAPI_FIDL_DIR_NAVIGATION}/freetextsearch/*.fidl
+${COMMONAPI_FIDL_DIR_NAVIGATION}/mapviewer/*.fidl
+${COMMONAPI_FIDL_DIR_NAVIGATION}/navigationcore/*.fidl
+${COMMONAPI_FIDL_DIR_NAVIGATION}/poiservice/*.fidl
+${COMMONAPI_FIDL_DIR_NAVIGATION}/freetextsearch/speech.fidl
+${COMMONAPI_FIDL_DIR_NAVIGATION}/freetextsearch/*.fidl
+)
 
 if (COMMONAPI_TOOL_GENERATOR)
      execute_process(WORKING_DIRECTORY ${COMMONAPI_FIDL_DIR}
