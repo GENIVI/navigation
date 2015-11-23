@@ -81,7 +81,8 @@ typeCollection NavigationTypes {
 		INVALID 	= 0
 	}
 
- 	enumeration TimeStampedEnum extends BasicEnum {
+ 	enumeration TimeStampedEnum {
+// 	enumeration TimeStampedEnum extends BasicEnum {
 		TIMESTAMP	= 16
 	}
 
