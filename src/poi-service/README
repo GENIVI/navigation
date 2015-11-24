@@ -56,18 +56,35 @@ How To Build poi-manager-server
 ===============================
 NB: You need CommonAPI 3.1.2 and Franca 0.9.1 installed 
 
-=============
-If the CommonAPI stuff has been generated into /usr/local/
-Check if the links are well set into /usr/local/lib
-if not do it yourself
 
-cd /usr/local/lib
-rm libCommonAPI-DBus.so.3
-rm libCommonAPI.so.3 
-ln -s libCommonAPI-DBus.so.3.1.2 libCommonAPI-DBus.so.3
-ln -s libCommonAPI.so.3.1.2 libCommonAPI.so.3
+You need to pass as parameter to the cmake the link to your patched dbus library (required by CommonAPI)
 
-The folder /usr/local/include/CommonAPI-3.1/CommonAPI must contain 3.1.2 include files
+NB: For the 64 bits version, replace 'x86' with 'x86_64' in the command below:
+
+cd build
+cmake -DWITH_FRANCA_DBUS_INTERFACE=ON -DDBUS_LIB_PATH=yourPath -DCOMMONAPI_DBUS_TOOL_GENERATOR=<common-api-dbus-tools folder>/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/x86/commonapi-dbus-generator-linux-x86 -DCOMMONAPI_TOOL_GENERATOR=<common-api-tools folder>/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/x86/commonapi-generator-linux-x86 -DWITH_DEBUG=ON ../
+make 
+cd ..
+
+===============================
+How To Run poi-manager-server
+===============================
+
+Copy the configuration file ./resource/commonapi-dbus.ini in a directory of your choice
+
+Set the environment variable COMMONAPI_DBUS_DEFAULT_CONFIG before starting the poi-manager-server.
+
+Example:
+export COMMONAPI_DBUS_DEFAULT_CONFIG=<your path>/commonapi-dbus.ini
+
+cp ./resource/poi-database-managed.db ./bin
+./bin/poi-manager-server -f ./bin/poi-database-managed.db
+
+===============================
+About CommonAPI issues
+===============================
+It seems to have an issue with the .cmake files when two versions of CommonAPI are installed
+(see into /usr/local/lib/cmake/)
 
 =============
 In case the .pc are not well generated, please add these files to /usr/local/lib/pkgconfig
@@ -100,27 +117,3 @@ Libs: -L${libdir} -Wl,--no-as-needed -lCommonAPI-DBus -Wl,--as-needed
 Cflags: -I${includedir}/CommonAPI-3.1
 
 =============
-You need to pass as parameter to the cmake the link to your patched dbus library (required by CommonAPI)
-
-NB: For the 64 bits version, replace 'x86' with 'x86_64' in the command below:
-
-cd build
-cmake -DWITH_FRANCA_INTERFACE=ON -DDBUS_LIB_PATH=yourPath -DCOMMONAPI_DBUS_TOOL_GENERATOR=<common-api-dbus-tools folder>/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/x86/commonapi-dbus-generator-linux-x86 -DCOMMONAPI_TOOL_GENERATOR=<common-api-tools folder>/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/x86/commonapi-generator-linux-x86 -DWITH_DEBUG=ON ../
-make 
-cd ..
-
-===============================
-How To Run poi-manager-server
-===============================
-
-Copy the configuration file ./resource/commonapi-dbus.ini in a directory of your choice
-
-Set the environment variable COMMONAPI_DBUS_DEFAULT_CONFIG before starting the poi-manager-server.
-
-Example:
-export COMMONAPI_DBUS_DEFAULT_CONFIG=<your path>/commonapi-dbus.ini
-
-cp ./resource/poi-database-managed.db ./bin
-./bin/poi-manager-server -f ./bin/poi-database-managed.db
-
-

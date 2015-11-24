@@ -20,7 +20,7 @@ cmake_minimum_required(VERSION 2.8)
 
 message(STATUS ${PROJECT_NAME})
 
-option(WITH_FRANCA_INTERFACE
+option(WITH_FRANCA_DBUS_INTERFACE
        "Build using the Franca interfaces" OFF)
 option(WITH_DBUS_INTERFACE
        "Build using the D-Bus interfaces" ON)
@@ -29,7 +29,7 @@ option(WITH_DEBUG
 option(WITH_DATABASE_SUPPLIER
         "Build the database supplier" OFF)
 
-message(STATUS "WITH_FRANCA_INTERFACE = ${WITH_FRANCA_INTERFACE}")
+message(STATUS "WITH_FRANCA_DBUS_INTERFACE = ${WITH_FRANCA_DBUS_INTERFACE}")
 message(STATUS "WITH_DBUS_INTERFACE = ${WITH_DBUS_INTERFACE}")
 message(STATUS "WITH_DEBUG = ${WITH_DEBUG}")
 message(STATUS "WITH_DATABASE_SUPPLIER = ${WITH_DATABASE_SUPPLIER}")
@@ -63,7 +63,7 @@ add_subdirectory(poi-client)
 
 add_subdirectory(poi-contentaccess-module)
 
-if(WITH_FRANCA_INTERFACE)
+if(WITH_FRANCA_DBUS_INTERFACE)
     set(FRANCA_DIR "${API_DIR}/franca/navigation")
     add_subdirectory(poi-manager-client)
 endif()

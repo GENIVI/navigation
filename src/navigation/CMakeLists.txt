@@ -19,7 +19,7 @@ project(navigation)
 cmake_minimum_required(VERSION 2.8)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
-option(WITH_FRANCA_INTERFACE
+option(WITH_FRANCA_DBUS_INTERFACE
        "Build using the Franca interfaces" OFF)
 option(WITH_DBUS_INTERFACE
        "Build using the D-Bus interfaces" ON)
@@ -36,7 +36,7 @@ option(NAVIT_NULL_VEHICLE
 option(NAVIT_QTPAINTER
         "qtqpainter for navit" 0)
 
-message(STATUS "WITH_FRANCA_INTERFACE = ${WITH_FRANCA_INTERFACE}")
+message(STATUS "WITH_FRANCA_DBUS_INTERFACE = ${WITH_FRANCA_DBUS_INTERFACE}")
 message(STATUS "WITH_DBUS_INTERFACE = ${WITH_DBUS_INTERFACE}")
 message(STATUS "WITH_DEBUG = ${WITH_DEBUG}")
 message(STATUS "YOCTO_CONFIG = ${YOCTO_CONFIG}")
