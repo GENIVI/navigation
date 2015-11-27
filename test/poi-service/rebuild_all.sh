@@ -17,11 +17,14 @@ echo 'build the poi client'
 
 echo 'delete the build folder'
 rm -rf build
+
 mkdir build
 cd build
 
+OS_VERSION=$(uname -i)
+
 echo 'build with CommonAPI'
-cmake -DWITH_FRANCA_DBUS_INTERFACE=ON -DWITH_DATABASE_SUPPLIER=ON -DCOMMONAPI_DBUS_TOOL_GENERATOR=$COMMON_API_ROOT_DIR/common-api-dbus-tools/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/x86/commonapi-dbus-generator-linux-x86 -DCOMMONAPI_TOOL_GENERATOR=$COMMON_API_ROOT_DIR/common-api-tools/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/x86/commonapi-generator-linux-x86 -DWITH_DEBUG=ON . ../
+cmake -DWITH_FRANCA_DBUS_INTERFACE=ON -DWITH_DATABASE_SUPPLIER=ON -DCOMMONAPI_DBUS_TOOL_GENERATOR=$COMMON_API_ROOT_DIR/common-api-dbus-tools/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/$OS_VERSION/commonapi-dbus-generator-linux-$OS_VERSION -DCOMMONAPI_TOOL_GENERATOR=$COMMON_API_ROOT_DIR/common-api-tools/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/$OS_VERSION/commonapi-generator-linux-$OS_VERSION -DWITH_DEBUG=ON . ../
 
 make
 

@@ -31,15 +31,6 @@ set(PRJ_SRC_GEN_PATH ${COMMONAPI_GEN_DIR}/${API_VERSION}/org/genivi/${ROOT_API}/
 set(PRJ_SRC_GEN_NAVIGATION_TYPES_PATH ${COMMONAPI_GEN_DIR}/org/genivi/${ROOT_API})
 set(PRJ_SRC_GEN_POISERVICE_TYPES_PATH ${COMMONAPI_GEN_DIR}/v1_0/org/genivi/${ROOT_API}/${PARENT_API})
 
-set(DBUS_LIB_PATH "/usr/local/lib")
-
-# DBus Path
-if (DBUS_LIB_PATH)
-  message(STATUS "DBUS_LIB_PATH = " ${DBUS_LIB_PATH})
-else()
-  message(FATAL_ERROR "Please specify the path to your patched DBus library using -D DBUS_LIB_PATH=yourPath")
-endif()
-
 # Packages
 find_package(PkgConfig REQUIRED)
 find_package(CommonAPI 3.1.2 REQUIRED)
@@ -65,8 +56,8 @@ set(PRJ_SRCS ${PRJ_LOCAL_SRCS} ${PRJ_COMMON_SRCS} ${PRJ_STUB_GEN_SRCS} ${PRJ_STU
 include_directories(
     ${COMMON_DIR}
     ${PRJ_SRC_GEN_PATH}
-    ${COMMONAPI_GEN_DIR}
     ${DBUS_INCLUDE_DIRS}
+    ${COMMONAPI_GEN_DIR}
     ${COMMONAPI_INCLUDE_DIRS}
     ${COMMONAPI_DBUS_INCLUDE_DIRS}
     ${GOBJECT_INCLUDE_DIRS}
@@ -75,15 +66,16 @@ include_directories(
 )
 
 link_directories(
-    ${DBUS_LIB_PATH}
-    ${GLIB_LIBRARY_DIRS}
+    ${DBUS_LIBDIR}
     ${COMMONAPI_LIBDIR}
     ${COMMONAPI_DBUS_LIBDIR}
     ${GOBJECT_LIBRARY_DIRS}
+    ${GLIB_LIBRARY_DIRS}
     ${SQLITE3_LIBRARY_DIRS}
 )
 
 set(LIBRARIES
+    ${DBUS_LIBRARIES}
     ${COMMONAPI_LIBRARIES}
     ${COMMONAPI_DBUS_LIBRARIES}
     ${GOBJECT_LIBRARIES}

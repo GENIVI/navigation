@@ -87,6 +87,9 @@ It seems to have an issue with the .cmake files when two versions of CommonAPI a
 (see into /usr/local/lib/cmake/)
 
 =============
+For the Ubuntu 64 bits, due to the use of symbol versioning LIBDBUS_1_0 by CommonAPI-DBus, the patched version of dbus has to be >= 1.10.0
+
+=============
 In case the .pc are not well generated, please add these files to /usr/local/lib/pkgconfig
 
 CommonAPI.pc
