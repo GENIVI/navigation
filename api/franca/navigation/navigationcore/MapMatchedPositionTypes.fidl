@@ -126,8 +126,8 @@ typeCollection MapMatchedPositionTypes {
 	
 	union PositionOnSegmentValue {
 		Boolean directionOnSegment
-		Distance distanceOnSegment
-		LinkId segment
+		Double distanceOnSegment //to be fixed, use of DistanceInMeters preferred ?
+		ByteBuffer segment
 		Timestamp timestamp
 	}
 	

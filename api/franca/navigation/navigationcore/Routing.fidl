@@ -280,7 +280,7 @@ interface Routing {
 			**>
 			Handle routeHandle
 			
-			Area[] excludedAreas
+			Polygon[] excludedAreas
 		}
 	}
 
@@ -296,7 +296,7 @@ interface Routing {
 			Handle routeHandle
 		}
 		out {
-			Area[] excludedAreas
+			Polygon[] excludedAreas
 		}
 	}
 

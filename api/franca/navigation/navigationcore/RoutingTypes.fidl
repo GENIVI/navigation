@@ -114,15 +114,22 @@ typeCollection RoutingTypes {
 		Schedule to UInt32
 	}
 
+ 	enumeration TimeStampedEnum extends BasicEnum {
+		TIMESTAMP	= 16
+	}
+
+	enumeration GeoLocalizedEnum extends TimeStampedEnum {
+		LATITUDE	= 160
+		LONGITUDE	= 161
+		ALTITUDE	= 162
+	}
 	
 	enumeration WaypointElementType extends GeoLocalizedEnum {
 		WAYPOINT_TYPE		= 289
 		LOCATION_INPUT		= 17
 	}
 	
-//	enumeration RouteSegmentType extends BasicEnum {
-	enumeration RouteSegmentType {
-		INVALID 	= 0
+	enumeration RouteSegmentType extends BasicEnum {
 		LINK_ID					= 320 		//Base 0x0140
 		START_LATITUDE			= 321
 		END_LATITUDE			= 322

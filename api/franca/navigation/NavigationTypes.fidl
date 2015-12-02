@@ -22,10 +22,6 @@ typeCollection NavigationTypes {
 
 	typedef Handle is UInt32
 
-	typedef Timestamp is UInt64
-	
-	typedef LinkId is ByteBuffer
-	
     <** @description: Handle to a location.
     	Range[0:0x7fffffff]
 	**>
@@ -49,30 +45,32 @@ typeCollection NavigationTypes {
 	}
 	
 	array Polygon of Coordinate2D
-	
-	typedef Area is Polygon
-
-    <** @description: Kind of shapes. **>
-    enumeration ShapeType {
-        CIRCLE
-        RECTANGLE
-        POLYGON
-    }
     
-    <** @description: A radius in meters.
-        Range[0x0:0xffffffff]
+    <** @description: A distance in meters.
+        A distance can be at most half of the earth perimeter (a little less than 20050 km).
+        (see http://www.wolframalpha.com/input/?i=Earth+perimeter)
+        Range[0:20050000]
+        notSpecifiedValue = -1
     **>	
-	typedef Radius is UInt32
+	typedef DistanceInMeters is Int32
 
 	<** @description: A circle given as center and radius. **>			
 	struct Circle {
 		<**	@description : The center of the circle.**>
 		Coordinate2D center
 		<**	@description : The radius of the circle.**>
-		Radius radius
+		DistanceInMeters radius
 	}
+	
+    <** @description: Kind of shapes. **>
+    enumeration ShapeType {
+        CIRCLE
+        RECTANGLE
+        POLYGON
+    }
 
-	typedef Distance is Double
+	typedef Timestamp is UInt64
+		
 
 /* enumerations */
 	
@@ -80,29 +78,6 @@ typeCollection NavigationTypes {
 	enumeration BasicEnum {
 		INVALID 	= 0
 	}
-
- 	enumeration TimeStampedEnum {
-// 	enumeration TimeStampedEnum extends BasicEnum {
-		TIMESTAMP	= 16
-	}
-
-//	enumeration GeoLocalizedEnum extends TimeStampedEnum {
-	enumeration GeoLocalizedEnum {
-		INVALID 	= 0
-		TIMESTAMP	= 16
-		LATITUDE	= 160
-		LONGITUDE	= 161
-		ALTITUDE	= 162
-	}
-
-    <** @description: Settings**>
-    enumeration Settings {
-        INVALID 				= 0
-        UNITS_OF_MEASUREMENT 	= 48 //Base 0x0030
-        LOCALE 					= 37
-        TIME_FORMAT 			= 3
-        COORDINATES_FORMAT 		= 6
-    }
 
 	enumeration Units {
 		METER		= 50
@@ -118,17 +93,7 @@ typeCollection NavigationTypes {
 		TWENTYFOURH	= 2
 	}
 
-	enumeration CoordinatesFormat {
-		INVALID		= 0
-		<** @description:DEGREES format = d.dº**>
-		DEGREES     = 1
-        <** @description:MINUTES format = dºm.m'**>		
-		MINUTES		= 2
-        <** @description:SECONDS format = dºm's"**>
-		SECONDS		= 3
-	}
-
-	struct Locales
+	struct Locale
 	{
 		<** @description : the language used. ISO 639‐3 language code (lower case)**>
 		String languageCode				

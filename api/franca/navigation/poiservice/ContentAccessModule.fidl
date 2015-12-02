@@ -56,7 +56,7 @@ interface POIContentAccessModule {
 	method getSupportedLocales {
 		out {
 			<** @description : array[struct(languageCode,countryCode,scriptCode)]**>
-			Locales[] localeList				
+			Locale[] localeList				
 		}	
 	}	
 	
