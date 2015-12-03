@@ -40,7 +40,7 @@
 #include <functional>
 
 #include <CommonAPI/CommonAPI.hpp> //Defined in the Common API Runtime library
-#include <v0_1/org/genivi/navigation/poiservice/POIContentManagerProxy.hpp>
+#include <v0_1/org/genivi/navigation/poiservice/POIContentAccessModuleProxy.hpp>
 
 #include "poi-common-data-model.h"
 
@@ -48,7 +48,7 @@ using namespace std;
 using namespace v0_1::org::genivi::navigation;
 using namespace poiservice;
 using namespace org::genivi::navigation;
-
+using namespace org::genivi;
 
 // class  contentManager
 class  contentManager
@@ -56,7 +56,7 @@ class  contentManager
 
 public:
 
-    contentManager(std::shared_ptr<POIContentManagerProxyDefault> proxy);
+    contentManager(std::shared_ptr<POIContentAccessModuleProxyDefault> proxy);
 
     ~contentManager();
 
@@ -93,20 +93,20 @@ public:
 private:
 
     GtkWidget *mp_popupWindow;
-    std::shared_ptr<POIContentManagerProxyDefault> mp_proxy;
+    std::shared_ptr<POIContentAccessModuleProxyDefault> mp_proxy;
     POIServiceTypes::CAMCategory m_category;
     POIServiceTypes::CategoryID m_category_id;
     std::vector<POIServiceTypes::CategoryID> m_category_ids;
     std::vector<POIServiceTypes::POI_ID> m_poi_ids;
     POIServiceTypes::PoiAddedDetails m_poi;
-    NavigationTypes::Locales m_locales;
+    NavigationTypes::Locale m_locales;
 
     std::string m_strTest;
 };
 
 static contentManager *clientContentManager;
 
-contentManager::contentManager(std::shared_ptr<POIContentManagerProxyDefault> proxy)
+contentManager::contentManager(std::shared_ptr<POIContentAccessModuleProxyDefault> proxy)
 {
     // test: create a new category, with a new attribute and add a poi under this category
     POIServiceTypes::Details categoryDetails;
@@ -204,7 +204,7 @@ contentManager::~contentManager()
 {
 }
 
-static void getVersionAsyncCallback(const CommonAPI::CallStatus& callStatus, const NavigationTypes::Version& version)
+static void getVersionAsyncCallback(const CommonAPI::CallStatus& callStatus, const CommonTypes::Version& version)
 {
     if (callStatus != CommonAPI::CallStatus::SUCCESS) {
         cout << "Remote getVersion failed with status: " << static_cast<std::underlying_type<CommonAPI::CallStatus>::type>(callStatus) << endl;
@@ -217,7 +217,7 @@ static void getVersionAsyncCallback(const CommonAPI::CallStatus& callStatus, con
 
 void contentManager::getServerStatus()
 {
-    function<void(const CommonAPI::CallStatus&, const NavigationTypes::Version&)> getVersion = getVersionAsyncCallback;
+    function<void(const CommonAPI::CallStatus&, const CommonTypes::Version&)> getVersion = getVersionAsyncCallback;
     CommonAPI::CallStatus callStatus;
 
     mp_proxy->getVersionAsync(getVersionAsyncCallback);
@@ -580,7 +580,7 @@ int main(int  argc , char**  argv )
     const std::string &domain = "local";
     const std::string &instance = "POIContentManager";
 
-    std::shared_ptr<POIContentManagerProxyDefault> myProxy = runtime->buildProxy<POIContentManagerProxy>(domain,instance);
+    std::shared_ptr<POIContentAccessModuleProxyDefault> myProxy = runtime->buildProxy<POIContentAccessModuleProxy>(domain,instance);
 
     while (!myProxy->isAvailable()) {
         usleep(10);

@@ -1234,7 +1234,7 @@ PoiManagerServerStub::~PoiManagerServerStub() {
 
 void PoiManagerServerStub::getVersion(const std::shared_ptr<CommonAPI::ClientId> _client, getVersionReply_t _reply)
 {
-     NavigationTypes::Version POIContentManagerVersion(m_version);
+     CommonTypes::Version POIContentManagerVersion(m_version);
 
     _reply(POIContentManagerVersion);
 }
@@ -1259,9 +1259,9 @@ void PoiManagerServerStub::getLocale(const std::shared_ptr<CommonAPI::ClientId> 
 
 void PoiManagerServerStub::getSupportedLocales(const std::shared_ptr<CommonAPI::ClientId> _client, getSupportedLocalesReply_t _reply)
 {
-    std::vector< NavigationTypes::Locales> localeList;
-    NavigationTypes::Locales en_US { "eng","USA", "Latn" };
-    NavigationTypes::Locales fr_FR { "fra","FRA", "Latn" };
+    std::vector< NavigationTypes::Locale> localeList;
+    NavigationTypes::Locale en_US { "eng","USA", "Latn" };
+    NavigationTypes::Locale fr_FR { "fra","FRA", "Latn" };
     localeList.push_back(en_US);
     localeList.push_back(fr_FR);
 

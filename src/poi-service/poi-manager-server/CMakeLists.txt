@@ -47,7 +47,7 @@ pkg_check_modules(GLIB REQUIRED glib-2.0)
 FILE(GLOB PRJ_LOCAL_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 FILE(GLOB PRJ_COMMON_SRCS ${COMMON_DIR}/poi-common-database.cpp ${COMMON_DIR}/poi-common-math.cpp)
 
-add_subdirectory(${FRANCA_DIR}/poiservice "${CMAKE_CURRENT_BINARY_DIR}/franca")
+add_subdirectory(${FRANCA_DIR}/navigation/poiservice "${CMAKE_CURRENT_BINARY_DIR}/franca")
 
 FILE(GLOB PRJ_STUB_GEN_SRCS ${PRJ_SRC_GEN_PATH}/*Stub*.cpp)
 FILE(GLOB PRJ_STUB_GEN_TYPES ${PRJ_SRC_GEN_NAVIGATION_TYPES_PATH}/*Types*.cpp ${PRJ_SRC_GEN_POISERVICE_TYPES_PATH}/*Types*.cpp)

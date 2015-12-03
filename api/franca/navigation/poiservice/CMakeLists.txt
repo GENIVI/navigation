@@ -22,12 +22,18 @@
 
 cmake_minimum_required (VERSION 2.8.1)
 
-project(poi-manager-server)
+project(franca-poiservice)
 
-option(COMMONAPI_TOOL_GENERATOR
-       "Absolute path to CommonAPI code generator" "")
-option(COMMONAPI_DBUS_TOOL_GENERATOR
-       "Absolute path to CommonAPI-DBus code generator" "")
+option(COMMONAPI_TOOL_DIR
+       "Absolute path to CommonAPI tool" "")
+option(COMMONAPI_DBUS_TOOL_DIR
+       "Absolute path to CommonAPI-DBus tool" "")
+
+execute_process(COMMAND uname -i OUTPUT_VARIABLE OS_VERSION)
+if("${OS_VERSION}" MATCHES "i686")
+  set(OS_VERSION "x86")
+endif()
+message(STATUS "OS_VERSION = ${OS_VERSION}")
 
 set(COMMONAPI_FIDL_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 
@@ -37,19 +43,18 @@ include(FindPkgConfig)
 
 # generate code from fidl
 file(GLOB FIDL_FILES "${COMMONAPI_FIDL_DIR}/*.fidl")
-message("FIDL_FILES: ${FIDL_FILES}")
 
-if (COMMONAPI_TOOL_GENERATOR)
+if (COMMONAPI_TOOL_DIR)
      execute_process(WORKING_DIRECTORY ${COMMONAPI_FIDL_DIR}
-                COMMAND ${COMMONAPI_DBUS_TOOL_GENERATOR} -d ${COMMONAPI_GEN_DIR} ${FIDL_FILES})
+                COMMAND ${COMMONAPI_TOOL_DIR}/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/${OS_VERSION}/commonapi-generator-linux-${OS_VERSION} -sk -d ${COMMONAPI_GEN_DIR} ${FIDL_FILES})
 else ()
-    message (FATAL_ERROR "Set the variable -DCOMMONAPI_TOOL_GENERATOR=<path>")
+    message (FATAL_ERROR "Set the variable -DCOMMONAPI_TOOL_DIR=<path>")
 endif ()
 
-if (COMMONAPI_DBUS_TOOL_GENERATOR)
+if (COMMONAPI_DBUS_TOOL_DIR)
     execute_process(WORKING_DIRECTORY ${COMMONAPI_FIDL_DIR}
-                COMMAND ${COMMONAPI_TOOL_GENERATOR} -sk -d ${COMMONAPI_GEN_DIR} ${FIDL_FILES})
+                COMMAND ${COMMONAPI_DBUS_TOOL_DIR}/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/${OS_VERSION}/commonapi-dbus-generator-linux-${OS_VERSION} -d ${COMMONAPI_GEN_DIR} ${FIDL_FILES})
 else ()
-    message (FATAL_ERROR "Set the variable -DCOMMONAPI_DBUS_TOOL_GENERATOR=<path>")
+    message (FATAL_ERROR "Set the variable -DCOMMONAPI_DBUS_TOOL_DIR=<path>")
 endif ()
 

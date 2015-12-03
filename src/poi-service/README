@@ -59,10 +59,8 @@ NB: You need CommonAPI 3.1.2 and Franca 0.9.1 installed
 
 You need to pass as parameter to the cmake the link to your patched dbus library (required by CommonAPI)
 
-NB: For the 64 bits version, replace 'x86' with 'x86_64' in the command below:
-
 cd build
-cmake -DWITH_FRANCA_DBUS_INTERFACE=ON -DDBUS_LIB_PATH=yourPath -DCOMMONAPI_DBUS_TOOL_GENERATOR=<common-api-dbus-tools folder>/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/x86/commonapi-dbus-generator-linux-x86 -DCOMMONAPI_TOOL_GENERATOR=<common-api-tools folder>/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/x86/commonapi-generator-linux-x86 -DWITH_DEBUG=ON ../
+cmake -DWITH_FRANCA_DBUS_INTERFACE=ON -DDBUS_LIB_PATH=yourPath -DCOMMONAPI_DBUS_TOOL_DIR=<common-api-dbus-tools folder> -DCOMMONAPI_TOOL_DIR=<common-api-tools folder> -DWITH_DEBUG=ON ../
 make 
 cd ..
 

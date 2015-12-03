@@ -29,9 +29,10 @@
 
 #include <CommonAPI/CommonAPI.hpp>
 
+#include <org/genivi/CommonTypes.hpp>
 #include <org/genivi/navigation/NavigationTypes.hpp>
 #include <v0_1/org/genivi/navigation/poiservice/POIServiceTypes.hpp>
-#include <v0_1/org/genivi/navigation/poiservice/POIContentManagerStubDefault.hpp>
+#include <v0_1/org/genivi/navigation/poiservice/POIContentAccessModuleStubDefault.hpp>
 
 #include "poi-common-database.h"
 
@@ -42,6 +43,7 @@
 using namespace std;
 using namespace v0_1::org::genivi::navigation::poiservice;
 using namespace org::genivi::navigation;
+using namespace org::genivi;
 
 class sqlRequest
 {
@@ -184,7 +186,7 @@ private:
 
 };
 
-class PoiManagerServerStub: public POIContentManagerStubDefault {
+class PoiManagerServerStub: public POIContentAccessModuleStubDefault {
 
 public:
     PoiManagerServerStub();
@@ -212,7 +214,7 @@ public:
 
 
 private:
-    NavigationTypes::Version m_version;
+    CommonTypes::Version m_version;
     std::string m_languageCode, m_countryCode, m_scriptCode;
 
     uint16_t m_availableCategories;

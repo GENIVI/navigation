@@ -64,7 +64,7 @@ add_subdirectory(poi-client)
 add_subdirectory(poi-contentaccess-module)
 
 if(WITH_FRANCA_DBUS_INTERFACE)
-    set(FRANCA_DIR "${API_DIR}/franca/navigation")
+    set(FRANCA_DIR "${API_DIR}/franca")
     add_subdirectory(poi-manager-client)
 endif()
 

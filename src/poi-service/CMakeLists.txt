@@ -47,6 +47,6 @@ add_subdirectory(${API_DIR}/poi-service "${DBUS_GENERATED_INCLUDE_DIR}/poi-servi
 add_subdirectory(poi-server)
 
 if (WITH_FRANCA_DBUS_INTERFACE)
-    set(FRANCA_DIR "${API_DIR}/franca/navigation")
+    set(FRANCA_DIR "${API_DIR}/franca")
     add_subdirectory(poi-manager-server)
 endif()
