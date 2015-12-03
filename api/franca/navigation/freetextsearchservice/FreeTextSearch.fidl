@@ -1,4 +1,3 @@
-
 // SPDX-License-Identifier: MPL-2.0
 // Copyright (C) 2015-2016, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH,
 // Alpine Electronics R&D Europe GmbH, Harman-Becker Automotive GmbH.
@@ -8,6 +7,7 @@
 
 package org.genivi.navigation.freetextsearchservice
 
+import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 
 <** @description : This interface allows a user to find locations by entering a single text string.

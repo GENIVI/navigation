@@ -31,6 +31,7 @@ option(COMMONAPI_DBUS_TOOL_GENERATOR
 
 set(COMMONAPI_FIDL_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 set(COMMONAPI_FIDL_DIR_NAVIGATION "${COMMONAPI_FIDL_DIR}/navigation")
+set(COMMONAPI_FIDL_DIR_HMI "${COMMONAPI_FIDL_DIR}/hmi")
 set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/src-gen")
 
 find_package(PkgConfig REQUIRED)
@@ -39,13 +40,14 @@ include(FindPkgConfig)
 
 # generate code from fidl files of navigation
 file(GLOB FIDL_FILES 
+${COMMONAPI_FIDL_DIR}/*.fidl
 ${COMMONAPI_FIDL_DIR_NAVIGATION}/*.fidl
-${COMMONAPI_FIDL_DIR_NAVIGATION}/freetextsearch/*.fidl
+${COMMONAPI_FIDL_DIR_NAVIGATION}/freetextsearchservice/*.fidl
 ${COMMONAPI_FIDL_DIR_NAVIGATION}/mapviewer/*.fidl
 ${COMMONAPI_FIDL_DIR_NAVIGATION}/navigationcore/*.fidl
 ${COMMONAPI_FIDL_DIR_NAVIGATION}/poiservice/*.fidl
-${COMMONAPI_FIDL_DIR_NAVIGATION}/freetextsearch/speech.fidl
-${COMMONAPI_FIDL_DIR_NAVIGATION}/freetextsearch/*.fidl
+${COMMONAPI_FIDL_DIR_HMI}/*.fidl
+${COMMONAPI_FIDL_DIR_HMI}/speechservice/*.fidl
 )
 
 if (COMMONAPI_TOOL_GENERATOR)

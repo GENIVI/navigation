@@ -1,0 +1,177 @@
+// SPDX-License-Identifier: MPL-2.0
+// Component Name: SpeechOutputService
+// Compliance Level: Abstract Component
+// Copyright (C) 2014, Continental Automotive GmbH, Elektrobit Automotive GmbH
+// License:
+// This Source Code Form is subject to the terms of the
+// Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+// this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+
+package org.genivi.hmi.speechservice
+
+import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
+
+<** @description : SpeechOutput interface.
+    The GENIVI SpeechOutput interface allows client applications to access TTS functionality   
+**> 
+interface SpeechOutput {
+	version {
+		major 0
+		minor 1
+	}
+	
+	<**	@description : This method returns the API version implemented by the content access module.**>
+	method getVersion {
+		out {
+			<** @description: .**>
+			Version ^version				
+		}	
+	}	
+
+	<** @description : Max length of a single prompt part. **>
+	const UInt32 MAX_CHUNK_LENGTH = 1024
+
+	<** @description : String containing the prompt to play. **>
+	typedef Chunk is String
+
+	<** @description : Index of the added prompt, zero based. **>
+	typedef ChunkID is UInt32
+
+	<** @description : String containing the name of the last reached marker. **>
+	typedef Marker is String
+
+	<** @description : Connection status, will be notified. **>
+	enumeration ConnectionStatus
+	{
+		CS_UNKNOWN		/* no instance of prompter available for member initialization purposes. */
+		CS_ESTABLISHED	/* success status, client is connected */
+		CS_REFUSED		/* currently a connection with the given priority is not possible. */
+		CS_POSSIBLE		/* notification that after a rejected prompt, a new attempt would be successful */
+		CS_PENDING		/* while connecting to service */
+		CS_PAUSED		/* client is paused */
+		CS_TERMINATED	/* client is disconnected */
+		CS_MAX			/* max value shall be error checked */
+	}
+	
+	<** @description : Connection type, used from openPrompter(). 
+	Defines the Audio connection that should be used for the prompter application.
+	The enum values will be mapped to an existing product connection id. **>
+	enumeration ConnectionType
+	{
+		CT_NAVIGATION	/* reserved for internal Navigation application */
+		CT_READER		/* reserved for internal Reader application */
+		CT_GEN_HIGH		/* reserved for connections of generic application with high priority */
+		CT_GEN_MEDIUM	/* reserved for connections of generic application with medium priority */
+		CT_GEN_LOW		/* reserved for connections of generic application with low priority */
+		CT_MAX			/* max value shall be error checked */
+	}
+	
+	<** @description : Processing type, used from openPrompter(). Sets text normalization mode and active prompt database of the TTS engine for the given context **>
+	enumeration PreProcessingType
+	{
+		PPT_DIALOG		/* activates preprocessing rules for Dialog context */
+		PPT_NAVIGATION	/* activates preprocessing rules for Navigation context */
+		PPT_NONE		/* resets preprocessing rules */
+		PPT_READER		/* activates preprocessing rules for Reader context */
+		PPT_MAX			/* max value shall be error checked */
+	}
+	
+	<** @description : Queue status, will be notified. **>
+	enumeration QueueStatus
+	{
+		QS_UNKNOWN		/* no instance of prompter available for member initialization purposes. */
+		QS_FULL			/* chunk was rejected because chunk doesn't fit into buffer */
+		QS_HIGH_FILL	/* was added, but less than n% space missing. The client should consider delaying further additions. There is a risk successive chunk additions will not be heard and return an error. */
+		QS_LOW_FILL		/* the chunk was added, and there is enough memory for more chunks available */
+		QS_MAX			/* max value shall be error checked */
+	}
+	
+	<** @description : TTS status, will be notified. **>
+	enumeration TtsStatus
+	{
+		TS_UNKNOWN			/* no instance of prompter available for member initialization purposes. */
+		TS_NOT_INITIALIZED	/* prompter is not ready (startup , language change) */
+		TS_ACTIVE			/* prompter is active */
+		TS_ABORTED			/* prompter was aborted */
+		TS_MARKER			/* marker reached */
+		TS_IDLE				/* prompter in idle state */
+		TS_ENQUEUED			/* queue not empty, new chunk arrived */
+		TS_FINISHED			/* prompter finished speaking */
+		TS_FAILED			/* prompting failed */
+		TS_MAX				/* max value shall be error checked */
+	}
+
+	<** @description : Must be called to open a SpeechOutputService session and to get the audio connection. **>
+	method openPrompter {
+		in {
+	        <** @description : Sets the Audio connection that should be used for the prompter application. **>
+			ConnectionType connectionType
+			<** @description : Sets the text normaization mode and which active prompt data base will be activated. **>
+			PreProcessingType preProcessingType
+		}
+	}
+
+	<** @description : The prompter must be opened to trigger the playback of the provided prompt. 
+	The prompt length must not exceed the length of a PromptChunk buffer.
+	Synthesizes the provided text or if using the escape sequence of the engine supplier a wave file in a supported sampling rate is provided, the system will back back also wave files. 
+	The text will be normalized using the context identifier provided to openprompter. This applies to matching prerecorded files as well as the synthesis of number and words that are matched to a lexical dictionary.
+	The synthesize will start if the prompter is idle, if the prompter is already playing the playback will be delayed until all previously added text chunks are played back. For every text chunk provided a notification will be send. **>
+    method addTextChunk {
+		in {
+			<** @description : String containing the prompt to play. **>
+			Chunk chunk
+		}
+		out {
+			<** @description : Index of the added prompt, zero based. **>
+			ChunkID chunkID
+		}
+	}
+
+	<** @description : A prompt must be playing to perform an abort action. If no prompting operation in progress there will be no reaction of the system. **>
+    method abortPrompter { }
+
+	<** @description : The prompter is closed after the last text chunk submitted has finished playing. **>
+    method closePrompter {	}
+	
+
+	// *** notification methods
+	
+	/**
+	 * The notifiy status messages will be send to signal the status as feedback on control of prompting functionalities.
+	 */
+	
+	<** @description : Notifies the connection status **>
+    broadcast notifyConnectionStatus selective {
+    	out {
+			<** @description : Client connection status. **>
+    		ConnectionStatus connectionStatus
+   		}
+    }
+
+	<** @description : Notifies the last reached marker. **>
+	broadcast notifyMarkerReached selective {
+		out {
+			<** @description : ID of the processed chunk. **>
+			ChunkID chunkID
+			<** @description : String with the name of the reached marker (if TTS engine supports inserting bookmarks with a name). **>
+			Marker marker
+		}
+	}
+	
+	<** @description : Notifies the queue status. **>
+	broadcast notifyQueueStatus selective {
+		out {
+			<** @description : Fill status of the text buffer. **>
+			QueueStatus queueStatus
+		}
+	}
+
+	<** @description : Notifies the TTS engine status. **>
+	broadcast notifyTTSStatus selective {
+		out {
+			<** @description : Current status of the TTS. **>
+			TtsStatus ttsStatus
+		}
+	}
+}
+

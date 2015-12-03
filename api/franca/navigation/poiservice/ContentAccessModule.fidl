@@ -1,13 +1,12 @@
-/* 
-SPDX-License-Identifier: MPL-2.0
-Copyright (C) 2014, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
-This Source Code Form is subject to the terms of the
-Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
-this file, you can obtain one at http://mozilla.org/MPL/2.0/.
-*/
+// SPDX-License-Identifier: MPL-2.0
+// Copyright (C) 2014, PCA Peugeot Citro�n, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
+// This Source Code Form is subject to the terms of the
+// Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+// this file, you can obtain one at http://mozilla.org/MPL/2.0/.
 
 package org.genivi.navigation.poiservice
 
+import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 import org.genivi.navigation.poiservice.POIServiceTypes.* from "POIServiceTypes.fidl"
 
@@ -15,8 +14,8 @@ import org.genivi.navigation.poiservice.POIServiceTypes.* from "POIServiceTypes.
 <** @description : This interface offers methods that implement the POI search functionality of a navigation system.**>
 interface POIContentAccessModule {
 	version {
-		major 1 
-		minor 0
+		major 0 
+		minor 1
 	}
 	
 	<**	@description : This method returns the API version implemented by the content access module.**>
@@ -59,7 +58,87 @@ interface POIContentAccessModule {
 			Locale[] localeList				
 		}	
 	}	
+
+	<**	@description : This method retrieves the list od POI categories available (pre-defined and custom).**>
+	method getAvailableCategories {
+		out {
+			<** @description : List of categories (id, name and top_level).**>
+			CategoryAndName[] categories				
+		}
+	}
 	
+	<**	@description : Get the root category id. That would be ALL_CATEGORIES.**>
+	method getRootCategory {
+		out {
+			<** @description : The root category is a top level one by design.**>
+			CategoryID category				
+		}
+	}
+	
+	<**	@description : Get the children categories id and type (top level) from the a parent unique id.**>
+	method getChildrenCategories {
+		in {
+			<** @description : unique category id.**>
+			CategoryID category				
+		}	
+		out {
+			<** @description : List of categories (id and top_level).**>
+			CategoryAndLevel[] categories				
+		}
+	}
+	
+	<**	@description : Get the parent categories id and type (top level) from the a unique id.**>
+	method getParentCategories {
+		in {
+			<** @description : unique category id.**>
+			CategoryID category				
+		}	
+		out {
+			<** @description : List of categories (id and top_level).**>
+			CategoryAndLevel[] categories				
+		}
+	}
+
+	<**	@description : Creates a category by name and return an unique id.**>
+	method createCategory {
+		in {
+			<** @description : List of details for the category to create.**>
+			CAMCategory category				
+		}	
+		out {
+			<** @description : Category unique id.**>
+			CategoryID unique_id				
+		}	
+	}
+	
+	<**	@description : Removes a list of categories. Because of required time to remove it from the database, a signal is emitted when the deletion is done.**>
+	method removeCategories {
+		in {
+			<** @description : List of categories to be removed.**>
+			CategoryID[] categories				
+		}
+	}
+
+	<**	@description : Adds a list of POIs to a category. Because of required time to add it to the database, a signal is emitted when the update is done, that gives the id of the elements added**>
+	method addPOIs {
+		in {
+			<** @description : Category unique id.**>
+			CategoryID unique_id	
+
+			<** @description : List of POIs and all their content. Note that there's no id sent, because it's up to the component to give it**>
+			PoiAddedDetails[] poiList			
+		}	
+		
+	}
+	
+	<**	@description : Removes a list of POIs to a category. Because of required time to remove it from the database, a signal is emitted when the update is done.**>
+	method removePOIs {
+		in {
+			<** @description : List of unique ids of POIs to remove.**>
+			POI_ID[] ids				
+		}
+	}
+
 	<**	@description : This method is sent by the POI service component to inform all the CAM that a new POI search was started.
         It provides all the relevant search parameters. Of course the CAM will only be aware of the search if it registers one of the search categories.**>
 	method poiSearchStarted {
@@ -95,7 +174,7 @@ interface POIContentAccessModule {
 	method resultListRequested {
 		in {
 			<** @description : Content access module unique id as known by the POI service component.**>
-			UInt8 camId				
+			ContentAccessModuleID camId				
 			<** @description : poi search unique handle.**>
 			Handle poiSearchHandle				
 			<** @description : List of attributes id to retrieve. This is optional and the list could be empty.**>
@@ -132,5 +211,39 @@ interface POIContentAccessModule {
 		}
 	}
 
+	<**	@description : CategoriesRemoved = This signal is emitted when a list of categories and associated content has been removed from the database.**>
+	broadcast CategoriesRemoved {
+		out {
+			<**	@description : List of categories removed.**>
+			CategoryID[] categories
+		}
+	}
 
+	<**	@description : POIAdded = This signal is emitted when a list of POIs and associated content has been added to the database. It returns the ids.**>
+	broadcast POIAdded {
+		out {
+			<**	@description : List of unique ids of POIs added. The order is the same as the order in the AddPOIs method.**>
+			POI_ID[] pois
+		}
+	}
+
+	<**	@description : POIRemoved = This signal is emitted when a list of POIs and associated content has been removed from the database.**>
+	broadcast POIRemoved {
+		out {
+			<**	@description : List of unique ids of POIs removed.**>
+			POI_ID[] pois
+		}
+	}
+
+	<**	@description : SearchStatusChanged = This signal updates the search or proximity alert status of the specified handle.**>	
+	broadcast SearchStatusChanged {
+		out {
+			<** @description : poi search unique handle.**>
+			Handle poiSearchHandle				
+			<** @description : enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... ).**>
+			SearchStatusState statusValue		
+			<** @description : List of pois that match the search (only valid if status is set to SEARCHING or FINISHED, by default empty list).**>
+			POI_ID[] pois		
+		}
+	}
 }

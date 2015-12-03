@@ -6,6 +6,7 @@
 
 package org.genivi.navigation.navigationcore
 	
+import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 import org.genivi.navigation.navigationcore.GuidanceTypes.* from "GuidanceTypes.fidl"
 
