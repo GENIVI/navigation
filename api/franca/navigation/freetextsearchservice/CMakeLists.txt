@@ -2,7 +2,7 @@
 # @licence app begin@
 # SPDX-License-Identifier: MPL-2.0
 #
-# Component Name: franca navigation poi service generation
+# Component Name: franca free text search generation
 #
 # Author: Philippe Colliot
 #
@@ -22,7 +22,7 @@
 
 cmake_minimum_required (VERSION 2.8.1)
 
-project(franca-poiservice)
+project(franca-freetextsearch)
 
 option(COMMONAPI_TOOL_DIR
        "Absolute path to CommonAPI tool" "")
@@ -48,17 +48,17 @@ endif()
 
 file(GLOB FIDL_FILES "${COMMONAPI_FIDL_DIR}/*.fidl")
 
-if (COMMONAPI_TOOL_DIR)
+if(COMMONAPI_TOOL_DIR)
      execute_process(WORKING_DIRECTORY ${COMMONAPI_FIDL_DIR}
                 COMMAND ${COMMONAPI_TOOL_DIR}/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/${OS_VERSION}/commonapi-generator-linux-${OS_VERSION} -sk -d ${COMMONAPI_GEN_DIR} ${FIDL_FILES})
-else ()
+else()
     message (FATAL_ERROR "Set the variable -DCOMMONAPI_TOOL_DIR=<path>")
-endif ()
+endif()
 
-if (COMMONAPI_DBUS_TOOL_DIR)
+if(COMMONAPI_DBUS_TOOL_DIR)
     execute_process(WORKING_DIRECTORY ${COMMONAPI_FIDL_DIR}
                 COMMAND ${COMMONAPI_DBUS_TOOL_DIR}/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/${OS_VERSION}/commonapi-dbus-generator-linux-${OS_VERSION} -d ${COMMONAPI_GEN_DIR} ${FIDL_FILES})
-else ()
+else()
     message (FATAL_ERROR "Set the variable -DCOMMONAPI_DBUS_TOOL_DIR=<path>")
-endif ()
+endif()
 

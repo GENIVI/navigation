@@ -36,8 +36,8 @@ CHK_DIR_EXISTS='test -d'
 MKDIR='mkdir -p'
 
 echo '------------------------localize the project and prepare the database------------------------'
-#by default city set to paris
-city="paris"
+#by default area set to paris
+area="paris"
 language='en'
 
 while getopts c:h opt
@@ -45,35 +45,39 @@ do
 	case $opt in
 	c)
 		case "$OPTARG" in
+		switzerland)
+			area="switzerland"
+			language='en'
+			;;
 		paris)
-			city="paris"
+			area="paris"
 			language='en'
 			;;
 		tokyo)
-			city="tokyo"
+			area="tokyo"
 			language='jp'
 			;;
 		san-diego)
-			city="san-diego"
+			area="san-diego"
 			language='en'
 			;;
 		*)
-			echo "Unsupported city $OPTARG" >&2
+			echo "Unsupported area $OPTARG" >&2
 			exit 1
 			;;
 		esac
 		;;
 	h)
 		echo "Usage:"
-		echo "$0 [-c city]"
-		echo "-c: Set city area (supported values: paris,tokyo,san-diego). Default is paris"
+		echo "$0 [-c area]"
+		echo "-c: Set area (supported values: paris,tokyo,san-diego). Default is paris"
 		echo "-h: Help"
 		exit 1
 	esac
 done
 
 echo 'generate the databases'
-$SCRIPT_DIR/make-database $city
+$SCRIPT_DIR/make-database $area
 
 echo 'set the config file'
 if [ ! -d $CONFIG_DIR ]
@@ -81,7 +85,7 @@ then
 	echo create config directory
 	mkdir -p $CONFIG_DIR
 fi
-CONFIG_FILE=$SCRIPT_DIR/$city/poi-client.conf
+CONFIG_FILE=$SCRIPT_DIR/$area/poi-client.conf
 cp $CONFIG_FILE $CONFIG_DIR/poi-client.conf
 
 echo 'set the language for the content access module' 

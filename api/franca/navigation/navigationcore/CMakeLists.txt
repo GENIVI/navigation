@@ -2,7 +2,7 @@
 # @licence app begin@
 # SPDX-License-Identifier: MPL-2.0
 #
-# Component Name: franca navigation poi service generation
+# Component Name: franca navigation core generation
 #
 # Author: Philippe Colliot
 #
@@ -22,7 +22,7 @@
 
 cmake_minimum_required (VERSION 2.8.1)
 
-project(franca-poiservice)
+project(franca-navigationcore)
 
 option(COMMONAPI_TOOL_DIR
        "Absolute path to CommonAPI tool" "")
