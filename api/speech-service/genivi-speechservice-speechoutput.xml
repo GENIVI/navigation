@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="introspect.xsl"?>
+<!-- This D-Bus Introspection model has been created from a Franca IDL file. -->
+<!-- Input file: 'SpeechOutput.fidl' -->
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="introspect.xsd" name="org.genivi.hmi.speechservice">
+  <interface name="org.genivi.hmi.speechservice.SpeechOutput">
+    <version>0.1</version>
+    <method name="getVersion">
+      <doc>
+        <line>getVersion = This method returns the API version implemented by the content access module.</line>
+      </doc>
+      <arg direction="out" name="version" type="(qqqs)">
+        <doc>
+          <line>version (of type Version) = .</line>
+          <line>Version struct[versionMajor, versionMinor, versionMicro, date] = version.</line>
+          <line>0: Version.versionMajor ('q') = when the major changes, then backward compatibility with previous releases is not granted.</line>
+          <line>1: Version.versionMinor ('q') = when the minor changes, then backward compatibility with previous releases is granted, but something changed in the implementation of the API (e.g. new methods may have been added).</line>
+          <line>2: Version.versionMicro ('q') = when the micro changes, then backward compatibility with previous releases is granted (bug fixes or documentation modifications).</line>
+          <line>3: Version.date ('s') = release date (e.g. 21-06-2011).</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="openPrompter">
+      <doc>
+        <line>openPrompter = Must be called to open a SpeechOutputService session and to get the audio connection.</line>
+      </doc>
+      <arg direction="in" name="connectionType" type="u">
+        <doc>
+          <line>connectionType (of type ConnectionType) = Sets the Audio connection that should be used for the prompter application.</line>
+          <line>enum[CT_NAVIGATION (null), CT_READER (null), CT_GEN_HIGH (null), CT_GEN_MEDIUM (null), CT_GEN_LOW (null), CT_MAX (null)]</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="preProcessingType" type="u">
+        <doc>
+          <line>preProcessingType (of type PreProcessingType) = Sets the text normaization mode and which active prompt data base will be activated.</line>
+          <line>enum[PPT_DIALOG (null), PPT_NAVIGATION (null), PPT_NONE (null), PPT_READER (null), PPT_MAX (null)]</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="addTextChunk">
+      <doc>
+        <line>addTextChunk = The prompter must be opened to trigger the playback of the provided prompt.</line>
+        <line>The prompt length must not exceed the length of a PromptChunk buffer.</line>
+        <line>Synthesizes the provided text or if using the escape sequence of the engine supplier a wave file in a supported sampling rate is provided, the system will back back also wave files.</line>
+        <line>The text will be normalized using the context identifier provided to openprompter. This applies to matching prerecorded files as well as the synthesis of number and words that are matched to a lexical dictionary.</line>
+        <line>The synthesize will start if the prompter is idle, if the prompter is already playing the playback will be delayed until all previously added text chunks are played back. For every text chunk provided a notification will be send.</line>
+      </doc>
+      <arg direction="in" name="chunk" type="s">
+        <doc>
+          <line>chunk (of type Chunk) = String containing the prompt to play.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="chunkID" type="u">
+        <doc>
+          <line>chunkID (of type ChunkID) = Index of the added prompt, zero based.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+    </method>
+    <method name="abortPrompter">
+      <doc>
+        <line>abortPrompter = A prompt must be playing to perform an abort action. If no prompting operation in progress there will be no reaction of the system.</line>
+      </doc>
+    </method>
+    <method name="closePrompter">
+      <doc>
+        <line>closePrompter = The prompter is closed after the last text chunk submitted has finished playing.</line>
+      </doc>
+    </method>
+    <signal name="notifyConnectionStatus">
+      <doc>
+        <line>notifyConnectionStatus = Notifies the connection status</line>
+      </doc>
+      <arg direction="out" name="connectionStatus" type="u">
+        <doc>
+          <line>connectionStatus (of type ConnectionStatus) = Client connection status.</line>
+          <line>enum[CS_UNKNOWN (null), CS_ESTABLISHED (null), CS_REFUSED (null), CS_POSSIBLE (null), CS_PENDING (null), CS_PAUSED (null), CS_TERMINATED (null), CS_MAX (null)]</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="notifyMarkerReached">
+      <doc>
+        <line>notifyMarkerReached = Notifies the last reached marker.</line>
+      </doc>
+      <arg direction="out" name="chunkID" type="u">
+        <doc>
+          <line>chunkID (of type ChunkID) = ID of the processed chunk.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="out" name="marker" type="s">
+        <doc>
+          <line>marker (of type Marker) = String with the name of the reached marker (if TTS engine supports inserting bookmarks with a name).</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="notifyQueueStatus">
+      <doc>
+        <line>notifyQueueStatus = Notifies the queue status.</line>
+      </doc>
+      <arg direction="out" name="queueStatus" type="u">
+        <doc>
+          <line>queueStatus (of type QueueStatus) = Fill status of the text buffer.</line>
+          <line>enum[QS_UNKNOWN (null), QS_FULL (null), QS_HIGH_FILL (null), QS_LOW_FILL (null), QS_MAX (null)]</line>
+        </doc>
+      </arg>
+    </signal>
+    <signal name="notifyTTSStatus">
+      <doc>
+        <line>notifyTTSStatus = Notifies the TTS engine status.</line>
+      </doc>
+      <arg direction="out" name="ttsStatus" type="u">
+        <doc>
+          <line>ttsStatus (of type TtsStatus) = Current status of the TTS.</line>
+          <line>enum[TS_UNKNOWN (null), TS_NOT_INITIALIZED (null), TS_ACTIVE (null), TS_ABORTED (null), TS_MARKER (null), TS_IDLE (null), TS_ENQUEUED (null), TS_FINISHED (null), TS_FAILED (null), TS_MAX (null)]</line>
+        </doc>
+      </arg>
+    </signal>
+  </interface>
+</node>

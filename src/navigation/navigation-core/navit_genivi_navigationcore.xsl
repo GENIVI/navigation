@@ -37,6 +37,8 @@
 		<xsl:text>&#x0A;                </xsl:text>
 		<plugin path="../../../navigation-core/enhancedposition-plugin/.libs/libgenivi_positioning_enhancedposition.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
+		<plugin path="../../../navigation-core/speech-plugin/.libs/libgenivi_speechservice_speechoutput.so" ondemand="no"/>
+		<xsl:text>&#x0A;                </xsl:text>
 		<plugin path="../../../poi-cam/.libs/libgenivi_poiservice_cam_navit.so" ondemand="no"/>
         </xsl:template>
         <xsl:template match="/config/plugins/plugin">

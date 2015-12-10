@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="constants.xsl"?>
+<!-- SPDX-License-Identifier: MPL-2.0
+     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH,   TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
+     This Source Code Form is subject to the terms of the
+     Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+     this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+-->
+<constants  name="SpeechService">
+  <version>1.0.0 (21-01-2014)</version>
+  <doc>
+    <line>This document defines the constants used in the Speech service APIs</line>
+  </doc>
+
+  <id name="MAX_CHUNK_LENGTH" value="1024" />
+  <id name="CS_UNKNOWN		" value="0x0000" />/* no instance of prompter available for member initialization purposes. */
+  <id name="CS_ESTABLISHED	" value="0x0001" />/* success status, client is connected */
+  <id name="CS_REFUSED		" value="0x0002" />/* currently a connection with the given priority is not possible. */
+  <id name="CS_POSSIBLE		" value="0x0003" />/* notification that after a rejected prompt, a new attempt would be successful */
+  <id name="CS_PENDING		" value="0x0004" />/* while connecting to service */
+  <id name="CS_PAUSED		" value="0x0005" />/* client is paused */
+  <id name="CS_TERMINATED	" value="0x0006" />/* client is disconnected */
+  <id name="CS_MAX			" value="0x0007" />/* max value shall be error checked */
+
+  <id name="CT_NAVIGATION" value="0x0010" />/* reserved for internal Navigation application */
+  <id name="CT_READER" value="0x0011" />/* reserved for internal Reader application */
+  <id name="CT_GEN_HIGH" value="0x0012" />/* reserved for connections of generic application with high priority */
+  <id name="CT_GEN_MEDIUM" value="0x0013" />/* reserved for connections of generic application with medium priority */
+  <id name="CT_GEN_LOW" value="0x0014" />/* reserved for connections of generic application with low priority */
+  <id name="CT_MAX" value="0x0015" />/* max value shall be error checked */
+
+  <id name="PPT_DIALOG" value="0x0020" />/* activates preprocessing rules for Dialog context */
+  <id name="PPT_NAVIGATION" value="0x0021" />/* activates preprocessing rules for Navigation context */
+  <id name="PPT_NONE" value="0x0022" />/* resets preprocessing rules */
+  <id name="PPT_READER" value="0x0023" />/* activates preprocessing rules for Reader context */
+  <id name="PPT_MAX" value="0x0024" />/* max value shall be error checked */
+
+  <id name="QS_UNKNOWN" value="0x0030" />/* no instance of prompter available for member initialization purposes. */
+  <id name="QS_FULL" value="0x0031" />/* chunk was rejected because chunk doesn't fit into buffer */
+  <id name="QS_HIGH_FILL" value="0x0032" />/* was added, but less than n% space missing. The client should consider delaying further additions. There is a risk successive chunk additions will not be heard and return an error. */
+  <id name="QS_LOW_FILL" value="0x0033" />/* the chunk was added, and there is enough memory for more chunks available */
+  <id name="QS_MAX" value="0x0034" />/* max value shall be error checked */
+
+  <id name="TS_UNKNOWN" value="0x0040" />/* no instance of prompter available for member initialization purposes. */
+  <id name="TS_NOT_INITIALIZED" value="0x0041" />/* prompter is not ready (startup , language change) */
+  <id name="TS_ACTIVE" value="0x0042" />/* prompter is active */
+  <id name="TS_ABORTED" value="0x0043" />/* prompter was aborted */
+  <id name="TS_MARKER" value="0x0044" />/* marker reached */
+  <id name="TS_IDLE" value="0x0045" />/* prompter in idle state */
+  <id name="TS_ENQUEUED" value="0x0046" />/* queue not empty, new chunk arrived */
+  <id name="TS_FINISHED" value="0x0047" />/* prompter finished speaking */
+  <id name="TS_FAILED" value="0x0048" />/* prompting failed */
+  <id name="TS_MAX" value="0x0049" />/* max value shall be error checked */
+
+</constants>

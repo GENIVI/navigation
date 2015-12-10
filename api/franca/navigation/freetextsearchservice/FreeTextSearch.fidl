@@ -1,3 +1,4 @@
+
 // SPDX-License-Identifier: MPL-2.0
 // Copyright (C) 2015-2016, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH,
 // Alpine Electronics R&D Europe GmbH, Harman-Becker Automotive GmbH.
@@ -7,7 +8,6 @@
 
 package org.genivi.navigation.freetextsearchservice
 
-import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 
 <** @description : This interface allows a user to find locations by entering a single text string.
@@ -63,19 +63,12 @@ interface FreeTextSearch {
 
 
   <** @description: A union to contain any of the possble search shapes. **>
-    union ShapeSpecificDetails {
+    union Shape {
         Circle circle
         Rectangle rectangle
     }
 
 	
-	<** @description: A shape. **>			
-	struct Shape {
-		ShapeType shapeType 
-		ShapeSpecificDetails shapeDetails
-	}
-
-		
     <** @description: A list of shapes.
         maximum length = 31
     **>
@@ -107,7 +100,7 @@ interface FreeTextSearch {
     }
 		
     <** @description: An OR-ed combination of SearchOption flags.
-        Range[0:0x7fffffff]
+        Range[0:0xffffffff]
     **>
     typedef SearchOptions is UInt32
 
@@ -142,7 +135,7 @@ interface FreeTextSearch {
 		
 		
     <** @description: Handle to a location.
-        Range[0:0x7fffffff]
+        Range[0:0xffffffff]
     **>
     typedef LocationHandle is UInt32
 
@@ -153,14 +146,6 @@ interface FreeTextSearch {
     array LocationHandleList of LocationHandle
 
 
-    <** @description: An address can represent a street, a named place, or a mapcode. **>
-    enumeration AddressType {
-        STREET
-        PLACE
-        MAP_CODE
-    }
-		
-	
 	<** @description: If a user entered a non-existing house number then the closest existing
 	    number is returned. The houseNumberFromInput will contain the house
 	    number from the user input, the houseNumber will contain closest house number.
@@ -204,7 +189,8 @@ interface FreeTextSearch {
 
 	<** @description: Mapcode details. **>			
 	struct MapCodeDetails {
-    	<** @description: If the location of the mapcode is close to a street, this field
+    	<** @description: Mapcodes are a free, open way to make every house or location on Earth addressable by a short code. 
+    	    If the location of the mapcode is close to a street, this field
     	    contains the name of that street, otherwise this field is left empty.
     	**>			
 		FtsString closestStreetName
@@ -212,24 +198,17 @@ interface FreeTextSearch {
 
 
   <** @description: A union to contain any of the specific types of address details. **>
-    union AddressTypeSpecificDetails {
+    union AddressDetails {
         StreetDetails streetDetails
         PlaceDetails placeDetails
         MapCodeDetails mapCodeDetails
     }
 
 
-	<** @description: Address details for lines, nodes and mapcodes. **>			
-	struct AddressDetails {
-		AddressType addressType
-    	AddressTypeSpecificDetails addressTypeSpecificDetails
-	}
-
-		
     <** @description: A higher score means a better match.
-        Range[0:0x7fff]
+        Range[0:0xffff]
     **>
-    typedef Score is Int16
+    typedef Score is UInt16
 
 	
 	<** @description: Address information. **>			

@@ -7,7 +7,7 @@
 // Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
 // this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
-package org.genivi.hmi.speechservice
+package org.genivi.hmi.speechoutputservice
 
 import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 
@@ -137,7 +137,7 @@ interface SpeechOutput {
 	// *** notification methods
 	
 	/**
-	 * The notifiy status messages will be send to signal the status as feedback on control of prompting functionalities.
+	 * The notify status messages will be send to signal the status as feedback on control of prompting functionalities.
 	 */
 	
 	<** @description : Notifies the connection status **>
