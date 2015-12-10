@@ -31,6 +31,7 @@ cmake_minimum_required(VERSION 2.8)
 message(STATUS "guidance")
 
 include_directories(${DBUS_GENERATED_INCLUDE_DIR}/navigation-core)
+include_directories(${DBUS_GENERATED_INCLUDE_DIR_SPEECH})
 
 set(genivi_navigationcore_guidance_LIBS ${PLUGIN_LDFLAGS})
 set(genivi_navigationcore_guidance_LIBRARY_DIRS ${PLUGIN_LIBRARIES})

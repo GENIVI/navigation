@@ -87,5 +87,4 @@ add_subdirectory(session-plugin)
 
 add_subdirectory(enhancedposition-plugin)
 
-add_subdirectory(speech-plugin)
 

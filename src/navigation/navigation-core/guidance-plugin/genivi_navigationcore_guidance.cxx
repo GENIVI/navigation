@@ -29,6 +29,10 @@
 #include <dbus-c++/glib-integration.h>
 #include "genivi-navigationcore-constants.h"
 #include "genivi-navigationcore-guidance_adaptor.h"
+
+#include "genivi-speechservice-constants.h"
+#include "genivi-speechservice-speechoutput_proxy.h"
+
 #include "config.h"
 #define USE_PLUGINS 1
 #include "debug.h"
@@ -52,6 +56,41 @@
 static DBus::Glib::BusDispatcher dispatcher;
 static DBus::Connection *conn;
 
+class SpeechOutput
+: public org::genivi::hmi::speechservice::SpeechOutput_proxy,
+  public DBus::ObjectProxy
+{
+    public:
+    struct callback *cb;
+    SpeechOutput(DBus::Connection &connection)
+        : DBus::ObjectProxy(connection,
+                                    "/org/genivi/hmi/speechservice/SpeechOutput",
+                                    "org.genivi.hmi.speechservice.SpeechOutput")
+    {
+    }
+
+    void notifyConnectionStatus(const uint32_t& connectionStatus)
+    {
+
+    }
+
+    void notifyMarkerReached(const uint32_t& chunkID, const std::string& marker)
+    {
+
+    }
+
+    void notifyQueueStatus(const uint32_t& queueStatus)
+    {
+
+    }
+
+    void notifyTTSStatus(const uint32_t& ttsStatus)
+    {
+
+    }
+};
+
+
 class Guidance;
 
 class GuidanceObj
@@ -61,6 +100,7 @@ class GuidanceObj
 	struct attr m_route, m_vehicleprofile, m_tracking_callback;
 	uint32_t m_session,m_route_handle;
 	Guidance *m_guidance;
+    SpeechOutput *m_speechoutput;
 	bool m_paused;
 	bool m_voice_guidance;
     uint16_t m_prompt_mode;
@@ -733,6 +773,9 @@ GuidanceObj::GuidanceObj(Guidance *guidance, uint32_t SessionHandle, uint32_t Ro
 	struct attr **ret=NULL;
 	struct attr callback_list;
 	struct navit *navit=get_navit();
+
+    m_speechoutput=new SpeechOutput(*conn);
+
 	if (navit_get_attr(navit, attr_callback_list, &callback_list, NULL)) {
 		callback_list_call_attr_4(callback_list.u.callback_list, attr_command, "navit_genivi_get_route", in, &ret, NULL);
 		if (ret && ret[0] && ret[1] && ret[0]->type == attr_route && ret[1]->type == attr_vehicleprofile) {
@@ -769,6 +812,7 @@ GuidanceObj::~GuidanceObj()
 		callback_destroy(m_guidance_callback);
 	}
 	m_guidance->GuidanceStatusChanged(GENIVI_NAVIGATIONCORE_INACTIVE, 0);
+    delete(m_speechoutput);
 }
 
 static class Guidance *server;
@@ -776,7 +820,7 @@ static class Guidance *server;
 void
 plugin_init(void)
 {
-	dispatcher.attach(NULL);
+    dispatcher.attach(NULL);
 	DBus::default_dispatcher = &dispatcher;
 	// FIXME: What dbus address to use? 
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
