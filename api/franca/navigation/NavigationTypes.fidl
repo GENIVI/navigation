@@ -39,7 +39,7 @@ typeCollection NavigationTypes {
 
 	struct Coordinate3D extends Coordinate2D {
     	<** @description: altitude above the sea level of the current position in meters .**>
-		Int32 altitude
+		Double altitude
 	}
 
 	struct Rectangle {
