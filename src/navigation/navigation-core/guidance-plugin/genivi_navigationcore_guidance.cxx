@@ -56,12 +56,12 @@
 static DBus::Glib::BusDispatcher dispatcher;
 static DBus::Connection *conn;
 
+#if (SPEECH_ENABLED)
 class SpeechOutput
 : public org::genivi::hmi::speechservice::SpeechOutput_proxy,
   public DBus::ObjectProxy
 {
     public:
-    struct callback *cb;
     SpeechOutput(DBus::Connection &connection)
         : DBus::ObjectProxy(connection,
                                     "/org/genivi/hmi/speechservice/SpeechOutput",
@@ -89,7 +89,7 @@ class SpeechOutput
 
     }
 };
-
+#endif
 
 class Guidance;
 
@@ -100,8 +100,10 @@ class GuidanceObj
 	struct attr m_route, m_vehicleprofile, m_tracking_callback;
 	uint32_t m_session,m_route_handle;
 	Guidance *m_guidance;
+#if (SPEECH_ENABLED)
     SpeechOutput *m_speechoutput;
-	bool m_paused;
+#endif
+    bool m_paused;
 	bool m_voice_guidance;
     uint16_t m_prompt_mode;
     std::string m_kind_of_voice;
@@ -646,6 +648,11 @@ void GuidanceObj::PlayVoiceManeuver()
 {
     message *messages;
     messages = navit_get_messages(get_navit());
+#if (SPEECH_ENABLED)
+    m_speechoutput->openPrompter(GENIVI_SPEECHSERVICE_CT_NAVIGATION,GENIVI_SPEECHSERVICE_PPT_NAVIGATION);
+    m_speechoutput->addTextChunk(messages);
+    m_speechoutput->closePrompter();
+#endif
 }
 
 void GuidanceObj::SetVoiceGuidanceSettings(const uint16_t& promptMode)
@@ -774,8 +781,9 @@ GuidanceObj::GuidanceObj(Guidance *guidance, uint32_t SessionHandle, uint32_t Ro
 	struct attr callback_list;
 	struct navit *navit=get_navit();
 
+#if (SPEECH_ENABLED)
     m_speechoutput=new SpeechOutput(*conn);
-
+#endif
 	if (navit_get_attr(navit, attr_callback_list, &callback_list, NULL)) {
 		callback_list_call_attr_4(callback_list.u.callback_list, attr_command, "navit_genivi_get_route", in, &ret, NULL);
 		if (ret && ret[0] && ret[1] && ret[0]->type == attr_route && ret[1]->type == attr_vehicleprofile) {
@@ -812,7 +820,10 @@ GuidanceObj::~GuidanceObj()
 		callback_destroy(m_guidance_callback);
 	}
 	m_guidance->GuidanceStatusChanged(GENIVI_NAVIGATIONCORE_INACTIVE, 0);
+#if (SPEECH_ENABLED)
     delete(m_speechoutput);
+#endif
+
 }
 
 static class Guidance *server;

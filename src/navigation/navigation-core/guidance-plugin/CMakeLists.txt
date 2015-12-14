@@ -30,6 +30,10 @@ cmake_minimum_required(VERSION 2.8)
 
 message(STATUS "guidance")
 
+if(WITH_SPEECH)
+    add_definitions("-DSPEECH_ENABLED=1")
+endif()
+
 include_directories(${DBUS_GENERATED_INCLUDE_DIR}/navigation-core)
 include_directories(${DBUS_GENERATED_INCLUDE_DIR_SPEECH})
 

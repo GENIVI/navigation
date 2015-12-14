@@ -25,6 +25,8 @@ option(WITH_DBUS_INTERFACE
        "Build using the D-Bus interfaces" ON)
 option(WITH_DEBUG
         "Enable the debug messages" OFF)
+option(WITH_SPEECH
+        "Enable the voice messages" OFF)
 option(YOCTO_CONFIG
         "Build using Yocto" OFF)
 option(NAVIT_DISABLE_QT
@@ -39,6 +41,7 @@ option(NAVIT_QTPAINTER
 message(STATUS "WITH_FRANCA_DBUS_INTERFACE = ${WITH_FRANCA_DBUS_INTERFACE}")
 message(STATUS "WITH_DBUS_INTERFACE = ${WITH_DBUS_INTERFACE}")
 message(STATUS "WITH_DEBUG = ${WITH_DEBUG}")
+message(STATUS "WITH_SPEECH = ${WITH_SPEECH}")
 message(STATUS "YOCTO_CONFIG = ${YOCTO_CONFIG}")
 message(STATUS "NAVIT_DISABLE_QT = ${NAVIT_DISABLE_QT}")
 message(STATUS "NAVIT_SAMPLE_MAP = ${NAVIT_SAMPLE_MAP}")
