@@ -1,0 +1,89 @@
+// SPDX-License-Identifier: MPL-2.0
+// Copyright (C) 2014, PCA Peugeot Citro�n, XS Embedded GmbH, TomTom International B.V., Continental Automotive GmbH, BMW Car IT GmbH,  Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation, Elektrobit Automotive GmbH
+// This Source Code Form is subject to the terms of the
+// Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
+// this file, you can obtain one at http://mozilla.org/MPL/2.0/.
+
+package org.genivi.navigation.mapviewer
+
+import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
+import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
+
+
+<** @description : This interface offers methods that implement the navigation core session functionality of a navigation system.**>
+interface MapViewerSession {
+	version {
+		major 0 
+		minor 1
+	}
+
+	<**	@description : This method returns the API version .**>
+	method getVersion {
+		out {
+			<** @description: .**>
+			Version ^version				
+		}	
+	}	
+
+	<** @description : createSession = This method creates a new session and retrieves a handle .**>
+	method createSession {
+		in {
+			<**
+				@description : client = name or identifier of the client application that requests a new session
+          		The navigation core must internally associate this name to the returned session handle
+          		This parameter can be used to identify the client application and determine if a given feature is enabled for it
+          	**>
+			String client
+		}
+		out {
+			<**	@description : sessionHandle **>
+			Handle sessionHandle
+		}
+		error {
+			<** @description: This error is generated if no more session handles are available **> 
+			NoMoreSessionHandles
+		}
+	}
+
+	<** @description : deleteSession = This method deletes a session and its associated resources .**>
+	method deleteSession {
+		in {
+			<**	@description : sessionHandle **>
+			Handle sessionHandle
+		}
+		error {
+			<** @description: This error is generated if an application tries to delete a session handle that is not available **> 
+			SessionNotAvailable
+		}
+	}
+
+	<**	@description : This method returns whether a given session handle is available or not (for example because it was deleted) .**>
+    method getSessionStatus {
+		in {
+			<**	@description : sessionHandle **>
+			Handle sessionHandle			
+		}   
+		out {
+			<**	@description : sessionStatus = enum(INVALID,AVAILABLE,NOT_AVAILABLE)**>
+			SessionStatus sessionStatus			
+		} 	
+    }
+    
+	<**	@description : This method returns a list of all available sessions .**>
+    method getAllSessions {
+		out {
+          <**	@description : sessionsList = array[struct(sessionHandle,client)]
+          client = name or identifier of the client application that requested the sessionHandle .**>
+			Session[] sessionsList
+		}    	
+    }
+    
+    <** @description : sessionDeleted = This signal is emitted when a session is deleted **>
+	broadcast sessionDeleted {
+		out {
+			<**	@description : sessionHandle **>
+			Handle sessionHandle			
+		}
+	}
+	
+}

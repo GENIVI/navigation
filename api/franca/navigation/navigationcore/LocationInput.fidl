@@ -8,7 +8,7 @@ package org.genivi.navigation.navigationcore
 
 import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
-import org.genivi.navigation.navigationcore.LocationInputTypes.* from "LocationInputTypes.fidl"
+import org.genivi.navigation.navigationcore.NavigationCoreTypes.* from "NavigationCoreTypes.fidl"
 
 <**
 	@description : LocationInput = This interface offers functions that implement the location-input functionality of a navigation system
@@ -19,6 +19,55 @@ interface LocationInput {
 		major 1 
 		minor 0
 	}
+
+	enumeration AddressAttribute extends GeoLocalizedEnum { //Base 0x00a0
+		COUNTRY			= 166
+		STATE			= 167
+		CITY			= 168
+		ZIPCODE			= 169
+		STREET			= 170
+		HOUSENUMBER		= 171
+		CROSSING		= 172
+		DISTRICT		= 173
+		PHONENUMBER		= 174
+		POINAME			= 175
+		TOWNCENTER		= 176
+		LOCATION_INPUT  = 177
+		FULL_ADDRESS	= 178
+		COUNTRYCODE		= 179
+		HOUSENAME		= 180
+		POSTAL_CODE		= 181
+	}
+	
+	enumeration SearchStatus extends BasicEnum { //Base 0x00c0
+  		SEARCHING		= 193
+  		FINISHED 		= 194		
+	}
+	
+	enumeration ValidationType extends BasicEnum { //Base 0x00d0
+		OK				= 208
+		UNKNOWN			= 209
+		AMBIGUOUS		= 210
+		INCONSISTENT	= 211
+	}
+	
+	array AddressAttributeList of AddressAttribute
+
+    union AddressValue {
+	    Int32 intValue
+	    Double doubleValue
+	    String stringValue
+	    Coordinate3D coordinateValue
+	    ByteBuffer internalData
+    }
+
+	map Address {
+		AddressAttribute to AddressValue
+	}
+
+	map ValidationStatus {
+		AddressAttribute to ValidationType
+	}	
 
 	<**
 		@description : getVersion = This method returns the API version implemented by the server application

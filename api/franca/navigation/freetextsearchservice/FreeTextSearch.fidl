@@ -334,7 +334,7 @@ interface FreeTextSearch {
         You will still get a done response on the previous request.
         This way each request gets a response.
     **>
-    method FtsRequest {
+    method ftsRequest {
         in {
     	 	<** @description: Identifier to match responses to this request. **>
     	 	RequestId requestId
@@ -390,7 +390,7 @@ interface FreeTextSearch {
         If there is no search request done before or if a search request is still in progress
         hen the FtsDone response will return a EStatusNoSearchToContinue status.
     **>
-    method FtsNextPage {
+    method ftsNextPage {
     	in {
     	 	<** @description: Identifier to match responses to this request. **>
     	 	RequestId requestId
@@ -406,7 +406,7 @@ interface FreeTextSearch {
     }
 
      <** @description: Cancel the last FTS request. **>
-    method FtsCancel {
+    method ftsCancel {
     	in {
 			<** @description: Handle to identify the Free Text Search session.
 			**>
@@ -416,7 +416,7 @@ interface FreeTextSearch {
 
 	
 	<**	@description : Response indicating that the search is done. **>	
-	broadcast FtsDone selective {
+	broadcast ftsDone selective {
 		out {
     	 	<** @description: Identifier to match this response with a request. **>
     	 	RequestId requestId
@@ -427,7 +427,7 @@ interface FreeTextSearch {
 	
 	
 	<**	@description : Response with address results. **>	
-	broadcast FtsResultAddresses selective {
+	broadcast ftsResultAddresses selective {
 		out {
     	 	<** @description: Identifier to match this response with a request. **>
     	 	RequestId requestId
@@ -442,7 +442,7 @@ interface FreeTextSearch {
 	}
 	
 	<**	@description : Response with POI results. **>	
-	broadcast FtsResultPois selective {
+	broadcast ftsResultPois selective {
 		out {
     	 	<** @description: Identifier to match this response with a request. **>
     	 	RequestId requestId
@@ -458,7 +458,7 @@ interface FreeTextSearch {
 	
 	
 	<**	@description : Response with POI category suggestions. **>	
-	broadcast FtsResultPoiSuggestions selective {
+	broadcast ftsResultPoiSuggestions selective {
 		out {
     	 	<** @description: Identifier to match this response with a request. **>
     	 	RequestId requestId
@@ -469,7 +469,7 @@ interface FreeTextSearch {
 	
 	
 	<**	@description : Release handle(s) if they are not used anymore. **>	
-	method DeleteLocationHandles {
+	method deleteLocationHandles {
 		in {
     	 	<** @description: list of handles to release. **>
     	 	LocationHandleList locationHandleList

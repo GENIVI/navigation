@@ -20,11 +20,10 @@ typeCollection NavigationTypes {
 		String date
 	}
 
+	<** @description: Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value.**>
 	typedef Handle is UInt32
 
-    <** @description: Handle to a location.
-    	Range[0:0x7fffffff]
-	**>
+    <** @description: Handle to a location.**>
     typedef LocationHandle is Handle	
 
 
@@ -75,6 +74,20 @@ typeCollection NavigationTypes {
 		INVALID 	= 0
 	}
 
+	enumeration TimeFormat extends BasicEnum{
+		TWELVEH     = 1
+		TWENTYFOURH	= 2
+	}
+
+	enumeration SessionStatus extends BasicEnum{
+		AVAILABLE = 1
+		NOT_AVAILABLE = 2
+	}
+
+	struct Session {
+		Handle sessionHandle
+		String client
+	}
 	enumeration Units {
 		METER		= 50
 		MILE		= 51
@@ -82,13 +95,7 @@ typeCollection NavigationTypes {
 		YARD		= 53
 		FOOT		= 54
 	}
-
-	enumeration TimeFormat {
-		INVALID		= 0
-		TWELVEH     = 1
-		TWENTYFOURH	= 2
-	}
-
+	
 	struct Locale
 	{
 		<** @description : the language used. ISO 639‐3 language code (lower case)**>

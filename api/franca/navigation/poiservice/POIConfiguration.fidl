@@ -105,7 +105,7 @@ interface POIConfiguration {
 	}	
 
 	<**	@description : Set the time format.**>
-	method SetTimeFormat {
+	method setTimeFormat {
 		in {
 			<** @description : timeFormat = enum(INVALID,12H,24H, ... ). **>
 			TimeFormat format				
@@ -113,7 +113,7 @@ interface POIConfiguration {
 	}	
 
 	<**	@description : Get the current time format .**>
-	method GetTimeFormat {
+	method getTimeFormat {
 		out {
 			<** @description : timeFormat = enum(INVALID,12H,24H, ... ). **>
 			TimeFormat format				
@@ -121,7 +121,7 @@ interface POIConfiguration {
 	}	
 
 	<**	@description : Get the supported set of time format .**>
-	method GetSupportedTimeFormats {
+	method getSupportedTimeFormats {
 		out {
 			<** @description : timeFormatList = array[timeFormat] .**>
 			TimeFormat[] timeFormatList				
@@ -129,7 +129,7 @@ interface POIConfiguration {
 	}	
 
 	<**	@description : Set the coordinates format.**>
-	method SetCoordinatesFormat {
+	method setCoordinatesFormat {
 		in {
 			<** @description : coordinatesFormat = enum(INVALID,DEGREES,MINUTES,SECONDS, ... )**>
 			CoordinatesFormat coordinatesFormat				
@@ -137,7 +137,7 @@ interface POIConfiguration {
 	}	
 
 	<**	@description : Get the coordinates format .**>
-	method GetCoordinatesFormat {
+	method getCoordinatesFormat {
 		out {
 			<** @description : coordinatesFormat = enum(INVALID,DEGREES,MINUTES,SECONDS, ... )**>
 			CoordinatesFormat coordinatesFormat				
@@ -153,7 +153,7 @@ interface POIConfiguration {
 	}	
 
 	<**	@description : Set the units of measurement .**>
-	method SetUnitsOfMeasurement {
+	method setUnitsOfMeasurement {
 		in {
 			<** @description : unitsOfMeasurementList = array[unitsOfMeasurement]**>
 			UnitsOfMeasurement unitsOfMeasurementList				
@@ -161,7 +161,7 @@ interface POIConfiguration {
 	}	
 
 	<**	@description : Get the units of measurement .**>
-	method GetUnitsOfMeasurement {
+	method getUnitsOfMeasurement {
 		out {
 			<** @description : unitsOfMeasurementList = array[unitsOfMeasurement]**>
 			UnitsOfMeasurement unitsOfMeasurementList				
@@ -169,7 +169,7 @@ interface POIConfiguration {
 	}	
 
 	<**	@description : Get the supported set of units of measurement .**>
-	method GetSupportedUnitsOfMeasurement {
+	method getSupportedUnitsOfMeasurement {
 		out {
 			<** @description : unitsOfMeasurementList = array[unitsOfMeasurement]**>
 			UnitsOfMeasurement unitsOfMeasurementList				
@@ -179,7 +179,7 @@ interface POIConfiguration {
 	<**
 		@description : ConfigurationChanged = This signal is sent to the clients when one or more configuration settings changes
 	**>
-	broadcast ConfigurationChanged {
+	broadcast configurationChanged {
 		out {
 
 			<**

@@ -8,7 +8,7 @@ package org.genivi.navigation.navigationcore
 
 import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
-import org.genivi.navigation.navigationcore.MapMatchedPositionTypes.* from "MapMatchedPositionTypes.fidl"
+import org.genivi.navigation.navigationcore.NavigationCoreTypes.* from "NavigationCoreTypes.fidl"
 
 <**
 	@description : MapMatchedPosition = This interface offers functions to retrieve the map matched position and to simulate positioning
@@ -18,6 +18,113 @@ interface MapMatchedPosition {
 	version {
 		major 1 
 		minor 0
+	}
+
+	enumeration PositionItemKey extends PositionStatus { //Base 0x00a0
+		HEADING				= 163
+		SPEED				= 164
+		CLIMB				= 165
+	}
+	
+	enumeration AddressItemKey  extends TimeStampedEnum {
+		TIMEZONE_OFFSET		= 17
+		DAYLIGHT_OFFSET		= 18
+		COUNTRY				= 166 //Base 0x00a0
+		STATE				= 167
+		CITY				= 168
+		ZIPCODE				= 169
+		STREET				= 170
+		HOUSENUMBER			= 171
+		CROSSING			= 172
+		DISTRICT			= 173
+		PHONENUMBER			= 174
+		POINAME				= 175
+		TOWNCENTER			= 176
+		LOCATION_INPUT		= 177
+		FULL_ADDRESS		= 178
+		COUNTRYCODE			= 179
+		HOUSENAME			= 180
+		POSTAL_CODE			= 181		
+	}
+		
+	enumeration PositionStatus extends GeoLocalizedEnum { //Base 0x00e0
+		GNSS_FIX_STATUS		= 224
+		DR_STATUS			= 225
+		MM_STATUS			= 226
+		SIMULATION_MODE		= 227		
+	}
+	
+	enumeration MatchMode { //Base 0x00f0
+		MATCH_TYPE			= 240
+		ON_ROAD				= 241
+		OFF_ROAD			= 242
+		ON_FERRY			= 243
+		IN_TUNNEL			= 244
+		ON_CARPARK			= 245
+	}		
+		
+	 enumeration GnnsFixStatus extends BasicEnum { //Base 0x0100
+	 	NO_FIX				= 256
+	 	TIME_FIX			= 257
+	 	FIX_2D				= 258 //2D_FIX is prohibited 
+	 	FIX_3D				= 259
+	}
+		
+	enumeration PositionOnSegmentKey extends TimeStampedEnum { //Base 0x0110
+		SEGMENT_ID				= 272
+		DIRECTION_ON_SEGMENT	= 274
+		DISTANCE_ON_SEGMENT		= 275
+	}
+	
+	enumeration SimulationStatus extends BasicEnum { //Base 0x0220
+		SIMULATION_STATUS_NO_SIMULATION		= 544
+		SIMULATION_STATUS_RUNNING			= 545
+		SIMULATION_STATUS_PAUSED			= 546
+		SIMULATION_STATUS_FIXED_POSITION	= 547
+	}
+	
+	union PositionItemValue {
+		Timestamp timestamp
+		Boolean status
+		GnnsFixStatus fix
+		Double doubleValue
+		Int32 intValue
+	}	
+		
+	map PositionItemDict {
+		PositionItemKey to PositionItemValue
+	}
+	
+	union AddressItemValue {
+		String addressField
+		Int16 offset
+		Timestamp timestamp
+		MatchMode matchMode
+	}
+	
+	map AddressItemDict {
+		AddressItemKey to AddressItemValue
+	}
+	
+	union PositionOnSegmentValue {
+		Boolean directionOnSegment
+		Double distanceOnSegment //to be fixed, use of DistanceInMeters preferred ?
+		ByteBuffer segment
+		Timestamp timestamp
+	}
+	
+	map PositionOnSegmentDict {
+		PositionOnSegmentKey to PositionOnSegmentValue
+	}
+	
+	union PositionStatusValue {
+		Boolean statusValue
+		GnnsFixStatus fixStatus
+		Timestamp timestamp
+	}
+	
+	map PositionStatusDict {
+		PositionStatus to PositionStatusValue
 	}
 
 	<**

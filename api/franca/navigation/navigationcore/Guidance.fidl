@@ -8,8 +8,6 @@ package org.genivi.navigation.navigationcore
 	
 import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
-import org.genivi.navigation.navigationcore.GuidanceTypes.* from "GuidanceTypes.fidl"
-
 
 <**
 	@description : Guidance = This interface offers functions that implement the route-guidance functionality of a navigation system
@@ -19,6 +17,151 @@ interface Guidance {
 	version {
 		major 1 
 		minor 0
+	}
+
+	enumeration Side extends BasicEnum {
+		LEFT = 128
+		RIGHT = 131
+		NOT_AVAILABLE = 2
+	}
+
+//	enumeration RoadProperty extends BasicEnum {
+		
+//	}
+	
+	enumeration LaneType extends BasicEnum {
+		LANE_INFO_BITMASK_STRAIGHT		= 1
+		LANE_INFO_BITMASK_SLIGHTRIGHT	= 2
+		LANE_INFO_BITMASK_RIGHT			= 4
+		LANE_INFO_BITMASK_SHARPRIGHT	= 8
+		LANE_INFO_BITMASK_RIGHTUTURN	= 16
+		LANE_INFO_BITMASK_SLIGHTLEFT	= 32
+		LANE_INFO_BITMASK_LEFT			= 64
+		LANE_INFO_BITMASK_SHARPLEFT		= 128
+		LANE_INFO_BITMASK_LEFTUTURN		= 256
+	}
+	
+	enumeration PromptMode extends BasicEnum { //Base 0x0040
+		DISABLED_PROMPT					= 65
+		AUTOMATIC_PROMPT				= 66
+		MANUAL_PROMPT					= 67
+	}
+	
+	enumeration ManeuverPhase extends BasicEnum { //Base 0x0050
+		CRUISE 				= 80
+		MANEUVER_APPEARED 	= 81
+		PRE_ADVICE 			= 82
+		ADVICE 				= 83
+		PASSED 				= 84
+	}
+
+	enumeration GuidanceStatus extends BasicEnum { //Base 0x0060
+		ACTIVE							= 96
+		INACTIVE						= 97
+	}
+	
+	enumeration ManeuverType extends BasicEnum { //Base 0x0070
+		STRAIGHT_ON					= 112
+		CROSSROAD					= 113
+		ROUNDABOUT					= 114
+		HIGHWAY_ENTER				= 115
+		HIGHWAY_EXIT				= 116
+		FOLLOW_SPECIFIC_LANE		= 117
+		DESTINATION					= 118
+		WAYPOINT					= 119
+		TURN						= 120
+		BIFURCATION					= 121
+	}
+	
+	enumeration ManeuverDirection extends BasicEnum { //Base 0x0080
+		LEFT							= 128
+		SLIGHT_LEFT						= 129
+		HARD_LEFT						= 130
+		RIGHT							= 131
+		SLIGHT_RIGHT					= 132
+		HARD_RIGHT						= 133
+		UTURN_RIGHT						= 134
+		UTURN_LEFT						= 135
+	}
+	
+	enumeration CalculationMode extends BasicEnum { //Base 0x0090
+		ALL_MANUAL						= 144
+		ALL_AUTOMATIC					= 145
+		TRAFFIC_MANUAL					= 146
+		OFF_ROUTE_MANUAL				= 147
+	}
+
+	enumeration RouteChangedCause extends BasicEnum { //Base 0x0210
+		TRAFFIC							= 528
+		OFF_ROUTE						= 529
+		MANUAL							= 530
+	}
+
+	enumeration ManeuverDirectionType extends BasicEnum { //Base 0x0240
+		DIRECTION					= 576
+		EXIT_NUMBER					= 577
+		ROAD_FORM					= 578
+		LANE_INFO					= 579
+	}
+
+	enumeration LaneDivider extends BasicEnum { //Base 0x0250
+		DIVIDER_UNDEFINED				= 592
+		DIVIDER_INTERRUPTEDLONG			= 593
+		DIVIDER_INTERRUPTEDSHORT		= 594
+		DIVIDER_SOLIDSINGLE				= 595
+		DIVIDER_SOLIDDOUBLE				= 596
+		DIVIDER_SOLIDINTERRUPTED		= 597
+		DIVIDER_INTERRUPTEDSOLID		= 598
+	}
+
+	struct tWaypointStruct {
+		UInt32 waypointOffset
+		UInt32 travelTime
+		Int32 direction
+		Side side
+		Int16 timeZone
+		Int16 daylightSavingTime
+		Boolean isDestination
+		UInt16 number
+	}
+
+	<**
+		@description : struct generated for DBus argument GetManeuversList_maneuversListElem6Elem4
+	**>
+	struct ManeuverSegment {
+		ManeuverType maneuver
+		UInt16 maneuverLength
+	}
+
+	<**
+		@description : struct generated for DBus argument GetManeuversList_maneuversListElem6Elem5
+	**>
+	struct ManeuverTurn {
+		ManeuverDirection maneuverDirection
+		String exitNumber
+	}
+
+	<**
+		@description : struct generated for DBus argument GetManeuversList_maneuversListElem6
+	**>
+	struct tManeuverItem {
+		UInt32 offsetOfManeuver
+		UInt32 travelTime
+		Int32 direction
+		ManeuverSegment segment
+		ManeuverTurn turnTo
+	}
+
+	<**
+		@description : struct generated for DBus argument GetManeuversList_maneuversList
+	**>
+	struct Maneuver {
+		String roadNumberAfterManeuver
+		String roadNameAfterManeuver
+		UInt16 roadPropertyAfterManeuver
+		Side drivingSide
+		UInt32 offsetOfNextManeuver
+		tManeuverItem[] items
 	}
 
 	<**

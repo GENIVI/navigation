@@ -7,8 +7,8 @@
 package org.genivi.navigation.navigationcore
 
 import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
-import org.genivi.navigation.navigationcore.RoutingTypes.* from "RoutingTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
+import org.genivi.navigation.navigationcore.NavigationCoreTypes.* from "NavigationCoreTypes.fidl"
 
 
 <**
@@ -19,6 +19,180 @@ interface Routing {
 	version {
 		major 1 
 		minor 0
+	}
+
+	enumeration CalculationStatus extends BasicEnum { //Base 0x0130
+  		CALCULATION_OK				= 304
+		NO_POSITION					= 305		
+	}
+	
+	enumeration CalculationError extends BasicEnum {
+		UNMATCHED_POSITION			= 306
+		UNREACHABLE_DESTINATION		= 307
+		UNFULFILLED_PREFERENCE_MODE	= 308
+	}
+	
+	enumeration CostModel extends BasicEnum { //Base 0x0160
+		FASTEST			= 352	
+		SHORTEST		= 353
+		ECOLOGICAL		= 354
+		SCENIC			= 355
+		EASY			= 356
+		OFF_ROAD		= 357 //to be confirmed
+		BALANCED		= 358
+		CHEAPEST		= 359
+	}
+  
+	enumeration RoutePreferenceSource extends BasicEnum { //Base 0x0170
+		FERRY				= 368
+		TOLL_ROADS			= 369
+		TUNNELS				= 370
+		HIGHWAYS_MOTORWAYS	= 371
+		VEHICLE_SIZE_LIMIT	= 372
+		CRIME_AREAS			= 373	
+	} 	 	
+  
+ 	enumeration TransportationMeans extends BasicEnum { //Base 0x0180
+		BY_CAR						= 384 
+		ON_FOOT						= 385
+		LONG_RANGE_TRAINS			= 386
+		PUBLIC_TRANSPORTATION		= 387
+		BY_BICYCLE					= 388
+		BY_TRUCK					= 389
+	}
+	
+	enumeration Schedule extends BasicEnum { 
+		ARRIVAL_TIME  		= 394
+ 		ARRIVAL_DATE		= 395
+		DEPARTURE_TIME		= 396
+		DEPARTURE_DATE		= 397 
+	}
+
+	enumeration RouteOverviewType extends Schedule  {
+		TOTAL_TIME			= 398
+		TOTAL_DISTANCE		= 399
+	}
+	
+	enumeration PreferenceMode extends BasicEnum { //Base 0x0190
+ 		PROHIBIT		= 400
+ 		AVOID			= 401
+ 		USE				= 402
+ 		PREFER			= 403	
+ 		IGNORE			= 404	
+ 	}
+ 	 	
+  	enumeration ConditionPreferenceSource extends BasicEnum { //Base 0x0200
+  		TRAFFIC_REALTIME	= 512
+  	}
+ 	 	
+ 	 	
+	<**
+		@description : struct generated for DBus argument SetRoutePreferences_roadPreferenceList
+	**>
+	struct RoutePreference {
+		PreferenceMode mode
+		RoutePreferenceSource source
+	}
+
+	<**
+		@description : struct generated for DBus argument SetRoutePreferences_conditionPreferenceList
+	**>
+	struct ConditionPreference {
+		PreferenceMode mode
+		ConditionPreferenceSource source
+	}
+
+
+	map RouteSchedule {
+		Schedule to UInt32
+	}
+
+ 	enumeration TimeStampedEnum extends BasicEnum {
+		TIMESTAMP	= 16
+	}
+
+	enumeration GeoLocalizedEnum extends TimeStampedEnum {
+		LATITUDE	= 160
+		LONGITUDE	= 161
+		ALTITUDE	= 162
+	}
+	
+	enumeration WaypointElementType extends GeoLocalizedEnum {
+		WAYPOINT_TYPE		= 289
+		LOCATION_INPUT		= 17
+	}
+	
+	enumeration RouteSegmentType extends BasicEnum {
+		LINK_ID					= 320 		//Base 0x0140
+		START_LATITUDE			= 321
+		END_LATITUDE			= 322
+		START_LONGITUDE			= 323
+		END_LONGITUDE			= 324
+		START_ALTITUDE			= 325
+		END_ALTITUDE			= 326
+		ROAD_NAME				= 327
+		DISTANCE				= 328
+		TIME					= 329
+		MANEUVER				= 330
+		INSTRUCTION				= 331
+        BORDER_CROSSING			= 332
+        ADDITIONAL_INFORMATION	= 333
+		ROAD_NUMBER				= 334
+		START_OFFSET			= 335
+		INTERMEDIATE_POINTS		= 288
+        HIGHWAY_EXIT			= 116
+        ALL						= 65535
+	}
+	
+	enumeration IntermediatePointType {
+		HARD_POINT
+		SOFT_POINT
+	}
+	
+	union RouteOverviewItem {
+		UInt32 uValue
+	}
+	
+	struct IntermediatePoint extends Coordinate2D {
+		IntermediatePointType type
+	}
+	
+	//TODO: Incomplete
+	union RouteSegmentItem {
+		Double doubleValue // LATITUDE, LONGITUDE, ALTITUDE
+		IntermediatePoint intermediatePoints
+		String stringValue // ROAD_NUMBER
+		ByteBuffer linkId
+		Int32 int32Value
+		Int16 int16Value
+		UInt32 uInt32Value
+	}
+	
+	union WayPointItem {
+		Double coordinateValue
+		Int32 altitudeValue
+		IntermediatePointType wayPointValue
+		ByteBuffer metaData
+	}
+	
+	map WayPoint {
+		WaypointElementType to WayPointItem
+	}
+
+	map RouteSegment {
+		RouteSegmentType to RouteSegmentItem
+	}
+
+	map RouteOverview {
+		RouteOverviewType to RouteOverviewItem
+	}
+
+	<**
+		@description : struct generated for DBus argument SetBlockedRouteStretches_blockParameters
+	**>
+	struct BlockedRouteElement {
+		UInt32 offset
+		UInt32 length
 	}
 
 	<**
