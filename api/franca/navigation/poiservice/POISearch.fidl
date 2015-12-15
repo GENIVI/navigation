@@ -24,29 +24,7 @@ interface POISearch {
 			Version ^version				
 		}	
 	}	
-		
-	<**	@description : Get the current language set for the search.
-    The language defines the poi and categories name and details language. If the language is not supported, the default details will be returned in the native language. **>
-	method getLanguage {
-		out {
-			<** @description : The language.**>
-			String languageCode				
-			<** @description : The country specific variant for the language.**>
-			String countryCode				
-		}	
-	}
-	
-	<**	@description : Set the language.
-    The language defines the poi and categories name and details language. If the language is not supported, the default details will be returned in the native language.**>
-	method setLanguage {
-		in {
-			<** @description : The language to be used.**>
-			String languageCode				
-			<** @description : The country specific variant for the language to be used.**>
-			String countryCode				
-		}	
-	}
-	
+			
 	<**	@description : This method allows the application to validate that POI categories are supported by the POI component and the Content access modules.**>
 	method validateCategories {
 		in {
