@@ -107,18 +107,20 @@ interface FreeTextSearch {
 
     <** @description: Search request status. **>
     enumeration FtsStatus {
+    	<** @description: No problem. **>
         OK
     	<** @description: User aborted search. **>
         ABORTED
         <** @description: Search string is too short to evaluate. **>
         PREFIX_TOO_SHORT
-        <** @description: There is no search for which a next page can be requested.  **>
-        NO_SEARCH_TO_CONTINUE
+        <** @description: An internal error occurred in the FTS engine.  **>
         INTERNAL_ERROR
         <** @description: No FTS index for the current map. **>
         INDEX_MISSING
     	<** @description: The FTS index format is not supported. **>
         BAD_VERSION
+        <** @description: An invalid freeTextSearchHandle is passed to the FTS engine. **>
+        INVALID_PARAMETER_SEARCH_HANDLE
     	<** @description: A search query not supported by the FTS engine. **>
         INVALID_PARAMETER_QUERY
     	<** @description: A search location not on this earth. **>
@@ -189,8 +191,7 @@ interface FreeTextSearch {
 
 	<** @description: Mapcode details. **>			
 	struct MapCodeDetails {
-    	<** @description: Mapcodes are a free, open way to make every house or location on Earth addressable by a short code. 
-    	    If the location of the mapcode is close to a street, this field
+    	<** @description: If the location of the mapcode is close to a street, this field
     	    contains the name of that street, otherwise this field is left empty.
     	**>			
 		FtsString closestStreetName
@@ -221,7 +222,11 @@ interface FreeTextSearch {
 		FtsStringList places
     	<** @description: There can be multiple postal codes assigned to a street. **>			
 		FtsStringList postalCodes
-    	<** @description: Mapcode of the coordinate **>			
+    	<** @description: Mapcode of the coordinate.
+    	    A mapcode represents a location. Every location on Earth can be represented by a mapcode.
+    	    Mapcodes were designed to be short, easy to recognize, remember and communicate.
+    	    They are precise to a few meters. For details see http://www.mapcode.com.
+    	**>	
 		FtsString mapCode
     	AddressDetails addressDetails
     	Coordinate2D coordinate
@@ -318,7 +323,13 @@ interface FreeTextSearch {
 	
 	<**	@description : This method returns the API version implemented by the content access module.**>
 	method getVersion {
+    	in {
+    	 	<** @description: Identifier to match responses to this request. **>
+    	 	RequestId requestId
+    	}
 		out {
+    	 	<** @description: Identifier to match this response with a request. **>
+    	 	RequestId responseId
 			<** @description: .**>
 			Version ^version				
 		}	
@@ -374,6 +385,8 @@ interface FreeTextSearch {
     	 	FuzzyLevel fuzzyLevel
     	}
 		out {
+    	 	<** @description: Identifier to match this response with a request. **>
+    	 	RequestId responseId
 			<** @description: Handle to identify the Free Text Search session.
 			**>
 			Handle freeTextSearchHandle
@@ -403,15 +416,25 @@ interface FreeTextSearch {
     	 	**>
     	 	SearchOptions searchOptions
     	}
+		out {
+    	 	<** @description: Identifier to match this response with a request. **>
+    	 	RequestId responseId
+		}
     }
 
-     <** @description: Cancel the last FTS request. **>
+     <** @description: Cancel an FTS session. **>
     method ftsCancel {
     	in {
-			<** @description: Handle to identify the Free Text Search session.
+    	 	<** @description: Identifier to match responses to this request. **>
+    	 	RequestId requestId
+			<** @description: Handle to identify the Free Text Search session to be cancelled.
 			**>
 			Handle freeTextSearchHandle
     	}
+		out {
+    	 	<** @description: Identifier to match this response with a request. **>
+    	 	RequestId responseId
+		}
     }
 
 	
@@ -419,7 +442,7 @@ interface FreeTextSearch {
 	broadcast ftsDone selective {
 		out {
     	 	<** @description: Identifier to match this response with a request. **>
-    	 	RequestId requestId
+    	 	RequestId responseId
     	 	<** @description: Status of the search request. **>
     	 	FtsStatus ftsStatus
 		}
@@ -430,7 +453,7 @@ interface FreeTextSearch {
 	broadcast ftsResultAddresses selective {
 		out {
     	 	<** @description: Identifier to match this response with a request. **>
-    	 	RequestId requestId
+    	 	RequestId responseId
     	 	<** @description: Matching addresses.
     	 	    The order of the addresses is the order of matching relevance.
     	 	    The first address is a better match than the last result.
@@ -445,7 +468,7 @@ interface FreeTextSearch {
 	broadcast ftsResultPois selective {
 		out {
     	 	<** @description: Identifier to match this response with a request. **>
-    	 	RequestId requestId
+    	 	RequestId responseId
     	 	<** @description: Matching POIs.
     	 	    The order of the POIs is the order of matching relevance.
     	 	    The first POI is a better match than the last result.
@@ -461,7 +484,7 @@ interface FreeTextSearch {
 	broadcast ftsResultPoiSuggestions selective {
 		out {
     	 	<** @description: Identifier to match this response with a request. **>
-    	 	RequestId requestId
+    	 	RequestId responseId
     	 	<** @description: POI category suggestions. **>
     	 	POICategories poiCategories
 		}
@@ -471,8 +494,14 @@ interface FreeTextSearch {
 	<**	@description : Release handle(s) if they are not used anymore. **>	
 	method deleteLocationHandles {
 		in {
+    	 	<** @description: Identifier to match responses to this request. **>
+    	 	RequestId requestId
     	 	<** @description: list of handles to release. **>
     	 	LocationHandleList locationHandleList
+		}
+		out {
+    	 	<** @description: Identifier to match this response with a request. **>
+    	 	RequestId responseId
 		}
 	}
 }
