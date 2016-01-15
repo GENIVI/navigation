@@ -86,7 +86,7 @@ typeCollection NavigationTypes {
 
 	struct Session {
 		Handle sessionHandle
-		String client
+		String clientApp
 	}
 	enumeration Units {
 		METER		= 50

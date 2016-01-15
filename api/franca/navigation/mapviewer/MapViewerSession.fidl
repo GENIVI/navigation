@@ -32,8 +32,9 @@ interface MapViewerSession {
 				@description : client = name or identifier of the client application that requests a new session
           		The navigation core must internally associate this name to the returned session handle
           		This parameter can be used to identify the client application and determine if a given feature is enabled for it
+          		NB: clientApp is used in place of client, due to a conflicting issue when build with CommonAPI
           	**>
-			String client
+			String clientApp
 		}
 		out {
 			<**	@description : sessionHandle **>
@@ -72,8 +73,8 @@ interface MapViewerSession {
 	<**	@description : This method returns a list of all available sessions .**>
     method getAllSessions {
 		out {
-          <**	@description : sessionsList = array[struct(sessionHandle,client)]
-          client = name or identifier of the client application that requested the sessionHandle .**>
+          <**	@description : sessionsList = array[struct(sessionHandle,clientApp)]
+          clientApp = name or identifier of the client application that requested the sessionHandle .**>
 			Session[] sessionsList
 		}    	
     }

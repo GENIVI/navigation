@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# @licence app begin@
+# SPDX-License-Identifier: MPL-2.0
+#
+# \copyright Copyright (C) 2013-2014, PCA Peugeot Citroen
+#
+# \file run
+#
+# \brief This file is part of the Build System.
+#
+# \author Philippe Colliot <philippe.colliot@mpsa.com>
+#
+# \version 1.0
+#
+# This Source Code Form is subject to the terms of the
+# Mozilla Public License (MPL), v. 2.0.
+# If a copy of the MPL was not distributed with this file,
+# You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# For further information see http://www.genivi.org/.
+#
+# List of changes:
+# 
+# <date>, <name>, <description of change>
+#
+# @licence end@
+
+CURDIR=$PWD
+
+POI_CLIENT_DIR=$CURDIR
+POI_CLIENT_BIN_DIR=$POI_CLIENT_DIR/bin
+POI_SERVER_DIR=$CURDIR/../../src/poi-service
+POI_SERVER_BIN_DIR=$POI_SERVER_DIR/bin
+
+cp $POI_CLIENT_DIR/resource/commonapi-dbus.ini $HOME
+export COMMONAPI_DBUS_DEFAULT_CONFIG=$HOME/commonapi-dbus.ini
+cp $POI_SERVER_DIR/resource/poi-database-managed.db $POI_SERVER_BIN_DIR/bin
+
+echo '------------------------start the proof of concept------------------------'
+$POI_SERVER_BIN_DIR/poi-manager-server -f $POI_SERVER_BIN_DIR/poi-database-managed.db &
+$POI_CLIENT_BIN_DIR/poi-manager-client -t &
+
+

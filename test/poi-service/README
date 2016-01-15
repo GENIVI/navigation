@@ -1,4 +1,4 @@
-Release date of the file: 24-11-2015 
+Release date of the file: 15-01-2016 
 Status: OK
 
 Project:
@@ -15,7 +15,7 @@ See also other navigation projects like navigation or proof of concepts implemen
 
 What is in:
 This folder contains scripts for building poi-supplier, poi-contentaccess-module and poi-client, generating the databases and launching the whole stuff (build poi-server if necessary)
-FYI: poi-server is located under src/poi-service
+FYI: poi-server is located under ../../src/poi-service
 
 Author: 
 Philippe Colliot philippe.colliot@mpsa.com
@@ -56,30 +56,34 @@ cd positioning
 git checkout <current version of positioning>
 cd ../
 
-===============================
-How To Build
-===============================
+=============================================================================================
+How to for the proof of concept
+=============================================================================================
 (you're supposed to have got additional code before)
 
-Create and enter the build folder:
+==========================================
+All-in-one script (for paris area) 
+==========================================
+./rebuild_all.sh
+
+==========================================
+How-to step by step, with explanations
+==========================================
+---Create and enter the build folder---
 mkdir ./build
 cd build
-
-Build:
 cmake ../
 make
 cd ..
 
-===============================
-How To Prepare the database and the configuration for a country
-===============================
+---Prepare the database and the configuration for a country---
 NB: You need to build the poi-supplier first:
 cd build
 cmake -DWITH_DATABASE_SUPPLIER=ON ../
 make
 cd ..
 
-To launch the stuff for Paris:
+---To generate the database for Paris---
 ./prepare -c paris
 
 NB:
@@ -106,15 +110,42 @@ You need to fix it by:
 sudo su
 dbus-uuidgen  > /etc/machine-id
 
-===============================
+==========================================
 How To Run
-===============================
-
+==========================================
 ./run 
 
-===============================
-How To Build poi-common-manager-client (experimental)
-===============================
+---Test sequence can be---
+On main panel:
+CREATE
+
+On additional panel:
+REGISTER
+ADDandREG
+
+On main panel
+Categories
+all categories with Radius set to 2000
+bicycle with Radius set to 5000
+replace 'enter text to search' with 'Saint'
+SEARCH
+You see FINISHED with 32 records
+Result list
+TOP/PREV/NEXT to watch the result
+For a new search, click on CANCEL first
+ 
+=============================================================================================
+How to for the common api based proof of concept (for testing add/remove stuff into a database)
+=============================================================================================
+
+==========================================
+All-in-one script 
+==========================================
+./rebuil_all.sh -f
+
+==========================================
+How-to step by step, with explanations
+==========================================
 First you need to build the poi-manager-server, see the README in ../../src/poi-service
 
 cd build
@@ -129,6 +160,8 @@ make
 ===============================
 How To Run
 ===============================
+./run_capi
+NB: the configuration file ./resource/commonapi-dbus.ini is copied into $HOME
 
 Launch the server (into ../../src/poi-service)
 
@@ -144,7 +177,8 @@ Launch the client
 ./bin/poi-manager-client -t
 poi manager client started
 
-What is logged (no DLT started):
+---Test sequence can be---
+NB: no DLT started
 
 DLT| WARNING:   Loging disabled, FIFO /tmp/dlt cannot be opened with open()!
 [CAPI][INFO] Using default binding 'dbus'

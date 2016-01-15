@@ -87,4 +87,8 @@ add_subdirectory(session-plugin)
 
 add_subdirectory(enhancedposition-plugin)
 
+if (WITH_PLUGIN_MIGRATION)
+    set(FRANCA_DIR "${API_DIR}/franca")
+    add_subdirectory(configuration-server-plugin)
+endif()
 
