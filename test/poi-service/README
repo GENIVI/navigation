@@ -42,14 +42,14 @@ locale | grep 'LC_NUMERIC'
 # you must get
 LC_NUMERIC="en_US.UTF-8"
 
-===============================
+==========================================
 Current versions of additional code 
-===============================
+==========================================
 <current version of positioning> (git): 32f9e5ce48f76c5c9833dda0e1743ab8b45dc574
 
-===============================
+==========================================
 How to get additional code 
-===============================
+==========================================
 Get positioning:
 git clone http://git.projects.genivi.org/lbs/positioning.git ./positioning
 cd positioning
@@ -57,7 +57,7 @@ git checkout <current version of positioning>
 cd ../
 
 =============================================================================================
-How to for the proof of concept
+How-to for the proof of concept
 =============================================================================================
 (you're supposed to have got additional code before)
 
@@ -137,11 +137,12 @@ For a new search, click on CANCEL first
 =============================================================================================
 How to for the common api based proof of concept (for testing add/remove stuff into a database)
 =============================================================================================
+NB: You need CommonAPI 3.1.2 and Franca 0.9.1 installed 
 
 ==========================================
 All-in-one script 
 ==========================================
-./rebuil_all.sh -f
+./rebuild_all.sh -f
 
 ==========================================
 How-to step by step, with explanations
@@ -157,9 +158,9 @@ cmake -DWITH_FRANCA_DBUS_INTERFACE=ON -DDBUS_LIB_PATH=yourPath -DCOMMONAPI_DBUS_
 
 make
 
-===============================
+==========================================
 How To Run
-===============================
+==========================================
 ./run_capi
 NB: the configuration file ./resource/commonapi-dbus.ini is copied into $HOME
 

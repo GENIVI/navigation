@@ -1,4 +1,4 @@
-Release date of the file: 04-08-2015 
+Release date of the file: 15-01-2016 
 Status: OK
 
 Project:
@@ -47,10 +47,6 @@ Now apply a patch to navit (The r5549 removed the  get_unique features used by G
 cd navit
 patch -p0 -i ../patches/search_list_get_unique.diff
 cd ../
-
-Get the sample map:
-wget -O ./map/switzerland.bin.tmp http://www.navit-project.org/switzerland.bin
-mv ./map/switzerland.bin.tmp ./map/switzerland.bin
 
 ===============================
 Directory Structure

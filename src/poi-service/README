@@ -1,4 +1,4 @@
-Release date of the file: 18-11-2015 
+Release date of the file: 15-01-2016 
 Status: OK
 
 Project:
@@ -31,32 +31,44 @@ Ubuntu 15.10 64bits
 To get the code:
 Code is part of the navigation-service repository, so you need to clone the whole content:
 git clone http://git.projects.genivi.org/lbs/navigation-service.git $WORKING-DIR
- 
-===============================
-How To Build poi-server
-===============================
 
-Create and enter the build folder:
+=============================================================================================
+How-to for the proof of concept
+=============================================================================================
+ 
+==========================================
+All-in-one script 
+==========================================
+./rebuild_all.sh
+
+==========================================
+How-to step by step, with explanations
+==========================================
+---Create and enter the build folder---
 mkdir ./build
 cd build
-
-Build:
 cmake ../
 make
 cd ..
 
-===============================
-How To Run poi-server
-===============================
-
+==========================================
+How To Run
+==========================================
 ./bin/poi-server  -f ./resource/poi-database-sample.db
 
-===============================
-How To Build poi-manager-server
-===============================
+=============================================================================================
+How to for the common api based proof of concept (for testing add/remove stuff into a database)
+=============================================================================================
 NB: You need CommonAPI 3.1.2 and Franca 0.9.1 installed 
 
+==========================================
+All-in-one script 
+==========================================
+./rebuild_all.sh -f
 
+==========================================
+How-to step by step, with explanations
+==========================================
 You need to pass as parameter to the cmake the link to your patched dbus library (required by CommonAPI)
 
 cd build
@@ -64,9 +76,9 @@ cmake -DWITH_FRANCA_DBUS_INTERFACE=ON -DDBUS_LIB_PATH=yourPath -DCOMMONAPI_DBUS_
 make 
 cd ..
 
-===============================
-How To Run poi-manager-server
-===============================
+==========================================
+How To Run
+==========================================
 
 Copy the configuration file ./resource/commonapi-dbus.ini in a directory of your choice
 
@@ -78,9 +90,9 @@ export COMMONAPI_DBUS_DEFAULT_CONFIG=<your path>/commonapi-dbus.ini
 cp ./resource/poi-database-managed.db ./bin
 ./bin/poi-manager-server -f ./bin/poi-database-managed.db
 
-===============================
+==========================================
 About CommonAPI issues
-===============================
+==========================================
 It seems to have an issue with the .cmake files when two versions of CommonAPI are installed
 (see into /usr/local/lib/cmake/)
 
