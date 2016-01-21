@@ -150,6 +150,9 @@ done
 trap "terminate" EXIT INT
 set -e
 
+echo "the graphic for navit is based on sdl"
+export NAVIT_GRAPHICS='sdl'
+
 cd $BIN_DIR
 
 if [ "$enhpos" = 1 ]

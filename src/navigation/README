@@ -1,4 +1,4 @@
-Release date of the file: 15-01-2016 
+Release date of the file: 21-01-2016 
 Status: OK
 
 Project:
@@ -69,8 +69,26 @@ the code of positioning
 ===============================
 How To Build
 ===============================
+
+==========================================
+Known issues
+==========================================
+There's an issue with navit (R6135) against gtk. 
+If the env variable NAVIT_GRAPHICS is not set, by default the graphics are gtk based.
+- for gtk, navit checks for freetype. Because of a missing symbolic link, it's necessary to do ln -s /usr/include/freetype2/ /usr/include/freetype 
+- despite navit enables gtk_drawing, there's a pb during runtime (to be fixed)
+So, for the time being, export NAVIT_GRAPHICS='sdl' is set into the run script
+
+==========================================
+All-in-one script 
+==========================================
+./rebuild_all.sh
+
+==========================================
+How-to step by step, with explanations
+==========================================
+
 (you're supposed to have got additional code before)
-NB: potential issue may occur due to path change of freetype stuff. If necessary, add a link to /usr/include/freetype2/ into /usr/include 
 
 Create and enter the build folder:
 mkdir ./build
