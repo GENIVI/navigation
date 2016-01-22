@@ -1,4 +1,4 @@
-Release date of the file: 15-01-2016 
+Release date of the file: 25-01-2016 
 Status: OK
 
 Project:
@@ -163,20 +163,6 @@ How To Run
 ==========================================
 ./run_capi
 NB: the configuration file ./resource/commonapi-dbus.ini is copied into $HOME
-
-Launch the server (into ../../src/poi-service)
-
-Copy the configuration file ./resource/commonapi-dbus.ini in a directory of your choice
-Set the environment variable COMMONAPI_DBUS_DEFAULT_CONFIG before starting the poi-manager-server.
-Example:
-export COMMONAPI_DBUS_DEFAULT_CONFIG=<your path>/commonapi-dbus.ini
-cp ./resource/poi-database-managed.db ./bin
-./bin/poi-manager-server -f ./bin/poi-database-managed.db
-poi manager server started
-
-Launch the client
-./bin/poi-manager-client -t
-poi manager client started
 
 ---Test sequence can be---
 NB: no DLT started

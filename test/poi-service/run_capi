@@ -35,7 +35,7 @@ POI_SERVER_BIN_DIR=$POI_SERVER_DIR/bin
 
 cp $POI_CLIENT_DIR/resource/commonapi-dbus.ini $HOME
 export COMMONAPI_DBUS_DEFAULT_CONFIG=$HOME/commonapi-dbus.ini
-cp $POI_SERVER_DIR/resource/poi-database-managed.db $POI_SERVER_BIN_DIR/bin
+cp $POI_SERVER_DIR/resource/poi-database-managed.db $POI_SERVER_BIN_DIR
 
 echo '------------------------start the proof of concept------------------------'
 $POI_SERVER_BIN_DIR/poi-manager-server -f $POI_SERVER_BIN_DIR/poi-database-managed.db &
