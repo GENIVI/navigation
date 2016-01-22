@@ -31,8 +31,8 @@
 
 #include <org/genivi/CommonTypes.hpp>
 #include <org/genivi/navigation/NavigationTypes.hpp>
-#include <v0_1/org/genivi/navigation/poiservice/POIServiceTypes.hpp>
-#include <v0_1/org/genivi/navigation/poiservice/POIContentAccessModuleStubDefault.hpp>
+#include <v0/org/genivi/navigation/poiservice/POIServiceTypes.hpp>
+#include <v0/org/genivi/navigation/poiservice/POIContentAccessModuleStubDefault.hpp>
 
 #include "poi-common-database.h"
 
@@ -41,7 +41,7 @@
 #include "poi-common-math.h"
 
 using namespace std;
-using namespace v0_1::org::genivi::navigation::poiservice;
+using namespace v0::org::genivi::navigation::poiservice;
 using namespace org::genivi::navigation;
 using namespace org::genivi;
 

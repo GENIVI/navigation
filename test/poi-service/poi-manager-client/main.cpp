@@ -40,12 +40,12 @@
 #include <functional>
 
 #include <CommonAPI/CommonAPI.hpp> //Defined in the Common API Runtime library
-#include <v0_1/org/genivi/navigation/poiservice/POIContentAccessModuleProxy.hpp>
+#include <v0/org/genivi/navigation/poiservice/POIContentAccessModuleProxy.hpp>
 
 #include "poi-common-data-model.h"
 
 using namespace std;
-using namespace v0_1::org::genivi::navigation;
+using namespace v0::org::genivi::navigation;
 using namespace poiservice;
 using namespace org::genivi::navigation;
 using namespace org::genivi;
@@ -158,7 +158,7 @@ contentManager::contentManager(std::shared_ptr<POIContentAccessModuleProxyDefaul
     categoryOperatorList.push_back(categoryOperator);
     categoryAttribute.setOperators(categoryOperatorList);
     categoryAttributeList.push_back(categoryAttribute);
-    m_category.setAttributes(categoryAttributeList);
+    m_category.setAttributeList(categoryAttributeList);
 
     categorySortOption.setId(POIServiceTypes::SortOption::SORT_DEFAULT);
     categorySortOption.setName("");
@@ -183,7 +183,7 @@ contentManager::contentManager(std::shared_ptr<POIContentAccessModuleProxyDefaul
     POIServiceTypes::AttributeValue v(NEW_STARS_VALUE);
     poiAttribute.setValue(v);
     poiAttributeList.push_back(poiAttribute);
-    m_poi.setAttributes(poiAttributeList);
+    m_poi.setAttributeList(poiAttributeList);
 
     // init of the data test for search string
     m_strTest = SEARCH_STRING;

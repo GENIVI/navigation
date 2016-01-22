@@ -252,18 +252,18 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
     }
 
     //Check the attributes and complete the table if necessary (poiattribute)
-    for (index=0;index < category.getAttributes().size();index++)
+    for (index=0;index < category.getAttributeList().size();index++)
     {
-        ret = checkIfAttributeExist((category.getAttributes().at(index)).getId(),(category.getAttributes().at(index)).getName());
+        ret = checkIfAttributeExist((category.getAttributeList().at(index)).getId(),(category.getAttributeList().at(index)).getName());
         if (ret == ATTRIBUTE_ID_NOT_EXIST)
         {
             //Create the attribute
             sqlQuery = m_SQL_REQUEST_INSERT_ATTRIBUTE;
             strStream.str("");
-            strStream << (category.getAttributes().at(index)).getId();
+            strStream << (category.getAttributeList().at(index)).getId();
             sqlQuery += strStream.str();
             sqlQuery += ",'";
-            sqlQuery.append((category.getAttributes().at(index)).getName());
+            sqlQuery.append((category.getAttributeList().at(index)).getName());
             sqlQuery += "');";
             query_result = mp_database->query(sqlQuery.c_str());
             if (!query_result.empty())
@@ -310,7 +310,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCa
         sqlQuery += strStream.str();
         sqlQuery += ",";
         strStream.str("");
-        strStream << (category.getAttributes().at(index)).getId();
+        strStream << (category.getAttributeList().at(index)).getId();
         sqlQuery += strStream.str();
         sqlQuery += ");";
         query_result = mp_database->query(sqlQuery.c_str());
@@ -871,45 +871,45 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createPoi(POIServiceTypes::CategoryID
     poiRecorded.website = "";
 
     //and scan the poi attributes
-    for (index=0; index < poi.getAttributes().size();index++)
+    for (index=0; index < poi.getAttributeList().size();index++)
     {
-        switch ((poi.getAttributes().at(index)).getId())
+        switch ((poi.getAttributeList().at(index)).getId())
         {
         case ATTRIBUTE_SOURCE:
-            poiRecorded.source = (poi.getAttributes().at(index)).getValue().get<std::string>();
+            poiRecorded.source = (poi.getAttributeList().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_WEBSITE:
-            poiRecorded.website = (poi.getAttributes().at(index)).getValue().get<std::string>();
+            poiRecorded.website = (poi.getAttributeList().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_PHONE :
-            poiRecorded.phone = (poi.getAttributes().at(index)).getValue().get<std::string>();
+            poiRecorded.phone = (poi.getAttributeList().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_STARS:
-            poiRecorded.stars = (poi.getAttributes().at(index)).getValue().get<int>();
+            poiRecorded.stars = (poi.getAttributeList().at(index)).getValue().get<int>();
             break;
         case ATTRIBUTE_OPENINGHOURS:
-            poiRecorded.openinghours = (poi.getAttributes().at(index)).getValue().get<std::string>();
+            poiRecorded.openinghours = (poi.getAttributeList().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_ADDRHOUSENUMBER:
-            poiRecorded.addr_house_number = (poi.getAttributes().at(index)).getValue().get<std::string>();
+            poiRecorded.addr_house_number = (poi.getAttributeList().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_ADDRSTREET:
-            poiRecorded.addr_street = (poi.getAttributes().at(index)).getValue().get<std::string>();
+            poiRecorded.addr_street = (poi.getAttributeList().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_ADDRPOSTCODE:
-            poiRecorded.addr_postcode = (poi.getAttributes().at(index)).getValue().get<int>();
+            poiRecorded.addr_postcode = (poi.getAttributeList().at(index)).getValue().get<int>();
             break;
         case ATTRIBUTE_ADDRCITY:
-            poiRecorded.addr_city = (poi.getAttributes().at(index)).getValue().get<std::string>();
+            poiRecorded.addr_city = (poi.getAttributeList().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_BRAND:
-            poiRecorded.brand = (poi.getAttributes().at(index)).getValue().get<std::string>();
+            poiRecorded.brand = (poi.getAttributeList().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_OPERATEUR:
-            poiRecorded.operateur = (poi.getAttributes().at(index)).getValue().get<std::string>();
+            poiRecorded.operateur = (poi.getAttributeList().at(index)).getValue().get<std::string>();
             break;
         case ATTRIBUTE_CREDIT_CARD:
-            poiRecorded.credit_card = (poi.getAttributes().at(index)).getValue().get<std::string>();
+            poiRecorded.credit_card = (poi.getAttributeList().at(index)).getValue().get<std::string>();
             break;
         default:
             return ATTRIBUTE_ID_NOT_EXIST;
