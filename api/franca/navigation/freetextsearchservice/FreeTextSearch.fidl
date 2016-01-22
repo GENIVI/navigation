@@ -8,6 +8,7 @@
 
 package org.genivi.navigation.freetextsearchservice
 
+import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 
 <** @description : This interface allows a user to find locations by entering a single text string.

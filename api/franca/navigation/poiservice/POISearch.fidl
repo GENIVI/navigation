@@ -213,7 +213,7 @@ interface POISearch {
 			<** @description : maximum number of elements that should be returned as result.**>
 			UInt16 maxWindowSize				
 			<** @description : List of attributes id to retrieve. This is optional and the list could be empty.**>
-			AttributeID[] attributes				
+			AttributeID[] attributeList				
 		}	
 		out {
 			<** @description : enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... ).**>

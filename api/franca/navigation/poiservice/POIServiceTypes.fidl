@@ -180,7 +180,7 @@ typeCollection POIServiceTypes {
 		<**	@description : struct(list of parents_id, icons, name, short_desc, media).**>
 		Details details
 		<**	@description : array[struct(name, type, array[struct(operator_id, operator_name)])].**>
-		CategoryAttribute[] attributes
+		CategoryAttribute[] attributeList
 		<**	@description : array[struct(id, name)].**>
 		CategorySortOption[] sortOptions
 	}
@@ -191,7 +191,7 @@ typeCollection POIServiceTypes {
  		<**	@description : enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...). Note: A POI category is a unique ID. It could be a predefined category or a custom one defined by a POI plug-in **>			
 		CategoryID id	
 		<**	@description : array[struct(name, type, array[struct(operator_id, operator_name)])].**>
-		CategoryAttribute[] attributes
+		CategoryAttribute[] attributeList
 		<**	@description : array[struct(id, name)].**>
 		CategorySortOption[] sortOptions
 	}
@@ -241,7 +241,7 @@ typeCollection POIServiceTypes {
   		<** @description: array[unique_id].**>			
         CategoryID[] categories
    		<** @description: array[struct(name,type,value)].**>			
-        PoiAttribute[] attributes
+        PoiAttribute[] attributeList
     }
 
  	<** @description:**>			
@@ -254,7 +254,7 @@ typeCollection POIServiceTypes {
 		<** @description:enum(OFF_ROUTE,ON_ROUTE,INSIDE_CORRIDOR, ... )**>			
         UInt16 routeStatus
 		<** @description:List of attributes requested. It could be empty**>			
-        PoiAttribute[] attributes
+        PoiAttribute[] attributeList
     }
 
 	
@@ -272,7 +272,7 @@ typeCollection POIServiceTypes {
  		<** @description:distance in meters to poi from center of the search.**>			
         UInt16 distance
  		<** @description:List of attributes requested. It could be empty.**>			
-        PoiAttribute[] attributes
+        PoiAttribute[] attributeList
     }
 	
  	
@@ -318,7 +318,7 @@ typeCollection POIServiceTypes {
 		<**	@description : struct(unique_id, list of parents_id, icons, name, top_level, short_desc, media).**>
         CategoryDetails details
 		<**	@description : array[struct(name, type, array[struct(operator_id, operator_name)].**>
-        CategoryAttribute[] attributes
+        CategoryAttribute[] attributeList
  		<**	@description : array[struct(id, name)].**>
         CategorySortOption[] sortOptions
     }
@@ -368,6 +368,6 @@ typeCollection POIServiceTypes {
         <** @description:POI location.**>           
         Coordinate3D location
    		<** @description: array[struct(id,type,value)].**>			
-        PoiAttribute[] attributes
+        PoiAttribute[] attributeList
     }
 }

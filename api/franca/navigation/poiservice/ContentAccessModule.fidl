@@ -178,7 +178,7 @@ interface POIContentAccessModule {
 			<** @description : poi search unique handle.**>
 			Handle poiSearchHandle				
 			<** @description : List of attributes id to retrieve. This is optional and the list could be empty.**>
-			AttributeID[] attributes				
+			AttributeID[] attributeList				
 		}	
 		out {
 			<** @description : enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... ).**>
