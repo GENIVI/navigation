@@ -68,18 +68,14 @@ typeCollection POIServiceTypes {
     }
 
    <** @description: Current state of the search**>
-//    enumeration SearchStatusState extends BasicEnum { //Base 0x0510
-    enumeration SearchStatusState { //Base 0x0510
-		INVALID 	= 0
+    enumeration SearchStatusState extends BasicEnum { //Base 0x0510
         NOT_STARTED		= 1296
         SEARCHING		= 1297
         FINISHED		= 1298
     }
     
     <** @description: Type of Operator**>
-//    enumeration OperatorType extends BasicEnum  { //Base 0x0520
-    enumeration OperatorType { //Base 0x0520
-		INVALID 	= 0
+    enumeration OperatorType extends BasicEnum  { //Base 0x0520
         MORE_THAN		= 1312
         LESS_THAN		= 1313
         EQUAL			= 1314

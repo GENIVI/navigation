@@ -40,7 +40,16 @@ then
 		echo 'export COMMONAPI_DBUS_TOOL_DIR=<path>'
 		exit 1
 	fi
-	commonapi_tools_option="-DCOMMONAPI_DBUS_TOOL_DIR="$COMMONAPI_DBUS_TOOL_DIR" -DCOMMONAPI_TOOL_DIR="$COMMONAPI_TOOL_DIR
+
+	if [ ! $DBUS_LIB_PATH ]
+	then 
+		echo 'Set the dir of the patched dbus'
+		echo 'export DBUS_LIB_PATH=<path>'
+		exit 1
+	fi
+
+	commonapi_tools_option="-DDBUS_LIB_PATH="$DBUS_LIB_PATH" -DCOMMONAPI_DBUS_TOOL_DIR="$COMMONAPI_DBUS_TOOL_DIR" -DCOMMONAPI_TOOL_DIR="$COMMONAPI_TOOL_DIR
+
 fi
 
 echo 'build the poi server'
