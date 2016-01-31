@@ -31,17 +31,23 @@ typedef uint attributeId_t;
 typedef uint handleId_t;
 typedef uchar camId_t;
 
+struct DBusCommonAPIVariant_t //(yv)
+{
+    uchar index;
+    QDBusVariant value;
+};
+
 struct geoCoordinate2D_t //(dd)
 {
     double latitude;
     double longitude;
 };
 
-struct geoCoordinate3D_t //(ddi)
+struct geoCoordinate3D_t //(ddd)
 {
     double latitude;
     double longitude;
-    int altitude;
+    double altitude;
 };
 
 struct poiCategoryAndReason_t //(uq)
@@ -95,24 +101,24 @@ struct version_t //(qqqs)
     std::string date;
 };
 
-struct poiAttribute_t //(uiv)
+struct poiAttribute_t //(ui(yv))
 {
     attributeId_t id;
     int type;
-    QDBusVariant value;
+    DBusCommonAPIVariant_t value;
 };
 
-struct poiAttributeFull_t //(uuivib)
+struct poiAttributeFull_t //(uui(yv)ib)
 {
     attributeId_t id;
     categoryId_t poiCategory; //Category unique id
     int type;
-    QDBusVariant value;
+    DBusCommonAPIVariant_t value;
     int oper; //enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....)
     bool mandatory; //true if the attribute is mandatory for the search and false for optional
 };
 
-struct resultSearch_t //(uuqa(uiv))
+struct resultSearch_t //(uuqa(ui(yv)))
 {
     uint id;
     uint distance;
@@ -120,39 +126,39 @@ struct resultSearch_t //(uuqa(uiv))
     QList<poiAttribute_t> attributes;
 };
 
-struct detailsPOISearch_t //(us(ddi))
+struct detailsPOISearch_t //(us(ddd))
 {
     poiId_t id;
     QString name; //need to be a QString for UTF8
     geoCoordinate3D_t location;
 };
 
-struct resultSearchDetails_t //((usddi)aua(uiv))
+struct resultSearchDetails_t //((us(ddd))aua(ui(yv)))
 {
     detailsPOISearch_t details;
     QList<categoryId_t> categories;
     QList<poiAttribute_t> attributes;
 };
 
-struct categoryDetails_t //(uauvsbsv)
+struct categoryDetails_t //(uau(yv)sbs(yv))
 {
     categoryId_t id; //Category unique id
     QList<categoryId_t> parents_id; //list of parent categories unique id
-    QDBusVariant icons; //visual icons set
+    DBusCommonAPIVariant_t icons; //visual icons set
     QString name; //need to be a QString for UTF8
     bool top_level; //false if predefined, true if created by plugin
     std::string description; //short category description (optional)
-    QDBusVariant media; //media associated (html web site, audio, video, ...) (optional)
+    DBusCommonAPIVariant_t media; //media associated (html web site, audio, video, ...) (optional)
 };
 
-struct categoryOperator_t //(isv)
+struct categoryOperator_t //(is(yv))
 {
     int type; //enum(INVALID,MORE_THAN,LESS_THAN,EQUAL, ....)
     std::string name; //attribute operator name
-    QDBusVariant value; //attribute operator value
+    DBusCommonAPIVariant_t value; //attribute operator value
 };
 
-struct categoryAttribute_t //(usia(isv))
+struct categoryAttribute_t //(usia(is(yv)))
 {
     attributeId_t id; //attribute unique id
     std::string name; //attribute unique name
@@ -166,7 +172,7 @@ struct categorySortOption_t //(us)
     std::string name; //name to be displayed by application
 };
 
-struct categoryDetailsList_t //((uauvsbsv) a(usia(isv)) a(us))
+struct categoryDetailsList_t //((uau(yv)sbs(yv)) a(usia(is(yv))) a(us))
 {
     categoryDetails_t details;
     QList<categoryAttribute_t> attributes;
@@ -179,7 +185,7 @@ typedef QMap<qulonglong,QDBusVariant> tupleUlongVariant;
 
 typedef QMap<ushort,ushort> tupleUshortUshort;
 
-struct resultCamSearch_t //(usu(ddi)qa(uiv))
+struct resultCamSearch_t //(usu(ddd)qa(ui(yv)))
 {
     poiId_t source_id;
     std::string name;
@@ -189,34 +195,41 @@ struct resultCamSearch_t //(usu(ddi)qa(uiv))
     QList<poiAttribute_t> attributes;
 };
 
-struct resultCamSearchDetails_t //((us(ddi))aua(uiv))
+struct resultCamSearchDetails_t //((us(ddd))aua(ui(yv)))
 {
     detailsPOISearch_t details;
     QList<categoryId_t> categories;
     QList<poiAttribute_t> attributes;
 };
 
-struct detailsCamCategory_t //(auvssv)
+struct detailsCamCategory_t //(au(yv)ss(yv))
 {
     QList<categoryId_t> parents_id;
     QDBusVariant icons;
     std::string name;
     std::string short_desc;
-    QDBusVariant media;
+    DBusCommonAPIVariant_t media;
 };
 
-struct poiCategoryCamAdd_t //((auvssv)a(usia(isv))a(us))
+struct poiCategoryCamAdd_t //((au(yv)ss(yv))a(usia(is(yv)))a(us))
 {
     detailsCamCategory_t details;
     QList<categoryAttribute_t> attributes;
     QList<categorySortOption_t> sortOptions;
 };
 
-struct poiCategoryCamUpdate_t //(ua(usia(isv))a(us))
+struct poiCategoryCamUpdate_t //(ua(usia(is(yv)))a(us))
 {
    categoryId_t unique_id;
    QList<categoryAttribute_t> attributes;
    QList<categorySortOption_t> sortOptions;
+};
+
+struct poiCamAdd_t //(s(ddd)a(ui(yv)))
+{
+   std::string name;
+   geoCoordinate3D_t location;
+   QList<poiAttribute_t> attributes;
 };
 
 struct satelliteInfo_t //(qqqqqb)

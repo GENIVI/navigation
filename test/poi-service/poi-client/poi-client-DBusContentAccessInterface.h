@@ -157,8 +157,61 @@ public Q_SLOTS: // METHODS
         return asyncCall(QLatin1String("GetSupportedLocales"));
     }
 
+    inline QDBusPendingReply<QList<poiCategoryFull_t > >GetAvailableCategories()
+    { //"a(usb)" out
+        return asyncCall(QLatin1String("GetAvailableCategories"));
+    }
+
+    inline QDBusPendingReply<categoryId_t>GetRootCategory()
+    { //"u" out
+        return asyncCall(QLatin1String("GetRootCategory"));
+    }
+
+    inline QDBusPendingReply<QList<poiCategory_t > >GetChildrenCategories(categoryId_t category)
+    { //"u" in "a(ub)" out
+        QList<QVariant> argumentList;
+        argumentList << qVariantFromValue(category);
+        return asyncCallWithArgumentList(QLatin1String("GetChildrenCategories"), argumentList);
+    }
+
+
+    inline QDBusPendingReply<QList<poiCategory_t > >GetParentCategories(categoryId_t category)
+    {//"u" in "a(ub)" out
+        QList<QVariant> argumentList;
+        argumentList << qVariantFromValue(category);
+        return asyncCallWithArgumentList(QLatin1String("GetParentCategories"), argumentList);
+    }
+
+    inline QDBusPendingReply<categoryId_t>createCategory(poiCategoryCamAdd_t category)
+    {//"((au(yv)ss(yv))a(usia(is(yv)))a(us))" in "u" out
+        QList<QVariant> argumentList;
+        argumentList << qVariantFromValue(category);
+        return asyncCallWithArgumentList(QLatin1String("createCategory"), argumentList);
+    }
+
+    inline QDBusPendingReply<>removeCategories(QList<categoryId_t > categories)
+    {//"au" in
+        QList<QVariant> argumentList;
+        argumentList << qVariantFromValue(categories);
+        return asyncCallWithArgumentList(QLatin1String("removeCategories"), argumentList);
+    }
+
+    inline QDBusPendingReply<>addPOIs(categoryId_t unique_id, QList<poiCamAdd_t > poiList)
+    {//"u,a(s(ddd)a(ui(yv)))" in
+        QList<QVariant> argumentList;
+        argumentList << qVariantFromValue(unique_id) << qVariantFromValue(poiList);
+        return asyncCallWithArgumentList(QLatin1String("addPOIs"), argumentList);
+    }
+
+    inline QDBusPendingReply<>removePOIs(QList<poiId_t > ids)
+    {//"au" in
+        QList<QVariant> argumentList;
+        argumentList << qVariantFromValue(ids);
+        return asyncCallWithArgumentList(QLatin1String("removeCategories"), argumentList);
+    }
+
     inline QDBusPendingReply<>PoiSearchStarted(handleId_t poiSearchHandle,ushort maxSize, geoCoordinate3D_t location, QList<poiSearch_t> poiCategories, QList<poiAttributeFull_t> poiAttributes, std::string inputString, ushort sortOption)
-    { // "u" "q" "(ddi)" "a(uu)" "a(uuivqb)" "s" "q" in
+    { // "u" "q" "(ddd)" "a(uu)" "a(uui(yv)qb)" "s" "q" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle) << qVariantFromValue(maxSize) << qVariantFromValue(location) << qVariantFromValue(poiCategories) << qVariantFromValue(poiAttributes) << qVariantFromValue(inputString) << qVariantFromValue(sortOption);
         return asyncCallWithArgumentList(QLatin1String("PoiSearchStarted"), argumentList);
@@ -172,14 +225,14 @@ public Q_SLOTS: // METHODS
     }
 
     inline QDBusPendingReply<ushort, ushort, QList<resultCamSearch_t> >ResultListRequested(camId_t camId, handleId_t poiSearchHandle, QList<attributeId_t> attributes)
-    { // "y" "u" "au" in "q" "q" "a(usu(ddi)qa(uiv))" out
+    { // "y" "u" "au" in "q" "q" "a(usu(ddd)qa(ui(yv)))" out
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(camId) << qVariantFromValue(poiSearchHandle) << qVariantFromValue(attributes);
         return asyncCallWithArgumentList(QLatin1String("ResultListRequested"), argumentList);
     }
 
     inline QDBusPendingReply<QList<resultCamSearchDetails_t> >PoiDetailsRequested(QList<poiId_t> source_id)
-    { // "au" in "a((us(ddi))aua(uiv))" out
+    { // "au" in "a((us(ddd))aua(ui(yv)))" out
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(source_id);
         return asyncCallWithArgumentList(QLatin1String("PoiDetailsRequested"), argumentList);

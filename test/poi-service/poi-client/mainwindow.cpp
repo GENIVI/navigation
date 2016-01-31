@@ -375,7 +375,7 @@ void MainWindow::select_category()
     {
         //preset the structure with default values
         poi_attribute.poiCategory = m_poiCategoryList.at(index).id;
-        poi_attribute.value = QDBusVariant("no value");
+        poi_attribute.value.value = QDBusVariant("no value");
         poi_attribute.mandatory = true;
         if (mp_categoryCheckBox[index]->isChecked())
         { //poi category selected for the search
@@ -499,7 +499,7 @@ void MainWindow::select_category()
     {
         //preset the structure with default values
         poi_attribute.poiCategory = m_poiCategoryListAdditional.at(index).id;
-        poi_attribute.value = QDBusVariant("no value");
+        poi_attribute.value.value = QDBusVariant("no value");
         poi_attribute.mandatory = true;
         if (mp_categoryCheckBoxAdditional[index]->isChecked())
         { //poi category selected for the search
@@ -1092,7 +1092,7 @@ void MainWindow::refreshViewTable(ushort windowSize)
                     idList.push_back(poiList.at(index).id);
                     for (sub_index=0;sub_index<poiList.at(index).attributes.size();sub_index++)
                     {
-                        str = poiList.at(index).attributes.at(sub_index).value.variant().toString();
+                        str = poiList.at(index).attributes.at(sub_index).value.value.variant().toString();
                         mp_tableViewPoi->item(index,columnBeginAttributes+poiList.at(index).attributes.at(sub_index).id)->setText(str);
                     }
                  }
@@ -1116,7 +1116,7 @@ void MainWindow::refreshViewTable(ushort windowSize)
                 if (giveCategoryIndex(poiDetailsList.at(index).categories.at(0),&index_in_table) == true)
                 { //found into the embedded data
                     mp_tableViewPoi->item(index,columnCategory)->setText(QString::fromStdString(m_poiCategoryList.at(index_in_table).name));  //only one category !
-                    mp_tableViewPoi->item(index,columnIcon)->setText(m_poiCategoryDetailsList.at(index_in_table).details.icons.variant().toString());
+                    mp_tableViewPoi->item(index,columnIcon)->setText(m_poiCategoryDetailsList.at(index_in_table).details.icons.value.variant().toString());
                     QPixmap pixmap(mp_tableViewPoi->item(index,columnIcon)->text());
                     m_tableIconPOI.append(pixmap);
                 }
@@ -1125,7 +1125,7 @@ void MainWindow::refreshViewTable(ushort windowSize)
                     if (giveCategoryIndexAdditional(poiDetailsList.at(index).categories.at(0),&index_in_table) == true)
                     { //found into the additional data
                         mp_tableViewPoi->item(index,columnCategory)->setText(QString::fromStdString(m_poiCategoryListAdditional.at(index_in_table).name));  //only one category !
-                        mp_tableViewPoi->item(index,columnIcon)->setText(m_poiCategoryDetailsListAdditional.at(index_in_table).details.icons.variant().toString());
+                        mp_tableViewPoi->item(index,columnIcon)->setText(m_poiCategoryDetailsListAdditional.at(index_in_table).details.icons.value.variant().toString());
                         QPixmap pixmap(mp_tableViewPoi->item(index,columnIcon)->text());
                         m_tableIconPOI.append(pixmap);
                     }

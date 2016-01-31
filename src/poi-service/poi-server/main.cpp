@@ -127,6 +127,26 @@ void contentAccessModule::ConfigurationChanged(const std::vector< uint16_t >& ch
 
 }
 
+void contentAccessModule::CategoriesRemoved(const std::vector< uint32_t >& categories)
+{
+
+}
+
+void contentAccessModule::POIAdded(const std::vector< uint32_t >& pois)
+{
+
+}
+
+void contentAccessModule::POIRemoved(const std::vector< uint32_t >& pois)
+{
+
+}
+
+void contentAccessModule::SearchStatusChanged(const uint32_t& poiSearchHandle, const int32_t& statusValue, const std::vector< uint32_t >& pois)
+{
+
+}
+
 // class  poiContentAccessServer
 
 poiContentAccessServer::poiContentAccessServer(DBus::Connection &connection)
@@ -1027,7 +1047,7 @@ void poiSearchServer::DeletePoiSearchHandle(const handleId_t& poiSearchHandle)
     }
 }
 
-void poiSearchServer::SetRouteHandle(const handleId_t& poiSearchHandle, const uint8_t& sessionHandle, const uint8_t& routeHandle, const uint32_t& startSearchOffset, const uint32_t& endSearchOffset)
+void poiSearchServer::SetRouteHandle(const handleId_t& poiSearchHandle, const handleId_t &sessionHandle, const handleId_t &routeHandle, const uint32_t& startSearchOffset, const uint32_t& endSearchOffset)
 {
     uint32_t index;
     int16_t detailLevel;
@@ -1735,7 +1755,7 @@ uint16_t poiSearchServer::searchPOIRequest(uint16_t categoryIndex, std::string s
         fromString<uint64_t>(poi.segment,sqlQueryLine[1], std::dec);
         fromString<double>(poi.coordinate.latitude,sqlQueryLine[2], std::dec);
         fromString<double>(poi.coordinate.longitude,sqlQueryLine[3], std::dec);
-        fromString<int32_t>(poi.coordinate.altitude,sqlQueryLine[4], std::dec);
+        fromString<double>(poi.coordinate.altitude,sqlQueryLine[4], std::dec);
         sub_index = 5;
 
         for (attribute_index=0;attribute_index<m_availableCategoryTable[categoryIndex].attributeList.size();attribute_index++)
@@ -1975,22 +1995,22 @@ DBus_version::DBus_version_t poiConfigurationServer::GetVersion()
     return(m_version.getDBus());
 }
 
-void poiConfigurationServer::SetUnitsOfMeasurement(const std::map< uint16_t, ::DBus::Variant >& unitsOfMeasurementList)
+void poiConfigurationServer::SetUnitsOfMeasurement(const std::map< int32_t, DBus_dataFormatConverter::DBusCommonAPIVariant >& unitsOfMeasurementList)
 {
     m_unitsOfMeasurementList = unitsOfMeasurementList;
-    std::vector< uint16_t > changed;
+    std::vector< int32_t > changed;
     changed.push_back(GENIVI_NAVIGATIONCORE_UNITS_OF_MEASUREMENT);
     ConfigurationChanged(changed);
 }
 
-std::map< uint16_t, ::DBus::Variant > poiConfigurationServer::GetUnitsOfMeasurement()
+std::map< int32_t, DBus_dataFormatConverter::DBusCommonAPIVariant > poiConfigurationServer::GetUnitsOfMeasurement()
 {
     return m_unitsOfMeasurementList;
 }
 
-std::map< uint16_t, ::DBus::Variant > poiConfigurationServer::GetSupportedUnitsOfMeasurement()
+std::map< int32_t, DBus_dataFormatConverter::DBusCommonAPIVariant > poiConfigurationServer::GetSupportedUnitsOfMeasurement()
 {
-    std::map< uint16_t, ::DBus::Variant > ret;
+    std::map< int32_t, DBus_dataFormatConverter::DBusCommonAPIVariant > ret;
     std::vector< uint16_t > length;
     DBus_dataFormatConverter dataConverter;
     length.push_back(GENIVI_NAVIGATIONCORE_METER);
@@ -1998,42 +2018,42 @@ std::map< uint16_t, ::DBus::Variant > poiConfigurationServer::GetSupportedUnitsO
     return ret;
 }
 
-void poiConfigurationServer::SetTimeFormat(const uint16_t& timeFormat)
+void poiConfigurationServer::SetTimeFormat(const int32_t& timeFormat)
 {
     m_timeFormat = timeFormat;
-    std::vector< uint16_t > changed;
+    std::vector< int32_t > changed;
     changed.push_back(GENIVI_NAVIGATIONCORE_TIME_FORMAT);
     ConfigurationChanged(changed);
 }
 
-uint16_t poiConfigurationServer::GetTimeFormat()
+int32_t poiConfigurationServer::GetTimeFormat()
 {
     return m_timeFormat;
 }
 
-std::vector< uint16_t > poiConfigurationServer::GetSupportedTimeFormats()
+std::vector< int32_t > poiConfigurationServer::GetSupportedTimeFormats()
 {
-    std::vector< uint16_t > ret;
+    std::vector< int32_t > ret;
     ret.push_back(GENIVI_NAVIGATIONCORE_24H);
     return ret;
 }
 
-void poiConfigurationServer::SetCoordinatesFormat(const uint16_t& coordinatesFormat)
+void poiConfigurationServer::SetCoordinatesFormat(const int32_t& coordinatesFormat)
 {
     m_coordinatesFormat = coordinatesFormat;
-    std::vector< uint16_t > changed;
+    std::vector< int32_t > changed;
     changed.push_back(GENIVI_NAVIGATIONCORE_COORDINATES_FORMAT);
     ConfigurationChanged(changed);
 }
 
-uint16_t poiConfigurationServer::GetCoordinatesFormat()
+int32_t poiConfigurationServer::GetCoordinatesFormat()
 {
     return m_coordinatesFormat;
 }
 
-std::vector< uint16_t > poiConfigurationServer::GetSupportedCoordinatesFormats()
+std::vector< int32_t > poiConfigurationServer::GetSupportedCoordinatesFormats()
 {
-    std::vector< uint16_t > ret;
+    std::vector< int32_t > ret;
     ret.push_back(GENIVI_NAVIGATIONCORE_DEGREES);
     return ret;
 }
@@ -2043,7 +2063,7 @@ void poiConfigurationServer::SetLocale(const std::string& languageCode, const st
     m_languageCode = languageCode;
     m_countryCode = countryCode;
     m_scriptCode = scriptCode;
-    std::vector< uint16_t > changed;
+    std::vector< int32_t > changed;
     changed.push_back(GENIVI_NAVIGATIONCORE_LOCALE);
     ConfigurationChanged(changed);
 

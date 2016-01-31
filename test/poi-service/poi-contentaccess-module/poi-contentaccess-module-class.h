@@ -98,6 +98,22 @@ public:
 
     std::vector< ::DBus::Struct< std::string, std::string , std::string> > GetSupportedLocales();
 
+    std::vector< DBus_categoryIdName::DBus_categoryIdName_t > GetAvailableCategories();
+
+    categoryId_t GetRootCategory();
+
+    std::vector< DBus_categoryIdLevel::DBus_categoryIdLevel_t > GetChildrenCategories(const categoryId_t& category);
+
+    std::vector< DBus_categoryIdLevel::DBus_categoryIdLevel_t > GetParentCategories(const categoryId_t& category);
+
+    categoryId_t createCategory(const DBus_CAMcategory::DBus_CAMcategory_t& category);
+
+    void removeCategories(const std::vector< categoryId_t >& categories);
+
+    void addPOIs(const categoryId_t& unique_id, const std::vector< DBus_PoiAddedDetails::DBus_PoiAddedDetails_t >& poiList);
+
+    void removePOIs(const std::vector< poiId_t >& ids);
+
     void PoiSearchStarted(const handleId_t& poiSearchHandle, const uint16_t& maxSize, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes, const std::string& inputString, const uint16_t& sortOption);
 
     void PoiSearchCanceled(const handleId_t& poiSearchHandle);

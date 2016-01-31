@@ -30,7 +30,7 @@
       <doc>
         <line>SetUnitsOfMeasurement = This method sets the units of measurement</line>
       </doc>
-      <arg name="unitsOfMeasurementList" type="a{qv}" direction="in">
+      <arg name="unitsOfMeasurementList" type="a{i(yv)}" direction="in">
         <doc>
           <line>unitsOfMeasurementList = array[unitsOfMeasurement]</line>
           <line>unitsOfMeasurement = tuple (key,value)</line>
@@ -43,7 +43,7 @@
       <doc>
         <line>GetUnitsOfMeasurement = This method retrieves the units of measurement</line>
       </doc>
-      <arg name="unitsOfMeasurementList" type="a{qv}" direction="out">
+      <arg name="unitsOfMeasurementList" type="a{i(yv)}" direction="out">
         <doc>
           <line>unitsOfMeasurementList = array[unitsOfMeasurement]</line>
           <line>unitsOfMeasurement = tuple (key,value)</line>
@@ -56,7 +56,7 @@
       <doc>
         <line>GetSupportedUnitsOfMeasurement = This method retrieves the supported units of measurement</line>
       </doc>
-      <arg name="unitsOfMeasurementList" type="a{qv}" direction="out">
+      <arg name="unitsOfMeasurementList" type="a{i(yv)}" direction="out">
         <doc>
           <line>unitsOfMeasurementList = array[unitsOfMeasurement]</line>
           <line>unitsOfMeasurement = dictionary[key,value]</line>
@@ -70,7 +70,7 @@
       <doc>
         <line>SetTimeFormat = This method sets the time format</line>
       </doc>
-      <arg name="timeFormat" type="q" direction="in">
+      <arg name="timeFormat" type="i" direction="in">
         <doc>
           <line>timeFormat = enum(INVALID,12H,24H, ... )</line>
         </doc>
@@ -80,7 +80,7 @@
       <doc>
         <line>GetTimeFormat = This method retrieves the time format</line>
       </doc>
-      <arg name="timeFormat" type="q" direction="out">
+      <arg name="timeFormat" type="i" direction="out">
         <doc>
           <line>timeFormat = enum(INVALID,12H,24H, ... )</line>
         </doc>
@@ -90,7 +90,7 @@
       <doc>
         <line>GetSupportedTimeFormats = This method retrieves the supported time formats</line>
       </doc>
-      <arg name="timeFormatList" type="aq" direction="out">
+      <arg name="timeFormatList" type="ai" direction="out">
         <doc>
           <line>timeFormatList = array[timeFormat]</line>
           <line>timeFormat = enum(INVALID,12H,24H, ... )</line>
@@ -101,7 +101,7 @@
       <doc>
         <line>SetCoordinatesFormat = This method sets the coordinates format</line>
       </doc>
-      <arg name="coordinatesFormat" type="q" direction="in">
+      <arg name="coordinatesFormat" type="i" direction="in">
         <doc>
           <line>coordinatesFormat = enum(INVALID,DEGREES,MINUTES,SECONDS, ... )</line>
           <line>DEGREES format = d.dº</line>
@@ -114,7 +114,7 @@
       <doc>
         <line>GetCoordinatesFormat = This method retrieves the coordinates format</line>
       </doc>
-      <arg name="coordinatesFormat" type="q" direction="out">
+      <arg name="coordinatesFormat" type="i" direction="out">
         <doc>
           <line>coordinatesFormat = enum(INVALID,DEGREES,MINUTES,SECONDS, ... )</line>
           <line>DEGREES format = d.dº</line>
@@ -127,7 +127,7 @@
       <doc>
         <line>GetSupportedCoordinatesFormats = This method retrieves the supported coordinates formats</line>
       </doc>
-      <arg name="coordinatesFormatList" type="aq" direction="out">
+      <arg name="coordinatesFormatList" type="ai" direction="out">
         <doc>
           <line>coordinatesFormatList = array[coordinatesFormat]</line>
           <line>coordinatesFormat = enum(INVALID,DEGREES,MINUTES,SECONDS, ... )</line>
@@ -194,7 +194,7 @@
       <doc>
         <line>ConfigurationChanged = This signal is sent to the clients when one or more configuration settings changes</line>
       </doc>
-      <arg name="changedSettings" type="aq">
+      <arg name="changedSettings" type="ai">
         <doc>
           <line>changedSettings = array[setting]</line>
           <line>setting = enum(INVALID,UNITS_OF_MEASUREMENT,LOCALE,TIME_FORMAT,COORDINATES_FORMAT, ... )</line>

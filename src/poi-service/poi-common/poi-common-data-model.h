@@ -41,7 +41,7 @@ typedef struct
 {
     double latitude;
     double longitude;
-    int altitude;
+    double altitude;
 } geocoordinate3D_t;
 
 enum ATTRIBUTE_LIST{

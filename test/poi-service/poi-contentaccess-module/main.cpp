@@ -294,6 +294,45 @@ std::vector< ::DBus::Struct< std::string, std::string , std::string> > contentAc
     return ret;
 }
 
+std::vector< DBus_categoryIdName::DBus_categoryIdName_t > contentAccessModuleServer::GetAvailableCategories()
+{
+
+}
+
+categoryId_t contentAccessModuleServer::GetRootCategory()
+{
+
+}
+
+std::vector< DBus_categoryIdLevel::DBus_categoryIdLevel_t > contentAccessModuleServer::GetChildrenCategories(const categoryId_t& category)
+{
+
+}
+
+std::vector< DBus_categoryIdLevel::DBus_categoryIdLevel_t > contentAccessModuleServer::GetParentCategories(const categoryId_t& category)
+{
+
+}
+
+categoryId_t contentAccessModuleServer::createCategory(const DBus_CAMcategory::DBus_CAMcategory_t& category)
+{
+
+}
+
+void contentAccessModuleServer::removeCategories(const std::vector< categoryId_t >& categories)
+{
+
+}
+
+void contentAccessModuleServer::addPOIs(const categoryId_t& unique_id, const std::vector< DBus_PoiAddedDetails::DBus_PoiAddedDetails_t >& poiList)
+{
+
+}
+
+void contentAccessModuleServer::removePOIs(const std::vector< poiId_t >& ids)
+{
+
+}
 
 void contentAccessModuleServer::PoiSearchStarted(const handleId_t& poiSearchHandle, const uint16_t& maxSize, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes, const std::string& inputString, const uint16_t& sortOption)
     {
@@ -627,11 +666,11 @@ uint16_t contentAccessModuleServer::searchPOIRequest(uint16_t categoryIndex, std
             poiDetails.details.name = sqlQueryLine[0]; //name for the table of details
             fromString<double>(poi.location.latitude,sqlQueryLine[2], std::dec); //location lat
             fromString<double>(poi.location.longitude,sqlQueryLine[3], std::dec); //location lon
-            fromString<int>(poi.location.altitude,sqlQueryLine[4], std::dec); //location alt
+            fromString<double>(poi.location.altitude,sqlQueryLine[4], std::dec); //location alt
 
             fromString<double>(poiDetails.details.location.latitude,sqlQueryLine[2], std::dec); //location lat for the table of details
             fromString<double>(poiDetails.details.location.longitude,sqlQueryLine[3], std::dec); //location lon for the table of details
-            fromString<int>(poiDetails.details.location.altitude,sqlQueryLine[4], std::dec); //location alt for the table of details
+            fromString<double>(poiDetails.details.location.altitude,sqlQueryLine[4], std::dec); //location alt for the table of details
 
             sub_index = 5; //next index to scan into the query line
             for (attribute_index=0;attribute_index<m_availableCategoryTable[categoryIndex].attributeList.size();attribute_index++)

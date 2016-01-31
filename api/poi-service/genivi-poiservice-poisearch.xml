@@ -126,9 +126,9 @@
           <line>Note: A POI category is a unique ID. It could be a predifined category or a custom one defined by a POI plug-in.</line>
         </doc>
       </arg>
-      <arg name="results" type="a((uauvsbsv)a(usia(isv))a(us))" direction="out">
+      <arg name="results" type="a((uau(yv)sbs(yv))a(usia(is(yv)))a(us))" direction="out">
         <doc>
-          <line>results = array[details, attributes, sortOptions]</line>
+          <line>results = array[details, attributeList, sortOptions]</line>
           <line>results = List of details for all the POI categories.</line>
           <line>details = struct(unique_id, list of parents_id, icons, name, top_level, short_desc, media)]</line>
           <line>unique_id = Category unique id</line>
@@ -138,7 +138,7 @@
           <line>top_level = true if the category is a predefined one (top level), false for customized categories created by plug-in.</line>
           <line>short_desc = short category description (optional)</line>
           <line>media = media associated (html web site, audio, video, ...) (optional)</line>
-          <line>attributes = array[struct(id, name, type, array[struct(operator_type, operator_name, operator_value)])</line>
+          <line>attributeList = array[struct(id, name, type, array[struct(operator_type, operator_name, operator_value)])</line>
           <line>id = attribute unique id</line>
           <line>name = attribute unique name</line>
           <line>type = enum(INVALID,STRING,INTEGER,COORDINATES ...)</line>
@@ -210,7 +210,7 @@
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
       </arg>
-      <arg name="location" type="(ddi)" direction="in">
+      <arg name="location" type="(ddd)" direction="in">
         <doc>
           <line>location = struct(lat,lon,alt)</line>
           <line>lat = latitude of a vertex of the polygon in format %3.6f. Range [-90:+90]. Example: 48.053250</line>
@@ -245,12 +245,12 @@
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
       </arg>
-      <arg name="sessionHandle" type="y" direction="in">
+      <arg name="sessionHandle" type="u" direction="in">
         <doc>
           <line>sessionHandle = session handle</line>
         </doc>
       </arg>
-      <arg name="routeHandle" type="y" direction="in">
+      <arg name="routeHandle" type="u" direction="in">
         <doc>
           <line>routeHandle = route handle.</line>
         </doc>
@@ -324,7 +324,7 @@
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
       </arg>
-      <arg name="poiAttributes" type="a(uuivib)" direction="in">
+      <arg name="poiAttributes" type="a(uui(yv)ib)" direction="in">
         <doc>
           <line>poiAtttributes = array[struct(id, categoryId, type, value, oper, mandatory)]</line>
           <line>id = attribute unique id (see data model)</line>
@@ -501,9 +501,9 @@
           <line>maxWindowSize = maximum number of elements that should be returned as result</line>
         </doc>
       </arg>
-      <arg name="attributes" type="au" direction="in">
+      <arg name="attributeList" type="au" direction="in">
         <doc>
-          <line>attributes = List of attributes id to retrieve. This is optional and the list could be empty.</line>
+          <line>attributeList = List of attributes id to retrieve. This is optional and the list could be empty.</line>
         </doc>
       </arg>
       <arg name="statusValue" type="q" direction="out">
@@ -516,13 +516,13 @@
           <line>resultListSize = Number of items of the results list</line>
         </doc>
       </arg>
-      <arg name="resultListWindow" type="a(uuqa(uiv))" direction="out">
+      <arg name="resultListWindow" type="a(uuqa(ui(yv)))" direction="out">
         <doc>
-          <line>resultListWindow = array[unique_id, distance, route_status, attributes]</line>
+          <line>resultListWindow = array[unique_id, distance, route_status, attributeList]</line>
           <line>unique_id = POI unique id</line>
           <line>distance = distance in meters to poi from center of the search or from vehicle if search along</line>
           <line>route_status = enum(OFF_ROUTE,ON_ROUTE,INSIDE_CORRIDOR, ... )</line>
-          <line>attributes = array[struct(id, type, value)]</line>
+          <line>attributeList = array[struct(id, type, value)]</line>
           <line>List of attributes requested. It could be empty.</line>
           <line>id = attribute unique id (see data model)</line>
           <line>type = enum(INVALID,STRING,INTEGER,COORDINATES ...)</line>
@@ -550,9 +550,9 @@
           <line>list of poi = Unique poi id</line>
         </doc>
       </arg>
-      <arg name="results" type="a((us(ddi))aua(uiv))" direction="out">
+      <arg name="results" type="a((us(ddd))aua(ui(yv)))" direction="out">
         <doc>
-          <line>results = array[details, categories, attributes]</line>
+          <line>results = array[details, categories, attributeList]</line>
           <line>results = List of details for all the POI.</line>
           <line>details = struct(unique id, name, location)</line>
           <line>unique id = POI id</line>
@@ -563,7 +563,7 @@
           <line>alt = altitude above the sea level of the current position in meters</line>
           <line>categories = array[id]</line>
           <line>id = enum(INVALID,ALL_CATEGORIES,AIRPORT,RESTAURANT,HOTEL,GAZ_STATION,CAR_PARK, ...)</line>
-          <line>attributes = array[struct(id, type, value)]</line>
+          <line>attributeList = array[struct(id, type, value)]</line>
           <line>List of attributes requested. It could be empty.</line>
           <line>id = attribute unique id (see data model)</line>
           <line>type = enum(INVALID,STRING,INTEGER,COORDINATES ...)</line>

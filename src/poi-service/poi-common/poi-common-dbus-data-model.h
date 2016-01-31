@@ -91,48 +91,50 @@ private:
 class DBus_dataFormatConverter
 {
 public:
+    typedef ::DBus::Struct< uint8_t, ::DBus::Variant > DBusCommonAPIVariant;
+
     DBus_dataFormatConverter()
     {
     }
     ~ DBus_dataFormatConverter()
     {
     }
-    DBus::Variant createVariantString(std::string str)
+    DBusCommonAPIVariant createVariantString(std::string str)
     {
-        DBus::Variant var;
-        DBus::MessageIter iter = var.writer();
+        DBusCommonAPIVariant var;
+        DBus::MessageIter iter = var._2.writer();
         iter.append_string(str.c_str());
         return var;
     }
 
-    DBus::Variant createVariantUint16(uint16_t value)
+    DBusCommonAPIVariant createVariantUint16(uint16_t value)
     {
-        DBus::Variant var;
-        DBus::MessageIter iter = var.writer();
+        DBusCommonAPIVariant var;
+        DBus::MessageIter iter = var._2.writer();
         iter.append_uint16(value);
         return var;
     }
 
-    DBus::Variant createVariantArrayUint16(std::vector< uint16_t > value)
+    DBusCommonAPIVariant createVariantArrayUint16(std::vector< uint16_t > value)
     {
-        DBus::Variant var;
-        DBus::MessageIter iter=var.writer();
+        DBusCommonAPIVariant var;
+        DBus::MessageIter iter=var._2.writer();
         iter << value;
         return var;
     }
 
-    DBus::Variant createVariantUint32(uint32_t value)
+    DBusCommonAPIVariant createVariantUint32(uint32_t value)
     {
-        DBus::Variant var;
-        DBus::MessageIter iter = var.writer();
+        DBusCommonAPIVariant var;
+        DBus::MessageIter iter = var._2.writer();
         iter.append_uint32(value);
         return var;
     }
 
-    DBus::Variant createVariantArrayUint32(std::vector< uint32_t > value)
+    DBusCommonAPIVariant createVariantArrayUint32(std::vector< uint32_t > value)
     {
-        DBus::Variant var;
-        DBus::MessageIter iter=var.writer();
+        DBusCommonAPIVariant var;
+        DBus::MessageIter iter=var._2.writer();
         iter << value;
         return var;
     }
@@ -192,7 +194,7 @@ private:
     version_t m_version;
 };
 
-class DBus_categoryDetails : DBus_dataFormatConverter // (uauvsbsv) -->in this implementation, the two variant data are string
+class DBus_categoryDetails : DBus_dataFormatConverter // (uau(yv)sbs(yv)) -->in this implementation, the two variant data are string
 {
 public:
     struct categoryDetails_t
@@ -206,7 +208,7 @@ public:
         std::string media; //media associated (html web site, audio, video, ...) (optional)
     };
 
-    typedef ::DBus::Struct< uint32_t, std::vector< uint32_t >, ::DBus::Variant, std::string, bool, std::string, ::DBus::Variant > DBus_categoryDetails_t;
+    typedef ::DBus::Struct< uint32_t, std::vector< uint32_t >, DBusCommonAPIVariant, std::string, bool, std::string, DBusCommonAPIVariant > DBus_categoryDetails_t;
 
     DBus_categoryDetails()
     {
@@ -252,11 +254,11 @@ public:
         {
             m_categoryDetails.parents_id.push_back(value._2.at(index));
         }
-        m_categoryDetails.icons = value._3.reader().get_string();
+        m_categoryDetails.icons = value._3._2.reader().get_string();
         m_categoryDetails.name = value._4;
         m_categoryDetails.top_level = value._5;
         m_categoryDetails.description = value._6;
-        m_categoryDetails.description = value._7.reader().get_string();
+        m_categoryDetails.description = value._7._2.reader().get_string();
     }
 
     DBus_categoryDetails_t getDBus()
@@ -282,7 +284,7 @@ private:
     categoryDetails_t m_categoryDetails;
 };
 
-class DBus_categoryOperator : DBus_dataFormatConverter // (isv) -->in this implementation, the variant data is a string
+class DBus_categoryOperator : DBus_dataFormatConverter // (is(yv)) -->in this implementation, the variant data is a string
 {
 public:
     struct categoryOperator_t
@@ -292,7 +294,7 @@ public:
         std::string value; //attribute operator value
     };
 
-    typedef ::DBus::Struct< int32_t, std::string, ::DBus::Variant > DBus_categoryOperator_t;
+    typedef ::DBus::Struct< int32_t, std::string, DBusCommonAPIVariant > DBus_categoryOperator_t;
 
     DBus_categoryOperator(){
         m_categoryOperator.type = 0;
@@ -316,7 +318,7 @@ public:
     void setDBus(DBus_categoryOperator_t value){
         m_categoryOperator.type = value._1;
         m_categoryOperator.name = value._2;
-        m_categoryOperator.value = value._3.reader().get_string();
+        m_categoryOperator.value = value._3._2.reader().get_string();
     }
 
     DBus_categoryOperator_t getDBus(){
@@ -331,7 +333,7 @@ private:
     categoryOperator_t m_categoryOperator;
 };
 
-class DBus_categoryAttribute : DBus_dataFormatConverter // (usia(isv))
+class DBus_categoryAttribute : DBus_dataFormatConverter // (usia(is(yv)))
 {
 public:
     struct categoryAttribute_t
@@ -342,7 +344,7 @@ public:
         std::vector<DBus_categoryOperator::categoryOperator_t > oper;
     };
 
-    typedef ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, ::DBus::Variant > > > DBus_categoryAttribute_t;
+    typedef ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, DBusCommonAPIVariant > > > DBus_categoryAttribute_t;
 
     DBus_categoryAttribute(){
         DBus_categoryOperator op;
@@ -450,7 +452,7 @@ private:
     categorySortOption_t m_categorySortOption;
 };
 
-class DBus_category : DBus_dataFormatConverter // ( (uauvsbsv) a(usia(isv)) a(us) )
+class DBus_category : DBus_dataFormatConverter // ( (uau(yv)sbs(yv)) a(usia(is(yv))) a(us) )
 {
 public:
     struct category_t
@@ -460,7 +462,7 @@ public:
         std::vector<DBus_categorySortOption::categorySortOption_t> sortOptions;
     };
 
-    typedef ::DBus::Struct< ::DBus::Struct< uint32_t, std::vector< uint32_t >, ::DBus::Variant, std::string, bool, std::string, ::DBus::Variant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, ::DBus::Variant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > DBus_category_t;
+    typedef ::DBus::Struct< ::DBus::Struct< uint32_t, std::vector< uint32_t >, DBusCommonAPIVariant, std::string, bool, std::string, DBusCommonAPIVariant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, DBusCommonAPIVariant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > DBus_category_t;
 
     DBus_category()
     {
@@ -734,7 +736,7 @@ private:
     categoryRadius_t m_categoryRadius;
 };
 
-class DBus_poiAttribute : DBus_dataFormatConverter // (uiv) -->in this implementation, the variant data is a string
+class DBus_poiAttribute : DBus_dataFormatConverter // (ui(yv)) -->in this implementation, the variant data is a string
 {
 public:
     struct poiAttribute_t
@@ -744,7 +746,7 @@ public:
         std::string value;
     };
 
-    typedef ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > DBus_poiAttribute_t;
+    typedef ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > DBus_poiAttribute_t;
 
 
     DBus_poiAttribute(){
@@ -768,7 +770,7 @@ public:
     void setDBus(DBus_poiAttribute_t value){
         m_attribute.id = value._1;
         m_attribute.type = value._2;
-        m_attribute.value = value._3.reader().get_string();
+        m_attribute.value = value._3._2.reader().get_string();
     }
 
     DBus_poiAttribute_t getDBus(){
@@ -783,7 +785,7 @@ private:
     poiAttribute_t m_attribute;
 };
 
-class DBus_attributeDetails : DBus_poiAttribute //(uuivib) -->in this implementation, the variant data is string
+class DBus_attributeDetails : DBus_poiAttribute //(uui(yv)ib) -->in this implementation, the variant data is string
 {
 public:
     struct attributeDetails_t
@@ -794,7 +796,7 @@ public:
         bool mandatory; //true if the attribute is mandatory for the search and false for optional
     };
 
-    typedef ::DBus::Struct< uint32_t, uint32_t, int32_t, ::DBus::Variant, int32_t, bool > DBus_attributeDetails_t;
+    typedef ::DBus::Struct< uint32_t, uint32_t, int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant >, int32_t, bool > DBus_attributeDetails_t;
 
 
     DBus_attributeDetails(){
@@ -849,16 +851,16 @@ private:
     attributeDetails_t m_attributeDetails;
 };
 
-class DBus_geoCoordinate3D : DBus_dataFormatConverter //(ddi)
+class DBus_geoCoordinate3D : DBus_dataFormatConverter //(ddd)
 {
 public:
     struct geoCoordinate3D_t
     {
         double latitude;
         double longitude;
-        int altitude;
+        double altitude;
     };
-    typedef ::DBus::Struct< double, double, int32_t > DBus_geoCoordinate3D_t;
+    typedef ::DBus::Struct< double, double, double > DBus_geoCoordinate3D_t;
 
     DBus_geoCoordinate3D(){
         m_geoCoordinate3D.latitude = 48.85792; //by default center of Paris
@@ -896,7 +898,7 @@ private:
     geoCoordinate3D_t m_geoCoordinate3D;
 };
 
-class DBus_poiDetails : DBus_dataFormatConverter //(us(ddi))
+class DBus_poiDetails : DBus_dataFormatConverter //(us(ddd))
 {
 public:
     struct poiDetails_t
@@ -905,7 +907,7 @@ public:
         std::string name;
         DBus_geoCoordinate3D::geoCoordinate3D_t location;
     };
-    typedef ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, int32_t > > DBus_poiDetails_t;
+    typedef ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, double > > DBus_poiDetails_t;
 
     DBus_poiDetails(){
         DBus_geoCoordinate3D loc;
@@ -950,7 +952,7 @@ private:
     poiDetails_t m_poiDetails;
 };
 
-class DBus_searchResult : DBus_dataFormatConverter //(uuqa(uiv)) -->in this implementation, the variant data depends on the value of 'type'
+class DBus_searchResult : DBus_dataFormatConverter //(uuqa(ui(yv))) -->in this implementation, the variant data depends on the value of 'type'
 {
 public:
     struct searchResult_t
@@ -961,7 +963,7 @@ public:
         std::vector<DBus_poiAttribute::poiAttribute_t> attributes;
     };
 
-    typedef ::DBus::Struct< uint32_t, uint32_t, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > DBus_searchResult_t;
+    typedef ::DBus::Struct< uint32_t, uint32_t, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > DBus_searchResult_t;
 
     DBus_searchResult(){
         DBus_poiAttribute attrib;
@@ -1025,7 +1027,7 @@ private:
     searchResult_t m_searchResult;
 };
 
-class DBus_searchResultDetails : DBus_dataFormatConverter // ((us(ddi))aua(uiv)) -->in this implementation, the variant data depends on the value of 'type'
+class DBus_searchResultDetails : DBus_dataFormatConverter // ((us(ddd))aua(ui(yv))) -->in this implementation, the variant data depends on the value of 'type'
 {
 public:
     struct searchResultDetails_t
@@ -1035,7 +1037,7 @@ public:
         std::vector<DBus_poiAttribute::poiAttribute_t> attributes;
     };
 
-    typedef ::DBus::Struct< ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, int32_t > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > DBus_searchResultDetails_t;
+    typedef ::DBus::Struct< ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, double > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > DBus_searchResultDetails_t;
 
 
     DBus_searchResultDetails(){
@@ -1116,7 +1118,7 @@ private:
     searchResultDetails_t m_searchResultDetails;
 };
 
-class DBus_poiCAMDetails : DBus_dataFormatConverter // (usq(ddi)qa(uiv)) -->in this implementation, the variant data depends on the value of 'type'
+class DBus_poiCAMDetails : DBus_dataFormatConverter // (usq(ddd)qa(ui(yv))) -->in this implementation, the variant data depends on the value of 'type'
 {
 public:
     struct poiCAMDetails_t //no class used into this public structure
@@ -1129,7 +1131,7 @@ public:
         std::vector<DBus_poiAttribute::poiAttribute_t> attributes;
     };
 
-    typedef ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, int32_t >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > DBus_poiCAMDetails_t;
+    typedef ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > DBus_poiCAMDetails_t;
 
     DBus_poiCAMDetails(){
         DBus_poiAttribute attrib;
@@ -1209,7 +1211,7 @@ private:
     poiCAMDetails_t m_poiCAMDetails;
 };
 
-class DBus_CAMcategoryDetails : DBus_dataFormatConverter // (auvssv) -->in this implementation, the variant data is string
+class DBus_CAMcategoryDetails : DBus_dataFormatConverter // (au(yv)ss(yv)) -->in this implementation, the variant data is string
 {
 public:
     struct CAMcategoryDetails_t
@@ -1221,7 +1223,7 @@ public:
         std::string media;
     };
 
-    typedef ::DBus::Struct< std::vector< uint32_t >, ::DBus::Variant, std::string, std::string, ::DBus::Variant > DBus_CAMcategoryDetails_t;
+    typedef ::DBus::Struct< std::vector< uint32_t >, DBusCommonAPIVariant, std::string, std::string, DBusCommonAPIVariant > DBus_CAMcategoryDetails_t;
 
     DBus_CAMcategoryDetails(){
         m_CAMcategoryDetails.parents_id.clear();
@@ -1258,10 +1260,10 @@ public:
         {
             m_CAMcategoryDetails.parents_id.push_back(value._1.at(index));
         }
-        m_CAMcategoryDetails.icons = value._2.reader().get_string();
+        m_CAMcategoryDetails.icons = value._2._2.reader().get_string();
         m_CAMcategoryDetails.name = value._3;
         m_CAMcategoryDetails.short_desc = value._4;
-        m_CAMcategoryDetails.media = value._5.reader().get_string();
+        m_CAMcategoryDetails.media = value._5._2.reader().get_string();
     }
 
     DBus_CAMcategoryDetails_t getDBus(){
@@ -1283,7 +1285,7 @@ private:
     CAMcategoryDetails_t m_CAMcategoryDetails;
 };
 
-class DBus_CAMcategory : DBus_dataFormatConverter // ((auvssv)a(usia(isv))a(us)) -->in this implementation, the variant data is string
+class DBus_CAMcategory : DBus_dataFormatConverter // ((au(yv)ss(yv))a(usia(is(yv)))a(us)) -->in this implementation, the variant data is string
 {
 public:
     struct CAMcategory_t //no class used into this public structure
@@ -1293,7 +1295,7 @@ public:
         std::vector<DBus_categorySortOption::categorySortOption_t> sortOptions;
     };
 
-    typedef ::DBus::Struct< ::DBus::Struct< std::vector< uint32_t >, ::DBus::Variant, std::string, std::string, ::DBus::Variant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, ::DBus::Variant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > DBus_CAMcategory_t;
+    typedef ::DBus::Struct< ::DBus::Struct< std::vector< uint32_t >, DBusCommonAPIVariant, std::string, std::string, DBusCommonAPIVariant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, DBusCommonAPIVariant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > DBus_CAMcategory_t;
 
     DBus_CAMcategory(){
         DBus_CAMcategoryDetails details;
@@ -1378,7 +1380,7 @@ private:
     CAMcategory_t m_CAMcategory;
 };
 
-class DBus_CAMcategoryUpdate : DBus_dataFormatConverter // (ua(usia(isv))a(us)) -->in this implementation, the variant data is string
+class DBus_CAMcategoryUpdate : DBus_dataFormatConverter // (ua(usia(is(yv)))a(us)) -->in this implementation, the variant data is string
 {
 public:
     struct CAMcategoryUpdate_t //no class used into this public structure
@@ -1388,7 +1390,7 @@ public:
         std::vector<DBus_categorySortOption::categorySortOption_t> sortOptions;
     };
 
-    typedef ::DBus::Struct< uint32_t, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, ::DBus::Variant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > DBus_CAMcategoryUpdate_t;
+    typedef ::DBus::Struct< uint32_t, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, DBusCommonAPIVariant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > DBus_CAMcategoryUpdate_t;
 
     DBus_CAMcategoryUpdate(){
         DBus_categoryAttribute attrib;
@@ -1468,7 +1470,7 @@ private:
     CAMcategoryUpdate_t m_CAMcategoryUpdate;
 };
 
-class DBus_PoiAddedDetails : DBus_dataFormatConverter // (s(ddi)a(uiv)) -->in this implementation, the variant data depends on the value of 'type'
+class DBus_PoiAddedDetails : DBus_dataFormatConverter // (s(ddd)a(ui(yv))) -->in this implementation, the variant data depends on the value of 'type'
 {
 public:
     struct PoiAddedDetails_t
@@ -1478,7 +1480,7 @@ public:
         std::vector<DBus_poiAttribute::poiAttribute_t> attributes;
     };
 
-    typedef ::DBus::Struct< std::string, ::DBus::Struct< double, double, int32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > DBus_PoiAddedDetails_t;
+    typedef ::DBus::Struct< std::string, ::DBus::Struct< double, double, double >, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > DBus_PoiAddedDetails_t;
 
 
     DBus_PoiAddedDetails(){

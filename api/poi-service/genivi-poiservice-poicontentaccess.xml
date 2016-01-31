@@ -87,7 +87,7 @@
           <line>camId = Content access module unique id as known by the POI service component.</line>
         </doc>
       </arg>
-      <arg name="poiCategories" type="a((auvssv)a(usia(isv))a(us))" direction="in">
+      <arg name="poiCategories" type="a((au(yv)ss(yv))a(usia(is(yv)))a(us))" direction="in">
         <doc>
           <line>poiCategories = array[details, attributes, sortOptions]</line>
           <line>List of details for all the POI categories.</line>
@@ -138,7 +138,7 @@
           <line>camId = Content access module unique id as known by the POI service component.</line>
         </doc>
       </arg>
-      <arg name="poiCategories" type="a(ua(usia(isv))a(us))" direction="in">
+      <arg name="poiCategories" type="a(ua(usia(is(yv)))a(us))" direction="in">
         <doc>
           <line>poiCategories = array[unique_id, attributes, sortOptions]</line>
           <line>List of attributes to update.</line>

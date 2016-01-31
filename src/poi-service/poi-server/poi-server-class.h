@@ -99,6 +99,10 @@ public:
     ~contentAccessModule();
 
     void ConfigurationChanged(const std::vector< uint16_t >& changedSettings);
+    void CategoriesRemoved(const std::vector< uint32_t >& categories);
+    void POIAdded(const std::vector< uint32_t >& pois);
+    void POIRemoved(const std::vector< uint32_t >& pois);
+    void SearchStatusChanged(const uint32_t& poiSearchHandle, const int32_t& statusValue, const std::vector< uint32_t >& pois);
 
 private:
 
@@ -225,6 +229,7 @@ public:
     void ConnectToRoutingClient(Routing *client);
 
 
+
 //implementation of the DBus methods of the POISearch component
 
     DBus_version::DBus_version_t GetVersion();
@@ -245,7 +250,7 @@ public:
 
     void DeletePoiSearchHandle(const handleId_t& poiSearchHandle);
 
-    void SetRouteHandle(const handleId_t& poiSearchHandle, const uint8_t& sessionHandle, const uint8_t& routeHandle, const uint32_t& startSearchOffset, const uint32_t& endSearchOffset);
+    void SetRouteHandle(const handleId_t& poiSearchHandle, const handleId_t& sessionHandle, const handleId_t& routeHandle, const uint32_t& startSearchOffset, const uint32_t& endSearchOffset);
 
     void SetCategories(const handleId_t& poiSearchHandle, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories);
 
@@ -359,15 +364,15 @@ public:
 
     DBus_version::DBus_version_t GetVersion();
 
-    void SetUnitsOfMeasurement(const std::map< uint16_t, ::DBus::Variant >& unitsOfMeasurementList);
-    std::map< uint16_t, ::DBus::Variant > GetUnitsOfMeasurement();
-    std::map< uint16_t, ::DBus::Variant > GetSupportedUnitsOfMeasurement();
-    void SetTimeFormat(const uint16_t& timeFormat);
-    uint16_t GetTimeFormat();
-    std::vector< uint16_t > GetSupportedTimeFormats();
-    void SetCoordinatesFormat(const uint16_t& coordinatesFormat);
-    uint16_t GetCoordinatesFormat();
-    std::vector< uint16_t > GetSupportedCoordinatesFormats();
+    void SetUnitsOfMeasurement(const std::map< int32_t, DBus_dataFormatConverter::DBusCommonAPIVariant >& unitsOfMeasurementList);
+    std::map< int32_t, DBus_dataFormatConverter::DBusCommonAPIVariant > GetUnitsOfMeasurement();
+    std::map< int32_t, DBus_dataFormatConverter::DBusCommonAPIVariant > GetSupportedUnitsOfMeasurement();
+    void SetTimeFormat(const int32_t& timeFormat);
+    int32_t GetTimeFormat();
+    std::vector< int32_t > GetSupportedTimeFormats();
+    void SetCoordinatesFormat(const int32_t& coordinatesFormat);
+    int32_t GetCoordinatesFormat();
+    std::vector< int32_t > GetSupportedCoordinatesFormats();
     void SetLocale(const std::string& languageCode, const std::string& countryCode, const std::string& scriptCode);
     void GetLocale(std::string& languageCode, std::string& countryCode, std::string& scriptCode);
     std::vector< ::DBus::Struct< std::string, std::string , std::string> > GetSupportedLocales();
@@ -386,8 +391,8 @@ private:
 // DBus data
     DBus_version m_version;
     std::string m_languageCode, m_countryCode, m_scriptCode;
-    uint16_t m_coordinatesFormat;
-    std::map< uint16_t, ::DBus::Variant > m_unitsOfMeasurementList;
+    int32_t m_coordinatesFormat;
+    std::map< int32_t, DBus_dataFormatConverter::DBusCommonAPIVariant > m_unitsOfMeasurementList;
     uint16_t m_timeFormat;
 };
 

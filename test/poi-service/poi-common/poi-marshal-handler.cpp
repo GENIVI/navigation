@@ -123,6 +123,23 @@ QDBusArgument &operator << (QDBusArgument &argument, const version_t &source)
     return argument;
 }
 
+const QDBusArgument &operator >> (const QDBusArgument &argument,DBusCommonAPIVariant_t &dest)
+{
+    argument.beginStructure();
+    argument >> dest.index >> dest.value;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument &operator << (QDBusArgument &argument, const DBusCommonAPIVariant_t &source)
+{
+    argument.beginStructure();
+    argument << source.index << source.value;
+    argument.endStructure();
+    return argument;
+}
+
+
 const QDBusArgument &operator >> (const QDBusArgument &argument,geoCoordinate2D_t &dest)
 {
     argument.beginStructure();
@@ -155,6 +172,21 @@ QDBusArgument &operator << (QDBusArgument &argument, const geoCoordinate3D_t &so
     return argument;
 }
 
+const QDBusArgument &operator >> (const QDBusArgument &argument,poiCamAdd_t &dest)
+{
+    argument.beginStructure();
+    argument >> dest.name >> dest.location >> dest.attributes;
+    argument.endStructure();
+    return argument;
+}
+
+QDBusArgument &operator << (QDBusArgument &argument, const poiCamAdd_t &source)
+{
+    argument.beginStructure();
+    argument << source.name << source.location << source.attributes;
+    argument.endStructure();
+    return argument;
+}
 
 const QDBusArgument &operator >> (const QDBusArgument &argument,poiAttribute_t &dest)
 {

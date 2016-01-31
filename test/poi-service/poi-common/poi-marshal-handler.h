@@ -53,12 +53,18 @@ QDBusArgument &operator << (QDBusArgument &argument, const std::string &source);
 Q_DECLARE_METATYPE(QList<std::string>)
 Q_DECLARE_METATYPE(QList<ushort>)
 Q_DECLARE_METATYPE(QList<uint>)
+Q_DECLARE_METATYPE(DBusCommonAPIVariant_t)
+const QDBusArgument &operator >> (const QDBusArgument &argument,DBusCommonAPIVariant_t &dest);
+QDBusArgument &operator << (QDBusArgument &argument, const DBusCommonAPIVariant_t &source);
 Q_DECLARE_METATYPE(geoCoordinate2D_t)
 const QDBusArgument &operator >> (const QDBusArgument &argument,geoCoordinate2D_t &dest);
 QDBusArgument &operator << (QDBusArgument &argument, const geoCoordinate2D_t &source);
 Q_DECLARE_METATYPE(geoCoordinate3D_t)
 const QDBusArgument &operator >> (const QDBusArgument &argument,geoCoordinate3D_t &dest);
 QDBusArgument &operator << (QDBusArgument &argument, const geoCoordinate3D_t &source);
+Q_DECLARE_METATYPE(poiCamAdd_t)
+const QDBusArgument &operator >> (const QDBusArgument &argument,poiCamAdd_t &dest);
+QDBusArgument &operator << (QDBusArgument &argument, const poiCamAdd_t &source);
 Q_DECLARE_METATYPE(poiCategoryAndReason_t)
 const QDBusArgument &operator >> (const QDBusArgument &argument,poiCategoryAndReason_t &dest);
 QDBusArgument &operator << (QDBusArgument &argument, const poiCategoryAndReason_t &source);
