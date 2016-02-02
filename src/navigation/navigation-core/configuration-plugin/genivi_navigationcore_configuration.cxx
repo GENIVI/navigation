@@ -48,7 +48,7 @@ static DBus::Glib::BusDispatcher dispatcher;
 static DBus::Connection *conn;
 
 static DBus::Variant
-variant_array_uint16(std::vector< uint16_t > i)
+variant_array_enumeration(std::vector< DBusCommonAPIEnumeration > i)
 {
 	DBus::Variant variant;
 	DBus::MessageIter iter=variant.writer();
@@ -164,11 +164,11 @@ class  Configuration
     GetSupportedUnitsOfMeasurement()
     {
         std::map< int32_t, DBusCommonAPIVariant > ret;
-	std::vector< uint16_t > length;
-	length.push_back(GENIVI_NAVIGATIONCORE_MILE);
-	length.push_back(GENIVI_NAVIGATIONCORE_METER);
-	ret[GENIVI_NAVIGATIONCORE_LENGTH]=variant_array_uint16(length);
-	return ret;
+        std::vector< DBusCommonAPIEnumeration > length;
+        length.push_back(GENIVI_NAVIGATIONCORE_MILE);
+        length.push_back(GENIVI_NAVIGATIONCORE_METER);
+        ret[GENIVI_NAVIGATIONCORE_LENGTH]=variant_array_enumeration(length);
+        return ret;
      }
 
 	void
@@ -270,7 +270,7 @@ class  Configuration
 static class Configuration *server;
 
 static DBus::Variant
-variant_uint16(uint16_t i)
+variant_enumeration(DBusCommonAPIEnumeration i)
 {
 	DBus::Variant variant;
 	DBus::MessageIter iter=variant.writer();
@@ -288,6 +288,6 @@ plugin_init(void)
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
 	conn->setup(&dispatcher);
 	conn->request_name("org.genivi.navigationcore.Configuration");
-	unitsOfMeasurement[GENIVI_NAVIGATIONCORE_LENGTH]=variant_uint16(GENIVI_NAVIGATIONCORE_KM);
+    unitsOfMeasurement[GENIVI_NAVIGATIONCORE_LENGTH]._2=variant_enumeration(GENIVI_NAVIGATIONCORE_KM);
 	server=new Configuration(*conn);
 }

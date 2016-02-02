@@ -256,7 +256,7 @@ class  Configuration
 static class Configuration *server;
 
 static DBus::Variant
-variant_uint16(uint16_t i)
+variant_enumeration(DBusCommonAPIEnumeration i)
 {
 	DBus::Variant variant;
 	DBus::MessageIter iter=variant.writer();
@@ -274,6 +274,6 @@ plugin_init(void)
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
 	conn->setup(&dispatcher);
 	conn->request_name("org.genivi.mapviewer.Configuration");
-	unitsOfMeasurement[GENIVI_MAPVIEWER_LENGTH]=variant_uint16(GENIVI_MAPVIEWER_KM);
+    unitsOfMeasurement[GENIVI_MAPVIEWER_LENGTH]._2=variant_enumeration(GENIVI_MAPVIEWER_KM);
 	server=new Configuration(*conn);
 }

@@ -191,7 +191,7 @@ get_vehicle(const char *source_prefix)
 }
 
 static DBus::Variant
-variant_uint16(uint16_t i)
+variant_enumeration(DBusCommonAPIEnumeration i)
 {
     DBus::Variant variant;
     DBus::MessageIter iter=variant.writer();
@@ -455,111 +455,111 @@ GuidanceObj::GetManeuver(struct item *item, uint32_t& DistanceToManeuver, int32_
 	switch (item->type) {
 	case type_nav_straight:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
 		break;
 	case type_nav_turnaround:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_UTURN_LEFT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_UTURN_LEFT);
 		break;
 	case type_nav_right_1:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_RIGHT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_SLIGHT_RIGHT);
 		break;
 	case type_nav_right_2:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_RIGHT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_RIGHT);
 		break;
 	case type_nav_right_3:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_RIGHT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_HARD_RIGHT);
 		break;
 	case type_nav_left_1:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_LEFT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_SLIGHT_LEFT);
 		break;
 	case type_nav_left_2:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_LEFT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_LEFT);
 		break;
 	case type_nav_left_3:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_LEFT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_HARD_LEFT);
 		break;
 	// FIXME: Are ManeuverDirection values right here?
 	case type_nav_roundabout_r1:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_RIGHT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_HARD_RIGHT);
 		break;
 	case type_nav_roundabout_r2:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_RIGHT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_RIGHT);
 		break;
 	case type_nav_roundabout_r3:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_RIGHT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_SLIGHT_RIGHT);
 		break;
 	case type_nav_roundabout_r4:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
 		break;
 	case type_nav_roundabout_r5:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_LEFT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_SLIGHT_LEFT);
 		break;
 	case type_nav_roundabout_r6:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_LEFT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_LEFT);
 		break;
 	case type_nav_roundabout_r7:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_LEFT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_HARD_LEFT);
 		break;
 	case type_nav_roundabout_r8:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_UTURN_LEFT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_UTURN_LEFT);
 		break;
 	// FIXME: Distinguish between clockwise and counterclockwise roundabout?
 	case type_nav_roundabout_l1:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_LEFT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_HARD_LEFT);
 		break;
 	case type_nav_roundabout_l2:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_LEFT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_LEFT);
 		break;
 	case type_nav_roundabout_l3:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_LEFT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_SLIGHT_LEFT);
 		break;
 	case type_nav_roundabout_l4:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
 		break;
 	case type_nav_roundabout_l5:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_RIGHT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_SLIGHT_RIGHT);
 		break;
 	case type_nav_roundabout_l6:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_RIGHT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_RIGHT);
 		break;
 	case type_nav_roundabout_l7:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_RIGHT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_HARD_RIGHT);
 		break;
 	case type_nav_roundabout_l8:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_UTURN_RIGHT);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_UTURN_RIGHT);
 		break;
 	case type_nav_destination:
         Maneuver=GENIVI_NAVIGATIONCORE_DESTINATION;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
 		break;
 	default:
         dbg(lvl_error,"Unable to convert type %s\n",item_to_name(item->type));
         Maneuver=GENIVI_NAVIGATIONCORE_INVALID;
         index = GENIVI_NAVIGATIONCORE_INVALID;
-        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_INVALID);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_INVALID);
 	}
     std::pair< int32_t, DBusCommonAPIVariant > ret(index,data);
     ManeuverData=ret;
