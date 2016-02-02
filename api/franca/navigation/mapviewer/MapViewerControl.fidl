@@ -17,7 +17,7 @@ interface MapViewerControl {
 		major 1 
 		minor 0
 	}
-
+	
 	enumeration MapViewType extends BasicEnum { //Base 0x0010
 		MAIN_MAP		= 16
 		SPLIT_SCREEN	= 17		
@@ -108,6 +108,12 @@ interface MapViewerControl {
 		LEVEL_4			= 83
 		LEVEL_5			= 84
 	}
+
+	enumeration HeadingType extends BasicEnum  { //Base 0x0130
+		CONSTANT_ANGLE		= 304
+		TRACK_UP			= 305
+		TOWARDS_TARGET		= 306
+	} 
 
 	enumeration MapTheme extends BasicEnum {		
 		THEME_BMW_CLASSIC_DAY
@@ -435,6 +441,24 @@ interface MapViewerControl {
 	}
 
 	<**
+		@description : followCarModeChanged = This signal is emitted when the follow-car-mode changes
+	**>
+	broadcast followCarModeChanged {
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : followCarMode = If true, the current car position is interpreted as position of the point the camera must look at
+			**>
+			Boolean followCarMode
+		}
+	}
+
+	<**
 		@description : setCameraPosition = This method sets the coordinates of the point at which the camera must be positioned
 	**>
 	method setCameraPosition {
@@ -467,6 +491,24 @@ interface MapViewerControl {
 		}
 		out {
 			Coordinate3D position
+		}
+	}
+
+	<**
+		@description : cameraPositionChanged = This signal is emitted when the position of the camera changes
+	**>
+	broadcast cameraPositionChanged {
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : followCarMode = If true, the current car position is interpreted as position of the point the camera must look at
+			**>
+			Coordinate3D targetPoint
 		}
 	}
 
@@ -547,7 +589,7 @@ interface MapViewerControl {
 			<**
 				@description : headingType = enum(INVALID,CONSTANT_ANGLE,TRACK_UP,TOWARDS_TARGET, ... )
 			**>
-			UInt16 headingType
+			HeadingType headingType
 
 			<**
 				@description : headingAngle = heading angle in degrees measured from the North axis clockwise. Range[0:360]
@@ -600,6 +642,25 @@ interface MapViewerControl {
 			Int32 tilt
 		}
 	}
+
+	<**
+		@description : cameraTiltAngleChanged = This signal is emitted when the camera tilt angle changes
+	**>
+	broadcast cameraTiltAngleChanged {
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : tilt = tilt angle in degrees. Range [-180:180]
+			**>
+			Int32 tilt
+		}
+	}
+
 
 	<**
 		@description : setCameraRollAngle = This method sets the camera roll angle
@@ -688,6 +749,24 @@ interface MapViewerControl {
 	}
 
 	<**
+		@description : cameraDistanceFromTargetPointChanged = This signal is emitted when the camera distance from the target point changes
+	**>
+	broadcast cameraDistanceFromTargetPointChanged {
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : distance = distance from the view point in meters
+			**>
+			UInt32 distance
+		}
+	}
+
+	<**
 		@description : setMapViewScaleMode = This method sets the scaling mode.
 	**>
 	method setMapViewScaleMode {
@@ -727,6 +806,29 @@ interface MapViewerControl {
 				@description : scaleMode = enum(AUTOMATIC,MANUAL,HYBRID)
 			**>
 			MapScaleMode scaleMode
+		}
+	}
+
+	<**
+		@description : mapViewScaleChanged = This signal is emitted when the mapview scale changes
+	**>
+	broadcast mapViewScaleChanged {
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : scaleID = scale identifier. Range[0:256]
+			**>
+			Int8 scaleID
+
+			<**
+				@description : isMinMax = enum(INVALID,MIN,MAX,MID, ... )
+			**>
+			MapScaleType isMinMax
 		}
 	}
 
@@ -885,6 +987,24 @@ interface MapViewerControl {
 			Handle mapViewInstanceHandle
 		}
 		out {
+			MapObjectVisibility objectVisibilityList
+		}
+	}
+
+	<**
+		@description : mapViewObjectVisibilityChanged = This signal is emitted when the type of objects shown on the map changes
+	**>
+	broadcast mapViewObjectVisibilityChanged {
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : objectVisibilityList = if true the objects are shown else they are not shown
+			**>
 			MapObjectVisibility objectVisibilityList
 		}
 	}
@@ -1052,8 +1172,23 @@ interface MapViewerControl {
 	}
 
 	<**
+		@description : mapViewBoundingBoxChanged = This signal is emitted when the bounding box of a map instance changes
+	**>
+	broadcast mapViewBoundingBoxChanged {
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			Rectangle boundingBox
+		}
+	}
+
+	<**
 		@description : setMapViewSaveArea = This methods defines the area that the HMI guarantees not to 
-cover with other windows or user interface elements
+		cover with other windows or user interface elements
 	**>
 	method setMapViewSaveArea {
 		in {
@@ -1074,7 +1209,7 @@ cover with other windows or user interface elements
 
 	<**
 		@description : setMapViewSaveArea = This methods defines the area that the HMI guarantees not to 
-cover with other windows or user interface elements
+		cover with other windows or user interface elements
 	**>
 	method getMapViewSaveArea {
 		in {
@@ -1085,6 +1220,21 @@ cover with other windows or user interface elements
 			Handle mapViewInstanceHandle
 		}
 		out {
+			MapViewArea saveArea
+		}
+	}
+
+	<**
+		@description : mapViewSaveAreaChanged = This signal is emitted when the area that the HMI guarantees not to cover with other windows or user interface elements chnages
+	**>
+	broadcast mapViewSaveAreaChanged {
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
 			MapViewArea saveArea
 		}
 	}
@@ -1231,6 +1381,24 @@ cover with other windows or user interface elements
 	}
 
 	<**
+		@description : mapViewVisibilityChanged = This signal is emitted when the MapView visibility changes
+	**>
+	broadcast mapViewVisibilityChanged {
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : visibilityMode = enum(INVALID,VISIBLE,INVISIBLE,FROZEN, ... )
+			**>
+			Visibility visibilityMode
+		}
+	}
+
+	<**
 		@description : getSupportedMapViewVisibilityModes = This method retrieves the supported mapview visibility modes
 	**>
 	method getSupportedMapViewVisibilityModes {
@@ -1274,6 +1442,24 @@ cover with other windows or user interface elements
 			Handle mapViewInstanceHandle
 		}
 		out {
+
+			<**
+				@description : performanceLevel = enum(INVALID,LEVEL1,LEVEL2,LEVEL3,LEVEL4,LEVEL5, ... )
+			**>
+			Level performanceLevel
+		}
+	}
+
+	<**
+		@description : mapViewPerformanceLevelChanged = This signal is emitted when the perfomance level of a map instance changes
+	**>
+	broadcast mapViewPerformanceLevelChanged {
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
 
 			<**
 				@description : performanceLevel = enum(INVALID,LEVEL1,LEVEL2,LEVEL3,LEVEL4,LEVEL5, ... )
@@ -1343,6 +1529,20 @@ cover with other windows or user interface elements
 	}
 
 	<**
+		@description : displayedRoutes = This signal is emitted when the list of displayed routes change
+	**>
+	broadcast displayedRoutes {
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			DisplayedRoute [] displayedRoutes
+		}
+	}
+
+	<**
 		@description : getDisplayedRoutes = This method returns a list of displayed routes
 	**>
 	method getDisplayedRoutes {
@@ -1370,7 +1570,7 @@ cover with other windows or user interface elements
 			Handle mapViewInstanceHandle
 		}
 		out {
-			UInt16 [] poiCategoryIds
+			CategoryID[] poiCategoryIds
 		}
 	}
 
@@ -1390,7 +1590,8 @@ cover with other windows or user interface elements
 				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
 			Handle mapViewInstanceHandle
-			UInt16 [] poiCategoryIds
+			
+			CategoryID[] poiCategoryIds
 		}
 	}
 
@@ -1410,7 +1611,8 @@ cover with other windows or user interface elements
 				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
 			Handle mapViewInstanceHandle
-			UInt16 [] poiCategoryIds
+			
+			CategoryID[] poiCategoryIds
 
 			<**
 				@description : minScaleID = minimun scale on which the POI categories are displayed
@@ -1439,7 +1641,38 @@ cover with other windows or user interface elements
 				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
 			Handle mapViewInstanceHandle
-			UInt16 [] poiCategoryIds
+			
+			CategoryID[] poiCategoryIds
+		}
+	}
+
+	<**
+		@description : poiCategoriesVisibilityChanged = This signal is emitted when the visibility of POI categories on a map instance changes
+	**>
+	broadcast poiCategoriesVisibilityChanged {
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+
+			CategoryID[] poiCategoryIds
+
+			<**
+				@description : visible = TRUE means that the POI categories are visible
+			**>
+			Boolean visible
+
+			<**
+				@description : minScaleID = minimun scale on which the POI categories are displayed
+			**>
+			Int8 minScaleID
+
+			<**
+				@description : maxScaleID = maximum scale on which the POI categories are displayed
+			**>
+			Int8 maxScaleID
 		}
 	}
 
@@ -1501,6 +1734,24 @@ cover with other windows or user interface elements
 			Handle mapViewInstanceHandle
 		}
 		out {
+
+			<**
+				@description : mapViewTheme = enum(INVALID,THEME_1,THEME_2,THEME_3, ... )
+			**>
+			MapTheme mapViewTheme
+		}
+	}
+
+	<**
+		@description : mapViewThemeChanged = This signal is emitted when the theme of a map view instance changes
+	**>
+	broadcast mapViewThemeChanged {
+		out {
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
 
 			<**
 				@description : mapViewTheme = enum(INVALID,THEME_1,THEME_2,THEME_3, ... )
@@ -1648,62 +1899,5 @@ cover with other windows or user interface elements
 			SelectedMapElement [] selectedElements
 		}
 	}
-
-	<**
-		@description : mapViewScaleChanged = This signal is emitted when the mapview scale changes
-	**>
-	broadcast mapViewScaleChanged {
-		out {
-
-			<**
-				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
-			**>
-			Handle mapViewInstanceHandle
-
-			<**
-				@description : scaleID = scale identifier. Range[0:256]
-			**>
-			Int8 scaleID
-
-			<**
-				@description : isMinMax = enum(INVALID,MIN,MAX,MID, ... )
-			**>
-			MapScaleType isMinMax
-		}
-	}
-
-	<**
-		@description : mapViewVisibilityChanged = This signal is emitted when the MapView visibility changes
-	**>
-	broadcast mapViewVisibilityChanged {
-		out {
-
-			<**
-				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
-			**>
-			Handle mapViewInstanceHandle
-
-			<**
-				@description : visibilityMode = enum(INVALID,VISIBLE,INVISIBLE,FROZEN, ... )
-			**>
-			Visibility visibilityMode
-		}
-	}
-
-	<**
-		@description : displayedRoutes = This signal is emitted when the list of displayed routes change
-	**>
-	broadcast displayedRoutes {
-		out {
-
-			<**
-				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
-			**>
-			Handle mapViewInstanceHandle
-			DisplayedRoute [] displayedRoutes
-		}
-	}
-
-
 
 }

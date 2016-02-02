@@ -20,4 +20,7 @@ typeCollection CommonTypes {
 		String date
 	}
 
+    <** @description:Unique ID for a POI Categories**>
+    typedef CategoryID is UInt32
+    
 }

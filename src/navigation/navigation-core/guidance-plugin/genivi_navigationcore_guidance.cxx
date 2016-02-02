@@ -48,6 +48,8 @@
 #include "vehicle.h"
 #include "route.h"
 
+#include "navigation-common-dbus.h"
+
 #if (!DEBUG_ENABLED)
 #undef dbg
 #define dbg(level,...) ;
@@ -118,11 +120,11 @@ class GuidanceObj
     void SetVoiceGuidanceSettings(const uint16_t& promptMode);
     uint16_t GetVoiceGuidanceSettings();
 	void PlayVoiceManeuver();
-	void GetGuidanceStatus(uint16_t& guidanceStatus, uint32_t& routeHandle);
+    void GetGuidanceStatus(int32_t& guidanceStatus, uint32_t& routeHandle);
 	void GetDestinationInformation(uint32_t& offset, uint32_t& TravelTime, int32_t& Direction, int16_t& TimeZone);
-    void GetManeuver(struct item *item, uint32_t& DistanceToManeuver, uint16_t& Maneuver, std::string& RoadAfterManeuver, ::DBus::Struct< uint16_t, ::DBus::Variant >& ManeuverData);
-    void GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, uint16_t& numberOfManeuvers, std::vector< ::DBus::Struct< std::string, std::string, uint16_t, uint16_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, uint16_t, std::vector< ::DBus::Struct< uint16_t, ::DBus::Variant > > > > > >& maneuversList);
-	void GetGuidanceDetails(bool& voiceGuidance, bool& vehicleOnTheRoad, bool& isDestinationReached, uint16_t& maneuver);
+    void GetManeuver(struct item *item, uint32_t& DistanceToManeuver, int32_t &Maneuver, std::string& RoadAfterManeuver, std::pair<int32_t, DBusCommonAPIVariant> &ManeuverData);
+    void GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, uint16_t& numberOfManeuvers, std::vector< ::DBus::Struct< std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > > >& maneuversList);
+    void GetGuidanceDetails(bool& voiceGuidance, bool& vehicleOnTheRoad, bool& isDestinationReached, int32_t &maneuver);
 	GuidanceObj(class Guidance *guidance, uint32_t SessionHandle, uint32_t RouteHandle);
 	~GuidanceObj();
 };
@@ -255,7 +257,7 @@ class  Guidance
 	}
 
     void
-    GetDestinationInformation(uint32_t& offset, uint32_t& travelTime, int32_t& direction, uint16_t& side, int16_t& timeZone, int16_t& daylightSavingTime)
+    GetDestinationInformation(uint32_t& offset, uint32_t& travelTime, int32_t& direction, int32_t& side, int16_t& timeZone, int16_t& daylightSavingTime)
 	{
         dbg(lvl_debug,"enter\n");
 		if (!guidance) {
@@ -317,7 +319,7 @@ class  Guidance
 	}
 
 	void
-	GetGuidanceDetails(bool& voiceGuidance, bool& vehicleOnTheRoad, bool& isDestinationReached, uint16_t& maneuver)
+    GetGuidanceDetails(bool& voiceGuidance, bool& vehicleOnTheRoad, bool& isDestinationReached, int32_t& maneuver)
 	{
 		if (!guidance) {
             dbg(lvl_debug,"no guidance active\n");
@@ -336,15 +338,14 @@ class  Guidance
         guidance->PlayVoiceManeuver();
 	}
 
-
     void
-    GetWaypointInformation(const uint16_t& requestedNumberOfWaypoints, uint16_t& numberOfWaypoints, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, uint16_t, int16_t, int16_t, bool, uint16_t > >& waypointsList)
+    GetWaypointInformation(const uint16_t& requestedNumberOfWaypoints, uint16_t& numberOfWaypoints, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, int16_t, int16_t, bool, uint16_t > >& waypointsList)
     {
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
     void
-    GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, uint16_t& numberOfManeuvers, std::vector< ::DBus::Struct< std::string, std::string, uint16_t, uint16_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, uint16_t, std::vector< ::DBus::Struct< uint16_t, ::DBus::Variant > > > > > >& maneuversList)
+    GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, uint16_t& numberOfManeuvers, std::vector< ::DBus::Struct< std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > > >& maneuversList)
 	{
 		if (!guidance) {
             dbg(lvl_debug,"no guidance active\n");
@@ -354,7 +355,7 @@ class  Guidance
 	}
 
 	void
-    SetRouteCalculationMode(const uint32_t& sessionHandle, const uint16_t& routeCalculationMode)
+    SetRouteCalculationMode(const uint32_t& sessionHandle, const int32_t& routeCalculationMode)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
@@ -366,7 +367,7 @@ class  Guidance
 	}
 
 	void
-	GetGuidanceStatus(uint16_t& guidanceStatus, uint32_t& routeHandle)
+    GetGuidanceStatus(int32_t& guidanceStatus, uint32_t& routeHandle)
 	{
 		if (guidance) {
 			guidance->GetGuidanceStatus(guidanceStatus, routeHandle);
@@ -377,12 +378,12 @@ class  Guidance
 	}
 
 	void
-	SetVoiceGuidanceSettings(const uint16_t& promptMode)
+    SetVoiceGuidanceSettings(const int32_t& promptMode)
 	{
         guidance->SetVoiceGuidanceSettings(promptMode);
 	}
 
-	uint16_t
+    int32_t
 	GetVoiceGuidanceSettings()
 	{
         return guidance->GetVoiceGuidanceSettings();
@@ -437,136 +438,143 @@ GuidanceObj::GetDestinationInformation(uint32_t& Distance, uint32_t& TravelTime,
 }
 
 void
-GuidanceObj::GetManeuver(struct item *item, uint32_t& DistanceToManeuver, uint16_t& Maneuver, std::string& RoadAfterManeuver, ::DBus::Struct< uint16_t, ::DBus::Variant >& ManeuverData)
+GuidanceObj::GetManeuver(struct item *item, uint32_t& DistanceToManeuver, int32_t& Maneuver, std::string& RoadAfterManeuver, std::pair< int32_t, DBusCommonAPIVariant >& ManeuverData)
 {
 	struct attr length, street_name;
-	if (item_attr_get(item, attr_length, &length)) {
+    int32_t index;
+    DBusCommonAPIVariant data;
+
+    if (item_attr_get(item, attr_length, &length)) {
 		DistanceToManeuver=length.u.num;
 	}
 	if (item_attr_get(item, attr_street_name, &street_name)) {
 		RoadAfterManeuver=std::string(street_name.u.str);
 	}
-    ManeuverData._1 = GENIVI_NAVIGATIONCORE_DIRECTION;
+
+    index = GENIVI_NAVIGATIONCORE_DIRECTION;
 	switch (item->type) {
 	case type_nav_straight:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
 		break;
 	case type_nav_turnaround:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_UTURN_LEFT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_UTURN_LEFT);
 		break;
 	case type_nav_right_1:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_RIGHT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_RIGHT);
 		break;
 	case type_nav_right_2:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_RIGHT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_RIGHT);
 		break;
 	case type_nav_right_3:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_RIGHT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_RIGHT);
 		break;
 	case type_nav_left_1:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_LEFT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_LEFT);
 		break;
 	case type_nav_left_2:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_LEFT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_LEFT);
 		break;
 	case type_nav_left_3:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_LEFT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_LEFT);
 		break;
 	// FIXME: Are ManeuverDirection values right here?
 	case type_nav_roundabout_r1:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_RIGHT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_RIGHT);
 		break;
 	case type_nav_roundabout_r2:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_RIGHT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_RIGHT);
 		break;
 	case type_nav_roundabout_r3:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_RIGHT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_RIGHT);
 		break;
 	case type_nav_roundabout_r4:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
 		break;
 	case type_nav_roundabout_r5:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_LEFT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_LEFT);
 		break;
 	case type_nav_roundabout_r6:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_LEFT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_LEFT);
 		break;
 	case type_nav_roundabout_r7:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_LEFT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_LEFT);
 		break;
 	case type_nav_roundabout_r8:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_UTURN_LEFT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_UTURN_LEFT);
 		break;
 	// FIXME: Distinguish between clockwise and counterclockwise roundabout?
 	case type_nav_roundabout_l1:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_LEFT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_LEFT);
 		break;
 	case type_nav_roundabout_l2:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_LEFT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_LEFT);
 		break;
 	case type_nav_roundabout_l3:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_LEFT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_LEFT);
 		break;
 	case type_nav_roundabout_l4:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
 		break;
 	case type_nav_roundabout_l5:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_RIGHT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_SLIGHT_RIGHT);
 		break;
 	case type_nav_roundabout_l6:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_RIGHT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_RIGHT);
 		break;
 	case type_nav_roundabout_l7:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_RIGHT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_HARD_RIGHT);
 		break;
 	case type_nav_roundabout_l8:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_UTURN_RIGHT);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_UTURN_RIGHT);
 		break;
 	case type_nav_destination:
         Maneuver=GENIVI_NAVIGATIONCORE_DESTINATION;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
 		break;
 	default:
         dbg(lvl_error,"Unable to convert type %s\n",item_to_name(item->type));
         Maneuver=GENIVI_NAVIGATIONCORE_INVALID;
-        ManeuverData._2=variant_uint16(GENIVI_NAVIGATIONCORE_INVALID);
+        index = GENIVI_NAVIGATIONCORE_INVALID;
+        data._2=variant_uint16(GENIVI_NAVIGATIONCORE_INVALID);
 	}
+    std::pair< int32_t, DBusCommonAPIVariant > ret(index,data);
+    ManeuverData=ret;
 }
 
 
 void
-GuidanceObj::GetGuidanceDetails(bool& voiceGuidance, bool& vehicleOnTheRoad, bool& isDestinationReached, uint16_t& maneuver)
+GuidanceObj::GetGuidanceDetails(bool& voiceGuidance, bool& vehicleOnTheRoad, bool& isDestinationReached, int32_t& maneuver)
 {
     struct map_rect *mr=get_map_rect();
     struct item *item;
     item=get_item(mr);
     std::string road_name_after_maneuver;
     uint32_t offset_maneuver;
-    ::DBus::Struct< uint16_t, ::DBus::Variant > maneuver_data;
+    std::pair< int32_t, DBusCommonAPIVariant > maneuver_data;
 
     voiceGuidance = m_voice_guidance;
     vehicleOnTheRoad = true; //by default, no off-road managed
@@ -577,24 +585,26 @@ GuidanceObj::GetGuidanceDetails(bool& voiceGuidance, bool& vehicleOnTheRoad, boo
 }
 
 void
-GuidanceObj::GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, uint16_t& numberOfManeuvers, std::vector< ::DBus::Struct< std::string, std::string, uint16_t, uint16_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, uint16_t, std::vector< ::DBus::Struct< uint16_t, ::DBus::Variant > > > > > >& maneuversList)
+GuidanceObj::GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, uint16_t& numberOfManeuvers, std::vector< ::DBus::Struct< std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > > >& maneuversList)
 {
 	struct map_rect *mr=get_map_rect();
 	struct item *item;
     uint16_t maneuverIndex;
+    std::map< int32_t, DBusCommonAPIVariant >::iterator it;
+
     numberOfManeuvers = 0;
     maneuverIndex = 0;
     while (item=get_item(mr)) { //scan the list of maneuvers of the route
         if (maneuverIndex >= maneuverOffset && maneuverIndex < maneuverOffset+requestedNumberOfManeuvers) {
-            ::DBus::Struct< std::string, std::string, uint16_t, uint16_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, uint16_t, std::vector< ::DBus::Struct< uint16_t, ::DBus::Variant > > > > >maneuver;
-            ::DBus::Struct< uint32_t, uint32_t, int32_t, uint16_t, std::vector< ::DBus::Struct< uint16_t, ::DBus::Variant > > > sub_maneuver;
-            ::DBus::Struct< uint16_t, ::DBus::Variant > maneuver_data;
+            ::DBus::Struct< std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, DBusCommonAPIVariant > > > > maneuver;
+            ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, DBusCommonAPIVariant > > sub_maneuver;
+            std::pair< int32_t, DBusCommonAPIVariant > maneuver_data;
             maneuver._1 = ""; //roadNumberAfterManeuver
             maneuver._3 = GENIVI_NAVIGATIONCORE_DEFAULT; //roadPropertyAfterManeuver
             maneuver._4 = GENIVI_NAVIGATIONCORE_RIGHT; //drivingSide
             maneuver._5 = 0; //offsetOfNextManeuver
             GetManeuver(item, sub_maneuver._1, sub_maneuver._4, maneuver._2, maneuver_data);
-            sub_maneuver._5.push_back(maneuver_data);
+            sub_maneuver._5.insert(maneuver_data);
             maneuver._6.push_back(sub_maneuver);
             if (maneuversList.size())
                 maneuversList.back()._5 = sub_maneuver._1; //offsetOfNextManeuver of the last record is the offsetOfManeuver  of this one
@@ -666,7 +676,7 @@ uint16_t GuidanceObj::GetVoiceGuidanceSettings()
 }
 
 void
-GuidanceObj::GetGuidanceStatus(uint16_t& guidanceStatus, uint32_t& routeHandle)
+GuidanceObj::GetGuidanceStatus(int32_t &guidanceStatus, uint32_t& routeHandle)
 {
 	if (m_paused)
         guidanceStatus = GENIVI_NAVIGATIONCORE_INACTIVE;

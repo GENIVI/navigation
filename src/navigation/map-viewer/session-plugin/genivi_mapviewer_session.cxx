@@ -34,6 +34,8 @@
 #include "plugin.h"
 #include "event.h"
 
+#include "navigation-common-dbus.h"
+
 #if (!DEBUG_ENABLED)
 #undef dbg
 #define dbg(level,...) ;
@@ -79,7 +81,7 @@ class  Session
 		return SessionHandle;
 	}
 
-    uint16_t GetSessionStatus(const uint32_t& SessionHandle)
+    DBusCommonAPIEnumeration GetSessionStatus(const uint32_t& SessionHandle)
 	{
 		if (handles[SessionHandle])
 			return GENIVI_MAPVIEWER_AVAILABLE;

@@ -6,6 +6,7 @@
 
 package org.genivi.navigation.poiservice
 
+import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 
 typeCollection POIServiceTypes {
@@ -16,9 +17,6 @@ typeCollection POIServiceTypes {
 	
    <** @description:Unique ID for a POI results**>
     typedef POI_ID is UInt32
-    
-    <** @description:Unique ID for a POI Categories**>
-    typedef CategoryID is UInt32
     
     <** @description:Unique ID for a POI Icon Resource**>
     typedef ResourceID is UInt32

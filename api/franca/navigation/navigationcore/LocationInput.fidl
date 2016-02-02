@@ -57,7 +57,7 @@ interface LocationInput {
 	    Int32 intValue
 	    Double doubleValue
 	    String stringValue
-	    Coordinate3D coordinateValue
+	    Coordinate3D coordinate3DValue
 	    ByteBuffer internalData
     }
 
@@ -95,9 +95,6 @@ interface LocationInput {
 				@description : Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
 			LocationHandle locationInputHandle
-		}
-		error {
-			NoMoreLocationInputHandles
 		}
 	}
 

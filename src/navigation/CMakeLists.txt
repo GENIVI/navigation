@@ -57,6 +57,7 @@ set(vehicle/null "${NAVIT_NULL_VEHICLE}")
 set(graphics/qt_qpainter "${NAVIT_QTPAINTER}")
 
 set(API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api")
+set(NAVIGATION_COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/navigation-common")
 
 if(NOT ${YOCTO_CONFIG})
     set(NAVIT_CMAKE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/navit/navit/cmake")

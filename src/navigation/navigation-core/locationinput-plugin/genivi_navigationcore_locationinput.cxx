@@ -41,6 +41,8 @@
 #include "coord.h"
 #include "transform.h"
 
+#include "navigation-common-dbus.h"
+
 #if (!DEBUG_ENABLED)
 #undef dbg
 #define dbg(level,...) ;
@@ -65,7 +67,7 @@ class LocationInputObj
 	struct event_idle *m_event;
 	bool m_spell;
 	bool m_spell_backspace;
-	std::vector< std::vector< std::map< uint16_t, ::DBus::Variant > > > m_data;
+    std::vector< std::vector< std::map< int32_t, DBusCommonAPIVariant > > > m_data;
     int m_chunk;
     int m_count;
     void SetSelectionCriterion(uint32_t SessionHandle, uint32_t SelectionCriterion);
@@ -77,8 +79,8 @@ class LocationInputObj
 	void Idle(void);
     void Spell(uint32_t SessionHandle, const std::string& InputCharacter, uint32_t MaxWindowSize);
     void RequestListUpdate(uint32_t sessionHandle, const uint16_t& offset, uint16_t maxWindowSize);
-    void GetEntry(uint16_t index, std::map< uint16_t, ::DBus::Variant >& entry);
-    void ValidateAddress(uint32_t sessionHandle, const std::map< uint16_t, ::DBus::Variant >& inputAddress);
+    void GetEntry(uint16_t index, std::map<int32_t, DBusCommonAPIVariant> &entry);
+    void ValidateAddress(uint32_t sessionHandle, const std::map<int32_t, DBusCommonAPIVariant> &inputAddress);
     LocationInputObj(LocationInput *locationinput, uint32_t handle);
 	~LocationInputObj();
 };
@@ -122,9 +124,9 @@ class  LocationInput
 		handles[LocationInputHandle]=NULL;
 	}
 
-    std::vector< uint16_t > GetSupportedAddressAttributes()
+    std::vector< int32_t > GetSupportedAddressAttributes()
     {
-        std::vector< uint16_t > AddressAttributes;
+        std::vector< int32_t > AddressAttributes;
 		AddressAttributes.resize(5);
 		AddressAttributes[0]=GENIVI_NAVIGATIONCORE_COUNTRY; 
 		AddressAttributes[1]=GENIVI_NAVIGATIONCORE_CITY; 
@@ -134,22 +136,22 @@ class  LocationInput
         return AddressAttributes;
     }
 
-    void SetAddress(const uint32_t& SessionHandle, const uint32_t& LocationInputHandle, const std::map< uint16_t, ::DBus::Variant >& Address)
+    void SetAddress(const uint32_t& sessionHandle, const uint32_t& locationInputHandle, const std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >& address)
 	{
 		dbg(lvl_debug,"enter\n");
-		LocationInputObj *obj=handles[LocationInputHandle];
+        LocationInputObj *obj=handles[locationInputHandle];
 		if (!obj)
 			 throw DBus::ErrorInvalidArgs("location handle invalid");
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-    void SetSelectionCriterion(const uint32_t& SessionHandle, const uint32_t& LocationInputHandle, const uint16_t& SelectionCriterion)
+    void SetSelectionCriterion(const uint32_t& sessionHandle, const uint32_t& locationInputHandle, const int32_t& selectionCriterion)
 	{
 		dbg(lvl_debug,"enter\n");
-		LocationInputObj *obj=handles[LocationInputHandle];
+        LocationInputObj *obj=handles[locationInputHandle];
 		if (!obj)
 			 throw DBus::ErrorInvalidArgs("location handle invalid");
-		obj->SetSelectionCriterion(SessionHandle, SelectionCriterion);
+        obj->SetSelectionCriterion(sessionHandle, selectionCriterion);
 	}
 
     void Search(const uint32_t& SessionHandle, const uint32_t& LocationInputHandle, const std::string& InputString, const uint16_t& MaxWindowSize)
@@ -197,9 +199,9 @@ class  LocationInput
         obj->RequestListUpdate(sessionHandle, offset, maxWindowSize);
 	}
 
-    std::map< uint16_t, ::DBus::Variant > GetEntry(const uint32_t& locationInputHandle, const uint16_t& index)
+    std::map< int32_t, DBusCommonAPIVariant > GetEntry(const uint32_t& locationInputHandle, const uint16_t& index)
 	{
-		std::map< uint16_t, ::DBus::Variant > ret;
+        std::map< int32_t, DBusCommonAPIVariant > ret;
 		LocationInputObj *obj=handles[locationInputHandle];
 		if (!obj)
 			 throw DBus::ErrorInvalidArgs("location handle invalid");
@@ -207,7 +209,7 @@ class  LocationInput
 		return ret;
 	}
 
-    void ValidateAddress(const uint32_t& sessionHandle, const uint32_t& locationInputHandle, const std::map< uint16_t, ::DBus::Variant >& inputAddress)
+    void ValidateAddress(const uint32_t& sessionHandle, const uint32_t& locationInputHandle, const std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >& inputAddress)
 	{
 		LocationInputObj *obj=handles[locationInputHandle];
 		if (!obj)
@@ -349,8 +351,8 @@ LocationInputObj::RequestListUpdate(uint32_t sessionHandle, const uint16_t& offs
 void
 LocationInputObj::SelectEntry(const uint32_t& SessionHandle, const uint32_t& Index)
 {
-	std::map< uint16_t, ::DBus::Variant > *res=NULL;
-	std::vector< uint16_t> next;
+    std::map< int32_t, DBusCommonAPIVariant > *res=NULL;
+    std::vector< int32_t> next;
 	int window=0;
 	bool guidable=false;
 	for (int i = 0 ; i < m_data.size() ; i++) {
@@ -424,7 +426,7 @@ LocationInputObj::Idle(void)
 	m_data.resize(0);
 	m_data.resize(1);
 	while ((res=search_list_get_result(m_sl))) {
-		std::map< uint16_t, ::DBus::Variant> entry;
+        std::map< int32_t, DBusCommonAPIVariant> entry;
 		if (res->country && res->country->name) {
 			dbg(lvl_debug,"country %s\n",res->country->name);
 			entry[GENIVI_NAVIGATIONCORE_COUNTRY]=variant_string(std::string(res->country->name));
@@ -494,12 +496,12 @@ LocationInputObj_Idle(LocationInputObj *obj)
 }
 
 void
-LocationInputObj::GetEntry(uint16_t index, std::map< uint16_t, ::DBus::Variant >& entry)
+LocationInputObj::GetEntry(uint16_t index, std::map<int32_t, DBusCommonAPIVariant> &entry)
 {
 }
 
 void
-LocationInputObj::ValidateAddress(uint32_t sessionHandle, const std::map< uint16_t, ::DBus::Variant >& inputAddress)
+LocationInputObj::ValidateAddress(uint32_t sessionHandle, const std::map< int32_t, DBusCommonAPIVariant >& inputAddress)
 {
 }
 

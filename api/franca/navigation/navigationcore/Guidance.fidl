@@ -25,10 +25,6 @@ interface Guidance {
 		NOT_AVAILABLE = 2
 	}
 
-//	enumeration RoadProperty extends BasicEnum {
-		
-//	}
-	
 	enumeration LaneType extends BasicEnum {
 		LANE_INFO_BITMASK_STRAIGHT		= 1
 		LANE_INFO_BITMASK_SLIGHTRIGHT	= 2
@@ -114,7 +110,36 @@ interface Guidance {
 		DIVIDER_INTERRUPTEDSOLID		= 598
 	}
 
-	struct tWaypointStruct {
+	enumeration ManeuverDataAttribute extends BasicEnum { //Base 0x260
+		LENGTH				= 608
+		DIRECTION			= 609
+		EXIT_NUMBER			= 610
+		ROAD_FORM			= 611
+		LANE_INFO			= 612
+		LATITUDE			= 613
+		LONGITUDE			= 614
+		ALTITUDE			= 615
+	}
+
+    union ManeuverDataValue {
+	    UInt16 uint16Value
+	    String stringValue
+	    LaneInfo[] laneInfoValue
+	    Coordinate3D coordinate3DValue
+    }
+	
+	map ManeuverData {
+		ManeuverDataAttribute to ManeuverDataValue
+	}	
+	
+	struct LaneInfo {
+		UInt32 laneIndex
+		ByteBuffer laneDirections
+		LaneType directionToFollow
+		LaneDivider divider
+	}
+
+	struct WaypointStruct {
 		UInt32 waypointOffset
 		UInt32 travelTime
 		Int32 direction
@@ -126,30 +151,14 @@ interface Guidance {
 	}
 
 	<**
-		@description : struct generated for DBus argument GetManeuversList_maneuversListElem6Elem4
-	**>
-	struct ManeuverSegment {
-		ManeuverType maneuver
-		UInt16 maneuverLength
-	}
-
-	<**
-		@description : struct generated for DBus argument GetManeuversList_maneuversListElem6Elem5
-	**>
-	struct ManeuverTurn {
-		ManeuverDirection maneuverDirection
-		String exitNumber
-	}
-
-	<**
 		@description : struct generated for DBus argument GetManeuversList_maneuversListElem6
 	**>
-	struct tManeuverItem {
+	struct ManeuverItem {
 		UInt32 offsetOfManeuver
 		UInt32 travelTime
 		Int32 direction
-		ManeuverSegment segment
-		ManeuverTurn turnTo
+		ManeuverType maneuver
+		ManeuverData maneuverData
 	}
 
 	<**
@@ -161,7 +170,7 @@ interface Guidance {
 		UInt16 roadPropertyAfterManeuver
 		Side drivingSide
 		UInt32 offsetOfNextManeuver
-		tManeuverItem[] items
+		ManeuverItem[] items
 	}
 
 	<**
@@ -273,7 +282,7 @@ interface Guidance {
 				@description : numberOfWaypoints = the number of retrieved waypoints(NOTE: the number corresponds to the number of elements in the array)
 			**>
 			UInt16 numberOfWaypoints
-			tWaypointStruct [] waypointsList
+			WaypointStruct [] waypointsList
 		}
 	}
 
@@ -301,7 +310,7 @@ interface Guidance {
 			<**
 				@description : side = enum(LEFT,RIGHT,NOT_AVAILABLE)
 			**>
-			UInt16 side
+			Side side
 
 			<**
 				@description : timeZone = time zone of the destination. It is expressed as the time difference from the UTC in minutes

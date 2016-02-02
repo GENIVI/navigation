@@ -37,6 +37,8 @@
 #include "plugin.h"
 #include "event.h"
 
+#include "navigation-common-dbus.h"
+
 #if (!DEBUG_ENABLED)
 #undef dbg
 #define dbg(level,...) ;
@@ -119,7 +121,7 @@ country_2_to_3(const char *in)
 }
 
 
-std::map< uint16_t, ::DBus::Variant > unitsOfMeasurement;
+std::map< int32_t, DBusCommonAPIVariant > unitsOfMeasurement;
 
 class  Configuration
 : public org::genivi::navigationcore::Configuration_adaptor,
@@ -144,24 +146,24 @@ class  Configuration
 	}
 
 	void
-	SetUnitsOfMeasurement(const std::map< uint16_t, ::DBus::Variant >& unitsOfMeasurementList)
+    SetUnitsOfMeasurement(const std::map< int32_t, DBusCommonAPIVariant >& unitsOfMeasurementList)
 	{
 		unitsOfMeasurement=unitsOfMeasurementList;
-		std::vector< uint16_t > changed;
+        std::vector< int32_t > changed;
 		changed.push_back(GENIVI_NAVIGATIONCORE_UNITS_OF_MEASUREMENT);
 		ConfigurationChanged(changed);
 	}
 
-	std::map< uint16_t, ::DBus::Variant >
+    std::map< int32_t, DBusCommonAPIVariant >
 	GetUnitsOfMeasurement()
 	{
 		return unitsOfMeasurement;
 	}
 
-    std::map< uint16_t, ::DBus::Variant >
+    std::map< int32_t, DBusCommonAPIVariant >
     GetSupportedUnitsOfMeasurement()
     {
-        std::map< uint16_t, ::DBus::Variant > ret;
+        std::map< int32_t, DBusCommonAPIVariant > ret;
 	std::vector< uint16_t > length;
 	length.push_back(GENIVI_NAVIGATIONCORE_MILE);
 	length.push_back(GENIVI_NAVIGATIONCORE_METER);
@@ -170,18 +172,18 @@ class  Configuration
      }
 
 	void
-	SetTimeFormat(const uint16_t& timeFormat)
+    SetTimeFormat(const int32_t& timeFormat)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-	uint16_t
+    int32_t
 	GetTimeFormat()
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-    std::vector< uint16_t >
+    std::vector< int32_t >
     GetSupportedTimeFormats()
     {
         throw DBus::ErrorNotSupported("Not yet supported");
@@ -194,7 +196,7 @@ class  Configuration
 		setenv("LANG",lang,1);
 		setlocale(LC_ALL,"");
         scriptCode = script;
-		std::vector< uint16_t > changed;
+        std::vector< int32_t > changed;
 		changed.push_back(GENIVI_NAVIGATIONCORE_LOCALE);
 		ConfigurationChanged(changed);
 	}
@@ -246,18 +248,18 @@ class  Configuration
 	}
 
 	void
-	SetCoordinatesFormat(const uint16_t& coordinatesFormat)
+    SetCoordinatesFormat(const int32_t& coordinatesFormat)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-	uint16_t
+    int32_t
 	GetCoordinatesFormat()
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-    std::vector< uint16_t >
+    std::vector< int32_t >
     GetSupportedCoordinatesFormats()
     {
         throw DBus::ErrorNotSupported("Not yet supported");

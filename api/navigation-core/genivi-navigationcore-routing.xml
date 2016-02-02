@@ -95,7 +95,7 @@
           <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="costModel" type="q" direction="in">
+      <arg name="costModel" type="i" direction="in">
         <doc>
           <line>costModel = enum(INVALID,FASTEST,SHORTEST,ECOLOGICAL,SCENIC,EASY,OFF_ROAD,BALANCED,CHEAPEST, ... )</line>
           <line>FASTEST = least time to reach the destination </line>
@@ -123,7 +123,7 @@
           <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="costModel" type="q" direction="out">
+      <arg name="costModel" type="i" direction="out">
         <doc>
           <line>costModel = enum(INVALID,FASTEST,SHORTEST,ECOLOGICAL,SCENIC,EASY,OFF_ROAD,BALANCED,CHEAPEST, ... )</line>
           <line>FASTEST = least time to reach the destination </line>
@@ -141,7 +141,7 @@
       <doc>
         <line>GetSupportedCostModels = This method retrieves a list of supported cost models</line>
       </doc>
-      <arg name="costModelsList" type="aq" direction="out">
+      <arg name="costModelsList" type="ai" direction="out">
         <doc>
           <line>costModelsList = array[costModel]</line>
           <line>costModel = enum(INVALID,FASTEST,SHORTEST,ECOLOGICAL,SCENIC,EASY,OFF_ROAD,BALANCED,CHEAPEST, ... )</line>
@@ -176,7 +176,7 @@
           <line>If this argument is an empty string, it means that the preferences apply to all countries</line>
         </doc>
       </arg>
-      <arg name="roadPreferenceList" type="a(qq)" direction="in">
+      <arg name="roadPreferenceList" type="a(ii)" direction="in">
         <doc>
           <line>roadPreferenceList = array[preference]</line>
           <line>preference = struct(preferenceMode,preferenceSource)</line>
@@ -188,7 +188,7 @@
           <line>preferenceSource = enum(FERRY,TOLL_ROADS,TUNNELS,HIGHWAYS_MOTORWAYS,VEHICLE_SIZE_LIMIT,CRIME_AREAS)</line>
         </doc>
       </arg>
-      <arg name="conditionPreferenceList" type="a(qq)" direction="in">
+      <arg name="conditionPreferenceList" type="a(ii)" direction="in">
         <doc>
           <line>conditionPreferenceList = array[preference]</line>
           <line>preference = struct(preferenceMode,preferenceSource)</line>
@@ -222,7 +222,7 @@
           <line>If this argument is an empty string, it means that the preferences apply to all countries</line>
         </doc>
       </arg>
-      <arg name="roadPreferenceList" type="a(qq)" direction="out">
+      <arg name="roadPreferenceList" type="a(ii)" direction="out">
         <doc>
           <line>roadPreferenceList = array[preference]</line>
           <line>preference = struct(preferenceMode,preferenceSource)</line>
@@ -234,7 +234,7 @@
           <line>preferenceSource = enum(FERRY,TOLL_ROADS,TUNNELS,HIGHWAYS_MOTORWAYS,VEHICLE_SIZE_LIMIT,CRIME_AREAS)</line>
         </doc>
       </arg>
-      <arg name="conditionPreferenceList" type="a(qq)" direction="out">
+      <arg name="conditionPreferenceList" type="a(ii)" direction="out">
         <doc>
           <line>conditionPreferenceList = array[preference]</line>
           <line>preference = struct(preferenceMode,preferenceSource)</line>
@@ -247,7 +247,7 @@
       <doc>
         <line>GetSupportedRoutePreferences = This method retrieves a list of supported route preferences</line>
       </doc>
-      <arg name="routePreferencesList" type="a(qq)" direction="out">
+      <arg name="routePreferencesList" type="a(ii)" direction="out">
         <doc>
           <line>routePreferencesList = array[preference]</line>
           <line>preference = struct(preferenceMode,preferenceSource)</line>
@@ -259,7 +259,7 @@
           <line>preferenceSource = enum(FERRY,TOLL_ROADS,TUNNELS,HIGHWAYS_MOTORWAYS,VEHICLE_SIZE_LIMIT,CRIME_AREAS)</line>
         </doc>
       </arg>
-      <arg name="conditionPreferenceList" type="a(qq)" direction="out">
+      <arg name="conditionPreferenceList" type="a(ii)" direction="out">
         <doc>
           <line>conditionPreferenceList = array[preference]</line>
           <line>preference = struct(preferenceMode,preferenceSource)</line>
@@ -282,7 +282,7 @@
           <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="routeSchedule" type="a{qu}" direction="in">
+      <arg name="routeSchedule" type="a{iu}" direction="in">
         <doc>
           <line>routeSchedule = array[detail]</line>
           <line>detail = dictionary[key,value]</line>
@@ -304,13 +304,13 @@
           <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="valuesToReturn" type="aq" direction="in">
+      <arg name="valuesToReturn" type="ai" direction="in">
         <doc>
           <line>valuesToReturn= array[value]</line>
           <line>value= enum(ARRIVAL_TIME, ARRIVAL_DATE,DEPARTURE_TIME, DEPARTURE_DATE)</line>
         </doc>
       </arg>
-      <arg name="routeSchedule" type="a{qu}" direction="out">
+      <arg name="routeSchedule" type="a{iu}" direction="out">
         <doc>
           <line> routeSchedule = array[detail]</line>
           <line>detail = dictionary[key,value]</line>
@@ -337,7 +337,7 @@
           <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="transportationMeansList" type="aq" direction="in">
+      <arg name="transportationMeansList" type="ai" direction="in">
         <doc>
           <line>transportationMeansList = array[transportationMeans]</line>
           <line>transportationMeans = enum(INVALID,BY_CAR,ON_FOOT,LONG_RANGE_TRAINS,PUBLIC_TRANSPORTATION,BY_BICYCLE,BY_TRUCK, ... )</line>
@@ -358,7 +358,7 @@
           <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="transportationMeansList" type="aq" direction="out">
+      <arg name="transportationMeansList" type="ai" direction="out">
         <doc>
           <line>transportationMeansList = array[transportationMeans]</line>
           <line>transportationMeans = enum(INVALID,BY_CAR,ON_FOOT,LONG_RANGE_TRAINS,PUBLIC_TRANSPORTATION,BY_BICYCLE,BY_TRUCK, ... )</line>
@@ -369,7 +369,7 @@
       <doc>
         <line>GetSupportedTransportationMeans = This method retrieves a list of supported means of transportation</line>
       </doc>
-      <arg name="transportationMeansList" type="aq" direction="out">
+      <arg name="transportationMeansList" type="ai" direction="out">
         <doc>
           <line>transportationMeansList = array[transportationMeans]</line>
           <line>transportationMeans = enum(INVALID,BY_CAR,ON_FOOT,LONG_RANGE_TRAINS,PUBLIC_TRANSPORTATION,BY_BICYCLE,BY_TRUCK, ... )</line>
@@ -445,7 +445,7 @@
           <line>startFromCurrentPosition = flag indicating if the current position is used as starting point</line>
         </doc>
       </arg>
-      <arg name="waypointsList" type="aa{qv}" direction="in">
+      <arg name="waypointsList" type="aa{i(yv)}" direction="in">
         <doc>
           <line>waypointsList = array[waypoint]</line>
           <line>waypoint = tuple (key,value)</line>
@@ -489,7 +489,7 @@
           <line>startFromCurrentPosition = flag indicating if the current position is used as starting point</line>
         </doc>
       </arg>
-      <arg name="waypointsList" type="aa{qv}" direction="out">
+      <arg name="waypointsList" type="aa{i(yv)}" direction="out">
         <doc>
           <line>waypointsList = array[waypoint]</line>
           <line>waypoint = tuple (key,value)</line>
@@ -556,7 +556,7 @@
           <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="unfullfilledPreferences" type="a{qq}">
+      <arg name="unfullfilledPreferences" type="a{ii}">
         <doc>
           <line>unfullfilledPreferences = array[preference]</line>
           <line>preference = tuple(preferenceMode,preferenceSource)</line>
@@ -578,13 +578,13 @@
           <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="errorCode" type="q">
+      <arg name="errorCode" type="i">
         <doc>
           <line>errorCode = enum(INVALID,UNMATCHED_POSITION,UNREACHABLE_DESTINATION,UNFULFILLED_PREFERENCE_MODE, ... )</line>
           <line>errorCode = UNFULFILLED_PREFERENCE_MODE. Refer to unfullfilledPreferences to see which routing preferences could not be met causing routing calculation to fail; for any other value the argument unfulfilledPreferences should be ignored. </line>
         </doc>
       </arg>
-      <arg name="unfullfilledPreferences" type="a{qq}">
+      <arg name="unfullfilledPreferences" type="a{ii}">
         <doc>
           <line>unfullfilledPreferences = array[preference]</line>
           <line>preference = tuple(preferenceMode,preferenceSource)</line>
@@ -606,7 +606,7 @@
           <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="status" type="q">
+      <arg name="status" type="i">
         <doc>
           <line>status = enum(INVALID,CALCULATION_OK,NO_POSITION, ... )</line>
         </doc>
@@ -658,7 +658,7 @@
           <line>detailLevel = detail level</line>
         </doc>
       </arg>
-      <arg name="valuesToReturn" type="aq" direction="in">
+      <arg name="valuesToReturn" type="ai" direction="in">
         <doc>
           <line>valuesToReturn= array[key]</line>
           <line>key = enum(INVALID,LINK-ID,INTERMEDIATE_POINTS,START_LATITUDE,START_LONGITUDE,START_ALTITUDE,</line>
@@ -681,7 +681,7 @@
           <line>totalNumberOfSegments = total number of segments</line>
         </doc>
       </arg>
-      <arg name="routeSegments" type="aa{qv}" direction="out">
+      <arg name="routeSegments" type="aa{i(yv)}" direction="out">
         <doc>
           <line>routeSegments = array[segment]</line>
           <line>segment = tuple(key,value)</line>
@@ -725,13 +725,13 @@
           <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="valuesToReturn" type="aq" direction="in">
+      <arg name="valuesToReturn" type="ai" direction="in">
         <doc>
           <line>valuesToReturn = array[key]</line>
           <line>key = enum(ARRIVAL_TIME,ARRIVAL_DATE,DEPARTURE_TIME,DEPARTURE_DATE,TOTAL_DISTANCE,TOTAL_TIME, ... ,ALL)</line>
         </doc>
       </arg>     
-      <arg name="routeOverview" type="a{qv}" direction="out">
+      <arg name="routeOverview" type="a{i(yv)}" direction="out">
         <doc>
           <line>routeOverview = array[detail]</line>
           <line>detail = tuple(key,value)</line>

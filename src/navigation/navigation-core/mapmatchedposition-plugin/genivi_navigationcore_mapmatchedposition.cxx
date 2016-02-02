@@ -44,6 +44,8 @@
 #include "route.h"
 #include "config_.h"
 
+#include "navigation-common-dbus.h"
+
 #if (!DEBUG_ENABLED)
 #undef dbg
 #define dbg(level,...) ;
@@ -152,11 +154,11 @@ class  MapMatchedPosition
 	}	
 #endif
 
-	std::map< uint16_t, ::DBus::Variant >
-	GetPosition(const std::vector< uint16_t >& valuesToReturn)
+    std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >
+    GetPosition(const std::vector< int32_t >& valuesToReturn)
 	{
         dbg(lvl_debug,"enter\n");
-		std::map< uint16_t, ::DBus::Variant >map;
+        std::map< int32_t, DBusCommonAPIVariant >map;
 		struct attr attr;
 		for (int i = 0 ; i < valuesToReturn.size() ; i++) {
 			switch (valuesToReturn[i]) {
@@ -181,11 +183,11 @@ class  MapMatchedPosition
 		return map;
 	}
 
-	std::map< uint16_t, ::DBus::Variant >
-	GetAddress(const std::vector< uint16_t >& valuesToReturn)
+    std::map< int32_t, DBusCommonAPIVariant >
+    GetAddress(const std::vector< int32_t >& valuesToReturn)
 	{
-		std::map< uint16_t, ::DBus::Variant >ret;
-		std::vector< uint16_t >::const_iterator it;
+        std::map< int32_t, DBusCommonAPIVariant >ret;
+        std::vector< int32_t >::const_iterator it;
 		for (it = valuesToReturn.begin(); it < valuesToReturn.end(); it++) {
 			if (*it == GENIVI_NAVIGATIONCORE_STREET && street_name) {
 				ret[*it]=variant_string(street_name);
@@ -194,19 +196,19 @@ class  MapMatchedPosition
 		return ret;
 	}
 
-	std::map< uint16_t, ::DBus::Variant >
-	GetPositionOnSegment(const std::vector< uint16_t >& valuesToReturn)
+    std::map< int32_t, DBusCommonAPIVariant >
+    GetPositionOnSegment(const std::vector< int32_t >& valuesToReturn)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-	std::map< uint16_t, ::DBus::Variant >
-	GetStatus(const std::vector< uint16_t >& valuesToReturn)
+    std::map< int32_t, DBusCommonAPIVariant >
+    GetStatus(const std::vector< int32_t >& valuesToReturn)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-	uint16_t
+    int32_t
 	GetSimulationStatus()
 	{
 		return simulationMode;
@@ -230,8 +232,8 @@ class  MapMatchedPosition
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-	void
-	SetPosition(const uint32_t& sessionHandle, const std::map< uint16_t, ::DBus::Variant >& position)
+    void
+    SetPosition(const uint32_t& sessionHandle, const std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >& position)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
@@ -311,7 +313,7 @@ tracking_attr_position_coord_geo(void)
 	struct attr position_coord_geo, current_item;
     dbg(lvl_debug,"enter\n");
 	if (tracking_get_attr(tracking, attr_position_coord_geo, &position_coord_geo, NULL)) {
-		std::vector< uint16_t >changes;
+        std::vector< int32_t >changes;
 		changes.push_back(GENIVI_NAVIGATIONCORE_LATITUDE);
 		changes.push_back(GENIVI_NAVIGATIONCORE_LONGITUDE);
 		changes.push_back(GENIVI_NAVIGATIONCORE_SPEED);
@@ -332,7 +334,7 @@ tracking_attr_position_coord_geo(void)
 			if (g_strcmp0(new_street_name, street_name)) {
 				g_free(street_name);
 				street_name=g_strdup(new_street_name);
-				std::vector< uint16_t >changes;
+                std::vector< int32_t >changes;
 				changes.push_back(GENIVI_NAVIGATIONCORE_STREET);
 				server->AddressUpdate(changes);
 			}

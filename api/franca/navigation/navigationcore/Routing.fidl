@@ -86,13 +86,15 @@ interface Routing {
   	}
  	 	
  	 	
-	<**
-		@description : struct generated for DBus argument SetRoutePreferences_roadPreferenceList
-	**>
+	map UnfullfilledRoutePreference {
+		PreferenceMode to RoutePreferenceSource
+	}
+
 	struct RoutePreference {
 		PreferenceMode mode
 		RoutePreferenceSource source
 	}
+
 
 	<**
 		@description : struct generated for DBus argument SetRoutePreferences_conditionPreferenceList
@@ -101,7 +103,6 @@ interface Routing {
 		PreferenceMode mode
 		ConditionPreferenceSource source
 	}
-
 
 	map RouteSchedule {
 		Schedule to UInt32
@@ -728,7 +729,7 @@ interface Routing {
 			**>
 			Handle routeHandle
 			
-			RoutePreference unfullfilledPreferences
+			UnfullfilledRoutePreference unfullfilledPreferences
 		}
 	}
 
@@ -748,7 +749,7 @@ interface Routing {
 			**>
 			CalculationError errorCode
 			
-			RoutePreference unfullfilledPreferences
+			UnfullfilledRoutePreference unfullfilledPreferences
 		}
 	}
 

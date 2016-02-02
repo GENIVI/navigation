@@ -43,7 +43,7 @@
           <line>verticalSize = vertical size of the map instance in pixels</line>
         </doc>
       </arg>
-      <arg name="mapViewType" type="q" direction="in">
+      <arg name="mapViewType" type="i" direction="in">
         <doc>
           <line>mapViewType = enum(INVALID,MAIN_MAP,SPLIT_SCREEN, ... )</line>
           <line>Note: to be used in case that a specific position of the map instance with respect to the display viewport is required</line>
@@ -91,7 +91,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="mapViewType" type="q" direction="out">
+      <arg name="mapViewType" type="i" direction="out">
         <doc>
           <line>mapViewType = enum(INVALID,MAIN_MAP,SPLIT_SCREEN, ... )</line>
         </doc>
@@ -101,7 +101,7 @@
       <doc>
         <line>GetSupportedMapViewTypes = This method retrieves the supported map view types</line>
       </doc>
-      <arg name="mapViewTypeList" type="aq" direction="out">
+      <arg name="mapViewTypeList" type="ai" direction="out">
         <doc>
           <line>mapViewTypeList = array[mapViewType]</line>
           <line>mapViewType = enum(INVALID,MAIN_MAP,SPLIT_SCREEN, ... )</line>
@@ -123,7 +123,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="targetPoint" type="(ddi)" direction="in">
+      <arg name="targetPoint" type="(ddd)" direction="in">
         <doc>
           <line>targetPoint = (lat,lon,alt)</line>
           <line>lat = latitude in format %3.6f. Range[-90:+90]</line>
@@ -142,7 +142,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="targetPoint" type="(ddi)" direction="out">
+      <arg name="targetPoint" type="(ddd)" direction="out">
         <doc>
           <line>targetPoint = (lat,lon,alt)</line>
           <line>lat = latitude in format %3.6f. Range[-90:+90]</line>
@@ -217,7 +217,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="position" type="(ddi)" direction="in">
+      <arg name="position" type="(ddd)" direction="in">
         <doc>
           <line>position = (lat,lon,alt)</line>
           <line>lat = latitude in format %3.6f. Range[-90:+90]</line>
@@ -235,7 +235,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="position" type="(ddi)" direction="out">
+      <arg name="position" type="(ddd)" direction="out">
         <doc>
           <line>position = (lat,lon,alt)</line>
           <line>lat = latitude in format %3.6f. Range[-90:+90]</line>
@@ -253,7 +253,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="targetPoint" type="(ddi)">
+      <arg name="targetPoint" type="(ddd)">
         <doc>
           <line>targetPoint = (lat,lon,alt)</line>
           <line>lat = latitude in format %3.6f. Range[-90:+90]</line>
@@ -333,7 +333,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="headingType" type="q" direction="out">
+      <arg name="headingType" type="i" direction="out">
         <doc>
           <line>headingType = enum(INVALID,CONSTANT_ANGLE,TRACK_UP,TOWARDS_TARGET, ... )</line>
         </doc>
@@ -400,7 +400,7 @@
     </method>
     <method name="GetCameraTiltAngle">
       <doc>
-        <line>GetMapViewTiltAngle = This method returns the camera tilt angle</line>
+        <line>GetCameraTiltAngle = This method returns the camera tilt angle</line>
       </doc>
       <arg name="mapViewInstanceHandle" type="u" direction="in">
         <doc>
@@ -534,7 +534,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="scaleMode" type="q" direction="in">
+      <arg name="scaleMode" type="i" direction="in">
         <doc>
           <line>scaleMode = enum(AUTOMATIC,MANUAL,HYBRID)</line>
           <line>scaleMode = AUTOMATIC, adjusts the camera distance automatically (e.g. depending on the speed)</line>
@@ -552,7 +552,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="scaleMode" type="q" direction="out">
+      <arg name="scaleMode" type="i" direction="out">
         <doc>
           <line>scaleMode = enum(AUTOMATIC,MANUAL,HYBRID)</line>
           <line>scaleMode = AUTOMATIC, adjusts the camera distance automatically (e.g. depending on the speed)</line>
@@ -570,7 +570,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="scaleModeList" type="aq" direction="out">
+      <arg name="scaleModeList" type="ai" direction="out">
         <doc>
           <line>scaleModeList = array[scaleMode]</line>
           <line>scaleMode = enum(AUTOMATIC,MANUAL,HYBRID)</line>
@@ -594,7 +594,7 @@
           <line>scaleID = scale identifier. Range[0:256]</line>
         </doc>
       </arg>
-      <arg name="isMinMax" type="q">
+      <arg name="isMinMax" type="i">
         <doc>
           <line>isMinMax = enum(INVALID,MIN,MAX,MID, ... )</line>
           <line>MIN = scale ID minimal value</line>
@@ -664,7 +664,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="perspective" type="q" direction="in">
+      <arg name="perspective" type="i" direction="in">
         <doc>
           <line>perspective = enum(INVALID,2D,3D, ... )</line>
         </doc>
@@ -679,7 +679,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="perspective" type="q" direction="out">
+      <arg name="perspective" type="i" direction="out">
         <doc>
           <line>perspective = enum(INVALID,2D,3D, ... )</line>
         </doc>
@@ -704,7 +704,7 @@
       <doc>
         <line>GetSupportedMapViewPerspectives = This method retrieves the supported mapview perspectives</line>
       </doc>
-      <arg name="perspectiveList" type="aq" direction="out">
+      <arg name="perspectiveList" type="ai" direction="out">
         <doc>
           <line>perspectiveList = array[perspective]</line>
           <line>perspective = enum(INVALID,2D,3D, ... )</line>
@@ -725,7 +725,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="objectVisibilityList" type="a{qb}" direction="in">
+      <arg name="objectVisibilityList" type="a{ib}" direction="in">
         <doc>
           <line> objectVisibilityList = array[objectVisibility]</line>
           <line> objectVisibility = dictionary[key,value]</line>
@@ -743,7 +743,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="objectVisibilityList" type="a{qb}" direction="out">
+      <arg name="objectVisibilityList" type="a{ib}" direction="out">
         <doc>
           <line> objectVisibilityList = array[objectVisibility]</line>
           <line> objectVisibility = dictionary[key,value]</line>
@@ -761,7 +761,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="objectVisibilityList" type="a{qb}">
+      <arg name="objectVisibilityList" type="a{ib}">
         <doc>
           <line> objectVisibilityList = array[objectVisibility]</line>
           <line> objectVisibility = dictionary[key,value]</line>
@@ -779,7 +779,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="objectVisibilityList" type="aq" direction="out">
+      <arg name="objectVisibilityList" type="ai" direction="out">
         <doc>
           <line> objectVisibilityList = array[objectVisibility]</line>
           <line> objectVisibility = enum[BUILDINGS,TERRAIN, ...]</line>
@@ -796,7 +796,7 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="scaleList" type="a(qqqu)" direction="out">
+      <arg name="scaleList" type="a(qqiu)" direction="out">
         <doc>
           <line>scaleList = array[struct(scaleId,scaleValue,scaleUnit,millimetersPerPixel)]</line>
           <line>scaleId = scale identifier. Range [0:256]</line>
@@ -881,7 +881,7 @@
           <line>scaleID = scale identifier. Range[0:256]</line>
         </doc>
       </arg>
-      <arg name="isMinMax" type="q" direction="out">
+      <arg name="isMinMax" type="i" direction="out">
         <doc>
           <line>isMinMax = enum(INVALID,MIN,MAX,MID, ... )</line>
           <line>MIN = scale ID minimal value</line>
@@ -1036,7 +1036,7 @@ cover with other windows or user interface elements</line>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="panningAction" type="q" direction="in">
+      <arg name="panningAction" type="i" direction="in">
         <doc>
           <line>panningAction = enum(PAN_START,PAN_TO,PAN_END)</line>
           <line>PAN_START, start panning the map at the specified screen coordinate identified by the arguments 'x' and 'y'</line>
@@ -1062,7 +1062,7 @@ cover with other windows or user interface elements</line>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="valueToReturn" type="q" direction="in">
+      <arg name="valueToReturn" type="i" direction="in">
         <doc>
           <line>valueToReturn = enum(PAN_START,PAN_TO,PAN_END)</line>
         </doc>
@@ -1136,7 +1136,7 @@ cover with other windows or user interface elements</line>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="visibilityMode" type="q" direction="in">
+      <arg name="visibilityMode" type="i" direction="in">
         <doc>
           <line>visibilityMode = enum(INVALID,VISIBLE,INVISIBLE,FROZEN, ... )</line>
         </doc>
@@ -1151,7 +1151,7 @@ cover with other windows or user interface elements</line>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="visibilityMode" type="q" direction="out">
+      <arg name="visibilityMode" type="i" direction="out">
         <doc>
           <line>visibilityMode = enum(INVALID,VISIBLE,INVISIBLE,FROZEN, ... )</line>
         </doc>
@@ -1161,7 +1161,7 @@ cover with other windows or user interface elements</line>
       <doc>
         <line>GetSupportedMapViewVisibilityModes = This method retrieves the supported mapview visibility modes</line>
       </doc>
-      <arg name="visibilityModeList" type="aq" direction="out">
+      <arg name="visibilityModeList" type="ai" direction="out">
         <doc>
           <line>visibilityModeList = array[visibilityMode]</line>
           <line>visibilityMode = enum(INVALID,VISIBLE,INVISIBLE,FROZEN, ... )</line>
@@ -1177,7 +1177,7 @@ cover with other windows or user interface elements</line>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="visibilityMode" type="q">
+      <arg name="visibilityMode" type="i">
         <doc>
           <line>visibilityMode = enum(INVALID,VISIBLE,INVISIBLE,FROZEN, ... )</line>
         </doc>
@@ -1198,7 +1198,7 @@ cover with other windows or user interface elements</line>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="performanceLevel" type="q" direction="in">
+      <arg name="performanceLevel" type="i" direction="in">
         <doc>
           <line>performanceLevel = enum(INVALID,LEVEL1,LEVEL2,LEVEL3,LEVEL4,LEVEL5, ... )</line>
           <line>Note: performance levels are application specific</line>
@@ -1214,7 +1214,7 @@ cover with other windows or user interface elements</line>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="performanceLevel" type="q" direction="out">
+      <arg name="performanceLevel" type="i" direction="out">
         <doc>
           <line>performanceLevel = enum(INVALID,LEVEL1,LEVEL2,LEVEL3,LEVEL4,LEVEL5, ... )</line>
         </doc>
@@ -1229,7 +1229,7 @@ cover with other windows or user interface elements</line>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="performanceLevel" type="q">
+      <arg name="performanceLevel" type="i">
         <doc>
           <line>performanceLevel = enum(INVALID,LEVEL1,LEVEL2,LEVEL3,LEVEL4,LEVEL5, ... )</line>
         </doc>
@@ -1239,7 +1239,7 @@ cover with other windows or user interface elements</line>
       <doc>
         <line>GetSupportedMapViewPerformanceLevels = This method retrieves the supported perfomance levels</line>
       </doc>
-      <arg name="performanceLevelList" type="aq" direction="out">
+      <arg name="performanceLevelList" type="ai" direction="out">
         <doc>
           <line>performanceLevelList = array[performanceLevel]</line>
           <line>performanceLevel = enum(INVALID,LEVEL1,LEVEL2,LEVEL3,LEVEL4,LEVEL5, ... )</line>
@@ -1336,7 +1336,7 @@ cover with other windows or user interface elements</line>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="poiCategoryIds" type="aq" direction="out">
+      <arg name="poiCategoryIds" type="au" direction="out">
         <doc>
           <line>poiCategoryIds = array[poiCategoryId]</line>
           <line>poiCategoryId = a POI category as defined in the 'GENIVI POIService API'.</line>
@@ -1358,7 +1358,7 @@ cover with other windows or user interface elements</line>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="poiCategoryIds" type="aq" direction="in">
+      <arg name="poiCategoryIds" type="au" direction="in">
         <doc>
           <line>poiCategoryIds = array[poiCategoryId]</line>
           <line>poiCategoryId = a POI category as defined in the 'GENIVI POIService API'.</line>
@@ -1380,7 +1380,7 @@ cover with other windows or user interface elements</line>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="poiCategoryIds" type="aq" direction="in">
+      <arg name="poiCategoryIds" type="au" direction="in">
         <doc>
           <line>poiCategoryIds = array[poiCategoryId]</line>
           <line>poiCategoryId = a POI category as defined in the 'GENIVI POIService API'.</line>
@@ -1411,7 +1411,7 @@ cover with other windows or user interface elements</line>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="poiCategoryIds" type="aq" direction="in">
+      <arg name="poiCategoryIds" type="au" direction="in">
         <doc>
           <line>poiCategoryIds = array[poiCategoryId]</line>
           <line>poiCategoryId = a POI category as defined in the 'GENIVI POIService API'.</line>
@@ -1427,7 +1427,7 @@ cover with other windows or user interface elements</line>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="poiCategoryIds" type="aq">
+      <arg name="poiCategoryIds" type="au">
         <doc>
           <line>poiCategoryIds = array[poiCategoryId]</line>
           <line>poiCategoryId = a POI category as defined in the 'GENIVI POIService API'.</line>
@@ -1483,7 +1483,7 @@ cover with other windows or user interface elements</line>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="mapViewTheme" type="q" direction="in">
+      <arg name="mapViewTheme" type="i" direction="in">
         <doc>
           <line>mapViewTheme = enum(INVALID,THEME_1,THEME_2,THEME_3, ... )</line>
           <line>Note: Themes are implementation specific. Example: THEME_1 = day color, THEME_2 = night color</line>
@@ -1499,7 +1499,7 @@ cover with other windows or user interface elements</line>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="mapViewTheme" type="q" direction="out">
+      <arg name="mapViewTheme" type="i" direction="out">
         <doc>
           <line>mapViewTheme = enum(INVALID,THEME_1,THEME_2,THEME_3, ... )</line>
           <line>Note: Themes are implementation specific. Example: THEME_1 = day color, THEME_2 = night color</line>
@@ -1515,7 +1515,7 @@ cover with other windows or user interface elements</line>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="mapViewTheme" type="q">
+      <arg name="mapViewTheme" type="i">
         <doc>
           <line>mapViewTheme = enum(INVALID,THEME_1,THEME_2,THEME_3, ... )</line>
           <line>Note: Themes are implementation specific. Example: THEME_1 = day color, THEME_2 = night color</line>
@@ -1526,7 +1526,7 @@ cover with other windows or user interface elements</line>
       <doc>
         <line>GetSupportedMapViewThemes = This method retrieves the supported mapview themes</line>
       </doc>
-      <arg name="mapViewThemeList" type="aq" direction="out">
+      <arg name="mapViewThemeList" type="ai" direction="out">
         <doc>
           <line>mapViewThemeList = array[mapViewTheme]</line>
           <line>mapViewTheme = enum(INVALID,THEME_1,THEME_2,THEME_3, ... )</line>
@@ -1696,7 +1696,7 @@ cover with other windows or user interface elements</line>
           <line>y = y-coordinate of the position on the map view specified by user input (y=0 indicates the first top pixel of the map view)</line>
         </doc>
       </arg>
-      <arg name="selectableTypes" type="aq" direction="in">
+      <arg name="selectableTypes" type="ai" direction="in">
         <doc>
           <line>selectableTypes = array[selectableType]</line>
           <line>selectableType = enum(INVALID,CUSTOM_ELEMENT,CURRENT_POSITION,WAYPOINT,POI,TRAFFIC_INCIDENT,ROUTE,GEOCOORDINATES)</line>
@@ -1708,7 +1708,7 @@ cover with other windows or user interface elements</line>
           <line>maxNumberOfSelectedElements = maximum number of selected elements to return. If 0, all possible elements which can be selected will be returned</line>
         </doc>
       </arg>
-      <arg name="selectedElements" type="a(q(dd)v)" direction="out">
+      <arg name="selectedElements" type="a(i(dd)(yv))" direction="out">
         <doc>
           <line>selectedElements = array[selectableType,struct(lat,lon),value]</line>
           <line>selectableType = enum(INVALID,CUSTOM_ELEMENT,CURRENT_POSITION,WAYPOINT,POI,TRAFFIC_INCIDENT,ROUTE,GEOCOORDINATES)</line>

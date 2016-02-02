@@ -92,7 +92,7 @@
           <line>isDestinationReached = if TRUE the destination has been reached</line>
         </doc>
       </arg>
-      <arg name="maneuver" type="q" direction="out">
+      <arg name="maneuver" type="i" direction="out">
         <doc>
           <line>maneuver = enum(INVALID,CRUISE,MANEUVER_APPEARED,PRE_ADVICE,ADVICE,PASSED, ... )</line>
         </doc>
@@ -122,7 +122,7 @@
           <line>numberOfWaypoints = the number of retrieved waypoints(NOTE: the number corresponds to the number of elements in the array)</line>
         </doc>
       </arg>
-      <arg name="waypointsList" type="a(uuiqnnbq)" direction="out">
+      <arg name="waypointsList" type="a(uuiinnbq)" direction="out">
         <doc>
           <line>array[struct(waypointOffset,travelTime,direction,side,timeZone,daylightSavingTime,isDestination,number)]</line>
           <line>waypointOffset = the offset of the way point in meters from the beginning of the route</line>
@@ -155,7 +155,7 @@
           <line>direction = direction of the destination in degree relatively to the North. Range [0:360]</line>
         </doc>
       </arg>
-      <arg name="side" type="q" direction="out">
+      <arg name="side" type="i" direction="out">
         <doc>
           <line>side = enum(LEFT,RIGHT,NOT_AVAILABLE)</line>
         </doc>
@@ -180,7 +180,7 @@
       <doc>
         <line>GuidanceStatusChanged = This signal is emitted when the guidance status changes</line>
       </doc>
-      <arg name="guidanceStatus" type="q">
+      <arg name="guidanceStatus" type="i">
         <doc>
           <line>guidanceStatus = enum(INVALID,ACTIVE,INACTIVE)</line>
           <line>ACTIVE means that NavigationCore is providing guidance information</line>
@@ -207,7 +207,7 @@
       <doc>
         <line>This signal is emitted each time a maneuver event is going</line>
       </doc>
-      <arg name="maneuver" type="q">
+      <arg name="maneuver" type="i">
         <doc>
           <line>maneuver = enum(INVALID,CRUISE,MANEUVER_APPEARED,PRE_ADVICE,ADVICE,PASSED, ... )</line>
         </doc>
@@ -243,7 +243,7 @@
           <line>Note: the number corresponds to the number of elements in the array</line>
         </doc>
       </arg>
-      <arg name="maneuversList" type="a(ssqqua(uuiqa(qv)))" direction="out">
+      <arg name="maneuversList" type="a(ssqiua(uuiia{i(yv)}))" direction="out">
         <doc>
           <line>maneuversList = array[struct(roadNumberAfterManeuver,roadNameAfterManeuver,roadPropertyAfterManeuver,drivingSide,offsetOfNextManeuver,maneuverDetails)]</line>
           <line>roadNumberAfterManeuver = the number of the road after the maneuver (if a road has multiple road numbers, they will be separated by slashes ('/') and combined into one string)</line>
@@ -296,7 +296,7 @@
           <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="routeCalculationMode" type="q" direction="in">
+      <arg name="routeCalculationMode" type="i" direction="in">
         <doc>
           <line>routeCalculationMode = enum(INVALID,ALL_MANUAL,ALL_AUTOMATIC,TRAFFIC_MANUAL,OFF_ROUTE_MANUAL)</line>
         </doc>
@@ -321,7 +321,7 @@
       <doc>
         <line>GetGuidanceStatus = This method retrieves the guidance status</line>
       </doc>
-      <arg name="guidanceStatus" type="q" direction="out">
+      <arg name="guidanceStatus" type="i" direction="out">
         <doc>
           <line>guidanceStatus = enum(INVALID,ACTIVE,INACTIVE)</line>
           <line>ACTIVE means that NavigationCore is providing guidance information</line>
@@ -338,7 +338,7 @@
       <doc>
         <line>SetVoiceGuidanceSettings = This method sets the voice guidance settings</line>
       </doc>
-      <arg name="promptMode" type="q" direction="in">
+      <arg name="promptMode" type="i" direction="in">
         <doc>
           <line>mode = enum(INVALID,DISABLED_PROMPT,AUTOMATIC_PROMPT,MANUAL_PROMPT, ... )</line>
           <line>MANUAL_PROMPT means that a client application can ask the NavigationCore to play the voice prompts</line>
@@ -351,7 +351,7 @@
       <doc>
         <line>GetVoiceGuidanceSettings = This method returns the used voice guidance settings</line>
       </doc>
-      <arg name="promptMode" type="q" direction="out">
+      <arg name="promptMode" type="i" direction="out">
         <doc>
           <line>mode = enum(INVALID,DISABLED_PROMPT,AUTOMATIC_PROMPT,MANUAL_PROMPT, ... )</line>
           <line>MANUAL_PROMPT means that a client application can ask the NavigationCore to play the voice prompts</line>
@@ -379,7 +379,7 @@
       <doc>
         <line>ActiveRouteChanged = This signal is emitted when the active route changes</line>
       </doc>
-      <arg name="changeCause" type="q">
+      <arg name="changeCause" type="i">
         <doc>
           <line>changeCause = enum(INVALID,TRAFFIC,OFF_ROUTE,MANUAL,...)</line>
         </doc>

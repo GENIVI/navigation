@@ -70,7 +70,7 @@
       <doc>
         <line>GetSupportedAddressAttributes = This method retrieves the supported address attributes</line>
       </doc>
-      <arg name="addressAttributesList" type="aq" direction="out">
+      <arg name="addressAttributesList" type="ai" direction="out">
         <doc>
           <line>addressAttributesList = array[attribute]</line>
           <line>attribute = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,STATE,CITY,ZIPCODE,STREET,HOUSENUMBER,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )</line>
@@ -91,7 +91,7 @@
           <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="address" type="a{qv}" direction="in">
+      <arg name="address" type="a{i(yv)}" direction="in">
         <doc>
           <line>address = array[attribute]</line>
           <line>attribute = tuple(key,value)</line>
@@ -127,7 +127,7 @@
           <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="selectionCriterion" type="q" direction="in">
+      <arg name="selectionCriterion" type="i" direction="in">
         <doc>
           <line>selectionCriterion = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )</line>
         </doc>
@@ -195,7 +195,7 @@
           <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="selectionCriterion" type="q">
+      <arg name="selectionCriterion" type="i">
         <doc>
           <line>selectionCriterion = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )</line>
         </doc>
@@ -210,7 +210,7 @@
           <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="statusValue" type="q">
+      <arg name="statusValue" type="i">
         <doc>
           <line>statusValue = enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... )</line>
         </doc>
@@ -290,7 +290,7 @@
           <line>windowSize = size of the provided window</line>
         </doc>
       </arg>
-      <arg name="resultListWindow" type="aa{qv}">
+      <arg name="resultListWindow" type="aa{i(yv)}">
         <doc>
           <line>resultListWindow = array[address]</line>
           <line>address = array[attribute]</line>
@@ -363,7 +363,7 @@
           <line>index = list index of the entry to be returned</line>
         </doc>
       </arg>
-      <arg name="address" type="a{qv}" direction="out">
+      <arg name="address" type="a{i(yv)}" direction="out">
         <doc>
           <line>address = array[attribute]</line>
           <line>attribute = tuple(key,value)</line>
@@ -399,13 +399,13 @@
           <line>guidable = flag indicating whether the current address is guidable</line>
         </doc>
       </arg>
-      <arg name="availableSelectionCriteria" type="aq">
+      <arg name="availableSelectionCriteria" type="ai">
         <doc>
           <line>availableSelectionCriteria = array of enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )</line>
           <line>Note: availableSelectionCriteria indicates the parts of the address that can be changed</line>
         </doc>
       </arg>
-      <arg name="address" type="a{qv}">
+      <arg name="address" type="a{i(yv)}">
         <doc>
           <line>address = array[attribute]</line>
           <line>attribute = tuple(key,value)</line>
@@ -441,7 +441,7 @@
           <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="inputAddress" type="a{qv}" direction="in">
+      <arg name="inputAddress" type="a{i(yv)}" direction="in">
         <doc>
           <line>inputAddress = array[attribute]</line>
           <line>attribute = tuple(key,value)</line>
@@ -472,7 +472,7 @@
           <line>locationInputHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="validatedAddressList" type="aa{qv}">
+      <arg name="validatedAddressList" type="aa{i(yv)}">
         <doc>
           <line>validatedAddressList = array[validatedAddress]</line>
           <line>validatedAddress = array[attribute]</line>
@@ -494,7 +494,7 @@
           <line>key = POINAME, value = value of type ´s´, that identifies a POI name</line>
         </doc>
       </arg>
-      <arg name="validationStatusList" type="aa{qq}">
+      <arg name="validationStatusList" type="aa{ii}">
         <doc>
           <line>validationStatusList = array[validationStatus]</line>
           <line>validationStatus = array[item]</line>

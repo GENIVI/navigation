@@ -6,6 +6,7 @@
 
 package org.genivi.navigation.poiservice
 
+import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.poiservice.POIServiceTypes.* from "POIServiceTypes.fidl"
 
 

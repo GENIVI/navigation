@@ -40,10 +40,6 @@ interface NavigationCoreSession {
 			<**	@description : sessionHandle **>
 			Handle sessionHandle
 		}
-		error {
-			<** @description: This error is generated if no more session handles are available **> 
-			NoMoreSessionHandles
-		}
 	}
 
 	<** @description : deleteSession = This method deletes a session and its associated resources .**>
@@ -51,10 +47,6 @@ interface NavigationCoreSession {
 		in {
 			<**	@description : sessionHandle **>
 			Handle sessionHandle
-		}
-		error {
-			<** @description: This error is generated if an application tries to delete a session handle that is not available **> 
-			SessionNotAvailable
 		}
 	}
 

@@ -48,6 +48,8 @@
 #include "map.h"
 #include "event.h"
 
+#include "navigation-common-dbus.h"
+
 #if (!DEBUG_ENABLED)
 #undef dbg
 #define dbg(level,...) ;
@@ -77,8 +79,8 @@ class RoutingObj
 	int m_route_status;
 	int m_vehicleprofile_idx;
 	struct vehicleprofile_settings m_vehicleprofile_settings[2];
-    std::vector< ::DBus::Struct< uint16_t, uint16_t > > m_route_preferences_list[2];
-	std::vector< std::map< uint16_t, ::DBus::Variant > > m_waypoints;
+    std::vector< ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > > m_route_preferences_list[2];
+    std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > > m_waypoints;
 	struct callback *m_callback;
 	struct attr m_route,m_vehicleprofile;
 	struct navit *get_navit(void);
@@ -86,19 +88,19 @@ class RoutingObj
 	struct route *get_route(struct navit *navit);
 	struct vehicle *get_vehicle(struct navit *navit);
 	struct tracking *get_tracking(void);
-	void map_to_pcoord(std::map< uint16_t, ::DBus::Variant >map, struct pcoord *pc);
+    void map_to_pcoord(std::map<DBusCommonAPIEnumeration, DBusCommonAPIVariant> map, struct pcoord *pc);
     void SetCostModel(uint32_t SessionHandle, uint16_t CostModel);
     void GetCostModel(uint16_t &CostModel);
-    void SetWaypoints(uint32_t SessionHandle, bool StartFromCurrentPosition, std::vector< std::map< uint16_t, ::DBus::Variant > > Waypoints);
-    void GetWaypoints(bool& StartFromCurrentPosition, std::vector< std::map< uint16_t, ::DBus::Variant > >& Waypoints);
+    void SetWaypoints(uint32_t SessionHandle, bool StartFromCurrentPosition, std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > > Waypoints);
+    void GetWaypoints(bool& StartFromCurrentPosition, std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > >& Waypoints);
     void CalculateRoute(uint32_t SessionHandle);
-    void GetRouteSegments(int16_t detailLevel , const std::vector< uint16_t >& valuesToReturn, const uint32_t& numberOfSegments, const uint32_t& offset, uint32_t& totalNumberOfSegments, std::vector< std::map< uint16_t, ::DBus::Variant > >& RouteSegments);
-    void GetRouteOverview(uint32_t routeHandle , std::map< uint16_t, ::DBus::Variant >& routeOverview);
+    void GetRouteSegments(int16_t detailLevel , const std::vector< DBusCommonAPIEnumeration >& valuesToReturn, const uint32_t& numberOfSegments, const uint32_t& offset, uint32_t& totalNumberOfSegments, std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > >& RouteSegments);
+    void GetRouteOverview(uint32_t routeHandle , std::map<DBusCommonAPIEnumeration, DBusCommonAPIVariant> &routeOverview);
     void GetRouteBoundingBox(::DBus::Struct< ::DBus::Struct< double, double >,::DBus::Struct< double, double > > &boundingBox);
     void CancelRouteCalculation(uint32_t sessionHandle);
     bool RoutePreference(uint16_t preferenceSource, uint16_t preferenceMode);
-    void SetRoutePreferences(uint32_t sessionHandle, const std::string& country, const std::vector< ::DBus::Struct< uint16_t, uint16_t > >& routePreferencesList);
-    void GetRoutePreferences(const std::string& country, std::vector< ::DBus::Struct< uint16_t, uint16_t > >& roadPreferenceList);
+    void SetRoutePreferences(uint32_t sessionHandle, const std::string& country, const std::vector< ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > >& routePreferencesList);
+    void GetRoutePreferences(const std::string& country, std::vector< ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > >& roadPreferenceList);
     RoutingObj(Routing *routing, uint32_t session, uint32_t handle);
 	~RoutingObj();
 };
@@ -163,7 +165,7 @@ class  Routing
 	}
 
 	void	
-    SetCostModel(const uint32_t& SessionHandle, const uint32_t& RouteHandle, const uint16_t& CostModel)
+    SetCostModel(const uint32_t& SessionHandle, const uint32_t& RouteHandle, const DBusCommonAPIEnumeration& CostModel)
 	{
 		RoutingObj *obj=handles[RouteHandle];
 		if (!obj)
@@ -171,7 +173,7 @@ class  Routing
 		obj->SetCostModel(SessionHandle, CostModel);
 	}
 
-	uint16_t
+    DBusCommonAPIEnumeration
     GetCostModel(const uint32_t& RouteHandle)
 	{
 		uint16_t CostModel;
@@ -183,10 +185,10 @@ class  Routing
 		return CostModel;
 	}
 	
-	std::vector< uint16_t >
+    std::vector< DBusCommonAPIEnumeration >
     GetSupportedCostModels()
 	{
-		std::vector< uint16_t > CostModels;
+        std::vector< DBusCommonAPIEnumeration > CostModels;
 		CostModels.resize(2);
 		CostModels[0]=GENIVI_NAVIGATIONCORE_FASTEST; 
 		CostModels[1]=GENIVI_NAVIGATIONCORE_SHORTEST; 
@@ -194,7 +196,7 @@ class  Routing
 	}
 	    	
 	void	
-    SetWaypoints(const uint32_t& SessionHandle , const uint32_t& RouteHandle , const bool& StartFromCurrentPosition , const std::vector< std::map< uint16_t, ::DBus::Variant > >& Waypoints)
+    SetWaypoints(const uint32_t& SessionHandle , const uint32_t& RouteHandle , const bool& StartFromCurrentPosition , const std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > >& Waypoints)
 	{
 		dbg(lvl_debug,"enter\n");
 		RoutingObj *obj=handles[RouteHandle];
@@ -204,7 +206,7 @@ class  Routing
 	}
 
 	void
-    GetWaypoints(const uint32_t& RouteHandle , bool& StartFromCurrentPosition , std::vector< std::map< uint16_t, ::DBus::Variant > >& Waypoints)
+    GetWaypoints(const uint32_t& RouteHandle , bool& StartFromCurrentPosition , std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > >& Waypoints)
 	{
 		dbg(lvl_debug,"enter\n");
 		RoutingObj *obj=handles[RouteHandle];
@@ -224,7 +226,7 @@ class  Routing
 	}
 
 	void
-    GetRouteSegments(const uint32_t& routeHandle, const int16_t& detailLevel, const std::vector< uint16_t >& valuesToReturn, const uint32_t& numberOfSegments, const uint32_t& offset, uint32_t& totalNumberOfSegments, std::vector< std::map< uint16_t, ::DBus::Variant > >& routeSegments)
+    GetRouteSegments(const uint32_t& routeHandle, const int16_t& detailLevel, const std::vector< DBusCommonAPIEnumeration >& valuesToReturn, const uint32_t& numberOfSegments, const uint32_t& offset, uint32_t& totalNumberOfSegments, std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > >& routeSegments)
 	{
 		dbg(lvl_debug,"enter\n");
 		RoutingObj *obj=handles[routeHandle];
@@ -244,7 +246,7 @@ class  Routing
 	}
 
 	void
-    SetRoutePreferences(const uint32_t& sessionHandle, const uint32_t& routeHandle, const std::string& country, const std::vector< ::DBus::Struct< uint16_t, uint16_t > >& roadPreferenceList, const std::vector< ::DBus::Struct< uint16_t, uint16_t > >& conditionPreferenceList)
+    SetRoutePreferences(const uint32_t& sessionHandle, const uint32_t& routeHandle, const std::string& country, const std::vector< ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > >& roadPreferenceList, const std::vector< ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > >& conditionPreferenceList)
 	{
 		RoutingObj *obj=handles[routeHandle];
 		if (!obj)
@@ -253,10 +255,10 @@ class  Routing
 	}
 
     void
-    GetRoutePreferences(const uint32_t& routeHandle, const std::string& country, std::vector< ::DBus::Struct< uint16_t, uint16_t > >& roadPreferenceList, std::vector< ::DBus::Struct< uint16_t, uint16_t > >& conditionPreferenceList)
+    GetRoutePreferences(const uint32_t& routeHandle, const std::string& country, std::vector< ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > >& roadPreferenceList, std::vector< ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > >& conditionPreferenceList)
 	{
-        ::DBus::Struct< uint16_t, uint16_t > roadPreference;
-        ::DBus::Struct< uint16_t, uint16_t > conditionPreference;
+        ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > roadPreference;
+        ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > conditionPreference;
 
         conditionPreference._1 = GENIVI_NAVIGATIONCORE_USE;
         conditionPreference._2 = GENIVI_NAVIGATIONCORE_TRAFFIC_REALTIME;
@@ -276,10 +278,10 @@ class  Routing
 	}
 
     void
-    GetSupportedRoutePreferences(std::vector< ::DBus::Struct< uint16_t, uint16_t > >& routePreferencesList, std::vector< ::DBus::Struct< uint16_t, uint16_t > >& conditionPreferenceList)
+    GetSupportedRoutePreferences(std::vector< ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > >& routePreferencesList, std::vector< ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > >& conditionPreferenceList)
 	{
-        ::DBus::Struct< uint16_t, uint16_t > routePreference;
-        ::DBus::Struct< uint16_t, uint16_t > conditionPreference;
+        ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > routePreference;
+        ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > conditionPreference;
         routePreference._1 = GENIVI_NAVIGATIONCORE_AVOID;
         routePreference._2 = GENIVI_NAVIGATIONCORE_HIGHWAYS_MOTORWAYS;
         routePreferencesList.push_back(routePreference);
@@ -294,29 +296,29 @@ class  Routing
         conditionPreferenceList.push_back(conditionPreference);
     }
 
-    void SetRouteSchedule(const uint32_t& sessionHandle, const uint32_t& routeHandle, const std::map< uint16_t, uint32_t >& routeSchedule)
+    void SetRouteSchedule(const uint32_t& sessionHandle, const uint32_t& routeHandle, const std::map< int32_t, uint32_t >& routeSchedule)
     {
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 
-    std::map< uint16_t, uint32_t > GetRouteSchedule(const uint32_t& routeHandle, const std::vector< uint16_t >& valuesToReturn)
+    std::map< int32_t, uint32_t > GetRouteSchedule(const uint32_t& routeHandle, const std::vector< int32_t >& valuesToReturn)
     {
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 
 	void
-    SetTransportationMeans(const uint32_t& sessionHandle, const uint32_t& routeHandle, const std::vector< uint16_t >& transportationMeansList)
+    SetTransportationMeans(const uint32_t& sessionHandle, const uint32_t& routeHandle, const std::vector< int32_t >& transportationMeansList)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-	std::vector< uint16_t >
+    std::vector< DBusCommonAPIEnumeration >
     GetTransportationMeans(const uint32_t& routeHandle)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-	std::vector< uint16_t >
+    std::vector< DBusCommonAPIEnumeration >
     GetSupportedTransportationMeans()
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
@@ -350,10 +352,10 @@ class  Routing
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-    std::map< uint16_t, ::DBus::Variant >
-    GetRouteOverview(const uint32_t& routeHandle, const std::vector< uint16_t >& valuesToReturn )
+    std::map< int32_t, DBusCommonAPIVariant >
+    GetRouteOverview(const uint32_t& routeHandle, const std::vector< DBusCommonAPIEnumeration >& valuesToReturn )
 	{
-        std::map< uint16_t, ::DBus::Variant > ret;
+        std::map< int32_t, DBusCommonAPIVariant > ret;
 		RoutingObj *obj=handles[routeHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Route handle invalid");
@@ -492,7 +494,7 @@ RoutingObj::GetCostModel(uint16_t& CostModel)
 }
 
 void
-RoutingObj::SetWaypoints(uint32_t SessionHandle, bool StartFromCurrentPosition, std::vector< std::map< uint16_t, ::DBus::Variant > > Waypoints)
+RoutingObj::SetWaypoints(uint32_t SessionHandle, bool StartFromCurrentPosition, std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > > Waypoints)
 {
 	if (StartFromCurrentPosition) {
 		if (Waypoints.size() != 1)
@@ -513,20 +515,20 @@ RoutingObj::SetWaypoints(uint32_t SessionHandle, bool StartFromCurrentPosition, 
 }
 
 void
-RoutingObj::GetWaypoints(bool& StartFromCurrentPosition, std::vector< std::map< uint16_t, ::DBus::Variant > >& Waypoints)
+RoutingObj::GetWaypoints(bool& StartFromCurrentPosition, std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > >& Waypoints)
 {
 	StartFromCurrentPosition=m_startfromcurrentposition;
 	Waypoints=m_waypoints;
 }
 
 void
-RoutingObj::map_to_pcoord(std::map< uint16_t, ::DBus::Variant >map, struct pcoord *pc)
+RoutingObj::map_to_pcoord(std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant >map, struct pcoord *pc)
 {
 	struct coord_geo g;
 	struct coord c;
 
-	g.lat=map[GENIVI_NAVIGATIONCORE_LATITUDE];
-	g.lng=map[GENIVI_NAVIGATIONCORE_LONGITUDE];
+    g.lat=map[GENIVI_NAVIGATIONCORE_LATITUDE]._2;
+    g.lng=map[GENIVI_NAVIGATIONCORE_LONGITUDE]._2;
 	transform_from_geo(projection_mg, &g, &c);
 	pc->pro=projection_mg;
 	pc->x=c.x;
@@ -586,7 +588,7 @@ variant_string(std::string s)
 }
 
 static bool
-vector_contains(const std::vector< uint16_t >& vector, uint16_t val)
+vector_contains(const std::vector< DBusCommonAPIEnumeration >& vector, uint16_t val)
 {
 	int i;
 	for (i = 0 ; i < vector.size() ; i++) {
@@ -597,7 +599,7 @@ vector_contains(const std::vector< uint16_t >& vector, uint16_t val)
 }
 
 static void
-get_map(struct coord *c, struct item *item, int is_end, const std::vector< uint16_t >& valuesToReturn, std::map< uint16_t, ::DBus::Variant > &map)
+get_map(struct coord *c, struct item *item, int is_end, const std::vector< DBusCommonAPIEnumeration >& valuesToReturn, std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > &map)
 {
 	uint16_t lat_key=is_end?GENIVI_NAVIGATIONCORE_END_LATITUDE:GENIVI_NAVIGATIONCORE_START_LATITUDE;
 	uint16_t lon_key=is_end?GENIVI_NAVIGATIONCORE_END_LONGITUDE:GENIVI_NAVIGATIONCORE_START_LONGITUDE;
@@ -636,7 +638,7 @@ get_map(struct coord *c, struct item *item, int is_end, const std::vector< uint1
 
 
 void
-RoutingObj::GetRouteSegments(int16_t detailLevel , const std::vector< uint16_t >& valuesToReturn, const uint32_t& numberOfSegments, const uint32_t& offset, uint32_t& totalNumberOfSegments, std::vector< std::map< uint16_t, ::DBus::Variant > >& RouteSegments)
+RoutingObj::GetRouteSegments(int16_t detailLevel , const std::vector< DBusCommonAPIEnumeration >& valuesToReturn, const uint32_t& numberOfSegments, const uint32_t& offset, uint32_t& totalNumberOfSegments, std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > >& RouteSegments)
 {
 	struct map *m=route_get_map(m_route.u.route);
 	if (!m)
@@ -664,7 +666,7 @@ RoutingObj::GetRouteSegments(int16_t detailLevel , const std::vector< uint16_t >
 							break;
 						case 1: /* last is start coordinates */
 							{
-								std::map< uint16_t, ::DBus::Variant > map;
+                                std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > map;
 								get_map(&last, item, 0, valuesToReturn, map);
 								RouteSegments.push_back(map);
 								pos++;
@@ -703,7 +705,7 @@ RoutingObj::GetRouteSegments(int16_t detailLevel , const std::vector< uint16_t >
 }
 
 void
-RoutingObj::GetRouteOverview(uint32_t routeHandle , std::map< uint16_t, ::DBus::Variant >& routeOverview)
+RoutingObj::GetRouteOverview(uint32_t routeHandle , std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant >& routeOverview)
 {
 	struct attr destination_length, destination_time;
 	if (!route_get_attr(m_route.u.route,attr_destination_length, &destination_length, NULL))
@@ -794,13 +796,13 @@ RoutingObj_Callback(struct RoutingObj *obj)
             obj->m_routing->RouteCalculationProgressUpdate(obj->m_handle, GENIVI_NAVIGATIONCORE_OK, 100);
 		obj->m_route_status=route_status.u.num;
 		dbg(lvl_debug,"callback routing ok\n");
-        std::map< uint16_t, uint16_t > unfulfilled_preferences;
+        std::map< int32_t, int32_t > unfulfilled_preferences;
         obj->m_routing->RouteCalculationSuccessful(obj->m_handle, unfulfilled_preferences);
 	}
 	if (route_status.u.num == route_status_not_found) {
 		obj->m_route_status=route_status.u.num;
 		dbg(lvl_debug,"callback routing failed\n");
-        std::map< uint16_t, uint16_t > unfulfilled_preferences;
+        std::map< int32_t, int32_t > unfulfilled_preferences;
         obj->m_routing->RouteCalculationFailed(obj->m_handle, GENIVI_NAVIGATIONCORE_UNREACHABLE_DESTINATION, unfulfilled_preferences);
 	}
 }
@@ -821,7 +823,7 @@ RoutingObj::RoutePreference(uint16_t preferenceSource,uint16_t preferenceMode)
 }
 
 void
-RoutingObj::SetRoutePreferences(uint32_t sessionHandle, const std::string& country, const std::vector< ::DBus::Struct< uint16_t, uint16_t > >& routePreferencesList)
+RoutingObj::SetRoutePreferences(uint32_t sessionHandle, const std::string& country, const std::vector< ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > >& routePreferencesList)
 {
 	int idx;
 	struct attr flags_forward_mask,flags_reverse_mask,roadprofile,item_types,route_weight;
@@ -880,7 +882,7 @@ RoutingObj::SetRoutePreferences(uint32_t sessionHandle, const std::string& count
 }
 
 void
-RoutingObj::GetRoutePreferences(const std::string& country, std::vector< ::DBus::Struct< uint16_t, uint16_t > >& roadPreferenceList)
+RoutingObj::GetRoutePreferences(const std::string& country, std::vector< ::DBus::Struct<DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > > &roadPreferenceList)
 {
     roadPreferenceList=m_route_preferences_list[m_vehicleprofile_idx];
 }

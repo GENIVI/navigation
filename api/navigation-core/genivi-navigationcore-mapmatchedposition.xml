@@ -56,7 +56,7 @@
       <doc>
         <line>GetSimulationStatus = This method retrieves the simulation status</line>
       </doc>
-      <arg name="simulationStatus" type="q" direction="out">
+      <arg name="simulationStatus" type="i" direction="out">
         <doc>
           <line>simulationStatus = enum(SIMULATION_STATUS_NO_SIMULATION, SIMULATION_STATUS_RUNNING, SIMULATION_STATUS_PAUSED, SIMULATION_STATUS_FIXED_POSITION)</line>
           <line>SIMULATION_STATUS_NO_SIMULATION means that NavigationCore is using the EnhancedPosition</line>
@@ -81,7 +81,7 @@
       <doc>
         <line>SimulationStatusChanged = This signal is emitted when the Simulation Status has changed</line>
       </doc>
-      <arg name="simulationStatus" type="q">
+      <arg name="simulationStatus" type="i">
         <doc>
           <line>simulationStatus = enum(SIMULATION_STATUS_NO_SIMULATION, SIMULATION_STATUS_RUNNING, SIMULATION_STATUS_PAUSED, SIMULATION_STATUS_FIXED_POSITION)</line>
           <line>SIMULATION_STATUS_NO_SIMULATION means that NavigationCore is using the EnhancedPosition</line>
@@ -169,13 +169,13 @@
       <doc>
         <line>GetPosition = This method returns the current position</line>
       </doc>
-      <arg name="valuesToReturn" type="aq" direction="in">
+      <arg name="valuesToReturn" type="ai" direction="in">
         <doc>
           <line>valuesToReturn= array[key]</line>
           <line>key = enum(INVALID,TIMESTAMP,LATITUDE,LONGITUDE,ALTITUDE,HEADING,SPEED,CLIMB,GNSS_FIX_STATUS,DR_STATUS,MM_STATUS,SIMULATION_MODE, ... ,ALL)</line>
         </doc>
       </arg>
-      <arg name="position" type="a{qv}" direction="out">
+      <arg name="position" type="a{i(yv)}" direction="out">
         <doc>
           <line>position = dictionary[key,value]</line>
           <line>dictionary = array of tuples (key,value)</line>
@@ -211,7 +211,7 @@
           <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="position" type="a{qv}" direction="in">
+      <arg name="position" type="a{i(yv)}" direction="in">
         <doc>
           <line>position = dictionary[key,value]</line>
           <line>dictionary = array of tuples (key,value)</line>
@@ -234,7 +234,7 @@
       <doc>
         <line>PositionUpdate = This signal is called to notify a client application of a position change. The update frequency is implementation specific. The maximal allowed frequency is 10Hz</line>
       </doc>
-      <arg name="changedValues" type="aq">
+      <arg name="changedValues" type="ai">
         <doc>
           <line>changedValues = array[value]</line>
           <line>value = enum(INVALID,TIMESTAMP,LATITUDE,LONGITUDE,ALTITUDE,HEADING,SPEED,CLIMB,GNSS_FIX_STATUS,DR_STATUS,MM_STATUS,SIMULATION_MODE, ... )</line>
@@ -245,13 +245,13 @@
       <doc>
         <line>GetAddress = This method returns the current address</line>
       </doc>
-      <arg name="valuesToReturn" type="aq" direction="in">
+      <arg name="valuesToReturn" type="ai" direction="in">
         <doc>
           <line>valuesToReturn= array[fieldType]</line>
           <line>key = enum(INVALID,TIMESTAMP,COUNTRY,COUNTRYCODE,CITY,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,TIMEZONE_OFFSET,DAYLIGHT_OFFSET,MATCH_TYPE, ... ,ALL)</line>
         </doc>
       </arg>
-      <arg name="address" type="a{qv}" direction="out">
+      <arg name="address" type="a{i(yv)}" direction="out">
         <doc>
           <line>address = dictionary[key,value]</line>
           <line>dictionary = array of tuples (key,value)</line>
@@ -286,7 +286,7 @@
       <doc>
         <line>AddressUpdate = This signal is called to notify a client application that the current address changed</line>
       </doc>
-      <arg name="changedValues" type="aq">
+      <arg name="changedValues" type="ai">
         <doc>
           <line>changedValues = array[value]</line>
           <line>value = enum(INVALID,TIMESTAMP,COUNTRY,COUNTRYCODE,CITY,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,TIMEZONE_OFFSET,DAYLIGHT_OFFSET,MATCH_TYPE, ... )</line>
@@ -297,13 +297,13 @@
       <doc>
         <line>positionOnSegment = This method returns the vehicle position on a route segment</line>
       </doc>
-      <arg name="valuesToReturn" type="aq" direction="in">
+      <arg name="valuesToReturn" type="ai" direction="in">
         <doc>
           <line>valuesToReturn= array[fieldType]</line>
           <line>key = enum(INVALID,TIMESTAMP,SEGMENT_ID,DIRECTION_ON_SEGMENT,DISTANCE_ON_SEGMENT, ... ,ALL)</line>
         </doc>
       </arg>
-      <arg name="positionOnSegment" type="a{qv}" direction="out">
+      <arg name="positionOnSegment" type="a{i(yv)}" direction="out">
         <doc>
           <line>positionOnSegment = dictionary[key,value]</line>
           <line>dictionary = array of tuples (key,value)</line>
@@ -319,7 +319,7 @@
       <doc>
         <line>PositionOnSegmentUpdate = This signal is called to notify the client that the vehicle position on the route segment changed</line>
       </doc>
-      <arg name="changedValues" type="aq">
+      <arg name="changedValues" type="ai">
         <doc>
           <line>changedValues = array[value]</line>
           <line>value = enum(INVALID,TIMESTAMP,SEGMENT_ID,DIRECTION_ON_SEGMENT,DISTANCE_ON_SEGMENT, ... )</line>
@@ -330,13 +330,13 @@
       <doc>
         <line>GetStatus = This method returns the current status</line>
       </doc>
-      <arg name="valuesToReturn" type="aq" direction="in">
+      <arg name="valuesToReturn" type="ai" direction="in">
         <doc>
           <line>valuesToReturn = array[fieldType]</line>
           <line>key = enum(INVALID,TIMESTAMP,GNSS_FIX_STATUS,DR_STATUS,MM_STATUS,SIMULATION_MODE, ... ,ALL)</line>
         </doc>
       </arg>
-      <arg name="status" type="a{qv}" direction="out">
+      <arg name="status" type="a{i(yv)}" direction="out">
         <doc>
           <line>status = dictionary[key,value]</line>
           <line>dictionary = array of tuples (key,value)</line>
@@ -353,7 +353,7 @@
       <doc>
         <line>StatusUpdate = This signal is emitted to notifiy a client application that the current status changed</line>
       </doc>
-      <arg name="changedValues" type="aq">
+      <arg name="changedValues" type="ai">
         <doc>
           <line>changedValues = array[value]</line>
           <line>value = enum(INVALID,TIMESTAMP,GNSS_FIX_STATUS,DR_STATUS,MM_STATUS,SIMULATION_MODE, ... )</line>

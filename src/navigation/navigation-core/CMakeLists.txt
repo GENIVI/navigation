@@ -39,6 +39,8 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 include_directories(${NAVIT_CONFIG_H_DIR}) # this one contains config.h that is generated
 
+include_directories(${NAVIGATION_COMMON_DIR})
+
 find_program(XSLTPROC xsltproc REQUIRED)
 
 # Generate the config file for navit/navigation-core

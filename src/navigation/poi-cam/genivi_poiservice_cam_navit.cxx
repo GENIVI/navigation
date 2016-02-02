@@ -40,6 +40,7 @@
 #include "transform.h"
 #include "map.h"
 #include "mapset.h"
+#include "navigation-common-dbus.h"
 
 #if (!DEBUG_ENABLED)
 #undef dbg
@@ -72,7 +73,7 @@ variant_string(std::string s)
 }
 
 static bool
-do_sort_distance(::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, int32_t >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > a, ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, int32_t >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > b)
+do_sort_distance(::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > a, ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > b)
 {
 	return a._5 < b._5;
 }
@@ -98,9 +99,9 @@ class ContentAccessModule
 {
 	private:
         std::vector< uint32_t > m_poiCategoriesId;
-        std::vector< ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, int32_t >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > > m_resultList;
+        std::vector< ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > > m_resultList;
         int m_max_radius;
-        bool (*m_sort_func)(::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, int32_t >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > a, ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, int32_t >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > b);
+        bool (*m_sort_func)(::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > a, ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > b);
 		struct coord m_center;
 		double m_scale;
 		struct mapset *m_mapset;
@@ -112,13 +113,13 @@ class ContentAccessModule
 
 	public:
 
-        ContentAccessModule(DBus::Connection &connection)
-        : DBus::ObjectAdaptor(connection, "/org/genivi/poiservice/POIContentAccessModule")
-        {
-		m_mapset=NULL;
-		m_msh=NULL;
-		m_map_rect=NULL;
-        }
+    ContentAccessModule(DBus::Connection &connection)
+    : DBus::ObjectAdaptor(connection, "/org/genivi/poiservice/POIContentAccessModule")
+    {
+        m_mapset=NULL;
+        m_msh=NULL;
+        m_map_rect=NULL;
+    }
 	
 	void
 	register_cam(void)
@@ -128,8 +129,8 @@ class ContentAccessModule
 		int camid=pca->RegisterContentAccessModule(cam_name);
 		dbg(lvl_debug,"camid=%d\n",camid);
 
-        std::vector< ::DBus::Struct< ::DBus::Struct< std::vector< uint32_t >, ::DBus::Variant, std::string, std::string, ::DBus::Variant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, ::DBus::Variant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > > poiCategories1;
-        ::DBus::Struct< ::DBus::Struct< std::vector< uint32_t >, ::DBus::Variant, std::string, std::string, ::DBus::Variant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, ::DBus::Variant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > poiCategory;
+        std::vector< ::DBus::Struct< ::DBus::Struct< std::vector< uint32_t >, DBusCommonAPIVariant, std::string, std::string, DBusCommonAPIVariant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, DBusCommonAPIVariant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > > poiCategories1;
+        ::DBus::Struct< ::DBus::Struct< std::vector< uint32_t >, DBusCommonAPIVariant, std::string, std::string, DBusCommonAPIVariant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, DBusCommonAPIVariant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > poiCategory;
 		/* poiCategory._1._1 parents_id */;
 		poiCategory._1._2=variant_string(""); /* icons */
 		poiCategory._1._3="fuel"; /* name */
@@ -161,8 +162,44 @@ class ContentAccessModule
 			m_map_rect=NULL;
 	}
 
-	::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string >
-	GetVersion()
+    void
+    add_poi(struct item *item)
+    {
+        struct attr label;
+        struct coord c;
+        dbg(lvl_debug,"adding poi\n");
+        ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > >  result;
+
+        result._1=m_resultList.size(); /* source_id */
+        if (item_attr_get(item, attr_label, &label))
+            result._2=std::string(label.u.str); /* name */
+        else
+            result._2=std::string(""); /* name */
+        result._3=m_poiCategoriesId[0]; /* category */
+        if (item_coord_get(item, &c, 1)) {
+            struct coord_geo g;
+            transform_to_geo(projection_mg, &c, &g);
+            result._4._1=g.lat; /* lat */
+            result._4._2=g.lng; /* lon */
+            double distance=transform_distance(projection_mg, &m_center, &c)/m_scale;
+#if 0
+            if (distance > m_max_radius)
+                return;
+#endif
+            result._5=distance; /* distance */
+        } else {
+            result._4._1=0; /* lat */
+            result._4._2=0; /* lon */
+            result._5=0; /* distance */
+        }
+        result._4._3=0; /* altitude */
+        /* result._6 attributes */
+        result._7=variant_string(std::string("")); /* value */
+        m_resultList.push_back(result);
+    }
+
+    ::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string >
+    GetVersion()
 	{
 		DBus::Struct<uint16_t, uint16_t, uint16_t, std::string> Version;
 		Version._1=3;
@@ -172,21 +209,24 @@ class ContentAccessModule
 		return Version;
 	}
 
-    void SetLocale(const std::string& languageCode, const std::string& countryCode, const std::string &scriptCode)
+    void
+    SetLocale(const std::string& languageCode, const std::string& countryCode, const std::string &scriptCode)
         {
             m_languageCode = languageCode;
             m_countryCode = countryCode;
             m_scriptCode = scriptCode;
         }
 
-    void GetLocale(std::string& languageCode, std::string& countryCode, std::string& scriptCode)
+    void
+    GetLocale(std::string& languageCode, std::string& countryCode, std::string& scriptCode)
     {
         languageCode = m_languageCode;
         countryCode = m_countryCode;
         scriptCode = m_scriptCode;
     }
 
-    std::vector< ::DBus::Struct< std::string, std::string , std::string> > GetSupportedLocales()
+    std::vector< ::DBus::Struct< std::string, std::string , std::string> >
+    GetSupportedLocales()
     {
         std::vector< ::DBus::Struct< std::string, std::string, std::string > > ret;
         ::DBus::Struct< std::string, std::string, std::string > en_US { "eng","USA", "Latn" };
@@ -196,7 +236,56 @@ class ContentAccessModule
         return ret;
     }
 
-    void PoiSearchStarted(const uint32_t& poiSearchHandle, const uint16_t& maxSize, const ::DBus::Struct< double, double, int32_t >& location, const std::vector< ::DBus::Struct< uint32_t, uint32_t > >& poiCategories, const std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, ::DBus::Variant, int32_t, bool > >& poiAttributes, const std::string& inputString, const uint16_t& sortOption)
+    std::vector< ::DBus::Struct< uint32_t, std::string, bool > >
+    GetAvailableCategories()
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+    }
+
+    uint32_t
+    GetRootCategory()
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+    }
+
+    std::vector< ::DBus::Struct< uint32_t, bool > >
+    GetChildrenCategories(const uint32_t& category)
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+    }
+
+    std::vector< ::DBus::Struct< uint32_t, bool > >
+    GetParentCategories(const uint32_t& category)
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+    }
+
+    uint32_t
+    createCategory(const ::DBus::Struct< ::DBus::Struct< std::vector< uint32_t >, DBusCommonAPIVariant, std::string, std::string, DBusCommonAPIVariant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, DBusCommonAPIVariant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > >& category)
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+    }
+
+    void
+    removeCategories(const std::vector< uint32_t >& categories)
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+    }
+
+    void
+    addPOIs(const uint32_t& unique_id, const std::vector< ::DBus::Struct< std::string, ::DBus::Struct< double, double, double >, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > >& poiList)
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+    }
+
+    void
+    removePOIs(const std::vector< uint32_t >& ids)
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+    }
+
+    void
+    PoiSearchStarted(const uint32_t& poiSearchHandle, const uint16_t& maxSize, const ::DBus::Struct< double, double, double >& location, const std::vector< ::DBus::Struct< uint32_t, uint32_t > >& poiCategories, const std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, DBusCommonAPIVariant, int32_t, bool > >& poiAttributes, const std::string& inputString, const uint16_t& sortOption)
     {
 		struct attr navit;
 		struct coord_geo g;
@@ -247,50 +336,14 @@ class ContentAccessModule
 			m_sort_func=NULL;
 	}
 
-	void
+    void
     PoiSearchCanceled(const uint32_t& poiSearchHandle)
 	{
 		dbg(lvl_debug,"enter\n");
 	}
-		
-	void
-	add_poi(struct item *item)
-	{
-		struct attr label;
-		struct coord c;
-		dbg(lvl_debug,"adding poi\n");
-        ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, int32_t >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > >  result;
 
-        result._1=m_resultList.size(); /* source_id */
-		if (item_attr_get(item, attr_label, &label))
-			result._2=std::string(label.u.str); /* name */
-		else
-			result._2=std::string(""); /* name */
-		result._3=m_poiCategoriesId[0]; /* category */
-		if (item_coord_get(item, &c, 1)) {
-			struct coord_geo g;
-			transform_to_geo(projection_mg, &c, &g);
-			result._4._1=g.lat; /* lat */
-			result._4._2=g.lng; /* lon */
-			double distance=transform_distance(projection_mg, &m_center, &c)/m_scale;
-#if 0
-			if (distance > m_max_radius)
-				return;
-#endif
-			result._5=distance; /* distance */
-		} else {
-			result._4._1=0; /* lat */
-			result._4._2=0; /* lon */
-			result._5=0; /* distance */
-		}
-		result._4._3=0; /* altitude */
-		/* result._6 attributes */
-		result._7=variant_string(std::string("")); /* value */
-		m_resultList.push_back(result);
-	}
-
-	void
-    ResultListRequested(const uint8_t& camId, const uint32_t& poiSearchHandle, const std::vector< uint32_t >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, int32_t >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > >& resultList)
+    void
+    ResultListRequested(const uint8_t& camId, const uint32_t& poiSearchHandle, const std::vector< uint32_t >& attributeList, uint16_t& statusValue, uint16_t& resultListSize, std::vector< ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > >& resultList)
 	{
 		struct item *item;
 		int count=0;
@@ -311,14 +364,14 @@ class ContentAccessModule
 		resultListSize=resultList.size();
 	}
 
-    std::vector< ::DBus::Struct< ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, int32_t > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > >
+    std::vector< ::DBus::Struct< ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, double > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > >
 	PoiDetailsRequested(const std::vector< uint32_t >& source_id)
 	{
 		dbg(lvl_debug,"enter\n");
-        std::vector< ::DBus::Struct< ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, int32_t > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > > ret;
+        std::vector< ::DBus::Struct< ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, double > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > > ret;
 		for (int i = 0 ; i < source_id.size() ; i++) {
 			int sid=source_id[i];
-            ::DBus::Struct< ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, int32_t > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, ::DBus::Variant > > > result;
+            ::DBus::Struct< ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, double > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > result;
 			result._1._1=sid; /* source id */
 			result._1._2=m_resultList[sid]._2; /* name */
             result._1._3._1=m_resultList[sid]._4._1; /* lat */

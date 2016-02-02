@@ -64,6 +64,8 @@
 #include "xmlconfig.h"
 #include "layout.h"
 
+#include "navigation-common-dbus.h"
+
 #if (!DEBUG_ENABLED)
 #undef dbg
 #define dbg(level,...) ;
@@ -95,7 +97,7 @@ class DisplayedRoute
 
 	void AddGeoCoordinateD(double lat, double lon);
 	void AddGeoCoordinate(DBus::Variant lat, DBus::Variant lon);
-	bool AddSegment(std::map< uint16_t, ::DBus::Variant > map);
+    bool AddSegment(std::map<DBusCommonAPIEnumeration, DBusCommonAPIVariant> map);
 	void WriteSegment(FILE *out);
 	public:
 	uint32_t m_handle;
@@ -143,15 +145,15 @@ class MapViewerControlObj
     void SetCameraHeadingTrackUp(uint32_t sessionHandle);
     void SetMapViewPerspective(uint32_t SessionHandle, uint16_t MapViewPerspectiveMode);
     void GetMapViewPerspective(uint16_t &MapViewPerspectiveMode);
-    void GetScaleList(std::vector< ::DBus::Struct< uint16_t, uint16_t, uint16_t, uint32_t > >& ScalesList);
+    void GetScaleList(std::vector< ::DBus::Struct< uint16_t, uint16_t, DBusCommonAPIEnumeration, uint32_t > >& ScalesList);
     void SetMapViewScale(uint32_t SessionHandle, uint32_t ScaleID);
     void SetMapViewScaleByDelta(uint32_t SessionHandle, int16_t ScaleDelta);
-    void GetMapViewScale(uint8_t& ScaleID, uint16_t& IsMinMax);
+    void GetMapViewScale(uint8_t& ScaleID, DBusCommonAPIEnumeration &IsMinMax);
     void GetMapViewType(uint16_t& MapViewType);
     void SetMapViewTheme(uint32_t sessionHandle, uint16_t mapViewTheme);
     void GetMapViewTheme(uint16_t& mapViewTheme);
-    void SetTargetPoint(uint32_t SessionHandle, ::DBus::Struct< double, double, int32_t >target);
-    void GetTargetPoint(::DBus::Struct< double, double, int32_t >&target);
+    void SetTargetPoint(uint32_t SessionHandle, ::DBus::Struct<double, double, double> target);
+    void GetTargetPoint(::DBus::Struct<double, double, double> &target);
     void SetMapViewPan(uint32_t SessionHandle, uint16_t panningAction, ::DBus::Struct< uint16_t, uint16_t >p);
     void GetMapViewPan(const uint16_t& panningAction, ::DBus::Struct< uint16_t, uint16_t > &p);
     void SetMapViewRotation(uint32_t sessionHandle, double rotationAngle, double rotationAnglePerFrame);
@@ -192,7 +194,7 @@ class Routing
 	{
 	}
 
-    void RouteCalculationFailed(const uint32_t& routeHandle, const uint16_t& errorCode, const std::map< uint16_t, uint16_t >& unfullfilledPreferences)
+    void RouteCalculationFailed(const uint32_t& routeHandle, const DBusCommonAPIEnumeration& errorCode, const std::map< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration >& unfullfilledPreferences)
 	{
 		std::vector<DisplayedRoute *>::iterator it;
 
@@ -203,7 +205,7 @@ class Routing
 		}
 	}
 
-    void RouteCalculationSuccessful(const uint32_t& RouteHandle, const std::map< uint16_t, uint16_t >& unfullfilledPreferences)
+    void RouteCalculationSuccessful(const uint32_t& RouteHandle, const std::map< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration >& unfullfilledPreferences)
 	{
         std::vector<DisplayedRoute *>::iterator it;
 
@@ -217,7 +219,7 @@ class Routing
 		}
 	}
 
-    void RouteCalculationProgressUpdate(const uint32_t& routeHandle, const uint16_t& status, const uint8_t& percentage)
+    void RouteCalculationProgressUpdate(const uint32_t& routeHandle, const DBusCommonAPIEnumeration& status, const uint8_t& percentage)
 	{
 	}	
 
@@ -256,25 +258,25 @@ class  MapMatchedPosition
 		cb=callback_new_2(callback_cast(position_update), this, v);
 	}
 
-	void PositionUpdate(const std::vector< uint16_t >& changedValues)
+    void PositionUpdate(const std::vector< DBusCommonAPIEnumeration >& changedValues)
 	{
 		event_add_timeout(0, 0, cb);
 	}
 
-	void AddressUpdate(const std::vector< uint16_t >& changedValues)
+    void AddressUpdate(const std::vector< DBusCommonAPIEnumeration >& changedValues)
 	{
 	}
 
-	void PositionOnSegmentUpdate(const std::vector< uint16_t >& changedValues)
+    void PositionOnSegmentUpdate(const std::vector< DBusCommonAPIEnumeration >& changedValues)
 	{
 	}
 
-	void StatusUpdate(const std::vector< uint16_t >& changedValues)
+    void StatusUpdate(const std::vector< DBusCommonAPIEnumeration >& changedValues)
 	{
 	}
 
 	void
-	SimulationStatusChanged(const uint16_t& simulationStatus)
+    SimulationStatusChanged(const DBusCommonAPIEnumeration& simulationStatus)
 	{
 	}
 
@@ -292,34 +294,34 @@ class  MapMatchedPosition
 static void
 position_update(MapMatchedPosition *pos, struct vehicle *v)
 {
-	std::vector< uint16_t > valuesToReturn;
+    std::vector< DBusCommonAPIEnumeration > valuesToReturn;
 
 	valuesToReturn.push_back(GENIVI_NAVIGATIONCORE_LATITUDE);
 	valuesToReturn.push_back(GENIVI_NAVIGATIONCORE_LONGITUDE);
 	valuesToReturn.push_back(GENIVI_NAVIGATIONCORE_SPEED);
 	valuesToReturn.push_back(GENIVI_NAVIGATIONCORE_HEADING);
 
-	std::map< uint16_t, ::DBus::Variant> map=pos->GetPosition(valuesToReturn);
+    std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant> map=pos->GetPosition(valuesToReturn);
 	if (map.find(GENIVI_NAVIGATIONCORE_SPEED) != map.end()) {
 		struct attr position_speed={attr_position_speed};
 		double speed;
 		position_speed.u.numd=&speed;
-		speed=double_variant(map[GENIVI_NAVIGATIONCORE_SPEED]);
+        speed=double_variant(map[GENIVI_NAVIGATIONCORE_SPEED]._2);
 		vehicle_set_attr(v, &position_speed);
 	}
 	if (map.find(GENIVI_NAVIGATIONCORE_HEADING) != map.end()) {
 		struct attr position_direction={attr_position_direction};
 		double direction;
 		position_direction.u.numd=&direction;
-		direction=double_variant(map[GENIVI_NAVIGATIONCORE_HEADING]);
+        direction=double_variant(map[GENIVI_NAVIGATIONCORE_HEADING]._2);
 		vehicle_set_attr(v, &position_direction);
 	}
 	if (map.find(GENIVI_NAVIGATIONCORE_LATITUDE) != map.end() && map.find(GENIVI_NAVIGATIONCORE_LONGITUDE) != map.end()) {
 		struct attr position_coord_geo={attr_position_coord_geo};
 		struct coord_geo g;
 		position_coord_geo.u.coord_geo=&g;
-		g.lat=double_variant(map[GENIVI_NAVIGATIONCORE_LATITUDE]);
-		g.lng=double_variant(map[GENIVI_NAVIGATIONCORE_LONGITUDE]);
+        g.lat=double_variant(map[GENIVI_NAVIGATIONCORE_LATITUDE]._2);
+        g.lng=double_variant(map[GENIVI_NAVIGATIONCORE_LONGITUDE]._2);
         dbg(lvl_debug,"update %f %f\n",g.lat,g.lng);
 		vehicle_set_attr(v, &position_coord_geo);
 	}
@@ -337,7 +339,7 @@ class  MapViewerControl
 	}
 
     uint32_t
-    CreateMapViewInstance(const uint32_t& sessionHandle, const ::DBus::Struct< uint16_t, uint16_t >& mapViewSize, const uint16_t& mapViewType)
+    CreateMapViewInstance(const uint32_t& sessionHandle, const ::DBus::Struct< uint16_t, uint16_t >& mapViewSize, const DBusCommonAPIEnumeration& mapViewType)
 	{
         dbg(lvl_debug,"enter\n");
 		if (mapViewType != GENIVI_MAPVIEWER_MAIN_MAP) 
@@ -363,7 +365,7 @@ class  MapViewerControl
 	}
 
 	void
-    SetMapViewPerspective(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const uint16_t& perspective)
+    SetMapViewPerspective(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const DBusCommonAPIEnumeration& perspective)
 	{
         MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
@@ -371,7 +373,7 @@ class  MapViewerControl
         obj->SetMapViewPerspective(sessionHandle, perspective);
 	}
 
-    uint16_t
+    DBusCommonAPIEnumeration
     GetMapViewPerspective(const uint32_t& mapViewInstanceHandle)
 	{
 		uint16_t MapViewPerspectiveMode;
@@ -382,7 +384,7 @@ class  MapViewerControl
 		return MapViewPerspectiveMode;
 	}
 
-    std::vector< uint16_t >
+    std::vector< DBusCommonAPIEnumeration >
     GetSupportedMapViewPerspectives()
     {
         throw DBus::ErrorNotSupported("Not yet supported");
@@ -408,7 +410,7 @@ class  MapViewerControl
 	}
 
 	void
-    GetMapViewScale(const uint32_t& MapViewInstanceHandle, uint8_t& ScaleID, uint16_t& IsMinMax)
+    GetMapViewScale(const uint32_t& MapViewInstanceHandle, uint8_t& ScaleID, DBusCommonAPIEnumeration& IsMinMax)
 	{
 		MapViewerControlObj *obj=handles[MapViewInstanceHandle];
 		if (!obj)
@@ -417,7 +419,7 @@ class  MapViewerControl
 	}
 
     void
-    SetMapViewPan(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const uint16_t& panningAction, const std::vector< ::DBus::Struct< uint16_t, uint16_t > >& pixelCoordinates)
+    SetMapViewPan(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const DBusCommonAPIEnumeration& panningAction, const std::vector< ::DBus::Struct< uint16_t, uint16_t > >& pixelCoordinates)
     {
         ::DBus::Struct< uint16_t, uint16_t > pixel;
         MapViewerControlObj *obj=handles[mapViewInstanceHandle];
@@ -431,7 +433,7 @@ class  MapViewerControl
     }
 
     void
-    GetMapViewPan(const uint32_t& mapViewInstanceHandle, const uint16_t& valueToReturn, const std::vector< ::DBus::Struct< uint16_t, uint16_t > >& pixelCoordinates)
+    GetMapViewPan(const uint32_t& mapViewInstanceHandle, const DBusCommonAPIEnumeration& valueToReturn, const std::vector< ::DBus::Struct< uint16_t, uint16_t > >& pixelCoordinates)
     {
         ::DBus::Struct< uint16_t, uint16_t > pixel;
         MapViewerControlObj *obj=handles[mapViewInstanceHandle];
@@ -472,7 +474,7 @@ class  MapViewerControl
 		return ret;
 	}
 
-	uint16_t
+    DBusCommonAPIEnumeration
     GetMapViewType(const uint32_t& mapViewInstanceHandle)
 	{
 		uint16_t ret;
@@ -483,14 +485,14 @@ class  MapViewerControl
 		return ret;
 	}
 
-    std::vector< uint16_t >
+    std::vector< DBusCommonAPIEnumeration >
     GetSupportedMapViewTypes()
     {
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 
 	void
-    SetTargetPoint(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const ::DBus::Struct< double, double, int32_t >& targetPoint)
+    SetTargetPoint(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const ::DBus::Struct< double, double, double >& targetPoint)
 	{
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
@@ -498,10 +500,10 @@ class  MapViewerControl
 		obj->SetTargetPoint(sessionHandle, targetPoint);
 	}
 
-	::DBus::Struct< double, double, int32_t >
+    ::DBus::Struct< double, double, double >
     GetTargetPoint(const uint32_t& mapViewInstanceHandle)
 	{
-		::DBus::Struct< double, double, int32_t > ret;
+        ::DBus::Struct< double, double, double > ret;
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
@@ -530,12 +532,12 @@ class  MapViewerControl
 	}
 
 	void
-	SetCameraPosition(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const ::DBus::Struct< double, double, int32_t >& position)
+    SetCameraPosition(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const ::DBus::Struct< double, double, double >& position)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-	::DBus::Struct< double, double, int32_t >
+    ::DBus::Struct< double, double, double >
     GetCameraPosition(const uint32_t& mapViewInstanceHandle)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
@@ -618,18 +620,18 @@ class  MapViewerControl
 	}
 
     void
-    SetMapViewScaleMode(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const uint16_t& scaleMode)
+    SetMapViewScaleMode(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const DBusCommonAPIEnumeration& scaleMode)
     {
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 
-    uint16_t
+    DBusCommonAPIEnumeration
     GetMapViewScaleMode(const uint32_t& mapViewInstanceHandle)
     {
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 
-    std::vector< uint16_t >
+    std::vector< DBusCommonAPIEnumeration >
     GetSupportedMapViewScaleModes(const uint32_t& mapViewInstanceHandle)
     {
         throw DBus::ErrorNotSupported("Not yet supported");
@@ -655,10 +657,10 @@ class  MapViewerControl
 		return ret;
 	}
 
-	std::vector< ::DBus::Struct< uint16_t, uint16_t, uint16_t, uint32_t > >
+    std::vector< ::DBus::Struct< uint16_t, uint16_t, DBusCommonAPIEnumeration, uint32_t > >
     GetScaleList(const uint32_t& mapViewInstanceHandle)
 	{
-		std::vector< ::DBus::Struct< uint16_t, uint16_t, uint16_t, uint32_t > > ret;
+        std::vector< ::DBus::Struct< uint16_t, uint16_t, DBusCommonAPIEnumeration, uint32_t > > ret;
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
@@ -711,54 +713,54 @@ class  MapViewerControl
 	}
 
 	void
-    SetMapViewVisibilityMode(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const uint16_t& visibilityMode)
+    SetMapViewVisibilityMode(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const DBusCommonAPIEnumeration& visibilityMode)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-	uint16_t
+    DBusCommonAPIEnumeration
     GetMapViewVisibilityMode(const uint32_t& mapViewInstanceHandle)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-    std::vector< uint16_t >
+    std::vector< DBusCommonAPIEnumeration >
     GetSupportedMapViewVisibilityModes()
     {
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 
     void
-    SetMapViewObjectVisibility(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const std::map< uint16_t, bool >& objectVisibilityList)
+    SetMapViewObjectVisibility(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const std::map< DBusCommonAPIEnumeration, bool >& objectVisibilityList)
     {
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 
-    std::map< uint16_t, bool >
+    std::map< DBusCommonAPIEnumeration, bool >
     GetMapViewObjectVisibility(const uint32_t& mapViewInstanceHandle)
     {
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 
-    std::vector< uint16_t >
+    std::vector< DBusCommonAPIEnumeration >
     GetSupportedMapViewObjectVisibilities(const uint32_t& mapViewInstanceHandle)
     {
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 
 	void
-    SetMapViewPerformanceLevel(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const uint16_t& performanceLevel)
+    SetMapViewPerformanceLevel(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const DBusCommonAPIEnumeration& performanceLevel)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-	uint16_t
+    DBusCommonAPIEnumeration
     GetMapViewPerformanceLevel(const uint32_t& mapViewInstanceHandle)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-    std::vector< uint16_t >
+    std::vector< DBusCommonAPIEnumeration >
     GetSupportedMapViewPerformanceLevels()
     {
         throw DBus::ErrorNotSupported("Not yet supported");
@@ -776,7 +778,7 @@ class  MapViewerControl
 	}
 
 	void
-    SetMapViewTheme(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const uint16_t& mapViewTheme)
+    SetMapViewTheme(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const DBusCommonAPIEnumeration& mapViewTheme)
 	{
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
@@ -784,7 +786,7 @@ class  MapViewerControl
 		obj->SetMapViewTheme(sessionHandle, mapViewTheme);
 	}
 
-	uint16_t
+    DBusCommonAPIEnumeration
     GetMapViewTheme(const uint32_t& mapViewInstanceHandle)
 	{
 		uint16_t ret;
@@ -795,7 +797,7 @@ class  MapViewerControl
 		return ret;
 	}
 
-    std::vector< uint16_t >
+    std::vector< DBusCommonAPIEnumeration >
     GetSupportedMapViewThemes()
     {
         throw DBus::ErrorNotSupported("Not yet supported");
@@ -845,7 +847,7 @@ class  MapViewerControl
 	}
 
 	void
-	GetCameraHeading(const uint32_t& mapViewInstanceHandle, uint16_t& headingType, int32_t& headingAngle, ::DBus::Struct< double, double >& target)
+    GetCameraHeading(const uint32_t& mapViewInstanceHandle, DBusCommonAPIEnumeration& headingType, int32_t& headingAngle, ::DBus::Struct< double, double >& target)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
@@ -881,7 +883,7 @@ class  MapViewerControl
 
 
 	void
-	SetPoiCategoriesNotVisible(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const std::vector< uint16_t >& poiCategoryIds)
+    SetPoiCategoriesNotVisible(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const std::vector< uint32_t >& poiCategoryIds)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
@@ -892,26 +894,26 @@ class  MapViewerControl
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-	std::vector< uint16_t >
+    std::vector< uint32_t >
 	GetPoiCategoriesVisible(const uint32_t& mapViewInstanceHandle)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-	std::vector< ::DBus::Struct< uint16_t, ::DBus::Struct< double, double >, ::DBus::Variant > >
-	SelectElementsOnMap(const uint32_t& mapViewInstanceHandle, const ::DBus::Struct< uint16_t, uint16_t >& pixelCoordinate, const std::vector< uint16_t >& selectableTypes, const uint16_t& maxNumberOfSelectedElements)
+    std::vector< ::DBus::Struct< int32_t, ::DBus::Struct< double, double >, ::DBus::Struct< uint8_t, ::DBus::Variant > > >
+    SelectElementsOnMap(const uint32_t& mapViewInstanceHandle, const ::DBus::Struct< uint16_t, uint16_t >& pixelCoordinate, const std::vector< int32_t >& selectableTypes, const uint16_t& maxNumberOfSelectedElements)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
 	void
-	SetPoiCategoriesVisible(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const std::vector< uint16_t >& poiCategoryIds)
+    SetPoiCategoriesVisible(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const std::vector< uint32_t >& poiCategoryIds)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
 	void
-	SetPoiCategoriesVisibleWithinLimits(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const std::vector< uint16_t >& poiCategoryIds, const uint8_t& minScaleID, const uint8_t& maxScaleID)
+    SetPoiCategoriesVisibleWithinLimits(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const std::vector< uint32_t >& poiCategoryIds, const uint8_t& minScaleID, const uint8_t& maxScaleID)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
@@ -942,7 +944,7 @@ MapViewerControlObj::GetMapViewPerspective(uint16_t& MapViewPerspectiveMode)
 }
 
 void
-MapViewerControlObj::GetScaleList(std::vector< ::DBus::Struct< uint16_t, uint16_t, uint16_t, uint32_t > >& ScalesList)
+MapViewerControlObj::GetScaleList(std::vector< ::DBus::Struct< uint16_t, uint16_t, DBusCommonAPIEnumeration, uint32_t > >& ScalesList)
 {
 	throw DBus::ErrorNotSupported("Not yet supported");
 }
@@ -968,7 +970,7 @@ MapViewerControlObj::SetMapViewScaleByDelta(uint32_t SessionHandle, int16_t Scal
 }
 
 void
-MapViewerControlObj::GetMapViewScale(uint8_t& ScaleID, uint16_t& IsMinMax)
+MapViewerControlObj::GetMapViewScale(uint8_t& ScaleID, DBusCommonAPIEnumeration& IsMinMax)
 {
 	struct transformation *trans=navit_get_trans(m_navit.u.navit);
 	long scale=transform_get_scale(trans);
@@ -1159,7 +1161,7 @@ MapViewerControlObj::SetCameraHeadingTrackUp(uint32_t sessionHandle)
 }
 
 void
-MapViewerControlObj::SetTargetPoint(uint32_t SessionHandle, ::DBus::Struct< double, double, int32_t >target)
+MapViewerControlObj::SetTargetPoint(uint32_t SessionHandle, ::DBus::Struct< double, double, double >target)
 {
 	struct coord_geo g;
 	struct attr center={attr_center};
@@ -1171,7 +1173,7 @@ MapViewerControlObj::SetTargetPoint(uint32_t SessionHandle, ::DBus::Struct< doub
 }
 
 void
-MapViewerControlObj::GetTargetPoint(::DBus::Struct< double, double, int32_t >&target)
+MapViewerControlObj::GetTargetPoint(::DBus::Struct< double, double, double >&target)
 {
 	struct attr center;
 	if (!navit_get_attr(m_navit.u.navit, attr_center, &center, NULL) || !center.u.coord_geo) 
@@ -1600,12 +1602,12 @@ DisplayedRoute::AddGeoCoordinate(DBus::Variant lat, DBus::Variant lon)
 }
 
 bool
-DisplayedRoute::AddSegment(std::map< uint16_t, ::DBus::Variant > map)
+DisplayedRoute::AddSegment(std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > map)
 {
 	if (map.find(GENIVI_NAVIGATIONCORE_START_LATITUDE) != map.end() && map.find(GENIVI_NAVIGATIONCORE_START_LONGITUDE) != map.end()) 
-		AddGeoCoordinate(map[GENIVI_NAVIGATIONCORE_START_LATITUDE],map[GENIVI_NAVIGATIONCORE_START_LONGITUDE]);
+        AddGeoCoordinate(map[GENIVI_NAVIGATIONCORE_START_LATITUDE]._2,map[GENIVI_NAVIGATIONCORE_START_LONGITUDE]._2);
 	if (map.find(GENIVI_NAVIGATIONCORE_INTERMEDIATE_POINTS) != map.end()) {
-		::DBus::Variant variant=map[GENIVI_NAVIGATIONCORE_INTERMEDIATE_POINTS];
+        ::DBus::Variant variant=map[GENIVI_NAVIGATIONCORE_INTERMEDIATE_POINTS]._2;
 		std::vector<DBus::Struct<uint16_t, double, double, double> >intermediate_points;
 		DBus::MessageIter iter=variant.reader();
 		iter >> intermediate_points;
@@ -1614,7 +1616,7 @@ DisplayedRoute::AddSegment(std::map< uint16_t, ::DBus::Variant > map)
 		}
 	}
 	if (map.find(GENIVI_NAVIGATIONCORE_END_LATITUDE) != map.end() && map.find(GENIVI_NAVIGATIONCORE_END_LONGITUDE) != map.end()) {
-		AddGeoCoordinate(map[GENIVI_NAVIGATIONCORE_END_LATITUDE],map[GENIVI_NAVIGATIONCORE_END_LONGITUDE]);
+        AddGeoCoordinate(map[GENIVI_NAVIGATIONCORE_END_LATITUDE]._2,map[GENIVI_NAVIGATIONCORE_END_LONGITUDE]._2);
 		return true;
 	}
 	return false;
@@ -1635,8 +1637,8 @@ DisplayedRoute::WriteSegment(FILE *out)
 DisplayedRoute::DisplayedRoute(class MapViewerControlObj *mapviewer, uint8_t RouteSession, uint32_t RouteHandle, struct mapset *mapset)
 {	
     dbg(lvl_debug,"enter\n");
-	std::vector< std::map< uint16_t, ::DBus::Variant > > RouteShape;
-	std::vector< uint16_t > valuesToReturn;
+    std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > > RouteShape;
+    std::vector< DBusCommonAPIEnumeration > valuesToReturn;
 	valuesToReturn.push_back(GENIVI_NAVIGATIONCORE_START_LATITUDE);
 	valuesToReturn.push_back(GENIVI_NAVIGATIONCORE_START_LONGITUDE);
 	valuesToReturn.push_back(GENIVI_NAVIGATIONCORE_END_LATITUDE);
@@ -1655,10 +1657,10 @@ DisplayedRoute::DisplayedRoute(class MapViewerControlObj *mapviewer, uint8_t Rou
 	int count=RouteShape.size();
 	bool complete=true;
 	for (int i = 0 ; i < count ; i++) {
-		std::map< uint16_t, ::DBus::Variant > map = RouteShape[i];
+        std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > map = RouteShape[i];
 		if (!complete) {
 			if (map.find(GENIVI_NAVIGATIONCORE_START_LATITUDE) != map.end() && map.find(GENIVI_NAVIGATIONCORE_START_LONGITUDE) != map.end()) 
-				AddGeoCoordinate(map[GENIVI_NAVIGATIONCORE_START_LATITUDE],map[GENIVI_NAVIGATIONCORE_START_LONGITUDE]);
+                AddGeoCoordinate(map[GENIVI_NAVIGATIONCORE_START_LATITUDE]._2,map[GENIVI_NAVIGATIONCORE_START_LONGITUDE]._2);
 			else
                 dbg(lvl_debug,"previous segment is missing end, but current segment is missing start also");
 			WriteSegment(f);

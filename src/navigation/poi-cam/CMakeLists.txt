@@ -49,6 +49,8 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 include_directories(${NAVIT_CONFIG_H_DIR}) # this one contains config.h that is generated
 
+include_directories(${NAVIGATION_COMMON_DIR})
+
 include_directories(${DBUS_GENERATED_INCLUDE_DIR}/poi-service)
 
 if(${YOCTO_CONFIG})
