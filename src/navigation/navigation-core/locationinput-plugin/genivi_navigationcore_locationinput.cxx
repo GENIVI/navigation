@@ -429,19 +429,23 @@ LocationInputObj::Idle(void)
         std::map< int32_t, DBusCommonAPIVariant> entry;
 		if (res->country && res->country->name) {
 			dbg(lvl_debug,"country %s\n",res->country->name);
-			entry[GENIVI_NAVIGATIONCORE_COUNTRY]=variant_string(std::string(res->country->name));
+            entry[GENIVI_NAVIGATIONCORE_COUNTRY]._1 = 0;
+            entry[GENIVI_NAVIGATIONCORE_COUNTRY]._2=variant_string(std::string(res->country->name));
 		}
 		if (res->town && res->town->common.town_name) {
 			dbg(lvl_debug,"town %s\n",res->town->common.town_name);
-			entry[GENIVI_NAVIGATIONCORE_CITY]=variant_string(std::string(res->town->common.town_name));
+            entry[GENIVI_NAVIGATIONCORE_CITY]._1 = 0;
+            entry[GENIVI_NAVIGATIONCORE_CITY]._2=variant_string(std::string(res->town->common.town_name));
 		}
 		if (res->street && res->street->name) {
 			dbg(lvl_debug,"street %s\n",res->street->name);
-			entry[GENIVI_NAVIGATIONCORE_STREET]=variant_string(std::string(res->street->name));
+            entry[GENIVI_NAVIGATIONCORE_STREET]._1 = 0;
+            entry[GENIVI_NAVIGATIONCORE_STREET]._2=variant_string(std::string(res->street->name));
 		}
 		if (res->house_number && res->house_number->house_number) {
 			dbg(lvl_debug,"house number %s\n",res->house_number->house_number);
-			entry[GENIVI_NAVIGATIONCORE_HOUSENUMBER]=variant_string(std::string(res->house_number->house_number));
+            entry[GENIVI_NAVIGATIONCORE_HOUSENUMBER]._1 = 0;
+            entry[GENIVI_NAVIGATIONCORE_HOUSENUMBER]._2=variant_string(std::string(res->house_number->house_number));
 		}
 		if (res->c) {
 			struct coord_geo g;
@@ -449,8 +453,10 @@ LocationInputObj::Idle(void)
 			c.x=res->c->x;
 			c.y=res->c->y;
 			transform_to_geo(res->c->pro, &c, &g);
-			entry[GENIVI_NAVIGATIONCORE_LATITUDE]=variant_double(g.lat);
-			entry[GENIVI_NAVIGATIONCORE_LONGITUDE]=variant_double(g.lng);
+            entry[GENIVI_NAVIGATIONCORE_LATITUDE]._1 = 0;
+            entry[GENIVI_NAVIGATIONCORE_LATITUDE]._2=variant_double(g.lat);
+            entry[GENIVI_NAVIGATIONCORE_LONGITUDE]._1 = 0;
+            entry[GENIVI_NAVIGATIONCORE_LONGITUDE]._2=variant_double(g.lng);
 		}
 		m_data[chunk].push_back(entry);
 		if (m_data[chunk].size() >= m_windowsize) {

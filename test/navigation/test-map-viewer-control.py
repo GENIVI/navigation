@@ -13,14 +13,15 @@
 *        could be easily tested using a python script
 *
 * \author Marco Residori <marco.residori@mentor_graphics.com>
+* \author Philippe Colliot <philippe.colliot@mpsa.com>
 *
-* \version 1.0
+* \version 1.1
 *
 * This Source Code Form is subject to the terms of the
 * Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
 # this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 * List of changes:
-* <date>, <name>, <description of change>
+* 04-02-2016, Philippe Colliot, Update to the new API ('i' for enumerations and 'yv' for variants), add some methods
 *
 * @licence end@
 **************************************************************************
@@ -36,6 +37,10 @@ LONGITUDE = 0x00a1
 
 MAIN_MAP = 0x0010
 SPLIT_SCREEN = 0x0011
+
+#constants used by the script
+HORIZONTAL_SIZE = 800
+VERTICAL_SIZE = 480
 
 print '\n--------------------------'
 print 'MapViewerControl Test'
@@ -57,8 +62,8 @@ MapViewerControl_interface = dbus.Interface(MapViewerControl_obj, dbus_interface
 #get mapviewer handle
 mapviewerhandle = MapViewerControl_interface.CreateMapViewInstance( \
   dbus.UInt32(sessionhandle), \
-  dbus.Struct((dbus.UInt16(640),dbus.UInt16(640))), \
-  dbus.UInt16(MAIN_MAP))
+  dbus.Struct((dbus.UInt16(HORIZONTAL_SIZE),dbus.UInt16(VERTICAL_SIZE))), \
+  dbus.Int32(MAIN_MAP))
 
 print 'MapView handle: ' + str(mapviewerhandle)
 
@@ -79,7 +84,7 @@ print 'Set center in Bern(' + str(lat1) + ',' + str(lon1) + ')'
 MapViewerControl_interface.SetTargetPoint( \
     dbus.UInt32(sessionhandle), \
     dbus.UInt32(mapviewerhandle), \
-    dbus.Struct((dbus.Double(lat1),dbus.Double(lon1),dbus.Int32(alt1))))
+    dbus.Struct((dbus.Double(lat1),dbus.Double(lon1),dbus.Double(alt1))))
 
 # Get current position
 targetPoint = MapViewerControl_interface.GetTargetPoint( \
@@ -129,6 +134,16 @@ MapViewerControl_interface.SetMapViewScaleByDelta( \
     dbus.UInt32(sessionhandle), \
     dbus.UInt32(mapviewerhandle), \
     dbus.Int16(-1))
+
+time.sleep(1)
+
+MapViewerControl_interface.ReleaseMapViewInstance( \
+  dbus.UInt32(sessionhandle), \
+  dbus.UInt32(mapviewerhandle))
+
+session_interface.DeleteSession(sessionhandle)
+                                
+time.sleep(1)
 
 print '\nTest Finished\n'
 

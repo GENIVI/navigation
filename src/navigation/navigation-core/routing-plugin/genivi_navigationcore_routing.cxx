@@ -713,11 +713,13 @@ RoutingObj::GetRouteOverview(uint32_t routeHandle , std::map< DBusCommonAPIEnume
 	if (!route_get_attr(m_route.u.route,attr_destination_time, &destination_time, NULL))
 		throw DBus::ErrorFailed("internal error:failed to get attribute destination_time");
 
-    DBus::Variant var1,var2;
-    DBus::MessageIter iter1 = var1.writer();
-    DBus::MessageIter iter2 = var2.writer();
+    DBusCommonAPIVariant var1,var2;
+    DBus::MessageIter iter1 = var1._2.writer();
+    DBus::MessageIter iter2 = var2._2.writer();
     iter1.append_uint32(destination_length.u.num);
     iter2.append_uint32(destination_time.u.num/10);
+    var1._1 = 0;
+    var2._1 = 0;
     routeOverview[GENIVI_NAVIGATIONCORE_TOTAL_DISTANCE] = var1;
     routeOverview[GENIVI_NAVIGATIONCORE_TOTAL_TIME] = var2;
 }

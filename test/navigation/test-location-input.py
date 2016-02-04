@@ -14,14 +14,15 @@
 *              could be easily tested using a python script
 *
 * @author Stephan Wiehr <stephan.wiehr@alpine.de>
+* @author Philippe Colliot <philippe.colliot@mpsa.com>
 *
-* @version 1.0
+* @version 1.1
 *
 * This Source Code Form is subject to the terms of the
 * Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
 # this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 * List of changes:
-* <date>, <name>, <description of change>
+* 04-02-2016, Philippe Colliot, Update to the new API ('i' for enumerations and 'yv' for variants), add status handler
 *
 * @licence end@
 **************************************************************************
@@ -47,6 +48,7 @@ DISTRICT = 0x00ad
 PHONE_NUMBER = 0x00ae
 POI_NAME = 0x00af
 TOWN_CENTER = 0x00b0
+FINISHED = 0x00c2
 
 # List of addresses
 COUNTRY_STRING = list()
@@ -73,6 +75,9 @@ COUNTRY_STRING.append('Italy')
 CITY_STRING.append('Aosta')
 STREET_STRING.append('Via Liconi')
 HOUSE_NUMBER_STRING.append('44')
+
+# Default size of the list 
+WINDOW_SIZE = 20
 
 # Configuration
 current_address_index = 0
@@ -127,6 +132,7 @@ def selection_criterion_to_string(selection_criterion):
 
 
 # Prepare a dictionary array for pretty printing
+
 def dictionary_array_to_string(dict_array, linefeed, offset=0):
     return_value = ''
     i = offset
@@ -140,11 +146,12 @@ def dictionary_array_to_string(dict_array, linefeed, offset=0):
 
 
 # Prepare a dictionary for pretty printing
+# NB: the value is supposed to be [UInt8, Variant], according to the DBus '(yv)', used by CommonAPI
 def dictionary_to_string(dictionary):
     return_value = ''
     i = 0
     for key in dictionary.keys():
-        value = dictionary[key]
+        value = dictionary[key][1]
         return_value += selection_criterion_to_string(key) + ' = ' + unicode(value)
         i += 1
         if i < len(dictionary):
@@ -154,6 +161,7 @@ def dictionary_to_string(dictionary):
 
 
 # Prepare a selection criteria array for pretty printing
+
 def selection_criteria_array_to_string(selection_criterion_array):
     return_value = ''
     i = 0
@@ -260,6 +268,15 @@ def evaluate_address(address, guidable):
 # Signal receiver
 
 # Handler for ContentUpdated callback
+
+def search_status_handler(handle,status):
+    print '\n::Search status ' + str(int(status))
+    if status == FINISHED:
+            location_input_interface.RequestListUpdate(dbus.UInt32(session_handle), dbus.UInt32(handle),
+                                                       dbus.UInt16(0),
+                                                       dbus.UInt16(WINDOW_SIZE))
+        
+
 def content_updated_handler(handle, guidable, available_selection_criteria, address):
     global target_search_string
     global entered_search_string
@@ -298,7 +315,6 @@ def content_updated_handler(handle, guidable, available_selection_criteria, addr
         print '\nTEST FAILED (Invalid search mode)'
         loop.quit()
 
-
 # Handler for SpellResult callback
 def spell_result_handler(handle, unique_string, valid_characters, full_match):
     global entered_search_string
@@ -328,6 +344,7 @@ def spell_result_handler(handle, unique_string, valid_characters, full_match):
 
 
 # Handler for SearchResultList callback
+
 def search_result_list_handler(handle, total_size, window_offset, window_size, result_list_window):
     global spell_next_character
     global found_exact_match
@@ -342,8 +359,8 @@ def search_result_list_handler(handle, total_size, window_offset, window_size, r
         found_exact_match = 0
         i = 0
         for address in result_list_window:
-            if address[current_selection_criterion] == target_search_string:
-                print '\nACTION: Found exact match, selecting \''+result_list_window[i][current_selection_criterion] + \
+            if unicode(address[current_selection_criterion][1]) == target_search_string:
+                print '\nACTION: Found exact match, selecting \''+unicode(address[current_selection_criterion][1]) + \
                       '\' (Session '+str(int(session_handle)) + ' LocationInputHandle ' + str(int(handle))+')'
                 location_input_interface.SelectEntry(dbus.UInt32(session_handle), dbus.UInt32(handle), dbus.UInt16(i))
                 break
@@ -369,6 +386,10 @@ def search_result_list_handler(handle, total_size, window_offset, window_size, r
 
 
 # add signal receiver
+bus.add_signal_receiver(search_status_handler,
+                        dbus_interface='org.genivi.navigationcore.LocationInput',
+                        signal_name='SearchStatus')
+
 bus.add_signal_receiver(search_result_list_handler,
                         dbus_interface='org.genivi.navigationcore.LocationInput',
                         signal_name='SearchResultList')
