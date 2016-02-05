@@ -90,17 +90,17 @@ void Routing::RouteCalculationCancelled(const handleId_t &routeHandle)
 
 }
 
-void Routing::RouteCalculationSuccessful(const handleId_t& routeHandle, const std::map< uint16_t, uint16_t >& unfullfilledPreferences)
+void Routing::RouteCalculationSuccessful(const handleId_t& routeHandle, const std::map< int32_t, int32_t >& unfullfilledPreferences)
 {
 
 }
 
-void Routing::RouteCalculationFailed(const handleId_t& routeHandle, const uint16_t& errorCode, const std::map< uint16_t, uint16_t >& unfullfilledPreferences)
+void Routing::RouteCalculationFailed(const handleId_t& routeHandle, const int32_t& errorCode, const std::map< int32_t, int32_t >& unfullfilledPreferences)
 {
 
 }
 
-void Routing::RouteCalculationProgressUpdate(const handleId_t& routeHandle, const uint16_t &status, const uint8_t &percentage)
+void Routing::RouteCalculationProgressUpdate(const handleId_t& routeHandle, const int32_t &status, const uint8_t &percentage)
 {
 
 }
@@ -1051,13 +1051,13 @@ void poiSearchServer::SetRouteHandle(const handleId_t& poiSearchHandle, const ha
 {
     uint32_t index;
     int16_t detailLevel;
-    std::vector< uint16_t > valuesToReturn;
+    std::vector< int32_t > valuesToReturn;
     uint32_t numberOfSegments;
     uint32_t offset;
     uint32_t totalNumberOfSegments;
-    std::vector< std::map< uint16_t, ::DBus::Variant > > routeSegments;
-    std::map< uint16_t, ::DBus::Variant > element;
-    std::map< uint16_t, ::DBus::Variant >::iterator iter;
+    std::vector< std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > routeSegments;
+    std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > element;
+    std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >::iterator iter;
     route_vector_t routeVector;
 
     if ((m_poiSearchHandle == INVALID_HANDLE) || (poiSearchHandle != m_poiSearchHandle))
@@ -1093,16 +1093,16 @@ void poiSearchServer::SetRouteHandle(const handleId_t& poiSearchHandle, const ha
             element = routeSegments.at(index);
             iter = element.find(GENIVI_NAVIGATIONCORE_START_LATITUDE);
             if (iter != element.end())
-                routeVector.startPoint.latitude = element.at(GENIVI_NAVIGATIONCORE_START_LATITUDE);
+                routeVector.startPoint.latitude = element.at(GENIVI_NAVIGATIONCORE_START_LATITUDE)._2;
             iter = element.find(GENIVI_NAVIGATIONCORE_START_LONGITUDE);
             if (iter != element.end())
-                routeVector.startPoint.longitude = element.at(GENIVI_NAVIGATIONCORE_START_LONGITUDE);
+                routeVector.startPoint.longitude = element.at(GENIVI_NAVIGATIONCORE_START_LONGITUDE)._2;
             iter = element.find(GENIVI_NAVIGATIONCORE_END_LATITUDE);
             if (iter != element.end())
-                routeVector.endPoint.latitude = element.at(GENIVI_NAVIGATIONCORE_END_LATITUDE);
+                routeVector.endPoint.latitude = element.at(GENIVI_NAVIGATIONCORE_END_LATITUDE)._2;
             iter = element.find(GENIVI_NAVIGATIONCORE_END_LONGITUDE);
             if (iter != element.end())
-                routeVector.endPoint.longitude = element.at(GENIVI_NAVIGATIONCORE_END_LONGITUDE);
+                routeVector.endPoint.longitude = element.at(GENIVI_NAVIGATIONCORE_END_LONGITUDE)._2;
             m_route.push_back(routeVector);
         }
     }

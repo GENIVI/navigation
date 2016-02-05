@@ -76,11 +76,11 @@ class Routing
 
     void RouteCalculationCancelled(const uint32_t& routeHandle);
 
-    void RouteCalculationSuccessful(const uint32_t& routeHandle, const std::map< uint16_t, uint16_t >& unfullfilledPreferences);
+    void RouteCalculationSuccessful(const uint32_t& routeHandle, const std::map< int32_t, int32_t >& unfullfilledPreferences);
 
-    void RouteCalculationFailed(const uint32_t& routeHandle, const uint16_t& errorCode,const std::map< uint16_t, uint16_t >& unfullfilledPreferences);
+    void RouteCalculationFailed(const uint32_t& routeHandle, const int32_t& errorCode,const std::map< int32_t, int32_t >& unfullfilledPreferences);
 
-    void RouteCalculationProgressUpdate(const uint32_t& routeHandle, const uint16_t& status, const uint8_t& percentage);
+    void RouteCalculationProgressUpdate(const uint32_t& routeHandle, const int32_t& status, const uint8_t& percentage);
 
     void AlternativeRoutesAvailable (const std::vector<uint32_t>& routeHandlesList);
 

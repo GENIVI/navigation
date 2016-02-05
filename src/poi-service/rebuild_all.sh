@@ -51,10 +51,10 @@ then
 	commonapi_tools_option="-DDBUS_LIB_PATH="$DBUS_LIB_PATH" -DCOMMONAPI_DBUS_TOOL_DIR="$COMMONAPI_DBUS_TOOL_DIR" -DCOMMONAPI_TOOL_DIR="$COMMONAPI_TOOL_DIR
 fi
 
-echo 'delete the build folder'
-rm -rf build
+echo 'clean up the build folder'
+find ./build ! -name '*.cbp' -type f -exec rm -f {} +
 
-mkdir build
+mkdir -p build
 cd build
 
 echo 'build poi-server'

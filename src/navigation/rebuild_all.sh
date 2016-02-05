@@ -1,13 +1,13 @@
 #!/bin/bash
 
-echo 'delete the build folder'
-rm -rf build
+echo 'clean up the build folder'
+find ./build ! -name '*.cbp' -type f -exec rm -f {} +
 
-mkdir build
+mkdir -p build
 cd build
-mkdir navit
+mkdir -p navit
 cd navit
-mkdir navit
+mkdir -p navit
 cd navit
 echo 'build navit'
 cmake -DDISABLE_QT=1 -DSAMPLE_MAP=0 -Dvehicle/null=1 -Dgraphics/qt_qpainter=0 ../../../navit/navit/

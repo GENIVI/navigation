@@ -59,10 +59,11 @@ cd ../../test/poi-service
 
 echo 'build the poi client'
 
-echo 'delete the build folder'
-rm -rf build
+echo 'clean up the build folder'
+find ./build ! -name '*.cbp' -type f -exec rm -f {} +
 
-mkdir build
+mkdir -p build
+
 cd build
 
 echo 'build poi-client'
