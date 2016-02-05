@@ -132,10 +132,10 @@ class ContentAccessModule
         std::vector< ::DBus::Struct< ::DBus::Struct< std::vector< uint32_t >, DBusCommonAPIVariant, std::string, std::string, DBusCommonAPIVariant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, DBusCommonAPIVariant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > > poiCategories1;
         ::DBus::Struct< ::DBus::Struct< std::vector< uint32_t >, DBusCommonAPIVariant, std::string, std::string, DBusCommonAPIVariant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, DBusCommonAPIVariant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > poiCategory;
 		/* poiCategory._1._1 parents_id */;
-		poiCategory._1._2=variant_string(""); /* icons */
+        poiCategory._1._2._2=variant_string(""); /* icons */
 		poiCategory._1._3="fuel"; /* name */
 		/* poiCategory,_1._4 short_desc */
-		poiCategory._1._5=variant_string(""); /* media */
+        poiCategory._1._5._2=variant_string(""); /* media */
 
 		/* poiCategory,_2 attributes */
 		/* poiCategory,_3 sortOptions */
@@ -169,6 +169,7 @@ class ContentAccessModule
         struct coord c;
         dbg(lvl_debug,"adding poi\n");
         ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > >  result;
+        ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > attribute;
 
         result._1=m_resultList.size(); /* source_id */
         if (item_attr_get(item, attr_label, &label))
@@ -194,7 +195,11 @@ class ContentAccessModule
         }
         result._4._3=0; /* altitude */
         /* result._6 attributes */
-        result._7=variant_string(std::string("")); /* value */
+        attribute._1 = 0;
+        attribute._2 = 0;
+        attribute._3._1 = 0;
+        attribute._3._2 = variant_string(std::string("")); /* value */
+        result._6.push_back(attribute);
         m_resultList.push_back(result);
     }
 
