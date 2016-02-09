@@ -164,19 +164,19 @@ class  MapMatchedPosition
 			switch (valuesToReturn[i]) {
 			case GENIVI_NAVIGATIONCORE_LATITUDE:
 				if (tracking_get_attr(tracking, attr_position_coord_geo, &attr, NULL)) 
-					map[GENIVI_NAVIGATIONCORE_LATITUDE]=variant_double(attr.u.coord_geo->lat);
+                    map[GENIVI_NAVIGATIONCORE_LATITUDE]._2=variant_double(attr.u.coord_geo->lat);
 				break;
 			case GENIVI_NAVIGATIONCORE_LONGITUDE:
 				if (tracking_get_attr(tracking, attr_position_coord_geo, &attr, NULL)) 
-					map[GENIVI_NAVIGATIONCORE_LONGITUDE]=variant_double(attr.u.coord_geo->lng);
+                    map[GENIVI_NAVIGATIONCORE_LONGITUDE]._2=variant_double(attr.u.coord_geo->lng);
 				break;
 			case GENIVI_NAVIGATIONCORE_SPEED:
 				if (tracking_get_attr(tracking, attr_position_speed, &attr, NULL))
-					map[GENIVI_NAVIGATIONCORE_SPEED]=variant_double(*attr.u.numd);
+                    map[GENIVI_NAVIGATIONCORE_SPEED]._2=variant_double(*attr.u.numd);
 				break;
 			case GENIVI_NAVIGATIONCORE_HEADING:
 				if (tracking_get_attr(tracking, attr_position_direction, &attr, NULL))
-					map[GENIVI_NAVIGATIONCORE_HEADING]=variant_double(*attr.u.numd);
+                    map[GENIVI_NAVIGATIONCORE_HEADING]._2=variant_double(*attr.u.numd);
 				break;
 			}
 		}
@@ -190,7 +190,7 @@ class  MapMatchedPosition
         std::vector< int32_t >::const_iterator it;
 		for (it = valuesToReturn.begin(); it < valuesToReturn.end(); it++) {
 			if (*it == GENIVI_NAVIGATIONCORE_STREET && street_name) {
-				ret[*it]=variant_string(street_name);
+                ret[*it]._2=variant_string(street_name);
 			}
 		}
 		return ret;

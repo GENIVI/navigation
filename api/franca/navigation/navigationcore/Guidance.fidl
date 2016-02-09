@@ -156,7 +156,7 @@ interface Guidance {
 	struct ManeuverItem {
 		UInt32 offsetOfManeuver
 		UInt32 travelTime
-		Int32 direction
+		ManeuverDirectionType direction
 		ManeuverType maneuver
 		ManeuverData maneuverData
 	}

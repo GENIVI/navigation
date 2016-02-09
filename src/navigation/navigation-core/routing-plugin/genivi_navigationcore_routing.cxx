@@ -588,7 +588,7 @@ variant_string(std::string s)
 }
 
 static bool
-vector_contains(const std::vector< DBusCommonAPIEnumeration >& vector, uint16_t val)
+vector_contains(const std::vector< DBusCommonAPIEnumeration >& vector, DBusCommonAPIEnumeration val)
 {
 	int i;
 	for (i = 0 ; i < vector.size() ; i++) {
@@ -601,26 +601,26 @@ vector_contains(const std::vector< DBusCommonAPIEnumeration >& vector, uint16_t 
 static void
 get_map(struct coord *c, struct item *item, int is_end, const std::vector< DBusCommonAPIEnumeration >& valuesToReturn, std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > &map)
 {
-	uint16_t lat_key=is_end?GENIVI_NAVIGATIONCORE_END_LATITUDE:GENIVI_NAVIGATIONCORE_START_LATITUDE;
-	uint16_t lon_key=is_end?GENIVI_NAVIGATIONCORE_END_LONGITUDE:GENIVI_NAVIGATIONCORE_START_LONGITUDE;
+    DBusCommonAPIEnumeration lat_key=is_end?GENIVI_NAVIGATIONCORE_END_LATITUDE:GENIVI_NAVIGATIONCORE_START_LATITUDE;
+    DBusCommonAPIEnumeration lon_key=is_end?GENIVI_NAVIGATIONCORE_END_LONGITUDE:GENIVI_NAVIGATIONCORE_START_LONGITUDE;
 	if (vector_contains(valuesToReturn, lat_key) || vector_contains(valuesToReturn, lon_key)) {
 		struct coord_geo g;
 		transform_to_geo(projection_mg, c, &g);
 		if (vector_contains(valuesToReturn, lat_key))
-			map[lat_key]=variant_double(g.lat);
+            map[lat_key]._2=variant_double(g.lat);
 		if (vector_contains(valuesToReturn, lon_key))
-			map[lon_key]=variant_double(g.lng);
+            map[lon_key]._2=variant_double(g.lng);
 	}
 	if (item && (vector_contains(valuesToReturn, GENIVI_NAVIGATIONCORE_DISTANCE) || vector_contains(valuesToReturn, GENIVI_NAVIGATIONCORE_TIME) || vector_contains(valuesToReturn, GENIVI_NAVIGATIONCORE_SPEED))) {
 		struct attr length, time, speed;
 		if (item_attr_get(item, attr_length, &length) && vector_contains(valuesToReturn, GENIVI_NAVIGATIONCORE_DISTANCE)) {
-			map[GENIVI_NAVIGATIONCORE_DISTANCE]=variant_double(length.u.num);
+            map[GENIVI_NAVIGATIONCORE_DISTANCE]._2=variant_double(length.u.num);
 		}
 		if (item_attr_get(item, attr_time, &time) && vector_contains(valuesToReturn, GENIVI_NAVIGATIONCORE_TIME)) {
-			map[GENIVI_NAVIGATIONCORE_TIME]=variant_uint16((time.u.num+5)/10);
+            map[GENIVI_NAVIGATIONCORE_TIME]._2=variant_uint16((time.u.num+5)/10);
 		}
 		if (item_attr_get(item, attr_speed, &speed) && vector_contains(valuesToReturn, GENIVI_NAVIGATIONCORE_SPEED)) {
-			map[GENIVI_NAVIGATIONCORE_SPEED]=variant_uint16(speed.u.num);
+            map[GENIVI_NAVIGATIONCORE_SPEED]._2=variant_uint16(speed.u.num);
 		}
 	}
 	if (item && vector_contains(valuesToReturn, GENIVI_NAVIGATIONCORE_ROAD_NAME)) {
@@ -630,7 +630,7 @@ get_map(struct coord *c, struct item *item, int is_end, const std::vector< DBusC
 			struct item *item2=map_rect_get_item_byid(mr, street_item.u.item->id_hi, street_item.u.item->id_lo);
 			struct attr label;
 			if (item2 && item_attr_get(item2, attr_label, &label)) 
-				map[GENIVI_NAVIGATIONCORE_ROAD_NAME]=variant_string(label.u.str);
+                map[GENIVI_NAVIGATIONCORE_ROAD_NAME]._2=variant_string(label.u.str);
 			map_rect_destroy(mr);
 		}
 	}
