@@ -1,7 +1,10 @@
 #!/bin/bash
 
 echo 'clean up the build folder'
-find ./build ! -name '*.cbp' -type f -exec rm -f {} +
+if [ -d "./build" ]
+then
+	find ./build ! -name '*.cbp' -type f -exec rm -f {} +
+fi
 
 mkdir -p build
 cd build

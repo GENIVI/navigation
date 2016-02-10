@@ -25,7 +25,7 @@ do
 done
 set -e
 
-if [ $franca="ON" ]
+if [ "$franca" = "ON" ]
 then
 	if [ ! $COMMONAPI_TOOL_DIR ]
 	then 
@@ -60,7 +60,10 @@ cd ../../test/poi-service
 echo 'build the poi client'
 
 echo 'clean up the build folder'
-find ./build ! -name '*.cbp' -type f -exec rm -f {} +
+if [ -d "./build" ]
+then
+	find ./build ! -name '*.cbp' -type f -exec rm -f {} +
+fi
 
 mkdir -p build
 
