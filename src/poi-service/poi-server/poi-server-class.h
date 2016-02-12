@@ -256,17 +256,17 @@ public:
 
     void SetAttributes(const handleId_t& poiSearchHandle, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes);
 
-    void StartPoiSearch(const handleId_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption);
+    void StartPoiSearch(const handleId_t& poiSearchHandle, const std::string& inputString, const int32_t &sortOption);
 
     void CancelPoiSearch(const handleId_t& poiSearchHandle);
 
     void SetCenter(const handleId_t& poiSearchHandle, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location);
 
-    void StartPoiProximityAlert(const handleId_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption);
+    void StartPoiProximityAlert(const handleId_t& poiSearchHandle, const std::string& inputString, const int32_t& sortOption);
 
     void CancelPoiProximityAlert(const handleId_t& poiSearchHandle);
 
-    void RequestResultList(const handleId_t& poiSearchHandle, const uint16_t& offset, const uint16_t& maxWindowSize, const std::vector< uint32_t >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_searchResult::DBus_searchResult_t >& resultListWindow);
+    void RequestResultList(const handleId_t& poiSearchHandle, const uint16_t& offset, const uint16_t& maxWindowSize, const std::vector< uint32_t >& attributes, int32_t& statusValue, uint16_t& resultListSize, std::vector< DBus_searchResult::DBus_searchResult_t >& resultListWindow);
 
     std::vector< DBus_searchResultDetails::DBus_searchResultDetails_t > GetPoiDetails(const std::vector< poiId_t >& id);
 

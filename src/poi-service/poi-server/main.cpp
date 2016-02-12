@@ -1204,7 +1204,7 @@ void poiSearchServer::SetAttributes(const handleId_t& poiSearchHandle, const std
     }
 }
 
-void poiSearchServer::StartPoiSearch(const handleId_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption)
+void poiSearchServer::StartPoiSearch(const handleId_t& poiSearchHandle, const std::string& inputString, const int32_t& sortOption)
 {
 
     if ((m_poiSearchHandle == INVALID_HANDLE) || (poiSearchHandle != m_poiSearchHandle))
@@ -1259,7 +1259,7 @@ void poiSearchServer::SetCenter(const handleId_t& poiSearchHandle, const DBus_ge
     }
 }
 
-void poiSearchServer::StartPoiProximityAlert(const handleId_t& poiSearchHandle, const std::string& inputString, const uint16_t& sortOption)
+void poiSearchServer::StartPoiProximityAlert(const handleId_t& poiSearchHandle, const std::string& inputString, const int32_t &sortOption)
 {
     if ((m_poiSearchHandle == INVALID_HANDLE) || (poiSearchHandle != m_poiSearchHandle))
         // to do send an error message
@@ -1291,7 +1291,7 @@ void poiSearchServer::CancelPoiProximityAlert(const handleId_t& poiSearchHandle)
     }
 }
 
-void poiSearchServer::RequestResultList(const handleId_t& poiSearchHandle, const uint16_t& offset, const uint16_t& maxWindowSize, const std::vector< attributeId_t >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_searchResult::DBus_searchResult_t >& resultListWindow)
+void poiSearchServer::RequestResultList(const handleId_t& poiSearchHandle, const uint16_t& offset, const uint16_t& maxWindowSize, const std::vector< attributeId_t >& attributes, int32_t& statusValue, uint16_t& resultListSize, std::vector< DBus_searchResult::DBus_searchResult_t >& resultListWindow)
 {
     DBus_searchResult::searchResult_t element; //id distance status attributes[]
     DBus_searchResult el;

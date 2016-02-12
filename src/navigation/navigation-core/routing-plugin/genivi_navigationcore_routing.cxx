@@ -98,7 +98,7 @@ class RoutingObj
     void GetRouteOverview(uint32_t routeHandle , std::map<DBusCommonAPIEnumeration, DBusCommonAPIVariant> &routeOverview);
     void GetRouteBoundingBox(::DBus::Struct< ::DBus::Struct< double, double >,::DBus::Struct< double, double > > &boundingBox);
     void CancelRouteCalculation(uint32_t sessionHandle);
-    bool RoutePreference(uint16_t preferenceSource, uint16_t preferenceMode);
+    bool RoutePreference(DBusCommonAPIEnumeration preferenceSource, DBusCommonAPIEnumeration preferenceMode);
     void SetRoutePreferences(uint32_t sessionHandle, const std::string& country, const std::vector< ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > >& routePreferencesList);
     void GetRoutePreferences(const std::string& country, std::vector< ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > >& roadPreferenceList);
     RoutingObj(Routing *routing, uint32_t session, uint32_t handle);
@@ -811,7 +811,7 @@ RoutingObj_Callback(struct RoutingObj *obj)
 
 
 bool
-RoutingObj::RoutePreference(uint16_t preferenceSource,uint16_t preferenceMode)
+RoutingObj::RoutePreference(DBusCommonAPIEnumeration preferenceSource, DBusCommonAPIEnumeration preferenceMode)
 {
     int index;
 

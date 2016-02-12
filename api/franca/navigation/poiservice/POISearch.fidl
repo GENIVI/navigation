@@ -168,7 +168,7 @@ interface POISearch {
 			String inputString				
 			<** @description : enum(SORT_DEFAULT,SORT_BY_DISTANCE,SORT_BY_TIME,ATTRIBUTE_CUSTOM, ... )
             If more than one category was defined for this search, the sort criteria should be compliant with all categories.**>
-			UInt16 sortOption				
+			SortOption sortOption				
 		}
 	}
 	
@@ -191,7 +191,7 @@ interface POISearch {
 			String inputString				
 			<** @description : enum(SORT_DEFAULT,SORT_BY_DISTANCE,SORT_BY_TIME,ATTRIBUTE_CUSTOM, ... )
             If more than one category was defined for this search, the sort criteria should be compliant with all categories.**>
-			UInt16 sortOption				
+			SortOption sortOption				
 		}
 	}
 	
@@ -217,7 +217,7 @@ interface POISearch {
 		}	
 		out {
 			<** @description : enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... ).**>
-			UInt16 statusValue				
+			SearchStatusState statusValue				
 			<** @description : Number of items of the results list.**>
 			UInt16 resultListSize				
 			<** @description : array[unique_id, distance, route_status, attributes].**>

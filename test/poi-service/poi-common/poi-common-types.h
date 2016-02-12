@@ -118,11 +118,11 @@ struct poiAttributeFull_t //(uui(yv)ib)
     bool mandatory; //true if the attribute is mandatory for the search and false for optional
 };
 
-struct resultSearch_t //(uuqa(ui(yv)))
+struct resultSearch_t //(uuia(ui(yv)))
 {
     uint id;
     uint distance;
-    ushort route_status;
+    int route_status;
     QList<poiAttribute_t> attributes;
 };
 

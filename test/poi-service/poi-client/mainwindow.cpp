@@ -1070,7 +1070,7 @@ void MainWindow::refreshViewTable(ushort windowSize)
     clearViewTable();
 
     // RequestResultList
-    QDBusPendingReply<ushort, ushort, QList<resultSearch_t> >reply_0 = m_dbusPoiSearchInterface->RequestResultList(m_poiSearchHandle, m_currentTopListIndex, windowSize, attributes);
+    QDBusPendingReply<int, ushort, QList<resultSearch_t> >reply_0 = m_dbusPoiSearchInterface->RequestResultList(m_poiSearchHandle, m_currentTopListIndex, windowSize, attributes);
     reply_0.waitForFinished();
     if (reply_0.isError())
         manageDBusError(reply_0.reply()); // call failed

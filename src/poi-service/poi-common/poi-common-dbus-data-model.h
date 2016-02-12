@@ -952,18 +952,18 @@ private:
     poiDetails_t m_poiDetails;
 };
 
-class DBus_searchResult : DBus_dataFormatConverter //(uuqa(ui(yv))) -->in this implementation, the variant data depends on the value of 'type'
+class DBus_searchResult : DBus_dataFormatConverter //(uuia(ui(yv))) -->in this implementation, the variant data depends on the value of 'type'
 {
 public:
     struct searchResult_t
     {
         poiId_t id;
         uint distance;
-        ushort route_status;
+        int32_t route_status;
         std::vector<DBus_poiAttribute::poiAttribute_t> attributes;
     };
 
-    typedef ::DBus::Struct< uint32_t, uint32_t, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > DBus_searchResult_t;
+    typedef ::DBus::Struct< uint32_t, uint32_t, int32_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > DBus_searchResult_t;
 
     DBus_searchResult(){
         DBus_poiAttribute attrib;

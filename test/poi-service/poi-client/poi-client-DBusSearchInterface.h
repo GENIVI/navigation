@@ -131,7 +131,7 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("SetRouteHandle"), argumentList);
     }
 
-    inline QDBusPendingReply<>StartPoiSearch(handleId_t poiSearchHandle, const QString &inputString, ushort sortOption)
+    inline QDBusPendingReply<>StartPoiSearch(handleId_t poiSearchHandle, const QString &inputString, int sortOption)
     { // "u" "s" "q" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle) << qVariantFromValue(inputString) << qVariantFromValue(sortOption);
@@ -145,8 +145,8 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("CancelPoiSearch"), argumentList);
     }
 
-    inline QDBusPendingReply<>StartPoiProximityAlert(handleId_t poiSearchHandle, const QString &inputString, ushort sortOption)
-    { // "u" "s" "q" in
+    inline QDBusPendingReply<>StartPoiProximityAlert(handleId_t poiSearchHandle, const QString &inputString, int sortOption)
+    { // "u" "s" "i" in
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle) << qVariantFromValue(inputString) << qVariantFromValue(sortOption);
         return asyncCallWithArgumentList(QLatin1String("StartPoiProximityAlert"), argumentList);
@@ -159,8 +159,8 @@ public Q_SLOTS: // METHODS
         return asyncCallWithArgumentList(QLatin1String("CancelPoiProximityAlert"), argumentList);
     }
 
-    inline QDBusPendingReply<ushort, ushort, QList<resultSearch_t> >RequestResultList(handleId_t poiSearchHandle, ushort offset, ushort maxWindowSize, QList<attributeId_t> attributes)
-    { // "u" "q" "q" "au" in "q" "q" "a(uuqa(uiv))" out
+    inline QDBusPendingReply<int, ushort, QList<resultSearch_t> >RequestResultList(handleId_t poiSearchHandle, ushort offset, ushort maxWindowSize, QList<attributeId_t> attributes)
+    { // "u" "q" "q" "au" in "i" "q" "a(uuia(ui(yv)))" out
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(poiSearchHandle) << qVariantFromValue(offset) << qVariantFromValue(maxWindowSize) << qVariantFromValue(attributes);
         return asyncCallWithArgumentList(QLatin1String("RequestResultList"), argumentList);
