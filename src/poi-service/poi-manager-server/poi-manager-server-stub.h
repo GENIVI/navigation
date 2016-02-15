@@ -84,10 +84,10 @@ public:
     sqlRequest();
     ~sqlRequest();
     SQL_REQUEST_ERRORS setDatabase(const char* poiDatabaseFileName);
-    vector<poi_category_common_t> getAvailableCategories(POIServiceTypes::CategoryID& rootCategory);
-    SQL_REQUEST_ERRORS createCategory(POIServiceTypes::CAMCategory category,POIServiceTypes::CategoryID& unique_id);
-    SQL_REQUEST_ERRORS removeCategory(POIServiceTypes::CategoryID unique_id);
-    SQL_REQUEST_ERRORS createPoi(POIServiceTypes::CategoryID categoryId, POIServiceTypes::PoiAddedDetails poi, POIServiceTypes::POI_ID& unique_id);
+    vector<poi_category_common_t> getAvailableCategories(CommonTypes::CategoryID& rootCategory);
+    SQL_REQUEST_ERRORS createCategory(POIServiceTypes::CAMCategory category,CommonTypes::CategoryID& unique_id);
+    SQL_REQUEST_ERRORS removeCategory(CommonTypes::CategoryID unique_id);
+    SQL_REQUEST_ERRORS createPoi(CommonTypes::CategoryID categoryId, POIServiceTypes::PoiAddedDetails poi, POIServiceTypes::POI_ID& unique_id);
     SQL_REQUEST_ERRORS removePoi(POIServiceTypes::POI_ID unique_id);
     SQL_REQUEST_ERRORS searchPoi(const string &categoryName, const string &search_string, NavigationTypes::Coordinate3D &left_bottom_location, NavigationTypes::Coordinate3D &right_top_location, std::vector<POIServiceTypes::POI_ID> &poi_id_list);
 
@@ -164,7 +164,7 @@ private:
 
     SQL_REQUEST_ERRORS checkIfCategoryNameDoesntExist(std::string name);
 
-    SQL_REQUEST_ERRORS checkIfCategoryExist(POIServiceTypes::CategoryID unique_id);
+    SQL_REQUEST_ERRORS checkIfCategoryExist(CommonTypes::CategoryID unique_id);
 
     SQL_REQUEST_ERRORS checkIfAttributeExist(POIServiceTypes::AttributeID unique_id, string name);
 
@@ -172,7 +172,7 @@ private:
 
     SQL_REQUEST_ERRORS getFreePoiId(POIServiceTypes::POI_ID &unique_id);
 
-    SQL_REQUEST_ERRORS getFreeCategoryId(POIServiceTypes::CategoryID &unique_id);
+    SQL_REQUEST_ERRORS getFreeCategoryId(CommonTypes::CategoryID &unique_id);
 
     SQL_REQUEST_ERRORS getFreeAttributeId(POIServiceTypes::AttributeID &unique_id);
 
@@ -197,11 +197,11 @@ public:
     void getSupportedLocales(const std::shared_ptr<CommonAPI::ClientId> _client, getSupportedLocalesReply_t _reply);
     void getAvailableCategories(const std::shared_ptr<CommonAPI::ClientId> _client, getAvailableCategoriesReply_t _reply);
     void getRootCategory(const std::shared_ptr<CommonAPI::ClientId> _client, getRootCategoryReply_t _reply);
-    void getChildrenCategories(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CategoryID _category, getChildrenCategoriesReply_t _reply);
-    void getParentCategories(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CategoryID _category, getParentCategoriesReply_t _reply);
+    void getChildrenCategories(const std::shared_ptr<CommonAPI::ClientId> _client, CommonTypes::CategoryID _category, getChildrenCategoriesReply_t _reply);
+    void getParentCategories(const std::shared_ptr<CommonAPI::ClientId> _client, CommonTypes::CategoryID _category, getParentCategoriesReply_t _reply);
     void createCategory(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CAMCategory _category, createCategoryReply_t _reply);
-    void removeCategories(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< POIServiceTypes::CategoryID> _categories, removeCategoriesReply_t _reply);
-    void addPOIs(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CategoryID _unique_id, std::vector< POIServiceTypes::PoiAddedDetails> _poiList, addPOIsReply_t _reply);
+    void removeCategories(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< CommonTypes::CategoryID> _categories, removeCategoriesReply_t _reply);
+    void addPOIs(const std::shared_ptr<CommonAPI::ClientId> _client, CommonTypes::CategoryID _unique_id, std::vector< POIServiceTypes::PoiAddedDetails> _poiList, addPOIsReply_t _reply);
     void removePOIs(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< POIServiceTypes::POI_ID> _ids, removePOIsReply_t _reply);
     void poiSearchStarted(const std::shared_ptr<CommonAPI::ClientId> _client, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, uint16_t _maxSize, ::org::genivi::navigation::NavigationTypes::Coordinate3D _location, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::CategoryAndRadius> _poiCategories, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::AttributeDetails> _poiAttributes, std::string _inputString, uint16_t _sortOption, poiSearchStartedReply_t _reply);
     void poiSearchCanceled(const std::shared_ptr<CommonAPI::ClientId> _client, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, poiSearchCanceledReply_t _reply);
@@ -219,7 +219,7 @@ private:
 
     uint16_t m_availableCategories;
     vector<poi_category_common_t> m_availableCategoryTable;
-    POIServiceTypes::CategoryID m_rootCategory;
+    CommonTypes::CategoryID m_rootCategory;
     NavigationTypes::Coordinate3D m_centerLocation;
 
     NavigationTypes::Handle m_search_handle;

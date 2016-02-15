@@ -162,7 +162,7 @@ public:
 
     void SetLocale(std::string languageCode, std::string countryCode, std::string scriptCode);
 
-    uint16_t searchAroundALocation(DBus_geoCoordinate3D::geoCoordinate3D_t location,const std::string* inputString, uint16_t sortOption);
+    uint16_t searchAroundALocation(DBus_geoCoordinate3D::geoCoordinate3D_t location, const std::string* inputString, int32_t sortOption);
 
     void SetPoiSearchHandle(handleId_t poiSearchHandle);
 

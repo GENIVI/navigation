@@ -48,7 +48,7 @@ void sqlRequest::onError()
 
 }
 
-vector<poi_category_common_t> sqlRequest::getAvailableCategories(POIServiceTypes::CategoryID &rootCategory)
+vector<poi_category_common_t> sqlRequest::getAvailableCategories(CommonTypes::CategoryID &rootCategory)
 {
     std::string sqlQuery; //SQL request on database
     std::ostringstream  strStream; //temporary stream used for transformation into string
@@ -213,7 +213,7 @@ void sqlRequest::getAvailableArea()
     }
 }
 
-sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCategory category, POIServiceTypes::CategoryID& unique_id)
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createCategory(POIServiceTypes::CAMCategory category, CommonTypes::CategoryID& unique_id)
 {
     sqlRequest::SQL_REQUEST_ERRORS ret;
     size_t index;
@@ -459,7 +459,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfCategoryNameDoesntExist(std::s
     return ret;
 }
 
-sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfCategoryExist(POIServiceTypes::CategoryID unique_id)
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfCategoryExist(CommonTypes::CategoryID unique_id)
 {
     std::string sqlQuery; //SQL request on database
     vector<vector<string> > query_result;
@@ -529,7 +529,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfPoiExist(POIServiceTypes::POI_
     return ret;
 }
 
-sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removeCategory(POIServiceTypes::CategoryID unique_id)
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::removeCategory(CommonTypes::CategoryID unique_id)
 {
     sqlRequest::SQL_REQUEST_ERRORS ret;
     std::string sqlQuery; //SQL request on database
@@ -682,7 +682,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::getFreePoiId(POIServiceTypes::POI_ID 
     return ret;
 }
 
-sqlRequest::SQL_REQUEST_ERRORS sqlRequest::getFreeCategoryId(POIServiceTypes::CategoryID& unique_id)
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::getFreeCategoryId(CommonTypes::CategoryID& unique_id)
 {
     sqlRequest::SQL_REQUEST_ERRORS ret;
     vector<vector<string> > query_result;
@@ -838,7 +838,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::checkIfAttributeExist(POIServiceTypes
     return ret;
 }
 
-sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createPoi(POIServiceTypes::CategoryID categoryId, POIServiceTypes::PoiAddedDetails poi, POIServiceTypes::POI_ID &unique_id)
+sqlRequest::SQL_REQUEST_ERRORS sqlRequest::createPoi(CommonTypes::CategoryID categoryId, POIServiceTypes::PoiAddedDetails poi, POIServiceTypes::POI_ID &unique_id)
 {
     sqlRequest::SQL_REQUEST_ERRORS ret;
     std::string sqlQuery; //SQL request on database
@@ -1292,7 +1292,7 @@ void PoiManagerServerStub::getRootCategory(const std::shared_ptr<CommonAPI::Clie
     _reply(m_rootCategory);
 }
 
-void PoiManagerServerStub::getParentCategories(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CategoryID _category, getParentCategoriesReply_t _reply)
+void PoiManagerServerStub::getParentCategories(const std::shared_ptr<CommonAPI::ClientId> _client, CommonTypes::CategoryID _category, getParentCategoriesReply_t _reply)
 {
     uint16_t index;
     POIServiceTypes::CategoryAndLevel categoryAndLevel;
@@ -1308,7 +1308,7 @@ void PoiManagerServerStub::getParentCategories(const std::shared_ptr<CommonAPI::
     _reply(categories);
 }
 
-void PoiManagerServerStub::getChildrenCategories(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CategoryID _category, getChildrenCategoriesReply_t _reply)
+void PoiManagerServerStub::getChildrenCategories(const std::shared_ptr<CommonAPI::ClientId> _client, CommonTypes::CategoryID _category, getChildrenCategoriesReply_t _reply)
 {
     uint16_t index;
     POIServiceTypes::CategoryAndLevel categoryAndLevel;
@@ -1326,7 +1326,7 @@ void PoiManagerServerStub::getChildrenCategories(const std::shared_ptr<CommonAPI
 
 void PoiManagerServerStub::createCategory(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CAMCategory _category, createCategoryReply_t _reply)
 {
-    POIServiceTypes::CategoryID unique_id;
+    CommonTypes::CategoryID unique_id;
 
     mp_sqlRequest->createCategory(_category,unique_id);
     refreshCategoryList();
@@ -1334,7 +1334,7 @@ void PoiManagerServerStub::createCategory(const std::shared_ptr<CommonAPI::Clien
     _reply(unique_id);
 }
 
-void PoiManagerServerStub::removeCategories(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< POIServiceTypes::CategoryID> _categories, removeCategoriesReply_t _reply)
+void PoiManagerServerStub::removeCategories(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< CommonTypes::CategoryID> _categories, removeCategoriesReply_t _reply)
 {
     size_t index;
 
@@ -1354,7 +1354,7 @@ void PoiManagerServerStub::removeCategories(const std::shared_ptr<CommonAPI::Cli
     }
 }
 
-void PoiManagerServerStub::addPOIs(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::CategoryID _unique_id, std::vector< POIServiceTypes::PoiAddedDetails> _poiList, addPOIsReply_t _reply)
+void PoiManagerServerStub::addPOIs(const std::shared_ptr<CommonAPI::ClientId> _client, CommonTypes::CategoryID _unique_id, std::vector< POIServiceTypes::PoiAddedDetails> _poiList, addPOIsReply_t _reply)
 {
     size_t index;
     std::vector<POIServiceTypes::POI_ID> addedPoiList;

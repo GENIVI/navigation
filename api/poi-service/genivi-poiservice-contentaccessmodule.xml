@@ -257,7 +257,7 @@
           <line>inputString = contains the name of the poi that is searched. It could be a partial name or an empty string.</line>
         </doc>
       </arg>
-      <arg name="sortOption" type="q" direction="in">
+      <arg name="sortOption" type="i" direction="in">
         <doc>
           <line>sortOption = enum(SORT_DEFAULT,SORT_BY_DISTANCE,SORT_BY_TIME,ATTRIBUTE_CUSTOM, ... )</line>
           <line>If more than one category was defined for this search, the sort criteria should be compliant with all categories.</line>
@@ -294,7 +294,7 @@
           <line>attributeList = List of attributes id to retrieve. This is optional and the list could be empty.</line>
         </doc>
       </arg>
-      <arg name="statusValue" type="q" direction="out">
+      <arg name="statusValue" type="i" direction="out">
         <doc>
           <line>statusValue = enum(INVALID,NOT_STARTED,SEARCHING,FINISHED, ... )</line>
         </doc>

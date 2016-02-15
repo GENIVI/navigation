@@ -96,6 +96,13 @@ typeCollection POIServiceTypes {
         ATTR_REMOVED  	= 1796
     }
 
+    <** @description: Reason of update**>
+    enumeration RouteStatus { //Base 0x0600
+        OFF_ROUTE		= 1536
+        ON_ROUTE		= 1537
+        INSIDE_CORRIDOR	= 1538
+    }
+
     <** @description: Configuration changed**>
     enumeration ConfigurationChangedReason {
         LOCALES
@@ -246,7 +253,7 @@ typeCollection POIServiceTypes {
 		<** @description:distance in meters to poi from center of the search or from vehicle if search along**>			
         UInt32 distance
 		<** @description:enum(OFF_ROUTE,ON_ROUTE,INSIDE_CORRIDOR, ... )**>			
-        UInt16 routeStatus
+        RouteStatus routeStatus
 		<** @description:List of attributes requested. It could be empty**>			
         PoiAttribute[] attributeList
     }
@@ -343,7 +350,7 @@ typeCollection POIServiceTypes {
  		<**	@description : Category unique id.**>
         CategoryID unique_id
         <** @description : enum(ADDED,REMOVED,ATTR_ADDED,ATTR_MODIFIED,ATTR_REMOVED, ... ) .**>
-    	UInt16 reason
+    	UpdateReason reason
 	}
 	<** @description: pair of category and the this category is available**>			
 	struct CategoryAndStatus

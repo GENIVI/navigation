@@ -157,7 +157,7 @@ interface POIContentAccessModule {
 			String inputString				
 			<** @description : enum(SORT_DEFAULT,SORT_BY_DISTANCE,SORT_BY_TIME,ATTRIBUTE_CUSTOM, ... )
             If more than one category was defined for this search, the sort criteria should be compliant with all categories.**>
-			UInt16 sortOption				
+			SortOption sortOption				
 		}	
 	}
 

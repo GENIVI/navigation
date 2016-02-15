@@ -586,12 +586,12 @@ DBus_searchResultDetails::DBus_searchResultDetails_t poiContentAccessServer::Get
     return(m_poiDetailsTable.at(index));
 }
 
-uint16_t poiContentAccessServer::searchAroundALocation(DBus_geoCoordinate3D::geoCoordinate3D_t location,const std::string* inputString, uint16_t sortOption)
+uint16_t poiContentAccessServer::searchAroundALocation(DBus_geoCoordinate3D::geoCoordinate3D_t location,const std::string* inputString, int32_t sortOption)
 {
     uint16_t maxSize;
     DBus_geoCoordinate3D loc;
     std::vector< attributeId_t > attributes;
-    uint16_t statusValue;
+    int32_t statusValue;
     uint16_t resultListSize;
     std::vector<poiId_t> poiList;
     uint16_t index;

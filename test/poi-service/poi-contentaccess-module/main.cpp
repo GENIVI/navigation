@@ -334,7 +334,7 @@ void contentAccessModuleServer::removePOIs(const std::vector< poiId_t >& ids)
 
 }
 
-void contentAccessModuleServer::PoiSearchStarted(const handleId_t& poiSearchHandle, const uint16_t& maxSize, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes, const std::string& inputString, const uint16_t& sortOption)
+void contentAccessModuleServer::PoiSearchStarted(const handleId_t& poiSearchHandle, const uint16_t& maxSize, const DBus_geoCoordinate3D::DBus_geoCoordinate3D_t& location, const std::vector< DBus_categoryRadius::DBus_categoryRadius_t >& poiCategories, const std::vector< DBus_attributeDetails::DBus_attributeDetails_t >& poiAttributes, const std::string& inputString, const int32_t& sortOption)
     {
         uint16_t index,sub_index;
         categoryId_t category_index;
@@ -437,7 +437,7 @@ void contentAccessModuleServer::PoiSearchCanceled(const handleId_t& poiSearchHan
         }
     }
 
-void contentAccessModuleServer::ResultListRequested(const camId_t& camId, const handleId_t& poiSearchHandle, const std::vector< attributeId_t >& attributes, uint16_t& statusValue, uint16_t& resultListSize, std::vector< DBus_poiCAMDetails::DBus_poiCAMDetails_t >& resultList)
+void contentAccessModuleServer::ResultListRequested(const camId_t& camId, const handleId_t& poiSearchHandle, const std::vector< attributeId_t >& attributes, int32_t &statusValue, uint16_t& resultListSize, std::vector< DBus_poiCAMDetails::DBus_poiCAMDetails_t >& resultList)
     {
 
         //this method is supposed to check the camId, but into the POC, it's the HMI that declares the CAM (for the moment)

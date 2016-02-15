@@ -64,7 +64,7 @@ public:
 
     void ConfigurationChanged(const std::vector< uint16_t >& changedSettings);
 
-    void CategoriesRemoved(const std::vector< POIServiceTypes::CategoryID >& categories);
+    void CategoriesRemoved(const std::vector< CommonTypes::CategoryID >& categories);
 
     void POIAdded(const std::vector< POIServiceTypes::POI_ID >& pois);
 
@@ -84,7 +84,7 @@ public:
 
     void testSearch();
 
-    void createCategory(const POIServiceTypes::CategoryID& category);
+    void createCategory(const CommonTypes::CategoryID& category);
 
     void dumpCategories();
 
@@ -95,8 +95,8 @@ private:
     GtkWidget *mp_popupWindow;
     std::shared_ptr<POIContentAccessModuleProxyDefault> mp_proxy;
     POIServiceTypes::CAMCategory m_category;
-    POIServiceTypes::CategoryID m_category_id;
-    std::vector<POIServiceTypes::CategoryID> m_category_ids;
+    CommonTypes::CategoryID m_category_id;
+    std::vector<CommonTypes::CategoryID> m_category_ids;
     std::vector<POIServiceTypes::POI_ID> m_poi_ids;
     POIServiceTypes::PoiAddedDetails m_poi;
     NavigationTypes::Locale m_locales;
@@ -110,7 +110,7 @@ contentManager::contentManager(std::shared_ptr<POIContentAccessModuleProxyDefaul
 {
     // test: create a new category, with a new attribute and add a poi under this category
     POIServiceTypes::Details categoryDetails;
-    std::vector<POIServiceTypes::CategoryID> categoryParentsIDList;
+    std::vector<CommonTypes::CategoryID> categoryParentsIDList;
     POIServiceTypes::Icon categoryIcons(std::string(ICON_URL));
     POIServiceTypes::Media categoryMedia(std::string(""));
 
@@ -246,7 +246,7 @@ void contentManager::ConfigurationChanged(const std::vector< uint16_t >& changed
     }
 }
 
-void contentManager::CategoriesRemoved(const std::vector<POIServiceTypes::CategoryID> &categories)
+void contentManager::CategoriesRemoved(const std::vector<CommonTypes::CategoryID> &categories)
 {
     size_t index;
 
@@ -311,7 +311,7 @@ void contentManager::connectPopupWindow(GtkWidget *window)
     mp_popupWindow = window;
 }
 
-static void createCategoryAsyncCallback(const CommonAPI::CallStatus& callStatus, const POIServiceTypes::CategoryID& categoryID)
+static void createCategoryAsyncCallback(const CommonAPI::CallStatus& callStatus, const CommonTypes::CategoryID& categoryID)
 {
     if (callStatus != CommonAPI::CallStatus::SUCCESS) {
         cout << "Remote createCategory failed with status: " << static_cast<std::underlying_type<CommonAPI::CallStatus>::type>(callStatus) << endl;
@@ -325,7 +325,7 @@ static void createCategoryAsyncCallback(const CommonAPI::CallStatus& callStatus,
     clientContentManager->dumpCategories();
 }
 
-void contentManager::createCategory(const POIServiceTypes::CategoryID& category)
+void contentManager::createCategory(const CommonTypes::CategoryID& category)
 {
     m_category_id = category;
 }
@@ -356,7 +356,7 @@ void contentManager::dumpLocales()
 
 void contentManager::testCreateCategory()
 {
-    function<void(const CommonAPI::CallStatus&, const POIServiceTypes::CategoryID&)> fcb = createCategoryAsyncCallback;
+    function<void(const CommonAPI::CallStatus&, const CommonTypes::CategoryID&)> fcb = createCategoryAsyncCallback;
 
     mp_proxy->createCategoryAsync(m_category,createCategoryAsyncCallback);
 
@@ -364,7 +364,7 @@ void contentManager::testCreateCategory()
 
 void contentManager::testRemoveCategory()
 {
-    std::vector<POIServiceTypes::CategoryID> categories;
+    std::vector<CommonTypes::CategoryID> categories;
     CommonAPI::CallStatus status;
 
     categories.push_back(m_category_id);
@@ -628,7 +628,7 @@ int main(int  argc , char**  argv )
             populateWindow(window,clientContentManager);
 
             // Connect the DBus signals
-            myProxy->getCategoriesRemovedEvent().subscribe([&](const std::vector<POIServiceTypes::CategoryID>& categories) {
+            myProxy->getCategoriesRemovedEvent().subscribe([&](const std::vector<CommonTypes::CategoryID>& categories) {
                 clientContentManager->CategoriesRemoved(categories);
             });
             myProxy->getConfigurationChangedEvent().subscribe([&](const std::vector< uint16_t >& changedSettings) {
