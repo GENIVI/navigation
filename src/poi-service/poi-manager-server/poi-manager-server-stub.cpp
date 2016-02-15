@@ -1396,7 +1396,7 @@ void PoiManagerServerStub::removePOIs(const std::shared_ptr<CommonAPI::ClientId>
     }
 }
 
-void PoiManagerServerStub::poiSearchStarted(const std::shared_ptr<CommonAPI::ClientId> _client, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, uint16_t _maxSize, ::org::genivi::navigation::NavigationTypes::Coordinate3D _location, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::CategoryAndRadius> _poiCategories, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::AttributeDetails> _poiAttributes, std::string _inputString, uint16_t _sortOption, poiSearchStartedReply_t _reply)
+void PoiManagerServerStub::poiSearchStarted(const std::shared_ptr<CommonAPI::ClientId> _client, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, uint16_t _maxSize, ::org::genivi::navigation::NavigationTypes::Coordinate3D _location, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::CategoryAndRadius> _poiCategories, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::AttributeDetails> _poiAttributes, std::string _inputString, int32_t _sortOption, poiSearchStartedReply_t _reply)
 {
     POIServiceTypes::CategoryAndRadius categoryAndRadius;
     size_t index;
