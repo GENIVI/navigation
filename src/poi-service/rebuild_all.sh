@@ -4,10 +4,14 @@ debug="OFF"
 franca="OFF"
 dbus="ON"
 commonapi_tools_option=""
+clean=0
 
-while getopts df opt
+while getopts cdf opt
 do
 	case $opt in
+	c)
+		clean=1
+		;;
 	d)
 		debug="ON"
 		;;
@@ -17,7 +21,8 @@ do
 		;;
 	\?)
 		echo "Usage:"
-		echo "$0 [-df]"
+		echo "$0 [-cdf]"
+		echo "-c: Rebuild with clean"
 		echo "-d: Enable the debug messages"
 		echo "-f: Build using the Franca interfaces"
 		exit 1
@@ -51,18 +56,24 @@ then
 	commonapi_tools_option="-DDBUS_LIB_PATH="$DBUS_LIB_PATH" -DCOMMONAPI_DBUS_TOOL_DIR="$COMMONAPI_DBUS_TOOL_DIR" -DCOMMONAPI_TOOL_DIR="$COMMONAPI_TOOL_DIR
 fi
 
-echo 'clean up the build folder'
-if [ -d "./build" ]
+if [ "$clean" = 1 ]
 then
-	find ./build ! -name '*.cbp' -type f -exec rm -f {} +
+	echo 'clean up the build folder'
+	if [ -d "./build" ]
+	then
+		find ./build ! -name '*.cbp' -type f -exec rm -f {} +
+	fi
 fi
+
 
 mkdir -p build
 cd build
 
 echo 'build poi-server'
-cmake -DWITH_FRANCA_DBUS_INTERFACE=$franca -DWITH_DBUS_INTERFACE=$dbus $commonapi_tools_option -DWITH_DEBUG=$debug ../
-
+if [ "$clean" = 1 ]
+then
+	cmake -DWITH_FRANCA_DBUS_INTERFACE=$franca -DWITH_DBUS_INTERFACE=$dbus $commonapi_tools_option -DWITH_DEBUG=$debug ../
+fi
 make
 
 

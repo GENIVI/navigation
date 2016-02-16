@@ -408,8 +408,15 @@ void contentManager::testSearch()
     categoryAndRadius.setRadius(SEARCH_RADIUS);
     poiCategories.push_back(categoryAndRadius);
 
-    attributeDetails.setCategoryId(m_category_id);
     attributeDetails.setId(ATTRIBUTE_ADDRCITY);
+    attributeDetails.setCategoryId(m_category_id);
+    attributeDetails.setType(POIServiceTypes::AttributeType::BOOLEAN);
+    POIServiceTypes::AttributeValue v(NEW_STARS_VALUE);
+    attributeDetails.setValue(v);
+    attributeDetails.setOper(POIServiceTypes::OperatorType::EQUAL);
+    attributeDetails.setMandatory(FALSE);
+
+    poiAttributes.clear();
     poiAttributes.push_back(attributeDetails);
 
     mp_proxy->poiSearchStarted(SEARCH_HANDLE,SEARCH_MAX_SIZE,location,poiCategories,poiAttributes,SEARCH_STRING,POIServiceTypes::SortOption::ATTRIBUTE_CUSTOM,status);

@@ -4,10 +4,14 @@ debug="OFF"
 franca="OFF"
 dbus="ON"
 commonapi_tools_option=""
+clean=0
 
-while getopts df opt
+while getopts cdf opt
 do
 	case $opt in
+	c)
+		clean=1
+		;;
 	d)
 		debug="ON"
 		;;
@@ -17,7 +21,8 @@ do
 		;;
 	\?)
 		echo "Usage:"
-		echo "$0 [-df]"
+		echo "$0 [-cdf]"
+		echo "-c: Rebuild with clean"
 		echo "-d: Enable the debug messages"
 		echo "-f: Build using the Franca interfaces"
 		exit 1
@@ -52,18 +57,21 @@ then
 
 fi
 
-echo 'build the poi server'
 cd ../../src/poi-service
 ./rebuild_all.sh "$@"
 cd ../../test/poi-service
 
-echo 'build the poi client'
-
-echo 'clean up the build folder'
-if [ -d "./build" ]
+if [ "$clean" = 1 ]
 then
-	find ./build ! -name '*.cbp' -type f -exec rm -f {} +
+	echo 'clean up the build folder'
+	if [ -d "./build" ]
+	then
+		find ./build ! -name '*.cbp' -type f -exec rm -f {} +
+	fi
+else
+	echo 'just build without generation of the database'
 fi
+
 
 mkdir -p build
 
@@ -72,12 +80,18 @@ cd build
 echo 'build poi-client'
 # Important notice: for the time being, it's just poi manager client that can be built against common api, 
 # so it's needed to set WITH_DBUS_INTERFACE=ON for positioning
-cmake -DWITH_DATABASE_SUPPLIER=ON -DWITH_FRANCA_DBUS_INTERFACE=$franca -DWITH_DBUS_INTERFACE=ON $commonapi_tools_option -DWITH_DEBUG=$debug ../
+if [ "$clean" = 1 ]
+then
+	cmake -DWITH_DATABASE_SUPPLIER=ON -DWITH_FRANCA_DBUS_INTERFACE=$franca -DWITH_DBUS_INTERFACE=ON $commonapi_tools_option -DWITH_DEBUG=$debug ../
+fi
 make
 cd ..
 
-echo 'populate the database with POIs of Paris'
-./prepare -c paris
+if [ "$clean" = 1 ]
+then
+	echo 'populate the database with POIs of Paris'
+	./prepare -c paris
+fi
  
 
 

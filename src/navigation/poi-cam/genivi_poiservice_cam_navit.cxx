@@ -290,7 +290,7 @@ class ContentAccessModule
     }
 
     void
-    PoiSearchStarted(const uint32_t& poiSearchHandle, const uint16_t& maxSize, const ::DBus::Struct< double, double, double >& location, const std::vector< ::DBus::Struct< uint32_t, uint32_t > >& poiCategories, const std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, DBusCommonAPIVariant, int32_t, bool > >& poiAttributes, const std::string& inputString, const uint16_t& sortOption)
+    PoiSearchStarted(const uint32_t& poiSearchHandle, const uint16_t& maxSize, const ::DBus::Struct< double, double, double >& location, const std::vector< ::DBus::Struct< uint32_t, uint32_t > >& poiCategories, const std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, DBusCommonAPIVariant, int32_t, bool > >& poiAttributes, const std::string& inputString, const int32_t& sortOption)
     {
 		struct attr navit;
 		struct coord_geo g;
@@ -348,7 +348,7 @@ class ContentAccessModule
 	}
 
     void
-    ResultListRequested(const uint8_t& camId, const uint32_t& poiSearchHandle, const std::vector< uint32_t >& attributeList, uint16_t& statusValue, uint16_t& resultListSize, std::vector< ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > >& resultList)
+    ResultListRequested(const uint8_t& camId, const uint32_t& poiSearchHandle, const std::vector< uint32_t >& attributeList, int32_t& statusValue, uint16_t& resultListSize, std::vector< ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > >& resultList)
 	{
 		struct item *item;
 		int count=0;
