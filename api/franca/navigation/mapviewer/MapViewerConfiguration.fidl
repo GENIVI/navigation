@@ -11,7 +11,7 @@ import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 
 
 <** @description : This interface offers methods that implement the map viewer configuration functionality of a navigation system.**>
-interface MapViewerConfiguration {
+interface Configuration {
 	version {
 		major 0 
 		minor 1

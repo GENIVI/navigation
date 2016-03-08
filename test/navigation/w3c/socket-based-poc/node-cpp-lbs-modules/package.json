@@ -1,0 +1,19 @@
+{
+    "name": "node-cpp-based-modules",
+    "version": "0.1.0",
+ 	"description": "C++ modules used by the for POC Web APIs, GENIVI/W3C cooperation",
+	"keywords": [
+		"npm",
+		"GENIVI",
+		"W3C",
+		"LBS-EG"
+	],
+  	"author": "Philippe Colliot <philippe.colliot@mpsa.com>",
+	"contributors": [""],
+    "main": "./build/Release/NavigationCoreConfiguration",
+    "license": "MPL V.2.0",
+	"devDependencies": {
+		"chai": "~3.5.0",
+		"mocha": "~2.4.5"
+	}
+}

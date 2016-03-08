@@ -11,7 +11,7 @@ import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 
 
 <** @description : This interface offers methods that implement the navigation core configuration functionality of a navigation system.**>
-interface NavigationCoreConfiguration {
+interface Configuration {
 	version {
 		major 0 
 		minor 1
@@ -146,7 +146,7 @@ interface NavigationCoreConfiguration {
 	<**	@description : Get the supported set of coordinates format .**>
 	method getSupportedCoordinatesFormat {
 		out {
-			<** @description : array[struct(languageCode,countryCode,scriptCode)]**>
+			<** @description : array[coordinatesFormat]**>
 			CoordinatesFormat[] coordinatesFormatList				
 		}	
 	}	
@@ -155,7 +155,7 @@ interface NavigationCoreConfiguration {
 	method setUnitsOfMeasurement {
 		in {
 			<** @description : unitsOfMeasurementList = array[unitsOfMeasurement]**>
-			UnitsOfMeasurement unitsOfMeasurementList				
+			UnitsOfMeasurement[] unitsOfMeasurementList				
 		}	
 	}	
 
@@ -163,7 +163,7 @@ interface NavigationCoreConfiguration {
 	method getUnitsOfMeasurement {
 		out {
 			<** @description : unitsOfMeasurementList = array[unitsOfMeasurement]**>
-			UnitsOfMeasurement unitsOfMeasurementList				
+			UnitsOfMeasurement[] unitsOfMeasurementList				
 		}	
 	}	
 
@@ -171,7 +171,7 @@ interface NavigationCoreConfiguration {
 	method getSupportedUnitsOfMeasurement {
 		out {
 			<** @description : unitsOfMeasurementList = array[unitsOfMeasurement]**>
-			UnitsOfMeasurement unitsOfMeasurementList				
+			UnitsOfMeasurement[] unitsOfMeasurementList				
 		}	
 	}	
 

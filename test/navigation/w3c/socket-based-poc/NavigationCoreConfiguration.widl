@@ -1,0 +1,79 @@
+enum Settings {
+    "INVALID",
+    "UNITS_OF_MEASUREMENT",
+    "LOCALE",
+    "TIME_FORMAT",
+    "COORDINATES_FORMAT"
+};
+
+enum UnitsOfMeasurementAttribute {
+	"INVALID",
+	"LENGTH"
+};
+
+interface UnitsOfMeasurementValue {
+        attribute (long or double) value;
+};
+
+interface UnitsOfMeasurement {
+	maplike<UnitsOfMeasurementAttribute, UnitsOfMeasurementValue>;
+};
+
+enum Units {
+	"METER",
+	"MILE",
+	"KM",
+	"YARD",
+	"FOOT"
+};
+
+enum TimeFormat {
+	"INVALID",
+	"TWELVEH",
+	"TWENTYFOURH"
+};
+
+enum CoordinatesFormat {
+	"INVALID",
+	"DEGREES",
+	"MINUTES",
+	"SECONDS"
+};
+
+[Constructor(unsigned short versionMajor, unsigned short versionMinor, unsigned short versionMicro, DOMString date)]
+interface Version {
+	readonly attribute unsigned short versionMajor;
+	readonly attribute unsigned short versionMinor;
+	readonly attribute unsigned short versionMicro;
+	readonly attribute DOMString date;
+};
+
+[Constructor(DOMString languageCode, DOMString countryCode, DOMString scriptCode)]
+interface Locale {
+    attribute DOMString languageCode;
+    attribute DOMString countryCode;
+    attribute DOMString scriptCode;
+};
+
+dictionary navigationCoreConfigurationOptions {
+	Version version;
+    Locale locale;
+	TimeFormat format;
+	CoordinatesFormat coordinatesFormat;
+	any unitsOfMeasurementList;
+};
+
+callback interface configurationChangedEventListener {
+  void handleEvent(any changedSettings);
+};
+
+[Constructor, Constructor(Node navigationCoreConfigurationNode, navigationCoreConfigurationOptions opts)]
+interface NavigationCoreConfiguration {
+	Promise<any> setProperty(DOMString propertyName, any newValue);
+	Promise<any> getProperty(DOMString propertyName);
+	any getSupportedLocales();
+	any getSupportedTimeFormats();
+	any getSupportedUnitsOfMeasurement();
+	void addEventListener(DOMString type, configurationChangedEventListener configurationChanged);
+};
+

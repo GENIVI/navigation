@@ -1,0 +1,48 @@
+body {
+    width: 800px;
+    height: 480px;
+    max-width: 800px;
+    max-height: 480px;
+    margin: 0;
+    padding: 0;
+    background-color: lightblue;
+}
+header {
+    color:white;
+    text-align:center;
+    padding:5px;
+}
+nav {
+    line-height:30px;
+    background-color:#eeeeee;
+    height:300px;
+    width:100px;
+    float:left;
+    padding:5px;
+}
+section {
+    width:350px;
+    float:left;
+    padding:10px;
+}
+footer {
+    background-color:black;
+    color:white;
+    clear:both;
+    text-align:center;
+    padding:5px;
+}
+h1 {
+    color: navy;
+    margin-left: 20px;
+}
+
+p {
+	font-family: verdana;
+	color: grey; 
+}
+
+localeListButtons {
+	color: yellow; 
+}
+

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Test page for GENIVI Web API (draft)</title>
+<link rel="stylesheet" href="style-sheets/stylesheet.css">
+<!-- to be fixed, use relative paths -->
+<script type="text/javascript" src="./node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
+<script type="text/javascript" src="./node_modules/webidl2/lib/webidl2.js"></script>
+</head>
+<body>
+<header>
+<h1>Test of the NavigationCoreConfiguration interface</h1>
+<p id="start_time"></p>
+<p id="version"></p>
+</header>
+
+<nav>
+TBD
+</nav>
+
+<section>
+<p id="locale"></p>
+</section>
+
+<section>
+<div id="localeSection">
+</div>
+</section>
+
+<footer>
+Copyright © PCA Peugeot Citroen
+</footer>
+
+<script type="text/javascript">
+
+<!-- socket management -->
+var socket = io.connect('http://localhost:8080');
+socket.on('feedback', function(message) {
+    alert('Message received from the server : ' + message);
+})
+
+socket.on('navigationcore_answer', function(message) {
+	if(message.request === 'getVersion')
+	{
+		getVersionReturn(message.answer);
+	} else {
+		if(message.request === 'getProperty')
+		{
+			if(message.answer[0] === 'Locale')
+			{
+				getLocaleReturn(message.answer);
+			}
+		} else {
+			if(message.request === 'getSupportedLocales')
+			{
+				getSupportedLocalesReturn(message.answer);
+			} else {
+				if(message.request === 'getUnitsOfMeasurement')
+				{
+    alert('Message received from the server : ' +message.answer.length+ message.answer[0].key+ message.answer[0].value);
+				}			
+			}
+		}	
+	}
+})
+
+<!-- initialization -->
+var today=new Date();
+document.getElementById("start_time").innerHTML=today;
+
+getVersion();
+
+var supportedLocales=[];
+addLocale("eng","USA", "Latn","./images/usa-flag.png");
+addLocale("deu","DEU", "Latn","./images/german-flag.png");
+addLocale("fra","FRA", "Latn","./images/french-flag.png");
+addLocale("jpn","JPN", "Hrkt","./images/japanese-flag.png");
+
+var div = document.getElementById("localeSection");
+addLocaleListButtons(div,supportedLocales.length);
+
+getSupportedLocales();
+
+getUnitsOfMeasurement();
+
+getLocale();
+
+<!-- middleware abstraction layer -->
+function getVersion() {
+	socket.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getVersion', parameters: []});
+}
+function getVersionReturn(answer) {
+	document.getElementById("version").innerHTML=answer[3];	
+}
+function getLocale() {
+	socket.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getProperty', parameters: ['Locale']});
+}
+function getLocaleReturn(answer) {
+	enhanceLocaleButton(answer[2]);	
+}
+function getSupportedLocales() {
+	socket.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getSupportedLocales', parameters: []});
+}
+function getSupportedLocalesReturn(answer) {
+	for ( var i=0; i<supportedLocales.length; i++ ) {
+		document.getElementById(supportedLocales[i].countryCode).disabled = true;
+		document.getElementById(supportedLocales[i].countryCode).style.opacity= 0.5;
+	}
+
+	for ( var i=0; i<answer.length; i++ ) {
+		for ( var j=0; j<supportedLocales.length; j++ ) {
+			if(supportedLocales[j].countryCode === answer[i][1])
+			{
+				document.getElementById(supportedLocales[j].countryCode).disabled = false;
+				document.getElementById(supportedLocales[j].countryCode).style.opacity= 1;
+				break;
+			}
+		}
+	}
+}
+function getUnitsOfMeasurement() {
+	socket.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getUnitsOfMeasurement', parameters: []});
+}
+
+function configurationChanged(changedSettings) {
+getLocale();
+}
+
+function setLocale(button) {
+	var data = {
+		property : 'Locale',
+	 	languageCode : supportedLocales[button.value].languageCode,
+	 	countryCode : supportedLocales[button.value].countryCode,
+	 	scriptCode : supportedLocales[button.value].scriptCode,
+		callBack : configurationChanged()
+	};
+
+	socket.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'setProperty', parameters: data});
+}
+
+<!-- some other functions -->
+function addLocaleListButtons( div, num_buttons ) {
+    var buttons="";
+    for ( var i=0; i<num_buttons; i++ ) {
+        buttons += '<input type="button" id="'+supportedLocales[i].countryCode+'" style="cursor:pointer; background: url('+supportedLocales[i].flagUrl+'); width:104px; height:64px; background-size: 100%; opacity: 0.5; no-repeat" onclick="setLocale(this)" class="localeListButtons" value="'+i+'" disabled></input><br></br>';
+    }
+	var newdiv = document.createElement('div');
+  	var divIdName = 'localeList';
+  	newdiv.setAttribute('id',divIdName);
+  	newdiv.innerHTML = buttons;
+  	div.appendChild(newdiv);
+}
+
+function enhanceLocaleButton(id) {
+	for ( var i=0; i<supportedLocales.length; i++ ) {
+		document.getElementById(supportedLocales[i].countryCode).style.width = "104px";
+		document.getElementById(supportedLocales[i].countryCode).style.height = "64px";
+	}
+	document.getElementById(id).style.width = "124px";
+	document.getElementById(id).style.height = "76px";
+}
+
+function addLocale(language, country,script,flag) {
+  supportedLocales.push({
+    languageCode: language,
+    countryCode: country,
+	scriptCode: script,
+	flagUrl: flag,
+  });
+}
+</script>
+</body>
+</html>

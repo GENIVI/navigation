@@ -58,7 +58,6 @@ typeCollection NavigationTypes {
 
 /* enumerations */
 	
-// for the time being, no use of inheritance (extends) for the enumerations, to be implemented later
 	enumeration BasicEnum {
 		INVALID 	= 0
 	}
