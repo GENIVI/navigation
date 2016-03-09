@@ -1,4 +1,4 @@
-Release date of the file: 16-02-2016 
+Release date of the file: 09-03-2016 
 Status: OK
 
 Project:
@@ -29,7 +29,7 @@ Ubuntu 14.04 LTS
 Current versions of additional code 
 ===============================
 <current version of positioning> (git): 5b6b120d836259afb57b3ad6bf2f6ba8107c4a3e
-<current version of navit> (svn): 6135
+<current version of navit> (git): 162a3e43d14531a7053872903674351a3142eea2
 
 ===============================
 How to get additional code 
@@ -41,7 +41,11 @@ git checkout <current version of positioning>
 cd ../
 
 Get navit:
-svn checkout http://svn.code.sf.net/p/navit/code/trunk navit -r<current version of navit>
+git clone https://github.com/navit-gps/navit.git
+cd navit
+git checkout <current version of navit>
+cd ../
+
 
 Now apply a patch to navit (The r5549 removed the  get_unique features used by GetSpell):
 cd navit
@@ -97,11 +101,9 @@ cd build
 For the time being, navit is not being able to be built directly with the top CmakeLists.txt (to be improved), so it's needed to do it separately:
 mkdir navit
 cd navit
-mkdir navit
-cd navit
-cmake -DDISABLE_QT=1 -DSAMPLE_MAP=0 -Dvehicle/null=1 -Dgraphics/qt_qpainter=0 ../../../navit/navit/
+cmake -DDISABLE_QT=1 -DSAMPLE_MAP=0 -Dvehicle/null=1 -Dgraphics/qt_qpainter=0 ../../navit/
 make
-cd ../../
+cd ../
 
 Now let's build the other parts:
 cmake ../

@@ -94,7 +94,7 @@ CUR_DIR=$PWD
 BIN_DIR=$CUR_DIR/bin
 SRC_DIR=$PWD
 LOGREPLAYER_LOGS_DIR=$SRC_DIR/positioning/log-replayer/logs
-NAVIT_BIN_DIR=$CUR_DIR/build/navit/navit/navit/
+NAVIT_BIN_DIR=$CUR_DIR/build/navit/navit/
 
 while getopts c:gnorvx opt
 do
