@@ -13,13 +13,11 @@ npm install node-cpp-lbs-modules/node-cpp-based-modules-0.1.0.tgz
 
 To test:
 Intall additional modules for nodejs:
-npm install http url fs path webidl2 escodegen
+npm install http url fs path webidl2 escodegen socket.io
 
 Run the server:
 
-node server.js
+nodejs server.js
 
-In your browser:
-
-http://localhost:8080/index.html
+In your browser open the file ./index.html
 
