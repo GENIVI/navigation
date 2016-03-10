@@ -47,12 +47,12 @@ find_program(XSLTPROC xsltproc REQUIRED)
 if(NOT ${YOCTO_CONFIG})
     execute_process(
         OUTPUT_FILE ${NAVIT_BIN_DIR}/navit_genivi_mapviewer.xml
-        COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_mapviewer.xsl ${navit_SOURCE_DIR}/navit_shipped.xml
+        COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_mapviewer.xsl ${navit_SOURCE_DIR}/navit/navit_shipped.xml
     )
 else()
     execute_process(
         OUTPUT_FILE ${CMAKE_CURRENT_BINARY_DIR}/navit_genivi_mapviewer.xml
-        COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_mapviewer.xsl ${NAVIT_CMAKE_DIR}/../navit_shipped.xml
+        COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_mapviewer.xsl ${NAVIT_CMAKE_DIR}/../navit/navit_shipped.xml
     )
 endif()
 
