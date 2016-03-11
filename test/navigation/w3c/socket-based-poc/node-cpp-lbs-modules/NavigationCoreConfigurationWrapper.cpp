@@ -1,14 +1,16 @@
 #include <node.h>
 
-#include "NavigationCoreConfiguration.hpp"
+#include "NavigationCoreConfigurationWrapper.hpp"
 
 using namespace v8;
 using namespace std;
-using namespace org::genivi::navigationcore;
 
-Persistent<FunctionTemplate> NavigationCoreConfiguration::constructor;
+//DBus::Glib::BusDispatcher dispatcher;
+static DBus::Connection *connection;
 
-void NavigationCoreConfiguration::ConfigurationChanged(const Handle<Function>& callback, const Handle<Array>& array) {
+Persistent<FunctionTemplate> NavigationCoreConfigurationWrapper::constructor;
+
+void NavigationCoreConfigurationWrapper::ConfigurationChanged(const Handle<Function>& callback, const Handle<Array>& array) {
     HandleScope scope;
     // In case the operation succeeded, convention is to pass null as the
     // first argument before the result arguments.
@@ -24,11 +26,11 @@ void NavigationCoreConfiguration::ConfigurationChanged(const Handle<Function>& c
     callback->Call(Context::GetCurrent()->Global(), argc, argv);
 }
 
-void NavigationCoreConfiguration::Init(Handle<Object> target) {
+void NavigationCoreConfigurationWrapper::Init(Handle<Object> target) {
     HandleScope scope;
 
     Local<FunctionTemplate> tpl = FunctionTemplate::New(New);
-    Local<String> name = String::NewSymbol("NavigationCoreConfiguration");
+    Local<String> name = String::NewSymbol("NavigationCoreConfigurationWrapper");
 
     constructor = Persistent<FunctionTemplate>::New(tpl);
     // ObjectWrap uses the first internal field to store the wrapped pointer.
@@ -47,9 +49,10 @@ void NavigationCoreConfiguration::Init(Handle<Object> target) {
     target->Set(name, constructor->GetFunction());
 }
 
-NavigationCoreConfiguration::NavigationCoreConfiguration() : ObjectWrap() {}
+NavigationCoreConfigurationWrapper::NavigationCoreConfigurationWrapper() : mp_proxy() {
+}
 
-Handle<Value> NavigationCoreConfiguration::New(const Arguments& args) {
+Handle<Value> NavigationCoreConfigurationWrapper::New(const Arguments& args) {
     HandleScope scope;
 
     if (!args.IsConstructCall()) {
@@ -57,15 +60,17 @@ Handle<Value> NavigationCoreConfiguration::New(const Arguments& args) {
             String::New("Use the new operator to create instances of this object."))
         );
     }
+    NavigationCoreConfigurationProxy* proxy = new NavigationCoreConfigurationProxy(*connection);
 
     // Creates a new instance object of this type and wraps it.
-    NavigationCoreConfiguration* obj = new NavigationCoreConfiguration();
+    NavigationCoreConfigurationWrapper* obj = new NavigationCoreConfigurationWrapper();
+    obj->mp_proxy = proxy;
     obj->Wrap(args.This());
 
     return args.This();
 }
 
-Handle<Value> NavigationCoreConfiguration::GetProperty(const Arguments& args) {
+Handle<Value> NavigationCoreConfigurationWrapper::GetProperty(const Arguments& args) {
     HandleScope scope; //to properly clean up v8 handles
 
     if (args.Length() < 1) {
@@ -78,11 +83,11 @@ Handle<Value> NavigationCoreConfiguration::GetProperty(const Arguments& args) {
 
     if(propertyName == "Locale") {
         // Retrieves the pointer to the wrapped object instance.
-        NavigationCoreConfiguration* obj = ObjectWrap::Unwrap<NavigationCoreConfiguration>(args.This());
+        NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
         Local<Object> ret = Object::New();
 
-        Locale localeValue = obj->m_proxy.GetLocale();
+        Locale localeValue = obj->mp_proxy->GetLocale();
         ret->Set( 0, String::New(propertyName.c_str()) );
         ret->Set( 1, String::New(localeValue.languageCode.c_str()) );
         ret->Set( 2, String::New(localeValue.countryCode.c_str()) );
@@ -93,7 +98,7 @@ Handle<Value> NavigationCoreConfiguration::GetProperty(const Arguments& args) {
     {
         if(propertyName == "TimeFormat") {
             // Retrieves the pointer to the wrapped object instance.
-            NavigationCoreConfiguration* obj = ObjectWrap::Unwrap<NavigationCoreConfiguration>(args.This());
+            NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
             Local<Object> ret = Object::New();
 
@@ -103,7 +108,7 @@ Handle<Value> NavigationCoreConfiguration::GetProperty(const Arguments& args) {
         {
             if(propertyName == "CoordinatesFormat") {
                 // Retrieves the pointer to the wrapped object instance.
-                NavigationCoreConfiguration* obj = ObjectWrap::Unwrap<NavigationCoreConfiguration>(args.This());
+                NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
                 Local<Object> ret = Object::New();
 
@@ -114,7 +119,7 @@ Handle<Value> NavigationCoreConfiguration::GetProperty(const Arguments& args) {
     return Undefined();
 }
 
-Handle<Value> NavigationCoreConfiguration::SetProperty(const Arguments& args)
+Handle<Value> NavigationCoreConfigurationWrapper::SetProperty(const Arguments& args)
 {
     HandleScope scope; //to properly clean up v8 handles
 
@@ -143,8 +148,8 @@ Handle<Value> NavigationCoreConfiguration::SetProperty(const Arguments& args)
         localeValue.scriptCode = std::string(*scriptCode);
 
         // Retrieves the pointer to the wrapped object instance.
-        NavigationCoreConfiguration* obj = ObjectWrap::Unwrap<NavigationCoreConfiguration>(args.This());
-        obj->m_proxy.SetLocale(localeValue);
+        NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
+        obj->mp_proxy->SetLocale(localeValue);
 
         Handle<Value> callBackValue = property_obj->Get(String::New("callBack"));
 
@@ -160,13 +165,13 @@ Handle<Value> NavigationCoreConfiguration::SetProperty(const Arguments& args)
     return Undefined();
 }
 
-Handle<Value> NavigationCoreConfiguration::GetVersion(const Arguments& args) {
+Handle<Value> NavigationCoreConfigurationWrapper::GetVersion(const Arguments& args) {
     HandleScope scope; //to properly clean up v8 handles
 
 	// Retrieves the pointer to the wrapped object instance.
-    NavigationCoreConfiguration* obj = ObjectWrap::Unwrap<NavigationCoreConfiguration>(args.This());
+    NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
-    Version version = obj->m_proxy.GetVersion();
+    Version version = obj->mp_proxy->GetVersion();
 
     Local<Object> ret = Object::New();
     ret->Set( 0, Int32::New(version.versionMajor) );
@@ -177,13 +182,13 @@ Handle<Value> NavigationCoreConfiguration::GetVersion(const Arguments& args) {
     return scope.Close(ret);
 }
 
-Handle<Value> NavigationCoreConfiguration::GetSupportedLocales(const Arguments& args) {
+Handle<Value> NavigationCoreConfigurationWrapper::GetSupportedLocales(const Arguments& args) {
     HandleScope scope; //to properly clean up v8 handles
 
     // Retrieves the pointer to the wrapped object instance.
-    NavigationCoreConfiguration* obj = ObjectWrap::Unwrap<NavigationCoreConfiguration>(args.This());
+    NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
-    std::vector<Locale > localeList = obj->m_proxy.GetSupportedLocales();
+    std::vector<Locale > localeList = obj->mp_proxy->GetSupportedLocales();
 
     Local<Array> ret = Array::New();
     for (unsigned i=0;i<localeList.size();i++)
@@ -198,26 +203,26 @@ Handle<Value> NavigationCoreConfiguration::GetSupportedLocales(const Arguments& 
     return scope.Close(ret);
 }
 
-Handle<Value> NavigationCoreConfiguration::GetUnitsOfMeasurement(const Arguments& args)
+Handle<Value> NavigationCoreConfigurationWrapper::GetUnitsOfMeasurement(const Arguments& args)
 {
     HandleScope scope; //to properly clean up v8 handles
 
     // Retrieves the pointer to the wrapped object instance.
-    NavigationCoreConfiguration* obj = ObjectWrap::Unwrap<NavigationCoreConfiguration>(args.This());
+    NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
-    Configuration_proxy::UnitsOfMeasurement unitsOfMeasurement = obj->m_proxy.GetUnitsOfMeasurement();
+    NavigationCoreConfigurationProxy::UnitsOfMeasurement unitsOfMeasurement = obj->mp_proxy->GetUnitsOfMeasurement();
 
     Local<Array> ret = Array::New();
-    for (Configuration_proxy::UnitsOfMeasurement::iterator iter = unitsOfMeasurement.begin(); iter != unitsOfMeasurement.end(); iter++) {
+    for (NavigationCoreConfigurationProxy::UnitsOfMeasurement::iterator iter = unitsOfMeasurement.begin(); iter != unitsOfMeasurement.end(); iter++) {
         Local<Object> data = Object::New();
-        Configuration_proxy::UnitsOfMeasurementValueStruct unitsOfMeasurement;
+        NavigationCoreConfigurationProxy::UnitsOfMeasurementValueStruct unitsOfMeasurement;
         unitsOfMeasurement = iter->second;
         data->Set(String::New("key"), Int32::New(iter->first));
         switch (unitsOfMeasurement.type) {
-        case Configuration_proxy::intValue:
+        case NavigationCoreConfigurationProxy::intValue:
             data->Set(String::New("value"), Int32::New(unitsOfMeasurement.value.intValue));
             break;
-        case Configuration_proxy::doubleValue:
+        case NavigationCoreConfigurationProxy::doubleValue:
         default:
             data->Set(String::New("value"), Number::New(unitsOfMeasurement.value.doubleValue));
             break;
@@ -228,7 +233,7 @@ Handle<Value> NavigationCoreConfiguration::GetUnitsOfMeasurement(const Arguments
 }
 
 void RegisterModule(Handle<Object> target) {
-    NavigationCoreConfiguration::Init(target);
+    NavigationCoreConfigurationWrapper::Init(target);
 }
 
-NODE_MODULE(NavigationCoreConfiguration, RegisterModule);
+NODE_MODULE(NavigationCoreConfigurationWrapper, RegisterModule);

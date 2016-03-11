@@ -1,5 +1,9 @@
-#ifndef NAVIGATIONCORECONFIGURATION_HPP
-#define NAVIGATIONCORECONFIGURATION_HPP
+#ifndef NAVIGATIONCORECONFIGURATIONWRAPPER_HPP
+#define NAVIGATIONCORECONFIGURATIONWRAPPER_HPP
+
+#include <dbus-c++/glib-integration.h>
+#include "genivi-navigationcore-constants.h"
+#include "genivi-navigationcore-configuration_proxy.h"
 
 #include <node.h>
 #include <node_buffer.h>
@@ -45,12 +49,9 @@ public:
     std::string scriptCode;
 };
 
-
-namespace org {
-namespace genivi {
-namespace navigationcore {
-
-class Configuration_proxy
+class NavigationCoreConfigurationProxy
+        : public org::genivi::navigationcore::Configuration_proxy,
+          public DBus::ObjectProxy
 {
 public:
 
@@ -84,7 +85,10 @@ public:
 
     typedef std::map<UnitsOfMeasurementAttribute,UnitsOfMeasurementValueStruct > UnitsOfMeasurement;
 
-    Configuration_proxy()
+    NavigationCoreConfigurationProxy(DBus::Connection &connection)
+        : DBus::ObjectProxy(connection,
+                                    "/org/genivi/navigationcore/Configuration",
+                                    "org.genivi.navigationcore.Configuration")
     {
         Locale en_US { "eng","USA", "Latn" };
         Locale de_DE { "deu","DEU", "Latn" };
@@ -98,6 +102,11 @@ public:
         UnitsOfMeasurementValueStruct value {intValue,METER};
 
         m_units_of_measurement[LENGTH] = value;
+    }
+
+    void ConfigurationChanged(const std::vector< int32_t >& changedSettings)
+    {
+
     }
 
     Version GetVersion()
@@ -131,15 +140,14 @@ private:
     std::vector<Locale > m_locale_list;
     UnitsOfMeasurement m_units_of_measurement;
 };
-} } }
 
-class NavigationCoreConfiguration : public node::ObjectWrap {
+class NavigationCoreConfigurationWrapper : public node::ObjectWrap {
 public:
     static v8::Persistent<v8::FunctionTemplate> constructor;
     static void Init(v8::Handle<v8::Object> target);
 
 protected:
-    NavigationCoreConfiguration();
+    NavigationCoreConfigurationWrapper();
 
     static v8::Handle<v8::Value> New(const v8::Arguments& args);
     static v8::Handle<v8::Value> GetVersion(const v8::Arguments& args);
@@ -151,8 +159,8 @@ protected:
 
     static void ConfigurationChanged(const v8::Handle<v8::Function> &callback, const v8::Handle<v8::Array>& array);
 
-    // Your own object variables here
-    org::genivi::navigationcore::Configuration_proxy m_proxy;
+private:
+    NavigationCoreConfigurationProxy* mp_proxy;
 };
 
 #endif

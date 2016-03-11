@@ -3,8 +3,9 @@ Technology used: nodejs
 
 To get nodejs:
 sudo apt-get install nodejs npm
+npm install -g node-gyp
 
-To build the module in C++ and install the module localy for nodejs:
+To build the c++ add-on in C++ and install the module localy for nodejs:
 cd ./node-cpp-lbs-modules 
 npm build .
 npm pack
@@ -21,3 +22,13 @@ nodejs server.js
 
 In your browser open the file ./index.html
 
+Annex:
+To debug the C++ add-on:
+cd ./node-cpp-lbs-modules 
+node-gyp configure --debug
+node-gyp build --debug
+npm pack
+cd ..
+npm install node-cpp-lbs-modules/node-cpp-based-modules-0.1.0.tgz
+
+nodejs debug server.js

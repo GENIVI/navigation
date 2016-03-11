@@ -10,7 +10,7 @@
 	],
   	"author": "Philippe Colliot <philippe.colliot@mpsa.com>",
 	"contributors": [""],
-    "main": "./build/Release/NavigationCoreConfiguration",
+    "main": "./build/Release/NavigationCoreConfigurationWrapper",
     "license": "MPL V.2.0",
 	"devDependencies": {
 		"chai": "~3.5.0",

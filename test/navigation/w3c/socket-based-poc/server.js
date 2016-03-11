@@ -16,10 +16,10 @@ var tree = webidl2.parse(file.toString());
 //console.log(escodegen.generate(tree));
 
 // Requirements of LBS add-on modules
-var navigationCoreConfiguration = require(resource.generatedNodejsModulePath+'/NavigationCoreConfiguration');
+var navigationCoreConfigurationWrapper = require(resource.generatedNodejsModulePath+'/NavigationCoreConfigurationWrapper');
 
 // Create instances
-var i_navigationCoreConfiguration = new navigationCoreConfiguration.NavigationCoreConfiguration();
+var i_navigationCoreConfiguration = new navigationCoreConfigurationWrapper.NavigationCoreConfigurationWrapper();
 
 // Create and init server
 var port = 8080;
