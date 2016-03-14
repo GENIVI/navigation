@@ -5,7 +5,7 @@
 using namespace v8;
 using namespace std;
 
-//DBus::Glib::BusDispatcher dispatcher;
+static DBus::Glib::BusDispatcher dispatcher;
 static DBus::Connection *connection;
 
 Persistent<FunctionTemplate> NavigationCoreConfigurationWrapper::constructor;
@@ -49,7 +49,7 @@ void NavigationCoreConfigurationWrapper::Init(Handle<Object> target) {
     target->Set(name, constructor->GetFunction());
 }
 
-NavigationCoreConfigurationWrapper::NavigationCoreConfigurationWrapper() : mp_proxy() {
+NavigationCoreConfigurationWrapper::NavigationCoreConfigurationWrapper() {
 }
 
 Handle<Value> NavigationCoreConfigurationWrapper::New(const Arguments& args) {
@@ -60,7 +60,12 @@ Handle<Value> NavigationCoreConfigurationWrapper::New(const Arguments& args) {
             String::New("Use the new operator to create instances of this object."))
         );
     }
+    dispatcher.attach(NULL);
+    DBus::default_dispatcher = &dispatcher;
+    connection = new DBus::Connection(DBus::Connection::SessionBus());
+    connection->setup(&dispatcher);
     NavigationCoreConfigurationProxy* proxy = new NavigationCoreConfigurationProxy(*connection);
+
 
     // Creates a new instance object of this type and wraps it.
     NavigationCoreConfigurationWrapper* obj = new NavigationCoreConfigurationWrapper();

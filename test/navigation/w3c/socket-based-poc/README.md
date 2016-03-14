@@ -30,5 +30,7 @@ node-gyp build --debug
 npm pack
 cd ..
 npm install node-cpp-lbs-modules/node-cpp-based-modules-0.1.0.tgz
-
+To see where the issue is in the js file:
 nodejs debug server.js
+To debug the c++ addon:
+gdb --args /usr/bin/nodejs server.js
