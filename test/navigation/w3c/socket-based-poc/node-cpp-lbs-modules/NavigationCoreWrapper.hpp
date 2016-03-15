@@ -1,12 +1,38 @@
-#ifndef NAVIGATIONCORECONFIGURATIONWRAPPER_HPP
-#define NAVIGATIONCORECONFIGURATIONWRAPPER_HPP
+/**
+* @licence app begin@
+* SPDX-License-Identifier: MPL-2.0
+*
+* \copyright Copyright (C) 2016, PCA Peugeot Citroen
+*
+* \file main.cpp
+*
+* \brief This file is part of the Navigation Web API proof of concept.
+*
+* \author Philippe Colliot <philippe.colliot@mpsa.com>
+*
+* \version 0.1
+*
+* This Source Code Form is subject to the terms of the
+* Mozilla Public License (MPL), v. 2.0.
+* If a copy of the MPL was not distributed with this file,
+* You can obtain one at http://mozilla.org/MPL/2.0/.
+*
+* For further information see http://www.genivi.org/.
+*
+* List of changes:
+* <date>, <name>, <description of change>
+*
+* @licence end@
+*/
+#ifndef NAVIGATIONCOREWRAPPER_HPP
+#define NAVIGATIONCOREWRAPPER_HPP
 
 #define USE_DBUS 0
 
 #include <node.h>
 #include <node_buffer.h>
 
-#include "./dbus-proxies/NavigationCoreConfigurationProxy.hpp"
+#include "./dbus-proxies/NavigationCoreProxy.hpp"
 
 #include <string>
 #include <vector>
@@ -17,14 +43,14 @@
 // header file.
 // using namespace v8;
 
-class NavigationCoreConfigurationWrapper : public node::ObjectWrap {
+class NavigationCoreWrapper : public node::ObjectWrap {
 public:
     static v8::Persistent<v8::FunctionTemplate> constructor;
     static void Init(v8::Handle<v8::Object> target);
 
 protected:
-    NavigationCoreConfigurationWrapper();
-    ~NavigationCoreConfigurationWrapper();
+    NavigationCoreWrapper();
+    ~NavigationCoreWrapper();
 
     static v8::Handle<v8::Value> New(const v8::Arguments& args);
     static v8::Handle<v8::Value> GetVersion(const v8::Arguments& args);
