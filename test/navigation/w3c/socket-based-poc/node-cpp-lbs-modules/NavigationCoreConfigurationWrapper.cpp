@@ -5,8 +5,6 @@
 using namespace v8;
 using namespace std;
 
-static DBus::Glib::BusDispatcher dispatcher;
-static DBus::Connection *connection;
 
 Persistent<FunctionTemplate> NavigationCoreConfigurationWrapper::constructor;
 
@@ -52,6 +50,9 @@ void NavigationCoreConfigurationWrapper::Init(Handle<Object> target) {
 NavigationCoreConfigurationWrapper::NavigationCoreConfigurationWrapper() {
 }
 
+NavigationCoreConfigurationWrapper::~NavigationCoreConfigurationWrapper() {
+}
+
 Handle<Value> NavigationCoreConfigurationWrapper::New(const Arguments& args) {
     HandleScope scope;
 
@@ -60,12 +61,7 @@ Handle<Value> NavigationCoreConfigurationWrapper::New(const Arguments& args) {
             String::New("Use the new operator to create instances of this object."))
         );
     }
-    dispatcher.attach(NULL);
-    DBus::default_dispatcher = &dispatcher;
-    connection = new DBus::Connection(DBus::Connection::SessionBus());
-    connection->setup(&dispatcher);
-    NavigationCoreConfigurationProxy* proxy = new NavigationCoreConfigurationProxy(*connection);
-
+    NavigationCoreProxy* proxy = new NavigationCoreProxy();
 
     // Creates a new instance object of this type and wraps it.
     NavigationCoreConfigurationWrapper* obj = new NavigationCoreConfigurationWrapper();
@@ -91,8 +87,8 @@ Handle<Value> NavigationCoreConfigurationWrapper::GetProperty(const Arguments& a
         NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
         Local<Object> ret = Object::New();
-
-        Locale localeValue = obj->mp_proxy->GetLocale();
+        Locale localeValue;
+        obj->mp_proxy->mp_configurationProxy->GetLocale(localeValue.languageCode,localeValue.countryCode,localeValue.scriptCode);
         ret->Set( 0, String::New(propertyName.c_str()) );
         ret->Set( 1, String::New(localeValue.languageCode.c_str()) );
         ret->Set( 2, String::New(localeValue.countryCode.c_str()) );
@@ -154,7 +150,7 @@ Handle<Value> NavigationCoreConfigurationWrapper::SetProperty(const Arguments& a
 
         // Retrieves the pointer to the wrapped object instance.
         NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
-        obj->mp_proxy->SetLocale(localeValue);
+        obj->mp_proxy->mp_configurationProxy->SetLocale(localeValue.languageCode,localeValue.countryCode,localeValue.scriptCode);
 
         Handle<Value> callBackValue = property_obj->Get(String::New("callBack"));
 
@@ -176,13 +172,13 @@ Handle<Value> NavigationCoreConfigurationWrapper::GetVersion(const Arguments& ar
 	// Retrieves the pointer to the wrapped object instance.
     NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
-    Version version = obj->mp_proxy->GetVersion();
+    ::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string > DBus_version = obj->mp_proxy->mp_configurationProxy->GetVersion();
 
     Local<Object> ret = Object::New();
-    ret->Set( 0, Int32::New(version.versionMajor) );
-    ret->Set( 1, Int32::New(version.versionMinor) );
-    ret->Set( 2, Int32::New(version.versionMicro) );
-    ret->Set( 3, String::New(version.date.c_str()) );
+    ret->Set( 0, Int32::New(DBus_version._1) );
+    ret->Set( 1, Int32::New(DBus_version._2) );
+    ret->Set( 2, Int32::New(DBus_version._3) );
+    ret->Set( 3, String::New(DBus_version._4.c_str()) );
 
     return scope.Close(ret);
 }
@@ -193,15 +189,15 @@ Handle<Value> NavigationCoreConfigurationWrapper::GetSupportedLocales(const Argu
     // Retrieves the pointer to the wrapped object instance.
     NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
-    std::vector<Locale > localeList = obj->mp_proxy->GetSupportedLocales();
+    std::vector< ::DBus::Struct< std::string, std::string, std::string > > localeList = obj->mp_proxy->mp_configurationProxy->GetSupportedLocales();
 
     Local<Array> ret = Array::New();
     for (unsigned i=0;i<localeList.size();i++)
     {
         Local<Object> data = Object::New();
-        data->Set( 0, String::New(localeList.at(i).languageCode.c_str()) );
-        data->Set( 1, String::New(localeList.at(i).countryCode.c_str()) );
-        data->Set( 2, String::New(localeList.at(i).scriptCode.c_str()) );
+        data->Set( 0, String::New(localeList.at(i)._1.c_str()) );
+        data->Set( 1, String::New(localeList.at(i)._2.c_str()) );
+        data->Set( 2, String::New(localeList.at(i)._3.c_str()) );
         ret->Set(ret->Length(), data);
     }
 
@@ -215,7 +211,7 @@ Handle<Value> NavigationCoreConfigurationWrapper::GetUnitsOfMeasurement(const Ar
     // Retrieves the pointer to the wrapped object instance.
     NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
-    NavigationCoreConfigurationProxy::UnitsOfMeasurement unitsOfMeasurement = obj->mp_proxy->GetUnitsOfMeasurement();
+    NavigationCoreConfigurationProxy::UnitsOfMeasurement unitsOfMeasurement = obj->mp_proxy->mp_configurationProxy->GetUnitsOfMeasurement();
 
     Local<Array> ret = Array::New();
     for (NavigationCoreConfigurationProxy::UnitsOfMeasurement::iterator iter = unitsOfMeasurement.begin(); iter != unitsOfMeasurement.end(); iter++) {

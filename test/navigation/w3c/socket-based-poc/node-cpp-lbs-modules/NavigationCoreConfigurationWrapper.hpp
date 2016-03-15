@@ -24,6 +24,7 @@ public:
 
 protected:
     NavigationCoreConfigurationWrapper();
+    ~NavigationCoreConfigurationWrapper();
 
     static v8::Handle<v8::Value> New(const v8::Arguments& args);
     static v8::Handle<v8::Value> GetVersion(const v8::Arguments& args);
@@ -37,7 +38,7 @@ protected:
 
 private:
 
-    NavigationCoreConfigurationProxy* mp_proxy;
+    NavigationCoreProxy* mp_proxy;
 };
 
 #endif

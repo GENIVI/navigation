@@ -17,20 +17,6 @@
 // header file.
 // using namespace v8;
 
-class Version {
-public:
-    Version() {
-        versionMajor = 1;
-        versionMinor = 0;
-        versionMicro = 0;
-        date = "19:02:2016";
-	}
-    uint16_t versionMajor;
-    uint16_t versionMinor;
-    uint16_t versionMicro;
-    std::string date;
-};
-
 class Locale {
 public:
     Locale() {
@@ -87,18 +73,19 @@ public:
 
     NavigationCoreConfigurationProxy(DBus::Connection &connection);
     void ConfigurationChanged(const std::vector< int32_t >& changedSettings);
-    Version GetVersion();
-    Locale GetLocale();
-    std::vector<Locale > GetSupportedLocales();
-    void SetLocale(Locale& locale);
     UnitsOfMeasurement GetUnitsOfMeasurement();
 
-public:
 private:
-    Version m_version;
-    Locale m_locale;
-    std::vector<Locale > m_locale_list;
     UnitsOfMeasurement m_units_of_measurement;
+};
+
+class NavigationCoreProxy
+{
+public:
+    NavigationCoreProxy();
+    ~NavigationCoreProxy();
+
+    NavigationCoreConfigurationProxy* mp_configurationProxy;
 };
 
 #endif
