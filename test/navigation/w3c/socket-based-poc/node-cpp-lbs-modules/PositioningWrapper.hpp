@@ -24,13 +24,15 @@
 *
 * @licence end@
 */
-#ifndef POISERVICEPROXY_HPP
-#define POISERVICEPROXY_HPP
+#ifndef POSITIONINGWRAPPER_HPP
+#define POSITIONINGWRAPPER_HPP
 
-#include "genivi-dbus-model.h"
+#define USE_DBUS 0
 
 #include <node.h>
 #include <node_buffer.h>
+
+#include "./dbus-proxies/PositioningProxy.hpp"
 
 #include <string>
 #include <vector>
@@ -41,28 +43,20 @@
 // header file.
 // using namespace v8;
 
-class POISearchProxy
-        : public org::genivi::poiservice::POISearch_proxy,
-          public DBus::ObjectProxy
-{
+class PositioningWrapper : public node::ObjectWrap {
 public:
+    static v8::Persistent<v8::FunctionTemplate> constructor;
+    static void Init(v8::Handle<v8::Object> target);
 
-    POISearchProxy(DBus::Connection &connection);
+protected:
+    PositioningWrapper();
+    ~PositioningWrapper();
 
-    void CategoriesUpdated(const std::vector< ::DBus::Struct< uint32_t, uint16_t > >& poiCategories);
-    void PoiStatus(const uint32_t& poiSearchHandle, const int32_t& statusValue);
-    void ResultListChanged(const uint32_t& poiSearchHandle, const uint16_t& resultListSize);
+    static v8::Handle<v8::Value> New(const v8::Arguments& args);
 
 private:
-};
 
-class POIServiceProxy
-{
-public:
-    POIServiceProxy();
-    ~POIServiceProxy();
-
-    POISearchProxy* mp_poiSearchProxy;
+    PositioningProxy* mp_proxy;
 };
 
 #endif

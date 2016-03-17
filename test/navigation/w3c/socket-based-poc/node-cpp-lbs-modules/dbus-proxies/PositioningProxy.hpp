@@ -24,8 +24,8 @@
 *
 * @licence end@
 */
-#ifndef POISERVICEPROXY_HPP
-#define POISERVICEPROXY_HPP
+#ifndef POSITIONINGPROXY_HPP
+#define POSITIONINGPROXY_HPP
 
 #include "genivi-dbus-model.h"
 
@@ -41,28 +41,25 @@
 // header file.
 // using namespace v8;
 
-class POISearchProxy
-        : public org::genivi::poiservice::POISearch_proxy,
+class PositioningEnhancedPositionProxy
+        : public org::genivi::positioning::EnhancedPosition_proxy,
           public DBus::ObjectProxy
 {
 public:
 
-    POISearchProxy(DBus::Connection &connection);
-
-    void CategoriesUpdated(const std::vector< ::DBus::Struct< uint32_t, uint16_t > >& poiCategories);
-    void PoiStatus(const uint32_t& poiSearchHandle, const int32_t& statusValue);
-    void ResultListChanged(const uint32_t& poiSearchHandle, const uint16_t& resultListSize);
+    PositioningEnhancedPositionProxy(DBus::Connection &connection);
+    void PositionUpdate(const uint64_t& changedValues);
 
 private:
 };
 
-class POIServiceProxy
+class PositioningProxy
 {
 public:
-    POIServiceProxy();
-    ~POIServiceProxy();
+    PositioningProxy();
+    ~PositioningProxy();
 
-    POISearchProxy* mp_poiSearchProxy;
+    PositioningEnhancedPositionProxy* mp_enhancedPositionProxy;
 };
 
 #endif

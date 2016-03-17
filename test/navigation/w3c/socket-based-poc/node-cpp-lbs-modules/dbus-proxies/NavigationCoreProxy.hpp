@@ -27,9 +27,7 @@
 #ifndef NAVIGATIONCOREPROXY_HPP
 #define NAVIGATIONCOREPROXY_HPP
 
-#include <dbus-c++/glib-integration.h>
-#include "genivi-navigationcore-constants.h"
-#include "genivi-navigationcore-configuration_proxy.h"
+#include "genivi-dbus-model.h"
 
 #include <node.h>
 #include <node_buffer.h>
