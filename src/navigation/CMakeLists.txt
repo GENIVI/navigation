@@ -62,12 +62,10 @@ set(NAVIGATION_COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/navigation-common")
 if(NOT ${YOCTO_CONFIG})
     set(NAVIT_CMAKE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/navit/cmake")
     set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/enhanced-position-service/dbus/api") # this one is for positioning
-    set(DBUS_GENERATED_INCLUDE_DIR_SPEECH "${CMAKE_CURRENT_BINARY_DIR}/dbus-include/speech-service") # this one is for speech
     set(NAVIT_CONFIG_H_DIR "${CMAKE_CURRENT_BINARY_DIR}/navit")
 else()
     set(NAVIT_CMAKE_DIR "${STAGING_LIBDIR}/navit/cmake")
     set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING "${STAGING_INCDIR}/positioning") # this one is for positioning
-    set(DBUS_GENERATED_INCLUDE_DIR_SPEECH "${STAGING_INCDIR}/speechservice") # this one is for speech
     set(NAVIT_CONFIG_H_DIR "${STAGING_DATADIR}")
 endif()
 
@@ -114,7 +112,9 @@ add_subdirectory(${API_DIR}/map-viewer "${DBUS_GENERATED_INCLUDE_DIR}/map-viewer
 
 add_subdirectory(${API_DIR}/poi-service "${DBUS_GENERATED_INCLUDE_DIR}/poi-service")
 
-add_subdirectory(${API_DIR}/speech-service "${DBUS_GENERATED_INCLUDE_DIR}/speech-service")
+if(${WITH_SPEECH})
+    add_subdirectory(${API_DIR}/speech-service "${DBUS_GENERATED_INCLUDE_DIR}/speech-service")
+endif()
 
 include(${NAVIT_CMAKE_DIR}/navit_macros.cmake)
 

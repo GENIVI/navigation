@@ -30,8 +30,10 @@
 #include "genivi-navigationcore-constants.h"
 #include "genivi-navigationcore-guidance_adaptor.h"
 
+#if (SPEECH_ENABLED)
 #include "genivi-speechservice-constants.h"
 #include "genivi-speechservice-speechoutput_proxy.h"
+#endif
 
 #include "config.h"
 #define USE_PLUGINS 1

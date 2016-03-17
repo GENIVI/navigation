@@ -32,10 +32,10 @@ message(STATUS "guidance")
 
 if(WITH_SPEECH)
     add_definitions("-DSPEECH_ENABLED=1")
+    include_directories(${DBUS_GENERATED_INCLUDE_DIR}/speech-service)
 endif()
 
 include_directories(${DBUS_GENERATED_INCLUDE_DIR}/navigation-core)
-include_directories(${DBUS_GENERATED_INCLUDE_DIR_SPEECH})
 
 set(genivi_navigationcore_guidance_LIBS ${PLUGIN_LDFLAGS})
 set(genivi_navigationcore_guidance_LIBRARY_DIRS ${PLUGIN_LIBRARIES})
