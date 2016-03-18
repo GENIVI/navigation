@@ -43,14 +43,17 @@
 // header file.
 // using namespace v8;
 
-class NavigationCoreWrapper : public node::ObjectWrap {
+class NavigationCoreConfigurationWrapper : public node::ObjectWrap {
+    friend void NavigationCoreProxy::ConfigurationChanged(const std::vector< int32_t >& changedSettings);
+
 public:
     static v8::Persistent<v8::FunctionTemplate> constructor;
     static void Init(v8::Handle<v8::Object> target);
+    static v8::Persistent<v8::Function> callbackConfigurationChanged;
 
 protected:
-    NavigationCoreWrapper();
-    ~NavigationCoreWrapper();
+    NavigationCoreConfigurationWrapper();
+    ~NavigationCoreConfigurationWrapper();
 
     static v8::Handle<v8::Value> New(const v8::Arguments& args);
     static v8::Handle<v8::Value> GetVersion(const v8::Arguments& args);
@@ -60,11 +63,11 @@ protected:
     static v8::Handle<v8::Value> GetProperty(const v8::Arguments& args);
     static v8::Handle<v8::Value> SetProperty(const v8::Arguments& args);
 
-    static void ConfigurationChanged(const v8::Handle<v8::Function> &callback, const v8::Handle<v8::Array>& array);
+    static v8::Handle<v8::Value> SetConfigurationChangedListener(const v8::Arguments& args);
+    static void ConfigurationChanged(const std::vector<int32_t> &changedSettings);
 
 private:
-
-    NavigationCoreProxy* mp_proxy;
+    NavigationCoreProxy* mp_navigationCoreProxy;
 };
 
 #endif

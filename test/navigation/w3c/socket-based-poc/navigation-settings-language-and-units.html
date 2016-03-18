@@ -58,11 +58,18 @@ socket.on('navigationcore_answer', function(message) {
 			} else {
 				if(message.request === 'getUnitsOfMeasurement')
 				{
-    alert('Message received from the server : ' +message.answer.length+ message.answer[0].key+ message.answer[0].value);
-				}			
+                                    getUnitsOfMeasurementReturn(message.answer);
+                                }
 			}
 		}	
 	}
+})
+
+socket.on('navigationcore_signal', function(message) {
+    if(message.signal === 'configurationChanged')
+    {
+            configurationChanged(message.data);
+    }
 })
 
 <!-- initialization -->
@@ -86,7 +93,7 @@ getUnitsOfMeasurement();
 
 getLocale();
 
-<!-- middleware abstraction layer -->
+<!-- getters -->
 function getVersion() {
 	socket.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getVersion', parameters: []});
 }
@@ -122,21 +129,23 @@ function getSupportedLocalesReturn(answer) {
 function getUnitsOfMeasurement() {
 	socket.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getUnitsOfMeasurement', parameters: []});
 }
-
-function configurationChanged(changedSettings) {
-getLocale();
+function getUnitsOfMeasurementReturn(answer) {
 }
 
+<!-- setters -->
 function setLocale(button) {
-	var data = {
-		property : 'Locale',
-	 	languageCode : supportedLocales[button.value].languageCode,
-	 	countryCode : supportedLocales[button.value].countryCode,
-	 	scriptCode : supportedLocales[button.value].scriptCode,
-		callBack : configurationChanged()
-	};
+        var data = {
+                property : 'Locale',
+                languageCode : supportedLocales[button.value].languageCode,
+                countryCode : supportedLocales[button.value].countryCode,
+                scriptCode : supportedLocales[button.value].scriptCode
+        };
+        socket.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'setProperty', parameters: data});
+}
 
-	socket.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'setProperty', parameters: data});
+<!-- signals -->
+function configurationChanged(changedSettings) {
+    getLocale();
 }
 
 <!-- some other functions -->
@@ -151,7 +160,6 @@ function addLocaleListButtons( div, num_buttons ) {
   	newdiv.innerHTML = buttons;
   	div.appendChild(newdiv);
 }
-
 function enhanceLocaleButton(id) {
 	for ( var i=0; i<supportedLocales.length; i++ ) {
 		document.getElementById(supportedLocales[i].countryCode).style.width = "104px";
@@ -160,7 +168,6 @@ function enhanceLocaleButton(id) {
 	document.getElementById(id).style.width = "124px";
 	document.getElementById(id).style.height = "76px";
 }
-
 function addLocale(language, country,script,flag) {
   supportedLocales.push({
     languageCode: language,
@@ -169,6 +176,7 @@ function addLocale(language, country,script,flag) {
 	flagUrl: flag,
   });
 }
+
 </script>
 </body>
 </html>

@@ -28,20 +28,19 @@
 
 #include "PositioningWrapper.hpp"
 
-using namespace v8;
 using namespace std;
 
 
-Persistent<FunctionTemplate> PositioningWrapper::constructor;
+v8::Persistent<v8::FunctionTemplate> PositioningWrapper::constructor;
 
 
-void PositioningWrapper::Init(Handle<Object> target) {
-    HandleScope scope;
+void PositioningWrapper::Init(v8::Handle<v8::Object> target) {
+    v8::HandleScope scope;
 
-    Local<FunctionTemplate> tpl = FunctionTemplate::New(New);
-    Local<String> name = String::NewSymbol("PositioningWrapper");
+    v8::Local<v8::FunctionTemplate> tpl = v8::FunctionTemplate::New(New);
+    v8::Local<v8::String> name = v8::String::NewSymbol("PositioningWrapper");
 
-    constructor = Persistent<FunctionTemplate>::New(tpl);
+    constructor = v8::Persistent<v8::FunctionTemplate>::New(tpl);
     // ObjectWrap uses the first internal field to store the wrapped pointer.
     constructor->InstanceTemplate()->SetInternalFieldCount(1);
     constructor->SetClassName(name);
@@ -59,12 +58,12 @@ PositioningWrapper::PositioningWrapper() {
 PositioningWrapper::~PositioningWrapper() {
 }
 
-Handle<Value> PositioningWrapper::New(const Arguments& args) {
-    HandleScope scope;
+v8::Handle<v8::Value> PositioningWrapper::New(const v8::Arguments& args) {
+    v8::HandleScope scope;
 
     if (!args.IsConstructCall()) {
-        return ThrowException(Exception::TypeError(
-            String::New("Use the new operator to create instances of this object."))
+        return v8::ThrowException(v8::Exception::TypeError(
+            v8::String::New("Use the new operator to create instances of this object."))
         );
     }
     PositioningProxy* proxy = new PositioningProxy();
@@ -77,7 +76,7 @@ Handle<Value> PositioningWrapper::New(const Arguments& args) {
     return args.This();
 }
 
-void RegisterModule(Handle<Object> target) {
+void RegisterModule(v8::Handle<v8::Object> target) {
     PositioningWrapper::Init(target);
 }
 

@@ -1,7 +1,12 @@
 Preliminary code for testing the implementation of a set of navigation Web API based on GENIVI API 
 Technology used: nodejs
 
-To get nodejs:
+To get a given version of nodejs (e.g. 0.12):
+curl -sL https://deb.nodesource.com/setup_0.12 | sudo -E bash
+sudo apt-get install -y nodejs
+NB: not supported by my trusty :-(
+
+For the time being, version is v0.10.25:
 sudo apt-get install nodejs npm
 npm install -g node-gyp
 

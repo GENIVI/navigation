@@ -34,6 +34,7 @@ var fs = require('fs');
 var path = require('path');
 var webidl2 = require('webidl2');
 var escodegen = require('escodegen');
+var events = require('events');
 
 // Parse the web idl files
 var file = fs.readFileSync("./NavigationCoreConfiguration.widl");
@@ -42,10 +43,16 @@ var tree = webidl2.parse(file.toString());
 //console.log(escodegen.generate(tree));
 
 // Requirements of LBS add-on modules
-var navigationCoreConfigurationWrapper = require(resource.generatedNodejsModulePath+'/NavigationCoreWrapper');
+var navigationCoreConfigurationWrapper = require(resource.generatedNodejsModulePath+'/NavigationCoreConfigurationWrapper');
 
 // Create instances
-var i_navigationCoreConfiguration = new navigationCoreConfigurationWrapper.NavigationCoreWrapper();
+var i_navigationCoreConfigurationWrapper = new navigationCoreConfigurationWrapper.NavigationCoreConfigurationWrapper();
+
+// Connect signals
+function configurationChanged(changedSettings) {
+    console.log('configurationChanged: ' + changedSettings);
+}
+var data = i_navigationCoreConfigurationWrapper.setConfigurationChangedListener(configurationChanged);
 
 // Create and init server
 var port = 8080;
@@ -84,22 +91,30 @@ server.listen(port);
 // Load socket.io 
 var io = require('socket.io').listen(server);
 
+var toto;
 // On connection
 io.sockets.on('connection', function (socket) {
 console.log('Client connected');
-
+toto = socket;
 socket.on('navigationcore_request', function (message) {
-	if (message.method in i_navigationCoreConfiguration && typeof i_navigationCoreConfiguration[message.method] === "function") {
-		console.log('Message received: Interface-->' + message.interface +' Method-->', message.method +' Parameters-->' + message.parameters);
-		var data = i_navigationCoreConfiguration[message.method](message.parameters);
-		if(data) {	
-			socket.emit('navigationcore_answer', {request: message.method, answer: data}); 
-		}
-	}
-	else {
-		console.log("Could not find " + message.method + " function");
-		socket.emit('feedback', "Could not find " + message.method + " function");
-	}
+    switch(message.interface) {
+    case "NavigationCoreConfiguration":
+        console.log('Message received: Interface-->' + message.interface +' Method-->', message.method +' Parameters-->' + message.parameters);
+        if (message.method in i_navigationCoreConfigurationWrapper && typeof i_navigationCoreConfigurationWrapper[message.method] === "function") {
+            var data = i_navigationCoreConfigurationWrapper[message.method](message.parameters);
+            if(data) {
+                socket.emit('navigationcore_answer', {request: message.method, answer: data});
+            }
+        }
+        else {
+            console.log("Could not find " + message.method + " function");
+            socket.emit('feedback', "Could not find " + message.method + " function");
+        }
+        break;
+    default:
+        console.log("Could not find " + message.interface);
+        socket.emit('feedback', "Could not find " + message.interface);
+    }
 }); 
 });
 

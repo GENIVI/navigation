@@ -28,20 +28,19 @@
 
 #include "POIServiceWrapper.hpp"
 
-using namespace v8;
 using namespace std;
 
 
-Persistent<FunctionTemplate> POIServiceWrapper::constructor;
+v8::Persistent<v8::FunctionTemplate> POIServiceWrapper::constructor;
 
 
-void POIServiceWrapper::Init(Handle<Object> target) {
-    HandleScope scope;
+void POIServiceWrapper::Init(v8::Handle<v8::Object> target) {
+    v8::HandleScope scope;
 
-    Local<FunctionTemplate> tpl = FunctionTemplate::New(New);
-    Local<String> name = String::NewSymbol("POIServiceWrapper");
+    v8::Local<v8::FunctionTemplate> tpl = v8::FunctionTemplate::New(New);
+    v8::Local<v8::String> name = v8::String::NewSymbol("POIServiceWrapper");
 
-    constructor = Persistent<FunctionTemplate>::New(tpl);
+    constructor = v8::Persistent<v8::FunctionTemplate>::New(tpl);
     // ObjectWrap uses the first internal field to store the wrapped pointer.
     constructor->InstanceTemplate()->SetInternalFieldCount(1);
     constructor->SetClassName(name);
@@ -59,12 +58,12 @@ POIServiceWrapper::POIServiceWrapper() {
 POIServiceWrapper::~POIServiceWrapper() {
 }
 
-Handle<Value> POIServiceWrapper::New(const Arguments& args) {
-    HandleScope scope;
+v8::Handle<v8::Value> POIServiceWrapper::New(const v8::Arguments& args) {
+    v8::HandleScope scope;
 
     if (!args.IsConstructCall()) {
-        return ThrowException(Exception::TypeError(
-            String::New("Use the new operator to create instances of this object."))
+        return v8::ThrowException(v8::Exception::TypeError(
+            v8::String::New("Use the new operator to create instances of this object."))
         );
     }
     POIServiceProxy* proxy = new POIServiceProxy();
@@ -77,7 +76,7 @@ Handle<Value> POIServiceWrapper::New(const Arguments& args) {
     return args.This();
 }
 
-void RegisterModule(Handle<Object> target) {
+void RegisterModule(v8::Handle<v8::Object> target) {
     POIServiceWrapper::Init(target);
 }
 

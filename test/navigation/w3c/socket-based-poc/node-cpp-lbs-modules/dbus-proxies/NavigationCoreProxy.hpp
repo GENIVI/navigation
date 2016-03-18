@@ -41,7 +41,9 @@
 // header file.
 // using namespace v8;
 
+
 class Locale {
+
 public:
     Locale() {
         languageCode = "eng";
@@ -59,10 +61,12 @@ public:
     std::string scriptCode;
 };
 
+class NavigationCoreProxy;
 class NavigationCoreConfigurationProxy
         : public org::genivi::navigationcore::Configuration_proxy,
           public DBus::ObjectProxy
 {
+
 public:
 
     union UnitsOfMeasurementValue {
@@ -95,21 +99,27 @@ public:
 
     typedef std::map<UnitsOfMeasurementAttribute,UnitsOfMeasurementValueStruct > UnitsOfMeasurement;
 
-    NavigationCoreConfigurationProxy(DBus::Connection &connection);
+    NavigationCoreConfigurationProxy(DBus::Connection &connection,NavigationCoreProxy* navigationCoreProxy);
     void ConfigurationChanged(const std::vector< int32_t >& changedSettings);
     UnitsOfMeasurement GetUnitsOfMeasurement();
 
 private:
+    NavigationCoreProxy* mp_navigationCoreProxy;
     UnitsOfMeasurement m_units_of_measurement;
 };
 
+class NavigationCoreConfigurationWrapper;
 class NavigationCoreProxy
 {
-public:
-    NavigationCoreProxy();
-    ~NavigationCoreProxy();
 
-    NavigationCoreConfigurationProxy* mp_configurationProxy;
+public:
+    NavigationCoreProxy(NavigationCoreConfigurationWrapper *navigationCoreConfigurationWrapper);
+    ~NavigationCoreProxy();
+    NavigationCoreConfigurationProxy* mp_navigationCoreConfigurationProxy;
+    void ConfigurationChanged(const std::vector< int32_t >& changedSettings);
+
+private:
+    NavigationCoreConfigurationWrapper* mp_navigationCoreConfigurationWrapper;
 };
 
 #endif

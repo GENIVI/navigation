@@ -27,6 +27,7 @@
 #include <node.h>
 
 #include "NavigationCoreProxy.hpp"
+#include "../NavigationCoreConfigurationWrapper.hpp"
 
 using namespace v8;
 using namespace std;
@@ -34,11 +35,14 @@ using namespace std;
 static DBus::Glib::BusDispatcher *dispatcher;
 static DBus::Connection *connection;
 
-NavigationCoreConfigurationProxy::NavigationCoreConfigurationProxy(DBus::Connection &connection)
+NavigationCoreConfigurationProxy::NavigationCoreConfigurationProxy(DBus::Connection &connection, NavigationCoreProxy *navigationCoreProxy)
     :    DBus::ObjectProxy(connection,
                            "/org/genivi/navigationcore",
                            "org.genivi.navigationcore.Configuration")
 {
+    printf("NavigationCoreConfigurationProxy\n");
+
+    mp_navigationCoreProxy = navigationCoreProxy;
 
     UnitsOfMeasurementValueStruct value {intValue,METER};
 
@@ -47,7 +51,8 @@ NavigationCoreConfigurationProxy::NavigationCoreConfigurationProxy(DBus::Connect
 
 void NavigationCoreConfigurationProxy::ConfigurationChanged(const std::vector< int32_t >& changedSettings)
 {
-
+    printf("ConfigurationChanged\n");
+    mp_navigationCoreProxy->ConfigurationChanged(changedSettings);
 }
 
 NavigationCoreConfigurationProxy::UnitsOfMeasurement NavigationCoreConfigurationProxy::GetUnitsOfMeasurement()
@@ -55,19 +60,25 @@ NavigationCoreConfigurationProxy::UnitsOfMeasurement NavigationCoreConfiguration
     return m_units_of_measurement;
 }
 
-NavigationCoreProxy::NavigationCoreProxy()
+NavigationCoreProxy::NavigationCoreProxy(NavigationCoreConfigurationWrapper *navigationCoreConfigurationWrapper)
 {
     dispatcher = new DBus::Glib::BusDispatcher();
     DBus::default_dispatcher = dispatcher;
     dispatcher->attach(NULL);
     connection = new DBus::Connection(DBus::Connection::SessionBus());
     connection->setup(dispatcher);
-    mp_configurationProxy = new NavigationCoreConfigurationProxy(*connection);
+    mp_navigationCoreConfigurationWrapper = navigationCoreConfigurationWrapper;
+    mp_navigationCoreConfigurationProxy = new NavigationCoreConfigurationProxy(*connection,this);
 }
 
 NavigationCoreProxy::~NavigationCoreProxy()
 {
-    delete mp_configurationProxy;
+    delete mp_navigationCoreConfigurationProxy;
     delete connection;
     delete dispatcher;
+}
+
+void NavigationCoreProxy::ConfigurationChanged(const std::vector< int32_t >& changedSettings)
+{
+    mp_navigationCoreConfigurationWrapper->ConfigurationChanged(changedSettings);
 }
