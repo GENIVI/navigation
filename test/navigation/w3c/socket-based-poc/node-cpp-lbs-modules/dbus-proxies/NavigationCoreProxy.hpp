@@ -115,8 +115,9 @@ class NavigationCoreProxy
 public:
     NavigationCoreProxy(NavigationCoreConfigurationWrapper *navigationCoreConfigurationWrapper);
     ~NavigationCoreProxy();
-    NavigationCoreConfigurationProxy* mp_navigationCoreConfigurationProxy;
     void ConfigurationChanged(const std::vector< int32_t >& changedSettings);
+
+    NavigationCoreConfigurationProxy* mp_navigationCoreConfigurationProxy;
 
 private:
     NavigationCoreConfigurationWrapper* mp_navigationCoreConfigurationWrapper;

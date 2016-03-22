@@ -48,12 +48,6 @@ var navigationCoreConfigurationWrapper = require(resource.generatedNodejsModuleP
 // Create instances
 var i_navigationCoreConfigurationWrapper = new navigationCoreConfigurationWrapper.NavigationCoreConfigurationWrapper();
 
-// Connect signals
-function configurationChanged(changedSettings) {
-    console.log('configurationChanged: ' + changedSettings);
-}
-var data = i_navigationCoreConfigurationWrapper.setConfigurationChangedListener(configurationChanged);
-
 // Create and init server
 var port = 8080;
 var hostname = '127.0.0.1';
@@ -88,34 +82,45 @@ var server = http.createServer(function(req, res) {
 // Launch server
 server.listen(port); 
 
-// Load socket.io 
+// Load socket.io and connect it to the server
 var io = require('socket.io').listen(server);
 
-var toto;
+// Connect signal gateways
+var socket_navigationcore = io.of('/navigationcore');
+function configurationChanged(changedSettings) {
+    console.log('configurationChanged: ' + changedSettings);
+    socket_navigationcore.emit('navigationcore_signal', {signal: 'configurationChanged', data: changedSettings});
+}
+var data = i_navigationCoreConfigurationWrapper.setConfigurationChangedListener(configurationChanged);
+
+// For the time being, signal are not caught, so use timer
+setInterval(function(){
+    socket_navigationcore.emit('navigationcore_signal', {signal: 'configurationChanged', data: 42});
+}, 1000);
+
 // On connection
-io.sockets.on('connection', function (socket) {
-console.log('Client connected');
-toto = socket;
-socket.on('navigationcore_request', function (message) {
-    switch(message.interface) {
-    case "NavigationCoreConfiguration":
-        console.log('Message received: Interface-->' + message.interface +' Method-->', message.method +' Parameters-->' + message.parameters);
-        if (message.method in i_navigationCoreConfigurationWrapper && typeof i_navigationCoreConfigurationWrapper[message.method] === "function") {
-            var data = i_navigationCoreConfigurationWrapper[message.method](message.parameters);
-            if(data) {
-                socket.emit('navigationcore_answer', {request: message.method, answer: data});
+socket_navigationcore.on('connection', function (client) {
+    console.log('Client connected');
+    client.on('navigationcore_request', function (message) {
+        switch(message.interface) {
+        case "NavigationCoreConfiguration":
+            console.log('Message received: Interface-->' + message.interface +' Method-->', message.method +' Parameters-->' + message.parameters);
+            if (message.method in i_navigationCoreConfigurationWrapper && typeof i_navigationCoreConfigurationWrapper[message.method] === "function") {
+                var data = i_navigationCoreConfigurationWrapper[message.method](message.parameters);
+                if(data) {
+                    client.emit('navigationcore_answer', {request: message.method, answer: data});
+                }
             }
+            else {
+                console.log("Could not find " + message.method + " function");
+                client.emit('feedback', "Could not find " + message.method + " function");
+            }
+            break;
+        default:
+            console.log("Could not find " + message.interface);
+            client.emit('feedback', "Could not find " + message.interface);
         }
-        else {
-            console.log("Could not find " + message.method + " function");
-            socket.emit('feedback', "Could not find " + message.method + " function");
-        }
-        break;
-    default:
-        console.log("Could not find " + message.interface);
-        socket.emit('feedback', "Could not find " + message.interface);
-    }
-}); 
+    });
 });
 
 // Log info

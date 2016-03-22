@@ -2,7 +2,7 @@ all: clean configure.release build pack
 
 release: configure.release build
 
-debug: configure.debug build
+debug: configure.debug build 
 
 configure.%:
 	@node-gyp configure --$*

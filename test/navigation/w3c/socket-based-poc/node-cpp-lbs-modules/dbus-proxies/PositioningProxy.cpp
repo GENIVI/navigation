@@ -27,6 +27,7 @@
 #include <node.h>
 
 #include "PositioningProxy.hpp"
+#include "../PositioningEnhancedPositionWrapper.hpp"
 
 using namespace v8;
 using namespace std;
@@ -44,16 +45,17 @@ PositioningEnhancedPositionProxy::PositioningEnhancedPositionProxy(DBus::Connect
 
 void PositioningEnhancedPositionProxy::PositionUpdate(const uint64_t& changedValues)
 {
-
+    mp_positioningProxy->PositionUpdate(changedValues);
 }
 
-PositioningProxy::PositioningProxy()
+PositioningProxy::PositioningProxy(PositioningEnhancedPositionWrapper *positioningEnhancedPositionWrapper)
 {
     dispatcher = new DBus::Glib::BusDispatcher();
     DBus::default_dispatcher = dispatcher;
     dispatcher->attach(NULL);
     connection = new DBus::Connection(DBus::Connection::SessionBus());
     connection->setup(dispatcher);
+    mp_positioningEnhancedPositionWrapper = positioningEnhancedPositionWrapper;
     mp_enhancedPositionProxy = new PositioningEnhancedPositionProxy(*connection);
 }
 
@@ -62,4 +64,9 @@ PositioningProxy::~PositioningProxy()
     delete mp_enhancedPositionProxy;
     delete connection;
     delete dispatcher;
+}
+
+void PositioningProxy::PositionUpdate(const uint64_t& changedValues)
+{
+    mp_positioningEnhancedPositionWrapper->PositionUpdate(changedValues);
 }

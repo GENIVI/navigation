@@ -41,6 +41,7 @@
 // header file.
 // using namespace v8;
 
+class PositioningProxy;
 class PositioningEnhancedPositionProxy
         : public org::genivi::positioning::EnhancedPosition_proxy,
           public DBus::ObjectProxy
@@ -51,15 +52,21 @@ public:
     void PositionUpdate(const uint64_t& changedValues);
 
 private:
+    PositioningProxy* mp_positioningProxy;
 };
 
+class PositioningEnhancedPositionWrapper;
 class PositioningProxy
 {
 public:
-    PositioningProxy();
+    PositioningProxy(PositioningEnhancedPositionWrapper* positioningEnhancedPositionWrapper);
     ~PositioningProxy();
+    void PositionUpdate(const uint64_t& changedValues);
 
     PositioningEnhancedPositionProxy* mp_enhancedPositionProxy;
+
+private:
+    PositioningEnhancedPositionWrapper* mp_positioningEnhancedPositionWrapper;
 };
 
 #endif

@@ -40,18 +40,16 @@ NavigationCoreConfigurationProxy::NavigationCoreConfigurationProxy(DBus::Connect
                            "/org/genivi/navigationcore",
                            "org.genivi.navigationcore.Configuration")
 {
-    printf("NavigationCoreConfigurationProxy\n");
-
     mp_navigationCoreProxy = navigationCoreProxy;
 
     UnitsOfMeasurementValueStruct value {intValue,METER};
 
     m_units_of_measurement[LENGTH] = value;
+
 }
 
 void NavigationCoreConfigurationProxy::ConfigurationChanged(const std::vector< int32_t >& changedSettings)
 {
-    printf("ConfigurationChanged\n");
     mp_navigationCoreProxy->ConfigurationChanged(changedSettings);
 }
 

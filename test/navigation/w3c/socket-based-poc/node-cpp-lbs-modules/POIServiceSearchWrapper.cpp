@@ -26,19 +26,19 @@
 */
 #include <node.h>
 
-#include "PositioningWrapper.hpp"
+#include "POIServiceSearchWrapper.hpp"
 
 using namespace std;
 
 
-v8::Persistent<v8::FunctionTemplate> PositioningWrapper::constructor;
+v8::Persistent<v8::FunctionTemplate> POIServiceSearchWrapper::constructor;
 
 
-void PositioningWrapper::Init(v8::Handle<v8::Object> target) {
+void POIServiceSearchWrapper::Init(v8::Handle<v8::Object> target) {
     v8::HandleScope scope;
 
     v8::Local<v8::FunctionTemplate> tpl = v8::FunctionTemplate::New(New);
-    v8::Local<v8::String> name = v8::String::NewSymbol("PositioningWrapper");
+    v8::Local<v8::String> name = v8::String::NewSymbol("POIServiceWrapper");
 
     constructor = v8::Persistent<v8::FunctionTemplate>::New(tpl);
     // ObjectWrap uses the first internal field to store the wrapped pointer.
@@ -52,13 +52,13 @@ void PositioningWrapper::Init(v8::Handle<v8::Object> target) {
     target->Set(name, constructor->GetFunction());
 }
 
-PositioningWrapper::PositioningWrapper() {
+POIServiceSearchWrapper::POIServiceSearchWrapper() {
 }
 
-PositioningWrapper::~PositioningWrapper() {
+POIServiceSearchWrapper::~POIServiceSearchWrapper() {
 }
 
-v8::Handle<v8::Value> PositioningWrapper::New(const v8::Arguments& args) {
+v8::Handle<v8::Value> POIServiceSearchWrapper::New(const v8::Arguments& args) {
     v8::HandleScope scope;
 
     if (!args.IsConstructCall()) {
@@ -66,10 +66,10 @@ v8::Handle<v8::Value> PositioningWrapper::New(const v8::Arguments& args) {
             v8::String::New("Use the new operator to create instances of this object."))
         );
     }
-    PositioningProxy* proxy = new PositioningProxy();
+    POIServiceProxy* proxy = new POIServiceProxy();
 
     // Creates a new instance object of this type and wraps it.
-    PositioningWrapper* obj = new PositioningWrapper();
+    POIServiceSearchWrapper* obj = new POIServiceSearchWrapper();
     obj->mp_proxy = proxy;
     obj->Wrap(args.This());
 
@@ -77,7 +77,7 @@ v8::Handle<v8::Value> PositioningWrapper::New(const v8::Arguments& args) {
 }
 
 void RegisterModule(v8::Handle<v8::Object> target) {
-    PositioningWrapper::Init(target);
+    POIServiceSearchWrapper::Init(target);
 }
 
-NODE_MODULE(PositioningWrapper, RegisterModule);
+NODE_MODULE(POIServiceSearchWrapper, RegisterModule);

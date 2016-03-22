@@ -34,13 +34,13 @@ Copyright © PCA Peugeot Citroen
 
 <script type="text/javascript">
 
-<!-- socket management -->
-var socket = io.connect('http://localhost:8080');
-socket.on('feedback', function(message) {
+<!-- sockets management -->
+var socket_navigationcore = io.connect('http://localhost:8080/navigationcore'); //namespace navigationcore
+socket_navigationcore.on('feedback', function(message) {
     alert('Message received from the server : ' + message);
 })
 
-socket.on('navigationcore_answer', function(message) {
+socket_navigationcore.on('navigationcore_answer', function(message) {
 	if(message.request === 'getVersion')
 	{
 		getVersionReturn(message.answer);
@@ -65,7 +65,7 @@ socket.on('navigationcore_answer', function(message) {
 	}
 })
 
-socket.on('navigationcore_signal', function(message) {
+socket_navigationcore.on('navigationcore_signal', function(message) {
     if(message.signal === 'configurationChanged')
     {
             configurationChanged(message.data);
@@ -95,19 +95,19 @@ getLocale();
 
 <!-- getters -->
 function getVersion() {
-	socket.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getVersion', parameters: []});
+        socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getVersion', parameters: []});
 }
 function getVersionReturn(answer) {
 	document.getElementById("version").innerHTML=answer[3];	
 }
 function getLocale() {
-	socket.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getProperty', parameters: ['Locale']});
+        socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getProperty', parameters: ['Locale']});
 }
 function getLocaleReturn(answer) {
 	enhanceLocaleButton(answer[2]);	
 }
 function getSupportedLocales() {
-	socket.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getSupportedLocales', parameters: []});
+        socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getSupportedLocales', parameters: []});
 }
 function getSupportedLocalesReturn(answer) {
 	for ( var i=0; i<supportedLocales.length; i++ ) {
@@ -127,7 +127,7 @@ function getSupportedLocalesReturn(answer) {
 	}
 }
 function getUnitsOfMeasurement() {
-	socket.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getUnitsOfMeasurement', parameters: []});
+        socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getUnitsOfMeasurement', parameters: []});
 }
 function getUnitsOfMeasurementReturn(answer) {
 }
@@ -140,7 +140,7 @@ function setLocale(button) {
                 countryCode : supportedLocales[button.value].countryCode,
                 scriptCode : supportedLocales[button.value].scriptCode
         };
-        socket.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'setProperty', parameters: data});
+        socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'setProperty', parameters: data});
 }
 
 <!-- signals -->

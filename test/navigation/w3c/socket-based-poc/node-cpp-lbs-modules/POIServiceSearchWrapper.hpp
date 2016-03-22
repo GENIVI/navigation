@@ -24,15 +24,15 @@
 *
 * @licence end@
 */
-#ifndef POSITIONINGWRAPPER_HPP
-#define POSITIONINGWRAPPER_HPP
+#ifndef POISERVICESEARCHWRAPPER_HPP
+#define POISERVICESEARCHWRAPPER_HPP
 
 #define USE_DBUS 0
 
 #include <node.h>
 #include <node_buffer.h>
 
-#include "./dbus-proxies/PositioningProxy.hpp"
+#include "./dbus-proxies/POIServiceProxy.hpp"
 
 #include <string>
 #include <vector>
@@ -43,20 +43,20 @@
 // header file.
 // using namespace v8;
 
-class PositioningWrapper : public node::ObjectWrap {
+class POIServiceSearchWrapper : public node::ObjectWrap {
 public:
     static v8::Persistent<v8::FunctionTemplate> constructor;
     static void Init(v8::Handle<v8::Object> target);
 
 protected:
-    PositioningWrapper();
-    ~PositioningWrapper();
+    POIServiceSearchWrapper();
+    ~POIServiceSearchWrapper();
 
     static v8::Handle<v8::Value> New(const v8::Arguments& args);
 
 private:
 
-    PositioningProxy* mp_proxy;
+    POIServiceProxy* mp_proxy;
 };
 
 #endif

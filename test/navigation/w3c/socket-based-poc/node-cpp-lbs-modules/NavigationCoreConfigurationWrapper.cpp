@@ -30,19 +30,38 @@
 
 
 v8::Persistent<v8::FunctionTemplate> NavigationCoreConfigurationWrapper::constructor;
-v8::Persistent<v8::Function> NavigationCoreConfigurationWrapper::callbackConfigurationChanged;
+v8::Persistent<v8::Function> NavigationCoreConfigurationWrapper::signalConfigurationChanged;
 
 void NavigationCoreConfigurationWrapper::ConfigurationChanged(const std::vector< int32_t >& changedSettings) {
     v8::HandleScope scope;
 
     const unsigned argc = changedSettings.size();
     v8::Local<v8::Value> argv[argc];
+
     for(unsigned i=0;i<changedSettings.size();i++)
     {
-        argv[i]=v8::Int32::New(changedSettings.at(i));
+        argv[i]=v8::Local<v8::Value>::New(v8::Int32::New(changedSettings.at(i)));
+    }
+    signalConfigurationChanged->Call(v8::Context::GetCurrent()->Global(), argc, argv);
+}
+
+v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::SetConfigurationChangedListener(const v8::Arguments& args)
+{
+    v8::HandleScope scope; //to properly clean up v8 handles
+
+    if (!args[0]->IsFunction()) {
+        return v8::ThrowException(
+        v8::Exception::TypeError(v8::String::New("Requires a function as parameter"))
+        );
     }
 
-    callbackConfigurationChanged->Call(v8::Context::GetCurrent()->Global(), argc, argv);
+    v8::Persistent<v8::Function> callback(v8::Local<v8::Function>::Cast(args[0]));
+    signalConfigurationChanged = callback;
+
+    v8::Local<v8::Object> ret = v8::Object::New();
+    ret->Set( 0, v8::Boolean::New(signalConfigurationChanged->IsFunction()) );
+
+    return scope.Close(ret);
 }
 
 void NavigationCoreConfigurationWrapper::Init(v8::Handle<v8::Object> target) {
@@ -243,25 +262,6 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::GetUnitsOfMeasurement(
         }
         ret->Set(ret->Length(), data);
     }
-    return scope.Close(ret);
-}
-
-v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::SetConfigurationChangedListener(const v8::Arguments& args)
-{
-    v8::HandleScope scope; //to properly clean up v8 handles
-
-    if (!args[0]->IsFunction()) {
-        return v8::ThrowException(
-        v8::Exception::TypeError(v8::String::New("SetConfigurationChangedListener requires a function as parameter"))
-        );
-    }
-
-    v8::Persistent<v8::Function> callback(v8::Local<v8::Function>::Cast(args[0]));
-    callbackConfigurationChanged = callback;
-
-    v8::Local<v8::Object> ret = v8::Object::New();
-    ret->Set( 0, v8::Boolean::New(callbackConfigurationChanged->IsFunction()) );
-
     return scope.Close(ret);
 }
 

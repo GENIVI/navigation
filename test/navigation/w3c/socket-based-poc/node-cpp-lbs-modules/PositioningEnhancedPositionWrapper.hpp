@@ -24,15 +24,15 @@
 *
 * @licence end@
 */
-#ifndef POISERVICEWRAPPER_HPP
-#define POISERVICEWRAPPER_HPP
+#ifndef POSITIONINGENHANCEDPOSITIONWRAPPER_HPP
+#define POSITIONINGENHANCEDPOSITIONWRAPPER_HPP
 
 #define USE_DBUS 0
 
 #include <node.h>
 #include <node_buffer.h>
 
-#include "./dbus-proxies/POIServiceProxy.hpp"
+#include "./dbus-proxies/PositioningProxy.hpp"
 
 #include <string>
 #include <vector>
@@ -43,20 +43,27 @@
 // header file.
 // using namespace v8;
 
-class POIServiceWrapper : public node::ObjectWrap {
+class PositioningEnhancedPositionWrapper : public node::ObjectWrap {
+    friend void PositioningProxy::PositionUpdate(const uint64_t &changedValues);
+
 public:
     static v8::Persistent<v8::FunctionTemplate> constructor;
     static void Init(v8::Handle<v8::Object> target);
+    static v8::Persistent<v8::Function> signalPositionUpdate;
 
 protected:
-    POIServiceWrapper();
-    ~POIServiceWrapper();
+    PositioningEnhancedPositionWrapper();
+    ~PositioningEnhancedPositionWrapper();
 
     static v8::Handle<v8::Value> New(const v8::Arguments& args);
+    static v8::Handle<v8::Value> GetVersion(const v8::Arguments& args);
+    static v8::Handle<v8::Value> GetPositionInfo(const v8::Arguments& args);
+
+    static v8::Handle<v8::Value> SetPositionUpdateListener(const v8::Arguments& args);
+    static void PositionUpdate(const uint64_t& changedValues);
 
 private:
-
-    POIServiceProxy* mp_proxy;
+    PositioningProxy* mp_positioningProxy;
 };
 
 #endif

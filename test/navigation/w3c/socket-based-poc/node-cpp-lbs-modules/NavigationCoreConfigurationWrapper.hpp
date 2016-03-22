@@ -49,7 +49,7 @@ class NavigationCoreConfigurationWrapper : public node::ObjectWrap {
 public:
     static v8::Persistent<v8::FunctionTemplate> constructor;
     static void Init(v8::Handle<v8::Object> target);
-    static v8::Persistent<v8::Function> callbackConfigurationChanged;
+    static v8::Persistent<v8::Function> signalConfigurationChanged;
 
 protected:
     NavigationCoreConfigurationWrapper();
