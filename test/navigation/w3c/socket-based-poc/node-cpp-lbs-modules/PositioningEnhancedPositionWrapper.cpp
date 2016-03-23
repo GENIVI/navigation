@@ -76,7 +76,7 @@ void PositioningEnhancedPositionWrapper::Init(v8::Handle<v8::Object> target) {
     v8::HandleScope scope;
 
     v8::Local<v8::FunctionTemplate> tpl = v8::FunctionTemplate::New(New);
-    v8::Local<v8::String> name = v8::String::NewSymbol("PositioningWrapper");
+    v8::Local<v8::String> name = v8::String::NewSymbol("PositioningEnhancedPositionWrapper");
 
     constructor = v8::Persistent<v8::FunctionTemplate>::New(tpl);
     // ObjectWrap uses the first internal field to store the wrapped pointer.
@@ -85,6 +85,7 @@ void PositioningEnhancedPositionWrapper::Init(v8::Handle<v8::Object> target) {
 
     // Add all prototype methods, getters and setters here.
     NODE_SET_PROTOTYPE_METHOD(constructor, "getVersion", GetVersion);
+    NODE_SET_PROTOTYPE_METHOD(constructor, "getPositionInfo", GetPositionInfo);
     NODE_SET_PROTOTYPE_METHOD(constructor, "setPositionUpdateListener", SetPositionUpdateListener);
 
     // This has to be last, otherwise the properties won't show up on the
@@ -139,10 +140,37 @@ v8::Handle<v8::Value> PositioningEnhancedPositionWrapper::GetPositionInfo(const 
 
     // Retrieves the pointer to the wrapped object instance.
     PositioningEnhancedPositionWrapper* obj = ObjectWrap::Unwrap<PositioningEnhancedPositionWrapper>(args.This());
-    uint64_t valuesToReturn;
+    uint64_t valuesToReturn=GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE | GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE | GENIVI_ENHANCEDPOSITIONSERVICE_ALTITUDE;
     uint64_t timestamp;
-    std::map< uint64_t, ::DBus::Variant > data;
-    obj->mp_positioningProxy->mp_enhancedPositionProxy->GetPositionInfo(valuesToReturn, timestamp, data);
+    std::map< uint64_t, ::DBus::Variant > position;
+    obj->mp_positioningProxy->mp_enhancedPositionProxy->GetPositionInfo(valuesToReturn, timestamp, position);
+
+
+    v8::Local<v8::Array> ret = v8::Array::New();
+    for (std::map< uint64_t, ::DBus::Variant >::iterator iter = position.begin(); iter != position.end(); iter++) {
+        v8::Local<v8::Object> data = v8::Object::New();
+        ::DBus::Variant value;
+        value = iter->second;
+        union {
+            uint32_t msb;
+            uint32_t lsb;
+        };
+        msb = iter->first & 0xFFFF0000; //dirty but quick, to be enhanced !
+        lsb = iter->first & 0x0000FFFF;
+        data->Set(v8::String::New("key_msb"), v8::Uint32::New(msb));
+        data->Set(v8::String::New("key_lsb"), v8::Uint32::New(lsb));
+        switch (iter->first) {
+        case GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE:
+        case GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE:
+        case GENIVI_ENHANCEDPOSITIONSERVICE_ALTITUDE:
+        default:
+            data->Set(v8::String::New("value"), v8::Number::New(value));
+            break;
+        }
+        ret->Set(ret->Length(), data);
+    }
+
+    return scope.Close(ret);
 }
 
 
