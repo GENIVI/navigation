@@ -11,20 +11,16 @@
 <body>
 <header>
 <h1>Test of the NavigationCoreConfiguration interface</h1>
-<p id="start_time"></p>
-<p id="version"></p>
 </header>
 
-<nav>
-TBD
-</nav>
-
 <section>
-<p id="locale"></p>
+START TIME: <h id="start_time"></h><br>
+VERSION: <h id="version"></h>
 </section>
 
 <section>
-<div id="localeSection">
+COUNTRY: <h id="locale"></h>
+<div id="localeSection" style="padding:10px;">
 </div>
 </section>
 
@@ -105,6 +101,7 @@ function getLocale() {
 }
 function getLocaleReturn(answer) {
 	enhanceLocaleButton(answer[2]);	
+        document.getElementById("locale").innerHTML=answer[2];
 }
 function getSupportedLocales() {
         socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getSupportedLocales', parameters: []});

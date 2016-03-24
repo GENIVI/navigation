@@ -37,7 +37,7 @@ static DBus::Connection *connection;
 
 PositioningEnhancedPositionProxy::PositioningEnhancedPositionProxy(DBus::Connection &connection)
     :    DBus::ObjectProxy(connection,
-                           "/org/genivi/positioning",
+                           "/org/genivi/positioning/EnhancedPosition",
                            "org.genivi.positioning.EnhancedPosition")
 {
 

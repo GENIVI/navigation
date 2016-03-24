@@ -39,15 +39,11 @@ void PositioningEnhancedPositionWrapper::PositionUpdate(const uint64_t& changedV
     v8::HandleScope scope;
 
     const unsigned argc = 2;
-    union {
-        uint32_t msb;
-        uint32_t lsb;
-    };
-    msb = changedValues & 0xFFFF0000; //dirty but quick, to be enhanced !
-    lsb = changedValues & 0x0000FFFF;
+    uint64to32 data;
+    data.full = changedValues;
     v8::Local<v8::Value> argv[argc];
-    argv[0] = v8::Local<v8::Value>::New(v8::Uint32::New(msb));
-    argv[1] = v8::Local<v8::Value>::New(v8::Uint32::New(lsb));
+    argv[0] = v8::Local<v8::Value>::New(v8::Uint32::New(data.p.high));
+    argv[1] = v8::Local<v8::Value>::New(v8::Uint32::New(data.p.low));
 
     signalPositionUpdate->Call(v8::Context::GetCurrent()->Global(), argc, argv);
 
@@ -147,25 +143,29 @@ v8::Handle<v8::Value> PositioningEnhancedPositionWrapper::GetPositionInfo(const 
 
 
     v8::Local<v8::Array> ret = v8::Array::New();
+
+    v8::Local<v8::Object> tst = v8::Object::New();
+    uint64to32 data;
+    data.full = timestamp;
+    tst->Set(v8::String::New("timestamp_msb"), v8::Uint32::New(data.p.high));
+    tst->Set(v8::String::New("timestamp_lsb"), v8::Uint32::New(data.p.low));
+    ret->Set(ret->Length(), tst);
+
     for (std::map< uint64_t, ::DBus::Variant >::iterator iter = position.begin(); iter != position.end(); iter++) {
         v8::Local<v8::Object> data = v8::Object::New();
         ::DBus::Variant value;
+        uint64to32 key;
         value = iter->second;
-        union {
-            uint32_t msb;
-            uint32_t lsb;
-        };
-        msb = iter->first & 0xFFFF0000; //dirty but quick, to be enhanced !
-        lsb = iter->first & 0x0000FFFF;
-        data->Set(v8::String::New("key_msb"), v8::Uint32::New(msb));
-        data->Set(v8::String::New("key_lsb"), v8::Uint32::New(lsb));
+        key.full = iter->first;
+        data->Set(v8::String::New("key_msb"), v8::Uint32::New(key.p.high));
+        data->Set(v8::String::New("key_lsb"), v8::Uint32::New(key.p.low));
         switch (iter->first) {
-        case GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE:
-        case GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE:
-        case GENIVI_ENHANCEDPOSITIONSERVICE_ALTITUDE:
-        default:
-            data->Set(v8::String::New("value"), v8::Number::New(value));
-            break;
+            case GENIVI_ENHANCEDPOSITIONSERVICE_LATITUDE:
+            case GENIVI_ENHANCEDPOSITIONSERVICE_LONGITUDE:
+            case GENIVI_ENHANCEDPOSITIONSERVICE_ALTITUDE:
+            default:
+                data->Set(v8::String::New("value"), v8::Number::New(value));
+                break;
         }
         ret->Set(ret->Length(), data);
     }

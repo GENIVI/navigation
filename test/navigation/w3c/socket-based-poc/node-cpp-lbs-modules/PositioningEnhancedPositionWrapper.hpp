@@ -55,6 +55,14 @@ protected:
     PositioningEnhancedPositionWrapper();
     ~PositioningEnhancedPositionWrapper();
 
+    typedef union {
+      uint64_t full;
+      struct {
+        uint32_t low;
+        uint32_t high;
+      } p;
+    } uint64to32;
+
     static v8::Handle<v8::Value> New(const v8::Arguments& args);
     static v8::Handle<v8::Value> GetVersion(const v8::Arguments& args);
     static v8::Handle<v8::Value> GetPositionInfo(const v8::Arguments& args);

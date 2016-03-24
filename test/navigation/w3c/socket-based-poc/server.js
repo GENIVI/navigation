@@ -87,20 +87,15 @@ server.listen(port);
 // Load socket.io and connect it to the server
 var io = require('socket.io').listen(server);
 
-// Connect signal gateways
+// Manage socket for the namespace /navigationcore
 var socket_navigationcore = io.of('/navigationcore');
+// signals
 function configurationChanged(changedSettings) {
     console.log('configurationChanged: ' + changedSettings);
     socket_navigationcore.emit('navigationcore_signal', {signal: 'configurationChanged', data: changedSettings});
 }
-var data = i_navigationCoreConfigurationWrapper.setConfigurationChangedListener(configurationChanged);
-
-// For the time being, signal are not caught, so use timer
-setInterval(function(){
-    socket_navigationcore.emit('navigationcore_signal', {signal: 'configurationChanged', data: 42});
-}, 1000);
-
-// On connection
+var setConfigurationChangedListenerResult = i_navigationCoreConfigurationWrapper.setConfigurationChangedListener(configurationChanged);
+// connection
 socket_navigationcore.on('connection', function (client) {
     console.log('Client connected');
     client.on('navigationcore_request', function (message) {
@@ -124,6 +119,46 @@ socket_navigationcore.on('connection', function (client) {
         }
     });
 });
+
+// Manage socket for the namespace /simulation
+var socket_simulation = io.of('/simulation');
+// signals
+function positionUpdate(changedValues) {
+    console.log('positionUpdate: ' + changedValues);
+    socket_simulation.emit('positioning_signal', {signal: 'positionUpdate', data: changedValues});
+}
+var setPositionUpdateListenerResult = i_positioningEnhancedPositionWrapper.setPositionUpdateListener(positionUpdate);
+
+// connection
+socket_simulation.on('connection', function (client) {
+    console.log('Client connected');
+    client.on('positioning_request', function (message) {
+        switch(message.interface) {
+        case "PositioningEnhancedPosition":
+            console.log('Message received: Interface-->' + message.interface +' Method-->', message.method +' Parameters-->' + message.parameters);
+            if (message.method in i_positioningEnhancedPositionWrapper && typeof i_positioningEnhancedPositionWrapper[message.method] === "function") {
+                var data = i_positioningEnhancedPositionWrapper[message.method](message.parameters);
+                if(data) {
+                    client.emit('positioning_answer', {request: message.method, answer: data});
+                }
+            }
+            else {
+                console.log("Could not find " + message.method + " function");
+                client.emit('feedback', "Could not find " + message.method + " function");
+            }
+            break;
+        default:
+            console.log("Could not find " + message.interface);
+            client.emit('feedback', "Could not find " + message.interface);
+        }
+    });
+});
+
+// For the time being, signal are not caught, so use a timer
+setInterval(function(){
+    socket_navigationcore.emit('navigationcore_signal', {signal: 'configurationChanged', data: 42});
+    socket_simulation.emit('positioning_signal', {signal: 'positionUpdate', data: 27});
+}, 1000);
 
 // Log info
 console.log('Server listening at: %s', server.address().port);
