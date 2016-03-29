@@ -37,12 +37,13 @@ void NavigationCoreConfigurationWrapper::ConfigurationChanged(const std::vector<
 
     const unsigned argc = changedSettings.size();
     v8::Local<v8::Value> argv[argc];
-
+    printf("ConfigurationChanged\n");
     for(unsigned i=0;i<changedSettings.size();i++)
     {
         argv[i]=v8::Local<v8::Value>::New(v8::Int32::New(changedSettings.at(i)));
     }
-    signalConfigurationChanged->Call(v8::Context::GetCurrent()->Global(), argc, argv);
+    v8::Persistent<v8::Function> fct = static_cast<v8::Function*>(*signalConfigurationChanged);
+    fct->Call(v8::Context::GetCurrent()->Global(), argc, argv);
 }
 
 v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::SetConfigurationChangedListener(const v8::Arguments& args)
@@ -55,8 +56,7 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::SetConfigurationChange
         );
     }
 
-    v8::Persistent<v8::Function> callback(v8::Local<v8::Function>::Cast(args[0]));
-    signalConfigurationChanged = callback;
+    signalConfigurationChanged = v8::Persistent<v8::Function>::New(v8::Handle<v8::Function>::Cast(args[0]));
 
     v8::Local<v8::Object> ret = v8::Object::New();
     ret->Set( 0, v8::Boolean::New(signalConfigurationChanged->IsFunction()) );

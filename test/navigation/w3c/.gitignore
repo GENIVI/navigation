@@ -1,5 +1,5 @@
-*.user
-*.config
-*.creator
-*.files
-*.includes
+*.user*
+*.config*
+*.creator*
+*.files*
+*.includes*

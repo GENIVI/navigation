@@ -41,10 +41,6 @@
 #include <dbus-c++/glib-integration.h>
 #include "genivi-navigationcore-constants.h"
 #include "genivi-navigationcore-configuration_proxy.h"
-#include "genivi-poiservice-constants.h"
-#include "genivi-poiservice-poisearch_proxy.h"
-#include "positioning-constants.h"
-#include "enhanced-position-proxy.h"
 
 typedef uint32_t poiId_t;
 typedef uint32_t categoryId_t;

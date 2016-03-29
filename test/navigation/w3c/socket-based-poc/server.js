@@ -35,6 +35,7 @@ var path = require('path');
 var webidl2 = require('webidl2');
 var escodegen = require('escodegen');
 var events = require('events');
+var gcontext = require('gcontext');
 
 // Parse the web idl files
 var file = fs.readFileSync("./NavigationCoreConfiguration.widl");
@@ -44,11 +45,9 @@ var tree = webidl2.parse(file.toString());
 
 // Requirements of LBS add-on modules
 var navigationCoreConfigurationWrapper = require(resource.generatedNodejsModulePath+'/NavigationCoreConfigurationWrapper');
-var positioningEnhancedPositionWrapper = require(resource.generatedNodejsModulePath+'/PositioningEnhancedPositionWrapper');
 
 // Create instances
 var i_navigationCoreConfigurationWrapper = new navigationCoreConfigurationWrapper.NavigationCoreConfigurationWrapper();
-var i_positioningEnhancedPositionWrapper = new positioningEnhancedPositionWrapper.PositioningEnhancedPositionWrapper();
 
 // Create and init server
 var port = 8080;
@@ -94,7 +93,11 @@ function configurationChanged(changedSettings) {
     console.log('configurationChanged: ' + changedSettings);
     socket_navigationcore.emit('navigationcore_signal', {signal: 'configurationChanged', data: changedSettings});
 }
-var setConfigurationChangedListenerResult = i_navigationCoreConfigurationWrapper.setConfigurationChangedListener(configurationChanged);
+var setConfigurationChangedListener = i_navigationCoreConfigurationWrapper.setConfigurationChangedListener(configurationChanged);
+
+// Start the gmainloop (to be done after the initialisation of listeners !
+//gcontext.init(); still a seg fault when data carried by the signal is a std::vector
+
 // connection
 socket_navigationcore.on('connection', function (client) {
     console.log('Client connected');
@@ -120,44 +123,9 @@ socket_navigationcore.on('connection', function (client) {
     });
 });
 
-// Manage socket for the namespace /simulation
-var socket_simulation = io.of('/simulation');
-// signals
-function positionUpdate(changedValues) {
-    console.log('positionUpdate: ' + changedValues);
-    socket_simulation.emit('positioning_signal', {signal: 'positionUpdate', data: changedValues});
-}
-var setPositionUpdateListenerResult = i_positioningEnhancedPositionWrapper.setPositionUpdateListener(positionUpdate);
-
-// connection
-socket_simulation.on('connection', function (client) {
-    console.log('Client connected');
-    client.on('positioning_request', function (message) {
-        switch(message.interface) {
-        case "PositioningEnhancedPosition":
-            console.log('Message received: Interface-->' + message.interface +' Method-->', message.method +' Parameters-->' + message.parameters);
-            if (message.method in i_positioningEnhancedPositionWrapper && typeof i_positioningEnhancedPositionWrapper[message.method] === "function") {
-                var data = i_positioningEnhancedPositionWrapper[message.method](message.parameters);
-                if(data) {
-                    client.emit('positioning_answer', {request: message.method, answer: data});
-                }
-            }
-            else {
-                console.log("Could not find " + message.method + " function");
-                client.emit('feedback', "Could not find " + message.method + " function");
-            }
-            break;
-        default:
-            console.log("Could not find " + message.interface);
-            client.emit('feedback', "Could not find " + message.interface);
-        }
-    });
-});
-
-// For the time being, signal are not caught, so use a timer
+// Timer for
 setInterval(function(){
-    socket_navigationcore.emit('navigationcore_signal', {signal: 'configurationChanged', data: 42});
-    socket_simulation.emit('positioning_signal', {signal: 'positionUpdate', data: 27});
+    configurationChanged(27);
 }, 1000);
 
 // Log info

@@ -50,6 +50,7 @@ NavigationCoreConfigurationProxy::NavigationCoreConfigurationProxy(DBus::Connect
 
 void NavigationCoreConfigurationProxy::ConfigurationChanged(const std::vector< int32_t >& changedSettings)
 {
+    printf("ConfigurationChanged\n");
     mp_navigationCoreProxy->ConfigurationChanged(changedSettings);
 }
 
@@ -78,5 +79,6 @@ NavigationCoreProxy::~NavigationCoreProxy()
 
 void NavigationCoreProxy::ConfigurationChanged(const std::vector< int32_t >& changedSettings)
 {
+    printf("ConfigurationChanged\n");
     mp_navigationCoreConfigurationWrapper->ConfigurationChanged(changedSettings);
 }

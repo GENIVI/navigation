@@ -15,11 +15,11 @@ cd ./node-cpp-lbs-modules
 npm build .
 npm pack
 cd ..
-npm install node-cpp-lbs-modules/node-cpp-based-modules-0.1.0.tgz
+npm install node-cpp-lbs-modules/node-cpp-lbs-modules-0.1.0.tgz
 
 To test:
 Intall additional modules for nodejs:
-npm install http url fs path webidl2 escodegen socket.io node-dbus
+npm install http url fs path webidl2 escodegen socket.io gcontext
 
 Run the server:
 
