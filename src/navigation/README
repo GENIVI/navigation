@@ -1,4 +1,4 @@
-Release date of the file: 09-03-2016 
+Release date of the file: 31-03-2016 
 Status: OK
 
 Project:
@@ -47,9 +47,10 @@ git checkout <current version of navit>
 cd ../
 
 
-Now apply a patch to navit (The r5549 removed the  get_unique features used by GetSpell):
+Now apply patches to navit (The r5549 removed the  get_unique features used by GetSpell, and another one is required to run it on the RENESAS board):
 cd navit
 patch -p0 -i ../patches/search_list_get_unique.diff
+patch -p0 -i ../patches/fsa_issue_padding.diff
 cd ../
 
 ===============================
