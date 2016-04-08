@@ -31,6 +31,7 @@
 import dbus
 import gobject
 import dbus.mainloop.glib
+import argparse
 
 # constants as defined in the Navigation API
 LATITUDE = 0x00a0
@@ -59,35 +60,30 @@ HOUSE_NUMBER_STRING = list()
 COUNTRY_STRING.append('Switzerland')
 CITY_STRING.append(u'Genève')
 STREET_STRING.append('Rue de Lausanne')
-HOUSE_NUMBER_STRING.append('32')
+HOUSE_NUMBER_STRING.append('')
 # Address #1
 COUNTRY_STRING.append('Switzerland')
 CITY_STRING.append('Bern')
 STREET_STRING.append('Haslerstrasse')
-HOUSE_NUMBER_STRING.append('25')
+HOUSE_NUMBER_STRING.append('')
 # Address #2
 COUNTRY_STRING.append('Switzerland')
 CITY_STRING.append(u'Zürich')
 STREET_STRING.append('Rainstrasse')
-HOUSE_NUMBER_STRING.append('75')
-# Address #3
-COUNTRY_STRING.append('Italy')
-CITY_STRING.append('Aosta')
-STREET_STRING.append('Via Liconi')
-HOUSE_NUMBER_STRING.append('44')
+HOUSE_NUMBER_STRING.append('')
 
 # Default size of the list 
 WINDOW_SIZE = 20
 
-# Configuration
-current_address_index = 0
-
 # Search mode (0 = Spell, 1 = Full string search)
 country_search_mode = 1
 city_search_mode = 0
-street_search_mode = 0
+street_search_mode = 1 #set to full because of a bug to be fixed in the plug-in
 house_number_search_mode = 1
 
+parser = argparse.ArgumentParser(description='Location input test.')
+parser.add_argument("-v", "--verbose", help='print the whole log messages')
+args = parser.parse_args()
 
 print '\n--------------------------\n' + \
       'LocationInput Test' + \
@@ -99,7 +95,10 @@ if __name__ == '__main__':
 # connect to session bus
 bus = dbus.SessionBus()
 
-
+def vprint(text):
+    if args.verbose:
+        print(text)
+    
 # Turn selection criteria values to their corresponding string description
 def selection_criterion_to_string(selection_criterion):
     return_value = ''
@@ -175,8 +174,8 @@ def selection_criteria_array_to_string(selection_criterion_array):
 
 
 def print_current_context():
-    print '\tACTIVE CONTEXT: selection criterion = ' + selection_criterion_to_string(current_selection_criterion) + \
-          ', search string = \'' + entered_search_string + '\''
+    vprint('\tACTIVE CONTEXT: selection criterion = ' + selection_criterion_to_string(current_selection_criterion) + \
+          ', search string = \'' + entered_search_string + '\'')
 
 
 def change_selection_criterion(selection_criterion):
@@ -191,23 +190,23 @@ def change_selection_criterion(selection_criterion):
 def spell_search(handle, entered_string, search_string, valid_characters, first=0):
     global entered_search_string
 
-    print '-> SpellSearch - entered \'' + entered_string + '\' target \'' + search_string + '\''
+    vprint('-> SpellSearch - entered \'' + entered_string + '\' target \'' + search_string + '\'')
 
     if unicode(search_string) != unicode(entered_string):
         found = unicode(search_string).lower().find(unicode(entered_string).lower())
         if found == 0:
-            spell_character = ''
             is_valid = -1
             if first == 0:
                 spell_character = search_string[len(entered_string)]
                 is_valid = valid_characters.find(spell_character)
             else:
+                spell_character=''
                 is_valid = 0
             if is_valid != -1:
                 entered_search_string = entered_string + spell_character
-                print '\nACTION: Spell search, selection criterion = ' + \
+                vprint('\nACTION: Spell search, selection criterion = ' + \
                       selection_criterion_to_string(current_selection_criterion) + ', trying \'' + spell_character + \
-                      '\''
+                      '\'')
                 location_input_interface.Spell(dbus.UInt32(session_handle), dbus.UInt32(handle),
                                                dbus.String(spell_character), dbus.UInt16(20))
             else:
@@ -227,8 +226,8 @@ def full_string_search(handle, search_string):
 
     entered_search_string = search_string
     found_exact_match = 1  # Force exact match for full string search
-    print '\nACTION: Full string search, selection criterion = ' + \
-          selection_criterion_to_string(current_selection_criterion) + ', trying \'' + search_string + '\''
+    vprint('\nACTION: Full string search, selection criterion = ' + \
+          selection_criterion_to_string(current_selection_criterion) + ', trying \'' + search_string + '\'')
     location_input_interface.Search(dbus.UInt32(session_handle), dbus.UInt32(handle), dbus.String(search_string),
                                     dbus.UInt16(20))
 
@@ -238,20 +237,20 @@ def evaluate_address(address, guidable):
     print '\nAddress complete!\nEvaluating...'
     if COUNTRY_STRING[current_address_index] == '':
         test_passed = 1
-    elif address[COUNTRY] == COUNTRY_STRING[current_address_index]:
-        print 'Country\t\t\t-> ok (' + address[COUNTRY] + ')'
+    elif address[COUNTRY][1] == COUNTRY_STRING[current_address_index]:
+        print 'Country\t\t\t-> ok (' + address[COUNTRY][1] + ')'
         if CITY_STRING[current_address_index] == '':
             test_passed = 1
-        elif address[CITY] == CITY_STRING[current_address_index]:
-            print 'City\t\t\t-> ok (' + address[CITY] + ')'
+        elif address[CITY][1] == CITY_STRING[current_address_index]:
+            print 'City\t\t\t-> ok (' + address[CITY][1] + ')'
             if STREET_STRING[current_address_index] == '':
                 test_passed = 1
-            elif address[STREET] == STREET_STRING[current_address_index]:
-                print 'Street\t\t\t-> ok (' + address[STREET] + ')'
+            elif address[STREET][1] == STREET_STRING[current_address_index]:
+                print 'Street\t\t\t-> ok (' + address[STREET][1] + ')'
                 if HOUSE_NUMBER_STRING[current_address_index] == '':
                     test_passed = 1
-                elif address[HOUSE_NUMBER] == HOUSE_NUMBER_STRING[current_address_index]:
-                    print 'House number\t-> ok (' + address[HOUSE_NUMBER] + ')'
+                elif address[HOUSE_NUMBER][1] == HOUSE_NUMBER_STRING[current_address_index]:
+                    print 'House number\t-> ok (' + address[HOUSE_NUMBER][1] + ')'
                     test_passed = 1
 
     if guidable == 1:
@@ -259,10 +258,16 @@ def evaluate_address(address, guidable):
             print 'TEST PASSED'
         else:
             print 'TEST FAILED (wrong address)'
+            loop.quit()
     else:
         print 'TEST FAILED (non-guidable address)'
-
-    loop.quit()
+        loop.quit()
+    address_index = current_address_index + 1
+    if address_index < len(COUNTRY_STRING):
+        startSearch(address_index)
+    else:
+        print 'END OF THE TEST'
+        loop.quit()
 
 
 # Signal receiver
@@ -270,7 +275,7 @@ def evaluate_address(address, guidable):
 # Handler for ContentUpdated callback
 
 def search_status_handler(handle,status):
-    print '\n::Search status ' + str(int(status))
+    vprint('\n::Search status ' + str(int(status)))
     if status == FINISHED:
             location_input_interface.RequestListUpdate(dbus.UInt32(session_handle), dbus.UInt32(handle),
                                                        dbus.UInt16(0),
@@ -281,11 +286,11 @@ def content_updated_handler(handle, guidable, available_selection_criteria, addr
     global target_search_string
     global entered_search_string
 
-    print '\n::ContentUpdated for LocationInputHandle ' + str(int(handle))
+    vprint('\n::ContentUpdated for LocationInputHandle ' + str(int(handle)))
     print_current_context()
-    print '\tGuidable = ' + str(guidable)
-    print '\tAvailable selection criteria = ' + selection_criteria_array_to_string(available_selection_criteria)
-    print '\tADDRESS: '+dictionary_to_string(address)
+    vprint('\tGuidable = ' + str(guidable))
+    vprint('\tAvailable selection criteria = ' + selection_criteria_array_to_string(available_selection_criteria))
+    vprint('\tADDRESS: '+dictionary_to_string(address))
 
     search_mode = -1
 
@@ -305,10 +310,11 @@ def content_updated_handler(handle, guidable, available_selection_criteria, addr
         target_search_string = ''
 
     entered_search_string = ''
+
     if target_search_string == '':
         evaluate_address(address, guidable)
     elif search_mode == 0:
-        spell_search(handle, '', target_search_string, '', 1)
+        spell_search(handle, entered_search_string, target_search_string, '', 1)
     elif search_mode == 1:
         full_string_search(handle, target_search_string)
     else:
@@ -322,15 +328,15 @@ def spell_result_handler(handle, unique_string, valid_characters, full_match):
     global found_exact_match
     global available_characters
 
-    print '\n::SpellResult for LocationInputHandle '+str(int(handle))
+    vprint('\n::SpellResult for LocationInputHandle '+str(int(handle)))
     if unique_string != entered_search_string:
-        print '\tAUTOCOMPLETE: \'' + entered_search_string + '\' -> \'' + unique_string + '\''
+        vprint('\tAUTOCOMPLETE: \'' + entered_search_string + '\' -> \'' + unique_string + '\'')
     entered_search_string = unique_string
     available_characters = valid_characters
     print_current_context()
-    print '\tUnique string = \''+unique_string+'\''
-    print '\tValid Characters = \''+valid_characters+'\''
-    print '\tFull Match = '+str(full_match)
+    vprint('\tUnique string = \''+unique_string+'\'')
+    vprint('\tValid Characters = \''+valid_characters+'\'')
+    vprint('\tFull Match = '+str(full_match))
 
     if len(valid_characters) == 1:
         if unicode(valid_characters[0]) == u'\x08':
@@ -349,33 +355,33 @@ def search_result_list_handler(handle, total_size, window_offset, window_size, r
     global spell_next_character
     global found_exact_match
 
-    print '\n::SearchResultList for LocationInputHandle ' + str(int(handle))
+    vprint('\n::SearchResultList for LocationInputHandle ' + str(int(handle)))
     print_current_context()
-    print '\tTotal size = ' + str(int(total_size)) + ', Window offset = ' + str(int(window_offset)) + \
-          ', Window size = ' + str(int(window_size))
-    print '\t' + dictionary_array_to_string(result_list_window, '\n\t', window_offset)
+    vprint('\tTotal size = ' + str(int(total_size)) + ', Window offset = ' + str(int(window_offset)) + \
+          ', Window size = ' + str(int(window_size)))
+    vprint('\t' + dictionary_array_to_string(result_list_window, '\n\t', window_offset))
 
     if found_exact_match == 1:
         found_exact_match = 0
         i = 0
         for address in result_list_window:
             if unicode(address[current_selection_criterion][1]) == target_search_string:
-                print '\nACTION: Found exact match, selecting \''+unicode(address[current_selection_criterion][1]) + \
-                      '\' (Session '+str(int(session_handle)) + ' LocationInputHandle ' + str(int(handle))+')'
+                vprint('\nACTION: Found exact match, selecting \''+unicode(address[current_selection_criterion][1]) + \
+                      '\' (Session '+str(int(session_handle)) + ' LocationInputHandle ' + str(int(handle))+')')
                 location_input_interface.SelectEntry(dbus.UInt32(session_handle), dbus.UInt32(handle), dbus.UInt16(i))
                 break
             i += 1
         if i == window_size:
-            print '\nACTION: Found exact match, searching in next page (Session '+str(int(session_handle)) +\
-                  ' LocationInputHandle ' + str(int(handle))+')'
+            vprint('\nACTION: Found exact match, searching in next page (Session '+str(int(session_handle)) +\
+                  ' LocationInputHandle ' + str(int(handle))+')')
             location_input_interface.RequestListUpdate(dbus.UInt32(session_handle), dbus.UInt32(handle),
                                                        dbus.UInt16(window_offset + window_size),
                                                        dbus.UInt16(window_size))
     elif total_size == 1:
         selection_name = result_list_window[0][current_selection_criterion]
         if selection_name == target_search_string:
-            print '\nACTION: Single entry list, selecting \'' + result_list_window[0][current_selection_criterion] + \
-                  '\' (Session '+str(int(session_handle)) + ' LocationInputHandle ' + str(int(handle))+')'
+            vprint('\nACTION: Single entry list, selecting \'' + result_list_window[0][current_selection_criterion] + \
+                  '\' (Session '+str(int(session_handle)) + ' LocationInputHandle ' + str(int(handle))+')')
             location_input_interface.SelectEntry(dbus.UInt32(session_handle), dbus.UInt32(handle), dbus.UInt16(0))
         else:
             print '\nTEST FAILED (Unexpected single result list)'
@@ -409,7 +415,29 @@ def timeout():
     print '\nTEST FAILED\n'
     loop.quit()
 
+def startSearch(address_index):
+    global entered_search_string
+    global spell_next_character
+    global found_exact_match
+    global available_characters
+    global target_search_string
+    global country_search_mode
+    global current_address_index
+    current_address_index = address_index
+    entered_search_string = ''
+    spell_next_character = 0
+    found_exact_match = 0
+    available_characters = ''
+    target_search_string = COUNTRY_STRING[current_address_index]
+    
+    change_selection_criterion(COUNTRY)
+    
+    if country_search_mode == 0:
+        spell_search(location_input_handle, entered_search_string, target_search_string, available_characters, 1)
+    elif country_search_mode == 1:
+        full_string_search(location_input_handle, target_search_string)
 
+    
 session = bus.get_object('org.genivi.navigationcore.Session', '/org/genivi/navigationcore')
 session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigationcore.Session')
 
@@ -427,19 +455,15 @@ print 'LocationInput handle = ' + str(location_input_handle)
 attributes = location_input_interface.GetSupportedAddressAttributes()
 print 'Initially supported address attributes = ' + selection_criteria_array_to_string(attributes)
 
-# Start by entering country
+# Configuration
+current_address_index = 0
 entered_search_string = ''
 spell_next_character = 0
 found_exact_match = 0
 available_characters = ''
-target_search_string = COUNTRY_STRING[current_address_index]
+target_search_string = ''
 
-change_selection_criterion(COUNTRY)
-
-if country_search_mode == 0:
-    spell_search(location_input_handle, '', target_search_string, '', 1)
-elif country_search_mode == 1:
-    full_string_search(location_input_handle, target_search_string)
+startSearch(0)
 
 # Main loop
 gobject.timeout_add(10000, timeout)

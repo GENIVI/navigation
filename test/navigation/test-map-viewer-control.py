@@ -31,6 +31,8 @@ import dbus
 import gobject
 import time
 
+#import pdb; pdb.set_trace()
+
 #constants as defined in the Navigation API
 LATITUDE = 0x00a0
 LONGITUDE = 0x00a1
@@ -55,6 +57,12 @@ session_interface = dbus.Interface(session, dbus_interface='org.genivi.mapviewer
 #get session handle
 sessionhandle = session_interface.CreateSession(dbus.String("test mapviewer"))
 print 'Session handle: ' + str(sessionhandle)
+
+sessionstatus = session_interface.GetSessionStatus(dbus.UInt32(sessionhandle));
+print 'Session status: ' + str(sessionstatus)
+
+sessionlist = session_interface.GetAllSessions();
+print 'Active sessions = ' + str(len(sessionlist))
 
 MapViewerControl_obj = bus.get_object('org.genivi.mapviewer.MapViewerControl','/org/genivi/mapviewer')
 MapViewerControl_interface = dbus.Interface(MapViewerControl_obj, dbus_interface='org.genivi.mapviewer.MapViewerControl')
