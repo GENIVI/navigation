@@ -69,43 +69,16 @@ class NavigationCoreConfigurationProxy
 
 public:
 
-    union UnitsOfMeasurementValue {
-        int32_t intValue;
-        double doubleValue;
-    };
-
     enum UnitsOfMeasurementValueType {
         intValue=0,
         doubleValue=1
     };
 
-    typedef struct {
-        UnitsOfMeasurementValueType type;
-        UnitsOfMeasurementValue value;
-    } UnitsOfMeasurementValueStruct;
-
-    enum UnitsOfMeasurementAttribute {
-        INVALID,
-        LENGTH=1
-    };
-
-    enum Units {
-        METER		= 50,
-        MILE		= 51,
-        KM			= 52,
-        YARD		= 53,
-        FOOT		= 54
-    };
-
-    typedef std::map<UnitsOfMeasurementAttribute,UnitsOfMeasurementValueStruct > UnitsOfMeasurement;
-
     NavigationCoreConfigurationProxy(DBus::Connection &connection,NavigationCoreProxy* navigationCoreProxy);
     void ConfigurationChanged(const std::vector< int32_t >& changedSettings);
-    UnitsOfMeasurement GetUnitsOfMeasurement();
 
 private:
     NavigationCoreProxy* mp_navigationCoreProxy;
-    UnitsOfMeasurement m_units_of_measurement;
 };
 
 class NavigationCoreConfigurationWrapper;

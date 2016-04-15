@@ -41,22 +41,11 @@ NavigationCoreConfigurationProxy::NavigationCoreConfigurationProxy(DBus::Connect
                            "org.genivi.navigationcore.Configuration")
 {
     mp_navigationCoreProxy = navigationCoreProxy;
-
-    UnitsOfMeasurementValueStruct value {intValue,METER};
-
-    m_units_of_measurement[LENGTH] = value;
-
 }
 
 void NavigationCoreConfigurationProxy::ConfigurationChanged(const std::vector< int32_t >& changedSettings)
 {
-    printf("ConfigurationChanged\n");
     mp_navigationCoreProxy->ConfigurationChanged(changedSettings);
-}
-
-NavigationCoreConfigurationProxy::UnitsOfMeasurement NavigationCoreConfigurationProxy::GetUnitsOfMeasurement()
-{
-    return m_units_of_measurement;
 }
 
 NavigationCoreProxy::NavigationCoreProxy(NavigationCoreConfigurationWrapper *navigationCoreConfigurationWrapper)
@@ -79,6 +68,5 @@ NavigationCoreProxy::~NavigationCoreProxy()
 
 void NavigationCoreProxy::ConfigurationChanged(const std::vector< int32_t >& changedSettings)
 {
-    printf("ConfigurationChanged\n");
     mp_navigationCoreConfigurationWrapper->ConfigurationChanged(changedSettings);
 }

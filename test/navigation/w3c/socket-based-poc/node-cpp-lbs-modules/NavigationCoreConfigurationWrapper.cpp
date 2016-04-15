@@ -37,7 +37,6 @@ void NavigationCoreConfigurationWrapper::ConfigurationChanged(const std::vector<
 
     const unsigned argc = changedSettings.size();
     v8::Local<v8::Value> argv[argc];
-    printf("ConfigurationChanged\n");
     for(unsigned i=0;i<changedSettings.size();i++)
     {
         argv[i]=v8::Local<v8::Value>::New(v8::Int32::New(changedSettings.at(i)));
@@ -243,21 +242,22 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::GetUnitsOfMeasurement(
     // Retrieves the pointer to the wrapped object instance.
     NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
-    NavigationCoreConfigurationProxy::UnitsOfMeasurement unitsOfMeasurement = obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->GetUnitsOfMeasurement();
+    std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > unitsOfMeasurement = obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->GetUnitsOfMeasurement();
+    printf("GetUnitsOfMeasurement\n");
 
     v8::Local<v8::Array> ret = v8::Array::New();
-    for (NavigationCoreConfigurationProxy::UnitsOfMeasurement::iterator iter = unitsOfMeasurement.begin(); iter != unitsOfMeasurement.end(); iter++) {
+    for (std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >::iterator iter = unitsOfMeasurement.begin(); iter != unitsOfMeasurement.end(); iter++) {
         v8::Local<v8::Object> data = v8::Object::New();
-        NavigationCoreConfigurationProxy::UnitsOfMeasurementValueStruct unitsOfMeasurement;
+        ::DBus::Struct< uint8_t, ::DBus::Variant > unitsOfMeasurement;
         unitsOfMeasurement = iter->second;
         data->Set(v8::String::New("key"), v8::Int32::New(iter->first));
-        switch (unitsOfMeasurement.type) {
+        switch (unitsOfMeasurement._1) {
         case NavigationCoreConfigurationProxy::intValue:
-            data->Set(v8::String::New("value"), v8::Int32::New(unitsOfMeasurement.value.intValue));
+            data->Set(v8::String::New("value"), v8::Int32::New(unitsOfMeasurement._2));
             break;
         case NavigationCoreConfigurationProxy::doubleValue:
         default:
-            data->Set(v8::String::New("value"), v8::Number::New(unitsOfMeasurement.value.doubleValue));
+            data->Set(v8::String::New("value"), v8::Number::New(unitsOfMeasurement._2));
             break;
         }
         ret->Set(ret->Length(), data);
