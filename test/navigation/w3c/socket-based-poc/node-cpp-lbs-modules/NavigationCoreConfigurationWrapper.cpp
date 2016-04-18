@@ -80,6 +80,7 @@ void NavigationCoreConfigurationWrapper::Init(v8::Handle<v8::Object> target) {
     NODE_SET_PROTOTYPE_METHOD(constructor, "getProperty", GetProperty);
     NODE_SET_PROTOTYPE_METHOD(constructor, "setProperty", SetProperty);
     NODE_SET_PROTOTYPE_METHOD(constructor, "getUnitsOfMeasurement", GetUnitsOfMeasurement);
+    NODE_SET_PROTOTYPE_METHOD(constructor, "setUnitsOfMeasurement", SetUnitsOfMeasurement);
     NODE_SET_PROTOTYPE_METHOD(constructor, "setConfigurationChangedListener", SetConfigurationChangedListener);
 
     // This has to be last, otherwise the properties won't show up on the
@@ -243,26 +244,63 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::GetUnitsOfMeasurement(
     NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
     std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > unitsOfMeasurement = obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->GetUnitsOfMeasurement();
-    printf("GetUnitsOfMeasurement\n");
 
     v8::Local<v8::Array> ret = v8::Array::New();
     for (std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >::iterator iter = unitsOfMeasurement.begin(); iter != unitsOfMeasurement.end(); iter++) {
         v8::Local<v8::Object> data = v8::Object::New();
-        ::DBus::Struct< uint8_t, ::DBus::Variant > unitsOfMeasurement;
-        unitsOfMeasurement = iter->second;
+        ::DBus::Struct< uint8_t, ::DBus::Variant > unitOfMeasurement;
+        unitOfMeasurement = iter->second;
         data->Set(v8::String::New("key"), v8::Int32::New(iter->first));
-        switch (unitsOfMeasurement._1) {
+        switch (unitOfMeasurement._1) {
         case NavigationCoreConfigurationProxy::intValue:
-            data->Set(v8::String::New("value"), v8::Int32::New(unitsOfMeasurement._2));
+            data->Set(v8::String::New("value"), v8::Int32::New(unitOfMeasurement._2));
             break;
         case NavigationCoreConfigurationProxy::doubleValue:
         default:
-            data->Set(v8::String::New("value"), v8::Number::New(unitsOfMeasurement._2));
+            data->Set(v8::String::New("value"), v8::Number::New(unitOfMeasurement._2));
             break;
         }
         ret->Set(ret->Length(), data);
     }
     return scope.Close(ret);
+}
+
+v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::SetUnitsOfMeasurement(const v8::Arguments& args)
+{
+    v8::HandleScope scope; //to properly clean up v8 handles
+
+    if (args.Length() < 1) {
+        return v8::ThrowException(
+        v8::Exception::TypeError(v8::String::New("setUnitsOfMeasurement requires at least 1 argument"))
+        );
+    }
+
+    if (args[0]->IsArray()) {
+        std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > unitsOfMeasurementList;
+        ::DBus::Struct< uint8_t, ::DBus::Variant > value;
+        v8::Handle<v8::Array> array = v8::Handle<v8::Array>::Cast(args[0]);
+        for (uint32_t i = 0; i < array->Length(); i++) {
+            v8::Handle<v8::Object> unitsOfMeasurement_obj = v8::Handle<v8::Object>::Cast(array->Get(i));
+
+            v8::Handle<v8::Value> attributeCodeValue = unitsOfMeasurement_obj->Get(v8::String::New("attributeCode"));
+            v8::Handle<v8::Value> unitCodeValue = unitsOfMeasurement_obj->Get(v8::String::New("unitCode"));
+            switch (attributeCodeValue->ToInt32()->Int32Value()) {
+            case GENIVI_NAVIGATIONCORE_LENGTH:
+                value._1 = 0;
+                value._2 = variant_int32(unitCodeValue->ToInt32()->Int32Value());
+                unitsOfMeasurementList[GENIVI_NAVIGATIONCORE_LENGTH] = value;
+                break;
+            default:
+                break;
+            }
+
+        }
+        // Retrieves the pointer to the wrapped object instance.
+        NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
+        obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->SetUnitsOfMeasurement(unitsOfMeasurementList);
+    }
+
+    return v8::Undefined();
 }
 
 void RegisterModule(v8::Handle<v8::Object> target) {

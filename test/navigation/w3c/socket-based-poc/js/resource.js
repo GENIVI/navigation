@@ -24,7 +24,7 @@
 *
 * @licence end@
 */
-var generatedNodejsModulePath="node-cpp-based-modules/build/Release/";
+var generatedNodejsModulePath="node-cpp-lbs-modules/build/Release/";
 var iconPath = "images";
 var constantPath = ".";
 exports.generatedNodejsModulePath = generatedNodejsModulePath;

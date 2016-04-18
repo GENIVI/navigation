@@ -43,6 +43,15 @@
 // header file.
 // using namespace v8;
 
+static DBus::Variant
+variant_int32(int32_t i)
+{
+    DBus::Variant variant;
+    DBus::MessageIter iter=variant.writer();
+    iter << i;
+    return variant;
+}
+
 class NavigationCoreConfigurationWrapper : public node::ObjectWrap {
     friend void NavigationCoreProxy::ConfigurationChanged(const std::vector< int32_t >& changedSettings);
 
@@ -58,7 +67,9 @@ protected:
     static v8::Handle<v8::Value> New(const v8::Arguments& args);
     static v8::Handle<v8::Value> GetVersion(const v8::Arguments& args);
     static v8::Handle<v8::Value> GetSupportedLocales(const v8::Arguments& args);
+
     static v8::Handle<v8::Value> GetUnitsOfMeasurement(const v8::Arguments& args);
+    static v8::Handle<v8::Value> SetUnitsOfMeasurement(const v8::Arguments& args);
 
     static v8::Handle<v8::Value> GetProperty(const v8::Arguments& args);
     static v8::Handle<v8::Value> SetProperty(const v8::Arguments& args);

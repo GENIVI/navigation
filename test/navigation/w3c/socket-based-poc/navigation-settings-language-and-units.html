@@ -80,11 +80,16 @@ addLocale("eng","USA", "Latn","./images/usa-flag.png");
 addLocale("jpn","JPN", "Hrkt","./images/japanese-flag.png");
 
 var supportedUnitsOfMeasurement=[];
-addUnitOfMeasurement(51,"./images/unit-mile");
-addUnitOfMeasurement(52,"./images/unit-km");
+addUnitOfMeasurement(49,52,"./images/unit-km.png");
+addUnitOfMeasurement(49,51,"./images/unit-mile.png");
 
-var div = document.getElementById("localeSection");
-addLocaleListButtons(div,supportedLocales.length);
+var divLocaleSection = document.getElementById("localeSection");
+addLocaleListButtons(divLocaleSection,supportedLocales.length);
+
+var divUnitSection = document.getElementById("unitSection");
+addUnitListButtons(divUnitSection,supportedUnitsOfMeasurement.length);
+
+getVersion();
 
 getSupportedLocales();
 
@@ -93,6 +98,12 @@ getUnitsOfMeasurement();
 getLocale();
 
 <!-- getters -->
+function getVersion() {
+        socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getVersion', parameters: []});
+}
+function getVersionReturn(answer) {
+       var version = answer[3];
+}
 function getLocale() {
         socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getProperty', parameters: ['Locale']});
 }
@@ -106,6 +117,7 @@ function getSupportedLocalesReturn(answer) {
 	for ( var i=0; i<supportedLocales.length; i++ ) {
 		document.getElementById(supportedLocales[i].countryCode).disabled = true;
 		document.getElementById(supportedLocales[i].countryCode).style.opacity= 0.5;
+                document.getElementById(supportedLocales[i].countryCode).style.cursor = "none";
 	}
 
 	for ( var i=0; i<answer.length; i++ ) {
@@ -114,8 +126,8 @@ function getSupportedLocalesReturn(answer) {
 			{
 				document.getElementById(supportedLocales[j].countryCode).disabled = false;
 				document.getElementById(supportedLocales[j].countryCode).style.opacity= 1;
-				break;
-			}
+                                document.getElementById(supportedLocales[i].countryCode).style.cursor = "pointer";
+                        }
 		}
 	}
 }
@@ -123,6 +135,14 @@ function getUnitsOfMeasurement() {
         socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getUnitsOfMeasurement', parameters: []});
 }
 function getUnitsOfMeasurementReturn(answer) {
+        for ( var i=0; i<answer.length; i++ ) {
+                for ( var j=0; j<supportedUnitsOfMeasurement.length; j++ ) {
+                    if((supportedUnitsOfMeasurement[j].attributeCode === answer[i].key) && (supportedUnitsOfMeasurement[j].unitCode === answer[i].value)) {
+                        enhanceUnitButton(supportedUnitsOfMeasurement[j].unitCode);
+                        break;
+                    }
+                }
+        }
 }
 
 <!-- setters -->
@@ -134,6 +154,15 @@ function setLocale(button) {
                 scriptCode : supportedLocales[button.value].scriptCode
         };
         socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'setProperty', parameters: data});
+}
+function setUnit(button) {
+        var data = [];
+        var UnitsOfMeasurement = {
+                attributeCode : supportedUnitsOfMeasurement[button.value].attributeCode,
+                unitCode : supportedUnitsOfMeasurement[button.value].unitCode,
+        };
+        data.push(UnitsOfMeasurement);
+        socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'setUnitsOfMeasurement', parameters: data});
 }
 
 <!-- signals -->
@@ -154,10 +183,16 @@ function addLocaleListButtons( div, num_buttons ) {
     newdiv.innerHTML = buttons;
     div.appendChild(newdiv);
 }
+function enhanceLocaleButton(id) {
+    for ( var i=0; i<supportedLocales.length; i++ ) {
+        document.getElementById(supportedLocales[i].countryCode).style.opacity = "1";
+    }
+    document.getElementById(id).style.opacity = "0.5";
+}
 function addUnitListButtons( div, num_buttons ) {
     var buttons="";
     for ( var i=0; i<num_buttons; i++ ) {
-        buttons += '<input type="button" id="'+supportedUnitsOfMeasurement[i].unitCode+'" style="cursor:pointer; background: url('+supportedUnitsOfMeasurement[i].iconUrl+'); width:100px; height:60px; background-size: 100%; opacity: 1; no-repeat;color: transparent;" onclick="setLocale(this)" class="unitListButtons" value="'+i+'" disabled></input><br></br>';
+        buttons += '<input type="button" id="'+supportedUnitsOfMeasurement[i].unitCode+'" style="cursor:pointer; background: url('+supportedUnitsOfMeasurement[i].iconUrl+'); width:100px; height:60px; background-size: 100%; opacity: 1; no-repeat;color: transparent;" onclick="setUnit(this)" class="unitListButtons" value="'+i+'" disabled></input><br></br>';
     }
     var newdiv = document.createElement('div');
     var divIdName = 'unitList';
@@ -165,11 +200,15 @@ function addUnitListButtons( div, num_buttons ) {
     newdiv.innerHTML = buttons;
     div.appendChild(newdiv);
 }
-function enhanceLocaleButton(id) {
-    for ( var i=0; i<supportedLocales.length; i++ ) {
-        document.getElementById(supportedLocales[i].countryCode).style.opacity = "1";
+function enhanceUnitButton(id) {
+    for ( var i=0; i<supportedUnitsOfMeasurement.length; i++ ) {
+        document.getElementById(supportedUnitsOfMeasurement[i].unitCode).style.opacity = "1";
+        document.getElementById(supportedUnitsOfMeasurement[i].unitCode).disabled = false;
+        document.getElementById(supportedUnitsOfMeasurement[i].unitCode).style.cursor = "pointer";
     }
     document.getElementById(id).style.opacity = "0.5";
+    document.getElementById(id).disabled = true;
+    document.getElementById(id).style.cursor = "none";
 }
 function addLocale(language, country,script,flag) {
     supportedLocales.push({
@@ -179,9 +218,10 @@ function addLocale(language, country,script,flag) {
         flagUrl: flag
     });
 }
-function addUnitOfMeasurement(unit, icon) {
+function addUnitOfMeasurement(attribute, value, icon) {
     supportedUnitsOfMeasurement.push({
-        unitCode: unit,
+        attributeCode: attribute,
+        unitCode: value,
         iconUrl: icon
     });
 }
