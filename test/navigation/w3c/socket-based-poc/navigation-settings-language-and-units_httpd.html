@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Test page for GENIVI Web API (draft)</title>
+<link rel="stylesheet" href="style-sheets/stylesheet.css">
+<!-- to be fixed, use relative paths -->
+<script type="text/javascript" src="./node_modules/socket.io/node_modules/socket.io-client/socket.io.js"></script>
+<script type="text/javascript" src="./node_modules/webidl2/lib/webidl2.js"></script>
+</head>
+<body>
+
+<languagesTitle id="languagesTitle">
+LANGUAGE
+</languagesTitle>
+
+<language>
+<div id="localeSection">
+</div>
+</language>
+
+<unitsTitle id="unitsTitle">
+UNITS
+</unitsTitle>
+
+<unit>
+<div id="unitSection">
+</div>
+</unit>
+
+<footer>
+Copyright © PCA Peugeot Citroen
+</footer>
+
+<script type="text/javascript">
+
+<!-- sockets management -->
+var socket_navigationcore = io.connect('http://192.168.163.129:8080/navigationcore'); //namespace navigationcore
+socket_navigationcore.on('feedback', function(message) {
+    alert('Message received from the server : ' + message);
+})
+
+socket_navigationcore.on('navigationcore_answer', function(message) {
+	if(message.request === 'getVersion')
+	{
+		getVersionReturn(message.answer);
+	} else {
+		if(message.request === 'getProperty')
+		{
+			if(message.answer[0] === 'Locale')
+			{
+				getLocaleReturn(message.answer);
+			}
+		} else {
+			if(message.request === 'getSupportedLocales')
+			{
+				getSupportedLocalesReturn(message.answer);
+			} else {
+				if(message.request === 'getUnitsOfMeasurement')
+				{
+                                    getUnitsOfMeasurementReturn(message.answer);
+                                }
+			}
+		}	
+	}
+})
+
+socket_navigationcore.on('navigationcore_signal', function(message) {
+    if(message.signal === 'configurationChanged')
+    {
+            configurationChanged(message.data);
+    }
+})
+
+<!-- initialization -->
+var supportedLocales=[];
+addLocale("fra","FRA", "Latn","./images/french-flag.png");
+addLocale("deu","DEU", "Latn","./images/german-flag.png");
+addLocale("eng","USA", "Latn","./images/usa-flag.png");
+addLocale("jpn","JPN", "Hrkt","./images/japanese-flag.png");
+
+var supportedUnitsOfMeasurement=[];
+addUnitOfMeasurement(49,52,"./images/unit-km.png");
+addUnitOfMeasurement(49,51,"./images/unit-mile.png");
+
+var divLocaleSection = document.getElementById("localeSection");
+addLocaleListButtons(divLocaleSection,supportedLocales.length);
+
+var divUnitSection = document.getElementById("unitSection");
+addUnitListButtons(divUnitSection,supportedUnitsOfMeasurement.length);
+
+getVersion();
+
+getSupportedLocales();
+
+getUnitsOfMeasurement();
+
+getLocale();
+
+<!-- getters -->
+function getVersion() {
+        socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getVersion', parameters: []});
+}
+function getVersionReturn(answer) {
+       var version = answer[3];
+}
+function getLocale() {
+        socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getProperty', parameters: ['Locale']});
+}
+function getLocaleReturn(answer) {
+	enhanceLocaleButton(answer[2]);	
+}
+function getSupportedLocales() {
+        socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getSupportedLocales', parameters: []});
+}
+function getSupportedLocalesReturn(answer) {
+	for ( var i=0; i<supportedLocales.length; i++ ) {
+		document.getElementById(supportedLocales[i].countryCode).disabled = true;
+		document.getElementById(supportedLocales[i].countryCode).style.opacity= 0.5;
+                document.getElementById(supportedLocales[i].countryCode).style.cursor = "none";
+	}
+
+	for ( var i=0; i<answer.length; i++ ) {
+		for ( var j=0; j<supportedLocales.length; j++ ) {
+			if(supportedLocales[j].countryCode === answer[i][1])
+			{
+				document.getElementById(supportedLocales[j].countryCode).disabled = false;
+				document.getElementById(supportedLocales[j].countryCode).style.opacity= 1;
+                                document.getElementById(supportedLocales[i].countryCode).style.cursor = "pointer";
+                        }
+		}
+	}
+}
+function getUnitsOfMeasurement() {
+        socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getUnitsOfMeasurement', parameters: []});
+}
+function getUnitsOfMeasurementReturn(answer) {
+        for ( var i=0; i<answer.length; i++ ) {
+                for ( var j=0; j<supportedUnitsOfMeasurement.length; j++ ) {
+                    if((supportedUnitsOfMeasurement[j].attributeCode === answer[i].key) && (supportedUnitsOfMeasurement[j].unitCode === answer[i].value)) {
+                        enhanceUnitButton(supportedUnitsOfMeasurement[j].unitCode);
+                        break;
+                    }
+                }
+        }
+}
+
+<!-- setters -->
+function setLocale(button) {
+        var data = {
+                property : 'Locale',
+                languageCode : supportedLocales[button.value].languageCode,
+                countryCode : supportedLocales[button.value].countryCode,
+                scriptCode : supportedLocales[button.value].scriptCode
+        };
+        socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'setProperty', parameters: data});
+}
+function setUnit(button) {
+        var data = [];
+        var UnitsOfMeasurement = {
+                attributeCode : supportedUnitsOfMeasurement[button.value].attributeCode,
+                unitCode : supportedUnitsOfMeasurement[button.value].unitCode,
+        };
+        data.push(UnitsOfMeasurement);
+        socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'setUnitsOfMeasurement', parameters: data});
+}
+
+<!-- signals -->
+function configurationChanged(changedSettings) {
+    getLocale();
+    getUnitsOfMeasurement();
+}
+
+<!-- some other functions -->
+function addLocaleListButtons( div, num_buttons ) {
+    var buttons="";
+    for ( var i=0; i<num_buttons; i++ ) {
+        buttons += '<input type="button" id="'+supportedLocales[i].countryCode+'" style="cursor:pointer; background: url('+supportedLocales[i].flagUrl+'); width:104px; height:64px; background-size: 100%; opacity: 1; no-repeat;color: transparent;" onclick="setLocale(this)" class="localeListButtons" value="'+i+'" disabled></input><br></br>';
+    }
+    var newdiv = document.createElement('div');
+    var divIdName = 'localeList';
+    newdiv.setAttribute('id',divIdName);
+    newdiv.innerHTML = buttons;
+    div.appendChild(newdiv);
+}
+function enhanceLocaleButton(id) {
+    for ( var i=0; i<supportedLocales.length; i++ ) {
+        document.getElementById(supportedLocales[i].countryCode).style.opacity = "1";
+    }
+    document.getElementById(id).style.opacity = "0.5";
+}
+function addUnitListButtons( div, num_buttons ) {
+    var buttons="";
+    for ( var i=0; i<num_buttons; i++ ) {
+        buttons += '<input type="button" id="'+supportedUnitsOfMeasurement[i].unitCode+'" style="cursor:pointer; background: url('+supportedUnitsOfMeasurement[i].iconUrl+'); width:100px; height:60px; background-size: 100%; opacity: 1; no-repeat;color: transparent;" onclick="setUnit(this)" class="unitListButtons" value="'+i+'" disabled></input><br></br>';
+    }
+    var newdiv = document.createElement('div');
+    var divIdName = 'unitList';
+    newdiv.setAttribute('id',divIdName);
+    newdiv.innerHTML = buttons;
+    div.appendChild(newdiv);
+}
+function enhanceUnitButton(id) {
+    for ( var i=0; i<supportedUnitsOfMeasurement.length; i++ ) {
+        document.getElementById(supportedUnitsOfMeasurement[i].unitCode).style.opacity = "1";
+        document.getElementById(supportedUnitsOfMeasurement[i].unitCode).disabled = false;
+        document.getElementById(supportedUnitsOfMeasurement[i].unitCode).style.cursor = "pointer";
+    }
+    document.getElementById(id).style.opacity = "0.5";
+    document.getElementById(id).disabled = true;
+    document.getElementById(id).style.cursor = "none";
+}
+function addLocale(language, country,script,flag) {
+    supportedLocales.push({
+        languageCode: language,
+        countryCode: country,
+        scriptCode: script,
+        flagUrl: flag
+    });
+}
+function addUnitOfMeasurement(attribute, value, icon) {
+    supportedUnitsOfMeasurement.push({
+        attributeCode: attribute,
+        unitCode: value,
+        iconUrl: icon
+    });
+}
+
+</script>
+</body>
+</html>

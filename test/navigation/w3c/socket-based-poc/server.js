@@ -49,6 +49,26 @@ var navigationCoreConfigurationWrapper = require(resource.generatedNodejsModuleP
 // Create instances
 var i_navigationCoreConfigurationWrapper = new navigationCoreConfigurationWrapper.NavigationCoreConfigurationWrapper();
 
+var poll = 0;
+// Scan arguments if exists
+if (process.argv[2] === 'poll'){
+    poll = 1;
+    console.log('Polling activated, no signal used');
+    if (process.argv[3] === 'silent'){
+        // Silentize console
+        console.log('Silent mode now');
+        console.log = function() {
+        }
+    }
+} else {
+    if (process.argv[2] === 'silent'){
+        // Silentize console
+        console.log('Silent mode now');
+        console.log = function() {
+        }
+    }
+}
+
 // Create and init server
 var port = 8080;
 var hostname = '127.0.0.1';
@@ -91,7 +111,7 @@ var socket_navigationcore = io.of('/navigationcore');
 // signals
 function configurationChanged(changedSettings) {
     console.log('configurationChanged: ' + changedSettings);
-    socket_navigationcore.emit('navigationcore_signal', {signal: 'configurationChanged', data: changedSettings});
+    if(!poll) { socket_navigationcore.emit('navigationcore_signal', {signal: 'configurationChanged', data: changedSettings});}
 }
 var setConfigurationChangedListener = i_navigationCoreConfigurationWrapper.setConfigurationChangedListener(configurationChanged);
 
@@ -125,7 +145,9 @@ socket_navigationcore.on('connection', function (client) {
 
 // Timer for
 setInterval(function(){
-    configurationChanged(27);
+    if(poll) {
+        socket_navigationcore.emit('navigationcore_signal', {signal: 'configurationChanged', data: 0});
+    }
 }, 1000);
 
 // Log info
