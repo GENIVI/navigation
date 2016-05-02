@@ -30,12 +30,12 @@
       <doc>
         <line>SetUnitsOfMeasurement = This method sets the units of measurement</line>
       </doc>
-      <arg name="unitsOfMeasurementList" type="a{i(yv)}" direction="in">
+      <arg name="unitsOfMeasurementList" type="a{ii}" direction="in">
         <doc>
           <line>unitsOfMeasurementList = array[unitsOfMeasurement]</line>
           <line>unitsOfMeasurement = tuple (key,value)</line>
           <line>key = enum(INVALID,LENGTH, ... )</line>
-          <line>key = LENGTH, value = value of type 'q', that represents an enum(INVALID,METER,MILE, ... )</line>
+          <line>key = LENGTH, value = value of type 'i', that represents an enum(INVALID,METER,MILE, ... )</line>
         </doc>
       </arg>
     </method>
@@ -43,12 +43,12 @@
       <doc>
         <line>GetUnitsOfMeasurement = This method retrieves the units of measurement</line>
       </doc>
-      <arg name="unitsOfMeasurementList" type="a{i(yv)}" direction="out">
+      <arg name="unitsOfMeasurementList" type="a{ii}" direction="out">
         <doc>
           <line>unitsOfMeasurementList = array[unitsOfMeasurement]</line>
           <line>unitsOfMeasurement = tuple (key,value)</line>
           <line>key = enum(INVALID,LENGTH, ... )</line>
-          <line>key = LENGTH, value = value of type 'q', that represents an enum(INVALID,METER,MILE, ... )</line>
+          <line>key = LENGTH, value = value of type 'i', that represents an enum(INVALID,METER,MILE, ... )</line>
         </doc>
       </arg>
     </method>
@@ -56,13 +56,13 @@
       <doc>
         <line>GetSupportedUnitsOfMeasurement = This method retrieves the supported units of measurement</line>
       </doc>
-      <arg name="unitsOfMeasurementList" type="a{i(yv)}" direction="out">
+      <arg name="unitsOfMeasurementList" type="a{iai}" direction="out">
         <doc>
           <line>unitsOfMeasurementList = array[unitsOfMeasurement]</line>
           <line>unitsOfMeasurement = dictionary[key,value]</line>
           <line>dictionary = array of tuples (key,value)</line>
           <line>key = enum(INVALID,LENGTH, ... )</line>
-          <line>key = LENGTH, value = value of type 'aq'; 'q' is an enum(INVALID,METER,MILE, ... )</line>
+          <line>key = LENGTH, value = value of type 'ai'; 'i' is an enum(INVALID,METER,MILE, ... )</line>
         </doc>
       </arg>
     </method>

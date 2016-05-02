@@ -44,36 +44,36 @@ public:
         return argout;
     }
 
-    void SetUnitsOfMeasurement(const std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >& unitsOfMeasurementList)
+    void SetUnitsOfMeasurement(const std::map< int32_t, int32_t >& unitsOfMeasurement)
     {
         ::DBus::CallMessage call;
         ::DBus::MessageIter wi = call.writer();
 
-        wi << unitsOfMeasurementList;
+        wi << unitsOfMeasurement;
         call.member("SetUnitsOfMeasurement");
         ::DBus::Message ret = invoke_method (call);
     }
 
-    std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > GetUnitsOfMeasurement()
+    std::map< int32_t, int32_t > GetUnitsOfMeasurement()
     {
         ::DBus::CallMessage call;
         call.member("GetUnitsOfMeasurement");
         ::DBus::Message ret = invoke_method (call);
         ::DBus::MessageIter ri = ret.reader();
 
-        std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > argout;
+        std::map< int32_t, int32_t > argout;
         ri >> argout;
         return argout;
     }
 
-    std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > GetSupportedUnitsOfMeasurement()
+    std::map< int32_t, std::vector< int32_t > > GetSupportedUnitsOfMeasurement()
     {
         ::DBus::CallMessage call;
         call.member("GetSupportedUnitsOfMeasurement");
         ::DBus::Message ret = invoke_method (call);
         ::DBus::MessageIter ri = ret.reader();
 
-        std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > argout;
+        std::map< int32_t, std::vector< int32_t > > argout;
         ri >> argout;
         return argout;
     }

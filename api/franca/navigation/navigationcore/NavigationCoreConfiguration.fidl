@@ -38,21 +38,22 @@ interface Configuration {
         LENGTH 	= 49 //Base 0x0030
     }
 
-    union UnitsOfMeasurementValue {
-	    Int32 intValue
-	    Double doubleValue
-    }
-
-	map UnitsOfMeasurement {
-		UnitsOfMeasurementAttribute to UnitsOfMeasurementValue
-	}
-
-	enumeration Units {
+	enumeration UnitsOfMeasurementValue {
 		METER		= 50
 		MILE		= 51
 		KM			= 52
 		YARD		= 53
 		FOOT		= 54
+	}
+	
+	array UnitsOfMeasurementListValue of UnitsOfMeasurementValue 
+	
+	map UnitsOfMeasurement {
+		UnitsOfMeasurementAttribute to UnitsOfMeasurementValue
+	}
+
+	map UnitsOfMeasurementList {
+		UnitsOfMeasurementAttribute to UnitsOfMeasurementListValue
 	}
 
 	enumeration TimeFormat {
@@ -154,16 +155,16 @@ interface Configuration {
 	<**	@description : Set the units of measurement .**>
 	method setUnitsOfMeasurement {
 		in {
-			<** @description : unitsOfMeasurementList = array[unitsOfMeasurement]**>
-			UnitsOfMeasurement[] unitsOfMeasurementList				
+			<** @description : unitsOfMeasurement = unitsOfMeasurement**>
+			UnitsOfMeasurement unitsOfMeasurement				
 		}	
 	}	
 
 	<**	@description : Get the units of measurement .**>
 	method getUnitsOfMeasurement {
 		out {
-			<** @description : unitsOfMeasurementList = array[unitsOfMeasurement]**>
-			UnitsOfMeasurement[] unitsOfMeasurementList				
+			<** @description : unitsOfMeasurement = unitsOfMeasurement**>
+			UnitsOfMeasurement unitsOfMeasurement				
 		}	
 	}	
 
@@ -171,7 +172,7 @@ interface Configuration {
 	method getSupportedUnitsOfMeasurement {
 		out {
 			<** @description : unitsOfMeasurementList = array[unitsOfMeasurement]**>
-			UnitsOfMeasurement[] unitsOfMeasurementList				
+			UnitsOfMeasurementList unitsOfMeasurementList				
 		}	
 	}	
 

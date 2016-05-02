@@ -69,11 +69,6 @@ class NavigationCoreConfigurationProxy
 
 public:
 
-    enum UnitsOfMeasurementValueType {
-        intValue=0,
-        doubleValue=1
-    };
-
     NavigationCoreConfigurationProxy(DBus::Connection &connection,NavigationCoreProxy* navigationCoreProxy);
     void ConfigurationChanged(const std::vector< int32_t >& changedSettings);
 

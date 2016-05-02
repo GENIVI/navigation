@@ -134,5 +134,21 @@ Due to a different way to manage the build, some specific settings are required:
 
 cmake -DYOCTO_BUILD=ON ../
 
+===============================
+How To for Common API (experimental)
+===============================
+You need to pass as parameter to the cmake the link to your patched dbus library (required by CommonAPI)
+
+cd build
+cmake -DWITH_PLUGIN_MIGRATION=ON -DWITH_FRANCA_DBUS_INTERFACE=ON -DDBUS_LIB_PATH=<DBus patched lib Path> -DCOMMONAPI_DBUS_TOOL_DIR=<common-api-dbus-tools folder> -DCOMMONAPI_TOOL_DIR=<common-api-tools folder> -DWITH_DEBUG=ON ../
+make 
+cd ..
+
+Copy the configuration file ./resource/commonapi-dbus.ini in a directory of your choice
+
+Set the environment variable COMMONAPI_DBUS_DEFAULT_CONFIG before starting the poi-manager-server.
+
+Example:
+export COMMONAPI_DBUS_DEFAULT_CONFIG=<your path>/commonapi-dbus.ini
 
 

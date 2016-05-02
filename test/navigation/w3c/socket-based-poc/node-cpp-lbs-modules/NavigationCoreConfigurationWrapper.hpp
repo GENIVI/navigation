@@ -43,15 +43,6 @@
 // header file.
 // using namespace v8;
 
-static DBus::Variant
-variant_int32(int32_t i)
-{
-    DBus::Variant variant;
-    DBus::MessageIter iter=variant.writer();
-    iter << i;
-    return variant;
-}
-
 class NavigationCoreConfigurationWrapper : public node::ObjectWrap {
     friend void NavigationCoreProxy::ConfigurationChanged(const std::vector< int32_t >& changedSettings);
 

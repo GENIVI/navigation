@@ -121,7 +121,7 @@ country_2_to_3(const char *in)
 }
 
 
-std::map< int32_t, DBusCommonAPIVariant > unitsOfMeasurement;
+std::map< int32_t, int32_t > m_unitsOfMeasurement;
 
 class  Configuration
 : public org::genivi::navigationcore::Configuration_adaptor,
@@ -146,28 +146,28 @@ class  Configuration
 	}
 
 	void
-    SetUnitsOfMeasurement(const std::map< int32_t, DBusCommonAPIVariant >& unitsOfMeasurementList)
+    SetUnitsOfMeasurement(const std::map< int32_t, int32_t >& unitsOfMeasurement)
 	{
-		unitsOfMeasurement=unitsOfMeasurementList;
+        m_unitsOfMeasurement=unitsOfMeasurement;
         std::vector< int32_t > changed;
 		changed.push_back(GENIVI_NAVIGATIONCORE_UNITS_OF_MEASUREMENT);
 		ConfigurationChanged(changed);
 	}
 
-    std::map< int32_t, DBusCommonAPIVariant >
+    std::map< int32_t, int32_t >
 	GetUnitsOfMeasurement()
 	{
-		return unitsOfMeasurement;
+        return m_unitsOfMeasurement;
 	}
 
-    std::map< int32_t, DBusCommonAPIVariant >
+    std::map< int32_t, std::vector< int32_t > >
     GetSupportedUnitsOfMeasurement()
     {
-        std::map< int32_t, DBusCommonAPIVariant > ret;
-        std::vector< DBusCommonAPIEnumeration > length;
+        std::map< int32_t, std::vector< int32_t > > ret;
+        std::vector< int32_t > length;
         length.push_back(GENIVI_NAVIGATIONCORE_MILE);
         length.push_back(GENIVI_NAVIGATIONCORE_METER);
-        ret[GENIVI_NAVIGATIONCORE_LENGTH]=variant_array_enumeration(length);
+        ret[GENIVI_NAVIGATIONCORE_LENGTH]=length;
         return ret;
      }
 
@@ -288,6 +288,6 @@ plugin_init(void)
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
 	conn->setup(&dispatcher);
 	conn->request_name("org.genivi.navigationcore.Configuration");
-    unitsOfMeasurement[GENIVI_NAVIGATIONCORE_LENGTH]._2=variant_enumeration(GENIVI_NAVIGATIONCORE_KM);
+    m_unitsOfMeasurement[GENIVI_NAVIGATIONCORE_LENGTH]=GENIVI_NAVIGATIONCORE_KM;
 	server=new Configuration(*conn);
 }

@@ -144,7 +144,9 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::GetProperty(const v8::
             NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
             v8::Local<v8::Object> ret = v8::Object::New();
-
+            int32_t value = obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->GetTimeFormat();
+            ret->Set( 0, v8::String::New(propertyName.c_str()) );
+            ret->Set( 1, v8::Int32::New(value) );
             return scope.Close(ret);
         }
         else
@@ -154,7 +156,9 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::GetProperty(const v8::
                 NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
                 v8::Local<v8::Object> ret = v8::Object::New();
-
+                int32_t value = obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->GetCoordinatesFormat();
+                ret->Set( 0, v8::String::New(propertyName.c_str()) );
+                ret->Set( 1, v8::Int32::New(value) );
                 return scope.Close(ret);
             }
         }
@@ -193,6 +197,28 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::SetProperty(const v8::
         // Retrieves the pointer to the wrapped object instance.
         NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
         obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->SetLocale(localeValue.languageCode,localeValue.countryCode,localeValue.scriptCode);
+    }
+    else
+    {
+        if(std::string(*str) == "TimeFormat") {
+            v8::Handle<v8::Value> timeFormatValue = property_obj->Get(v8::String::New("value"));
+            int32_t timeFormat = timeFormatValue->ToInt32()->Int32Value();
+
+            // Retrieves the pointer to the wrapped object instance.
+            NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
+            obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->SetTimeFormat(timeFormat);
+        }
+        else
+        {
+            if(std::string(*str) == "CoordinatesFormat") {
+                v8::Handle<v8::Value> coordinatesFormatValue = property_obj->Get(v8::String::New("value"));
+                int32_t coordinatesFormat = coordinatesFormatValue->ToInt32()->Int32Value();
+
+                // Retrieves the pointer to the wrapped object instance.
+                NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
+                obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->SetCoordinatesFormat(coordinatesFormat);
+            }
+        }
     }
 
     return v8::Undefined();
@@ -243,23 +269,13 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::GetUnitsOfMeasurement(
     // Retrieves the pointer to the wrapped object instance.
     NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
-    std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > unitsOfMeasurement = obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->GetUnitsOfMeasurement();
+    std::map< int32_t, int32_t > unitsOfMeasurement = obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->GetUnitsOfMeasurement();
 
     v8::Local<v8::Array> ret = v8::Array::New();
-    for (std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >::iterator iter = unitsOfMeasurement.begin(); iter != unitsOfMeasurement.end(); iter++) {
+    for (std::map< int32_t, int32_t >::iterator iter = unitsOfMeasurement.begin(); iter != unitsOfMeasurement.end(); iter++) {
         v8::Local<v8::Object> data = v8::Object::New();
-        ::DBus::Struct< uint8_t, ::DBus::Variant > unitOfMeasurement;
-        unitOfMeasurement = iter->second;
         data->Set(v8::String::New("key"), v8::Int32::New(iter->first));
-        switch (unitOfMeasurement._1) {
-        case NavigationCoreConfigurationProxy::intValue:
-            data->Set(v8::String::New("value"), v8::Int32::New(unitOfMeasurement._2));
-            break;
-        case NavigationCoreConfigurationProxy::doubleValue:
-        default:
-            data->Set(v8::String::New("value"), v8::Number::New(unitOfMeasurement._2));
-            break;
-        }
+        data->Set(v8::String::New("value"), v8::Int32::New(iter->second));
         ret->Set(ret->Length(), data);
     }
     return scope.Close(ret);
@@ -276,8 +292,8 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::SetUnitsOfMeasurement(
     }
 
     if (args[0]->IsArray()) {
-        std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > unitsOfMeasurementList;
-        ::DBus::Struct< uint8_t, ::DBus::Variant > value;
+        std::map< int32_t, int32_t > unitsOfMeasurementList;
+        int32_t value;
         v8::Handle<v8::Array> array = v8::Handle<v8::Array>::Cast(args[0]);
         for (uint32_t i = 0; i < array->Length(); i++) {
             v8::Handle<v8::Object> unitsOfMeasurement_obj = v8::Handle<v8::Object>::Cast(array->Get(i));
@@ -286,8 +302,7 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::SetUnitsOfMeasurement(
             v8::Handle<v8::Value> unitCodeValue = unitsOfMeasurement_obj->Get(v8::String::New("unitCode"));
             switch (attributeCodeValue->ToInt32()->Int32Value()) {
             case GENIVI_NAVIGATIONCORE_LENGTH:
-                value._1 = 0;
-                value._2 = variant_int32(unitCodeValue->ToInt32()->Int32Value());
+                value = unitCodeValue->ToInt32()->Int32Value();
                 unitsOfMeasurementList[GENIVI_NAVIGATIONCORE_LENGTH] = value;
                 break;
             default:

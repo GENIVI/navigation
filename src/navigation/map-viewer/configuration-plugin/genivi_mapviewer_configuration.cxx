@@ -119,8 +119,7 @@ country_2_to_3(const char *in)
 	return map_2_to_3(country_map, sizeof(country_map)/sizeof(country_map[0]), in);
 }
 
-
-std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > unitsOfMeasurement;
+std::map< int32_t, int32_t > m_unitsOfMeasurement;
 
 class  Configuration
 : public org::genivi::mapviewer::Configuration_adaptor,
@@ -144,31 +143,31 @@ class  Configuration
 		return ret;
 	}
 
-	void
-    SetUnitsOfMeasurement(const std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant >& unitsOfMeasurementList)
-	{
-		unitsOfMeasurement=unitsOfMeasurementList;
-        std::vector< DBusCommonAPIEnumeration > changed;
-		changed.push_back(GENIVI_MAPVIEWER_UNITS_OF_MEASUREMENT);
-		ConfigurationChanged(changed);
-	}
+    void
+    SetUnitsOfMeasurement(const std::map< int32_t, int32_t >& unitsOfMeasurement)
+    {
+        m_unitsOfMeasurement=unitsOfMeasurement;
+        std::vector< int32_t > changed;
+        changed.push_back(GENIVI_MAPVIEWER_UNITS_OF_MEASUREMENT);
+        ConfigurationChanged(changed);
+    }
 
-    std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant >
-	GetUnitsOfMeasurement()
-	{
-		return unitsOfMeasurement;
-	}
+    std::map< int32_t, int32_t >
+    GetUnitsOfMeasurement()
+    {
+        return m_unitsOfMeasurement;
+    }
 
-    std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant >
+    std::map< int32_t, std::vector< int32_t > >
     GetSupportedUnitsOfMeasurement()
     {
-        std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > ret;
-        std::vector< uint16_t > length;
+        std::map< int32_t, std::vector< int32_t > > ret;
+        std::vector< int32_t > length;
         length.push_back(GENIVI_MAPVIEWER_MILE);
         length.push_back(GENIVI_MAPVIEWER_METER);
-        ret[GENIVI_MAPVIEWER_LENGTH]=variant_array_uint16(length);
+        ret[GENIVI_MAPVIEWER_LENGTH]=length;
         return ret;
-    }
+     }
 
 	void
     SetTimeFormat(const DBusCommonAPIEnumeration& timeFormat)
@@ -274,6 +273,6 @@ plugin_init(void)
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
 	conn->setup(&dispatcher);
 	conn->request_name("org.genivi.mapviewer.Configuration");
-    unitsOfMeasurement[GENIVI_MAPVIEWER_LENGTH]._2=variant_enumeration(GENIVI_MAPVIEWER_KM);
+    m_unitsOfMeasurement[GENIVI_MAPVIEWER_LENGTH]=GENIVI_MAPVIEWER_KM;
 	server=new Configuration(*conn);
 }
