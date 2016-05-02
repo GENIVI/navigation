@@ -154,8 +154,8 @@ class MapViewerControlObj
     void GetMapViewTheme(uint16_t& mapViewTheme);
     void SetTargetPoint(uint32_t SessionHandle, ::DBus::Struct<double, double, double> target);
     void GetTargetPoint(::DBus::Struct<double, double, double> &target);
-    void SetMapViewPan(uint32_t SessionHandle, uint16_t panningAction, ::DBus::Struct< uint16_t, uint16_t >p);
-    void GetMapViewPan(const uint16_t& panningAction, ::DBus::Struct< uint16_t, uint16_t > &p);
+    void SetMapViewPan(uint32_t SessionHandle, int32_t panningAction, ::DBus::Struct< uint16_t, uint16_t >p);
+    void GetMapViewPan(const int32_t &panningAction, ::DBus::Struct< uint16_t, uint16_t > &p);
     void SetMapViewRotation(uint32_t sessionHandle, double rotationAngle, double rotationAnglePerFrame);
     void GetMapViewRotation(int32_t& rotationAngle, int32_t& rotationAnglePerFrame);
     void SetMapViewBoundingBox(uint32_t sessionHandle, const ::DBus::Struct< ::DBus::Struct< double, double >, ::DBus::Struct< double, double > >& boundingBox);
@@ -1229,7 +1229,7 @@ MapViewerControlObj_PostDraw(class MapViewerControlObj *obj)
 }
 
 void
-MapViewerControlObj::SetMapViewPan(uint32_t SessionHandle, uint16_t panningAction, ::DBus::Struct< uint16_t, uint16_t > p)
+MapViewerControlObj::SetMapViewPan(uint32_t SessionHandle, int32_t panningAction, ::DBus::Struct< uint16_t, uint16_t > p)
 {
     struct transformation *tr;
     struct coord co,cn,c,*cp;
@@ -1261,7 +1261,7 @@ MapViewerControlObj::SetMapViewPan(uint32_t SessionHandle, uint16_t panningActio
 }
 
 void
-MapViewerControlObj::GetMapViewPan(const uint16_t& panningAction, ::DBus::Struct< uint16_t, uint16_t >& p)
+MapViewerControlObj::GetMapViewPan(const int32_t& panningAction, ::DBus::Struct< uint16_t, uint16_t >& p)
 {
     p._1=m_pan.x;
     p._2=m_pan.y;
