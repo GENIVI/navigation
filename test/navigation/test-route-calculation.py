@@ -34,17 +34,21 @@ import dbus.mainloop.glib
 from collections import namedtuple,defaultdict
 from _dbus_bindings import Int32
 from PIL.GimpGradientFile import SEGMENTS
-#import pdb; pdb.set_trace()
-
-#typedef
-routeOverviewValue = namedtuple('routeOverviewValue', ['y','v'])
+#import pdb;
 
 #constants as defined in the Navigation API
-GENIVI_LATITUDE = 0x00a0
-GENIVI_LONGITUDE = 0x00a1
-GENIVI_TOTAL_TIME = 0x018e
-GENIVI_TOTAL_DISTANCE = 0x018f
-GENIVI_ROAD_NAME = 0x0147
+GENIVI_NAVIGATIONCORE_LATITUDE = 0x00a0
+GENIVI_NAVIGATIONCORE_LONGITUDE = 0x00a1
+GENIVI_NAVIGATIONCORE_TOTAL_TIME = 0x018e
+GENIVI_NAVIGATIONCORE_TOTAL_DISTANCE = 0x018f
+GENIVI_NAVIGATIONCORE_ROAD_NAME = 0x0147
+GENIVI_NAVIGATIONCORE_START_LATITUDE = 0x0141
+GENIVI_NAVIGATIONCORE_END_LATITUDE = 0x0142
+GENIVI_NAVIGATIONCORE_START_LONGITUDE = 0x0143
+GENIVI_NAVIGATIONCORE_END_LONGITUDE = 0x0144
+GENIVI_NAVIGATIONCORE_DISTANCE = 0x0148
+GENIVI_NAVIGATIONCORE_TIME = 0x0149
+GENIVI_NAVIGATIONCORE_SPEED = 0x00a4
 
 #constants used into the script
 TIME_OUT = 10000
@@ -85,13 +89,23 @@ routes = []
 routes.append([])
 routes[0].append(ZUERICH)
 routes[0].append(BERN)
-routes[0].append('Route number 1')
+routes[0].append('Route ZUERICH to BERN')
 routes[0].append(0) #by default
 routes.append([])
 routes[1].append(GENEVE)
 routes[1].append(NEUCHATEL)
-routes[1].append('Route number 2')
+routes[1].append('Route GENEVE to NEUCHATEL')
 routes[1].append(0) #by default
+routes.append([])
+routes[2].append(ZUERICH)
+routes[2].append(NEUCHATEL)
+routes[2].append('Route ZUERICH to NEUCHATEL')
+routes[2].append(0) #by default
+routes.append([])
+routes[3].append(BERN)
+routes[3].append(GENEVE)
+routes[3].append('Route BERN to GENEVE')
+routes[3].append(0) #by default
 
 print '--------------------------'
 print 'Route Calculation Test'
@@ -108,19 +122,30 @@ def catchall_route_calculation_signals_handler(routeHandle, status, percentage):
     print 'Route Calculation: ' + str(int(percentage)) + ' %'
     if int(percentage) == 100:
         #get route overview
-        overview = g_routing_interface.GetRouteOverview(dbus.UInt32(g_route_handle),dbus.Array([dbus.Int32(GENIVI_TOTAL_DISTANCE),dbus.Int32(GENIVI_TOTAL_TIME)]))
+        overview = g_routing_interface.GetRouteOverview(dbus.UInt32(g_route_handle),dbus.Array([dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_DISTANCE),dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_TIME)]))
         #retrieve distance 
-        totalDistance = dbus.Struct(overview[dbus.Int32(GENIVI_TOTAL_DISTANCE)])
+        totalDistance = dbus.Struct(overview[dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_DISTANCE)])
         print 'Total Distance: ' + str(totalDistance[1]/1000) + ' km'
-        totalTime = dbus.Struct(overview[dbus.Int32(GENIVI_TOTAL_TIME)])
+        totalTime = dbus.Struct(overview[dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_TIME)])
         m, s = divmod(totalTime[1], 60)
         h, m = divmod(m, 60)
         print "Total Time: %d:%02d:%02d" % (h, m, s)
         #get route segments     GetRouteSegments(const uint32_t& routeHandle, const int16_t& detailLevel, const std::vector< DBusCommonAPIEnumeration >& valuesToReturn, const uint32_t& numberOfSegments, const uint32_t& offset, uint32_t& totalNumberOfSegments, std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > >& routeSegments)
-        totalNumberOfSegments = dbus.Int32()
-        CapiVariant = namedtuple('CapiVariant', ('y','v'))
-        routeSegments = [{(Int32,CapiVariant)}]
-        #g_routing_interface.GetRouteSegments(dbus.UInt32(g_route_handle),dbus.Int16(0),dbus.Array([dbus.Int32(GENIVI_TOTAL_DISTANCE),dbus.Int32(GENIVI_TOTAL_TIME),dbus.Int32(GENIVI_ROAD_NAME)]),dbus.UInt32(500),dbus.UInt32(0),totalNumberOfSegments,routeSegments)
+        valuesToReturn = [dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_DISTANCE),
+        dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_TIME),
+        dbus.Int32(GENIVI_NAVIGATIONCORE_ROAD_NAME),
+        dbus.Int32(GENIVI_NAVIGATIONCORE_START_LATITUDE),
+        dbus.Int32(GENIVI_NAVIGATIONCORE_END_LATITUDE),
+        dbus.Int32(GENIVI_NAVIGATIONCORE_START_LONGITUDE),
+        dbus.Int32(GENIVI_NAVIGATIONCORE_END_LONGITUDE),
+        dbus.Int32(GENIVI_NAVIGATIONCORE_DISTANCE),
+        dbus.Int32(GENIVI_NAVIGATIONCORE_TIME),
+        dbus.Int32(GENIVI_NAVIGATIONCORE_SPEED)]
+        ret = g_routing_interface.GetRouteSegments(dbus.UInt32(g_route_handle),dbus.Int16(0),dbus.Array(valuesToReturn),dbus.UInt32(500),dbus.UInt32(0))
+	print "Total number of segments: " + str(ret[0]) 
+        #len(ret[1]) is size
+        #ret[1][0][GENIVI_NAVIGATIONCORE_START_LATITUDE] is the start latitude
+#        pdb.set_trace()
         route = g_current_route + 1
         if route < len(routes):
             launch_route_calculation(route)
@@ -179,8 +204,8 @@ def launch_route_calculation(route):
                                    dbus.UInt32(g_route_handle), \
                                    dbus.Boolean(0), \
                                    dbus.Array([ \
-                                        dbus.Dictionary({dbus.UInt16(GENIVI_LATITUDE):dbus.Struct([0,dbus.Double(locations[start][LOCATION_LAT_INDEX])]),dbus.UInt16(GENIVI_LONGITUDE):dbus.Struct([0,dbus.Double(locations[start][LOCATION_LON_INDEX])])}), \
-                                        dbus.Dictionary({dbus.UInt16(GENIVI_LATITUDE):dbus.Struct([0,dbus.Double(locations[dest][LOCATION_LAT_INDEX])]),dbus.UInt16(GENIVI_LONGITUDE):dbus.Struct([0,dbus.Double(locations[dest][LOCATION_LON_INDEX])])}) \
+                                        dbus.Dictionary({dbus.UInt16(GENIVI_NAVIGATIONCORE_LATITUDE):dbus.Struct([0,dbus.Double(locations[start][LOCATION_LAT_INDEX])]),dbus.UInt16(GENIVI_NAVIGATIONCORE_LONGITUDE):dbus.Struct([0,dbus.Double(locations[start][LOCATION_LON_INDEX])])}), \
+                                        dbus.Dictionary({dbus.UInt16(GENIVI_NAVIGATIONCORE_LATITUDE):dbus.Struct([0,dbus.Double(locations[dest][LOCATION_LAT_INDEX])]),dbus.UInt16(GENIVI_NAVIGATIONCORE_LONGITUDE):dbus.Struct([0,dbus.Double(locations[dest][LOCATION_LON_INDEX])])}) \
                                    ]) \
                                    )
     
