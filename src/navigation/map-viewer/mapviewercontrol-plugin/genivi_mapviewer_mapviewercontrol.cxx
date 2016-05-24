@@ -34,7 +34,7 @@
 #include <ilm/ilm_control.h>
 #ifndef FSA_LAYER
 #define FSA_LAYER 600
-#define FSA_VERTICAL_OFFSET 68
+#define HMI_LAYER 700
 #endif
 #endif
 
@@ -1409,6 +1409,46 @@ MapViewerControlObj::ConvertGeoCoordsToPixelCoords(uint32_t sessionHandle, const
 	}
 }
 
+#if LM
+static void callbackFunction(ilmObjectType object, t_ilm_uint surfaceId, t_ilm_bool created, void *user_data)
+{
+    (void)user_data;
+    struct ilmSurfaceProperties sp;
+
+    if (object == ILM_SURFACE) {
+        if (created) {
+            //m_handle not propageted here but it is m_handle=1.
+            if (surfaceId == FSA_LAYER+1) {
+                //Configure map surface
+                if (ilm_getPropertiesOfSurface(surfaceId, &sp) != ILM_SUCCESS) {
+                    dbg(lvl_error,"error on ilm_getPropertiesOfSurface\n");
+                }
+
+                if (ilm_layerAddSurface(FSA_LAYER, surfaceId) != ILM_SUCCESS) {
+                    dbg(lvl_error,"error on ilm_layerAddSurface\n");
+                }
+
+                if (ilm_surfaceSetSourceRectangle(surfaceId, 0, 0, sp.origSourceWidth, sp.origSourceHeight)  != ILM_SUCCESS) {
+                    dbg(lvl_error,"error on ilm_surfaceSetSourceRectangle\n");
+                }
+
+                if (ilm_surfaceSetDestinationRectangle(surfaceId, 0, 0, sp.origSourceWidth, sp.origSourceHeight) != ILM_SUCCESS) {
+                    dbg(lvl_error,"error on ilm_surfaceSetDestinationRectangle\n");
+                }
+
+                if (ilm_surfaceSetVisibility(surfaceId, ILM_TRUE) != ILM_SUCCESS) {
+                    dbg(lvl_error,"error on ilm_surfaceSetVisibility\n");
+                }
+
+                if (ilm_commitChanges() != ILM_SUCCESS) {
+                    dbg(lvl_error,"error on ilm_commitChanges\n");
+                }
+            }
+        }
+    }
+}
+#endif
+
 MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uint32_t handle, const ::DBus::Struct< uint16_t, uint16_t >& MapViewSize)
 {
 	m_mapviewercontrol=mapviewercontrol;
@@ -1489,35 +1529,49 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
 
 #if LM
     t_ilm_nativedisplay display = (t_ilm_nativedisplay)graphics_get_data(m_graphics.u.graphics, "display");
-    if (ilm_initWithNativedisplay(display) != ILM_SUCCESS) {
-        dbg(lvl_debug, "error on ilm_initWidthNativeDisplay\n");
+
+    if (ilmClient_init(display) != ILM_SUCCESS) {
+        dbg(lvl_error, "error on ilm_initWidthNativeDisplay\n");
     }
 
     t_ilm_nativehandle nativehandle=(t_ilm_nativehandle)graphics_get_data(m_graphics.u.graphics,"xwindow_id");
     t_ilm_surface surfaceId=FSA_LAYER+m_handle;
     t_ilm_layer layerId=FSA_LAYER;
+
+    //Configure Screen for FSA
+    t_ilm_layer renderOrder[1];
+    renderOrder[0] = FSA_LAYER;
+    renderOrder[1] = HMI_LAYER;
+    if (ilm_displaySetRenderOrder(0,renderOrder,2) != ILM_SUCCESS) {
+        dbg(lvl_error,"error on ilm_displaySetRenderOrder\n");
+    }
+
+    //Configure the FSA layer dimensions & visibility
+    if (ilm_layerSetSourceRectangle(layerId, 0, 0, MapViewSize._1, MapViewSize._2) != ILM_SUCCESS) {
+        dbg(lvl_error,"error on ilm_layerSetSourceRectangle\n");
+    }
+
+    if (ilm_layerSetDestinationRectangle(layerId, 0, 0, MapViewSize._1, MapViewSize._2) != ILM_SUCCESS) {
+        dbg(lvl_error,"error on ilm_layerSetDestinationRectangle\n");
+    }
+
+    if (ilm_layerSetVisibility(layerId, ILM_TRUE) != ILM_SUCCESS) {
+        dbg(lvl_error,"error on ilm_layerSetVisibility\n");
+    }
+
+    //Register Notification
+    if (ilm_registerNotification(callbackFunction, NULL)  != ILM_SUCCESS) {
+        dbg(lvl_error,"error on ilm_registerNotification\n");
+    }
+
+    //Create surface for the map and add notification when created
     if (ilm_surfaceCreate(nativehandle, MapViewSize._1, MapViewSize._2, ILM_PIXELFORMAT_RGBA_8888, &surfaceId) != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_surfaceCreate\n");
-    } 
-
-    if (ilm_surfaceSetSourceRectangle(surfaceId, 0, 0, MapViewSize._1, MapViewSize._2)  != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_surfaceSetSourceRectangle\n");
+        dbg(lvl_error,"error on ilm_surfaceCreate\n");
     }
 
-    if (ilm_surfaceSetDestinationRectangle(surfaceId, 0, 0, MapViewSize._1, MapViewSize._2-FSA_VERTICAL_OFFSET) != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_surfaceSetDestinationRectangle\n");
-    }
-
-    if (ilm_surfaceSetVisibility(surfaceId, ILM_TRUE) != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_surfaceSetVisibility\n");
-    }
-
-    if (ilm_layerAddSurface(layerId, surfaceId) != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_layerAddSurface\n");
-    }
-
+    //Commit all changes
     if (ilm_commitChanges() != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_commitChanges\n");
+        dbg(lvl_error,"error on ilm_commitChanges\n");
     }
 #endif
 
@@ -1529,13 +1583,13 @@ MapViewerControlObj::~MapViewerControlObj()
     t_ilm_surface surfaceId=FSA_LAYER+m_handle;
     t_ilm_layer layerId=FSA_LAYER;
     if (ilm_surfaceRemove(surfaceId) != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_surfaceRemove\n");
+        dbg(lvl_error,"error on ilm_surfaceRemove\n");
     }
     if (ilm_layerRemoveSurface(layerId, surfaceId) != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_layerAddSurface\n");
+        dbg(lvl_error,"error on ilm_layerAddSurface\n");
     }
     if (ilm_commitChanges() != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_commitChanges\n");
+        dbg(lvl_error,"error on ilm_commitChanges\n");
     }
 #endif
 
@@ -1709,10 +1763,8 @@ plugin_init(void)
     server=new MapViewerControl(*conns[MAPVIEWER_CONTROL_CONNECTION]);
 
 #if LM
-#if 0
     if (ilm_init() != ILM_SUCCESS) {
-        dbg(lvl_debug,"error on ilm_init\n");
+        dbg(lvl_error,"error on ilm_init\n");
     }
-#endif
 #endif
 }

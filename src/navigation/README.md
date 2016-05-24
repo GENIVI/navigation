@@ -14,10 +14,10 @@ Navit from [https://github.com/navit-gps/navit/](https://github.com/navit-gps/na
 NB: Patches are applied to navit:
 search_list_get_unique.diff features used by GetSpell
 fsa_issue_padding.diff required to run on the GDP
-NB: For displaying current versions used by the code type ./reload.sh in command line 
+NB: For displaying current versions used by the code type ./clone_and_build.sh in command line 
 The code is regularly aligned with the latest versions of the third parties software
 
-## Prerequisities
+## Prerequisites
 Under Ubuntu, some packets are needed to be installed:
 sudo apt-get install xsltproc libdbus-cpp-dev libdbus-c++-dev libglib2.0-dev gtk+-2.0 libglibmm-2.4-dev libxml++2.6-dev libgtk-3-dev libdbus-1-dev libsdl1.2-dev libsdl-image1.2-dev libsdl-ttf2.0-dev inkscape qt5-qmake qtbase5-dev-tools qtbase5-dev qttools5-dev-tools qtdeclarative5-dev 
 

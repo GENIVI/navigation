@@ -605,6 +605,8 @@ GuidanceObj::GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const 
             maneuver._3 = GENIVI_NAVIGATIONCORE_DEFAULT; //roadPropertyAfterManeuver
             maneuver._4 = GENIVI_NAVIGATIONCORE_RIGHT; //drivingSide
             maneuver._5 = 0; //offsetOfNextManeuver
+            //get infos about maneuver: sub_maneuver._1: DistanceToManeuver, sub_maneuver._4: Maneuver, maneuver._2: RoadAfterManeuver
+            //maneuver_data is a map of attribute and value (e.g. DIRECTION STRAIGHT_ON )
             GetManeuver(item, sub_maneuver._1, sub_maneuver._4, maneuver._2, maneuver_data);
             sub_maneuver._5.insert(maneuver_data);
             maneuver._6.push_back(sub_maneuver);
