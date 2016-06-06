@@ -1,41 +1,35 @@
-Preliminary code for testing the implementation of a set of navigation Web API based on GENIVI API 
-Technology used: nodejs
+# W3C proof of concept
 
-To get a given version of nodejs (e.g. 0.12):
-curl -sL https://deb.nodesource.com/setup_0.12 | sudo -E bash
-sudo apt-get install -y nodejs
-NB: not supported by my trusty :-(
+## Synopsis
+This folder contains a preliminary code for testing the implementation of a set of navigation Web API based on GENIVI API. The example used is the configuration API. It's based on nodejs
 
-For the time being, version is v0.10.25:
-sudo apt-get install nodejs npm
-npm install -g node-gyp
+##Tested targets
+Desktop: Tested under Ubuntu 16.04 LTS 64 bits
+nodejs version: 4.2.6
 
+## Third parties software
+For nodejs you need to install some modules:
+npm install http url fs path webidl2 escodegen socket.io gcontext
+
+### Special thanks
+Thanks to Fred Chien (the node-gcontext maintainer) who has kindly and quickly updated his module to fit the nodejs version.
+ 
+## Prerequisites
+You need navigation being built and running
+
+## How to build
 To build the c++ add-on in C++ and install the module localy for nodejs:
 cd ./node-cpp-lbs-modules 
-npm build .
-npm pack
+make all
 cd ..
 npm install node-cpp-lbs-modules/node-cpp-lbs-modules-0.1.0.tgz
 
-To test:
-Intall additional modules for nodejs:
-npm install http url fs path webidl2 escodegen socket.io gcontext
+## How to test
+Launch the navigation
+nodejs server.js poll silent
+In your browser open the file ./navigation-settings-language-and-units.html
 
-Run the server:
+##Known issues
+To fix bug name of Debian (/bin/sh: 1: node: not found)
+sudo apt-get install nodejs-legacy
 
-nodejs server.js
-
-In your browser open the file ./index.html
-
-Annex:
-To debug the C++ add-on:
-cd ./node-cpp-lbs-modules 
-node-gyp configure --debug
-node-gyp build --debug
-npm pack
-cd ..
-npm install node-cpp-lbs-modules/node-cpp-based-modules-0.1.0.tgz
-To see where the issue is in the js file:
-nodejs debug server.js
-To debug the c++ addon:
-gdb --args /usr/bin/nodejs server.js

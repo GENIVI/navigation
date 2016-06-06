@@ -29,63 +29,64 @@
 #include "NavigationCoreConfigurationWrapper.hpp"
 
 
-v8::Persistent<v8::FunctionTemplate> NavigationCoreConfigurationWrapper::constructor;
+v8::Persistent<v8::Function> NavigationCoreConfigurationWrapper::constructor;
 v8::Persistent<v8::Function> NavigationCoreConfigurationWrapper::signalConfigurationChanged;
 
 void NavigationCoreConfigurationWrapper::ConfigurationChanged(const std::vector< int32_t >& changedSettings) {
-    v8::HandleScope scope;
+    v8::Isolate* isolate = v8::Isolate::GetCurrent();
 
     const unsigned argc = changedSettings.size();
     v8::Local<v8::Value> argv[argc];
     for(unsigned i=0;i<changedSettings.size();i++)
     {
-        argv[i]=v8::Local<v8::Value>::New(v8::Int32::New(changedSettings.at(i)));
+        argv[i]=v8::Local<v8::Value>::New(isolate,v8::Int32::New(isolate,changedSettings.at(i)));
     }
-    v8::Persistent<v8::Function> fct = static_cast<v8::Function*>(*signalConfigurationChanged);
-    fct->Call(v8::Context::GetCurrent()->Global(), argc, argv);
+    v8::Local<v8::Function> fct;
+    fct.New(isolate,signalConfigurationChanged);
+    fct->Call(isolate->GetCurrentContext()->Global(), argc, argv);
 }
 
-v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::SetConfigurationChangedListener(const v8::Arguments& args)
+void NavigationCoreConfigurationWrapper::SetConfigurationChangedListener(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
-    v8::HandleScope scope; //to properly clean up v8 handles
+    v8::Isolate* isolate = args.GetIsolate();
 
     if (!args[0]->IsFunction()) {
-        return v8::ThrowException(
-        v8::Exception::TypeError(v8::String::New("Requires a function as parameter"))
+        isolate->ThrowException(
+        v8::Exception::TypeError(v8::String::NewFromUtf8(isolate,"Requires a function as parameter"))
         );
     }
+    v8::Local<v8::Function> fct = v8::Local<v8::Function>::Cast(args[0]);
+    v8::Persistent<v8::Function> persfct(isolate,fct);
+    signalConfigurationChanged.Reset(isolate,persfct);;
 
-    signalConfigurationChanged = v8::Persistent<v8::Function>::New(v8::Handle<v8::Function>::Cast(args[0]));
+    v8::Local<v8::Object> ret = v8::Object::New(isolate);
+    ret->Set( 0, v8::Boolean::New(isolate, v8::True) );
 
-    v8::Local<v8::Object> ret = v8::Object::New();
-    ret->Set( 0, v8::Boolean::New(signalConfigurationChanged->IsFunction()) );
-
-    return scope.Close(ret);
+    args.GetReturnValue().Set(ret);
 }
 
-void NavigationCoreConfigurationWrapper::Init(v8::Handle<v8::Object> target) {
-    v8::HandleScope scope;
+void NavigationCoreConfigurationWrapper::Init(v8::Local<v8::Object> target) {
+    v8::Isolate* isolate = target->GetIsolate();
 
-    v8::Local<v8::FunctionTemplate> tpl = v8::FunctionTemplate::New(New);
-    v8::Local<v8::String> name = v8::String::NewSymbol("NavigationCoreConfigurationWrapper");
-
-    constructor = v8::Persistent<v8::FunctionTemplate>::New(tpl);
-    // ObjectWrap uses the first internal field to store the wrapped pointer.
-    constructor->InstanceTemplate()->SetInternalFieldCount(1);
-    constructor->SetClassName(name);
+    // Prepare constructor template
+    v8::Local<v8::FunctionTemplate> tpl = v8::FunctionTemplate::New(isolate, New);
+    tpl->SetClassName(v8::String::NewFromUtf8(isolate, "NavigationCoreConfigurationWrapper"));
+    tpl->InstanceTemplate()->SetInternalFieldCount(1);
 
     // Add all prototype methods, getters and setters here.
-    NODE_SET_PROTOTYPE_METHOD(constructor, "getVersion", GetVersion);
-    NODE_SET_PROTOTYPE_METHOD(constructor, "getSupportedLocales", GetSupportedLocales);
-    NODE_SET_PROTOTYPE_METHOD(constructor, "getProperty", GetProperty);
-    NODE_SET_PROTOTYPE_METHOD(constructor, "setProperty", SetProperty);
-    NODE_SET_PROTOTYPE_METHOD(constructor, "getUnitsOfMeasurement", GetUnitsOfMeasurement);
-    NODE_SET_PROTOTYPE_METHOD(constructor, "setUnitsOfMeasurement", SetUnitsOfMeasurement);
-    NODE_SET_PROTOTYPE_METHOD(constructor, "setConfigurationChangedListener", SetConfigurationChangedListener);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "getVersion", GetVersion);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "getSupportedLocales", GetSupportedLocales);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "getProperty", GetProperty);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "setProperty", SetProperty);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "getUnitsOfMeasurement", GetUnitsOfMeasurement);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "setUnitsOfMeasurement", SetUnitsOfMeasurement);
+    NODE_SET_PROTOTYPE_METHOD(tpl, "setConfigurationChangedListener", SetConfigurationChangedListener);
 
     // This has to be last, otherwise the properties won't show up on the
     // object in JavaScript.
-    target->Set(name, constructor->GetFunction());
+    constructor.Reset(isolate, tpl->GetFunction());
+    target->Set(v8::String::NewFromUtf8(isolate, "NavigationCoreConfigurationWrapper"),
+                 tpl->GetFunction());
 }
 
 NavigationCoreConfigurationWrapper::NavigationCoreConfigurationWrapper() {
@@ -94,31 +95,51 @@ NavigationCoreConfigurationWrapper::NavigationCoreConfigurationWrapper() {
 NavigationCoreConfigurationWrapper::~NavigationCoreConfigurationWrapper() {
 }
 
-v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::New(const v8::Arguments& args) {
-    v8::HandleScope scope;
+void NavigationCoreConfigurationWrapper::New(const v8::FunctionCallbackInfo<v8::Value>& args) {
+    v8::Isolate* isolate = args.GetIsolate();
 
-    if (!args.IsConstructCall()) {
-        return v8::ThrowException(v8::Exception::TypeError(
-            v8::String::New("Use the new operator to create instances of this object."))
-        );
+    if (args.IsConstructCall()) {
+      // Invoked as constructor: `new MyObject(...)`
+//      double value = args[0]->IsUndefined() ? 0 : args[0]->NumberValue(); //no parameters
+      NavigationCoreConfigurationWrapper* obj = new NavigationCoreConfigurationWrapper();
+      obj->Wrap(args.This());
+      args.GetReturnValue().Set(args.This());
+
+      NavigationCoreProxy* proxy = new NavigationCoreProxy(obj);
+      obj->mp_navigationCoreProxy = proxy;
+    } else { // not tested yet
+      // Invoked as plain function `MyObject(...)`, turn into construct call.
+      const int argc = 1;
+      v8::Local<v8::Value> argv[argc] = { args[0] };
+      v8::Local<v8::Context> context = isolate->GetCurrentContext();
+      v8::Local<v8::Function> cons = v8::Local<v8::Function>::New(isolate, constructor);
+      v8::Local<v8::Object> result = cons->NewInstance(context, argc, argv).ToLocalChecked();
+      args.GetReturnValue().Set(result);
+
+//      NavigationCoreProxy* proxy = new NavigationCoreProxy(result);
+//      result->mp_navigationCoreProxy = proxy;
     }
-    // Creates a new instance object of this type and wraps it.
-    NavigationCoreConfigurationWrapper* obj = new NavigationCoreConfigurationWrapper();
-
-    NavigationCoreProxy* proxy = new NavigationCoreProxy(obj);
-
-    obj->mp_navigationCoreProxy = proxy;
-    obj->Wrap(args.This());
-
-    return args.This();
 }
 
-v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::GetProperty(const v8::Arguments& args) {
-    v8::HandleScope scope; //to properly clean up v8 handles
+void NavigationCoreConfigurationWrapper::NewInstance(const v8::FunctionCallbackInfo<v8::Value>& args) {
+  v8::Isolate* isolate = args.GetIsolate();
+
+  const unsigned argc = 1;
+  v8::Local<v8::Value> argv[argc] = { args[0] };
+  v8::Local<v8::Function> cons = v8::Local<v8::Function>::New(isolate, constructor);
+  v8::Local<v8::Context> context = isolate->GetCurrentContext();
+  v8::Local<v8::Object> instance =
+      cons->NewInstance(context, argc, argv).ToLocalChecked();
+
+  args.GetReturnValue().Set(instance);
+}
+
+void NavigationCoreConfigurationWrapper::GetProperty(const v8::FunctionCallbackInfo<v8::Value>& args) {
+    v8::Isolate* isolate = args.GetIsolate();
 
     if (args.Length() < 1) {
-        return v8::ThrowException(
-        v8::Exception::TypeError(v8::String::New("getProperty requires at least 1 argument"))
+        isolate->ThrowException(
+        v8::Exception::TypeError(v8::String::NewFromUtf8(isolate,"getProperty requires at least 1 argument"))
         );
     }
     v8::String::Utf8Value str(args[0]->ToString());
@@ -126,16 +147,16 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::GetProperty(const v8::
 
     if(propertyName == "Locale") {
         // Retrieves the pointer to the wrapped object instance.
-        NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
+        NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.Holder());
 
-        v8::Local<v8::Object> ret = v8::Object::New();
+        v8::Local<v8::Object> ret = v8::Object::New(isolate);
         Locale localeValue;
         obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->GetLocale(localeValue.languageCode,localeValue.countryCode,localeValue.scriptCode);
-        ret->Set( 0, v8::String::New(propertyName.c_str()) );
-        ret->Set( 1, v8::String::New(localeValue.languageCode.c_str()) );
-        ret->Set( 2, v8::String::New(localeValue.countryCode.c_str()) );
-        ret->Set( 3, v8::String::New(localeValue.scriptCode.c_str()) );
-        return scope.Close(ret);
+        ret->Set( 0, v8::String::NewFromUtf8(isolate,propertyName.c_str()) );
+        ret->Set( 1, v8::String::NewFromUtf8(isolate,localeValue.languageCode.c_str()) );
+        ret->Set( 2, v8::String::NewFromUtf8(isolate,localeValue.countryCode.c_str()) );
+        ret->Set( 3, v8::String::NewFromUtf8(isolate,localeValue.scriptCode.c_str()) );
+        args.GetReturnValue().Set(ret);
     }
     else
     {
@@ -143,11 +164,11 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::GetProperty(const v8::
             // Retrieves the pointer to the wrapped object instance.
             NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
-            v8::Local<v8::Object> ret = v8::Object::New();
+            v8::Local<v8::Object> ret = v8::Object::New(isolate);
             int32_t value = obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->GetTimeFormat();
-            ret->Set( 0, v8::String::New(propertyName.c_str()) );
-            ret->Set( 1, v8::Int32::New(value) );
-            return scope.Close(ret);
+            ret->Set( 0, v8::String::NewFromUtf8(isolate,propertyName.c_str()) );
+            ret->Set( 1, v8::Int32::New(isolate,value) );
+            args.GetReturnValue().Set(ret);
         }
         else
         {
@@ -155,42 +176,41 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::GetProperty(const v8::
                 // Retrieves the pointer to the wrapped object instance.
                 NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
-                v8::Local<v8::Object> ret = v8::Object::New();
+                v8::Local<v8::Object> ret = v8::Object::New(isolate);
                 int32_t value = obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->GetCoordinatesFormat();
-                ret->Set( 0, v8::String::New(propertyName.c_str()) );
-                ret->Set( 1, v8::Int32::New(value) );
-                return scope.Close(ret);
+                ret->Set( 0, v8::String::NewFromUtf8(isolate,propertyName.c_str()) );
+                ret->Set( 1, v8::Int32::New(isolate,value) );
+                args.GetReturnValue().Set(ret);
             }
         }
     }
-    return v8::Undefined();
 }
 
-v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::SetProperty(const v8::Arguments& args)
+void NavigationCoreConfigurationWrapper::SetProperty(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
-    v8::HandleScope scope; //to properly clean up v8 handles
+    v8::Isolate* isolate = args.GetIsolate();
 
     if (args.Length() < 1) {
-        return v8::ThrowException(
-        v8::Exception::TypeError(v8::String::New("setProperty requires at least 1 argument"))
+        isolate->ThrowException(
+        v8::Exception::TypeError(v8::String::NewFromUtf8(isolate,"setProperty requires at least 1 argument"))
         );
     }
     v8::Handle<v8::Object> property_obj = v8::Handle<v8::Object>::Cast(args[0]);
 
-    v8::Handle<v8::Value> property = property_obj->Get(v8::String::New("property"));
+    v8::Handle<v8::Value> property = property_obj->Get(v8::String::NewFromUtf8(isolate,"property"));
 
     v8::String::Utf8Value str(property->ToString());
 
     if(std::string(*str) == "Locale")
     {
         Locale localeValue;
-        v8::Handle<v8::Value> languageCodeValue = property_obj->Get(v8::String::New("languageCode"));
+        v8::Handle<v8::Value> languageCodeValue = property_obj->Get(v8::String::NewFromUtf8(isolate,"languageCode"));
         v8::String::Utf8Value languageCode(languageCodeValue->ToString());
         localeValue.languageCode = std::string(*languageCode);
-        v8::Handle<v8::Value> countryCodeValue = property_obj->Get(v8::String::New("countryCode"));
+        v8::Handle<v8::Value> countryCodeValue = property_obj->Get(v8::String::NewFromUtf8(isolate,"countryCode"));
         v8::String::Utf8Value countryCode(countryCodeValue->ToString());
         localeValue.countryCode = std::string(*countryCode);
-        v8::Handle<v8::Value> scriptCodeValue = property_obj->Get(v8::String::New("scriptCode"));
+        v8::Handle<v8::Value> scriptCodeValue = property_obj->Get(v8::String::NewFromUtf8(isolate,"scriptCode"));
         v8::String::Utf8Value scriptCode(scriptCodeValue->ToString());
         localeValue.scriptCode = std::string(*scriptCode);
 
@@ -201,7 +221,7 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::SetProperty(const v8::
     else
     {
         if(std::string(*str) == "TimeFormat") {
-            v8::Handle<v8::Value> timeFormatValue = property_obj->Get(v8::String::New("value"));
+            v8::Handle<v8::Value> timeFormatValue = property_obj->Get(v8::String::NewFromUtf8(isolate,"value"));
             int32_t timeFormat = timeFormatValue->ToInt32()->Int32Value();
 
             // Retrieves the pointer to the wrapped object instance.
@@ -211,7 +231,7 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::SetProperty(const v8::
         else
         {
             if(std::string(*str) == "CoordinatesFormat") {
-                v8::Handle<v8::Value> coordinatesFormatValue = property_obj->Get(v8::String::New("value"));
+                v8::Handle<v8::Value> coordinatesFormatValue = property_obj->Get(v8::String::NewFromUtf8(isolate,"value"));
                 int32_t coordinatesFormat = coordinatesFormatValue->ToInt32()->Int32Value();
 
                 // Retrieves the pointer to the wrapped object instance.
@@ -221,73 +241,73 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::SetProperty(const v8::
         }
     }
 
-    return v8::Undefined();
+    args.GetReturnValue().Set(v8::DEFAULT);
 }
 
-v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::GetVersion(const v8::Arguments& args) {
-    v8::HandleScope scope; //to properly clean up v8 handles
+void NavigationCoreConfigurationWrapper::GetVersion(const v8::FunctionCallbackInfo<v8::Value>& args) {
+    v8::Isolate* isolate = args.GetIsolate();
 
 	// Retrieves the pointer to the wrapped object instance.
     NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
     ::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string > DBus_version = obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->GetVersion();
 
-    v8::Local<v8::Object> ret = v8::Object::New();
-    ret->Set( 0, v8::Int32::New(DBus_version._1) );
-    ret->Set( 1, v8::Int32::New(DBus_version._2) );
-    ret->Set( 2, v8::Int32::New(DBus_version._3) );
-    ret->Set( 3, v8::String::New(DBus_version._4.c_str()) );
+    v8::Local<v8::Object> ret = v8::Object::New(isolate);
+    ret->Set( 0, v8::Int32::New(isolate,DBus_version._1) );
+    ret->Set( 1, v8::Int32::New(isolate,DBus_version._2) );
+    ret->Set( 2, v8::Int32::New(isolate,DBus_version._3) );
+    ret->Set( 3, v8::String::NewFromUtf8(isolate,DBus_version._4.c_str()) );
 
-    return scope.Close(ret);
+    args.GetReturnValue().Set(ret);
 }
 
-v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::GetSupportedLocales(const v8::Arguments& args) {
-    v8::HandleScope scope; //to properly clean up v8 handles
+void NavigationCoreConfigurationWrapper::GetSupportedLocales(const v8::FunctionCallbackInfo<v8::Value>& args) {
+    v8::Isolate* isolate = args.GetIsolate();
 
     // Retrieves the pointer to the wrapped object instance.
     NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
     std::vector< ::DBus::Struct< std::string, std::string, std::string > > localeList = obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->GetSupportedLocales();
 
-    v8::Local<v8::Array> ret = v8::Array::New();
+    v8::Local<v8::Array> ret = v8::Array::New(isolate);
     for (unsigned i=0;i<localeList.size();i++)
     {
-        v8::Local<v8::Object> data = v8::Object::New();
-        data->Set( 0, v8::String::New(localeList.at(i)._1.c_str()) );
-        data->Set( 1, v8::String::New(localeList.at(i)._2.c_str()) );
-        data->Set( 2, v8::String::New(localeList.at(i)._3.c_str()) );
+        v8::Local<v8::Object> data = v8::Object::New(isolate);
+        data->Set( 0, v8::String::NewFromUtf8(isolate,localeList.at(i)._1.c_str()) );
+        data->Set( 1, v8::String::NewFromUtf8(isolate,localeList.at(i)._2.c_str()) );
+        data->Set( 2, v8::String::NewFromUtf8(isolate,localeList.at(i)._3.c_str()) );
         ret->Set(ret->Length(), data);
     }
 
-    return scope.Close(ret);
+    args.GetReturnValue().Set(ret);
 }
 
-v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::GetUnitsOfMeasurement(const v8::Arguments& args)
+void NavigationCoreConfigurationWrapper::GetUnitsOfMeasurement(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
-    v8::HandleScope scope; //to properly clean up v8 handles
+    v8::Isolate* isolate = args.GetIsolate();
 
     // Retrieves the pointer to the wrapped object instance.
     NavigationCoreConfigurationWrapper* obj = ObjectWrap::Unwrap<NavigationCoreConfigurationWrapper>(args.This());
 
     std::map< int32_t, int32_t > unitsOfMeasurement = obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->GetUnitsOfMeasurement();
 
-    v8::Local<v8::Array> ret = v8::Array::New();
+    v8::Local<v8::Array> ret = v8::Array::New(isolate);
     for (std::map< int32_t, int32_t >::iterator iter = unitsOfMeasurement.begin(); iter != unitsOfMeasurement.end(); iter++) {
-        v8::Local<v8::Object> data = v8::Object::New();
-        data->Set(v8::String::New("key"), v8::Int32::New(iter->first));
-        data->Set(v8::String::New("value"), v8::Int32::New(iter->second));
+        v8::Local<v8::Object> data = v8::Object::New(isolate);
+        data->Set(v8::String::NewFromUtf8(isolate,"key"), v8::Int32::New(isolate,iter->first));
+        data->Set(v8::String::NewFromUtf8(isolate,"value"), v8::Int32::New(isolate,iter->second));
         ret->Set(ret->Length(), data);
     }
-    return scope.Close(ret);
+    args.GetReturnValue().Set(ret);
 }
 
-v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::SetUnitsOfMeasurement(const v8::Arguments& args)
+void NavigationCoreConfigurationWrapper::SetUnitsOfMeasurement(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
-    v8::HandleScope scope; //to properly clean up v8 handles
+    v8::Isolate* isolate = args.GetIsolate();
 
     if (args.Length() < 1) {
-        return v8::ThrowException(
-        v8::Exception::TypeError(v8::String::New("setUnitsOfMeasurement requires at least 1 argument"))
+        isolate->ThrowException(
+        v8::Exception::TypeError(v8::String::NewFromUtf8(isolate,"setUnitsOfMeasurement requires at least 1 argument"))
         );
     }
 
@@ -298,8 +318,8 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::SetUnitsOfMeasurement(
         for (uint32_t i = 0; i < array->Length(); i++) {
             v8::Handle<v8::Object> unitsOfMeasurement_obj = v8::Handle<v8::Object>::Cast(array->Get(i));
 
-            v8::Handle<v8::Value> attributeCodeValue = unitsOfMeasurement_obj->Get(v8::String::New("attributeCode"));
-            v8::Handle<v8::Value> unitCodeValue = unitsOfMeasurement_obj->Get(v8::String::New("unitCode"));
+            v8::Handle<v8::Value> attributeCodeValue = unitsOfMeasurement_obj->Get(v8::String::NewFromUtf8(isolate,"attributeCode"));
+            v8::Handle<v8::Value> unitCodeValue = unitsOfMeasurement_obj->Get(v8::String::NewFromUtf8(isolate,"unitCode"));
             switch (attributeCodeValue->ToInt32()->Int32Value()) {
             case GENIVI_NAVIGATIONCORE_LENGTH:
                 value = unitCodeValue->ToInt32()->Int32Value();
@@ -315,11 +335,11 @@ v8::Handle<v8::Value> NavigationCoreConfigurationWrapper::SetUnitsOfMeasurement(
         obj->mp_navigationCoreProxy->mp_navigationCoreConfigurationProxy->SetUnitsOfMeasurement(unitsOfMeasurementList);
     }
 
-    return v8::Undefined();
+    args.GetReturnValue().Set(v8::DEFAULT);
 }
 
 void RegisterModule(v8::Handle<v8::Object> target) {
     NavigationCoreConfigurationWrapper::Init(target);
 }
 
-NODE_MODULE(NavigationCoreConfigurationWrapper, RegisterModule);
+NODE_MODULE(NavigationCoreConfigurationWrapper, RegisterModule)

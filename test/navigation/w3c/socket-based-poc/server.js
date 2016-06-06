@@ -116,7 +116,7 @@ function configurationChanged(changedSettings) {
 var setConfigurationChangedListener = i_navigationCoreConfigurationWrapper.setConfigurationChangedListener(configurationChanged);
 
 // Start the gmainloop (to be done after the initialisation of listeners !
-//gcontext.init(); still a seg fault when data carried by the signal is a std::vector
+//gcontext.init(); //still a seg fault when data carried by the signal is a std::vector
 
 // connection
 socket_navigationcore.on('connection', function (client) {

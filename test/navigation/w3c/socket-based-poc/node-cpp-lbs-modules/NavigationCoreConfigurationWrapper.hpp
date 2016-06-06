@@ -31,6 +31,7 @@
 
 #include <node.h>
 #include <node_buffer.h>
+#include <node_object_wrap.h>
 
 #include "./dbus-proxies/NavigationCoreProxy.hpp"
 
@@ -47,25 +48,26 @@ class NavigationCoreConfigurationWrapper : public node::ObjectWrap {
     friend void NavigationCoreProxy::ConfigurationChanged(const std::vector< int32_t >& changedSettings);
 
 public:
-    static v8::Persistent<v8::FunctionTemplate> constructor;
-    static void Init(v8::Handle<v8::Object> target);
+    static v8::Persistent<v8::Function> constructor;
+    static void Init(v8::Local<v8::Object> target);
+    static void NewInstance(const v8::FunctionCallbackInfo<v8::Value>& args);
     static v8::Persistent<v8::Function> signalConfigurationChanged;
 
 protected:
     NavigationCoreConfigurationWrapper();
     ~NavigationCoreConfigurationWrapper();
 
-    static v8::Handle<v8::Value> New(const v8::Arguments& args);
-    static v8::Handle<v8::Value> GetVersion(const v8::Arguments& args);
-    static v8::Handle<v8::Value> GetSupportedLocales(const v8::Arguments& args);
+    static void New(const v8::FunctionCallbackInfo<v8::Value> &args);
+    static void GetVersion(const v8::FunctionCallbackInfo<v8::Value>& args);
+    static void GetSupportedLocales(const v8::FunctionCallbackInfo<v8::Value>& args);
 
-    static v8::Handle<v8::Value> GetUnitsOfMeasurement(const v8::Arguments& args);
-    static v8::Handle<v8::Value> SetUnitsOfMeasurement(const v8::Arguments& args);
+    static void GetUnitsOfMeasurement(const v8::FunctionCallbackInfo<v8::Value>& args);
+    static void SetUnitsOfMeasurement(const v8::FunctionCallbackInfo<v8::Value>& args);
 
-    static v8::Handle<v8::Value> GetProperty(const v8::Arguments& args);
-    static v8::Handle<v8::Value> SetProperty(const v8::Arguments& args);
+    static void GetProperty(const v8::FunctionCallbackInfo<v8::Value> &args);
+    static void SetProperty(const v8::FunctionCallbackInfo<v8::Value>& args);
 
-    static v8::Handle<v8::Value> SetConfigurationChangedListener(const v8::Arguments& args);
+    static void SetConfigurationChangedListener(const v8::FunctionCallbackInfo<v8::Value>& args);
     static void ConfigurationChanged(const std::vector<int32_t> &changedSettings);
 
 private:
