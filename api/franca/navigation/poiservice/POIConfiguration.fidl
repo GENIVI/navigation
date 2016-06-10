@@ -14,8 +14,8 @@ import org.genivi.navigation.poiservice.POIServiceTypes.* from "POIServiceTypes.
 <** @description : This interface offers methods that implement the POI configuration functionality of a navigation system.**>
 interface POIConfiguration {
 	version {
-		major 0 
-		minor 1
+		major 4 
+		minor 0
 	}
 		<**	@description : This method returns the API version .**>
 	method getVersion {

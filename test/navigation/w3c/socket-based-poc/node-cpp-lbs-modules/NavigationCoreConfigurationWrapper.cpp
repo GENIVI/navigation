@@ -25,24 +25,26 @@
 * @licence end@
 */
 #include <node.h>
+#include <string>
+
+#include "./common/debug.h"
 
 #include "NavigationCoreConfigurationWrapper.hpp"
-
 
 v8::Persistent<v8::Function> NavigationCoreConfigurationWrapper::constructor;
 v8::Persistent<v8::Function> NavigationCoreConfigurationWrapper::signalConfigurationChanged;
 
 void NavigationCoreConfigurationWrapper::ConfigurationChanged(const std::vector< int32_t >& changedSettings) {
+    printTimeStamp("ConfigurationChanged wrapper");
     v8::Isolate* isolate = v8::Isolate::GetCurrent();
-
+    v8::HandleScope handleScope(isolate);
     const unsigned argc = changedSettings.size();
     v8::Local<v8::Value> argv[argc];
     for(unsigned i=0;i<changedSettings.size();i++)
     {
         argv[i]=v8::Local<v8::Value>::New(isolate,v8::Int32::New(isolate,changedSettings.at(i)));
     }
-    v8::Local<v8::Function> fct;
-    fct.New(isolate,signalConfigurationChanged);
+    v8::Local<v8::Function> fct = v8::Local<v8::Function>::New(isolate,signalConfigurationChanged);
     fct->Call(isolate->GetCurrentContext()->Global(), argc, argv);
 }
 
@@ -55,6 +57,7 @@ void NavigationCoreConfigurationWrapper::SetConfigurationChangedListener(const v
         v8::Exception::TypeError(v8::String::NewFromUtf8(isolate,"Requires a function as parameter"))
         );
     }
+
     v8::Local<v8::Function> fct = v8::Local<v8::Function>::Cast(args[0]);
     v8::Persistent<v8::Function> persfct(isolate,fct);
     signalConfigurationChanged.Reset(isolate,persfct);;
@@ -188,6 +191,7 @@ void NavigationCoreConfigurationWrapper::GetProperty(const v8::FunctionCallbackI
 
 void NavigationCoreConfigurationWrapper::SetProperty(const v8::FunctionCallbackInfo<v8::Value>& args)
 {
+    printTimeStamp("SetProperty");
     v8::Isolate* isolate = args.GetIsolate();
 
     if (args.Length() < 1) {
@@ -195,22 +199,22 @@ void NavigationCoreConfigurationWrapper::SetProperty(const v8::FunctionCallbackI
         v8::Exception::TypeError(v8::String::NewFromUtf8(isolate,"setProperty requires at least 1 argument"))
         );
     }
-    v8::Handle<v8::Object> property_obj = v8::Handle<v8::Object>::Cast(args[0]);
+    v8::Local<v8::Object> property_obj = v8::Local<v8::Object>::Cast(args[0]);
 
-    v8::Handle<v8::Value> property = property_obj->Get(v8::String::NewFromUtf8(isolate,"property"));
+    v8::Local<v8::Value> property = property_obj->Get(v8::String::NewFromUtf8(isolate,"property"));
 
     v8::String::Utf8Value str(property->ToString());
 
     if(std::string(*str) == "Locale")
     {
         Locale localeValue;
-        v8::Handle<v8::Value> languageCodeValue = property_obj->Get(v8::String::NewFromUtf8(isolate,"languageCode"));
+        v8::Local<v8::Value> languageCodeValue = property_obj->Get(v8::String::NewFromUtf8(isolate,"languageCode"));
         v8::String::Utf8Value languageCode(languageCodeValue->ToString());
         localeValue.languageCode = std::string(*languageCode);
-        v8::Handle<v8::Value> countryCodeValue = property_obj->Get(v8::String::NewFromUtf8(isolate,"countryCode"));
+        v8::Local<v8::Value> countryCodeValue = property_obj->Get(v8::String::NewFromUtf8(isolate,"countryCode"));
         v8::String::Utf8Value countryCode(countryCodeValue->ToString());
         localeValue.countryCode = std::string(*countryCode);
-        v8::Handle<v8::Value> scriptCodeValue = property_obj->Get(v8::String::NewFromUtf8(isolate,"scriptCode"));
+        v8::Local<v8::Value> scriptCodeValue = property_obj->Get(v8::String::NewFromUtf8(isolate,"scriptCode"));
         v8::String::Utf8Value scriptCode(scriptCodeValue->ToString());
         localeValue.scriptCode = std::string(*scriptCode);
 
@@ -221,7 +225,7 @@ void NavigationCoreConfigurationWrapper::SetProperty(const v8::FunctionCallbackI
     else
     {
         if(std::string(*str) == "TimeFormat") {
-            v8::Handle<v8::Value> timeFormatValue = property_obj->Get(v8::String::NewFromUtf8(isolate,"value"));
+            v8::Local<v8::Value> timeFormatValue = property_obj->Get(v8::String::NewFromUtf8(isolate,"value"));
             int32_t timeFormat = timeFormatValue->ToInt32()->Int32Value();
 
             // Retrieves the pointer to the wrapped object instance.
@@ -231,7 +235,7 @@ void NavigationCoreConfigurationWrapper::SetProperty(const v8::FunctionCallbackI
         else
         {
             if(std::string(*str) == "CoordinatesFormat") {
-                v8::Handle<v8::Value> coordinatesFormatValue = property_obj->Get(v8::String::NewFromUtf8(isolate,"value"));
+                v8::Local<v8::Value> coordinatesFormatValue = property_obj->Get(v8::String::NewFromUtf8(isolate,"value"));
                 int32_t coordinatesFormat = coordinatesFormatValue->ToInt32()->Int32Value();
 
                 // Retrieves the pointer to the wrapped object instance.
@@ -314,12 +318,12 @@ void NavigationCoreConfigurationWrapper::SetUnitsOfMeasurement(const v8::Functio
     if (args[0]->IsArray()) {
         std::map< int32_t, int32_t > unitsOfMeasurementList;
         int32_t value;
-        v8::Handle<v8::Array> array = v8::Handle<v8::Array>::Cast(args[0]);
+        v8::Local<v8::Array> array = v8::Local<v8::Array>::Cast(args[0]);
         for (uint32_t i = 0; i < array->Length(); i++) {
-            v8::Handle<v8::Object> unitsOfMeasurement_obj = v8::Handle<v8::Object>::Cast(array->Get(i));
+            v8::Local<v8::Object> unitsOfMeasurement_obj = v8::Local<v8::Object>::Cast(array->Get(i));
 
-            v8::Handle<v8::Value> attributeCodeValue = unitsOfMeasurement_obj->Get(v8::String::NewFromUtf8(isolate,"attributeCode"));
-            v8::Handle<v8::Value> unitCodeValue = unitsOfMeasurement_obj->Get(v8::String::NewFromUtf8(isolate,"unitCode"));
+            v8::Local<v8::Value> attributeCodeValue = unitsOfMeasurement_obj->Get(v8::String::NewFromUtf8(isolate,"attributeCode"));
+            v8::Local<v8::Value> unitCodeValue = unitsOfMeasurement_obj->Get(v8::String::NewFromUtf8(isolate,"unitCode"));
             switch (attributeCodeValue->ToInt32()->Int32Value()) {
             case GENIVI_NAVIGATIONCORE_LENGTH:
                 value = unitCodeValue->ToInt32()->Int32Value();

@@ -41,35 +41,13 @@ socket_navigationcore.on('feedback', function(message) {
 })
 
 socket_navigationcore.on('navigationcore_answer', function(message) {
-	if(message.request === 'getVersion')
-	{
-		getVersionReturn(message.answer);
-	} else {
-		if(message.request === 'getProperty')
-		{
-			if(message.answer[0] === 'Locale')
-			{
-				getLocaleReturn(message.answer);
-			}
-		} else {
-			if(message.request === 'getSupportedLocales')
-			{
-				getSupportedLocalesReturn(message.answer);
-			} else {
-				if(message.request === 'getUnitsOfMeasurement')
-				{
-                                    getUnitsOfMeasurementReturn(message.answer);
-                                }
-			}
-		}	
-	}
+    var funcCall = message.request + "Return";
+    window[funcCall](message.answer);
 })
 
 socket_navigationcore.on('navigationcore_signal', function(message) {
-    if(message.signal === 'configurationChanged')
-    {
-            configurationChanged(message.data);
-    }
+    var funcCall = message.signal;
+    window[funcCall](message.data);
 })
 
 <!-- initialization -->
@@ -93,7 +71,7 @@ getVersion();
 
 getSupportedLocales();
 
-//getUnitsOfMeasurement();
+getUnitsOfMeasurement();
 
 getLocale();
 
@@ -107,8 +85,11 @@ function getVersionReturn(answer) {
 function getLocale() {
         socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getProperty', parameters: ['Locale']});
 }
-function getLocaleReturn(answer) {
+function getPropertyReturn(answer) {
+    if(answer[0] === 'Locale')
+    {
 	enhanceLocaleButton(answer[2]);	
+    }
 }
 function getSupportedLocales() {
         socket_navigationcore.emit('navigationcore_request', {interface: 'NavigationCoreConfiguration', method: 'getSupportedLocales', parameters: []});

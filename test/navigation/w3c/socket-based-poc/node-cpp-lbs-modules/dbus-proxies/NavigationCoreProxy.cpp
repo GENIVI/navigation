@@ -29,6 +29,8 @@
 #include "NavigationCoreProxy.hpp"
 #include "../NavigationCoreConfigurationWrapper.hpp"
 
+#include "../common/debug.h"
+
 using namespace v8;
 using namespace std;
 
@@ -45,6 +47,7 @@ NavigationCoreConfigurationProxy::NavigationCoreConfigurationProxy(DBus::Connect
 
 void NavigationCoreConfigurationProxy::ConfigurationChanged(const std::vector< int32_t >& changedSettings)
 {
+    printTimeStamp("ConfigurationChanged proxy");
     mp_navigationCoreProxy->ConfigurationChanged(changedSettings);
 }
 

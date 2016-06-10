@@ -7,6 +7,10 @@
 package org.genivi
 
 typeCollection CommonTypes {
+	version {
+		major 4 
+		minor 0
+	}
 
 	<** @description: version.**>			
 	struct Version {

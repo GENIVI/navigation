@@ -16,8 +16,8 @@ import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 **> 
 interface SpeechOutput {
 	version {
-		major 0
-		minor 1
+		major 4
+		minor 0
 	}
 	
 	<**	@description : This method returns the API version implemented by the content access module.**>

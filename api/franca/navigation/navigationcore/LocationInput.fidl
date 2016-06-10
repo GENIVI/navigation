@@ -16,7 +16,7 @@ import org.genivi.navigation.navigationcore.NavigationCoreTypes.* from "Navigati
 
 interface LocationInput {
 	version {
-		major 1 
+		major 4 
 		minor 0
 	}
 

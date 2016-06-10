@@ -17,7 +17,7 @@ import org.genivi.navigation.navigationcore.NavigationCoreTypes.* from "Navigati
 
 interface Routing {
 	version {
-		major 1 
+		major 4 
 		minor 0
 	}
 
@@ -142,6 +142,7 @@ interface Routing {
 		START_OFFSET			= 335
 		INTERMEDIATE_POINTS		= 288
         HIGHWAY_EXIT			= 116
+        SPEED 					= 164
         ALL						= 65535
 	}
 	

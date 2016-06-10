@@ -13,7 +13,7 @@ import org.genivi.navigation.poiservice.POIServiceTypes.* from "POIServiceTypes.
 <** @description : This interface offers a set of common methods for Content Access Modules (CAM). The CAM provide and update POI and categories information from remote sources to the POIService modules.**>
 interface POIContentAccess {
 	version {
-		major 1 
+		major 4 
 		minor 0
 	}
     <** @description : Register to the POI provider module 

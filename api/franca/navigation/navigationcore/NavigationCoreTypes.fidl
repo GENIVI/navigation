@@ -9,6 +9,11 @@ import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 
 typeCollection NavigationCoreTypes {
+	version {
+		major 4 
+		minor 0
+	}
+
  	enumeration TimeStampedEnum extends BasicEnum { //Base 0x0010
 		TIMESTAMP	= 16
 	}

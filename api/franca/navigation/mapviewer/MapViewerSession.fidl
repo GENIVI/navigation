@@ -13,8 +13,8 @@ import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 <** @description : This interface offers methods that implement the navigation core session functionality of a navigation system.**>
 interface MapViewerSession {
 	version {
-		major 0 
-		minor 1
+		major 4 
+		minor 0
 	}
 
 	<**	@description : This method returns the API version .**>

@@ -36,8 +36,8 @@ To indicate that the search has finished an FtsDone signal is sent.
 
 interface FreeTextSearch {
 	version {
-		major 0
-		minor 1
+		major 4
+		minor 0
 	}
 		
     <** @description: A requestId is an identifier used to match a response to a request.
