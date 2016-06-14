@@ -1,0 +1,43 @@
+<route-set country="Switzerland">
+<route> 
+<start>"Zuerich"</start>
+<destination>"Bern"</destination>
+<name>"Route ZÜRICH to BERN"</name>
+<handle>0</handle>
+</route>
+<route> 
+<start>"Geneve"</start>
+<destination>"Neuchatel"</destination>
+<name>"Route GENEVE to NEUCHATEL"</name>
+<handle>0</handle>
+</route>
+<route> 
+<start>"Zuerich"</start>
+<destination>"Neuchatel"</destination>
+<name>"Route ZÜRICH to NEUCHATEL"</name>
+<handle>0</handle>
+</route>
+<route> 
+<start>"Bern"</start>
+<destination>"Geneve"</destination>
+<name>"Route BERN to GENEVE"</name>
+<handle>0</handle>
+</route>
+<location name='"Zuerich"'> 
+<latitude>47.367264</latitude>
+<longitude>8.550330</longitude>
+</location>
+<location name='"Bern"'> 
+<latitude>46.948108</latitude>
+<longitude>7.444643</longitude>
+</location>
+<location name='"Geneve"'>
+<latitude>46.206659</latitude>
+<longitude>6.1410842</longitude>
+</location>
+<location name='"Neuchatel"'> 
+<latitude>46.990585</latitude>
+<longitude>6.928453</longitude>
+</location>
+</route-set><!--NB: don't use accent.-->
+

@@ -27,14 +27,21 @@
 **************************************************************************
 """
 
-
 import dbus
 import gobject
 import dbus.mainloop.glib
 from collections import namedtuple,defaultdict
 from _dbus_bindings import Int32
 from PIL.GimpGradientFile import SEGMENTS
-#import pdb;
+from xml.dom.minidom import parse
+import xml.dom.minidom
+import argparse
+import sys
+import errno
+
+#import pdb;pdb.set_trace()
+
+from pip import locations
 
 #constants as defined in the Navigation API
 GENIVI_NAVIGATIONCORE_LATITUDE = 0x00a0
@@ -53,63 +60,35 @@ GENIVI_NAVIGATIONCORE_SPEED = 0x00a4
 #constants used into the script
 TIME_OUT = 10000
 
-#waypoints used by the script
-ZUERICH = 0
-BERN = 1
-GENEVE = 2
-NEUCHATEL = 3
+print('--------------------------')
+print('Route Calculation Test')
+print('--------------------------')
 
-LOCATION_LAT_INDEX = 0
-LOCATION_LON_INDEX = 1
-LOCATION_NAME_INDEX = 2
-locations = []
-locations.append([])
-locations[ZUERICH].append(47.3673)
-locations[ZUERICH].append(8.5500)
-locations[ZUERICH].append('Zuerich')
-locations.append([])
-locations[BERN].append(46.9479)
-locations[BERN].append(7.4446)
-locations[BERN].append('Bern')
-locations.append([])
-locations[GENEVE].append(46.2065442)
-locations[GENEVE].append(6.1411703)
-locations[GENEVE].append('Geneve')
-locations.append([])
-locations[NEUCHATEL].append(46.9905681)
-locations[NEUCHATEL].append(6.928624)
-locations[NEUCHATEL].append('Neuchatel')
+parser = argparse.ArgumentParser(description='Route Calculation Test for navigation PoC and FSA.')
+parser.add_argument('-r','--rou',action='store', dest='routes', help='List of routes in xml format')
+args = parser.parse_args()
 
+if args.routes == None:
+    print('route file is missing')
+    sys.exit(1)
+else:
+    try:
+        DOMTree = xml.dom.minidom.parse(args.routes)
+    except OSError as e:
+        if e.errno == errno.ENOENT:
+            print('file not exists')
+        sys.exit(1)
+    route_set = DOMTree.documentElement
+            
+print("Country : %s" % route_set.getAttribute("country"))
 
-ROUTE_START_INDEX = 0
-ROUTE_DEST_INDEX = 1
-ROUTE_NAME_INDEX = 2
-ROUTE_HANDLE = 3
-routes = []
-routes.append([])
-routes[0].append(ZUERICH)
-routes[0].append(BERN)
-routes[0].append('Route ZUERICH to BERN')
-routes[0].append(0) #by default
-routes.append([])
-routes[1].append(GENEVE)
-routes[1].append(NEUCHATEL)
-routes[1].append('Route GENEVE to NEUCHATEL')
-routes[1].append(0) #by default
-routes.append([])
-routes[2].append(ZUERICH)
-routes[2].append(NEUCHATEL)
-routes[2].append('Route ZUERICH to NEUCHATEL')
-routes[2].append(0) #by default
-routes.append([])
-routes[3].append(BERN)
-routes[3].append(GENEVE)
-routes[3].append('Route BERN to GENEVE')
-routes[3].append(0) #by default
+routes = route_set.getElementsByTagName("route")
 
-print '--------------------------'
-print 'Route Calculation Test'
-print '--------------------------'
+#create dictionary with the locations
+locations = {}
+for location in route_set.getElementsByTagName("location"):
+    lat_long = [location.getElementsByTagName("latitude")[0].childNodes[0].data,location.getElementsByTagName("longitude")[0].childNodes[0].data]
+    locations[location.getAttribute("name")] = lat_long
 
 if __name__ == '__main__':
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True) 
@@ -147,11 +126,11 @@ def catchall_route_calculation_signals_handler(routeHandle, status, percentage):
         #ret[1][0][GENIVI_NAVIGATIONCORE_START_LATITUDE] is the start latitude
 #        pdb.set_trace()
         route = g_current_route + 1
-        if route < len(routes):
+        if route < routes.length:
             launch_route_calculation(route)
         else:
-            for i in range(len(routes)):
-                g_routing_interface.DeleteRoute(dbus.UInt32(g_session_handle),dbus.UInt32(routes[i][ROUTE_HANDLE]))
+            for i in range(routes.length):
+                g_routing_interface.DeleteRoute(dbus.UInt32(g_session_handle),dbus.UInt32(routes[i].getElementsByTagName("handle")[0].childNodes[0].data))
             g_session_interface.DeleteSession(dbus.UInt32(g_session_handle))
 
 def catchall_session_signals_handler(sessionHandle):
@@ -189,23 +168,23 @@ def launch_route_calculation(route):
     global g_routing_interface
     global g_session_handle
     g_current_route = route
-    print 'Route name: '+routes[g_current_route][ROUTE_NAME_INDEX]
+    print 'Route name: '+routes[g_current_route].getElementsByTagName("name")[0].childNodes[0].data
     #get route handle
     g_route_handle = g_routing_interface.CreateRoute(dbus.UInt32(g_session_handle)) 
-    routes[g_current_route][ROUTE_HANDLE] = g_route_handle
+    routes[g_current_route].getElementsByTagName("handle")[0].childNodes[0].data = g_route_handle
     print 'Route handle: ' + str(g_route_handle)
-    start = routes[g_current_route][ROUTE_START_INDEX]
-    dest = routes[g_current_route][ROUTE_DEST_INDEX]
+    start = routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data
+    dest = routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data
     print 'Calculating route from \
-'+locations[start][LOCATION_NAME_INDEX]+'(' + str(locations[start][LOCATION_LAT_INDEX]) + ',' + str(locations[start][LOCATION_LON_INDEX]) + ') to \
-'+locations[dest][LOCATION_NAME_INDEX]+'(' + str(locations[dest][LOCATION_LAT_INDEX]) + ',' + str(locations[dest][LOCATION_LON_INDEX]) + ')' 
+'+start+'(' + str(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][0]) + ',' + str(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][1]) + ') to \
+'+dest+'(' + str(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][0]) + ',' + str(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][1]) + ')' 
     #set waypoints
     g_routing_interface.SetWaypoints(dbus.UInt32(g_session_handle), \
                                    dbus.UInt32(g_route_handle), \
                                    dbus.Boolean(0), \
                                    dbus.Array([ \
-                                        dbus.Dictionary({dbus.UInt16(GENIVI_NAVIGATIONCORE_LATITUDE):dbus.Struct([0,dbus.Double(locations[start][LOCATION_LAT_INDEX])]),dbus.UInt16(GENIVI_NAVIGATIONCORE_LONGITUDE):dbus.Struct([0,dbus.Double(locations[start][LOCATION_LON_INDEX])])}), \
-                                        dbus.Dictionary({dbus.UInt16(GENIVI_NAVIGATIONCORE_LATITUDE):dbus.Struct([0,dbus.Double(locations[dest][LOCATION_LAT_INDEX])]),dbus.UInt16(GENIVI_NAVIGATIONCORE_LONGITUDE):dbus.Struct([0,dbus.Double(locations[dest][LOCATION_LON_INDEX])])}) \
+                                        dbus.Dictionary({dbus.UInt16(GENIVI_NAVIGATIONCORE_LATITUDE):dbus.Struct([0,dbus.Double(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][0])]),dbus.UInt16(GENIVI_NAVIGATIONCORE_LONGITUDE):dbus.Struct([0,dbus.Double(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][1])])}), \
+                                        dbus.Dictionary({dbus.UInt16(GENIVI_NAVIGATIONCORE_LATITUDE):dbus.Struct([0,dbus.Double(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][0])]),dbus.UInt16(GENIVI_NAVIGATIONCORE_LONGITUDE):dbus.Struct([0,dbus.Double(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][1])])}) \
                                    ]) \
                                    )
     
