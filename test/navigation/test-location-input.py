@@ -31,7 +31,13 @@
 import dbus
 import gobject
 import dbus.mainloop.glib
+from xml.dom.minidom import parse
+import xml.dom.minidom
 import argparse
+import sys
+import errno
+#import pdb;pdb.set_trace()    
+
 
 # constants as defined in the Navigation API
 LATITUDE = 0x00a0
@@ -56,21 +62,6 @@ COUNTRY_STRING = list()
 CITY_STRING = list()
 STREET_STRING = list()
 HOUSE_NUMBER_STRING = list()
-# Address #0
-COUNTRY_STRING.append('Switzerland')
-CITY_STRING.append(u'Genève')
-STREET_STRING.append('Rue de Lausanne')
-HOUSE_NUMBER_STRING.append('')
-# Address #1
-COUNTRY_STRING.append('Switzerland')
-CITY_STRING.append('Bern')
-STREET_STRING.append('Haslerstrasse')
-HOUSE_NUMBER_STRING.append('')
-# Address #2
-COUNTRY_STRING.append('Switzerland')
-CITY_STRING.append(u'Zürich')
-STREET_STRING.append('Rainstrasse')
-HOUSE_NUMBER_STRING.append('')
 
 # Default size of the list 
 WINDOW_SIZE = 20
@@ -81,13 +72,37 @@ city_search_mode = 0
 street_search_mode = 1 #set to full because of a bug to be fixed in the plug-in
 house_number_search_mode = 1
 
-parser = argparse.ArgumentParser(description='Location input test.')
-parser.add_argument("-v", "--verbose", help='print the whole log messages')
-args = parser.parse_args()
-
 print '\n--------------------------\n' + \
       'LocationInput Test' + \
       '\n--------------------------\n'
+
+parser = argparse.ArgumentParser(description='Location input Test for navigation PoC and FSA.')
+parser.add_argument('-l','--loc',action='store', dest='locations', help='List of locations in xml format')
+parser.add_argument("-v", "--verbose", action='store_true',help='print the whole log messages')
+args = parser.parse_args()
+
+if args.locations == None:
+    print('location file is missing')
+    sys.exit(1)
+else:
+    try:
+        DOMTree = xml.dom.minidom.parse(args.locations)
+    except OSError as e:
+        if e.errno == errno.ENOENT:
+            print('file not exists')
+        sys.exit(1)
+    location_set = DOMTree.documentElement
+            
+print("Area : %s" % location_set.getAttribute("area"))
+
+locations = location_set.getElementsByTagName("location")
+
+for location in location_set.getElementsByTagName("location"):
+    COUNTRY_STRING.append(location.getElementsByTagName("country")[0].childNodes[0].data)
+    CITY_STRING.append(location.getElementsByTagName("city")[0].childNodes[0].data)
+    STREET_STRING.append(location.getElementsByTagName("street")[0].childNodes[0].data)
+    #HOUSE_NUMBER_STRING.append(location.getElementsByTagName("number")[0].childNodes[0].data)
+    HOUSE_NUMBER_STRING.append('') #there's a bug in the navigation core when the house number doesn't exist, so deactivated 
 
 if __name__ == '__main__':
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
@@ -379,8 +394,8 @@ def search_result_list_handler(handle, total_size, window_offset, window_size, r
                                                        dbus.UInt16(window_size))
     elif total_size == 1:
         selection_name = result_list_window[0][current_selection_criterion]
-        if selection_name == target_search_string:
-            vprint('\nACTION: Single entry list, selecting \'' + result_list_window[0][current_selection_criterion] + \
+        if selection_name[1] == target_search_string:
+            vprint('\nACTION: Single entry list, selecting \'' + selection_name[1] + \
                   '\' (Session '+str(int(session_handle)) + ' LocationInputHandle ' + str(int(handle))+')')
             location_input_interface.SelectEntry(dbus.UInt32(session_handle), dbus.UInt32(handle), dbus.UInt16(0))
         else:
@@ -431,7 +446,6 @@ def startSearch(address_index):
     target_search_string = COUNTRY_STRING[current_address_index]
     
     change_selection_criterion(COUNTRY)
-    
     if country_search_mode == 0:
         spell_search(location_input_handle, entered_search_string, target_search_string, available_characters, 1)
     elif country_search_mode == 1:
