@@ -32,6 +32,8 @@ option(COMMONAPI_DBUS_TOOL_DIR
 execute_process(COMMAND uname -i OUTPUT_VARIABLE OS_VERSION)
 if("${OS_VERSION}" MATCHES "i686")
   set(OS_VERSION "x86")
+else()
+  set(OS_VERSION "x86_64")
 endif()
 message(STATUS "OS_VERSION = ${OS_VERSION}")
 

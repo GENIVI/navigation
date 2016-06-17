@@ -14,9 +14,10 @@ HOW TO GENERATE THE COMMON API FILES
 First you need to have generated the common api tools and the common api dbus tools.
 For example, to generate the whole set of stubs:
 
-mkdir build
-cd build
-cmake -DCOMMONAPI_TOOL_DIR=<tools path> -DCOMMONAPI_DBUS_TOOL_DIR=<dbus tools path> ../
+```mkdir build```
+```cd build```
+```cmake -DCOMMONAPI_TOOL_DIR=<tools path> -DCOMMONAPI_DBUS_TOOL_DIR=<dbus tools path> ../```
 
 To generate part of the stubs, for example the stubs for poi service:
-cmake -DCOMMONAPI_TOOL_DIR=<tools path> -DCOMMONAPI_DBUS_TOOL_DIR=<dbus tools path> ../
+```cmake -DCOMMONAPI_TOOL_DIR=<tools path> -DCOMMONAPI_DBUS_TOOL_DIR=<dbus tools path> ../
+```

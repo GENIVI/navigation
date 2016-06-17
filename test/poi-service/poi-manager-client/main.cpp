@@ -40,17 +40,17 @@
 #include <functional>
 
 #include <CommonAPI/CommonAPI.hpp> //Defined in the Common API Runtime library
-#include <org/genivi/navigation/NavigationTypes.hpp>
-#include <v0/org/genivi/navigation/poiservice/POIServiceTypes.hpp>
-#include <v0/org/genivi/navigation/poiservice/POIContentAccessModuleProxy.hpp>
+#include <v4/org/genivi/CommonTypes.hpp>
+#include <v4/org/genivi/navigation/NavigationTypes.hpp>
+#include <v4/org/genivi/navigation/poiservice/POIServiceTypes.hpp>
+#include <v4/org/genivi/navigation/poiservice/POIContentAccessModuleProxy.hpp>
 
 #include "poi-common-data-model.h"
 
 using namespace std;
-using namespace v0::org::genivi::navigation;
-using namespace poiservice;
-using namespace org::genivi::navigation;
-using namespace org::genivi;
+using namespace v4::org::genivi::navigation::poiservice;
+using namespace v4::org::genivi::navigation;
+using namespace v4::org::genivi;
 
 // class  contentManager
 class  contentManager

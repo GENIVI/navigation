@@ -40,7 +40,7 @@ sudo apt-get install python-pip python-dbus python-gobject python-pil
 sudo pip install --upgrade pip
 
 To test, launch the navigation middleware by entering:
-./run-r
+./run -r
 test files:
 ./test-route-calculation.py
 ./test-location-input.py
@@ -79,4 +79,7 @@ So, for the time being, export NAVIT_GRAPHICS='sdl' is set into the run script
 There's an issue with the svg to png  library so inkscape is used. It seems to be necessary to do:
 export NO_AT_BRIDGE=1
 
+## License
+
+Mozilla Public License Version 2.0
 

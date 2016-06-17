@@ -31,6 +31,7 @@
 #include <QApplication>
 #include <QTranslator>
 #include <QSettings>
+#include <QDir>
 
 int main(int argc, char *argv[])
 {
@@ -79,7 +80,7 @@ int main(int argc, char *argv[])
 
     if (translator.load("poi-client_"+ mainWindow.settingsHMIlanguage))
     {
-        if (QResource::registerResource("poi-client-resource.rcc","./"))
+        if (QResource::registerResource("poi-client-resource.rcc",QDir::currentPath()))
         {
             app.installTranslator(&translator);
 

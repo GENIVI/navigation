@@ -1396,7 +1396,7 @@ void PoiManagerServerStub::removePOIs(const std::shared_ptr<CommonAPI::ClientId>
     }
 }
 
-void PoiManagerServerStub::poiSearchStarted(const std::shared_ptr<CommonAPI::ClientId> _client, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, uint16_t _maxSize, ::org::genivi::navigation::NavigationTypes::Coordinate3D _location, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::CategoryAndRadius> _poiCategories, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::AttributeDetails> _poiAttributes, std::string _inputString, int32_t _sortOption, poiSearchStartedReply_t _reply)
+void PoiManagerServerStub::poiSearchStarted(const std::shared_ptr<CommonAPI::ClientId> _client, NavigationTypes::Handle _poiSearchHandle, uint16_t _maxSize, NavigationTypes::Coordinate3D _location, std::vector< POIServiceTypes::CategoryAndRadius> _poiCategories, std::vector< POIServiceTypes::AttributeDetails> _poiAttributes, std::string _inputString, int32_t _sortOption, poiSearchStartedReply_t _reply)
 {
     POIServiceTypes::CategoryAndRadius categoryAndRadius;
     size_t index;
@@ -1443,7 +1443,7 @@ void PoiManagerServerStub::poiSearchStarted(const std::shared_ptr<CommonAPI::Cli
 
 }
 
-void PoiManagerServerStub::poiSearchCanceled(const std::shared_ptr<CommonAPI::ClientId> _client, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, poiSearchCanceledReply_t _reply)
+void PoiManagerServerStub::poiSearchCanceled(const std::shared_ptr<CommonAPI::ClientId> _client, NavigationTypes::Handle _poiSearchHandle, poiSearchCanceledReply_t _reply)
 {
     std::vector<POIServiceTypes::POI_ID> poiIDList;
 
@@ -1454,12 +1454,12 @@ void PoiManagerServerStub::poiSearchCanceled(const std::shared_ptr<CommonAPI::Cl
     fireSearchStatusChangedEvent(_poiSearchHandle,POIServiceTypes::SearchStatusState::NOT_STARTED,poiIDList);
 }
 
-void PoiManagerServerStub::resultListRequested(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::ContentAccessModuleID _camId, ::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::AttributeID> _attributes, resultListRequestedReply_t _reply)
+void PoiManagerServerStub::resultListRequested(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::ContentAccessModuleID _camId, NavigationTypes::Handle _poiSearchHandle, std::vector< POIServiceTypes::AttributeID> _attributes, resultListRequestedReply_t _reply)
 {
 
 }
 
-void PoiManagerServerStub::poiDetailsRequested(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< ::v0_1::org::genivi::navigation::poiservice::POIServiceTypes::POI_ID> _source_id, poiDetailsRequestedReply_t _reply)
+void PoiManagerServerStub::poiDetailsRequested(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< POIServiceTypes::POI_ID> _source_id, poiDetailsRequestedReply_t _reply)
 {
 
 }

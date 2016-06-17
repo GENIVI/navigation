@@ -20,14 +20,11 @@ cmake_minimum_required(VERSION 2.8)
 
 message(STATUS ${PROJECT_NAME})
 
-option(WITH_FRANCA_DBUS_INTERFACE
-       "Build using the Franca interfaces" OFF)
 option(WITH_DBUS_INTERFACE
        "Build using the D-Bus interfaces" ON)
 option(WITH_DEBUG
         "Enable the debug messages" OFF)
 
-message(STATUS "WITH_FRANCA_DBUS_INTERFACE = ${WITH_FRANCA_DBUS_INTERFACE}")
 message(STATUS "WITH_DBUS_INTERFACE = ${WITH_DBUS_INTERFACE}")
 message(STATUS "WITH_DEBUG = ${WITH_DEBUG}")
 
@@ -46,7 +43,3 @@ add_subdirectory(${API_DIR}/poi-service "${DBUS_GENERATED_INCLUDE_DIR}/poi-servi
 
 add_subdirectory(poi-server)
 
-if (WITH_FRANCA_DBUS_INTERFACE)
-    set(FRANCA_DIR "${API_DIR}/franca")
-    add_subdirectory(poi-manager-server)
-endif()

@@ -16,6 +16,8 @@
 # @licence end@
 ###########################################################################
 project(poi-manager-server)
+cmake_minimum_required(VERSION 2.8)
+
 message(STATUS ${PROJECT_NAME})
 
 option(DBUS_LIB_PATH
@@ -26,12 +28,17 @@ set(CMAKE_CXX_FLAGS "-Wall -std=c++0x")
 
 set(PARENT_API poiservice)
 set(ROOT_API navigation)
-set(API_VERSION_MAJOR 0)
+set(API_VERSION_MAJOR 4)
 set(API_VERSION "v${API_VERSION_MAJOR}")
 set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/src-gen")
 set(PRJ_SRC_GEN_PATH ${COMMONAPI_GEN_DIR}/${API_VERSION}/org/genivi/${ROOT_API}/${PARENT_API})
-set(PRJ_SRC_GEN_NAVIGATION_TYPES_PATH ${COMMONAPI_GEN_DIR}/org/genivi/${ROOT_API})
+set(PRJ_SRC_GEN_NAVIGATION_TYPES_PATH ${COMMONAPI_GEN_DIR}/${API_VERSION}/org/genivi/${ROOT_API})
 set(PRJ_SRC_GEN_POISERVICE_TYPES_PATH ${COMMONAPI_GEN_DIR}/${API_VERSION}/org/genivi/${ROOT_API}/${PARENT_API})
+set(API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../../api")
+set(FRANCA_DIR "${API_DIR}/franca")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
+set(COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../poi-common")
 
 # DBus Path
 if(DBUS_LIB_PATH)

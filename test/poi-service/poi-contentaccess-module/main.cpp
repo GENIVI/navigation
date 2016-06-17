@@ -42,6 +42,8 @@
 #include <QApplication>
 #include <QTranslator>
 #include <QResource>
+#include <QDir>
+
 #include "mainwindow.h"
 
 #include <QSettings>
@@ -909,7 +911,7 @@ int main(int  argc , char**  argv )
 
     QApplication a(argc, argv);
     QTranslator translator;
-    if (QResource::registerResource("poi-client-resource.rcc","./"))
+    if (QResource::registerResource("poi-client-resource.rcc",QDir::currentPath()))
     {
         if (translator.load("poi-contentaccess-module_"+ language))
         {

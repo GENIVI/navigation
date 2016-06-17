@@ -28,17 +28,17 @@
 
 CURDIR=$PWD
 
-POI_CLIENT_DIR=$CURDIR
-POI_CLIENT_BIN_DIR=$POI_CLIENT_DIR/bin
-POI_SERVER_DIR=$CURDIR/../../src/poi-service
-POI_SERVER_BIN_DIR=$POI_SERVER_DIR/bin
+POI_MANAGER_CLIENT_DIR=$CURDIR
+POI_MANAGER_CLIENT_BIN_DIR=$POI_MANAGER_CLIENT_DIR/bin
+POI_MANAGER_SERVER_DIR=$CURDIR/../../../src/poi-service/poi-manager-server
+POI_MANAGER_SERVER_BIN_DIR=$POI_MANAGER_SERVER_DIR/bin
 
-cp $POI_CLIENT_DIR/resource/commonapi-dbus.ini $HOME
+cp $POI_MANAGER_CLIENT_DIR/../resource/commonapi-dbus.ini $HOME
 export COMMONAPI_DBUS_DEFAULT_CONFIG=$HOME/commonapi-dbus.ini
-cp $POI_SERVER_DIR/resource/poi-database-managed.db $POI_SERVER_BIN_DIR
+cp $POI_MANAGER_SERVER_DIR/../resource/poi-database-managed.db $POI_MANAGER_SERVER_BIN_DIR
 
 echo '------------------------start the proof of concept------------------------'
-$POI_SERVER_BIN_DIR/poi-manager-server -f $POI_SERVER_BIN_DIR/poi-database-managed.db &
-$POI_CLIENT_BIN_DIR/poi-manager-client -t &
+$POI_MANAGER_SERVER_BIN_DIR/poi-manager-server -f $POI_MANAGER_SERVER_BIN_DIR/poi-database-managed.db &
+$POI_MANAGER_CLIENT_BIN_DIR/poi-manager-client -t &
 
 
