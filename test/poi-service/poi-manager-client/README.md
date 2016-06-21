@@ -28,70 +28,37 @@ or to build updated parts
 
 
 ## How To Run
-First it's required to set a config file:
-Copy the configuration file ../resource/commonapi-dbus.ini in a directory of your choice
-
-Set the environment variable COMMONAPI_DBUS_DEFAULT_CONFIG before starting the poi-manager-server.
-
-Example:
-```export COMMONAPI_DBUS_DEFAULT_CONFIG=<your path>/commonapi-dbus.ini```
-
-./run
+```./run.sh```
 
 ## How to test 
 
 ---Test sequence can be---
-NB: no DLT started
-
-DLT| WARNING:   Loging disabled, FIFO /tmp/dlt cannot be opened with open()!
-[CAPI][INFO] Using default binding 'dbus'
-[CAPI][INFO] Using default shared library folder '/usr/local/lib/commonapi'
-[CAPI][INFO] Using default configuration file '/etc/commonapi.ini'
-[CAPI][DEBUG] Registering factory for binding=dbus
-poi manager server started
-
-DLT| WARNING:   Loging disabled, FIFO /tmp/dlt cannot be opened with open()!
-[CAPI][INFO] Using default binding 'dbus'
-[CAPI][INFO] Using default shared library folder '/usr/local/lib/commonapi'
-[CAPI][INFO] Using default configuration file '/etc/commonapi.ini'
-[CAPI][DEBUG] Registering factory for binding=dbus
+```./run.sh```
 poi manager client started
-Version 1.0.0
+languageCode: Version eng countryCode: USA scriptCode: Latn 
+1.0.0
 Date 19-03-2015
-languageCode: eng countryCode: USA scriptCode: Latn 
 Configuration changed:  0
 Change locales
 languageCode: fra countryCode: FRA scriptCode: Latn 
 id: 0 name: all categories top level: 1
-
-Create category
-
+**--> Push button Create category**
 Category 1 created
 id: 0 name: all categories top level: 1
 id: 1 name: recreation top level: 1
-
-Create POI
-
+**--> Push button Create POI**
 POI 1 added
-
-Search
-
+**--> Push button Search**
 Search state 1298
 Result list size 1
 POI id 1
-
-Delete POI
-
+**--> Push button Delete POI**
 POI 1 removed
-
-Delete category
-
+**--> Push button Delete category**
 Category 1 removed
 id: 0 name: all categories top level: 1
-
-Exit
+**-> Stop it**
 poi manager client closed
-DLT| ERROR:     Lost log messages in user buffer when exiting: 2
 
 ## License
 

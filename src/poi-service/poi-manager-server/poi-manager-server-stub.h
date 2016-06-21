@@ -29,10 +29,10 @@
 
 #include <CommonAPI/CommonAPI.hpp>
 
-#include <v4/org/genivi/CommonTypes.hpp>
-#include <v4/org/genivi/navigation/NavigationTypes.hpp>
-#include <v4/org/genivi/navigation/poiservice/POIServiceTypes.hpp>
-#include <v4/org/genivi/navigation/poiservice/POIContentAccessModuleStubDefault.hpp>
+#include <CommonTypes.hpp>
+#include <NavigationTypes.hpp>
+#include <POIServiceTypes.hpp>
+#include <POIContentAccessModuleStubDefault.hpp>
 
 #include "poi-common-database.h"
 
@@ -203,7 +203,7 @@ public:
     void removeCategories(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< CommonTypes::CategoryID> _categories, removeCategoriesReply_t _reply);
     void addPOIs(const std::shared_ptr<CommonAPI::ClientId> _client, CommonTypes::CategoryID _unique_id, std::vector< POIServiceTypes::PoiAddedDetails> _poiList, addPOIsReply_t _reply);
     void removePOIs(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< POIServiceTypes::POI_ID> _ids, removePOIsReply_t _reply);
-    void poiSearchStarted(const std::shared_ptr<CommonAPI::ClientId> _client, NavigationTypes::Handle _poiSearchHandle, uint16_t _maxSize, NavigationTypes::Coordinate3D _location, std::vector< POIServiceTypes::CategoryAndRadius> _poiCategories, std::vector< POIServiceTypes::AttributeDetails> _poiAttributes, std::string _inputString, int32_t _sortOption, poiSearchStartedReply_t _reply);
+    void poiSearchStarted(const std::shared_ptr<CommonAPI::ClientId> _client, NavigationTypes::Handle _poiSearchHandle, uint16_t _maxSize, NavigationTypes::Coordinate3D _location, std::vector< POIServiceTypes::CategoryAndRadius> _poiCategories, std::vector< POIServiceTypes::AttributeDetails> _poiAttributes, std::string _inputString, POIServiceTypes::SortOption _sortOption, poiSearchStartedReply_t _reply);
     void poiSearchCanceled(const std::shared_ptr<CommonAPI::ClientId> _client, NavigationTypes::Handle _poiSearchHandle, poiSearchCanceledReply_t _reply);
     void resultListRequested(const std::shared_ptr<CommonAPI::ClientId> _client, POIServiceTypes::ContentAccessModuleID _camId, NavigationTypes::Handle _poiSearchHandle, std::vector< POIServiceTypes::AttributeID> _attributes, resultListRequestedReply_t _reply);
     void poiDetailsRequested(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< POIServiceTypes::POI_ID> _source_id, poiDetailsRequestedReply_t _reply);

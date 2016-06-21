@@ -27,20 +27,7 @@ or to build updated parts
 ```./build.sh```
 
 ## How To Run
-First it's required to set a config file:
-Copy the configuration file ../resource/commonapi-dbus.ini in a directory of your choice
-
-Set the environment variable COMMONAPI_DBUS_DEFAULT_CONFIG before starting the poi-manager-server.
-
-Example:
-```export COMMONAPI_DBUS_DEFAULT_CONFIG=<your path>/commonapi-dbus.ini```
-
-Copy the database for testing:
-
-```cp ../resource/poi-database-managed.db ./bin```
-
-And launch the server (use d-feet to check if it's running or build the client)
-```./bin/poi-manager-server -f ./bin/poi-database-managed.db```
+```./run.sh```
 
 ## License
 

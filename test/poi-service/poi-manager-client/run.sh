@@ -32,13 +32,16 @@ POI_MANAGER_CLIENT_DIR=$CURDIR
 POI_MANAGER_CLIENT_BIN_DIR=$POI_MANAGER_CLIENT_DIR/bin
 POI_MANAGER_SERVER_DIR=$CURDIR/../../../src/poi-service/poi-manager-server
 POI_MANAGER_SERVER_BIN_DIR=$POI_MANAGER_SERVER_DIR/bin
-
-cp $POI_MANAGER_CLIENT_DIR/../resource/commonapi-dbus.ini $HOME
-export COMMONAPI_DBUS_DEFAULT_CONFIG=$HOME/commonapi-dbus.ini
-cp $POI_MANAGER_SERVER_DIR/../resource/poi-database-managed.db $POI_MANAGER_SERVER_BIN_DIR
-
+RESOURCE=$POI_MANAGER_SERVER_DIR/../resource
 echo '------------------------start the proof of concept------------------------'
+cp $RESOURCE/poi-database-managed.db ./bin
+COMMONAPI_DEFAULT_CONFIG=$RESOURCE/commonapi4dbus.ini \
+COMMONAPI_DBUS_DEFAULT_CONFIG=$RESOURCE/commonapi-dbus.ini \
 $POI_MANAGER_SERVER_BIN_DIR/poi-manager-server -f $POI_MANAGER_SERVER_BIN_DIR/poi-database-managed.db &
-$POI_MANAGER_CLIENT_BIN_DIR/poi-manager-client -t &
+COMMONAPI_DEFAULT_CONFIG=$RESOURCE/commonapi4dbus.ini \
+COMMONAPI_DBUS_DEFAULT_CONFIG=$RESOURCE/commonapi-dbus.ini \
+$POI_MANAGER_CLIENT_BIN_DIR/poi-manager-client -t 
+kill -9 `ps -ef | egrep poi-manager-server | grep -v grep | awk '{print $2}'`
+
 
 

@@ -40,10 +40,10 @@
 #include <functional>
 
 #include <CommonAPI/CommonAPI.hpp> //Defined in the Common API Runtime library
-#include <v4/org/genivi/CommonTypes.hpp>
-#include <v4/org/genivi/navigation/NavigationTypes.hpp>
-#include <v4/org/genivi/navigation/poiservice/POIServiceTypes.hpp>
-#include <v4/org/genivi/navigation/poiservice/POIContentAccessModuleProxy.hpp>
+#include <CommonTypes.hpp>
+#include <NavigationTypes.hpp>
+#include <POIServiceTypes.hpp>
+#include <POIContentAccessModuleProxy.hpp>
 
 #include "poi-common-data-model.h"
 
@@ -586,15 +586,16 @@ int main(int  argc , char**  argv )
 
     std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
 
-    const std::string &domain = "local";
-    const std::string &instance = "POIContentManager";
+    const std::string domain = "local";
+    const std::string instance = "POIContentAccessModuleService";
+    const std::string connection = "POIContentAccessModuleClient";
 
-    std::shared_ptr<POIContentAccessModuleProxyDefault> myProxy = runtime->buildProxy<POIContentAccessModuleProxy>(domain,instance);
+    std::shared_ptr<POIContentAccessModuleProxyDefault> myProxy =
+            runtime->buildProxy<POIContentAccessModuleProxy>(domain,instance);
 
     while (!myProxy->isAvailable()) {
         usleep(10);
     }
-    cout << "poi manager client started" << endl;
 
     //index used for argument analysis
     int next_option;

@@ -82,17 +82,15 @@ int main(int  argc , char**  argv )
     // Common API data init
     std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
 
-    const std::string &domain = "local";
-    const std::string &instance = "POIContentManager";
-
-    std::string connection = "POIContentManager";
+    const std::string domain = "local";
+    const std::string instance = "POIContentAccessModuleService";
 
     std::shared_ptr<PoiManagerServerStub> myServicePOIContentManager = std::make_shared<PoiManagerServerStub>();
 
-    bool successfullyRegistered = runtime->registerService(domain, instance, myServicePOIContentManager, connection);
+    bool successfullyRegistered = runtime->registerService(domain, instance, myServicePOIContentManager);
     while (!successfullyRegistered) {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        successfullyRegistered = runtime->registerService(domain, instance, myServicePOIContentManager, connection);
+        successfullyRegistered = runtime->registerService(domain, instance, myServicePOIContentManager);
     }
 
     //index used for argument analysis
