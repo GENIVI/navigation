@@ -78,50 +78,6 @@ static const map32_t country_map[] = {
     {"JPN","JP"},
 };
 
-static const char *
-map_3_to_2(const map32_t *map, int len, const char *in)
-{
-    int i;
-    for (i = 0 ; i < len ; i++)
-        if (!strcmp(map[i].c3,in))
-            return map[i].c2;
-    return "";
-}
-
-static const char *
-map_2_to_3(const map32_t *map, int len, const char *in)
-{
-    int i;
-    for (i = 0 ; i < len ; i++)
-        if (!strcmp(map[i].c2,in))
-            return map[i].c3;
-    return "";
-}
-
-static const char *
-language_3_to_2(const char *in)
-{
-    return map_3_to_2(language_map, sizeof(language_map)/sizeof(language_map[0]), in);
-}
-
-static const char *
-language_2_to_3(const char *in)
-{
-    return map_2_to_3(language_map, sizeof(language_map)/sizeof(language_map[0]), in);
-}
-
-static const char *
-country_3_to_2(const char *in)
-{
-    return map_3_to_2(country_map, sizeof(country_map)/sizeof(country_map[0]), in);
-}
-
-static const char *
-country_2_to_3(const char *in)
-{
-    return map_2_to_3(country_map, sizeof(country_map)/sizeof(country_map[0]), in);
-}
-
 class NavigationCoreConfigurationServerStub: public ConfigurationStubDefault {
 
 public:
