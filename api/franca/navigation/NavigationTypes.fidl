@@ -60,9 +60,13 @@ typeCollection NavigationTypes {
 		
 
 /* enumerations */
+	enumeration BasicError {
+		NoError = 0	
+	}	
 	
 	enumeration BasicEnum {
 		INVALID 	= 0
+		ALL 		= 65535
 	}
 
 	enumeration TimeFormat extends BasicEnum{

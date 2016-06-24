@@ -56,12 +56,6 @@ interface Configuration {
 		UnitsOfMeasurementAttribute to UnitsOfMeasurementListValue
 	}
 
-	enumeration TimeFormat {
-		INVALID		= 0
-		TWELVEH     = 1
-		TWENTYFOURH	= 2
-	}
-
 	enumeration CoordinatesFormat {
 		INVALID		= 0
 		<** @description:DEGREES format = d.dÂº**>

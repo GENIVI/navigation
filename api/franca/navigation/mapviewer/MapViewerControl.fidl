@@ -37,6 +37,8 @@ interface MapViewerControl {
 
 	enumeration MapObject extends BasicEnum {
 		// TODO: Check which elements are really visible
+		BUILDINGS 			= 128	
+		TERRAIN 			= 129
 		DET_POI                           //Points Of Interest
 		DET_TTI                           //TTI elements
 		DET_ONE_WAY_STREET_ARROW          //Arrows marking one way streets
@@ -110,12 +112,15 @@ interface MapViewerControl {
 	}
 
 	enumeration HeadingType extends BasicEnum  { //Base 0x0130
-		CONSTANT_ANGLE		= 304
-		TRACK_UP			= 305
-		TOWARDS_TARGET		= 306
+		CONSTANT_ANGLE		= 112
+		TRACK_UP			= 113
+		TOWARDS_TARGET		= 114
 	} 
 
-	enumeration MapTheme extends BasicEnum {		
+	enumeration MapTheme extends BasicEnum {	
+		THEME_1	= 96
+		THEME_2 = 97
+		THEME_3 = 98
 		THEME_BMW_CLASSIC_DAY
 		THEME_BMW_CLASSIC_NIGHT
 		THEME_BMW_CLASSIC_TRAFFIC_DAY
@@ -460,6 +465,7 @@ interface MapViewerControl {
 
 	<**
 		@description : setCameraPosition = This method sets the coordinates of the point at which the camera must be positioned
+		Note: the camera heading will be automatically set in such a way, that the camera is aimed at the view point
 	**>
 	method setCameraPosition {
 		in {
@@ -514,6 +520,7 @@ interface MapViewerControl {
 
 	<**
 		@description : setCameraHeadingAngle = This method sets the map view heading angle
+		Note: the camera position will be automatically set in such a way, that it looks at the currently selected target point
 	**>
 	method setCameraHeadingAngle {
 		in {
@@ -599,6 +606,32 @@ interface MapViewerControl {
 			Coordinate2D target
 		}
 	}
+	
+	<**
+		@description : CameraHeadingChanged = This signal is emitted when the heading angle of the camera changes
+	**>
+	broadcast CameraHeadingChanged {
+		out {
+		
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			
+			<**
+				@description : headingType = enum(INVALID,CONSTANT_ANGLE,TRACK_UP,TOWARDS_TARGET, ... )
+			**>
+			HeadingType headingType
+			
+			<**
+				@description : headingAngle = heading angle in degrees. Range [0:360]
+				The angle in degrees between projection on the ground plane of the line through the center of the screen and the top-centre of the screen, and the North direction
+				0 degrees means that the map view is oriented such that North is at the top of the screen
+				Degrees are measured clockwise such that 90 degrees correspond to the East direction
+			**>
+			Int32 headingAngle
+		}
+	}
 
 	<**
 		@description : setCameraTiltAngle = This method sets the camera tilt angle
@@ -624,7 +657,7 @@ interface MapViewerControl {
 	}
 
 	<**
-		@description : getMapViewTiltAngle = This method returns the camera tilt angle
+		@description : getCameraTiltAngle = This method returns the camera tilt angle
 	**>
 	method getCameraTiltAngle {
 		in {
@@ -823,7 +856,7 @@ interface MapViewerControl {
 			<**
 				@description : scaleID = scale identifier. Range[0:256]
 			**>
-			Int8 scaleID
+			UInt8 scaleID
 
 			<**
 				@description : isMinMax = enum(INVALID,MIN,MAX,MID, ... )
@@ -941,6 +974,24 @@ interface MapViewerControl {
 
 			<**
 				@description : perspective = enum(INVALID,2D,3D, ... )
+			**>
+			MapPerspective perspective
+		}
+	}
+	
+	<**
+		@description : MapViewPerspectiveChanged = This signal is emitted when the map perspective chnages
+	**>
+	broadcast MapViewPerspectiveChanged {
+		out {
+		
+			<**
+				@description : Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
+			
+			<**
+				@description : perspective = enum(INVALID,2D,3D, ... )</line>
 			**>
 			MapPerspective perspective
 		}
@@ -1126,7 +1177,7 @@ interface MapViewerControl {
 			<**
 				@description : scaleID = scale identifier. Range[0:256]
 			**>
-			Int8 scaleID
+			UInt8 scaleID
 
 			<**
 				@description : isMinMax = enum(INVALID,MIN,MAX,MID, ... )
@@ -1208,7 +1259,7 @@ interface MapViewerControl {
 	}
 
 	<**
-		@description : setMapViewSaveArea = This methods defines the area that the HMI guarantees not to 
+		@description : getMapViewSaveArea = This methods defines the area that the HMI guarantees not to 
 		cover with other windows or user interface elements
 	**>
 	method getMapViewSaveArea {
@@ -1307,6 +1358,8 @@ interface MapViewerControl {
 
 			<**
 				@description : rotationAnglePerSecond = partial rotation for each second
+				The value can be set implement a smooth rotation
+				If rotationAnglePerSecond = rotationAngle it means that the rotation must be instantaneous
 			**>
 			Int32 rotationAnglePerSecond
 		}
@@ -1415,6 +1468,7 @@ interface MapViewerControl {
 
 			<**
 				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+				Note: it can be used to set the MapView in application specific performance mode (e.g. low CPU-usage or low memory-usage)
 			**>
 			Handle sessionHandle
 
@@ -1617,12 +1671,12 @@ interface MapViewerControl {
 			<**
 				@description : minScaleID = minimun scale on which the POI categories are displayed
 			**>
-			Int8 minScaleID
+			UInt8 minScaleID
 
 			<**
 				@description : maxScaleID = maximum scale on which the POI categories are displayed
 			**>
-			Int8 maxScaleID
+			UInt8 maxScaleID
 		}
 	}
 
@@ -1667,12 +1721,12 @@ interface MapViewerControl {
 			<**
 				@description : minScaleID = minimun scale on which the POI categories are displayed
 			**>
-			Int8 minScaleID
+			UInt8 minScaleID
 
 			<**
 				@description : maxScaleID = maximum scale on which the POI categories are displayed
 			**>
-			Int8 maxScaleID
+			UInt8 maxScaleID
 		}
 	}
 

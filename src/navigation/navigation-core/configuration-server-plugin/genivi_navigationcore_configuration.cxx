@@ -44,15 +44,19 @@
 #include "event.h"
 
 #include <CommonAPI/CommonAPI.hpp>
-#include <org/genivi/CommonTypes.hpp>
-#include <org/genivi/navigation/NavigationTypes.hpp>
-#include <org/genivi/navigation/navigationcore/NavigationCoreTypes.hpp>
-#include <v0/org/genivi/navigation/navigationcore/ConfigurationStubDefault.hpp>
+#include <CommonTypes.hpp>
+#include <NavigationTypes.hpp>
+#include <NavigationCoreTypes.hpp>
+#include <ConfigurationStubDefault.hpp>
 
 #if (!DEBUG_ENABLED)
 #undef dbg
 #define dbg(level,...) ;
 #endif
+
+using namespace v4::org::genivi::navigation::navigationcore;
+using namespace v4::org::genivi::navigation;
+using namespace v4::org::genivi;
 
 typedef struct  {
     const char *c3;
@@ -118,21 +122,6 @@ country_2_to_3(const char *in)
     return map_2_to_3(country_map, sizeof(country_map)/sizeof(country_map[0]), in);
 }
 
-using namespace std;
-using namespace v0::org::genivi::navigation::navigationcore;
-using namespace org::genivi::navigation;
-using namespace org::genivi;
-
-Configuration::UnitsOfMeasurementValue value;
-Configuration::UnitsOfMeasurement unit = {{Configuration::UnitsOfMeasurementAttribute::LENGTH, value }};
-static std::vector<Configuration::UnitsOfMeasurement> unitsOfMeasurementList;
-
-NavigationTypes::Locale en_US { "eng","USA", "Latn" };
-NavigationTypes::Locale fr_FR { "fra","FRA", "Latn" };
-NavigationTypes::Locale de_DE { "deu","DEU", "Latn" };
-NavigationTypes::Locale jp_JP { "jpn","JPN", "Hrkt" };
-static std::vector< NavigationTypes::Locale> localeList;
-
 class NavigationCoreConfigurationServerStub: public ConfigurationStubDefault {
 
 public:
@@ -142,7 +131,7 @@ public:
     void setLocale(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _languageCode, std::string _countryCode, std::string _scriptCode, setLocaleReply_t _reply);
     void getLocale(const std::shared_ptr<CommonAPI::ClientId> _client, getLocaleReply_t _reply);
     void getSupportedLocales(const std::shared_ptr<CommonAPI::ClientId> _client, getSupportedLocalesReply_t _reply);
-    void setTimeFormat(const std::shared_ptr<CommonAPI::ClientId> _client, ::org::genivi::navigation::NavigationTypes::TimeFormat _format, setTimeFormatReply_t _reply);
+    void setTimeFormat(const std::shared_ptr<CommonAPI::ClientId> _client, NavigationTypes::TimeFormat _format, setTimeFormatReply_t _reply);
     void getTimeFormat(const std::shared_ptr<CommonAPI::ClientId> _client, getTimeFormatReply_t _reply);
     void getSupportedTimeFormats(const std::shared_ptr<CommonAPI::ClientId> _client, getSupportedTimeFormatsReply_t _reply);
     void setCoordinatesFormat(const std::shared_ptr<CommonAPI::ClientId> _client, Configuration::CoordinatesFormat _coordinatesFormat, setCoordinatesFormatReply_t _reply);
@@ -155,30 +144,53 @@ public:
 private:
     CommonTypes::Version m_version;
     Configuration::UnitsOfMeasurement m_unitsOfMeasurement;
+    Configuration::UnitsOfMeasurementList m_SupportedUnitsOfMeasurement;
+    std::vector< NavigationTypes::Locale> m_SupportedLocales;
     std::string m_languageCode, m_countryCode, m_scriptCode;
+    NavigationTypes::TimeFormat m_timeFormat;
+    std::vector<NavigationTypes::TimeFormat> m_SupportedTimeFormats;
+    Configuration::CoordinatesFormat m_coordinatesFormat;
+    std::vector<Configuration::CoordinatesFormat> m_SupportedCoordinatesFormats;
 };
 
 NavigationCoreConfigurationServerStub::NavigationCoreConfigurationServerStub()
 {
+    Configuration::UnitsOfMeasurementListValue valueList;
+
     m_version.setVersionMajor(3);
     m_version.setVersionMinor(0);
     m_version.setVersionMicro(0);
     m_version.setDate("21-01-2014");
 
-    localeList.push_back(en_US);
-    localeList.push_back(fr_FR);
-    localeList.push_back(de_DE);
-    localeList.push_back(jp_JP);
+    NavigationTypes::Locale en_US { "eng","USA", "Latn" };
+    NavigationTypes::Locale fr_FR { "fra","FRA", "Latn" };
+    NavigationTypes::Locale de_DE { "deu","DEU", "Latn" };
+    NavigationTypes::Locale jp_JP { "jpn","JPN", "Hrkt" };
 
-    unitsOfMeasurementList.push_back(unit);
+    m_SupportedLocales.push_back(en_US);
+    m_SupportedLocales.push_back(fr_FR);
+    m_SupportedLocales.push_back(de_DE);
+    m_SupportedLocales.push_back(jp_JP);
+
+    valueList.push_back(Configuration::UnitsOfMeasurementValue::MILE);
+    valueList.push_back(Configuration::UnitsOfMeasurementValue::METER);
+
+    m_SupportedUnitsOfMeasurement[Configuration::UnitsOfMeasurementAttribute::LENGTH]=valueList;
+
+    m_SupportedTimeFormats.push_back(NavigationTypes::TimeFormat::TWELVEH);
+    m_SupportedTimeFormats.push_back(NavigationTypes::TimeFormat::TWENTYFOURH);
+
+    m_SupportedCoordinatesFormats.push_back(Configuration::CoordinatesFormat::DEGREES);
 
     //default init
-    m_languageCode = localeList.at(0).getLanguageCode();
-    m_countryCode = localeList.at(0).getCountryCode();
-    m_scriptCode = localeList.at(0).getScriptCode();
+    m_languageCode = m_SupportedLocales.at(0).getLanguageCode();
+    m_countryCode = m_SupportedLocales.at(0).getCountryCode();
+    m_scriptCode = m_SupportedLocales.at(0).getScriptCode();
+    m_coordinatesFormat = m_SupportedCoordinatesFormats.at(0);
 
-    m_unitsOfMeasurement[Configuration::UnitsOfMeasurementAttribute::LENGTH] = Configuration::UnitsOfMeasurementValue::KM;
+    m_unitsOfMeasurement[Configuration::UnitsOfMeasurementAttribute::LENGTH] = Configuration::UnitsOfMeasurementValue::METER;
 
+    m_timeFormat = m_SupportedTimeFormats.at(0);
 }
 
 NavigationCoreConfigurationServerStub::~NavigationCoreConfigurationServerStub()
@@ -211,52 +223,52 @@ void NavigationCoreConfigurationServerStub::getLocale(const std::shared_ptr<Comm
 
 void NavigationCoreConfigurationServerStub::getSupportedLocales(const std::shared_ptr<CommonAPI::ClientId> _client, getSupportedLocalesReply_t _reply)
 {
-
+    _reply(m_SupportedLocales);
 }
 
-void NavigationCoreConfigurationServerStub::setTimeFormat(const std::shared_ptr<CommonAPI::ClientId> _client, ::org::genivi::navigation::NavigationTypes::TimeFormat _format, setTimeFormatReply_t _reply)
+void NavigationCoreConfigurationServerStub::setTimeFormat(const std::shared_ptr<CommonAPI::ClientId> _client, NavigationTypes::TimeFormat _format, setTimeFormatReply_t _reply)
 {
-
+    m_timeFormat = _format;
 }
 
 void NavigationCoreConfigurationServerStub::getTimeFormat(const std::shared_ptr<CommonAPI::ClientId> _client, getTimeFormatReply_t _reply)
 {
-
+    _reply(m_timeFormat);
 }
 
 void NavigationCoreConfigurationServerStub::getSupportedTimeFormats(const std::shared_ptr<CommonAPI::ClientId> _client, getSupportedTimeFormatsReply_t _reply)
 {
-
+    _reply(m_SupportedTimeFormats);
 }
 
 void NavigationCoreConfigurationServerStub::setCoordinatesFormat(const std::shared_ptr<CommonAPI::ClientId> _client, Configuration::CoordinatesFormat _coordinatesFormat, setCoordinatesFormatReply_t _reply)
 {
-
+    m_coordinatesFormat = _coordinatesFormat;
 }
 
 void NavigationCoreConfigurationServerStub::getCoordinatesFormat(const std::shared_ptr<CommonAPI::ClientId> _client, getCoordinatesFormatReply_t _reply)
 {
-
+    _reply(m_coordinatesFormat);
 }
 
 void NavigationCoreConfigurationServerStub::getSupportedCoordinatesFormat(const std::shared_ptr<CommonAPI::ClientId> _client, getSupportedCoordinatesFormatReply_t _reply)
 {
-
+    _reply(m_SupportedCoordinatesFormats);
 }
 
 void NavigationCoreConfigurationServerStub::setUnitsOfMeasurement(const std::shared_ptr<CommonAPI::ClientId> _client, Configuration::UnitsOfMeasurement _unitsOfMeasurementList, setUnitsOfMeasurementReply_t _reply)
 {
-
+    m_unitsOfMeasurement = _unitsOfMeasurementList;
 }
 
 void NavigationCoreConfigurationServerStub::getUnitsOfMeasurement(const std::shared_ptr<CommonAPI::ClientId> _client, getUnitsOfMeasurementReply_t _reply)
 {
-
+    _reply(m_unitsOfMeasurement);
 }
 
 void NavigationCoreConfigurationServerStub::getSupportedUnitsOfMeasurement(const std::shared_ptr<CommonAPI::ClientId> _client, getSupportedUnitsOfMeasurementReply_t _reply)
 {
-
+    _reply(m_SupportedUnitsOfMeasurement);
 }
 
 void
@@ -270,14 +282,12 @@ plugin_init(void)
     const std::string &domain = "local";
     const std::string &instance = "Configuration";
 
-    std::string connection = "Configuration";
-
     std::shared_ptr<NavigationCoreConfigurationServerStub> myServiceConfiguration = std::make_shared<NavigationCoreConfigurationServerStub>();
 
-    bool successfullyRegistered = runtime->registerService(domain, instance, myServiceConfiguration, connection);
+    bool successfullyRegistered = runtime->registerService(domain, instance, myServiceConfiguration);
     while (!successfullyRegistered) {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        successfullyRegistered = runtime->registerService(domain, instance, myServiceConfiguration, connection);
+        successfullyRegistered = runtime->registerService(domain, instance, myServiceConfiguration);
     }
 }
 

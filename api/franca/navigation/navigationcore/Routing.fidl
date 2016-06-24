@@ -143,7 +143,6 @@ interface Routing {
 		INTERMEDIATE_POINTS		= 288
         HIGHWAY_EXIT			= 116
         SPEED 					= 164
-        ALL						= 65535
 	}
 	
 	enumeration IntermediatePointType {
