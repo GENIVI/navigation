@@ -27,13 +27,13 @@
 		<xsl:text>&#x0A;                </xsl:text>
 		<plugin path="../../navigation-core/locationinput-server-plugin/.libs/libgenivi_navigationcore_locationinput_server.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../navigation-core/routing-plugin/.libs/libgenivi_navigationcore_routing.so" ondemand="no"/>
+		<plugin path="../../navigation-core/routing-server-plugin/.libs/libgenivi_navigationcore_routing_server.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../navigation-core/session-plugin/.libs/libgenivi_navigationcore_session.so" ondemand="no"/>
+		<plugin path="../../navigation-core/session-server-plugin/.libs/libgenivi_navigationcore_session_server.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../navigation-core/guidance-plugin/.libs/libgenivi_navigationcore_guidance.so" ondemand="no"/>
+		<plugin path="../../navigation-core/guidance-server-plugin/.libs/libgenivi_navigationcore_guidance_server.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../navigation-core/mapmatchedposition-plugin/.libs/libgenivi_navigationcore_mapmatchedposition.so" ondemand="no"/>
+		<plugin path="../../navigation-core/mapmatchedposition-server-plugin/.libs/libgenivi_navigationcore_mapmatchedposition_server.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
 		<plugin path="../../navigation-core/enhancedposition-plugin/.libs/libgenivi_positioning_enhancedposition.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>

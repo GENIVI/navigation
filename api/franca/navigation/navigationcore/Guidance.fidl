@@ -70,6 +70,7 @@ interface Guidance {
 	}
 	
 	enumeration ManeuverDirection extends BasicEnum { //Base 0x0080
+		STRAIGHT_ON					    = 127
 		LEFT							= 128
 		SLIGHT_LEFT						= 129
 		HARD_LEFT						= 130
@@ -87,6 +88,10 @@ interface Guidance {
 		OFF_ROUTE_MANUAL				= 147
 	}
 
+	enumeration RoadProperty extends BasicEnum { //Base 0x0100
+		UNDEFINED   					= 256
+		TOLL_ROADS   					= 257
+	}
 	enumeration RouteChangedCause extends BasicEnum { //Base 0x0210
 		TRAFFIC							= 528
 		OFF_ROUTE						= 529
@@ -167,7 +172,7 @@ interface Guidance {
 	struct Maneuver {
 		String roadNumberAfterManeuver
 		String roadNameAfterManeuver
-		UInt16 roadPropertyAfterManeuver
+		RoadProperty roadPropertyAfterManeuver
 		Side drivingSide
 		UInt32 offsetOfNextManeuver
 		ManeuverItem[] items

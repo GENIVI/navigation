@@ -20,7 +20,7 @@
 * For further information see http://www.genivi.org/.
 *
 * List of changes:
-* 
+*
 * <date>, <name>, <description of change>
 *
 * @licence end@
@@ -58,34 +58,34 @@ class LocationInputServerStub;
 
 class LocationInputObj
 {
-	public:
-	struct search_list *m_sl;
+    public:
+    struct search_list *m_sl;
     NavigationTypes::Handle m_handle;
     NavigationTypes::Handle m_session;
     LocationInput::AddressAttribute m_criterion;
-	uint32_t m_windowsize;
-	struct attr m_search;
+    uint32_t m_windowsize;
+    struct attr m_search;
     LocationInputServerStub *mp_locationinput;
-	struct callback *m_callback;
-	struct event_idle *m_event;
-	bool m_spell;
-	bool m_spell_backspace;
+    struct callback *m_callback;
+    struct event_idle *m_event;
+    bool m_spell;
+    bool m_spell_backspace;
     std::vector< std::vector< LocationInput::Address > > m_data;
     int m_chunk;
     int m_count;
     void SetSelectionCriterion(NavigationTypes::Handle SessionHandle, LocationInput::AddressAttribute SelectionCriterion);
     void Search(NavigationTypes::Handle SessionHandle, const std::string& InputString, uint32_t MaxWindowSize);
     void SelectEntry(const NavigationTypes::Handle& SessionHandle, const uint32_t& Index);
-	struct navit *get_navit(void);
-	struct mapset *get_mapset(struct navit *navit);
-	void IdleStop(void);
-	void Idle(void);
+    struct navit *get_navit(void);
+    struct mapset *get_mapset(struct navit *navit);
+    void IdleStop(void);
+    void Idle(void);
     void Spell(NavigationTypes::Handle SessionHandle, const std::string& InputCharacter, uint32_t MaxWindowSize);
     void RequestListUpdate(NavigationTypes::Handle sessionHandle, const uint16_t& offset, uint16_t maxWindowSize);
     void GetEntry(uint16_t index, LocationInput::Address &entry);
     void ValidateAddress(NavigationTypes::Handle sessionHandle, const LocationInput::Address &inputAddress);
     LocationInputObj(LocationInputServerStub *locationinput, uint32_t handle);
-	~LocationInputObj();
+    ~LocationInputObj();
 };
 
 class  LocationInputServerStub : public LocationInputStubDefault {
@@ -270,107 +270,107 @@ private:
 struct navit *
 LocationInputObj::get_navit(void)
 {
-	struct attr navit;
-	if (!config_get_attr(config, attr_navit, &navit, NULL))
-		return NULL;
-	return navit.u.navit;
+    struct attr navit;
+    if (!config_get_attr(config, attr_navit, &navit, NULL))
+        return NULL;
+    return navit.u.navit;
 }
 struct mapset *
 LocationInputObj::get_mapset(struct navit *navit)
 {
-	struct attr mapset;
-	if (!navit_get_attr(navit, attr_mapset, &mapset, NULL))
-		return NULL;
-	return mapset.u.mapset;
+    struct attr mapset;
+    if (!navit_get_attr(navit, attr_mapset, &mapset, NULL))
+        return NULL;
+    return mapset.u.mapset;
 }
 
 void
 LocationInputObj::SetSelectionCriterion(NavigationTypes::Handle SessionHandle, LocationInput::AddressAttribute SelectionCriterion)
 {
-	m_criterion=SelectionCriterion;
-	switch(m_criterion) {
+    m_criterion=SelectionCriterion;
+    switch(m_criterion) {
     case LocationInput::AddressAttribute::COUNTRY:
-		m_search.type=attr_country_name;
-		break;
+        m_search.type=attr_country_name;
+        break;
     case LocationInput::AddressAttribute::CITY:
-		m_search.type=attr_town_name;
-		break;
+        m_search.type=attr_town_name;
+        break;
     case LocationInput::AddressAttribute::STREET:
-		m_search.type=attr_street_name;
-		break;
+        m_search.type=attr_street_name;
+        break;
     case LocationInput::AddressAttribute::HOUSENUMBER:
-		m_search.type=attr_house_number;
-		break;
+        m_search.type=attr_house_number;
+        break;
     case LocationInput::AddressAttribute::FULL_ADDRESS:
-		m_search.type=attr_address;
-		break;
-	default:
-		throw DBus::ErrorInvalidArgs("Invalid selection criterion");
-	}
-	g_free(m_search.u.str);
-	m_search.u.str=NULL;
+        m_search.type=attr_address;
+        break;
+    default:
+        throw DBus::ErrorInvalidArgs("Invalid selection criterion");
+    }
+    g_free(m_search.u.str);
+    m_search.u.str=NULL;
     mp_locationinput->fireCurrentSelectionCriterionEvent(m_handle, m_criterion);
 }
 
 void
 LocationInputObj::Search(NavigationTypes::Handle SessionHandle, const std::string& InputString, uint32_t MaxWindowSize)
 {
-	IdleStop();
-	g_free(m_search.u.str);
+    IdleStop();
+    g_free(m_search.u.str);
 
-	m_session=SessionHandle;
-	m_search.u.str=g_strdup(InputString.c_str());
-	m_windowsize=MaxWindowSize;
-	m_spell=false;
+    m_session=SessionHandle;
+    m_search.u.str=g_strdup(InputString.c_str());
+    m_windowsize=MaxWindowSize;
+    m_spell=false;
 
-	search_list_search(m_sl, &m_search, 0);
-	m_event=event_add_idle(0, m_callback);
+    search_list_search(m_sl, &m_search, 0);
+    m_event=event_add_idle(0, m_callback);
 }
 
 void
 LocationInputObj::Spell(NavigationTypes::Handle SessionHandle, const std::string& InputCharacter, uint32_t MaxWindowSize)
 {
-	IdleStop();
+    IdleStop();
 
-	m_spell=true;
-	m_spell_backspace=false;
-	m_session=SessionHandle;
-	char *newstr;
-	const char *input=InputCharacter.c_str();
-	int len=strlen(input)+1;
-	dbg(lvl_debug,"input '%s' (%d)\n",input,strlen(input));
-	if (m_search.u.str && strlen(m_search.u.str)) {
-		const char *i=input;
-		char c;
-		newstr=g_strdup(m_search.u.str);
-		dbg(lvl_debug,"string %s\n",newstr);
-		while ((c=*i++)) {
-			dbg(lvl_debug,"char '%c'\n",c);
-			if (c == '\b') {
-				m_spell_backspace=true;
-				*g_utf8_prev_char(newstr+strlen(newstr))='\0';
-			} else {
-				int len=strlen(newstr);
-				newstr=g_renew(char,newstr,len+2);
-				newstr[len]=c;
-				newstr[len+1]='\0';
-			}
-			dbg(lvl_debug,"string now %s\n",newstr);
-		}
-	} else { 
-		if (strcmp(input,"\b")) 
-			newstr=g_strdup(input);
-		else
-			newstr=NULL;
-	}
-	g_free(m_search.u.str);
-	dbg(lvl_debug,"search string '%s' (%d)\n",newstr,strlen(newstr));
-	m_search.u.str=newstr;
-	m_windowsize=MaxWindowSize;
+    m_spell=true;
+    m_spell_backspace=false;
+    m_session=SessionHandle;
+    char *newstr;
+    const char *input=InputCharacter.c_str();
+    int len=strlen(input)+1;
+    dbg(lvl_debug,"input '%s' (%d)\n",input,strlen(input));
+    if (m_search.u.str && strlen(m_search.u.str)) {
+        const char *i=input;
+        char c;
+        newstr=g_strdup(m_search.u.str);
+        dbg(lvl_debug,"string %s\n",newstr);
+        while ((c=*i++)) {
+            dbg(lvl_debug,"char '%c'\n",c);
+            if (c == '\b') {
+                m_spell_backspace=true;
+                *g_utf8_prev_char(newstr+strlen(newstr))='\0';
+            } else {
+                int len=strlen(newstr);
+                newstr=g_renew(char,newstr,len+2);
+                newstr[len]=c;
+                newstr[len+1]='\0';
+            }
+            dbg(lvl_debug,"string now %s\n",newstr);
+        }
+    } else {
+        if (strcmp(input,"\b"))
+            newstr=g_strdup(input);
+        else
+            newstr=NULL;
+    }
+    g_free(m_search.u.str);
+    dbg(lvl_debug,"search string '%s' (%d)\n",newstr,strlen(newstr));
+    m_search.u.str=newstr;
+    m_windowsize=MaxWindowSize;
 
-	search_list_search(m_sl, &m_search, 1);
-	dbg(lvl_debug,"backspace %d\n",m_spell_backspace);
-	m_event=event_add_idle(0, m_callback);
+    search_list_search(m_sl, &m_search, 1);
+    dbg(lvl_debug,"backspace %d\n",m_spell_backspace);
+    m_event=event_add_idle(0, m_callback);
 
 }
 
@@ -397,127 +397,127 @@ LocationInputObj::SelectEntry(const NavigationTypes::Handle &SessionHandle, cons
     LocationInput::Address *res=NULL;
     std::vector<LocationInput::AddressAttribute> next;
     std::size_t window=0;
-	bool guidable=false;
+    bool guidable=false;
     for (std::size_t i = 0 ; i < m_data.size() ; i++) {
-		if (Index >= window && Index < window+m_data[i].size()) {
-			res=&m_data[i][Index-window];
-			break;
-		}
-		window+=m_data[i].size();
-	}
-	if (!res) 
-		throw DBus::ErrorInvalidArgs("Invalid index");
-	search_list_select(m_sl, m_search.type, Index+1, 1);
-	switch(m_criterion) {
+        if (Index >= window && Index < window+m_data[i].size()) {
+            res=&m_data[i][Index-window];
+            break;
+        }
+        window+=m_data[i].size();
+    }
+    if (!res)
+        throw DBus::ErrorInvalidArgs("Invalid index");
+    search_list_select(m_sl, m_search.type, Index+1, 1);
+    switch(m_criterion) {
     case LocationInput::AddressAttribute::COUNTRY:
         next.push_back(LocationInput::AddressAttribute::COUNTRY);
         next.push_back(LocationInput::AddressAttribute::CITY);
-		break;
+        break;
     case LocationInput::AddressAttribute::CITY:
         next.push_back(LocationInput::AddressAttribute::COUNTRY);
         next.push_back(LocationInput::AddressAttribute::CITY);
         next.push_back(LocationInput::AddressAttribute::STREET);
-		break;
+        break;
     case LocationInput::AddressAttribute::STREET:
     case LocationInput::AddressAttribute::HOUSENUMBER:
         next.push_back(LocationInput::AddressAttribute::COUNTRY);
         next.push_back(LocationInput::AddressAttribute::CITY);
         next.push_back(LocationInput::AddressAttribute::STREET);
         next.push_back(LocationInput::AddressAttribute::HOUSENUMBER);
-		break;
-	}
+        break;
+    }
     if (res->find(LocationInput::AddressAttribute::LATITUDE) != res->end())
-		guidable=true;
+        guidable=true;
     mp_locationinput->fireContentUpdatedEvent(m_handle, guidable, next, *res);
 }
 
 void
 LocationInputObj::IdleStop(void)
 {
-	if (m_event) {
-		event_remove_idle(m_event);
-		m_event=NULL;
-	}
+    if (m_event) {
+        event_remove_idle(m_event);
+        m_event=NULL;
+    }
 }
 
 void
 LocationInputObj::Idle(void)
 {
-	dbg(lvl_debug,"enter\n");
+    dbg(lvl_debug,"enter\n");
     mp_locationinput->fireSearchStatusEvent(m_handle, LocationInput::SearchStatus::SEARCHING);
-	struct search_list_result *res;
-	int chunk=0;
+    struct search_list_result *res;
+    int chunk=0;
     uint16_t count=0;
-	m_data.resize(0);
-	m_data.resize(1);
-	while ((res=search_list_get_result(m_sl))) {
+    m_data.resize(0);
+    m_data.resize(1);
+    while ((res=search_list_get_result(m_sl))) {
         LocationInput::Address entry;
-		if (res->country && res->country->name) {
-			dbg(lvl_debug,"country %s\n",res->country->name);
+        if (res->country && res->country->name) {
+            dbg(lvl_debug,"country %s\n",res->country->name);
             entry[LocationInput::AddressAttribute::COUNTRY] = std::string(res->country->name);
-		}
-		if (res->town && res->town->common.town_name) {
-			dbg(lvl_debug,"town %s\n",res->town->common.town_name);
+        }
+        if (res->town && res->town->common.town_name) {
+            dbg(lvl_debug,"town %s\n",res->town->common.town_name);
             entry[LocationInput::AddressAttribute::CITY] = std::string(res->town->common.town_name);
-		}
-		if (res->street && res->street->name) {
-			dbg(lvl_debug,"street %s\n",res->street->name);
+        }
+        if (res->street && res->street->name) {
+            dbg(lvl_debug,"street %s\n",res->street->name);
             entry[LocationInput::AddressAttribute::STREET] = std::string(res->street->name);
-		}
-		if (res->house_number && res->house_number->house_number) {
-			dbg(lvl_debug,"house number %s\n",res->house_number->house_number);
+        }
+        if (res->house_number && res->house_number->house_number) {
+            dbg(lvl_debug,"house number %s\n",res->house_number->house_number);
             entry[LocationInput::AddressAttribute::HOUSENUMBER] = std::string(res->house_number->house_number);
-		}
-		if (res->c) {
-			struct coord_geo g;
-			struct coord c;
-			c.x=res->c->x;
-			c.y=res->c->y;
-			transform_to_geo(res->c->pro, &c, &g);
+        }
+        if (res->c) {
+            struct coord_geo g;
+            struct coord c;
+            c.x=res->c->x;
+            c.y=res->c->y;
+            transform_to_geo(res->c->pro, &c, &g);
             entry[LocationInput::AddressAttribute::LATITUDE] = g.lat;
             entry[LocationInput::AddressAttribute::LONGITUDE] = g.lng;
-		}
-		m_data[chunk].push_back(entry);
-		if (m_data[chunk].size() >= m_windowsize) {
-			chunk++;
-			m_data.resize(chunk+1);
-		}
-		count++;
-	}
+        }
+        m_data[chunk].push_back(entry);
+        if (m_data[chunk].size() >= m_windowsize) {
+            chunk++;
+            m_data.resize(chunk+1);
+        }
+        count++;
+    }
 
     // the search_list_get_unique has been removed from the svn in the r5549, so navit needs to be patched for upper versions
     if (m_spell) {
-		char *unique;
-		if (m_spell_backspace)
-			unique=g_strdup(m_search.u.str);
-		else
+        char *unique;
+        if (m_spell_backspace)
+            unique=g_strdup(m_search.u.str);
+        else
             unique=search_list_get_unique(m_sl, NULL);
-		m_spell_backspace=false;
-		if (unique) {
-			g_free(m_search.u.str);
-			m_search.u.str=unique;
-			char *next=search_list_get_unique(m_sl, unique);
-			if (next) {
+        m_spell_backspace=false;
+        if (unique) {
+            g_free(m_search.u.str);
+            m_search.u.str=unique;
+            char *next=search_list_get_unique(m_sl, unique);
+            if (next) {
                 mp_locationinput->fireSpellResultEvent(m_handle, unique, next, false);
-				g_free(next);
-			}
+                g_free(next);
+            }
         }
         else
             mp_locationinput->fireSpellResultEvent(m_handle, "", "\b", false);
-    } 
+    }
 
     m_count = count; //amount of data
     m_chunk = chunk; //amount of lists of data
 
     mp_locationinput->fireSearchStatusEvent(m_handle, LocationInput::SearchStatus::FINISHED);
-	IdleStop();
+    IdleStop();
 
 }
 
 static void
 LocationInputObj_Idle(LocationInputObj *obj)
 {
-	obj->Idle();
+    obj->Idle();
 }
 
 void
@@ -533,22 +533,22 @@ LocationInputObj::ValidateAddress(NavigationTypes::Handle sessionHandle, const L
 LocationInputObj::LocationInputObj(LocationInputServerStub *locationinput, uint32_t handle)
 {
     mp_locationinput=locationinput;
-	m_handle=handle;
-	m_sl=search_list_new(get_mapset(get_navit()));
+    m_handle=handle;
+    m_sl=search_list_new(get_mapset(get_navit()));
     m_count=0;
     m_chunk=0;
-	m_search.type=attr_none;
-	m_search.u.str=NULL;
-	m_event=NULL;
-	m_callback=callback_new_1(reinterpret_cast<void (*)(void)>(LocationInputObj_Idle), this);
+    m_search.type=attr_none;
+    m_search.u.str=NULL;
+    m_event=NULL;
+    m_callback=callback_new_1(reinterpret_cast<void (*)(void)>(LocationInputObj_Idle), this);
 }
 
 LocationInputObj::~LocationInputObj()
 {
-	IdleStop();
-	callback_destroy(m_callback);
-	g_free(m_search.u.str);
-	search_list_destroy(m_sl);
+    IdleStop();
+    callback_destroy(m_callback);
+    g_free(m_search.u.str);
+    search_list_destroy(m_sl);
 }
 
 void

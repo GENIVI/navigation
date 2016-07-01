@@ -90,22 +90,22 @@ if(${YOCTO_CONFIG})
 endif()
 
 
-add_subdirectory(guidance-plugin)
-
-add_subdirectory(mapmatchedposition-plugin)
-
-add_subdirectory(routing-plugin)
-
-add_subdirectory(session-plugin)
-
 add_subdirectory(enhancedposition-plugin)
 
 if (WITH_PLUGIN_MIGRATION)
     set(FRANCA_DIR "${API_DIR}/franca")
     add_subdirectory(configuration-server-plugin)
     add_subdirectory(locationinput-server-plugin)
+    add_subdirectory(guidance-server-plugin)
+    add_subdirectory(mapmatchedposition-server-plugin)
+    add_subdirectory(routing-server-plugin)
+    add_subdirectory(session-server-plugin)
 else()
     add_subdirectory(configuration-plugin)
     add_subdirectory(locationinput-plugin)
+    add_subdirectory(guidance-plugin)
+    add_subdirectory(mapmatchedposition-plugin)
+    add_subdirectory(routing-plugin)
+    add_subdirectory(session-plugin)
 endif()
 
