@@ -45,6 +45,7 @@
 #include "roadprofile.h"
 #include "map.h"
 #include "event.h"
+#include <unistd.h>
 
 #include <CommonAPI/CommonAPI.hpp>
 #include <CommonTypes.hpp>
@@ -341,6 +342,8 @@ class  RoutingServerStub : public RoutingStubDefault
         RoutingObj *obj=mp_handles[_routeHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Route handle invalid");
+        printf("0\n");
+
         obj->SetWaypoints(_sessionHandle, _startFromCurrentPosition, _waypointsList);
         _reply();
     }
@@ -634,6 +637,8 @@ RoutingObj::GetCostModel(Routing::CostModel &CostModel)
 void
 RoutingObj::SetWaypoints(uint32_t SessionHandle, bool StartFromCurrentPosition, std::vector<Routing::WayPoint> Waypoints)
 {
+    Routing::WayPoint waypoint;
+    Routing::WayPoint::iterator it;
     if (StartFromCurrentPosition) {
         if (Waypoints.size() != 1)
             throw DBus::ErrorFailed("StartFromCurrentPosition is set, but Waypoint size is not 1");
@@ -642,9 +647,12 @@ RoutingObj::SetWaypoints(uint32_t SessionHandle, bool StartFromCurrentPosition, 
             throw DBus::ErrorFailed("StartFromCurrentPosition is not set, but Waypoint size is not 2");
     }
     for (size_t i=0 ; i < Waypoints.size(); i++) {
-        if (Waypoints[i].find(Routing::WaypointElementType::LATITUDE) == Waypoints[i].end())
+        waypoint = Waypoints[i];
+        printf("0\n");
+        printf("%d",waypoint[Routing::WaypointElementType::LATITUDE]);
+        if (waypoint.find(Routing::WaypointElementType::LATITUDE) == waypoint.end())
             throw DBus::ErrorInvalidArgs("Waypoint doesn't contain Latitude");
-        if (Waypoints[i].find(Routing::WaypointElementType::LONGITUDE) == Waypoints[i].end())
+        if (waypoint.find(Routing::WaypointElementType::LONGITUDE) == waypoint.end())
             throw DBus::ErrorInvalidArgs("Waypoint doesn't contain Longitude");
     }
     m_startfromcurrentposition=StartFromCurrentPosition;

@@ -101,7 +101,7 @@ def catchall_route_calculation_signals_handler(routeHandle, status, percentage):
     print 'Route Calculation: ' + str(int(percentage)) + ' %'
     if int(percentage) == 100:
         #get route overview
-        overview = g_routing_interface.GetRouteOverview(dbus.UInt32(g_route_handle),dbus.Array([dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_DISTANCE),dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_TIME)]))
+        overview = g_routing_interface.getRouteOverview(dbus.UInt32(g_route_handle),dbus.Array([dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_DISTANCE),dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_TIME)]))
         #retrieve distance 
         totalDistance = dbus.Struct(overview[dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_DISTANCE)])
         print 'Total Distance: ' + str(totalDistance[1]/1000) + ' km'
@@ -120,7 +120,7 @@ def catchall_route_calculation_signals_handler(routeHandle, status, percentage):
         dbus.Int32(GENIVI_NAVIGATIONCORE_DISTANCE),
         dbus.Int32(GENIVI_NAVIGATIONCORE_TIME),
         dbus.Int32(GENIVI_NAVIGATIONCORE_SPEED)]
-        ret = g_routing_interface.GetRouteSegments(dbus.UInt32(g_route_handle),dbus.Int16(0),dbus.Array(valuesToReturn),dbus.UInt32(500),dbus.UInt32(0))
+        ret = g_routing_interface.getRouteSegments(dbus.UInt32(g_route_handle),dbus.Int16(0),dbus.Array(valuesToReturn),dbus.UInt32(500),dbus.UInt32(0))
 	print "Total number of segments: " + str(ret[0]) 
         #len(ret[1]) is size
         #ret[1][0][GENIVI_NAVIGATIONCORE_START_LATITUDE] is the start latitude
@@ -130,8 +130,8 @@ def catchall_route_calculation_signals_handler(routeHandle, status, percentage):
             launch_route_calculation(route)
         else:
             for i in range(routes.length):
-                g_routing_interface.DeleteRoute(dbus.UInt32(g_session_handle),dbus.UInt32(routes[i].getElementsByTagName("handle")[0].childNodes[0].data))
-            g_session_interface.DeleteSession(dbus.UInt32(g_session_handle))
+                g_routing_interface.deleteRoute(dbus.UInt32(g_session_handle),dbus.UInt32(routes[i].getElementsByTagName("handle")[0].childNodes[0].data))
+            g_session_interface.deleteSession(dbus.UInt32(g_session_handle))
 
 def catchall_session_signals_handler(sessionHandle):
     print('Session handle deleted: '+str(sessionHandle))
@@ -145,16 +145,16 @@ def catchall_route_deleted_signals_handler(routeHandle):
     print('Route handle deleted: '+str(routeHandle))
 
 bus.add_signal_receiver(catchall_route_calculation_signals_handler, \
-                        dbus_interface = "org.genivi.navigationcore.Routing", \
-                        signal_name = "RouteCalculationProgressUpdate")
+                        dbus_interface = "org.genivi.navigation.navigationcore.Routing", \
+                        signal_name = "routeCalculationProgressUpdate")
 
 bus.add_signal_receiver(catchall_route_deleted_signals_handler, \
-                        dbus_interface = "org.genivi.navigationcore.Routing", \
-                        signal_name = "RouteDeleted")
+                        dbus_interface = "org.genivi.navigation.navigationcore.Routing", \
+                        signal_name = "routeDeleted")
 
 bus.add_signal_receiver(catchall_session_signals_handler, \
-                        dbus_interface = "org.genivi.navigationcore.Session", \
-                        signal_name = "SessionDeleted")
+                        dbus_interface = "org.genivi.navigation.navigationcore.Session", \
+                        signal_name = "sessionDeleted")
 
 #timeout
 def timeout():
@@ -170,7 +170,7 @@ def launch_route_calculation(route):
     g_current_route = route
     print 'Route name: '+routes[g_current_route].getElementsByTagName("name")[0].childNodes[0].data
     #get route handle
-    g_route_handle = g_routing_interface.CreateRoute(dbus.UInt32(g_session_handle)) 
+    g_route_handle = g_routing_interface.createRoute(dbus.UInt32(g_session_handle)) 
     routes[g_current_route].getElementsByTagName("handle")[0].childNodes[0].data = g_route_handle
     print 'Route handle: ' + str(g_route_handle)
     start = routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data
@@ -179,28 +179,28 @@ def launch_route_calculation(route):
 '+start+'(' + str(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][0]) + ',' + str(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][1]) + ') to \
 '+dest+'(' + str(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][0]) + ',' + str(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][1]) + ')' 
     #set waypoints
-    g_routing_interface.SetWaypoints(dbus.UInt32(g_session_handle), \
+    g_routing_interface.setWaypoints(dbus.UInt32(g_session_handle), \
                                    dbus.UInt32(g_route_handle), \
                                    dbus.Boolean(0), \
                                    dbus.Array([ \
-                                        dbus.Dictionary({dbus.UInt16(GENIVI_NAVIGATIONCORE_LATITUDE):dbus.Struct([0,dbus.Double(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][0])]),dbus.UInt16(GENIVI_NAVIGATIONCORE_LONGITUDE):dbus.Struct([0,dbus.Double(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][1])])}), \
-                                        dbus.Dictionary({dbus.UInt16(GENIVI_NAVIGATIONCORE_LATITUDE):dbus.Struct([0,dbus.Double(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][0])]),dbus.UInt16(GENIVI_NAVIGATIONCORE_LONGITUDE):dbus.Struct([0,dbus.Double(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][1])])}) \
+                                        dbus.Dictionary({dbus.Int32(GENIVI_NAVIGATIONCORE_LATITUDE):dbus.Struct([dbus.Byte(0),dbus.Double(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][0])]),dbus.Int32(GENIVI_NAVIGATIONCORE_LONGITUDE):dbus.Struct([dbus.Byte(0),dbus.Double(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][1])])}), \
+                                        dbus.Dictionary({dbus.Int32(GENIVI_NAVIGATIONCORE_LATITUDE):dbus.Struct([dbus.Byte(0),dbus.Double(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][0])]),dbus.Int32(GENIVI_NAVIGATIONCORE_LONGITUDE):dbus.Struct([dbus.Byte(0),dbus.Double(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][1])])}) \
                                    ]) \
                                    )
     
     #calculate route
-    g_routing_interface.CalculateRoute(dbus.UInt32(g_session_handle),dbus.UInt32(g_route_handle))
+    g_routing_interface.calculateRoute(dbus.UInt32(g_session_handle),dbus.UInt32(g_route_handle))
 
 
-session = bus.get_object('org.genivi.navigationcore.Session','/org/genivi/navigationcore')
-g_session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigationcore.Session')
+session = bus.get_object('org.genivi.navigation.navigationcore.Session_Session','/Session')
+g_session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.navigationcore.Session')
 
 #get session handle
-g_session_handle = g_session_interface.CreateSession(dbus.String("test route calculation"))
+g_session_handle = g_session_interface.createSession(dbus.String("test route calculation"))
 print 'Session handle: ' + str(g_session_handle)
 
-routing_obj = bus.get_object('org.genivi.navigationcore.Routing','/org/genivi/navigationcore')
-g_routing_interface = dbus.Interface(routing_obj, dbus_interface='org.genivi.navigationcore.Routing')
+routing_obj = bus.get_object('org.genivi.navigation.navigationcore.Routing_Routing','/Routing')
+g_routing_interface = dbus.Interface(routing_obj, dbus_interface='org.genivi.navigation.navigationcore.Routing')
 
 g_current_route = 0
 launch_route_calculation(0)
