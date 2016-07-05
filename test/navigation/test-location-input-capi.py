@@ -72,9 +72,9 @@ city_search_mode = 0
 street_search_mode = 1 #set to full because of a bug to be fixed in the plug-in
 house_number_search_mode = 1
 
-print '\n--------------------------\n' + \
+print( '\n--------------------------\n' + \
       'LocationInput Test' + \
-      '\n--------------------------\n'
+      '\n--------------------------\n')
 
 parser = argparse.ArgumentParser(description='Location input Test for navigation PoC and FSA.')
 parser.add_argument('-l','--loc',action='store', dest='locations', help='List of locations in xml format')
@@ -225,13 +225,13 @@ def spell_search(handle, entered_string, search_string, valid_characters, first=
                 location_input_interface.spell(dbus.UInt32(session_handle), dbus.UInt32(handle),
                                                dbus.String(spell_character), dbus.UInt16(20))
             else:
-                print 'TEST FAILED (Target character can not be entered)'
+                print ('TEST FAILED (Target character can not be entered)')
                 loop.quit()
         else:
-            print 'TEST FAILED (Unexpected completion)'
+            print ('TEST FAILED (Unexpected completion)')
             loop.quit()
     else:
-        print 'Full spell match'
+        print ('Full spell match')
 
 
 # Full string search
@@ -249,39 +249,39 @@ def full_string_search(handle, search_string):
 
 def evaluate_address(address, guidable):
     test_passed = 0
-    print '\nAddress complete!\nEvaluating...'
+    print ('\nAddress complete!\nEvaluating...')
     if COUNTRY_STRING[current_address_index] == '':
         test_passed = 1
     elif address[COUNTRY][1] == COUNTRY_STRING[current_address_index]:
-        print 'Country\t\t\t-> ok (' + address[COUNTRY][1] + ')'
+        print ('Country\t\t\t-> ok (' + address[COUNTRY][1] + ')')
         if CITY_STRING[current_address_index] == '':
             test_passed = 1
         elif address[CITY][1] == CITY_STRING[current_address_index]:
-            print 'City\t\t\t-> ok (' + address[CITY][1] + ')'
+            print ('City\t\t\t-> ok (' + address[CITY][1] + ')')
             if STREET_STRING[current_address_index] == '':
                 test_passed = 1
             elif address[STREET][1] == STREET_STRING[current_address_index]:
-                print 'Street\t\t\t-> ok (' + address[STREET][1] + ')'
+                print ('Street\t\t\t-> ok (' + address[STREET][1] + ')')
                 if HOUSE_NUMBER_STRING[current_address_index] == '':
                     test_passed = 1
                 elif address[HOUSE_NUMBER][1] == HOUSE_NUMBER_STRING[current_address_index]:
-                    print 'House number\t-> ok (' + address[HOUSE_NUMBER][1] + ')'
+                    print ('House number\t-> ok (' + address[HOUSE_NUMBER][1] + ')')
                     test_passed = 1
 
     if guidable == 1:
         if test_passed == 1:
-            print 'TEST PASSED'
+            print ('TEST PASSED')
         else:
-            print 'TEST FAILED (wrong address)'
+            print ('TEST FAILED (wrong address)')
             loop.quit()
     else:
-        print 'TEST FAILED (non-guidable address)'
+        print ('TEST FAILED (non-guidable address)')
         loop.quit()
     address_index = current_address_index + 1
     if address_index < len(COUNTRY_STRING):
         startSearch(address_index)
     else:
-        print 'END OF THE TEST'
+        print('END OF THE TEST')
         loop.quit()
 
 
@@ -333,7 +333,7 @@ def content_updated_handler(handle, guidable, available_selection_criteria, addr
     elif search_mode == 1:
         full_string_search(handle, target_search_string)
     else:
-        print '\nTEST FAILED (Invalid search mode)'
+        print ('\nTEST FAILED (Invalid search mode)')
         loop.quit()
 
 # Handler for SpellResult callback
@@ -355,7 +355,7 @@ def spell_result_handler(handle, unique_string, valid_characters, full_match):
 
     if len(valid_characters) == 1:
         if unicode(valid_characters[0]) == u'\x08':
-            print '\nTEST FAILED (Dead end spelling)'
+            print ('\nTEST FAILED (Dead end spelling)')
             loop.quit()
 
     if unicode(entered_search_string) == unicode(target_search_string):
@@ -399,7 +399,7 @@ def search_result_list_handler(handle, total_size, window_offset, window_size, r
                   '\' (Session '+str(int(session_handle)) + ' LocationInputHandle ' + str(int(handle))+')')
             location_input_interface.selectEntry(dbus.UInt32(session_handle), dbus.UInt32(handle), dbus.UInt16(0))
         else:
-            print '\nTEST FAILED (Unexpected single result list)'
+            print ('\nTEST FAILED (Unexpected single result list)')
             loop.quit()
     elif spell_next_character == 1:
         spell_next_character = 0
@@ -426,8 +426,8 @@ bus.add_signal_receiver(content_updated_handler,
 
 # Timeout
 def timeout():
-    print 'Timeout Expired'
-    print '\nTEST FAILED\n'
+    print('Timeout Expired')
+    print ('\nTEST FAILED\n')
     loop.quit()
 
 def startSearch(address_index):
@@ -452,21 +452,21 @@ def startSearch(address_index):
         full_string_search(location_input_handle, target_search_string)
 
     
-session = bus.get_object('org.genivi.navigationcore.Session', '/org/genivi/navigationcore')
-session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigationcore.Session')
+session = bus.get_object('org.genivi.navigation.navigationcore.Session_Session', '/Session')
+session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.navigationcore.Session')
 
 # Get SessionHandle
-session_handle = session_interface.CreateSession(dbus.String('test location input'))
-print 'Session handle = ' + str(session_handle)
+session_handle = session_interface.createSession(dbus.String('test location input'))
+print ('Session handle = ' + str(session_handle))
 
 location_input_obj = bus.get_object('org.genivi.navigation.navigationcore.LocationInput_LocationInput', '/LocationInput')
 location_input_interface = dbus.Interface(location_input_obj, dbus_interface='org.genivi.navigation.navigationcore.LocationInput')
 # Get LocationInputHandle
 location_input_handle = location_input_interface.createLocationInput(dbus.UInt32(session_handle))
-print 'LocationInput handle = ' + str(location_input_handle)
+print ('LocationInput handle = ' + str(location_input_handle))
 
 attributes = location_input_interface.getSupportedAddressAttributes()
-print 'Initially supported address attributes = ' + selection_criteria_array_to_string(attributes)
+print ('Initially supported address attributes = ' + selection_criteria_array_to_string(attributes))
 
 # Configuration
 current_address_index = 0

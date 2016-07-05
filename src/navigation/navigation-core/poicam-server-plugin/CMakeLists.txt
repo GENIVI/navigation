@@ -2,7 +2,7 @@
 # @licence app begin@
 # SPDX-License-Identifier: MPL-2.0
 #
-# Component Name: mapmatchedposition-server-plugin
+# Component Name: configuration-server-plugin
 #
 # Author: Philippe Colliot
 #
@@ -15,13 +15,14 @@
 #
 # @licence end@
 ###########################################################################
-project(session-server-plugin)
+project(poicam-server-plugin)
 cmake_minimum_required(VERSION 2.8)
 
 message(STATUS ${PROJECT_NAME})
 
 set(CMAKE_VERBOSE_MAKEFILE on)
 set(CMAKE_CXX_FLAGS "-Wall -std=c++0x")
+
 
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
@@ -53,36 +54,41 @@ pkg_check_modules(DBUS_CPP_GLIB dbus-c++-glib-1)
 
 # Add the Franca files (that will generate the CommonAPI stuff)
 set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/src-gen")
-add_subdirectory(${FRANCA_DIR}/navigation/navigationcore "${CMAKE_CURRENT_BINARY_DIR}/franca")
+add_subdirectory(${FRANCA_DIR}/navigation/poiservice "${CMAKE_CURRENT_BINARY_DIR}/franca")
 
 # Path to the generated files
 set(API_VERSION_MAJOR 4)
 set(API_VERSION "v${API_VERSION_MAJOR}")
 set(PRJ_SRC_GEN_ROOT_PATH ${COMMONAPI_GEN_DIR}/${API_VERSION}/org/genivi) #files shared by all the APIs
 set(PRJ_SRC_GEN_NAVIGATION_PATH ${PRJ_SRC_GEN_ROOT_PATH}/navigation) #files shared by the navigation APIs
-set(PRJ_SRC_GEN_NAVIGATIONCORE_PATH ${PRJ_SRC_GEN_NAVIGATION_PATH}/navigationcore) #files shared by the navigationcore APIs
+set(PRJ_SRC_GEN_POISERVICE_PATH ${PRJ_SRC_GEN_NAVIGATION_PATH}/poiservice) #files shared by the poiservice APIs
 
-# Source Files
-set(FRANCA_FILE "Session")
+# Source Files 
 FILE(GLOB PRJ_LOCAL_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.cxx)
+# Source Files for generating the server stub
+set(FRANCA_FILE_SERVER "POIContentAccessModule")
 FILE(GLOB PRJ_STUB_GEN_SRCS
     ${PRJ_SRC_GEN_ROOT_PATH}/*DBusStub*.cpp ${PRJ_SRC_GEN_ROOT_PATH}/*Types.cpp ${PRJ_SRC_GEN_ROOT_PATH}/*DBusDeployment.cpp ${PRJ_SRC_GEN_ROOT_PATH}/*StubDefault.cpp
     ${PRJ_SRC_GEN_NAVIGATION_PATH}/*DBusStub*.cpp ${PRJ_SRC_GEN_NAVIGATION_PATH}/*Types.cpp ${PRJ_SRC_GEN_NAVIGATION_PATH}/*DBusDeployment.cpp ${PRJ_SRC_GEN_NAVIGATION_PATH}/*StubDefault.cpp
-    ${PRJ_SRC_GEN_NAVIGATIONCORE_PATH}/${FRANCA_FILE}DBusStub*.cpp ${PRJ_SRC_GEN_NAVIGATIONCORE_PATH}/${FRANCA_FILE}Types.cpp ${PRJ_SRC_GEN_NAVIGATIONCORE_PATH}/${FRANCA_FILE}DBusDeployment.cpp ${PRJ_SRC_GEN_NAVIGATIONCORE_PATH}/${FRANCA_FILE}StubDefault.cpp
+    ${PRJ_SRC_GEN_POISERVICE_PATH}/${FRANCA_FILE_SERVER}DBusStub*.cpp ${PRJ_SRC_GEN_POISERVICE_PATH}/${FRANCA_FILE_SERVER}Types.cpp ${PRJ_SRC_GEN_POISERVICE_PATH}/${FRANCA_FILE_SERVER}DBusDeployment.cpp ${PRJ_SRC_GEN_POISERVICE_PATH}/${FRANCA_FILE_SERVER}StubDefault.cpp
     )
 FILE(GLOB PRJ_STUB_IMPL_SRCS
     ${PRJ_SRC_GEN_ROOT_PATH}/*Stub*.cpp
     ${PRJ_SRC_GEN_NAVIGATION_PATH}/*Stub*.cpp
-    ${PRJ_SRC_GEN_NAVIGATIONCORE_PATH}/${FRANCA_FILE}Stub*.cpp
+    ${PRJ_SRC_GEN_POISERVICE_PATH}/${FRANCA_FILE_SERVER}Stub*.cpp
     )
+set(FRANCA_FILE_CLIENT "POIContentAccess")
+FILE(GLOB PRJ_PROXY_GEN_SRCS
+    ${PRJ_SRC_GEN_POISERVICE_PATH}/${FRANCA_FILE_CLIENT}DBusClient*.cpp 
+)
 
-set(PRJ_SRCS ${PRJ_LOCAL_SRCS} ${PRJ_STUB_GEN_SRCS} ${PRJ_STUB_IMPL_SRCS})
+set(PRJ_SRCS ${PRJ_LOCAL_SRCS} ${PRJ_STUB_GEN_SRCS} ${PRJ_STUB_IMPL_SRCS} ${PRJ_PROXY_GEN_SRCS})
 
 include_directories(
     ${COMMONAPI_GEN_DIR}
     ${PRJ_SRC_GEN_ROOT_PATH}
     ${PRJ_SRC_GEN_NAVIGATION_PATH}
-    ${PRJ_SRC_GEN_NAVIGATIONCORE_PATH}
+    ${PRJ_SRC_GEN_POISERVICE_PATH}
     ${DBUS_INCLUDE_DIRS}
     ${COMMONAPI_INCLUDE_DIRS}
     ${COMMONAPI_DBUS_INCLUDE_DIRS}
@@ -110,6 +116,6 @@ set(LIBRARIES
 )
 
 # Build service
-module_add_library(genivi_navigationcore_session_server ${PRJ_SRCS})
-target_link_libraries(genivi_navigationcore_session_server ${LIBRARIES})
+module_add_library(genivi_poiservice_cam_server ${PRJ_SRCS})
+target_link_libraries(genivi_poiservice_cam_server ${LIBRARIES})
 

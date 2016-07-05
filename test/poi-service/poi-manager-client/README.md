@@ -28,6 +28,10 @@ or to build updated parts
 
 
 ## How To Run
+CommonAPI requires two configuration files that have to be accessible by the PATH, e.g. 
+```cp ./commonapi4dbus.ini ~/```
+```cp ./commonapi-dbus.ini ~/```
+
 ```./run.sh```
 
 ## How to test 

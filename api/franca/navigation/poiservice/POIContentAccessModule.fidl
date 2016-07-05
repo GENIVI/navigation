@@ -207,7 +207,7 @@ interface POIContentAccessModule {
 	broadcast ConfigurationChanged {
 		out {
 			<**	@description : changedSettings array[setting].**>
-			UInt16[] changedSettings
+			Settings[] changedSettings
 		}
 	}
 

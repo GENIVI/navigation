@@ -933,6 +933,8 @@ RoutingObj::SetRoutePreferences(uint32_t sessionHandle, const std::string& count
                 par=&s->highway_land_weight;
                 active=RoutePreference(Routing::PreferenceMode::AVOID, Routing::RoutePreferenceSource::HIGHWAYS_MOTORWAYS);
                 break;
+            default:
+                break;
             }
             if (par) {
                 if (!*par) {

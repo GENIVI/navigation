@@ -24,14 +24,6 @@ interface POIConfiguration {
 			Version ^version				
 		}	
 	}		
-    <** @description: Settings**>
-    enumeration Settings {
-        INVALID 				= 0
-        UNITS_OF_MEASUREMENT 	= 48 //Base 0x0030
-        LOCALE 					= 37
-        TIME_FORMAT 			= 3
-        COORDINATES_FORMAT 		= 6
-    }
 
     <** @description: Units of measurement**>
     enumeration UnitsOfMeasurementAttribute {

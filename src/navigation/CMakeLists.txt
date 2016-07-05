@@ -122,5 +122,6 @@ add_subdirectory(navigation-core)
 
 add_subdirectory(map-viewer)
 
-add_subdirectory(poi-cam)
-
+if (NOT WITH_PLUGIN_MIGRATION)
+    add_subdirectory(poi-cam)
+endif()
