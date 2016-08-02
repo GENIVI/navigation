@@ -1,0 +1,10 @@
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+compat_includes
+compat_libs
+*_adaptor.h
+*_proxy.h
+Makefile
+.svn
+.libs

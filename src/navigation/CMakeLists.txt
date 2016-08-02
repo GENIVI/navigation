@@ -103,6 +103,7 @@ endif()
 
 # For the moment, there's still an issue there
 #add_subdirectory(navit/navit)
+# so cmake for navit has to be invoked manually
 
 add_subdirectory(map)
 
@@ -117,6 +118,27 @@ if(${WITH_SPEECH})
 endif()
 
 include(${NAVIT_CMAKE_DIR}/navit_macros.cmake)
+
+if (WITH_PLUGIN_MIGRATION)
+    # generates the CommonAPI templates from the Franca files
+    set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/franca/src-gen")
+    # for hmi and navigation
+    set(FRANCA_DIR "${API_DIR}/franca")
+    add_subdirectory(${FRANCA_DIR} "${CMAKE_CURRENT_BINARY_DIR}/franca")
+    # for enhanced position service
+    set(FRANCA_POSITIONING_DIR "${CMAKE_CURRENT_SOURCE_DIR}/positioning/enhanced-position-service/franca/api")
+    execute_process(COMMAND uname -i OUTPUT_VARIABLE OS_VERSION)
+    if("${OS_VERSION}" MATCHES "i686")
+      set(OS_VERSION "x86")
+    else()
+      set(OS_VERSION "x86_64")
+    endif()
+    set(COMMONAPI_TOOL_GENERATOR "${COMMONAPI_TOOL_DIR}/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/${OS_VERSION}/commonapi-generator-linux-${OS_VERSION}")
+    set(COMMONAPI_DBUS_TOOL_GENERATOR "${COMMONAPI_DBUS_TOOL_DIR}/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/${OS_VERSION}/commonapi-dbus-generator-linux-${OS_VERSION}")
+    set(WITH_FRANCA_DBUS_INTERFACE "ON")
+    set(COMMONAPI_GEN_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/enhanced-position-service/franca/api")
+    add_subdirectory(${FRANCA_POSITIONING_DIR} "${CMAKE_CURRENT_BINARY_DIR}/franca-positioning")
+endif()
 
 add_subdirectory(navigation-core)
 

@@ -23,27 +23,17 @@
         <xsl:template match="/config/plugins/plugin[1]" priority="1" >
 		<xsl:copy><xsl:apply-templates select="@*|node()"/></xsl:copy>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../navigation-core/configuration-server-plugin/.libs/libgenivi_navigationcore_configuration_server.so" ondemand="no"/>
+		<plugin path="../../map-viewer/configuration-server-plugin/.libs/libgenivi_mapviewer_configuration_server.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../navigation-core/locationinput-server-plugin/.libs/libgenivi_navigationcore_locationinput_server.so" ondemand="no"/>
+		<plugin path="../../map-viewer/session-server-plugin/.libs/libgenivi_mapviewer_session_server.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../navigation-core/routing-server-plugin/.libs/libgenivi_navigationcore_routing_server.so" ondemand="no"/>
-		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../navigation-core/session-server-plugin/.libs/libgenivi_navigationcore_session_server.so" ondemand="no"/>
-		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../navigation-core/guidance-server-plugin/.libs/libgenivi_navigationcore_guidance_server.so" ondemand="no"/>
-		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../navigation-core/mapmatchedposition-server-plugin/.libs/libgenivi_navigationcore_mapmatchedposition_server.so" ondemand="no"/>
-		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../navigation-core/enhancedposition-client-plugin/.libs/libgenivi_positioning_enhancedposition_client.so" ondemand="no"/>
-		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../navigation-core/poicam-server-plugin/.libs/libgenivi_poiservice_cam_server.so" ondemand="no"/>
+		<plugin path="../../map-viewer/mapviewercontrol-server-plugin/.libs/libgenivi_mapviewer_mapviewercontrol_server.so" ondemand="no"/>
         </xsl:template>
         <xsl:template match="/config/plugins/plugin">
 		<xsl:copy><xsl:apply-templates select="@*|node()"/></xsl:copy>
 	</xsl:template>
-	<xsl:template match="/config/navit">
-		<xsl:copy><xsl:attribute name="flags">3</xsl:attribute><xsl:apply-templates select="@*|node()"/></xsl:copy>
+        <xsl:template match="/config/navit">
+		<xsl:copy><xsl:attribute name="flags">7</xsl:attribute><xsl:attribute name="tracking">0</xsl:attribute><xsl:apply-templates select="@*|node()"/></xsl:copy>
 	</xsl:template>
 	<xsl:template match="/config/navit/graphics">
 		<xsl:copy><xsl:attribute name="enabled">no</xsl:attribute><xsl:apply-templates select="@*|node()"/></xsl:copy>
@@ -52,12 +42,7 @@
 		<xsl:copy><xsl:attribute name="enabled">no</xsl:attribute><xsl:apply-templates select="@*[not(name()='enabled')]|node()"/></xsl:copy>
 	</xsl:template>
 	<xsl:template match="/config/navit/vehicle[@name='Local GPS']">
-		<xsl:copy><xsl:attribute name="enabled">no</xsl:attribute><xsl:apply-templates select="@*[not(name()='enabled')]|node()"/></xsl:copy>
-	</xsl:template>
-	<xsl:template match="/config/navit/vehicle[@name='Demo']">
-		<vehicle name="EnhancedPosition" profilename="car" active="yes" source="enhancedposition://"/>
-		<xsl:text>&#x0A;                </xsl:text>
-		<xsl:copy><xsl:attribute name="active">no</xsl:attribute><xsl:apply-templates select="@*[not(name()='enabled' or name()='active')]|node()"/></xsl:copy>
+		<xsl:copy><xsl:attribute name="source">null:</xsl:attribute><xsl:attribute name="follow">null:</xsl:attribute></xsl:copy>
 	</xsl:template>
 	<xsl:template match="@*|node()"><xsl:copy><xsl:apply-templates select="@*|node()"/></xsl:copy></xsl:template>
 </xsl:transform>

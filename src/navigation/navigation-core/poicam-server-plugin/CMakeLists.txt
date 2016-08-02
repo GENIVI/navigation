@@ -52,10 +52,6 @@ pkg_check_modules(GLIB REQUIRED glib-2.0)
 pkg_check_modules(DBUS_CPP_GLIB dbus-c++-glib-1)
 
 
-# Add the Franca files (that will generate the CommonAPI stuff)
-set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/src-gen")
-add_subdirectory(${FRANCA_DIR}/navigation/poiservice "${CMAKE_CURRENT_BINARY_DIR}/franca")
-
 # Path to the generated files
 set(API_VERSION_MAJOR 4)
 set(API_VERSION "v${API_VERSION_MAJOR}")
@@ -79,7 +75,7 @@ FILE(GLOB PRJ_STUB_IMPL_SRCS
     )
 set(FRANCA_FILE_CLIENT "POIContentAccess")
 FILE(GLOB PRJ_PROXY_GEN_SRCS
-    ${PRJ_SRC_GEN_POISERVICE_PATH}/${FRANCA_FILE_CLIENT}DBusClient*.cpp 
+    ${PRJ_SRC_GEN_POISERVICE_PATH}/${FRANCA_FILE_CLIENT}*DBusProxy.cpp
 )
 
 set(PRJ_SRCS ${PRJ_LOCAL_SRCS} ${PRJ_STUB_GEN_SRCS} ${PRJ_STUB_IMPL_SRCS} ${PRJ_PROXY_GEN_SRCS})

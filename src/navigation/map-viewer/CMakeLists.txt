@@ -45,15 +45,29 @@ find_program(XSLTPROC xsltproc REQUIRED)
 
 # Generate the config file for navit/mapviewer
 if(NOT ${YOCTO_CONFIG})
-    execute_process(
-        OUTPUT_FILE ${NAVIT_BIN_DIR}/navit_genivi_mapviewer.xml
-        COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_mapviewer.xsl ${navit_SOURCE_DIR}/navit/navit_shipped.xml
-    )
+    if (WITH_PLUGIN_MIGRATION)
+        execute_process(
+            OUTPUT_FILE ${NAVIT_BIN_DIR}/navit_genivi_mapviewer.xml
+            COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_mapviewer_capi.xsl ${navit_SOURCE_DIR}/navit/navit_shipped.xml
+        )
+    else()
+        execute_process(
+            OUTPUT_FILE ${NAVIT_BIN_DIR}/navit_genivi_mapviewer.xml
+            COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_mapviewer.xsl ${navit_SOURCE_DIR}/navit/navit_shipped.xml
+        )
+    endif()
 else()
-    execute_process(
-        OUTPUT_FILE ${CMAKE_CURRENT_BINARY_DIR}/navit_genivi_mapviewer.xml
-        COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_mapviewer.xsl ${NAVIT_CMAKE_DIR}/../navit/navit_shipped.xml
-    )
+    if (WITH_PLUGIN_MIGRATION)
+        execute_process(
+            OUTPUT_FILE ${CMAKE_CURRENT_BINARY_DIR}/navit_genivi_mapviewer.xml
+            COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_mapviewer_capi.xsl ${NAVIT_CMAKE_DIR}/../navit/navit_shipped.xml
+        )
+    else()
+        execute_process(
+            OUTPUT_FILE ${CMAKE_CURRENT_BINARY_DIR}/navit_genivi_mapviewer.xml
+            COMMAND ${XSLTPROC} ${CMAKE_CURRENT_SOURCE_DIR}/navit_genivi_mapviewer.xsl ${NAVIT_CMAKE_DIR}/../navit/navit_shipped.xml
+        )
+    endif()
 endif()
 
 add_definitions(-DPLUGIN=1)
@@ -75,8 +89,13 @@ if(${YOCTO_CONFIG})
     include_directories(${STAGING_INCDIR}/navit)
 endif()
 
-add_subdirectory(configuration-plugin)
-
-add_subdirectory(mapviewercontrol-plugin)
-
-add_subdirectory(session-plugin)
+if (WITH_PLUGIN_MIGRATION)
+    set(FRANCA_DIR "${API_DIR}/franca")
+    add_subdirectory(configuration-server-plugin)
+    add_subdirectory(mapviewercontrol-server-plugin)
+    add_subdirectory(session-server-plugin)
+else()
+    add_subdirectory(configuration-plugin)
+    add_subdirectory(mapviewercontrol-plugin)
+    add_subdirectory(session-plugin)
+endif()

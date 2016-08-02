@@ -91,7 +91,12 @@ class LocationInputObj
 class  LocationInputServerStub : public LocationInputStubDefault {
 
 public:
+
+#define MAX_LOCATION_HANDLES 256
+#define FIRST_LOCATION_HANDLE 1
+
     LocationInputServerStub(){
+        mp_handles[FIRST_LOCATION_HANDLE]=NULL;
         m_version.setVersionMajor(3);
         m_version.setVersionMinor(0);
         m_version.setVersionMicro(0);
@@ -115,10 +120,10 @@ public:
     void createLocationInput(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, createLocationInputReply_t _reply){
         uint32_t LocationInputHandle;
         dbg(lvl_debug,"enter\n");
-        LocationInputHandle=1;
-        while (mp_handles[LocationInputHandle]) {
+        LocationInputHandle=FIRST_LOCATION_HANDLE;
+        while (mp_handles.count(LocationInputHandle)>0 ) {
             LocationInputHandle++;
-            if (LocationInputHandle == 256)
+            if (LocationInputHandle == MAX_LOCATION_HANDLES)
                 throw DBus::ErrorLimitsExceeded("Out of location handles");
         }
         mp_handles[LocationInputHandle]=new LocationInputObj(this, LocationInputHandle);
@@ -131,11 +136,14 @@ public:
      */
     void deleteLocationInput(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::LocationHandle _locationInputHandle, deleteLocationInputReply_t _reply){
         dbg(lvl_debug,"enter\n");
-        LocationInputObj *obj=mp_handles[_locationInputHandle];
-        if (!obj)
-             throw DBus::ErrorInvalidArgs("location handle invalid");
-        delete(obj);
-        mp_handles[_locationInputHandle]=NULL;
+        if (mp_handles.find(_locationInputHandle) != mp_handles.end())
+        {
+            LocationInputObj *obj=mp_handles[_locationInputHandle];
+            delete(obj);
+        }
+        else {
+            throw DBus::ErrorInvalidArgs("location handle invalid");
+        }
         _reply();
     }
 

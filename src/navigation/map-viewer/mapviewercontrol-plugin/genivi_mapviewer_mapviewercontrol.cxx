@@ -432,17 +432,16 @@ class  MapViewerControl
         }
     }
 
-    void
-    GetMapViewPan(const uint32_t& mapViewInstanceHandle, const DBusCommonAPIEnumeration& valueToReturn, const std::vector< ::DBus::Struct< uint16_t, uint16_t > >& pixelCoordinates)
+    std::vector< ::DBus::Struct< uint16_t, uint16_t > >
+    GetMapViewPan(const uint32_t& mapViewInstanceHandle, const int32_t& valueToReturn)
     {
+        std::vector< ::DBus::Struct< uint16_t, uint16_t > > pixelCoordinates;
         ::DBus::Struct< uint16_t, uint16_t > pixel;
         MapViewerControlObj *obj=handles[mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
         obj->GetMapViewPan(valueToReturn, pixel); //limited to one pixel coordinate
-#if 0 /* FIXME */
         pixelCoordinates.push_back(pixel);
-#endif
     }
 
 	void

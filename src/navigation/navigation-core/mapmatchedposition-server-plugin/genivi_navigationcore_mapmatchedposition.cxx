@@ -269,7 +269,7 @@ class  MapMatchedPositionServerStub : public MapMatchedPositionStubDefault
     /**
      * description: getAddress = This method returns the current address
      */
-    void getAddress(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector<MapMatchedPosition::AddressItemKey> _valuesToReturn, getAddressReply_t _reply){
+    void getCurrentAddress(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector<MapMatchedPosition::AddressItemKey> _valuesToReturn, getCurrentAddressReply_t _reply){
         MapMatchedPosition::AddressItemDict ret;
         std::vector< MapMatchedPosition::AddressItemKey >::const_iterator it;
         for (it = _valuesToReturn.begin(); it < _valuesToReturn.end(); it++) {

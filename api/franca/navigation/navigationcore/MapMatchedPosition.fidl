@@ -278,7 +278,7 @@ interface MapMatchedPosition {
 	<**
 		@description : getAddress = This method returns the current address
 	**>
-	method getAddress {
+	method getCurrentAddress {
 		in {
 			AddressItemKey[] valuesToReturn
 		}

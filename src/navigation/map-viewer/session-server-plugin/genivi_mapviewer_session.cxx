@@ -4,7 +4,7 @@
 *
 * \copyright Copyright (C) 2013-2014, PCA Peugeot Citroen
 *
-* \file genivi_navigationcore_session.cxx
+* \file genivi_mapviewer_session.cxx
 *
 * \brief This file is part of the Navit POC.
 *
@@ -35,7 +35,6 @@
 #include <CommonAPI/CommonAPI.hpp>
 #include <CommonTypes.hpp>
 #include <NavigationTypes.hpp>
-#include <NavigationCoreTypes.hpp>
 #include <SessionStubDefault.hpp>
 
 #if (!DEBUG_ENABLED)
@@ -43,7 +42,7 @@
 #define dbg(level,...) ;
 #endif
 
-using namespace v4::org::genivi::navigation::navigationcore;
+using namespace v4::org::genivi::navigation::mapviewer;
 using namespace v4::org::genivi::navigation;
 using namespace v4::org::genivi;
 
@@ -54,7 +53,7 @@ class  SessionServerStub : public SessionStubDefault
 #define MAX_SESSION_HANDLES 256
 
     SessionServerStub()
-	{
+    {
         m_version.setVersionMajor(3);
         m_version.setVersionMinor(0);
         m_version.setVersionMicro(0);

@@ -29,7 +29,13 @@ option(COMMONAPI_TOOL_DIR
 option(COMMONAPI_DBUS_TOOL_DIR
        "Absolute path to CommonAPI-DBus tool" "")
 
-set(COMMONAPI_GEN_DIR ${CMAKE_CURRENT_BINARY_DIR})
+get_directory_property(hasParent PARENT_DIRECTORY)
+
+if(hasParent) 
+    set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/src-gen" PARENT_SCOPE)
+else()
+    set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/src-gen")
+endif()
 
 if (COMMONAPI_TOOL_DIR)
     message(STATUS "COMMONAPI_TOOL_DIR ${COMMONAPI_TOOL_DIR}")

@@ -439,12 +439,12 @@ plugin_init(void)
 
     const std::string instancePOIContentAccess = "POIContentAccess";
 
-/*    myServicePOIContentAccess = runtime->buildProxy<POIContentAccessProxy>(domain, instancePOIContentAccess);
+    myServicePOIContentAccess = runtime->buildProxy<POIContentAccessProxy>(domain, instancePOIContentAccess);
 
     while (!myServicePOIContentAccess->isAvailable()) {
         usleep(10);
     }
 
     myServicePOIContentAccessModule->register_cam();
-*/
+
 }

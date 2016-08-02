@@ -90,8 +90,6 @@ if(${YOCTO_CONFIG})
 endif()
 
 
-add_subdirectory(enhancedposition-plugin)
-
 if (WITH_PLUGIN_MIGRATION)
     set(FRANCA_DIR "${API_DIR}/franca")
     add_subdirectory(configuration-server-plugin)
@@ -101,6 +99,7 @@ if (WITH_PLUGIN_MIGRATION)
     add_subdirectory(routing-server-plugin)
     add_subdirectory(session-server-plugin)
     add_subdirectory(poicam-server-plugin)
+    add_subdirectory(enhancedposition-client-plugin)
 else()
     add_subdirectory(configuration-plugin)
     add_subdirectory(locationinput-plugin)
@@ -108,5 +107,6 @@ else()
     add_subdirectory(mapmatchedposition-plugin)
     add_subdirectory(routing-plugin)
     add_subdirectory(session-plugin)
+    add_subdirectory(enhancedposition-plugin)
 endif()
 

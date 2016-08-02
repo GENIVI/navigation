@@ -2,7 +2,7 @@
 # @licence app begin@
 # SPDX-License-Identifier: MPL-2.0
 #
-# Component Name: configuration-server-plugin
+# Component Name: control-server-plugin
 #
 # Author: Philippe Colliot
 #
@@ -15,7 +15,7 @@
 #
 # @licence end@
 ###########################################################################
-project(guidance-server-plugin)
+project(mapviewer-control-server-plugin)
 cmake_minimum_required(VERSION 2.8)
 
 message(STATUS ${PROJECT_NAME})
@@ -57,28 +57,36 @@ set(API_VERSION_MAJOR 4)
 set(API_VERSION "v${API_VERSION_MAJOR}")
 set(PRJ_SRC_GEN_ROOT_PATH ${COMMONAPI_GEN_DIR}/${API_VERSION}/org/genivi) #files shared by all the APIs
 set(PRJ_SRC_GEN_NAVIGATION_PATH ${PRJ_SRC_GEN_ROOT_PATH}/navigation) #files shared by the navigation APIs
+set(PRJ_SRC_GEN_MAPVIEWER_PATH ${PRJ_SRC_GEN_NAVIGATION_PATH}/mapviewer) #files shared by the mapviewer APIs
 set(PRJ_SRC_GEN_NAVIGATIONCORE_PATH ${PRJ_SRC_GEN_NAVIGATION_PATH}/navigationcore) #files shared by the navigationcore APIs
 
 # Source Files
-set(FRANCA_FILE "Guidance")
+set(FRANCA_FILE "MapViewerControl")
 FILE(GLOB PRJ_LOCAL_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.cxx)
 FILE(GLOB PRJ_STUB_GEN_SRCS
     ${PRJ_SRC_GEN_ROOT_PATH}/*DBusStub*.cpp ${PRJ_SRC_GEN_ROOT_PATH}/*Types.cpp ${PRJ_SRC_GEN_ROOT_PATH}/*DBusDeployment.cpp ${PRJ_SRC_GEN_ROOT_PATH}/*StubDefault.cpp
     ${PRJ_SRC_GEN_NAVIGATION_PATH}/*DBusStub*.cpp ${PRJ_SRC_GEN_NAVIGATION_PATH}/*Types.cpp ${PRJ_SRC_GEN_NAVIGATION_PATH}/*DBusDeployment.cpp ${PRJ_SRC_GEN_NAVIGATION_PATH}/*StubDefault.cpp
-    ${PRJ_SRC_GEN_NAVIGATIONCORE_PATH}/${FRANCA_FILE}DBusStub*.cpp ${PRJ_SRC_GEN_NAVIGATIONCORE_PATH}/${FRANCA_FILE}Types.cpp ${PRJ_SRC_GEN_NAVIGATIONCORE_PATH}/${FRANCA_FILE}DBusDeployment.cpp ${PRJ_SRC_GEN_NAVIGATIONCORE_PATH}/${FRANCA_FILE}StubDefault.cpp
+    ${PRJ_SRC_GEN_MAPVIEWER_PATH}/${FRANCA_FILE}DBusStub*.cpp ${PRJ_SRC_GEN_MAPVIEWER_PATH}/${FRANCA_FILE}Types.cpp ${PRJ_SRC_GEN_MAPVIEWER_PATH}/${FRANCA_FILE}DBusDeployment.cpp ${PRJ_SRC_GEN_MAPVIEWER_PATH}/${FRANCA_FILE}StubDefault.cpp
     )
 FILE(GLOB PRJ_STUB_IMPL_SRCS
     ${PRJ_SRC_GEN_ROOT_PATH}/*Stub*.cpp
     ${PRJ_SRC_GEN_NAVIGATION_PATH}/*Stub*.cpp
-    ${PRJ_SRC_GEN_NAVIGATIONCORE_PATH}/${FRANCA_FILE}Stub*.cpp
+    ${PRJ_SRC_GEN_MAPVIEWER_PATH}/${FRANCA_FILE}Stub*.cpp
     )
+# here the source files for the proxies
+FILE(GLOB PRJ_PROXY_GEN_SRCS
+    ${PRJ_SRC_GEN_NAVIGATIONCORE_PATH}/RoutingDBusProxy.cpp
+    ${PRJ_SRC_GEN_NAVIGATIONCORE_PATH}/MapMatchedPositionDBusProxy.cpp
+    ${PRJ_SRC_GEN_NAVIGATIONCORE_PATH}/SessionDBusProxy.cpp
+)
 
-set(PRJ_SRCS ${PRJ_LOCAL_SRCS} ${PRJ_STUB_GEN_SRCS} ${PRJ_STUB_IMPL_SRCS})
+set(PRJ_SRCS ${PRJ_LOCAL_SRCS} ${PRJ_STUB_GEN_SRCS} ${PRJ_STUB_IMPL_SRCS} ${PRJ_PROXY_GEN_SRCS})
 
 include_directories(
     ${COMMONAPI_GEN_DIR}
     ${PRJ_SRC_GEN_ROOT_PATH}
     ${PRJ_SRC_GEN_NAVIGATION_PATH}
+    ${PRJ_SRC_GEN_MAPVIEWER_PATH}
     ${PRJ_SRC_GEN_NAVIGATIONCORE_PATH}
     ${DBUS_INCLUDE_DIRS}
     ${COMMONAPI_INCLUDE_DIRS}
@@ -107,6 +115,6 @@ set(LIBRARIES
 )
 
 # Build service
-module_add_library(genivi_navigationcore_guidance_server ${PRJ_SRCS})
-target_link_libraries(genivi_navigationcore_guidance_server ${LIBRARIES})
+module_add_library(genivi_mapviewer_mapviewercontrol_server ${PRJ_SRCS})
+target_link_libraries(genivi_mapviewer_mapviewercontrol_server ${LIBRARIES})
 

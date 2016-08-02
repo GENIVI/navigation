@@ -161,7 +161,7 @@ interface Routing {
 	//TODO: Incomplete
 	union RouteSegmentItem {
 		Double doubleValue // LATITUDE, LONGITUDE, ALTITUDE
-		IntermediatePoint intermediatePoints
+		IntermediatePoint[] intermediatePoints
 		String stringValue // ROAD_NUMBER
 		ByteBuffer linkId
 		Int32 int32Value

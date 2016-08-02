@@ -1330,6 +1330,8 @@ interface MapViewerControl {
 				@description : valueToReturn = enum(PAN_START,PAN_TO,PAN_END)
 			**>
 			PanAction  valueToReturn
+		}
+		out {
 			
 			Pixel [] pixelCoordinates
 		}

@@ -1067,7 +1067,7 @@ cover with other windows or user interface elements</line>
           <line>valueToReturn = enum(PAN_START,PAN_TO,PAN_END)</line>
         </doc>
       </arg>
-      <arg name="pixelCoordinates" type="a(qq)" direction="in">
+      <arg name="pixelCoordinates" type="a(qq)" direction="out">
         <doc>
           <line>pixelCoordinates = array[struct(x,y)]</line>
           <line>x = x-coordinate (x=0 indicates the first left pixel of the map view)</line>
