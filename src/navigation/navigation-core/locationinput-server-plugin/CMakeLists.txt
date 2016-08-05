@@ -34,7 +34,7 @@ if(DBUS_LIB_PATH)
   message(STATUS "DBUS_LIB_PATH = " ${DBUS_LIB_PATH})
   set(DBUS_INCLUDE_DIRS ${DBUS_LIB_PATH}/include/dbus-1.0 ${DBUS_LIB_PATH}/lib/dbus-1.0/include)
   set(DBUS_LIBDIR ${DBUS_LIB_PATH}/lib)
-  set(DBUS_LIBRARIES ${DBUS_LIB_PATH}/lib/libdbus-1.so)
+  set(DBUS_LIBRARIES ${DBUS_LIBDIR}/libdbus-1.so)
 else()
   message(FATAL_ERROR "Please specify the path to your patched DBus library using -DDBUS_LIB_PATH=yourPath")
 endif()
@@ -98,9 +98,9 @@ link_directories(
 )
 
 set(LIBRARIES
-    ${DBUS_LIBRARIES}
     ${COMMONAPI_LIBRARIES}
     ${COMMONAPI_DBUS_LIBRARIES}
+    ${DBUS_LIBRARIES}
     ${GOBJECT_LIBRARIES}
     ${GLIB_LIBRARIES}
     ${DBUS_CPP_GLIB_LIBRARIES}

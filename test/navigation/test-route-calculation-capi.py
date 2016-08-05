@@ -179,12 +179,13 @@ def launch_route_calculation(route):
 '+start+'(' + str(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][0]) + ',' + str(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][1]) + ') to \
 '+dest+'(' + str(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][0]) + ',' + str(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][1]) + ')' 
     #set waypoints
+    waypointDoubleCapiType = 0x03
     g_routing_interface.setWaypoints(dbus.UInt32(g_session_handle), \
                                    dbus.UInt32(g_route_handle), \
                                    dbus.Boolean(0), \
                                    dbus.Array([ \
-                                        dbus.Dictionary({dbus.Int32(GENIVI_NAVIGATIONCORE_LATITUDE):dbus.Struct([dbus.Byte(0),dbus.Double(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][0])]),dbus.Int32(GENIVI_NAVIGATIONCORE_LONGITUDE):dbus.Struct([dbus.Byte(0),dbus.Double(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][1])])}), \
-                                        dbus.Dictionary({dbus.Int32(GENIVI_NAVIGATIONCORE_LATITUDE):dbus.Struct([dbus.Byte(0),dbus.Double(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][0])]),dbus.Int32(GENIVI_NAVIGATIONCORE_LONGITUDE):dbus.Struct([dbus.Byte(0),dbus.Double(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][1])])}) \
+                                        dbus.Dictionary({dbus.Int32(GENIVI_NAVIGATIONCORE_LATITUDE):dbus.Struct([dbus.Byte(waypointDoubleCapiType),dbus.Double(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][0])]),dbus.Int32(GENIVI_NAVIGATIONCORE_LONGITUDE):dbus.Struct([dbus.Byte(waypointDoubleCapiType),dbus.Double(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][1])])}), \
+                                        dbus.Dictionary({dbus.Int32(GENIVI_NAVIGATIONCORE_LATITUDE):dbus.Struct([dbus.Byte(waypointDoubleCapiType),dbus.Double(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][0])]),dbus.Int32(GENIVI_NAVIGATIONCORE_LONGITUDE):dbus.Struct([dbus.Byte(waypointDoubleCapiType),dbus.Double(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][1])])}) \
                                    ]) \
                                    )
     

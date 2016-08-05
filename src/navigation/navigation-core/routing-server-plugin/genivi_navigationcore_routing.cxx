@@ -342,8 +342,6 @@ class  RoutingServerStub : public RoutingStubDefault
         RoutingObj *obj=mp_handles[_routeHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Route handle invalid");
-        printf("0\n");
-
         obj->SetWaypoints(_sessionHandle, _startFromCurrentPosition, _waypointsList);
         _reply();
     }
@@ -648,8 +646,6 @@ RoutingObj::SetWaypoints(uint32_t SessionHandle, bool StartFromCurrentPosition, 
     }
     for (size_t i=0 ; i < Waypoints.size(); i++) {
         waypoint = Waypoints[i];
-        printf("0\n");
-        printf("%d",waypoint[Routing::WaypointElementType::LATITUDE]);
         if (waypoint.find(Routing::WaypointElementType::LATITUDE) == waypoint.end())
             throw DBus::ErrorInvalidArgs("Waypoint doesn't contain Latitude");
         if (waypoint.find(Routing::WaypointElementType::LONGITUDE) == waypoint.end())
@@ -688,7 +684,7 @@ RoutingObj::CalculateRoute(uint32_t SessionHandle)
     struct pcoord pc;
 
     if (!m_waypoints.size())
-        throw DBus::ErrorFailed("no waipoints set");
+        throw DBus::ErrorFailed("no waypoints set");
     route_set_profile(m_route.u.route,m_vehicleprofile.u.vehicleprofile);
     if (!m_startfromcurrentposition) {
         route_set_destination(m_route.u.route, NULL, 0);

@@ -121,7 +121,7 @@ public:
         uint32_t LocationInputHandle;
         dbg(lvl_debug,"enter\n");
         LocationInputHandle=FIRST_LOCATION_HANDLE;
-        while (mp_handles.count(LocationInputHandle)>0 ) {
+        while ((mp_handles.count(LocationInputHandle)>0 ) && (mp_handles[LocationInputHandle] != NULL)) {
             LocationInputHandle++;
             if (LocationInputHandle == MAX_LOCATION_HANDLES)
                 throw DBus::ErrorLimitsExceeded("Out of location handles");
@@ -140,10 +140,12 @@ public:
         {
             LocationInputObj *obj=mp_handles[_locationInputHandle];
             delete(obj);
+            mp_handles[_locationInputHandle]=NULL;
         }
         else {
             throw DBus::ErrorInvalidArgs("location handle invalid");
         }
+
         _reply();
     }
 

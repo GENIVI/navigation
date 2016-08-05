@@ -226,10 +226,10 @@ def spell_search(handle, entered_string, search_string, valid_characters, first=
                                                dbus.String(spell_character), dbus.UInt16(20))
             else:
                 print ('TEST FAILED (Target character can not be entered)')
-                loop.quit()
+                exit()
         else:
             print ('TEST FAILED (Unexpected completion)')
-            loop.quit()
+            exit()
     else:
         print ('Full spell match')
 
@@ -273,16 +273,16 @@ def evaluate_address(address, guidable):
             print ('TEST PASSED')
         else:
             print ('TEST FAILED (wrong address)')
-            loop.quit()
+            exit()
     else:
         print ('TEST FAILED (non-guidable address)')
-        loop.quit()
+        exit()
     address_index = current_address_index + 1
     if address_index < len(COUNTRY_STRING):
         startSearch(address_index)
     else:
         print('END OF THE TEST')
-        loop.quit()
+        exit()
 
 
 # Signal receiver
@@ -334,7 +334,7 @@ def content_updated_handler(handle, guidable, available_selection_criteria, addr
         full_string_search(handle, target_search_string)
     else:
         print ('\nTEST FAILED (Invalid search mode)')
-        loop.quit()
+        exit()
 
 # Handler for SpellResult callback
 def spell_result_handler(handle, unique_string, valid_characters, full_match):
@@ -356,7 +356,7 @@ def spell_result_handler(handle, unique_string, valid_characters, full_match):
     if len(valid_characters) == 1:
         if unicode(valid_characters[0]) == u'\x08':
             print ('\nTEST FAILED (Dead end spelling)')
-            loop.quit()
+            exit()
 
     if unicode(entered_search_string) == unicode(target_search_string):
         found_exact_match = 1
@@ -400,7 +400,7 @@ def search_result_list_handler(handle, total_size, window_offset, window_size, r
             location_input_interface.selectEntry(dbus.UInt32(session_handle), dbus.UInt32(handle), dbus.UInt16(0))
         else:
             print ('\nTEST FAILED (Unexpected single result list)')
-            loop.quit()
+            exit()
     elif spell_next_character == 1:
         spell_next_character = 0
         spell_search(handle, entered_search_string, target_search_string, available_characters)
@@ -428,8 +428,13 @@ bus.add_signal_receiver(content_updated_handler,
 def timeout():
     print('Timeout Expired')
     print ('\nTEST FAILED\n')
-    loop.quit()
+    exit()
 
+# Exit
+def exit():
+    location_input_interface.deleteLocationInput(dbus.UInt32(session_handle),dbus.UInt32(location_input_handle))
+    loop.quit()
+    
 def startSearch(address_index):
     global entered_search_string
     global spell_next_character

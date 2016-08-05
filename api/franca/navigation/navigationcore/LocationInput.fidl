@@ -58,7 +58,7 @@ interface LocationInput {
 	    Double doubleValue
 	    String stringValue
 	    Coordinate3D coordinate3DValue
-	    ByteBuffer internalData
+	    UInt8[] internalData
     }
 
 	map Address {

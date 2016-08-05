@@ -68,11 +68,6 @@ interface Routing {
 		DEPARTURE_DATE		= 397 
 	}
 
-	enumeration RouteOverviewType extends Schedule  {
-		TOTAL_TIME			= 398
-		TOTAL_DISTANCE		= 399
-	}
-	
 	enumeration PreferenceMode extends BasicEnum { //Base 0x0190
  		PROHIBIT		= 400
  		AVOID			= 401
@@ -95,10 +90,6 @@ interface Routing {
 		RoutePreferenceSource source
 	}
 
-
-	<**
-		@description : struct generated for DBus argument SetRoutePreferences_conditionPreferenceList
-	**>
 	struct ConditionPreference {
 		PreferenceMode mode
 		ConditionPreferenceSource source
@@ -118,11 +109,46 @@ interface Routing {
 		ALTITUDE	= 162
 	}
 	
-	enumeration WaypointElementType extends GeoLocalizedEnum {
-		WAYPOINT_TYPE		= 289
-		LOCATION_INPUT		= 17
+	struct IntermediatePoint extends Coordinate2D {
+		WayPointType type
+	}
+		
+	enumeration WayPointType {
+		HARD_POINT 				= 290
+		SOFT_POINT				= 291
 	}
 	
+	enumeration RouteOverviewType extends Schedule  {
+		TOTAL_TIME			= 398
+		TOTAL_DISTANCE		= 399
+	}
+	
+	union RouteOverviewItem {
+		UInt32 uValue
+	}
+	
+	map RouteOverview {
+		RouteOverviewType to RouteOverviewItem
+	}
+
+	enumeration WaypointElementType {
+		LATITUDE				= 160
+		LONGITUDE				= 161
+		ALTITUDE				= 162
+		LOCATION_INPUT			= 17
+		WAYPOINT_TYPE			= 289
+	}
+		
+	union WayPointItem {
+		Double coordinateValue
+		WayPointType waypointValue
+		UInt8[] metaData
+	}
+
+	map WayPoint {
+		WaypointElementType to WayPointItem
+	}
+
 	enumeration RouteSegmentType extends BasicEnum {
 		LINK_ID					= 320 		//Base 0x0140
 		START_LATITUDE			= 321
@@ -144,48 +170,20 @@ interface Routing {
         HIGHWAY_EXIT			= 116
         SPEED 					= 164
 	}
-	
-	enumeration IntermediatePointType {
-		HARD_POINT
-		SOFT_POINT
-	}
-	
-	union RouteOverviewItem {
-		UInt32 uValue
-	}
-	
-	struct IntermediatePoint extends Coordinate2D {
-		IntermediatePointType type
-	}
-	
+
 	//TODO: Incomplete
 	union RouteSegmentItem {
 		Double doubleValue // LATITUDE, LONGITUDE, ALTITUDE
 		IntermediatePoint[] intermediatePoints
 		String stringValue // ROAD_NUMBER
-		ByteBuffer linkId
+		UInt8[] linkId
 		Int32 int32Value
 		Int16 int16Value
 		UInt32 uInt32Value
 	}
-	
-	union WayPointItem {
-		Double coordinateValue
-		Int32 altitudeValue
-		IntermediatePointType wayPointValue
-		ByteBuffer metaData
-	}
-	
-	map WayPoint {
-		WaypointElementType to WayPointItem
-	}
-
+		
 	map RouteSegment {
 		RouteSegmentType to RouteSegmentItem
-	}
-
-	map RouteOverview {
-		RouteOverviewType to RouteOverviewItem
 	}
 
 	<**
@@ -772,7 +770,7 @@ interface Routing {
 			<**
 				@description : percentage = progress status. Range [0:100]
 			**>
-			Int8 percentage
+			UInt8 percentage
 		}
 	}
 

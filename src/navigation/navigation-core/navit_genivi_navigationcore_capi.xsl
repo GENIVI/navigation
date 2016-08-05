@@ -35,9 +35,9 @@
 		<xsl:text>&#x0A;                </xsl:text>
 		<plugin path="../../navigation-core/mapmatchedposition-server-plugin/.libs/libgenivi_navigationcore_mapmatchedposition_server.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../navigation-core/enhancedposition-client-plugin/.libs/libgenivi_positioning_enhancedposition_client.so" ondemand="no"/>
+		<plugin path="../../navigation-core/enhancedposition-plugin/.libs/libgenivi_positioning_enhancedposition.so" ondemand="no"/>
 		<xsl:text>&#x0A;                </xsl:text>
-		<plugin path="../../navigation-core/poicam-server-plugin/.libs/libgenivi_poiservice_cam_server.so" ondemand="no"/>
+		<plugin path="../../poi-cam/.libs/libgenivi_poiservice_cam_navit.so" ondemand="no"/>
         </xsl:template>
         <xsl:template match="/config/plugins/plugin">
 		<xsl:copy><xsl:apply-templates select="@*|node()"/></xsl:copy>
