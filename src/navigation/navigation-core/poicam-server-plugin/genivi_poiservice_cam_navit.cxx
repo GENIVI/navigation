@@ -436,15 +436,13 @@ plugin_init(void)
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
         successfullyRegistered = runtime->registerService(domain, instancePOIContentAccessModule, myServicePOIContentAccessModule);
     }
-
     const std::string instancePOIContentAccess = "POIContentAccess";
-
     myServicePOIContentAccess = runtime->buildProxy<POIContentAccessProxy>(domain, instancePOIContentAccess);
 
-    while (!myServicePOIContentAccess->isAvailable()) {
-        usleep(10);
-    }
+    // not working correctly (blocked) so removed for the moment
+//    while (!myServicePOIContentAccess->isAvailable()) {
+//        usleep(10);
+//    }
 
-    myServicePOIContentAccessModule->register_cam();
-
+        myServicePOIContentAccessModule->register_cam();
 }

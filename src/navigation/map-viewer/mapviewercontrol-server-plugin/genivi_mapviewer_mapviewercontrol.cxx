@@ -115,12 +115,13 @@ class MapViewerControlObj
 	bool m_force_draw;
     MapViewerControl::MapPerspective m_perspective;
 	bool m_follow_car;
-    MapViewerControlServerStub *m_mapviewercontrol;
+    MapViewerControlServerStub *mp_mapviewercontrol;
 	std::vector<DisplayedRoute *> m_displayed_routes;
-    MapMatchedPositionClientProxy *m_mapmatchedposition;
-    RoutingClientProxy *m_routing;
-	struct point m_pan;
+    MapMatchedPositionClientProxy *mp_mapMatchedPositionClientProxy;
+    RoutingClientProxy* mp_routingClientProxy;
+    struct point m_pan;
 	int m_pan_action;
+
 	void MoveMap(void);
     void SetFollowCarMode(NavigationTypes::Handle SessionHandle, bool active);
     void GetFollowCarMode(bool& active);
@@ -188,9 +189,10 @@ class  MapMatchedPositionClientProxy
     {
         myServiceMapMatchedPosition = runtime->buildProxy<MapMatchedPositionProxy>(domain, instance);
 
-        while (!myServiceMapMatchedPosition->isAvailable()) {
-            usleep(10);
-        }
+// not working correctly (blocked) so removed for the moment
+//        while (!myServiceRouting->isAvailable()) {
+//            usleep(10);
+//        }
     }
 
     void setListeners()
@@ -204,6 +206,7 @@ class  MapMatchedPositionClientProxy
         event_add_timeout(0, 0, mp_callback);
     }
 };
+
 static void positionVehicleNavitUpdate(std::shared_ptr<MapMatchedPositionProxyDefault> pos, struct vehicle *v)
 {
     std::vector< MapMatchedPosition::PositionItemKey > valuesToReturn;
@@ -250,10 +253,10 @@ class RoutingClientProxy
     RoutingClientProxy(const std::string & domain, const std::string & instance)
     {
         myServiceRouting = runtime->buildProxy<RoutingProxy>(domain, instance);
-
-        while (!myServiceRouting->isAvailable()) {
-            usleep(10);
-        }
+// not working correctly (blocked) so removed for the moment
+//        while (!myServiceRouting->isAvailable()) {
+//            usleep(10);
+//        }
     }
 
     void connectToMapViewer(MapViewerControlObj *obj)
@@ -305,27 +308,29 @@ class  NavigationCoreSessionClientProxy
     {
         myServiceNavigationCoreSession = runtime->buildProxy<SessionProxy>(domain, instance);
 
-        while (!myServiceNavigationCoreSession->isAvailable()) {
-            usleep(10);
-        }
+// not working correctly (blocked) so removed for the moment
+//        while (!myServiceRouting->isAvailable()) {
+//            usleep(10);
+//        }
     }
 };
 
-static MapMatchedPositionClientProxy* mp_mapMatchedPositionClientProxy;
-static RoutingClientProxy* mp_routingClientProxy;
 static NavigationCoreSessionClientProxy* mp_navigationCoreSessionClientProxy;
 
 class  MapViewerControlServerStub : public MapViewerControlStubDefault
 {
 	public:
 #define MAX_SESSION_HANDLE 256
+#define FIRST_SESSION_HANDLE 1
 
     MapViewerControlServerStub()
 	{
+        mp_handles[FIRST_SESSION_HANDLE]=NULL;
         m_version.setVersionMajor(3);
         m_version.setVersionMinor(0);
         m_version.setVersionMicro(0);
         m_version.setDate("21-01-2014");
+
     }
 
     /**
@@ -344,12 +349,12 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         dbg(lvl_debug,"enter\n");
         if (_mapViewType != MapViewerControl::MapViewType::MAIN_MAP)
 			throw DBus::ErrorInvalidArgs("Unsupported mapViewType");
-        NavigationTypes::Handle _mapViewInstanceHandle=1;
-        while (mp_handles[_mapViewInstanceHandle]) {
+        NavigationTypes::Handle _mapViewInstanceHandle=FIRST_SESSION_HANDLE;
+        while ((mp_handles.count(_mapViewInstanceHandle)>0 ) && (mp_handles[_mapViewInstanceHandle] != NULL)) {
             _mapViewInstanceHandle++;
             if (_mapViewInstanceHandle == MAX_SESSION_HANDLE)
                 throw DBus::ErrorLimitsExceeded("Out of mapviewinstance handles");
-		}
+        }
         mp_handles[_mapViewInstanceHandle]=new MapViewerControlObj(this, _mapViewInstanceHandle, _mapViewSize);
         _reply(_mapViewInstanceHandle);
 	}
@@ -360,11 +365,16 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
      */
     void releaseMapViewInstance(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, releaseMapViewInstanceReply_t _reply)
 	{
-        MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
-		if (!obj)
-			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		delete(obj);
-        mp_handles[_mapViewInstanceHandle]=NULL;
+        if (mp_handles.find(_mapViewInstanceHandle) != mp_handles.end())
+        {
+            MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
+            delete(obj);
+            mp_handles[_mapViewInstanceHandle]=NULL;
+        }
+        else {
+            throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
+        }
+
         _reply();
 	}
 
@@ -1489,6 +1499,13 @@ void
 MapViewerControlObj::DisplayRoute(NavigationTypes::Handle SessionHandle, NavigationTypes::Handle RouteHandle, bool highlighted)
 {
 	HideRoute(SessionHandle, RouteHandle);
+
+    if (m_navigationcore_session == NavigationTypes::BasicEnum::INVALID)
+    {
+        CommonAPI::CallStatus status;
+        mp_navigationCoreSessionClientProxy->myServiceNavigationCoreSession->createSession(std::string("MapViewerControl"),status,m_navigationcore_session);
+    }
+
     DisplayedRoute *route=new DisplayedRoute(this,m_navigationcore_session,RouteHandle,m_mapset);
 	route->Show();
 	m_displayed_routes.push_back(route);
@@ -1599,7 +1616,7 @@ class RoutingClientProxy;
 
 MapViewerControlObj::MapViewerControlObj(MapViewerControlServerStub *mapviewercontrol, NavigationTypes::Handle handle, const MapViewerControl::Dimension &MapViewSize)
 {
-	m_mapviewercontrol=mapviewercontrol;
+	mp_mapviewercontrol=mapviewercontrol;
 	m_handle=handle;
 	m_navit.type=attr_navit;
 	m_scrollspeed=0;
@@ -1608,13 +1625,13 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControlServerStub *mapviewerco
     m_perspective=MapViewerControl::MapPerspective::PERSPECTIVE_2D;
 	m_follow_car=true;
 
+    m_navigationcore_session = NavigationTypes::BasicEnum::INVALID;
     //init the routing client
     const std::string domain = "local";
     const std::string instanceRouting = "Routing";
     mp_routingClientProxy = new RoutingClientProxy(domain,instanceRouting);
     mp_routingClientProxy->setListeners();
     mp_routingClientProxy->connectToMapViewer(this);
-
     struct attr navit_template;
 	struct attr navit_flags={attr_flags};navit_flags.u.num=2;
 	struct attr *navit_attrs[]={&navit_flags,NULL};
@@ -1627,7 +1644,7 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControlServerStub *mapviewerco
         dbg(lvl_debug,"failed to create new navit instance\n");
 		return;
 	}
-	const char *graphics=getenv("NAVIT_GRAPHICS");
+    const char *graphics=getenv("NAVIT_GRAPHICS");
 	if (!graphics)
 		graphics="gtk_drawing_area";
 	struct attr graphics_type={attr_type};graphics_type.u.str=(char *)graphics;
@@ -1637,13 +1654,13 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControlServerStub *mapviewerco
 	struct attr *graphics_attrs[]={&graphics_type,&graphics_w,&graphics_h,&graphics_window_title,NULL};
 	m_graphics.type=attr_graphics;
 	m_graphics.u.graphics=graphics_new(&m_navit,graphics_attrs);
-	g_free(graphics_window_title.u.str);
+    g_free(graphics_window_title.u.str);
 
 	if (!m_graphics.u.graphics) {
         dbg(lvl_debug,"failed to create new graphics\n");
 		return;
 	}
-	m_postdraw_callback=callback_new_attr_1(reinterpret_cast<void (*)(void)>(MapViewerControlObj_PostDraw), attr_postdraw, this);
+    m_postdraw_callback=callback_new_attr_1(reinterpret_cast<void (*)(void)>(MapViewerControlObj_PostDraw), attr_postdraw, this);
 	m_move_callback=callback_new_1(reinterpret_cast<void (*)(void)>(MapViewerControlObj_MoveMap), this);
 	graphics_add_callback(m_graphics.u.graphics, m_postdraw_callback);
 	navit_add_attr(m_navit.u.navit, &m_graphics);
@@ -1653,7 +1670,7 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControlServerStub *mapviewerco
         dbg(lvl_debug,"failed to get mapset\n");
 		return;
 	}
-	mapset.u.mapset=mapset_dup(mapset.u.mapset);
+    mapset.u.mapset=mapset_dup(mapset.u.mapset);
 	m_mapset=mapset.u.mapset;
 	navit_add_attr(m_navit.u.navit, &mapset);
 
@@ -1678,7 +1695,6 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControlServerStub *mapviewerco
     mp_mapMatchedPositionClientProxy->setListeners();
     mp_mapMatchedPositionClientProxy->connectToMapViewer(this);
     mp_mapMatchedPositionClientProxy->connectToVehicle(m_vehicle.u.vehicle);
-
 	navit_init(m_navit.u.navit);
 	graphics_get_data(m_graphics.u.graphics,"window");
 	struct transformation *trans=navit_get_trans(m_navit.u.navit);
@@ -1760,8 +1776,8 @@ MapViewerControlObj::~MapViewerControlObj()
 	vehicle_destroy(m_vehicle.u.vehicle);
 #endif
 	navit_destroy(m_navit.u.navit);
-	delete(m_routing);
-	delete(m_mapmatchedposition);
+    delete(mp_routingClientProxy);
+    delete(mp_mapMatchedPositionClientProxy);
 }
 
 uint32_t
@@ -1851,7 +1867,7 @@ DisplayedRoute::DisplayedRoute(class MapViewerControlObj *mapviewer, uint8_t Rou
 	m_shown=false;
 	uint32_t totalNumberOfSegments;
     CommonAPI::CallStatus status;
-    mapviewer->m_routing->myServiceRouting->getRouteSegments(RouteHandle, 1, valuesToReturn, 0xffffffff, 0, status,totalNumberOfSegments, RouteShape);
+    mapviewer->mp_routingClientProxy->myServiceRouting->getRouteSegments(RouteHandle, 1, valuesToReturn, 0xffffffff, 0, status,totalNumberOfSegments, RouteShape);
 	m_filename=g_strdup_printf("/tmp/genivi_route_map_%d_%d.bin",mapviewer->m_handle,RouteHandle);
 	FILE *f=fopen(m_filename,"w");
 	int count=RouteShape.size();
@@ -1912,11 +1928,8 @@ plugin_init(void)
     }
 
     //init the session client
-    const std::string instanceNavigationCoreSession = "NavigationCoreSession";
+    const std::string instanceNavigationCoreSession = "Session";
     mp_navigationCoreSessionClientProxy = new NavigationCoreSessionClientProxy(domain,instanceNavigationCoreSession);
-
-    CommonAPI::CallStatus status;
-    mp_navigationCoreSessionClientProxy->myServiceNavigationCoreSession->createSession(std::string("MapViewerControl"),status,m_navigationcore_session);
 
 #if LM
     if (ilm_init() != ILM_SUCCESS) {

@@ -89,9 +89,10 @@ class EnhancedPositionClientProxy
 	{
         myServiceEnhancedPosition = runtime->buildProxy<EnhancedPositionProxy>(domain, instance);
 
-        while (!myServiceEnhancedPosition->isAvailable()) {
-            usleep(10);
-        }
+// not working correctly (blocked) so removed for the moment
+//        while (!myServiceEnhancedPosition->isAvailable()) {
+//            usleep(10);
+//        }
     }
 
     void connectToVehicle(struct vehicle_priv *priv)
@@ -203,6 +204,7 @@ static int vehicle_enhancedposition_position_attr_get(struct vehicle_priv *priv,
 static int vehicle_enhancedposition_set_attr(struct vehicle_priv *priv, struct attr *attr)
 {
     dbg(lvl_debug, "enter\n");
+    return 1;
 }
 
 // navit plugin callbacks
@@ -211,16 +213,6 @@ struct vehicle_methods vehicle_enhancedposition_methods = {
 	vehicle_enhancedposition_position_attr_get,
 	vehicle_enhancedposition_set_attr,
 };
-
-static double
-double_variant(DBus::Variant variant)
-{
-	double d;
-	DBus::MessageIter iter=variant.reader();
-	iter >> d;
-	return d;
-}
-
 
 static void
 vehicle_process_map(struct vehicle_priv *priv, EnhancedPositionServiceTypes::PositionInfo& map)
@@ -278,7 +270,6 @@ vehicle_enhancedposition_new(struct vehicle_methods *meth,
 
 	*meth=vehicle_enhancedposition_methods;
 	ret = g_new0(struct vehicle_priv, 1);
-
     //init the enhanced position service client
     const std::string domain = "local";
     const std::string instanceEnhancedposition = "Enhancedposition";
@@ -287,7 +278,7 @@ vehicle_enhancedposition_new(struct vehicle_methods *meth,
     ret->enhanced_position->connectToVehicle(ret);
 
 	ret->cb=callback_new_1(callback_cast(vehicle_enhancedposition_callback), ret);
-	ret->cbl=cbl;
+    ret->cbl=cbl;
 
 	return ret;
 }
@@ -295,6 +286,9 @@ vehicle_enhancedposition_new(struct vehicle_methods *meth,
 void plugin_init(void)
 {
 	event_request_system("glib","genivi_navigationcore_enhpos");
+
+    // Common API data init
+    runtime = CommonAPI::Runtime::get();
 
 	plugin_register_vehicle_type("enhancedposition", vehicle_enhancedposition_new);
 }
