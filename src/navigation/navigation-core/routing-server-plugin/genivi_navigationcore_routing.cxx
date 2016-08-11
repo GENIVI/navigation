@@ -112,7 +112,7 @@ private:
     struct tracking *get_tracking(void);
 };
 
-static std::map<uint32_t, RoutingObj *> mp_handles;
+static std::map<NavigationTypes::Handle, RoutingObj *> mp_handles;
 
 static bool commands_registered;
 
@@ -121,12 +121,12 @@ navit_genivi_get_route(struct navit *nav, char *function, struct attr **in, stru
 {
 	if (!out || !in || !in[0])
 		return;
-	if (!ATTR_IS_INT(in[0]->type))
+    if (!ATTR_IS_INT(in[0]->type))
 		return;
     RoutingObj *obj=mp_handles[in[0]->u.num];
 	if (!obj)
 		return;
-	*out=attr_generic_add_attr(*out, &obj->m_route);
+    *out=attr_generic_add_attr(*out, &obj->m_route);
 	*out=attr_generic_add_attr(*out, &obj->m_vehicleprofile);
 }
 
@@ -465,7 +465,6 @@ class  RoutingServerStub : public RoutingStubDefault
 	
 private:
     CommonTypes::Version m_version;
-    std::map<NavigationTypes::Handle, RoutingObj *> mp_handles;
 
 };
 

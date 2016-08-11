@@ -116,11 +116,6 @@ class GuidanceObj
     std::string m_kind_of_voice;
 	struct item *get_item(struct map_rect *mr);
 	struct map_rect *get_map_rect(void);
-    void SetSimulationMode(uint32_t SessionHandle, bool Activate);
-    void GetSimulationMode(bool& SimulationMode);
-    void SetSimulationSpeed(uint32_t sessionHandle);
-    void PauseGuidance(uint32_t sessionHandle);
-    void ResumeGuidance(uint32_t sessionHandle);
 	void SetVoiceGuidance(const bool& activate, const std::string& voice);
     void SetVoiceGuidanceSettings(const Guidance::PromptMode &promptMode);
     Guidance::PromptMode GetVoiceGuidanceSettings();
@@ -204,6 +199,8 @@ class  GuidanceServerStub : public GuidanceStubDefault
         m_version.setVersionMinor(0);
         m_version.setVersionMicro(0);
         m_version.setDate("21-01-2014");
+
+        mp_guidance = NULL;
 	}
 
     ~GuidanceServerStub() {
@@ -388,7 +385,7 @@ GuidanceObj::GetDestinationInformation(uint32_t& Distance, uint32_t& TravelTime,
 	struct item *item;
 	if (!mr) 
 		throw DBus::ErrorFailed("internal error:failed to get map rect");
-	while (item=map_rect_get_item(mr)) {
+    while ((item=map_rect_get_item(mr))) {
 		if (item_coord_get(item, &c[idx], 1)) {
 			if (!idx) {
 				if (!item_attr_get(item, attr_destination_time, &destination_time))
@@ -538,7 +535,6 @@ GuidanceObj::GetManeuver(struct item *item, uint32_t& offsetOfManeuver, Guidance
     maneuverData[maneuverDataAttribute] = maneuverDataValue;
 }
 
-
 void
 GuidanceObj::GetGuidanceDetails(bool& voiceGuidance, bool& vehicleOnTheRoad, bool& isDestinationReached, Guidance::ManeuverPhase& maneuver)
 {
@@ -584,7 +580,7 @@ GuidanceObj::GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const 
 
     numberOfManeuvers = 0;
     maneuverIndex = 0;
-    while (item=get_item(mr)) { //scan the list of maneuvers of the route
+    while ((item=get_item(mr))) { //scan the list of maneuvers of the route
         if (maneuverIndex >= maneuverOffset && maneuverIndex < maneuverOffset+requestedNumberOfManeuvers) {
             Guidance::Maneuver maneuver;
             std::vector<Guidance::ManeuverItem> items;
@@ -614,37 +610,6 @@ GuidanceObj::GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const 
         maneuverIndex++;
 	}
 	map_rect_destroy(mr);
-}
-
-void
-GuidanceObj::SetSimulationSpeed(uint32_t sessionHandle)
-{
-	struct vehicle *vehicle=get_vehicle("demo:");
-	if (vehicle && !m_paused) 
-		vehicle_set_attr(vehicle, &vehicle_speed);
-}
-
-void
-GuidanceObj::PauseGuidance(uint32_t sessionHandle)
-{
-	struct vehicle *vehicle=get_vehicle("demo:");
-	if (vehicle) {
-		struct attr vehicle_speed0={attr_speed,(char *)0};
-		vehicle_set_attr(vehicle, &vehicle_speed0);
-	}
-	m_paused=true;
-}
-
-void
-GuidanceObj::ResumeGuidance(uint32_t sessionHandle)
-{
-	struct vehicle *vehicle=get_vehicle("demo:");
-	GuidanceObj_Callback(this);
-	if (vehicle) 
-    {
-		vehicle_set_attr(vehicle, &vehicle_speed);
-    }
-    m_paused=false;
 }
 
 void GuidanceObj::SetVoiceGuidance(const bool& activate, const std::string& voice)
@@ -684,7 +649,6 @@ GuidanceObj::GetGuidanceStatus(Guidance::GuidanceStatus &guidanceStatus, Navigat
         guidanceStatus = Guidance::GuidanceStatus::ACTIVE;
 	routeHandle=m_route_handle;
 }
-
 
 void
 GuidanceObj_Callback(GuidanceObj *obj)
@@ -786,8 +750,8 @@ GuidanceObj::GuidanceObj(GuidanceServerStub *guidance, uint32_t SessionHandle, u
     m_speechoutput=new SpeechOutput(*conn);
 #endif
 	if (navit_get_attr(navit, attr_callback_list, &callback_list, NULL)) {
-		callback_list_call_attr_4(callback_list.u.callback_list, attr_command, "navit_genivi_get_route", in, &ret, NULL);
-		if (ret && ret[0] && ret[1] && ret[0]->type == attr_route && ret[1]->type == attr_vehicleprofile) {
+        callback_list_call_attr_4(callback_list.u.callback_list, attr_command, "navit_genivi_get_route", in, &ret, NULL);
+        if (ret && ret[0] && ret[1] && ret[0]->type == attr_route && ret[1]->type == attr_vehicleprofile) {
 			struct tracking *tracking=get_tracking();
 			m_route=*ret[0];
 			m_vehicleprofile=*ret[1];
@@ -798,7 +762,7 @@ GuidanceObj::GuidanceObj(GuidanceServerStub *guidance, uint32_t SessionHandle, u
 				vehicle_set_attr(demo, &m_route);
 				vehicle_set_attr(demo, &vehicle_speed);
 			}
-			navigation_set_route(get_navigation(), m_route.u.route);
+            navigation_set_route(get_navigation(), m_route.u.route);
 			tracking_set_route(get_tracking(), m_route.u.route);
 			navigation_register_callback(get_navigation(), attr_navigation_speech, m_guidance_callback);
 			GuidanceObj_Callback(this);
