@@ -34,7 +34,7 @@ or to build updated parts
 
 ## How to test
 Some python scripts can be used for test. 
-Goto ../../test/navigation
+Go to ../../test/navigation
 For Python, you need to install some modules
 sudo apt-get install python-pip python-dbus python-gobject python-pil
 sudo pip install --upgrade pip
@@ -67,6 +67,44 @@ navit/
 basic code of navit
 positioning/
 the code of positioning
+
+## How to for the CommonAPI based version (draft)
+The former version of the POCs is based on GLib DBus. A migration to CommonAPI is under progress. 
+
+###Prerequisites
+You need CommonAPI 3.1.5 and Franca 0.9.1 installed 
+For the Ubuntu 64 bits, due to the use of symbol versioning LIBDBUS_1_0 by CommonAPI-DBus, the patched version of DBus has to be >= 1.10.0
+NB: the patch common-api-dbus-runtime/src/dbus-patches/capi-dbus-add-support-for-custom-marshalling.patch failed a little bit, it's needed to update the dbus/dbus-string.h manually
+
+### How to build
+First it's required to set some paths:
+```
+export DBUS_LIB_PATH=<path to the patched version of the DBus lib>
+export COMMONAPI_DBUS_TOOL_DIR=<path to the common-api-dbus-tools folder>
+export COMMONAPI_TOOL_DIR=<path to the common-api-tools folder> 
+```
+A script allows either:
+to clean and rebuild all (including invoking cmake) 
+./build.sh -cm
+or to build updated parts
+./build.sh -m
+
+### How to test
+Some python scripts can be used for test. 
+Go to ../../test/navigation
+For Python, you need to install some modules (see explanations above)
+
+To test, launch the navigation middleware by entering:
+./run-capi -r
+test files:
+./test-route-calculation-capi.py
+./test-location-input-capi.py
+./test-map-viewer-control-capi.py
+NB: there's a bug when the map is closed, so you need to restart the navigation after the last one
+
+If everything is OK, you must see:
+
+Test PASSED
 
 ##Known issues
 

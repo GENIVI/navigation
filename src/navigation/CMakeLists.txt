@@ -19,8 +19,6 @@ project(navigation)
 cmake_minimum_required(VERSION 2.8)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
-option(WITH_FRANCA_DBUS_INTERFACE
-       "Build using the Franca interfaces" OFF)
 option(WITH_DBUS_INTERFACE
        "Build using the D-Bus interfaces" ON)
 option(WITH_DEBUG
@@ -40,7 +38,6 @@ option(NAVIT_NULL_VEHICLE
 option(NAVIT_QTPAINTER
         "qtqpainter for navit" 0)
 
-message(STATUS "WITH_FRANCA_DBUS_INTERFACE = ${WITH_FRANCA_DBUS_INTERFACE}")
 message(STATUS "WITH_DBUS_INTERFACE = ${WITH_DBUS_INTERFACE}")
 message(STATUS "WITH_DEBUG = ${WITH_DEBUG}")
 message(STATUS "WITH_SPEECH = ${WITH_SPEECH}")
@@ -84,12 +81,26 @@ set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING_PARENT_SCOPE ${DBUS_GENERATED_INCLUDE
 endif(hasParent)
 
 if(NOT ${YOCTO_CONFIG})
+    # for enhanced position service
     if(NOT EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/positioning")
         message(FATAL_ERROR "Don't you forget to download additional code ? Please see README first")
     endif()
     set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
     set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
-        add_subdirectory(positioning)
+    if (WITH_PLUGIN_MIGRATION)
+        set(FRANCA_POSITIONING_DIR "${CMAKE_CURRENT_SOURCE_DIR}/positioning/enhanced-position-service/franca/api")
+        execute_process(COMMAND uname -i OUTPUT_VARIABLE OS_VERSION)
+        if("${OS_VERSION}" MATCHES "i686")
+          set(OS_VERSION "x86")
+        else()
+          set(OS_VERSION "x86_64")
+        endif()
+        set(WITH_FRANCA_DBUS_INTERFACE "ON" CACHE INTERNAL "")
+        set(COMMONAPI_TOOL_GENERATOR "${COMMONAPI_TOOL_DIR}/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/${OS_VERSION}/commonapi-generator-linux-${OS_VERSION}" CACHE INTERNAL "")
+        set(COMMONAPI_DBUS_TOOL_GENERATOR "${COMMONAPI_DBUS_TOOL_DIR}/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/${OS_VERSION}/commonapi-dbus-generator-linux-${OS_VERSION}" CACHE INTERNAL "")
+        set(COMMONAPI_GEN_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/enhanced-position-service/franca/api")
+    endif()
+    add_subdirectory(positioning)
     unset(CMAKE_LIBRARY_OUTPUT_DIRECTORY)
     unset(CMAKE_RUNTIME_OUTPUT_DIRECTORY)
 endif()
@@ -107,11 +118,6 @@ endif()
 
 add_subdirectory(map)
 
-add_subdirectory(${API_DIR}/navigation-core "${DBUS_GENERATED_INCLUDE_DIR}/navigation-core")
-
-add_subdirectory(${API_DIR}/map-viewer "${DBUS_GENERATED_INCLUDE_DIR}/map-viewer")
-
-add_subdirectory(${API_DIR}/poi-service "${DBUS_GENERATED_INCLUDE_DIR}/poi-service")
 
 if(${WITH_SPEECH})
     add_subdirectory(${API_DIR}/speech-service "${DBUS_GENERATED_INCLUDE_DIR}/speech-service")
@@ -125,19 +131,11 @@ if (WITH_PLUGIN_MIGRATION)
     # for hmi and navigation
     set(FRANCA_DIR "${API_DIR}/franca")
     add_subdirectory(${FRANCA_DIR} "${CMAKE_CURRENT_BINARY_DIR}/franca")
-    # for enhanced position service
-    set(FRANCA_POSITIONING_DIR "${CMAKE_CURRENT_SOURCE_DIR}/positioning/enhanced-position-service/franca/api")
-    execute_process(COMMAND uname -i OUTPUT_VARIABLE OS_VERSION)
-    if("${OS_VERSION}" MATCHES "i686")
-      set(OS_VERSION "x86")
-    else()
-      set(OS_VERSION "x86_64")
-    endif()
-    set(COMMONAPI_TOOL_GENERATOR "${COMMONAPI_TOOL_DIR}/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/${OS_VERSION}/commonapi-generator-linux-${OS_VERSION}")
-    set(COMMONAPI_DBUS_TOOL_GENERATOR "${COMMONAPI_DBUS_TOOL_DIR}/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/${OS_VERSION}/commonapi-dbus-generator-linux-${OS_VERSION}")
-    set(WITH_FRANCA_DBUS_INTERFACE "ON")
-    set(COMMONAPI_GEN_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/enhanced-position-service/franca/api")
-    add_subdirectory(${FRANCA_POSITIONING_DIR} "${CMAKE_CURRENT_BINARY_DIR}/franca-positioning")
+else()
+    #generates the GLib DBus proxies and adaptors
+    add_subdirectory(${API_DIR}/navigation-core "${DBUS_GENERATED_INCLUDE_DIR}/navigation-core")
+    add_subdirectory(${API_DIR}/map-viewer "${DBUS_GENERATED_INCLUDE_DIR}/map-viewer")
+    add_subdirectory(${API_DIR}/poi-service "${DBUS_GENERATED_INCLUDE_DIR}/poi-service")
 endif()
 
 add_subdirectory(navigation-core)

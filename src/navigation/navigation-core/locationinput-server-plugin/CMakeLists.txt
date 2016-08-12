@@ -31,7 +31,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
 # DBus Path
 if(DBUS_LIB_PATH)
-  message(STATUS "DBUS_LIB_PATH = " ${DBUS_LIB_PATH})
   set(DBUS_INCLUDE_DIRS ${DBUS_LIB_PATH}/include/dbus-1.0 ${DBUS_LIB_PATH}/lib/dbus-1.0/include)
   set(DBUS_LIBDIR ${DBUS_LIB_PATH}/lib)
   set(DBUS_LIBRARIES ${DBUS_LIBDIR}/libdbus-1.so)

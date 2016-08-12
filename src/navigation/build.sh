@@ -2,9 +2,11 @@
 
 clean=0
 capi=0
+commonapi_tools_option=""
 
 function check_path_for_capi
 {
+	echo 'check path for CommonAPI'
 	if [ ! $COMMONAPI_TOOL_DIR ]
 	then 
 		echo 'Set the dir of the common api tools'
@@ -25,6 +27,7 @@ function check_path_for_capi
 		echo 'export DBUS_LIB_PATH=<path>'
 		exit 1
 	fi
+	commonapi_tools_option="-DDBUS_LIB_PATH="$DBUS_LIB_PATH" -DCOMMONAPI_DBUS_TOOL_DIR="$COMMONAPI_DBUS_TOOL_DIR" -DCOMMONAPI_TOOL_DIR="$COMMONAPI_TOOL_DIR
 }
  
 while getopts cm opt
@@ -77,7 +80,10 @@ then
 	then
 		cmake -DWITH_PLUGIN_MIGRATION=0 ../
 	else
-		cmake -DWITH_PLUGIN_MIGRATION=1 -DDBUS_LIB_PATH=$DBUS_LIB_PATH -DCOMMONAPI_TOOL_DIR=$COMMONAPI_TOOL_DIR -DCOMMONAPI_DBUS_TOOL_DIR=$COMMONAPI_DBUS_TOOL_DIR ../
+		cmake -DWITH_PLUGIN_MIGRATION=ON -DWITH_DBUS_INTERFACE=OFF $commonapi_tools_option ../
+		echo 'fix a bug in the generation of CommonAPI hpp'
+		sed -i -e 's/(const TimeStampedEnum::/(const ::v4::org::genivi::navigation::navigationcore::NavigationCoreTypes::TimeStampedEnum::/' ./franca/src-gen/v4/org/genivi/navigation/navigationcore/LocationInput.hpp
+		sed -i -e 's/(const TimeStampedEnum::/(const ::v4::org::genivi::navigation::navigationcore::NavigationCoreTypes::TimeStampedEnum::/' ./franca/src-gen/v4/org/genivi/navigation/navigationcore/MapMatchedPosition.hpp
 	fi
 fi
 make

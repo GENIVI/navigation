@@ -39,7 +39,8 @@ import sys
 import errno
 import time
 
-#import pdb;pdb.set_trace()
+#import pdb;
+#pdb.set_trace()
 
 from pip import locations
 
@@ -63,7 +64,7 @@ TIME_OUT = 10000
 HORIZONTAL_SIZE = 800
 VERTICAL_SIZE = 480
 MAIN_MAP = 0x0010
-NUMBER_OF_SEGMENTS = 500
+NUMBER_OF_SEGMENTS = 1000
 
 #add signal receivers
 def catchall_routing_routeCalculationProgressUpdate_handler(routeHandle, status, percentage):
@@ -132,8 +133,9 @@ def catchall_guidance_positionOnRouteChanged_handler(offsetOnRoute):
     print "Offset on route: " +str(offsetOnRoute)
     ret = g_guidance_interface.getDestinationInformation()
     print "Travel time: " +str(ret[1])
-    ret = g_guidance_interface.getManeuversList(dbus.UInt16(10),dbus.UInt32(0))
+    ret = g_guidance_interface.getManeuversList(dbus.UInt16(1),dbus.UInt32(0))
     print "Number of maneuvers: " +str(ret[0])
+    print "Next road to turn: " +str(ret[1][0][1])
     g_mapmatchedposition_interface.setSimulationMode(dbus.UInt32(g_navigationcore_session_handle),dbus.Boolean(False))
     g_guidance_interface.stopGuidance(dbus.UInt32(g_navigationcore_session_handle))
     

@@ -111,13 +111,16 @@ class EnhancedPositionClientProxy
 	{
         dbg(lvl_debug,"enter\n");
 		bool position_found=false;
+        printf("A %ld\n",changedValues);
         if ((changedValues & (EnhancedPositionServiceTypes::PositionInfoKey::LATITUDE | EnhancedPositionServiceTypes::PositionInfoKey::LONGITUDE)) == (EnhancedPositionServiceTypes::PositionInfoKey::LATITUDE | EnhancedPositionServiceTypes::PositionInfoKey::LONGITUDE))
         {
             position_found=true;
 		}
         if (position_found && !mp_priv->cb_pending) {
+            printf("B %ld\n",changedValues);
             event_add_timeout(0, 0, mp_priv->cb);
             mp_priv->cb_pending=1;
+            printf("B %ld\n",changedValues);
 		}
 	}
 };
@@ -218,8 +221,9 @@ static void
 vehicle_process_map(struct vehicle_priv *priv, EnhancedPositionServiceTypes::PositionInfo& map)
 {
     EnhancedPositionServiceTypes::PositionInfo::const_iterator itr;
-	for(itr = map.begin(); itr != map.end(); ++itr) {
-		switch ((*itr).first) {
+
+    for(itr = map.begin(); itr != map.end(); ++itr) {
+        switch ((*itr).first) {
         case EnhancedPositionServiceTypes::PositionInfoKey::LATITUDE:
             priv->geo.lat=(*itr).second.get<double>();
 			break;
@@ -230,7 +234,7 @@ vehicle_process_map(struct vehicle_priv *priv, EnhancedPositionServiceTypes::Pos
 //			priv->height=(*itr).second.get<double>();
 			break;
         case EnhancedPositionServiceTypes::PositionInfoKey::HEADING:
-//			priv->direction=(*itr).second.get<double>();
+//			priv->direction=(*itr).second.get<float>();
 			break;
         case EnhancedPositionServiceTypes::PositionInfoKey::SPEED:
             priv->speed=floor((*itr).second.get<double>()*360+0.5)/100;
@@ -272,16 +276,16 @@ vehicle_enhancedposition_new(struct vehicle_methods *meth,
 	ret = g_new0(struct vehicle_priv, 1);
     //init the enhanced position service client
     const std::string domain = "local";
-    const std::string instanceEnhancedposition = "Enhancedposition";
+    const std::string instanceEnhancedposition = "EnhancedPositionService";
     ret->enhanced_position = new EnhancedPositionClientProxy(domain,instanceEnhancedposition);
     ret->enhanced_position->setListeners();
     ret->enhanced_position->connectToVehicle(ret);
-
 	ret->cb=callback_new_1(callback_cast(vehicle_enhancedposition_callback), ret);
     ret->cbl=cbl;
 
 	return ret;
 }
+
 
 void plugin_init(void)
 {

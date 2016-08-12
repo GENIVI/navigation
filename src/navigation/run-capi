@@ -1,0 +1,203 @@
+#!/bin/bash
+
+###########################################################################
+# @licence app begin@
+# SPDX-License-Identifier: MPL-2.0
+#
+# \copyright Copyright (C) 2013-2014, PCA Peugeot Citroen
+#
+# \file run
+#
+# \brief This file is part of the Build System.
+#
+# \author Martin Schaller <martin.schaller@it-schaller.de>
+#
+# \version 1.0
+#
+# This Source Code Form is subject to the terms of the
+# Mozilla Public License (MPL), v. 2.0.
+# If a copy of the MPL was not distributed with this file,
+# You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# For further information see http://www.genivi.org/.
+#
+# List of changes:
+# 
+# 26-6-2014, Marco Residori, Added support of new EnhancedPositionService
+# 4-8-2014, Philippe Colliot, Add some wait for dbus service
+#
+# @licence end@
+###########################################################################
+function run
+{
+	local x=$xterm
+	local g=$gdb
+	local l=$log
+	local title="$1"
+	shift
+	if [ "$1" = "-n" ]
+	then
+		shift
+		x=0
+		log=0
+	fi
+	if [ "$1" = -"g" ]
+	then
+		shift
+		g=0
+	fi
+	if [ "$x" = 1 ]
+	then
+		if [ "$g" = 1 ]
+		then
+			set -- gdb -ex run --args "$@"
+		fi
+		xterm -T "$title" -sb -sl 5000 -e "$@" &
+	elif [ "$log" = 1 ]
+	then
+		"$@" >"$CUR_DIR/$title.log" 2>&1 &
+	else
+		"$@" &
+	fi
+	PIDS="$PIDS $!"
+}
+
+function wait_for_service
+{
+	for i in $(seq 1 50)
+	do
+		if dbus-send --dest=$1 $2 org.freedesktop.DBus.Introspectable.Introspect
+		then
+			return
+		fi
+		echo "Waiting for $1"
+		sleep 0.1
+	done
+}
+
+function terminate
+{
+	set +e
+	trap "" EXIT INT
+	kill $PIDS
+}
+
+gdb=0
+xterm=0
+log=0
+enhpos=1
+replayer=1
+verbose=0 #no debug or log messages displayed
+center="4612 N 0608 E"
+
+CUR_DIR=$PWD
+BIN_DIR=$CUR_DIR/bin
+SRC_DIR=$PWD
+LOGREPLAYER_LOGS_DIR=$SRC_DIR/positioning/log-replayer/logs
+NAVIT_BIN_DIR=$CUR_DIR/build/navit/navit/
+
+while getopts c:gnorvx opt
+do
+	case $opt in
+	c)
+		case "$OPTARG" in
+		paris)
+			center="2.34 48.86"
+			;;
+		tokyo)
+			center="139.74 35.70"
+			;;
+		[0-9-]*)
+			center=$OPTARG
+			;;
+		*)
+			echo "Unsupported center $OPTARG" >&2
+			exit 1
+			;;
+		esac
+		;;
+	g)
+		gdb=1
+		;;
+	n)
+		enhpos=0
+		;;
+	o)
+		log=1
+		;;
+	r)
+		replayer=0
+		;;
+	v) #enable log messages
+		verbose=1
+		;;
+	x)
+		xterm=1
+		;;
+	\?)
+		echo "Usage:"
+		echo "$0 [-c center][-gnorvx]"
+		echo "-c: Set center (supported values: paris,tokyo,longitude,latitude). Default is geneve"
+		echo "-g: Run subprocesses within gdb (only with -x)"
+		echo "-n: Don't start enhanced-position-service"
+		echo "-r: Don't start replayer"
+		echo "-o: Create log file of subprocess output"
+		echo "-v: Enable the output debug messages"
+		echo "-x: Run subprocesses in own xterm to get separated log messages"
+		exit 1
+	esac
+done
+trap "terminate" EXIT INT
+set -e
+
+echo "the graphic for navit is based on sdl"
+export NAVIT_GRAPHICS='sdl'
+
+cd $BIN_DIR
+
+if [ "$enhpos" = 1 ]
+then
+    run EnhancedPositionService ./EnhancedPositionServiceDBus 
+	wait_for_service org.genivi.EnhancedPositionService.EnhancedPosition_EnhancedPositionService /EnhancedPositionService
+
+	if [ "$replayer" = 1 ]
+	then
+		if [ -z "$REPLAYER_LOG_FILE" ]
+		then
+			REPLAYER_LOG_FILE=$LOGREPLAYER_LOGS_DIR/geneve-cologny.log
+		fi
+		run LogReplayer ./log-replayer $REPLAYER_LOG_FILE 
+	fi
+fi
+
+cd $NAVIT_BIN_DIR
+
+>bookmark.txt
+echo "$center" >center.txt
+
+if [ "$verbose" = "1" ]
+then
+	run MapViewer ./navit -d 3 -c navit_genivi_mapviewer.xml
+else
+	run MapViewer ./navit -d 0 -c navit_genivi_mapviewer.xml
+fi
+
+wait_for_service org.genivi.navigation.mapviewer.Configuration_Configuration /org/genivi/navigation/mapviewer
+wait_for_service org.genivi.navigation.mapviewer.MapViewerControl_MapViewerControl /org/genivi/navigation/mapviewer
+wait_for_service org.genivi.navigation.mapviewer.Session_Session /org/genivi/navigation/mapviewer
+
+if [ "$verbose" = "1" ]
+then
+	run NavigationCore ./navit -d 3 -c navit_genivi_navigationcore.xml
+else
+	run NavigationCore ./navit -d 0 -c navit_genivi_navigationcore.xml
+fi
+
+wait_for_service org.genivi.navigation.navigationcore.Configuration_Configuration /org/genivi/navigation/navigationcore
+wait_for_service org.genivi.navigation.navigationcore.Guidance_Guidance /org/genivi/navigation/navigationcore
+wait_for_service org.genivi.navigation.navigationcore.LocationInput_LocationInput /org/genivi/navigation/navigationcore
+wait_for_service org.genivi.navigation.navigationcore.MapMatchedPosition_MapMatchedPosition /org/genivi/navigation/navigationcore
+wait_for_service org.genivi.navigation.navigationcore.Routing_Routing /org/genivi/navigation/navigationcore
+wait_for_service org.genivi.navigation.navigationcore.Session_Session /org/genivi/navigation/navigationcore
+
+wait

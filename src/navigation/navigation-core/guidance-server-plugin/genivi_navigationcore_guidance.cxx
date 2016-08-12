@@ -225,6 +225,7 @@ class  GuidanceServerStub : public GuidanceStubDefault
             throw DBus::ErrorFailed("guidance already active");
         }
         mp_guidance=new GuidanceObj(this, _sessionHandle, _routeHandle);
+        fireGuidanceStatusChangedEvent(Guidance::GuidanceStatus::ACTIVE, _routeHandle);
         _reply();
     }
 
@@ -237,8 +238,12 @@ class  GuidanceServerStub : public GuidanceStubDefault
             dbg(lvl_debug,"no guidance active\n");
             throw DBus::ErrorFailed("no guidance active");
         }
+        Guidance::GuidanceStatus _guidanceStatus;
+        NavigationTypes::Handle _routeHandle;
+        mp_guidance->GetGuidanceStatus(_guidanceStatus,_routeHandle);
         delete(mp_guidance);
-        mp_guidance=NULL;
+        mp_guidance = NULL;
+        fireGuidanceStatusChangedEvent(Guidance::GuidanceStatus::INACTIVE, _routeHandle);
         _reply();
     }
 
@@ -752,24 +757,23 @@ GuidanceObj::GuidanceObj(GuidanceServerStub *guidance, uint32_t SessionHandle, u
 	if (navit_get_attr(navit, attr_callback_list, &callback_list, NULL)) {
         callback_list_call_attr_4(callback_list.u.callback_list, attr_command, "navit_genivi_get_route", in, &ret, NULL);
         if (ret && ret[0] && ret[1] && ret[0]->type == attr_route && ret[1]->type == attr_vehicleprofile) {
-			struct tracking *tracking=get_tracking();
+            struct tracking *tracking=get_tracking();
 			m_route=*ret[0];
 			m_vehicleprofile=*ret[1];
 			m_tracking_callback.u.callback=callback_new_attr_1(reinterpret_cast<void (*)(void)>(GuidanceObj_TrackingCallback), attr_position_coord_geo, this);
-			tracking_add_attr(tracking, &m_tracking_callback);
-			struct vehicle *demo=get_vehicle("demo:");
-			if (demo) {
-				vehicle_set_attr(demo, &m_route);
-				vehicle_set_attr(demo, &vehicle_speed);
+            tracking_add_attr(tracking, &m_tracking_callback);
+            struct vehicle *demo=get_vehicle("demo:");
+            if (demo) {
+                vehicle_set_attr(demo, &m_route);
+                vehicle_set_attr(demo, &vehicle_speed);
 			}
             navigation_set_route(get_navigation(), m_route.u.route);
-			tracking_set_route(get_tracking(), m_route.u.route);
-			navigation_register_callback(get_navigation(), attr_navigation_speech, m_guidance_callback);
-			GuidanceObj_Callback(this);
-		}
+            tracking_set_route(get_tracking(), m_route.u.route);
+            navigation_register_callback(get_navigation(), attr_navigation_speech, m_guidance_callback);
+            GuidanceObj_Callback(this);
+        }
 		g_free(ret);
 	}
-    m_guidance->fireGuidanceStatusChangedEvent(Guidance::GuidanceStatus::ACTIVE, RouteHandle);
 }
 
 GuidanceObj::~GuidanceObj()
@@ -784,7 +788,6 @@ GuidanceObj::~GuidanceObj()
 		navigation_unregister_callback(get_navigation(), attr_navigation_speech, m_guidance_callback);
 		callback_destroy(m_guidance_callback);
 	}
-    m_guidance->fireGuidanceStatusChangedEvent(Guidance::GuidanceStatus::INACTIVE, 0);
 #if (SPEECH_ENABLED)
     delete(m_speechoutput);
 #endif
