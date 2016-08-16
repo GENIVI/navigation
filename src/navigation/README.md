@@ -41,11 +41,12 @@ sudo pip install --upgrade pip
 
 To test, launch the navigation middleware by entering:
 ./run -r
-test files:
-./test-route-calculation.py
-./test-location-input.py
+'bug safe' test files (can be launched several times):
+./test-location-input.py -l location.xml
+./test-route-calculation.py -r route.xml
+'bug to be fixed' test files (can be launched only one time):
+./test-guidance.py -r route.xml
 ./test-map-viewer-control.py
-NB: there's a bug when the map is closed, so you need to restart the navigation after the last one
 
 If everything is OK, you must see:
 
@@ -89,6 +90,9 @@ to clean and rebuild all (including invoking cmake)
 or to build updated parts
 ./build.sh -m
 
+NB: in case you didn't build the whole code yet, you can also invoke
+./clone_and_build.sh -m
+
 ### How to test
 Some python scripts can be used for test. 
 Go to ../../test/navigation
@@ -96,11 +100,12 @@ For Python, you need to install some modules (see explanations above)
 
 To test, launch the navigation middleware by entering:
 ./run-capi -r
-test files:
-./test-route-calculation-capi.py
-./test-location-input-capi.py
+'bug safe' test files (can be launched several times):
+./test-location-input-capi.py -l location.xml
+./test-route-calculation-capi.py -r route.xml
+'bug to be fixed' test files
+./test-guidance_capi.py -r route.xml
 ./test-map-viewer-control-capi.py
-NB: there's a bug when the map is closed, so you need to restart the navigation after the last one
 
 If everything is OK, you must see:
 

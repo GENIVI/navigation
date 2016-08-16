@@ -1,7 +1,8 @@
 #!/bin/bash
 
-positioning_version='9e65831eed02cc8a1b2e2e73787d6007b54214b4'
-navit_version='42f9d3484516c88c7cdf647817a6d6a2acac53c2'
+build_option=""
+positioning_version='f341b4a2cb216d6204136794d33076170ab1bf80'
+navit_version='0a8f85666a3b849d70ed450d74bed3cf85466630'
 
 echo "version of positioning is: $positioning_version"
 echo "version of navit is: $navit_version"
@@ -13,6 +14,21 @@ if [ ! "$input" = 'y' ]
 then
 	exit 1
 fi
+
+while getopts m opt
+do
+	case $opt in
+	m)
+		build_option="-m"
+		;;
+	\?)
+		echo "Usage:"
+		echo "$0 [-m]"
+		echo "-m: build with commonAPI plugins "
+		exit 1
+	esac
+done
+
 
 if [ -d "./build" ]
 then
@@ -32,7 +48,7 @@ patch -p0 -i ../patches/search_list_get_unique.diff
 patch -p0 -i ../patches/fsa_issue_padding.diff
 cd ..
 
-./build.sh -c
+./build.sh -c $build_option
 
 
 

@@ -153,7 +153,6 @@ MapViewerControl_interface.releaseMapViewInstance( \
 
 session_interface.deleteSession(sessionhandle)
                                 
-time.sleep(1)
 
 print '\nTest Finished\n'
 
