@@ -208,7 +208,7 @@ typeCollection POIServiceTypes {
 	
 
 	
-  	<** @description: Attribute associcated to an POI used in addPOI and POI Search Result(both CAM and Service)**>			
+  	<** @description: Attribute associated to an POI used in addPOI and POI Search Result(both CAM and Service)**>			
     struct PoiAttribute
     {
 		<** @description:attribute unique id (see data model)**>			

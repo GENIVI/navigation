@@ -24,9 +24,12 @@ option(WITH_DBUS_INTERFACE
        "Build using the D-Bus interfaces" ON)
 option(WITH_DEBUG
         "Enable the debug messages" OFF)
+option(WITH_PLUGIN_MIGRATION
+        "Enable navit plugin migration to commonapi" OFF)
 
 message(STATUS "WITH_DBUS_INTERFACE = ${WITH_DBUS_INTERFACE}")
 message(STATUS "WITH_DEBUG = ${WITH_DEBUG}")
+message(STATUS "WITH_PLUGIN_MIGRATION = ${WITH_PLUGIN_MIGRATION}")
 
 set(API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api")
 set(DBUS_GENERATED_INCLUDE_DIR "${CMAKE_CURRENT_BINARY_DIR}/dbus-include")
@@ -35,11 +38,14 @@ set(COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/poi-common")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
-add_subdirectory(${API_DIR}/navigation-core "${DBUS_GENERATED_INCLUDE_DIR}/navigation-core")
+if (WITH_PLUGIN_MIGRATION)
+    add_subdirectory(poi-server-capi)
+else()
+    #generates the GLib DBus proxies and adaptors
+    add_subdirectory(${API_DIR}/navigation-core "${DBUS_GENERATED_INCLUDE_DIR}/navigation-core")
+    add_subdirectory(${API_DIR}/map-viewer "${DBUS_GENERATED_INCLUDE_DIR}/map-viewer")
+    add_subdirectory(${API_DIR}/poi-service "${DBUS_GENERATED_INCLUDE_DIR}/poi-service")
+    add_subdirectory(poi-server)
+endif()
 
-add_subdirectory(${API_DIR}/map-viewer "${DBUS_GENERATED_INCLUDE_DIR}/map-viewer")
-
-add_subdirectory(${API_DIR}/poi-service "${DBUS_GENERATED_INCLUDE_DIR}/poi-service")
-
-add_subdirectory(poi-server)
 

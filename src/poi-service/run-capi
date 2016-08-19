@@ -5,7 +5,7 @@
 #
 # \copyright Copyright (C) 2013-2014, PCA Peugeot Citroen
 #
-# \file run
+# \file run-capi
 #
 # \brief This file is part of the Build System.
 #
@@ -28,17 +28,17 @@
 
 CURDIR=$PWD
 
-BIN_DIR=$CURDIR/bin
+BIN_DIR=$CURDIR/poi-server-capi/bin
 POI_SERVER_BIN_DIR=$BIN_DIR
 RESOURCE_DIR=$CURDIR/resource
 MAIN_DATABASE=$RESOURCE_DIR/poi-database-sample.db
 ADDITIONAL_DATABASE=$RESOURCE_DIR/poi-database-managed.db
 
 echo 'kill reminding orphan process if necessary'
-./kill-all
+kill -9 `ps -ef | egrep poi-server | grep -v grep | awk '{print $2}'`
 
 echo '------------------------start the server------------------------'
-$POI_SERVER_BIN_DIR/poi-server -f $MAIN_DATABASE &
+$POI_SERVER_BIN_DIR/poi-server -f $MAIN_DATABASE 
 
 
 

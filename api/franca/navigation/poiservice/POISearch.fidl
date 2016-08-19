@@ -239,7 +239,7 @@ interface POISearch {
 	}	
 		
 	<**	@description : This signal indicates that one or more POI categories were added, updated or removed.**>	
-	broadcast CategoriesUpdated {
+	broadcast categoriesUpdated {
 		out {
 			<**	@description : List of POI categories modified or added.**>
 			CategoryAndReason[] poiCategories			
@@ -247,7 +247,7 @@ interface POISearch {
 	}
 	
 	<**	@description : This signal updates the search or proximity alert status of the specified handle.**>	
-	broadcast PoiStatus {
+	broadcast poiStatus {
 		out {
 			<** @description : poi search unique handle.**>
 			Handle poiSearchHandle				
@@ -257,7 +257,7 @@ interface POISearch {
 	}
 	
 	<**	@description : This signal updates in the poi results list.**>	
-	broadcast ResultListChanged {
+	broadcast resultListChanged {
 		out {
 			<** @description : poi search unique handle.**>
 			Handle poiSearchHandle				
