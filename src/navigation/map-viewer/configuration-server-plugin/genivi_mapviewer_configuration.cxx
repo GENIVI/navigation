@@ -159,8 +159,8 @@ void MapViewerConfigurationServerStub::setLocale(const std::shared_ptr<CommonAPI
     m_scriptCode = _scriptCode;
 
     changedSettings.push_back(Configuration::Settings::LOCALE);
-
     fireConfigurationChangedEvent(changedSettings);
+    _reply();
 }
 
 void MapViewerConfigurationServerStub::getLocale(const std::shared_ptr<CommonAPI::ClientId> _client, getLocaleReply_t _reply)
@@ -175,7 +175,13 @@ void MapViewerConfigurationServerStub::getSupportedLocales(const std::shared_ptr
 
 void MapViewerConfigurationServerStub::setTimeFormat(const std::shared_ptr<CommonAPI::ClientId> _client, NavigationTypes::TimeFormat _format, setTimeFormatReply_t _reply)
 {
+    std::vector<Configuration::Settings> changedSettings;
+
     m_timeFormat = _format;
+
+    changedSettings.push_back(Configuration::Settings::TIME_FORMAT);
+    fireConfigurationChangedEvent(changedSettings);
+    _reply();
 }
 
 void MapViewerConfigurationServerStub::getTimeFormat(const std::shared_ptr<CommonAPI::ClientId> _client, getTimeFormatReply_t _reply)
@@ -190,7 +196,13 @@ void MapViewerConfigurationServerStub::getSupportedTimeFormats(const std::shared
 
 void MapViewerConfigurationServerStub::setCoordinatesFormat(const std::shared_ptr<CommonAPI::ClientId> _client, Configuration::CoordinatesFormat _coordinatesFormat, setCoordinatesFormatReply_t _reply)
 {
+    std::vector<Configuration::Settings> changedSettings;
+
     m_coordinatesFormat = _coordinatesFormat;
+
+    changedSettings.push_back(Configuration::Settings::COORDINATES_FORMAT);
+    fireConfigurationChangedEvent(changedSettings);
+    _reply();
 }
 
 void MapViewerConfigurationServerStub::getCoordinatesFormat(const std::shared_ptr<CommonAPI::ClientId> _client, getCoordinatesFormatReply_t _reply)
@@ -205,7 +217,13 @@ void MapViewerConfigurationServerStub::getSupportedCoordinatesFormat(const std::
 
 void MapViewerConfigurationServerStub::setUnitsOfMeasurement(const std::shared_ptr<CommonAPI::ClientId> _client, Configuration::UnitsOfMeasurement _unitsOfMeasurementList, setUnitsOfMeasurementReply_t _reply)
 {
+    std::vector<Configuration::Settings> changedSettings;
+
     m_unitsOfMeasurement = _unitsOfMeasurementList;
+
+    changedSettings.push_back(Configuration::Settings::UNITS_OF_MEASUREMENT);
+    fireConfigurationChangedEvent(changedSettings);
+    _reply();
 }
 
 void MapViewerConfigurationServerStub::getUnitsOfMeasurement(const std::shared_ptr<CommonAPI::ClientId> _client, getUnitsOfMeasurementReply_t _reply)

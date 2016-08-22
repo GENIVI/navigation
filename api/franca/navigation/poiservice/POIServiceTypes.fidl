@@ -286,7 +286,7 @@ typeCollection POIServiceTypes {
     }
 	
  	
-  	<** @description: used in setAttrbutes and CAM startPOISearch**>			
+  	<** @description: used in setAttributes and CAM startPOISearch**>			
     struct AttributeDetails
     {
         <** @description : id of attribute .**>

@@ -168,8 +168,8 @@ void NavigationCoreConfigurationServerStub::setLocale(const std::shared_ptr<Comm
     m_scriptCode = _scriptCode;
 
     changedSettings.push_back(Configuration::Settings::LOCALE);
-
     fireConfigurationChangedEvent(changedSettings);
+    _reply();
 }
 
 void NavigationCoreConfigurationServerStub::getLocale(const std::shared_ptr<CommonAPI::ClientId> _client, getLocaleReply_t _reply)
@@ -184,7 +184,13 @@ void NavigationCoreConfigurationServerStub::getSupportedLocales(const std::share
 
 void NavigationCoreConfigurationServerStub::setTimeFormat(const std::shared_ptr<CommonAPI::ClientId> _client, NavigationTypes::TimeFormat _format, setTimeFormatReply_t _reply)
 {
+    std::vector<Configuration::Settings> changedSettings;
+
     m_timeFormat = _format;
+
+    changedSettings.push_back(Configuration::Settings::TIME_FORMAT);
+    fireConfigurationChangedEvent(changedSettings);
+    _reply();
 }
 
 void NavigationCoreConfigurationServerStub::getTimeFormat(const std::shared_ptr<CommonAPI::ClientId> _client, getTimeFormatReply_t _reply)
@@ -199,7 +205,13 @@ void NavigationCoreConfigurationServerStub::getSupportedTimeFormats(const std::s
 
 void NavigationCoreConfigurationServerStub::setCoordinatesFormat(const std::shared_ptr<CommonAPI::ClientId> _client, Configuration::CoordinatesFormat _coordinatesFormat, setCoordinatesFormatReply_t _reply)
 {
+    std::vector<Configuration::Settings> changedSettings;
+
     m_coordinatesFormat = _coordinatesFormat;
+
+    changedSettings.push_back(Configuration::Settings::COORDINATES_FORMAT);
+    fireConfigurationChangedEvent(changedSettings);
+    _reply();
 }
 
 void NavigationCoreConfigurationServerStub::getCoordinatesFormat(const std::shared_ptr<CommonAPI::ClientId> _client, getCoordinatesFormatReply_t _reply)
@@ -214,7 +226,13 @@ void NavigationCoreConfigurationServerStub::getSupportedCoordinatesFormat(const 
 
 void NavigationCoreConfigurationServerStub::setUnitsOfMeasurement(const std::shared_ptr<CommonAPI::ClientId> _client, Configuration::UnitsOfMeasurement _unitsOfMeasurementList, setUnitsOfMeasurementReply_t _reply)
 {
+    std::vector<Configuration::Settings> changedSettings;
+
     m_unitsOfMeasurement = _unitsOfMeasurementList;
+
+    changedSettings.push_back(Configuration::Settings::UNITS_OF_MEASUREMENT);
+    fireConfigurationChangedEvent(changedSettings);
+    _reply();
 }
 
 void NavigationCoreConfigurationServerStub::getUnitsOfMeasurement(const std::shared_ptr<CommonAPI::ClientId> _client, getUnitsOfMeasurementReply_t _reply)

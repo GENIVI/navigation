@@ -1402,6 +1402,7 @@ void POISearchServerStub::getCategoriesDetails(const std::shared_ptr<CommonAPI::
                 categoryAttribute.setId((m_availableCategoryTable[category_index].attributeList.at(sub_index)).id);
                 categoryAttribute.setName((m_availableCategoryTable[category_index].attributeList.at(sub_index)).name);
                 categoryAttribute.setType(POIServiceTypes::AttributeType::BOOLEAN);
+                operatorList.clear();
                 categoryOperator.setType(POIServiceTypes::OperatorType::EQUAL);
                 categoryOperator.setName("EQUAL"); //redondancy
                 categoryOperator.setValue(std::string(""));
@@ -1683,7 +1684,6 @@ void POISearchServerStub::cancelPoiSearch(const std::shared_ptr<CommonAPI::Clien
     }
     _reply();
 }
-
 
 void POISearchServerStub::startPoiProximityAlert(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::string _inputString, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::SortOption _sortOption, startPoiProximityAlertReply_t _reply)
 {
@@ -2428,8 +2428,8 @@ void POIConfigurationServerStub::setLocale(const std::shared_ptr<CommonAPI::Clie
     m_scriptCode = _scriptCode;
 
     changedSettings.push_back(POIServiceTypes::Settings::LOCALE);
-
     fireConfigurationChangedEvent(changedSettings);
+    _reply();
 }
 
 void POIConfigurationServerStub::getLocale(const std::shared_ptr<CommonAPI::ClientId> _client, getLocaleReply_t _reply)
@@ -2444,7 +2444,13 @@ void POIConfigurationServerStub::getSupportedLocales(const std::shared_ptr<Commo
 
 void POIConfigurationServerStub::setTimeFormat(const std::shared_ptr<CommonAPI::ClientId> _client, NavigationTypes::TimeFormat _format, setTimeFormatReply_t _reply)
 {
+    std::vector<POIServiceTypes::Settings> changedSettings;
+
     m_timeFormat = _format;
+
+    changedSettings.push_back(POIServiceTypes::Settings::TIME_FORMAT);
+    fireConfigurationChangedEvent(changedSettings);
+    _reply();
 }
 
 void POIConfigurationServerStub::getTimeFormat(const std::shared_ptr<CommonAPI::ClientId> _client, getTimeFormatReply_t _reply)
@@ -2459,7 +2465,13 @@ void POIConfigurationServerStub::getSupportedTimeFormats(const std::shared_ptr<C
 
 void POIConfigurationServerStub::setCoordinatesFormat(const std::shared_ptr<CommonAPI::ClientId> _client, POIConfiguration::CoordinatesFormat _coordinatesFormat, setCoordinatesFormatReply_t _reply)
 {
+    std::vector<POIServiceTypes::Settings> changedSettings;
+
     m_coordinatesFormat = _coordinatesFormat;
+
+    changedSettings.push_back(POIServiceTypes::Settings::COORDINATES_FORMAT);
+    fireConfigurationChangedEvent(changedSettings);
+    _reply();
 }
 
 void POIConfigurationServerStub::getCoordinatesFormat(const std::shared_ptr<CommonAPI::ClientId> _client, getCoordinatesFormatReply_t _reply)
@@ -2474,7 +2486,13 @@ void POIConfigurationServerStub::getSupportedCoordinatesFormat(const std::shared
 
 void POIConfigurationServerStub::setUnitsOfMeasurement(const std::shared_ptr<CommonAPI::ClientId> _client, POIConfiguration::UnitsOfMeasurement _unitsOfMeasurementList, setUnitsOfMeasurementReply_t _reply)
 {
+    std::vector<POIServiceTypes::Settings> changedSettings;
+
     m_unitsOfMeasurement = _unitsOfMeasurementList;
+
+    changedSettings.push_back(POIServiceTypes::Settings::UNITS_OF_MEASUREMENT);
+    fireConfigurationChangedEvent(changedSettings);
+    _reply();
 }
 
 void POIConfigurationServerStub::getUnitsOfMeasurement(const std::shared_ptr<CommonAPI::ClientId> _client, getUnitsOfMeasurementReply_t _reply)
