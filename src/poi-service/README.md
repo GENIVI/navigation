@@ -25,10 +25,51 @@ to clean and rebuild all (including invoking cmake)
 or to build updated parts
 ```./build.sh```
 
-
-
 ## How To Run
 ```./bin/poi-server  -f ./resource/poi-database-sample.db```
+
+## How to for the CommonAPI based version (draft)
+The former version of the POCs is based on GLib DBus. A migration to CommonAPI is under progress. 
+
+###Prerequisites
+You need CommonAPI 3.1.5 and Franca 0.9.1 installed 
+For the Ubuntu 64 bits, due to the use of symbol versioning LIBDBUS_1_0 by CommonAPI-DBus, the patched version of DBus has to be >= 1.10.0
+NB: the patch common-api-dbus-runtime/src/dbus-patches/capi-dbus-add-support-for-custom-marshalling.patch failed a little bit, it's needed to update the dbus/dbus-string.h manually
+
+### How to build
+First it's required to set some paths:
+```
+export DBUS_LIB_PATH=<path to the patched version of the DBus lib>
+export COMMONAPI_DBUS_TOOL_DIR=<path to the common-api-dbus-tools folder>
+export COMMONAPI_TOOL_DIR=<path to the common-api-tools folder> 
+```
+A script allows either:
+to clean and rebuild all (including invoking cmake) 
+```./build.sh -cm```
+or to build updated parts
+```./build.sh -m```
+
+NB: in case you didn't build the whole code yet, you can also invoke
+```./clone_and_build.sh -m```
+
+## How To Test
+```./run-capi &```
+```../../test/poi-service/test-poi-capi.py```
+If everything is OK, you must see:
+Search for hotel and station with keyword: Saint-Germain
+Category ID: 2
+Name: hotel
+Category ID: 6
+Name: station
+Search handle: 1
+language: fra
+country: FRA
+script: Latn
+Search finished
+Results: 2
+Hotel: Au Manoir Saint-Germain des Prés
+Station: Saint-Germain des Prés
+Test PASSED
 
 
 ## License

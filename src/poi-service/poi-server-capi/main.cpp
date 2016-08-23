@@ -1971,6 +1971,7 @@ void POISearchServerStub::getPoiDetails(const std::shared_ptr<CommonAPI::ClientI
                 coordinate3D.setAltitude(poi.coordinate.getAltitude());
                 poiDetails.setLocation(coordinate3D);
                 searchResDetails.setDetails(poiDetails);
+                categories.clear();
                 categories.push_back(m_availableCategoryTable[poi.categoryIndex].id); //POI only owns to one category for the moment !
                 searchResDetails.setCategories(categories);
 
