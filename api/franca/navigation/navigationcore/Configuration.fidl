@@ -16,13 +16,7 @@ interface Configuration {
 		major 4 
 		minor 0
 	}
-		<**	@description : This method returns the API version .**>
-	method getVersion {
-		out {
-			<** @description: .**>
-			Version ^version				
-		}	
-	}		
+	
     <** @description: Settings**>
     enumeration Settings {
         INVALID 				= 0
@@ -66,6 +60,14 @@ interface Configuration {
 		SECONDS		= 3
 	}
 	
+	<**	@description : This method returns the API version .**>
+	method getVersion {
+		out {
+			<** @description: .**>
+			Version ^version				
+		}	
+	}		
+
 	<**	@description : Set the current language set. If the language is not supported, the default details will be returned in the native language.**>
 	method setLocale {
 		in {

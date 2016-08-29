@@ -20,7 +20,7 @@ interface SpeechOutput {
 		minor 0
 	}
 	
-	<**	@description : This method returns the API version implemented by the content access module.**>
+	<**	@description : This method returns the API version implemented by the SpeechOutput.**>
 	method getVersion {
 		out {
 			<** @description: .**>

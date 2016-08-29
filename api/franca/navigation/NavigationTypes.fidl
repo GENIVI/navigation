@@ -100,4 +100,9 @@ typeCollection NavigationTypes {
 		<** @description : the script specific variant for the language used. ISO 15924 alpha 4 script code (upper case)**>
 		String scriptCode						
 	}
+	
+	enumeration NotificationNavigation {
+		SESSION_ERROR_NOMORESESSIONHANDLES
+		SESSION_ERROR_SESSIONNOTAVAILABLE
+	}
 }

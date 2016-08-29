@@ -250,6 +250,7 @@ interface MapMatchedPosition {
 
 	<**
 		@description : getPosition = This method returns the current position
+		notify(MAPMATCHEDPOSITION_ERROR_NOPOSITION) is emitted if no position is available
 	**>
 	method getPosition {
 		in {
@@ -276,7 +277,9 @@ interface MapMatchedPosition {
 	}
 
 	<**
-		@description : getAddress = This method returns the current address
+		@description : getCurrentAddress = This method returns the current address
+		notify(MAPMATCHEDPOSITION_ERROR_NOMAP) is emitted if no map is available
+		notify(MAPMATCHEDPOSITION_ERROR_OUTOFKNOWNMAP) is emitted if the vehicle is located in a position outside of the known map
 	**>
 	method getCurrentAddress {
 		in {
@@ -391,7 +394,12 @@ interface MapMatchedPosition {
 		}
 	}
 
-
-
-
+	<**
+		@description : notify = This signal is emitted when something wrong occured when invoking the API 
+	**>
+	broadcast notify {
+		out {
+			Notification notification
+		}
+	}
 }

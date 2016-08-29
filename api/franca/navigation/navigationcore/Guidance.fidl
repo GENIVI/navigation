@@ -8,6 +8,7 @@ package org.genivi.navigation.navigationcore
 	
 import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
+import org.genivi.navigation.navigationcore.NavigationCoreTypes.* from "./NavigationCoreTypes.fidl"
 
 <**
 	@description : Guidance = This interface offers functions that implement the route-guidance functionality of a navigation system
@@ -266,6 +267,7 @@ interface Guidance {
 
 	<**
 		@description : playVoiceManeuver = This method plays or repeats the last voice guidance
+		notify(GUIDANCE_ERROR_VOICENOTALLOWED) is emitted if the voice generation is inactive
 	**>
 	method playVoiceManeuver {
 	}
@@ -331,6 +333,7 @@ interface Guidance {
 
 	<**
 		@description : getManeuversList = This method retrieves the list of next maneuvers
+		notify(GUIDANCE_ERROR_NOMANEUVER) is emitted in case there's no maneuver until the destination
 	**>
 	method getManeuversList {
 		in {
@@ -376,6 +379,7 @@ interface Guidance {
 
 	<**
 		@description : skipNextManeuver = This method allows to jump behind the current maneuver
+		notify(GUIDANCE_ERROR_NOMANEUVER) is emitted in case there's no maneuver until the destination
 	**>
 	method skipNextManeuver {
 		in {
@@ -407,6 +411,7 @@ interface Guidance {
 
 	<**
 		@description : setVoiceGuidanceSettings = This method sets the voice guidance settings
+		notify(GUIDANCE_ERROR_VOICENOTALLOWED) is emitted if the voice generation is inactive
 	**>
 	method setVoiceGuidanceSettings {
 		in {
@@ -531,5 +536,12 @@ interface Guidance {
 		}
 	}
 
-
+	<**
+		@description : notify = This signal is emitted when something wrong occured when invoking the API 
+	**>
+	broadcast notify {
+		out {
+			Notification notification
+		}
+	}
 }

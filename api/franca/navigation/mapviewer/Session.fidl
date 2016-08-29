@@ -8,6 +8,7 @@ package org.genivi.navigation.mapviewer
 
 import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
+import org.genivi.navigation.mapviewer.MapViewerTypes.* from "./MapViewerTypes.fidl"
 
 
 <** @description : This interface offers methods that implement the navigation core session functionality of a navigation system.**>
@@ -25,7 +26,9 @@ interface Session {
 		}	
 	}	
 
-	<** @description : createSession = This method creates a new session and retrieves a handle .**>
+	<** @description : createSession = This method creates a new session and retrieves a handle .
+		notify(SESSION_ERROR_NOMORESESSIONHANDLES) is emitted if no more session handles are available
+	**>
 	method createSession {
 		in {
 			<**
@@ -42,7 +45,9 @@ interface Session {
 		}
 	}
 
-	<** @description : deleteSession = This method deletes a session and its associated resources .**>
+	<** @description : deleteSession = This method deletes a session and its associated resources .
+		notify(SESSION_ERROR_SESSIONNOTAVAILABLE) is emitted if an application tries to delete a session handle that is not available
+	**>
 	method deleteSession {
 		in {
 			<**	@description : sessionHandle **>
@@ -76,6 +81,15 @@ interface Session {
 		out {
 			<**	@description : sessionHandle **>
 			Handle sessionHandle			
+		}
+	}
+
+	<**
+		@description : notify = This signal is emitted when something wrong occured when invoking the API 
+	**>
+	broadcast notify {
+		out {
+			Notification notification
 		}
 	}
 	

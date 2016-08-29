@@ -8,6 +8,7 @@ package org.genivi.navigation.mapviewer
 
 import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
+import org.genivi.navigation.mapviewer.MapViewerTypes.* from "./MapViewerTypes.fidl"
 
 <**
 	@description : MapViewerControl = This interface offers functions to control the MapViewer
@@ -294,6 +295,7 @@ interface MapViewerControl {
 
 	<**
 		@description : createMapViewInstance = This method creates a new map instance
+		notify(MAPVIEWERCONTROL_ERROR_NOMOREMAPVIEWINSTANCEHANDLES) is emitted if no more map view instance handles are available
 	**>
 	method createMapViewInstance {
 		in {
@@ -321,6 +323,7 @@ interface MapViewerControl {
 
 	<**
 		@description : releaseMapViewInstance = This method releases (i.e. destroys) a given map instance. Only invisible map instances can be released
+		notify(MAPVIEWERCONTROL_ERROR_MAPVIEWINSTANCENOTAVAILABLE) is emitted if an application tries to delete a map view instance handle that is not available
 	**>
 	method releaseMapViewInstance {
 		in {
@@ -1953,6 +1956,15 @@ interface MapViewerControl {
 		}
 		out {
 			SelectedMapElement [] selectedElements
+		}
+	}
+
+	<**
+		@description : notify = This signal is emitted when something wrong occured when invoking the API 
+	**>
+	broadcast notify {
+		out {
+			Notification notification
 		}
 	}
 

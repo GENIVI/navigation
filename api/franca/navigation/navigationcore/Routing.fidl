@@ -205,6 +205,7 @@ interface Routing {
 
 	<**
 		@description : This method creates a route
+		notify(ROUTING_ERROR_NOMOREROUTEHANDLES) is emitted if no more routing handles are available
 	**>
 	method createRoute {
 		in {
@@ -225,6 +226,8 @@ interface Routing {
 
 	<**
 		@description : This method deletes a route and its associated resources
+		notify(ROUTING_ERROR_ROUTENOTAVAILABLE) is emitted if an application tries to delete a route handle that is not available
+		notify(ROUTING_ERROR_OPERATIONNOTALLOWED) is emitted if an application tries to delete a route which is not created manually (e.g. an alternative route calculated in the background)
 	**>
 	method deleteRoute {
 		in {
@@ -243,6 +246,7 @@ interface Routing {
 
 	<**
 		@description : This method sets the cost model
+		notify(ROUTING_ERROR_OPERATIONNOTALLOWED) is emitted if an application tries to set a cost model for a route which is not created manually (e.g. an alternative route calculated in the background)
 	**>
 	method setCostModel {
 		in {
@@ -295,6 +299,8 @@ interface Routing {
 
 	<**
 		@description : This method sets a list of route preferences
+		notify(ROUTING_ERROR_OPERATIONNOTALLOWED) is emitted if an application tries to set route preferences for a route which is not created manually (e.g. an alternative route calculated in the background)
+		notify(ROUTING_ERROR_ROUTEPREFERENCENOTSUPPORTED) is emitted if an application tries to set a route preference which is not supported (e.g. (USE,CRIME_AREA)). The preferences which are not supported are product dependent.
 	**>
 	method setRoutePreferences {
 		in {
@@ -393,6 +399,7 @@ interface Routing {
 
 	<**
 		@description : This method sets a list of means of transportation that must be considered when calculating a route
+		notify(ROUTING_ERROR_OPERATIONNOTALLOWED) is emitted if an application tries to set transportation means for a route which is not created manually (e.g. an alternative route calculated in the background)
 	**>
 	method setTransportationMeans {
 		in {
@@ -438,6 +445,7 @@ interface Routing {
 
 	<**
 		@description : setExcludedAreas = This method sets the areas to be excluded when calculating a route
+		notify(ROUTING_ERROR_OPERATIONNOTALLOWED) is emitted if an application tries to set excluded areas for a route which is not created manually (e.g. an alternative route calculated in the background)
 	**>
 	method setExcludedAreas {
 		in {
@@ -474,6 +482,9 @@ interface Routing {
 
 	<**
 		@description : setWaypoints = This method sets a list of waypoints
+		notify(ROUTING_ERROR_WAYPOINTCANNOTBECHANGED) is emitted when a client application tries to change the waypoints while the route guidance is active
+		notify(ROUTING_ERROR_TOOMANYWAYPOINTS) is emitted when a client application tries to set a number of waypoints that exceeds the system capabilities
+		notify(ROUTING_ERROR_OPERATIONNOTALLOWED) is emitted if an application tries to set waypoints for a route which is not created manually (e.g. an alternative route calculated in the background)
 	**>
 	method setWaypoints {
 		in {
@@ -521,6 +532,7 @@ interface Routing {
 
 	<**
 		@description : calculateRoute = This method starts a route calculation
+		notify(ROUTING_ERROR_OPERATIONNOTALLOWED) is emitted if an application tries to calculate a route which is not created manually (e.g. an alternative route calculated in the background)
 	**>
 	method calculateRoute {
 		in {
@@ -557,6 +569,7 @@ interface Routing {
 
 	<**
 		@description : calculateRoutes = This method allows a client to calculate alternative routes that differs from a list of already calculated routes
+		notify(ROUTING_ERROR_OPERATIONNOTALLOWED) is emitted if an application tries to calculate an alternative to a route which is not created manually (e.g. an alternative route calculated in the background)
 	**>
 	method calculateRoutes {
 		in {
@@ -783,5 +796,13 @@ interface Routing {
 		}
 	}
 
+	<**
+		@description : notify = This signal is emitted when something wrong occured when invoking the API 
+	**>
+	broadcast notify {
+		out {
+			Notification notification
+		}
+	}
 
 }
