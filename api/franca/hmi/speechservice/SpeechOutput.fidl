@@ -141,7 +141,8 @@ interface SpeechOutput {
 	 */
 	
 	<** @description : Notifies the connection status **>
-    broadcast notifyConnectionStatus selective {
+//    broadcast notifyConnectionStatus selective {
+    broadcast notifyConnectionStatus {
     	out {
 			<** @description : Client connection status. **>
     		ConnectionStatus connectionStatus
@@ -149,7 +150,8 @@ interface SpeechOutput {
     }
 
 	<** @description : Notifies the last reached marker. **>
-	broadcast notifyMarkerReached selective {
+//	broadcast notifyMarkerReached selective {
+	broadcast notifyMarkerReached {
 		out {
 			<** @description : ID of the processed chunk. **>
 			ChunkID chunkID
@@ -159,7 +161,8 @@ interface SpeechOutput {
 	}
 	
 	<** @description : Notifies the queue status. **>
-	broadcast notifyQueueStatus selective {
+//	broadcast notifyQueueStatus selective {
+	broadcast notifyQueueStatus {
 		out {
 			<** @description : Fill status of the text buffer. **>
 			QueueStatus queueStatus
@@ -167,7 +170,8 @@ interface SpeechOutput {
 	}
 
 	<** @description : Notifies the TTS engine status. **>
-	broadcast notifyTTSStatus selective {
+//	broadcast notifyTTSStatus selective {
+	broadcast notifyTTSStatus {
 		out {
 			<** @description : Current status of the TTS. **>
 			TtsStatus ttsStatus
