@@ -70,11 +70,13 @@ positioning/
 the code of positioning
 
 ## How to for the CommonAPI based version (draft)
-The former version of the POCs is based on GLib DBus. A migration to CommonAPI is under progress. 
+The former version of the POCs is based on GLib DBus. Migration to CommonAPI is done. 
 
 ###Prerequisites
 You need CommonAPI 3.1.5 and Franca 0.9.1 installed 
 For the Ubuntu 64 bits, due to the use of symbol versioning LIBDBUS_1_0 by CommonAPI-DBus, the patched version of DBus has to be >= 1.10.0
+For instance, wget https://dbus.freedesktop.org/releases/dbus/dbus-1.10.0.tar.gz
+NB: It's better to install it in your local folder, in case you test it under Ubuntu
 NB: the patch common-api-dbus-runtime/src/dbus-patches/capi-dbus-add-support-for-custom-marshalling.patch failed a little bit, it's needed to update the dbus/dbus-string.h manually
 
 ### How to build
