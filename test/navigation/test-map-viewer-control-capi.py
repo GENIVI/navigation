@@ -55,7 +55,8 @@ session = bus.get_object('org.genivi.navigation.mapviewer.Session_Session','/Ses
 session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.mapviewer.Session')
 
 #get session handle
-sessionhandle = session_interface.createSession(dbus.String('test mapviewer'))
+ret = session_interface.createSession(dbus.String('test mapviewer'))
+sessionhandle=ret[1]
 print 'Session handle: ' + str(sessionhandle)
 
 sessionstatus = session_interface.getSessionStatus(dbus.UInt32(sessionhandle));
@@ -68,11 +69,11 @@ MapViewerControl_obj = bus.get_object('org.genivi.navigation.mapviewer.MapViewer
 MapViewerControl_interface = dbus.Interface(MapViewerControl_obj, dbus_interface='org.genivi.navigation.mapviewer.MapViewerControl')
 
 #get mapviewer handle
-mapviewerhandle = MapViewerControl_interface.createMapViewInstance( \
+ret = MapViewerControl_interface.createMapViewInstance( \
   dbus.UInt32(sessionhandle), \
   dbus.Struct((dbus.UInt16(HORIZONTAL_SIZE),dbus.UInt16(VERTICAL_SIZE))), \
   dbus.Int32(MAIN_MAP))
-
+mapviewerhandle=ret[1]
 print 'MapView handle: ' + str(mapviewerhandle)
 
 # Bern
@@ -113,7 +114,11 @@ if round(lon1,4) != round(lon2,4) :
 if round(alt1,4) != round(alt2,4) :
     print '\nTest Failed:' + str(round(alt1,4)) + '!=' + str(round(alt2,4))  + '\n'
 
-time.sleep(1)
+ret=MapViewerControl_interface.getMapViewScale(dbus.UInt32(mapviewerhandle))
+print('Scale ID: '+str(int(ret[0])))
+print('MapScaleType: '+str(int(ret[1])))
+
+time.sleep(3)
 
 print 'Zoom in'
 MapViewerControl_interface.setMapViewScaleByDelta( \
@@ -121,7 +126,7 @@ MapViewerControl_interface.setMapViewScaleByDelta( \
     dbus.UInt32(mapviewerhandle), \
     dbus.Int16(1))
 
-time.sleep(2)
+time.sleep(3)
 
 print 'Zoom in'
 MapViewerControl_interface.setMapViewScaleByDelta( \
@@ -129,7 +134,7 @@ MapViewerControl_interface.setMapViewScaleByDelta( \
     dbus.UInt32(mapviewerhandle), \
     dbus.Int16(1))
 
-time.sleep(2)
+time.sleep(3)
 
 print 'Zoom out'
 MapViewerControl_interface.setMapViewScaleByDelta( \
@@ -137,7 +142,7 @@ MapViewerControl_interface.setMapViewScaleByDelta( \
     dbus.UInt32(mapviewerhandle), \
     dbus.Int16(-1))
 
-time.sleep(2)
+time.sleep(3)
 
 print 'Zoom out'
 MapViewerControl_interface.setMapViewScaleByDelta( \
@@ -145,7 +150,7 @@ MapViewerControl_interface.setMapViewScaleByDelta( \
     dbus.UInt32(mapviewerhandle), \
     dbus.Int16(-1))
 
-time.sleep(2)
+time.sleep(3)
 
 MapViewerControl_interface.releaseMapViewInstance( \
   dbus.UInt32(sessionhandle), \

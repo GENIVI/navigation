@@ -233,6 +233,7 @@ class  MapMatchedPositionServerStub : public MapMatchedPositionStubDefault
      * description: getPosition = This method returns the current position
      */
     void getPosition(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector<MapMatchedPosition::PositionItemKey> _valuesToReturn, getPositionReply_t _reply){
+        MapMatchedPosition::getPositionError _error = MapMatchedPosition::getPositionError::OK;
         dbg(lvl_debug,"enter\n");
         MapMatchedPosition::PositionItemDict map;
         struct attr attr;
@@ -256,7 +257,7 @@ class  MapMatchedPositionServerStub : public MapMatchedPositionStubDefault
                 break;
             }
         }
-        _reply(map);
+        _reply(_error,map);
     }
 
     /**
@@ -270,6 +271,7 @@ class  MapMatchedPositionServerStub : public MapMatchedPositionStubDefault
      * description: getAddress = This method returns the current address
      */
     void getCurrentAddress(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector<MapMatchedPosition::AddressItemKey> _valuesToReturn, getCurrentAddressReply_t _reply){
+        MapMatchedPosition::getCurrentAddressError _error = MapMatchedPosition::getCurrentAddressError::OK;
         MapMatchedPosition::AddressItemDict ret;
         std::vector< MapMatchedPosition::AddressItemKey >::const_iterator it;
         for (it = _valuesToReturn.begin(); it < _valuesToReturn.end(); it++) {
@@ -277,7 +279,7 @@ class  MapMatchedPositionServerStub : public MapMatchedPositionStubDefault
                 ret[*it]= std::string(mp_street_name);
             }
         }
-        _reply(ret);
+        _reply(_error, ret);
     }
 
     /**

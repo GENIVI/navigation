@@ -63,6 +63,7 @@ static const uint32_t MAX_CHUNK_LENGTH	= 1024;	/**< max length of a single promp
 static const uint32_t MAX_MARKER_LENGTH	= 32;	/**< marker tag inside the prompt chunk */
 static const uint32_t PROCESS_CHUNKS_LOOP = 100;
 static cst_voice* mp_voice;
+static cst_audio_streaming_info* mp_asi;
 static pthread_mutex_t mutex;
 
 static std::string m_chunkBuffer; /** max size = MAX_CHUNK_SIZE*MAX_SLOT_COUNT */
@@ -92,6 +93,12 @@ static std::string m_chunkBuffer; /** max size = MAX_CHUNK_SIZE*MAX_SLOT_COUNT *
     return(true);
 }
 
+ static int fliteCallback(const cst_wave *w, int start, int size,
+              int last, cst_audio_streaming_info_struct *asi)
+ {
+     printf("\n>>> [server] fliteCallback()\n");
+ }
+
 class  SpeechOutputServerStub
 : public SpeechOutputStubDefault
 {
@@ -110,7 +117,11 @@ public:
         flite_init();
 
         mp_voice = register_cmu_us_kal(NULL);
+/*        mp_asi = new_audio_streaming_info();
+        mp_asi->asc = fliteCallback;
 
+        feat_set(mp_voice->features,"streaming_info",audio_streaming_info_val(mp_asi));
+*/
     }
 
     ~SpeechOutputServerStub() {

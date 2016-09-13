@@ -75,28 +75,30 @@ class  SessionServerStub : public SessionStubDefault
      * description: createSession = This method creates a new session and retrieves a handle .
      */
     void createSession(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _clientApp, createSessionReply_t _reply){
+        Session::createSessionError _error = Session::createSessionError::OK;
         dbg(lvl_debug,"enter\n");
         NavigationTypes::Handle _sessionHandle=1;
         while (mp_handles[_sessionHandle]) {
             _sessionHandle++;
             if (_sessionHandle == MAX_SESSION_HANDLES)
-                throw DBus::Error("org.genivi.navigationcore.Session.Error.NoMoreSessionHandles","Out of session handles");
+               _error = Session::createSessionError::SESSION_ERROR_NOMORESESSIONHANDLES;
         }
         mp_handles[_sessionHandle]=new std::string(_clientApp);
-        _reply(_sessionHandle);
+        _reply(_error,_sessionHandle);
     }
 
     /**
      * description: deleteSession = This method deletes a session and its associated resources .
      */
     void deleteSession(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, deleteSessionReply_t _reply){
+        Session::deleteSessionError _error = Session::deleteSessionError::OK;
         dbg(lvl_debug,"enter\n");
         if (!mp_handles[_sessionHandle])
-            throw DBus::Error("org.genivi.navigationcore.Session.Error.NotAvailableSessionHandle","Session handle invalid");
+           _error = Session::deleteSessionError::SESSION_ERROR_SESSIONNOTAVAILABLE;
         delete(mp_handles[_sessionHandle]);
         mp_handles[_sessionHandle]=NULL;
         fireSessionDeletedEvent(_sessionHandle);
-        _reply();
+        _reply(_error);
     }
 
     /**

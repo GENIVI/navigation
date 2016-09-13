@@ -267,9 +267,12 @@ interface Guidance {
 
 	<**
 		@description : playVoiceManeuver = This method plays or repeats the last voice guidance
-		notify(GUIDANCE_ERROR_VOICENOTALLOWED) is emitted if the voice generation is inactive
 	**>
 	method playVoiceManeuver {
+		error {
+			OK
+			GUIDANCE_ERROR_VOICENOTALLOWED //the voice generation is inactive
+		}
 	}
 
 	<**
@@ -333,7 +336,6 @@ interface Guidance {
 
 	<**
 		@description : getManeuversList = This method retrieves the list of next maneuvers
-		notify(GUIDANCE_ERROR_NOMANEUVER) is emitted in case there's no maneuver until the destination
 	**>
 	method getManeuversList {
 		in {
@@ -357,6 +359,10 @@ interface Guidance {
 			
 			Maneuver[] maneuversList
 		}
+		error {
+			OK
+			GUIDANCE_ERROR_NOMANEUVER //there's no maneuver until the destination
+		}
 	}
 
 	<**
@@ -379,7 +385,6 @@ interface Guidance {
 
 	<**
 		@description : skipNextManeuver = This method allows to jump behind the current maneuver
-		notify(GUIDANCE_ERROR_NOMANEUVER) is emitted in case there's no maneuver until the destination
 	**>
 	method skipNextManeuver {
 		in {
@@ -388,6 +393,10 @@ interface Guidance {
 				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
 			Handle sessionHandle
+		}
+		error {
+			OK
+			GUIDANCE_ERROR_NOMANEUVER //there's no maneuver until the destination
 		}
 	}
 
@@ -411,7 +420,6 @@ interface Guidance {
 
 	<**
 		@description : setVoiceGuidanceSettings = This method sets the voice guidance settings
-		notify(GUIDANCE_ERROR_VOICENOTALLOWED) is emitted if the voice generation is inactive
 	**>
 	method setVoiceGuidanceSettings {
 		in {
@@ -420,6 +428,10 @@ interface Guidance {
 				@description : mode = enum(INVALID,DISABLED_PROMPT,AUTOMATIC_PROMPT,MANUAL_PROMPT, ... )
 			**>
 			PromptMode promptMode
+		}
+		error {
+			OK
+			GUIDANCE_ERROR_VOICENOTALLOWED //the voice generation is inactive
 		}
 	}
 
@@ -533,15 +545,6 @@ interface Guidance {
 				@description : changeCause = enum(INVALID,TRAFFIC,OFF_ROUTE,MANUAL,...)
 			**>
 			RouteChangedCause changeCause
-		}
-	}
-
-	<**
-		@description : notify = This signal is emitted when something wrong occured when invoking the API 
-	**>
-	broadcast notify {
-		out {
-			Notification notification
 		}
 	}
 }

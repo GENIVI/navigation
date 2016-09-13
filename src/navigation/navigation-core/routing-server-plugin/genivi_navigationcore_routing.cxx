@@ -159,39 +159,42 @@ class  RoutingServerStub : public RoutingStubDefault
      * description: This method creates a route
      */
     void createRoute(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, createRouteReply_t _reply){
+        Routing::createRouteError _error = Routing::createRouteError::OK;
         dbg(lvl_debug,"enter\n");
         NavigationTypes::Handle routeHandle=1;
         while (mp_handles[routeHandle]) {
             routeHandle++;
             if (routeHandle == MAX_ROUTE_HANDLES)
-                throw DBus::ErrorLimitsExceeded("Out of route handles");
+                _error = Routing::createRouteError::ROUTING_ERROR_NOMOREROUTEHANDLES;
         }
         mp_handles[routeHandle]=new RoutingObj(this, _sessionHandle, routeHandle);
-        _reply(routeHandle);
+        _reply(_error, routeHandle);
     }
 
     /**
      * description: This method deletes a route and its associated resources
      */
     void deleteRoute(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _routeHandle, deleteRouteReply_t _reply){
+        Routing::deleteRouteError _error = Routing::deleteRouteError::OK;
         RoutingObj *obj=mp_handles[_routeHandle];
         if (!obj)
-            throw DBus::ErrorInvalidArgs("Route handle invalid");
+            _error = Routing::deleteRouteError::ROUTING_ERROR_ROUTENOTAVAILABLE;
         delete(obj);
         mp_handles[_routeHandle]=NULL;
         fireRouteDeletedEvent(_routeHandle);
-        _reply();
+        _reply(_error);
     }
 
     /**
      * description: This method sets the cost model
      */
     void setCostModel(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _routeHandle, Routing::CostModel _costModel, setCostModelReply_t _reply){
+        Routing::setCostModelError _error = Routing::setCostModelError::OK;
         RoutingObj *obj=mp_handles[_routeHandle];
         if (!obj)
-            throw DBus::ErrorInvalidArgs("Route handle invalid");
+           _error = Routing::setCostModelError::ROUTING_ERROR_OPERATIONNOTALLOWED;
         obj->SetCostModel(_sessionHandle, _costModel);
-        _reply();
+        _reply(_error);
     }
 
     /**
@@ -222,11 +225,12 @@ class  RoutingServerStub : public RoutingStubDefault
      * description: This method sets a list of route preferences
      */
     void setRoutePreferences(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _routeHandle, std::string _countryCode, std::vector<Routing::RoutePreference> _roadPreferenceList, std::vector<Routing::ConditionPreference> _conditionPreferenceList, setRoutePreferencesReply_t _reply){
+        Routing::setRoutePreferencesError _error = Routing::setRoutePreferencesError::OK;
         RoutingObj *obj=mp_handles[_routeHandle];
         if (!obj)
-            throw DBus::ErrorInvalidArgs("Route handle invalid");
+           _error = Routing::setRoutePreferencesError::ROUTING_ERROR_OPERATIONNOTALLOWED;
         obj->SetRoutePreferences(_sessionHandle, _countryCode, _roadPreferenceList);
-        _reply();
+        _reply(_error);
     }
 
     /**
@@ -297,8 +301,9 @@ class  RoutingServerStub : public RoutingStubDefault
      *   calculating a route
      */
     void setTransportationMeans(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _routeHandle, std::vector<Routing::TransportationMeans> _transportationMeansList, setTransportationMeansReply_t _reply){
+        Routing::setTransportationMeansError _error = Routing::setTransportationMeansError::OK;
         throw DBus::ErrorNotSupported("Not yet supported");
-        _reply();
+        _reply(_error);
     }
 
     /**
@@ -322,8 +327,9 @@ class  RoutingServerStub : public RoutingStubDefault
      *   route
      */
     void setExcludedAreas(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _routeHandle, std::vector< ::v4::org::genivi::navigation::NavigationTypes::Polygon> _excludedAreas, setExcludedAreasReply_t _reply){
+        Routing::setExcludedAreasError _error = Routing::setExcludedAreasError::OK;
         throw DBus::ErrorNotSupported("Not yet supported");
-        _reply();
+        _reply(_error);
     }
 
     /**
@@ -338,12 +344,13 @@ class  RoutingServerStub : public RoutingStubDefault
      * description: setWaypoints = This method sets a list of waypoints
      */
     void setWaypoints(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _routeHandle, bool _startFromCurrentPosition, std::vector<Routing::WayPoint> _waypointsList, setWaypointsReply_t _reply){
+        Routing::setWaypointsError _error = Routing::setWaypointsError::OK;
         dbg(lvl_debug,"enter\n");
         RoutingObj *obj=mp_handles[_routeHandle];
         if (!obj)
-            throw DBus::ErrorInvalidArgs("Route handle invalid");
+            _error = Routing::setWaypointsError::ROUTING_ERROR_OPERATIONNOTALLOWED;
         obj->SetWaypoints(_sessionHandle, _startFromCurrentPosition, _waypointsList);
-        _reply();
+        _reply(_error);
     }
 
     /**
@@ -364,12 +371,13 @@ class  RoutingServerStub : public RoutingStubDefault
      * description: calculateRoute = This method starts a route calculation
      */
     void calculateRoute(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _routeHandle, calculateRouteReply_t _reply){
+        Routing::calculateRouteError _error = Routing::calculateRouteError::OK;
         dbg(lvl_debug,"enter\n");
         RoutingObj *obj=mp_handles[_routeHandle];
         if (!obj)
-            throw DBus::ErrorInvalidArgs("Route handle invalid");
+            _error = Routing::calculateRouteError::ROUTING_ERROR_OPERATIONNOTALLOWED;
         obj->CalculateRoute(_sessionHandle);
-        _reply();
+        _reply(_error);
     }
 
     /**

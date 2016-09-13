@@ -24,6 +24,14 @@ cmake_minimum_required (VERSION 2.8.1)
 
 project(franca-poiservice)
 
+get_directory_property(hasParent PARENT_DIRECTORY)
+
+if(hasParent)
+    set(COMMONAPI_GEN_DIR "${COMMONAPI_GEN_DIR}" PARENT_SCOPE)
+else()
+    set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/src-gen")
+endif()
+
 option(COMMONAPI_TOOL_DIR
        "Absolute path to CommonAPI tool" "")
 option(COMMONAPI_DBUS_TOOL_DIR

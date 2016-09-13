@@ -32,7 +32,7 @@ option(COMMONAPI_DBUS_TOOL_DIR
 get_directory_property(hasParent PARENT_DIRECTORY)
 
 if(hasParent) 
-    set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/src-gen" PARENT_SCOPE)
+    set(COMMONAPI_GEN_DIR "${COMMONAPI_GEN_DIR}" PARENT_SCOPE)
 else()
     set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/src-gen")
 endif()

@@ -27,7 +27,6 @@ interface Session {
 	}	
 
 	<** @description : createSession = This method creates a new session and retrieves a handle .
-		notify(SESSION_ERROR_NOMORESESSIONHANDLES) is emitted if no more session handles are available
 	**>
 	method createSession {
 		in {
@@ -43,15 +42,22 @@ interface Session {
 			<**	@description : sessionHandle **>
 			Handle sessionHandle
 		}
+		error {
+			OK
+			SESSION_ERROR_NOMORESESSIONHANDLES //no more session handles are available
+		}
 	}
 
 	<** @description : deleteSession = This method deletes a session and its associated resources .
-		notify(SESSION_ERROR_SESSIONNOTAVAILABLE) is emitted if an application tries to delete a session handle that is not available
 	**>
 	method deleteSession {
 		in {
 			<**	@description : sessionHandle **>
 			Handle sessionHandle
+		}
+		error {
+			OK
+			SESSION_ERROR_SESSIONNOTAVAILABLE //an application tries to delete a session handle that is not available
 		}
 	}
 
@@ -83,14 +89,4 @@ interface Session {
 			Handle sessionHandle			
 		}
 	}
-
-	<**
-		@description : notify = This signal is emitted when something wrong occured when invoking the API 
-	**>
-	broadcast notify {
-		out {
-			Notification notification
-		}
-	}
-	
 }

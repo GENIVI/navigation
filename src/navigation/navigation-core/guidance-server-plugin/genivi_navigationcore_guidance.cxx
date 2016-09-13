@@ -277,13 +277,14 @@ class  GuidanceServerStub : public GuidanceStubDefault
      * description: playVoiceManeuver = This method plays or repeats the last voice guidance
      */
     void playVoiceManeuver(const std::shared_ptr<CommonAPI::ClientId> _client, playVoiceManeuverReply_t _reply){
+        Guidance::playVoiceManeuverError _error = Guidance::playVoiceManeuverError::OK;
         if (!mp_guidance) {
             dbg(lvl_debug,"no guidance active\n");
-            throw DBus::ErrorFailed("no guidance active");
+            _error = Guidance::playVoiceManeuverError::GUIDANCE_ERROR_VOICENOTALLOWED;
         }
 
         mp_guidance->PlayVoiceManeuver();
-        _reply();
+        _reply(_error);
     }
 
     /**
@@ -320,15 +321,16 @@ class  GuidanceServerStub : public GuidanceStubDefault
      * description: getManeuversList = This method retrieves the list of next maneuvers
      */
     void getManeuversList(const std::shared_ptr<CommonAPI::ClientId> _client, uint16_t _requestedNumberOfManeuvers, uint32_t _maneuverOffset, getManeuversListReply_t _reply){
+        Guidance::getManeuversListError _error = Guidance::getManeuversListError::OK;
         if (!mp_guidance) {
             dbg(lvl_debug,"no guidance active\n");
-            throw DBus::ErrorFailed("no guidance active");
+            _error = Guidance::getManeuversListError::GUIDANCE_ERROR_NOMANEUVER;
         }
 
         uint16_t _numberOfManeuvers;
         std::vector<Guidance::Maneuver> _maneuversList;
         mp_guidance->GetManeuversList(_requestedNumberOfManeuvers, _maneuverOffset, _numberOfManeuvers, _maneuversList);
-        _reply(_numberOfManeuvers,_maneuversList);
+        _reply(_error,_numberOfManeuvers,_maneuversList);
     }
 
     /**
@@ -365,8 +367,9 @@ class  GuidanceServerStub : public GuidanceStubDefault
      * description: setVoiceGuidanceSettings = This method sets the voice guidance settings
      */
     void setVoiceGuidanceSettings(const std::shared_ptr<CommonAPI::ClientId> _client, Guidance::PromptMode _promptMode, setVoiceGuidanceSettingsReply_t _reply){
+        Guidance::setVoiceGuidanceSettingsError _error = Guidance::setVoiceGuidanceSettingsError::OK;
         mp_guidance->SetVoiceGuidanceSettings(_promptMode);
-        _reply();
+        _reply(_error);
     }
 
     /**

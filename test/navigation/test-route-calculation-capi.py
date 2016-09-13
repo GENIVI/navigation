@@ -97,7 +97,7 @@ if __name__ == '__main__':
 bus = dbus.SessionBus()
 
 #add signal receivers
-def catchall_route_calculation_signals_handler(routeHandle, status, percentage):
+def route_calculation_signals_handler(routeHandle, status, percentage):
     print 'Route Calculation: ' + str(int(percentage)) + ' %'
     if int(percentage) == 100:
         #get route overview
@@ -133,7 +133,7 @@ def catchall_route_calculation_signals_handler(routeHandle, status, percentage):
                 g_routing_interface.deleteRoute(dbus.UInt32(g_session_handle),dbus.UInt32(routes[i].getElementsByTagName("handle")[0].childNodes[0].data))
             g_session_interface.deleteSession(dbus.UInt32(g_session_handle))
 
-def catchall_session_signals_handler(sessionHandle):
+def session_signals_handler(sessionHandle):
     print('Session handle deleted: '+str(sessionHandle))
     if sessionHandle == g_session_handle:
         print 'Test PASSED'
@@ -141,18 +141,18 @@ def catchall_session_signals_handler(sessionHandle):
         print 'Test FAILED'
     loop.quit()
 
-def catchall_route_deleted_signals_handler(routeHandle):
+def route_deleted_signals_handler(routeHandle):
     print('Route handle deleted: '+str(routeHandle))
 
-bus.add_signal_receiver(catchall_route_calculation_signals_handler, \
+bus.add_signal_receiver(route_calculation_signals_handler, \
                         dbus_interface = "org.genivi.navigation.navigationcore.Routing", \
                         signal_name = "routeCalculationProgressUpdate")
 
-bus.add_signal_receiver(catchall_route_deleted_signals_handler, \
+bus.add_signal_receiver(route_deleted_signals_handler, \
                         dbus_interface = "org.genivi.navigation.navigationcore.Routing", \
                         signal_name = "routeDeleted")
 
-bus.add_signal_receiver(catchall_session_signals_handler, \
+bus.add_signal_receiver(session_signals_handler, \
                         dbus_interface = "org.genivi.navigation.navigationcore.Session", \
                         signal_name = "sessionDeleted")
 
@@ -170,7 +170,8 @@ def launch_route_calculation(route):
     g_current_route = route
     print 'Route name: '+routes[g_current_route].getElementsByTagName("name")[0].childNodes[0].data
     #get route handle
-    g_route_handle = g_routing_interface.createRoute(dbus.UInt32(g_session_handle)) 
+    ret = g_routing_interface.createRoute(dbus.UInt32(g_session_handle))
+    g_route_handle=ret[1] 
     routes[g_current_route].getElementsByTagName("handle")[0].childNodes[0].data = g_route_handle
     print 'Route handle: ' + str(g_route_handle)
     start = routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data
@@ -197,7 +198,8 @@ session = bus.get_object('org.genivi.navigation.navigationcore.Session_Session',
 g_session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.navigationcore.Session')
 
 #get session handle
-g_session_handle = g_session_interface.createSession(dbus.String("test route calculation"))
+ret = g_session_interface.createSession(dbus.String("test route calculation"))
+g_session_handle=ret[1]
 print 'Session handle: ' + str(g_session_handle)
 
 routing_obj = bus.get_object('org.genivi.navigation.navigationcore.Routing_Routing','/Routing')

@@ -67,10 +67,10 @@ MAIN_MAP = 0x0010
 NUMBER_OF_SEGMENTS = 1000
 
 #add signal receivers
-def catchall_routing_routeCalculationProgressUpdate_handler(routeHandle, status, percentage):
+def routing_routeCalculationProgressUpdate_handler(routeHandle, status, percentage):
     print 'Route Calculation: ' + str(int(percentage)) + ' %'
 
-def catchall_routing_routeCalculationSuccessful_handler(routeHandle,unfullfilledPreferences):
+def routing_routeCalculationSuccessful_handler(routeHandle,unfullfilledPreferences):
     global g_guidance_active
     print 'Route Calculation Successfull: ' + str(routeHandle)
     #get route overview
@@ -105,7 +105,7 @@ def catchall_routing_routeCalculationSuccessful_handler(routeHandle,unfullfilled
 #    display_route(routeHandle)
     launch_guidance(routeHandle)
     
-def catchall_session_sessionDeleted_handler(sessionHandle):
+def session_sessionDeleted_handler(sessionHandle):
     print('Session handle deleted: '+str(sessionHandle))
     if sessionHandle == g_navigationcore_session_handle:
         print 'Test PASSED'
@@ -113,10 +113,10 @@ def catchall_session_sessionDeleted_handler(sessionHandle):
         print 'Test FAILED'
     loop.quit()
 
-def catchall_routing_routeDeleted_handler(routeHandle):
+def routing_routeDeleted_handler(routeHandle):
     print('Route handle deleted: '+str(routeHandle))
 
-def catchall_guidance_guidanceStatusChanged_handler(guidanceStatus,routeHandle):
+def guidance_guidanceStatusChanged_handler(guidanceStatus,routeHandle):
     global g_guidance_active
     print('Guidance status changed: '+str(guidanceStatus))
     if guidanceStatus != GENIVI_NAVIGATIONCORE_ACTIVE and g_guidance_active == True:
@@ -129,17 +129,17 @@ def catchall_guidance_guidanceStatusChanged_handler(guidanceStatus,routeHandle):
                 g_routing_interface.deleteRoute(dbus.UInt32(g_navigationcore_session_handle),dbus.UInt32(routes[i].getElementsByTagName("handle")[0].childNodes[0].data))
             g_navigationcore_session_interface.deleteSession(dbus.UInt32(g_navigationcore_session_handle))
    
-def catchall_guidance_positionOnRouteChanged_handler(offsetOnRoute):
+def guidance_positionOnRouteChanged_handler(offsetOnRoute):
     print "Offset on route: " +str(offsetOnRoute)
     ret = g_guidance_interface.getDestinationInformation()
     print "Travel time: " +str(ret[1])
     ret = g_guidance_interface.getManeuversList(dbus.UInt16(1),dbus.UInt32(0))
-    print "Number of maneuvers: " +str(ret[0])
-    print "Next road to turn: " +str(ret[1][0][1])
+    print "Number of maneuvers: " +str(ret[1])
+    print "Next road to turn: " +str(ret[2][0][1])
     g_mapmatchedposition_interface.setSimulationMode(dbus.UInt32(g_navigationcore_session_handle),dbus.Boolean(False))
     g_guidance_interface.stopGuidance(dbus.UInt32(g_navigationcore_session_handle))
     
-def catchall_mapmatchedposition_simulationStatusChanged_handler(simulationStatus):
+def mapmatchedposition_simulationStatusChanged_handler(simulationStatus):
     print "Simulation status: " +str(simulationStatus)
         
 #timeout
@@ -168,7 +168,8 @@ def launch_route_calculation(route):
     g_current_route = route
     print 'Route name: '+routes[g_current_route].getElementsByTagName("name")[0].childNodes[0].data
     #get route handle
-    g_route_handle = g_routing_interface.createRoute(dbus.UInt32(g_navigationcore_session_handle)) 
+    ret = g_routing_interface.createRoute(dbus.UInt32(g_navigationcore_session_handle)) 
+    g_route_handle=ret[1]
     routes[g_current_route].getElementsByTagName("handle")[0].childNodes[0].data = g_route_handle
     print 'Route handle: ' + str(g_route_handle)
     start = routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data
@@ -197,7 +198,8 @@ def createMapView():
     global g_mapviewer_maphandle
     
     #get mapviewer session handle
-    g_mapviewer_sessionhandle = g_mapviewer_session_interface.createSession(dbus.String('test mapviewer'))
+    ret = g_mapviewer_session_interface.createSession(dbus.String('test mapviewer'))
+    g_mapviewer_sessionhandle=ret[1]
     print 'Mapviewer session handle: ' + str(g_mapviewer_sessionhandle)
     
     g_mapviewer_sessionstatus = g_mapviewer_session_interface.getSessionStatus(dbus.UInt32(g_mapviewer_sessionhandle));
@@ -207,10 +209,11 @@ def createMapView():
     print 'Mapviewer active sessions = ' + str(len(g_mapviewer_sessionlist))
     
     #get mapviewer handle
-    g_mapviewer_maphandle = g_mapviewercontrol_interface.createMapViewInstance( \
+    ret = g_mapviewercontrol_interface.createMapViewInstance( \
       dbus.UInt32(g_mapviewer_sessionhandle), \
       dbus.Struct((dbus.UInt16(HORIZONTAL_SIZE),dbus.UInt16(VERTICAL_SIZE))), \
      dbus.Int32(MAIN_MAP))
+    g_mapviewer_maphandle=ret[1]
     
     print 'MapView handle: ' + str(g_mapviewer_maphandle)
     
@@ -266,31 +269,31 @@ if __name__ == '__main__':
 #connect to session bus
 bus = dbus.SessionBus()
 
-bus.add_signal_receiver(catchall_routing_routeCalculationProgressUpdate_handler, \
+bus.add_signal_receiver(routing_routeCalculationProgressUpdate_handler, \
                         dbus_interface = "org.genivi.navigation.navigationcore.Routing", \
                         signal_name = "routeCalculationProgressUpdate")
 
-bus.add_signal_receiver(catchall_routing_routeCalculationSuccessful_handler, \
+bus.add_signal_receiver(routing_routeCalculationSuccessful_handler, \
                         dbus_interface = "org.genivi.navigation.navigationcore.Routing", \
                         signal_name = "routeCalculationSuccessful")
 
-bus.add_signal_receiver(catchall_routing_routeDeleted_handler, \
+bus.add_signal_receiver(routing_routeDeleted_handler, \
                         dbus_interface = "org.genivi.navigation.navigationcore.Routing", \
                         signal_name = "routeDeleted")
 
-bus.add_signal_receiver(catchall_session_sessionDeleted_handler, \
+bus.add_signal_receiver(session_sessionDeleted_handler, \
                         dbus_interface = "org.genivi.navigation.navigationcore.Session", \
                         signal_name = "sessionDeleted")
 
-bus.add_signal_receiver(catchall_guidance_guidanceStatusChanged_handler, \
+bus.add_signal_receiver(guidance_guidanceStatusChanged_handler, \
                         dbus_interface = "org.genivi.navigation.navigationcore.Guidance", \
                         signal_name = "guidanceStatusChanged")
 
-bus.add_signal_receiver(catchall_guidance_positionOnRouteChanged_handler, \
+bus.add_signal_receiver(guidance_positionOnRouteChanged_handler, \
                         dbus_interface = "org.genivi.navigation.navigationcore.Guidance", \
                         signal_name = "positionOnRouteChanged")
 
-bus.add_signal_receiver(catchall_mapmatchedposition_simulationStatusChanged_handler, \
+bus.add_signal_receiver(mapmatchedposition_simulationStatusChanged_handler, \
                         dbus_interface = "org.genivi.navigation.navigationcore.MapMatchedPosition", \
                         signal_name = "simulationStatusChanged")
 
@@ -313,7 +316,8 @@ g_mapmatchedposition_obj = bus.get_object('org.genivi.navigation.navigationcore.
 g_mapmatchedposition_interface = dbus.Interface(g_mapmatchedposition_obj, dbus_interface='org.genivi.navigation.navigationcore.MapMatchedPosition')
 
 #get navigationcore session handle
-g_navigationcore_session_handle = g_navigationcore_session_interface.createSession(dbus.String("test guidance"))
+ret = g_navigationcore_session_interface.createSession(dbus.String("test guidance"))
+g_navigationcore_session_handle=ret[1]
 print 'Navigation core session handle: ' + str(g_navigationcore_session_handle)
 
 #createMapView()

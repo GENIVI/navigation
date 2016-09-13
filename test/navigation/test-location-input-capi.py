@@ -20,7 +20,7 @@
 *
 * This Source Code Form is subject to the terms of the
 * Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
-# this file, You can obtain one at http://mozilla.org/MPL/2.0/.
+* this file, You can obtain one at http://mozilla.org/MPL/2.0/.
 * List of changes:
 * 04-02-2016, Philippe Colliot, Update to the new API ('i' for enumerations and 'yv' for variants), add status handler
 *
@@ -432,7 +432,10 @@ def timeout():
 
 # Exit
 def exit():
-    location_input_interface.deleteLocationInput(dbus.UInt32(session_handle),dbus.UInt32(location_input_handle))
+    error=location_input_interface.deleteLocationInput(dbus.UInt32(session_handle),dbus.UInt32(location_input_handle))
+    print('Delete location input: '+str(int(error)))
+    error=session_interface.deleteSession(dbus.UInt32(session_handle))
+    print('Delete session: '+str(int(error)))
     loop.quit()
     
 def startSearch(address_index):
@@ -461,13 +464,15 @@ session = bus.get_object('org.genivi.navigation.navigationcore.Session_Session',
 session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.navigationcore.Session')
 
 # Get SessionHandle
-session_handle = session_interface.createSession(dbus.String('test location input'))
+ret = session_interface.createSession(dbus.String('test location input'))
+session_handle=ret[1]
 print ('Session handle = ' + str(session_handle))
 
 location_input_obj = bus.get_object('org.genivi.navigation.navigationcore.LocationInput_LocationInput', '/LocationInput')
 location_input_interface = dbus.Interface(location_input_obj, dbus_interface='org.genivi.navigation.navigationcore.LocationInput')
 # Get LocationInputHandle
-location_input_handle = location_input_interface.createLocationInput(dbus.UInt32(session_handle))
+ret = location_input_interface.createLocationInput(dbus.UInt32(session_handle))
+location_input_handle = ret[1]
 print ('LocationInput handle = ' + str(location_input_handle))
 
 attributes = location_input_interface.getSupportedAddressAttributes()

@@ -150,25 +150,25 @@ interface Routing {
 	}
 
 	enumeration RouteSegmentType extends BasicEnum {
-		LINK_ID					= 320 		//Base 0x0140
-		START_LATITUDE			= 321
-		END_LATITUDE			= 322
-		START_LONGITUDE			= 323
-		END_LONGITUDE			= 324
-		START_ALTITUDE			= 325
-		END_ALTITUDE			= 326
-		ROAD_NAME				= 327
-		DISTANCE				= 328
-		TIME					= 329
-		MANEUVER				= 330
-		INSTRUCTION				= 331
-        BORDER_CROSSING			= 332
-        ADDITIONAL_INFORMATION	= 333
-		ROAD_NUMBER				= 334
-		START_OFFSET			= 335
-		INTERMEDIATE_POINTS		= 288
-        HIGHWAY_EXIT			= 116
-        SPEED 					= 164
+		LINK_ID					= 320 //value of type UInt8[], that represents a link-ID in a format whose interpretation is left to the navigationcore
+		START_LATITUDE			= 321 //value of type Double, that expresses the latitude of the starting point in format %3.6f. Range [-90:+90]. Example: 48.053250
+		END_LATITUDE			= 322 //value idem of START_LATITUDE, it can be omitted, if it coincides with the latitude of the start point of the next segment
+		START_LONGITUDE			= 323 //value of type Double, that expresses the longitude of the starting point in format %3.6f. Range [-180:+180]. Example: 8.321000
+		END_LONGITUDE			= 324 //
+		START_ALTITUDE			= 325 //
+		END_ALTITUDE			= 326 //
+		ROAD_NAME				= 327 //
+		DISTANCE				= 328 //
+		TIME					= 329 //
+		MANEUVER				= 330 //
+		INSTRUCTION				= 331 //
+        BORDER_CROSSING			= 332 //
+        ADDITIONAL_INFORMATION	= 333 // 
+		ROAD_NUMBER				= 334 //
+		START_OFFSET			= 335 //
+		INTERMEDIATE_POINTS		= 288 //
+        HIGHWAY_EXIT			= 116 //
+        SPEED 					= 164 //
 	}
 
 	//TODO: Incomplete
@@ -180,6 +180,7 @@ interface Routing {
 		Int32 int32Value
 		Int16 int16Value
 		UInt32 uInt32Value
+		UInt16 uInt16Value
 	}
 		
 	map RouteSegment {
@@ -205,7 +206,6 @@ interface Routing {
 
 	<**
 		@description : This method creates a route
-		notify(ROUTING_ERROR_NOMOREROUTEHANDLES) is emitted if no more routing handles are available
 	**>
 	method createRoute {
 		in {
@@ -222,12 +222,14 @@ interface Routing {
 			**>
 			Handle routeHandle
 		}
+		error {
+			OK
+			ROUTING_ERROR_NOMOREROUTEHANDLES //no more routing handles are available
+		}
 	}
 
 	<**
 		@description : This method deletes a route and its associated resources
-		notify(ROUTING_ERROR_ROUTENOTAVAILABLE) is emitted if an application tries to delete a route handle that is not available
-		notify(ROUTING_ERROR_OPERATIONNOTALLOWED) is emitted if an application tries to delete a route which is not created manually (e.g. an alternative route calculated in the background)
 	**>
 	method deleteRoute {
 		in {
@@ -242,11 +244,15 @@ interface Routing {
 			**>
 			Handle routeHandle
 		}
+		error {
+			OK
+			ROUTING_ERROR_ROUTENOTAVAILABLE //an application tries to delete a route handle that is not available
+			ROUTING_ERROR_OPERATIONNOTALLOWED //an application tries to delete a route which is not created manually (e.g. an alternative route calculated in the background)
+		}
 	}
 
 	<**
 		@description : This method sets the cost model
-		notify(ROUTING_ERROR_OPERATIONNOTALLOWED) is emitted if an application tries to set a cost model for a route which is not created manually (e.g. an alternative route calculated in the background)
 	**>
 	method setCostModel {
 		in {
@@ -265,6 +271,10 @@ interface Routing {
 				@description : enum(INVALID,FASTEST,SHORTEST,ECOLOGICAL,SCENIC,EASY,OFF_ROAD,BALANCED,CHEAPEST, ... )
 			**>
 			CostModel costModel
+		}
+		error {
+			OK
+			ROUTING_ERROR_OPERATIONNOTALLOWED // is emitted if an application tries to set a cost model for a route which is not created manually (e.g. an alternative route calculated in the background)
 		}
 	}
 
@@ -299,8 +309,6 @@ interface Routing {
 
 	<**
 		@description : This method sets a list of route preferences
-		notify(ROUTING_ERROR_OPERATIONNOTALLOWED) is emitted if an application tries to set route preferences for a route which is not created manually (e.g. an alternative route calculated in the background)
-		notify(ROUTING_ERROR_ROUTEPREFERENCENOTSUPPORTED) is emitted if an application tries to set a route preference which is not supported (e.g. (USE,CRIME_AREA)). The preferences which are not supported are product dependent.
 	**>
 	method setRoutePreferences {
 		in {
@@ -323,6 +331,12 @@ interface Routing {
 			RoutePreference[] roadPreferenceList
 			
 			ConditionPreference[] conditionPreferenceList
+		}
+		error {
+			OK
+			ROUTING_ERROR_OPERATIONNOTALLOWED //an application tries to set route preferences for a route which is not created manually (e.g. an alternative route calculated in the background)
+			ROUTING_ERROR_ROUTEPREFERENCENOTSUPPORTED //an application tries to set a route preference which is not supported (e.g. (USE,CRIME_AREA)). The preferences which are not supported are product dependent.
+			
 		}
 	}
 
@@ -399,7 +413,6 @@ interface Routing {
 
 	<**
 		@description : This method sets a list of means of transportation that must be considered when calculating a route
-		notify(ROUTING_ERROR_OPERATIONNOTALLOWED) is emitted if an application tries to set transportation means for a route which is not created manually (e.g. an alternative route calculated in the background)
 	**>
 	method setTransportationMeans {
 		in {
@@ -415,6 +428,10 @@ interface Routing {
 			Handle routeHandle
 			
 			TransportationMeans[] transportationMeansList
+		}
+		error {
+			OK
+			ROUTING_ERROR_OPERATIONNOTALLOWED //an application tries to set transportation means for a route which is not created manually (e.g. an alternative route calculated in the background)
 		}
 	}
 
@@ -445,7 +462,6 @@ interface Routing {
 
 	<**
 		@description : setExcludedAreas = This method sets the areas to be excluded when calculating a route
-		notify(ROUTING_ERROR_OPERATIONNOTALLOWED) is emitted if an application tries to set excluded areas for a route which is not created manually (e.g. an alternative route calculated in the background)
 	**>
 	method setExcludedAreas {
 		in {
@@ -461,6 +477,10 @@ interface Routing {
 			Handle routeHandle
 			
 			Polygon[] excludedAreas
+		}
+		error {
+			OK
+			ROUTING_ERROR_OPERATIONNOTALLOWED //an application tries to set excluded areas for a route which is not created manually (e.g. an alternative route calculated in the background)
 		}
 	}
 
@@ -482,9 +502,6 @@ interface Routing {
 
 	<**
 		@description : setWaypoints = This method sets a list of waypoints
-		notify(ROUTING_ERROR_WAYPOINTCANNOTBECHANGED) is emitted when a client application tries to change the waypoints while the route guidance is active
-		notify(ROUTING_ERROR_TOOMANYWAYPOINTS) is emitted when a client application tries to set a number of waypoints that exceeds the system capabilities
-		notify(ROUTING_ERROR_OPERATIONNOTALLOWED) is emitted if an application tries to set waypoints for a route which is not created manually (e.g. an alternative route calculated in the background)
 	**>
 	method setWaypoints {
 		in {
@@ -505,6 +522,12 @@ interface Routing {
 			Boolean startFromCurrentPosition
 			
 			WayPoint[] waypointsList
+		}
+		error {
+			OK
+			ROUTING_ERROR_WAYPOINTCANNOTBECHANGED //a client application tries to change the waypoints while the route guidance is active
+			ROUTING_ERROR_TOOMANYWAYPOINTS //a client application tries to set a number of waypoints that exceeds the system capabilities
+			ROUTING_ERROR_OPERATIONNOTALLOWED //an application tries to set waypoints for a route which is not created manually (e.g. an alternative route calculated in the background)
 		}
 	}
 
@@ -532,7 +555,6 @@ interface Routing {
 
 	<**
 		@description : calculateRoute = This method starts a route calculation
-		notify(ROUTING_ERROR_OPERATIONNOTALLOWED) is emitted if an application tries to calculate a route which is not created manually (e.g. an alternative route calculated in the background)
 	**>
 	method calculateRoute {
 		in {
@@ -546,6 +568,10 @@ interface Routing {
 				@description : routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
 			Handle routeHandle
+		}
+		error {
+			OK
+			ROUTING_ERROR_OPERATIONNOTALLOWED //an application tries to calculate a route which is not created manually (e.g. an alternative route calculated in the background)
 		}
 	}
 
@@ -569,7 +595,6 @@ interface Routing {
 
 	<**
 		@description : calculateRoutes = This method allows a client to calculate alternative routes that differs from a list of already calculated routes
-		notify(ROUTING_ERROR_OPERATIONNOTALLOWED) is emitted if an application tries to calculate an alternative to a route which is not created manually (e.g. an alternative route calculated in the background)
 	**>
 	method calculateRoutes {
 		in {
@@ -582,6 +607,10 @@ interface Routing {
 		}
 		out {
 			Handle[] alternativeRoutesList
+		}
+		error {
+			OK
+			ROUTING_ERROR_OPERATIONNOTALLOWED //an application tries to calculate an alternative to a route which is not created manually (e.g. an alternative route calculated in the background)
 		}
 	}
 
@@ -795,14 +824,4 @@ interface Routing {
 			Handle[] routeHandlesList
 		}
 	}
-
-	<**
-		@description : notify = This signal is emitted when something wrong occured when invoking the API 
-	**>
-	broadcast notify {
-		out {
-			Notification notification
-		}
-	}
-
 }

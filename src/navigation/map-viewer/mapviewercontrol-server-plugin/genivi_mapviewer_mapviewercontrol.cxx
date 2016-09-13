@@ -211,13 +211,14 @@ static void positionVehicleNavitUpdate(std::shared_ptr<MapMatchedPositionProxyDe
 {
     std::vector< MapMatchedPosition::PositionItemKey > valuesToReturn;
     CommonAPI::CallStatus status;
+    MapMatchedPosition::getPositionError _error;
     MapMatchedPosition::PositionItemDict _position;
     valuesToReturn.push_back(MapMatchedPosition::PositionItemKey::LATITUDE);
     valuesToReturn.push_back(MapMatchedPosition::PositionItemKey::LONGITUDE);
     valuesToReturn.push_back(MapMatchedPosition::PositionItemKey::SPEED);
     valuesToReturn.push_back(MapMatchedPosition::PositionItemKey::HEADING);
 
-    pos->getPosition(valuesToReturn,status,_position);
+    pos->getPosition(valuesToReturn,status,_error,_position);
     if (_position.find(MapMatchedPosition::PositionItemKey::SPEED) != _position.end()) {
         struct attr position_speed={attr_position_speed};
         double speed;
@@ -346,17 +347,18 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
      */
     void createMapViewInstance(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, MapViewerControl::Dimension _mapViewSize, MapViewerControl::MapViewType _mapViewType, createMapViewInstanceReply_t _reply)
     {
+        MapViewerControl::createMapViewInstanceError _error = MapViewerControl::createMapViewInstanceError::OK;
         dbg(lvl_debug,"enter\n");
         if (_mapViewType != MapViewerControl::MapViewType::MAIN_MAP)
-			throw DBus::ErrorInvalidArgs("Unsupported mapViewType");
+            _error = MapViewerControl::createMapViewInstanceError::MAPVIEWERCONTROL_ERROR_NOMOREMAPVIEWINSTANCEHANDLES;
         NavigationTypes::Handle _mapViewInstanceHandle=FIRST_SESSION_HANDLE;
         while ((mp_handles.count(_mapViewInstanceHandle)>0 ) && (mp_handles[_mapViewInstanceHandle] != NULL)) {
             _mapViewInstanceHandle++;
             if (_mapViewInstanceHandle == MAX_SESSION_HANDLE)
-                throw DBus::ErrorLimitsExceeded("Out of mapviewinstance handles");
+                _error = MapViewerControl::createMapViewInstanceError::MAPVIEWERCONTROL_ERROR_NOMOREMAPVIEWINSTANCEHANDLES;
         }
         mp_handles[_mapViewInstanceHandle]=new MapViewerControlObj(this, _mapViewInstanceHandle, _mapViewSize);
-        _reply(_mapViewInstanceHandle);
+        _reply(_error,_mapViewInstanceHandle);
 	}
 
     /**
@@ -365,6 +367,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
      */
     void releaseMapViewInstance(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, releaseMapViewInstanceReply_t _reply)
 	{
+        MapViewerControl::releaseMapViewInstanceError _error = MapViewerControl::releaseMapViewInstanceError::OK;
         if (mp_handles.find(_mapViewInstanceHandle) != mp_handles.end())
         {
             MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
@@ -372,10 +375,10 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
             mp_handles[_mapViewInstanceHandle]=NULL;
         }
         else {
-            throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
+           _error = MapViewerControl::releaseMapViewInstanceError::MAPVIEWERCONTROL_ERROR_MAPVIEWINSTANCENOTAVAILABLE;
         }
 
-        _reply();
+        _reply(_error);
 	}
 
     /**
@@ -1503,7 +1506,8 @@ MapViewerControlObj::DisplayRoute(NavigationTypes::Handle SessionHandle, Navigat
     if (m_navigationcore_session == NavigationTypes::BasicEnum::INVALID)
     {
         CommonAPI::CallStatus status;
-        mp_navigationCoreSessionClientProxy->myServiceNavigationCoreSession->createSession(std::string("MapViewerControl"),status,m_navigationcore_session);
+        Session::createSessionError _error;
+        mp_navigationCoreSessionClientProxy->myServiceNavigationCoreSession->createSession(std::string("MapViewerControl"),status,_error, m_navigationcore_session);
     }
 
     DisplayedRoute *route=new DisplayedRoute(this,m_navigationcore_session,RouteHandle,m_mapset);

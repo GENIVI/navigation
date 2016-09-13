@@ -24,6 +24,14 @@ cmake_minimum_required (VERSION 2.8.1)
 
 project(franca-navigation)
 
+get_directory_property(hasParent PARENT_DIRECTORY)
+
+if(hasParent)
+    set(COMMONAPI_GEN_DIR "${COMMONAPI_GEN_DIR}" PARENT_SCOPE)
+else()
+    set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/src-gen")
+endif()
+
 add_subdirectory(freetextsearchservice)
 add_subdirectory(mapviewer)
 add_subdirectory(navigationcore)

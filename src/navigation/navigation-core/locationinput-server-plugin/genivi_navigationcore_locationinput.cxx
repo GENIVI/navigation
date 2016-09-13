@@ -118,16 +118,17 @@ public:
      *   handle
      */
     void createLocationInput(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, createLocationInputReply_t _reply){
+        LocationInput::createLocationInputError _error = LocationInput::createLocationInputError::OK;
         uint32_t LocationInputHandle;
         dbg(lvl_debug,"enter\n");
         LocationInputHandle=FIRST_LOCATION_HANDLE;
         while ((mp_handles.count(LocationInputHandle)>0 ) && (mp_handles[LocationInputHandle] != NULL)) {
             LocationInputHandle++;
             if (LocationInputHandle == MAX_LOCATION_HANDLES)
-                throw DBus::ErrorLimitsExceeded("Out of location handles");
+                _error=LocationInput::createLocationInputError::LOCATIONINPUT_ERROR_NOMORELOCATIONINPUTHANDLES;
         }
         mp_handles[LocationInputHandle]=new LocationInputObj(this, LocationInputHandle);
-        _reply(LocationInputHandle);
+        _reply(_error,LocationInputHandle);
     }
 
     /**
@@ -135,6 +136,7 @@ public:
      *   resources
      */
     void deleteLocationInput(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::LocationHandle _locationInputHandle, deleteLocationInputReply_t _reply){
+        LocationInput::deleteLocationInputError _error = LocationInput::deleteLocationInputError::OK;
         dbg(lvl_debug,"enter\n");
         if (mp_handles.find(_locationInputHandle) != mp_handles.end())
         {
@@ -143,10 +145,10 @@ public:
             mp_handles[_locationInputHandle]=NULL;
         }
         else {
-            throw DBus::ErrorInvalidArgs("location handle invalid");
+            _error = LocationInput::deleteLocationInputError::LOCATIONINPUT_ERROR_LOCATIONINPUTNOTAVAILABLE;
         }
 
-        _reply();
+        _reply(_error);
     }
 
     /**

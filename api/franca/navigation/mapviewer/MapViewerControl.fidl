@@ -295,7 +295,6 @@ interface MapViewerControl {
 
 	<**
 		@description : createMapViewInstance = This method creates a new map instance
-		notify(MAPVIEWERCONTROL_ERROR_NOMOREMAPVIEWINSTANCEHANDLES) is emitted if no more map view instance handles are available
 	**>
 	method createMapViewInstance {
 		in {
@@ -319,11 +318,14 @@ interface MapViewerControl {
 			**>
 			Handle mapViewInstanceHandle
 		}
+		error {
+			OK
+			MAPVIEWERCONTROL_ERROR_NOMOREMAPVIEWINSTANCEHANDLES //no more map view instance handles are available
+		}
 	}
 
 	<**
 		@description : releaseMapViewInstance = This method releases (i.e. destroys) a given map instance. Only invisible map instances can be released
-		notify(MAPVIEWERCONTROL_ERROR_MAPVIEWINSTANCENOTAVAILABLE) is emitted if an application tries to delete a map view instance handle that is not available
 	**>
 	method releaseMapViewInstance {
 		in {
@@ -337,6 +339,10 @@ interface MapViewerControl {
 				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
 			Handle mapViewInstanceHandle
+		}
+		error {
+			OK
+			MAPVIEWERCONTROL_ERROR_MAPVIEWINSTANCENOTAVAILABLE //an application tries to delete a map view instance handle that is not available
 		}
 	}
 
@@ -1958,14 +1964,4 @@ interface MapViewerControl {
 			SelectedMapElement [] selectedElements
 		}
 	}
-
-	<**
-		@description : notify = This signal is emitted when something wrong occured when invoking the API 
-	**>
-	broadcast notify {
-		out {
-			Notification notification
-		}
-	}
-
 }

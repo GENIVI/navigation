@@ -78,7 +78,7 @@ if [ "$clean" = 1 ]
 then
 	if [ "$capi" = 0 ]
 	then
-		cmake -DWITH_PLUGIN_MIGRATION=0 ../
+		cmake -DWITH_PLUGIN_MIGRATION=OFF ../
 	else
 		cmake -DWITH_PLUGIN_MIGRATION=ON -DWITH_DBUS_INTERFACE=OFF $commonapi_tools_option ../
 		echo 'fix a bug in the generation of CommonAPI hpp'

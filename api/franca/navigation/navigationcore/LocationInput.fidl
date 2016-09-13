@@ -80,7 +80,6 @@ interface LocationInput {
 
 	<**
 		@description : createLocationInput = This method creates a new location input and retrieves a handle
-		notify(LOCATIONINPUT_ERROR_NOMORELOCATIONINPUTHANDLES) is emitted if no more location input handles are available
 	**>
 	method createLocationInput {
 		in {
@@ -97,11 +96,14 @@ interface LocationInput {
 			**>
 			LocationHandle locationInputHandle
 		}
+		error {
+			OK
+			LOCATIONINPUT_ERROR_NOMORELOCATIONINPUTHANDLES //no more location input handles are available
+		}
 	}
 
 	<**
 		@description : deleteLocationInput = This method deletes a location input and its associated resources
-		notify(LOCATIONINPUT_ERROR_LOCATIONINPUTNOTAVAILABLE) is emitted if an application tries to delete a location input handle that is not available
 	**>
 	method deleteLocationInput {
 		in {
@@ -115,6 +117,10 @@ interface LocationInput {
 				@description : locationInpuHandle = Location input handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
 			LocationHandle locationInputHandle
+		}
+		error {
+			OK
+			LOCATIONINPUT_ERROR_LOCATIONINPUTNOTAVAILABLE //an application tries to delete a location input handle that is not available
 		}
 	}
 
@@ -486,15 +492,6 @@ interface LocationInput {
 			Address [] validatedAddressList
 			
 			ValidationStatus [] validationStatusList
-		}
-	}
-
-	<**
-		@description : notify = This signal is emitted when something wrong occured when invoking the API 
-	**>
-	broadcast notify {
-		out {
-			Notification notification
 		}
 	}
 }
