@@ -37,6 +37,8 @@
           <line>This parameter can be used to identify the client application and determine if a given feature is enabled for it</line>
         </doc>
       </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
       <arg name="sessionHandle" type="u" direction="out">
         <doc>
           <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
@@ -56,6 +58,8 @@
         <doc>
           <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
       </arg>
       <error name="org.genivi.mapviewer.Session.Error.SessionNotAvailable">
         <doc>

@@ -330,7 +330,7 @@ class  Guidance
 		guidance->GetGuidanceDetails(voiceGuidance, vehicleOnTheRoad, isDestinationReached, maneuver);
 	}
 
-	void
+    int32_t
 	PlayVoiceManeuver()
 	{
         if (!guidance) {
@@ -338,6 +338,7 @@ class  Guidance
             throw DBus::ErrorFailed("no guidance active");
         }
         guidance->PlayVoiceManeuver();
+        return(0); //not implemented yet
 	}
 
     void
@@ -347,14 +348,15 @@ class  Guidance
 	}
 
     void
-    GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, uint16_t& numberOfManeuvers, std::vector< ::DBus::Struct< std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > > >& maneuversList)
+    GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, int32_t& error, uint16_t& numberOfManeuvers, std::vector< ::DBus::Struct< std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > > >& maneuversList)
 	{
 		if (!guidance) {
             dbg(lvl_debug,"no guidance active\n");
 			throw DBus::ErrorFailed("no guidance active");
 		}
 		guidance->GetManeuversList(requestedNumberOfManeuvers, maneuverOffset, numberOfManeuvers, maneuversList);
-	}
+        error=0; //not used
+    }
 
 	void
     SetRouteCalculationMode(const uint32_t& sessionHandle, const int32_t& routeCalculationMode)
@@ -362,10 +364,11 @@ class  Guidance
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-	void
+    int32_t
     SkipNextManeuver(const uint32_t& sessionHandle)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
+        return(0); //not implemented yet
 	}
 
 	void
@@ -379,10 +382,11 @@ class  Guidance
 		}
 	}
 
-	void
+    int32_t
     SetVoiceGuidanceSettings(const int32_t& promptMode)
 	{
         guidance->SetVoiceGuidanceSettings(promptMode);
+        return(0); //not implemented yet
 	}
 
     int32_t

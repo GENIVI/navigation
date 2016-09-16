@@ -102,6 +102,8 @@
       <doc>
         <line>PlayVoiceManeuver = This method plays or repeats the last voice guidance</line>
       </doc>
+      <arg name="error" type="i" direction="out">
+      </arg>
       <error name="org.genivi.navigationcore.Guidance.Error.VoiceNotAllowed">
         <doc>
           <line>This error is generated if the voice generation is inactive </line>
@@ -237,6 +239,8 @@
           <line>maneuverOffset = the offset of the first maneuver to retrieve</line>
         </doc>
       </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
       <arg name="numberOfManeuvers" type="q" direction="out">
         <doc>
           <line>numberOfManeuvers = the number of retrieved maneuvers</line>
@@ -311,6 +315,8 @@
           <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
       <error name="org.genivi.navigationcore.Guidance.Error.NoManeuver">
         <doc>
           <line>This error is generated in case there's no maneuver until the destination</line>
@@ -345,6 +351,8 @@
           <line>AUTOMATIC_PROMPT means that the voice prompts will be requested by NavigationCore automatically</line>
           <line>DISABLED_PROMPT means that the client application will the voice generator component directly to play the messages (bypassing the NavigationCore)</line>
         </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
       </arg>
     </method>
     <method name="GetVoiceGuidanceSettings">

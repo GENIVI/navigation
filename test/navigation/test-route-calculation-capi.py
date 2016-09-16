@@ -7,7 +7,7 @@
 *
 * \copyright Copyright (C) 2014, XS Embedded GmbH, PCA Peugeot Citroen
 *
-* \file simulation-dashboard.py
+* \file test-route-calculation-capi.py
 *
 * \brief This simple test shows how the route calculation 
 *              could be easily tested using a python script

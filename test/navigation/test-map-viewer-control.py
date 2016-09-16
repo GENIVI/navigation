@@ -55,7 +55,8 @@ session = bus.get_object('org.genivi.mapviewer.Session','/org/genivi/mapviewer')
 session_interface = dbus.Interface(session, dbus_interface='org.genivi.mapviewer.Session')
 
 #get session handle
-sessionhandle = session_interface.CreateSession(dbus.String("test mapviewer"))
+ret = session_interface.CreateSession(dbus.String("test mapviewer"))
+sessionhandle=ret[1]
 print 'Session handle: ' + str(sessionhandle)
 
 sessionstatus = session_interface.GetSessionStatus(dbus.UInt32(sessionhandle));
@@ -68,10 +69,11 @@ MapViewerControl_obj = bus.get_object('org.genivi.mapviewer.MapViewerControl','/
 MapViewerControl_interface = dbus.Interface(MapViewerControl_obj, dbus_interface='org.genivi.mapviewer.MapViewerControl')
 
 #get mapviewer handle
-mapviewerhandle = MapViewerControl_interface.CreateMapViewInstance( \
+ret = MapViewerControl_interface.CreateMapViewInstance( \
   dbus.UInt32(sessionhandle), \
   dbus.Struct((dbus.UInt16(HORIZONTAL_SIZE),dbus.UInt16(VERTICAL_SIZE))), \
   dbus.Int32(MAIN_MAP))
+mapviewerhandle=ret[1]
 
 print 'MapView handle: ' + str(mapviewerhandle)
 

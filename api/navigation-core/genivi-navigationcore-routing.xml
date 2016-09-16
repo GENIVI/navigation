@@ -35,6 +35,8 @@
           <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
       <arg name="routeHandle" type="u" direction="out">
         <doc>
           <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
@@ -59,6 +61,8 @@
         <doc>
           <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
       </arg>
       <error name="org.genivi.navigationcore.Routing.Error.RouteNotAvailable">
         <doc>
@@ -107,6 +111,8 @@
           <line>BALANCED = trade-off between FASTEST and SHORTEST (e.g. 50% FASTEST and 50% SHORTEST) </line>
           <line>CHEAPEST = least fuel or electric charge to destination taking pricing into account </line>
         </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
       </arg>
       <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
         <doc>
@@ -195,6 +201,8 @@
           <line>preferenceMode = enum(USE,IGNORE)</line>
           <line>preferenceSource = enum(TRAFFIC_REALTIME, ...)</line>
         </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
       </arg>
       <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
         <doc>
@@ -343,6 +351,8 @@
           <line>transportationMeans = enum(INVALID,BY_CAR,ON_FOOT,LONG_RANGE_TRAINS,PUBLIC_TRANSPORTATION,BY_BICYCLE,BY_TRUCK, ... )</line>
         </doc>
       </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
       <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
         <doc>
           <line>This error is generated if an application tries to set transportation means for a route which is not created manually (e.g. an alternative route calculated in the background)</line>
@@ -399,6 +409,8 @@
           <line>lon = longitude of a vertex of the polygon in format %3.6f. Range [-180:+180]. Example: 48.053250</line>
           <line>Note: a polygon must have at least 3 vertexes</line>
         </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
       </arg>
       <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
         <doc>
@@ -459,6 +471,8 @@
           <line>Note: if the flag StartFromCurrentPosition=false, then at least two waypoints must be provided (starting point and destination)</line>
         </doc>
       </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
       <error name="org.genivi.navigationcore.Routing.Error.WaypointCannotBeChanged">
         <doc>
           <line>This error is sent when a client application tries to change the waypoints while the route guidance is active</line>
@@ -515,6 +529,8 @@
         <doc>
           <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
       </arg>
       <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
         <doc>
@@ -631,6 +647,8 @@
           <line>calculatedRoutesList = array[calculatedRoute]</line>
           <line>calculatedRoute = Handle identifying an already calculated route. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
       </arg>
       <arg name="alternativeRoutesList" type="au" direction="out">
         <doc>

@@ -60,10 +60,6 @@ typeCollection NavigationTypes {
 		
 
 /* enumerations */
-	enumeration BasicError {
-		NoError = 0	
-	}	
-	
 	enumeration BasicEnum {
 		INVALID 	= 0
 		ALL 		= 65535
@@ -101,8 +97,4 @@ typeCollection NavigationTypes {
 		String scriptCode						
 	}
 	
-	enumeration NotificationNavigation {
-		SESSION_ERROR_NOMORESESSIONHANDLES
-		SESSION_ERROR_SESSIONNOTAVAILABLE
-	}
 }

@@ -139,21 +139,21 @@ class  Routing
 	{
 	}
 
-    uint32_t
-    CreateRoute(const uint32_t& SessionHandle)
-	{
-                dbg(lvl_debug,"enter\n");
-		uint32_t RouteHandle=1;
-		while (handles[RouteHandle]) {
-			RouteHandle++;
-			if (RouteHandle == 256)
+    void
+    CreateRoute(const uint32_t& sessionHandle, int32_t& error, uint32_t& routeHandle)
+    {
+        dbg(lvl_debug,"enter\n");
+        routeHandle=1;
+        while (handles[routeHandle]) {
+            routeHandle++;
+            if (routeHandle == 256)
 				throw DBus::ErrorLimitsExceeded("Out of route handles");
 		}
-		handles[RouteHandle]=new RoutingObj(this, SessionHandle, RouteHandle);
-		return RouteHandle;
+        handles[routeHandle]=new RoutingObj(this, sessionHandle, routeHandle);
+        error=0; //not implemented yet
 	}
 
-	void	
+    int32_t
     DeleteRoute(const uint32_t& SessionHandle, const uint32_t& RouteHandle)
 	{
 		RoutingObj *obj=handles[RouteHandle];
@@ -162,16 +162,18 @@ class  Routing
 		delete(obj);
 		handles[RouteHandle]=NULL;
         RouteDeleted(RouteHandle);
+        return(0); //not implemented yet
 	}
 
-	void	
+    int32_t
     SetCostModel(const uint32_t& SessionHandle, const uint32_t& RouteHandle, const DBusCommonAPIEnumeration& CostModel)
 	{
 		RoutingObj *obj=handles[RouteHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Route handle invalid");
 		obj->SetCostModel(SessionHandle, CostModel);
-	}
+        return(0); //not implemented yet
+    }
 
     DBusCommonAPIEnumeration
     GetCostModel(const uint32_t& RouteHandle)
@@ -195,7 +197,7 @@ class  Routing
 		return CostModels;
 	}
 	    	
-	void	
+    int32_t
     SetWaypoints(const uint32_t& SessionHandle , const uint32_t& RouteHandle , const bool& StartFromCurrentPosition , const std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > >& Waypoints)
 	{
 		dbg(lvl_debug,"enter\n");
@@ -203,7 +205,8 @@ class  Routing
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Route handle invalid");
 		obj->SetWaypoints(SessionHandle, StartFromCurrentPosition, Waypoints);
-	}
+        return(0); //not implemented yet
+    }
 
 	void
     GetWaypoints(const uint32_t& RouteHandle , bool& StartFromCurrentPosition , std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > >& Waypoints)
@@ -215,7 +218,7 @@ class  Routing
         obj->GetWaypoints(StartFromCurrentPosition, Waypoints);
 	}
 
-	void	
+    int32_t
     CalculateRoute(const uint32_t& SessionHandle , const uint32_t& RouteHandle )
 	{
 		dbg(lvl_debug,"enter\n");
@@ -223,7 +226,8 @@ class  Routing
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Route handle invalid");
 		obj->CalculateRoute(SessionHandle);
-	}
+        return(0); //not implemented yet
+    }
 
 	void
     GetRouteSegments(const uint32_t& routeHandle, const int16_t& detailLevel, const std::vector< DBusCommonAPIEnumeration >& valuesToReturn, const uint32_t& numberOfSegments, const uint32_t& offset, uint32_t& totalNumberOfSegments, std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > >& routeSegments)
@@ -245,14 +249,15 @@ class  Routing
 		return Version;
 	}
 
-	void
+    int32_t
     SetRoutePreferences(const uint32_t& sessionHandle, const uint32_t& routeHandle, const std::string& country, const std::vector< ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > >& roadPreferenceList, const std::vector< ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > >& conditionPreferenceList)
 	{
 		RoutingObj *obj=handles[routeHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Route handle invalid");
         obj->SetRoutePreferences(sessionHandle, country, roadPreferenceList);
-	}
+        return(0); //not implemented yet
+    }
 
     void
     GetRoutePreferences(const uint32_t& routeHandle, const std::string& country, std::vector< ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > >& roadPreferenceList, std::vector< ::DBus::Struct< DBusCommonAPIEnumeration, DBusCommonAPIEnumeration > >& conditionPreferenceList)
@@ -306,11 +311,12 @@ class  Routing
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 
-	void
+    int32_t
     SetTransportationMeans(const uint32_t& sessionHandle, const uint32_t& routeHandle, const std::vector< int32_t >& transportationMeansList)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
-	}
+        return(0); //not implemented yet
+    }
 
     std::vector< DBusCommonAPIEnumeration >
     GetTransportationMeans(const uint32_t& routeHandle)
@@ -324,11 +330,12 @@ class  Routing
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-	void
+    int32_t
     SetExcludedAreas(const uint32_t& sessionHandle, const uint32_t& routeHandle, const std::vector< std::vector< ::DBus::Struct< double, double > > >& excludedAreas)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
-	}
+        return(0); //not implemented yet
+    }
 
 	std::vector< std::vector< ::DBus::Struct< double, double > > >
     GetExcludedAreas(const uint32_t& routeHandle)
@@ -346,8 +353,8 @@ class  Routing
         RouteCalculationCancelled(routeHandle);
 	}
 
-    std::vector< uint32_t >
-    CalculateRoutes(const uint32_t& sessionHandle, const std::vector< uint32_t >& calculatedRoutesList)
+    void
+    CalculateRoutes(const uint32_t& sessionHandle, const std::vector< uint32_t >& calculatedRoutesList, int32_t& error, std::vector< uint32_t >& alternativeRoutesList)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}

@@ -81,7 +81,7 @@ enum {
 
 static DBus::Glib::BusDispatcher dispatchers[CONNECTION_AMOUNT];
 static DBus::Connection *conns[CONNECTION_AMOUNT];
-static int32_t navigationcore_session=-1;
+static uint32_t navigationcore_session=-1;
 
 static double double_variant(DBus::Variant variant);
 class MapViewerControl;
@@ -301,7 +301,9 @@ position_update(MapMatchedPosition *pos, struct vehicle *v)
 	valuesToReturn.push_back(GENIVI_NAVIGATIONCORE_SPEED);
 	valuesToReturn.push_back(GENIVI_NAVIGATIONCORE_HEADING);
 
-    std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant> map=pos->GetPosition(valuesToReturn);
+    int32_t error;
+    std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant> map;
+    pos->GetPosition(valuesToReturn,error,map);
 	if (map.find(GENIVI_NAVIGATIONCORE_SPEED) != map.end()) {
 		struct attr position_speed={attr_position_speed};
 		double speed;
@@ -338,23 +340,23 @@ class  MapViewerControl
 	{
 	}
 
-    uint32_t
-    CreateMapViewInstance(const uint32_t& sessionHandle, const ::DBus::Struct< uint16_t, uint16_t >& mapViewSize, const DBusCommonAPIEnumeration& mapViewType)
+    void
+    CreateMapViewInstance(const uint32_t& sessionHandle, const ::DBus::Struct< uint16_t, uint16_t >& mapViewSize, const DBusCommonAPIEnumeration& mapViewType, int32_t& error, uint32_t& mapViewInstanceHandle)
 	{
         dbg(lvl_debug,"enter\n");
 		if (mapViewType != GENIVI_MAPVIEWER_MAIN_MAP) 
 			throw DBus::ErrorInvalidArgs("Unsupported mapViewType");
-		uint32_t MapViewInstanceHandle=1;
-		while (handles[MapViewInstanceHandle]) {
-			MapViewInstanceHandle++;
-			if (MapViewInstanceHandle == 256)
+        mapViewInstanceHandle=1;
+        while (handles[mapViewInstanceHandle]) {
+            mapViewInstanceHandle++;
+            if (mapViewInstanceHandle == 256)
 				throw DBus::ErrorLimitsExceeded("Out of mapviewinstance handles");
 		}
-		handles[MapViewInstanceHandle]=new MapViewerControlObj(this, MapViewInstanceHandle, mapViewSize);
-		return MapViewInstanceHandle;
-	}
+        handles[mapViewInstanceHandle]=new MapViewerControlObj(this, mapViewInstanceHandle, mapViewSize);
+        error=0; //not used
+    }
 
-	void
+    int32_t
     ReleaseMapViewInstance(const uint32_t& SessionHandle, const uint32_t& MapViewInstanceHandle)
 	{
 		MapViewerControlObj *obj=handles[MapViewInstanceHandle];
@@ -362,6 +364,7 @@ class  MapViewerControl
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
 		delete(obj);
 		handles[MapViewInstanceHandle]=NULL;
+        return(0); //not implemented yet
 	}
 
 	void
@@ -1341,7 +1344,8 @@ MapViewerControlObj::DisplayRoute(uint32_t SessionHandle, uint32_t RouteHandle, 
 	HideRoute(SessionHandle, RouteHandle);
 	if (navigationcore_session == -1) {
         NavigationCoreSession session(*conns[NAVIGATIONCORE_SESSION_CONNECTION]);
-		navigationcore_session=session.CreateSession("MapViewerControl");
+        int32_t error;
+        session.CreateSession("MapViewerControl",error,navigationcore_session);
 	}
 	DisplayedRoute *route=new DisplayedRoute(this,navigationcore_session,RouteHandle,m_mapset);
 	route->Show();

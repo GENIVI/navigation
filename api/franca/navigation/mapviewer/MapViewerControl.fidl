@@ -8,7 +8,6 @@ package org.genivi.navigation.mapviewer
 
 import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
-import org.genivi.navigation.mapviewer.MapViewerTypes.* from "./MapViewerTypes.fidl"
 
 <**
 	@description : MapViewerControl = This interface offers functions to control the MapViewer

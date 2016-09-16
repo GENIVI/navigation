@@ -100,21 +100,20 @@ class  LocationInput
 	{
 	}
 
-    uint32_t CreateLocationInput(const uint32_t& SessionHandle)
+    void CreateLocationInput(const uint32_t& sessionHandle, int32_t& error, uint32_t& locationInputHandle)
 	{
-		uint32_t LocationInputHandle;
 		dbg(lvl_debug,"enter\n");
-		LocationInputHandle=1;
-		while (handles[LocationInputHandle]) {
-			LocationInputHandle++;
-			if (LocationInputHandle == 256)
+        locationInputHandle=1;
+        while (handles[locationInputHandle]) {
+            locationInputHandle++;
+            if (locationInputHandle == 256)
 				throw DBus::ErrorLimitsExceeded("Out of location handles");
 		}
-		handles[LocationInputHandle]=new LocationInputObj(this, LocationInputHandle);
-		return LocationInputHandle;
+        handles[locationInputHandle]=new LocationInputObj(this, locationInputHandle);
+        error=0; //not implemented yet
 	}
 
-    void DeleteLocationInput(const uint32_t& SessionHandle, const uint32_t& LocationInputHandle)
+    int32_t DeleteLocationInput(const uint32_t& SessionHandle, const uint32_t& LocationInputHandle)
 	{
 		dbg(lvl_debug,"enter\n");
 		LocationInputObj *obj=handles[LocationInputHandle];
@@ -122,6 +121,7 @@ class  LocationInput
 			 throw DBus::ErrorInvalidArgs("location handle invalid");
 		delete(obj);
 		handles[LocationInputHandle]=NULL;
+        return(0); //not implemented yet
 	}
 
     std::vector< int32_t > GetSupportedAddressAttributes()

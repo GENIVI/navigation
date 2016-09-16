@@ -7,7 +7,7 @@
 *
 * \copyright Copyright (C) 2014, XS Embedded GmbH, PCA Peugeot Citroen
 *
-* \file simulation-dashboard.py
+* \file test-route-calculation.py
 *
 * \brief This simple test shows how the route calculation 
 *              could be easily tested using a python script
@@ -170,7 +170,8 @@ def launch_route_calculation(route):
     g_current_route = route
     print 'Route name: '+routes[g_current_route].getElementsByTagName("name")[0].childNodes[0].data
     #get route handle
-    g_route_handle = g_routing_interface.CreateRoute(dbus.UInt32(g_session_handle)) 
+    ret = g_routing_interface.CreateRoute(dbus.UInt32(g_session_handle)) 
+    g_route_handle=ret[1] 
     routes[g_current_route].getElementsByTagName("handle")[0].childNodes[0].data = g_route_handle
     print 'Route handle: ' + str(g_route_handle)
     start = routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data
@@ -196,7 +197,8 @@ session = bus.get_object('org.genivi.navigationcore.Session','/org/genivi/naviga
 g_session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigationcore.Session')
 
 #get session handle
-g_session_handle = g_session_interface.CreateSession(dbus.String("test route calculation"))
+ret = g_session_interface.CreateSession(dbus.String("test route calculation"))
+g_session_handle=ret[1]
 print 'Session handle: ' + str(g_session_handle)
 
 routing_obj = bus.get_object('org.genivi.navigationcore.Routing','/org/genivi/navigationcore')

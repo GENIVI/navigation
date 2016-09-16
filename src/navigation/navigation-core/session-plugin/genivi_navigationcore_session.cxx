@@ -68,17 +68,17 @@ class  Session
 		return Version;
 	}
 
-    uint32_t CreateSession(const std::string &client)
+    void CreateSession(const std::string& client, int32_t& error, uint32_t& sessionHandle)
 	{
 		dbg(lvl_debug,"enter\n");
-		uint32_t SessionHandle=1;
-		while (handles[SessionHandle]) {
-			SessionHandle++;
-			if (SessionHandle == 256)
+        sessionHandle=1;
+        while (handles[sessionHandle]) {
+            sessionHandle++;
+            if (sessionHandle == 256)
 				throw DBus::Error("org.genivi.navigationcore.Session.Error.NoMoreSessionHandles","Out of session handles");
 		}
-		handles[SessionHandle]=new std::string(client);
-		return SessionHandle;
+        handles[sessionHandle]=new std::string(client);
+        error=0; //not implemented yet
 	}
 
     DBusCommonAPIEnumeration GetSessionStatus(const uint32_t& SessionHandle)
@@ -89,7 +89,7 @@ class  Session
 			return GENIVI_NAVIGATIONCORE_NOT_AVAILABLE;
 	}
 
-    void DeleteSession(const uint32_t& SessionHandle)
+    int32_t DeleteSession(const uint32_t& SessionHandle)
 	{
 		dbg(lvl_debug,"enter\n");
 		if (!handles[SessionHandle])
@@ -97,6 +97,7 @@ class  Session
 		delete(handles[SessionHandle]);
 		handles[SessionHandle]=NULL;
 		SessionDeleted(SessionHandle);
+        return(0); //not implemented yet
 	}
 
     std::vector< ::DBus::Struct< uint32_t, std::string > >

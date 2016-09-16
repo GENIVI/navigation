@@ -51,6 +51,8 @@
           <line>with respect to the display viewport could be (0;0) and (hres/2;0) respectively</line>
         </doc>
       </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
       <arg name="mapViewInstanceHandle" type="u" direction="out">
         <doc>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
@@ -75,6 +77,8 @@
         <doc>
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
       </arg>
       <error name="org.genivi.mapviewer.MapViewerControl.Error.MapViewInstanceNotAvailable">
         <doc>

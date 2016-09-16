@@ -175,6 +175,8 @@
           <line>key = enum(INVALID,TIMESTAMP,LATITUDE,LONGITUDE,ALTITUDE,HEADING,SPEED,CLIMB,GNSS_FIX_STATUS,DR_STATUS,MM_STATUS,SIMULATION_MODE, ... ,ALL)</line>
         </doc>
       </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
       <arg name="position" type="a{i(yv)}" direction="out">
         <doc>
           <line>position = dictionary[key,value]</line>
@@ -241,15 +243,17 @@
         </doc>
       </arg>
     </signal>
-    <method name="GetAddress">
+    <method name="GetCurrentAddress">
       <doc>
-        <line>GetAddress = This method returns the current address</line>
+        <line>GetCurrentAddress = This method returns the current address</line>
       </doc>
       <arg name="valuesToReturn" type="ai" direction="in">
         <doc>
           <line>valuesToReturn= array[fieldType]</line>
           <line>key = enum(INVALID,TIMESTAMP,COUNTRY,COUNTRYCODE,CITY,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,TIMEZONE_OFFSET,DAYLIGHT_OFFSET,MATCH_TYPE, ... ,ALL)</line>
         </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
       </arg>
       <arg name="address" type="a{i(yv)}" direction="out">
         <doc>

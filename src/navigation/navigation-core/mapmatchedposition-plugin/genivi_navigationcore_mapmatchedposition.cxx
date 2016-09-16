@@ -154,47 +154,45 @@ class  MapMatchedPosition
 	}	
 #endif
 
-    std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >
-    GetPosition(const std::vector< int32_t >& valuesToReturn)
-	{
+    void
+    GetPosition(const std::vector< int32_t >& valuesToReturn, int32_t& error, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >& position)
+    {
         dbg(lvl_debug,"enter\n");
-        std::map< int32_t, DBusCommonAPIVariant >map;
 		struct attr attr;
 		for (int i = 0 ; i < valuesToReturn.size() ; i++) {
 			switch (valuesToReturn[i]) {
 			case GENIVI_NAVIGATIONCORE_LATITUDE:
 				if (tracking_get_attr(tracking, attr_position_coord_geo, &attr, NULL)) 
-                    map[GENIVI_NAVIGATIONCORE_LATITUDE]._2=variant_double(attr.u.coord_geo->lat);
+                    position[GENIVI_NAVIGATIONCORE_LATITUDE]._2=variant_double(attr.u.coord_geo->lat);
 				break;
 			case GENIVI_NAVIGATIONCORE_LONGITUDE:
 				if (tracking_get_attr(tracking, attr_position_coord_geo, &attr, NULL)) 
-                    map[GENIVI_NAVIGATIONCORE_LONGITUDE]._2=variant_double(attr.u.coord_geo->lng);
+                    position[GENIVI_NAVIGATIONCORE_LONGITUDE]._2=variant_double(attr.u.coord_geo->lng);
 				break;
 			case GENIVI_NAVIGATIONCORE_SPEED:
 				if (tracking_get_attr(tracking, attr_position_speed, &attr, NULL))
-                    map[GENIVI_NAVIGATIONCORE_SPEED]._2=variant_double(*attr.u.numd);
+                    position[GENIVI_NAVIGATIONCORE_SPEED]._2=variant_double(*attr.u.numd);
 				break;
 			case GENIVI_NAVIGATIONCORE_HEADING:
 				if (tracking_get_attr(tracking, attr_position_direction, &attr, NULL))
-                    map[GENIVI_NAVIGATIONCORE_HEADING]._2=variant_double(*attr.u.numd);
+                    position[GENIVI_NAVIGATIONCORE_HEADING]._2=variant_double(*attr.u.numd);
 				break;
 			}
 		}
-		return map;
+        error=0; //not implemented yet
 	}
 
-    std::map< int32_t, DBusCommonAPIVariant >
-    GetAddress(const std::vector< int32_t >& valuesToReturn)
-	{
-        std::map< int32_t, DBusCommonAPIVariant >ret;
+    void
+    GetCurrentAddress(const std::vector< int32_t >& valuesToReturn, int32_t& error, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >& address)
+    {
         std::vector< int32_t >::const_iterator it;
-		for (it = valuesToReturn.begin(); it < valuesToReturn.end(); it++) {
-			if (*it == GENIVI_NAVIGATIONCORE_STREET && street_name) {
-                ret[*it]._2=variant_string(street_name);
-			}
-		}
-		return ret;
-	}
+        for (it = valuesToReturn.begin(); it < valuesToReturn.end(); it++) {
+            if (*it == GENIVI_NAVIGATIONCORE_STREET && street_name) {
+                address[*it]._2=variant_string(street_name);
+            }
+        }
+        error=0; //not implemented yet
+    }
 
     std::map< int32_t, DBusCommonAPIVariant >
     GetPositionOnSegment(const std::vector< int32_t >& valuesToReturn)

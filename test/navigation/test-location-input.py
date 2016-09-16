@@ -456,14 +456,16 @@ session = bus.get_object('org.genivi.navigationcore.Session', '/org/genivi/navig
 session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigationcore.Session')
 
 # Get SessionHandle
-session_handle = session_interface.CreateSession(dbus.String('test location input'))
+ret = session_interface.CreateSession(dbus.String('test location input'))
+session_handle=ret[1]
 print 'Session handle = ' + str(session_handle)
 
 location_input_obj = bus.get_object('org.genivi.navigationcore.LocationInput', '/org/genivi/navigationcore')
 location_input_interface = dbus.Interface(location_input_obj, dbus_interface='org.genivi.navigationcore.LocationInput')
 
 # Get LocationInputHandle
-location_input_handle = location_input_interface.CreateLocationInput(dbus.UInt32(session_handle))
+ret = location_input_interface.CreateLocationInput(dbus.UInt32(session_handle))
+location_input_handle = ret[1]
 print 'LocationInput handle = ' + str(location_input_handle)
 
 attributes = location_input_interface.GetSupportedAddressAttributes()
