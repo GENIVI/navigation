@@ -58,7 +58,7 @@ set(NAVIGATION_COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/navigation-common")
 
 if(NOT ${YOCTO_CONFIG})
     set(NAVIT_CMAKE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/navit/cmake")
-    set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING "${CMAKE_CURRENT_BINARY_DIR}/enhanced-position-service/dbus/api") # this one is for positioning
+    set(DBUS_GENERATED_INCLUDE_DIR_POSITIONING "${CMAKE_BINARY_DIR}/enhanced-position-service/dbus/api") # this one is for positioning, NB: it uses CMAKE_BINARY_DIR
     set(NAVIT_CONFIG_H_DIR "${CMAKE_CURRENT_BINARY_DIR}/navit")
 else()
     set(NAVIT_CMAKE_DIR "${STAGING_LIBDIR}/navit/cmake")

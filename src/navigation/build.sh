@@ -2,6 +2,7 @@
 
 clean=0
 capi=0
+navit=0
 commonapi_tools_option=""
 
 function check_path_for_capi
@@ -30,7 +31,7 @@ function check_path_for_capi
 	commonapi_tools_option="-DDBUS_LIB_PATH="$DBUS_LIB_PATH" -DCOMMONAPI_DBUS_TOOL_DIR="$COMMONAPI_DBUS_TOOL_DIR" -DCOMMONAPI_TOOL_DIR="$COMMONAPI_TOOL_DIR
 }
  
-while getopts cm opt
+while getopts cmn opt
 do
 	case $opt in
 	c)
@@ -39,11 +40,15 @@ do
 	m)
 		capi=1
 		;;
+	n)
+		navit=1
+		;;
 	\?)
 		echo "Usage:"
-		echo "$0 [-c] [-m]"
+		echo "$0 [-cmn]"
 		echo "-c: build with clean"
 		echo "-m: build with commonAPI plugins "
+		echo "-n: Build navit"
 		exit 1
 	esac
 done
@@ -66,12 +71,22 @@ mkdir -p build
 cd build
 mkdir -p navit
 cd navit
-echo 'build navit'
-if [ "$clean" = 1 ]
+
+if [ "$navit" = 1 ]
 then
-	cmake -DDISABLE_QT=1 -DSAMPLE_MAP=0 -Dvehicle/null=1 -Dgraphics/qt_qpainter=0 ../../navit/
+	echo 'build navit'
+	if [ "$clean" = 1 ]
+	then
+		cmake -DDISABLE_QT=1 -DSAMPLE_MAP=0 -Dvehicle/null=1 -Dgraphics/qt_qpainter=0 ../../navit/
+	fi
+	make
+else
+	if [ "$clean" = 1 ]
+	then
+		cmake -DDISABLE_QT=1 -DSAMPLE_MAP=0 -Dvehicle/null=1 -Dgraphics/qt_qpainter=0 ../../navit/
+		make
+	fi
 fi
-make
 cd ../
 echo 'build navigation'
 if [ "$clean" = 1 ]

@@ -111,7 +111,6 @@ class EnhancedPositionClientProxy
 	{
         dbg(lvl_debug,"enter\n");
 		bool position_found=false;
-        printf("A %ld\n",changedValues);
         if ((changedValues & (EnhancedPositionServiceTypes::PositionInfoKey::LATITUDE | EnhancedPositionServiceTypes::PositionInfoKey::LONGITUDE)) == (EnhancedPositionServiceTypes::PositionInfoKey::LATITUDE | EnhancedPositionServiceTypes::PositionInfoKey::LONGITUDE))
         {
             position_found=true;
@@ -120,7 +119,6 @@ class EnhancedPositionClientProxy
             printf("B %ld\n",changedValues);
             event_add_timeout(0, 0, mp_priv->cb);
             mp_priv->cb_pending=1;
-            printf("B %ld\n",changedValues);
 		}
 	}
 };

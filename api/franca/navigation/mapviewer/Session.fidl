@@ -8,7 +8,6 @@ package org.genivi.navigation.mapviewer
 
 import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
-import org.genivi.navigation.mapviewer.MapViewerTypes.* from "./MapViewerTypes.fidl"
 
 
 <** @description : This interface offers methods that implement the navigation core session functionality of a navigation system.**>
