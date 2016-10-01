@@ -116,7 +116,6 @@ class EnhancedPositionClientProxy
             position_found=true;
 		}
         if (position_found && !mp_priv->cb_pending) {
-            printf("B %ld\n",changedValues);
             event_add_timeout(0, 0, mp_priv->cb);
             mp_priv->cb_pending=1;
 		}

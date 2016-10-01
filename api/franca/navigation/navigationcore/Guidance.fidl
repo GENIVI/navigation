@@ -38,13 +38,13 @@ interface Guidance {
 		LANE_INFO_BITMASK_LEFTUTURN		= 256
 	}
 	
-	enumeration PromptMode extends BasicEnum { //Base 0x0040
+	enumeration PromptMode extends BasicEnum { 
 		DISABLED_PROMPT					= 65
 		AUTOMATIC_PROMPT				= 66
 		MANUAL_PROMPT					= 67
 	}
 	
-	enumeration ManeuverPhase extends BasicEnum { //Base 0x0050
+	enumeration ManeuverPhase extends BasicEnum { 
 		CRUISE 				= 80
 		MANEUVER_APPEARED 	= 81
 		PRE_ADVICE 			= 82
@@ -52,12 +52,12 @@ interface Guidance {
 		PASSED 				= 84
 	}
 
-	enumeration GuidanceStatus extends BasicEnum { //Base 0x0060
+	enumeration GuidanceStatus extends BasicEnum { 
 		ACTIVE							= 96
 		INACTIVE						= 97
 	}
 	
-	enumeration ManeuverType extends BasicEnum { //Base 0x0070
+	enumeration ManeuverType extends BasicEnum { 
 		STRAIGHT_ON					= 112
 		CROSSROAD					= 113
 		ROUNDABOUT					= 114
@@ -70,7 +70,7 @@ interface Guidance {
 		BIFURCATION					= 121
 	}
 	
-	enumeration ManeuverDirection extends BasicEnum { //Base 0x0080
+	enumeration ManeuverDirection extends BasicEnum { 
 		STRAIGHT_ON					    = 127
 		LEFT							= 128
 		SLIGHT_LEFT						= 129
@@ -82,31 +82,31 @@ interface Guidance {
 		UTURN_LEFT						= 135
 	}
 	
-	enumeration CalculationMode extends BasicEnum { //Base 0x0090
+	enumeration CalculationMode extends BasicEnum { 
 		ALL_MANUAL						= 144
 		ALL_AUTOMATIC					= 145
 		TRAFFIC_MANUAL					= 146
 		OFF_ROUTE_MANUAL				= 147
 	}
 
-	enumeration RoadProperty extends BasicEnum { //Base 0x0100
+	enumeration RoadProperty extends BasicEnum { 
 		UNDEFINED   					= 256
 		TOLL_ROADS   					= 257
 	}
-	enumeration RouteChangedCause extends BasicEnum { //Base 0x0210
+	enumeration RouteChangedCause extends BasicEnum { 
 		TRAFFIC							= 528
 		OFF_ROUTE						= 529
 		MANUAL							= 530
 	}
 
-	enumeration ManeuverDirectionType extends BasicEnum { //Base 0x0240
+	enumeration ManeuverDirectionType extends BasicEnum { 
 		DIRECTION					= 576
 		EXIT_NUMBER					= 577
 		ROAD_FORM					= 578
 		LANE_INFO					= 579
 	}
 
-	enumeration LaneDivider extends BasicEnum { //Base 0x0250
+	enumeration LaneDivider extends BasicEnum { 
 		DIVIDER_UNDEFINED				= 592
 		DIVIDER_INTERRUPTEDLONG			= 593
 		DIVIDER_INTERRUPTEDSHORT		= 594
@@ -116,20 +116,26 @@ interface Guidance {
 		DIVIDER_INTERRUPTEDSOLID		= 598
 	}
 
-	enumeration ManeuverDataAttribute extends BasicEnum { //Base 0x260
-		LENGTH				= 608
-		DIRECTION			= 609
-		EXIT_NUMBER			= 610
-		ROAD_FORM			= 611
-		LANE_INFO			= 612
-		LATITUDE			= 613
-		LONGITUDE			= 614
-		ALTITUDE			= 615
+	enumeration RoadForm extends BasicEnum {
+		ROAD_REGULAR				= 561
+		ROAD_HIGHWAY_MOTORWAY		= 562
+		ROAD_FERRY					= 563
+	}
+
+	enumeration ManeuverDataAttribute extends BasicEnum {
+		LENGTH				= 608 //value of type UInt16, when maneuver=ROUNDABOUT, expresses the length of the route segment between the entry to and the exit from the roundabout
+		DIRECTION			= 576 //value of type ManeuverDirection
+		EXIT_NUMBER			= 577 //when maneuver=ROUNDABOUT, value of type UInt16 that expresses the roundabout exit number, when maneuver=HIGHWAY_EXIT, value of type String that expresses the highway exit number
+		ROAD_FORM			= 578 //value of type RoadForm
+		LANE_INFO			= 579 //value of type LaneInfo[] 
+		COORDINATE			= 613 //value of type Coordinate3D
 	}
 
     union ManeuverDataValue {
 	    ManeuverDirection enumValue
+	    UInt16 uint16Value
 	    String stringValue
+	    RoadForm roadFormValue
 	    LaneInfo[] laneInfoValue
 	    Coordinate3D coordinate3DValue
     }
@@ -138,22 +144,22 @@ interface Guidance {
 		ManeuverDataAttribute to ManeuverDataValue
 	}	
 	
-	struct LaneInfo {
-		UInt32 laneIndex
-		ByteBuffer laneDirections
-		LaneType directionToFollow
-		LaneDivider divider
+	struct LaneInfo { //Note: To describe the divider on the left side of the left-most lane, use the following entry in LANE_INFO: (laneIndex=0xffffffff,laneDirections=0x00000000,directionToFollow=0x00000000,divider=type)
+		UInt32 laneIndex //number of the individual lane. Counting starts from zero, beginning at the left-most lane in the direction of travel (independent of the driving side)
+		ByteBuffer laneDirections //bitfield where each bit corresponds to a certain direction. A 1-bit indicates that the corresponding part of the lane arrow is drawn in the lane information on the street (see the lane info bitmasks)
+		LaneType directionToFollow //bitfield where each bit corresponds to a certain direction. A 1-bit indicates that the corresponding part of the lane arrow matches the direction of the corresponding maneuver (see the lane info bitmasks). At most one bit of this bitmask will be set.
+		LaneDivider divider //indicates the type of divider between the given lane and the next one to the right, in the direction of travel
 	}
 
 	struct WaypointStruct {
-		UInt32 waypointOffset
-		UInt32 travelTime
-		Int32 direction
-		Side side
-		Int16 timeZone
-		Int16 daylightSavingTime
-		Boolean isDestination
-		UInt16 number
+		UInt32 waypointOffset //the offset of the way point in meters from the beginning of the route
+		UInt32 travelTime //time to reach the way point in seconds
+		Int32 direction //direction of the way point in degree relatively to the North. Range [0:360]
+		Side side 
+		Int16 timeZone //time zone of the way point. It is expressed as the time difference from the UTC in minutes
+		Int16 daylightSavingTime //daylight saving time of the way point. It is expressed as the time difference from the UTC in minutes
+		Boolean isDestination //if TRUE the way point is the destination
+		UInt16 number //number of the next waypoint (related to the waypoint list, first way point index is 0)
 	}
 
 	<**
@@ -190,6 +196,7 @@ interface Guidance {
 
 	<**
 		@description : startGuidance = This method starts the guidance for a given route
+		The guidanceStatus will change to ACTIVE
 	**>
 	method startGuidance {
 		in {
@@ -208,6 +215,7 @@ interface Guidance {
 
 	<**
 		@description : stopGuidance = This method stops the guidance
+		The guidanceStatus will change to INACTIVE
 	**>
 	method stopGuidance {
 		in {
@@ -234,6 +242,10 @@ interface Guidance {
 				@description : kind of voice (to be defined)
 			**>
 			String voice
+		}
+		error {
+			OK
+			GUIDANCE_ERROR_VOICENOTALLOWED //the voice generation is inactive
 		}
 	}
 
@@ -408,6 +420,8 @@ interface Guidance {
 
 			<**
 				@description : guidanceStatus = enum(INVALID,ACTIVE,INACTIVE)
+				ACTIVE means that NavigationCore is providing guidance information
+				INACTIVE means that NavigationCore is not providing guidance information
 			**>
 			GuidanceStatus guidanceStatus
 
@@ -426,6 +440,9 @@ interface Guidance {
 
 			<**
 				@description : mode = enum(INVALID,DISABLED_PROMPT,AUTOMATIC_PROMPT,MANUAL_PROMPT, ... )
+				MANUAL_PROMPT means that a client application can ask the NavigationCore to play the voice prompts
+				AUTOMATIC_PROMPT means that the voice prompts will be requested by NavigationCore automatically
+				DISABLED_PROMPT means that the client application will the voice generator component directly to play the messages (bypassing the NavigationCore)
 			**>
 			PromptMode promptMode
 		}
@@ -443,6 +460,9 @@ interface Guidance {
 
 			<**
 				@description : mode = enum(INVALID,DISABLED_PROMPT,AUTOMATIC_PROMPT,MANUAL_PROMPT, ... )
+				MANUAL_PROMPT means that a client application can ask the NavigationCore to play the voice prompts
+				AUTOMATIC_PROMPT means that the voice prompts will be requested by NavigationCore automatically
+				DISABLED_PROMPT means that the client application will the voice generator component directly to play the messages (bypassing the NavigationCore)
 			**>
 			PromptMode promptMode
 		}
@@ -462,6 +482,8 @@ interface Guidance {
 
 			<**
 				@description : guidanceStatus = enum(INVALID,ACTIVE,INACTIVE)
+				ACTIVE means that NavigationCore is providing guidance information
+				INACTIVE means that NavigationCore is not providing guidance information
 			**>
 			GuidanceStatus guidanceStatus
 

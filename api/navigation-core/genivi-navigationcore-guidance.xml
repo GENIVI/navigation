@@ -67,6 +67,8 @@
           <line>kind of voice (to be defined)</line>
         </doc>
       </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
       <error name="org.genivi.navigationcore.Guidance.Error.VoiceNotAllowed">
         <doc>
           <line>This error is generated if the voice generation is inactive </line>

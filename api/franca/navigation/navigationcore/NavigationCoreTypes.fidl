@@ -14,14 +14,14 @@ typeCollection NavigationCoreTypes {
 		minor 0
 	}
 
- 	enumeration TimeStampedEnum extends BasicEnum { //Base 0x0010
+ 	enumeration TimeStampedEnum extends BasicEnum { 
 		TIMESTAMP	= 16
 	}
 
-	enumeration GeoLocalizedEnum extends TimeStampedEnum { //Base 0x00a0
-		LATITUDE	= 160
-		LONGITUDE	= 161
-		ALTITUDE	= 162
+	enumeration GeoLocalizedEnum extends TimeStampedEnum { 
+		LATITUDE	= 160 //value of type Double, that expresses the latitude in format %3.6f. Range[-90:+90]. Example: 48.70901
+		LONGITUDE	= 161 //value of type Double, that expresses the longitude in format %3.6f. Range[-180:+180]. Example: 9.167898
+		ALTITUDE	= 162 //value of type Int32, that expresses the altitude in meters
 	}	
 	
 }

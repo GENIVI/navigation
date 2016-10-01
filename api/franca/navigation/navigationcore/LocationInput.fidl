@@ -20,31 +20,13 @@ interface LocationInput {
 		minor 0
 	}
 
-	enumeration AddressAttribute extends GeoLocalizedEnum { //Base 0x00a0
-		COUNTRY			= 166
-		STATE			= 167
-		CITY			= 168
-		ZIPCODE			= 169
-		STREET			= 170
-		HOUSENUMBER		= 171
-		CROSSING		= 172
-		DISTRICT		= 173
-		PHONENUMBER		= 174
-		POINAME			= 175
-		TOWNCENTER		= 176
-		LOCATION_INPUT  = 177
-		FULL_ADDRESS	= 178
-		COUNTRYCODE		= 179
-		HOUSENAME		= 180
-		POSTAL_CODE		= 181
-	}
 	
 	enumeration SearchStatus extends BasicEnum { //Base 0x00c0
   		SEARCHING		= 193
   		FINISHED 		= 194		
 	}
 	
-	enumeration ValidationType extends BasicEnum { //Base 0x00d0
+	enumeration ValidationType extends BasicEnum { 
 		OK				= 208
 		UNKNOWN			= 209
 		AMBIGUOUS		= 210
@@ -52,6 +34,26 @@ interface LocationInput {
 	}
 	
 	array AddressAttributeList of AddressAttribute
+
+	enumeration AddressAttribute extends GeoLocalizedEnum { 
+		COUNTRY			= 166 //value of type String, that identifies the country name
+		COUNTRYCODE		= 179 //value of type String, ISO 3166‐1 alpha 3 country code (upper case)
+		STATE			= 167
+		CITY			= 168 //value of type String, that identifies the city name
+		ZIPCODE			= 169
+		STREET			= 170 //value of type String, that identifies the street name
+		ROAD_NUMBER		= 182 //value of type String, that identifies the road number
+		HOUSENUMBER		= 171 //value of type String, that identifies the house number
+		HOUSENAME		= 180 //value of type String, that identifies the house name
+		CROSSING		= 172 //value of type String, that identifies the crossing
+		DISTRICT		= 173 //value of type String, that identifies the district name
+		PHONENUMBER		= 174 //value of type String, that identifies a phone number
+		POINAME			= 175 //value of type String, that identifies a POI name
+		TOWNCENTER		= 176
+		LOCATION_INPUT  = 177
+		FULL_ADDRESS	= 178
+		POSTAL_CODE		= 181
+	}
 
     union AddressValue {
 	    Int32 intValue
@@ -178,6 +180,7 @@ interface LocationInput {
 
 	<**
 		@description : spell = This method sends the next spell input for the current session
+		Note: when a spell is started the entries of the search are removed
 	**>
 	method spell {
 		in {
@@ -206,6 +209,7 @@ interface LocationInput {
 
 	<**
 		@description : search = This method sends the search input for the current session
+		Note: when a search is started the entries of the spell input are removed
 	**>
 	method search {
 		in {
@@ -262,6 +266,7 @@ interface LocationInput {
 
 	<**
 		@description : selectEntry = This method triggers selection of a result list entry by index
+		Note: the update of the input content will be notified in signal ContentUpdated
 	**>
 	method selectEntry {
 		in {
@@ -326,6 +331,7 @@ interface LocationInput {
 
 	<**
 		@description : reverseGeocode = This method transforms a geocoordinate into an address
+		Note: the update of the input content will be notified in signal ContentUpdated
 	**>
 	method reverseGeocode {
 		in {

@@ -251,8 +251,9 @@ class  GuidanceServerStub : public GuidanceStubDefault
      * description: setVoiceGuidance = This method switch on/off the voice guidance
      */
     void setVoiceGuidance(const std::shared_ptr<CommonAPI::ClientId> _client, bool _activate, std::string _voice, setVoiceGuidanceReply_t _reply){
+        Guidance::setVoiceGuidanceError _error = Guidance::setVoiceGuidanceError::OK;
         mp_guidance->SetVoiceGuidance(_activate,_voice);
-        _reply();
+        _reply(_error);
     }
 
     /**
