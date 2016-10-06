@@ -422,7 +422,7 @@ GuidanceObj::GetManeuver(struct item *item, uint32_t& offsetOfManeuver, Guidance
 {
 	struct attr length, street_name;
     Guidance::ManeuverDataAttribute maneuverDataAttribute;
-    Guidance::ManeuverDataValue maneuverDataValue;
+    Guidance::ManeuverDirection maneuverDataValue;
 
     if (item_attr_get(item, attr_length, &length)) {
         offsetOfManeuver=length.u.num;
@@ -435,7 +435,7 @@ GuidanceObj::GetManeuver(struct item *item, uint32_t& offsetOfManeuver, Guidance
 	switch (item->type) {
 	case type_nav_straight:
         maneuverType=Guidance::ManeuverType::CROSSROAD;
-        maneuverDataValue = Guidance::ManeuverDirection::STRAIGHT_ON;
+        maneuverDataValue = Guidance::ManeuverDirection::STRAIGHT;
 		break;
 	case type_nav_turnaround:
         maneuverType=Guidance::ManeuverType::CROSSROAD;
@@ -480,7 +480,7 @@ GuidanceObj::GetManeuver(struct item *item, uint32_t& offsetOfManeuver, Guidance
 		break;
 	case type_nav_roundabout_r4:
         maneuverType=Guidance::ManeuverType::ROUNDABOUT;
-        maneuverDataValue = Guidance::ManeuverDirection::STRAIGHT_ON;
+        maneuverDataValue = Guidance::ManeuverDirection::STRAIGHT;
 		break;
 	case type_nav_roundabout_r5:
         maneuverType=Guidance::ManeuverType::ROUNDABOUT;
@@ -513,7 +513,7 @@ GuidanceObj::GetManeuver(struct item *item, uint32_t& offsetOfManeuver, Guidance
 		break;
 	case type_nav_roundabout_l4:
         maneuverType=Guidance::ManeuverType::ROUNDABOUT;
-        maneuverDataValue = Guidance::ManeuverDirection::STRAIGHT_ON;
+        maneuverDataValue = Guidance::ManeuverDirection::STRAIGHT;
 		break;
 	case type_nav_roundabout_l5:
         maneuverType=Guidance::ManeuverType::ROUNDABOUT;
@@ -533,7 +533,7 @@ GuidanceObj::GetManeuver(struct item *item, uint32_t& offsetOfManeuver, Guidance
 		break;
 	case type_nav_destination:
         maneuverType=Guidance::ManeuverType::DESTINATION;
-        maneuverDataValue = Guidance::ManeuverDirection::STRAIGHT_ON;
+        maneuverDataValue = Guidance::ManeuverDirection::STRAIGHT;
 		break;
 	default:
         dbg(lvl_error,"Unable to convert type %s\n",item_to_name(item->type));

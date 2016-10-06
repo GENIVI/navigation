@@ -71,7 +71,7 @@ interface Guidance {
 	}
 	
 	enumeration ManeuverDirection extends BasicEnum { 
-		STRAIGHT_ON					    = 127
+		STRAIGHT					    = 127
 		LEFT							= 128
 		SLIGHT_LEFT						= 129
 		HARD_LEFT						= 130

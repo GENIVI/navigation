@@ -314,10 +314,11 @@ class  Guidance
 		guidance->ResumeGuidance(sessionHandle);
 	}
 
-	void
+	int32_t
 	SetVoiceGuidance(const bool& activate, const std::string& voice)
 	{
         guidance->SetVoiceGuidance(activate,voice);
+        return(0); //not implemented yet
 	}
 
 	void
@@ -461,7 +462,7 @@ GuidanceObj::GetManeuver(struct item *item, uint32_t& DistanceToManeuver, int32_
 	switch (item->type) {
 	case type_nav_straight:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
-        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_STRAIGHT);
 		break;
 	case type_nav_turnaround:
         Maneuver=GENIVI_NAVIGATIONCORE_CROSSROAD;
@@ -506,7 +507,7 @@ GuidanceObj::GetManeuver(struct item *item, uint32_t& DistanceToManeuver, int32_
 		break;
 	case type_nav_roundabout_r4:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_STRAIGHT);
 		break;
 	case type_nav_roundabout_r5:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
@@ -539,7 +540,7 @@ GuidanceObj::GetManeuver(struct item *item, uint32_t& DistanceToManeuver, int32_
 		break;
 	case type_nav_roundabout_l4:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
-        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_STRAIGHT);
 		break;
 	case type_nav_roundabout_l5:
         Maneuver=GENIVI_NAVIGATIONCORE_ROUNDABOUT;
@@ -559,7 +560,7 @@ GuidanceObj::GetManeuver(struct item *item, uint32_t& DistanceToManeuver, int32_
 		break;
 	case type_nav_destination:
         Maneuver=GENIVI_NAVIGATIONCORE_DESTINATION;
-        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_STRAIGHT_ON);
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_STRAIGHT);
 		break;
 	default:
         dbg(lvl_error,"Unable to convert type %s\n",item_to_name(item->type));

@@ -66,6 +66,7 @@
   <id name="TURN" value="0x0078" />
   <id name="BIFURCATION" value="0x0079" />
 
+  <id name="STRAIGHT" value="0x007F" />
   <id name="LEFT" value="0x0080" />
   <id name="SLIGHT_LEFT" value="0x0081" />
   <id name="HARD_LEFT" value="0x0082" />
