@@ -18,19 +18,19 @@ interface MapViewerControl {
 		minor 0
 	}
 	
-	enumeration MapViewType extends BasicEnum { //Base 0x0010
+	enumeration MapViewType extends BasicEnum { 
 		MAIN_MAP		= 16
 		SPLIT_SCREEN	= 17		
 		GUIDING_MAP		= 18
 	}
 	
-	enumeration MapScaleMode extends BasicEnum { //Base 0x0110
+	enumeration MapScaleMode extends BasicEnum { 
 		AUTOMATIC		= 272
 		MANUAL			= 273
 		HYBRID			= 274
 	}
 
-	enumeration MapPerspective extends BasicEnum { //Base 0x0020
+	enumeration MapPerspective extends BasicEnum { 
 		PERSPECTIVE_2D	= 32
 		PERSPECTIVE_3D	= 33
 	}
@@ -91,19 +91,19 @@ interface MapViewerControl {
 		DET_STENCIL		
 	}
 
-	enumeration PanAction extends BasicEnum { //Base 0x0100
+	enumeration PanAction extends BasicEnum { 
 		PAN_START		= 256
 		PAN_TO			= 257
 		PAN_END			= 258
 	}
 	
-	enumeration Visibility extends BasicEnum { //Base 0x0040
+	enumeration Visibility extends BasicEnum { 
 		VISIBLE			= 67
 		INVISIBLE		= 68
 		FROZEN			= 69
 	}
 
-	enumeration Level extends BasicEnum { //Base 0x0050
+	enumeration Level extends BasicEnum { 
 		LEVEL_1			= 80
 		LEVEL_2			= 81
 		LEVEL_3			= 82
@@ -111,7 +111,7 @@ interface MapViewerControl {
 		LEVEL_5			= 84
 	}
 
-	enumeration HeadingType extends BasicEnum  { //Base 0x0130
+	enumeration HeadingType extends BasicEnum  { 
 		CONSTANT_ANGLE		= 112
 		TRACK_UP			= 113
 		TOWARDS_TARGET		= 114
@@ -121,26 +121,6 @@ interface MapViewerControl {
 		THEME_1	= 96
 		THEME_2 = 97
 		THEME_3 = 98
-		THEME_BMW_CLASSIC_DAY
-		THEME_BMW_CLASSIC_NIGHT
-		THEME_BMW_CLASSIC_TRAFFIC_DAY
-		THEME_BMW_CLASSIC_TRAFFIC_NIGHT
-		THEME_BMW_ALTERNATIVE_DAY
-		THEME_BMW_ALTERNATIVE_NIGHT
-		THEME_BMW_ALTERNATIVE_TRAFFIC_DAY
-		THEME_BMW_ALTERNATIVE_TRAFFIC_NIGHT
-		THEME_BMW_GUIDING
-
-		THEME_MINI_CLASSIC_DAY
-		THEME_MINI_CLASSIC_NIGHT
-		THEME_MINI_CLASSIC_TRAFFIC_DAY
-		THEME_MINI_CLASSIC_TRAFFIC_NIGHT
-		THEME_MINI_ALTERNATIVE_DAY
-		THEME_MINI_ALTERNATIVE_NIGHT
-		THEME_MINI_ALTERNATIVE_TRAFFIC_DAY
-		THEME_MINI_ALTERNATIVE_TRAFFIC_NIGHT
-		THEME_MINI_GUIDING
-
 		THEME_I_CLASSIC_DAY
 		THEME_I_CLASSIC_NIGHT
 		THEME_I_CLASSIC_TRAFFIC_DAY
@@ -164,7 +144,7 @@ interface MapViewerControl {
 		MapObject to Boolean
 	}
 
-	enumeration MapScaleUnit extends BasicEnum { //Base 0x0030
+	enumeration MapScaleUnit extends BasicEnum { 
 		METER		= 50
 		MILE		= 51
 		KM			= 52
@@ -172,31 +152,30 @@ interface MapViewerControl {
 		FOOT		= 54
 	}
 
-	enumeration MapScaleType extends BasicEnum { //Base 0x0040
+	enumeration MapScaleType extends BasicEnum { 
 		MIN			= 64
 		MAX			= 65
 		MID			= 66
 	}
 
 	enumeration SelectableMapType extends BasicEnum {
-        MET_POI = 2                            //POI.
-        MET_POLYGON = 3                        //Polygons.
-        MET_EDGE = 4                           //All edges except roads. E.g. railways rivers ferries.
-        MET_ROAD = 5                           //Road edges.
-        MET_ROAD_ICON = 6                      //Road icons.
-        MET_TTI_ICON = 7                       //TTI icons.
-        MET_TTI_EDGE = 8                       //TTI edge [Not yet supported].
-        MET_CITY_MARKER = 9                    //City names and city markers.
-        MET_ROUTE = 10                         //Tours.
-        MET_TREKKING_ROUTE = 11                //Trekking tours.
-        MET_POSITION = 12                      //Position.
-        MET_LANDMARK = 13                      //Landmarks.
-        MET_DESTINATION = 14                   //Destinations.
-        MET_FAVORITE = 15                      //Favorites.
-        MET_PICTURE = 16                       //Picture.
-        MET_GENERIC_MARKER  = 17                //Generic markers like weather markers.
-		
-		CUSTOM_ELEMENT		= 288 //Base 0x0120
+        MET_POI 			= 2		//POI.
+        MET_POLYGON 		= 3 	//Polygons.
+        MET_EDGE 			= 4		//All edges except roads. E.g. railways rivers ferries.
+        MET_ROAD 			= 5 	//Road edges.
+        MET_ROAD_ICON 		= 6 	//Road icons.
+        MET_TTI_ICON 		= 7 	//TTI icons.
+        MET_TTI_EDGE 		= 8 	//TTI edge [Not yet supported].
+        MET_CITY_MARKER 	= 9 	//City names and city markers.
+        MET_ROUTE 			= 10 	//Tours.
+        MET_TREKKING_ROUTE 	= 11 	//Trek tours.
+        MET_POSITION 		= 12 	//Position.
+        MET_LANDMARK 		= 13 	//Landmarks.
+        MET_DESTINATION 	= 14 	//Destinations.
+        MET_FAVORITE 		= 15 	//Favorites.
+        MET_PICTURE 		= 16 	//Picture.
+        MET_GENERIC_MARKER  = 17 	//Generic markers like weather markers.	
+		CUSTOM_ELEMENT		= 288 
 		CURRENT_POSITION	= 289
 		WAYPOINT			= 290
 		POI					= 291
@@ -230,8 +209,8 @@ interface MapViewerControl {
 		@description : struct generated for DBus argument SetMapViewPan_pixelCoordinates
 	**>
 	struct Pixel {
-		UInt16 x
-		UInt16 y
+		UInt16 x	// x-coordinate of the position on the map view specified by user input (x=0 indicates the first left pixel of the map view)
+		UInt16 y	// y-coordinate of the position on the map view specified by user input (y=0 indicates the first top pixel of the map view)
 	}
 
 
@@ -257,14 +236,18 @@ interface MapViewerControl {
 		@description : struct generated for DBus argument DisplayCustomElements_customElements
 	**>
 	struct CustomElement {
-		String name
-		String iconUri
+		String name	//name of the custom element
+		String iconUri //uri to the icon of the custom element
 		Coordinate2D coordinate
-		AnchorPoint elem4
+		AnchorPoint elem4  	//defines which point on the icon is used as the reference for associating the icon to the map coordinate
+          					// (0,0) is the center of the icon 
+          					// (-1,-1) is the top left corner of the icon 
+          					// (1,1) is the bottom right corner of the icon 
+		
 	}
 
 
-	map tCustomElementDict {
+	map CustomElementDict {
 		Handle to CustomElement
 	}
 
@@ -1935,7 +1918,7 @@ interface MapViewerControl {
 			Handle mapViewInstanceHandle
 		}
 		out {
-			tCustomElementDict customElements
+			CustomElementDict customElements
 		}
 	}
 
@@ -1952,7 +1935,7 @@ interface MapViewerControl {
 			
 			Pixel pixelCoordinate
 			
-			SelectableMapType [] selectableTypes
+			SelectableMapType [] selectableTypes  // Note: The order of priority by which the elements are selected is implementation dependent
 
 			<**
 				@description : maxNumberOfSelectedElements = maximum number of selected elements to return. If 0, all possible elements which can be selected will be returned

@@ -124,6 +124,8 @@ void setLocale(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _
     changedSettings.push_back(POIServiceTypes::Settings::LOCALE);
 
     fireConfigurationChangedEvent(changedSettings);
+
+    _reply();
 }
 
 /**
@@ -257,6 +259,7 @@ void poiSearchStarted(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::
     else
         m_sort_func=NULL;
 
+    _reply();
 }
 
 /**
@@ -264,6 +267,8 @@ void poiSearchStarted(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::
  */
 void poiSearchCanceled(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, poiSearchCanceledReply_t _reply){
     dbg(lvl_debug,"enter\n");
+    //to be completed
+    _reply();
 }
 
 /**
@@ -427,7 +432,7 @@ plugin_init(void)
     std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
 
     const std::string domain = "local";
-    const std::string instancePOIContentAccessModule = "POIContentAccessModuleService";
+    const std::string instancePOIContentAccessModule = "POIContentAccessModule";
 
     std::shared_ptr<POIContentAccessModuleServerStub> myServicePOIContentAccessModule = std::make_shared<POIContentAccessModuleServerStub>();
 
@@ -439,10 +444,9 @@ plugin_init(void)
     const std::string instancePOIContentAccess = "POIContentAccess";
     myServicePOIContentAccess = runtime->buildProxy<POIContentAccessProxy>(domain, instancePOIContentAccess);
 
-    // not working correctly (blocked) so removed for the moment
-//    while (!myServicePOIContentAccess->isAvailable()) {
-//        usleep(10);
-//    }
+    while (!myServicePOIContentAccess->isAvailable()) {
+        usleep(10);
+    }
 
-        myServicePOIContentAccessModule->register_cam();
+    myServicePOIContentAccessModule->register_cam();
 }

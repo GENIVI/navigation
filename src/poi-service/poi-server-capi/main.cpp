@@ -1761,11 +1761,6 @@ void POISearchServerStub::requestResultList(const std::shared_ptr<CommonAPI::Cli
                     element.setDistance(camElement.getDistance()); //distance
                     element.setRouteStatus(POIServiceTypes::RouteStatus::OFF_ROUTE);
                     attributes = camElement.getAttributeList();
-                    for (sub_index=0;sub_index<attributes.size();sub_index++)
-                    {
-                        attribute = (attributes.at(sub_index));
-                        attributes.push_back(attribute);
-                    }
                     element.setAttributeList(attributes);
                     _resultListWindow.push_back(element);
                     index++;

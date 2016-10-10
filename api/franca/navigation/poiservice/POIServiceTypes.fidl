@@ -55,52 +55,60 @@ typeCollection POIServiceTypes {
 		TOURIST   			= 25
 		PUBLIC_BUILDING   	= 26
 		RAILWAY_STATION   	= 27
+		DESTINATION_FLAG	= 204
+		FAVORITE 			= 205
+		FAVORITE_HOME		= 206
+		FAVORITE_ADDRESSBOOK = 207
+		USER_IMPORT			= 208
+		USER_CONTACT		= 209
+		MOTORWAY_EXIT		= 210
+		ALL_CATEGORIES		= 65535
      }
  
      <** @description: Type of Attribute**>
-    enumeration AttributeType { //Base 0x0500
-    	STRING		= 1280
-        INTEGER		= 1281
-        BOOLEAN		= 1282
-        COORDINATES	= 1283
+    enumeration AttributeType { 
+    	STRING		= 500
+        INTEGER		= 501
+        COORDINATES	= 502
+        BOOLEAN		= 503
     }
 
    <** @description: Current state of the search**>
-    enumeration SearchStatusState extends BasicEnum { //Base 0x0510
-        NOT_STARTED		= 1296
-        SEARCHING		= 1297
-        FINISHED		= 1298
+    enumeration SearchStatusState extends BasicEnum {
+        NOT_STARTED		= 510
+        SEARCHING		= 511
+        FINISHED		= 512
     }
     
     <** @description: Type of Operator**>
-    enumeration OperatorType extends BasicEnum  { //Base 0x0520
-        MORE_THAN		= 1312
-        LESS_THAN		= 1313
-        EQUAL			= 1314
+    enumeration OperatorType extends BasicEnum  { 
+        MORE_THAN		= 520
+        LESS_THAN		= 521
+        EQUAL			= 522
     }
 
     <** @description: Reason of update**>
-    enumeration SortOption { //Base 0x0560
-        SORT_DEFAULT		= 1376
-        SORT_BY_DISTANCE	= 1377
-        SORT_BY_TIME		= 1378
-        ATTRIBUTE_CUSTOM	= 1379
+    enumeration SortOption { 
+        SORT_DEFAULT		= 560
+        SORT_BY_DISTANCE	= 561
+        SORT_BY_TIME		= 562
+        ATTRIBUTE_CUSTOM	= 563
     }
 
     <** @description: Reason of update**>
-    enumeration UpdateReason { //Base 0x0700
-        ADDED			= 1792
-        REMOVED			= 1793
-        ATTR_ADDED		= 1794
-        ATTR_MODIFIED	= 1795
-        ATTR_REMOVED  	= 1796
+    enumeration RouteStatus { 
+        OFF_ROUTE		= 600
+        ON_ROUTE		= 601
+        INSIDE_CORRIDOR	= 602
     }
 
     <** @description: Reason of update**>
-    enumeration RouteStatus { //Base 0x0600
-        OFF_ROUTE		= 1536
-        ON_ROUTE		= 1537
-        INSIDE_CORRIDOR	= 1538
+    enumeration UpdateReason { 
+        ADDED			= 700
+        REMOVED			= 701
+        ATTR_ADDED		= 702
+        ATTR_MODIFIED	= 703
+        ATTR_REMOVED  	= 704
     }
 
     <** @description: Configuration changed**>
@@ -111,7 +119,7 @@ typeCollection POIServiceTypes {
     <** @description: Settings**>
     enumeration Settings {
         INVALID 				= 0
-        UNITS_OF_MEASUREMENT 	= 48 //Base 0x0030
+        UNITS_OF_MEASUREMENT 	= 48 
         LOCALE 					= 37
         TIME_FORMAT 			= 3
         COORDINATES_FORMAT 		= 6
