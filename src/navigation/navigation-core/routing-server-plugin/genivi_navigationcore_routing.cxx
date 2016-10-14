@@ -738,10 +738,10 @@ get_map(struct coord *c, struct item *item, int is_end, const std::vector< Routi
             map[Routing::RouteSegmentType::DISTANCE]=(double)length.u.num;
 		}
         if (item_attr_get(item, attr_time, &time) && vector_contains(valuesToReturn, Routing::RouteSegmentType::TIME)) {
-            map[Routing::RouteSegmentType::TIME]=(uint32_t)((time.u.num+5)/10);
+            map[Routing::RouteSegmentType::TIME]=(uint16_t)((time.u.num+5)/10);
 		}
         if (item_attr_get(item, attr_speed, &speed) && vector_contains(valuesToReturn, Routing::RouteSegmentType::SPEED)) {
-            map[Routing::RouteSegmentType::SPEED]=(uint32_t)speed.u.num;
+            map[Routing::RouteSegmentType::SPEED]=(uint16_t)speed.u.num;
 		}
 	}
     if (item && vector_contains(valuesToReturn, Routing::RouteSegmentType::ROAD_NAME)) {

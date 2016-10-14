@@ -393,24 +393,30 @@ class  MapViewerControl
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 
-	void
+    void
     SetMapViewScale(const uint32_t& SessionHandle, const uint32_t& MapViewInstanceHandle, const uint16_t& ScaleID)
-	{
+    {
         dbg(lvl_debug,"enter\n");
-		MapViewerControlObj *obj=handles[MapViewInstanceHandle];
-		if (!obj)
-			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		obj->SetMapViewScale(SessionHandle, ScaleID);
-	}
+        MapViewerControlObj *obj=handles[MapViewInstanceHandle];
+        if (!obj)
+                throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
+        obj->SetMapViewScale(SessionHandle, ScaleID);
+        //todo: manage the isminmax indicator
+        MapViewScaleChanged(MapViewInstanceHandle,ScaleID,GENIVI_MAPVIEWER_INVALID);
+    }
 
-	void
+    void
     SetMapViewScaleByDelta(const uint32_t& SessionHandle, const uint32_t& MapViewInstanceHandle, const int16_t& ScaleDelta)
-	{
-		MapViewerControlObj *obj=handles[MapViewInstanceHandle];
-		if (!obj)
-			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		obj->SetMapViewScaleByDelta(SessionHandle, ScaleDelta);
-	}
+    {
+        MapViewerControlObj *obj=handles[MapViewInstanceHandle];
+        if (!obj)
+                throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
+        obj->SetMapViewScaleByDelta(SessionHandle, ScaleDelta);
+        uint8_t current_scale;
+        DBusCommonAPIEnumeration is_min_max;
+        obj->GetMapViewScale(current_scale,is_min_max);
+        MapViewScaleChanged(MapViewInstanceHandle,current_scale,is_min_max);
+    }
 
 	void
     GetMapViewScale(const uint32_t& MapViewInstanceHandle, uint8_t& ScaleID, DBusCommonAPIEnumeration& IsMinMax)

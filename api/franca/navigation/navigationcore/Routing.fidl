@@ -21,7 +21,7 @@ interface Routing {
 		minor 0
 	}
 
-	enumeration CalculationStatus extends BasicEnum { //Base 0x0130
+	enumeration CalculationStatus extends BasicEnum { 
   		CALCULATION_OK				= 304
 		NO_POSITION					= 305		
 	}
@@ -32,7 +32,7 @@ interface Routing {
 		UNFULFILLED_PREFERENCE_MODE	= 308
 	}
 	
-	enumeration CostModel extends BasicEnum { //Base 0x0160
+	enumeration CostModel extends BasicEnum { 
 		FASTEST			= 352	
 		SHORTEST		= 353
 		ECOLOGICAL		= 354
@@ -43,7 +43,7 @@ interface Routing {
 		CHEAPEST		= 359
 	}
   
-	enumeration RoutePreferenceSource extends BasicEnum { //Base 0x0170
+	enumeration RoutePreferenceSource extends BasicEnum { 
 		FERRY				= 368
 		TOLL_ROADS			= 369
 		TUNNELS				= 370
@@ -52,7 +52,7 @@ interface Routing {
 		CRIME_AREAS			= 373	
 	} 	 	
   
- 	enumeration TransportationMeans extends BasicEnum { //Base 0x0180
+ 	enumeration TransportationMeans extends BasicEnum { 
 		BY_CAR						= 384 
 		ON_FOOT						= 385
 		LONG_RANGE_TRAINS			= 386
@@ -62,13 +62,13 @@ interface Routing {
 	}
 	
 	enumeration Schedule extends BasicEnum { 
-		ARRIVAL_TIME  		= 394
- 		ARRIVAL_DATE		= 395
-		DEPARTURE_TIME		= 396
-		DEPARTURE_DATE		= 397 
+		ARRIVAL_TIME  		= 394 //value of type UInt32, that represents the arrival time expressed in seconds since mid-night (UTC)
+ 		ARRIVAL_DATE		= 395 //value of type UInt32, that represents the arrival date expressed either as calendar date (the number of days since 1 Jan 2000) or as weekday. The weekday is expressed with values from 0 to 6 (0 = Saturday, 1 = Sunday, 2 = Monday, ..., 6 = Friday)
+		DEPARTURE_TIME		= 396 //value of type UInt32, that represents the departure time expressed in seconds since mid-night (UTC)
+		DEPARTURE_DATE		= 397 //value of type UInt32, that represents the departure date expressed either as calendar date (the number of days since 1 Jan 2000) or as weekday. The weekday is expressed with values from 0 to 6  (0 = Saturday, 1 = Sunday, 2 = Monday, ..., 6 = Friday)
 	}
 
-	enumeration PreferenceMode extends BasicEnum { //Base 0x0190
+	enumeration PreferenceMode extends BasicEnum { 
  		PROHIBIT		= 400
  		AVOID			= 401
  		USE				= 402
@@ -76,7 +76,7 @@ interface Routing {
  		IGNORE			= 404	
  	}
  	 	
-  	enumeration ConditionPreferenceSource extends BasicEnum { //Base 0x0200
+  	enumeration ConditionPreferenceSource extends BasicEnum { 
   		TRAFFIC_REALTIME	= 512
   	}
  	 	
@@ -119,10 +119,10 @@ interface Routing {
 	}
 	
 	enumeration RouteOverviewType extends Schedule  {
-		TOTAL_TIME			= 398
-		TOTAL_DISTANCE		= 399
+		TOTAL_TIME			= 398 //value of type UInt32, that represents the total time in seconds
+		TOTAL_DISTANCE		= 399 //value of type UInt32, that represents the total distance in m 
 	}
-	
+
 	union RouteOverviewItem {
 		UInt32 uValue
 	}
@@ -154,27 +154,29 @@ interface Routing {
 		START_LATITUDE			= 321 //value of type Double, that expresses the latitude of the starting point in format %3.6f. Range [-90:+90]. Example: 48.053250
 		END_LATITUDE			= 322 //value idem of START_LATITUDE, it can be omitted, if it coincides with the latitude of the start point of the next segment
 		START_LONGITUDE			= 323 //value of type Double, that expresses the longitude of the starting point in format %3.6f. Range [-180:+180]. Example: 8.321000
-		END_LONGITUDE			= 324 //
-		START_ALTITUDE			= 325 //
-		END_ALTITUDE			= 326 //
-		ROAD_NAME				= 327 //
-		DISTANCE				= 328 //
-		TIME					= 329 //
-		MANEUVER				= 330 //
-		INSTRUCTION				= 331 //
-        BORDER_CROSSING			= 332 //
-        ADDITIONAL_INFORMATION	= 333 // 
-		ROAD_NUMBER				= 334 //
-		START_OFFSET			= 335 //
-		INTERMEDIATE_POINTS		= 288 //
-        HIGHWAY_EXIT			= 116 //
-        SPEED 					= 164 //
+		END_LONGITUDE			= 324 //value of type Double, that expresses the longitude of the ending point in format %3.6f. Range [-180:+180]. Example: 8.321000
+		START_ALTITUDE			= 325 //value of type Int32, that expresses the altitude relative to the ground of the starting point in meters 
+		END_ALTITUDE			= 326 //value of type Int32, can be omitted, if it coincides with the altitude of the start point of the next segment
+		ROAD_NAME				= 327 //value of type String, that expresses the road name
+		DISTANCE				= 328 //value of type Double, that identifies distance to the next segment in meters
+		TIME					= 329 //value of type UInt16, that identifies time to travel to the next segment in seconds
+		MANEUVER				= 330 //value of type 'a(qqaq)', that identifies a pictogram that describes the next maneuver (OPTIONAL)
+		INSTRUCTION				= 331 //value of type String, that identifies the instruction to the user
+        BORDER_CROSSING			= 332 //value of type String, that contains information about border crossings
+        ADDITIONAL_INFORMATION	= 333 //value of type String, that contains additional information to the user (toll cost, ... ) 
+		ROAD_NUMBER				= 334 //value of type String, that expresses the road number
+		START_OFFSET			= 335 //value of type UInt32, that indicates the offset of the starting point in meters from the beginning of the route
+		INTERMEDIATE_POINTS		= 288 //value of type IntermediatePoint[], that expresses an array of intermediate points
+        HIGHWAY_EXIT			= 116 //value of type String, that in case the road segment ends with a highway exit, it expresses the highway exit number
+        SPEED 					= 164 //value of type UInt16, that identifies speed limit on the current segment
+        TIME_ZONE				      //value of type 'n', that indicates the time zone of the current segment. It is expressed as the time difference from the UTC in minutes
+		DAYLIGHT_SAVING_TIME          //value of type 'n', that indicates the daylight saving time of the current segment. It is expressed as the time difference from the UTC in minutes
 	}
 
 	//TODO: Incomplete
 	union RouteSegmentItem {
 		Double doubleValue // LATITUDE, LONGITUDE, ALTITUDE
-		IntermediatePoint[] intermediatePoints
+		IntermediatePoint[] intermediatePoints //Note: an intermediate point is expressed as a struct(type,latitude,longitude,altitude), where type = enum(INVALID,HARD_POINT,SOFT_POINT, ... )
 		String stringValue // ROAD_NUMBER
 		UInt8[] linkId
 		Int32 int32Value

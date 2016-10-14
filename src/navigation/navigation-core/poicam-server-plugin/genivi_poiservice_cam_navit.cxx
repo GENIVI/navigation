@@ -444,9 +444,13 @@ plugin_init(void)
     const std::string instancePOIContentAccess = "POIContentAccess";
     myServicePOIContentAccess = runtime->buildProxy<POIContentAccessProxy>(domain, instancePOIContentAccess);
 
-    while (!myServicePOIContentAccess->isAvailable()) {
+    uint8_t counter=0;
+    while (!myServicePOIContentAccess->isAvailable() && ++counter<100) {
         usleep(10);
     }
 
-    myServicePOIContentAccessModule->register_cam();
+    if (counter<100)
+        myServicePOIContentAccessModule->register_cam();
+    else
+        printf("NB: POIContentAccessModule not available\n");
 }

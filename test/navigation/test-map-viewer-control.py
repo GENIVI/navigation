@@ -121,7 +121,7 @@ MapViewerControl_interface.SetMapViewScaleByDelta( \
     dbus.UInt32(mapviewerhandle), \
     dbus.Int16(1))
 
-time.sleep(1)
+time.sleep(3)
 
 print 'Zoom in'
 MapViewerControl_interface.SetMapViewScaleByDelta( \
@@ -129,7 +129,7 @@ MapViewerControl_interface.SetMapViewScaleByDelta( \
     dbus.UInt32(mapviewerhandle), \
     dbus.Int16(1))
 
-time.sleep(1)
+time.sleep(3)
 
 print 'Zoom out'
 MapViewerControl_interface.SetMapViewScaleByDelta( \
@@ -137,7 +137,7 @@ MapViewerControl_interface.SetMapViewScaleByDelta( \
     dbus.UInt32(mapviewerhandle), \
     dbus.Int16(-1))
 
-time.sleep(1)
+time.sleep(3)
 
 print 'Zoom out'
 MapViewerControl_interface.SetMapViewScaleByDelta( \
@@ -145,15 +145,13 @@ MapViewerControl_interface.SetMapViewScaleByDelta( \
     dbus.UInt32(mapviewerhandle), \
     dbus.Int16(-1))
 
-time.sleep(1)
+time.sleep(3)
 
 MapViewerControl_interface.ReleaseMapViewInstance( \
   dbus.UInt32(sessionhandle), \
   dbus.UInt32(mapviewerhandle))
 
 session_interface.DeleteSession(sessionhandle)
-                                
-time.sleep(1)
 
 print '\nTest Finished\n'
 

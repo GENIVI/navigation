@@ -29,9 +29,11 @@
 
 import dbus
 import gobject
+import dbus.mainloop.glib
 import time
 
-#import pdb; pdb.set_trace()
+#import pdb; 
+#pdb.set_trace()
 
 #constants as defined in the Navigation API
 LATITUDE = 0x00a0
@@ -43,13 +45,56 @@ SPLIT_SCREEN = 0x0011
 #constants used by the script
 HORIZONTAL_SIZE = 800
 VERTICAL_SIZE = 480
+TIME_OUT = 10000
+MIN_SCALE = 0
+MAX_SCALE = 16
+
+def mapviewer_mapViewScaleChanged_handler(mapViewInstanceHandle,scale,isMinMax):
+    global g_scale
+    new_scale=int(scale)
+    print("Scale: "+str(new_scale))
+    if g_scale > new_scale and new_scale !=MIN_SCALE:
+        print("Zoom in")
+        g_scale=new_scale
+        MapViewerControl_interface.setMapViewScaleByDelta( \
+            dbus.UInt32(sessionhandle), \
+            dbus.UInt32(mapviewerhandle), \
+            dbus.Int16(1))
+    else:
+        if new_scale < MAX_SCALE:
+            print("Zoom out")
+            g_scale=new_scale
+            MapViewerControl_interface.setMapViewScaleByDelta( \
+                dbus.UInt32(sessionhandle), \
+                dbus.UInt32(mapviewerhandle), \
+                dbus.Int16(-1))
+        else:
+            print 'Test PASSED'
+            MapViewerControl_interface.releaseMapViewInstance( \
+                dbus.UInt32(sessionhandle), \
+                dbus.UInt32(mapviewerhandle))
+            session_interface.deleteSession(sessionhandle)
+            loop.quit()
+
+#timeout
+def timeout():
+    print 'Timeout Expired'
+    print '\nTest FAILED'
+    loop.quit()
 
 print '\n--------------------------'
 print 'MapViewerControl Test'
 print '--------------------------\n'
 
+if __name__ == '__main__':
+    dbus.mainloop.glib.DBusGMainLoop(set_as_default=True) 
+
 #connect to session bus
 bus = dbus.SessionBus()
+
+bus.add_signal_receiver(mapviewer_mapViewScaleChanged_handler, \
+                        dbus_interface = "org.genivi.navigation.mapviewer.MapViewerControl", \
+                        signal_name = "mapViewScaleChanged")
 
 session = bus.get_object('org.genivi.navigation.mapviewer.Session_Session','/Session')
 session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.mapviewer.Session')
@@ -118,49 +163,19 @@ ret=MapViewerControl_interface.getMapViewScale(dbus.UInt32(mapviewerhandle))
 print('Scale ID: '+str(int(ret[0])))
 print('MapScaleType: '+str(int(ret[1])))
 
-time.sleep(3)
-
-print 'Zoom in'
-MapViewerControl_interface.setMapViewScaleByDelta( \
-    dbus.UInt32(sessionhandle), \
-    dbus.UInt32(mapviewerhandle), \
-    dbus.Int16(1))
+g_scale=int(ret[0])
 
 time.sleep(3)
 
 print 'Zoom in'
-MapViewerControl_interface.setMapViewScaleByDelta( \
-    dbus.UInt32(sessionhandle), \
-    dbus.UInt32(mapviewerhandle), \
-    dbus.Int16(1))
+MapViewerControl_interface.setMapViewScaleByDelta(dbus.UInt32(sessionhandle), dbus.UInt32(mapviewerhandle), dbus.Int16(1))
 
-time.sleep(3)
+time.sleep(1)
 
-print 'Zoom out'
-MapViewerControl_interface.setMapViewScaleByDelta( \
-    dbus.UInt32(sessionhandle), \
-    dbus.UInt32(mapviewerhandle), \
-    dbus.Int16(-1))
-
-time.sleep(3)
-
-print 'Zoom out'
-MapViewerControl_interface.setMapViewScaleByDelta( \
-    dbus.UInt32(sessionhandle), \
-    dbus.UInt32(mapviewerhandle), \
-    dbus.Int16(-1))
-
-time.sleep(3)
-
-MapViewerControl_interface.releaseMapViewInstance( \
-  dbus.UInt32(sessionhandle), \
-  dbus.UInt32(mapviewerhandle))
-
-session_interface.deleteSession(sessionhandle)
-                                
-
-print '\nTest Finished\n'
-
+#main loop 
+gobject.timeout_add(TIME_OUT, timeout)
+loop = gobject.MainLoop()
+loop.run()
 
 
 
