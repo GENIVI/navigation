@@ -1,0 +1,3 @@
+#!/bin/sh
+echo 'kill navit'
+kill -9 `ps -ef | grep navit | grep -v grep | awk '{print $2}'`

@@ -47,14 +47,16 @@ HORIZONTAL_SIZE = 800
 VERTICAL_SIZE = 480
 TIME_OUT = 10000
 MIN_SCALE = 0
-MAX_SCALE = 16
+MAX_SCALE = 21
 
 def mapviewer_mapViewScaleChanged_handler(mapViewInstanceHandle,scale,isMinMax):
     global g_scale
     new_scale=int(scale)
     print("Scale: "+str(new_scale))
+    print('Is min max: '+str(int(isMinMax)))
     if g_scale > new_scale and new_scale !=MIN_SCALE:
         print("Zoom in")
+#        pdb.set_trace()
         g_scale=new_scale
         MapViewerControl_interface.setMapViewScaleByDelta( \
             dbus.UInt32(sessionhandle), \
@@ -160,8 +162,8 @@ if round(alt1,4) != round(alt2,4) :
     print '\nTest Failed:' + str(round(alt1,4)) + '!=' + str(round(alt2,4))  + '\n'
 
 ret=MapViewerControl_interface.getMapViewScale(dbus.UInt32(mapviewerhandle))
-print('Scale ID: '+str(int(ret[0])))
-print('MapScaleType: '+str(int(ret[1])))
+print('Scale: '+str(int(ret[0])))
+print('Is min max: '+str(int(ret[1])))
 
 g_scale=int(ret[0])
 

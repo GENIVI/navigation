@@ -153,6 +153,8 @@ set -e
 echo "the graphic for navit is based on sdl"
 export NAVIT_GRAPHICS='sdl'
 
+./kill_navit &
+
 cd $BIN_DIR
 
 if [ "$enhpos" = 1 ]

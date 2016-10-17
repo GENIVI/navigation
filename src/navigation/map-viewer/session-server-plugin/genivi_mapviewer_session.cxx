@@ -94,7 +94,8 @@ class  SessionServerStub : public SessionStubDefault
         dbg(lvl_debug,"enter\n");
         if (!mp_handles[_sessionHandle])
            _error = Session::deleteSessionError::SESSION_ERROR_SESSIONNOTAVAILABLE;
-        delete(mp_handles[_sessionHandle]);
+        else
+            delete(mp_handles[_sessionHandle]);
         mp_handles[_sessionHandle]=NULL;
         fireSessionDeletedEvent(_sessionHandle);
         _reply(_error);
