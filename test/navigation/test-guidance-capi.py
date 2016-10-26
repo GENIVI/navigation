@@ -83,9 +83,7 @@ def routing_routeCalculationSuccessful_handler(routeHandle,unfullfilledPreferenc
     h, m = divmod(m, 60)
     print "Total Time: %d:%02d:%02d" % (h, m, s)
     #get route segments     GetRouteSegments(const uint32_t& routeHandle, const int16_t& detailLevel, const std::vector< DBusCommonAPIEnumeration >& valuesToReturn, const uint32_t& numberOfSegments, const uint32_t& offset, uint32_t& totalNumberOfSegments, std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > >& routeSegments)
-    valuesToReturn = [dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_DISTANCE),
-    dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_TIME),
-    dbus.Int32(GENIVI_NAVIGATIONCORE_ROAD_NAME),
+    valuesToReturn = [dbus.Int32(GENIVI_NAVIGATIONCORE_ROAD_NAME),
     dbus.Int32(GENIVI_NAVIGATIONCORE_START_LATITUDE),
     dbus.Int32(GENIVI_NAVIGATIONCORE_END_LATITUDE),
     dbus.Int32(GENIVI_NAVIGATIONCORE_START_LONGITUDE),
@@ -270,50 +268,50 @@ if __name__ == '__main__':
 bus = dbus.SessionBus()
 
 bus.add_signal_receiver(routing_routeCalculationProgressUpdate_handler, \
-                        dbus_interface = "org.genivi.navigation.navigationcore.Routing", \
+                        dbus_interface = "org.genivi.navigation.navigationcore.Routing.v4_0", \
                         signal_name = "routeCalculationProgressUpdate")
 
 bus.add_signal_receiver(routing_routeCalculationSuccessful_handler, \
-                        dbus_interface = "org.genivi.navigation.navigationcore.Routing", \
+                        dbus_interface = "org.genivi.navigation.navigationcore.Routing.v4_0", \
                         signal_name = "routeCalculationSuccessful")
 
 bus.add_signal_receiver(routing_routeDeleted_handler, \
-                        dbus_interface = "org.genivi.navigation.navigationcore.Routing", \
+                        dbus_interface = "org.genivi.navigation.navigationcore.Routing.v4_0", \
                         signal_name = "routeDeleted")
 
 bus.add_signal_receiver(session_sessionDeleted_handler, \
-                        dbus_interface = "org.genivi.navigation.navigationcore.Session", \
+                        dbus_interface = "org.genivi.navigation.navigationcore.Session.v4_0", \
                         signal_name = "sessionDeleted")
 
 bus.add_signal_receiver(guidance_guidanceStatusChanged_handler, \
-                        dbus_interface = "org.genivi.navigation.navigationcore.Guidance", \
+                        dbus_interface = "org.genivi.navigation.navigationcore.Guidance.v4_0", \
                         signal_name = "guidanceStatusChanged")
 
 bus.add_signal_receiver(guidance_positionOnRouteChanged_handler, \
-                        dbus_interface = "org.genivi.navigation.navigationcore.Guidance", \
+                        dbus_interface = "org.genivi.navigation.navigationcore.Guidance.v4_0", \
                         signal_name = "positionOnRouteChanged")
 
 bus.add_signal_receiver(mapmatchedposition_simulationStatusChanged_handler, \
-                        dbus_interface = "org.genivi.navigation.navigationcore.MapMatchedPosition", \
+                        dbus_interface = "org.genivi.navigation.navigationcore.MapMatchedPosition.v4_0", \
                         signal_name = "simulationStatusChanged")
 
-navigationcore_session_obj = bus.get_object('org.genivi.navigation.navigationcore.Session_Session','/Session')
-g_navigationcore_session_interface = dbus.Interface(navigationcore_session_obj, dbus_interface='org.genivi.navigation.navigationcore.Session')
+navigationcore_session_obj = bus.get_object('org.genivi.navigation.navigationcore.Session.v4_0_Session','/Session')
+g_navigationcore_session_interface = dbus.Interface(navigationcore_session_obj, dbus_interface='org.genivi.navigation.navigationcore.Session.v4_0')
 
-routing_obj = bus.get_object('org.genivi.navigation.navigationcore.Routing_Routing','/Routing')
-g_routing_interface = dbus.Interface(routing_obj, dbus_interface='org.genivi.navigation.navigationcore.Routing')
+routing_obj = bus.get_object('org.genivi.navigation.navigationcore.Routing.v4_0_Routing','/Routing')
+g_routing_interface = dbus.Interface(routing_obj, dbus_interface='org.genivi.navigation.navigationcore.Routing.v4_0')
 
-guidance_obj = bus.get_object('org.genivi.navigation.navigationcore.Guidance_Guidance','/Guidance')
-g_guidance_interface = dbus.Interface(guidance_obj, dbus_interface='org.genivi.navigation.navigationcore.Guidance')
+guidance_obj = bus.get_object('org.genivi.navigation.navigationcore.Guidance.v4_0_Guidance','/Guidance')
+g_guidance_interface = dbus.Interface(guidance_obj, dbus_interface='org.genivi.navigation.navigationcore.Guidance.v4_0')
 
-mapviewer_session_obj = bus.get_object('org.genivi.navigation.mapviewer.Session_Session','/Session')
-g_mapviewer_session_interface = dbus.Interface(mapviewer_session_obj, dbus_interface='org.genivi.navigation.mapviewer.Session')
+mapviewer_session_obj = bus.get_object('org.genivi.navigation.mapviewer.Session.v4_0_Session','/Session')
+g_mapviewer_session_interface = dbus.Interface(mapviewer_session_obj, dbus_interface='org.genivi.navigation.mapviewer.Session.v4_0')
 
-g_mapviewercontrol_obj = bus.get_object('org.genivi.navigation.mapviewer.MapViewerControl_MapViewerControl','/MapViewerControl')
-g_mapviewercontrol_interface = dbus.Interface(g_mapviewercontrol_obj, dbus_interface='org.genivi.navigation.mapviewer.MapViewerControl')
+g_mapviewercontrol_obj = bus.get_object('org.genivi.navigation.mapviewer.MapViewerControl.v4_0_MapViewerControl','/MapViewerControl')
+g_mapviewercontrol_interface = dbus.Interface(g_mapviewercontrol_obj, dbus_interface='org.genivi.navigation.mapviewer.MapViewerControl.v4_0')
 
-g_mapmatchedposition_obj = bus.get_object('org.genivi.navigation.navigationcore.MapMatchedPosition_MapMatchedPosition','/MapMatchedPosition')
-g_mapmatchedposition_interface = dbus.Interface(g_mapmatchedposition_obj, dbus_interface='org.genivi.navigation.navigationcore.MapMatchedPosition')
+g_mapmatchedposition_obj = bus.get_object('org.genivi.navigation.navigationcore.MapMatchedPosition.v4_0_MapMatchedPosition','/MapMatchedPosition')
+g_mapmatchedposition_interface = dbus.Interface(g_mapmatchedposition_obj, dbus_interface='org.genivi.navigation.navigationcore.MapMatchedPosition.v4_0')
 
 #get navigationcore session handle
 ret = g_navigationcore_session_interface.createSession(dbus.String("test guidance"))

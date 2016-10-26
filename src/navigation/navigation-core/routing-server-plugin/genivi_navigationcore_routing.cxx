@@ -405,7 +405,7 @@ class  RoutingServerStub : public RoutingStubDefault
      *   starting from the one closest to the current position to the one closest to
      *   the destination
      */
-    void getRouteSegments(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _routeHandle, int16_t _detailLevel, std::vector<Routing::RouteSegmentType> _valuesToReturn, uint32_t _numberOfSegments, uint32_t _offset, getRouteSegmentsReply_t _reply){
+    void getRouteSegments(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _routeHandle, int16_t _detailLevel, std::vector< Routing::RouteSegmentType > _valuesToReturn, uint32_t _numberOfSegments, uint32_t _offset, getRouteSegmentsReply_t _reply){
         dbg(lvl_debug,"enter\n");
         uint32_t _totalNumberOfSegments;
         std::vector<Routing::RouteSegment> _routeSegments;

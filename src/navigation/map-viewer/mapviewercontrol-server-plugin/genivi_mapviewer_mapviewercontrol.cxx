@@ -344,16 +344,19 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
     void createMapViewInstance(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, MapViewerControl::Dimension _mapViewSize, MapViewerControl::MapViewType _mapViewType, createMapViewInstanceReply_t _reply)
     {
         MapViewerControl::createMapViewInstanceError _error = MapViewerControl::createMapViewInstanceError::OK;
+        NavigationTypes::Handle  _mapViewInstanceHandle=0;
         dbg(lvl_debug,"enter\n");
         if (_mapViewType != MapViewerControl::MapViewType::MAIN_MAP)
             _error = MapViewerControl::createMapViewInstanceError::MAPVIEWERCONTROL_ERROR_NOMOREMAPVIEWINSTANCEHANDLES;
-        NavigationTypes::Handle _mapViewInstanceHandle=FIRST_SESSION_HANDLE;
-        while ((mp_handles.count(_mapViewInstanceHandle)>0 ) && (mp_handles[_mapViewInstanceHandle] != NULL)) {
-            _mapViewInstanceHandle++;
-            if (_mapViewInstanceHandle == MAX_SESSION_HANDLE)
-                _error = MapViewerControl::createMapViewInstanceError::MAPVIEWERCONTROL_ERROR_NOMOREMAPVIEWINSTANCEHANDLES;
+        else {
+            _mapViewInstanceHandle=FIRST_SESSION_HANDLE;
+            while ((mp_handles.count(_mapViewInstanceHandle)>0 ) && (mp_handles[_mapViewInstanceHandle] != NULL)) {
+                _mapViewInstanceHandle++;
+                if (_mapViewInstanceHandle == MAX_SESSION_HANDLE)
+                    _error = MapViewerControl::createMapViewInstanceError::MAPVIEWERCONTROL_ERROR_NOMOREMAPVIEWINSTANCEHANDLES;
+            }
+            mp_handles[_mapViewInstanceHandle]=new MapViewerControlObj(this, _mapViewInstanceHandle, _mapViewSize);
         }
-        mp_handles[_mapViewInstanceHandle]=new MapViewerControlObj(this, _mapViewInstanceHandle, _mapViewSize);
         _reply(_error,_mapViewInstanceHandle);
 	}
 
@@ -364,11 +367,13 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
     void releaseMapViewInstance(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, releaseMapViewInstanceReply_t _reply)
 	{
         MapViewerControl::releaseMapViewInstanceError _error = MapViewerControl::releaseMapViewInstanceError::OK;
-        if (mp_handles.find(_mapViewInstanceHandle) != mp_handles.end())
+        std::map<uint32_t, MapViewerControlObj *>::iterator iter = mp_handles.find(_mapViewInstanceHandle);
+        if (iter != mp_handles.end())
         {
             MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
-            delete(obj);
-            mp_handles[_mapViewInstanceHandle]=NULL;
+            delete(obj); //delete the navit mapviewer instance
+            //and remove the handle from the dictionary too
+            mp_handles.erase(iter);
         }
         else {
            _error = MapViewerControl::releaseMapViewInstanceError::MAPVIEWERCONTROL_ERROR_MAPVIEWINSTANCENOTAVAILABLE;
@@ -382,11 +387,11 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
      *   set using CreateMapViewInstance
      */
     void getMapViewType(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, getMapViewTypeReply_t _reply){
-        MapViewerControl::MapViewType _mapViewType;
+        MapViewerControl::MapViewType _mapViewType=MapViewerControl::MapViewType::INVALID;
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetMapViewType(_mapViewType);
+        else obj->GetMapViewType(_mapViewType);
         _reply(_mapViewType);
 
     }
@@ -408,7 +413,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetTargetPoint(_sessionHandle, _targetPoint);
+        else obj->SetTargetPoint(_sessionHandle, _targetPoint);
         _reply();
     }
 
@@ -420,7 +425,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetTargetPoint(_targetPoint);
+        else obj->GetTargetPoint(_targetPoint);
         _reply(_targetPoint);
 
     }
@@ -432,7 +437,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetFollowCarMode(_sessionHandle, _followCarMode);
+        else obj->SetFollowCarMode(_sessionHandle, _followCarMode);
         _reply();
     }
 
@@ -440,11 +445,11 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
      * description: getFollowCarMode = This method returns the current FollowCar-mode
      */
     void getFollowCarMode(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, getFollowCarModeReply_t _reply){
-        bool _followCarMode;
+        bool _followCarMode=false;
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetFollowCarMode(_followCarMode);
+        else obj->GetFollowCarMode(_followCarMode);
         _reply(_followCarMode);
 
     }
@@ -477,7 +482,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetCameraHeadingAngle(_sessionHandle, _heading);
+        else obj->SetCameraHeadingAngle(_sessionHandle, _heading);
         _reply();
     }
 
@@ -497,7 +502,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetCameraHeadingTrackUp(_sessionHandle);
+        else obj->SetCameraHeadingTrackUp(_sessionHandle);
         _reply();
     }
 
@@ -515,7 +520,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetCameraTiltAngle(_sessionHandle, _tilt);
+        else obj->SetCameraTiltAngle(_sessionHandle, _tilt);
         _reply();
     }
 
@@ -527,7 +532,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetCameraTiltAngle(_tilt);
+        else obj->GetCameraTiltAngle(_tilt);
         _reply(_tilt);
 
     }
@@ -539,7 +544,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetCameraRollAngle(_sessionHandle, _roll);
+        else obj->SetCameraRollAngle(_sessionHandle, _roll);
         _reply();
     }
 
@@ -551,7 +556,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetCameraRollAngle(_roll);
+        else obj->GetCameraRollAngle(_roll);
         _reply(_roll);
 
     }
@@ -564,7 +569,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetCameraDistanceFromTargetPoint(_sessionHandle, _distance);
+        else obj->SetCameraDistanceFromTargetPoint(_sessionHandle, _distance);
         _reply();
     }
 
@@ -573,11 +578,11 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
      *   distance from the target point
      */
     void getCameraDistanceFromTargetPoint(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, getCameraDistanceFromTargetPointReply_t _reply){
-        uint32_t _distance;
+        uint32_t _distance=0;
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetCameraDistanceFromTargetPoint(_distance);
+        else obj->GetCameraDistanceFromTargetPoint(_distance);
         _reply(_distance);
     }
 
@@ -625,7 +630,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetCameraHeight(_sessionHandle, _height);
+        else obj->SetCameraHeight(_sessionHandle, _height);
         _reply();
     }
 
@@ -637,7 +642,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetCameraHeight(_height);
+        else obj->GetCameraHeight(_height);
         _reply(_height);
     }
 
@@ -648,7 +653,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetMapViewPerspective(_sessionHandle, _perspective);
+        else obj->SetMapViewPerspective(_sessionHandle, _perspective);
         _reply();
     }
 
@@ -656,11 +661,11 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
      * description: getMapViewPerspective = This method returns the current map perspective
      */
     void getMapViewPerspective(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, getMapViewPerspectiveReply_t _reply){
-        MapViewerControl::MapPerspective _perspective;
+        MapViewerControl::MapPerspective _perspective=MapViewerControl::MapPerspective::INVALID;
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetMapViewPerspective(_perspective);
+        else obj->GetMapViewPerspective(_perspective);
         _reply(_perspective);
     }
 
@@ -704,7 +709,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetScaleList(_scaleList);
+        else obj->GetScaleList(_scaleList);
         _reply(_scaleList);
     }
 
@@ -716,9 +721,13 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetMapViewScale(_sessionHandle, _scaleID);
-        //todo: manage the isminmax indicator
-        fireMapViewScaleChangedEvent(_mapViewInstanceHandle,_scaleID,MapViewerControl::MapScaleType::INVALID);
+        else  {
+            obj->SetMapViewScale(_sessionHandle, _scaleID);
+            uint8_t current_scale;
+            MapViewerControl::MapScaleType is_min_max;
+            obj->GetMapViewScale(current_scale,is_min_max);
+            fireMapViewScaleChangedEvent(_mapViewInstanceHandle,current_scale,is_min_max);
+        }
         _reply();
     }
 
@@ -730,11 +739,13 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetMapViewScaleByDelta(_sessionHandle, _scaleDelta);
-        uint8_t current_scale;
-        MapViewerControl::MapScaleType is_min_max;
-        obj->GetMapViewScale(current_scale,is_min_max);
-        fireMapViewScaleChangedEvent(_mapViewInstanceHandle,current_scale,is_min_max);
+        else {
+            obj->SetMapViewScaleByDelta(_sessionHandle, _scaleDelta);
+            uint8_t current_scale;
+            MapViewerControl::MapScaleType is_min_max;
+            obj->GetMapViewScale(current_scale,is_min_max);
+            fireMapViewScaleChangedEvent(_mapViewInstanceHandle,current_scale,is_min_max);
+        }
         _reply();
     }
 
@@ -750,12 +761,12 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
      * description: getMapViewScale = This method returns the currently used map scale
      */
     void getMapViewScale(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, getMapViewScaleReply_t _reply){
-        uint8_t _scaleID;
-        MapViewerControl::MapScaleType _isMinMax;
+        uint8_t _scaleID=0;
+        MapViewerControl::MapScaleType _isMinMax=MapViewerControl::MapScaleType::INVALID;
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetMapViewScale(_scaleID, _isMinMax);
+        else obj->GetMapViewScale(_scaleID, _isMinMax);
         _reply(_scaleID,_isMinMax);
     }
 
@@ -766,7 +777,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetMapViewBoundingBox(_sessionHandle, _boundingBox);
+        else obj->SetMapViewBoundingBox(_sessionHandle, _boundingBox);
         _reply();
     }
 
@@ -779,7 +790,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetMapViewBoundingBox(_boundingBox);
+        else obj->GetMapViewBoundingBox(_boundingBox);
         _reply(_boundingBox);
     }
 
@@ -807,10 +818,12 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        if (_pixelCoordinates.size())
-        {
-            pixel = _pixelCoordinates.at(0);
-            obj->SetMapViewPan(_sessionHandle, _panningAction, pixel);
+        else {
+            if (_pixelCoordinates.size())
+            {
+                pixel = _pixelCoordinates.at(0);
+                obj->SetMapViewPan(_sessionHandle, _panningAction, pixel);
+            }
         }
         _reply();
     }
@@ -824,7 +837,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetMapViewPan(_valueToReturn, pixel); //limited to one pixel coordinate
+        else obj->GetMapViewPan(_valueToReturn, pixel); //limited to one pixel coordinate
         _pixelCoordinates.push_back(pixel);
         _reply(_pixelCoordinates);
     }
@@ -836,7 +849,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetMapViewRotation(_sessionHandle, _rotationAngle, _rotationAnglePerSecond);
+        else obj->SetMapViewRotation(_sessionHandle, _rotationAngle, _rotationAnglePerSecond);
         _reply();
     }
 
@@ -845,12 +858,12 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
      *   purposes
      */
     void getMapViewRotation(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, getMapViewRotationReply_t _reply){
-        int32_t _rotationAngle;
-        int32_t _rotationAnglePerFrame;
+        int32_t _rotationAngle=0;
+        int32_t _rotationAnglePerFrame=0;
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetMapViewRotation(_rotationAngle, _rotationAnglePerFrame);
+        else obj->GetMapViewRotation(_rotationAngle, _rotationAnglePerFrame);
         _reply(_rotationAngle,_rotationAnglePerFrame);
     }
 
@@ -907,7 +920,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->DisplayRoute(_sessionHandle, _routeHandle, _highlighted);
+        else obj->DisplayRoute(_sessionHandle, _routeHandle, _highlighted);
         _reply();
     }
 
@@ -918,7 +931,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->HideRoute(_sessionHandle, _routeHandle);
+        else obj->HideRoute(_sessionHandle, _routeHandle);
         _reply();
     }
 
@@ -927,10 +940,10 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
      */
     void getDisplayedRoutes(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, getDisplayedRoutesReply_t _reply){
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
+        std::vector<MapViewerControl::DisplayedRoute> _displayedRoutes;
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        std::vector<MapViewerControl::DisplayedRoute> _displayedRoutes;
-        obj->GetDisplayedRoutes(_displayedRoutes);
+        else obj->GetDisplayedRoutes(_displayedRoutes);
         _reply(_displayedRoutes);
     }
 
@@ -985,7 +998,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetMapViewTheme(_sessionHandle, _mapViewTheme);
+        else obj->SetMapViewTheme(_sessionHandle, _mapViewTheme);
         _reply();
     }
 
@@ -994,11 +1007,11 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
      *   instance
      */
     void getMapViewTheme(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, getMapViewThemeReply_t _reply){
-        MapViewerControl::MapTheme _mapViewTheme;
+        MapViewerControl::MapTheme _mapViewTheme=MapViewerControl::MapTheme::INVALID;
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetMapViewTheme(_mapViewTheme);
+        else obj->GetMapViewTheme(_mapViewTheme);
         _reply(_mapViewTheme);
 
     }
@@ -1016,10 +1029,10 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
      */
     void convertPixelCoordsToGeoCoords(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, std::vector<MapViewerControl::Pixel> _pixelCoordinates, convertPixelCoordsToGeoCoordsReply_t _reply){
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
+        std::vector< ::v4::org::genivi::navigation::NavigationTypes::Coordinate2D> _geoCoordinates;
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        std::vector< ::v4::org::genivi::navigation::NavigationTypes::Coordinate2D> _geoCoordinates;
-        obj->ConvertPixelCoordsToGeoCoords(_sessionHandle, _pixelCoordinates, _geoCoordinates);
+        else obj->ConvertPixelCoordsToGeoCoords(_sessionHandle, _pixelCoordinates, _geoCoordinates);
         _reply(_geoCoordinates);
     }
 
@@ -1029,10 +1042,10 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
      */
     void convertGeoCoordsToPixelCoords(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, std::vector< ::v4::org::genivi::navigation::NavigationTypes::Coordinate2D> _geoCoordinates, convertGeoCoordsToPixelCoordsReply_t _reply){
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
+        std::vector<MapViewerControl::Pixel> _pixelCoordinates;
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        std::vector<MapViewerControl::Pixel> _pixelCoordinates;
-        obj->ConvertGeoCoordsToPixelCoords(_sessionHandle, _geoCoordinates, _pixelCoordinates);
+        else obj->ConvertGeoCoordsToPixelCoords(_sessionHandle, _geoCoordinates, _pixelCoordinates);
         _reply(_pixelCoordinates);
     }
 
@@ -1116,12 +1129,13 @@ MapViewerControlObj::SetMapViewScale(NavigationTypes::Handle SessionHandle, uint
 void
 MapViewerControlObj::SetMapViewScaleByDelta(NavigationTypes::Handle SessionHandle, int16_t ScaleDelta)
 {
-	if (!ScaleDelta) 
+    if (!ScaleDelta)
 		throw DBus::ErrorInvalidArgs("ScaleDelta must not be 0");
-	if (ScaleDelta < 0) 
-		navit_zoom_out(m_navit.u.navit,1 << (-ScaleDelta),NULL);
-	else if (ScaleDelta > 0) 
-		navit_zoom_in(m_navit.u.navit,1 << ScaleDelta,NULL);
+    else {
+        if (ScaleDelta < 0)
+            navit_zoom_out(m_navit.u.navit,1 << (-ScaleDelta),NULL);
+        else navit_zoom_in(m_navit.u.navit,1 << ScaleDelta,NULL);
+    }
 }
 
 void
@@ -1490,7 +1504,7 @@ MapViewerControlObj::GetMapViewBoundingBox(NavigationTypes::Rectangle& boundingB
 void
 MapViewerControlObj::GetDisplayedRoutes(std::vector<MapViewerControl::DisplayedRoute>& displayedRoutes)
 {
-	int i;
+    size_t i;
 	for (i = 0 ; i < m_displayed_routes.size(); i++) {
         MapViewerControl::DisplayedRoute route;
         route.setRouteHandle(m_displayed_routes[i]->RouteHandle());

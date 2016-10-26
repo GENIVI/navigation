@@ -32,7 +32,7 @@ import gobject
 import dbus.mainloop.glib
 import time
 
-#import pdb; 
+import pdb 
 #pdb.set_trace()
 
 #constants as defined in the Navigation API
@@ -54,9 +54,9 @@ def mapviewer_mapViewScaleChanged_handler(mapViewInstanceHandle,scale,isMinMax):
     new_scale=int(scale)
     print("Scale: "+str(new_scale))
     print('Is min max: '+str(int(isMinMax)))
+    time.sleep(0.25)
     if g_scale > new_scale and new_scale !=MIN_SCALE:
         print("Zoom in")
-#        pdb.set_trace()
         g_scale=new_scale
         MapViewerControl_interface.setMapViewScaleByDelta( \
             dbus.UInt32(sessionhandle), \
@@ -95,11 +95,11 @@ if __name__ == '__main__':
 bus = dbus.SessionBus()
 
 bus.add_signal_receiver(mapviewer_mapViewScaleChanged_handler, \
-                        dbus_interface = "org.genivi.navigation.mapviewer.MapViewerControl", \
+                        dbus_interface = "org.genivi.navigation.mapviewer.MapViewerControl.v4_0", \
                         signal_name = "mapViewScaleChanged")
 
-session = bus.get_object('org.genivi.navigation.mapviewer.Session_Session','/Session')
-session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.mapviewer.Session')
+session = bus.get_object('org.genivi.navigation.mapviewer.Session.v4_0_Session','/Session')
+session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.mapviewer.Session.v4_0')
 
 #get session handle
 ret = session_interface.createSession(dbus.String('test mapviewer'))
@@ -112,8 +112,8 @@ print 'Session status: ' + str(sessionstatus)
 sessionlist = session_interface.getAllSessions();
 print 'Active sessions = ' + str(len(sessionlist))
 
-MapViewerControl_obj = bus.get_object('org.genivi.navigation.mapviewer.MapViewerControl_MapViewerControl','/MapViewerControl')
-MapViewerControl_interface = dbus.Interface(MapViewerControl_obj, dbus_interface='org.genivi.navigation.mapviewer.MapViewerControl')
+MapViewerControl_obj = bus.get_object('org.genivi.navigation.mapviewer.MapViewerControl.v4_0_MapViewerControl','/MapViewerControl')
+MapViewerControl_interface = dbus.Interface(MapViewerControl_obj, dbus_interface='org.genivi.navigation.mapviewer.MapViewerControl.v4_0')
 
 #get mapviewer handle
 ret = MapViewerControl_interface.createMapViewInstance( \
@@ -121,6 +121,7 @@ ret = MapViewerControl_interface.createMapViewInstance( \
   dbus.Struct((dbus.UInt16(HORIZONTAL_SIZE),dbus.UInt16(VERTICAL_SIZE))), \
   dbus.Int32(MAIN_MAP))
 mapviewerhandle=ret[1]
+
 print 'MapView handle: ' + str(mapviewerhandle)
 
 # Bern
@@ -167,12 +168,10 @@ print('Is min max: '+str(int(ret[1])))
 
 g_scale=int(ret[0])
 
-time.sleep(3)
+time.sleep(0.25)
 
 print 'Zoom in'
 MapViewerControl_interface.setMapViewScaleByDelta(dbus.UInt32(sessionhandle), dbus.UInt32(mapviewerhandle), dbus.Int16(1))
-
-time.sleep(1)
 
 #main loop 
 gobject.timeout_add(TIME_OUT, timeout)

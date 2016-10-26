@@ -82,9 +82,7 @@ def routing_routeCalculationSuccessful_handler(routeHandle,unfullfilledPreferenc
     h, m = divmod(m, 60)
     print "Total Time: %d:%02d:%02d" % (h, m, s)
     #get route segments     GetRouteSegments(const uint32_t& routeHandle, const int16_t& detailLevel, const std::vector< DBusCommonAPIEnumeration >& valuesToReturn, const uint32_t& numberOfSegments, const uint32_t& offset, uint32_t& totalNumberOfSegments, std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > >& routeSegments)
-    valuesToReturn = [dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_DISTANCE),
-    dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_TIME),
-    dbus.Int32(GENIVI_NAVIGATIONCORE_ROAD_NAME),
+    valuesToReturn = [dbus.Int32(GENIVI_NAVIGATIONCORE_ROAD_NAME),
     dbus.Int32(GENIVI_NAVIGATIONCORE_START_LATITUDE),
     dbus.Int32(GENIVI_NAVIGATIONCORE_END_LATITUDE),
     dbus.Int32(GENIVI_NAVIGATIONCORE_START_LONGITUDE),

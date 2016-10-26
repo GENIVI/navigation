@@ -329,15 +329,15 @@ def search_result_list_handler(handle, total_size, window_offset, window_size, r
 
 # add signal receiver
 bus.add_signal_receiver(search_status_handler,
-                        dbus_interface='org.genivi.navigation.navigationcore.LocationInput',
+                        dbus_interface='org.genivi.navigation.navigationcore.LocationInput.v4_0',
                         signal_name='searchStatus')
 
 bus.add_signal_receiver(search_result_list_handler,
-                        dbus_interface='org.genivi.navigation.navigationcore.LocationInput',
+                        dbus_interface='org.genivi.navigation.navigationcore.LocationInput.v4_0',
                         signal_name='searchResultList')
 
 bus.add_signal_receiver(content_updated_handler,
-                        dbus_interface='org.genivi.navigation.navigationcore.LocationInput',
+                        dbus_interface='org.genivi.navigation.navigationcore.LocationInput.v4_0',
                         signal_name='contentUpdated')
 
 
@@ -373,16 +373,16 @@ def startSearch(address_index):
     full_string_search(location_input_handle, target_search_string)
 
     
-session = bus.get_object('org.genivi.navigation.navigationcore.Session_Session', '/Session')
-session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.navigationcore.Session')
+session = bus.get_object('org.genivi.navigation.navigationcore.Session.v4_0_Session', '/Session')
+session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.navigationcore.Session.v4_0')
 
 # Get SessionHandle
 ret = session_interface.createSession(dbus.String('test location input'))
 session_handle=ret[1]
 print ('Session handle = ' + str(session_handle))
 
-location_input_obj = bus.get_object('org.genivi.navigation.navigationcore.LocationInput_LocationInput', '/LocationInput')
-location_input_interface = dbus.Interface(location_input_obj, dbus_interface='org.genivi.navigation.navigationcore.LocationInput')
+location_input_obj = bus.get_object('org.genivi.navigation.navigationcore.LocationInput.v4_0_LocationInput', '/LocationInput')
+location_input_interface = dbus.Interface(location_input_obj, dbus_interface='org.genivi.navigation.navigationcore.LocationInput.v4_0')
 # Get LocationInputHandle
 ret = location_input_interface.createLocationInput(dbus.UInt32(session_handle))
 location_input_handle = ret[1]

@@ -632,7 +632,7 @@ interface Routing {
 			**>
 			Int16 detailLevel
 			
-			RouteSegmentType [] valuesToReturn
+			RouteSegmentType[] valuesToReturn
 
 			<**
 				@description : numberOfSegments = number of segments to be retrieved

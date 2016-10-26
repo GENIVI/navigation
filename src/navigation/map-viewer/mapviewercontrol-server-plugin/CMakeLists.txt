@@ -28,29 +28,6 @@ set(CMAKE_CXX_FLAGS "-Wall -std=c++0x")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
-
-# DBus Path
-if(DBUS_LIB_PATH)
-  set(DBUS_INCLUDE_DIRS ${DBUS_LIB_PATH}/include/dbus-1.0 ${DBUS_LIB_PATH}/lib/dbus-1.0/include)
-  set(DBUS_LIBDIR ${DBUS_LIB_PATH}/lib)
-  set(DBUS_LIBRARIES ${DBUS_LIB_PATH}/lib/libdbus-1.so)
-else()
-  message(FATAL_ERROR "Please specify the path to your patched DBus library using -DDBUS_LIB_PATH=yourPath")
-endif()
-
-# Packages
-find_package(CommonAPI 3.1.5 REQUIRED)
-find_package(CommonAPI-DBus 3.1.5 REQUIRED)
-
-
-#pkg_check_modules(DBUS "dbus-1 >= 1.8.4") // #to be fixed, it doesn't work so the paths are set manually (see above)
-pkg_check_modules(COMMONAPI "CommonAPI >= 3.1.5")
-pkg_check_modules(COMMONAPI_DBUS "CommonAPI-DBus >= 3.1.5")
-pkg_check_modules(GOBJECT gobject-2.0)
-pkg_check_modules(GLIB REQUIRED glib-2.0)
-pkg_check_modules(DBUS_CPP_GLIB dbus-c++-glib-1)
-
-
 # Path to the generated files
 set(API_VERSION_MAJOR 4)
 set(API_VERSION "v${API_VERSION_MAJOR}")

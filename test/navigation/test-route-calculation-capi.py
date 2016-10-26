@@ -39,7 +39,8 @@ import argparse
 import sys
 import errno
 
-#import pdb;pdb.set_trace()
+import pdb;
+#pdb.set_trace()
 
 from pip import locations
 
@@ -110,9 +111,7 @@ def route_calculation_signals_handler(routeHandle, status, percentage):
         h, m = divmod(m, 60)
         print "Total Time: %d:%02d:%02d" % (h, m, s)
         #get route segments     GetRouteSegments(const uint32_t& routeHandle, const int16_t& detailLevel, const std::vector< DBusCommonAPIEnumeration >& valuesToReturn, const uint32_t& numberOfSegments, const uint32_t& offset, uint32_t& totalNumberOfSegments, std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > >& routeSegments)
-        valuesToReturn = [dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_DISTANCE),
-        dbus.Int32(GENIVI_NAVIGATIONCORE_TOTAL_TIME),
-        dbus.Int32(GENIVI_NAVIGATIONCORE_ROAD_NAME),
+        valuesToReturn = [dbus.Int32(GENIVI_NAVIGATIONCORE_ROAD_NAME),
         dbus.Int32(GENIVI_NAVIGATIONCORE_START_LATITUDE),
         dbus.Int32(GENIVI_NAVIGATIONCORE_END_LATITUDE),
         dbus.Int32(GENIVI_NAVIGATIONCORE_START_LONGITUDE),
@@ -121,7 +120,7 @@ def route_calculation_signals_handler(routeHandle, status, percentage):
         dbus.Int32(GENIVI_NAVIGATIONCORE_TIME),
         dbus.Int32(GENIVI_NAVIGATIONCORE_SPEED)]
         ret = g_routing_interface.getRouteSegments(dbus.UInt32(g_route_handle),dbus.Int16(0),dbus.Array(valuesToReturn),dbus.UInt32(500),dbus.UInt32(0))
-	print "Total number of segments: " + str(ret[0]) 
+        print "Total number of segments: " + str(ret[0]) 
         #len(ret[1]) is size
         #ret[1][0][GENIVI_NAVIGATIONCORE_START_LATITUDE] is the start latitude
 #        pdb.set_trace()
@@ -145,15 +144,15 @@ def route_deleted_signals_handler(routeHandle):
     print('Route handle deleted: '+str(routeHandle))
 
 bus.add_signal_receiver(route_calculation_signals_handler, \
-                        dbus_interface = "org.genivi.navigation.navigationcore.Routing", \
+                        dbus_interface = "org.genivi.navigation.navigationcore.Routing.v4_0", \
                         signal_name = "routeCalculationProgressUpdate")
 
 bus.add_signal_receiver(route_deleted_signals_handler, \
-                        dbus_interface = "org.genivi.navigation.navigationcore.Routing", \
+                        dbus_interface = "org.genivi.navigation.navigationcore.Routing.v4_0", \
                         signal_name = "routeDeleted")
 
 bus.add_signal_receiver(session_signals_handler, \
-                        dbus_interface = "org.genivi.navigation.navigationcore.Session", \
+                        dbus_interface = "org.genivi.navigation.navigationcore.Session.v4_0", \
                         signal_name = "sessionDeleted")
 
 #timeout
@@ -194,16 +193,16 @@ def launch_route_calculation(route):
     g_routing_interface.calculateRoute(dbus.UInt32(g_session_handle),dbus.UInt32(g_route_handle))
 
 
-session = bus.get_object('org.genivi.navigation.navigationcore.Session_Session','/Session')
-g_session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.navigationcore.Session')
+session = bus.get_object('org.genivi.navigation.navigationcore.Session.v4_0_Session','/Session')
+g_session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.navigationcore.Session.v4_0')
 
 #get session handle
 ret = g_session_interface.createSession(dbus.String("test route calculation"))
 g_session_handle=ret[1]
 print 'Session handle: ' + str(g_session_handle)
 
-routing_obj = bus.get_object('org.genivi.navigation.navigationcore.Routing_Routing','/Routing')
-g_routing_interface = dbus.Interface(routing_obj, dbus_interface='org.genivi.navigation.navigationcore.Routing')
+routing_obj = bus.get_object('org.genivi.navigation.navigationcore.Routing.v4_0_Routing','/Routing')
+g_routing_interface = dbus.Interface(routing_obj, dbus_interface='org.genivi.navigation.navigationcore.Routing.v4_0')
 
 g_current_route = 0
 launch_route_calculation(0)

@@ -170,15 +170,11 @@ print('Is min max: '+str(int(ret[1])))
 
 g_scale=int(ret[0])
 
-time.sleep(1)
-
 print 'Zoom in'
 MapViewerControl_interface.SetMapViewScaleByDelta( \
     dbus.UInt32(sessionhandle), \
     dbus.UInt32(mapviewerhandle), \
     dbus.Int16(1))
-
-time.sleep(1)
 
 #main loop 
 gobject.timeout_add(TIME_OUT, timeout)

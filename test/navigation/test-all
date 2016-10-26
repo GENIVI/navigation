@@ -1,0 +1,11 @@
+#!/bin/bash
+
+./test-location-input.py -l locations.xml
+sleep 2
+./test-route-calculation.py -r routes.xml
+sleep 2
+./test-address-input.py -l location.xml
+sleep 2
+./test-guidance.py -r route.xml
+sleep 2
+./test-map-viewer-control.py

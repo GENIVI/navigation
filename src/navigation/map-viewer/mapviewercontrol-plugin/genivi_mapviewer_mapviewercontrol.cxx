@@ -344,46 +344,54 @@ class  MapViewerControl
     CreateMapViewInstance(const uint32_t& sessionHandle, const ::DBus::Struct< uint16_t, uint16_t >& mapViewSize, const DBusCommonAPIEnumeration& mapViewType, int32_t& error, uint32_t& mapViewInstanceHandle)
 	{
         dbg(lvl_debug,"enter\n");
-		if (mapViewType != GENIVI_MAPVIEWER_MAIN_MAP) 
-			throw DBus::ErrorInvalidArgs("Unsupported mapViewType");
-        mapViewInstanceHandle=1;
-        while (handles[mapViewInstanceHandle]) {
-            mapViewInstanceHandle++;
-            if (mapViewInstanceHandle == 256)
-				throw DBus::ErrorLimitsExceeded("Out of mapviewinstance handles");
-		}
-        handles[mapViewInstanceHandle]=new MapViewerControlObj(this, mapViewInstanceHandle, mapViewSize);
         error=0; //not used
+        mapViewInstanceHandle=0;
+        if (mapViewType != GENIVI_MAPVIEWER_MAIN_MAP) {
+            throw DBus::ErrorInvalidArgs("Unsupported mapViewType");
+        } else {
+            mapViewInstanceHandle=1;
+            while (handles[mapViewInstanceHandle]) {
+                mapViewInstanceHandle++;
+                if (mapViewInstanceHandle == 256)
+                                    throw DBus::ErrorLimitsExceeded("Out of mapviewinstance handles");
+                    }
+            handles[mapViewInstanceHandle]=new MapViewerControlObj(this, mapViewInstanceHandle, mapViewSize);
+        }
     }
 
     int32_t
     ReleaseMapViewInstance(const uint32_t& SessionHandle, const uint32_t& MapViewInstanceHandle)
-	{
-		MapViewerControlObj *obj=handles[MapViewInstanceHandle];
-		if (!obj)
-			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		delete(obj);
-		handles[MapViewInstanceHandle]=NULL;
-        return(0); //not implemented yet
+    {
+        std::map<uint32_t, MapViewerControlObj *>::iterator iter = handles.find(MapViewInstanceHandle);
+        if (iter != handles.end())
+        {
+            MapViewerControlObj *obj=handles[MapViewInstanceHandle];
+            delete(obj); //delete the navit mapviewer instance
+            //and remove the handle from the dictionary too
+            handles.erase(iter);
+            return(0);
 	}
-
+        else {
+            return(1);
+        }
+    }
 	void
     SetMapViewPerspective(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const DBusCommonAPIEnumeration& perspective)
 	{
         MapViewerControlObj *obj=handles[mapViewInstanceHandle];
-		if (!obj)
-			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetMapViewPerspective(sessionHandle, perspective);
+            if (!obj)
+                throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
+            else obj->SetMapViewPerspective(sessionHandle, perspective);
 	}
 
     DBusCommonAPIEnumeration
     GetMapViewPerspective(const uint32_t& mapViewInstanceHandle)
 	{
-		uint16_t MapViewPerspectiveMode;
+                uint16_t MapViewPerspectiveMode=0;
         MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetMapViewPerspective(MapViewPerspectiveMode);
+        else obj->GetMapViewPerspective(MapViewPerspectiveMode);
 		return MapViewPerspectiveMode;
 	}
 
@@ -400,9 +408,11 @@ class  MapViewerControl
         MapViewerControlObj *obj=handles[MapViewInstanceHandle];
         if (!obj)
                 throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetMapViewScale(SessionHandle, ScaleID);
-        //todo: manage the isminmax indicator
-        MapViewScaleChanged(MapViewInstanceHandle,ScaleID,GENIVI_MAPVIEWER_INVALID);
+        else {
+            obj->SetMapViewScale(SessionHandle, ScaleID);
+            //todo: manage the isminmax indicator
+            MapViewScaleChanged(MapViewInstanceHandle,ScaleID,GENIVI_MAPVIEWER_INVALID);
+        }
     }
 
     void
@@ -411,11 +421,13 @@ class  MapViewerControl
         MapViewerControlObj *obj=handles[MapViewInstanceHandle];
         if (!obj)
                 throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->SetMapViewScaleByDelta(SessionHandle, ScaleDelta);
-        uint8_t current_scale;
-        DBusCommonAPIEnumeration is_min_max;
-        obj->GetMapViewScale(current_scale,is_min_max);
-        MapViewScaleChanged(MapViewInstanceHandle,current_scale,is_min_max);
+        else {
+            obj->SetMapViewScaleByDelta(SessionHandle, ScaleDelta);
+            uint8_t current_scale;
+            DBusCommonAPIEnumeration is_min_max;
+            obj->GetMapViewScale(current_scale,is_min_max);
+            MapViewScaleChanged(MapViewInstanceHandle,current_scale,is_min_max);
+        }
     }
 
 	void
@@ -424,7 +436,7 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[MapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetMapViewScale(ScaleID, IsMinMax);
+        else obj->GetMapViewScale(ScaleID, IsMinMax);
 	}
 
     void
@@ -434,10 +446,12 @@ class  MapViewerControl
         MapViewerControlObj *obj=handles[mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        if (pixelCoordinates.size())
-        {
-            pixel = pixelCoordinates.at(0);
-            obj->SetMapViewPan(sessionHandle, panningAction, pixel);
+        else {
+            if (pixelCoordinates.size())
+            {
+                pixel = pixelCoordinates.at(0);
+                obj->SetMapViewPan(sessionHandle, panningAction, pixel);
+            }
         }
     }
 
@@ -449,8 +463,9 @@ class  MapViewerControl
         MapViewerControlObj *obj=handles[mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetMapViewPan(valueToReturn, pixel); //limited to one pixel coordinate
+        else obj->GetMapViewPan(valueToReturn, pixel); //limited to one pixel coordinate
         pixelCoordinates.push_back(pixel);
+        return pixelCoordinates;
     }
 
 	void
@@ -459,7 +474,7 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[MapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		obj->DisplayRoute(SessionHandle, RouteHandle, highlighted);
+                else obj->DisplayRoute(SessionHandle, RouteHandle, highlighted);
 	}
 
 	void	
@@ -468,7 +483,7 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[MapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		obj->HideRoute(SessionHandle, RouteHandle);
+                else obj->HideRoute(SessionHandle, RouteHandle);
 	}
 
 	::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string >
@@ -485,11 +500,11 @@ class  MapViewerControl
     DBusCommonAPIEnumeration
     GetMapViewType(const uint32_t& mapViewInstanceHandle)
 	{
-		uint16_t ret;
+                uint16_t ret=0;
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetMapViewType(ret);
+        else obj->GetMapViewType(ret);
 		return ret;
 	}
 
@@ -505,7 +520,7 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		obj->SetTargetPoint(sessionHandle, targetPoint);
+                else obj->SetTargetPoint(sessionHandle, targetPoint);
 	}
 
     ::DBus::Struct< double, double, double >
@@ -515,7 +530,7 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetTargetPoint(ret);
+        else obj->GetTargetPoint(ret);
 		return ret;
 	}
 
@@ -525,17 +540,17 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		obj->SetFollowCarMode(sessionHandle, followCarMode);
+                else obj->SetFollowCarMode(sessionHandle, followCarMode);
 	}
 
 	bool
     GetFollowCarMode(const uint32_t& mapViewInstanceHandle)
 	{
-		bool followCarMode;
+                bool followCarMode=false;
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetFollowCarMode(followCarMode);
+        else obj->GetFollowCarMode(followCarMode);
 		return followCarMode;
 	}
 
@@ -557,7 +572,7 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		obj->SetCameraHeadingAngle(sessionHandle, heading);
+                else obj->SetCameraHeadingAngle(sessionHandle, heading);
 	}
 
 	void
@@ -572,17 +587,17 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		obj->SetCameraTiltAngle(sessionHandle, tilt);
+                else obj->SetCameraTiltAngle(sessionHandle, tilt);
 	}
 
 	int32_t
     GetCameraTiltAngle(const uint32_t& mapViewInstanceHandle)
 	{
-		double ret;
+                double ret=0;
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetCameraTiltAngle(ret);
+        else obj->GetCameraTiltAngle(ret);
 		return ret;
 	}
 
@@ -592,7 +607,7 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		obj->SetCameraRollAngle(sessionHandle, roll);
+                else obj->SetCameraRollAngle(sessionHandle, roll);
 	}
 
 	int32_t
@@ -612,18 +627,18 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		obj->SetCameraDistanceFromTargetPoint(sessionHandle, distance);
+                else obj->SetCameraDistanceFromTargetPoint(sessionHandle, distance);
 	}
 
 
     uint32_t
     GetCameraDistanceFromTargetPoint(const uint32_t& mapViewInstanceHandle)
     {
-        double ret;
+        double ret=0;
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetCameraDistanceFromTargetPoint(ret);
+        else obj->GetCameraDistanceFromTargetPoint(ret);
 		return ret;
 	}
 
@@ -651,17 +666,17 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		obj->SetCameraHeight(sessionHandle, height);
+                else obj->SetCameraHeight(sessionHandle, height);
 	}
 
 	uint32_t
     GetCameraHeight(const uint32_t& mapViewInstanceHandle)
 	{
-		double ret;
+                double ret=0;
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetCameraHeight(ret);
+        else obj->GetCameraHeight(ret);
 		return ret;
 	}
 
@@ -672,7 +687,7 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetScaleList(ret);
+        else obj->GetScaleList(ret);
 		return ret;
 	}
 
@@ -688,7 +703,7 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		obj->SetMapViewBoundingBox(sessionHandle, boundingBox);
+                else obj->SetMapViewBoundingBox(sessionHandle, boundingBox);
 	}
 
 	::DBus::Struct< ::DBus::Struct< double, double >, ::DBus::Struct< double, double > >
@@ -698,7 +713,7 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetMapViewBoundingBox(ret);
+        else obj->GetMapViewBoundingBox(ret);
 		return ret;
 	}
 
@@ -708,7 +723,7 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		obj->SetMapViewRotation(sessionHandle, rotationAngle, rotationAnglePerSecond);
+                else obj->SetMapViewRotation(sessionHandle, rotationAngle, rotationAnglePerSecond);
 	}
 
 	void
@@ -717,7 +732,7 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetMapViewRotation(rotationAngle, rotationAnglePerFrame);
+        else obj->GetMapViewRotation(rotationAngle, rotationAnglePerFrame);
 	}
 
 	void
@@ -777,11 +792,11 @@ class  MapViewerControl
     std::vector< ::DBus::Struct< uint32_t, bool > >
     GetDisplayedRoutes(const uint32_t& mapViewInstanceHandle)
 	{
-		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
+        std::vector< ::DBus::Struct< uint32_t, bool > >ret;
+                MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        std::vector< ::DBus::Struct< uint32_t, bool > >ret;
-        obj->GetDisplayedRoutes(ret);
+        else obj->GetDisplayedRoutes(ret);
 		return ret;
 	}
 
@@ -791,17 +806,17 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		obj->SetMapViewTheme(sessionHandle, mapViewTheme);
+                else obj->SetMapViewTheme(sessionHandle, mapViewTheme);
 	}
 
     DBusCommonAPIEnumeration
     GetMapViewTheme(const uint32_t& mapViewInstanceHandle)
 	{
-		uint16_t ret;
+                uint16_t ret=0;
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        obj->GetMapViewTheme(ret);
+        else obj->GetMapViewTheme(ret);
 		return ret;
 	}
 
@@ -814,22 +829,22 @@ class  MapViewerControl
 	std::vector< ::DBus::Struct< double, double > >
     ConvertPixelCoordsToGeoCoords(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const std::vector< ::DBus::Struct< uint16_t, uint16_t > >& pixelCoordinates)
 	{
-		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
+            std::vector< ::DBus::Struct< double, double > >ret;
+                MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		std::vector< ::DBus::Struct< double, double > >ret;
-		obj->ConvertPixelCoordsToGeoCoords(sessionHandle, pixelCoordinates, ret);
+                else obj->ConvertPixelCoordsToGeoCoords(sessionHandle, pixelCoordinates, ret);
 		return ret;
 	}
 
 	std::vector< ::DBus::Struct< uint16_t, uint16_t > >
     ConvertGeoCoordsToPixelCoords(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const std::vector< ::DBus::Struct< double, double > >& geoCoordinates)
 	{
-		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
+            std::vector< ::DBus::Struct< uint16_t, uint16_t > >ret;
+                MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		std::vector< ::DBus::Struct< uint16_t, uint16_t > >ret;
-		obj->ConvertGeoCoordsToPixelCoords(sessionHandle, geoCoordinates, ret);
+                else obj->ConvertGeoCoordsToPixelCoords(sessionHandle, geoCoordinates, ret);
 		return ret;
 	}
 
@@ -839,7 +854,7 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-		obj->SetCameraHeadingTrackUp(sessionHandle);
+                else obj->SetCameraHeadingTrackUp(sessionHandle);
 	}
 
 	void
