@@ -64,7 +64,7 @@ public:
 
     void getServerStatus();
 
-    void ConfigurationChanged(const std::vector< uint16_t >& changedSettings);
+    void ConfigurationChanged(const std::vector<POIServiceTypes::Settings> &changedSettings);
 
     void CategoriesRemoved(const std::vector< CommonTypes::CategoryID >& categories);
 
@@ -236,7 +236,7 @@ void contentManager::getServerStatus()
 
 }
 
-void contentManager::ConfigurationChanged(const std::vector< uint16_t >& changedSettings)
+void contentManager::ConfigurationChanged(const std::vector< POIServiceTypes::Settings >& changedSettings)
 {
     size_t index;
 
@@ -487,12 +487,12 @@ void populateWindow(GtkWidget *window,contentManager *clientContentManager)
     GtkWidget *button;
     GtkWidget *box;
 
-    gtk_window_set_title (GTK_WINDOW (window), "Poi Manager Client");
+    gtk_window_set_title(GTK_WINDOW (window), "Poi Manager Client");
 
     g_signal_connect (window, "delete-event",
               G_CALLBACK (deleteWindow), NULL);
 
-    gtk_container_set_border_width (GTK_CONTAINER (window), 10);
+    gtk_container_set_border_width(GTK_CONTAINER (window), 10);
 
     box = gtk_box_new(GTK_ORIENTATION_HORIZONTAL,5);
 
@@ -503,51 +503,51 @@ void populateWindow(GtkWidget *window,contentManager *clientContentManager)
     g_signal_connect (button, "clicked",
               G_CALLBACK (onCreateCategory), clientContentManager);
 
-    gtk_box_pack_start (GTK_BOX(box), button, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(box), button, TRUE, TRUE, 0);
 
-    gtk_widget_show (button);
+    gtk_widget_show(button);
 
-    button = gtk_button_new_with_label ("Delete category");
+    button = gtk_button_new_with_label("Delete category");
 
-    g_signal_connect (button, "clicked",
-              G_CALLBACK (onDeleteCategory), clientContentManager);
+    g_signal_connect(button, "clicked",
+              G_CALLBACK(onDeleteCategory), clientContentManager);
 
-    gtk_box_pack_start(GTK_BOX (box), button, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(box), button, TRUE, TRUE, 0);
 
-    gtk_widget_show (button);
+    gtk_widget_show(button);
 
-    gtk_widget_show (box);
+    gtk_widget_show(box);
 
-    button = gtk_button_new_with_label ("Create POI");
+    button = gtk_button_new_with_label("Create POI");
 
-    g_signal_connect (button, "clicked",
-              G_CALLBACK (onCreatePoi), clientContentManager);
+    g_signal_connect(button, "clicked",
+              G_CALLBACK(onCreatePoi), clientContentManager);
 
-    gtk_box_pack_start (GTK_BOX(box), button, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(box), button, TRUE, TRUE, 0);
 
-    gtk_widget_show (button);
+    gtk_widget_show(button);
 
-    button = gtk_button_new_with_label ("Delete POI");
+    button = gtk_button_new_with_label("Delete POI");
 
-    g_signal_connect (button, "clicked",
-              G_CALLBACK (onDeletePoi), clientContentManager);
+    g_signal_connect(button, "clicked",
+              G_CALLBACK(onDeletePoi), clientContentManager);
 
-    gtk_box_pack_start(GTK_BOX (box), button, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(box), button, TRUE, TRUE, 0);
 
-    gtk_widget_show (button);
+    gtk_widget_show(button);
 
-    button = gtk_button_new_with_label ("Search");
+    button = gtk_button_new_with_label("Search");
 
-    g_signal_connect (button, "clicked",
-              G_CALLBACK (onSearch), clientContentManager);
+    g_signal_connect(button, "clicked",
+              G_CALLBACK(onSearch), clientContentManager);
 
-    gtk_box_pack_start (GTK_BOX(box), button, TRUE, TRUE, 0);
+    gtk_box_pack_start(GTK_BOX(box), button, TRUE, TRUE, 0);
 
-    gtk_widget_show (button);
+    gtk_widget_show(button);
 
-    gtk_widget_show (box);
+    gtk_widget_show(box);
 
-    gtk_widget_show (window);
+    gtk_widget_show(window);
 }
 
 /**
@@ -560,12 +560,12 @@ void populateWindow(GtkWidget *window,contentManager *clientContentManager)
  */
 void print_usage (FILE* stream, int exit_code)
 {
-  fprintf (stream, "Use: %s options [database]\n",program_name);
-  fprintf (stream,
+  fprintf(stream, "Use: %s options [database]\n",program_name);
+  fprintf(stream,
            " -h --help               Display this message.\n"
            " -f --file database      Open the database.\n"
            " -t --test               Test.\n");
-  exit (exit_code);
+  exit(exit_code);
 }
 
 /**
@@ -613,12 +613,12 @@ int main(int  argc , char**  argv )
     program_name = argv[0];
 
     do {
-        next_option = getopt_long (argc, argv, short_options,
+        next_option = getopt_long(argc, argv, short_options,
                                   long_options, NULL);
-        switch (next_option)
+        switch(next_option)
         {
         case 'h':   /* -h --help */
-            print_usage (stdout, 0);
+            print_usage(stdout, 0);
             break;
         case 't':   /* -t --test */
 
@@ -626,10 +626,10 @@ int main(int  argc , char**  argv )
             clientContentManager = new contentManager(myProxy);
 
             // Create the interface panel
-            gtk_init (&argc, &argv);
+            gtk_init(&argc, &argv);
 
             // Create a new window
-            window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+            window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
 
             // Connect the client to the popup window (for feedback on signals)
             clientContentManager->connectPopupWindow(window);
@@ -641,7 +641,7 @@ int main(int  argc , char**  argv )
             myProxy->getCategoriesRemovedEvent().subscribe([&](const std::vector<CommonTypes::CategoryID>& categories) {
                 clientContentManager->CategoriesRemoved(categories);
             });
-            myProxy->getConfigurationChangedEvent().subscribe([&](const std::vector< uint16_t >& changedSettings) {
+            myProxy->getConfigurationChangedEvent().subscribe([&](const std::vector< POIServiceTypes::Settings >& changedSettings) {
                 clientContentManager->ConfigurationChanged(changedSettings);
             });
             myProxy->getPOIAddedEvent().subscribe([&](const std::vector< POIServiceTypes::POI_ID >& pois) {
@@ -663,11 +663,13 @@ int main(int  argc , char**  argv )
             // loop listening
             gtk_main();
 
+            delete clientContentManager;
+
             break;
         case 'f':   /* -f --file database*/
             database_filename = argv[2];
             if (!is_readable(database_filename))
-                print_usage (stderr, 1);
+                print_usage(stderr, 1);
             else
             {
                 // Manage the database content
@@ -675,15 +677,18 @@ int main(int  argc , char**  argv )
             }
             break;
         case '?':   /* Invalid option. */
-            print_usage (stderr, 1);
+            print_usage(stderr, 1);
             break;
         case -1:    /* End of options.  */
             break;
         default:    /* Error  */
-            print_usage (stderr, 1);
+            print_usage(stderr, 1);
         }
     }
     while (next_option != -1);
+
+    myProxy.reset();
+    runtime.reset();
 
     return EXIT_SUCCESS;
 }

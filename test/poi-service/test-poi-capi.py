@@ -30,12 +30,12 @@ import gobject
 import dbus.mainloop.glib
 import time
 
-import pdb;
+#import pdb;
 #pdb.set_trace()
 #constants as defined in the Navigation API
 GENIVI_Configuration_Settings_LOCALE = 37
-GENIVI_SearchStatusState_FINISHED = 1298
-GENIVI_SearchStatusState_NOT_STARTED = 1296
+GENIVI_SearchStatusState_FINISHED = 512
+GENIVI_SearchStatusState_NOT_STARTED = 510
 
 #constants used into the script
 TIME_OUT = 10000
@@ -98,25 +98,25 @@ print("Search for hotel and station with keyword: "+ STRING_TO_SEARCH)
 bus = dbus.SessionBus()
 
 bus.add_signal_receiver(catch_poi_configurationChanged_signal_handler, \
-                        dbus_interface = "org.genivi.navigation.poiservice.POIConfiguration", \
+                        dbus_interface = "org.genivi.navigation.poiservice.POIConfiguration.v4_0", \
                         signal_name = "configurationChanged")
 
 bus.add_signal_receiver(catch_poi_poiStatus_signal_handler, \
-                        dbus_interface = "org.genivi.navigation.poiservice.POISearch", \
+                        dbus_interface = "org.genivi.navigation.poiservice.POISearch.v4_0", \
                         signal_name = "poiStatus")
 
 bus.add_signal_receiver(catch_poi_resultListChanged_signal_handler, \
-                        dbus_interface = "org.genivi.navigation.poiservice.POISearch", \
+                        dbus_interface = "org.genivi.navigation.poiservice.POISearch.v4_0", \
                         signal_name = "resultListChanged")
 
-poiConfiguration = bus.get_object('org.genivi.navigation.poiservice.POIConfiguration_POIConfiguration','/POIConfiguration')
-g_poiConfiguration_interface = dbus.Interface(poiConfiguration, dbus_interface='org.genivi.navigation.poiservice.POIConfiguration')
+poiConfiguration = bus.get_object('org.genivi.navigation.poiservice.POIConfiguration.v4_0_POIConfiguration','/POIConfiguration')
+g_poiConfiguration_interface = dbus.Interface(poiConfiguration, dbus_interface='org.genivi.navigation.poiservice.POIConfiguration.v4_0')
 
-poiContentAccess = bus.get_object('org.genivi.navigation.poiservice.POIContentAccess_POIContentAccess','/POIContentAccess')
-g_poiContentAccess_interface = dbus.Interface(poiContentAccess, dbus_interface='org.genivi.navigation.poiservice.POIContentAccess')
+poiContentAccess = bus.get_object('org.genivi.navigation.poiservice.POIContentAccess.v4_0_POIContentAccess','/POIContentAccess')
+g_poiContentAccess_interface = dbus.Interface(poiContentAccess, dbus_interface='org.genivi.navigation.poiservice.POIContentAccess.v4_0')
 
-poiSearch = bus.get_object('org.genivi.navigation.poiservice.POISearch_POISearch','/POISearch')
-g_poiSearch_interface = dbus.Interface(poiSearch, dbus_interface='org.genivi.navigation.poiservice.POISearch')
+poiSearch = bus.get_object('org.genivi.navigation.poiservice.POISearch.v4_0_POISearch','/POISearch')
+g_poiSearch_interface = dbus.Interface(poiSearch, dbus_interface='org.genivi.navigation.poiservice.POISearch.v4_0')
 
 g_poiConfiguration_interface.setLocale(dbus.String("fra"),dbus.String("FRA"),dbus.String("Latn"))
 
@@ -136,11 +136,11 @@ for results in ret:
     if results[0][0] == ID_HOTEL:
         for attribute in results[1]:
             attributes_hotel.append(attribute[0])
-            attributesDetails.append(dbus.Struct([dbus.UInt32(attribute[0]),dbus.UInt32(ID_HOTEL),dbus.Int32(1280),dbus.Struct([dbus.Byte(2),dbus.String("")]),dbus.Int32(1314),dbus.Boolean(False)])) 
+            attributesDetails.append(dbus.Struct([dbus.UInt32(attribute[0]),dbus.UInt32(ID_HOTEL),dbus.Int32(500),dbus.Struct([dbus.Byte(2),dbus.String("")]),dbus.Int32(522),dbus.Boolean(False)])) 
     elif results[0][0] == ID_STATION:
         for attribute in results[1]:
             attributes_station.append(attribute[0])
-            attributesDetails.append(dbus.Struct([dbus.UInt32(attribute[0]),dbus.UInt32(ID_STATION),dbus.Int32(1280),dbus.Struct([dbus.Byte(2),dbus.String("")]),dbus.Int32(1314),dbus.Boolean(False)])) 
+            attributesDetails.append(dbus.Struct([dbus.UInt32(attribute[0]),dbus.UInt32(ID_STATION),dbus.Int32(500),dbus.Struct([dbus.Byte(2),dbus.String("")]),dbus.Int32(522),dbus.Boolean(False)])) 
         
 ret=g_poiSearch_interface.getRootCategory()
 
@@ -157,7 +157,7 @@ g_poiSearch_interface.setCategories(g_searchHandle,[dbus.Struct([dbus.UInt32(ID_
 
 g_poiSearch_interface.setAttributes(g_searchHandle,attributesDetails)
 
-g_poiSearch_interface.startPoiSearch(g_searchHandle,dbus.String(STRING_TO_SEARCH),dbus.Int32(1376))
+g_poiSearch_interface.startPoiSearch(g_searchHandle,dbus.String(STRING_TO_SEARCH),dbus.Int32(560))
 
 
 #main loop 

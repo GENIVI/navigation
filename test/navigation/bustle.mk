@@ -23,11 +23,11 @@
 # <date>, <name>, <description of change>
 #
 # @licence end@
-bustle_URL="http://anongit.freedesktop.org/git/bustle.git"
-bustle_VERSION=61ac45d195476edb810a1c2345c886fdc51a20cc
+bustle_URL="https://github.com/wjt/bustle.git"
+bustle_VERSION=0a426c396ee890bbde67791dbf8d2c21b9cc6a3c
 bustle_SRC=$(SRC_DIR)/bustle
 bustle_BIN=$(BIN_DIR)/bustle
-bustle_DEPS+= gtk2.0-dev haskell-platform libghc-gtk-dev libghc-glade-dev libpcap-dev language-pack-de language-pack-fr gtk2hs-buildtools libdbus-1-dev
+bustle_DEPS+= gtk2.0-dev haskell-platform libghc-gtk-dev  libpcap-dev language-pack-de language-pack-fr gtk2hs-buildtools libdbus-1-dev
 
 DEPS+=$(bustle_DEPS)
 ALL+=bustle

@@ -43,12 +43,12 @@ endif()
 
 # Packages
 find_package(PkgConfig REQUIRED)
-find_package(CommonAPI 3.1.5 REQUIRED)
-find_package(CommonAPI-DBus 3.1.5 REQUIRED)
+find_package(CommonAPI)
+find_package(CommonAPI-DBus)
 
 #pkg_check_modules(DBUS "dbus-1 >= 1.8.4") // #to be fixed, it doesn't work so the paths are set manually (see above)
-pkg_check_modules(COMMONAPI "CommonAPI >= 3.1.5")
-pkg_check_modules(COMMONAPI_DBUS "CommonAPI-DBus >= 3.1.5")
+pkg_check_modules(COMMONAPI "CommonAPI >= 3.1.9")
+pkg_check_modules(COMMONAPI_DBUS "CommonAPI-DBus >= 3.1.9")
 pkg_check_modules(SQLITE3 REQUIRED sqlite3)
 pkg_check_modules(GOBJECT gobject-2.0)
 

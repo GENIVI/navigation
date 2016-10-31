@@ -1241,13 +1241,13 @@ void PoiManagerServerStub::getVersion(const std::shared_ptr<CommonAPI::ClientId>
 
 void PoiManagerServerStub::setLocale(const std::shared_ptr<CommonAPI::ClientId> _client, std::string _languageCode, std::string _countryCode, std::string _scriptCode, setLocaleReply_t _reply)
 {
-    std::vector<uint16_t> changedSettings;
+    std::vector<POIServiceTypes::Settings> changedSettings;
 
     m_languageCode = _languageCode;
     m_countryCode = _countryCode;
     m_scriptCode = _scriptCode;
 
-    changedSettings.push_back(POIServiceTypes::ConfigurationChangedReason::LOCALES);
+    changedSettings.push_back(POIServiceTypes::Settings::LOCALE);
 
     fireConfigurationChangedEvent(changedSettings);
 }
