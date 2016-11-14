@@ -90,8 +90,8 @@ interface Guidance {
 	}
 
 	enumeration RoadProperty extends BasicEnum { 
-		UNDEFINED   					= 256
-		TOLL_ROADS   					= 257
+		DEFAULT   						= 65534
+		TOLL_ROADS   					= 369
 	}
 	enumeration RouteChangedCause extends BasicEnum { 
 		TRAFFIC							= 528

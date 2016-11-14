@@ -44,7 +44,9 @@ interface MapMatchedPosition {
 		FULL_ADDRESS		= 178
 		COUNTRYCODE			= 179
 		HOUSENAME			= 180
-		POSTAL_CODE			= 181		
+		POSTAL_CODE			= 181
+		ROAD_NUMBER			= 334
+		MATCH_TYPE			= 240		
 	}
 		
 	enumeration PositionStatus extends GeoLocalizedEnum { //Base 0x00e0
@@ -167,21 +169,6 @@ interface MapMatchedPosition {
 		}
 	}
 
-	<**
-		@description :  AddSimulationStatusListener = Add this node as a listener to Simulation Status changes.
-	**>
-	method addSimulationStatusListener {
-	}
-
-	<**
-		@description :  RemoveSimulationStatusListener = Remove this node as a listener to Simulation Status changes.
-	**>
-	method removeSimulationStatusListener {
-	}
-
-	<**
-		@description : setSimulationSpeed = This method sets the speed factor for the simulation mode
-	**>
 	method setSimulationSpeed {
 		in {
 
@@ -208,18 +195,6 @@ interface MapMatchedPosition {
 			**>
 			UInt8 speedFactor
 		}
-	}
-
-	<**
-		@description :  AddSimulationSpeedListener = Add this node as a listener to simulation speed factor changes.
-	**>
-	method addSimulationSpeedListener {
-	}
-
-	<**
-		@description :  RemoveSimulationSpeedListener = Remove this node as a listener to simulation speed factor changes.
-	**>
-	method removeSimulationSpeedListener {
 	}
 
 	<**
@@ -323,7 +298,7 @@ interface MapMatchedPosition {
 	<**
 		@description : simulationStatusChanged = This signal is emitted when the Simulation Status has changed
 	**>
-	broadcast simulationStatusChanged {
+	broadcast simulationStatusChanged selective {
 		out {
 
 			<**
@@ -336,7 +311,7 @@ interface MapMatchedPosition {
 	<**
 		@description : simulationSpeedChanged = This signal is emitted when the simulation speed factor has changed
 	**>
-	broadcast simulationSpeedChanged {
+	broadcast simulationSpeedChanged selective {
 		out {
 
 			<**

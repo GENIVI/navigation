@@ -87,8 +87,8 @@ public:
     void GetRouteBoundingBox(NavigationTypes::Rectangle &boundingBox);
     void CancelRouteCalculation(uint32_t sessionHandle);
     bool RoutePreference(Routing::PreferenceMode preferenceMode,Routing::RoutePreferenceSource preferenceSource);
-    void SetRoutePreferences(uint32_t sessionHandle, const std::string& country, const std::vector< Routing::RoutePreference >& routePreferencesList);
-    void GetRoutePreferences(const std::string& country, std::vector< Routing::RoutePreference >& roadPreferenceList);
+    void SetRoutePreferences(uint32_t sessionHandle, const std::string& country, const std::vector< Routing::RoadPreference >& routePreferencesList);
+    void GetRoutePreferences(const std::string& country, std::vector< Routing::RoadPreference >& roadPreferenceList);
 
     uint32_t m_handle;
     RoutingServerStub *mp_routing;
@@ -99,7 +99,7 @@ private:
     struct search_list *m_sl;
     uint32_t m_session;
     Routing::CostModel m_costmodel;
-    std::vector< Routing::RoutePreference > m_route_preferences_list[2];
+    std::vector< Routing::RoadPreference > m_route_preferences_list[2];
     std::vector< Routing::WayPoint > m_waypoints;
     bool m_startfromcurrentposition;
     int m_vehicleprofile_idx;
@@ -224,7 +224,7 @@ class  RoutingServerStub : public RoutingStubDefault
     /**
      * description: This method sets a list of route preferences
      */
-    void setRoutePreferences(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _routeHandle, std::string _countryCode, std::vector<Routing::RoutePreference> _roadPreferenceList, std::vector<Routing::ConditionPreference> _conditionPreferenceList, setRoutePreferencesReply_t _reply){
+    void setRoutePreferences(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _routeHandle, std::string _countryCode, std::vector<Routing::RoadPreference> _roadPreferenceList, std::vector<Routing::ConditionPreference> _conditionPreferenceList, setRoutePreferencesReply_t _reply){
         Routing::setRoutePreferencesError _error = Routing::setRoutePreferencesError::OK;
         RoutingObj *obj=mp_handles[_routeHandle];
         if (!obj)
@@ -237,8 +237,8 @@ class  RoutingServerStub : public RoutingStubDefault
      * description: This method retrieves a list of selected route preferences
      */
     void getRoutePreferences(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _routeHandle, std::string _countryCode, getRoutePreferencesReply_t _reply){
-        Routing::RoutePreference routePreference;
-        std::vector<Routing::RoutePreference> _roadPreferenceList;
+        Routing::RoadPreference roadPreference;
+        std::vector<Routing::RoadPreference> _roadPreferenceList;
         Routing::ConditionPreference conditionPreference;
         std::vector<Routing::ConditionPreference> _conditionPreferenceList;
 
@@ -248,9 +248,9 @@ class  RoutingServerStub : public RoutingStubDefault
         obj->GetRoutePreferences(_countryCode, _roadPreferenceList);
         if (_roadPreferenceList.size() == 0)
         { //add a default value (bug in qml to be fixed)
-            routePreference.setMode(Routing::PreferenceMode::INVALID);
-            routePreference.setSource(Routing::RoutePreferenceSource::INVALID);
-            _roadPreferenceList.push_back(routePreference);
+            roadPreference.setMode(Routing::PreferenceMode::INVALID);
+            roadPreference.setSource(Routing::RoutePreferenceSource::INVALID);
+            _roadPreferenceList.push_back(roadPreference);
         }
         conditionPreference.setMode(Routing::PreferenceMode::USE);
         conditionPreference.setSource(Routing::ConditionPreferenceSource::TRAFFIC_REALTIME);
@@ -262,19 +262,19 @@ class  RoutingServerStub : public RoutingStubDefault
      * description: This method retrieves a list of supported route preferences
      */
     void getSupportedRoutePreferences(const std::shared_ptr<CommonAPI::ClientId> _client, getSupportedRoutePreferencesReply_t _reply){
-        Routing::RoutePreference routePreference;
-        std::vector<Routing::RoutePreference> _routePreferencesList;
+        Routing::RoadPreference roadPreference;
+        std::vector<Routing::RoadPreference> _routePreferencesList;
         Routing::ConditionPreference conditionPreference;
         std::vector<Routing::ConditionPreference> _conditionPreferenceList;
-        routePreference.setMode(Routing::PreferenceMode::AVOID);
-        routePreference.setSource(Routing::RoutePreferenceSource::HIGHWAYS_MOTORWAYS);
-        _routePreferencesList.push_back(routePreference);
-        routePreference.setMode(Routing::PreferenceMode::AVOID);
-        routePreference.setSource(Routing::RoutePreferenceSource::TOLL_ROADS);
-        _routePreferencesList.push_back(routePreference);
-        routePreference.setMode(Routing::PreferenceMode::AVOID);
-        routePreference.setSource(Routing::RoutePreferenceSource::FERRY);
-        _routePreferencesList.push_back(routePreference);
+        roadPreference.setMode(Routing::PreferenceMode::AVOID);
+        roadPreference.setSource(Routing::RoutePreferenceSource::HIGHWAYS_MOTORWAYS);
+        _routePreferencesList.push_back(roadPreference);
+        roadPreference.setMode(Routing::PreferenceMode::AVOID);
+        roadPreference.setSource(Routing::RoutePreferenceSource::TOLL_ROADS);
+        _routePreferencesList.push_back(roadPreference);
+        roadPreference.setMode(Routing::PreferenceMode::AVOID);
+        roadPreference.setSource(Routing::RoutePreferenceSource::FERRY);
+        _routePreferencesList.push_back(roadPreference);
         conditionPreference.setMode(Routing::PreferenceMode::USE);
         conditionPreference.setSource(Routing::ConditionPreferenceSource::TRAFFIC_REALTIME);
         _conditionPreferenceList.push_back(conditionPreference);
@@ -902,9 +902,8 @@ RoutingObj::RoutePreference(Routing::PreferenceMode preferenceMode,Routing::Rout
 }
 
 void
-RoutingObj::SetRoutePreferences(uint32_t sessionHandle, const std::string& country, const std::vector< Routing::RoutePreference >& routePreferencesList)
+RoutingObj::SetRoutePreferences(uint32_t sessionHandle, const std::string& country, const std::vector< Routing::RoadPreference >& routePreferencesList)
 {
-    int idx;
     struct attr flags_forward_mask,flags_reverse_mask,roadprofile,item_types,route_weight;
     m_route_preferences_list[m_vehicleprofile_idx]=routePreferencesList;
     struct vehicleprofile_settings *s=&m_vehicleprofile_settings[m_vehicleprofile_idx];
@@ -963,7 +962,7 @@ RoutingObj::SetRoutePreferences(uint32_t sessionHandle, const std::string& count
 }
 
 void
-RoutingObj::GetRoutePreferences(const std::string& country, std::vector< Routing::RoutePreference >& roadPreferenceList)
+RoutingObj::GetRoutePreferences(const std::string& country, std::vector< Routing::RoadPreference >& roadPreferenceList)
 {
     roadPreferenceList=m_route_preferences_list[m_vehicleprofile_idx];
 }

@@ -85,7 +85,7 @@ interface Routing {
 		PreferenceMode to RoutePreferenceSource
 	}
 
-	struct RoutePreference {
+	struct RoadPreference {
 		PreferenceMode mode
 		RoutePreferenceSource source
 	}
@@ -330,7 +330,7 @@ interface Routing {
 			**>
 			String countryCode
 			
-			RoutePreference[] roadPreferenceList
+			RoadPreference[] roadPreferenceList
 			
 			ConditionPreference[] conditionPreferenceList
 		}
@@ -359,7 +359,7 @@ interface Routing {
 			String countryCode
 		}
 		out {
-			RoutePreference[] roadPreferenceList
+			RoadPreference[] roadPreferenceList
 			ConditionPreference[] conditionPreferenceList
 		}
 	}
@@ -369,7 +369,7 @@ interface Routing {
 	**>
 	method getSupportedRoutePreferences {
 		out {
-			RoutePreference[] routePreferencesList
+			RoadPreference[] routePreferencesList
 			ConditionPreference[] conditionPreferenceList
 		}
 	}

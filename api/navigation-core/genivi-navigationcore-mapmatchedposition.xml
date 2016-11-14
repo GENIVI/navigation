@@ -66,17 +66,6 @@
         </doc>
       </arg>
     </method>
-    <method name="AddSimulationStatusListener">
-      <doc>
-        <line> AddSimulationStatusListener = Add this node as a listener to Simulation Status changes.</line>
-		<line>Upon changes a SimulationStatusChanged signal will be received. NavigationCore will only send out a SimulationStatusChanged signal if there is at least one node listening to these changes.</line>
-      </doc>
-    </method>
-    <method name="RemoveSimulationStatusListener">
-      <doc>
-        <line> RemoveSimulationStatusListener = Remove this node as a listener to Simulation Status changes.</line>
-      </doc>
-    </method>
     <signal name="SimulationStatusChanged">
       <doc>
         <line>SimulationStatusChanged = This signal is emitted when the Simulation Status has changed</line>
@@ -117,18 +106,6 @@
           <line>unit is x0.25. Normal speed x1 is 4</line>
         </doc>
       </arg>
-    </method>
-    <method name="AddSimulationSpeedListener">
-      <doc>
-        <line> AddSimulationSpeedListener = Add this node as a listener to simulation speed factor changes.</line>
-		<line>Upon changes a SimulationSpeedChanged signal will be received.</line>
-		<line>NavigationCore will only send out a SimulationSpeedChanged signal if there is at least one node listening to these changes</line>
-      </doc>
-    </method>
-    <method name="RemoveSimulationSpeedListener">
-      <doc>
-        <line> RemoveSimulationSpeedListener = Remove this node as a listener to simulation speed factor changes.</line>
-      </doc>
     </method>
     <signal name="SimulationSpeedChanged">
       <doc>

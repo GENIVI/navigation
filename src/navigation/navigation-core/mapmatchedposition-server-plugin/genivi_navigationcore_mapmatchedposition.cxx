@@ -131,7 +131,7 @@ class  MapMatchedPositionServerStub : public MapMatchedPositionStubDefault
             newSimulationMode = _activate ? MapMatchedPosition::SimulationStatus::SIMULATION_STATUS_FIXED_POSITION : MapMatchedPosition::SimulationStatus::SIMULATION_STATUS_NO_SIMULATION;
             if (newSimulationMode != m_simulationMode) {
                 m_simulationMode=newSimulationMode;
-                fireSimulationStatusChangedEvent(m_simulationMode);
+                fireSimulationStatusChangedSelective(m_simulationMode);
             }
             demo_update(false);
             struct navit *navit=get_navit();
@@ -151,29 +151,13 @@ class  MapMatchedPositionServerStub : public MapMatchedPositionStubDefault
     }
 
     /**
-     * description: AddSimulationStatusListener = Add this node as a listener to Simulation Status
-     *   changes.
-     */
-    void addSimulationStatusListener(const std::shared_ptr<CommonAPI::ClientId> _client, addSimulationStatusListenerReply_t _reply){
-        throw DBus::ErrorNotSupported("Not yet supported");
-    }
-
-    /**
-     * description: RemoveSimulationStatusListener = Remove this node as a listener to Simulation
-     *   Status changes.
-     */
-    void removeSimulationStatusListener(const std::shared_ptr<CommonAPI::ClientId> _client, removeSimulationStatusListenerReply_t _reply){
-        throw DBus::ErrorNotSupported("Not yet supported");
-    }
-
-    /**
      * description: setSimulationSpeed = This method sets the speed factor for the simulation mode
      */
     void setSimulationSpeed(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, uint8_t _speedFactor, setSimulationSpeedReply_t _reply){
         int speed=_speedFactor*40/4;
         if (vehicle_speed.u.num != speed) {
             vehicle_speed.u.num=speed;
-            fireSimulationSpeedChangedEvent(_speedFactor);
+            fireSimulationSpeedChangedSelective(_speedFactor);
             if (m_simulationMode == MapMatchedPosition::SimulationStatus::SIMULATION_STATUS_RUNNING) {
                 demo_update(true);
             }
@@ -189,29 +173,13 @@ class  MapMatchedPositionServerStub : public MapMatchedPositionStubDefault
     }
 
     /**
-     * description: AddSimulationSpeedListener = Add this node as a listener to simulation speed
-     *   factor changes.
-     */
-    void addSimulationSpeedListener(const std::shared_ptr<CommonAPI::ClientId> _client, addSimulationSpeedListenerReply_t _reply){
-        throw DBus::ErrorNotSupported("Not yet supported");
-    }
-
-    /**
-     * description: RemoveSimulationSpeedListener = Remove this node as a listener to simulation
-     *   speed factor changes.
-     */
-    void removeSimulationSpeedListener(const std::shared_ptr<CommonAPI::ClientId> _client, removeSimulationSpeedListenerReply_t _reply){
-        throw DBus::ErrorNotSupported("Not yet supported");
-    }
-
-    /**
      * description: startSimulation = This method starts, or resumes, a Follow Active Route
      *   simulation
      */
     void startSimulation(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, startSimulationReply_t _reply){
         if (m_simulationMode == MapMatchedPosition::SimulationStatus::SIMULATION_STATUS_PAUSED || m_simulationMode == MapMatchedPosition::SimulationStatus::SIMULATION_STATUS_FIXED_POSITION ) {
             m_simulationMode=MapMatchedPosition::SimulationStatus::SIMULATION_STATUS_RUNNING;
-            fireSimulationStatusChangedEvent(m_simulationMode);
+            fireSimulationStatusChangedSelective(m_simulationMode);
             demo_update(true);
         }
         _reply();
@@ -223,7 +191,7 @@ class  MapMatchedPositionServerStub : public MapMatchedPositionStubDefault
     void pauseSimulation(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, pauseSimulationReply_t _reply){
         if (m_simulationMode == MapMatchedPosition::SimulationStatus::SIMULATION_STATUS_RUNNING) {
             m_simulationMode=MapMatchedPosition::SimulationStatus::SIMULATION_STATUS_PAUSED;
-            fireSimulationStatusChangedEvent(m_simulationMode);
+            fireSimulationStatusChangedSelective(m_simulationMode);
             demo_update(false);
         }
         _reply();
