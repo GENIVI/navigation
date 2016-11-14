@@ -608,22 +608,6 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
     }
 
     /**
-     * description: addMapViewScaleChangedListener = This method adds a listener which is notified
-     *   when map view scale changes.
-     */
-    void addMapViewScaleChangedListener(const std::shared_ptr<CommonAPI::ClientId> _client, addMapViewScaleChangedListenerReply_t _reply){
-        throw DBus::ErrorNotSupported("Not yet supported");
-    }
-
-    /**
-     * description: removeMapViewScaleChangedListener = This method removes a listener which is
-     *   notified when map view scale changes.
-     */
-    void removeMapViewScaleChangedListener(const std::shared_ptr<CommonAPI::ClientId> _client, removeMapViewScaleChangedListenerReply_t _reply){
-        throw DBus::ErrorNotSupported("Not yet supported");
-    }
-
-    /**
      * description: setCameraHeight = This method sets the camera height
      */
     void setCameraHeight(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, uint32_t _height, setCameraHeightReply_t _reply){
@@ -726,7 +710,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
             uint8_t current_scale;
             MapViewerControl::MapScaleType is_min_max;
             obj->GetMapViewScale(current_scale,is_min_max);
-            fireMapViewScaleChangedEvent(_mapViewInstanceHandle,current_scale,is_min_max);
+            fireMapViewScaleChangedSelective(_mapViewInstanceHandle,current_scale,is_min_max);
         }
         _reply();
     }
@@ -744,7 +728,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
             uint8_t current_scale;
             MapViewerControl::MapScaleType is_min_max;
             obj->GetMapViewScale(current_scale,is_min_max);
-            fireMapViewScaleChangedEvent(_mapViewInstanceHandle,current_scale,is_min_max);
+            fireMapViewScaleChangedSelective(_mapViewInstanceHandle,current_scale,is_min_max);
         }
         _reply();
     }
@@ -1030,10 +1014,11 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
     void convertPixelCoordsToGeoCoords(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, std::vector<MapViewerControl::Pixel> _pixelCoordinates, convertPixelCoordsToGeoCoordsReply_t _reply){
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         std::vector< ::v4::org::genivi::navigation::NavigationTypes::Coordinate2D> _geoCoordinates;
+        MapViewerControl::convertPixelCoordsToGeoCoordsError _error = MapViewerControl::convertPixelCoordsToGeoCoordsError::OK;
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
         else obj->ConvertPixelCoordsToGeoCoords(_sessionHandle, _pixelCoordinates, _geoCoordinates);
-        _reply(_geoCoordinates);
+        _reply(_error,_geoCoordinates);
     }
 
     /**
@@ -1043,10 +1028,11 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
     void convertGeoCoordsToPixelCoords(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, std::vector< ::v4::org::genivi::navigation::NavigationTypes::Coordinate2D> _geoCoordinates, convertGeoCoordsToPixelCoordsReply_t _reply){
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         std::vector<MapViewerControl::Pixel> _pixelCoordinates;
+        MapViewerControl::convertGeoCoordsToPixelCoordsError _error = MapViewerControl::convertGeoCoordsToPixelCoordsError::OK;
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
         else obj->ConvertGeoCoordsToPixelCoords(_sessionHandle, _geoCoordinates, _pixelCoordinates);
-        _reply(_pixelCoordinates);
+        _reply(_error,_pixelCoordinates);
     }
 
     /**

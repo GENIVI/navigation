@@ -607,16 +607,6 @@
         </doc>
       </arg>
     </signal>
-    <method name="AddMapViewScaleChangedListener">
-      <doc>
-        <line>AddMapViewScaleChangedListener = This method adds a listener which is notified when map view scale changes.</line>
-      </doc>
-    </method>
-    <method name="RemoveMapViewScaleChangedListener">
-      <doc>
-        <line>RemoveMapViewScaleChangedListener = This method removes a listener which is notified when map view scale changes.</line>
-      </doc>
-    </method>
     <method name="SetCameraHeight">
       <doc>
         <line>SetCameraHeight = This method sets the camera height</line>
@@ -1559,7 +1549,9 @@ cover with other windows or user interface elements</line>
           <line>y = y-coordinate (y=0 indicates the first top pixel of the map view)</line>
         </doc>
       </arg>
-      <arg name="geoCoordinates" type="a(dd)" direction="out">
+       <arg name="error" type="i" direction="out">
+      </arg>
+     <arg name="geoCoordinates" type="a(dd)" direction="out">
         <doc>
           <line>geoCoordinates = array[struct(lat,lon)]</line>
           <line>lat = latitude in format %3.6f. Range[-90:+90]</line>
@@ -1588,7 +1580,9 @@ cover with other windows or user interface elements</line>
           <line>lon = longitude in format %3.6f. Range[-180:+180]</line>
         </doc>
       </arg>
-      <arg name="pixelCoordinates" type="a(qq)" direction="out">
+       <arg name="error" type="i" direction="out">
+      </arg>
+     <arg name="pixelCoordinates" type="a(qq)" direction="out">
         <doc>
           <line>pixelCoordinates = array[struct(x,y)]</line>
           <line>x = x-coordinate (x=0 indicates the first left pixel of the map view)</line>

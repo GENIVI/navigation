@@ -836,7 +836,7 @@ interface MapViewerControl {
 	<**
 		@description : mapViewScaleChanged = This signal is emitted when the mapview scale changes
 	**>
-	broadcast mapViewScaleChanged {
+	broadcast mapViewScaleChanged selective {
 		out {
 
 			<**
@@ -870,18 +870,6 @@ interface MapViewerControl {
 		out {
 			MapScaleMode [] scaleModeList
 		}
-	}
-
-	<**
-		@description : addMapViewScaleChangedListener = This method adds a listener which is notified when map view scale changes.
-	**>
-	method addMapViewScaleChangedListener {
-	}
-
-	<**
-		@description : removeMapViewScaleChangedListener = This method removes a listener which is notified when map view scale changes.
-	**>
-	method removeMapViewScaleChangedListener {
 	}
 
 	<**
@@ -1837,6 +1825,10 @@ interface MapViewerControl {
 		out {			
 			Coordinate2D [] geoCoordinates
 		}
+		error {
+			OK
+			MAPVIEWERCONTROL_ERROR_INVALID_INPUT // wrong input coordinates
+		}
 	}
 
 	<**
@@ -1861,6 +1853,10 @@ interface MapViewerControl {
 		out {
 			
 			Pixel [] pixelCoordinates
+		}
+		error {
+			OK
+			MAPVIEWERCONTROL_ERROR_INVALID_INPUT // wrong input coordinates
 		}
 	}
 
