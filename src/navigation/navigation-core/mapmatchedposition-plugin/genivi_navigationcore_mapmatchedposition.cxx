@@ -212,23 +212,25 @@ class  MapMatchedPosition
 		return simulationMode;
 	}
 
-	void
-	RemoveSimulationSpeedListener()
-	{
-		throw DBus::ErrorNotSupported("Not yet supported");
-	}
+    bool subscribeForSimulationStatusChangedSelective()
+    { //not implemented yet, always return true
+        return true;
+    }
 
-	void
-	AddSimulationStatusListener()
-	{
-		throw DBus::ErrorNotSupported("Not yet supported");
-	}
+    void unsubscribeFromSimulationStatusChangedSelective()
+    { //not implemented yet
 
-	void
-	AddSimulationSpeedListener()
-	{
-		throw DBus::ErrorNotSupported("Not yet supported");
-	}
+    }
+
+    bool subscribeForSimulationSpeedChangedSelective()
+    { //not implemented yet, always return true
+        return true;
+    }
+
+    void unsubscribeFromSimulationSpeedChangedSelective()
+    { //not implemented yet
+
+    }
 
     void
     SetPosition(const uint32_t& sessionHandle, const std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >& position)
@@ -298,11 +300,6 @@ class  MapMatchedPosition
 		return vehicle_speed.u.num*4/40;
 	}
 
-	void
-	RemoveSimulationStatusListener()
-	{
-		throw DBus::ErrorNotSupported("Not yet supported");
-	}
 };
 
 static void

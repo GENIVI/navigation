@@ -80,6 +80,12 @@
         </doc>
       </arg>
     </signal>
+    <method name="subscribeForSimulationStatusChangedSelective">
+      <arg direction="out" name="status" type="b">
+      </arg>
+    </method>
+    <method name="unsubscribeFromSimulationStatusChangedSelective">
+    </method>  
     <method name="SetSimulationSpeed">
       <doc>
         <line>SetSimulationSpeed = This method sets the speed factor for the simulation mode</line>
@@ -119,6 +125,12 @@
         </doc>
       </arg>
     </signal>
+    <method name="subscribeForSimulationSpeedChangedSelective">
+      <arg direction="out" name="status" type="b">
+      </arg>
+    </method>
+    <method name="unsubscribeFromSimulationSpeedChangedSelective">
+    </method>  
     <method name="StartSimulation">
       <doc>
         <line>StartSimulation = This method starts, or resumes, a Follow Active Route simulation</line>

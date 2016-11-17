@@ -375,7 +375,8 @@ class  MapViewerControl
             return(1);
         }
     }
-	void
+
+    void
     SetMapViewPerspective(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const DBusCommonAPIEnumeration& perspective)
 	{
         MapViewerControlObj *obj=handles[mapViewInstanceHandle];
@@ -826,26 +827,20 @@ class  MapViewerControl
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 
-	std::vector< ::DBus::Struct< double, double > >
-    ConvertPixelCoordsToGeoCoords(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const std::vector< ::DBus::Struct< uint16_t, uint16_t > >& pixelCoordinates)
+    void ConvertPixelCoordsToGeoCoords(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const std::vector< ::DBus::Struct< uint16_t, uint16_t > >& pixelCoordinates, int32_t& error, std::vector< ::DBus::Struct< double, double > >& geoCoordinates)
 	{
-            std::vector< ::DBus::Struct< double, double > >ret;
-                MapViewerControlObj *obj=handles[mapViewInstanceHandle];
+        MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
-			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-                else obj->ConvertPixelCoordsToGeoCoords(sessionHandle, pixelCoordinates, ret);
-		return ret;
+            throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
+        else obj->ConvertPixelCoordsToGeoCoords(sessionHandle, pixelCoordinates, geoCoordinates);
 	}
 
-	std::vector< ::DBus::Struct< uint16_t, uint16_t > >
-    ConvertGeoCoordsToPixelCoords(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const std::vector< ::DBus::Struct< double, double > >& geoCoordinates)
-	{
-            std::vector< ::DBus::Struct< uint16_t, uint16_t > >ret;
-                MapViewerControlObj *obj=handles[mapViewInstanceHandle];
+    void ConvertGeoCoordsToPixelCoords(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const std::vector< ::DBus::Struct< double, double > >& geoCoordinates, int32_t& error, std::vector< ::DBus::Struct< uint16_t, uint16_t > >& pixelCoordinates)
+    {
+        MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-                else obj->ConvertGeoCoordsToPixelCoords(sessionHandle, geoCoordinates, ret);
-		return ret;
+        else obj->ConvertGeoCoordsToPixelCoords(sessionHandle, geoCoordinates, pixelCoordinates);
 	}
 
 	void
@@ -892,19 +887,6 @@ class  MapViewerControl
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 
-    void
-    AddMapViewScaleChangedListener()
-    {
-        throw DBus::ErrorNotSupported("Not yet supported");
-    }
-
-    void
-    RemoveMapViewScaleChangedListener()
-    {
-        throw DBus::ErrorNotSupported("Not yet supported");
-    }
-
-
 	void
     SetPoiCategoriesNotVisible(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const std::vector< uint32_t >& poiCategoryIds)
 	{
@@ -940,6 +922,17 @@ class  MapViewerControl
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
+
+    bool subscribeForMapViewScaleChangedSelective()
+    {//not implemented yet, always return true
+        return true;
+    }
+
+    void unsubscribeFromMapViewScaleChangedSelective()
+    {//not implemented yet
+
+    }
+
 };
 
 void

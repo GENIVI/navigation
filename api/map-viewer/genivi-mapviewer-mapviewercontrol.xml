@@ -607,6 +607,12 @@
         </doc>
       </arg>
     </signal>
+    <method name="subscribeForMapViewScaleChangedSelective">
+      <arg direction="out" name="status" type="b">
+      </arg>
+    </method>
+    <method name="unsubscribeFromMapViewScaleChangedSelective">
+    </method>  
     <method name="SetCameraHeight">
       <doc>
         <line>SetCameraHeight = This method sets the camera height</line>
