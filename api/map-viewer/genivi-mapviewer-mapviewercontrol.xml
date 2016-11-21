@@ -607,11 +607,11 @@
         </doc>
       </arg>
     </signal>
-    <method name="subscribeForMapViewScaleChangedSelective">
+    <method name="subscribeFormapViewScaleChangedSelective">
       <arg direction="out" name="status" type="b">
       </arg>
     </method>
-    <method name="unsubscribeFromMapViewScaleChangedSelective">
+    <method name="unsubscribeFrommapViewScaleChangedSelective">
     </method>  
     <method name="SetCameraHeight">
       <doc>

@@ -80,11 +80,11 @@
         </doc>
       </arg>
     </signal>
-    <method name="subscribeForSimulationStatusChangedSelective">
+    <method name="subscribeForsimulationStatusChangedSelective">
       <arg direction="out" name="status" type="b">
       </arg>
     </method>
-    <method name="unsubscribeFromSimulationStatusChangedSelective">
+    <method name="unsubscribeFromsimulationStatusChangedSelective">
     </method>  
     <method name="SetSimulationSpeed">
       <doc>
@@ -125,11 +125,11 @@
         </doc>
       </arg>
     </signal>
-    <method name="subscribeForSimulationSpeedChangedSelective">
+    <method name="subscribeForsimulationSpeedChangedSelective">
       <arg direction="out" name="status" type="b">
       </arg>
     </method>
-    <method name="unsubscribeFromSimulationSpeedChangedSelective">
+    <method name="unsubscribeFromsimulationSpeedChangedSelective">
     </method>  
     <method name="StartSimulation">
       <doc>

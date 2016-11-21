@@ -923,12 +923,12 @@ class  MapViewerControl
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}
 
-    bool subscribeForMapViewScaleChangedSelective()
+    bool subscribeFormapViewScaleChangedSelective()
     {//not implemented yet, always return true
         return true;
     }
 
-    void unsubscribeFromMapViewScaleChangedSelective()
+    void unsubscribeFrommapViewScaleChangedSelective()
     {//not implemented yet
 
     }

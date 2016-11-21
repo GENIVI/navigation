@@ -212,22 +212,22 @@ class  MapMatchedPosition
 		return simulationMode;
 	}
 
-    bool subscribeForSimulationStatusChangedSelective()
+    bool subscribeForsimulationStatusChangedSelective()
     { //not implemented yet, always return true
         return true;
     }
 
-    void unsubscribeFromSimulationStatusChangedSelective()
+    void unsubscribeFromsimulationStatusChangedSelective()
     { //not implemented yet
 
     }
 
-    bool subscribeForSimulationSpeedChangedSelective()
+    bool subscribeForsimulationSpeedChangedSelective()
     { //not implemented yet, always return true
         return true;
     }
 
-    void unsubscribeFromSimulationSpeedChangedSelective()
+    void unsubscribeFromsimulationSpeedChangedSelective()
     { //not implemented yet
 
     }
