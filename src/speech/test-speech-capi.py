@@ -33,9 +33,6 @@ import time
 import pdb;
 #pdb.set_trace()
 #constants as defined in the Navigation API
-GENIVI_Configuration_Settings_LOCALE = 37
-GENIVI_SearchStatusState_FINISHED = 1298
-GENIVI_SearchStatusState_NOT_STARTED = 1296
 
 #constants used into the script
 TIME_OUT = 10000
@@ -65,20 +62,20 @@ if __name__ == '__main__':
 bus = dbus.SessionBus()
 
 bus.add_signal_receiver(catch_speech_notifyConnectionStatus_signal_handler, \
-                        dbus_interface = "org.genivi.hmi.speechoutputservice.SpeechOutput", \
+                        dbus_interface = "org.genivi.hmi.speechoutputservice.SpeechOutput.v4_0", \
                         signal_name = "notifyConnectionStatus")
 bus.add_signal_receiver(catch_speech_notifyMarkerReached_signal_handler, \
-                        dbus_interface = "org.genivi.hmi.speechoutputservice.SpeechOutput", \
+                        dbus_interface = "org.genivi.hmi.speechoutputservice.SpeechOutput.v4_0", \
                         signal_name = "notifyMarkerReached")
 bus.add_signal_receiver(catch_speech_notifyQueueStatus_signal_handler, \
-                        dbus_interface = "org.genivi.hmi.speechoutputservice.SpeechOutput", \
+                        dbus_interface = "org.genivi.hmi.speechoutputservice.SpeechOutput.v4_0", \
                         signal_name = "notifyQueueStatus")
 bus.add_signal_receiver(catch_speech_notifyTTSStatus_signal_handler, \
-                        dbus_interface = "org.genivi.hmi.speechoutputservice.SpeechOutput", \
+                        dbus_interface = "org.genivi.hmi.speechoutputservice.SpeechOutput.v4_0", \
                         signal_name = "notifyTTSStatus")
 
-speech = bus.get_object('org.genivi.hmi.speechoutputservice.SpeechOutput_SpeechOutput','/SpeechOutput')
-g_speech_interface = dbus.Interface(speech, dbus_interface='org.genivi.hmi.speechoutputservice.SpeechOutput')
+speech = bus.get_object('org.genivi.hmi.speechoutputservice.SpeechOutput.v4_0_SpeechOutput','/SpeechOutput')
+g_speech_interface = dbus.Interface(speech, dbus_interface='org.genivi.hmi.speechoutputservice.SpeechOutput.v4_0')
 
 g_speech_interface.addTextChunk(dbus.String("Hello"))
 

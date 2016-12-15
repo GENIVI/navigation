@@ -5,13 +5,13 @@
 // This Source Code Form is subject to the terms of the
 // Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
 // this file, you can obtain one at http://mozilla.org/MPL/2.0/.
-
 package org.genivi.navigation.freetextsearchservice
 
 import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 
-<** @description : This interface allows a user to find locations by entering a single text string.
+<**
+@description : This interface allows a user to find locations by entering a single text string.
 A user of a navigation system needs to find a location on a map, e.g. to use as a destination of a route.
 Locations can be identified by different means, for example:
  - An address, e.g. '2400 Camino Ramon, San Ramon, California, USA.'
@@ -32,311 +32,552 @@ The order in which the results will be received is not defined. The search engin
 If there are no matches found in a certain type of result, then no response for that type will be sent.
 E.g. if the user input only matches an address but not POIs, then no FtsResultPois response will be sent.
 To indicate that the search has finished an FtsDone signal is sent.
+
 **>
 
 interface FreeTextSearch {
-	version {
-		major 4
-		minor 0
-	}
-		
-    <** @description: A requestId is an identifier used to match a response to a request.
+    version {
+        major 0
+        minor 1
+    }
+
+    <**
+    @description: A requestId is an identifier used to match a response to a request.
         Range[0x1:0x7fff]
         notSpecifiedValue = 0x0
+    
     **>
     typedef RequestId is Int16
 
-    <** @description: Handle for a single Free Text Search session.
-	**>
-    typedef FreeTextSearchHandle is Handle	
-		
-    <** @description: Type to represent most texts in this interface..
+    <**
+    @description: Handle for a single Free Text Search session.
+    **>
+    typedef FreeTextSearchHandle is Handle
+
+    <**
+    @description: Type to represent most texts in this interface..
         Character set = UNICODE
         Maximum length = 4095
+    
     **>
     typedef FtsString is String
 
-		
-    <** @description: A list of strings
+    <**
+    @description: A list of strings
         maximum length = 100
     **>
     array FtsStringList of FtsString
 
+    <**
+    @description: A route corridor
+    **>
+    struct RouteCorridor {
 
-  <** @description: A union to contain any of the possble search shapes. **>
+        <**
+        @description: Route handle used to select a route.
+            Can be 0 to use the route for which guidance is started with startGuidance 
+            from Guidance interface.
+        **>
+        Handle routeHandle
+    
+        <**
+        @description: Offset on route from the start of the route, in meters.
+        **>
+        DistanceInMeters startOffset
+    
+        <**
+        @description: Width of the corridor, in meters.
+        **>
+        DistanceInMeters corridorWidth
+    
+        <**
+        @description: Length of the corridor, in meters.
+            Can be 0 to search until the end of the route.
+        **>
+        DistanceInMeters corridorLength
+    } 
+
+    <**
+        @description: A union to contain any of the possible search shapes.
+        The search can be limited to the area of a circle or rectangle or to a route corridor 
+        around a planned route. 
+    **>
     union Shape {
         Circle circle
         Rectangle rectangle
+        RouteCorridor routeCorridor
     }
 
-	
-    <** @description: A list of shapes.
+    <**
+    @description: A list of shapes.
         maximum length = 31
+    
     **>
     array ShapeList of Shape
 
-		
-    <** @description: A maximum number of results to be returned.
+    <**
+    @description: A maximum number of results to be returned.
         Range[0:1000]
     **>
     typedef PageSize is UInt16
 
-
-    <** @description: Search options for a search request.
+    <**
+    @description: Search options for a search request.
         The options are flags which can be OR-ed together to create SearchOptions.
     **>
     enumeration SearchOption {
-    	<** @description: Search addresses. **>
-        ADDRESS                              =     1
-    	<** @description: Search POIs. **>
-        POI                                  =     2
-        <** @description: Get POI suggestions. **>
-        POI_SUGGESTION                       =     4
-        <** @description: Do not search places when doing an address search. **>
-        NO_PLACES                            =  65536
-        <** @description: Do not search streets when doing an address search. **>
-        NO_STREETS                           = 131072
-        <** @description: Do not make assumptions on POI categories. **>
-        NO_POI_CATEGORY_ASSUMPTIONS          = 262144
+
+        <**
+            @description: Search addresses. 
+        **>
+        ADDRESS = 1
+
+        <**
+            @description: Search POIs. 
+        **>
+        POI = 2
+
+        <**
+            @description: Get POI suggestions. 
+        **>
+        POI_SUGGESTION = 4
+
+        <**
+            @description: Do not search places when doing an address search. 
+        **>
+        NO_PLACES = 65536
+
+        <**
+            @description: Do not search streets when doing an address search. 
+        **>
+        NO_STREETS = 131072
+
+        <**
+            @description: Do not make assumptions on POI categories. 
+        **>
+        NO_POI_CATEGORY_ASSUMPTIONS = 262144
+        
+        <**
+            @description: Do not search political divisions when doing an address search.
+        **>
+        NO_POLITICAL_DIVISIONS = 524288
+        
+        <**
+            @description: Indicate POI links.
+            If this option is set in the query, POI results will be marked appropriately 
+            if they are parents or children. 
+        **>        
+        POI_INDICATE_LINKS = 1048576
     }
-		
-    <** @description: An OR-ed combination of SearchOption flags.
+
+    <**
+    @description: An OR-ed combination of SearchOption flags.
         Range[0:0xffffffff]
     **>
     typedef SearchOptions is UInt32
 
-
-    <** @description: Search request status. **>
+    <**
+        @description: Search request status. 
+    **>
     enumeration FtsStatus {
-    	<** @description: No problem. **>
-        OK
-    	<** @description: User aborted search. **>
-        ABORTED
-        <** @description: Search string is too short to evaluate. **>
-        PREFIX_TOO_SHORT
-        <** @description: An internal error occurred in the FTS engine.  **>
-        INTERNAL_ERROR
-        <** @description: No FTS index for the current map. **>
-        INDEX_MISSING
-    	<** @description: The FTS index format is not supported. **>
-        BAD_VERSION
-        <** @description: An invalid freeTextSearchHandle is passed to the FTS engine. **>
-        INVALID_PARAMETER_SEARCH_HANDLE
-    	<** @description: A search query not supported by the FTS engine. **>
-        INVALID_PARAMETER_QUERY
-    	<** @description: A search location not on this earth. **>
-        INVALID_PARAMETER_SEARCH_LOCATION
-    	<** @description: An invalid page size. **>
-        INVALID_PARAMETER_PAGE_SIZE
-    	<** @description: Invalid search options passed to the FTS engine. **>
-        INVALID_PARAMETER_SEARCH_OPTIONS
-    	<** @description: Invalid search conditions passed to the FTS engine. **>
-        INVALID_PARAMETER_SEARCH_CONDITIONS
-    	<** @description: One or  more of the search shapes are invalid. **>
-        INVALID_PARAMETER_SEARCH_SHAPES
+
+        <**
+            @description: No problem. 
+        **>
+        OK = 0
+
+        <**
+            @description: User aborted search. 
+        **>
+        ABORTED = 1
+
+        <**
+            @description: Search string is too short to evaluate. 
+        **>
+        PREFIX_TOO_SHORT = 2
+
+        <**
+            @description: There is no search for which a next page can be requested.
+        **>
+        NO_SEARCH_TO_CONTINUE = 3
+
+        <**
+            @description: An internal error occurred in the FTS engine.  
+        **>
+        INTERNAL_ERROR = 4
+
+        <**
+            @description: No FTS index for the current map. 
+        **>
+        INDEX_MISSING = 5
+
+        <**
+            @description: The FTS index format is not supported. 
+        **>
+        BAD_VERSION = 6 
+
+        <**
+            @description: An invalid freeTextSearchHandle is passed to the FTS engine. 
+        **>
+        INVALID_PARAMETER_SEARCH_HANDLE = 7
+
+        <**
+            @description: A search query not supported by the FTS engine. 
+        **>
+        INVALID_PARAMETER_QUERY = 8
+
+        <**
+            @description: A search location not on this earth. 
+        **>
+        INVALID_PARAMETER_SEARCH_LOCATION = 9
+
+        <**
+            @description: An invalid page size. 
+        **>
+        INVALID_PARAMETER_PAGE_SIZE = 10
+
+        <**
+            @description: Invalid search options passed to the FTS engine. 
+        **>
+        INVALID_PARAMETER_SEARCH_OPTIONS = 11
+
+        <**
+            @description: Invalid search conditions passed to the FTS engine. 
+        **>
+        INVALID_PARAMETER_SEARCH_CONDITIONS = 12
+
+        <**
+            @description: One or  more of the search shapes are invalid. 
+        **>
+        INVALID_PARAMETER_SEARCH_SHAPES = 13
+        
+        <**
+            @description: The fuzzy level is not in the allowed range: [0,5].
+        **>
+        INVALID_PARAMETER_FUZZY_LEVEL =14
+        
+        <**
+            @description: The input consisted of invalid geographic coordinates.
+        **>        
+        INVALID_COORDINATES_INPUT = 15
     }
-		
-		
-    <** @description: Handle to a location.
+
+    <**
+    @description: Handle to a location.
         Range[0:0xffffffff]
+    
     **>
     typedef LocationHandle is UInt32
 
-		
-    <** @description: A list of LocationHandles.
+    <**
+    @description: A list of LocationHandles.
         maximum length = 4096
+    
     **>
     array LocationHandleList of LocationHandle
 
+    <**
+    @description: If a user entered a non-existing house number then the closest existing
+        number is returned. The houseNumberFromInput will contain the house
+        number from the user input, the houseNumber will contain closest house number.
+        If the map does not contain house numbers for the street, but the user
+        input seems to have a house number, then houseNumber will be empty and
+        houseNumberFromInput will contain the number from the input.              
+    **>
+    struct StreetDetails {
+        FtsString streetName
 
-	<** @description: If a user entered a non-existing house number then the closest existing
-	    number is returned. The houseNumberFromInput will contain the house
-	    number from the user input, the houseNumber will contain closest house number.
-	    If the map does not contain house numbers for the street, but the user
-	    input seems to have a house number, then houseNumber will be empty and
-	    houseNumberFromInput will contain the number from the input.
-	 **>			
-	struct StreetDetails {
-		FtsString streetName
-    	<** @description: If a user entered a non-existing house number then the closest existing
-	        number is returned. The houseNumberFromInput will contain the house
-	        number from the user input, the houseNumber will contain closest house number.
-	        If the map does not contain house numbers for the street, but the user
-	        input seems to have a house number, then houseNumber will be empty and
-    	    houseNumberFromInput will contain the number from the input.
-	    **>			
-		FtsString houseNumber
-    	<** @description: The house number that the search engine recognized in the user input.
-	        Can be empty.
-	    **>			
-		FtsString houseNumberFromInput
-	}
+        <**
+        @description: If a user entered a non-existing house number then the closest existing
+            number is returned. The houseNumberFromInput will contain the house
+            number from the user input, the houseNumber will contain closest house number.
+            If the map does not contain house numbers for the street, but the user
+            input seems to have a house number, then houseNumber will be empty and
+            houseNumberFromInput will contain the number from the input.                 
+        **>
+        FtsString houseNumber
 
+        <**
+        @description: The house number that the search engine recognized in the user input.
+            Can be empty.
+        **>
+        FtsString houseNumberFromInput
+    }
 
     enumeration PlaceType {
-    	<** @description: a place of unknown type. **>
-        OTHER
-    	<** @description: a center of a settlement. **>
-        SETTLEMENT                                  =     2
+
+        <**
+            @description: a place of unknown type. 
+        **>
+        OTHER = 0
+
+        <**
+            @description: a center of a settlement. 
+        **>
+        SETTLEMENT = 1
     }
-		
-	
-	<** @description: Place details. **>			
-	struct PlaceDetails {
-		PlaceType placeType
-		FtsString placeName
-    	<** @description: The bounding box of this place (an estimate). **>			
-		Rectangle placeBoundingBox
-	}
 
+    <**
+        @description: Place details. 
+    **>
+    struct PlaceDetails {
+        PlaceType placeType
+        FtsString placeName
 
-	<** @description: Mapcode details. **>			
-	struct MapCodeDetails {
-    	<** @description: If the location of the mapcode is close to a street, this field
-    	    contains the name of that street, otherwise this field is left empty.
-    	**>			
-		FtsString closestStreetName
-	}
+        <**
+            @description: The bounding box of this place (an estimate). 
+        **>
+        Rectangle placeBoundingBox
+    }
 
+    <**
+        @description: Mapcode details. 
+    **>
+    struct MapCodeDetails {
 
-  <** @description: A union to contain any of the specific types of address details. **>
+        <**
+        @description: If the location of the mapcode is close to a street, this field
+            contains the name of that street, otherwise this field is left empty.
+        **>
+        FtsString closestStreetName
+    }
+
+    <**
+        @description: Political division details (country or state). 
+    **>
+    struct PoliticalDivisionDetails {
+        <**
+            @description: The bounding box of the political division. 
+        **>
+        Rectangle boundingBox                 
+    }
+    
+    <**
+        @description: Geographic coordinate pair details. 
+    **>    
+    struct CoordinatesDetails
+    {
+        <**
+            @description: This field contains the name of the street that is closest 
+                to the coordinates, as long as the straight line distance to 
+                the closest street location is less than 25 meters.
+        **>
+        FtsString    closestStreetName
+    } 
+
+    
+    <**
+        @description: A union to contain any of the specific types of address details. 
+    **>
     union AddressDetails {
         StreetDetails streetDetails
         PlaceDetails placeDetails
         MapCodeDetails mapCodeDetails
+        PoliticalDivisionDetails politicalDivisionDetails
+        CoordinatesDetails coordinatesDetails
     }
 
-
-    <** @description: A higher score means a better match.
+    <**
+    @description: A higher score means a better match.
         Range[0:0xffff]
+    
     **>
     typedef Score is UInt16
 
-	
-	<** @description: Address information. **>			
-	struct Address {
-		LocationHandle locationHandle
-		FtsString countryCode
-    	<** @description: Optional state code. **>			
-		FtsString stateCode
-    	<** @description: There can be multiple place names. **>			
-		FtsStringList places
-    	<** @description: There can be multiple postal codes assigned to a street. **>			
-		FtsStringList postalCodes
-    	<** @description: Mapcode of the coordinate.
-    	    A mapcode represents a location. Every location on Earth can be represented by a mapcode.
-    	    Mapcodes were designed to be short, easy to recognize, remember and communicate.
-    	    They are precise to a few meters. For details see http://www.mapcode.com.
-    	**>	
-		FtsString mapCode
-    	AddressDetails addressDetails
-    	Coordinate2D coordinate
-    	<** @description: Distance in meters from the search location.
-    	    -1 if no search location is given.
-    	**>			
-		DistanceInMeters distance
-    	<** @description: A higher score means a better match. **>			
-		Score score
-    	<** @description: Indicates whether this match is fuzzy, i.e. it was matched with misspellings. **>			
-		Boolean fuzzyMatch
-	}
+    <**
+        @description: Address information. 
+    **>
+    struct Address {
+        LocationHandle locationHandle
+        FtsString countryCode
 
-		
-    <** @description: A list of addresses.
+        <**
+            @description: Optional state code. 
+        **>
+        FtsString stateCode
+
+        <**
+            @description: There can be multiple place names. 
+        **>
+        FtsStringList places
+
+        <**
+            @description: There can be multiple postal codes assigned to a street. 
+        **>
+        FtsStringList postalCodes
+
+        <**
+        @description: Mapcode of the coordinate.
+            A mapcode represents a location. Every location on Earth can be represented by a mapcode.
+            Mapcodes were designed to be short, easy to recognize, remember and communicate.
+            They are precise to a few meters. For details see http://www.mapcode.com.                 
+        **>
+        FtsString mapCode
+        AddressDetails addressDetails
+        Coordinate2D coordinate
+
+        <**
+        @description: Distance in meters from the search location.
+            -1 if no search location is given.
+        **>
+        DistanceInMeters distance
+
+        <**
+            @description: A higher score means a better match. 
+        **>
+        Score score
+
+        <**
+            @description: Indicates whether this match is fuzzy, i.e. it was matched with misspellings. 
+        **>
+        Boolean fuzzyMatch
+    }
+
+    <**
+    @description: A list of addresses.
         maximum length = 500
     **>
     array Addresses of Address
 
-		
-    <** @description: Numerical POI category code.
+    <**
+    @description: Numerical POI category code.
         Range[0:0xffffffff]
     **>
     typedef POICategoryCode is UInt32
 
-	
-	<** @description: POI information. **>			
-	struct POI {
-		LocationHandle locationHandle
-		POICategoryCode categoryCode
-		FtsStringList brandNames
-		FtsString poiName
-		FtsString address
-		FtsStringList place
-		FtsStringList postalCode
-		FtsString mapCode
-		FtsString countryCode
-		FtsString stateCode
-		FtsString telephone
-		Coordinate2D coordinate
-    	<** @description: Distance in meters from the search location.
-    	    -1 if no search location is given.
-    	**>			
-		DistanceInMeters distance
-    	<** @description: A higher score means a better match. **>			
-		Score score
-    	<** @description: Indicates whether this match is fuzzy, i.e. it was matched with misspellings. **>			
-		Boolean fuzzyMatch
-	}
-		
-    <** @description: A list of POIs.
+    <**
+        @description: POI information. 
+    **>
+    struct POI {
+        LocationHandle locationHandle
+        POICategoryCode categoryCode
+        FtsStringList brandNames
+        FtsString poiName
+        FtsString address
+        FtsStringList place
+        FtsStringList postalCode
+        FtsString mapCode
+        FtsString countryCode
+        FtsString stateCode
+        FtsString telephone
+        Coordinate2D coordinate
+
+        <**
+        @description: Distance in meters from the search location.
+            -1 if no search location is given.
+        **>
+        DistanceInMeters distance
+
+        <**
+            @description: A higher score means a better match. 
+        **>
+        Score score
+
+        <**
+            @description: Indicates whether this match is fuzzy, i.e. it was matched with misspellings. 
+        **>
+        Boolean fuzzyMatch
+        
+        <**
+            @description: Indicates that POI has parents.
+        **>
+        Boolean hasParents
+        
+        <**
+            @description: Indicates that POI has children.
+        **>
+        Boolean hasChildren    
+        
+        <**
+            @description: For searches along route, this value is the the detour distance, 
+            in meters, expresses how much longer the total route will be if the POI is visited.
+            The detour distance will be -1 for all searches that don’t use a route corridor 
+            (searches in all map, in circle or rectangle).
+        **>
+        DistanceInMeters detourDistance
+        
+        <**
+            @description: For searches along route, this value is the detour time, in seconds,
+            expresses what’s the delay at the destination if the POI is visited.
+            The detour time will be -1 for all searches that don’t use a route corridor 
+            (searches in all map, in circle or rectangle).
+        **>         
+        Int32 detourTime 
+    }
+
+    <**
+    @description: A list of POIs.
         maximum length = 500
+    
     **>
     array POIs of POI
 
-	
-	<** @description: Data type for POI category suggestions. **>			
-	struct POICategory {
-		POICategoryCode categoryCode
-		FtsString categoryName
-    	<** @description: The search engine recognizes synonyms and names associated with a
-    	    POI category. If a match on such a name is found, then this attribute is set to that name.
-    	**>			
-		FtsString matchedName
-    	<** @description: Text that can be used for a suggestion like: "<categoryName> <searchTextSuggestion>"
-    	    Typically this contains the original query text, where the recognized
-    	    category name or synonym has been removed.
-    	**>			
-		FtsString searchTextSuggestion
-    	<** @description: A list of addresses that can be used for suggestions like: "<categoryName> near <address>
-    	    Note the addresses in this list do not have a valid location handle
-    	    as the address is only needed to be displayed as a suggestion.
-    	    The coordinates of an address can be used for a POI window query if the
-    	    user picks a suggestion.
-    	**>			
-		Addresses nearAddressSuggestions
-    	<** @description: A higher score means a better match. **>			
-		Score score
-	}
-		
-		
-    <** @description: A list of POI categories.
+    <**
+        @description: Data type for POI category suggestions. 
+    **>
+    struct POICategory {
+        POICategoryCode categoryCode
+        FtsString categoryName
+
+        <**
+        @description: The search engine recognizes synonyms and names associated with a
+            POI category. If a match on such a name is found, then this attribute is set to that name.
+        **>
+        FtsString matchedName
+
+        <**
+        @description: Text that can be used for a suggestion like: "<categoryName> <searchTextSuggestion>"
+            Typically this contains the original query text, where the recognized
+            category name or synonym has been removed.
+        **>
+        FtsString searchTextSuggestion
+
+        <**
+        @description: A list of addresses that can be used for suggestions like: "<categoryName> near <address>
+            Note the addresses in this list do not have a valid location handle
+            as the address is only needed to be displayed as a suggestion.
+            The coordinates of an address can be used for a POI window query if the
+            user picks a suggestion.                 
+        **>
+        Addresses nearAddressSuggestions
+
+        <**
+            @description: A higher score means a better match. 
+        **>
+        Score score
+    }
+
+    <**
+    @description: A list of POI categories.
         maximum length = 500
+    
     **>
     array POICategories of POICategory
 
-		
-    <** @description: Indicates on a scale from 0 to 5 how fuzzy the search results can be.
+    <**
+    @description: Indicates on a scale from 0 to 5 how fuzzy the search results can be.
         0 means only an exact search is performed, 1 is the lowest level of fuzzy search
         and 5 means a very fuzzy search.
         Range[0:5]
+    
     **>
     typedef FuzzyLevel is Int8
-	
-	<**	@description : This method returns the API version implemented by the content access module.**>
-	method getVersion {
-    	in {
-    	 	<** @description: Identifier to match responses to this request. **>
-    	 	RequestId requestId
-    	}
-		out {
-    	 	<** @description: Identifier to match this response with a request. **>
-    	 	RequestId responseId
-			<** @description: .**>
-			Version ^version				
-		}	
-	}	
 
-    <** @description: Perform a free text search.
+    <**
+        @description : This method returns the API version implemented by the content access module.
+    **>
+    method getVersion {
+        out {
+
+            <**
+                @description: .
+            **>
+            Version ^version
+        }
+    }
+
+    <**
+    @description: Perform a free text search.
         A single search request will trigger zero or more FtsResultXxx responses followed by an FtsDone response.
         Each response will contain 1 page of results.
         A next page of results can be retrieved with the FtsNextPage request.
@@ -345,164 +586,261 @@ interface FreeTextSearch {
         then the previous request will be canceled.
         You will still get a done response on the previous request.
         This way each request gets a response.
+    
     **>
     method ftsRequest {
         in {
-    	 	<** @description: Identifier to match responses to this request. **>
-    	 	RequestId requestId
-    	 	<** @description: Text to match. **>
-    	 	FtsString inputString
-    	 	<** @description: Location for scoring the search results.
-    	 	    A result closer to this location gets a higher score than a result further away.
-    	 	**>
-    	 	Coordinate2D searchLocation
-    	 	<** @description: Limit the search to the union of several shapes (each can be a circle or a rectangle).
-    	 	    Pass an empty list to search the whole map.
-    	 	**>
-    	 	ShapeList searchShapes
-    	 	<** @description: The maximum number of addresses and POIs that will be returned. **>
-    	 	PageSize pageSize
-    	 	<** @description: Options to indicate what to search for.
-    	 	    One or more values of SearchOption can be added together.
-    	 	**>
-    	 	SearchOptions searchOptions
-    	 	<** @description: Additional search conditions, space separated.
-    	 	    The string can be empty when the POI search is not limited by categories
-    	 	    and not limited by countries/states.
-    	 	    Supported conditions:
-    	 	        "category:nnnn"  Limit the POI search to a one or more POI categories,
-    	 	                         where 'nnnn' is a comma-separated list of numerical POI category ids.
-    	 	        "country:aaaaa"  Limit the search to one or more countries (or states),
-    	 	                         where 'aaaaa' is a comma-separated list of ISO-3166-1 alpha 3
-    	 	                         country code concatenated with an optional ISO-3166-2 state code.
-    	 	    Examples:
-    	 	    "category:9373,9374": limits the POI search to the union of categories 9373 and 9374.
-    	 	    "country:USACA": limits the search to the state of California.
-    	 	    "category:6315 country:USACA,MEX": limits the POI search to category 6315
-    	 	    and limits the search to the union of California state and Mexico.
-    	 	**>
-    	 	FtsString searchConditions
-    	 	<** @description: Indication of how fuzzy the search shall be performed. **>
-    	 	FuzzyLevel fuzzyLevel
-    	}
-		out {
-    	 	<** @description: Identifier to match this response with a request. **>
-    	 	RequestId responseId
-			<** @description: Handle to identify the Free Text Search session.
-			**>
-			Handle freeTextSearchHandle
-		}
-		error {
-			<** @description: Indicates that no new Free Text Search session can be started at the moment.
-			**>
-			NoMoreFtsHandles
-		}
+
+            <**
+                @description: Identifier to match responses to this request. 
+            **>
+            RequestId requestId
+
+            <**
+                @description: Text to match. 
+            **>
+            FtsString inputString
+
+            <**
+            @description: Location for scoring the search results.
+                A result closer to this location gets a higher score than a result further away.
+            **>
+            Coordinate2D searchLocation
+
+            <**
+            @description: Limit the search to the union of several shapes (each can be a circle or a rectangle 
+                or a route corridor around a planned route). Pass an empty list to search the whole map.
+            **>
+            ShapeList searchShapes
+
+            <**
+                @description: The maximum number of addresses and POIs that will be returned. 
+            **>
+            PageSize pageSize
+
+            <**
+            @description: Options to indicate what to search for.
+                One or more values of SearchOption can be added together.
+            **>
+            SearchOptions searchOptions
+
+            <**
+            @description: Additional search conditions, space separated.
+                The string can be empty when the POI search is not limited by categories
+                and not limited by countries/states.
+                Supported conditions:
+                    "category:nnnn"  Limit the POI search to a one or more POI categories,
+                                     where 'nnnn' is a comma-separated list of numerical POI category ids.
+                    "country:aaaaa"  Limit the search to one or more countries (or states),
+                                     where 'aaaaa' is a comma-separated list of ISO-3166-1 alpha 3
+                                     country code concatenated with an optional ISO-3166-2 state code.
+                Examples:
+                                     "category:9373,9374": limits the POI search to the union of categories 9373 and 9374.
+                                     "country:USACA": limits the search to the state of California.
+                                     "category:6315 country:USACA,MEX": limits the POI search to category 6315
+                                     and limits the search to the union of California state and Mexico.
+            **>
+            FtsString searchConditions
+
+            <**
+                @description: Indication of how fuzzy the search shall be performed. 
+            **>
+            FuzzyLevel fuzzyLevel
+        }
+        out {
+
+            <**
+            @description: Handle to identify the Free Text Search session.
+            **>
+            Handle freeTextSearchHandle
+        }
+        error {
+
+            <**
+            @description: Indicates no error.            
+            **>
+            OK
+
+            <**
+            @description: Indicates that no new Free Text Search session can be started at the moment.
+            **>
+            NoMoreFtsHandles
+
+            <**
+            @description: Indicates the request failed becuase of invalid request ID.
+            **>
+            InvalidRequestId
+        }
     }
-    
-    <** @description: Get next result page for the last performed search.
+
+    <**
+    @description: Get next result page for the last performed search.
         This request will trigger zero or more FtsResultXxx responses followed by an FtsDone response.
-        If there is no search request done before or if a search request is still in progress
-        hen the FtsDone response will return a EStatusNoSearchToContinue status.
+        If there is no search request done before or if a search request is still in progress,
+        the FtsDone response will return a NO_SEARCH_TO_CONTINUE status.
+    
     **>
     method ftsNextPage {
-    	in {
-    	 	<** @description: Identifier to match responses to this request. **>
-    	 	RequestId requestId
-			<** @description: Handle to identify the Free Text Search session.
-			**>
-			Handle freeTextSearchHandle
-    	 	<** @description: Options to indicate what to search for.
-    	 	    One or more values of TFTSSearchOption can be added together.
-    	 	    You can only get results for options that have been passed to the initial FtsRequest.
-    	 	**>
-    	 	SearchOptions searchOptions
-    	}
-		out {
-    	 	<** @description: Identifier to match this response with a request. **>
-    	 	RequestId responseId
-		}
+        in {
+
+            <**
+                @description: Identifier to match responses to this request. 
+            **>
+            RequestId requestId
+
+            <**
+            @description: Handle to identify the Free Text Search session.
+            **>
+            Handle freeTextSearchHandle
+
+            <**
+            @description: Options to indicate what to search for.
+                One or more values of SearchOption can be added together.
+                You can only get results for options that have been passed to the initial FtsRequest.
+            **>
+            SearchOptions searchOptions
+        }
+        error {
+
+            <**
+            @description: Indicates no error.            
+            **>
+            OK
+
+            <**
+            @description: Indicates that freeTextSearchHandle is unknown.            
+            **>
+            UnknownHandle
+
+            <**
+            @description: Indicates the request failed becuase of invalid request ID.
+            **>
+            InvalidRequestId
+        }
     }
 
-     <** @description: Cancel an FTS session. **>
+    <**
+        @description: Cancel an FTS session. 
+    **>
     method ftsCancel {
-    	in {
-    	 	<** @description: Identifier to match responses to this request. **>
-    	 	RequestId requestId
-			<** @description: Handle to identify the Free Text Search session to be cancelled.
-			**>
-			Handle freeTextSearchHandle
-    	}
-		out {
-    	 	<** @description: Identifier to match this response with a request. **>
-    	 	RequestId responseId
-		}
+        in {
+
+            <**
+            @description: Handle to identify the Free Text Search session to be cancelled.
+            **>
+            Handle freeTextSearchHandle
+        }
+        error {
+
+            <**
+            @description: Indicates no error.            
+            **>
+            OK
+
+            <**
+            @description: Indicates that freeTextSearchHandle is unknown.            
+            **>
+            UnknownHandle
+        }        
     }
 
-	
-	<**	@description : Response indicating that the search is done. **>	
-	broadcast ftsDone selective {
-		out {
-    	 	<** @description: Identifier to match this response with a request. **>
-    	 	RequestId responseId
-    	 	<** @description: Status of the search request. **>
-    	 	FtsStatus ftsStatus
-		}
-	}
-	
-	
-	<**	@description : Response with address results. **>	
-	broadcast ftsResultAddresses selective {
-		out {
-    	 	<** @description: Identifier to match this response with a request. **>
-    	 	RequestId responseId
-    	 	<** @description: Matching addresses.
-    	 	    The order of the addresses is the order of matching relevance.
-    	 	    The first address is a better match than the last result.
-    	 	**>
-    	 	Addresses addresses
-    	 	<** @description: Flag to indicate if more addresses might be available in a next page. **>
-    	 	Boolean moreAvailable
-		}
-	}
-	
-	<**	@description : Response with POI results. **>	
-	broadcast ftsResultPois selective {
-		out {
-    	 	<** @description: Identifier to match this response with a request. **>
-    	 	RequestId responseId
-    	 	<** @description: Matching POIs.
-    	 	    The order of the POIs is the order of matching relevance.
-    	 	    The first POI is a better match than the last result.
-    	 	**>
-    	 	POIs pois
-    	 	<** @description: Flag to indicate if more POIs might be available in a next page. **>
-    	 	Boolean moreAvailable
-		}
-	}
-	
-	
-	<**	@description : Response with POI category suggestions. **>	
-	broadcast ftsResultPoiSuggestions selective {
-		out {
-    	 	<** @description: Identifier to match this response with a request. **>
-    	 	RequestId responseId
-    	 	<** @description: POI category suggestions. **>
-    	 	POICategories poiCategories
-		}
-	}
-	
-	
-	<**	@description : Release handle(s) if they are not used anymore. **>	
-	method deleteLocationHandles {
-		in {
-    	 	<** @description: Identifier to match responses to this request. **>
-    	 	RequestId requestId
-    	 	<** @description: list of handles to release. **>
-    	 	LocationHandleList locationHandleList
-		}
-		out {
-    	 	<** @description: Identifier to match this response with a request. **>
-    	 	RequestId responseId
-		}
-	}
+    <**
+        @description : Response indicating that the search is done. 
+    **>
+    broadcast ftsDone selective {
+        out {
+
+            <**
+                @description: Identifier to match this response with a request. 
+            **>
+            RequestId responseId
+
+            <**
+                @description: Status of the search request. 
+            **>
+            FtsStatus ftsStatus
+        }
+    }
+
+    <**
+        @description : Response with address results. 
+    **>
+    broadcast ftsResultAddresses selective {
+        out {
+
+            <**
+                @description: Identifier to match this response with a request. 
+            **>
+            RequestId responseId
+
+            <**
+            @description: Matching addresses.
+                The order of the addresses is the order of matching relevance.
+                The first address is a better match than the last result.
+            **>
+            Addresses addresses
+
+            <**
+                @description: Flag to indicate if more addresses might be available in a next page. 
+            **>
+            Boolean moreAvailable
+        }
+    }
+
+    <**
+        @description : Response with POI results. 
+    **>
+    broadcast ftsResultPois selective {
+        out {
+
+            <**
+                @description: Identifier to match this response with a request. 
+            **>
+            RequestId responseId
+
+            <**
+            @description: Matching POIs.
+                The order of the POIs is the order of matching relevance.
+                The first POI is a better match than the last result.
+            **>
+            POIs pois
+
+            <**
+                @description: Flag to indicate if more POIs might be available in a next page. 
+            **>
+            Boolean moreAvailable
+        }
+    }
+
+    <**
+        @description : Response with POI category suggestions. 
+    **>
+    broadcast ftsResultPoiSuggestions selective {
+        out {
+
+            <**
+                @description: Identifier to match this response with a request. 
+            **>
+            RequestId responseId
+
+            <**
+                @description: POI category suggestions. 
+            **>
+            POICategories poiCategories
+        }
+    }
+
+    <**
+        @description : Release handle(s) if they are not used anymore. 
+    **>
+    method deleteLocationHandles {
+        in {
+
+            <**
+                @description: list of handles to release. 
+            **>
+            LocationHandleList locationHandleList
+        }
+    }
+
 }

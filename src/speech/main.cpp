@@ -2,13 +2,15 @@
 * @licence app begin@
 * SPDX-License-Identifier: MPL-2.0
 *
-* \copyright Copyright (C) 2013-2014, PCA Peugeot Citroen
+* \copyright Copyright (C) 2013-2017, PCA Peugeot Citroen
 *
 * \file main.cpp
 *
 * \brief This file is part of the speech proof of concept.
 *
 * \author Philippe Colliot <philippe.colliot@mpsa.com>
+* \brief Some parts of the code has been inspired by the following people:
+* \brief Mario Thielert, David Kämpf, Dominique Massonie
 *
 * \version 1.1
 *
@@ -97,6 +99,22 @@ static std::string m_chunkBuffer; /** max size = MAX_CHUNK_SIZE*MAX_SLOT_COUNT *
               int last, cst_audio_streaming_info_struct *asi)
  {
      printf("\n>>> [server] fliteCallback()\n");
+     printf("start: %d size: %d last: %d \n",start,size,last);
+     static cst_audiodev *ad = 0;
+
+     if (start == 0)
+         ad = audio_open(w->sample_rate,w->num_channels,CST_AUDIO_LINEAR16);
+
+     audio_write(ad,&w->samples[start],size*sizeof(short));
+
+     if (last == 1)
+     {
+         audio_close(ad);
+         ad = NULL;
+     }
+
+     /* if you want to stop return CST_AUDIO_STREAM_STOP */
+     return CST_AUDIO_STREAM_CONT;
  }
 
 class  SpeechOutputServerStub
@@ -117,11 +135,11 @@ public:
         flite_init();
 
         mp_voice = register_cmu_us_kal(NULL);
-/*        mp_asi = new_audio_streaming_info();
+        mp_asi = new_audio_streaming_info();
         mp_asi->asc = fliteCallback;
 
         feat_set(mp_voice->features,"streaming_info",audio_streaming_info_val(mp_asi));
-*/
+
     }
 
     ~SpeechOutputServerStub() {
