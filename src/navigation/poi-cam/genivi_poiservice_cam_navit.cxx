@@ -97,19 +97,26 @@ class ContentAccessModule
   public DBus::IntrospectableAdaptor,
   public DBus::ObjectAdaptor
 {
-	private:
-        std::vector< uint32_t > m_poiCategoriesId;
-        std::vector< ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > > m_resultList;
-        int m_max_radius;
-        bool (*m_sort_func)(::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > a, ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > b);
-		struct coord m_center;
-		double m_scale;
-		struct mapset *m_mapset;
-		struct mapset_handle *m_msh;
-		struct map *m_map;
-		struct map_rect *m_map_rect;
-		struct map_selection m_selection;
-        std::string m_languageCode,m_countryCode,m_scriptCode;
+    private:
+    struct poiEquivalence {
+        std::string name;
+        item_type formerId;
+        int32_t givenId;
+    };
+
+    std::vector<poiEquivalence> m_poiEquivalenceList;
+    std::vector< uint32_t > m_poiCategoriesId;
+    std::vector< ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > > m_resultList;
+    int m_max_radius;
+    bool (*m_sort_func)(::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > a, ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > b);
+    struct coord m_center;
+    double m_scale;
+    struct mapset *m_mapset;
+    struct mapset_handle *m_msh;
+    struct map *m_map;
+    struct map_rect *m_map_rect;
+    struct map_selection m_selection;
+    std::string m_languageCode,m_countryCode,m_scriptCode;
 
 	public:
 
@@ -128,27 +135,47 @@ class ContentAccessModule
         pca=new PoiContentAccess(*conns[POI_CONTENTACCESS_CONNECTION]);
 		int camid=pca->RegisterContentAccessModule(cam_name);
 		dbg(lvl_debug,"camid=%d\n",camid);
-
         std::vector< ::DBus::Struct< ::DBus::Struct< std::vector< uint32_t >, DBusCommonAPIVariant, std::string, std::string, DBusCommonAPIVariant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, DBusCommonAPIVariant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > > poiCategories1;
         ::DBus::Struct< ::DBus::Struct< std::vector< uint32_t >, DBusCommonAPIVariant, std::string, std::string, DBusCommonAPIVariant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, DBusCommonAPIVariant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > poiCategory;
-		/* poiCategory._1._1 parents_id */;
-        poiCategory._1._2._2=variant_string(""); /* icons */
-		poiCategory._1._3="fuel"; /* name */
-		/* poiCategory,_1._4 short_desc */
-        poiCategory._1._5._2=variant_string(""); /* media */
+        size_t i;
+        poiEquivalence poi_equivalence;
 
-		/* poiCategory,_2 attributes */
-		/* poiCategory,_3 sortOptions */
+        poi_equivalence.name="fuel";
+        poi_equivalence.formerId=type_poi_fuel;
+        m_poiEquivalenceList.push_back(poi_equivalence);
+        poi_equivalence.name="hotel";
+        poi_equivalence.formerId=type_poi_hotel;
+        m_poiEquivalenceList.push_back(poi_equivalence);
+        poi_equivalence.name="car_parking";
+        poi_equivalence.formerId=type_poi_car_parking;
+        m_poiEquivalenceList.push_back(poi_equivalence);
+        poi_equivalence.name="bar";
+        poi_equivalence.formerId=type_poi_bar;
+        m_poiEquivalenceList.push_back(poi_equivalence);
+        poi_equivalence.name="restaurant";
+        poi_equivalence.formerId=type_poi_restaurant;
+        m_poiEquivalenceList.push_back(poi_equivalence);
+        for(i=0;i<m_poiEquivalenceList.size();i++)
+        {
+            /* poiCategory._1._1 parents_id */;
+            poiCategory._1._2._2=variant_string(""); /* icons */
+            poiCategory._1._3=m_poiEquivalenceList[i].name; /* name */
+            /* poiCategory,_1._4 short_desc */
+            poiCategory._1._5._2=variant_string(""); /* media */
 
-		poiCategories1.push_back(poiCategory);
-		
-		m_poiCategoriesId=pca->AddCategories(camid, poiCategories1);
-		for (int i = 0 ; i < m_poiCategoriesId.size(); i++) {
-			dbg(lvl_debug,"Added category id %d\n",m_poiCategoriesId[i]);
-		}
-		pca->RegisterPoiCategories(camid, m_poiCategoriesId);
-		delete(pca);
-	}
+            /* poiCategory,_2 attributes */
+            /* poiCategory,_3 sortOptions */
+
+            poiCategories1.push_back(poiCategory);
+        }
+
+        m_poiCategoriesId=pca->AddCategories(camid, poiCategories1);
+        for (i = 0 ; i < m_poiCategoriesId.size(); i++) {
+            m_poiEquivalenceList[i].givenId=m_poiCategoriesId[i];
+        }
+        pca->RegisterPoiCategories(camid, m_poiCategoriesId);
+        delete(pca);
+    }
 
 	void
 	map_next(void)
@@ -328,8 +355,16 @@ class ContentAccessModule
 		m_selection.u.c_rect.lu.x-=d;
 		m_selection.u.c_rect.lu.y+=d;
 		m_selection.order=18;
-		m_selection.range.min=type_poi_fuel;
-		m_selection.range.max=type_poi_fuel;
+        //for the time being only search for the first id (because I don't know how to manage it for several ones)
+        for(size_t i=0;i<m_poiEquivalenceList.size();i++)
+        { //to be improved !
+            if(m_poiEquivalenceList[i].givenId==poiCategories[0]._1)
+            {
+                m_selection.range.min=m_poiEquivalenceList[i].formerId;
+                m_selection.range.max=m_poiEquivalenceList[i].formerId;
+            }
+        }
+
 		dbg(lvl_debug,"rect 0x%x,0x%x-0x%x,0x%x\n",m_selection.u.c_rect.lu.x,m_selection.u.c_rect.lu.y,m_selection.u.c_rect.rl.x,m_selection.u.c_rect.rl.y);
 		if (m_msh)
 			mapset_close(m_msh);
@@ -355,7 +390,7 @@ class ContentAccessModule
 		dbg(lvl_debug,"enter camId=%d handle=%d\n", camId, poiSearchHandle);
 		while (resultList.size() < 256 && m_map_rect) {
 			while (resultList.size() < 256 && (item=map_rect_get_item(m_map_rect))) {
-				if (item->type == type_poi_fuel)
+                if (item->type == m_selection.range.min)
 					add_poi(item);
 				count++;
 			}
