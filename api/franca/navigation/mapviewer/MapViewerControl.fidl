@@ -260,10 +260,28 @@ interface MapViewerControl {
 		ElementValue value
 	}
 
+	<**
+		@description : expresses the extra data for a waypoint selected on the map
+	**>
+	struct WayPointValue {
+
+		<**
+			@description : the waypoint belong to the route with handle "routeHandle""
+		**>
+		Handle routeHandle
+  
+		<**
+			@description : waypointIndex is the index of the waypoint on the route (the first waypoint is index 0)
+		**>
+		UInt16 waypointIndex
+	}
+  
+
 	union ElementValue {
 		Int32 trafficIncident
 		Handle handle
 		CustomElement element
+		WayPointValue wayPointValue
 	}
 
 	<**
