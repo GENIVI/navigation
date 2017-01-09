@@ -40,7 +40,6 @@ interface LocationInput {
 		COUNTRYCODE		= 179 //value of type String, ISO 3166‐1 alpha 3 country code (upper case)
 		STATE			= 167
 		CITY			= 168 //value of type String, that identifies the city name
-		ZIPCODE			= 169
 		STREET			= 170 //value of type String, that identifies the street name
 		ROAD_NUMBER		= 182 //value of type String, that identifies the road number
 		HOUSENUMBER		= 171 //value of type String, that identifies the house number

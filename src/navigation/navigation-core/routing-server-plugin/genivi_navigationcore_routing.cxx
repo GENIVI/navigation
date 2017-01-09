@@ -393,10 +393,10 @@ class  RoutingServerStub : public RoutingStubDefault
     }
 
     /**
-     * description: calculateRoutes = This method allows a client to calculate alternative routes
-     *   that differs from a list of already calculated routes
+     * description: calculateAlternativeRoutes = This method allows a client to calculate alternative routes
+     *   that differs from a  calculated route
      */
-    void calculateRoutes(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, std::vector< ::v4::org::genivi::navigation::NavigationTypes::Handle> _calculatedRoutesList, calculateRoutesReply_t _reply){
+    void calculateAlternativeRoutes(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _calculatedRoute, calculateAlternativeRoutesReply_t _reply) {
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 

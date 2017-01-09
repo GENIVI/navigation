@@ -92,7 +92,6 @@
   <id name="COUNTRY" value="0x00a6" />
   <id name="STATE" value="0x00a7" />
   <id name="CITY" value="0x00a8" />
-  <id name="ZIPCODE" value="0x00a9" />
   <id name="STREET" value="0x00aa" />
   <id name="HOUSENUMBER" value="0x00ab" />
   <id name="CROSSING" value="0x00ac" />

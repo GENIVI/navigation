@@ -222,7 +222,21 @@ interface MapViewerControl {
 		Boolean highlighted
 	}
 
-
+	struct  CategoryVisibility {
+		CategoryID poiCategoryId
+		<**
+			@description : visible = TRUE means that the POI categories are visible
+		**>
+		Boolean visible
+		<**
+			@description : minScaleID = minimun scale on which the POI categories are displayed
+		**>
+		UInt8 minScaleID
+		<**
+			@description : maxScaleID = maximum scale on which the POI categories are displayed
+		**>
+		UInt8 maxScaleID
+	}
 
 	<**
 		@description : struct generated for DBus argument DisplayCustomElements_customElementsElem4
@@ -1710,22 +1724,8 @@ interface MapViewerControl {
 			**>
 			Handle mapViewInstanceHandle
 
-			CategoryID[] poiCategoryIds
+			CategoryVisibility[] poiCategoryVisibilities
 
-			<**
-				@description : visible = TRUE means that the POI categories are visible
-			**>
-			Boolean visible
-
-			<**
-				@description : minScaleID = minimun scale on which the POI categories are displayed
-			**>
-			UInt8 minScaleID
-
-			<**
-				@description : maxScaleID = maximum scale on which the POI categories are displayed
-			**>
-			UInt8 maxScaleID
 		}
 	}
 

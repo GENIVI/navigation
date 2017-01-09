@@ -354,7 +354,7 @@ class  Routing
 	}
 
     void
-    CalculateRoutes(const uint32_t& sessionHandle, const std::vector< uint32_t >& calculatedRoutesList, int32_t& error, std::vector< uint32_t >& alternativeRoutesList)
+    CalculateAlternativeRoutes(const uint32_t& sessionHandle, const uint32_t& calculatedRoute, int32_t& error, std::vector< uint32_t >& alternativeRoutesList)
 	{
 		throw DBus::ErrorNotSupported("Not yet supported");
 	}

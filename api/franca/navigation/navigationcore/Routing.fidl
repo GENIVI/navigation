@@ -596,16 +596,19 @@ interface Routing {
 	}
 
 	<**
-		@description : calculateRoutes = This method allows a client to calculate alternative routes that differs from a list of already calculated routes
+		@description : @description : calculateAlternativeRoutes = This method allows a client to calculate alternative routes of a route that already calculated.
 	**>
-	method calculateRoutes {
+	method calculateAlternativeRoutes {
 		in {
 
 			<**
 				@description : sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
 			**>
 			Handle sessionHandle
-			Handle[] calculatedRoutesList
+			<**
+				@description : route handle of the calculated route for which alternatives should be calculated
+			**>
+			Handle calculatedRoute
 		}
 		out {
 			Handle[] alternativeRoutesList
