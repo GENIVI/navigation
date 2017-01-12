@@ -23,5 +23,55 @@ typeCollection NavigationCoreTypes {
 		LONGITUDE	= 161 //value of type Double, that expresses the longitude in format %3.6f. Range[-180:+180]. Example: 9.167898
 		ALTITUDE	= 162 //value of type Int32, that expresses the altitude in meters
 	}	
+	enumeration RoadShieldAffixType {
+		NONE           = 700
+		NORTH          = 701
+		EAST           = 702
+		SOUTH          = 703
+		WEST           = 704
+		ALTERNATE      = 705
+		BYPASS         = 706
+		BUSINESS_LOOP  = 707
+		BUSINESS_ROUTE = 708
+		BUSINESS_SPUR  = 709
+		EXTENDED       = 710
+		COLLECTOR      = 711
+		EXPRESS        = 712
+	}
+
+	<**
+		@description : This struct describes information about the 'affix', which is a small sign which may be attached to 
+			the main road sign. Usually this will be something like 'northbound'. In most cases the affixContent is just 
+			a textual representation of the type, and can be ignored, but it could be used to build a string representation 
+			of the road sign, if desired.
+	**>
+	struct RoadShieldAffix {
+		<** @description : Type of the affix. **>
+		RoadShieldAffixType affixType
+
+		<** @description :  The textual representation of the affix type. **>
+		String affixContent
+	}
+
+	<**
+		@description : A road shield is the way in which a road number is graphically represented on road signs. For
+			example, A-roads in the Netherlands are displayed in white lettering on a red background, while E-roads 
+			are shown as white letters on a green background. 
+	**>
+	struct RoadShield {
+		<** @description : The text of a road number as displayed on a road shield. For example, for a motorway in Germany 
+				with the numbers "A40" and "E34", the values are "40" and "E34". This shows that the 'A' is not shown on 
+				the shield, but the 'E' is shown. **>
+		String roadNumber
+
+		<** @description : A road shield can have zero or more affixes. **>
+		RoadShieldAffix[] affixes
+
+		<** @description : For every road shield a number of icons may be available. There may be icons for high and low 
+				density screens, and/or icons with different widths for different text lengths. Such a collection of icons 
+				is called an icon set. Opaque data referring to an icon set for the RoadShield. An empty string indicates 
+				that no icon set is available. **>
+		String iconSetId
+	}
 	
 }

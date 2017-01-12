@@ -32,7 +32,6 @@ interface MapMatchedPosition {
 		COUNTRY				= 166 //Base 0x00a0
 		STATE				= 167
 		CITY				= 168
-		ZIPCODE				= 169
 		STREET				= 170
 		HOUSENUMBER			= 171
 		CROSSING			= 172
@@ -46,7 +45,8 @@ interface MapMatchedPosition {
 		HOUSENAME			= 180
 		POSTAL_CODE			= 181
 		ROAD_NUMBER			= 334
-		MATCH_TYPE			= 240		
+		MATCH_TYPE			= 240
+		ROADSHIELDS			= 182
 	}
 		
 	enumeration PositionStatus extends GeoLocalizedEnum { //Base 0x00e0
@@ -102,6 +102,7 @@ interface MapMatchedPosition {
 		Int16 offset
 		Timestamp timestamp
 		MatchMode matchMode
+		RoadShield[] roadShields
 	}
 	
 	map AddressItemDict {

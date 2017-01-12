@@ -104,6 +104,7 @@
   <id name="COUNTRYCODE" value="0x00b3" />
   <id name="HOUSENAME" value="0x00b4" />
   <id name="POSTAL_CODE" value="0x00b5" /> 
+  <id name="ROADSHIELDS" value="0x00b6" />
 
   <id name="NOT_STARTED" value="0x0c0" />
   <id name="SEARCHING" value="0x00c1" />
@@ -240,5 +241,19 @@
   <id name="DIVIDER_SOLIDDOUBLE" value="0x0254" />
   <id name="DIVIDER_SOLIDINTERRUPTED" value="0x0255" />
   <id name="DIVIDER_INTERRUPTEDSOLID" value="0x0256" />
+
+  <id name="AFFIX_NONE" value="0x02BC" />
+  <id name="AFFIX_NORTH" value="0x02BD" />
+  <id name="AFFIX_EAST" value="0x02BE" />
+  <id name="AFFIX_SOUTH" value="0x02BF" />
+  <id name="AFFIX_WEST" value="0x02C0" />
+  <id name="AFFIX_ALTERNATE" value="0x02C1" />
+  <id name="AFFIX_BYPASS" value="0x02C2" />
+  <id name="AFFIX_BUSINESS_LOOP" value="0x02C3" />
+  <id name="AFFIX_BUSINESS_ROUTE" value="0x02C4" />
+  <id name="AFFIX_BUSINESS_SPUR" value="0x02C5" />
+  <id name="AFFIX_EXTENDED" value="0x02C6" />
+  <id name="AFFIX_COLLECTOR" value="0x02C7" />
+  <id name="AFFIX_EXPRESS" value="0x02C8" />
 
 </constants>

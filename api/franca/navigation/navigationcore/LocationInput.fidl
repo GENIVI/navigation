@@ -52,6 +52,7 @@ interface LocationInput {
 		LOCATION_INPUT  = 177
 		FULL_ADDRESS	= 178
 		POSTAL_CODE		= 181
+		ROADSHIELDS		= 182
 	}
 
     union AddressValue {
@@ -60,6 +61,7 @@ interface LocationInput {
 	    String stringValue
 	    Coordinate3D coordinate3DValue
 	    UInt8[] internalData
+	    RoadShield[] roadShields
     }
 
 	map Address {
@@ -171,7 +173,7 @@ interface LocationInput {
 			LocationHandle locationInputHandle
 
 			<**
-				@description : selectionCriterion = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )
+				@description : selectionCriterion = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )
 			**>
 			AddressAttribute selectionCriterion
 		}
@@ -361,7 +363,7 @@ interface LocationInput {
 			LocationHandle locationInputHandle
 
 			<**
-				@description : selectionCriterion = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,ZIPCODE,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )
+				@description : selectionCriterion = enum(INVALID,LATITUDE,LONGITUDE,ALTITUDE,FULL_ADDRESS,COUNTRY,COUNTRYCODE,STATE,CITY,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,PHONENUMBER,POINAME,TOWNCENTER, ... )
 			**>
 			AddressAttribute selectionCriterion
 		}

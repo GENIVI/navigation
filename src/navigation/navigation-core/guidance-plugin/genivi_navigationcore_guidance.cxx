@@ -125,7 +125,7 @@ class GuidanceObj
     void GetGuidanceStatus(int32_t& guidanceStatus, uint32_t& routeHandle);
 	void GetDestinationInformation(uint32_t& offset, uint32_t& TravelTime, int32_t& Direction, int16_t& TimeZone);
     void GetManeuver(struct item *item, uint32_t& DistanceToManeuver, int32_t &Maneuver, std::string& RoadAfterManeuver, std::pair<int32_t, DBusCommonAPIVariant> &ManeuverData);
-    void GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, uint16_t& numberOfManeuvers, std::vector< ::DBus::Struct< std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > > >& maneuversList);
+    void GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, uint16_t& numberOfManeuvers,std::vector< ::DBus::Struct< std::vector< ::DBus::Struct< std::string, std::vector< ::DBus::Struct< int32_t, std::string > >, std::string > >, std::string, std::string, std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > > >&  maneuversList);
     void GetGuidanceDetails(bool& voiceGuidance, bool& vehicleOnTheRoad, bool& isDestinationReached, int32_t &maneuver);
 	GuidanceObj(class Guidance *guidance, uint32_t SessionHandle, uint32_t RouteHandle);
 	~GuidanceObj();
@@ -349,7 +349,7 @@ class  Guidance
 	}
 
     void
-    GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, int32_t& error, uint16_t& numberOfManeuvers, std::vector< ::DBus::Struct< std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > > >& maneuversList)
+    GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, int32_t& error, uint16_t& numberOfManeuvers, std::vector< ::DBus::Struct< std::vector< ::DBus::Struct< std::string, std::vector< ::DBus::Struct< int32_t, std::string > >, std::string > >, std::string, std::string, std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > > >& maneuversList)
 	{
 		if (!guidance) {
             dbg(lvl_debug,"no guidance active\n");
@@ -592,7 +592,7 @@ GuidanceObj::GetGuidanceDetails(bool& voiceGuidance, bool& vehicleOnTheRoad, boo
 }
 
 void
-GuidanceObj::GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, uint16_t& numberOfManeuvers, std::vector< ::DBus::Struct< std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > > >& maneuversList)
+GuidanceObj::GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, uint16_t& numberOfManeuvers,std::vector< ::DBus::Struct< std::vector< ::DBus::Struct< std::string, std::vector< ::DBus::Struct< int32_t, std::string > >, std::string > >, std::string, std::string, std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > > >&  maneuversList)
 {
 	struct map_rect *mr=get_map_rect();
 	struct item *item;
@@ -603,20 +603,20 @@ GuidanceObj::GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const 
     maneuverIndex = 0;
     while (item=get_item(mr)) { //scan the list of maneuvers of the route
         if (maneuverIndex >= maneuverOffset && maneuverIndex < maneuverOffset+requestedNumberOfManeuvers) {
-            ::DBus::Struct< std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, DBusCommonAPIVariant > > > > maneuver;
+            ::DBus::Struct< std::vector< ::DBus::Struct< std::string, std::vector< ::DBus::Struct< int32_t, std::string > >, std::string > >, std::string, std::string, std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, DBusCommonAPIVariant > > > > maneuver;
             ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, DBusCommonAPIVariant > > sub_maneuver;
             std::pair< int32_t, DBusCommonAPIVariant > maneuver_data;
-            maneuver._1 = ""; //roadNumberAfterManeuver
-            maneuver._3 = GENIVI_NAVIGATIONCORE_DEFAULT; //roadPropertyAfterManeuver
-            maneuver._4 = GENIVI_NAVIGATIONCORE_RIGHT; //drivingSide
-            maneuver._5 = 0; //offsetOfNextManeuver
-            //get infos about maneuver: sub_maneuver._1: DistanceToManeuver, sub_maneuver._4: Maneuver, maneuver._2: RoadAfterManeuver
+            maneuver._4 = ""; //roadNumberAfterManeuver
+            maneuver._6 = GENIVI_NAVIGATIONCORE_DEFAULT; //roadPropertyAfterManeuver
+            maneuver._7 = GENIVI_NAVIGATIONCORE_RIGHT; //drivingSide
+            maneuver._8 = 0; //offsetOfNextManeuver
+            //get infos about maneuver: sub_maneuver._1: DistanceToManeuver, sub_maneuver._4: Maneuver, maneuver._5: RoadAfterManeuver
             //maneuver_data is a map of attribute and value (e.g. DIRECTION STRAIGHT_ON )
-            GetManeuver(item, sub_maneuver._1, sub_maneuver._4, maneuver._2, maneuver_data);
+            GetManeuver(item, sub_maneuver._1, sub_maneuver._4, maneuver._5, maneuver_data);
             sub_maneuver._5.insert(maneuver_data);
-            maneuver._6.push_back(sub_maneuver);
+            maneuver._9.push_back(sub_maneuver);
             if (maneuversList.size())
-                maneuversList.back()._5 = sub_maneuver._1; //offsetOfNextManeuver of the last record is the offsetOfManeuver  of this one
+                maneuversList.back()._8 = sub_maneuver._1; //offsetOfNextManeuver of the last record is the offsetOfManeuver  of this one
 			maneuversList.push_back(maneuver);
             numberOfManeuvers++;
 		}

@@ -133,7 +133,7 @@ def guidance_positionOnRouteChanged_handler(offsetOnRoute):
     print "Travel time: " +str(ret[1])
     ret = g_guidance_interface.getManeuversList(dbus.UInt16(1),dbus.UInt32(0))
     print "Number of maneuvers: " +str(ret[1])
-    print "Next road to turn: " +str(ret[2][0][1])
+    print "Next road to turn: " +str(ret[2][0][4])
     g_mapmatchedposition_interface.setSimulationMode(dbus.UInt32(g_navigationcore_session_handle),dbus.Boolean(False))
     g_guidance_interface.stopGuidance(dbus.UInt32(g_navigationcore_session_handle))
     

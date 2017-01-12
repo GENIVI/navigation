@@ -249,9 +249,17 @@
           <line>Note: the number corresponds to the number of elements in the array</line>
         </doc>
       </arg>
-      <arg name="maneuversList" type="a(ssqiua(uuiia{i(yv)}))" direction="out">
+      <arg name="maneuversList" type="a(a(sa(is)s)ssssqiua(uuiia{i(yv)}))" direction="out">
         <doc>
-          <line>maneuversList = array[struct(roadNumberAfterManeuver,roadNameAfterManeuver,roadPropertyAfterManeuver,drivingSide,offsetOfNextManeuver,maneuverDetails)]</line>
+          <line>maneuversList = array[struct(roadShieldsAfterManeuver,countryCodeAfterManeuver,stateCodeAfterManeuver,roadNumberAfterManeuver,roadNameAfterManeuver,roadPropertyAfterManeuver,drivingSide,offsetOfNextManeuver,maneuverDetails)]</line>
+          <line>roadShieldsAfterManeuver = array[struct(roadNumber,affixes,iconSetId)]. A road can have zero or more roadshields.</line>
+          <line>roadNumber= The text of a road number as displayed on a road shield. For example, for a motorway in Germany with the numbers "A40" and "E34", the values are "40" and "E34". This shows that the 'A' is not shown on the shield, but the 'E' is shown. </line>
+          <line>affixes = array[struct(affixType,affixContent)]. A road shield can have zero or more affixes</line>
+          <line>affixType = Type of the affix. enum(AFFIX_NONE,AFFIX_NORTH,AFFIX_EAST,AFFIX_SOUTH,AFFIX_WEST, AFFIX_ALTERNATE,AFFIX_BYPASS,AFFIX_BUSINESS_LOOP,AFFIX_BUSINESS_ROUTE,AFFIX_BUSINESS_SPUR,AFFIX_EXTENDED,AFFIX_COLLECTOR,AFFIX_EXPRESS)</line>
+          <line>affixContent = The textual representation of the affix type.</line>
+          <line>iconSetId = For every road shield a number of icons may be available. There may be icons for high and low density screens, and/or icons with different widths for different text lengths. Such a collection of icons is called an icon set. Opaque data referring to an icon set for the RoadShield. An empty string indicates 				that no icon set is available. </line>
+          <line>countryCodeAfterManeuver = the ISO 3166‐1 alpha-3 country code (three-letter upper case).</line>
+          <line>stateCodeAfterManeuver = the ISO 3166-2 Subdivision code (e.g., provinces or state) of country (up to three characters). An empty string when absent.</line>
           <line>roadNumberAfterManeuver = the number of the road after the maneuver (if a road has multiple road numbers, they will be separated by slashes ('/') and combined into one string)</line>
           <line>roadNameAfterManeuver = the name of the road after the maneuver</line>
           <line>roadPropertyAfterManeuver = enum(TOLL_ROADS, ... ,DEFAULT)</line>

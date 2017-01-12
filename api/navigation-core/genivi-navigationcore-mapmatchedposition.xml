@@ -248,7 +248,7 @@
         <doc>
           <line>address = dictionary[key,value]</line>
           <line>dictionary = array of tuples (key,value)</line>
-          <line>key = enum(INVALID,TIMESTAMP,COUNTRY,COUNTRYCODE,CITY,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,TIMEZONE_OFFSET,DAYLIGHT_OFFSET,MATCH_TYPE, ... )</line>
+          <line>key = enum(INVALID,TIMESTAMP,COUNTRY,COUNTRYCODE,CITY,STREET,ROAD_NUMBER,HOUSENUMBER,HOUSENAME,CROSSING,DISTRICT,TIMEZONE_OFFSET,DAYLIGHT_OFFSET,MATCH_TYPE,ROADSHIELDS, ... )</line>
           <line>key = TIMESTAMP, value = value of type 't', that represents a timestamp in ms</line>
           <line>key = COUNTRY, value = value of type 's', that identifies the country name</line>
           <line>key = COUNTRYCODE, value = value of type 's', ISO 3166‐1 alpha 3 country code (upper case)</line>
@@ -262,6 +262,7 @@
           <line>key = TIMEZONE_OFFSET, value = value of type 'n', that identifies the timezone offset at the current address</line>
           <line>key = DAYLIGHT_OFFSET, value = value of type 'n', that identifies the daylight offset at the current address</line>
           <line>key = MATCH_TYPE, value = value of type 'q', that identifies an enum(INVALID,ON_ROAD,OFF_ROAD,ON_FERRY,IN_TUNNEL,ON_CARPARK, ... )</line>
+          <line>key = ROADSHIELDS, value = value of type ´a(sa(is)s)´, that identifies a roadshield</line>
         </doc>
       </arg>
       <error name="org.genivi.navigationcore.MapMatchedPosition.Error.NoMap">

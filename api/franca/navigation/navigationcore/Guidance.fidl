@@ -177,6 +177,9 @@ interface Guidance {
 		@description : struct generated for DBus argument GetManeuversList_maneuversList
 	**>
 	struct Maneuver {
+		RoadShield[] roadShieldsAfterManeuver // A road can have zero or more roadshields.
+		String countryCodeAfterManeuver // ISO 3166‐1 alpha-3 country code (three-letter upper case).
+		String stateCodeAfterManeuver // ISO 3166-2 Subdivision code (e.g., provinces or state) of country (up to three characters). An empty string when absent.
 		String roadNumberAfterManeuver
 		String roadNameAfterManeuver
 		RoadProperty roadPropertyAfterManeuver
