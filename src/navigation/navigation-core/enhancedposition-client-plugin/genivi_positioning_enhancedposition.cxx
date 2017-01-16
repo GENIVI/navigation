@@ -291,5 +291,5 @@ void plugin_init(void)
     // Common API data init
     runtime = CommonAPI::Runtime::get();
 
-	plugin_register_vehicle_type("enhancedposition", vehicle_enhancedposition_new);
+	plugin_register_category_vehicle("enhancedposition", vehicle_enhancedposition_new);
 }

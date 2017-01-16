@@ -838,7 +838,7 @@ GuidanceObj::~GuidanceObj()
 		navigation_unregister_callback(get_navigation(), attr_navigation_speech, m_guidance_callback);
 		callback_destroy(m_guidance_callback);
 	}
-	m_guidance->GuidanceStatusChanged(GENIVI_NAVIGATIONCORE_INACTIVE, 0);
+    m_guidance->GuidanceStatusChanged(GENIVI_NAVIGATIONCORE_INACTIVE, m_route_handle);
 #if (SPEECH_ENABLED)
     delete(m_speechoutput);
 #endif
