@@ -1,416 +1,91 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="introspect.xsl"?>
 <!-- SPDX-License-Identifier: MPL-2.0
-     Copyright (C) 2014, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH,   TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
+     Copyright (C) 2016, BMW Car IT GmbH, Continental Automotive GmbH, PCA Peugeot Citroën, XS Embedded GmbH, TomTom International B.V., Alpine Electronics R&D Europe GmbH, AISIN AW CO., LTD.,  Neusoft Technology Solutions GmbH, Jaguar Land Rover Limited, Visteon Corporation
      This Source Code Form is subject to the terms of the
      Mozilla Public License, v. 2.0. If a copy of the MPL was not distributed with
      this file, you can obtain one at http://mozilla.org/MPL/2.0/.
 -->
-<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/navigation/freetextsearchservice" xsi:noNamespaceSchemaLocation="introspect.xsd" >
-  <interface name="org.genivi.navigation.freetextsearchservice.FreeTextSearch">
-    <version>0.1.0 (16-11-2016)</version>
-    <doc>
-      <line>FreeTextSearch = This interface allows a user to find locations by entering a single text string.</line>
-      <line>A user of a navigation system needs to find a location on a map, e.g. to use as a destination of a route.</line>
-      <line>Locations can be identified by different means, for example:</line>
-      <line>- An address, e.g. '2400 Camino Ramon, San Ramon, California, USA.'</line>
-      <line>- A point of interest, e.g. 'Eiffel Tower'.</line>
-      <line>- A named place, .e.g. 'Amsterdam'</line>
-      <line>This interface allows a user to find these locations by entering a single text string.</line>
-      <line>The system will respond with locations that match the given text string.</line>
-      <line>For each location, a location handle will be returned that can be used as input to other interfaces,</line>
-      <line>for example to plan a route, or to get more attributes of a point of interest.</line>
-      <line>A free text search is initiated by sending a free text search request (Method FtsRequest) containing the search text and search options input by the user.</line>
-      <line>Depending on search options both addresses and POIs are searched for matches. A single request may get multiple result responses (via Signals):</line>
-      <line>- FtsResultAddresses to report address matches</line>
-      <line>- FtsResultPois to report POI matches</line>
-      <line>- FtsResultPoiSuggestions to give suggestions for doing specific POI queries</line>
-      <line>Each response comes as soon as the results are available, so address results may be received while the search process continues looking for POI matches.</line>
-      <line>The order in which the results will be received is not defined. The search engine determines which results to return first based on the user input.</line>
-      <line>If there are no matches found in a certain type of result, then no response for that type will be sent.</line>
-      <line>E.g. if the user input only matches an address but not POIs, then no FtsResultPois response will be sent.</line>
-      <line>To indicate that the search has finished an FtsDone signal is sent.</line>      
-    </doc>    
-    <method name="getVersion">
-      <doc>
-        <line>getVersion = This method returns the API version implemented by the content access module.</line>
-      </doc>
-      <arg direction="out" name="version" type="(qqqs)">
-        <doc>
-          <line>version Version - </line>
-          <line>Version struct[versionMajor, versionMinor, versionMicro, date] = version.</line>
-          <line>Version.versionMajor UInt16 - when the major changes, then backward compatibility with previous releases is not granted.</line>
-          <line>Version.versionMinor UInt16 - when the minor changes, then backward compatibility with previous releases is granted, but something changed in the implementation of the API (e.g. new methods may have been added).</line>
-          <line>Version.versionMicro UInt16 -  when the micro changes, then backward compatibility with previous releases is granted (bug fixes or documentation modifications).</line>
-          <line>Version.date String - release date (e.g. 21-06-2011).</line>
-        </doc>
-      </arg>
-    </method>
-    <method name="ftsRequest">
-      <doc>
-        <line>ftsRequest = Perform a free text search.</line>
-        <line>A single search request will trigger zero or more FtsResultXxx responses followed by an FtsDone response.</line>
-        <line>Each response will contain 1 page of results.</line>
-        <line>A next page of results can be retrieved with the FtsNextPage request.</line>
-        <line></line>
-        <line>When you send a new request before receiving a done response on the previous request,</line>
-        <line>then the previous request will be canceled.</line>
-        <line>You will still get a done response on the previous request.</line>
-        <line>This way each request gets a response.</line>
-      </doc>
-      <arg direction="in" name="requestId" type="n">
-        <doc>
-          <line>requestId RequestId - Identifier to match responses to this request.</line>          
-          <line>RequestId Int16 - Range[0x1:0x7fff]. notSpecifiedValue = 0x0.</line>
-        </doc>
-      </arg>
-      <arg direction="in" name="inputString" type="s">
-        <doc>
-          <line>inputString FtsString - Text to match.</line>  
-          <line>FtsString String - Type to represent most texts in this interface. Character set = UNICODE.</line>
-        </doc>
-      </arg>
-      <arg direction="in" name="searchLocation" type="(dd)">
-        <doc>
-          <line>searchLocation Coordinate2D - Location for scoring the search results.</line>
-          <line>A result closer to this location gets a higher score than a result further away.</line>
-          <line>Coordinate2D struct(latitude,longitude).</line>
-          <line>Coordinate2D.latitude Double - Latitude of the current position (according WGS84). Range [-90:+90]. Example: 48.053250.</line>
-          <line>Coordinate2D.longitude Double - Longitude of the current position (according WGS84). Range [-180:+180]. Example: 8.324500. </line>
-        </doc>
-      </arg>
-      <arg direction="in" name="searchShapes" type="a(yv)">
-        <doc>
-          <line>searchShapes ShapeList - Limit the search to the union of several shapes (each can be a circle or a rectangle</line>
-          <line>or a route corridor around a planned route). Pass an empty list to search the whole map.</line>
-          <line>ShapeList array[Shape] - </line>
-          <line>Shape variant[circle, rectangle, routeCorridor] - A union to contain any of the possible search shapes.</line>
-          <line>Shape.circle Circle - </line>
-          <line>Shape.rectangle Rectangle - </line>
-          <line>Shape.routeCorridor RouteCorridor - </line>
-          <line>Circle struct(center, radius) - A circle given as center and radius.</line>
-          <line>Circle.center Coordinate2D - </line>
-          <line>Circle.radius DistanceInMeters - </line>
-          <line>DistanceInMeters Int32 - </line>
-          <line>Rectangle struct(topLeft,bottomRight) - </line>
-          <line>topLeft Coordinate2D - </line>
-          <line>bottomRight Coordinate2D - </line>
-          <line>RouteCorridor struct(routeHandle, startOffset, corridorWidth, corridorLength)</line>
-          <line>RouteCorridor.routeHandle Handle - Route handle used to select a route. </line>
-          <line>Can be 0 to use the route for which guidance is started with startGuidance from Guidance interface.</line>
-          <line>RouteCorridor.startOffset DistanceInMeters - Offset on route from the start of the route, in meters.</line>
-          <line>RouteCorridor.corridorWidth DistanceInMeters - Width of the corridor, in meters.</line>
-          <line>RouteCorridor.corridorLength DistanceInMeters - Length of the corridor, in meters. Can be 0 to search until the end of the route.</line>
-        </doc>
-      </arg>
-      <arg direction="in" name="pageSize" type="q">
-        <doc>
-          <line>pageSize PageSize - The maximum number of addresses and POIs that will be returned.</line>
-          <line>PageSize UInt16 - A maximum number of results to be returned. Range[0:1000].</line>
-        </doc>
-      </arg>
-      <arg direction="in" name="searchOptions" type="u">
-        <doc>
-          <line>searchOptions SearchOptions - Options to indicate what to search for.</line>
-          <line>One or more values of SearchOption can be added together.</line>
-          <line>SearchOptions UInt32 - An OR-ed combination of SearchOption flags. Range[0:0xffffffff]</line>
-          <line>SearchOption enum[ADDRESS=0x1, POI=0x2, POI_SUGGESTION=0x4,</line>
-          <line>NO_PLACES=0x10000, NO_STREETS=0x20000, NO_POI_CATEGORY_ASSUMPTIONS=0x40000,</line>
-          <line>NO_POLITICAL_DIVISIONS=0x80000, POI_INDICATE_LINKS=0x100000]</line>
-        </doc>
-      </arg>
-      <arg direction="in" name="searchConditions" type="s">
-        <doc>
-          <line>searchConditions FtsString - Additional search conditions, space separated.</line>
-          <line>The string can be empty when the POI search is not limited by categories</line>
-          <line>and not limited by countries/states.</line>
-          <line>Supported conditions:</line>
-          <line>&quot;category:nnnn&quot;  Limit the POI search to a one or more POI categories,</line>
-          <line>where 'nnnn' is a comma-separated list of numerical POI category ids.</line>
-          <line>&quot;country:aaaaa&quot;  Limit the search to one or more countries (or states),</line>
-          <line>where 'aaaaa' is a comma-separated list of ISO-3166-1 alpha 3</line>
-          <line>country code concatenated with an optional ISO-3166-2 state code.</line>
-          <line>Examples:</line>
-          <line>&quot;category:9373,9374&quot;: limits the POI search to the union of categories 9373 and 9374.</line>
-          <line>&quot;country:USACA&quot;: limits the search to the state of California.</line>
-          <line>&quot;category:6315 country:USACA,MEX&quot;: limits the POI search to category 6315</line>
-          <line>and limits the search to the union of California state and Mexico.</line>          
-        </doc>
-      </arg>
-      <arg direction="in" name="fuzzyLevel" type="y">
-        <doc>
-          <line>fuzzyLevel FuzzyLevel - Indication of how fuzzy the search shall be performed.</line>
-          <line>FuzzyLevel Int8 - Indicates on a scale from 0 to 5 how fuzzy the search results can be. </line>
-          <line>0 means only an exact search is performed, 1 is the lowest level of fuzzy search</line>
-          <line>and 5 means a very fuzzy search. Range[0:5]</line>
-        </doc>
-      </arg>
-      <arg direction="out" name="error" type="i">
-        <doc>
-          <line>OK = Indicates no error.</line>
-          <line>NoMoreFtsHandles = Indicates that no new Free Text Search session can be started at the moment.</line>
-          <line>InvalidRequestId = Indicates the request failed becuase of invalid request ID.</line>
-        </doc>
-      </arg>      
-      <arg direction="out" name="freeTextSearchHandle" type="u">
-        <doc>
-          <line>freeTextSearchHandle Handle. Handle to identify the Free Text Search session.</line>
-          <line>Handle UInt32. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value.</line>
-        </doc>
-      </arg>
-    </method>
-    <method name="ftsNextPage">
-      <doc>
-        <line>ftsNextPage = Get next result page for the last performed search.</line>
-        <line>This request will trigger zero or more FtsResultXxx responses followed by an FtsDone response.</line>
-        <line>If there is no search request done before or if a search request is still in progress</line>
-        <line>then the FtsDone response will return a NO_SEARCH_TO_CONTINUE status.</line>
-      </doc>
-      <arg direction="in" name="requestId" type="n">
-        <doc>
-          <line>requestId RequestId - Identifier to match responses to this request.</line>          
-        </doc>
-      </arg>
-      <arg direction="in" name="freeTextSearchHandle" type="u">
-        <doc>
-          <line>freeTextSearchHandle Handle - Handle to identify the Free Text Search session.</line>          
-        </doc>
-      </arg>
-      <arg direction="in" name="searchOptions" type="u">
-        <doc>
-          <line>searchOptions SearchOptions - Options to indicate what to search for.</line>
-          <line>One or more values of SearchOption can be added together.</line>
-          <line>You can only get results for options that have been passed to the initial FtsRequest.</line>          
-        </doc>
-      </arg>
-      <arg direction="out" name="error" type="i">
-        <doc>
-          <line>OK = Indicates no error.</line>
-          <line>UnknownHandle = Indicates that freeTextSearchHandle is unknown.</line>         
-          <line>InvalidRequestId = Indicates the request failed becuase of invalid request ID.</line>
-        </doc>
-      </arg>
-    </method>
-    <method name="ftsCancel">
-      <doc>
-        <line>ftsCancel = Cancel an FTS session.</line>
-      </doc>
-      <arg direction="in" name="freeTextSearchHandle" type="u">
-        <doc>
-          <line>freeTextSearchHandle Handle - Handle to identify the Free Text Search session to be cancelled.</line>          
-        </doc>
-      </arg>
-      <arg direction="out" name="error" type="i">
-        <doc>
-          <line>OK = Indicates no error.</line>
-          <line>UnknownHandle = Indicates that freeTextSearchHandle is unknown.</line>         
-        </doc>
-      </arg>      
-    </method>
-    <method name="deleteLocationHandles">
-      <doc>
-        <line>deleteLocationHandles = Release handle(s) if they are not used anymore.</line>
-      </doc>
-      <arg direction="in" name="locationHandleList" type="au">
-        <doc>
-          <line>locationHandleList LocationHandleList - list of handles to release.</line>
-          <line>LocationHandleList array[LocationHandle] - A list of LocationHandles. maximum length = 4096.</line>
-          <line>LocationHandle UInt32 - Handle to a location. Range[0:0xffffffff].</line>          
-        </doc>
-      </arg>
-    </method>
-    <method name="subscribeForftsDoneSelective">
-      <arg direction="out" name="status" type="b">
-      </arg>
-    </method>
-    <method name="unsubscribeFromftsDoneSelective">
-    </method>    
-    <signal name="ftsDone">
-      <doc>
-        <line>ftsDone = Response indicating that the search is done.</line>
-      </doc>
-      <arg direction="out" name="responseId" type="n">
-        <doc>
-          <line>responseId RequestId - Identifier to match this response with a request.</line>          
-        </doc>
-      </arg>
-      <arg direction="out" name="ftsStatus" type="i">
-        <doc>
-          <line>ftsStatus FtsStatus - Status of the search request.</line>
-          <line>FtsStatus enum[OK, ABORTED, PREFIX_TOO_SHORT, NO_SEARCH_TO_CONTINUE, INTERNAL_ERROR, INDEX_MISSING, BAD_VERSION,</line>
-          <line>INVALID_PARAMETER_SEARCH_HANDLE, INVALID_PARAMETER_QUERY, INVALID_PARAMETER_SEARCH_LOCATION,</line>
-          <line>INVALID_PARAMETER_PAGE_SIZE, INVALID_PARAMETER_SEARCH_OPTIONS, INVALID_PARAMETER_SEARCH_CONDITIONS,</line>
-          <line>INVALID_PARAMETER_SEARCH_SHAPES, INVALID_PARAMETER_FUZZY_LEVEL, INVALID_COORDINATES_INPUT]</line>
-        </doc>
-      </arg>
-    </signal>
-    <method name="subscribeForftsResultAddressesSelective">
-      <arg direction="out" name="status" type="b">
-      </arg>
-    </method>
-    <method name="unsubscribeFromftsResultAddressesSelective">
-    </method>    
-    <signal name="ftsResultAddresses">
-      <doc>
-        <line>ftsResultAddresses = Response with address results.</line>
-      </doc>
-      <arg direction="out" name="responseId" type="n">
-        <doc>
-          <line>responseId RequestId - Identifier to match this response with a request.</line>          
-        </doc>
-      </arg>
-      <arg direction="out" name="addresses" type="a(ussasass(yv)(dd)iqb)">
-        <doc>
-          <line>addresses Addresses - Matching addresses.</line>
-          <line>The order of the addresses is the order of matching relevance.</line>
-          <line>The first address is a better match than the last result.</line>
-          <line>Addresses array[Address] - A list of addresses. maximum length = 500.</line>
-          <line>Address struct[locationHandle, countryCode, stateCode, places, postalCodes,</line>
-          <line>mapCode, addressDetails, coordinate, distance, score, fuzzyMatch] - Address information.</line>
-          <line>Address.locationHandle LocationHandle - </line>          
-          <line>Address.countryCode FtsString - </line>          
-          <line>Address.stateCode FtsString - </line>          
-          <line>Address.places FtsStringList - There can be multiple place names.</line>
-          <line>Address.postalCodes FtsStringList - There can be multiple postal codes assigned to a street.</line>
-          <line>Address.mapCode FtsString - Mapcode of the coordinate.</line>
-          <line>A mapcode represents a location. Every location on Earth can be represented by a mapcode.</line>
-          <line>Mapcodes were designed to be short, easy to recognize, remember and communicate.</line>
-          <line>They are precise to a few meters. For details see http://www.mapcode.com.</line>
-          <line>Address.addressDetails AddressDetails - </line>
-          <line>Address.coordinate Coordinate2D - </line>
-          <line>Address.distance DistanceInMeters -  Distance in meters from the search location. -1 if no search location is given.</line>
-          <line>Address.score Score - A higher score means a better match.</line>
-          <line>Address.fuzzyMatch Boolean - Indicates whether this match is fuzzy, i.e. it was matched with misspellings.</line>
-          <line>FtsStringList array(FtsString) - A list of strings. maximum length = 100</line>         
-          <line>AddressDetails union[streetDetails, placeDetails, mapCodeDetails, politicalDivisionDetails, coordinatesDetails] - A union to contain any of the specific types of address details.</line>
-          <line>AddressDetails.streetDetails StreetDetails - </line>          
-          <line>AddressDetails.placeDetails PlaceDetails -  </line>
-          <line>AddressDetails.mapCodeDetails MapCodeDetails -  </line>          
-          <line>AddressDetails.politicalDivisionDetails PoliticalDivisionDetails -  </line>
-          <line>AddressDetails.coordinatesDetails CoordinatesDetails -  </line>
-          <line>StreetDetails struct[streetName, houseNumber, houseNumberFromInput] - If a user entered a non-existing house number then the closest existing</line>
-          <line>number is returned. The houseNumberFromInput will contain the house</line>
-          <line>number from the user input, the houseNumber will contain closest house number.</line>
-          <line>If the map does not contain house numbers for the street, but the user</line>
-          <line>input seems to have a house number, then houseNumber will be empty and</line>
-          <line>houseNumberFromInput will contain the number from the input.</line>          
-          <line>StreetDetails.streetName FtsString - </line>
-          <line>StreetDetails.houseNumber FtsString - If a user entered a non-existing house number then the closest existing</line>
-          <line>number is returned. The houseNumberFromInput will contain the house</line>
-          <line>number from the user input, the houseNumber will contain closest house number.</line>
-          <line>If the map does not contain house numbers for the street, but the user</line>
-          <line>input seems to have a house number, then houseNumber will be empty and</line>
-          <line>houseNumberFromInput will contain the number from the input.</line>
-          <line>StreetDetails.houseNumberFromInput FtsString - The house number that the search engine recognized in the user input. Can be empty.</line>          
-          <line>PlaceDetails struct[placeType, placeName, placeBoundingBox] - Place details.</line>
-          <line>PlaceDetails.placeType enum[OTHER, SETTLEMENT]- </line>
-          <line>PlaceDetails.placeName FtsString</line>
-          <line>PlaceDetails.placeBoundingBox Rectangle - The bounding box of this place (an estimate).</line>          
-          <line>MapCodeDetails struct[closestStreetName]- Mapcode details.</line>
-          <line>MapCodeDetails.closestStreetName FtsString - If the location of the mapcode is close to a street, this field</line>
-          <line>contains the name of that street, otherwise this field is left empty.</line>
-          <line>PoliticalDivisionDetails struct[boundingBox]- Political division details (country or state). </line>
-          <line>PoliticalDivisionDetails.boundingBox Rectangle - The bounding box of the political division. </line>
-          <line>CoordinatesDetails - struct[closestStreetName] - Geographic coordinate pair details.</line>
-          <line>CoordinatesDetails.closestStreetName FtsString - This field contains the name of the street that is closest</line> 
-          <line>to the coordinates, as long as the straight line distance to</line> 
-          <line>the closest street location is less than 25 meters.</line>
-          <line>Score UInt16 - A higher score means a better match. Range[0:0xffff]</line>
-        </doc>
-      </arg>
-      <arg direction="out" name="moreAvailable" type="b">
-        <doc>
-          <line>moreAvailable Boolean - Flag to indicate if more addresses might be available in a next page.</line>
-        </doc>
-      </arg>
-    </signal>
-    <method name="subscribeForftsResultPoisSelective">
-      <arg direction="out" name="status" type="b">
-      </arg>
-    </method>
-    <method name="unsubscribeFromftsResultPoisSelective">
-    </method>      
-    <signal name="ftsResultPois">
-      <doc>
-        <line>ftsResultPois = Response with POI results.</line>
-      </doc>
-      <arg direction="out" name="responseId" type="n">
-        <doc>
-          <line>responseId RequestId - Identifier to match this response with a request.</line>          
-        </doc>
-      </arg>
-      <arg direction="out" name="pois" type="a(uuasssasasssss(dd)iqb)">
-        <doc>
-          <line>pois POIs - Matching POIs.</line>          
-          <line>The order of the POIs is the order of matching relevance.</line>
-          <line>The first POI is a better match than the last result.</line>
-          <line>POIs = array[POI]. A list of POIs. maximum length = 500</line>
-          <line>POI struct[locationHandle, categoryCode, brandNames, poiName, address, place, postalCode, mapCode, countryCode, stateCode,</line>
-          <line>telephone, coordinate, distance, score, fuzzyMatch, hasParents, hasChildren, detourDistance, detourTime] = POI information.</line>          
-          <line>POI.locationHandle LocationHandle - </line>
-          <line>POI.categoryCode POICategoryCode - </line>
-          <line>POI.brandNames FtsStringList - </line>
-          <line>POI.poiName FtsString - </line>
-          <line>POI.address FtsString - </line>
-          <line>POI.place FtsStringList - </line>
-          <line>POI.postalCode FtsStringList - </line>
-          <line>POI.mapCode FtsString - </line>
-          <line>POI.countryCode FtsString - </line>
-          <line>POI.stateCode FtsString - </line>
-          <line>POI.telephone FtsString - </line>
-          <line>POI.coordinate Coordinate2D - </line>
-          <line>POI.distance DistanceInMeters -  Distance in meters from the search location. -1 if no search location is given.</line>
-          <line>POI.score Score - A higher score means a better match.</line>
-          <line>POI.fuzzyMatch Boolean - Indicates whether this match is fuzzy, i.e. it was matched with misspellings.</line>                    
-          <line>POI.hasParents Boolean - Indicates that POI has parents.</line>
-          <line>POI.hasChildren Boolean - Indicates that POI has children.</line>
-          <line>POI.detourDistance DistanceInMeters -  For searches along route, this value is the the detour distance,</line> 
-          <line>in meters, expresses how much longer the total route will be if the POI is visited.</line>
-          <line>The detour distance will be -1 for all searches that don’t use a route corridor (searches in all map, in circle or rectangle)</line>
-          <line>POI.detourTime Int32 - For searches along route, this value is the detour time, in seconds, </line>
-          <line>expresses what’s the delay at the destination if the POI is visited. </line>
-          <line>The detour time will be -1 for all searches that don’t use a route corridor (searches in all map, in circle or rectangle)</line>
-          <line>POICategoryCode UInt32 - Numerical POI category code. Range[0:0xffffffff].</line>          
-        </doc>
-      </arg>
-      <arg direction="out" name="moreAvailable" type="b">
-        <doc>
-          <line>moreAvailable Boolean - Flag to indicate if more POIs might be available in a next page.</line>
-        </doc>
-      </arg>
-    </signal>
-    <method name="subscribeForftsResultPoiSuggestionsSelective">
-      <arg direction="out" name="status" type="b">
-      </arg>
-    </method>
-    <method name="unsubscribeFromftsResultPoiSuggestionsSelective">
-    </method>         
-    <signal name="ftsResultPoiSuggestions">
-      <doc>
-        <line>ftsResultPoiSuggestions = Response with POI category suggestions.</line>
-      </doc>
-      <arg direction="out" name="responseId" type="n">
-        <doc>
-          <line>responseId RequestId - Identifier to match this response with a request.</line>          
-        </doc>
-      </arg>
-      <arg direction="out" name="poiCategories" type="a(usssa(ussasass(yv)(dd)iqb)q)">
-        <doc>
-          <line>poiCategories POICategories - POI category suggestions.</line>
-          <line>POICategories array[POICategory] - A list of POI categories. maximum length = 500.</line>
-          <line>POICategory struct[categoryCode, categoryName, matchedName, searchTextSuggestion, nearAddressSuggestions, score] - Data type for POI category suggestions.</line>
-          <line>POICategory.categoryCode POICategoryCode - </line>
-          <line>POICategory.categoryName FtsString - </line>          
-          <line>POICategory.matchedName FtsString - The search engine recognizes synonyms and names associated with a POI category.</line>
-          <line>If a match on such a name is found, then this attribute is set to that name.</line>          
-          <line>POICategory.searchTextSuggestion FtsString - Text that can be used for a suggestion like: &quot;&lt;categoryName&gt; &lt;searchTextSuggestion&gt;&quot;</line>
-          <line>Typically this contains the original query text, where the recognized category name or synonym has been removed.</line>          
-          <line>POICategory.nearAddressSuggestions Addresses - A list of addresses that can be used for suggestions like: &quot;&lt;categoryName&gt; near &lt;address&gt;&quot;</line>
-          <line>Note the addresses in this list do not have a valid location handle as the address is only needed to be displayed as a suggestion.</line>
-          <line>The coordinates of an address can be used for a POI window query if the user picks a suggestion.</line>
-          <line>POICategory.score Score - A higher score means a better match.</line>
-        </doc>
-      </arg>
-    </signal>
-  </interface>
+<node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/navigation/freetextsearchservice/FreeTextSearch" xsi:noNamespaceSchemaLocation="introspect.xsd" >
+    <interface name="org.genivi.navigation.freetextsearchservice.FreeTextSearch">
+        <method name="getInterfaceVersion">
+            <arg name="value" type="uu" direction="out" />
+        </method>
+        <signal name="ftsDone">
+            <arg name="sessionHandle" type="u" direction="out" />
+            <arg name="pageId" type="i" direction="out" />
+            <arg name="ftsStatus" type="i" direction="out" />
+        </signal>
+        <method name="subscribeForftsDoneSelective">
+          <arg direction="out" name="status" type="b">
+          </arg>
+        </method>
+        <method name="unsubscribeFromftsDoneSelective">
+        </method>                     
+        <signal name="ftsResultAddresses">
+            <arg name="sessionHandle" type="u" direction="out" />
+            <arg name="pageId" type="i" direction="out" />
+            <arg name="addresses" type="a(ussasass(yv)(dd)iqb)" direction="out" />
+            <arg name="moreAvailable" type="b" direction="out" />
+        </signal>
+        <method name="subscribeForftsResultAddressesSelective">
+          <arg direction="out" name="status" type="b">
+          </arg>
+        </method>
+        <method name="unsubscribeFromftsResultAddressesSelective">
+        </method>                     
+        <signal name="ftsResultPois">
+            <arg name="sessionHandle" type="u" direction="out" />
+            <arg name="pageId" type="i" direction="out" />
+            <arg name="pois" type="a(uuasssasasssss(dd)iqbbbii)" direction="out" />
+            <arg name="moreAvailable" type="b" direction="out" />
+        </signal>
+        <method name="subscribeForftsResultPoisSelective">
+          <arg direction="out" name="status" type="b">
+          </arg>
+        </method>
+        <method name="unsubscribeFromftsResultPoisSelective">
+        </method>                     
+        <signal name="ftsResultPoiSuggestions">
+            <arg name="sessionHandle" type="u" direction="out" />
+            <arg name="pageId" type="i" direction="out" />
+            <arg name="poiCategories" type="a(usssa(ussasass(yv)(dd)iqb)q)" direction="out" />
+        </signal>
+        <method name="subscribeForftsResultPoiSuggestionsSelective">
+          <arg direction="out" name="status" type="b">
+          </arg>
+        </method>
+        <method name="unsubscribeFromftsResultPoiSuggestionsSelective">
+        </method>                     
+        <method name="getVersion">
+            <arg name="version" type="(qqqs)" direction="out" />
+        </method>
+        <method name="ftsRequest">
+            <arg name="inputString" type="s" direction="in" />
+            <arg name="searchLocation" type="(dd)" direction="in" />
+            <arg name="searchShapes" type="a(yv)" direction="in" />
+            <arg name="pageSize" type="q" direction="in" />
+            <arg name="searchOptions" type="u" direction="in" />
+            <arg name="searchConditions" type="s" direction="in" />
+            <arg name="fuzzyLevel" type="y" direction="in" />
+            <arg name="error" type="i" direction="out" />
+            <arg name="sessionHandle" type="u" direction="out" />
+            <arg name="pageId" type="i" direction="out" />
+        </method>
+        <method name="ftsNextPage">
+            <arg name="sessionHandle" type="u" direction="in" />
+            <arg name="searchOptions" type="u" direction="in" />
+            <arg name="error" type="i" direction="out" />
+            <arg name="pageId" type="i" direction="out" />
+        </method>
+        <method name="ftsCancel">
+            <arg name="sessionHandle" type="u" direction="in" />
+            <arg name="error" type="i" direction="out" />
+        </method>
+        <method name="deleteLocationHandles">
+            <arg name="locationHandleList" type="au" direction="in" />
+        </method>
+    </interface>
 </node>
+        
+

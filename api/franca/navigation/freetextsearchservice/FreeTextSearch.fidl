@@ -18,20 +18,19 @@ Locations can be identified by different means, for example:
  - A point of interest, e.g. 'Eiffel Tower'.
  - A named place, .e.g. 'Amsterdam'
 
-This interface allows a user to find these locations by entering a single text string.
 The system will respond with locations that match the given text string.
 For each location, a location handle will be returned that can be used as input to other interfaces,
 for example to plan a route, or to get more attributes of a point of interest.
 A free text search is initiated by sending a free text search request (Method FtsRequest) containing the search text and search options input by the user.
 Depending on search options both addresses and POIs are searched for matches. A single request may get multiple result responses (via Signals):
- - FtsResultAddresses to report address matches
- - FtsResultPois to report POI matches
- - FtsResultPoiSuggestions to give suggestions for doing specific POI queries
+ - ftsResultAddresses to report address matches
+ - ftsResultPois to report POI matches
+ - ftsResultPoiSuggestions to give suggestions for doing specific POI queries
 Each response comes as soon as the results are available, so address results may be received while the search process continues looking for POI matches.
 The order in which the results will be received is not defined. The search engine determines which results to return first based on the user input.
 If there are no matches found in a certain type of result, then no response for that type will be sent.
-E.g. if the user input only matches an address but not POIs, then no FtsResultPois response will be sent.
-To indicate that the search has finished an FtsDone signal is sent.
+E.g. if the user input only matches an address but not POIs, then no ftsResultPois response will be sent.
+To indicate that the search has finished an ftsDone signal is sent.
 
 **>
 
@@ -42,17 +41,12 @@ interface FreeTextSearch {
     }
 
     <**
-    @description: A requestId is an identifier used to match a response to a request.
-        Range[0x1:0x7fff]
-        notSpecifiedValue = 0x0
-    
+    @description: Search results are returned in some sequential pages. Each
+        page is identified with an ID called pageId. The pageId of the first 
+        page is zero and pageIds are incremented by one for each subsequent page. 
+        Value -1 indicates that pageId is not specified.
     **>
-    typedef RequestId is Int16
-
-    <**
-    @description: Handle for a single Free Text Search session.
-    **>
-    typedef FreeTextSearchHandle is Handle
+    typedef PageId is Int32
 
     <**
     @description: Type to represent most texts in this interface..
@@ -197,69 +191,59 @@ interface FreeTextSearch {
         PREFIX_TOO_SHORT = 2
 
         <**
-            @description: There is no search for which a next page can be requested.
-        **>
-        NO_SEARCH_TO_CONTINUE = 3
-
-        <**
             @description: An internal error occurred in the FTS engine.  
         **>
-        INTERNAL_ERROR = 4
+        INTERNAL_ERROR = 3
 
         <**
             @description: No FTS index for the current map. 
         **>
-        INDEX_MISSING = 5
+        INDEX_MISSING = 4
 
         <**
             @description: The FTS index format is not supported. 
         **>
-        BAD_VERSION = 6 
-
-        <**
-            @description: An invalid freeTextSearchHandle is passed to the FTS engine. 
-        **>
-        INVALID_PARAMETER_SEARCH_HANDLE = 7
+        BAD_VERSION = 5
 
         <**
             @description: A search query not supported by the FTS engine. 
         **>
-        INVALID_PARAMETER_QUERY = 8
+        INVALID_PARAMETER_QUERY = 6
 
         <**
             @description: A search location not on this earth. 
         **>
-        INVALID_PARAMETER_SEARCH_LOCATION = 9
+        INVALID_PARAMETER_SEARCH_LOCATION = 7
 
         <**
             @description: An invalid page size. 
         **>
-        INVALID_PARAMETER_PAGE_SIZE = 10
+        INVALID_PARAMETER_PAGE_SIZE = 8
 
         <**
             @description: Invalid search options passed to the FTS engine. 
         **>
-        INVALID_PARAMETER_SEARCH_OPTIONS = 11
+        INVALID_PARAMETER_SEARCH_OPTIONS = 9
 
         <**
             @description: Invalid search conditions passed to the FTS engine. 
         **>
-        INVALID_PARAMETER_SEARCH_CONDITIONS = 12
+        INVALID_PARAMETER_SEARCH_CONDITIONS = 10
 
         <**
             @description: One or  more of the search shapes are invalid. 
         **>
-        INVALID_PARAMETER_SEARCH_SHAPES = 13
+        INVALID_PARAMETER_SEARCH_SHAPES = 11
         
         <**
             @description: The fuzzy level is not in the allowed range: [0,5].
         **>
-        INVALID_PARAMETER_FUZZY_LEVEL =14
+        INVALID_PARAMETER_FUZZY_LEVEL = 12
         
         <**
             @description: The input consisted of invalid geographic coordinates.
         **>        
-        INVALID_COORDINATES_INPUT = 15
+        INVALID_COORDINATES_INPUT = 13
     }
 
     <**
@@ -577,24 +561,20 @@ interface FreeTextSearch {
     }
 
     <**
-    @description: Perform a free text search.
-        A single search request will trigger zero or more FtsResultXxx responses followed by an FtsDone response.
-        Each response will contain 1 page of results.
-        A next page of results can be retrieved with the FtsNextPage request.
+    @description: Perform a free text search.        
+        A single search request will trigger zero or one of each ftsResultAddresses, 
+        ftsResultPois or ftsResultPoiSuggestions responses followed by an ftsDone response.
+        Each response will contain at most one page of results. A next page of results can be 
+        retrieved with the FtsNextPage request.
         
-        When you send a new request before receiving a done response on the previous request,
-        then the previous request will be canceled.
-        You will still get a done response on the previous request.
-        This way each request gets a response.
-    
+        A ftsRequest call creates a new FTS session identified with a unique sessionHandle. The 
+        FTS session will explicitly be terminated by a ftsCancel call or will implicitly be terminated 
+        by a subsequent ftsRequest call. When a new ftsRequest is sent before receiving a ftsDone response
+        on the previous request, the previous request will be canceled. A ftsDone response on the previous 
+        request will still be sent. This way each request gets a response.    
     **>
     method ftsRequest {
         in {
-
-            <**
-                @description: Identifier to match responses to this request. 
-            **>
-            RequestId requestId
 
             <**
                 @description: Text to match. 
@@ -650,9 +630,14 @@ interface FreeTextSearch {
         out {
 
             <**
-            @description: Handle to identify the Free Text Search session.
+            @description: A new FTS session is created with session handle equal to sessionHandle.
             **>
-            Handle freeTextSearchHandle
+            Handle sessionHandle
+            
+            <**
+            @description: The pageId of the search result to be returned (zero for the first page). 
+            **>
+            PageId pageId            
         }
         error {
 
@@ -662,37 +647,27 @@ interface FreeTextSearch {
             OK
 
             <**
-            @description: Indicates that no new Free Text Search session can be started at the moment.
+            @description: Indicates that no new FTS session can be created at the moment.
             **>
-            NoMoreFtsHandles
-
-            <**
-            @description: Indicates the request failed becuase of invalid request ID.
-            **>
-            InvalidRequestId
+            NoMoreSessionHandles
         }
     }
 
     <**
-    @description: Get next result page for the last performed search.
-        This request will trigger zero or more FtsResultXxx responses followed by an FtsDone response.
-        If there is no search request done before or if a search request is still in progress,
-        the FtsDone response will return a NO_SEARCH_TO_CONTINUE status.
+    @description: Get next result page for the specified FTS session.
+        This request will trigger zero or one of each ftsResultAddresses, ftsResultPois 
+        or ftsResultPoiSuggestions responses followed by an ftsDone response.
+        If no error is reported, ftsDone will be sent.
     
     **>
     method ftsNextPage {
         in {
-
+           
             <**
-                @description: Identifier to match responses to this request. 
+            @description: Specifies the session.
             **>
-            RequestId requestId
-
-            <**
-            @description: Handle to identify the Free Text Search session.
-            **>
-            Handle freeTextSearchHandle
-
+            Handle sessionHandle
+            
             <**
             @description: Options to indicate what to search for.
                 One or more values of SearchOption can be added together.
@@ -700,6 +675,13 @@ interface FreeTextSearch {
             **>
             SearchOptions searchOptions
         }
+        out {
+
+            <**
+            @description: The pageId of the search result to be returned.
+            **>
+            PageId pageId              
+        }        
         error {
 
             <**
@@ -708,14 +690,19 @@ interface FreeTextSearch {
             OK
 
             <**
-            @description: Indicates that freeTextSearchHandle is unknown.            
+            @description: Indicates that a search request is already in progress. ftsDone has not yet been sent for the previous request.
             **>
-            UnknownHandle
+            AlreadyInProgress
 
             <**
-            @description: Indicates the request failed becuase of invalid request ID.
+            @description: Indicates that no more search results are available for the given search session handle.
             **>
-            InvalidRequestId
+            NoMoreSearchResultsAvailable
+
+            <**
+            @description: Indicates that sessionHandle is unknown.            
+            **>
+            UnknownSessionHandle
         }
     }
 
@@ -728,7 +715,7 @@ interface FreeTextSearch {
             <**
             @description: Handle to identify the Free Text Search session to be cancelled.
             **>
-            Handle freeTextSearchHandle
+            Handle sessionHandle
         }
         error {
 
@@ -738,22 +725,27 @@ interface FreeTextSearch {
             OK
 
             <**
-            @description: Indicates that freeTextSearchHandle is unknown.            
+            @description: Indicates that sessionHandle is unknown.            
             **>
-            UnknownHandle
+            UnknownSessionHandle
         }        
     }
 
     <**
-        @description : Response indicating that the search is done. 
+        @description : Response indicating the search status. 
     **>
     broadcast ftsDone selective {
         out {
 
             <**
-                @description: Identifier to match this response with a request. 
+                @description: Specifies the session. 
             **>
-            RequestId responseId
+            Handle sessionHandle
+            
+            <**
+                @description: Specifies the page for which this response is sent. 
+            **>
+            PageId pageId          
 
             <**
                 @description: Status of the search request. 
@@ -769,9 +761,14 @@ interface FreeTextSearch {
         out {
 
             <**
-                @description: Identifier to match this response with a request. 
+                @description: Specifies the session.  
             **>
-            RequestId responseId
+            Handle sessionHandle
+            
+            <**
+                @description: Specifies the page for which this response is sent.
+            **>
+            PageId pageId   
 
             <**
             @description: Matching addresses.
@@ -794,9 +791,14 @@ interface FreeTextSearch {
         out {
 
             <**
-                @description: Identifier to match this response with a request. 
+                @description: Specifies the session.  
             **>
-            RequestId responseId
+            Handle sessionHandle
+            
+            <**
+                @description: Specifies the page for which this response is sent.
+            **>
+            PageId pageId
 
             <**
             @description: Matching POIs.
@@ -819,9 +821,14 @@ interface FreeTextSearch {
         out {
 
             <**
-                @description: Identifier to match this response with a request. 
+                @description: Specifies the session.  
             **>
-            RequestId responseId
+            Handle sessionHandle
+            
+            <**
+                @description: Specifies the page for which this response is sent. 
+            **>
+            PageId pageId
 
             <**
                 @description: POI category suggestions. 
