@@ -8,6 +8,13 @@
 -->
 
 <constants  name="FreeTextSearch">
+    <id name="FTSRANGECONSTANTS_MAX_FUZZY_LEVEL" value="5" />
+    <id name="FTSRANGECONSTANTS_MAX_SHAPES" value="31" />
+    <id name="FTSRANGECONSTANTS_MAX_STRING_LIST_SIZE" value="100" />
+    <id name="FTSRANGECONSTANTS_MAX_RESULTS" value="500" />
+    <id name="FTSRANGECONSTANTS_MAX_STRING_LENGTH" value="4095" />
+    <id name="FTSRANGECONSTANTS_MAX_LOCATION_HANDLES_LIST_SIZE" value="4096" />
+    
     <id name="SEARCHOPTION_ADDRESS" value="1" />
     <id name="SEARCHOPTION_POI" value="2" />
     <id name="SEARCHOPTION_POI_SUGGESTION" value="4" />

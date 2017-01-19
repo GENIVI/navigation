@@ -6,6 +6,7 @@
 * \copyright Copyright (C) 2016, PCA Peugeot Citroen
 * \author Peter Goedegebure (Peter.Goedegebure@tomtom.com)
 * \author Philippe Colliot <philippe.colliot@mpsa.com>
+* \author Morteza Damavandpeyma <Morteza.Damavandpeyma@tomtom.com>
 * This Source Code Form is subject to the terms of the
 * Mozilla Public License (MPL), v. 2.0.
 * If a copy of the MPL was not distributed with this file,
@@ -18,309 +19,197 @@
 *
 * @licence end@
 */
+#include <thread>
 #include <iostream>
+#include <sstream>
+#include <iterator>
+#include <algorithm>
 #include <unistd.h>
-
 #include <CommonAPI/CommonAPI.hpp>
-#include <org/genivi/CommonTypes.hpp>
-#include <org/genivi/navigation/NavigationTypes.hpp>
+#include <v0/org/genivi/navigation/freetextsearchservice/FreeTextSearch.hpp> 
 #include <v0/org/genivi/navigation/freetextsearchservice/FreeTextSearchProxy.hpp>
 
-using namespace org::genivi;
-using namespace org::genivi::navigation;
 using namespace v0::org::genivi::navigation::freetextsearchservice;
+using namespace v4::org::genivi::navigation;
+using namespace v4::org::genivi;
 
-// Sequence:
-// - get version info synchronous
-// - start asynchronous request
-//   - when done is received (pageDone), request next page.
-//     - when done is received (pageDone), cancel the request and free the locationHandles.
-//       - when responses are received (cancelDone, freeHandleDone), we're done.
-//
-bool pageDone = false;
-bool cancelDone = false;
-bool freeHandlesDone = false;
+bool ftsDoneIsReceived = false;
 
-FreeTextSearch::Addresses resultAddresses;
-FreeTextSearch::POIs resultPois;
+void printCommaSeperated(const std::vector<std::string>& strings)
+{
+  std::ostringstream ss;
+  std::copy(strings.begin(), strings.end() - 1, std::ostream_iterator<std::string>(ss, ", "));
+  ss << strings.back();
+  std::cout << ss.str();
+}
 
-void printAddress(FreeTextSearch::Address address) {
+void printAddress(const FreeTextSearch::Address& address) {
     std::cout << "Address: ";
     std::cout << "score=" << address.getScore();
     std::cout << ", countryCode=" << address.getCountryCode();
     std::cout << ", stateCode=" << address.getStateCode();
     std::cout << ", mapCode=" << address.getMapCode();
     std::cout << ", places=";
-    FreeTextSearch::FtsStringList places = address.getPlaces();
-    bool first = true;
-    for (unsigned int index = 0; index < places.size(); index++) {
-    	if (first) {
-    		first = false;
-    	} else {
-    		std::cout << ",";
-    	}
-    	std::cout << places.at(index);
-    }
+    printCommaSeperated(address.getPlaces());
+
     FreeTextSearch::AddressDetails addressDetails = address.getAddressDetails();
     if (addressDetails.isType<FreeTextSearch::StreetDetails>()) {
-    	FreeTextSearch::StreetDetails streetDetails = addressDetails.get<FreeTextSearch::StreetDetails>();
-    	std::cout << ", streetName=" << streetDetails.getStreetName();
-    	std::cout << ", houseNumber=" << streetDetails.getHouseNumber();
-    	std::cout << ", (fromInput=" << streetDetails.getHouseNumberFromInput() << ")";
+      FreeTextSearch::StreetDetails streetDetails = addressDetails.get<FreeTextSearch::StreetDetails>();
+      std::cout << ", streetName=" << streetDetails.getStreetName();
+      std::cout << ", houseNumber=" << streetDetails.getHouseNumber();
+      std::cout << ", (fromInput=" << streetDetails.getHouseNumberFromInput() << ")";
     }
 
     std::cout << ", postalCodes=";
-    FreeTextSearch::FtsStringList postalCodes = address.getPostalCodes();
-    first = true;
-    for (unsigned int index = 0; index < postalCodes.size(); index++) {
-    	if (first) {
-    		first = false;
-    	} else {
-    		std::cout << ",";
-    	}
-    	std::cout << postalCodes.at(index);
-    }
-
+    printCommaSeperated(address.getPostalCodes());
     NavigationTypes::Coordinate2D coordinate = address.getCoordinate();
     std::cout << ", coordinate=(" << coordinate.getLatitude() << "," << coordinate.getLongitude() << ")";
     std::cout << ", distance=" << address.getDistance();
-    if (address.getFuzzyMatch()) {
-    	std::cout << ", fuzzy";
-    }
+    std::cout << ", fuzzy=" << address.getFuzzyMatch();
     std::cout << ", locationHandle=" << address.getLocationHandle();
     std::cout << std::endl;
 }
 
-void printPoi(FreeTextSearch::POI poi) {
+void printPoi(const FreeTextSearch::POI& poi) {
     std::cout << "POI: ";
     std::cout << "poiName=" << poi.getPoiName();
     std::cout << ", brandNames=";
-    FreeTextSearch::FtsStringList brandNames = poi.getBrandNames();
-    bool first = true;
-    for (unsigned int index = 0; index < brandNames.size(); index++) {
-    	if (first) {
-    		first = false;
-    	} else {
-    		std::cout << ",";
-    	}
-    	std::cout << brandNames.at(index);
-    }
+    printCommaSeperated(poi.getBrandNames());
     std::cout << ", categoryCode=" << poi.getCategoryCode();
     std::cout << ", countryCode=" << poi.getCountryCode();
     std::cout << ", stateCode=" << poi.getStateCode();
     std::cout << ", mapCode=" << poi.getMapCode();
     std::cout << ", places=";
-    FreeTextSearch::FtsStringList places = poi.getPlace();
-    first = true;
-    for (unsigned int index = 0; index < places.size(); index++) {
-    	if (first) {
-    		first = false;
-    	} else {
-    		std::cout << ",";
-    	}
-    	std::cout << places.at(index);
-    }
+    printCommaSeperated(poi.getPlace());
     std::cout << ", postalCodes=";
-    FreeTextSearch::FtsStringList postalCodes = poi.getPostalCode();
-    first = true;
-    for (unsigned int index = 0; index < postalCodes.size(); index++) {
-    	if (first) {
-    		first = false;
-    	} else {
-    		std::cout << ",";
-    	}
-    	std::cout << postalCodes.at(index);
-    }
+    printCommaSeperated(poi.getPostalCode());
     std::cout << ", address=" << poi.getAddress();
     std::cout << ", telephone=" << poi.getTelephone();
-
     NavigationTypes::Coordinate2D coordinate = poi.getCoordinate();
     std::cout << ", coordinate=(" << coordinate.getLatitude() << "," << coordinate.getLongitude() << ")";
     std::cout << ", locationHandle=" << poi.getLocationHandle();
     std::cout << std::endl;
 }
 
-void printAllResults(std::string title) {
-	std::cout << std::endl;
-	std::cout << title << " - current results:" << std::endl;
+void RegisterCallbacks(std::shared_ptr<FreeTextSearchProxy<> > fts)
+{
+  fts->getFtsResultAddressesSelectiveEvent().subscribe(
+      [&](NavigationTypes::Handle sessionHandle, FreeTextSearch::PageId pageId, FreeTextSearch::Addresses addresses, bool moreAvailable)
+      {
+        std::cout << std::endl << "FtsResultAddressesses"
+            << "\n\tsessionHandle = " << sessionHandle
+            << "\n\tpageId = " << pageId
+            << "\n\tmoreAvailable = " << moreAvailable
+            << std::endl;
+        std::for_each(addresses.begin(), addresses.end(), &printAddress);
 
-	// TODO merge Addresses and POIs based on score. For first print all addresses and then all POIs.
-	for (unsigned int index=0; index < resultAddresses.size(); ++index) {
-		printAddress(resultAddresses.at(index));
-	}
-
-	for (unsigned int index=0; index < resultPois.size(); ++index) {
-		printPoi(resultPois.at(index));
-	}
-
-	std::cout << std::endl;
+      });
+  fts->getFtsResultPoisSelectiveEvent().subscribe(
+      [&](NavigationTypes::Handle sessionHandle, FreeTextSearch::PageId pageId, FreeTextSearch::POIs pois, bool moreAvailable)
+      {
+        std::cout << std::endl << "FtsResultPOIs"
+            << "\n\tsessionHandle = " << sessionHandle
+            << "\n\tpageId = " << pageId
+            << "\n\tmoreAvailable = " << moreAvailable
+            << std::endl;
+        std::for_each(pois.begin(), pois.end(), &printPoi);
+      });
+  fts->getFtsResultPoiSuggestionsSelectiveEvent().subscribe(
+      [&](NavigationTypes::Handle sessionHandle, FreeTextSearch::PageId pageId, FreeTextSearch::POICategories poiCategories)
+      {
+        std::cout << std::endl << "PoiSuggestions"
+            << "\n\tsessionHandle = " << sessionHandle
+            << "\n\tpageId = " << pageId
+            << std::endl;
+      });
+  fts->getFtsDoneSelectiveEvent().subscribe(
+      [&](NavigationTypes::Handle sessionHandle, FreeTextSearch::PageId pageId, FreeTextSearch::FtsStatus status)
+      {
+        std::cout << std::endl << "FtsDone"
+            << "\n\tsessionHandle = " << sessionHandle
+            << "\n\tpageId = " << pageId
+            << "\n\tstatus = " << status
+            << std::endl;
+        ftsDoneIsReceived = true;
+      });
 }
 
-void ftsRequestCallback(const CommonAPI::CallStatus& callStatus,
-		const FreeTextSearch::ftsRequestError& error, const FreeTextSearch::RequestId& responseId,
-		const NavigationTypes::Handle& freeTextSearchHandle) {
-    std::cout << "   Result of ftsRequest (asynchronous)" << error << std::endl;
-    std::cout << "   callStatus: " << ((callStatus == CommonAPI::CallStatus::SUCCESS) ? "SUCCESS" : "NO_SUCCESS")
-              << std::endl;
-    std::cout << "   error = " << error << std::endl;
-    std::cout << "   responseId = " << responseId << std::endl;
-    std::cout << "   freeTextSearchHandle = " << freeTextSearchHandle << std::endl;
+void WaitForFtsDoneSignal()
+{
+  std::cout << "Waiting for page results ...";
+  while (!ftsDoneIsReceived)
+  {
+    usleep(1000);
+  }
+  std::cout << std::endl;
 }
 
-void ftsNextPageCallback(const CommonAPI::CallStatus& callStatus,
-		const FreeTextSearch::RequestId& responseId) {
-    std::cout << "   Result of ftsNextPage (asynchronous)" << std::endl;
-    std::cout << "   callStatus: " << ((callStatus == CommonAPI::CallStatus::SUCCESS) ? "SUCCESS" : "NO_SUCCESS")
-              << std::endl;
-    std::cout << "   responseId = " << responseId << std::endl;
+int main()
+{
+  std::shared_ptr <CommonAPI::Runtime> runtime = CommonAPI::Runtime::get();
+  std::shared_ptr<FreeTextSearchProxy<>> fts = runtime->buildProxy<FreeTextSearchProxy>("local", "test");
+
+  while (!fts->isAvailable())
+  {
+    usleep(10);
+  }
+
+  RegisterCallbacks(fts);
+
+  CommonAPI::CallStatus callStatus;
+  CommonTypes::Version version;
+  FreeTextSearch::FtsString inputString = "TomTom Eindhoven";
+  NavigationTypes::Coordinate2D searchLocation(0, 0);
+  FreeTextSearch::ShapeList searchShapes;
+  FreeTextSearch::PageSize pageSize = 1;
+  FreeTextSearch::SearchOptions searchOptions = FreeTextSearch::SearchOption::ADDRESS || FreeTextSearch::SearchOption::POI;
+  FreeTextSearch::FtsString searchConditions = "";
+  FreeTextSearch::FuzzyLevel fuzzyLevel = 0;
+
+  FreeTextSearch::ftsRequestError errorFtsRequest;
+  FreeTextSearch::ftsNextPageError errorFtsNextPage;
+  FreeTextSearch::ftsCancelError errorFtsCancel;
+  FreeTextSearch::LocationHandleList locationHandleList;
+  NavigationTypes::Handle sessionHandle;
+  FreeTextSearch::PageId pageId;
+
+
+  std::cout << "Call getVersion (synchronous) *****************************************************"<< std::endl;
+  fts->getVersion(callStatus, version);
+  std::cout << "\tcallStatus = " << ((callStatus == CommonAPI::CallStatus::SUCCESS) ? "SUCCESS" : "NO_SUCCESS") << std::endl;
+  std::cout << "\tversion = " << version.getVersionMajor() << "." << version.getVersionMinor();
+  std::cout << "." << version.getVersionMicro() << " (" << version.getDate() << ")" << std::endl;
+
+
+  ftsDoneIsReceived = false;
+  fts->ftsRequest(inputString, searchLocation, searchShapes, pageSize, searchOptions, searchConditions, fuzzyLevel, callStatus, errorFtsRequest, sessionHandle, pageId);
+  std::cout << "Call ftsRequest (synchronous) *****************************************************" << std::endl;
+  std::cout << "\tcallStatus = " << ((callStatus == CommonAPI::CallStatus::SUCCESS) ? "SUCCESS" : "NO_SUCCESS") << std::endl;
+  std::cout << "\terror = " << errorFtsRequest << std::endl;
+  std::cout << "\tsessionHandle = " << sessionHandle << std::endl;
+  std::cout <<" \tpageId =" << pageId << std::endl;
+  WaitForFtsDoneSignal();
+
+
+  ftsDoneIsReceived = false;
+  fts->ftsNextPage(sessionHandle, searchOptions, callStatus, errorFtsNextPage, pageId);
+  std::cout << "Call ftsNextPage (synchronous) ****************************************************" <<std::endl;
+  std::cout << "\tcallStatus = " << ((callStatus == CommonAPI::CallStatus::SUCCESS) ? "SUCCESS" : "NO_SUCCESS") << std::endl;
+  std::cout << "\terror = " << errorFtsNextPage << std::endl;
+  std::cout << "\tpageId = " << pageId << std::endl;
+  WaitForFtsDoneSignal();
+
+
+  fts->ftsCancel(sessionHandle, callStatus, errorFtsCancel);
+  std::cout << "Call ftsCancel (synchronous) ******************************************************" <<std::endl;
+  std::cout << "\tcallStatus = " << ((callStatus == CommonAPI::CallStatus::SUCCESS) ? "SUCCESS" : "NO_SUCCESS") << std::endl;
+  std::cout << "\terror = " << errorFtsCancel << std::endl;
+
+
+  fts->deleteLocationHandles(locationHandleList, callStatus);
+  std::cout << "Call deleteLocationHandles (synchronous) ******************************************" <<std::endl;
+  std::cout << "\tcallStatus = " << ((callStatus == CommonAPI::CallStatus::SUCCESS) ? "SUCCESS" : "NO_SUCCESS") << std::endl;
+
+  return 0;
 }
 
-void ftsCancelCallback(const CommonAPI::CallStatus& callStatus,
-		const FreeTextSearch::RequestId& responseId) {
-    std::cout << "   Result of ftsCancel (asynchronous)" << std::endl;
-    std::cout << "   callStatus: " << ((callStatus == CommonAPI::CallStatus::SUCCESS) ? "SUCCESS" : "NO_SUCCESS")
-              << std::endl;
-    std::cout << "   responseId = " << responseId << std::endl;
-
-    cancelDone = true;
-}
-
-void deleteLocationHandlesCallback(const CommonAPI::CallStatus& callStatus,
-		const FreeTextSearch::RequestId& responseId) {
-    std::cout << "   Result of deleteLocationHandles (asynchronous)" << std::endl;
-    std::cout << "   callStatus: " << ((callStatus == CommonAPI::CallStatus::SUCCESS) ? "SUCCESS" : "NO_SUCCESS")
-              << std::endl;
-    std::cout << "   responseId = " << responseId << std::endl;
-
-    freeHandlesDone = true;
-}
-
-int main() {
-    std::shared_ptr<CommonAPI::Runtime> runtime = CommonAPI::Runtime::get();
-
-    std::string domain = "local";
-	std::string instance = "org.genivi.navigation.freetextsearchservice";
-
-    std::shared_ptr<FreeTextSearchProxyDefault> myProxy = runtime->buildProxy < FreeTextSearchProxy > (domain, instance);
-
-    while (!myProxy->isAvailable()) {
-        usleep(10);
-    }
-
-    /*
-     * Subscribe to broadcasts
-     */
-    myProxy->getFtsResultAddressesSelectiveEvent().subscribe([&](FreeTextSearch::RequestId responseId, FreeTextSearch::Addresses addresses, bool moreAvailable){
-        std::cout << "Received ftsResultAddresses, responseId = " << responseId << std::endl;
-        std::cout << "moreAvailable = " << moreAvailable << std::endl;
-
-        for (unsigned int index=0; index < addresses.size(); ++index) {
-        	resultAddresses.push_back(addresses.at(index));
-        }
-
-        printAllResults("New addresses received");
-    });
-
-    myProxy->getFtsResultPoisSelectiveEvent().subscribe([&](FreeTextSearch::RequestId responseId, FreeTextSearch::POIs pois, bool moreAvailable){
-        std::cout << "Received ftsResultPois, responseId = " << responseId << std::endl;
-        std::cout << "moreAvailable = " << moreAvailable << std::endl;
-
-        for (unsigned int index=0; index < pois.size(); ++index) {
-        	resultPois.push_back(pois.at(index));
-        }
-
-        printAllResults("New POIs received");
-    });
-
-    myProxy->getFtsDoneSelectiveEvent().subscribe([&](FreeTextSearch::RequestId responseId, FreeTextSearch::FtsStatus ftsStatus) {
-        std::cout << "Received ftsDone, responseId = " << responseId << std::endl;
-        std::cout << "ftsStatus = " << ftsStatus << std::endl;
-
-        pageDone = true;
-    });
-
-    FreeTextSearch::RequestId requestId = 0;
-    FreeTextSearch::RequestId responseId;
-    CommonAPI::CallStatus callStatus;
-
-    // Get the API version info.
-    CommonTypes::Version version;
-    std::cout << "Call getVersion (synchronous), requesId = " << requestId << std::endl;
-    myProxy->getVersion(requestId, callStatus, responseId, version);
-    std::cout << "   callStatus: " << ((callStatus == CommonAPI::CallStatus::SUCCESS) ? "SUCCESS" : "NO_SUCCESS")
-              << std::endl;
-    std::cout << "   responseId = " << responseId << std::endl;
-    std::cout << "   version = " << version.getVersionMajor() << "." << version.getVersionMinor()
-    		  << "." << version.getVersionMicro() << " (" << version.getDate() << ")" << std::endl;
-
-    requestId++;
-
-    // Clear results
-    resultAddresses.clear();
-    resultPois.clear();
-
-    // Search parameters
-    FreeTextSearch::FtsString inputString = "lucht";
-    NavigationTypes::Coordinate2D* searchLocation = new NavigationTypes::Coordinate2D(48.053250, 8.324500);
-    FreeTextSearch::ShapeList searchShapes;
-    FreeTextSearch::PageSize pageSize = 20;
-    FreeTextSearch::SearchOptions searchOptions = FreeTextSearch::SearchOption::ADDRESS;
-    FreeTextSearch::FtsString searchConditions = "";
-    FreeTextSearch::FuzzyLevel fuzzyLevel = 5;
-    // TODO At least the synchronous call always has the 'error' parameter. So there has to be a 'NO ERROR' value defined.
-    FreeTextSearch::ftsRequestError error;
-    NavigationTypes::Handle freeTextSearchHandle;
-
-    pageDone = false;
-    std::cout << "Call ftsRequest (asynchronous), requesId = " << requestId << std::endl;
-    std::function<void(const CommonAPI::CallStatus&,
-    		           const FreeTextSearch::ftsRequestError&, const FreeTextSearch::RequestId&,
-    		    		const NavigationTypes::Handle&)> ftsRequestCallbackFunction = ftsRequestCallback;
-    myProxy->ftsRequestAsync(requestId, inputString, *searchLocation, searchShapes, pageSize, searchOptions, searchConditions, fuzzyLevel,
-    		                 ftsRequestCallbackFunction);
-
-    while (!pageDone) {
-        std::cout << "Waiting for first page results." << std::endl;
-        usleep(50000);
-    }
-
-    requestId++;
-    pageDone = false;
-    std::cout << "Call ftsNext (asynchronous), requesId = " << requestId << std::endl;
-    std::function<void(const CommonAPI::CallStatus&,
-    		           const FreeTextSearch::RequestId&)> ftsNextPageCallbackFunction = ftsNextPageCallback;
-    myProxy->ftsNextPageAsync(requestId, freeTextSearchHandle, searchOptions, ftsNextPageCallbackFunction);
-
-    while (!pageDone) {
-        std::cout << "Waiting for second page results." << std::endl;
-        usleep(50000);
-    }
-
-    requestId++;
-    cancelDone = false;
-    freeHandlesDone = false;
-    std::cout << "Call ftsCancel (asynchronous), requesId = " << requestId << std::endl;
-    std::function<void(const CommonAPI::CallStatus&,
-    		           const FreeTextSearch::RequestId&)> ftsCancelCallbackFunction = ftsCancelCallback;
-    myProxy->ftsCancelAsync(requestId, freeTextSearchHandle, ftsCancelCallbackFunction);
-
-    requestId++;
-    std::cout << "Call deleteLocationHandles (asynchronous), requesId = " << requestId << std::endl;
-    std::function<void(const CommonAPI::CallStatus&,
-    		           const FreeTextSearch::RequestId&)> deleteLocationHandlesCallbackFunction = deleteLocationHandlesCallback;
-    FreeTextSearch::LocationHandleList locationHandleList;
-    myProxy->deleteLocationHandlesAsync(requestId, locationHandleList, deleteLocationHandlesCallbackFunction);
-
-
-    while (!(cancelDone && freeHandlesDone)) {
-        std::cout << "Waiting for cancel and deleteHandles to finish." << std::endl;
-        usleep(50000);
-    }
-
-
-//    while (true) {
-//        std::this_thread::sleep_for(std::chrono::seconds(5));
-//    }
-
-    return 0;
-}

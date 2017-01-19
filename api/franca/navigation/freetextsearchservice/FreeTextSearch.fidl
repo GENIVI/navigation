@@ -41,6 +41,18 @@ interface FreeTextSearch {
     }
 
     <**
+        @description: Contains constant values used in this interface 
+    **>
+    enumeration FtsRangeConstants {
+    	MAX_FUZZY_LEVEL = 5
+    	MAX_SHAPES = 31
+    	MAX_STRING_LIST_SIZE = 100
+    	MAX_RESULTS = 500
+    	MAX_STRING_LENGTH = 4095
+    	MAX_LOCATION_HANDLES_LIST_SIZE = 4096
+    }
+    
+    <**
     @description: Search results are returned in some sequential pages. Each
         page is identified with an ID called pageId. The pageId of the first 
         page is zero and pageIds are incremented by one for each subsequent page. 
@@ -51,14 +63,14 @@ interface FreeTextSearch {
     <**
     @description: Type to represent most texts in this interface..
         Character set = UNICODE
-        Maximum length = 4095
+        Maximum length = MAX_STRING_LENGTH
     
     **>
     typedef FtsString is String
 
     <**
     @description: A list of strings
-        maximum length = 100
+        maximum length = MAX_STRING_LIST_SIZE
     **>
     array FtsStringList of FtsString
 
@@ -104,14 +116,14 @@ interface FreeTextSearch {
 
     <**
     @description: A list of shapes.
-        maximum length = 31
+        maximum length = MAX_SHAPES
     
     **>
     array ShapeList of Shape
 
     <**
     @description: A maximum number of results to be returned.
-        Range[0:1000]
+        Range[0:MAX_RESULTS]
     **>
     typedef PageSize is UInt16
 
@@ -236,7 +248,7 @@ interface FreeTextSearch {
         INVALID_PARAMETER_SEARCH_SHAPES = 11
         
         <**
-            @description: The fuzzy level is not in the allowed range: [0,5].
+            @description: The fuzzy level is not in the allowed range: [0,MAX_FUZZY_LEVEL].
         **>
         INVALID_PARAMETER_FUZZY_LEVEL = 12
         
@@ -255,7 +267,7 @@ interface FreeTextSearch {
 
     <**
     @description: A list of LocationHandles.
-        maximum length = 4096
+        maximum length = MAX_LOCATION_HANDLES_LIST_SIZE
     
     **>
     array LocationHandleList of LocationHandle
@@ -419,7 +431,7 @@ interface FreeTextSearch {
 
     <**
     @description: A list of addresses.
-        maximum length = 500
+        maximum length = MAX_RESULTS
     **>
     array Addresses of Address
 
@@ -491,7 +503,7 @@ interface FreeTextSearch {
 
     <**
     @description: A list of POIs.
-        maximum length = 500
+        maximum length = MAX_RESULTS
     
     **>
     array POIs of POI
@@ -533,16 +545,16 @@ interface FreeTextSearch {
 
     <**
     @description: A list of POI categories.
-        maximum length = 500
+        maximum length = MAX_RESULTS
     
     **>
     array POICategories of POICategory
 
     <**
-    @description: Indicates on a scale from 0 to 5 how fuzzy the search results can be.
+    @description: Indicates on a scale from 0 to MAX_FUZZY_LEVEL how fuzzy the search results can be.
         0 means only an exact search is performed, 1 is the lowest level of fuzzy search
-        and 5 means a very fuzzy search.
-        Range[0:5]
+        and MAX_FUZZY_LEVEL means a very fuzzy search.
+        Range[0:MAX_FUZZY_LEVEL]
     
     **>
     typedef FuzzyLevel is Int8
