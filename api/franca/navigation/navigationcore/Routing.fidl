@@ -609,6 +609,10 @@ interface Routing {
 				@description : route handle of the calculated route for which alternatives should be calculated
 			**>
 			Handle calculatedRoute
+			<**
+				@description : indicates maximum number of alternative routes to be calculated 
+			**>
+			UInt16 numberOfAlternativeRoutes
 		}
 		out {
 			Handle[] alternativeRoutesList

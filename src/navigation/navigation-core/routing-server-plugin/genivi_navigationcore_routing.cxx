@@ -396,7 +396,7 @@ class  RoutingServerStub : public RoutingStubDefault
      * description: calculateAlternativeRoutes = This method allows a client to calculate alternative routes
      *   that differs from a  calculated route
      */
-    void calculateAlternativeRoutes(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _calculatedRoute, calculateAlternativeRoutesReply_t _reply) {
+    void calculateAlternativeRoutes(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _calculatedRoute, uint16_t _numberOfAlternativeRoutes, calculateAlternativeRoutesReply_t _reply) {
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 
