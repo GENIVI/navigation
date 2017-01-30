@@ -55,10 +55,10 @@ interface MapViewerControl {
 		DET_ROAD                          //Roads
 		DET_POLYGON                       //Polygons
 		DET_DESTINATION                   //Destination flag
-		DET_MANOEUVRE_MARKER              //Maneuvre point markers
+		DET_MANOEUVRE_MARKER              //Maneuver point markers
 		DET_LANE_GUIDANCE_MARKER          //Lane guidance point markers
 		DET_ROUTE                         //Route
-		DET_MANOEUVRE_ARROW               //Maneuvre arrows
+		DET_MANOEUVRE_ARROW               //Maneuver arrows
 		DET_TREKKING_TOUR                 //Trekking tours
 		DET_TTI_EDGE_HIGHLIGHTING         //TTI highlighted edges
 		DET_CITY_MARKER                   //City markers
@@ -75,7 +75,7 @@ interface MapViewerControl {
 		DET_FPS_DISPLAY                   //Measure and display frames per second.
 		DET_CROSSHAIR                     //Display cross-hair.
 		DET_DEVDROP_BANNER                //Enables drawing of a banner. The banner indicates that the current version is a developer's version. The banner is rendered across the display.
-		DET_FRAME_AROUND_MAP 			   //a frame is rendered around the map.
+		DET_FRAME_AROUND_MAP 			  //a frame is rendered around the map.
 		DET_CORONA                        //a corona is drawn around the earth.
 		DET_WATEREFFECT                   //Demo effect for water.
 		DET_TREES                         //Demo effect for trees.
@@ -84,11 +84,11 @@ interface MapViewerControl {
 		DET_ROUTE_DESTINATION             //Render destination POIs (e.g. destination flags).
 		DET_RANGE_DISPLAY                 //Display range display.
 		DET_POI_BRANDS                    //Display branded POIs.
-		DET_WEATHER_MARKER                //DrawingElementType_DET_WEATHER_MARKER
+		DET_WEATHER_MARKER                //Weather marker
 		DET_WEATHER_OVERLAY               //Weather map overlay
-		DET_WAYPOINT_ROUTE
-		DET_WAYPOINT_ROUTE_MARKER
-		DET_STENCIL		
+		DET_WAYPOINT_ROUTE				  //	
+		DET_WAYPOINT_ROUTE_MARKER         //
+		DET_STENCIL		                  //
 	}
 
 	enumeration PanAction extends BasicEnum { 
