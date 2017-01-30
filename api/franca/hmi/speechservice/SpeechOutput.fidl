@@ -16,7 +16,7 @@ import org.genivi.CommonTypes.* from "../../CommonTypes.fidl"
 **> 
 interface SpeechOutput {
 	version {
-		major 4
+		major 1
 		minor 0
 	}
 	
@@ -39,7 +39,13 @@ interface SpeechOutput {
 
 	<** @description : String containing the name of the last reached marker. **>
 	typedef Marker is String
-
+	
+	<** @description : Max length of a single prompt part. **>
+	enumeration Limits
+	{
+		MAX_CHUNK_LENGTH = 1024
+	}
+	
 	<** @description : Connection status, will be notified. **>
 	enumeration ConnectionStatus
 	{
@@ -128,11 +134,12 @@ interface SpeechOutput {
 	}
 
 	<** @description : A prompt must be playing to perform an abort action. If no prompting operation in progress there will be no reaction of the system. **>
-    method abortPrompter { }
+    method abortPrompter fireAndForget {
+    }
 
 	<** @description : The prompter is closed after the last text chunk submitted has finished playing. **>
-    method closePrompter {	}
-	
+    method closePrompter fireAndForget {
+    }
 
 	// *** notification methods
 	
@@ -141,8 +148,7 @@ interface SpeechOutput {
 	 */
 	
 	<** @description : Notifies the connection status **>
-//    broadcast notifyConnectionStatus selective {
-    broadcast notifyConnectionStatus {
+    broadcast notifyConnectionStatus selective {
     	out {
 			<** @description : Client connection status. **>
     		ConnectionStatus connectionStatus
@@ -150,8 +156,7 @@ interface SpeechOutput {
     }
 
 	<** @description : Notifies the last reached marker. **>
-//	broadcast notifyMarkerReached selective {
-	broadcast notifyMarkerReached {
+	broadcast notifyMarkerReached selective {
 		out {
 			<** @description : ID of the processed chunk. **>
 			ChunkID chunkID
@@ -161,17 +166,17 @@ interface SpeechOutput {
 	}
 	
 	<** @description : Notifies the queue status. **>
-//	broadcast notifyQueueStatus selective {
-	broadcast notifyQueueStatus {
+	broadcast notifyQueueStatus selective {
 		out {
 			<** @description : Fill status of the text buffer. **>
 			QueueStatus queueStatus
 		}
 	}
 
-	<** @description : Notifies the TTS engine status. **>
-//	broadcast notifyTTSStatus selective {
-	broadcast notifyTTSStatus {
+	<** @description : Notifies the TTS engine status. 
+        \return : TtsStatus TTS status information **>
+
+	broadcast notifyTTSStatus selective {
 		out {
 			<** @description : Current status of the TTS. **>
 			TtsStatus ttsStatus
