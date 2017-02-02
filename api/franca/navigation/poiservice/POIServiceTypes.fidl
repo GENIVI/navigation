@@ -64,7 +64,322 @@ typeCollection POIServiceTypes {
 		MOTORWAY_EXIT		= 210
 		ALL_CATEGORIES		= 65535
      }
- 
+
+ 	enumeration StandardCategory {
+ 		NOT_STANDARD_CATEGORY
+		//////////////////////////////////////////////
+		// Group: Vehicles
+		//////////////////////////////////////////////
+		
+		VEHICLE_REPAIR                = 1
+		PETROL_STATION                = 2
+		
+		// Electric Vehicle Station (EVS)
+		// An EV charging station, also called electric recharging point, charging
+		// point, EVSE (Electric Vehicle Supply Equipment), and EVCE (Electric
+		// Vehicle Charging Equipment), supplies electricity for the recharging of
+		// electric vehicles and other plug-in vehicles (including plug-in hybrids).
+		EVS_CHARGING_STATION           = 3
+		
+		CONTROLLED_ACCESS_INTERSECTION = 4
+		CONTROLLED_ACCESS_ENTRY_EXIT   = 5
+		
+		// Smart IC - Controlled Access roads where no cache payments
+		// are available. Only Electronic (ETC) payments are available.
+		// These roads are e.g. in Japan and Korea.
+		CONTROLLED_ACCESS_SMART_IC    = 6
+		
+		RENT_A_CAR                    = 7
+		CAR_WASH                      = 8
+		CAR_DEALERSHIP                = 9
+		MOTOR_CYCLE_DEALERSHIP        = 10 
+		TRUCK_DEALERSHIP              = 11
+		PARKING_GARAGE                = 12
+		OPEN_PARKING                  = 13 
+		
+		// A service located along freeways offering one or more recreational
+		// facilities or service functions to the car driver.
+		REST_AREA                     = 14
+		
+		ROAD_ASSISTANCE               = 15
+		CAMPING                       = 16
+		CARAVAN_SITE                  = 17
+		COACH_AND_LORRY_PARKING       = 18
+		
+		// Motoring Organization Office
+		// A national club or subscription based organisation offering services
+		// and facilities for motorists.
+		MOTORING_ORG_OFFICE          = 19
+		
+		// Car Shipping Terminal
+		// A location where cars may be loaded onto ferries for car shipping
+		// services.
+		CAR_SHIPPING_TERMINAL        = 20
+		
+		
+		//////////////////////////////////////////////
+		// Group: Lodging
+		//////////////////////////////////////////////
+		
+		HOTEL_MOTEL                 = 21
+		
+		//////////////////////////////////////////////
+		// Group: Food & Drinks
+		//////////////////////////////////////////////
+		
+		// Restaurant
+		// Any establishment offering meals for payment including sit down meals or
+		// fast food take-aways. Hotels or a Public Houses may be included in this
+		// Feature.
+		RESTAURANT                 = 22
+		
+		// Fast food
+		// Any establishment offering fast food take-away meals for payment.
+		FAST_FOOD                  = 23
+		
+		// Coffee shop
+		// An establishment which serves mainly coffee or tea.
+		COFFEE_SHOP                 = 24
+		
+		// Bar or Pub
+		// An establishment serving alcoholic beverages, providing seating, and may
+		// serve food.
+		BAR_OR_PUB                  = 25
+		
+		
+		//////////////////////////////////////////////
+		// Group: Culture
+		//////////////////////////////////////////////
+		
+		CINEMA                     = 26
+		MUSEUM                     = 27
+		THEATRE                    = 28
+		LIBRARY                    = 29
+		
+		
+		//////////////////////////////////////////////
+		// Group: Health
+		//////////////////////////////////////////////
+		
+		// Hospital / Polyclinic
+		HOSPITAL                   = 30
+		
+		// Physician
+		// Licensed medical practitioner which provides services related to
+		// restoring human health.
+		PHYSICIAN                  = 31
+		
+		// Dentist
+		// Licensed medical practitioner which provides services related to dental
+		// treatment.
+		DENTIST                    = 32
+		
+		PHARMACY                   = 33
+		
+		// Veterinarian
+		// Licensed medical practitioner which provides services related to
+		// medical treatment of animals.
+		VETERINARIAN_SERVICE        = 34
+		
+		
+		//////////////////////////////////////////////
+		// Group: Public Buildings
+		//////////////////////////////////////////////
+		
+		POLICE_STATION              = 35
+		POST_OFFICE                 = 36
+		CITY_HALL                   = 37
+		EMBASSY                     = 38
+		COURT_HOUSE                 = 39
+		
+		// Government Office
+		// An office for local, regional or national government activities.
+		GOVERNMENT_OFFICE           = 40
+		
+		// Community Centre
+		// Facilities and activities for the benefit of the local community only.
+		// They typically cater to special interest groups such as youth, elderly,
+		// or handicapped.
+		COMMUNITY_CENTER            = 41
+		
+		
+		//////////////////////////////////////////////
+		// Group: Shopping
+		//////////////////////////////////////////////
+		
+		SHOPPING_CENTER             = 42
+		
+		// Store
+		// A business establishment where usually diversified goods are kept for
+		// retail sale (e.g. Bookstore, Grocery Store, Conveniency store, Clothing
+		// store, etc.)
+		STORE                      = 43
+		
+		
+		//////////////////////////////////////////////
+		// Group: Finance
+		//////////////////////////////////////////////
+		
+		BANK                       = 44
+		ATM                        = 45
+		CURRENCY_EXCHANGE          = 46
+		
+		
+		//////////////////////////////////////////////
+		// Group: Tourism
+		//////////////////////////////////////////////
+		
+		TOURIST_OFFICE              = 47
+		TRAVEL_AGENCY               = 48
+		
+		
+		//////////////////////////////////////////////
+		// Group: Sights
+		//////////////////////////////////////////////
+		
+		TOURIST_ATTRACTION          = 49
+		HISTORICAL_MONUMENT         = 50
+		NATIONAL_PARK               = 51
+		
+		// City Center
+		// This Position which adequately describes a central activity point of a
+		// settlement or Administrative Area. It will typically be the town hall,
+		// central train station or other central activity centre (i.e. church or
+		// pedestrian District.)
+		CITY_CENTER                 = 52
+		
+		// Hamlet
+		// A Hamlet is a very small village, typically without a church. In some
+		// countries, these Hamlets are well known locations and are used by
+		// inhabitants to refer to their home address.
+		HAMLET                     = 53
+		
+		
+		//////////////////////////////////////////////
+		// Group: Entertainment & Fun
+		//////////////////////////////////////////////
+		
+		ZOO                        = 54
+		AMUSEMENT_PARK             = 55
+		
+		// Going Out Places
+		// Places where people visit when they "go out": clubs, shows, casinos,
+		// parties, etc.
+		GOING_OUT                   = 56
+		
+		
+		//////////////////////////////////////////////
+		// Group: Sports
+		//////////////////////////////////////////////
+		
+		STADIUM                    = 57
+		
+		// Sports Center
+		// An indoor sports facility or an outdoor location where any sport such as
+		// golf, riding, sailing etc. may be enjoyed.
+		SPORTS_CENTER              = 58
+		
+		RECREATION                 = 59
+		SKI_RESORT                 = 60
+		SWIMMING_POOL              = 61
+		GOLF_COURSE                = 62
+		
+		
+		//////////////////////////////////////////////
+		// Group: Water Transport
+		//////////////////////////////////////////////
+		
+		FERRY_TERMINAL              = 63
+		
+		// Marina
+		// An area with docking and service facility for pleasure craft. See also
+		// HARBOUR
+		MARINA                     = 64
+		
+		// Harbour
+		// A portion of a sea, a lake, or other large body of water, either
+		// land-locked or artificially protected so as to be a place of safety for
+		// vessels in stormy weather. See also MARINA.
+		HARBOUR                    = 65
+		
+		
+		//////////////////////////////////////////////
+		// Group: Business
+		//////////////////////////////////////////////
+		
+		// Business Facility
+		// Location where the main activities of a particular business activity are
+		// concentrated.
+		BUSINESS_FACILITY            = 66
+		
+		// Exhibition or Conference Center
+		EXHIBITION_CONFERENCE_CENTER = 67
+		
+		
+		//////////////////////////////////////////////
+		// Group: Passenger Transport
+		//////////////////////////////////////////////
+		
+		RAILWAY_STATION             = 68
+		
+		// Public transit stop
+		// Public Transit Stop is a point where passengers can board a public
+		// transport vehicle.
+		PUBLIC_TRANSIT_STOP          = 69
+		
+		// Park and ride
+		// A parking facility that is designated as a Park & Ride, a facility where
+		// people leave their vehicles to join a carpool/bus/etc.
+		PARK_AND_RIDE                = 70
+		
+		AIRPORT                      = 71
+		
+		// Airline Access
+		// An airline's check-in area (if there is more than one terminal) at the
+		// airport.
+		AIRLINE_ACCESS              = 72
+		
+		// Taxi stand
+		// Designated queueing, loading and unloading area for taxis, usually in
+		// city centres and buildings with a high volume of pedestrians.
+		TAXI_STAND                  = 73
+		
+		//////////////////////////////////////////////
+		// Group: Emergency Categories
+		//////////////////////////////////////////////
+		
+		EMERGENCY_CALL_STATION       = 74
+		EMERGENCY_MEDICAL_SERVICE    = 75
+		FIRST_AID_POST               = 76
+		FIRE_BRIGADE                 = 77
+		
+		//////////////////////////////////////////////
+		// Group: Other
+		//////////////////////////////////////////////
+		
+		PLACE_OF_WORSHIP            = 78
+		
+		// School, University, or College
+		EDUCATION                   = 79
+		
+		CUSTOMS                     = 80
+		FRONTIER_CROSSING           = 81
+		TOLL_LOCATION               = 82
+		
+		// Public restroom
+		// Room equipped with toilets and lavatories for public use.
+		PUBLIC_RESTROOM             = 83
+		PUBLIC_PHONE                = 84
+		KINDERGARTEN                = 85
+		MOUNTAIN_PASS_SUMMIT        = 86
+		
+		// Speed Camera
+		// Roadside camera, triggered by a speeding vehicle, that takes a photograph
+		// of that vehicle and records its speed
+		SPEED_CAMERA                = 87
+		 		
+ 	}
+
      <** @description: Type of Attribute**>
     enumeration AttributeType { 
     	STRING		= 500
@@ -316,6 +631,10 @@ typeCollection POIServiceTypes {
     {
  		<**	@description : Category unique id.**>
         CategoryID uniqueId
+
+ 		<**	@description : Identifier for the POI Standard Category that describes the semantic meaning of the POI Category. 
+ 				NOT_STANDARD_CATEGORY should be used if the category doesn't belong to any standard category or if it is unknown. **>
+        StandardCategory standardCategoryId                
  		<**	@description : list of parent categories unique id.**>
         CategoryID[] parentsId
  		<**	@description : visual icons set.**>

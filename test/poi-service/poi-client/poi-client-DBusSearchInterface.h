@@ -99,7 +99,7 @@ public Q_SLOTS: // METHODS
     }
 
     inline QDBusPendingReply<QList<categoryDetailsList_t> >GetCategoriesDetails(QList<categoryId_t> categories)
-    { // "au" in "a((uauvsbsv)a(usia(isv))a(us))" out
+    { // "au" in "a((uiauvsbsv)a(usia(isv))a(us))" out
         QList<QVariant> argumentList;
         argumentList << qVariantFromValue(categories);
         return asyncCallWithArgumentList(QLatin1String("GetCategoriesDetails"), argumentList);

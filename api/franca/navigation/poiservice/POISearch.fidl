@@ -38,7 +38,7 @@ interface POISearch {
 		}
 	}
 	
-	<**	@description : This method retrieves the list od POI categories available (pre-defined and custom).**>
+	<**	@description : This method retrieves the list of POI categories available (pre-defined and custom).**>
 	method getAvailableCategories {
 		out {
 			<** @description : List of categories (id, name and top_level).**>
@@ -75,6 +75,17 @@ interface POISearch {
 		out {
 			<** @description : List of categories (id and top_level).**>
 			CategoryAndLevel[] categories				
+		}
+	}
+	
+	<**	@description : Get the categories that are marked with the given standard category. **>
+	method getCategoriesWithStandardCategoryId {
+		in {
+			<** @description : Categories marked with "standardCategoryId" should be returned. **>
+			StandardCategory standardCategoryId			
+		} out {
+			<** @description : List of categories that are marked with the requested standard category. **>
+			CategoryID[] categories
 		}
 	}
 	

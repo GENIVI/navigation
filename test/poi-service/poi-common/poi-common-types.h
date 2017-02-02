@@ -140,9 +140,10 @@ struct resultSearchDetails_t //((us(ddd))aua(ui(yv)))
     QList<poiAttribute_t> attributes;
 };
 
-struct categoryDetails_t //(uau(yv)sbs(yv))
+struct categoryDetails_t //(uiau(yv)sbs(yv))
 {
     categoryId_t id; //Category unique id
+    int standardCategoryId; //standard Category Id
     QList<categoryId_t> parents_id; //list of parent categories unique id
     DBusCommonAPIVariant_t icons; //visual icons set
     QString name; //need to be a QString for UTF8
@@ -172,7 +173,7 @@ struct categorySortOption_t //(us)
     std::string name; //name to be displayed by application
 };
 
-struct categoryDetailsList_t //((uau(yv)sbs(yv)) a(usia(is(yv))) a(us))
+struct categoryDetailsList_t //((uiau(yv)sbs(yv)) a(usia(is(yv))) a(us))
 {
     categoryDetails_t details;
     QList<categoryAttribute_t> attributes;

@@ -934,6 +934,12 @@ std::vector< DBus_categoryIdLevel::DBus_categoryIdLevel_t > poiSearchServer::Get
     return(return_value);
 }
 
+std::vector< uint32_t > poiSearchServer::GetCategoriesWithStandardCategoryId(const int32_t& standardCategoryId)
+{
+    std::vector< uint32_t > return_value;
+    return return_value;
+}
+
 std::vector< DBus_category::DBus_category_t > poiSearchServer::GetCategoriesDetails(const std::vector< categoryId_t >& categories)
 {
     std::vector<DBus_category::DBus_category_t > return_value;

@@ -115,6 +115,21 @@
         </doc>
       </error>
     </method>
+    <method name="GetCategoriesWithStandardCategoryId">
+      <doc>
+        <line>GetCategoriesWithStandardCategoryId = Get the categories that are marked with the given standard category.</line>        
+      </doc>
+      <arg name="standardCategoryId" type="i" direction="in">
+        <doc>
+          <line>Categories marked with "standardCategoryId" should be returned.</line>
+        </doc>
+      </arg>
+      <arg name="categories" type="au" direction="out">
+        <doc>
+          <line>List of categories that are marked with the requested standard category.</line>
+        </doc>
+      </arg>    
+    </method>    
     <method name="GetCategoriesDetails">
       <doc>
         <line>GetCategoriesDetails = This method retrieves the details associated to one or more POI categories.</line>
@@ -126,12 +141,13 @@
           <line>Note: A POI category is a unique ID. It could be a predifined category or a custom one defined by a POI plug-in.</line>
         </doc>
       </arg>
-      <arg name="results" type="a((uau(yv)sbs(yv))a(usia(is(yv)))a(us))" direction="out">
+      <arg name="results" type="a((uiau(yv)sbs(yv))a(usia(is(yv)))a(us))" direction="out">
         <doc>
           <line>results = array[details, attributeList, sortOptions]</line>
           <line>results = List of details for all the POI categories.</line>
           <line>details = struct(unique_id, list of parents_id, icons, name, top_level, short_desc, media)]</line>
           <line>unique_id = Category unique id</line>
+          <line>standardCategoryId = enum(...) Identifier for the POI Standard Category that describes the semantic meaning of the POI Category.</line>
           <line>parents_id = list of parent categories unique id</line>
           <line>icons = visual icons set</line>
           <line>name = name</line>

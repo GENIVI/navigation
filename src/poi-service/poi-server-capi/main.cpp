@@ -369,6 +369,11 @@ public:
     void getParentCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::CommonTypes::CategoryID _category, getParentCategoriesReply_t _reply);
 
     /**
+     * description: Get the categories that are marked with the given standard category.
+     */
+    void getCategoriesWithStandardCategoryId(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::StandardCategory _standardCategoryId, getCategoriesWithStandardCategoryIdReply_t _reply);
+
+    /**
      * description: This method retrieves the details associated to one or more POI categories.
      *       It contains the name, the parent categories, the top level attribute, the
      *   list of attributes, the icons, ... .
@@ -1383,6 +1388,7 @@ void POISearchServerStub::getCategoriesDetails(const std::shared_ptr<CommonAPI::
         if ( isCategoryAvailable(_categories.at(index),&category_index) == true)
         { //category found into the embedded data!
             categoryDetails.setUniqueId(m_availableCategoryTable[category_index].id);
+            categoryDetails.setStandardCategoryId(POIServiceTypes::StandardCategory::NOT_STANDARD_CATEGORY);
             parentsId.clear();
 
             for (sub_index=0;sub_index<m_availableCategoryTable[category_index].parentList.size();sub_index++)
@@ -1435,6 +1441,12 @@ void POISearchServerStub::getCategoriesDetails(const std::shared_ptr<CommonAPI::
     }
 
     _reply(_results);
+}
+
+void POISearchServerStub::getCategoriesWithStandardCategoryId(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::StandardCategory _standardCategoryId, getCategoriesWithStandardCategoryIdReply_t _reply)
+{
+    std::vector< CommonTypes::CategoryID > _categories;
+    _reply(_categories);
 }
 
 void POISearchServerStub::createPoiSearchHandle(const std::shared_ptr<CommonAPI::ClientId> _client, createPoiSearchHandleReply_t _reply)

@@ -244,6 +244,8 @@ public:
 
     std::vector< DBus_categoryIdLevel::DBus_categoryIdLevel_t > GetParentCategories(const categoryId_t& category);
 
+    std::vector< uint32_t > GetCategoriesWithStandardCategoryId(const int32_t& standardCategoryId);
+
     std::vector< DBus_category::DBus_category_t > GetCategoriesDetails(const std::vector< categoryId_t >& categories);
 
     handleId_t CreatePoiSearchHandle();

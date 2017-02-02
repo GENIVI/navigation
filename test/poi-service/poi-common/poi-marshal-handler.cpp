@@ -239,7 +239,7 @@ QDBusArgument &operator << (QDBusArgument &argument, const resultSearch_t &sourc
 const QDBusArgument &operator >> (const QDBusArgument &argument,categoryDetails_t &dest)
 {
     argument.beginStructure();
-    argument >> dest.id >> dest.parents_id >> dest.icons >> dest.name >> dest.top_level >> dest.description >> dest.media;
+    argument >> dest.id >> dest.standardCategoryId >> dest.parents_id >> dest.icons >> dest.name >> dest.top_level >> dest.description >> dest.media;
     argument.endStructure();
     return argument;
 }
@@ -247,7 +247,7 @@ const QDBusArgument &operator >> (const QDBusArgument &argument,categoryDetails_
 QDBusArgument &operator << (QDBusArgument &argument, const categoryDetails_t &source)
 {
     argument.beginStructure();
-    argument << source.id << source.parents_id << source.icons << source.name << source.top_level << source.description << source.media;
+    argument << source.id << source.standardCategoryId << source.parents_id << source.icons << source.name << source.top_level << source.description << source.media;
     argument.endStructure();
     return argument;
 }

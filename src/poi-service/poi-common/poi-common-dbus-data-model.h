@@ -194,12 +194,13 @@ private:
     version_t m_version;
 };
 
-class DBus_categoryDetails : DBus_dataFormatConverter // (uau(yv)sbs(yv)) -->in this implementation, the two variant data are string
+class DBus_categoryDetails : DBus_dataFormatConverter // (uiau(yv)sbs(yv)) -->in this implementation, the two variant data are string
 {
 public:
     struct categoryDetails_t
     {
         categoryId_t id; //Category unique id
+        int32_t standardCategoryId; //standard Category Id
         std::vector<categoryId_t> parents_id; //list of parent categories unique id
         std::string icons; //visual icons set
         std::string name;
@@ -208,11 +209,12 @@ public:
         std::string media; //media associated (html web site, audio, video, ...) (optional)
     };
 
-    typedef ::DBus::Struct< uint32_t, std::vector< uint32_t >, DBusCommonAPIVariant, std::string, bool, std::string, DBusCommonAPIVariant > DBus_categoryDetails_t;
+    typedef ::DBus::Struct< uint32_t, int32_t, std::vector< uint32_t >, DBusCommonAPIVariant, std::string, bool, std::string, DBusCommonAPIVariant > DBus_categoryDetails_t;
 
     DBus_categoryDetails()
     {
         m_categoryDetails.id = 0;
+        m_categoryDetails.standardCategoryId = 0;
         m_categoryDetails.parents_id.clear();
         m_categoryDetails.parents_id.push_back(0); //one element by default
         m_categoryDetails.icons = "";
@@ -228,6 +230,7 @@ public:
     {
         size_t index;
         m_categoryDetails.id = value.id;
+        m_categoryDetails.standardCategoryId = value.standardCategoryId;
         m_categoryDetails.parents_id.clear();
         for (index=0;index<value.parents_id.size();index++)
         {
@@ -249,16 +252,17 @@ public:
     {
         size_t index;
         m_categoryDetails.id =  value._1;
+        m_categoryDetails.standardCategoryId = value._2;
         m_categoryDetails.parents_id.clear();
-        for (index=0;index<value._2.size();index++)
+        for (index=0;index<value._3.size();index++)
         {
-            m_categoryDetails.parents_id.push_back(value._2.at(index));
+            m_categoryDetails.parents_id.push_back(value._3.at(index));
         }
-        m_categoryDetails.icons = value._3._2.reader().get_string();
-        m_categoryDetails.name = value._4;
-        m_categoryDetails.top_level = value._5;
-        m_categoryDetails.description = value._6;
-        m_categoryDetails.description = value._7._2.reader().get_string();
+        m_categoryDetails.icons = value._4._2.reader().get_string();
+        m_categoryDetails.name = value._5;
+        m_categoryDetails.top_level = value._6;
+        m_categoryDetails.description = value._7;
+        m_categoryDetails.description = value._8._2.reader().get_string();
     }
 
     DBus_categoryDetails_t getDBus()
@@ -267,16 +271,17 @@ public:
         DBus_categoryDetails_t return_value;
 
         return_value._1 = m_categoryDetails.id;
-        return_value._2.clear();
+        return_value._2 = m_categoryDetails.standardCategoryId;
+        return_value._3.clear();
         for (index=0;index<m_categoryDetails.parents_id.size();index++)
         {
-            return_value._2.push_back(m_categoryDetails.parents_id.at(index));
+            return_value._3.push_back(m_categoryDetails.parents_id.at(index));
         }
-        return_value._3 = createVariantString(m_categoryDetails.icons);
-        return_value._4 = m_categoryDetails.name;
-        return_value._5 = m_categoryDetails.top_level;
-        return_value._6 = m_categoryDetails.description;
-        return_value._7 = createVariantString(m_categoryDetails.media);
+        return_value._4 = createVariantString(m_categoryDetails.icons);
+        return_value._5 = m_categoryDetails.name;
+        return_value._6 = m_categoryDetails.top_level;
+        return_value._7 = m_categoryDetails.description;
+        return_value._8 = createVariantString(m_categoryDetails.media);
         return(return_value);
     }
 
@@ -452,7 +457,7 @@ private:
     categorySortOption_t m_categorySortOption;
 };
 
-class DBus_category : DBus_dataFormatConverter // ( (uau(yv)sbs(yv)) a(usia(is(yv))) a(us) )
+class DBus_category : DBus_dataFormatConverter // ( (uiau(yv)sbs(yv)) a(usia(is(yv))) a(us) )
 {
 public:
     struct category_t
@@ -462,7 +467,7 @@ public:
         std::vector<DBus_categorySortOption::categorySortOption_t> sortOptions;
     };
 
-    typedef ::DBus::Struct< ::DBus::Struct< uint32_t, std::vector< uint32_t >, DBusCommonAPIVariant, std::string, bool, std::string, DBusCommonAPIVariant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, DBusCommonAPIVariant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > DBus_category_t;
+    typedef ::DBus::Struct< ::DBus::Struct< uint32_t, int32_t, std::vector< uint32_t >, DBusCommonAPIVariant, std::string, bool, std::string, DBusCommonAPIVariant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, DBusCommonAPIVariant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > DBus_category_t;
 
     DBus_category()
     {
