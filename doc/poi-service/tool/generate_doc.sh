@@ -4,7 +4,7 @@
 # @licence app begin@
 # SPDX-License-Identifier: MPL-2.0
 #
-# Component Name: EnhancedPositionService
+# Component Name: POIService
 # Author: Marco Residori
 #
 # Copyright (C) 2017, Mentor Graphics
