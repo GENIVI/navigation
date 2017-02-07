@@ -36,9 +36,12 @@ import xml.dom.minidom
 import argparse
 import sys
 import errno
+from dltTrigger import *
 #import pdb;
 #pdb.set_trace()    
 
+#name of the test 
+test_name = "location input"
 
 # constants as defined in the Navigation API
 LATITUDE = 0x00a0
@@ -437,6 +440,7 @@ def exit():
     print('Delete location input: '+str(int(error)))
     error=session_interface.deleteSession(dbus.UInt32(session_handle))
     print('Delete session: '+str(int(error)))
+    stopTrigger(test_name)
     loop.quit()
     
 def startSearch(address_index):
@@ -459,6 +463,8 @@ def startSearch(address_index):
         spell_search(location_input_handle, entered_search_string, target_search_string, available_characters, 1)
     elif country_search_mode == 1:
         full_string_search(location_input_handle, target_search_string)
+
+startTrigger(test_name)  
 
 session = bus.get_object('org.genivi.navigation.navigationcore.Session.v4_0_Session', '/Session')
 session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.navigationcore.Session.v4_0')

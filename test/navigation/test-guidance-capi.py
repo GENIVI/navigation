@@ -38,11 +38,14 @@ import argparse
 import sys
 import errno
 import time
-
+from dltTrigger import *
 #import pdb;
 #pdb.set_trace()
 
 from pip import locations
+
+#name of the test 
+test_name = "guidance"
 
 #constants as defined in the Navigation API
 GENIVI_NAVIGATIONCORE_LATITUDE = 0x00a0
@@ -109,7 +112,7 @@ def session_sessionDeleted_handler(sessionHandle):
         print 'Test PASSED'
     else:
         print 'Test FAILED'
-    loop.quit()
+    exit()
 
 def routing_routeDeleted_handler(routeHandle):
     print('Route handle deleted: '+str(routeHandle))
@@ -144,6 +147,10 @@ def mapmatchedposition_simulationStatusChanged_handler(simulationStatus):
 def timeout():
     print 'Timeout Expired'
     print '\nTest FAILED'
+    exit()
+
+def exit():
+    stopTrigger(test_name)
     loop.quit()
 
 def display_route(route):
@@ -294,6 +301,8 @@ bus.add_signal_receiver(guidance_positionOnRouteChanged_handler, \
 bus.add_signal_receiver(mapmatchedposition_simulationStatusChanged_handler, \
                         dbus_interface = "org.genivi.navigation.navigationcore.MapMatchedPosition.v4_0", \
                         signal_name = "simulationStatusChanged")
+
+startTrigger(test_name)
 
 navigationcore_session_obj = bus.get_object('org.genivi.navigation.navigationcore.Session.v4_0_Session','/Session')
 g_navigationcore_session_interface = dbus.Interface(navigationcore_session_obj, dbus_interface='org.genivi.navigation.navigationcore.Session.v4_0')

@@ -38,10 +38,12 @@ import xml.dom.minidom
 import argparse
 import sys
 import errno
-
 #import pdb;pdb.set_trace()
-
 from pip import locations
+from dltTrigger import *
+
+#name of the test 
+test_name = "route calculation"
 
 #constants as defined in the Navigation API
 GENIVI_NAVIGATIONCORE_LATITUDE = 0x00a0
@@ -137,7 +139,7 @@ def catchall_session_signals_handler(sessionHandle):
         print 'Test PASSED'
     else:
         print 'Test FAILED'
-    loop.quit()
+    exit()
 
 def catchall_route_deleted_signals_handler(routeHandle):
     print('Route handle deleted: '+str(routeHandle))
@@ -158,6 +160,10 @@ bus.add_signal_receiver(catchall_session_signals_handler, \
 def timeout():
     print 'Timeout Expired'
     print '\nTest FAILED'
+    exit()
+
+def exit():
+    stopTrigger(test_name)
     loop.quit()
 
 def launch_route_calculation(route):
@@ -185,11 +191,11 @@ def launch_route_calculation(route):
                                         dbus.Dictionary({dbus.UInt16(GENIVI_NAVIGATIONCORE_LATITUDE):dbus.Struct([0,dbus.Double(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][0])]),dbus.UInt16(GENIVI_NAVIGATIONCORE_LONGITUDE):dbus.Struct([0,dbus.Double(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][1])])}), \
                                         dbus.Dictionary({dbus.UInt16(GENIVI_NAVIGATIONCORE_LATITUDE):dbus.Struct([0,dbus.Double(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][0])]),dbus.UInt16(GENIVI_NAVIGATIONCORE_LONGITUDE):dbus.Struct([0,dbus.Double(locations[routes[g_current_route].getElementsByTagName("destination")[0].childNodes[0].data][1])])}) \
                                    ]) \
-                                   )
-    
+                                   )   
     #calculate route
     g_routing_interface.CalculateRoute(dbus.UInt32(g_session_handle),dbus.UInt32(g_route_handle))
 
+startTrigger(test_name)  
 
 session = bus.get_object('org.genivi.navigationcore.Session','/org/genivi/navigationcore')
 g_session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigationcore.Session')

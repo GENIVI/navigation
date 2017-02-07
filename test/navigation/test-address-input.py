@@ -36,8 +36,11 @@ import xml.dom.minidom
 import argparse
 import sys
 import errno
+from dltTrigger import *
 #import pdb;pdb.set_trace()    
 
+#name of the test 
+test_name = "address input"
 
 # constants as defined in the Navigation API
 LATITUDE = 0x00a0
@@ -234,16 +237,16 @@ def evaluate_address(address, guidable):
             print 'TEST PASSED'
         else:
             print 'TEST FAILED (wrong address)'
-            loop.quit()
+            exit()
     else:
         print 'TEST FAILED (non-guidable address)'
-        loop.quit()
+        exit()
     address_index = current_address_index + 1
     if address_index < len(COUNTRY_STRING):
         startSearch(address_index)
     else:
         print 'END OF THE TEST'
-        loop.quit()
+        exit()
 
 
 # Signal receiver
@@ -319,7 +322,7 @@ def search_result_list_handler(handle, total_size, window_offset, window_size, r
             location_input_interface.SelectEntry(dbus.UInt32(session_handle), dbus.UInt32(handle), dbus.UInt16(0))
         else:
             print '\nTEST FAILED (Unexpected single result list)'
-            loop.quit()
+            exit()
     elif spell_next_character == 1:
         spell_next_character = 0
         spell_search(handle, entered_search_string, target_search_string, available_characters)
@@ -343,7 +346,17 @@ bus.add_signal_receiver(content_updated_handler,
 def timeout():
     print 'Timeout Expired'
     print '\nTEST FAILED\n'
+    exit()
+
+# Exit
+def exit():
+    error=location_input_interface.DeleteLocationInput(dbus.UInt32(session_handle),dbus.UInt32(location_input_handle))
+    print('Delete location input: '+str(int(error)))
+    error=session_interface.DeleteSession(dbus.UInt32(session_handle))
+    print('Delete session: '+str(int(error)))
+    stopTrigger(test_name)
     loop.quit()
+    
 
 def startSearch(address_index):
     global found_exact_match
@@ -359,7 +372,8 @@ def startSearch(address_index):
     change_selection_criterion(COUNTRY)
     full_string_search(location_input_handle, target_search_string)
 
-    
+startTrigger(test_name)  
+  
 session = bus.get_object('org.genivi.navigationcore.Session', '/org/genivi/navigationcore')
 session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigationcore.Session')
 

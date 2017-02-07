@@ -31,8 +31,11 @@ import dbus
 import gobject
 import dbus.mainloop.glib
 import time
-
+from dltTrigger import *
 #import pdb; pdb.set_trace()
+
+#name of the test 
+test_name = "map viewer"
 
 #constants as defined in the Navigation API
 LATITUDE = 0x00a0
@@ -75,14 +78,17 @@ def mapviewer_mapViewScaleChanged_handler(mapViewInstanceHandle,scale,isMinMax):
                 dbus.UInt32(sessionhandle), \
                 dbus.UInt32(mapviewerhandle))
             session_interface.DeleteSession(sessionhandle)
-            loop.quit()
+            exit()
 
 #timeout
 def timeout():
     print 'Timeout Expired'
     print '\nTest FAILED'
-    loop.quit()
+    exit()
 
+def exit():
+    stopTrigger(test_name)
+    loop.quit()
 
 print '\n--------------------------'
 print 'MapViewerControl Test'
@@ -99,6 +105,8 @@ bus.add_signal_receiver(mapviewer_mapViewScaleChanged_handler, \
                         dbus_interface = "org.genivi.mapviewer.MapViewerControl", \
                         signal_name = "MapViewScaleChanged")
 
+
+startTrigger(test_name)  
 
 session = bus.get_object('org.genivi.mapviewer.Session','/org/genivi/mapviewer')
 session_interface = dbus.Interface(session, dbus_interface='org.genivi.mapviewer.Session')

@@ -32,6 +32,11 @@ import time
 
 import pdb;
 #pdb.set_trace()
+from dltTrigger import *
+
+#name of the test 
+test_name = "poi search"
+
 #constants as defined in the Navigation API
 GENIVI_Configuration_Settings_LOCALE = 37
 GENIVI_SearchStatusState_FINISHED = 1298
@@ -65,7 +70,7 @@ def catch_poi_poiStatus_signal_handler(poiSearchHandle,statusValue):
         elif statusValue == GENIVI_SearchStatusState_NOT_STARTED:
             g_poiSearch_interface.deletePoiSearchHandle(poiSearchHandle)
             print("Test PASSED")
-            loop.quit()
+            exit()
          
 def catch_poi_resultListChanged_signal_handler(poiSearchHandle,resultListSize):
     poiList=[]
@@ -87,6 +92,10 @@ def catch_poi_resultListChanged_signal_handler(poiSearchHandle,resultListSize):
 def timeout():
     print ('Timeout Expired')
     print ('\nTest FAILED')
+    exit()
+
+def exit():
+    stopTrigger(test_name)
     loop.quit()
 
 if __name__ == '__main__':
@@ -108,6 +117,8 @@ bus.add_signal_receiver(catch_poi_poiStatus_signal_handler, \
 bus.add_signal_receiver(catch_poi_resultListChanged_signal_handler, \
                         dbus_interface = "org.genivi.poiservice.POISearch", \
                         signal_name = "resultListChanged")
+
+startTrigger(test_name)
 
 poiConfiguration = bus.get_object('org.genivi.poiservice.POIConfiguration','/org/genivi/poiservice')
 g_poiConfiguration_interface = dbus.Interface(poiConfiguration, dbus_interface='org.genivi.navigation.poiservice.POIConfiguration')

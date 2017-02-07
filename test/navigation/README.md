@@ -10,6 +10,18 @@ test-route-calculation.py
 test-all
 and others (*-capi.py) are for the CommonAPI version
 NB: For the time being, only the GlibDBus version of navigation runs well
+
+There's a mechanism to trig with DLT, so it's necessary to build some stuff before.
+
+##How to build the trigger
+Under ./dlt-triggers
+```
+mkdir build
+cd build
+cmake ../
+make 
+make install
+```
 ##Tested targets
 Desktop: Tested under Ubuntu 16.04 LTS 64 bits
 ##How-to test 
