@@ -7,7 +7,7 @@
      this file, you can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 <node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/navigationcore" xsi:noNamespaceSchemaLocation="introspect.xsd">
-  <interface name="org.genivi.navigationcore.Guidance">
+  <interface name="org.genivi.navigation.navigationcore.Guidance">
     <version>3.1.0 (03-03-2014)</version>
     <doc>
       <line>Guidance = This interface offers functions that implement the route-guidance functionality of a navigation system</line>
@@ -69,7 +69,7 @@
       </arg>
       <arg name="error" type="i" direction="out">
       </arg>
-      <error name="org.genivi.navigationcore.Guidance.Error.VoiceNotAllowed">
+      <error name="org.genivi.navigation.navigationcore.Guidance.Error.VoiceNotAllowed">
         <doc>
           <line>This error is generated if the voice generation is inactive </line>
         </doc>
@@ -106,7 +106,7 @@
       </doc>
       <arg name="error" type="i" direction="out">
       </arg>
-      <error name="org.genivi.navigationcore.Guidance.Error.VoiceNotAllowed">
+      <error name="org.genivi.navigation.navigationcore.Guidance.Error.VoiceNotAllowed">
         <doc>
           <line>This error is generated if the voice generation is inactive </line>
         </doc>
@@ -290,7 +290,7 @@
           <line>key = ALTITUDE, value = value of type 'i', that expresses the altitude of the starting point in meters</line>
         </doc>
       </arg>
-      <error name="org.genivi.navigationcore.Guidance.Error.NoManeuver">
+      <error name="org.genivi.navigation.navigationcore.Guidance.Error.NoManeuver">
         <doc>
           <line>This error is generated in case there's no maneuver until the destination</line>
         </doc>
@@ -327,7 +327,7 @@
       </arg>
       <arg name="error" type="i" direction="out">
       </arg>
-      <error name="org.genivi.navigationcore.Guidance.Error.NoManeuver">
+      <error name="org.genivi.navigation.navigationcore.Guidance.Error.NoManeuver">
         <doc>
           <line>This error is generated in case there's no maneuver until the destination</line>
         </doc>

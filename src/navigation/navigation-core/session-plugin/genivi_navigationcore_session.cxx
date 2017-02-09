@@ -47,7 +47,7 @@ static DBus::Connection *conn;
 static std::map<uint32_t, std::string *> handles;
 
 class  Session
-: public org::genivi::navigationcore::Session_adaptor,
+: public org::genivi::navigation::navigationcore::Session_adaptor,
   public DBus::IntrospectableAdaptor,
   public DBus::ObjectAdaptor
 {
@@ -75,7 +75,7 @@ class  Session
         while (handles[sessionHandle]) {
             sessionHandle++;
             if (sessionHandle == 256)
-				throw DBus::Error("org.genivi.navigationcore.Session.Error.NoMoreSessionHandles","Out of session handles");
+				throw DBus::Error("org.genivi.navigation.navigationcore.Session.Error.NoMoreSessionHandles","Out of session handles");
 		}
         handles[sessionHandle]=new std::string(client);
         error=0; //not implemented yet
@@ -93,7 +93,7 @@ class  Session
 	{
 		dbg(lvl_debug,"enter\n");
 		if (!handles[SessionHandle])
-			throw DBus::Error("org.genivi.navigationcore.Session.Error.NotAvailableSessionHandle","Session handle invalid");
+			throw DBus::Error("org.genivi.navigation.navigationcore.Session.Error.NotAvailableSessionHandle","Session handle invalid");
 		delete(handles[SessionHandle]);
 		handles[SessionHandle]=NULL;
 		SessionDeleted(SessionHandle);
@@ -130,6 +130,6 @@ plugin_init(void)
 	DBus::default_dispatcher = &dispatcher;
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
 	conn->setup(&dispatcher);
-	conn->request_name("org.genivi.navigationcore.Session");
+	conn->request_name("org.genivi.navigation.navigationcore.Session");
 	server=new Session(*conn);
 }

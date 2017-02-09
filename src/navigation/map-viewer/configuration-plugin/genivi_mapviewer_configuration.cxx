@@ -122,7 +122,7 @@ country_2_to_3(const char *in)
 std::map< int32_t, int32_t > m_unitsOfMeasurement;
 
 class  Configuration
-: public org::genivi::mapviewer::Configuration_adaptor,
+: public org::genivi::navigation::mapviewer::Configuration_adaptor,
   public DBus::IntrospectableAdaptor,
   public DBus::ObjectAdaptor
 {
@@ -272,7 +272,7 @@ plugin_init(void)
 	DBus::default_dispatcher = &dispatcher;
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
 	conn->setup(&dispatcher);
-	conn->request_name("org.genivi.mapviewer.Configuration");
+    conn->request_name("org.genivi.navigation.mapviewer.Configuration");
     m_unitsOfMeasurement[GENIVI_MAPVIEWER_LENGTH]=GENIVI_MAPVIEWER_KM;
 	server=new Configuration(*conn);
 }

@@ -7,7 +7,7 @@
      this file, you can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 <node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/navigationcore" xsi:noNamespaceSchemaLocation="introspect.xsd">
-  <interface name="org.genivi.navigationcore.MapMatchedPosition">
+  <interface name="org.genivi.navigation.navigationcore.MapMatchedPosition">
     <version>3.0.0 (21-01-2014)</version>
     <doc>
       <line>MapMatchedPosition = This interface offers functions to retrieve the map matched position and to simulate positioning</line>
@@ -184,7 +184,7 @@
           <line>key = SIMULATION_MODE, value = value of type 'b', where TRUE means that the current position is simulated</line>
         </doc>
       </arg>
-      <error name="org.genivi.navigationcore.MapMatchedPosition.Error.NoPosition">
+      <error name="org.genivi.navigation.navigationcore.MapMatchedPosition.Error.NoPosition">
         <doc>
           <line>This error is generated if no position is available</line>
         </doc>
@@ -265,12 +265,12 @@
           <line>key = ROADSHIELDS, value = value of type ´a(sa(is)s)´, that identifies a roadshield</line>
         </doc>
       </arg>
-      <error name="org.genivi.navigationcore.MapMatchedPosition.Error.NoMap">
+      <error name="org.genivi.navigation.navigationcore.MapMatchedPosition.Error.NoMap">
         <doc>
           <line>This error is generated if no map is available</line>
         </doc>
       </error>
-      <error name="org.genivi.navigationcore.MapMatchedPosition.Error.OutOfKnownMap">
+      <error name="org.genivi.navigation.navigationcore.MapMatchedPosition.Error.OutOfKnownMap">
         <doc>
           <line>This error is generated if the vehicle is located in a position outside of the known map</line>
         </doc>

@@ -7,7 +7,7 @@
      this file, you can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 <node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/navigationcore" xsi:noNamespaceSchemaLocation="introspect.xsd">
-  <interface name="org.genivi.navigationcore.Routing">
+  <interface name="org.genivi.navigation.navigationcore.Routing">
     <version>3.0.0 (22-01-2014)</version>
     <doc>
       <line>Routing = This interface offers functions that implement the routing functionality of a navigation system</line>
@@ -42,7 +42,7 @@
           <line>routeHandle = Route handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <error name="org.genivi.navigationcore.Routing.Error.NoMoreRouteHandles">
+      <error name="org.genivi.navigation.navigationcore.Routing.Error.NoMoreRouteHandles">
         <doc>
           <line>This error is generated if no more routing handles are available</line>
         </doc>
@@ -64,12 +64,12 @@
       </arg>
       <arg name="error" type="i" direction="out">
       </arg>
-      <error name="org.genivi.navigationcore.Routing.Error.RouteNotAvailable">
+      <error name="org.genivi.navigation.navigationcore.Routing.Error.RouteNotAvailable">
         <doc>
           <line>This error is generated if an application tries to delete a route handle that is not available</line>
         </doc>
       </error>
-      <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
+      <error name="org.genivi.navigation.navigationcore.Routing.Error.OperationNotAllowed">
         <doc>
           <line>This error is generated if an application tries to delete a route which is not created manually (e.g. an alternative route calculated in the background)</line>
         </doc>
@@ -114,7 +114,7 @@
       </arg>
       <arg name="error" type="i" direction="out">
       </arg>
-      <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
+      <error name="org.genivi.navigation.navigationcore.Routing.Error.OperationNotAllowed">
         <doc>
           <line>This error is generated if an application tries to set a cost model for a route which is not created manually (e.g. an alternative route calculated in the background)</line>
         </doc>
@@ -204,12 +204,12 @@
       </arg>
       <arg name="error" type="i" direction="out">
       </arg>
-      <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
+      <error name="org.genivi.navigation.navigationcore.Routing.Error.OperationNotAllowed">
         <doc>
           <line>This error is generated if an application tries to set route preferences for a route which is not created manually (e.g. an alternative route calculated in the background)</line>
         </doc>
       </error>
-      <error name="org.genivi.navigationcore.Routing.Error.RoutePreferenceNotSupported">
+      <error name="org.genivi.navigation.navigationcore.Routing.Error.RoutePreferenceNotSupported">
         <doc>
           <line>This error is generated if an application tries to set a route preference which is not supported (e.g. (USE,CRIME_AREA)). The preferences which are not supported are product dependent.</line>
         </doc>
@@ -353,7 +353,7 @@
       </arg>
       <arg name="error" type="i" direction="out">
       </arg>
-      <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
+      <error name="org.genivi.navigation.navigationcore.Routing.Error.OperationNotAllowed">
         <doc>
           <line>This error is generated if an application tries to set transportation means for a route which is not created manually (e.g. an alternative route calculated in the background)</line>
         </doc>
@@ -412,7 +412,7 @@
       </arg>
       <arg name="error" type="i" direction="out">
       </arg>
-      <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
+      <error name="org.genivi.navigation.navigationcore.Routing.Error.OperationNotAllowed">
         <doc>
           <line>This error is generated if an application tries to set excluded areas for a route which is not created manually (e.g. an alternative route calculated in the background)</line>
         </doc>
@@ -473,17 +473,17 @@
       </arg>
       <arg name="error" type="i" direction="out">
       </arg>
-      <error name="org.genivi.navigationcore.Routing.Error.WaypointCannotBeChanged">
+      <error name="org.genivi.navigation.navigationcore.Routing.Error.WaypointCannotBeChanged">
         <doc>
           <line>This error is sent when a client application tries to change the waypoints while the route guidance is active</line>
         </doc>
       </error>
-      <error name="org.genivi.navigationcore.Routing.Error.TooManyWaypoints">
+      <error name="org.genivi.navigation.navigationcore.Routing.Error.TooManyWaypoints">
         <doc>
           <line>This error is sent when a client application tries to set a number of waypoints that exceeds the system capabilities</line>
         </doc>
       </error>
-      <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
+      <error name="org.genivi.navigation.navigationcore.Routing.Error.OperationNotAllowed">
         <doc>
           <line>This error is generated if an application tries to set waypoints for a route which is not created manually (e.g. an alternative route calculated in the background)</line>
         </doc>
@@ -532,7 +532,7 @@
       </arg>
       <arg name="error" type="i" direction="out">
       </arg>
-      <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
+      <error name="org.genivi.navigation.navigationcore.Routing.Error.OperationNotAllowed">
         <doc>
           <line>This error is generated if an application tries to calculate a route which is not created manually (e.g. an alternative route calculated in the background)</line>
         </doc>
@@ -660,7 +660,7 @@
           <line>alternativeRoute = Handle identifying an alternative route. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <error name="org.genivi.navigationcore.Routing.Error.OperationNotAllowed">
+      <error name="org.genivi.navigation.navigationcore.Routing.Error.OperationNotAllowed">
         <doc>
           <line>This error is generated if an application tries to calculate an alternative to a route which is not created manually (e.g. an alternative route calculated in the background)</line>
         </doc>

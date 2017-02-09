@@ -7,7 +7,7 @@
      this file, you can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 <node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/navigationcore" xsi:noNamespaceSchemaLocation="introspect.xsd">
-  <interface name="org.genivi.navigationcore.Session">
+  <interface name="org.genivi.navigation.navigationcore.Session">
     <version>3.0.0 (22-01-2014)</version>
     <doc>
       <line>Session = This interface offers functions to create and delete sessions</line>
@@ -44,7 +44,7 @@
           <line>sessionHandle = Session handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <error name="org.genivi.navigationcore.Session.Error.NoMoreSessionHandles">
+      <error name="org.genivi.navigation.navigationcore.Session.Error.NoMoreSessionHandles">
         <doc>
           <line>This error is generated if no more session handles are available</line>
         </doc>
@@ -61,7 +61,7 @@
       </arg>
       <arg name="error" type="i" direction="out">
       </arg>
-      <error name="org.genivi.navigationcore.Session.Error.SessionNotAvailable">
+      <error name="org.genivi.navigation.navigationcore.Session.Error.SessionNotAvailable">
         <doc>
           <line>This error is generated if an application tries to delete a session handle that is not available</line>
         </doc>

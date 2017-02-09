@@ -124,7 +124,7 @@ country_2_to_3(const char *in)
 std::map< int32_t, int32_t > m_unitsOfMeasurement;
 
 class  Configuration
-: public org::genivi::navigationcore::Configuration_adaptor,
+: public org::genivi::navigation::navigationcore::Configuration_adaptor,
   public DBus::IntrospectableAdaptor,
   public DBus::ObjectAdaptor
 {
@@ -287,7 +287,7 @@ plugin_init(void)
 	DBus::default_dispatcher = &dispatcher;
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
 	conn->setup(&dispatcher);
-	conn->request_name("org.genivi.navigationcore.Configuration");
+    conn->request_name("org.genivi.navigation.navigationcore.Configuration");
     m_unitsOfMeasurement[GENIVI_NAVIGATIONCORE_LENGTH]=GENIVI_NAVIGATIONCORE_KM;
 	server=new Configuration(*conn);
 }

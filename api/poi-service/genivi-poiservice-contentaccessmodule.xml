@@ -7,7 +7,7 @@
      this file, you can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 <node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/poiservice" xsi:noNamespaceSchemaLocation="introspect.xsd">
-  <interface name="org.genivi.poiservice.POIContentAccessModule">
+  <interface name="org.genivi.navigation.poiservice.POIContentAccessModule">
     <version>1.0.0 (19-12-2012)</version>
     <doc>
       <line>This interface offers a set of common methods to the POI components to deal with all the content access modules (CAM). The CAM provide and update POI and categories information from remote sources to the POIService modules</line>
@@ -120,7 +120,7 @@
           <line>top_level = true if the category is a pre-defined one (top level with only ALL_CATEGORIES as parent), false for customized categories created by plug-in.</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.InvalidCategory">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.InvalidCategory">
         <doc>
           <line>The category is not available.</line>
         </doc>
@@ -142,7 +142,7 @@
           <line>top_level = true if the category is a pre-defined one (top level with only ALL_CATEGORIES as parent), false for customized categories created by plug-in.</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.InvalidCategory">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.InvalidCategory">
         <doc>
           <line>The category is not available.</line>
         </doc>
@@ -323,17 +323,17 @@
           <line>value = value. The value depends on the attribute specifications and type.</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiContentAccess.Error.CamNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiContentAccess.Error.CamNotAvailable">
         <doc>
           <line>This error is generated if an application tries to send data to the POI service component but the CAM id is not registered.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.HandleNotAvailable">
         <doc>
           <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiContentAccess.Error.InvalidCategory">
+      <error name="org.genivi.navigation.poiservice.poiContentAccess.Error.InvalidCategory">
         <doc>
           <line>The category associated to a POI is not valid or was not added by the CAM to the component.</line>
         </doc>
@@ -369,12 +369,12 @@
           <line>Note: This list only contains the available attributes. If there is no value for an optional attributes, it is not returned.</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiContentAccess.Error.CamNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiContentAccess.Error.CamNotAvailable">
         <doc>
           <line>This error is generated if an application tries to send data to the POI service component but the CAM id is not registered.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiContentAccess.Error.InvalidPoiSourceId">
+      <error name="org.genivi.navigation.poiservice.poiContentAccess.Error.InvalidPoiSourceId">
         <doc>
           <line>The poi unique source id is not valid for the content access module.</line>
         </doc>

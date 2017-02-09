@@ -36,4 +36,5 @@ set(genivi_mapviewer_session_LIBS ${PLUGIN_LDFLAGS})
 set(genivi_mapviewer_session_LIBRARY_DIRS ${PLUGIN_LIBRARIES})
 
 module_add_library(genivi_mapviewer_session genivi_mapviewer_session.cxx ${DBUS_GENERATED_INCLUDE_DIR}/map-viewer/genivi-mapviewer-session_adaptor.h)
+add_dependencies(genivi_mapviewer_session ${API_DIR}/map-viewer)
 

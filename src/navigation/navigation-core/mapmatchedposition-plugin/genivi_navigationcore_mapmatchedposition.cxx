@@ -122,7 +122,7 @@ variant_string(std::string s)
 
 
 class  MapMatchedPosition
-: public org::genivi::navigationcore::MapMatchedPosition_adaptor,
+: public org::genivi::navigation::navigationcore::MapMatchedPosition_adaptor,
   public DBus::IntrospectableAdaptor,
   public DBus::ObjectAdaptor
 {
@@ -369,7 +369,7 @@ plugin_init(void)
 	DBus::default_dispatcher = &dispatcher;
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
 	conn->setup(&dispatcher);
-	conn->request_name("org.genivi.navigationcore.MapMatchedPosition");
+	conn->request_name("org.genivi.navigation.navigationcore.MapMatchedPosition");
 	server=new MapMatchedPosition(*conn);
 	config_cb.type=attr_callback;
 	config_cb.u.callback=callback_new_attr_0(callback_cast(config_attr_navit), attr_navit);

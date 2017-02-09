@@ -7,7 +7,7 @@
      this file, you can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 <node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/poiservice" xsi:noNamespaceSchemaLocation="introspect.xsd">
-  <interface name="org.genivi.poiservice.POIContentAccess">
+  <interface name="org.genivi.navigation.poiservice.POIContentAccess">
     <version>1.0.0 (19-12-2012)</version>
     <doc>
       <line>This interface offers a set of common methods for Content Access Modules (CAM). The CAM provide and update POI and categories information from remote sources to the POIService modules</line>
@@ -28,7 +28,7 @@
           <line>camId = Content access module unique id as known by the POI service component.</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiContentAccess.Error.RegistrationFailed">
+      <error name="org.genivi.navigation.poiservice.poiContentAccess.Error.RegistrationFailed">
         <doc>
           <line>The registration failed (for instance the name is not unique).</line>
         </doc>
@@ -43,7 +43,7 @@
           <line>camId = Content access module unique id as known by the POI service component.</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiContentAccess.Error.CamNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiContentAccess.Error.CamNotAvailable">
         <doc>
           <line>This error is generated if an application tries to send data to the POI service component but the CAM id is not registered.</line>
         </doc>
@@ -66,12 +66,12 @@
           <line>unique_id = Unique category id</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiContentAccess.Error.CamNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiContentAccess.Error.CamNotAvailable">
         <doc>
           <line>This error is generated if an application tries to send data to the POI service component but the CAM id is not registered.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiContentAccess.Error.InvalidCategory">
+      <error name="org.genivi.navigation.poiservice.poiContentAccess.Error.InvalidCategory">
         <doc>
           <line>The category was already registered.</line>
         </doc>
@@ -115,12 +115,12 @@
           <line>Note: A POI category is a unique ID.</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiContentAccess.Error.CamNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiContentAccess.Error.CamNotAvailable">
         <doc>
           <line>This error is generated if an application tries to send data to the POI service component but the CAM id is not registered.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiContentAccess.Error.InvalidCategory">
+      <error name="org.genivi.navigation.poiservice.poiContentAccess.Error.InvalidCategory">
         <doc>
           <line>The category was already added or is already a predifined one.</line>
           <line>Note: As there is no id yet, a category is defined as unique if there was no category registered before with the same name and parent category.</line>
@@ -155,18 +155,18 @@
           <line>name = name to be displayed by application</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiContentAccess.Error.CamNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiContentAccess.Error.CamNotAvailable">
         <doc>
           <line>This error is generated if an application tries to send data to the POI service component but the CAM id is not registered.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiContentAccess.Error.ReadOnly">
+      <error name="org.genivi.navigation.poiservice.poiContentAccess.Error.ReadOnly">
         <doc>
           <line>At least one of the attribute of a given category was not updated due to read-only policy.</line>
           <line>Note: The other attributes were updated.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiContentAccess.Error.InvalidCategory">
+      <error name="org.genivi.navigation.poiservice.poiContentAccess.Error.InvalidCategory">
         <doc>
           <line>One of the category is not available.</line>
         </doc>
@@ -189,18 +189,18 @@
           <line>unique_id = unique category id</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiContentAccess.Error.CamNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiContentAccess.Error.CamNotAvailable">
         <doc>
           <line>This error is generated if an application tries to send data to the POI service component but the CAM id is not registered.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiContentAccess.Error.ReadOnly">
+      <error name="org.genivi.navigation.poiservice.poiContentAccess.Error.ReadOnly">
         <doc>
           <line>At least one of the category was not deleted due to read-only policy.</line>
           <line>Note: The other categories were removed.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiContentAccess.Error.InvalidCategory">
+      <error name="org.genivi.navigation.poiservice.poiContentAccess.Error.InvalidCategory">
         <doc>
           <line>One of the category is not available.</line>
         </doc>

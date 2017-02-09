@@ -90,7 +90,7 @@ static std::map<uint32_t, LocationInputObj *> handles;
 
 
 class  LocationInput
-: public org::genivi::navigationcore::LocationInput_adaptor,
+: public org::genivi::navigation::navigationcore::LocationInput_adaptor,
   public DBus::IntrospectableAdaptor,
   public DBus::ObjectAdaptor
 {
@@ -541,6 +541,6 @@ plugin_init(void)
 	DBus::default_dispatcher = &dispatcher;
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
 	conn->setup(&dispatcher);
-	conn->request_name("org.genivi.navigationcore.LocationInput");
+	conn->request_name("org.genivi.navigation.navigationcore.LocationInput");
 	server=new LocationInput(*conn);
 }

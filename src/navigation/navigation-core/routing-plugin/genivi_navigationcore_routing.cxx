@@ -129,7 +129,7 @@ static struct command_table commands[] = {
 
 
 class  Routing
-: public org::genivi::navigationcore::Routing_adaptor,
+: public org::genivi::navigation::navigationcore::Routing_adaptor,
   public DBus::IntrospectableAdaptor,
   public DBus::ObjectAdaptor
 {
@@ -939,6 +939,6 @@ plugin_init(void)
 	DBus::default_dispatcher = &dispatcher;
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
 	conn->setup(&dispatcher);
-	conn->request_name("org.genivi.navigationcore.Routing");
+	conn->request_name("org.genivi.navigation.navigationcore.Routing");
 	server=new Routing(*conn);
 }

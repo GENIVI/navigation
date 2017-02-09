@@ -61,7 +61,7 @@ enum {
 
 static DBus::Glib::BusDispatcher dispatchers[CONNECTION_AMOUNT];
 static DBus::Connection *conns[CONNECTION_AMOUNT];
-static const char *cam_name="org.genivi.poiservice.POIContentAccessModuleNavit";
+static const char *cam_name="org.genivi.navigation.poiservice.POIContentAccessModuleNavit";
 
 static DBus::Variant
 variant_string(std::string s)
@@ -80,20 +80,20 @@ do_sort_distance(::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct
 
 
 class PoiContentAccess
-: public org::genivi::poiservice::POIContentAccess_proxy,
+: public org::genivi::navigation::poiservice::POIContentAccess_proxy,
   public DBus::ObjectProxy
 {
 	public:
 
         PoiContentAccess(DBus::Connection &connection)
-        : DBus::ObjectProxy(connection, "/org/genivi/poiservice/POIContentAccess","org.genivi.poiservice.POIContentAccess")
+        : DBus::ObjectProxy(connection, "/org/genivi/poiservice/POIContentAccess","org.genivi.navigation.poiservice.POIContentAccess")
         {
         }
 
 };
 
 class ContentAccessModule
-: public org::genivi::poiservice::POIContentAccessModule_adaptor,
+: public org::genivi::navigation::poiservice::POIContentAccessModule_adaptor,
   public DBus::IntrospectableAdaptor,
   public DBus::ObjectAdaptor
 {

@@ -145,15 +145,15 @@ def catchall_route_deleted_signals_handler(routeHandle):
     print('Route handle deleted: '+str(routeHandle))
 
 bus.add_signal_receiver(catchall_route_calculation_signals_handler, \
-                        dbus_interface = "org.genivi.navigationcore.Routing", \
+                        dbus_interface = "org.genivi.navigation.navigationcore.Routing", \
                         signal_name = "RouteCalculationProgressUpdate")
 
 bus.add_signal_receiver(catchall_route_deleted_signals_handler, \
-                        dbus_interface = "org.genivi.navigationcore.Routing", \
+                        dbus_interface = "org.genivi.navigation.navigationcore.Routing", \
                         signal_name = "RouteDeleted")
 
 bus.add_signal_receiver(catchall_session_signals_handler, \
-                        dbus_interface = "org.genivi.navigationcore.Session", \
+                        dbus_interface = "org.genivi.navigation.navigationcore.Session", \
                         signal_name = "SessionDeleted")
 
 #timeout
@@ -197,16 +197,16 @@ def launch_route_calculation(route):
 
 startTrigger(test_name)  
 
-session = bus.get_object('org.genivi.navigationcore.Session','/org/genivi/navigationcore')
-g_session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigationcore.Session')
+session = bus.get_object('org.genivi.navigation.navigationcore.Session','/org/genivi/navigationcore')
+g_session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.navigationcore.Session')
 
 #get session handle
 ret = g_session_interface.CreateSession(dbus.String("test route calculation"))
 g_session_handle=ret[1]
 print 'Session handle: ' + str(g_session_handle)
 
-routing_obj = bus.get_object('org.genivi.navigationcore.Routing','/org/genivi/navigationcore')
-g_routing_interface = dbus.Interface(routing_obj, dbus_interface='org.genivi.navigationcore.Routing')
+routing_obj = bus.get_object('org.genivi.navigation.navigationcore.Routing','/org/genivi/navigationcore')
+g_routing_interface = dbus.Interface(routing_obj, dbus_interface='org.genivi.navigation.navigationcore.Routing')
 
 g_current_route = 0
 launch_route_calculation(0)

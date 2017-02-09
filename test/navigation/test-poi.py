@@ -107,27 +107,27 @@ print("Search for hotel and station with keyword: "+ STRING_TO_SEARCH)
 bus = dbus.SessionBus()
 
 bus.add_signal_receiver(catch_poi_configurationChanged_signal_handler, \
-                        dbus_interface = "org.genivi.poiservice.POIConfiguration", \
+                        dbus_interface = "org.genivi.navigation.poiservice.POIConfiguration", \
                         signal_name = "configurationChanged")
 
 bus.add_signal_receiver(catch_poi_poiStatus_signal_handler, \
-                        dbus_interface = "org.genivi.poiservice.POISearch", \
+                        dbus_interface = "org.genivi.navigation.poiservice.POISearch", \
                         signal_name = "poiStatus")
 
 bus.add_signal_receiver(catch_poi_resultListChanged_signal_handler, \
-                        dbus_interface = "org.genivi.poiservice.POISearch", \
+                        dbus_interface = "org.genivi.navigation.poiservice.POISearch", \
                         signal_name = "resultListChanged")
 
 startTrigger(test_name)
 
-poiConfiguration = bus.get_object('org.genivi.poiservice.POIConfiguration','/org/genivi/poiservice')
-g_poiConfiguration_interface = dbus.Interface(poiConfiguration, dbus_interface='org.genivi.navigation.poiservice.POIConfiguration')
+poiConfiguration = bus.get_object('org.genivi.navigation.poiservice.POIConfiguration','/org/genivi/poiservice')
+g_poiConfiguration_interface = dbus.Interface(poiConfiguration, dbus_interface='org.genivi.navigation.navigation.poiservice.POIConfiguration')
 
-poiContentAccess = bus.get_object('org.genivi.poiservice.POIContentAccess','/org/genivi/poiservice')
-g_poiContentAccess_interface = dbus.Interface(poiContentAccess, dbus_interface='org.genivi.navigation.poiservice.POIContentAccess')
+poiContentAccess = bus.get_object('org.genivi.navigation.poiservice.POIContentAccess','/org/genivi/poiservice')
+g_poiContentAccess_interface = dbus.Interface(poiContentAccess, dbus_interface='org.genivi.navigation.navigation.poiservice.POIContentAccess')
 
-poiSearch = bus.get_object('org.genivi.poiservice.POISearch','/org/genivi/poiservice')
-g_poiSearch_interface = dbus.Interface(poiSearch, dbus_interface='org.genivi.poiservice.POISearch')
+poiSearch = bus.get_object('org.genivi.navigation.poiservice.POISearch','/org/genivi/poiservice')
+g_poiSearch_interface = dbus.Interface(poiSearch, dbus_interface='org.genivi.navigation.poiservice.POISearch')
 
 g_poiConfiguration_interface.setLocale(dbus.String("fra"),dbus.String("FRA"),dbus.String("Latn"))
 

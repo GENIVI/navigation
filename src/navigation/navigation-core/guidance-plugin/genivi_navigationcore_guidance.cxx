@@ -69,7 +69,7 @@ class SpeechOutput
     SpeechOutput(DBus::Connection &connection)
         : DBus::ObjectProxy(connection,
                                     "/org/genivi/hmi/speechservice/SpeechOutput",
-                                    "org.genivi.hmi.speechservice.SpeechOutput")
+                                    "org.genivi.navigation.hmi.speechservice.SpeechOutput")
     {
     }
 
@@ -202,7 +202,7 @@ variant_enumeration(DBusCommonAPIEnumeration i)
 }
 
 class  Guidance
-: public org::genivi::navigationcore::Guidance_adaptor,
+: public org::genivi::navigation::navigationcore::Guidance_adaptor,
   public DBus::IntrospectableAdaptor,
   public DBus::ObjectAdaptor
 {
@@ -855,6 +855,6 @@ plugin_init(void)
 	// FIXME: What dbus address to use? 
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
 	conn->setup(&dispatcher);
-	conn->request_name("org.genivi.navigationcore.Guidance");
+	conn->request_name("org.genivi.navigation.navigationcore.Guidance");
 	server=new Guidance(*conn);
 }

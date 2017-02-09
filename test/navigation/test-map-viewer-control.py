@@ -102,14 +102,14 @@ if __name__ == '__main__':
 bus = dbus.SessionBus()
 
 bus.add_signal_receiver(mapviewer_mapViewScaleChanged_handler, \
-                        dbus_interface = "org.genivi.mapviewer.MapViewerControl", \
+                        dbus_interface = "org.genivi.navigation.mapviewer.MapViewerControl", \
                         signal_name = "MapViewScaleChanged")
 
 
 startTrigger(test_name)  
 
-session = bus.get_object('org.genivi.mapviewer.Session','/org/genivi/mapviewer')
-session_interface = dbus.Interface(session, dbus_interface='org.genivi.mapviewer.Session')
+session = bus.get_object('org.genivi.navigation.mapviewer.Session','/org/genivi/mapviewer')
+session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.mapviewer.Session')
 
 #get session handle
 ret = session_interface.CreateSession(dbus.String("test mapviewer"))
@@ -122,8 +122,8 @@ print 'Session status: ' + str(sessionstatus)
 sessionlist = session_interface.GetAllSessions();
 print 'Active sessions = ' + str(len(sessionlist))
 
-MapViewerControl_obj = bus.get_object('org.genivi.mapviewer.MapViewerControl','/org/genivi/mapviewer')
-MapViewerControl_interface = dbus.Interface(MapViewerControl_obj, dbus_interface='org.genivi.mapviewer.MapViewerControl')
+MapViewerControl_obj = bus.get_object('org.genivi.navigation.mapviewer.MapViewerControl','/org/genivi/mapviewer')
+MapViewerControl_interface = dbus.Interface(MapViewerControl_obj, dbus_interface='org.genivi.navigation.mapviewer.MapViewerControl')
 
 #get mapviewer handle
 ret = MapViewerControl_interface.CreateMapViewInstance( \

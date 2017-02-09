@@ -7,7 +7,7 @@
      this file, you can obtain one at http://mozilla.org/MPL/2.0/.
 -->
 <node xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="/org/genivi/poiservice" xsi:noNamespaceSchemaLocation="introspect.xsd">
-  <interface name="org.genivi.poiservice.POISearch">
+  <interface name="org.genivi.navigation.poiservice.POISearch">
     <version>1.0.0 (19-12-2012)</version>
     <doc>
       <line>This interface offers methods that implement the POI search functionality of a navigation system</line>
@@ -87,7 +87,7 @@
           <line>top_level = true if the category is a pre-defined one (top level with only ALL_CATEGORIES as parent), false for customized categories created by plug-in.</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.InvalidCategory">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.InvalidCategory">
         <doc>
           <line>The category is not available.</line>
         </doc>
@@ -109,7 +109,7 @@
           <line>top_level = true if the category is a pre-defined one (top level with only ALL_CATEGORIES as parent), false for customized categories created by plug-in.</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.InvalidCategory">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.InvalidCategory">
         <doc>
           <line>The category is not available.</line>
         </doc>
@@ -166,7 +166,7 @@
           <line>name = name to be displayed by application</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.InvalidCategory">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.InvalidCategory">
         <doc>
           <line>The category is not available.</line>
           <line>If there are more than one category and one of them is not available, no detailed will be returned for this category but there will be no error.</line>
@@ -195,7 +195,7 @@
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.NoMoreHandles">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.NoMoreHandles">
         <doc>
           <line>This error is generated if no more poi search unique handles are available</line>
         </doc>
@@ -210,7 +210,7 @@
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.HandleNotAvailable">
         <doc>
           <line>This error is generated if an application tries to delete a poi search unique handle that is not available</line>
         </doc>
@@ -234,17 +234,17 @@
           <line>alt = altitude above the sea level of the current position in meters</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.InvalidPosition">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.InvalidPosition">
         <doc>
           <line>This error is generated if an application tries to set invalid coordinates.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiSearch.Error.SearchIsActive">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.SearchIsActive">
         <doc>
           <line>This error is generated if an application tries to change the search criteria but the search is on-going and could not be updated.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.HandleNotAvailable">
         <doc>
           <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
         </doc>
@@ -281,17 +281,17 @@
           <line>endSearchOffset (optional) = Lenght of the route (in meters) from where to start the search along. 0 or invalid lenght means end is the destination.</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.InvalidRouteHandle">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.InvalidRouteHandle">
         <doc>
           <line>This error is generated if an application tries to set invalid route handle.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiSearch.Error.SearchIsActive">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.SearchIsActive">
         <doc>
           <line>This error is generated if an application tries to change the search criteria but the search is on-going and could not be updated.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.HandleNotAvailable">
         <doc>
           <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
         </doc>
@@ -314,17 +314,17 @@
           <line>Note: A POI category is a unique ID. It could be a predifined category or a custom one defined by a POI plug-in.</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.InvalidCategory">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.InvalidCategory">
         <doc>
           <line>This error is generated if an application tries to set one or more invalid poi categories.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiSearch.Error.SearchIsActive">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.SearchIsActive">
         <doc>
           <line>This error is generated if an application tries to change the search criteria but the search is on-going and could not be updated.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.HandleNotAvailable">
         <doc>
           <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
         </doc>
@@ -351,17 +351,17 @@
           <line>mandatory = true if the attribute is mandatory for the search and false for optional.</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.InvalidPoiAttribute">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.InvalidPoiAttribute">
         <doc>
           <line>This error is generated if an application tries to set one or more invalid poi attributes.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiSearch.Error.SearchIsActive">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.SearchIsActive">
         <doc>
           <line>This error is generated if an application tries to change the search criteria but the search is on-going and could not be updated.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.HandleNotAvailable">
         <doc>
           <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
         </doc>
@@ -389,17 +389,17 @@
           <line>If more than one category was defined for this search, the sort criteria should be compliant with all categories.</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.HandleNotAvailable">
         <doc>
           <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiSearch.Error.InvalidCategory">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.InvalidCategory">
         <doc>
           <line>This error is generated if an application tries to start a search without, at least, one poi category defined.</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiSearch.Error.BadLocation">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.BadLocation">
         <doc>
           <line>This error is generated if an application tries to start a search without a valid location (coordinates or route handle) defined.</line>
         </doc>
@@ -414,7 +414,7 @@
           <line>poiSearchHandle = poi search unique handle</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.HandleNotAvailable">
         <doc>
           <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
         </doc>
@@ -442,12 +442,12 @@
           <line>If more than one category was defined for this search, the sort criteria should be compliant with all categories.</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.HandleNotAvailable">
         <doc>
           <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiSearch.Error.InvalidCategory">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.InvalidCategory">
         <doc>
           <line>This error is generated if an application tries to start a search without, at least, one poi category defined.</line>
         </doc>
@@ -462,7 +462,7 @@
           <line>poiSearchHandle = poi alert unique handle</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.HandleNotAvailable">
         <doc>
           <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
         </doc>
@@ -545,12 +545,12 @@
           <line>value = value. The value depends on the attribute specifications and type.</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.HandleNotAvailable">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.HandleNotAvailable">
         <doc>
           <line>This error is generated if an application tries to use a poi search unique handle that is not available or not valid</line>
         </doc>
       </error>
-      <error name="org.genivi.poiservice.poiSearch.Error.InvalidPoiAttribute">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.InvalidPoiAttribute">
         <doc>
           <line>This error is generated if an application tries to get one or more invalid poi attributes.</line>
         </doc>
@@ -586,7 +586,7 @@
           <line>value = value. The value depends on the attribute specifications and type.</line>
         </doc>
       </arg>
-      <error name="org.genivi.poiservice.poiSearch.Error.InvalidPoiId">
+      <error name="org.genivi.navigation.poiservice.poiSearch.Error.InvalidPoiId">
         <doc>
           <line>The poi unique id is not valid.</line>
         </doc>

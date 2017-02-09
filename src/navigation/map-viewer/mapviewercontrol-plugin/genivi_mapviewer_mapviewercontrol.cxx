@@ -175,13 +175,13 @@ static std::map<uint32_t, MapViewerControlObj *> handles;
 
 
 class Routing
-: public org::genivi::navigationcore::Routing_proxy,
+: public org::genivi::navigation::navigationcore::Routing_proxy,
   public DBus::ObjectProxy
 {
 	public:
 	MapViewerControlObj *m_mapviewerobj;
 	Routing(DBus::Connection &connection, MapViewerControlObj *obj)
-	: DBus::ObjectProxy(connection, "/org/genivi/navigationcore","org.genivi.navigationcore.Routing")
+	: DBus::ObjectProxy(connection, "/org/genivi/navigationcore","org.genivi.navigation.navigationcore.Routing")
 	{
 		m_mapviewerobj=obj;
 	}
@@ -231,12 +231,12 @@ class Routing
 };
 
 class  NavigationCoreSession
-: public org::genivi::navigationcore::Session_proxy,
+: public org::genivi::navigation::navigationcore::Session_proxy,
   public DBus::ObjectProxy
 {
 	public:
 	NavigationCoreSession(DBus::Connection &connection)
-	: DBus::ObjectProxy(connection, "/org/genivi/navigationcore","org.genivi.navigationcore.Session")
+	: DBus::ObjectProxy(connection, "/org/genivi/navigationcore","org.genivi.navigation.navigationcore.Session")
 	{
 	}
     void SessionDeleted(const uint32_t& sessionHandle)
@@ -247,14 +247,14 @@ class  NavigationCoreSession
 static void position_update(MapMatchedPosition *pos, struct vehicle *v);
 
 class  MapMatchedPosition
-: public org::genivi::navigationcore::MapMatchedPosition_proxy,
+: public org::genivi::navigation::navigationcore::MapMatchedPosition_proxy,
   public DBus::ObjectProxy
 {
 	public:
 	struct callback *cb;
 	MapViewerControlObj *m_mapviewerobj;
 	MapMatchedPosition(DBus::Connection &connection, struct vehicle *v)
-	: DBus::ObjectProxy(connection, "/org/genivi/navigationcore","org.genivi.navigationcore.MapMatchedPosition")
+	: DBus::ObjectProxy(connection, "/org/genivi/navigationcore","org.genivi.navigation.navigationcore.MapMatchedPosition")
 	{	
 		cb=callback_new_2(callback_cast(position_update), this, v);
 	}
@@ -331,7 +331,7 @@ position_update(MapMatchedPosition *pos, struct vehicle *v)
 }
 
 class  MapViewerControl
-: public org::genivi::mapviewer::MapViewerControl_adaptor,
+: public org::genivi::navigation::mapviewer::MapViewerControl_adaptor,
   public DBus::IntrospectableAdaptor,
   public DBus::ObjectAdaptor
 {
@@ -1779,7 +1779,7 @@ plugin_init(void)
 		conns[i] = new DBus::Connection(DBus::Connection::SessionBus());
 		conns[i]->setup(&dispatchers[i]);
 	}
-    conns[MAPVIEWER_CONTROL_CONNECTION]->request_name("org.genivi.mapviewer.MapViewerControl");
+    conns[MAPVIEWER_CONTROL_CONNECTION]->request_name("org.genivi.navigation.mapviewer.MapViewerControl");
     server=new MapViewerControl(*conns[MAPVIEWER_CONTROL_CONNECTION]);
 
 #if LM
