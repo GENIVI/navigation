@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dltfilter>
     <filter>
-        <type>1</type>
-        <name>HIDE-APP</name>
+        <type>0</type>
+        <name>New Filter</name>
         <ecuid></ecuid>
-        <applicationid>APP</applicationid>
-        <contextid></contextid>
+        <applicationid>NAVI</applicationid>
+        <contextid>TEST</contextid>
         <headertext></headertext>
         <payloadtext></payloadtext>
         <enableregexp_Context>0</enableregexp_Context>
@@ -16,7 +16,7 @@
         <enablefilter>1</enablefilter>
         <enableecuid>0</enableecuid>
         <enableapplicationid>1</enableapplicationid>
-        <enablecontextid>0</enablecontextid>
+        <enablecontextid>1</enablecontextid>
         <enableheadertext>0</enableheadertext>
         <enablepayloadtext>0</enablepayloadtext>
         <enablectrlmsgs>0</enablectrlmsgs>
@@ -28,11 +28,11 @@
         <logLevelMin>0</logLevelMin>
     </filter>
     <filter>
-        <type>1</type>
-        <name>HIDE-DA1</name>
+        <type>0</type>
+        <name>New Filter</name>
         <ecuid></ecuid>
-        <applicationid>DA1</applicationid>
-        <contextid></contextid>
+        <applicationid>GUID</applicationid>
+        <contextid>TEST</contextid>
         <headertext></headertext>
         <payloadtext></payloadtext>
         <enableregexp_Context>0</enableregexp_Context>
@@ -43,7 +43,7 @@
         <enablefilter>1</enablefilter>
         <enableecuid>0</enableecuid>
         <enableapplicationid>1</enableapplicationid>
-        <enablecontextid>0</enablecontextid>
+        <enablecontextid>1</enablecontextid>
         <enableheadertext>0</enableheadertext>
         <enablepayloadtext>0</enablepayloadtext>
         <enablectrlmsgs>0</enablectrlmsgs>
@@ -57,20 +57,20 @@
     <filter>
         <type>2</type>
         <name>New Filter</name>
-        <ecuid>ECU1</ecuid>
-        <applicationid>NAVI</applicationid>
-        <contextid>TEST</contextid>
+        <ecuid></ecuid>
+        <applicationid></applicationid>
+        <contextid></contextid>
         <headertext></headertext>
-        <payloadtext>Start test</payloadtext>
+        <payloadtext>Start</payloadtext>
         <enableregexp_Context>0</enableregexp_Context>
         <enableregexp_Header>0</enableregexp_Header>
         <enableregexp_Payload>0</enableregexp_Payload>
         <ignoreCase_Header>0</ignoreCase_Header>
         <ignoreCase_Payload>0</ignoreCase_Payload>
         <enablefilter>1</enablefilter>
-        <enableecuid>1</enableecuid>
-        <enableapplicationid>1</enableapplicationid>
-        <enablecontextid>1</enablecontextid>
+        <enableecuid>0</enableecuid>
+        <enableapplicationid>0</enableapplicationid>
+        <enablecontextid>0</enablecontextid>
         <enableheadertext>0</enableheadertext>
         <enablepayloadtext>1</enablepayloadtext>
         <enablectrlmsgs>0</enablectrlmsgs>
@@ -84,11 +84,65 @@
     <filter>
         <type>2</type>
         <name>New Filter</name>
-        <ecuid>ECU1</ecuid>
-        <applicationid>NAVI</applicationid>
-        <contextid>TEST</contextid>
+        <ecuid></ecuid>
+        <applicationid></applicationid>
+        <contextid></contextid>
         <headertext></headertext>
-        <payloadtext>Stop test</payloadtext>
+        <payloadtext>Stop</payloadtext>
+        <enableregexp_Context>0</enableregexp_Context>
+        <enableregexp_Header>0</enableregexp_Header>
+        <enableregexp_Payload>0</enableregexp_Payload>
+        <ignoreCase_Header>0</ignoreCase_Header>
+        <ignoreCase_Payload>0</ignoreCase_Payload>
+        <enablefilter>1</enablefilter>
+        <enableecuid>0</enableecuid>
+        <enableapplicationid>0</enableapplicationid>
+        <enablecontextid>0</enablecontextid>
+        <enableheadertext>0</enableheadertext>
+        <enablepayloadtext>1</enablepayloadtext>
+        <enablectrlmsgs>0</enablectrlmsgs>
+        <enableLogLevelMin>0</enableLogLevelMin>
+        <enableLogLevelMax>0</enableLogLevelMax>
+        <enableMarker>0</enableMarker>
+        <filterColour>#ff0000</filterColour>
+        <logLevelMax>0</logLevelMax>
+        <logLevelMin>0</logLevelMin>
+    </filter>
+    <filter>
+        <type>0</type>
+        <name>New Filter</name>
+        <ecuid></ecuid>
+        <applicationid>GNSS</applicationid>
+        <contextid></contextid>
+        <headertext></headertext>
+        <payloadtext></payloadtext>
+        <enableregexp_Context>0</enableregexp_Context>
+        <enableregexp_Header>0</enableregexp_Header>
+        <enableregexp_Payload>0</enableregexp_Payload>
+        <ignoreCase_Header>0</ignoreCase_Header>
+        <ignoreCase_Payload>0</ignoreCase_Payload>
+        <enablefilter>1</enablefilter>
+        <enableecuid>0</enableecuid>
+        <enableapplicationid>1</enableapplicationid>
+        <enablecontextid>0</enablecontextid>
+        <enableheadertext>0</enableheadertext>
+        <enablepayloadtext>0</enablepayloadtext>
+        <enablectrlmsgs>0</enablectrlmsgs>
+        <enableLogLevelMin>0</enableLogLevelMin>
+        <enableLogLevelMax>0</enableLogLevelMax>
+        <enableMarker>0</enableMarker>
+        <filterColour>#ffffff</filterColour>
+        <logLevelMax>0</logLevelMax>
+        <logLevelMin>0</logLevelMin>
+    </filter>
+    <filter>
+        <type>0</type>
+        <name>New Filter</name>
+        <ecuid>ECU1</ecuid>
+        <applicationid>DLTD</applicationid>
+        <contextid>INTM</contextid>
+        <headertext></headertext>
+        <payloadtext>registered for PID </payloadtext>
         <enableregexp_Context>0</enableregexp_Context>
         <enableregexp_Header>0</enableregexp_Header>
         <enableregexp_Payload>0</enableregexp_Payload>
@@ -104,7 +158,89 @@
         <enableLogLevelMin>0</enableLogLevelMin>
         <enableLogLevelMax>0</enableLogLevelMax>
         <enableMarker>0</enableMarker>
-        <filterColour>#ff0000</filterColour>
+        <filterColour>#ffffff</filterColour>
+        <logLevelMax>0</logLevelMax>
+        <logLevelMin>0</logLevelMin>
+    </filter>
+    <filter>
+        <type>0</type>
+        <name>New Filter</name>
+        <ecuid>ECU1</ecuid>
+        <applicationid>DLTD</applicationid>
+        <contextid>INTM</contextid>
+        <headertext></headertext>
+        <payloadtext>Unregistered ApID</payloadtext>
+        <enableregexp_Context>0</enableregexp_Context>
+        <enableregexp_Header>0</enableregexp_Header>
+        <enableregexp_Payload>0</enableregexp_Payload>
+        <ignoreCase_Header>0</ignoreCase_Header>
+        <ignoreCase_Payload>0</ignoreCase_Payload>
+        <enablefilter>1</enablefilter>
+        <enableecuid>1</enableecuid>
+        <enableapplicationid>1</enableapplicationid>
+        <enablecontextid>1</enablecontextid>
+        <enableheadertext>0</enableheadertext>
+        <enablepayloadtext>1</enablepayloadtext>
+        <enablectrlmsgs>0</enablectrlmsgs>
+        <enableLogLevelMin>0</enableLogLevelMin>
+        <enableLogLevelMax>0</enableLogLevelMax>
+        <enableMarker>0</enableMarker>
+        <filterColour>#ffffff</filterColour>
+        <logLevelMax>0</logLevelMax>
+        <logLevelMin>0</logLevelMin>
+    </filter>
+    <filter>
+        <type>1</type>
+        <name>New Filter</name>
+        <ecuid>ECU1</ecuid>
+        <applicationid>DLTD</applicationid>
+        <contextid>INTM</contextid>
+        <headertext>2017/02/10 15:11:59.673396 142200.1224 74 ECU1 DLTD INTM 67615 log info verbose 1</headertext>
+        <payloadtext>Unregistered ApID 'NAVI'
+</payloadtext>
+        <enableregexp_Context>0</enableregexp_Context>
+        <enableregexp_Header>0</enableregexp_Header>
+        <enableregexp_Payload>0</enableregexp_Payload>
+        <ignoreCase_Header>0</ignoreCase_Header>
+        <ignoreCase_Payload>0</ignoreCase_Payload>
+        <enablefilter>1</enablefilter>
+        <enableecuid>0</enableecuid>
+        <enableapplicationid>0</enableapplicationid>
+        <enablecontextid>0</enablecontextid>
+        <enableheadertext>0</enableheadertext>
+        <enablepayloadtext>1</enablepayloadtext>
+        <enablectrlmsgs>0</enablectrlmsgs>
+        <enableLogLevelMin>0</enableLogLevelMin>
+        <enableLogLevelMax>0</enableLogLevelMax>
+        <enableMarker>0</enableMarker>
+        <filterColour>#ffffff</filterColour>
+        <logLevelMax>0</logLevelMax>
+        <logLevelMin>0</logLevelMin>
+    </filter>
+    <filter>
+        <type>1</type>
+        <name>New Filter</name>
+        <ecuid>ECU1</ecuid>
+        <applicationid>DLTD</applicationid>
+        <contextid>INTM</contextid>
+        <headertext>2017/02/10 15:11:59.673194 142200.1223 71 ECU1 DLTD INTM 67615 log info verbose 1</headertext>
+        <payloadtext>ApplicationID 'NAVI' registered for PID</payloadtext>
+        <enableregexp_Context>0</enableregexp_Context>
+        <enableregexp_Header>0</enableregexp_Header>
+        <enableregexp_Payload>0</enableregexp_Payload>
+        <ignoreCase_Header>0</ignoreCase_Header>
+        <ignoreCase_Payload>0</ignoreCase_Payload>
+        <enablefilter>1</enablefilter>
+        <enableecuid>0</enableecuid>
+        <enableapplicationid>0</enableapplicationid>
+        <enablecontextid>0</enablecontextid>
+        <enableheadertext>0</enableheadertext>
+        <enablepayloadtext>1</enablepayloadtext>
+        <enablectrlmsgs>0</enablectrlmsgs>
+        <enableLogLevelMin>0</enableLogLevelMin>
+        <enableLogLevelMax>0</enableLogLevelMax>
+        <enableMarker>0</enableMarker>
+        <filterColour>#ffffff</filterColour>
         <logLevelMax>0</logLevelMax>
         <logLevelMin>0</logLevelMin>
     </filter>

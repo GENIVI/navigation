@@ -23,6 +23,8 @@ option(WITH_DBUS_INTERFACE
        "Build using the D-Bus interfaces" ON)
 option(WITH_DEBUG
         "Enable the debug messages" OFF)
+option(WITH_DLT
+        "Enable DLT logging" OFF)
 option(WITH_SPEECH
         "Enable the voice messages" OFF)
 option(WITH_PLUGIN_MIGRATION
@@ -40,6 +42,7 @@ option(NAVIT_QTPAINTER
 
 message(STATUS "WITH_DBUS_INTERFACE = ${WITH_DBUS_INTERFACE}")
 message(STATUS "WITH_DEBUG = ${WITH_DEBUG}")
+message(STATUS "WITH_DLT = ${WITH_DLT}")
 message(STATUS "WITH_SPEECH = ${WITH_SPEECH}")
 message(STATUS "WITH_PLUGIN_MIGRATION = ${WITH_PLUGIN_MIGRATION}")
 message(STATUS "YOCTO_CONFIG = ${YOCTO_CONFIG}")

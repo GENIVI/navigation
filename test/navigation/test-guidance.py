@@ -131,6 +131,9 @@ def guidance_guidanceStatusChanged_handler(guidanceStatus,routeHandle):
    
 def guidance_positionOnRouteChanged_handler(offsetOnRoute):
     print "Offset on route: " +str(offsetOnRoute)
+    
+def guidance_maneuverChanged_handler(maneuver):
+    print "Maneuver: " +str(maneuver)
     ret = g_guidance_interface.GetDestinationInformation()
     print "Travel time: " +str(ret[1])
     ret = g_guidance_interface.GetManeuversList(dbus.UInt16(10),dbus.UInt32(0))
@@ -138,7 +141,7 @@ def guidance_positionOnRouteChanged_handler(offsetOnRoute):
     print "Next road to turn: " +str(ret[2][0][4])
     g_mapmatchedposition_interface.SetSimulationMode(dbus.UInt32(g_navigationcore_session_handle),dbus.Boolean(False))
     g_guidance_interface.StopGuidance(dbus.UInt32(g_navigationcore_session_handle))
-    
+
 def mapmatchedposition_simulationStatusChanged_handler(simulationStatus):
     print "Simulation status: " +str(simulationStatus)
         
@@ -297,6 +300,10 @@ bus.add_signal_receiver(guidance_guidanceStatusChanged_handler, \
 bus.add_signal_receiver(guidance_positionOnRouteChanged_handler, \
                         dbus_interface = "org.genivi.navigation.navigationcore.Guidance", \
                         signal_name = "PositionOnRouteChanged")
+
+bus.add_signal_receiver(guidance_maneuverChanged_handler, \
+                        dbus_interface = "org.genivi.navigation.navigationcore.Guidance", \
+                        signal_name = "ManeuverChanged")
 
 bus.add_signal_receiver(mapmatchedposition_simulationStatusChanged_handler, \
                         dbus_interface = "org.genivi.navigation.navigationcore.MapMatchedPosition", \

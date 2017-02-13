@@ -43,14 +43,14 @@
 #include "poi-server-class.h"
 
 
-static const char* poiSearch_SERVICE_NAME = "org.genivi.poiservice.POISearch";
+static const char* poiSearch_SERVICE_NAME = "org.genivi.navigation.poiservice.POISearch";
 static const char* poiSearch_OBJECT_PATH = "/org/genivi/poiservice/POISearch";
-static const char* poiConfiguration_SERVICE_NAME = "org.genivi.poiservice.Configuration";
-static const char* poiConfiguration_OBJECT_PATH = "/org/genivi/poiservice/Configuration";
-static const char* poiContentAccess_SERVICE_NAME = "org.genivi.poiservice.POIContentAccess";
+static const char* poiConfiguration_SERVICE_NAME = "org.genivi.navigation.poiservice.POIConfiguration";
+static const char* poiConfiguration_OBJECT_PATH = "/org/genivi/poiservice/POIConfiguration";
+static const char* poiContentAccess_SERVICE_NAME = "org.genivi.navigation.poiservice.POIContentAccess";
 static const char* poiContentAccess_OBJECT_PATH = "/org/genivi/poiservice/POIContentAccess";
 static const char* contentAccessModule_OBJECT_PATH = "/org/genivi/poiservice/POIContentAccessModule";
-static const char* Routing_SERVICE_NAME = "org.genivi.navigationcore.Routing";
+static const char* Routing_SERVICE_NAME = "org.genivi.navigation.navigationcore.Routing";
 static const char* Routing_OBJECT_PATH = "/org/genivi/navigationcore";
 
 // SQL requests

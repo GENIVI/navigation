@@ -62,7 +62,7 @@ class poiSearchServer;
 class poiContentAccessServer;
 
 class Routing
-: public org::genivi::navigationcore::Routing_proxy,
+: public org::genivi::navigation::navigationcore::Routing_proxy,
   public DBus::IntrospectableProxy,
   public DBus::ObjectProxy
 {
@@ -87,7 +87,7 @@ class Routing
 };
 
 class  contentAccessModule
-: public org::genivi::poiservice::POIContentAccessModule_proxy,
+: public org::genivi::navigation::poiservice::POIContentAccessModule_proxy,
   public DBus::IntrospectableProxy,
   public DBus::ObjectProxy
 {
@@ -109,7 +109,7 @@ private:
 };
 
 class  poiContentAccessServer
-: public org::genivi::poiservice::POIContentAccess_adaptor,
+: public org::genivi::navigation::poiservice::POIContentAccess_adaptor,
   public DBus::IntrospectableAdaptor,
   public DBus::ObjectAdaptor
 {
@@ -208,7 +208,7 @@ private:
 };
 
 class  poiSearchServer
-: public org::genivi::poiservice::POISearch_adaptor,
+: public org::genivi::navigation::poiservice::POISearch_adaptor,
   public DBus::IntrospectableAdaptor,
   public DBus::ObjectAdaptor
 {
@@ -351,7 +351,7 @@ private:
 };
 
 class  poiConfigurationServer
-: public org::genivi::poiservice::Configuration_adaptor,
+: public org::genivi::navigation::poiservice::POIConfiguration_adaptor,
   public DBus::IntrospectableAdaptor,
   public DBus::ObjectAdaptor
 {

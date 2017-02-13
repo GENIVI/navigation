@@ -35,10 +35,17 @@ if(WITH_SPEECH)
     include_directories(${DBUS_GENERATED_INCLUDE_DIR}/speech-service)
 endif()
 
+if(WITH_DLT)
+    pkg_check_modules(DLT REQUIRED automotive-dlt)
+    add_definitions("-DDLT_ENABLED=1")
+    include_directories( ${DLT_INCLUDE_DIRS} )
+    set(LIBRARIES ${LIBRARIES} ${DLT_LIBRARIES})
+endif()
+
 include_directories(${DBUS_GENERATED_INCLUDE_DIR}/navigation-core)
 
 set(genivi_navigationcore_guidance_LIBS ${PLUGIN_LDFLAGS})
 set(genivi_navigationcore_guidance_LIBRARY_DIRS ${PLUGIN_LIBRARIES})
 
 module_add_library(genivi_navigationcore_guidance genivi_navigationcore_guidance.cxx ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-guidance_adaptor.h)
-
+target_link_libraries(genivi_navigationcore_guidance ${LIBRARIES})

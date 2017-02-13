@@ -57,6 +57,11 @@
 #define dbg(level,...) ;
 #endif
 
+#if (DLT_ENABLED)
+#include "dlt.h"
+DLT_DECLARE_CONTEXT(con_test)
+#endif
+
 static DBus::Glib::BusDispatcher dispatcher;
 static DBus::Connection *conn;
 
@@ -132,7 +137,7 @@ class GuidanceObj
 };
 
 void GuidanceObj_Callback(GuidanceObj *obj);
-static class GuidanceObj *guidance;
+static class GuidanceObj *s_guidance;
 static struct attr vehicle_speed={attr_speed,(char *)40};
 
 static struct navit *
@@ -210,7 +215,8 @@ class  Guidance
 	Guidance(DBus::Connection &connection)
 	: DBus::ObjectAdaptor(connection, "/org/genivi/navigationcore")
 	{
-        simulationMode = true; //by default
+        m_simulationMode = true; //by default
+        m_guidance_active=false;
 	}
 
 	void
@@ -221,7 +227,7 @@ class  Guidance
 		vehicle.type=attr_vehicle;
         vehicle.u.vehicle=get_vehicle(Activate?"enhancedposition:":"demo:");
 		if (vehicle.u.vehicle) {
-            simulationMode = Activate;
+            m_simulationMode = Activate;
 			struct navit *navit=get_navit();
 			navit_set_attr(navit, &vehicle);
 		} else {
@@ -232,41 +238,57 @@ class  Guidance
 	bool
     GetSimulationMode()
     {
-        return (simulationMode);
+        return (m_simulationMode);
     }
 
 	void	
     StartGuidance(const uint32_t& SessionHandle, const uint32_t& RouteHandle)
 	{
         dbg(lvl_debug,"enter\n");
-		if (guidance) {
+        if (m_guidance_active) {
             dbg(lvl_debug,"guidance already active\n");
 			throw DBus::ErrorFailed("guidance already active");
-		}
-		guidance=new GuidanceObj(this, SessionHandle, RouteHandle);
+        } else {
+#if (DLT_ENABLED)
+            DLT_REGISTER_APP("GUID","Navigation core guidance");
+            DLT_REGISTER_CONTEXT(con_test,"TEST","Navigation context for testing");
+#endif
+            s_guidance=new GuidanceObj(this, SessionHandle, RouteHandle);
+            m_guidance_active=true;
+#if (DLT_ENABLED)
+            DLT_LOG(con_test,DLT_LOG_INFO,DLT_STRING("guidance active: "),DLT_BOOL(m_guidance_active));
+#endif
+        }
 	}
 
 	void	
     StopGuidance(const uint32_t& SessionHandle)
 	{
         dbg(lvl_debug,"enter\n");
-		if (!guidance) {
+        if (m_guidance_active==false) {
             dbg(lvl_debug,"no guidance active\n");
 			throw DBus::ErrorFailed("no guidance active");
-		}
-		delete(guidance);
-		guidance=NULL;
+        } else {
+            delete(s_guidance);
+            m_guidance_active=false;
+#if (DLT_ENABLED)
+            DLT_LOG(con_test,DLT_LOG_INFO,DLT_STRING("guidance active: "),DLT_BOOL(m_guidance_active));
+            DLT_UNREGISTER_CONTEXT(con_test);
+            DLT_UNREGISTER_APP();
+#endif
+        }
 	}
 
     void
     GetDestinationInformation(uint32_t& offset, uint32_t& travelTime, int32_t& direction, int32_t& side, int16_t& timeZone, int16_t& daylightSavingTime)
 	{
         dbg(lvl_debug,"enter\n");
-		if (!guidance) {
+        if (m_guidance_active==false) {
             dbg(lvl_debug,"no guidance active\n");
 			throw DBus::ErrorFailed("no guidance active");
-		}
-        guidance->GetDestinationInformation(offset, travelTime, direction, timeZone);
+        } else {
+            s_guidance->GetDestinationInformation(offset, travelTime, direction, timeZone);
+        }
 	}
 
 	::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string >
@@ -284,8 +306,8 @@ class  Guidance
     SetSimulationSpeed(const uint32_t& sessionHandle, const uint8_t& speedFactor)
 	{
 		vehicle_speed.u.num=speedFactor*40/4;
-		if (guidance)
-			guidance->SetSimulationSpeed(sessionHandle);
+        if (m_guidance_active==true)
+            s_guidance->SetSimulationSpeed(sessionHandle);
 	}
 
 	uint8_t
@@ -297,48 +319,57 @@ class  Guidance
 	void
     PauseGuidance(const uint32_t& sessionHandle)
 	{
-		if (!guidance) {
+        if (m_guidance_active==false) {
             dbg(lvl_debug,"no guidance active\n");
 			throw DBus::ErrorFailed("no guidance active");
-		}
-		guidance->PauseGuidance(sessionHandle);
+        } else {
+            s_guidance->PauseGuidance(sessionHandle);
+        }
 	}
 
 	void
     ResumeGuidance(const uint32_t& sessionHandle)
 	{
-		if (!guidance) {
+        if (m_guidance_active==false) {
             dbg(lvl_debug,"no guidance active\n");
 			throw DBus::ErrorFailed("no guidance active");
-		}
-		guidance->ResumeGuidance(sessionHandle);
+        } else {
+            s_guidance->ResumeGuidance(sessionHandle);
+        }
 	}
 
 	int32_t
 	SetVoiceGuidance(const bool& activate, const std::string& voice)
 	{
-        guidance->SetVoiceGuidance(activate,voice);
+        if (m_guidance_active==false) {
+            dbg(lvl_debug,"no guidance active\n");
+            throw DBus::ErrorFailed("no guidance active");
+        } else {
+            s_guidance->SetVoiceGuidance(activate,voice);
+        }
         return(0); //not implemented yet
 	}
 
 	void
     GetGuidanceDetails(bool& voiceGuidance, bool& vehicleOnTheRoad, bool& isDestinationReached, int32_t& maneuver)
 	{
-		if (!guidance) {
+        if (m_guidance_active==false) {
             dbg(lvl_debug,"no guidance active\n");
 			throw DBus::ErrorFailed("no guidance active");
-		}
-		guidance->GetGuidanceDetails(voiceGuidance, vehicleOnTheRoad, isDestinationReached, maneuver);
+        } else {
+            s_guidance->GetGuidanceDetails(voiceGuidance, vehicleOnTheRoad, isDestinationReached, maneuver);
+        }
 	}
 
     int32_t
 	PlayVoiceManeuver()
 	{
-        if (!guidance) {
+        if (m_guidance_active==false) {
             dbg(lvl_debug,"no guidance active\n");
             throw DBus::ErrorFailed("no guidance active");
+        } else {
+            s_guidance->PlayVoiceManeuver();
         }
-        guidance->PlayVoiceManeuver();
         return(0); //not implemented yet
 	}
 
@@ -351,11 +382,12 @@ class  Guidance
     void
     GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, int32_t& error, uint16_t& numberOfManeuvers, std::vector< ::DBus::Struct< std::vector< ::DBus::Struct< std::string, std::vector< ::DBus::Struct< int32_t, std::string > >, std::string > >, std::string, std::string, std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > > >& maneuversList)
 	{
-		if (!guidance) {
+        if (m_guidance_active==false) {
             dbg(lvl_debug,"no guidance active\n");
 			throw DBus::ErrorFailed("no guidance active");
-		}
-		guidance->GetManeuversList(requestedNumberOfManeuvers, maneuverOffset, numberOfManeuvers, maneuversList);
+        } else {
+            s_guidance->GetManeuversList(requestedNumberOfManeuvers, maneuverOffset, numberOfManeuvers, maneuversList);
+        }
         error=0; //not used
     }
 
@@ -375,8 +407,8 @@ class  Guidance
 	void
     GetGuidanceStatus(int32_t& guidanceStatus, uint32_t& routeHandle)
 	{
-		if (guidance) {
-			guidance->GetGuidanceStatus(guidanceStatus, routeHandle);
+        if (m_guidance_active==true) {
+            s_guidance->GetGuidanceStatus(guidanceStatus, routeHandle);
 		} else {
 			guidanceStatus=GENIVI_NAVIGATIONCORE_INACTIVE;
 			routeHandle=0;
@@ -386,14 +418,24 @@ class  Guidance
     int32_t
     SetVoiceGuidanceSettings(const int32_t& promptMode)
 	{
-        guidance->SetVoiceGuidanceSettings(promptMode);
+        if (m_guidance_active==false) {
+            dbg(lvl_debug,"no guidance active\n");
+            throw DBus::ErrorFailed("no guidance active");
+        } else {
+            s_guidance->SetVoiceGuidanceSettings(promptMode);
+        }
         return(0); //not implemented yet
 	}
 
     int32_t
 	GetVoiceGuidanceSettings()
 	{
-        return guidance->GetVoiceGuidanceSettings();
+        if (m_guidance_active==false) {
+            dbg(lvl_debug,"no guidance active\n");
+            throw DBus::ErrorFailed("no guidance active");
+        } else {
+            return s_guidance->GetVoiceGuidanceSettings();
+        }
 	}
 
     void
@@ -408,7 +450,8 @@ class  Guidance
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 
-    bool simulationMode;
+    bool m_simulationMode;
+    bool m_guidance_active;
 };
 
 void
@@ -694,7 +737,6 @@ GuidanceObj::GetGuidanceStatus(int32_t &guidanceStatus, uint32_t& routeHandle)
 	routeHandle=m_route_handle;
 }
 
-
 void
 GuidanceObj_Callback(GuidanceObj *obj)
 {
@@ -730,7 +772,13 @@ GuidanceObj_Callback(GuidanceObj *obj)
 			maneuver=GENIVI_NAVIGATIONCORE_INVALID;
 		}
 		obj->m_guidance->ManeuverChanged(maneuver);
-	} else {
+#if (DLT_ENABLED)
+        DLT_LOG(con_test,DLT_LOG_INFO,DLT_STRING("maneuver: "),DLT_INT16(maneuver));
+#endif
+    } else {
+#if (DLT_ENABLED)
+        DLT_LOG(con_test,DLT_LOG_ERROR,DLT_STRING("item not found"));
+#endif
         dbg(lvl_debug,"failed to get level item=%p\n",item);
 	}
 }
@@ -743,7 +791,6 @@ variant_double(double d)
 	iter << d;
 	return variant;
 }
-
 
 void
 GuidanceObj_TrackingCallback(GuidanceObj *obj)
@@ -776,8 +823,12 @@ struct map_rect *
 GuidanceObj::get_map_rect(void)
 {
 	struct map *map=navigation_get_map(get_navigation());
-	if (!map)
-		return NULL;
+    if (!map) {
+#if (DLT_ENABLED)
+        DLT_LOG(con_test,DLT_LOG_ERROR,DLT_STRING("map_rect null"));
+#endif
+        return NULL;
+    }
 	return map_rect_new(map, NULL);
 }
 
@@ -824,6 +875,9 @@ GuidanceObj::GuidanceObj(Guidance *guidance, uint32_t SessionHandle, uint32_t Ro
 		g_free(ret);
 	}
 	m_guidance->GuidanceStatusChanged(GENIVI_NAVIGATIONCORE_ACTIVE, RouteHandle);
+#if (DLT_ENABLED)
+            DLT_LOG(con_test,DLT_LOG_INFO,DLT_STRING("guidance status: "),DLT_INT16(GENIVI_NAVIGATIONCORE_ACTIVE));
+#endif
 }
 
 GuidanceObj::~GuidanceObj()
@@ -842,10 +896,13 @@ GuidanceObj::~GuidanceObj()
 #if (SPEECH_ENABLED)
     delete(m_speechoutput);
 #endif
+#if (DLT_ENABLED)
+            DLT_LOG(con_test,DLT_LOG_INFO,DLT_STRING("guidance status: "),DLT_INT16(GENIVI_NAVIGATIONCORE_INACTIVE));
+#endif
 
 }
 
-static class Guidance *server;
+static class Guidance *s_server;
 
 void
 plugin_init(void)
@@ -856,5 +913,5 @@ plugin_init(void)
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
 	conn->setup(&dispatcher);
 	conn->request_name("org.genivi.navigation.navigationcore.Guidance");
-	server=new Guidance(*conn);
+    s_server=new Guidance(*conn);
 }
