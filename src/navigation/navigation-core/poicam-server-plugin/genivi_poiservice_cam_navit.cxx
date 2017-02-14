@@ -55,7 +55,7 @@
 #define dbg(level,...) ;
 #endif
 
-using namespace v4::org::genivi::navigation::poiservice;
+using namespace v2::org::genivi::navigation::poiservice;
 using namespace v4::org::genivi::navigation;
 using namespace v4::org::genivi;
 
@@ -174,7 +174,7 @@ void getParentCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v
 /**
  * description: Creates a category by name and return an unique id.
  */
-void createCategory(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::CAMCategory _category, createCategoryReply_t _reply){
+void createCategory(const std::shared_ptr<CommonAPI::ClientId> _client, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::CAMCategory _category, createCategoryReply_t _reply){
     throw DBus::ErrorNotSupported("Not yet supported");
 }
 
@@ -191,7 +191,7 @@ void removeCategories(const std::shared_ptr<CommonAPI::ClientId> _client, std::v
  *   database, a signal is emitted when the update is done, that gives the id of
  *   the elements added
  */
-void addPOIs(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::CommonTypes::CategoryID _unique_id, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::PoiAddedDetails> _poiList, addPOIsReply_t _reply){
+void addPOIs(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::CommonTypes::CategoryID _unique_id, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::PoiAddedDetails> _poiList, addPOIsReply_t _reply){
     throw DBus::ErrorNotSupported("Not yet supported");
 }
 
@@ -199,7 +199,7 @@ void addPOIs(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::geni
  * description: Removes a list of POIs to a category. Because of required time to remove it
  *   from the database, a signal is emitted when the update is done.
  */
-void removePOIs(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::POI_ID> _ids, removePOIsReply_t _reply){
+void removePOIs(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::POI_ID> _ids, removePOIsReply_t _reply){
     throw DBus::ErrorNotSupported("Not yet supported");
 }
 
@@ -209,7 +209,7 @@ void removePOIs(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector<
  *   parameters. Of course the CAM will only be aware of the search if it registers
  *   one of the search categories.
  */
-void poiSearchStarted(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, uint16_t _maxSize, ::v4::org::genivi::navigation::NavigationTypes::Coordinate3D _location, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::CategoryAndRadius> _poiCategories, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::AttributeDetails> _poiAttributes, std::string _inputString, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::SortOption _sortOption, poiSearchStartedReply_t _reply){
+void poiSearchStarted(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, uint16_t _maxSize, ::v4::org::genivi::navigation::NavigationTypes::Coordinate3D _location, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::CategoryAndRadius> _poiCategories, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::AttributeDetails> _poiAttributes, std::string _inputString, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::SortOption _sortOption, poiSearchStartedReply_t _reply){
     struct attr navit;
     struct coord_geo g;
     dbg(lvl_debug,"enter handle=%d size=%d location=%f,%f,%d string='%s' sortOption=%d\n",_poiSearchHandle, _maxSize, _location.getLatitude(),_location.getLongitude(),_location.getAltitude(), _inputString.c_str(), _sortOption);
@@ -276,7 +276,7 @@ void poiSearchCanceled(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4:
  *   unique id is managed by the POI component, the CAM only provides the POI name,
  *   the category and coordinates as well as all the relevant detailed information.
  */
-void resultListRequested(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::AttributeID> _attributeList, resultListRequestedReply_t _reply){
+void resultListRequested(const std::shared_ptr<CommonAPI::ClientId> _client, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::AttributeID> _attributeList, resultListRequestedReply_t _reply){
     struct item *item;
     int count=0;
     POIServiceTypes::SearchStatusState _statusValue;
@@ -345,7 +345,7 @@ void resultListRequested(const std::shared_ptr<CommonAPI::ClientId> _client, ::v
  *   contains the name, the parent categories, the list of attributes, the icons,
  *   ... .
  */
-void poiDetailsRequested(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::POI_ID> _source_id, poiDetailsRequestedReply_t _reply){
+void poiDetailsRequested(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::POI_ID> _source_id, poiDetailsRequestedReply_t _reply){
     dbg(lvl_debug,"enter\n");
     std::vector< POIServiceTypes::SearchResultDetails> _results;
     NavigationTypes::Coordinate3D location;

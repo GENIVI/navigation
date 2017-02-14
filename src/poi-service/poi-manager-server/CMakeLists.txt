@@ -56,22 +56,24 @@ set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/src-gen")
 add_subdirectory(${FRANCA_DIR}/navigation/poiservice "${CMAKE_CURRENT_BINARY_DIR}/franca")
 
 # Path to the generated files
-set(API_VERSION_MAJOR 4)
-set(API_VERSION "v${API_VERSION_MAJOR}")
-set(PRJ_SRC_GEN_ROOT_PATH ${COMMONAPI_GEN_DIR}/${API_VERSION}/org/genivi) #files shared by all the APIs
-set(PRJ_SRC_GEN_NAVIGATION_PATH ${PRJ_SRC_GEN_ROOT_PATH}/navigation) #files shared by the navigation APIs
-set(PRJ_SRC_GEN_POISERVICE_PATH ${PRJ_SRC_GEN_NAVIGATION_PATH}/poiservice) #files shared by the poiservice APIs
+set(API_VERSION_NAVIGATION_MAJOR 4)
+set(API_VERSION_NAVIGATION "v${API_VERSION_NAVIGATION_MAJOR}")
+set(API_VERSION_POISERVICE_MAJOR 2)
+set(API_VERSION_POISERVICE "v${API_VERSION_POISERVICE_MAJOR}")
+set(PRJ_SRC_GEN_COMMON_PATH ${COMMONAPI_GEN_DIR}/${API_VERSION_NAVIGATION}/org/genivi) #files shared by all the APIs
+set(PRJ_SRC_GEN_NAVIGATION_PATH ${COMMONAPI_GEN_DIR}/${API_VERSION_NAVIGATION}/org/genivi/navigation) #files shared by the navigation APIs
+set(PRJ_SRC_GEN_POISERVICE_PATH ${COMMONAPI_GEN_DIR}/${API_VERSION_POISERVICE}/org/genivi/navigation/poiservice) #files shared by the poiservice APIs
 
 # Source Files
 FILE(GLOB PRJ_LOCAL_SRCS ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp)
 FILE(GLOB PRJ_COMMON_SRCS ${COMMON_DIR}/poi-common-database.cpp ${COMMON_DIR}/poi-common-math.cpp)
 FILE(GLOB PRJ_STUB_GEN_SRCS
-    ${PRJ_SRC_GEN_ROOT_PATH}/*DBusStub*.cpp ${PRJ_SRC_GEN_ROOT_PATH}/*Types.cpp ${PRJ_SRC_GEN_ROOT_PATH}/*DBusDeployment.cpp ${PRJ_SRC_GEN_ROOT_PATH}/*StubDefault.cpp
+    ${PRJ_SRC_GEN_COMMON_PATH}/*DBusStub*.cpp ${PRJ_SRC_GEN_COMMON_PATH}/*Types.cpp ${PRJ_SRC_GEN_COMMON_PATH}/*DBusDeployment.cpp ${PRJ_SRC_GEN_COMMON_PATH}/*StubDefault.cpp
     ${PRJ_SRC_GEN_NAVIGATION_PATH}/*DBusStub*.cpp ${PRJ_SRC_GEN_NAVIGATION_PATH}/*Types.cpp ${PRJ_SRC_GEN_NAVIGATION_PATH}/*DBusDeployment.cpp ${PRJ_SRC_GEN_NAVIGATION_PATH}/*StubDefault.cpp
     ${PRJ_SRC_GEN_POISERVICE_PATH}/*DBusStub*.cpp ${PRJ_SRC_GEN_POISERVICE_PATH}/*Types.cpp ${PRJ_SRC_GEN_POISERVICE_PATH}/*DBusDeployment.cpp ${PRJ_SRC_GEN_POISERVICE_PATH}/*StubDefault.cpp
     )
 FILE(GLOB PRJ_STUB_IMPL_SRCS
-    ${PRJ_SRC_GEN_ROOT_PATH}/*Stub*.cpp
+    ${PRJ_SRC_GEN_COMMON_PATH}/*Stub*.cpp
     ${PRJ_SRC_GEN_NAVIGATION_PATH}/*Stub*.cpp
     ${PRJ_SRC_GEN_POISERVICE_PATH}/*Stub*.cpp
     )
@@ -81,7 +83,7 @@ set(PRJ_SRCS ${PRJ_LOCAL_SRCS} ${PRJ_COMMON_SRCS} ${PRJ_STUB_GEN_SRCS} ${PRJ_STU
 include_directories(
     ${COMMON_DIR}
     ${COMMONAPI_GEN_DIR}
-    ${PRJ_SRC_GEN_ROOT_PATH}
+    ${PRJ_SRC_GEN_COMMON_PATH}
     ${PRJ_SRC_GEN_NAVIGATION_PATH}
     ${PRJ_SRC_GEN_POISERVICE_PATH}
     ${DBUS_INCLUDE_DIRS}

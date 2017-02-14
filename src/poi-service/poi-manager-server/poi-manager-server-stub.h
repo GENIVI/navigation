@@ -41,7 +41,7 @@
 #include "poi-common-math.h"
 
 using namespace std;
-using namespace v4::org::genivi::navigation::poiservice;
+using namespace v2::org::genivi::navigation::poiservice;
 using namespace v4::org::genivi::navigation;
 using namespace v4::org::genivi;
 
