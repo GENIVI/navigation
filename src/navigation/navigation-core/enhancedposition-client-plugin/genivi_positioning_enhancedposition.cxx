@@ -46,7 +46,7 @@
 #include <unistd.h>
 
 #include <CommonAPI/CommonAPI.hpp>
-#include <EnhancedPositionProxy.hpp>
+#include <v5/org/genivi/EnhancedPositionService/EnhancedPositionProxy.hpp>
 #include <EnhancedPositionServiceTypes.hpp>
 
 #if (!DEBUG_ENABLED)
@@ -55,6 +55,7 @@
 #endif
 
 using namespace org::genivi::EnhancedPositionService;
+using namespace v5::org::genivi::EnhancedPositionService;
 
 static std::shared_ptr < CommonAPI::Runtime > runtime;
 
