@@ -11,7 +11,7 @@ import org.genivi.navigation.NavigationTypes.* from "../NavigationTypes.fidl"
 
 typeCollection POIServiceTypes {
 	version {
-		 major 4 
+		 major 2 
 		 minor 0 
 	}
 	
