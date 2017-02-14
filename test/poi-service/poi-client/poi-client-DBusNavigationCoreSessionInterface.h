@@ -52,7 +52,7 @@ class DBusNavigationCoreSessionInterface: public QDBusAbstractInterface
     Q_OBJECT
 public:
     static inline const char *staticInterfaceName()
-    { return "org.genivi.navigationcore.Session"; }
+    { return "org.genivi.navigation.navigationcore.Session"; }
 
 public:
     DBusNavigationCoreSessionInterface(const QString &service, const QString &path, const QDBusConnection &connection, QObject *parent = 0);
@@ -76,9 +76,11 @@ private:
 
 namespace org {
   namespace genivi {
-    namespace navigationcore {
-        namespace Session {
-      typedef ::DBusNavigationCoreSessionInterface DBusNavigationCoreSessionInterface;
+    namespace navigation {
+        namespace navigationcore {
+            namespace Session {
+        typedef ::DBusNavigationCoreSessionInterface DBusNavigationCoreSessionInterface;
+            }
         }
     }
   }

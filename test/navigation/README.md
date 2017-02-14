@@ -43,4 +43,12 @@ To launch all the tests:
 ```
 NB: The locations and the routes are defined for the map database around Geneva (the reference map database into the repository). 
 
+##Sequence charts
+In order to illustrate the DBus exchanges, some sequence diagrams are available:
+location-input.pdf -->  ./test-location-input.py -l location.xml
+route-calculation.pdf --> ./test-route-calculation.py -r route.xml
+guidance.pdf --> ./test-guidance.py -r route.xml (partial)
+map-viewer-control.pdf --> ./test-map-viewer-control.py
+
+NB: The sequence charts have been caught and generated with an Elektrobit tool (EBSolys)
 

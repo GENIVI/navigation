@@ -58,7 +58,7 @@ class poiContentAccess;
 
 
 class  poiContentAccess
-: public org::genivi::poiservice::POIContentAccess_proxy,
+: public org::genivi::navigation::poiservice::POIContentAccess_proxy,
   public DBus::IntrospectableProxy,
   public DBus::ObjectProxy
 {
@@ -75,7 +75,7 @@ private:
 
 
 class  contentAccessModuleServer
-: public org::genivi::poiservice::POIContentAccessModule_adaptor,
+: public org::genivi::navigation::poiservice::POIContentAccessModule_adaptor,
   public DBus::IntrospectableAdaptor,
   public DBus::ObjectAdaptor
 {

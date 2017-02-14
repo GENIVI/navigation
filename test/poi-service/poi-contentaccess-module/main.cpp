@@ -48,9 +48,9 @@
 
 #include <QSettings>
 
-static const char* contentAccessModule_SERVICE_NAME = "org.genivi.poiservice.POIContentAccessModule";
+static const char* contentAccessModule_SERVICE_NAME = "org.genivi.navigation.poiservice.POIContentAccessModule";
 static const char* contentAccessModule_OBJECT_PATH = "/org/genivi/poiservice/POIContentAccessModule";
-static const char* poiContentAccess_SERVICE_NAME = "org.genivi.poiservice.POIContentAccess";
+static const char* poiContentAccess_SERVICE_NAME = "org.genivi.navigation.poiservice.POIContentAccess";
 static const char* poiContentAccess_OBJECT_PATH = "/org/genivi/poiservice/POIContentAccess";
 
 // SQL requests

@@ -187,13 +187,13 @@ private:
     QList<QPixmap> m_tableIconPOI;
 
     //handles to DBus interfaces
-    org::genivi::poiservice::poiSearch::DBusSearchInterface *m_dbusPoiSearchInterface;
-    org::genivi::poiservice::poiSearch::DBusConfigurationInterface *m_dbusConfigurationInterface;
-    org::genivi::navigationcore::Routing::DBusRoutingInterface *m_dbusNavigationRoutingInterface;
-    org::genivi::navigationcore::Guidance::DBusGuidanceInterface *m_dbusNavigationGuidanceInterface;
+    org::genivi::navigation::poiservice::poiSearch::DBusSearchInterface *m_dbusPoiSearchInterface;
+    org::genivi::navigation::poiservice::poiSearch::DBusConfigurationInterface *m_dbusConfigurationInterface;
+    org::genivi::navigation::navigationcore::Routing::DBusRoutingInterface *m_dbusNavigationRoutingInterface;
+    org::genivi::navigation::navigationcore::Guidance::DBusGuidanceInterface *m_dbusNavigationGuidanceInterface;
     DBusEnhancedPositionInterface *m_dbusPositioningEnhancedPositionInterface;
-    org::genivi::navigationcore::Session::DBusNavigationCoreSessionInterface *m_dbusNavigationCoreSessionInterface;
-    org::genivi::poiservice::poiContentAccess::DBusContentAccessInterface *m_dbusContentAccessInterface;
+    org::genivi::navigation::navigationcore::Session::DBusNavigationCoreSessionInterface *m_dbusNavigationCoreSessionInterface;
+    org::genivi::navigation::poiservice::poiContentAccess::DBusContentAccessInterface *m_dbusContentAccessInterface;
 
     geoCoordinate3D_t m_geoLocation;
 

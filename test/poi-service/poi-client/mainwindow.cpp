@@ -280,19 +280,19 @@ void MainWindow::InitUi()
 
     // init D-Bus (every interfaces on the session bus)
     //create instances of clients
-    m_dbusPoiSearchInterface = new org::genivi::poiservice::poiSearch::DBusSearchInterface("org.genivi.poiservice.POISearch", "/org/genivi/poiservice/POISearch",
+    m_dbusPoiSearchInterface = new org::genivi::navigation::poiservice::poiSearch::DBusSearchInterface("org.genivi.navigation.poiservice.POISearch", "/org/genivi/poiservice/POISearch",
                                                                                                 QDBusConnection::sessionBus(), this);
-    m_dbusConfigurationInterface = new org::genivi::poiservice::poiSearch::DBusConfigurationInterface("org.genivi.poiservice.Configuration", "/org/genivi/poiservice/Configuration",
+    m_dbusConfigurationInterface = new org::genivi::navigation::poiservice::poiSearch::DBusConfigurationInterface("org.genivi.navigation.poiservice.POIConfiguration", "/org/genivi/poiservice/Configuration",
                                                                                                 QDBusConnection::sessionBus(), this);
-    m_dbusContentAccessInterface = new org::genivi::poiservice::poiContentAccess::DBusContentAccessInterface("org.genivi.poiservice.POIContentAccess","/org/genivi/poiservice/POIContentAccess",
+    m_dbusContentAccessInterface = new org::genivi::navigation::poiservice::poiContentAccess::DBusContentAccessInterface("org.genivi.navigation.poiservice.POIContentAccess","/org/genivi/poiservice/POIContentAccess",
                                                                                                 QDBusConnection::sessionBus(), this);
-    m_dbusNavigationRoutingInterface = new org::genivi::navigationcore::Routing::DBusRoutingInterface("org.genivi.navigationcore.Routing", "/org/genivi/navigationcore",
+    m_dbusNavigationRoutingInterface = new org::genivi::navigation::navigationcore::Routing::DBusRoutingInterface("org.genivi.navigation.navigationcore.Routing", "/org/genivi/navigationcore",
                                                                                                 QDBusConnection::sessionBus(), this);
-    m_dbusNavigationGuidanceInterface = new org::genivi::navigationcore::Guidance::DBusGuidanceInterface("org.genivi.navigationcore.Guidance", "/org/genivi/navigationcore",
+    m_dbusNavigationGuidanceInterface = new org::genivi::navigation::navigationcore::Guidance::DBusGuidanceInterface("org.genivi.navigation.navigationcore.Guidance", "/org/genivi/navigationcore",
                                                                                                 QDBusConnection::sessionBus(), this);
     m_dbusPositioningEnhancedPositionInterface = new org::genivi::positioning::EnhancedPosition::DBusEnhancedPositionInterface("org.genivi.positioning.EnhancedPosition", "/org/genivi/positioning/EnhancedPosition",
                                                                                                 QDBusConnection::sessionBus(), this);
-    m_dbusNavigationCoreSessionInterface = new org::genivi::navigationcore::Session::DBusNavigationCoreSessionInterface("org.genivi.navigationcore.Session", "/org/genivi/navigationcore",
+    m_dbusNavigationCoreSessionInterface = new org::genivi::navigation::navigationcore::Session::DBusNavigationCoreSessionInterface("org.genivi.navigation.navigationcore.Session", "/org/genivi/navigationcore",
                                                                                                 QDBusConnection::sessionBus(), this );
 
     //connect to signals

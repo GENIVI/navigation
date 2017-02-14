@@ -52,7 +52,7 @@ class DBusGuidanceInterface: public QDBusAbstractInterface
     Q_OBJECT
 public:
     static inline const char *staticInterfaceName()
-    { return "org.genivi.navigationcore.Guidance"; }
+    { return "org.genivi.navigation.navigationcore.Guidance"; }
 
 public:
     DBusGuidanceInterface(const QString &service, const QString &path, const QDBusConnection &connection, QObject *parent = 0);
@@ -73,9 +73,11 @@ private:
 
 namespace org {
   namespace genivi {
-    namespace navigationcore {
-        namespace Guidance {
-      typedef ::DBusGuidanceInterface DBusGuidanceInterface;
+    namespace navigation {
+        namespace navigationcore {
+            namespace Guidance {
+        typedef ::DBusGuidanceInterface DBusGuidanceInterface;
+            }
         }
     }
   }

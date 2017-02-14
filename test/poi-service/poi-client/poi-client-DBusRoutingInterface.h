@@ -52,7 +52,7 @@ class DBusRoutingInterface: public QDBusAbstractInterface
     Q_OBJECT
 public:
     static inline const char *staticInterfaceName()
-    { return "org.genivi.navigationcore.Routing"; }
+    { return "org.genivi.navigation.navigationcore.Routing"; }
 
 public:
     DBusRoutingInterface(const QString &service, const QString &path, const QDBusConnection &connection, QObject *parent = 0);
@@ -85,9 +85,11 @@ private:
 
 namespace org {
   namespace genivi {
-    namespace navigationcore {
-        namespace Routing {
-      typedef ::DBusRoutingInterface DBusRoutingInterface;
+    namespace navigation {
+        namespace navigationcore {
+            namespace Routing {
+        typedef ::DBusRoutingInterface DBusRoutingInterface;
+            }
         }
     }
   }

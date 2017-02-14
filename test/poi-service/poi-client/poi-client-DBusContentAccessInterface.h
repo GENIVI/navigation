@@ -52,7 +52,7 @@ class DBusContentAccessInterface: public QDBusAbstractInterface
     Q_OBJECT
 public:
     static inline const char *staticInterfaceName()
-    { return "org.genivi.poiservice.POIContentAccess"; }
+    { return "org.genivi.navigation.poiservice.POIContentAccess"; }
 
 public:
     DBusContentAccessInterface(const QString &service, const QString &path, const QDBusConnection &connection, QObject *parent = 0);
@@ -110,9 +110,11 @@ private:
 
 namespace org {
   namespace genivi {
-    namespace poiservice {
-        namespace poiContentAccess {
-      typedef ::DBusContentAccessInterface DBusContentAccessInterface;
+    namespace navigation {
+        namespace poiservice {
+            namespace poiContentAccess {
+        typedef ::DBusContentAccessInterface DBusContentAccessInterface;
+            }
         }
     }
   }
@@ -126,7 +128,7 @@ class DBusContentAccessModuleInterface: public QDBusAbstractInterface
     Q_OBJECT
 public:
     static inline const char *staticInterfaceName()
-    { return "org.genivi.poiservice.POIContentAccessModule"; }
+    { return "org.genivi.navigation.poiservice.POIContentAccessModule"; }
 
 public:
     DBusContentAccessModuleInterface(const QString &service, const QString &path, const QDBusConnection &connection, QObject *parent = 0);
@@ -245,9 +247,11 @@ private:
 
 namespace org {
   namespace genivi {
-    namespace poiservice {
-        namespace contentAccessModule {
-      typedef ::DBusContentAccessModuleInterface DBusContentAccessModuleInterface;
+    namespace navigation {
+        namespace poiservice {
+            namespace contentAccessModule {
+        typedef ::DBusContentAccessModuleInterface DBusContentAccessModuleInterface;
+            }
         }
     }
   }

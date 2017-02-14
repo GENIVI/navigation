@@ -53,7 +53,7 @@ class DBusSearchInterface: public QDBusAbstractInterface
     Q_OBJECT
 public:
     static inline const char *staticInterfaceName()
-    { return "org.genivi.poiservice.POISearch"; }
+    { return "org.genivi.navigation.poiservice.POISearch"; }
 
 public:
     DBusSearchInterface(const QString &service, const QString &path, const QDBusConnection &connection, QObject *parent = 0);
@@ -199,9 +199,11 @@ private:
 
 namespace org {
   namespace genivi {
-    namespace poiservice {
-        namespace poiSearch {
-      typedef ::DBusSearchInterface DBusSearchInterface;
+    namespace navigation {
+        namespace poiservice {
+            namespace poiSearch {
+        typedef ::DBusSearchInterface DBusSearchInterface;
+            }
         }
     }
   }
