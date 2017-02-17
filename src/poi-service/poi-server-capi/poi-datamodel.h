@@ -39,7 +39,7 @@
 #include <CommonTypes.hpp>
 #include <POIServiceTypes.hpp>
 
-using namespace v4::org::genivi::navigation::poiservice;
+using namespace v2::org::genivi::navigation::poiservice;
 using namespace v4::org::genivi::navigation;
 using namespace v4::org::genivi;
 

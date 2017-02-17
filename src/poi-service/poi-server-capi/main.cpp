@@ -53,7 +53,7 @@
 #include "poi-datamodel.h"
 
 using namespace v4::org::genivi::navigation::navigationcore;
-using namespace v4::org::genivi::navigation::poiservice;
+using namespace v2::org::genivi::navigation::poiservice;
 using namespace v4::org::genivi::navigation;
 using namespace v4::org::genivi;
 
@@ -224,7 +224,7 @@ public:
     /**
      * description: Remove CAM from POI provider module.
      */
-    void unRegisterContentAccessModule(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, unRegisterContentAccessModuleReply_t _reply);
+    void unRegisterContentAccessModule(const std::shared_ptr<CommonAPI::ClientId> _client, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, unRegisterContentAccessModuleReply_t _reply);
 
     /**
      * description: Register to the POI provider module the categories you can search for POI.
@@ -232,7 +232,7 @@ public:
      *   register a customized category, you might need to create it before and add it
      *   to the POI service component.
      */
-    void registerPoiCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, std::vector< ::v4::org::genivi::CommonTypes::CategoryID> _poiCategories, registerPoiCategoriesReply_t _reply);
+    void registerPoiCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, std::vector< ::v4::org::genivi::CommonTypes::CategoryID> _poiCategories, registerPoiCategoriesReply_t _reply);
 
     /**
      * description: Update categories in the POI service component. It could be a predifined or a
@@ -242,21 +242,21 @@ public:
      *   update customized attributes for a category and not the predefined ones so
      *   some update could be rejected.
      */
-    void updateCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::CAMCategoryUpdate> _poiCategories, updateCategoriesReply_t _reply);
+    void updateCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::CAMCategoryUpdate> _poiCategories, updateCategoriesReply_t _reply);
 
     /**
      * description: Add new categories to the POI service component.         The CAM provides for
      *   each categories the name, the parent categories, the top level attribute, the
      *   list of attributes, the icons, ...  .
      */
-    void addCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::CAMCategory> _poiCategories, addCategoriesReply_t _reply);
+    void addCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::CAMCategory> _poiCategories, addCategoriesReply_t _reply);
 
     /**
      * description: Remove categories from the POI service component. It could be a predifined or a
      *   customed one.         Depending on the local database write policy, the CAM
      *   might only not be able to remove some categories.
      */
-    void removeCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, std::vector< ::v4::org::genivi::CommonTypes::CategoryID> _poiCategories, removeCategoriesReply_t _reply);
+    void removeCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, std::vector< ::v4::org::genivi::CommonTypes::CategoryID> _poiCategories, removeCategoriesReply_t _reply);
 
 
 // Specific methods
@@ -371,7 +371,7 @@ public:
     /**
      * description: Get the categories that are marked with the given standard category.
      */
-    void getCategoriesWithStandardCategoryId(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::StandardCategory _standardCategoryId, getCategoriesWithStandardCategoryIdReply_t _reply);
+    void getCategoriesWithStandardCategoryId(const std::shared_ptr<CommonAPI::ClientId> _client, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::StandardCategory _standardCategoryId, getCategoriesWithStandardCategoryIdReply_t _reply);
 
     /**
      * description: This method retrieves the details associated to one or more POI categories.
@@ -407,14 +407,14 @@ public:
      * description: This method sets the POI categories for the current search input and the
      *   corresponding result-lists for the current session .
      */
-    void setCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::CategoryAndRadius> _poiCategories, setCategoriesReply_t _reply);
+    void setCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::CategoryAndRadius> _poiCategories, setCategoriesReply_t _reply);
 
     /**
      * description: This method set POI attributes (optional) for the current search input and the
      *   corresponding result-lists for the current session         An attribute is
      *   attached to a category.
      */
-    void setAttributes(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::AttributeDetails> _poiAttributes, setAttributesReply_t _reply);
+    void setAttributes(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::AttributeDetails> _poiAttributes, setAttributesReply_t _reply);
 
     /**
      * description: This method sends the search input for the search handle.         The search
@@ -422,7 +422,7 @@ public:
      *   positon or route handle were configured, the search will use the vehicle
      *   position are center location.
      */
-    void startPoiSearch(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::string _inputString, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::SortOption _sortOption, startPoiSearchReply_t _reply);
+    void startPoiSearch(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::string _inputString, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::SortOption _sortOption, startPoiSearchReply_t _reply);
 
     /**
      * description: This method cancels the search for the current session.
@@ -436,7 +436,7 @@ public:
      *     If a route handle was defined, it will search along the route with default
      *   categorie's radius.
      */
-    void startPoiProximityAlert(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::string _inputString, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::SortOption _sortOption, startPoiProximityAlertReply_t _reply);
+    void startPoiProximityAlert(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::string _inputString, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::SortOption _sortOption, startPoiProximityAlertReply_t _reply);
 
     /**
      * description: This method cancels the search for the current session.
@@ -446,13 +446,13 @@ public:
     /**
      * description: This method gets the poi result list (e.g. after a Search/Scroll call) .
      */
-    void requestResultList(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, uint16_t _offset, uint16_t _maxWindowSize, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::AttributeID> _attributeList, requestResultListReply_t _reply);
+    void requestResultList(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, uint16_t _offset, uint16_t _maxWindowSize, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::AttributeID> _attributeList, requestResultListReply_t _reply);
     /**
      * description: This method retrieves the details associated to one or more POI.         It
      *   contains the name, the parent categories, the list of attributes, the icons,
      *   ... ..
      */
-    void getPoiDetails(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::POI_ID> _id, getPoiDetailsReply_t _reply);
+    void getPoiDetails(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::POI_ID> _id, getPoiDetailsReply_t _reply);
 
     // Specific methods
 
@@ -637,7 +637,7 @@ void POIContentAccessServerStub::registerContentAccessModule(const std::shared_p
     _reply(m_camId);
 }
 
-void POIContentAccessServerStub::unRegisterContentAccessModule(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, unRegisterContentAccessModuleReply_t _reply)
+void POIContentAccessServerStub::unRegisterContentAccessModule(const std::shared_ptr<CommonAPI::ClientId> _client, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, unRegisterContentAccessModuleReply_t _reply)
 {
     if ((m_camId == INVALID_HANDLE) || (_camId != m_camId))
         // to do send an error message
@@ -653,7 +653,7 @@ void POIContentAccessServerStub::unRegisterContentAccessModule(const std::shared
     }
 }
 
-void POIContentAccessServerStub::registerPoiCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, std::vector< ::v4::org::genivi::CommonTypes::CategoryID> _poiCategories, registerPoiCategoriesReply_t _reply)
+void POIContentAccessServerStub::registerPoiCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, std::vector< ::v4::org::genivi::CommonTypes::CategoryID> _poiCategories, registerPoiCategoriesReply_t _reply)
 {
     std::vector< POIServiceTypes::CategoryAndReason > poiCategoriesAndReason;
     POIServiceTypes::CategoryAndReason categoryAndReason;
@@ -683,7 +683,7 @@ void POIContentAccessServerStub::registerPoiCategories(const std::shared_ptr<Com
     _reply();
 }
 
-void POIContentAccessServerStub::updateCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::CAMCategoryUpdate> _poiCategories, updateCategoriesReply_t _reply)
+void POIContentAccessServerStub::updateCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::CAMCategoryUpdate> _poiCategories, updateCategoriesReply_t _reply)
 {
     if ((m_camId == INVALID_HANDLE) || (_camId != m_camId))
         // to do send an error message
@@ -695,7 +695,7 @@ void POIContentAccessServerStub::updateCategories(const std::shared_ptr<CommonAP
     _reply();
 }
 
-void POIContentAccessServerStub::addCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::CAMCategory> _poiCategories, addCategoriesReply_t _reply)
+void POIContentAccessServerStub::addCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::CAMCategory> _poiCategories, addCategoriesReply_t _reply)
 {
     POIServiceTypes::CAMCategory CAMCategory;
     std::vector<POIServiceTypes::CategoryAttribute> CAMCategoryAttributes;
@@ -743,7 +743,7 @@ void POIContentAccessServerStub::addCategories(const std::shared_ptr<CommonAPI::
     _reply(_poiCategoriesId);
 }
 
-void POIContentAccessServerStub::removeCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, std::vector< ::v4::org::genivi::CommonTypes::CategoryID> _poiCategories, removeCategoriesReply_t _reply)
+void POIContentAccessServerStub::removeCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::ContentAccessModuleID _camId, std::vector< ::v4::org::genivi::CommonTypes::CategoryID> _poiCategories, removeCategoriesReply_t _reply)
 {
     std::vector< POIServiceTypes::CategoryAndReason > poiCategoriesAndReason;
     POIServiceTypes::CategoryAndReason categoryAndReason;
@@ -1443,7 +1443,7 @@ void POISearchServerStub::getCategoriesDetails(const std::shared_ptr<CommonAPI::
     _reply(_results);
 }
 
-void POISearchServerStub::getCategoriesWithStandardCategoryId(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::StandardCategory _standardCategoryId, getCategoriesWithStandardCategoryIdReply_t _reply)
+void POISearchServerStub::getCategoriesWithStandardCategoryId(const std::shared_ptr<CommonAPI::ClientId> _client, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::StandardCategory _standardCategoryId, getCategoriesWithStandardCategoryIdReply_t _reply)
 {
     std::vector< CommonTypes::CategoryID > _categories;
     _reply(_categories);
@@ -1560,7 +1560,7 @@ void POISearchServerStub::setRouteHandle(const std::shared_ptr<CommonAPI::Client
     _reply();
 }
 
-void POISearchServerStub::setCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::CategoryAndRadius> _poiCategories, setCategoriesReply_t _reply)
+void POISearchServerStub::setCategories(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::CategoryAndRadius> _poiCategories, setCategoriesReply_t _reply)
 {
     size_t index;
     CommonTypes::CategoryID category_index;
@@ -1605,7 +1605,7 @@ void POISearchServerStub::setCategories(const std::shared_ptr<CommonAPI::ClientI
     _reply();
 }
 
-void POISearchServerStub::setAttributes(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::AttributeDetails> _poiAttributes, setAttributesReply_t _reply)
+void POISearchServerStub::setAttributes(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::AttributeDetails> _poiAttributes, setAttributesReply_t _reply)
 {
     POIServiceTypes::AttributeDetails attributeDetails;
     size_t index,sub_index;
@@ -1654,7 +1654,7 @@ void POISearchServerStub::setAttributes(const std::shared_ptr<CommonAPI::ClientI
     _reply();
 }
 
-void POISearchServerStub::startPoiSearch(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::string _inputString, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::SortOption _sortOption, startPoiSearchReply_t _reply)
+void POISearchServerStub::startPoiSearch(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::string _inputString, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::SortOption _sortOption, startPoiSearchReply_t _reply)
 {
 
     if ((m_poiSearchHandle == INVALID_HANDLE) || (_poiSearchHandle != m_poiSearchHandle))
@@ -1697,7 +1697,7 @@ void POISearchServerStub::cancelPoiSearch(const std::shared_ptr<CommonAPI::Clien
     _reply();
 }
 
-void POISearchServerStub::startPoiProximityAlert(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::string _inputString, ::v4::org::genivi::navigation::poiservice::POIServiceTypes::SortOption _sortOption, startPoiProximityAlertReply_t _reply)
+void POISearchServerStub::startPoiProximityAlert(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, std::string _inputString, ::v2::org::genivi::navigation::poiservice::POIServiceTypes::SortOption _sortOption, startPoiProximityAlertReply_t _reply)
 {
     if ((m_poiSearchHandle == INVALID_HANDLE) || (_poiSearchHandle != m_poiSearchHandle))
         // to do send an error message
@@ -1731,7 +1731,7 @@ void POISearchServerStub::cancelPoiProximityAlert(const std::shared_ptr<CommonAP
     _reply();
 }
 
-void POISearchServerStub::requestResultList(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, uint16_t _offset, uint16_t _maxWindowSize, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::AttributeID> _attributeList, requestResultListReply_t _reply)
+void POISearchServerStub::requestResultList(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _poiSearchHandle, uint16_t _offset, uint16_t _maxWindowSize, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::AttributeID> _attributeList, requestResultListReply_t _reply)
 {
     POIServiceTypes::SearchStatusState _statusValue;
     uint16_t _resultListSize;
@@ -1941,7 +1941,7 @@ void POISearchServerStub::requestResultList(const std::shared_ptr<CommonAPI::Cli
     _reply(_statusValue,_resultListSize,_resultListWindow);
 }
 
-void POISearchServerStub::getPoiDetails(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< ::v4::org::genivi::navigation::poiservice::POIServiceTypes::POI_ID> _id, getPoiDetailsReply_t _reply)
+void POISearchServerStub::getPoiDetails(const std::shared_ptr<CommonAPI::ClientId> _client, std::vector< ::v2::org::genivi::navigation::poiservice::POIServiceTypes::POI_ID> _id, getPoiDetailsReply_t _reply)
 {
     std::vector< POIServiceTypes::SearchResultDetails> _results;
     POIServiceTypes::SearchResultDetails searchResDetails;
