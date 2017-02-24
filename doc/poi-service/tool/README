@@ -4,7 +4,15 @@ How to generate the component specification
 
 Download Franca2IDL.jar and Franca2IDLFilter.sh from
 https://drive.google.com/open?id=0B7JseVbR6jvhfjNoSnMyc19HV2lGZW1Jay1lUVZ5YU9qN1NBZTZnRGg2emxZS2ZCQWU5VWM
-, copy them in the folder /usr/local/bin and allow executing these files as programs.
+
+NB: For some reason the relative path in Franca2IDLFilter.sh doesn't work, so it's needed to change it to an absolute path
+
+copy them in the folder /usr/local/bin and allow executing these files as programs.
+
+Generate the pdf file from the xxx-part1.docx
 
 Run the script generate_doc.sh
+
+NB: For some reason it's necessary to run it under sudo (don't miss to manage proxy if needed because it gets something on the Internet)
+
 
