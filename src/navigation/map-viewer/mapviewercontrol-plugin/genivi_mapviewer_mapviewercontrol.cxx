@@ -30,7 +30,6 @@
 
 #if LM
 #include <ilm/ilm_client.h>
-#include <ilm/ilm_client.h>
 #include <ilm/ilm_control.h>
 //Align with Qt Surfaces = 8000 + Layer.
 #ifndef FSA_SURFACE
@@ -1431,7 +1430,6 @@ MapViewerControlObj::ConvertGeoCoordsToPixelCoords(uint32_t sessionHandle, const
 static void callbackFunction(ilmObjectType object, t_ilm_uint surfaceId, t_ilm_bool created, void *user_data)
 {
     (void)user_data;
-    struct ilmSurfaceProperties sp;
 
     t_ilm_int pLength = 0;
     t_ilm_layer* ppArray = NULL;
@@ -1441,53 +1439,27 @@ static void callbackFunction(ilmObjectType object, t_ilm_uint surfaceId, t_ilm_b
     if (object == ILM_SURFACE) {
         if (created) {
             if (surfaceId == FSA_SURFACE) {
-                //Configure map surface
-                if (ilm_getPropertiesOfSurface(surfaceId, &sp) != ILM_SUCCESS) {
-                    dbg(lvl_error,"error on ilm_getPropertiesOfSurface\n");
+
+                //Timing issue for creation - Need to add tempo
+                sleep(1);
+
+                //Grab all the layers - HMI will be pLength-2 and FSA pLength-1
+                if (ilm_getLayerIDs(&pLength, &ppArray)  != ILM_SUCCESS) {
+                    fprintf(stderr, "error on ilm_getLayerIDs\n");
                 }
 
-                if (ilm_surfaceSetSourceRectangle(surfaceId, 0, 0, sp.origSourceWidth, sp.origSourceHeight)  != ILM_SUCCESS) {
-                    dbg(lvl_error,"error on ilm_surfaceSetSourceRectangle\n");
-                }
-
-                //RenderOrder with the hmi-launcher Qt surface
-                /*
-                 * ilm_getLayerIDsOnScreen will give the layer attached
-                 * to the hmi-launcher Qt surface following hmi-launcher Qt surface
-                 */
-                if (ilm_getLayerIDsOnScreen(0, &pLength, &ppArray)  != ILM_SUCCESS) {
-                    dbg(lvl_error, "error on ilm_getLayerIDsOnScreen\n");
-                }
-
-                /* The last one is the hmi-launcher layer and thus surface.
-                 * Then hmi-launcher surface toped the map surface into the hmi-launcher layer.
-                 */
-                renderOrder[1] = SURFACE_OFFSET + ppArray[pLength - 1];
+                renderOrder[1] = SURFACE_OFFSET + ppArray[pLength - 2];
                 renderOrder[0] = FSA_SURFACE;
 
                 if (ilm_layerSetRenderOrder(ppArray[pLength - 1],renderOrder,2) != ILM_SUCCESS) {
-                    dbg(lvl_error,"error on ilm_layerSetRenderOrder\n");
-                }
-
-                //Put the map at the same resolution as the hmi-launcher
-                if (ilm_getPropertiesOfSurface(SURFACE_OFFSET + ppArray[pLength - 1], &pSurfaceProperties) != ILM_SUCCESS) {
-                    dbg(lvl_error,"error on ilm_getPropertiesOfSurface\n");
-                }
-
-                if (ilm_surfaceSetDestinationRectangle(surfaceId, pSurfaceProperties.destX, pSurfaceProperties.destY,
-                                                                  pSurfaceProperties.destWidth, pSurfaceProperties.destHeight) != ILM_SUCCESS) {
-                    dbg(lvl_error,"error on ilm_surfaceSetDestinationRectangle\n");
-                }
-
-                if (ilm_surfaceSetVisibility(surfaceId, ILM_TRUE) != ILM_SUCCESS) {
-                    dbg(lvl_error,"error on ilm_surfaceSetVisibility\n");
+                    fprintf(stderr,"error on ilm_layerSetRenderOrder\n");
                 }
 
                 if (ilm_commitChanges() != ILM_SUCCESS) {
-                    dbg(lvl_error,"error on ilm_commitChanges\n");
+                    fprintf(stderr,"error on ilm_commitChanges\n");
                 }
             }
-        }
+	}
     }
 }
 #endif
@@ -1575,7 +1547,7 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
     t_ilm_nativedisplay display = (t_ilm_nativedisplay)graphics_get_data(m_graphics.u.graphics, "display");
 
     if (ilmClient_init(display) != ILM_SUCCESS) {
-        dbg(lvl_error, "error on ilm_initWidthNativeDisplay\n");
+        fprintf(stderr, "error on ilm_initWidthNativeDisplay\n");
     }
 
     t_ilm_nativehandle nativehandle=(t_ilm_nativehandle)graphics_get_data(m_graphics.u.graphics,"xwindow_id");
@@ -1583,17 +1555,17 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
 
     //Register Notification
     if (ilm_registerNotification(callbackFunction, NULL)  != ILM_SUCCESS) {
-        dbg(lvl_error,"error on ilm_registerNotification\n");
+        fprintf(stderr,"error on ilm_registerNotification\n");
     }
 
-    //Create surface for the map and add notification when created
+    //Create surface for the map and add notification when created. Note: width, heigh & pixel format are not taking in count at the end.
     if (ilm_surfaceCreate(nativehandle, MapViewSize._1, MapViewSize._2, ILM_PIXELFORMAT_RGBA_8888, &surfaceId) != ILM_SUCCESS) {
-        dbg(lvl_error,"error on ilm_surfaceCreate\n");
+        fprintf(stderr,"error on ilm_surfaceCreate\n");
     }
 
     //Commit all changes
     if (ilm_commitChanges() != ILM_SUCCESS) {
-        dbg(lvl_error,"error on ilm_commitChanges\n");
+        fprintf(stderr,"error on ilm_commitChanges\n");
     }
 #endif
 
@@ -1605,11 +1577,11 @@ MapViewerControlObj::~MapViewerControlObj()
     t_ilm_surface surfaceId=FSA_SURFACE;
 
     if (ilm_surfaceRemove(surfaceId) != ILM_SUCCESS) {
-        dbg(lvl_error,"error on ilm_surfaceRemove\n");
+        fprintf(stderr,"error on ilm_surfaceRemove\n");
     }
 
     if (ilm_commitChanges() != ILM_SUCCESS) {
-        dbg(lvl_error,"error on ilm_commitChanges\n");
+        fprintf(stderr,"error on ilm_commitChanges\n");
     }
 #endif
 
@@ -1784,7 +1756,7 @@ plugin_init(void)
 
 #if LM
     if (ilm_init() != ILM_SUCCESS) {
-        dbg(lvl_error,"error on ilm_init\n");
+        fprintf(stderr,"error on ilm_init\n");
     }
 #endif
 }

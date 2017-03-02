@@ -32,6 +32,11 @@ import gobject
 import dbus.mainloop.glib
 import time
 from dltTrigger import *
+from xml.dom.minidom import parse
+import xml.dom.minidom
+import argparse
+import sys
+import errno
 #import pdb; pdb.set_trace()
 
 #name of the test 
@@ -50,6 +55,15 @@ VERTICAL_SIZE = 480
 TIME_OUT = 20000
 MIN_SCALE = 0
 MAX_SCALE = 21
+
+# List of coordinates
+LATITUDE = list()
+LONGITUDE = list()
+ALTITUDE = list()
+COUNTRY_STRING = list()
+CITY_STRING = list()
+STREET_STRING = list()
+HOUSE_NUMBER_STRING = list()
 
 def mapviewer_mapViewScaleChanged_handler(mapViewInstanceHandle,scale,isMinMax):
     global g_scale
@@ -94,6 +108,36 @@ print '\n--------------------------'
 print 'MapViewerControl Test'
 print '--------------------------\n'
 
+parser = argparse.ArgumentParser(description='Map Viewer Test for navigation PoC and FSA.')
+parser.add_argument('-l','--loc',action='store', dest='locations', help='List of locations in xml format')
+parser.add_argument("-v", "--verbose", action='store_true',help='print the whole log messages')
+args = parser.parse_args()
+
+if args.locations == None:
+    print('location file is missing')
+    sys.exit(1)
+else:
+    try:
+        DOMTree = xml.dom.minidom.parse(args.locations)
+    except OSError as e:
+        if e.errno == errno.ENOENT:
+            print('file not exists')
+        sys.exit(1)
+    location_set = DOMTree.documentElement
+            
+print("Area : %s" % location_set.getAttribute("area"))
+
+locations = location_set.getElementsByTagName("location")
+
+for location in location_set.getElementsByTagName("location"):
+    LATITUDE.append(location.getElementsByTagName("latitude")[0].childNodes[0].data)
+    LONGITUDE.append(location.getElementsByTagName("longitude")[0].childNodes[0].data)
+    ALTITUDE.append(0)
+    COUNTRY_STRING.append(location.getElementsByTagName("country")[0].childNodes[0].data)
+    CITY_STRING.append(location.getElementsByTagName("city")[0].childNodes[0].data)
+    STREET_STRING.append(location.getElementsByTagName("street")[0].childNodes[0].data)
+    HOUSE_NUMBER_STRING.append(location.getElementsByTagName("number")[0].childNodes[0].data)
+
 if __name__ == '__main__':
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True) 
 
@@ -134,10 +178,11 @@ mapviewerhandle=ret[1]
 
 print 'MapView handle: ' + str(mapviewerhandle)
 
-# Bern
-lat1 = 46.9479
-lon1 = 7.4446
-alt1 = 0
+index=0
+
+lat1 = LATITUDE[index]
+lon1 = LONGITUDE[index]
+alt1 = ALTITUDE[index]
 
 time.sleep(2)
 
@@ -147,7 +192,7 @@ MapViewerControl_interface.SetFollowCarMode( \
     dbus.UInt32(mapviewerhandle), \
     dbus.Boolean(False))
 
-print 'Set center in Bern(' + str(lat1) + ',' + str(lon1) + ')' 
+print 'Set center in '+ CITY_STRING[index]+ ' (' + str(lat1) + ',' + str(lon1) + ')' 
 MapViewerControl_interface.SetTargetPoint( \
     dbus.UInt32(sessionhandle), \
     dbus.UInt32(mapviewerhandle), \
@@ -163,13 +208,13 @@ alt2 = targetPoint[2]
 
 print 'Get center -> (' + str(lat2) + ',' + str(lon2) + ')'  
 
-if round(lat1,4) != round(lat2,4) :
+if round(float(lat1),4) != round(float(lat2),4) :
     print '\nTest Failed:' + str(round(lat1,4)) + '!=' + str(round(lat2,4))  + '\n' 
 
-if round(lon1,4) != round(lon2,4) :
+if round(float(lon1),4) != round(float(lon2),4) :
     print '\nTest Failed:' + str(round(lon1,4)) + '!=' + str(round(lon2,4))  + '\n' 
 
-if round(alt1,4) != round(alt2,4) :
+if round(float(alt1),4) != round(float(alt2),4) :
     print '\nTest Failed:' + str(round(alt1,4)) + '!=' + str(round(alt2,4))  + '\n'
 
 ret=MapViewerControl_interface.GetMapViewScale(dbus.UInt32(mapviewerhandle))

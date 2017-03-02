@@ -8,4 +8,4 @@ sleep 2
 sleep 2
 ./test-guidance.py -r route.xml
 sleep 2
-./test-map-viewer-control.py
+./test-map-viewer-control.py -l location.xml

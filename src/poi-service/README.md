@@ -28,6 +28,25 @@ or to build updated parts
 ## How To Run
 ```./bin/poi-server  -f ./resource/poi-database-sample.db```
 
+## How To Test
+```./run &```
+```../../test/poi-service/test-poi.py```
+If everything is OK, you must see:
+Search for hotel and station with keyword: Saint-Germain
+Category ID: 2
+Name: hotel
+Category ID: 6
+Name: station
+Search handle: 1
+language: fra
+country: FRA
+script: Latn
+Search finished
+Results: 2
+Hotel: Au Manoir Saint-Germain des Prés
+Station: Saint-Germain des Prés
+Test PASSED
+
 ## How to for the CommonAPI based version
 
 ## Prerequisites

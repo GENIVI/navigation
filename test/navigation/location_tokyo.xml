@@ -1,0 +1,10 @@
+<location-set area="Tokyo">
+<location> 
+<latitude>35.660111</latitude>
+<longitude>139.699535</longitude>
+<country>Japan</country>
+<city>東京</city>
+<street>井ノ頭通り</street>
+<number>17</number>
+</location>
+</location-set>

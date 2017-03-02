@@ -40,17 +40,23 @@ sudo apt-get install python-pip python-dbus python-gobject python-pil
 sudo pip install --upgrade pip
 
 To test, launch the navigation middleware by entering:
-./run -r
-'bug safe' test files (can be launched several times):
-./test-location-input.py -l location.xml
-./test-route-calculation.py -r route.xml
-'bug to be fixed' test files (can be launched only one time):
-./test-guidance.py -r route.xml
-./test-map-viewer-control.py
+../../src/navigation/run -r
+and the test batch:
+./test-all
 
 If everything is OK, you must see:
 
 Test PASSED
+
+### How to test for Tokyo area (draft)
+It's also possible to launch test for Japan. 
+Before testing it's necessary to get the map by picking it from this site:
+http://maps9.navit-project.org/api/map/?bbox=139.1,35.5,140.4,36.0&timestamp=170217
+Rename the file to tokyo.bin, copy it to ./map and do ./build.sh -c
+To test, launch the navigation middleware by entering:
+../../src/navigation/run -r -c tokyo
+and the test batch:
+./test-all_tokyo
 
 ##Directory Structure
 
