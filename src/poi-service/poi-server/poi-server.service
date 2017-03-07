@@ -1,0 +1,15 @@
+#
+# poi-server fsa systemd service unit file
+#
+
+[Unit]
+Description=POI Server for FSA configuration file
+Requires=dbus.service
+After=dbus.service
+
+[Service]
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/0/dbus/user_bus_socket
+ExecStart=/usr/bin/poi-server -f /usr/share/navigation-service/empty.db
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,18 @@
+
+[Unit]
+Description=Navit (Mapviewer part) Service for FSA configuration file
+Requires=dbus.service enhanced-position-service.service hmi-launcher_fsa.service
+After=enhanced-position-service_fsa.service hmi-launcher_fsa.service
+
+[Service]
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/0/dbus/user_bus_socket
+
+Environment=NAVIT_LIBDIR=/usr/lib/navit
+Environment=NAVIT_PLATFORM=wayland
+Environment=NAVIT_GRAPHICS=opengl
+
+Environment=LD_PRELOAD=/usr/lib/libEGL.so
+ExecStart=/usr/bin/navit /usr/share/navigation-service/navit_genivi_mapviewer.xml
+
+[Install]
+WantedBy=default.target
