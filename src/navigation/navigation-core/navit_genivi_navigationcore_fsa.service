@@ -1,7 +1,3 @@
-#
-# navit_genivi_navigationcore fsa systemd service unit file
-#
-
 [Unit]
 Description=Navit (Navigationcore part) Service for FSA configuration file
 Requires=dbus.service enhanced-position-service.service

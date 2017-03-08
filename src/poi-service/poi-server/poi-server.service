@@ -1,7 +1,3 @@
-#
-# poi-server fsa systemd service unit file
-#
-
 [Unit]
 Description=POI Server for FSA configuration file
 Requires=dbus.service

@@ -1440,7 +1440,7 @@ static void callbackFunction(ilmObjectType object, t_ilm_uint surfaceId, t_ilm_b
         if (created) {
             if (surfaceId == FSA_SURFACE) {
 
-                //Timing issue for creation - Need to add tempo
+                //FIXIT: Need to add tempo
                 sleep(1);
 
                 //Grab all the layers - HMI will be pLength-2 and FSA pLength-1
@@ -1448,8 +1448,21 @@ static void callbackFunction(ilmObjectType object, t_ilm_uint surfaceId, t_ilm_b
                     fprintf(stderr, "error on ilm_getLayerIDs\n");
                 }
 
-                renderOrder[1] = SURFACE_OFFSET + ppArray[pLength - 2];
+		//FIXIT: Since we don't know thep id of hmi_launcher and order of start.
+                //Guess it is teh last one or the one before navit mapviewer PID.
                 renderOrder[0] = FSA_SURFACE;
+                if (ppArray[pLength - 2] != FSA_SURFACE)
+                    renderOrder[1] = SURFACE_OFFSET + ppArray[pLength - 2];
+                    if (ilm_layerSetRenderOrder(ppArray[pLength - 2],renderOrder,2) != ILM_SUCCESS) {
+                        fprintf(stderr,"error on ilm_layerSetRenderOrder\n");
+                    }
+                else if (ppArray[pLength - 1] != FSA_SURFACE)
+                    renderOrder[1] = SURFACE_OFFSET + ppArray[pLength - 1];
+                    if (ilm_layerSetRenderOrder(ppArray[pLength - 1],renderOrder,2) != ILM_SUCCESS) {
+                        fprintf(stderr,"error on ilm_layerSetRenderOrder\n");
+                    }
+                else
+                     fprintf(stderr,"error on render order guess\n");
 
                 if (ilm_layerSetRenderOrder(ppArray[pLength - 1],renderOrder,2) != ILM_SUCCESS) {
                     fprintf(stderr,"error on ilm_layerSetRenderOrder\n");
