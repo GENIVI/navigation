@@ -70,6 +70,9 @@
 #define dbg(level,...) ;
 #endif
 
+#define ZOOM_ZERO_METER_WIDTH 33250 //width in millimeter of the real area for the minimum zoom
+#define ZOOM_ZERO_METER_HEIGHT 21970 //height in millimeter of the real area for the minimum zoom
+
 using namespace v4::org::genivi::navigation::mapviewer;
 using namespace v4::org::genivi::navigation::navigationcore;
 using namespace v4::org::genivi::navigation;
@@ -124,6 +127,8 @@ class MapViewerControlObj
 	std::vector<DisplayedRoute *> m_displayed_routes;
     struct point m_pan;
 	int m_pan_action;
+    uint16_t m_width;
+    uint16_t m_height;
 
 	void MoveMap(void);
     void SetFollowCarMode(NavigationTypes::Handle SessionHandle, bool active);
@@ -1100,7 +1105,89 @@ MapViewerControlObj::GetMapViewPerspective(MapViewerControl::MapPerspective& Map
 void
 MapViewerControlObj::GetScaleList(std::vector<MapViewerControl::MapScale> &ScalesList)
 {
-	throw DBus::ErrorNotSupported("Not yet supported");
+    MapViewerControl::MapScale scale;
+    uint32_t basisPixel = ZOOM_ZERO_METER_WIDTH/m_width;
+
+    scale.setScaleId(0);
+    scale.setScaleValue(2);
+    scale.setUnit(MapViewerControl::MapScaleUnit::METER);
+    scale.setMillimetersPerPixel(basisPixel);
+    ScalesList.push_back(scale);
+    scale.setScaleId(1);
+    scale.setScaleValue(5);
+    scale.setUnit(MapViewerControl::MapScaleUnit::METER);
+    scale.setMillimetersPerPixel(basisPixel<<1);
+    ScalesList.push_back(scale);
+    scale.setScaleId(2);
+    scale.setScaleValue(10);
+    scale.setUnit(MapViewerControl::MapScaleUnit::METER);
+    scale.setMillimetersPerPixel(basisPixel<<2);
+    ScalesList.push_back(scale);
+    scale.setScaleId(3);
+    scale.setScaleValue(20);
+    scale.setUnit(MapViewerControl::MapScaleUnit::METER);
+    scale.setMillimetersPerPixel(basisPixel<<3);
+    ScalesList.push_back(scale);
+    scale.setScaleId(4);
+    scale.setScaleValue(50);
+    scale.setUnit(MapViewerControl::MapScaleUnit::METER);
+    scale.setMillimetersPerPixel(basisPixel<<4);
+    ScalesList.push_back(scale);
+    scale.setScaleId(5);
+    scale.setScaleValue(100);
+    scale.setUnit(MapViewerControl::MapScaleUnit::METER);
+    scale.setMillimetersPerPixel(basisPixel<<5);
+    ScalesList.push_back(scale);
+    scale.setScaleId(6);
+    scale.setScaleValue(200);
+    scale.setUnit(MapViewerControl::MapScaleUnit::METER);
+    scale.setMillimetersPerPixel(basisPixel<<6);
+    ScalesList.push_back(scale);
+    scale.setScaleId(7);
+    scale.setScaleValue(500);
+    scale.setUnit(MapViewerControl::MapScaleUnit::METER);
+    scale.setMillimetersPerPixel(basisPixel<<7);
+    ScalesList.push_back(scale);
+    scale.setScaleId(8);
+    scale.setScaleValue(1);
+    scale.setUnit(MapViewerControl::MapScaleUnit::KM);
+    scale.setMillimetersPerPixel(basisPixel<<8);
+    ScalesList.push_back(scale);
+    scale.setScaleId(9);
+    scale.setScaleValue(2);
+    scale.setUnit(MapViewerControl::MapScaleUnit::KM);
+    scale.setMillimetersPerPixel(basisPixel<<9);
+    ScalesList.push_back(scale);
+    scale.setScaleId(10);
+    scale.setScaleValue(5);
+    scale.setUnit(MapViewerControl::MapScaleUnit::KM);
+    scale.setMillimetersPerPixel(basisPixel<<10);
+    ScalesList.push_back(scale);
+    scale.setScaleId(11);
+    scale.setScaleValue(10);
+    scale.setUnit(MapViewerControl::MapScaleUnit::KM);
+    scale.setMillimetersPerPixel(basisPixel<<11);
+    ScalesList.push_back(scale);
+    scale.setScaleId(12);
+    scale.setScaleValue(20);
+    scale.setUnit(MapViewerControl::MapScaleUnit::KM);
+    scale.setMillimetersPerPixel(basisPixel<<12);
+    ScalesList.push_back(scale);
+    scale.setScaleId(13);
+    scale.setScaleValue(50);
+    scale.setUnit(MapViewerControl::MapScaleUnit::KM);
+    scale.setMillimetersPerPixel(basisPixel<<13);
+    ScalesList.push_back(scale);
+    scale.setScaleId(14);
+    scale.setScaleValue(100);
+    scale.setUnit(MapViewerControl::MapScaleUnit::KM);
+    scale.setMillimetersPerPixel(basisPixel<<14);
+    ScalesList.push_back(scale);
+    scale.setScaleId(15);
+    scale.setScaleValue(200);
+    scale.setUnit(MapViewerControl::MapScaleUnit::KM);
+    scale.setMillimetersPerPixel(basisPixel<<15);
+    ScalesList.push_back(scale);
 }
 
 void

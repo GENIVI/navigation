@@ -79,6 +79,9 @@ enum {
     CONNECTION_AMOUNT
 };
 
+#define ZOOM_ZERO_METER_WIDTH 33250 //width in millimeter of the real area for the minimum zoom
+#define ZOOM_ZERO_METER_HEIGHT 21970 //height in millimeter of the real area for the minimum zoom
+
 static DBus::Glib::BusDispatcher dispatchers[CONNECTION_AMOUNT];
 static DBus::Connection *conns[CONNECTION_AMOUNT];
 static uint32_t navigationcore_session=-1;
@@ -129,6 +132,9 @@ class MapViewerControlObj
 	Routing *m_routing;
 	struct point m_pan;
 	int m_pan_action;
+    uint16_t m_width;
+    uint16_t m_height;
+
 	void MoveMap(void);
     void SetFollowCarMode(uint32_t SessionHandle, bool active);
     void GetFollowCarMode(bool& active);
@@ -962,7 +968,89 @@ MapViewerControlObj::GetMapViewPerspective(uint16_t& MapViewPerspectiveMode)
 void
 MapViewerControlObj::GetScaleList(std::vector< ::DBus::Struct< uint16_t, uint16_t, DBusCommonAPIEnumeration, uint32_t > >& ScalesList)
 {
-	throw DBus::ErrorNotSupported("Not yet supported");
+    ::DBus::Struct< uint16_t, uint16_t, DBusCommonAPIEnumeration, uint32_t > scale;
+    uint32_t basisPixel = ZOOM_ZERO_METER_WIDTH/m_width;
+
+    scale._1=0;
+    scale._2=2;
+    scale._3=GENIVI_MAPVIEWER_METER;
+    scale._4=basisPixel;
+    ScalesList.push_back(scale);
+    scale._1=1;
+    scale._2=5;
+    scale._3=GENIVI_MAPVIEWER_METER;
+    scale._4=basisPixel<<1;
+    ScalesList.push_back(scale);
+    scale._1=2;
+    scale._2=10;
+    scale._3=GENIVI_MAPVIEWER_METER;
+    scale._4=basisPixel<<2;
+    ScalesList.push_back(scale);
+    scale._1=3;
+    scale._2=20;
+    scale._3=GENIVI_MAPVIEWER_METER;
+    scale._4=basisPixel<<3;
+    ScalesList.push_back(scale);
+    scale._1=4;
+    scale._2=50;
+    scale._3=GENIVI_MAPVIEWER_METER;
+    scale._4=basisPixel<<4;
+    ScalesList.push_back(scale);
+    scale._1=5;
+    scale._2=100;
+    scale._3=GENIVI_MAPVIEWER_METER;
+    scale._4=basisPixel<<5;
+    ScalesList.push_back(scale);
+    scale._1=6;
+    scale._2=200;
+    scale._3=GENIVI_MAPVIEWER_METER;
+    scale._4=basisPixel<<6;
+    ScalesList.push_back(scale);
+    scale._1=7;
+    scale._2=500;
+    scale._3=GENIVI_MAPVIEWER_METER;
+    scale._4=basisPixel<<7;
+    ScalesList.push_back(scale);
+    scale._1=8;
+    scale._2=1;
+    scale._3=GENIVI_MAPVIEWER_KM;
+    scale._4=basisPixel<<8;
+    ScalesList.push_back(scale);
+    scale._1=9;
+    scale._2=2;
+    scale._3=GENIVI_MAPVIEWER_KM;
+    scale._4=basisPixel<<9;
+    ScalesList.push_back(scale);
+    scale._1=10;
+    scale._2=5;
+    scale._3=GENIVI_MAPVIEWER_KM;
+    scale._4=basisPixel<<10;
+    ScalesList.push_back(scale);
+    scale._1=11;
+    scale._2=10;
+    scale._3=GENIVI_MAPVIEWER_KM;
+    scale._4=basisPixel<<11;
+    ScalesList.push_back(scale);
+    scale._1=12;
+    scale._2=20;
+    scale._3=GENIVI_MAPVIEWER_KM;
+    scale._4=basisPixel<<12;
+    ScalesList.push_back(scale);
+    scale._1=13;
+    scale._2=50;
+    scale._3=GENIVI_MAPVIEWER_KM;
+    scale._4=basisPixel<<13;
+    ScalesList.push_back(scale);
+    scale._1=14;
+    scale._2=100;
+    scale._3=GENIVI_MAPVIEWER_KM;
+    scale._4=basisPixel<<14;
+    ScalesList.push_back(scale);
+    scale._1=15;
+    scale._2=200;
+    scale._3=GENIVI_MAPVIEWER_KM;
+    scale._4=basisPixel<<15;
+    ScalesList.push_back(scale);
 }
 
 void
@@ -1555,6 +1643,10 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
 	sel.u.p_rect.rl.x=MapViewSize._1;
 	sel.u.p_rect.rl.y=MapViewSize._2;
 	transform_set_screen_selection(trans, &sel);
+
+    m_width=MapViewSize._1;
+    m_height=MapViewSize._2;
+
 
 #if LM
     t_ilm_nativedisplay display = (t_ilm_nativedisplay)graphics_get_data(m_graphics.u.graphics, "display");
