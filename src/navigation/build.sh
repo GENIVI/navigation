@@ -109,6 +109,9 @@ then
 		sed -i -e 's/(const TimeStampedEnum::/(const ::v4::org::genivi::navigation::navigationcore::NavigationCoreTypes::TimeStampedEnum::/' ./franca/src-gen/v4/org/genivi/navigation/navigationcore/LocationInput.hpp
 		sed -i -e 's/(const TimeStampedEnum::/(const ::v4::org::genivi::navigation::navigationcore::NavigationCoreTypes::TimeStampedEnum::/' ./franca/src-gen/v4/org/genivi/navigation/navigationcore/MapMatchedPosition.hpp
 	fi
+	echo 'replace a missing font in the configuration file of navit instances'
+	sed -i -e 's/Liberation Sans/TakaoPGothic/' ./navit/navit/navit_genivi_mapviewer.xml
+	sed -i -e 's/Liberation Sans/TakaoPGothic/' ./navit/navit/navit_genivi_navigationcore.xml
 fi
 make
 cd ..
