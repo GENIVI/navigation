@@ -35,20 +35,20 @@
 #include "genivi-speechservice-speechoutput_proxy.h"
 #endif
 
-#include "config.h"
+#include <config.h>
 #define USE_PLUGINS 1
-#include "debug.h"
-#include "plugin.h"
-#include "item.h"
-#include "config_.h"
-#include "navit.h"
-#include "callback.h"
-#include "navigation.h"
-#include "map.h"
-#include "transform.h"
-#include "track.h"
-#include "vehicle.h"
-#include "route.h"
+#include <navit/debug.h>
+#include <navit/plugin.h>
+#include <navit/item.h>
+#include <navit/config_.h>
+#include <navit/navit.h>
+#include <navit/callback.h>
+#include <navit/navigation.h>
+#include <navit/map.h>
+#include <navit/transform.h>
+#include <navit/track.h>
+#include <navit/vehicle.h>
+#include <navit/route.h>
 
 #include "navigation-common-dbus.h"
 

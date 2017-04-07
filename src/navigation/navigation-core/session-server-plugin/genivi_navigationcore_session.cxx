@@ -26,11 +26,11 @@
 * @licence end@
 */
 #include <dbus-c++/glib-integration.h>
-#include "config.h"
+#include <config.h>
 #define USE_PLUGINS 1
-#include "debug.h"
-#include "plugin.h"
-#include "event.h"
+#include <navit/debug.h>
+#include <navit/plugin.h>
+#include <navit/event.h>
 
 #include <CommonAPI/CommonAPI.hpp>
 #include <CommonTypes.hpp>

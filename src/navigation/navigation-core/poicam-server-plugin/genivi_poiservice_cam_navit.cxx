@@ -27,20 +27,21 @@
 * @licence end@
 */
 #include <dbus-c++/glib-integration.h>
-#include "config.h"
+#include <config.h>
 #define USE_PLUGINS 1
-#include "debug.h"
-#include "plugin.h"
-#include "item.h"
-#include "config_.h"
-#include "navit.h"
-#include "search.h"
-#include "callback.h"
-#include "event.h"
-#include "coord.h"
-#include "transform.h"
-#include "map.h"
-#include "mapset.h"
+#include <navit/debug.h>
+#include <navit/plugin.h>
+#include <navit/item.h>
+#include <navit/config_.h>
+#include <navit/navit.h>
+#include <navit/search.h>
+#include <navit/callback.h>
+#include <navit/event.h>
+#include <navit/coord.h>
+#include <navit/transform.h>
+#include <navit/map.h>
+#include <navit/mapset.h>
+
 #include <algorithm>
 #include <unistd.h>
 

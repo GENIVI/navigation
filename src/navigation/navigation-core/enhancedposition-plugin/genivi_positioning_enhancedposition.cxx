@@ -33,15 +33,15 @@
 #include <assert.h>
 #include <math.h>
 #define USE_PLUGINS 1
-#include "debug.h"
-#include "item.h"
-#include "navit.h"
-#include "map.h"
-#include "callback.h"
-#include "transform.h"
-#include "plugin.h"
-#include "event.h"
-#include "vehicle.h"
+#include <navit/debug.h>
+#include <navit/item.h>
+#include <navit/navit.h>
+#include <navit/map.h>
+#include <navit/callback.h>
+#include <navit/transform.h>
+#include <navit/plugin.h>
+#include <navit/event.h>
+#include <navit/vehicle.h>
 
 #include "time.h"
 

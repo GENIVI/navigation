@@ -32,9 +32,8 @@ include_directories(${DBUS_CPP_GLIB_INCLUDE_DIRS})
 
 include(${PRELOAD_CACHE_FOR_PLUGINS})
 
-include_directories(${INCLUDE_DIRECTORIES})
+include_directories(${NAVIT_DIR})
 include_directories(.)
-include_directories(${navit_SOURCE_DIR}/navit)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 include_directories(${NAVIT_CONFIG_H_DIR}) # this one contains config.h that is generated

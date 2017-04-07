@@ -37,25 +37,25 @@
 #endif
 #endif
 
-#include "config.h"
+#include <config.h>
 #define USE_PLUGINS 1
-#include "debug.h"
-#include "plugin.h"
-#include "item.h"
-#include "config_.h"
-#include "navit.h"
-#include "event.h"
-#include "point.h"
-#include "graphics.h"
-#include "coord.h"
-#include "transform.h"
-#include "map.h"
-#include "mapset.h"
-#include "callback.h"
-#include "vehicle.h"
-#include "attr.h"
-#include "xmlconfig.h"
-#include "layout.h"
+#include <navit/debug.h>
+#include <navit/plugin.h>
+#include <navit/item.h>
+#include <navit/config_.h>
+#include <navit/navit.h>
+#include <navit/event.h>
+#include <navit/point.h>
+#include <navit/graphics.h>
+#include <navit/coord.h>
+#include <navit/transform.h>
+#include <navit/map.h>
+#include <navit/mapset.h>
+#include <navit/callback.h>
+#include <navit/vehicle.h>
+#include <navit/attr.h>
+#include <navit/xmlconfig.h>
+#include <navit/layout.h>
 
 #include <CommonAPI/CommonAPI.hpp>
 #include <CommonTypes.hpp>

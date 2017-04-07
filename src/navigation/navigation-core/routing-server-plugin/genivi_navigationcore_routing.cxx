@@ -27,24 +27,25 @@
 * @licence end@
 */
 #include <dbus-c++/glib-integration.h>
-#include "config.h"
+#include <config.h>
 #define USE_PLUGINS 1
-#include "debug.h"
-#include "plugin.h"
-#include "item.h"
-#include "coord.h"
-#include "config_.h"
-#include "navit.h"
-#include "route.h"
-#include "transform.h"
-#include "command.h"
-#include "callback.h"
-#include "vehicle.h"
-#include "xmlconfig.h"
-#include "vehicleprofile.h"
-#include "roadprofile.h"
-#include "map.h"
-#include "event.h"
+#include <navit/debug.h>
+#include <navit/plugin.h>
+#include <navit/item.h>
+#include <navit/coord.h>
+#include <navit/config_.h>
+#include <navit/navit.h>
+#include <navit/route.h>
+#include <navit/transform.h>
+#include <navit/command.h>
+#include <navit/callback.h>
+#include <navit/vehicle.h>
+#include <navit/xmlconfig.h>
+#include <navit/vehicleprofile.h>
+#include <navit/roadprofile.h>
+#include <navit/map.h>
+#include <navit/event.h>
+
 #include <unistd.h>
 
 #include <CommonAPI/CommonAPI.hpp>
