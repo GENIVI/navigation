@@ -151,8 +151,8 @@ class MapViewerControlObj
     void SetCameraHeadingTrackUp(uint32_t sessionHandle);
     void SetMapViewPerspective(uint32_t SessionHandle, uint16_t MapViewPerspectiveMode);
     void GetMapViewPerspective(uint16_t &MapViewPerspectiveMode);
-    void GetScaleList(std::vector< ::DBus::Struct< uint16_t, uint16_t, DBusCommonAPIEnumeration, uint32_t > >& ScalesList);
-    void SetMapViewScale(uint32_t SessionHandle, uint32_t ScaleID);
+    void GetScaleList(std::vector< ::DBus::Struct< uint8_t, uint16_t, DBusCommonAPIEnumeration, uint32_t > >& ScalesList);
+    void SetMapViewScale(uint32_t SessionHandle, uint8_t ScaleID);
     void SetMapViewScaleByDelta(uint32_t SessionHandle, int16_t ScaleDelta);
     void GetMapViewScale(uint8_t& ScaleID, DBusCommonAPIEnumeration &IsMinMax);
     void GetMapViewType(uint16_t& MapViewType);
@@ -409,7 +409,7 @@ class  MapViewerControl
     }
 
     void
-    SetMapViewScale(const uint32_t& SessionHandle, const uint32_t& MapViewInstanceHandle, const uint16_t& ScaleID)
+    SetMapViewScale(const uint32_t& SessionHandle, const uint32_t& MapViewInstanceHandle, const uint8_t& ScaleID)
     {
         dbg(lvl_debug,"enter\n");
         MapViewerControlObj *obj=handles[MapViewInstanceHandle];
@@ -687,10 +687,10 @@ class  MapViewerControl
 		return ret;
 	}
 
-    std::vector< ::DBus::Struct< uint16_t, uint16_t, DBusCommonAPIEnumeration, uint32_t > >
+    std::vector< ::DBus::Struct< uint8_t, uint16_t, DBusCommonAPIEnumeration, uint32_t > >
     GetScaleList(const uint32_t& mapViewInstanceHandle)
 	{
-        std::vector< ::DBus::Struct< uint16_t, uint16_t, DBusCommonAPIEnumeration, uint32_t > > ret;
+        std::vector< ::DBus::Struct< uint8_t, uint16_t, DBusCommonAPIEnumeration, uint32_t > > ret;
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
@@ -966,9 +966,9 @@ MapViewerControlObj::GetMapViewPerspective(uint16_t& MapViewPerspectiveMode)
 }
 
 void
-MapViewerControlObj::GetScaleList(std::vector< ::DBus::Struct< uint16_t, uint16_t, DBusCommonAPIEnumeration, uint32_t > >& ScalesList)
+MapViewerControlObj::GetScaleList(std::vector< ::DBus::Struct< uint8_t, uint16_t, DBusCommonAPIEnumeration, uint32_t > >& ScalesList)
 {
-    ::DBus::Struct< uint16_t, uint16_t, DBusCommonAPIEnumeration, uint32_t > scale;
+    ::DBus::Struct< uint8_t, uint16_t, DBusCommonAPIEnumeration, uint32_t > scale;
     uint32_t basisPixel = ZOOM_ZERO_METER_WIDTH/m_width;
 
     scale._1=0;
@@ -1054,7 +1054,7 @@ MapViewerControlObj::GetScaleList(std::vector< ::DBus::Struct< uint16_t, uint16_
 }
 
 void
-MapViewerControlObj::SetMapViewScale(uint32_t SessionHandle, uint32_t ScaleID)
+MapViewerControlObj::SetMapViewScale(uint32_t SessionHandle, uint8_t ScaleID)
 {
 	long scale=1 << ScaleID;
 	struct transformation *trans=navit_get_trans(m_navit.u.navit);

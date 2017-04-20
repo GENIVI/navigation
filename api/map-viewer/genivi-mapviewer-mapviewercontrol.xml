@@ -595,7 +595,7 @@
       </arg>
       <arg name="scaleID" type="y">
         <doc>
-          <line>scaleID = scale identifier. Range[0:256]</line>
+          <line>scaleID = scale identifier. Range[0:255]</line>
         </doc>
       </arg>
       <arg name="isMinMax" type="i">
@@ -796,10 +796,10 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="scaleList" type="a(qqiu)" direction="out">
+      <arg name="scaleList" type="a(yqiu)" direction="out">
         <doc>
           <line>scaleList = array[struct(scaleId,scaleValue,scaleUnit,millimetersPerPixel)]</line>
-          <line>scaleId = scale identifier. Range [0:256]</line>
+          <line>scaleId = scale identifier. Range [0:255]</line>
           <line>scaleValue = scale value. It can assume values like 100, 200, 1000, ...</line>
           <line>scaleUnit = unit of measurement. It is an enum(INVALID,METER,KM,MILE,YARD,FOOT, ... )</line>
           <line>millimetersPerPixel = number indicating the number of millimeters per pixel</line>
@@ -821,9 +821,9 @@
           <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
         </doc>
       </arg>
-      <arg name="scaleID" type="q" direction="in">
+      <arg name="scaleID" type="y" direction="in">
         <doc>
-          <line>scaleID = scale identifier. Range[0:256]</line>
+          <line>scaleID = scale identifier. Range[0:255]</line>
         </doc>
       </arg>
     </method>
@@ -878,7 +878,7 @@
       </arg>
       <arg name="scaleID" type="y" direction="out">
         <doc>
-          <line>scaleID = scale identifier. Range[0:256]</line>
+          <line>scaleID = scale identifier. Range[0:255]</line>
         </doc>
       </arg>
       <arg name="isMinMax" type="i" direction="out">

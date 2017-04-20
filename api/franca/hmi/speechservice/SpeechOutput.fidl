@@ -28,9 +28,6 @@ interface SpeechOutput {
 		}	
 	}	
 
-	<** @description : Max length of a single prompt part. **>
-	const UInt32 MAX_CHUNK_LENGTH = 1024
-
 	<** @description : String containing the prompt to play. **>
 	typedef Chunk is String
 

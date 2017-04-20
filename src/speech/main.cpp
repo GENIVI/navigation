@@ -50,7 +50,7 @@ extern "C" {
 #include <CommonTypes.hpp>
 #include <SpeechOutputStubDefault.hpp>
 
-using namespace v4::org::genivi::hmi::speechoutputservice;
+using namespace v1::org::genivi::hmi::speechoutputservice;
 using namespace v4::org::genivi;
 
 static std::shared_ptr < CommonAPI::Runtime > runtime;
@@ -211,7 +211,7 @@ public:
             }
         }
 
-        fireNotifyQueueStatusEvent(qStatus);
+        fireNotifyQueueStatusSelective(qStatus);
 
         _reply(_chunkID);
     }
@@ -220,19 +220,17 @@ public:
      * description: A prompt must be playing to perform an abort action. If no prompting operation
      *   in progress there will be no reaction of the system.
      */
-    void abortPrompter(const std::shared_ptr<CommonAPI::ClientId> _client, abortPrompterReply_t _reply) {
+    void abortPrompter(const std::shared_ptr<CommonAPI::ClientId> _client) {
         printf("\n>>> [server] abortPrompter()\n");
 
-        _reply();
     }
 
     /**
      * description: The prompter is closed after the last text chunk submitted has finished playing.
      */
-    void closePrompter(const std::shared_ptr<CommonAPI::ClientId> _client, closePrompterReply_t _reply) {
+    void closePrompter(const std::shared_ptr<CommonAPI::ClientId> _client) {
         printf("\n>>> [server] closePrompter()\n");
 
-        _reply();
     }
 
 

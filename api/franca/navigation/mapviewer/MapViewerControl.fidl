@@ -188,7 +188,7 @@ interface MapViewerControl {
 		@description : struct generated for DBus argument GetScaleList_scaleList
 	**>
 	struct MapScale {
-		UInt16 scaleId
+		UInt8 scaleId
 		UInt16 scaleValue
 		MapScaleUnit unit
 		UInt32 millimetersPerPixel
@@ -877,7 +877,7 @@ interface MapViewerControl {
 			Handle mapViewInstanceHandle
 
 			<**
-				@description : scaleID = scale identifier. Range[0:256]
+				@description : scaleID = scale identifier. Range[0:255]
 			**>
 			UInt8 scaleID
 
@@ -1120,9 +1120,9 @@ interface MapViewerControl {
 			Handle mapViewInstanceHandle
 
 			<**
-				@description : scaleID = scale identifier. Range[0:256]
+				@description : scaleID = scale identifier. Range[0:255]
 			**>
-			UInt16 scaleID
+			UInt8 scaleID
 		}
 	}
 
@@ -1186,7 +1186,7 @@ interface MapViewerControl {
 		out {
 
 			<**
-				@description : scaleID = scale identifier. Range[0:256]
+				@description : scaleID = scale identifier. Range[0:255]
 			**>
 			UInt8 scaleID
 
