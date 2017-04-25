@@ -52,10 +52,6 @@ include_directories(${NAVIGATION_COMMON_DIR})
 
 include_directories(${DBUS_GENERATED_INCLUDE_DIR}/poi-service)
 
-if(${YOCTO_CONFIG})
-    include_directories(${STAGING_INCDIR}/navit)
-endif()
-
 set(PLUGIN_LDFLAGS ${DBUS_CPP_LDFLAGS} ${DBUS_CPP_GLIB_LDFLAGS} ${GLIB_LDFLAGS})
 set(PLUGIN_LIBRARIES ${DBUS_CPP_LIBRARY_DIRS} ${GLIB_LIBRARY_DIRS} ${DBUS_CPP_GLIB_LIBRARY_DIRS})
 

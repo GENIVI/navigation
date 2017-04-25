@@ -1065,12 +1065,10 @@ MapViewerControlObj::SetMapViewScale(uint32_t SessionHandle, uint8_t ScaleID)
 void
 MapViewerControlObj::SetMapViewScaleByDelta(uint32_t SessionHandle, int16_t ScaleDelta)
 {
-	if (!ScaleDelta) 
-		throw DBus::ErrorInvalidArgs("ScaleDelta must not be 0");
 	if (ScaleDelta < 0) 
-		navit_zoom_out(m_navit.u.navit,1 << (-ScaleDelta),NULL);
+        navit_zoom_in(m_navit.u.navit,1 << (-ScaleDelta),NULL);
 	else if (ScaleDelta > 0) 
-		navit_zoom_in(m_navit.u.navit,1 << ScaleDelta,NULL);
+        navit_zoom_out(m_navit.u.navit,1 << ScaleDelta,NULL);
 }
 
 void
@@ -1078,10 +1076,13 @@ MapViewerControlObj::GetMapViewScale(uint8_t& ScaleID, DBusCommonAPIEnumeration&
 {
 	struct transformation *trans=navit_get_trans(m_navit.u.navit);
 	long scale=transform_get_scale(trans);
-	if (scale <= 1 || scale >= 2097152)
-		IsMinMax=1;
+    if (scale <= 1)
+        IsMinMax=GENIVI_MAPVIEWER_MIN;
 	else
-		IsMinMax=0;
+        if (scale >= 2097152)
+            IsMinMax=GENIVI_MAPVIEWER_MAX;
+        else
+            IsMinMax=GENIVI_MAPVIEWER_MID;
 	ScaleID=0;
 	while (scale > 1) {
 		scale >>=1;

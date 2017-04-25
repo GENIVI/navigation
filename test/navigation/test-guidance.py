@@ -39,7 +39,8 @@ import sys
 import errno
 import time
 from dltTrigger import *
-#import pdb;pdb.set_trace()
+#import pdb
+#pdb.set_trace()
 
 from pip import locations
 
@@ -67,6 +68,7 @@ HORIZONTAL_SIZE = 800
 VERTICAL_SIZE = 480
 MAIN_MAP = 0x0010
 NUMBER_OF_SEGMENTS = 500
+ZOOM_GUIDANCE = 2
 
 #add signal receivers
 def routing_routeCalculationProgressUpdate_handler(routeHandle, status, percentage):
@@ -102,7 +104,7 @@ def routing_routeCalculationSuccessful_handler(routeHandle,unfullfilledPreferenc
     #ret[1][0][GENIVI_NAVIGATIONCORE_START_LATITUDE] is the start latitude
     g_guidance_active = True
 #        pdb.set_trace()
-#    display_route(routeHandle)
+    display_route(routeHandle)
     launch_guidance(routeHandle)
     
 def session_sessionDeleted_handler(sessionHandle):
@@ -157,6 +159,8 @@ def exit():
     loop.quit()
     
 def display_route(route):
+    ret = g_routing_interface.GetRouteBoundingBox(dbus.UInt32(g_route_handle))
+    g_mapviewercontrol_interface.SetMapViewBoundingBox(dbus.UInt32(g_mapviewer_sessionhandle),dbus.UInt32(g_mapviewer_maphandle),ret)
     g_mapviewercontrol_interface.DisplayRoute( \
         dbus.UInt32(g_mapviewer_sessionhandle), \
         dbus.UInt32(g_mapviewer_maphandle), \
@@ -166,7 +170,16 @@ def display_route(route):
 def launch_guidance(route):
     g_mapmatchedposition_interface.SetSimulationMode(dbus.UInt32(g_navigationcore_session_handle),dbus.Boolean(True))
     g_guidance_interface.StartGuidance(dbus.UInt32(g_navigationcore_session_handle),dbus.UInt32(route))
-#    g_mapmatchedposition_interface.StartSimulation(g_navigationcore_session_handle)
+    g_mapviewercontrol_interface.SetFollowCarMode(dbus.UInt32(g_navigationcore_session_handle),dbus.UInt32(g_mapviewer_maphandle),True)
+    g_mapviewercontrol_interface.SetMapViewScale(dbus.UInt32(g_mapviewer_sessionhandle),dbus.UInt32(g_mapviewer_maphandle),ZOOM_GUIDANCE)
+    g_mapviewercontrol_interface.SetTargetPoint(dbus.UInt32(g_mapviewer_sessionhandle),\
+                                                dbus.UInt32(g_mapviewer_maphandle),\
+                                                dbus.Struct((\
+                                                dbus.Double(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][0]),\
+                                                dbus.Double(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][1]),\
+                                                dbus.Double(0)\
+                                                )))
+    g_mapmatchedposition_interface.StartSimulation(g_navigationcore_session_handle)
         
 def launch_route_calculation(route):
     global g_current_route
@@ -334,7 +347,7 @@ ret = g_navigationcore_session_handle = g_navigationcore_session_interface.Creat
 g_navigationcore_session_handle=ret[1]
 print 'Navigation core session handle: ' + str(g_navigationcore_session_handle)
 
-#createMapView()
+createMapView()
 
 g_current_route = 0
 g_guidance_active = False

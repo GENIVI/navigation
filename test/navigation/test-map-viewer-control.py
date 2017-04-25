@@ -45,6 +45,8 @@ test_name = "map viewer"
 #constants as defined in the Navigation API
 LATITUDE = 0x00a0
 LONGITUDE = 0x00a1
+MAPVIEWER_MAX = 0x0041
+MAPVIEWER_MIN = 0x0040
 
 MAIN_MAP = 0x0010
 SPLIT_SCREEN = 0x0011
@@ -53,8 +55,6 @@ SPLIT_SCREEN = 0x0011
 HORIZONTAL_SIZE = 800
 VERTICAL_SIZE = 480
 TIME_OUT = 20000
-MIN_SCALE = 0
-MAX_SCALE = 21
 
 # List of coordinates
 LATITUDE = list()
@@ -71,21 +71,21 @@ def mapviewer_mapViewScaleChanged_handler(mapViewInstanceHandle,scale,isMinMax):
     print("Scale: "+str(new_scale))
     print('Is min max: '+str(int(isMinMax)))
     time.sleep(0.25)
-    if g_scale > new_scale and new_scale !=MIN_SCALE:
+    if g_scale > new_scale and isMinMax !=MAPVIEWER_MIN:
         print("Zoom in")
         g_scale=new_scale
         MapViewerControl_interface.SetMapViewScaleByDelta( \
             dbus.UInt32(sessionhandle), \
             dbus.UInt32(mapviewerhandle), \
-            dbus.Int16(1))
+            dbus.Int16(-1))
     else:
-        if new_scale < MAX_SCALE:
+        if isMinMax !=MAPVIEWER_MAX:
             print("Zoom out")
             g_scale=new_scale
             MapViewerControl_interface.SetMapViewScaleByDelta( \
                 dbus.UInt32(sessionhandle), \
                 dbus.UInt32(mapviewerhandle), \
-                dbus.Int16(-1))
+                dbus.Int16(1))
         else:
             print 'Test PASSED'
             MapViewerControl_interface.ReleaseMapViewInstance( \
@@ -209,13 +209,13 @@ alt2 = targetPoint[2]
 print 'Get center -> (' + str(lat2) + ',' + str(lon2) + ')'  
 
 if round(float(lat1),4) != round(float(lat2),4) :
-    print '\nTest Failed:' + str(round(lat1,4)) + '!=' + str(round(lat2,4))  + '\n' 
+    print '\nTest Failed:' + str(round(float(lat1),4)) + '!=' + str(round(float(lat2),4))  + '\n' 
 
 if round(float(lon1),4) != round(float(lon2),4) :
-    print '\nTest Failed:' + str(round(lon1,4)) + '!=' + str(round(lon2,4))  + '\n' 
+    print '\nTest Failed:' + str(round(float(lon1),4)) + '!=' + str(round(float(lon2),4))  + '\n' 
 
 if round(float(alt1),4) != round(float(alt2),4) :
-    print '\nTest Failed:' + str(round(alt1,4)) + '!=' + str(round(alt2,4))  + '\n'
+    print '\nTest Failed:' + str(round(float(alt1),4)) + '!=' + str(round(float(alt2),4))  + '\n'
 
 ret=MapViewerControl_interface.GetMapViewScale(dbus.UInt32(mapviewerhandle))
 print('Scale: '+str(int(ret[0])))
@@ -227,7 +227,7 @@ print 'Zoom in'
 MapViewerControl_interface.SetMapViewScaleByDelta( \
     dbus.UInt32(sessionhandle), \
     dbus.UInt32(mapviewerhandle), \
-    dbus.Int16(1))
+    dbus.Int16(-1))
 
 #main loop 
 gobject.timeout_add(TIME_OUT, timeout)
