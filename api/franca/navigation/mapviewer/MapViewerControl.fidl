@@ -390,7 +390,7 @@ interface MapViewerControl {
 	}
 
 	<**
-		@description : setTargetPoint = This method sets the position of the point the camera is always aimed at
+		@description : setTargetPoint = This method sets the position of the point the camera is aimed at
 	**>
 	method setTargetPoint {
 		in {
@@ -1349,6 +1349,286 @@ interface MapViewerControl {
 	}
 
 	<**
+		@description : mapViewRotateBegin = Begin a rotation gesture.
+	**>
+	method mapViewRotateBegin {
+		in {
+			<**
+				@description : sessionHandle = Session handle.
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle.
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : anchorPoint = Specifies coordinates in pixels on the screen where the gesture is anchored. 
+			**>
+			Pixel anchorPoint
+			
+		}
+		error {
+			OK
+			INVALID_SESSION_HANDLE
+			INVALID_MAP_VIEW_INSTANCE_HANDLE
+			INVALID_ANCHOR_POINT
+		}
+	}
+
+
+	<**
+		@description : mapViewRotateUpdate = Provide an update for the rotation gesture.
+	**>
+	method mapViewRotateUpdate {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle.
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle.
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : anchorPoint = Specifies coordinates in pixels on the screen where the gesture is anchored. 
+			**>
+			Pixel anchorPoint
+			
+			<**
+				@description : rotationAngle = The rotation angle in degrees. 
+				Range [-179: 180]. Positive (negative) value should result in clockwise (counterclockwise) rotation.
+			**>
+			Int16 rotationAngle			
+		}
+		error {
+			OK
+			INVALID_SESSION_HANDLE
+			INVALID_MAP_VIEW_INSTANCE_HANDLE			
+			INVALID_ANCHOR_POINT
+			INVALID_ROTATION_ANGLE
+			INVALID_CALL_SEQUENCE
+		}
+	}
+	
+	<**
+		@description : mapViewRotateEnd = End the rotation gesture.
+	**>
+	method mapViewRotateEnd {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle.
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle.
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : velocity = The remaining velocity of rotation, in degrees per second.
+			**>
+			UInt16 velocity
+		}
+		error {
+			OK
+			INVALID_SESSION_HANDLE
+			INVALID_MAP_VIEW_INSTANCE_HANDLE
+			INVALID_CALL_SEQUENCE
+		}
+	}
+
+	<**
+		@description : mapViewPinchBegin = Begin a pinch gesture.
+	**>
+	method mapViewPinchBegin {
+		in {
+			<**
+				@description : sessionHandle = Session handle.
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle.
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : anchorPoint = Specifies coordinates in pixels on the screen where the gesture is anchored. 
+			**>
+			Pixel anchorPoint
+			
+		}
+		error {
+			OK
+			INVALID_SESSION_HANDLE
+			INVALID_MAP_VIEW_INSTANCE_HANDLE
+			INVALID_ANCHOR_POINT
+		}
+	}
+
+
+	<**
+		@description : mapViewPinchUpdate = Provide an update for the pinch gesture.
+	**>
+	method mapViewPinchUpdate {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle.
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle.
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : anchorPoint = Specifies coordinates in pixels on the screen where the gesture is anchored. 
+			**>
+			Pixel anchorPoint
+			
+			<**
+				@description : scaleFactor = Scale factor relative to the scale during mapViewPinchBegin call 
+			**>
+			Double scaleFactor			
+		}
+		error {
+			OK
+			INVALID_SESSION_HANDLE
+			INVALID_MAP_VIEW_INSTANCE_HANDLE			
+			INVALID_ANCHOR_POINT
+			INVALID_CALL_SEQUENCE			
+		}
+	}
+	
+	<**
+		@description : mapViewPinchEnd = End the pinch gesture.
+	**>
+	method mapViewPinchEnd {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle.
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle.
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : velocity = The remaining velocity of scale, in scale factor per second.
+			**>
+			Double velocity
+		}
+		error {
+			OK
+			INVALID_SESSION_HANDLE
+			INVALID_MAP_VIEW_INSTANCE_HANDLE
+			INVALID_CALL_SEQUENCE
+		}
+	}
+
+
+	<**
+		@description : mapViewTiltBegin = Begin a tilt gesture.
+	**>
+	method mapViewTiltBegin {
+		in {
+			<**
+				@description : sessionHandle = Session handle.
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle.
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : anchorPoint = Specifies coordinates in pixels on the screen where the gesture is started. 
+			**>
+			Pixel anchorPoint
+			
+		}
+		error {
+			OK
+			INVALID_SESSION_HANDLE
+			INVALID_MAP_VIEW_INSTANCE_HANDLE
+			INVALID_ANCHOR_POINT
+		}
+	}
+
+
+	<**
+		@description : mapViewTiltUpdate = Provide an update for the tilt gesture.
+	**>
+	method mapViewTiltUpdate {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle.
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle.
+			**>
+			Handle mapViewInstanceHandle
+		
+			<**
+				@description : scale = Current translation on y axis, in pixels from origin coordinates passed in mapViewTiltBegin.
+			**>
+			Int32 translation			
+		}
+		error {
+			OK
+			INVALID_SESSION_HANDLE
+			INVALID_MAP_VIEW_INSTANCE_HANDLE
+			INVALID_CALL_SEQUENCE
+		}
+	}
+	
+	<**
+		@description : mapViewTiltEnd = End the tilt gesture.
+	**>
+	method mapViewTiltEnd {
+		in {
+
+			<**
+				@description : sessionHandle = Session handle.
+			**>
+			Handle sessionHandle
+
+			<**
+				@description : mapViewInstanceHandle = Map instance handle.
+			**>
+			Handle mapViewInstanceHandle
+
+			<**
+				@description : velocity = The remaining velocity on the y axis, in pixels per second.
+
+			**>
+			UInt32 velocity
+		}
+		error {
+			OK
+			INVALID_SESSION_HANDLE
+			INVALID_MAP_VIEW_INSTANCE_HANDLE
+			INVALID_CALL_SEQUENCE
+		}
+	}
+
+	<**
 		@description : setMapViewRotation = This method rotates the map
 	**>
 	method setMapViewRotation {
@@ -1392,14 +1672,15 @@ interface MapViewerControl {
 		out {
 
 			<**
-				@description : rotationAngle = rotation angle in degrees measured from the North axis clockwise. Range[0:360]
+				@description : rotationAngle = rotation angle in degrees measured from the North axis clockwise if possitive 
+				or counter clockwise if negative. Range[-179:180].
 			**>
 			Int32 rotationAngle
 
 			<**
-				@description : rotationAnglePerFrame = partial rotation for each map frame in degrees
+				@description : rotationAnglePerSecond = partial rotation angle per second
 			**>
-			Int32 rotationAnglePerFrame
+			Int32 rotationAnglePerSecond
 		}
 	}
 

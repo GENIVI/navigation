@@ -119,7 +119,7 @@ class MapViewerControlObj
 	struct mapset *m_mapset;
 	uint32_t m_handle;
 	double m_scrolldirection, m_scrollspeed;
-	double m_rotationangle, m_rotationangleperframe;
+    double m_rotationangle, m_rotationanglepersecond;
 
 	struct callback *m_postdraw_callback;
 	struct callback *m_move_callback;
@@ -162,8 +162,8 @@ class MapViewerControlObj
     void GetTargetPoint(::DBus::Struct<double, double, double> &target);
     void SetMapViewPan(uint32_t SessionHandle, int32_t panningAction, ::DBus::Struct< uint16_t, uint16_t >p);
     void GetMapViewPan(const int32_t &panningAction, ::DBus::Struct< uint16_t, uint16_t > &p);
-    void SetMapViewRotation(uint32_t sessionHandle, double rotationAngle, double rotationAnglePerFrame);
-    void GetMapViewRotation(int32_t& rotationAngle, int32_t& rotationAnglePerFrame);
+    void SetMapViewRotation(uint32_t sessionHandle, double rotationAngle, double rotationAnglePerSecond);
+    void GetMapViewRotation(int32_t& rotationAngle, int32_t& rotationAnglePerSecond);
     void SetMapViewBoundingBox(uint32_t sessionHandle, const ::DBus::Struct< ::DBus::Struct< double, double >, ::DBus::Struct< double, double > >& boundingBox);
     void GetMapViewBoundingBox(::DBus::Struct< ::DBus::Struct< double, double >, ::DBus::Struct< double, double > >& boundingBox);
     void GetDisplayedRoutes(std::vector< ::DBus::Struct< uint32_t, bool > >& displayedRoutes);
@@ -734,12 +734,12 @@ class  MapViewerControl
 	}
 
 	void
-	GetMapViewRotation(const uint32_t& mapViewInstanceHandle, int32_t& rotationAngle, int32_t& rotationAnglePerFrame)
+    GetMapViewRotation(const uint32_t& mapViewInstanceHandle, int32_t& rotationAngle, int32_t& rotationAnglePerSecond)
 	{
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        else obj->GetMapViewRotation(rotationAngle, rotationAnglePerFrame);
+        else obj->GetMapViewRotation(rotationAngle, rotationAnglePerSecond);
 	}
 
 	void
@@ -937,6 +937,60 @@ class  MapViewerControl
     void unsubscribeFrommapViewScaleChangedSelective()
     {//not implemented yet
 
+    }
+
+    int32_t MapViewRotateBegin(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const ::DBus::Struct< uint16_t, uint16_t >& anchorPoint)
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+        return 0;
+    }
+
+    int32_t MapViewRotateUpdate(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const ::DBus::Struct< uint16_t, uint16_t >& anchorPoint, const int16_t& rotationAngle)
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+        return 0;
+    }
+
+    int32_t MapViewRotateEnd(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const uint16_t& velocity)
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+        return 0;
+    }
+
+    int32_t MapViewPinchBegin(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const ::DBus::Struct< uint16_t, uint16_t >& anchorPoint)
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+        return 0;
+    }
+
+    int32_t MapViewPinchUpdate(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const ::DBus::Struct< uint16_t, uint16_t >& anchorPoint, const double& scaleFactor)
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+        return 0;
+    }
+
+    int32_t MapViewPinchEnd(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const double& velocity)
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+        return 0;
+    }
+
+    int32_t MapViewTiltBegin(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const ::DBus::Struct< uint16_t, uint16_t >& anchorPoint)
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+        return 0;
+    }
+
+    int32_t MapViewTiltUpdate(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const int32_t& translation)
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+        return 0;
+    }
+
+    int32_t MapViewTiltEnd(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const uint32_t& velocity)
+    {
+        throw DBus::ErrorNotSupported("Not yet supported");
+        return 0;
     }
 
 };
@@ -1291,27 +1345,27 @@ MapViewerControlObj::GetTargetPoint(::DBus::Struct< double, double, double >&tar
 void
 MapViewerControlObj::MoveMap(void)
 {
-	if (m_scrollspeed || m_rotationangleperframe || m_force_draw) {
+    if (m_scrollspeed || m_rotationanglepersecond || m_force_draw) {
 		int w,h;
 		double refresh_time=0.3; // Time needed to redraw map
 		double r=m_scrollspeed*refresh_time;
 		struct point p;
 		struct transformation *t=navit_get_trans(m_navit.u.navit);
-		if (m_rotationangleperframe) {
+        if (m_rotationanglepersecond) {
 			int yaw=transform_get_yaw(t);
 			int delta=((int)(m_rotationangle+0.5)-yaw)%360;
 			if (delta > 180)
 				delta-=180;
 			if (delta < -180)
 				delta+=180;
-			if (delta < 0 && delta < -m_rotationangleperframe)
-				delta=-m_rotationangleperframe;
-			if (delta > 0 && delta > m_rotationangleperframe)
-				delta=m_rotationangleperframe;
+            if (delta < 0 && delta < -m_rotationanglepersecond)
+                delta=-m_rotationanglepersecond;
+            if (delta > 0 && delta > m_rotationanglepersecond)
+                delta=m_rotationanglepersecond;
 			if (delta)
 				transform_set_yaw(t, yaw+delta);
 			else
-				m_rotationangleperframe=0;
+                m_rotationanglepersecond=0;
 		}
 		transform_get_size(t, &w, &h);
 		p.x=w/2+sin(m_scrolldirection*M_PI/180)*r;
@@ -1373,20 +1427,20 @@ MapViewerControlObj::GetMapViewPan(const int32_t& panningAction, ::DBus::Struct<
 }
 
 void
-MapViewerControlObj::SetMapViewRotation(uint32_t sessionHandle, double rotationAngle, double rotationAnglePerFrame)
+MapViewerControlObj::SetMapViewRotation(uint32_t sessionHandle, double rotationAngle, double rotationAnglePerSecond)
 {
 	m_rotationangle=rotationAngle;
-	m_rotationangleperframe=rotationAnglePerFrame;
+    m_rotationanglepersecond=rotationAnglePerSecond;
 	SetFollowCarMode(sessionHandle, false);
 	MoveMap();
 
 }
 
 void
-MapViewerControlObj::GetMapViewRotation(int32_t& rotationAngle, int32_t& rotationAnglePerFrame)
+MapViewerControlObj::GetMapViewRotation(int32_t& rotationAngle, int32_t& rotationAnglePerSecond)
 {
 	rotationAngle=m_rotationangle;
-	rotationAnglePerFrame=m_rotationangleperframe;
+    rotationAnglePerSecond=m_rotationanglepersecond;
 }
 
 void

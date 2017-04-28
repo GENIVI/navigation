@@ -130,7 +130,7 @@
         <doc>
           <line>array[struct(waypointOffset,travelTime,direction,side,timeZone,daylightSavingTime,isDestination,number)]</line>
           <line>waypointOffset = the offset of the way point in meters from the beginning of the route</line>
-          <line>travelTime = time to reach the way point in seconds</line>
+          <line>travelTime = time to reach the waypoint in seconds from the current position</line>
           <line>direction = direction of the way point in degree relatively to the North. Range [0:360]</line>
           <line>side = enum(LEFT,RIGHT,NOT_AVAILABLE)</line>
           <line>timeZone = time zone of the way point. It is expressed as the time difference from the UTC in minutes</line>
@@ -178,6 +178,11 @@
     <signal name="VehicleLeftTheRoadNetwork">
       <doc>
         <line>VehicleLeftTheRoadNetwork = This signal is emitted when the vehicle exits from the road network</line>
+      </doc>
+    </signal>
+    <signal name="VehicleReturnedToTheRoadNetwork">
+      <doc>
+        <line>VehicleReturnedToTheRoadNetwork = This signal is emitted when the vehicle returns to the road network</line>
       </doc>
     </signal>
     <signal name="GuidanceStatusChanged">
@@ -299,6 +304,11 @@
     <signal name="VehicleLeftTheRoute">
       <doc>
         <line>VehicleLeftTheRoute = This signal is emitted when the vehicle has left the route</line>
+      </doc>
+    </signal>
+    <signal name="VehicleReturnedToTheRoute">
+      <doc>
+        <line>VehicleReturnedToTheRoute = This signal is emitted when the vehicle has returned to the route</line>
       </doc>
     </signal>
     <method name="SetRouteCalculationMode">

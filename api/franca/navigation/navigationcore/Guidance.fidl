@@ -26,7 +26,7 @@ interface Guidance {
 		NOT_AVAILABLE = 2
 	}
 
-	enumeration LaneType extends BasicEnum {
+	enumeration LaneType extends BasicEnum { // Used by laneDirections and directionToFollow (into the UInt32 bitfield)
 		LANE_INFO_BITMASK_STRAIGHT		= 1
 		LANE_INFO_BITMASK_SLIGHTRIGHT	= 2
 		LANE_INFO_BITMASK_RIGHT			= 4
@@ -146,14 +146,14 @@ interface Guidance {
 	
 	struct LaneInfo { //Note: To describe the divider on the left side of the left-most lane, use the following entry in LANE_INFO: (laneIndex=0xffffffff,laneDirections=0x00000000,directionToFollow=0x00000000,divider=type)
 		UInt32 laneIndex //number of the individual lane. Counting starts from zero, beginning at the left-most lane in the direction of travel (independent of the driving side)
-		ByteBuffer laneDirections //bitfield where each bit corresponds to a certain direction. A 1-bit indicates that the corresponding part of the lane arrow is drawn in the lane information on the street (see the lane info bitmasks)
-		LaneType directionToFollow //bitfield where each bit corresponds to a certain direction. A 1-bit indicates that the corresponding part of the lane arrow matches the direction of the corresponding maneuver (see the lane info bitmasks). At most one bit of this bitmask will be set.
+		UInt32 laneDirections //bitfield where each bit corresponds to a certain direction. A 1-bit indicates that the corresponding part of the lane arrow is drawn in the lane information on the street (see the LaneType bitmasks)
+		UInt32 directionToFollow //bitfield where each bit corresponds to a certain direction. A 1-bit indicates that the corresponding part of the lane arrow matches the direction of the corresponding maneuver (see the LaneType bitmasks). At most one bit of this bitmask will be set.
 		LaneDivider divider //indicates the type of divider between the given lane and the next one to the right, in the direction of travel
 	}
 
 	struct WaypointStruct {
 		UInt32 waypointOffset //the offset of the way point in meters from the beginning of the route
-		UInt32 travelTime //time to reach the way point in seconds
+		UInt32 travelTime //time to reach the waypoint in seconds from the current position
 		Int32 direction //direction of the way point in degree relatively to the North. Range [0:360]
 		Side side 
 		Int16 timeZone //time zone of the way point. It is expressed as the time difference from the UTC in minutes
@@ -477,6 +477,12 @@ interface Guidance {
 	broadcast vehicleLeftTheRoadNetwork {
 	}
 
+        <**
+                @description : vehicleReturnedToTheRoadNetwork = This signal is emitted when the vehicle returns to the road network
+        **>
+        broadcast vehicleReturnedToTheRoadNetwork {
+        }
+
 	<**
 		@description : guidanceStatusChanged = This signal is emitted when the guidance status changes
 	**>
@@ -540,6 +546,12 @@ interface Guidance {
 		@description : vehicleLeftTheRoute = This signal is emitted when the vehicle has left the route
 	**>
 	broadcast vehicleLeftTheRoute {
+	}
+
+	<**
+	        @description : vehicleReturnedToTheRoute = This signal is emitted when the vehicle has returned to the route
+	**>
+	broadcast vehicleReturnedToTheRoute {
 	}
 
 	<**

@@ -116,7 +116,7 @@ class MapViewerControlObj
 	struct mapset *m_mapset;
 	uint32_t m_handle;
 	double m_scrolldirection, m_scrollspeed;
-	double m_rotationangle, m_rotationangleperframe;
+        double m_rotationangle, m_rotationanglepersecond;
 
 	struct callback *m_postdraw_callback;
 	struct callback *m_move_callback;
@@ -157,8 +157,8 @@ class MapViewerControlObj
     void GetTargetPoint(NavigationTypes::Coordinate3D &target);
     void SetMapViewPan(NavigationTypes::Handle SessionHandle, MapViewerControl::PanAction panningAction, MapViewerControl::Pixel p);
     void GetMapViewPan(const int32_t &panningAction, MapViewerControl::Pixel &p);
-    void SetMapViewRotation(NavigationTypes::Handle SessionHandle, double rotationAngle, double rotationAnglePerFrame);
-    void GetMapViewRotation(int32_t& rotationAngle, int32_t& rotationAnglePerFrame);
+    void SetMapViewRotation(NavigationTypes::Handle SessionHandle, double rotationAngle, double rotationAnglePerSecond);
+    void GetMapViewRotation(int32_t& rotationAngle, int32_t& _rotationAnglePerSecond);
     void SetMapViewBoundingBox(NavigationTypes::Handle SessionHandle, const NavigationTypes::Rectangle& boundingBox);
     void GetMapViewBoundingBox(NavigationTypes::Rectangle& boundingBox);
     void GetDisplayedRoutes(std::vector<MapViewerControl::DisplayedRoute> &displayedRoutes);
@@ -848,12 +848,12 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
      */
     void getMapViewRotation(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, getMapViewRotationReply_t _reply){
         int32_t _rotationAngle=0;
-        int32_t _rotationAnglePerFrame=0;
+        int32_t _rotationAnglePerSecond=0;
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        else obj->GetMapViewRotation(_rotationAngle, _rotationAnglePerFrame);
-        _reply(_rotationAngle,_rotationAnglePerFrame);
+        else obj->GetMapViewRotation(_rotationAngle, _rotationAnglePerSecond);
+        _reply(_rotationAngle,_rotationAnglePerSecond);
     }
 
     /**
@@ -1434,27 +1434,27 @@ MapViewerControlObj::GetTargetPoint(NavigationTypes::Coordinate3D&target)
 void
 MapViewerControlObj::MoveMap(void)
 {
-	if (m_scrollspeed || m_rotationangleperframe || m_force_draw) {
+        if (m_scrollspeed || m_rotationanglepersecond || m_force_draw) {
 		int w,h;
 		double refresh_time=0.3; // Time needed to redraw map
 		double r=m_scrollspeed*refresh_time;
 		struct point p;
 		struct transformation *t=navit_get_trans(m_navit.u.navit);
-		if (m_rotationangleperframe) {
+                if (m_rotationanglepersecond) {
 			int yaw=transform_get_yaw(t);
 			int delta=((int)(m_rotationangle+0.5)-yaw)%360;
 			if (delta > 180)
 				delta-=180;
 			if (delta < -180)
 				delta+=180;
-			if (delta < 0 && delta < -m_rotationangleperframe)
-				delta=-m_rotationangleperframe;
-			if (delta > 0 && delta > m_rotationangleperframe)
-				delta=m_rotationangleperframe;
+                        if (delta < 0 && delta < -m_rotationanglepersecond)
+                                delta=-m_rotationanglepersecond;
+                        if (delta > 0 && delta > m_rotationanglepersecond)
+                                delta=m_rotationanglepersecond;
 			if (delta)
 				transform_set_yaw(t, yaw+delta);
 			else
-				m_rotationangleperframe=0;
+                                m_rotationanglepersecond=0;
 		}
 		transform_get_size(t, &w, &h);
 		p.x=w/2+sin(m_scrolldirection*M_PI/180)*r;
@@ -1515,20 +1515,20 @@ MapViewerControlObj::GetMapViewPan(const int32_t& panningAction, MapViewerContro
 }
 
 void
-MapViewerControlObj::SetMapViewRotation(NavigationTypes::Handle SessionHandle, double rotationAngle, double rotationAnglePerFrame)
+MapViewerControlObj::SetMapViewRotation(NavigationTypes::Handle SessionHandle, double rotationAngle, double rotationAnglePerSecond)
 {
 	m_rotationangle=rotationAngle;
-	m_rotationangleperframe=rotationAnglePerFrame;
+        m_rotationanglepersecond=rotationAnglePerSecond;
     SetFollowCarMode(SessionHandle, false);
 	MoveMap();
 
 }
 
 void
-MapViewerControlObj::GetMapViewRotation(int32_t& rotationAngle, int32_t& rotationAnglePerFrame)
+MapViewerControlObj::GetMapViewRotation(int32_t& rotationAngle, int32_t& _rotationAnglePerSecond)
 {
 	rotationAngle=m_rotationangle;
-	rotationAnglePerFrame=m_rotationangleperframe;
+        _rotationAnglePerSecond=m_rotationanglepersecond;
 }
 
 void

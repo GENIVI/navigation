@@ -114,8 +114,8 @@
     </method>
     <method name="SetTargetPoint">
       <doc>
-        <line>SetTargetPoint = This method sets the position of the point the camera is always aimed at</line>
-        <line>Note: the target point is typically visualized in the center of the map</line>
+        <line>SetTargetPoint = This method sets the position of the point the camera is aimed at</line>
+        <line>Note: the target point is typically visualized in the center of the screen</line>
       </doc>
       <arg name="sessionHandle" type="u" direction="in">
         <doc>
@@ -1075,6 +1075,287 @@ cover with other windows or user interface elements</line>
         </doc>
       </arg>
     </method>
+    <method name="MapViewRotateBegin">
+      <doc>
+        <line>MapViewRotateBegin = MapViewRotateBegin = Begin a rotation gesture.</line>
+      </doc>
+      <arg direction="in" name="sessionHandle" type="u">
+        <doc>
+          <line>sessionHandle (of type Handle) = sessionHandle = Session handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle (of type Handle) = mapViewInstanceHandle = Map instance handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="anchorPoint" type="(qq)">
+        <doc>
+          <line>anchorPoint (of type Pixel) = anchorPoint = Specifies coordinates in pixels on the screen where the gesture is anchored.</line>
+          <line>Pixel struct[x, y] = struct generated for DBus argument SetMapViewPan_pixelCoordinates</line>
+          <line>0: Pixel.x ('q') = Description missing</line>
+          <line>1: Pixel.y ('q') = Description missing</line>
+        </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.OK" id="0"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_SESSION_HANDLE" id="1"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_MAP_VIEW_INSTANCE_HANDLE" id="2"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_ANCHOR_POINT" id="3"/>
+    </method>
+    <method name="MapViewRotateUpdate">
+      <doc>
+        <line>MapViewRotateUpdate = MapViewRotateUpdate = Provide an update for the rotation gesture.</line>
+      </doc>
+      <arg direction="in" name="sessionHandle" type="u">
+        <doc>
+          <line>sessionHandle (of type Handle) = sessionHandle = Session handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle (of type Handle) = mapViewInstanceHandle = Map instance handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="anchorPoint" type="(qq)">
+        <doc>
+          <line>anchorPoint (of type Pixel) = anchorPoint = Specifies coordinates in pixels on the screen where the gesture is anchored.</line>
+          <line>Pixel struct[x, y] = struct generated for DBus argument SetMapViewPan_pixelCoordinates</line>
+          <line>0: Pixel.x ('q') = Description missing</line>
+          <line>1: Pixel.y ('q') = Description missing</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="rotationAngle" type="n">
+        <doc>
+          <line>rotationAngle = rotationAngle = The rotation angle in degrees.</line>
+          <line>Range [-179: 180]. Positive (negative) value should result in clockwise (counterclockwise) rotation.</line>
+        </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.OK" id="0"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_SESSION_HANDLE" id="1"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_MAP_VIEW_INSTANCE_HANDLE" id="2"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_ANCHOR_POINT" id="3"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_ROTATION_ANGLE" id="4"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_CALL_SEQUENCE" id="5"/>
+    </method>
+    <method name="MapViewRotateEnd">
+      <doc>
+        <line>MapViewRotateEnd = MapViewRotateEnd = End the rotation gesture.</line>
+      </doc>
+      <arg direction="in" name="sessionHandle" type="u">
+        <doc>
+          <line>sessionHandle (of type Handle) = sessionHandle = Session handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle (of type Handle) = mapViewInstanceHandle = Map instance handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="velocity" type="q">
+        <doc>
+          <line>velocity = velocity = The remaining velocity of rotation, in degrees per second.</line>
+        </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.OK" id="0"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_SESSION_HANDLE" id="1"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_MAP_VIEW_INSTANCE_HANDLE" id="2"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_CALL_SEQUENCE" id="3"/>
+    </method>
+    <method name="MapViewPinchBegin">
+      <doc>
+        <line>MapViewPinchBegin = MapViewPinchBegin = Begin a pinch gesture.</line>
+      </doc>
+      <arg direction="in" name="sessionHandle" type="u">
+        <doc>
+          <line>sessionHandle (of type Handle) = sessionHandle = Session handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle (of type Handle) = mapViewInstanceHandle = Map instance handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="anchorPoint" type="(qq)">
+        <doc>
+          <line>anchorPoint (of type Pixel) = anchorPoint = Specifies coordinates in pixels on the screen where the gesture is anchored.</line>
+          <line>Pixel struct[x, y] = struct generated for DBus argument SetMapViewPan_pixelCoordinates</line>
+          <line>0: Pixel.x ('q') = Description missing</line>
+          <line>1: Pixel.y ('q') = Description missing</line>
+        </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.OK" id="0"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_SESSION_HANDLE" id="1"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_MAP_VIEW_INSTANCE_HANDLE" id="2"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_ANCHOR_POINT" id="3"/>
+    </method>
+    <method name="MapViewPinchUpdate">
+      <doc>
+        <line>MapViewPinchUpdate = MapViewPinchUpdate = Provide an update for the pinch gesture.</line>
+      </doc>
+      <arg direction="in" name="sessionHandle" type="u">
+        <doc>
+          <line>sessionHandle (of type Handle) = sessionHandle = Session handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle (of type Handle) = mapViewInstanceHandle = Map instance handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="anchorPoint" type="(qq)">
+        <doc>
+          <line>anchorPoint (of type Pixel) = anchorPoint = Specifies coordinates in pixels on the screen where the gesture is anchored.</line>
+          <line>Pixel struct[x, y] = struct generated for DBus argument SetMapViewPan_pixelCoordinates</line>
+          <line>0: Pixel.x ('q') = Description missing</line>
+          <line>1: Pixel.y ('q') = Description missing</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="scaleFactor" type="d">
+        <doc>
+          <line>scaleFactor = scaleFactor = Scale factor relative to the scale during mapViewPinchBegin call</line>
+        </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.OK" id="0"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_SESSION_HANDLE" id="1"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_MAP_VIEW_INSTANCE_HANDLE" id="2"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_ANCHOR_POINT" id="3"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_CALL_SEQUENCE" id="4"/>
+    </method>
+    <method name="MapViewPinchEnd">
+      <doc>
+        <line>MapViewPinchEnd = MapViewPinchEnd = End the pinch gesture.</line>
+      </doc>
+      <arg direction="in" name="sessionHandle" type="u">
+        <doc>
+          <line>sessionHandle (of type Handle) = sessionHandle = Session handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle (of type Handle) = mapViewInstanceHandle = Map instance handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="velocity" type="d">
+        <doc>
+          <line>velocity = velocity = The remaining velocity of scale, in scale factor per second.</line>
+        </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.OK" id="0"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_SESSION_HANDLE" id="1"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_MAP_VIEW_INSTANCE_HANDLE" id="2"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_CALL_SEQUENCE" id="3"/>
+    </method>
+    <method name="MapViewTiltBegin">
+      <doc>
+        <line>MapViewTiltBegin = MapViewTiltBegin = Begin a tilt gesture.</line>
+      </doc>
+      <arg direction="in" name="sessionHandle" type="u">
+        <doc>
+          <line>sessionHandle (of type Handle) = sessionHandle = Session handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle (of type Handle) = mapViewInstanceHandle = Map instance handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="anchorPoint" type="(qq)">
+        <doc>
+          <line>anchorPoint (of type Pixel) = anchorPoint = Specifies coordinates in pixels on the screen where the gesture is started.</line>
+          <line>Pixel struct[x, y] = struct generated for DBus argument SetMapViewPan_pixelCoordinates</line>
+          <line>0: Pixel.x ('q') = Description missing</line>
+          <line>1: Pixel.y ('q') = Description missing</line>
+        </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.OK" id="0"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_SESSION_HANDLE" id="1"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_MAP_VIEW_INSTANCE_HANDLE" id="2"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_ANCHOR_POINT" id="3"/>
+    </method>
+    <method name="MapViewTiltUpdate">
+      <doc>
+        <line>MapViewTiltUpdate = MapViewTiltUpdate = Provide an update for the tilt gesture.</line>
+      </doc>
+      <arg direction="in" name="sessionHandle" type="u">
+        <doc>
+          <line>sessionHandle (of type Handle) = sessionHandle = Session handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle (of type Handle) = mapViewInstanceHandle = Map instance handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="translation" type="i">
+        <doc>
+          <line>translation = scale = Current translation on y axis, in pixels from origin coordinates passed in mapViewTiltBegin.</line>
+        </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.OK" id="0"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_SESSION_HANDLE" id="1"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_MAP_VIEW_INSTANCE_HANDLE" id="2"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_CALL_SEQUENCE" id="3"/>
+    </method>
+    <method name="MapViewTiltEnd">
+      <doc>
+        <line>MapViewTiltEnd = MapViewTiltEnd = End the tilt gesture.</line>
+      </doc>
+      <arg direction="in" name="sessionHandle" type="u">
+        <doc>
+          <line>sessionHandle (of type Handle) = sessionHandle = Session handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle (of type Handle) = mapViewInstanceHandle = Map instance handle.</line>
+          <line>lineComment to be defined</line>
+        </doc>
+      </arg>
+      <arg direction="in" name="velocity" type="u">
+        <doc>
+          <line>velocity = velocity = The remaining velocity on the y axis, in pixels per second.</line>
+        </doc>
+      </arg>
+      <arg name="error" type="i" direction="out">
+      </arg>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.OK" id="0"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_SESSION_HANDLE" id="1"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_MAP_VIEW_INSTANCE_HANDLE" id="2"/>
+      <error name="org.genivi.navigation.mapviewer.MapViewerControl.Error.INVALID_CALL_SEQUENCE" id="3"/>
+    </method>
     <method name="SetMapViewRotation">
       <doc>
         <line>SetMapViewRotation = This method rotates the map</line>
@@ -1106,19 +1387,21 @@ cover with other windows or user interface elements</line>
       <doc>
         <line>GetMapViewRotation = This method is particularly interesting for debugging purposes</line>
       </doc>
-      <arg name="mapViewInstanceHandle" type="u" direction="in">
+      <arg direction="in" name="mapViewInstanceHandle" type="u">
         <doc>
-          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+          <line>mapViewInstanceHandle (of type Handle) = mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+          <line>lineComment to be defined</line>
         </doc>
       </arg>
-      <arg name="rotationAngle" type="i" direction="out">
+      <arg direction="out" name="rotationAngle" type="i">
         <doc>
-          <line>rotationAngle = rotation angle in degrees measured from the North axis clockwise. Range[0:360]</line>
+          <line>rotationAngle = rotationAngle = rotation angle in degrees measured from the North axis clockwise if possitive</line>
+          <line>or counter clockwise if negative. Range[-179:180].</line>
         </doc>
       </arg>
-      <arg name="rotationAnglePerFrame" type="i" direction="out">
+      <arg direction="out" name="rotationAnglePerSecond" type="i">
         <doc>
-          <line>rotationAnglePerFrame = partial rotation for each map frame in degrees</line>
+          <line>rotationAnglePerSecond = rotationAnglePerSecond = partial rotation angle per second</line>
         </doc>
       </arg>
     </method>
