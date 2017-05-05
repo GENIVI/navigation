@@ -1322,7 +1322,7 @@ interface MapViewerControl {
 			**>
 			PanAction panningAction
 			
-			Pixel [] pixelCoordinates
+			Pixel pixelCoordinates
 		}
 	}
 
@@ -1344,7 +1344,7 @@ interface MapViewerControl {
 		}
 		out {
 			
-			Pixel [] pixelCoordinates
+			Pixel pixelCoordinates
 		}
 	}
 

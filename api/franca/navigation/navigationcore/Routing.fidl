@@ -119,8 +119,8 @@ interface Routing {
 	}
 	
 	enumeration RouteOverviewType extends Schedule  {
-		TOTAL_TIME			= 398 //value of type UInt32, that represents the total time in seconds
-		TOTAL_DISTANCE		= 399 //value of type UInt32, that represents the total distance in m 
+		TOTAL_TIME     = 398 //value of type UInt32, represents the total time (in seconds) takes to navigate from the beginning of the route till destination
+		TOTAL_DISTANCE = 399 //value of type UInt32, that represents the total distance (in m) from the beginning of the route till destination 
 	}
 
 	union RouteOverviewItem {

@@ -1044,9 +1044,9 @@ cover with other windows or user interface elements</line>
           <line>PAN_END, pan the map to the specified screen coordinate identified by the arguments 'x' and 'y' and end panning; it has no effect before PAN_START</line>
         </doc>
       </arg>
-      <arg name="pixelCoordinates" type="a(qq)" direction="in">
+      <arg name="pixelCoordinates" type="(qq)" direction="in">
         <doc>
-          <line>pixelCoordinates = array[struct(x,y)]</line>
+          <line>pixelCoordinates = struct(x,y)</line>
           <line>x = x-coordinate (x=0 indicates the first left pixel of the map view)</line>
           <line>y = y-coordinate (y=0 indicates the first top pixel of the map view)</line>
         </doc>
@@ -1067,9 +1067,9 @@ cover with other windows or user interface elements</line>
           <line>valueToReturn = enum(PAN_START,PAN_TO,PAN_END)</line>
         </doc>
       </arg>
-      <arg name="pixelCoordinates" type="a(qq)" direction="out">
+      <arg name="pixelCoordinates" type="(qq)" direction="out">
         <doc>
-          <line>pixelCoordinates = array[struct(x,y)]</line>
+          <line>pixelCoordinates = struct(x,y)</line>
           <line>x = x-coordinate (x=0 indicates the first left pixel of the map view)</line>
           <line>y = y-coordinate (y=0 indicates the first top pixel of the map view)</line>
         </doc>

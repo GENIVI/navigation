@@ -447,31 +447,24 @@ class  MapViewerControl
 	}
 
     void
-    SetMapViewPan(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const DBusCommonAPIEnumeration& panningAction, const std::vector< ::DBus::Struct< uint16_t, uint16_t > >& pixelCoordinates)
+    SetMapViewPan(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const DBusCommonAPIEnumeration& panningAction, const ::DBus::Struct< uint16_t, uint16_t >& pixelCoordinates)
     {
-        ::DBus::Struct< uint16_t, uint16_t > pixel;
         MapViewerControlObj *obj=handles[mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
         else {
-            if (pixelCoordinates.size())
-            {
-                pixel = pixelCoordinates.at(0);
-                obj->SetMapViewPan(sessionHandle, panningAction, pixel);
-            }
+            obj->SetMapViewPan(sessionHandle, panningAction, pixelCoordinates);
         }
     }
 
-    std::vector< ::DBus::Struct< uint16_t, uint16_t > >
+    ::DBus::Struct< uint16_t, uint16_t >
     GetMapViewPan(const uint32_t& mapViewInstanceHandle, const int32_t& valueToReturn)
     {
-        std::vector< ::DBus::Struct< uint16_t, uint16_t > > pixelCoordinates;
-        ::DBus::Struct< uint16_t, uint16_t > pixel;
+        ::DBus::Struct< uint16_t, uint16_t > pixelCoordinates;
         MapViewerControlObj *obj=handles[mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        else obj->GetMapViewPan(valueToReturn, pixel); //limited to one pixel coordinate
-        pixelCoordinates.push_back(pixel);
+        else obj->GetMapViewPan(valueToReturn, pixelCoordinates); //limited to one pixel coordinate
         return pixelCoordinates;
     }
 

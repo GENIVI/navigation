@@ -166,8 +166,8 @@ interface Guidance {
 		@description : struct generated for DBus argument GetManeuversList_maneuversListElem6
 	**>
 	struct ManeuverItem {
-		UInt32 offsetOfManeuver
-		UInt32 travelTime
+		UInt32 offsetOfManeuver //the offset of the maneuver in meters from the beginning of the route
+		UInt32 travelTime //time to reach the maneuver in second from the current position. Value 0 is returned If the maneuver is already passed
 		ManeuverDirectionType direction
 		ManeuverType maneuver
 		ManeuverData maneuverData
@@ -323,7 +323,7 @@ interface Guidance {
 			UInt32 offset
 
 			<**
-				@description : travelTime = time to reach the destination in second
+				@description : travelTime = time to reach the destination in second from the current position
 			**>
 			UInt32 travelTime
 

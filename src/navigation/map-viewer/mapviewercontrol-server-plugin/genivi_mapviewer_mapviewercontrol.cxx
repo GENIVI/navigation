@@ -802,17 +802,12 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
     /**
      * description: setMapViewPan = This method pans a given map instance
      */
-    void setMapViewPan(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, MapViewerControl::PanAction _panningAction, std::vector<MapViewerControl::Pixel> _pixelCoordinates, setMapViewPanReply_t _reply){
-        MapViewerControl::Pixel pixel;
+    void setMapViewPan(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, MapViewerControl::PanAction _panningAction, MapViewerControl::Pixel _pixelCoordinates, setMapViewPanReply_t _reply){
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
         else {
-            if (_pixelCoordinates.size())
-            {
-                pixel = _pixelCoordinates.at(0);
-                obj->SetMapViewPan(_sessionHandle, _panningAction, pixel);
-            }
+                obj->SetMapViewPan(_sessionHandle, _panningAction, _pixelCoordinates);
         }
         _reply();
     }
@@ -821,13 +816,11 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
      * description: getMapViewPan
      */
     void getMapViewPan(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, MapViewerControl::PanAction _valueToReturn, getMapViewPanReply_t _reply){
-        MapViewerControl::Pixel pixel;
-        std::vector<MapViewerControl::Pixel> _pixelCoordinates;
+        MapViewerControl::Pixel _pixelCoordinates;
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-        else obj->GetMapViewPan(_valueToReturn, pixel); //limited to one pixel coordinate
-        _pixelCoordinates.push_back(pixel);
+        else obj->GetMapViewPan(_valueToReturn, _pixelCoordinates); //limited to one pixel coordinate
         _reply(_pixelCoordinates);
     }
 
