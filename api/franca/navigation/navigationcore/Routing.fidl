@@ -135,7 +135,7 @@ interface Routing {
 		LATITUDE				= 160
 		LONGITUDE				= 161
 		ALTITUDE				= 162
-		LOCATION_INPUT			= 17
+		LOCATION_INPUT			= 177
 		WAYPOINT_TYPE			= 289
 	}
 		
