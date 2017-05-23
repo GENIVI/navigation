@@ -1,15 +1,21 @@
 # Test files for Navigation
 ## Synopsis
 These folders contain several files that allow to test the navigation.
-Some are for the GlibDBus version:
+
+The folder ./script contains the ones for the GlibDBus version:
 test-location-input.py
 test-address-input.py 
 test-map-viewer-control.py
 test-guidance.py
 test-route-calculation.py
 test-all
-and others (*-capi.py) are for the CommonAPI version
+
+The folder ./script-capi contains the ones for the CommonAPI version
 NB: For the time being, only the GlibDBus version of navigation runs well
+
+The folder ./resource contains the resource files (e.g. the address) used as input by the script
+
+The folder ./log contains the generated sequence charts (see below)  
 
 There's a mechanism to trig with DLT, so it's necessary to build some stuff before.
 
@@ -30,6 +36,7 @@ First, open a new terminal and launch the navigation by entering:
 ./run -r
 ```
 Unitary tests:
+(under ./script folder)
 ```
 ./test-location-input.py -l locations.xml
 ./test-route-calculation.py -r routes.xml

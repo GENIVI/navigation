@@ -69,9 +69,9 @@ HOUSE_NUMBER_STRING = list()
 # Default size of the list 
 WINDOW_SIZE = 20
 
-print '\n--------------------------\n' + \
+print('\n--------------------------\n' + \
       'LocationInput Test' + \
-      '\n--------------------------\n'
+      '\n--------------------------\n')
 
 parser = argparse.ArgumentParser(description='Location input Test for navigation PoC and FSA.')
 parser.add_argument('-l','--loc',action='store', dest='locations', help='List of locations in xml format')
@@ -213,39 +213,39 @@ def full_string_search(handle, search_string):
 
 def evaluate_address(address, guidable):
     test_passed = 0
-    print '\nAddress complete!\nEvaluating...'
+    print('\nAddress complete!\nEvaluating...')
     if COUNTRY_STRING[current_address_index] == '':
         test_passed = 1
     elif address[COUNTRY][1] == COUNTRY_STRING[current_address_index]:
-        print 'Country\t\t\t-> ok (' + address[COUNTRY][1] + ')'
+        print ('Country\t\t\t-> ok (' + address[COUNTRY][1] + ')')
         if CITY_STRING[current_address_index] == '':
             test_passed = 1
         elif address[CITY][1] == CITY_STRING[current_address_index]:
-            print 'City\t\t\t-> ok (' + address[CITY][1] + ')'
+            print ('City\t\t\t-> ok (' + address[CITY][1] + ')')
             if STREET_STRING[current_address_index] == '':
                 test_passed = 1
             elif address[STREET][1] == STREET_STRING[current_address_index]:
-                print 'Street\t\t\t-> ok (' + address[STREET][1] + ')'
+                print ('Street\t\t\t-> ok (' + address[STREET][1] + ')')
                 if HOUSE_NUMBER_STRING[current_address_index] == '':
                     test_passed = 1
                 elif address[HOUSE_NUMBER][1] == HOUSE_NUMBER_STRING[current_address_index]:
-                    print 'House number\t-> ok (' + address[HOUSE_NUMBER][1] + ')'
+                    print ('House number\t-> ok (' + address[HOUSE_NUMBER][1] + ')')
                     test_passed = 1
 
     if guidable == 1:
         if test_passed == 1:
-            print 'TEST PASSED'
+            print ('TEST PASSED')
         else:
-            print 'TEST FAILED (wrong address)'
+            print('TEST FAILED (wrong address)')
             exit()
     else:
-        print 'TEST FAILED (non-guidable address)'
+        print ('TEST FAILED (non-guidable address)')
         exit()
     address_index = current_address_index + 1
     if address_index < len(COUNTRY_STRING):
         startSearch(address_index)
     else:
-        print 'END OF THE TEST'
+        print ('END OF THE TEST')
         exit()
 
 
@@ -321,7 +321,7 @@ def search_result_list_handler(handle, total_size, window_offset, window_size, r
                   '\' (Session '+str(int(session_handle)) + ' LocationInputHandle ' + str(int(handle))+')')
             location_input_interface.SelectEntry(dbus.UInt32(session_handle), dbus.UInt32(handle), dbus.UInt16(0))
         else:
-            print '\nTEST FAILED (Unexpected single result list)'
+            print ('\nTEST FAILED (Unexpected single result list)')
             exit()
     elif spell_next_character == 1:
         spell_next_character = 0
@@ -344,8 +344,8 @@ bus.add_signal_receiver(content_updated_handler,
 
 # Timeout
 def timeout():
-    print 'Timeout Expired'
-    print '\nTEST FAILED\n'
+    print ('Timeout Expired')
+    print ('\nTEST FAILED\n')
     exit()
 
 # Exit
@@ -363,6 +363,7 @@ def startSearch(address_index):
     global available_characters
     global target_search_string
     global current_address_index
+    global entered_search_string
     current_address_index = address_index
     entered_search_string = ''
     found_exact_match = 0
@@ -380,7 +381,7 @@ session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigatio
 # Get SessionHandle
 ret = session_interface.CreateSession(dbus.String('test location input'))
 session_handle=ret[1]
-print 'Session handle = ' + str(session_handle)
+print ('Session handle = ' + str(session_handle))
 
 location_input_obj = bus.get_object('org.genivi.navigation.navigationcore.LocationInput', '/org/genivi/navigationcore')
 location_input_interface = dbus.Interface(location_input_obj, dbus_interface='org.genivi.navigation.navigationcore.LocationInput')
@@ -388,10 +389,10 @@ location_input_interface = dbus.Interface(location_input_obj, dbus_interface='or
 # Get LocationInputHandle
 ret = location_input_interface.CreateLocationInput(dbus.UInt32(session_handle))
 location_input_handle = ret[1]
-print 'LocationInput handle = ' + str(location_input_handle)
+print ('LocationInput handle = ' + str(location_input_handle))
 
 attributes = location_input_interface.GetSupportedAddressAttributes()
-print 'Initially supported address attributes = ' + selection_criteria_array_to_string(attributes)
+print ('Initially supported address attributes = ' + selection_criteria_array_to_string(attributes))
 
 # Configuration
 current_address_index = 0

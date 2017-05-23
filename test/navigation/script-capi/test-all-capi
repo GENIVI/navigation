@@ -1,0 +1,12 @@
+#!/bin/bash
+
+./test-location-input-capi.py -l ../resource/locations.xml
+sleep 2
+./test-route-calculation-capi.py -r ../resource/routes.xml
+sleep 2
+./test-address-input-capi.py -l ../resource/location.xml
+sleep 2
+./test-guidance-capi.py -r ../resource/route.xml
+sleep 2
+./test-map-viewer-control-capi.py ../resource/location.xml
+

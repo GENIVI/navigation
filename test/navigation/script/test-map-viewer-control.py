@@ -55,6 +55,10 @@ SPLIT_SCREEN = 0x0011
 HORIZONTAL_SIZE = 800
 VERTICAL_SIZE = 480
 TIME_OUT = 20000
+INIT_SCALE=2
+TEST_STEP_START=0
+TEST_STEP_SCALE=1
+TEST_STEP_ROTATE=2
 
 # List of coordinates
 LATITUDE = list()
@@ -67,46 +71,71 @@ HOUSE_NUMBER_STRING = list()
 
 def mapviewer_mapViewScaleChanged_handler(mapViewInstanceHandle,scale,isMinMax):
     global g_scale
+    global step
     new_scale=int(scale)
     print("Scale: "+str(new_scale))
     print('Is min max: '+str(int(isMinMax)))
-    time.sleep(0.25)
-    if g_scale > new_scale and isMinMax !=MAPVIEWER_MIN:
-        print("Zoom in")
-        g_scale=new_scale
-        MapViewerControl_interface.SetMapViewScaleByDelta( \
-            dbus.UInt32(sessionhandle), \
-            dbus.UInt32(mapviewerhandle), \
-            dbus.Int16(-1))
-    else:
-        if isMinMax !=MAPVIEWER_MAX:
-            print("Zoom out")
+    if step ==TEST_STEP_SCALE:
+        time.sleep(0.25)
+        if g_scale > new_scale and isMinMax !=MAPVIEWER_MIN:
+            print("Zoom in")
             g_scale=new_scale
             MapViewerControl_interface.SetMapViewScaleByDelta( \
                 dbus.UInt32(sessionhandle), \
                 dbus.UInt32(mapviewerhandle), \
-                dbus.Int16(1))
+                dbus.Int16(-1))
         else:
-            print 'Test PASSED'
-            MapViewerControl_interface.ReleaseMapViewInstance( \
-                dbus.UInt32(sessionhandle), \
-                dbus.UInt32(mapviewerhandle))
-            session_interface.DeleteSession(sessionhandle)
-            exit()
+            if isMinMax !=MAPVIEWER_MAX:
+                print("Zoom out")
+                g_scale=new_scale
+                MapViewerControl_interface.SetMapViewScaleByDelta( \
+                    dbus.UInt32(sessionhandle), \
+                    dbus.UInt32(mapviewerhandle), \
+                    dbus.Int16(1))
+            else:
+                print('Test scale PASSED')
+                next_step()
 
 #timeout
 def timeout():
-    print 'Timeout Expired'
-    print '\nTest FAILED'
+    print('Timeout Expired') 
+    print ('\nTest FAILED')
     exit()
 
+
 def exit():
+    MapViewerControl_interface.ReleaseMapViewInstance( \
+        dbus.UInt32(sessionhandle), \
+        dbus.UInt32(mapviewerhandle))
+    session_interface.DeleteSession(sessionhandle)
     stopTrigger(test_name)
     loop.quit()
 
-print '\n--------------------------'
-print 'MapViewerControl Test'
-print '--------------------------\n'
+def next_step():
+    global step
+    if step == TEST_STEP_START:
+        step=TEST_STEP_SCALE
+        print ('Test scale')
+        MapViewerControl_interface.SetMapViewScale( \
+        dbus.UInt32(sessionhandle), \
+        dbus.UInt32(mapviewerhandle), \
+        dbus.UInt16(INIT_SCALE))
+    else:
+            if step ==TEST_STEP_SCALE:
+                step=TEST_STEP_ROTATE
+                print ('Test rotate')
+                MapViewerControl_interface.SetMapViewScale( \
+                    dbus.UInt32(sessionhandle), \
+                    dbus.UInt32(mapviewerhandle), \
+                    dbus.UInt16(INIT_SCALE))
+                exit()
+            else:
+                    if step ==TEST_STEP_ROTATE:
+                        exit()
+        
+print('\n--------------------------')
+print('MapViewerControl Test')
+print('--------------------------\n')
 
 parser = argparse.ArgumentParser(description='Map Viewer Test for navigation PoC and FSA.')
 parser.add_argument('-l','--loc',action='store', dest='locations', help='List of locations in xml format')
@@ -158,13 +187,13 @@ session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigatio
 #get session handle
 ret = session_interface.CreateSession(dbus.String("test mapviewer"))
 sessionhandle=ret[1]
-print 'Session handle: ' + str(sessionhandle)
+print('Session handle: ' + str(sessionhandle))
 
 sessionstatus = session_interface.GetSessionStatus(dbus.UInt32(sessionhandle));
-print 'Session status: ' + str(sessionstatus)
+print ('Session status: ' + str(sessionstatus))
 
 sessionlist = session_interface.GetAllSessions();
-print 'Active sessions = ' + str(len(sessionlist))
+print( 'Active sessions = ' + str(len(sessionlist)))
 
 MapViewerControl_obj = bus.get_object('org.genivi.navigation.mapviewer.MapViewerControl','/org/genivi/mapviewer')
 MapViewerControl_interface = dbus.Interface(MapViewerControl_obj, dbus_interface='org.genivi.navigation.mapviewer.MapViewerControl')
@@ -176,7 +205,7 @@ ret = MapViewerControl_interface.CreateMapViewInstance( \
   dbus.Int32(MAIN_MAP))
 mapviewerhandle=ret[1]
 
-print 'MapView handle: ' + str(mapviewerhandle)
+print('MapView handle: ' + str(mapviewerhandle))
 
 index=0
 
@@ -186,13 +215,13 @@ alt1 = ALTITUDE[index]
 
 time.sleep(2)
 
-print 'Stop following the car position' 
+print ('Stop following the car position') 
 MapViewerControl_interface.SetFollowCarMode( \
     dbus.UInt32(sessionhandle), \
     dbus.UInt32(mapviewerhandle), \
     dbus.Boolean(False))
 
-print 'Set center in '+ CITY_STRING[index]+ ' (' + str(lat1) + ',' + str(lon1) + ')' 
+print('Set center in '+ CITY_STRING[index]+ ' (' + str(lat1) + ',' + str(lon1) + ')') 
 MapViewerControl_interface.SetTargetPoint( \
     dbus.UInt32(sessionhandle), \
     dbus.UInt32(mapviewerhandle), \
@@ -206,16 +235,16 @@ lat2 = targetPoint[0]
 lon2 = targetPoint[1]
 alt2 = targetPoint[2]
 
-print 'Get center -> (' + str(lat2) + ',' + str(lon2) + ')'  
+print ('Get center -> (' + str(lat2) + ',' + str(lon2) + ')' ) 
 
 if round(float(lat1),4) != round(float(lat2),4) :
-    print '\nTest Failed:' + str(round(float(lat1),4)) + '!=' + str(round(float(lat2),4))  + '\n' 
+    print ('\nTest Failed:' + str(round(float(lat1),4)) + '!=' + str(round(float(lat2),4))  + '\n' )
 
 if round(float(lon1),4) != round(float(lon2),4) :
-    print '\nTest Failed:' + str(round(float(lon1),4)) + '!=' + str(round(float(lon2),4))  + '\n' 
+    print('\nTest Failed:' + str(round(float(lon1),4)) + '!=' + str(round(float(lon2),4))  + '\n' )
 
 if round(float(alt1),4) != round(float(alt2),4) :
-    print '\nTest Failed:' + str(round(float(alt1),4)) + '!=' + str(round(float(alt2),4))  + '\n'
+    print('\nTest Failed:' + str(round(float(alt1),4)) + '!=' + str(round(float(alt2),4))  + '\n')
 
 ret=MapViewerControl_interface.GetMapViewScale(dbus.UInt32(mapviewerhandle))
 print('Scale: '+str(int(ret[0])))
@@ -223,11 +252,8 @@ print('Is min max: '+str(int(ret[1])))
 
 g_scale=int(ret[0])
 
-print 'Zoom in'
-MapViewerControl_interface.SetMapViewScaleByDelta( \
-    dbus.UInt32(sessionhandle), \
-    dbus.UInt32(mapviewerhandle), \
-    dbus.Int16(-1))
+step=TEST_STEP_START
+next_step()
 
 #main loop 
 gobject.timeout_add(TIME_OUT, timeout)

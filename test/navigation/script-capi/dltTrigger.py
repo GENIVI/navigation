@@ -28,7 +28,7 @@
 import subprocess,os
 from subprocess import call 
 
-PATH_TEST_TRIGGER='./dlt-triggers/bin/'
+PATH_TEST_TRIGGER='../dlt-triggers/bin/'
 
 def startTrigger(name): 
 	FNULL = open(os.devnull,'w')

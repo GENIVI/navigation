@@ -2,7 +2,7 @@
 
 build_option=""
 positioning_version='9725fe1f553197042d6445997690d452a73490c0'
-navit_version='658060b86596efb270cfcd21e118a9071f5d5092'
+navit_version='1e71b5fd4c0bf5ac96e5207c51db7d17057ed798'
 
 echo "version of positioning is: $positioning_version"
 echo "version of navit is: $navit_version"
