@@ -3,7 +3,8 @@
 clean=0
 capi=0
 navit=0
-commonapi_tools_option=""
+dlt_option="-DWITH_DLT=OFF"
+commonapi_tools_option="-DWITH_PLUGIN_MIGRATION=OFF"
 
 function check_path_for_capi
 {
@@ -28,14 +29,17 @@ function check_path_for_capi
 		echo 'export DBUS_LIB_PATH=<path>'
 		exit 1
 	fi
-	commonapi_tools_option="-DDBUS_LIB_PATH="$DBUS_LIB_PATH" -DCOMMONAPI_DBUS_TOOL_DIR="$COMMONAPI_DBUS_TOOL_DIR" -DCOMMONAPI_TOOL_DIR="$COMMONAPI_TOOL_DIR
+	commonapi_tools_option="-DWITH_PLUGIN_MIGRATION=ON -DWITH_DBUS_INTERFACE=OFF -DDBUS_LIB_PATH="$DBUS_LIB_PATH" -DCOMMONAPI_DBUS_TOOL_DIR="$COMMONAPI_DBUS_TOOL_DIR" -DCOMMONAPI_TOOL_DIR="$COMMONAPI_TOOL_DIR
 }
  
-while getopts cmn opt
+while getopts cdmn opt
 do
 	case $opt in
 	c)
 		clean=1
+		;;
+	d)
+		dlt_option="-DWITH_DLT=ON"
 		;;
 	m)
 		capi=1
@@ -45,10 +49,11 @@ do
 		;;
 	\?)
 		echo "Usage:"
-		echo "$0 [-cmn]"
+		echo "$0 [-cdmn]"
 		echo "-c: build with clean"
-		echo "-m: build with commonAPI plugins "
-		echo "-n: Build navit"
+		echo "-d: build with dlt (only with -c)"
+		echo "-m: build with commonAPI plugins (only with -c) "
+		echo "-n: build navit"
 		exit 1
 	esac
 done
@@ -100,15 +105,7 @@ cd ../
 echo 'build navigation'
 if [ "$clean" = 1 ]
 then
-	if [ "$capi" = 0 ]
-	then
-		cmake -DWITH_PLUGIN_MIGRATION=OFF ../
-	else
-		cmake -DWITH_PLUGIN_MIGRATION=ON -DWITH_DBUS_INTERFACE=OFF $commonapi_tools_option ../
-		echo 'fix a bug in the generation of CommonAPI hpp'
-		sed -i -e 's/(const TimeStampedEnum::/(const ::v4::org::genivi::navigation::navigationcore::NavigationCoreTypes::TimeStampedEnum::/' ./franca/src-gen/v4/org/genivi/navigation/navigationcore/LocationInput.hpp
-		sed -i -e 's/(const TimeStampedEnum::/(const ::v4::org::genivi::navigation::navigationcore::NavigationCoreTypes::TimeStampedEnum::/' ./franca/src-gen/v4/org/genivi/navigation/navigationcore/MapMatchedPosition.hpp
-	fi
+	cmake $dlt_option $commonapi_tools_option ../
 	echo 'replace a missing font in the configuration file of navit instances'
 	sed -i -e 's/Liberation Sans/TakaoPGothic/' ./navit/navit/navit_genivi_mapviewer.xml
 	sed -i -e 's/Liberation Sans/TakaoPGothic/' ./navit/navit/navit_genivi_navigationcore.xml

@@ -18,6 +18,7 @@
 project(navigation)
 cmake_minimum_required(VERSION 2.8)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
+find_package(PkgConfig)
 
 option(WITH_DBUS_INTERFACE
        "Build using the D-Bus interfaces" ON)
@@ -140,6 +141,13 @@ else()
     add_subdirectory(${API_DIR}/navigation-core "${DBUS_GENERATED_INCLUDE_DIR}/navigation-core")
     add_subdirectory(${API_DIR}/map-viewer "${DBUS_GENERATED_INCLUDE_DIR}/map-viewer")
     add_subdirectory(${API_DIR}/poi-service "${DBUS_GENERATED_INCLUDE_DIR}/poi-service")
+endif()
+
+if(${WITH_DLT})
+    add_definitions("-DDLT_ENABLED=1")
+    pkg_check_modules(DLT REQUIRED automotive-dlt)
+    include_directories( ${DLT_INCLUDE_DIRS} )
+    set(LIBRARIES ${LIBRARIES} ${DLT_LIBRARIES})
 endif()
 
 add_subdirectory(navigation-core)

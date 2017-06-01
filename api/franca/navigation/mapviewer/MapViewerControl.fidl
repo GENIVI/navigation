@@ -631,9 +631,9 @@ interface MapViewerControl {
 	}
 	
 	<**
-		@description : CameraHeadingChanged = This signal is emitted when the heading angle of the camera changes
+		@description : cameraHeadingChanged = This signal is emitted when the heading angle of the camera changes
 	**>
-	broadcast CameraHeadingChanged {
+	broadcast cameraHeadingChanged {
 		out {
 		
 			<**
@@ -991,9 +991,9 @@ interface MapViewerControl {
 	}
 	
 	<**
-		@description : MapViewPerspectiveChanged = This signal is emitted when the map perspective chnages
+		@description : mapViewPerspectiveChanged = This signal is emitted when the map perspective chnages
 	**>
-	broadcast MapViewPerspectiveChanged {
+	broadcast mapViewPerspectiveChanged {
 		out {
 		
 			<**

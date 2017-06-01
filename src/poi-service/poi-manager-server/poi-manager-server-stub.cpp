@@ -1372,7 +1372,7 @@ void PoiManagerServerStub::addPOIs(const std::shared_ptr<CommonAPI::ClientId> _c
     }
     else
     {
-        firePOIAddedEvent(addedPoiList);
+        firePoiAddedEvent(addedPoiList);
     }
 
 }
@@ -1392,7 +1392,7 @@ void PoiManagerServerStub::removePOIs(const std::shared_ptr<CommonAPI::ClientId>
     }
     else
     {
-        firePOIRemovedEvent(_ids);
+        firePoiRemovedEvent(_ids);
     }
 }
 

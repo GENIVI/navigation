@@ -81,6 +81,7 @@ link_directories(
 )
 
 set(LIBRARIES
+    ${LIBRARIES}
     ${DBUS_LIBRARIES}
     ${COMMONAPI_LIBRARIES}
     ${COMMONAPI_DBUS_LIBRARIES}

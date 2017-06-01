@@ -37,7 +37,7 @@ echo '------------------------start the proof of concept------------------------
 cp $RESOURCE/poi-database-managed.db ./bin
 COMMONAPI_DEFAULT_CONFIG=$RESOURCE/commonapi4dbus.ini \
 COMMONAPI_DBUS_DEFAULT_CONFIG=$RESOURCE/commonapi-dbus.ini \
-$POI_MANAGER_SERVER_BIN_DIR/poi-manager-server -f $POI_MANAGER_SERVER_BIN_DIR/poi-database-managed.db &
+$POI_MANAGER_SERVER_BIN_DIR/poi-manager-server -f $POI_MANAGER_CLIENT_BIN_DIR/poi-database-managed.db &
 COMMONAPI_DEFAULT_CONFIG=$RESOURCE/commonapi4dbus.ini \
 COMMONAPI_DBUS_DEFAULT_CONFIG=$RESOURCE/commonapi-dbus.ini \
 $POI_MANAGER_CLIENT_BIN_DIR/poi-manager-client -t 

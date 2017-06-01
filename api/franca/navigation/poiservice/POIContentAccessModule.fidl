@@ -203,32 +203,32 @@ interface POIContentAccessModule {
 		}	
 	}
 	
-	<**	@description : ConfigurationChanged = This signal is sent to the clients when one or more configuration settings changes.**>
-	broadcast ConfigurationChanged {
+	<**	@description : configurationChanged = This signal is sent to the clients when one or more configuration settings changes.**>
+	broadcast configurationChanged {
 		out {
 			<**	@description : changedSettings array[setting].**>
 			Settings[] changedSettings
 		}
 	}
 
-	<**	@description : CategoriesRemoved = This signal is emitted when a list of categories and associated content has been removed from the database.**>
-	broadcast CategoriesRemoved {
+	<**	@description : categoriesRemoved = This signal is emitted when a list of categories and associated content has been removed from the database.**>
+	broadcast categoriesRemoved {
 		out {
 			<**	@description : List of categories removed.**>
 			CategoryID[] categories
 		}
 	}
 
-	<**	@description : POIAdded = This signal is emitted when a list of POIs and associated content has been added to the database. It returns the ids.**>
-	broadcast POIAdded {
+	<**	@description : poiAdded = This signal is emitted when a list of POIs and associated content has been added to the database. It returns the ids.**>
+	broadcast poiAdded {
 		out {
 			<**	@description : List of unique ids of POIs added. The order is the same as the order in the AddPOIs method.**>
 			POI_ID[] pois
 		}
 	}
 
-	<**	@description : POIRemoved = This signal is emitted when a list of POIs and associated content has been removed from the database.**>
-	broadcast POIRemoved {
+	<**	@description : poiRemoved = This signal is emitted when a list of POIs and associated content has been removed from the database.**>
+	broadcast poiRemoved {
 		out {
 			<**	@description : List of unique ids of POIs removed.**>
 			POI_ID[] pois
@@ -236,7 +236,7 @@ interface POIContentAccessModule {
 	}
 
 	<**	@description : SearchStatusChanged = This signal updates the search or proximity alert status of the specified handle.**>	
-	broadcast SearchStatusChanged {
+	broadcast searchStatusChanged {
 		out {
 			<** @description : poi search unique handle.**>
 			Handle poiSearchHandle				

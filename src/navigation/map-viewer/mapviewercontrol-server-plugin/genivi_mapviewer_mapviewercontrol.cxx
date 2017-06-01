@@ -65,6 +65,10 @@
 #include <RoutingProxy.hpp>
 #include <navigationcore/SessionProxy.hpp>
 
+#include "log.h"
+
+DLT_DECLARE_CONTEXT(gCtx);
+
 #if (!DEBUG_ENABLED)
 #undef dbg
 #define dbg(level,...) ;
@@ -1195,13 +1199,11 @@ MapViewerControlObj::SetMapViewScale(NavigationTypes::Handle SessionHandle, uint
 void
 MapViewerControlObj::SetMapViewScaleByDelta(NavigationTypes::Handle SessionHandle, int16_t ScaleDelta)
 {
-    if (!ScaleDelta)
-		throw DBus::ErrorInvalidArgs("ScaleDelta must not be 0");
-    else {
-        if (ScaleDelta < 0)
-            navit_zoom_out(m_navit.u.navit,1 << (-ScaleDelta),NULL);
-        else navit_zoom_in(m_navit.u.navit,1 << ScaleDelta,NULL);
-    }
+    LOG_INFO(gCtx,"Delta=%d",ScaleDelta);
+    if (ScaleDelta < 0)
+        navit_zoom_in(m_navit.u.navit,1 << (-ScaleDelta),NULL);
+    else if (ScaleDelta > 0)
+        navit_zoom_out(m_navit.u.navit,1 << ScaleDelta,NULL);
 }
 
 void
@@ -1209,21 +1211,18 @@ MapViewerControlObj::GetMapViewScale(uint8_t& ScaleID, MapViewerControl::MapScal
 {
 	struct transformation *trans=navit_get_trans(m_navit.u.navit);
 	long scale=transform_get_scale(trans);
-    if (scale >= 2097152)
-        IsMinMax=MapViewerControl::MapScaleType::MAX;
-    else {
-        if (scale <= 1) {
-            IsMinMax=MapViewerControl::MapScaleType::MIN;
-        } else {
+    if (scale <= 1)
+        IsMinMax=MapViewerControl::MapScaleType::MIN;
+    else
+        if (scale >= 2097152)
+            IsMinMax=MapViewerControl::MapScaleType::MAX;
+        else
             IsMinMax=MapViewerControl::MapScaleType::MID;
-            ScaleID=0;
-            while (scale > 1) { //strange code here, to be investigated ?
-                scale >>=1;
-                ScaleID++;
-            }
-        }
+    ScaleID=0;
+    while (scale > 1) {
+        scale >>=1;
+        ScaleID++;
     }
-
 }
 
 void
@@ -1973,6 +1972,9 @@ DisplayedRoute::~DisplayedRoute()
 void
 plugin_init(void)
 {
+    DLT_REGISTER_APP("MPVS","MAP VIEWER CONTROL SERVER");
+    DLT_REGISTER_CONTEXT(gCtx,"MPVS","Global Context");
+
     dbg(lvl_debug,"enter\n");
     event_request_system("glib","genivi_mapviewercontrol");
 
@@ -1991,19 +1993,27 @@ plugin_init(void)
         successfullyRegistered = runtime->registerService(domain, instanceMapViewerControl, myServiceMapViewerControl);
     }
 
+    LOG_INFO_MSG(gCtx,"map viewer control server");
+
     //init the session client
     const std::string instanceNavigationCoreSession = "Session";
     mp_navigationCoreSessionClientProxy = new NavigationCoreSessionClientProxy(domain,instanceNavigationCoreSession);
+
+    LOG_INFO_MSG(gCtx,"session client");
 
     //init the routing client
     const std::string instanceRouting = "Routing";
     mp_routingClientProxy = new RoutingClientProxy(domain,instanceRouting);
     mp_routingClientProxy->setListeners();
 
+    LOG_INFO_MSG(gCtx,"routing client");
+
     // init the map matched position client
     const std::string instanceMapMatchedPosition = "MapMatchedPosition";
     mp_mapMatchedPositionClientProxy = new MapMatchedPositionClientProxy(domain,instanceMapMatchedPosition);
     mp_mapMatchedPositionClientProxy->setListeners();
+
+    LOG_INFO_MSG(gCtx,"map matched position client");
 
 #if LM
     if (ilm_init() != ILM_SUCCESS) {

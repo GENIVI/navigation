@@ -64,15 +64,15 @@ public:
 
     void getServerStatus();
 
-    void ConfigurationChanged(const std::vector<POIServiceTypes::Settings> &changedSettings);
+    void configurationChanged(const std::vector<POIServiceTypes::Settings> &changedSettings);
 
-    void CategoriesRemoved(const std::vector< CommonTypes::CategoryID >& categories);
+    void categoriesRemoved(const std::vector< CommonTypes::CategoryID >& categories);
 
-    void POIAdded(const std::vector< POIServiceTypes::POI_ID >& pois);
+    void poiAdded(const std::vector< POIServiceTypes::POI_ID >& pois);
 
-    void POIRemoved(const std::vector< POIServiceTypes::POI_ID >& pois);
+    void poiRemoved(const std::vector< POIServiceTypes::POI_ID >& pois);
 
-    void SearchStatusChanged(const NavigationTypes::Handle &handle, const POIServiceTypes::SearchStatusState &searchStatusState, const std::vector<POIServiceTypes::POI_ID> &pois);
+    void searchStatusChanged(const NavigationTypes::Handle &handle, const POIServiceTypes::SearchStatusState &searchStatusState, const std::vector<POIServiceTypes::POI_ID> &pois);
 
     void connectPopupWindow(GtkWidget *window);
 
@@ -236,7 +236,7 @@ void contentManager::getServerStatus()
 
 }
 
-void contentManager::ConfigurationChanged(const std::vector< POIServiceTypes::Settings >& changedSettings)
+void contentManager::configurationChanged(const std::vector< POIServiceTypes::Settings >& changedSettings)
 {
     size_t index;
 
@@ -248,7 +248,7 @@ void contentManager::ConfigurationChanged(const std::vector< POIServiceTypes::Se
     }
 }
 
-void contentManager::CategoriesRemoved(const std::vector<CommonTypes::CategoryID> &categories)
+void contentManager::categoriesRemoved(const std::vector<CommonTypes::CategoryID> &categories)
 {
     size_t index;
 
@@ -264,7 +264,7 @@ void contentManager::CategoriesRemoved(const std::vector<CommonTypes::CategoryID
     dumpCategories();
 }
 
-void contentManager::POIAdded(const std::vector<POIServiceTypes::POI_ID> &pois)
+void contentManager::poiAdded(const std::vector<POIServiceTypes::POI_ID> &pois)
 {
     size_t index;
 
@@ -276,7 +276,7 @@ void contentManager::POIAdded(const std::vector<POIServiceTypes::POI_ID> &pois)
     }
 }
 
-void contentManager::POIRemoved(const std::vector<POIServiceTypes::POI_ID> &pois)
+void contentManager::poiRemoved(const std::vector<POIServiceTypes::POI_ID> &pois)
 {
     size_t index;
 
@@ -287,7 +287,7 @@ void contentManager::POIRemoved(const std::vector<POIServiceTypes::POI_ID> &pois
 
 }
 
-void contentManager::SearchStatusChanged(const NavigationTypes::Handle &handle, const POIServiceTypes::SearchStatusState &searchStatusState, const std::vector<POIServiceTypes::POI_ID> &pois)
+void contentManager::searchStatusChanged(const NavigationTypes::Handle &handle, const POIServiceTypes::SearchStatusState &searchStatusState, const std::vector<POIServiceTypes::POI_ID> &pois)
 {
     size_t index;
 
@@ -639,19 +639,19 @@ int main(int  argc , char**  argv )
 
             // Connect the DBus signals
             myProxy->getCategoriesRemovedEvent().subscribe([&](const std::vector<CommonTypes::CategoryID>& categories) {
-                clientContentManager->CategoriesRemoved(categories);
+                clientContentManager->categoriesRemoved(categories);
             });
             myProxy->getConfigurationChangedEvent().subscribe([&](const std::vector< POIServiceTypes::Settings >& changedSettings) {
-                clientContentManager->ConfigurationChanged(changedSettings);
+                clientContentManager->configurationChanged(changedSettings);
             });
-            myProxy->getPOIAddedEvent().subscribe([&](const std::vector< POIServiceTypes::POI_ID >& pois) {
-                clientContentManager->POIAdded(pois);
+            myProxy->getPoiAddedEvent().subscribe([&](const std::vector< POIServiceTypes::POI_ID >& pois) {
+                clientContentManager->poiAdded(pois);
             });
-            myProxy->getPOIRemovedEvent().subscribe([&](const std::vector< POIServiceTypes::POI_ID >& pois) {
-                clientContentManager->POIRemoved(pois);
+            myProxy->getPoiRemovedEvent().subscribe([&](const std::vector< POIServiceTypes::POI_ID >& pois) {
+                clientContentManager->poiRemoved(pois);
             });
             myProxy->getSearchStatusChangedEvent().subscribe([&](const NavigationTypes::Handle handle, const POIServiceTypes::SearchStatusState searchStatusState, const std::vector< POIServiceTypes::POI_ID >& pois ) {
-                clientContentManager->SearchStatusChanged(handle,searchStatusState,pois);
+                clientContentManager->searchStatusChanged(handle,searchStatusState,pois);
             });
 
             // Send a feedback to the user
