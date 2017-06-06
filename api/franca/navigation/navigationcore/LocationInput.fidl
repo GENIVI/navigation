@@ -53,6 +53,10 @@ interface LocationInput {
 		FULL_ADDRESS	= 178
 		POSTAL_CODE		= 181
 		ROADSHIELDS		= 182
+		BLOCK_NUMBER	= 0x0186
+		UNIT_NUMBER		= 0x0187
+		BEGIN_STREET	= 0x0188
+		ROAD_INTERSECTION = 0x0189 
 	}
 
     union AddressValue {
