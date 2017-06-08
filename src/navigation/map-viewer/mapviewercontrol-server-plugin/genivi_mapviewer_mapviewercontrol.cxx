@@ -64,7 +64,6 @@
 #include <MapMatchedPositionProxy.hpp>
 #include <RoutingProxy.hpp>
 #include <navigationcore/SessionProxy.hpp>
-
 #include "log.h"
 
 DLT_DECLARE_CONTEXT(gCtx);
@@ -120,7 +119,7 @@ class MapViewerControlObj
 	struct mapset *m_mapset;
 	uint32_t m_handle;
 	double m_scrolldirection, m_scrollspeed;
-        double m_rotationangle, m_rotationanglepersecond;
+    double m_rotationangle, m_rotationanglepersecond;
 
 	struct callback *m_postdraw_callback;
 	struct callback *m_move_callback;
@@ -134,7 +133,9 @@ class MapViewerControlObj
     uint16_t m_width;
     uint16_t m_height;
 
-	void MoveMap(void);
+    MapViewerControlObj(MapViewerControlServerStub *mapviewercontrol, NavigationTypes::Handle handle, const MapViewerControl::Dimension &MapViewSize);
+    ~MapViewerControlObj();
+    void MoveMap(void);
     void SetFollowCarMode(NavigationTypes::Handle SessionHandle, bool active);
     void GetFollowCarMode(bool& active);
     void SetCameraHeadingAngle(NavigationTypes::Handle SessionHandle, double angle);
@@ -151,7 +152,7 @@ class MapViewerControlObj
     void SetMapViewPerspective(NavigationTypes::Handle SessionHandle, MapViewerControl::MapPerspective MapViewPerspectiveMode);
     void GetMapViewPerspective(MapViewerControl::MapPerspective &MapViewPerspectiveMode);
     void GetScaleList(std::vector< MapViewerControl::MapScale >& ScalesList);
-    void SetMapViewScale(NavigationTypes::Handle SessionHandle, uint32_t ScaleID);
+    void SetMapViewScale(NavigationTypes::Handle SessionHandle, uint8_t ScaleID);
     void SetMapViewScaleByDelta(NavigationTypes::Handle SessionHandle, int16_t ScaleDelta);
     void GetMapViewScale(uint8_t& ScaleID, MapViewerControl::MapScaleType &IsMinMax);
     void GetMapViewType(MapViewerControl::MapViewType &MapViewType);
@@ -170,8 +171,6 @@ class MapViewerControlObj
     void HideRoute(NavigationTypes::Handle SessionHandle, NavigationTypes::Handle RouteHandle);
     void ConvertPixelCoordsToGeoCoords(NavigationTypes::Handle SessionHandle, const std::vector<MapViewerControl::Pixel> &pixelCoordinates, std::vector<NavigationTypes::Coordinate2D> &GeoCoordinates);
     void ConvertGeoCoordsToPixelCoords(NavigationTypes::Handle SessionHandle, const std::vector<NavigationTypes::Coordinate2D> &geoCoordinates, std::vector<MapViewerControl::Pixel> &pixelCoordinates);
-    MapViewerControlObj(MapViewerControlServerStub *mapviewercontrol, NavigationTypes::Handle handle, const MapViewerControl::Dimension &MapViewSize);
-	~MapViewerControlObj();
 };
 
 static std::map<uint32_t, MapViewerControlObj *> mp_handles;
@@ -323,6 +322,19 @@ class  NavigationCoreSessionClientProxy
     }
 };
 
+class ClientStub : public CommonAPI::ClientId
+{
+public:
+    ~ClientStub(){}
+    bool operator==(ClientId& clientIdToCompare) {
+        return true;
+    }
+
+    std::size_t hashCode() {
+        return 0;
+    }
+};
+
 class  MapViewerControlServerStub : public MapViewerControlStubDefault
 {
 	public:
@@ -336,7 +348,6 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         m_version.setVersionMinor(0);
         m_version.setVersionMicro(0);
         m_version.setDate("21-01-2014");
-
     }
 
     /**
@@ -447,6 +458,7 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
         else obj->SetFollowCarMode(_sessionHandle, _followCarMode);
+        fireFollowCarModeChangedEvent(_mapViewInstanceHandle,_followCarMode);
         _reply();
     }
 
@@ -709,17 +721,17 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
     /**
      * description: setMapViewScale = This method sets the map scale by specifying a ScaleID
      */
-    void setMapViewScale(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, uint16_t _scaleID, setMapViewScaleReply_t _reply){
-        dbg(lvl_debug,"enter\n");
+    void setMapViewScale(const std::shared_ptr<CommonAPI::ClientId> _client, ::v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ::v4::org::genivi::navigation::NavigationTypes::Handle _mapViewInstanceHandle, uint8_t _scaleID, setMapViewScaleReply_t _reply){
+        MapViewerControl::MapScaleType is_min_max=MapViewerControl::MapScaleType::INVALID;
         MapViewerControlObj *obj=mp_handles[_mapViewInstanceHandle];
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
         else  {
-            obj->SetMapViewScale(_sessionHandle, _scaleID);
-            uint8_t current_scale;
-            MapViewerControl::MapScaleType is_min_max;
-            obj->GetMapViewScale(current_scale,is_min_max);
-            fireMapViewScaleChangedSelective(_mapViewInstanceHandle,current_scale,is_min_max);
+//            obj->SetMapViewScale(_sessionHandle, _scaleID);
+//            obj->GetMapViewScale(_scaleID,is_min_max);
+            fireMapViewScaleChangedSelective(_mapViewInstanceHandle,_scaleID,is_min_max);
+            fireFollowCarModeChangedEvent(_mapViewInstanceHandle,false);
+
         }
         _reply();
     }
@@ -1069,7 +1081,6 @@ class  MapViewerControlServerStub : public MapViewerControlStubDefault
         throw DBus::ErrorNotSupported("Not yet supported");
     }
 
-
 private:
     CommonTypes::Version m_version;
 
@@ -1188,18 +1199,17 @@ MapViewerControlObj::GetScaleList(std::vector<MapViewerControl::MapScale> &Scale
 }
 
 void
-MapViewerControlObj::SetMapViewScale(NavigationTypes::Handle SessionHandle, uint32_t ScaleID)
+MapViewerControlObj::SetMapViewScale(NavigationTypes::Handle SessionHandle, uint8_t ScaleID)
 {
 	long scale=1 << ScaleID;
 	struct transformation *trans=navit_get_trans(m_navit.u.navit);
 	transform_set_scale(trans, scale);
-	navit_draw(m_navit.u.navit);
+    navit_draw(m_navit.u.navit);
 }
 
 void
 MapViewerControlObj::SetMapViewScaleByDelta(NavigationTypes::Handle SessionHandle, int16_t ScaleDelta)
 {
-    LOG_INFO(gCtx,"Delta=%d",ScaleDelta);
     if (ScaleDelta < 0)
         navit_zoom_in(m_navit.u.navit,1 << (-ScaleDelta),NULL);
     else if (ScaleDelta > 0)
@@ -1983,34 +1993,34 @@ plugin_init(void)
 
     // init the map viewer control server
     const std::string domain = "local";
-    const std::string instanceMapViewerControl = "MapViewerControl";
+    const std::string instanceMapViewerControlServer = "MapViewerControl";
 
     std::shared_ptr<MapViewerControlServerStub> myServiceMapViewerControl = std::make_shared<MapViewerControlServerStub>();
 
-    bool successfullyRegistered = runtime->registerService(domain, instanceMapViewerControl, myServiceMapViewerControl);
+    bool successfullyRegistered = runtime->registerService(domain, instanceMapViewerControlServer, myServiceMapViewerControl);
     while (!successfullyRegistered) {
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        successfullyRegistered = runtime->registerService(domain, instanceMapViewerControl, myServiceMapViewerControl);
+        successfullyRegistered = runtime->registerService(domain, instanceMapViewerControlServer, myServiceMapViewerControl);
     }
 
     LOG_INFO_MSG(gCtx,"map viewer control server");
 
     //init the session client
-    const std::string instanceNavigationCoreSession = "Session";
-    mp_navigationCoreSessionClientProxy = new NavigationCoreSessionClientProxy(domain,instanceNavigationCoreSession);
+    const std::string instanceNavigationCoreSessionClient = "Session";
+    mp_navigationCoreSessionClientProxy = new NavigationCoreSessionClientProxy(domain,instanceNavigationCoreSessionClient);
 
     LOG_INFO_MSG(gCtx,"session client");
 
     //init the routing client
-    const std::string instanceRouting = "Routing";
-    mp_routingClientProxy = new RoutingClientProxy(domain,instanceRouting);
+    const std::string instanceRoutingClient = "Routing";
+    mp_routingClientProxy = new RoutingClientProxy(domain,instanceRoutingClient);
     mp_routingClientProxy->setListeners();
 
     LOG_INFO_MSG(gCtx,"routing client");
 
     // init the map matched position client
-    const std::string instanceMapMatchedPosition = "MapMatchedPosition";
-    mp_mapMatchedPositionClientProxy = new MapMatchedPositionClientProxy(domain,instanceMapMatchedPosition);
+    const std::string instanceMapMatchedPositionClient = "MapMatchedPosition";
+    mp_mapMatchedPositionClientProxy = new MapMatchedPositionClientProxy(domain,instanceMapMatchedPositionClient);
     mp_mapMatchedPositionClientProxy->setListeners();
 
     LOG_INFO_MSG(gCtx,"map matched position client");

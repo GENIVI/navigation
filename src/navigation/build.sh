@@ -103,6 +103,10 @@ else
 fi
 cd ../
 echo 'build navigation'
+if [ "$capi" = 1 ]
+then
+	echo 'delete <selective> option because DBus does not manage it'
+fi
 if [ "$clean" = 1 ]
 then
 	cmake $dlt_option $commonapi_tools_option ../

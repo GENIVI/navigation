@@ -174,6 +174,7 @@ if __name__ == '__main__':
 
 #connect to session bus
 bus = dbus.SessionBus()
+result = bus.request_name("org.genivi.navigation.mapviewer.MapViewerClient", dbus.UInt32(0))
 
 bus.add_signal_receiver(mapviewer_mapViewScaleChanged_handler, \
                         dbus_interface = "org.genivi.navigation.mapviewer.MapViewerControl.v4_0", \
@@ -252,7 +253,7 @@ print('Scale: '+str(int(ret[0])))
 print('Is min max: '+str(int(ret[1])))
 
 g_scale=int(ret[0])
-
+time.sleep(2)
 step=TEST_STEP_START
 next_step()
 

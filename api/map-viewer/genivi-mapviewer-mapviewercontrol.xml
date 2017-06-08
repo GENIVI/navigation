@@ -2002,5 +2002,16 @@ cover with other windows or user interface elements</line>
         </doc>
       </arg>
     </method>
+    <signal name="MapViewRotated">
+      <doc>
+        <line>MapViewRotated = This signal is emitted when the rotation is achieved</line>
+	<line>This signal is meant for debugging purposes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+    </signal>
   </interface>
 </node>

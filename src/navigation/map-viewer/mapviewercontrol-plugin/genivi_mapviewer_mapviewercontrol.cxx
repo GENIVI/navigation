@@ -66,6 +66,10 @@
 
 #include "navigation-common-dbus.h"
 
+#include "log.h"
+
+DLT_DECLARE_CONTEXT(gCtx);
+
 #if (!DEBUG_ENABLED)
 #undef dbg
 #define dbg(level,...) ;
@@ -138,8 +142,8 @@ class MapViewerControlObj
 	void MoveMap(void);
     void SetFollowCarMode(uint32_t SessionHandle, bool active);
     void GetFollowCarMode(bool& active);
-    void SetCameraHeadingAngle(uint32_t sessionHandle, double angle);
-    void GetCameraHeadingAngle(double &angle);
+    void SetCameraHeadingAngle(uint32_t sessionHandle, int32_t angle);
+    void GetCameraHeading(DBusCommonAPIEnumeration& headingType, int32_t& headingAngle, ::DBus::Struct< double, double >& target);
     void SetCameraTiltAngle(uint32_t sessionHandle, double angle);
     void GetCameraTiltAngle(double &angle);
     void SetCameraRollAngle(uint32_t sessionHandle, double angle);
@@ -189,7 +193,8 @@ class Routing
 	: DBus::ObjectProxy(connection, "/org/genivi/navigationcore","org.genivi.navigation.navigationcore.Routing")
 	{
 		m_mapviewerobj=obj;
-	}
+        LOG_INFO_MSG(gCtx,"routing client");
+    }
 
 
     void RouteDeleted(const uint32_t& routeHandle)
@@ -243,7 +248,8 @@ class  NavigationCoreSession
 	NavigationCoreSession(DBus::Connection &connection)
 	: DBus::ObjectProxy(connection, "/org/genivi/navigationcore","org.genivi.navigation.navigationcore.Session")
 	{
-	}
+        LOG_INFO_MSG(gCtx,"session client");
+    }
     void SessionDeleted(const uint32_t& sessionHandle)
 	{
 	}
@@ -262,7 +268,8 @@ class  MapMatchedPosition
 	: DBus::ObjectProxy(connection, "/org/genivi/navigationcore","org.genivi.navigation.navigationcore.MapMatchedPosition")
 	{	
 		cb=callback_new_2(callback_cast(position_update), this, v);
-	}
+        LOG_INFO_MSG(gCtx,"map matched position client");
+    }
 
     void PositionUpdate(const std::vector< DBusCommonAPIEnumeration >& changedValues)
 	{
@@ -344,7 +351,8 @@ class  MapViewerControl
 	MapViewerControl(DBus::Connection &connection)
 	: DBus::ObjectAdaptor(connection, "/org/genivi/mapviewer")
 	{
-	}
+        LOG_INFO_MSG(gCtx,"map viewer control server");
+    }
 
     void
     CreateMapViewInstance(const uint32_t& sessionHandle, const ::DBus::Struct< uint16_t, uint16_t >& mapViewSize, const DBusCommonAPIEnumeration& mapViewType, int32_t& error, uint32_t& mapViewInstanceHandle)
@@ -386,9 +394,12 @@ class  MapViewerControl
     SetMapViewPerspective(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const DBusCommonAPIEnumeration& perspective)
 	{
         MapViewerControlObj *obj=handles[mapViewInstanceHandle];
-            if (!obj)
-                throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-            else obj->SetMapViewPerspective(sessionHandle, perspective);
+        if (!obj)
+            throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
+        else{
+            obj->SetMapViewPerspective(sessionHandle, perspective);
+            MapViewPerspectiveChanged(mapViewInstanceHandle,perspective);
+        }
 	}
 
     DBusCommonAPIEnumeration
@@ -417,8 +428,10 @@ class  MapViewerControl
                 throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
         else {
             obj->SetMapViewScale(SessionHandle, ScaleID);
-            //todo: manage the isminmax indicator
-            MapViewScaleChanged(MapViewInstanceHandle,ScaleID,GENIVI_MAPVIEWER_INVALID);
+            uint8_t current_scale;
+            DBusCommonAPIEnumeration is_min_max;
+            obj->GetMapViewScale(current_scale,is_min_max);
+            MapViewScaleChanged(MapViewInstanceHandle,current_scale,is_min_max);
         }
     }
 
@@ -723,7 +736,10 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-                else obj->SetMapViewRotation(sessionHandle, rotationAngle, rotationAnglePerSecond);
+        else {
+            obj->SetMapViewRotation(sessionHandle, rotationAngle, rotationAnglePerSecond);
+            MapViewRotated(mapViewInstanceHandle);
+        }
 	}
 
 	void
@@ -848,7 +864,7 @@ class  MapViewerControl
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-                else obj->SetCameraHeadingTrackUp(sessionHandle);
+        else obj->SetCameraHeadingTrackUp(sessionHandle);
 	}
 
 	void
@@ -866,8 +882,11 @@ class  MapViewerControl
 	void
     GetCameraHeading(const uint32_t& mapViewInstanceHandle, DBusCommonAPIEnumeration& headingType, int32_t& headingAngle, ::DBus::Struct< double, double >& target)
 	{
-		throw DBus::ErrorNotSupported("Not yet supported");
-	}
+        MapViewerControlObj *obj=handles[mapViewInstanceHandle];
+        if (!obj)
+            throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
+        else obj->GetCameraHeading(headingType,headingAngle,target);
+    }
 
     std::vector< uint32_t >
     DisplayCustomElements(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const std::vector< ::DBus::Struct< std::string, std::string, ::DBus::Struct< double, double >, ::DBus::Struct< int16_t, int16_t > > >& customElements)
@@ -1217,7 +1236,7 @@ MapViewerControlObj::GetFollowCarMode(bool& active)
 }
 
 void
-MapViewerControlObj::SetCameraHeadingAngle(uint32_t sessionHandle, double angle)
+MapViewerControlObj::SetCameraHeadingAngle(uint32_t sessionHandle, int32_t angle)
 {
 	struct attr orientation={attr_orientation};
 	orientation.u.num=angle;
@@ -1226,10 +1245,13 @@ MapViewerControlObj::SetCameraHeadingAngle(uint32_t sessionHandle, double angle)
 }
 
 void
-MapViewerControlObj::GetCameraHeadingAngle(double &angle)
+MapViewerControlObj::GetCameraHeading(DBusCommonAPIEnumeration& headingType, int32_t& headingAngle, ::DBus::Struct< double, double >& target)
 {
 	struct transformation *trans=navit_get_trans(m_navit.u.navit);
-	angle=transform_get_yaw(trans);
+    headingAngle=transform_get_yaw(trans);
+    headingType=GENIVI_MAPVIEWER_INVALID;
+    target._1=0;
+    target._2=0;
 }
 
 void
@@ -1426,7 +1448,6 @@ MapViewerControlObj::SetMapViewRotation(uint32_t sessionHandle, double rotationA
     m_rotationanglepersecond=rotationAnglePerSecond;
 	SetFollowCarMode(sessionHandle, false);
 	MoveMap();
-
 }
 
 void
@@ -1894,7 +1915,10 @@ static class MapViewerControl *server;
 void
 plugin_init(void)
 {
-	event_request_system("glib","genivi_mapviewercontrol");
+    DLT_REGISTER_APP("MPVS","MAP VIEWER CONTROL SERVER");
+    DLT_REGISTER_CONTEXT(gCtx,"MPVS","Global Context");
+
+    event_request_system("glib","genivi_mapviewercontrol");
 	int i;
     for (i = 0 ; i < CONNECTION_AMOUNT ; i++) {
         // init the dispatcher
