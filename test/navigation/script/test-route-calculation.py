@@ -36,8 +36,13 @@ import argparse
 import sys
 import errno
 import genivi
+try:
+    from dltTrigger import *
+    dltTrigger=True
+    print('DLT signal sent')
+except dltTriggerNotBuilt:
+    dltTrigger=False
 #import pdb;pdb.set_trace()
-from dltTrigger import *
 
 #name of the test 
 test_name = "route calculation"
@@ -146,7 +151,8 @@ def timeout():
     exit()
 
 def exit():
-    stopTrigger(test_name)
+    if dltTrigger==True:
+        stopTrigger(test_name)
     loop.quit()
 
 def launch_route_calculation(route):
@@ -178,7 +184,8 @@ def launch_route_calculation(route):
     #calculate route
     g_routing_interface.CalculateRoute(dbus.UInt32(g_session_handle),dbus.UInt32(g_route_handle))
 
-startTrigger(test_name)  
+if dltTrigger==True:
+    startTrigger(test_name)
 
 session = bus.get_object('org.genivi.navigation.navigationcore.Session','/org/genivi/navigationcore')
 g_session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.navigationcore.Session')

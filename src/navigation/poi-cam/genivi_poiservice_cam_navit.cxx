@@ -103,10 +103,18 @@ class ContentAccessModule
         item_type formerId;
         int32_t givenId;
     };
+    struct poiCategoryIdRadius{
+        item_type formerId;
+        uint32_t givenId;
+        uint32_t radius;
+    };
 
     std::vector<poiEquivalence> m_poiEquivalenceList;
+    item_type m_bottom_poi_type;
     std::vector< uint32_t > m_poiCategoriesId;
+    std::vector<poiCategoryIdRadius> m_poiCategoriesIdRadius;
     std::vector< ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > > m_resultList;
+    std::string m_inputString;
     int m_max_radius;
     bool (*m_sort_func)(::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > a, ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > b);
     struct coord m_center;
@@ -140,6 +148,8 @@ class ContentAccessModule
         size_t i;
         poiEquivalence poi_equivalence;
 
+        //The m_poiEquivalenceList is populated 'by hand' and the formerId have to be ordered from min to max !
+        m_bottom_poi_type=type_poi_land_feature; //the minimum used for init
         poi_equivalence.name="fuel";
         poi_equivalence.formerId=type_poi_fuel;
         m_poiEquivalenceList.push_back(poi_equivalence);
@@ -189,45 +199,52 @@ class ContentAccessModule
 			m_map_rect=NULL;
 	}
 
-    void
-    add_poi(struct item *item)
+    bool
+    add_poi(struct item *item, uint32_t category, std::string inputString)
     {
         struct attr label;
         struct coord c;
         dbg(lvl_debug,"adding poi\n");
         ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > >  result;
         ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > attribute;
+        bool stringMatched=false;
 
-        result._1=m_resultList.size(); /* source_id */
-        if (item_attr_get(item, attr_label, &label))
+        if (item_attr_get(item, attr_label, &label)){
             result._2=std::string(label.u.str); /* name */
-        else
-            result._2=std::string(""); /* name */
-        result._3=m_poiCategoriesId[0]; /* category */
-        if (item_coord_get(item, &c, 1)) {
-            struct coord_geo g;
-            transform_to_geo(projection_mg, &c, &g);
-            result._4._1=g.lat; /* lat */
-            result._4._2=g.lng; /* lon */
-            double distance=transform_distance(projection_mg, &m_center, &c)/m_scale;
-#if 0
-            if (distance > m_max_radius)
-                return;
-#endif
-            result._5=distance; /* distance */
-        } else {
-            result._4._1=0; /* lat */
-            result._4._2=0; /* lon */
-            result._5=0; /* distance */
+            std::size_t found = result._2.find(inputString);
+            if (found!=std::string::npos)
+                stringMatched=true;
         }
-        result._4._3=0; /* altitude */
-        /* result._6 attributes */
-        attribute._1 = 0;
-        attribute._2 = 0;
-        attribute._3._1 = 0;
-        attribute._3._2 = variant_string(std::string("")); /* value */
-        result._6.push_back(attribute);
-        m_resultList.push_back(result);
+
+        if(stringMatched){
+            result._1=m_resultList.size(); /* source_id */
+            result._3=category; /* category */
+            if (item_coord_get(item, &c, 1)) {
+                struct coord_geo g;
+                transform_to_geo(projection_mg, &c, &g);
+                result._4._1=g.lat; /* lat */
+                result._4._2=g.lng; /* lon */
+                double distance=transform_distance(projection_mg, &m_center, &c)/m_scale;
+    #if 0
+                if (distance > m_max_radius)
+                    return;
+    #endif
+                result._5=distance; /* distance */
+            } else {
+                result._4._1=0; /* lat */
+                result._4._2=0; /* lon */
+                result._5=0; /* distance */
+            }
+            result._4._3=0; /* altitude */
+            /* result._6 attributes */
+            attribute._1 = 0;
+            attribute._2 = 0;
+            attribute._3._1 = 0;
+            attribute._3._2 = variant_string(std::string("")); /* value */
+            result._6.push_back(attribute);
+            m_resultList.push_back(result);
+        }
+        return stringMatched;
     }
 
     ::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string >
@@ -324,8 +341,14 @@ class ContentAccessModule
 		dbg(lvl_debug,"enter handle=%d size=%d location=%f,%f,%d string='%s' sortOption=%d\n",poiSearchHandle, maxSize, location._1,location._2,location._3, inputString.c_str(), sortOption);
 		m_resultList.resize(0);
 		m_max_radius=0;
+        m_inputString=inputString;
+        poiCategoryIdRadius categoryIdRadius;
+        m_poiCategoriesIdRadius.clear();
 		for (int i = 0 ; i < poiCategories.size(); i++) {
 			dbg(lvl_debug,"category %d %d\n",poiCategories[i]._1,poiCategories[i]._2);
+            categoryIdRadius.givenId=poiCategories[i]._1;
+            categoryIdRadius.radius=poiCategories[i]._2;
+            m_poiCategoriesIdRadius.push_back(categoryIdRadius);
 			if (m_max_radius < poiCategories[i]._2)
 				m_max_radius=poiCategories[i]._2;
 		}
@@ -355,14 +378,37 @@ class ContentAccessModule
 		m_selection.u.c_rect.lu.x-=d;
 		m_selection.u.c_rect.lu.y+=d;
 		m_selection.order=18;
-        //for the time being only search for the first id (because I don't know how to manage it for several ones)
+
+        //set the range of categories to search
+        m_selection.range.min=m_bottom_poi_type;
+        m_selection.range.max=m_bottom_poi_type;
+        bool isFound;
+        size_t index;
         for(size_t i=0;i<m_poiEquivalenceList.size();i++)
-        { //to be improved !
-            if(m_poiEquivalenceList[i].givenId==poiCategories[0]._1)
-            {
-                m_selection.range.min=m_poiEquivalenceList[i].formerId;
-                m_selection.range.max=m_poiEquivalenceList[i].formerId;
-            }
+        {
+            isFound=false;
+            index=0;
+            do{
+                if(m_poiEquivalenceList[i].givenId==(m_poiCategoriesIdRadius.at(index)).givenId)
+                {
+                    (m_poiCategoriesIdRadius.at(index)).formerId=m_poiEquivalenceList[i].formerId;
+                    if((m_selection.range.min==m_bottom_poi_type)&&(m_selection.range.max==m_bottom_poi_type))
+                    { //first id found
+                        m_selection.range.min=m_poiEquivalenceList[i].formerId;
+                        m_selection.range.max=m_poiEquivalenceList[i].formerId;
+                    }else{
+                        if(m_poiEquivalenceList[i].formerId<m_selection.range.min){
+                            m_selection.range.min=m_poiEquivalenceList[i].formerId;
+                        }else{
+                            if(m_poiEquivalenceList[i].formerId>m_selection.range.max){
+                                m_selection.range.max=m_poiEquivalenceList[i].formerId;
+                            }
+                        }
+                    }
+                    isFound=true;
+                }
+                index++;
+            }while((isFound==false)&&(index<m_poiCategoriesIdRadius.size()));
         }
 
 		dbg(lvl_debug,"rect 0x%x,0x%x-0x%x,0x%x\n",m_selection.u.c_rect.lu.x,m_selection.u.c_rect.lu.y,m_selection.u.c_rect.rl.x,m_selection.u.c_rect.rl.y);
@@ -387,11 +433,20 @@ class ContentAccessModule
 	{
 		struct item *item;
 		int count=0;
-		dbg(lvl_debug,"enter camId=%d handle=%d\n", camId, poiSearchHandle);
+        bool isFound;
+        size_t index;
+        dbg(lvl_debug,"enter camId=%d handle=%d\n", camId, poiSearchHandle);
 		while (resultList.size() < 256 && m_map_rect) {
 			while (resultList.size() < 256 && (item=map_rect_get_item(m_map_rect))) {
-                if (item->type == m_selection.range.min)
-					add_poi(item);
+                isFound=false;
+                index=0;
+                do{
+                    if (item->type == (m_poiCategoriesIdRadius.at(index)).formerId)
+                    {
+                        isFound=add_poi(item,(m_poiCategoriesIdRadius.at(index)).givenId,m_inputString);
+                    }
+                    index++;
+                }while((isFound==false)&&(index<m_poiCategoriesIdRadius.size()));
 				count++;
 			}
 			map_next();
@@ -417,7 +472,7 @@ class ContentAccessModule
             result._1._3._1=m_resultList[sid]._4._1; /* lat */
             result._1._3._2=m_resultList[sid]._4._2; /* lon */
             result._1._3._3=0; /* alt */
-			result._2.push_back(m_poiCategoriesId[0]);
+            result._2.push_back(m_resultList[sid]._3);
 			ret.push_back(result);
 		}
 		return ret;

@@ -618,7 +618,8 @@ uint16_t poiContentAccessServer::searchAroundALocation(DBus_geoCoordinate3D::geo
         //build list of poi to get
         for (index=0;index<resultListSize;index++)
             poiList.push_back(m_poiTable.at(index)._1);
-        m_poiDetailsTable = mp_contentAccessModule->PoiDetailsRequested(poiList);
+        if(resultListSize>0)
+            m_poiDetailsTable = mp_contentAccessModule->PoiDetailsRequested(poiList);
     }
 
     return(resultListSize);

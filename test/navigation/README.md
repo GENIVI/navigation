@@ -3,6 +3,7 @@
 These folders contain several files that allow to test the navigation.
 
 The folder ./script contains the ones for the GlibDBus version:
+test-poi.py
 test-location-input.py
 test-address-input.py 
 test-map-viewer-control.py
@@ -17,7 +18,7 @@ The folder ./resource contains the resource files (e.g. the address) used as inp
 
 The folder ./log contains the generated sequence charts (see below)  
 
-There's a mechanism to trig with DLT, so it's necessary to build some stuff before.
+There's a optional mechanism to trig with DLT, please build the stuff in dlt-triggers before:
 
 ##How to build the trigger
 Under ./dlt-triggers
@@ -31,13 +32,14 @@ make install
 ##Tested targets
 Desktop: Tested under Ubuntu 16.04 LTS 64 bits
 ##How-to test 
-First, open a new terminal and launch the navigation by entering:
+First, open a new terminal and launch the navigation and the poi server by entering:
 ```
-./run -r
+./run -r -p
 ```
 Unitary tests:
 (under ./script folder)
 ```
+./test-poi.py -l ../resource/location.xml
 ./test-location-input.py -l locations.xml
 ./test-route-calculation.py -r routes.xml
 ./test-address-input.py -l location.xml

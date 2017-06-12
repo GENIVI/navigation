@@ -36,9 +36,13 @@ import sys
 import errno
 import time
 import genivi
-from dltTrigger import *
-#import pdb
-#pdb.set_trace()
+try:
+    from dltTrigger import *
+    dltTrigger=True
+    print('DLT signal sent')
+except dltTriggerNotBuilt:
+    dltTrigger=False
+#import pdb;pdb.set_trace()
 
 #name of the test 
 test_name = "guidance"
@@ -135,7 +139,8 @@ def timeout():
     exit()
 
 def exit():
-    stopTrigger(test_name)
+    if dltTrigger==True:
+        stopTrigger(test_name)
     loop.quit()
     
 def display_route(route):
@@ -302,7 +307,8 @@ bus.add_signal_receiver(mapmatchedposition_simulationStatusChanged_handler, \
                         dbus_interface = "org.genivi.navigation.navigationcore.MapMatchedPosition", \
                         signal_name = "SimulationStatusChanged")
 
-startTrigger(test_name)
+if dltTrigger==True:
+    startTrigger(test_name)
 
 navigationcore_session_obj = bus.get_object('org.genivi.navigation.navigationcore.Session','/org/genivi/navigationcore')
 g_navigationcore_session_interface = dbus.Interface(navigationcore_session_obj, dbus_interface='org.genivi.navigation.navigationcore.Session')

@@ -28,12 +28,17 @@
 import dbus
 import gobject
 import dbus.mainloop.glib
-from dltTrigger import *
 import xml.dom.minidom
 import argparse
 import sys
 import errno
 import genivi
+try:
+    from dltTrigger import *
+    dltTrigger=True
+    print('DLT signal sent')
+except dltTriggerNotBuilt:
+    dltTrigger=False
 #import pdb; pdb.set_trace()
 
 #name of the test 
@@ -49,8 +54,8 @@ ID_RESTAURANT = 260
 ATTRIBUTE_SOURCE = 0
 ATTRIBUTE_PHONE = 2
 RADIUS_HOTEL = 100 #in tenth of meter !
-RADIUS_FUEL = 500
-STRING_TO_SEARCH = "Alpes"
+RADIUS_RESTAURANT = 500
+STRING_TO_SEARCH = "hof"
 MAX_WINDOW_SIZE = 100
 OFFSET = 0
 
@@ -82,19 +87,22 @@ def catch_poi_poiStatus_signal_handler(poiSearchHandle,statusValue):
          
 def catch_poi_resultListChanged_signal_handler(poiSearchHandle,resultListSize):
     poiList=[]
-    if poiSearchHandle == g_searchHandle and resultListSize != 0:
-        ret=g_poiSearch_interface.RequestResultList(dbus.UInt32(poiSearchHandle),dbus.UInt16(OFFSET),dbus.UInt16(MAX_WINDOW_SIZE),[ATTRIBUTE_SOURCE,ATTRIBUTE_PHONE])
-        if ret[0] == genivi.SEARCH_FINISHED and ret[1] >= 0:
-            print("Results: "+str(int(ret[1])))
-            for result in ret[2]:
-                poiList.append(result[0])
-            ret=g_poiSearch_interface.GetPoiDetails(poiList)
-            for resultDetail in ret:
-                if resultDetail[1][0] == ID_HOTEL:
-                    print("Hotel: " +resultDetail[0][1])
-                elif resultDetail[1][0] == ID_FUEL:
-                    print("Fuel: " +resultDetail[0][1])
-            g_poiSearch_interface.CancelPoiSearch(dbus.UInt32(poiSearchHandle))           
+    if poiSearchHandle == g_searchHandle: 
+        if resultListSize != 0:
+            ret=g_poiSearch_interface.RequestResultList(dbus.UInt32(poiSearchHandle),dbus.UInt16(OFFSET),dbus.UInt16(MAX_WINDOW_SIZE),[ATTRIBUTE_SOURCE,ATTRIBUTE_PHONE])
+            if ret[0] == genivi.SEARCH_FINISHED and ret[1] >= 0:
+                print("Results: "+str(int(ret[1])))
+                for result in ret[2]:
+                    poiList.append(result[0])
+                ret=g_poiSearch_interface.GetPoiDetails(poiList)
+                for resultDetail in ret:
+                    if resultDetail[1][0] == ID_HOTEL:
+                        print("Hotel: " +resultDetail[0][1])
+                    elif resultDetail[1][0] == ID_RESTAURANT:
+                        print("Restaurant: " +resultDetail[0][1])
+                g_poiSearch_interface.CancelPoiSearch(dbus.UInt32(poiSearchHandle))
+        else:
+            g_poiSearch_interface.CancelPoiSearch(dbus.UInt32(poiSearchHandle))  
        
 def timeout():
     print ('Timeout Expired')
@@ -102,7 +110,8 @@ def timeout():
     exit()
 
 def exit():
-    stopTrigger(test_name)
+    if dltTrigger==True:
+        stopTrigger(test_name)
     loop.quit()
 
 
@@ -143,7 +152,7 @@ for location in location_set.getElementsByTagName("location"):
 if __name__ == '__main__':
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True) 
 
-print("Search for hotel and fuel with keyword: "+ STRING_TO_SEARCH)
+print("Search for hotel and restaurant with keyword: "+ STRING_TO_SEARCH)
 
 #connect to session bus
 bus = dbus.SessionBus()
@@ -160,7 +169,8 @@ bus.add_signal_receiver(catch_poi_resultListChanged_signal_handler, \
                         dbus_interface = "org.genivi.navigation.poiservice.POISearch", \
                         signal_name = "ResultListChanged")
 
-startTrigger(test_name)
+if dltTrigger==True:
+    startTrigger(test_name)
 
 poiConfiguration = bus.get_object('org.genivi.navigation.poiservice.POIConfiguration','/org/genivi/poiservice/POIConfiguration')
 g_poiConfiguration_interface = dbus.Interface(poiConfiguration, dbus_interface='org.genivi.navigation.poiservice.POIConfiguration')
@@ -176,13 +186,13 @@ g_poiConfiguration_interface.SetLocale(dbus.String("fra"),dbus.String("FRA"),dbu
 categories=[]
 ret=g_poiSearch_interface.GetAvailableCategories()
 for categoryAndName in ret:
-    if categoryAndName[0] == ID_HOTEL or categoryAndName[0] == ID_FUEL:
+    if categoryAndName[0] == ID_HOTEL or categoryAndName[0] == ID_RESTAURANT:
         print("Category ID: " + str(int(categoryAndName[0])))
         categories.append(categoryAndName[0])
         print("Name: " + categoryAndName[1])
 
 attributes_hotel=[]
-attributes_fuel=[]
+attributes_restaurant=[]
 attributesDetails=[]
 ret=g_poiSearch_interface.GetCategoriesDetails(categories)
 for results in ret:
@@ -190,10 +200,10 @@ for results in ret:
         for attribute in results[1]:
             attributes_hotel.append(attribute[0])
             attributesDetails.append(dbus.Struct([dbus.UInt32(attribute[0]),dbus.UInt32(ID_HOTEL),dbus.Int32(1280),dbus.Struct([dbus.Byte(2),dbus.String("")]),dbus.Int32(1314),dbus.Boolean(False)])) 
-    elif results[0][0] == ID_FUEL:
+    elif results[0][0] == ID_RESTAURANT:
         for attribute in results[1]:
-            attributes_fuel.append(attribute[0])
-            attributesDetails.append(dbus.Struct([dbus.UInt32(attribute[0]),dbus.UInt32(ID_FUEL),dbus.Int32(1280),dbus.Struct([dbus.Byte(2),dbus.String("")]),dbus.Int32(1314),dbus.Boolean(False)])) 
+            attributes_restaurant.append(attribute[0])
+            attributesDetails.append(dbus.Struct([dbus.UInt32(attribute[0]),dbus.UInt32(ID_RESTAURANT),dbus.Int32(1280),dbus.Struct([dbus.Byte(2),dbus.String("")]),dbus.Int32(1314),dbus.Boolean(False)])) 
         
 ret=g_poiSearch_interface.GetRootCategory()
 
@@ -208,7 +218,7 @@ alt = ALTITUDE[index]
 
 g_poiSearch_interface.SetCenter(g_searchHandle,dbus.Struct([dbus.Double(lat),dbus.Double(lon),dbus.Double(alt)]))
 
-g_poiSearch_interface.SetCategories(g_searchHandle,[dbus.Struct([dbus.UInt32(ID_HOTEL),dbus.UInt32(RADIUS_HOTEL)]),dbus.Struct([dbus.UInt32(ID_FUEL),dbus.UInt32(RADIUS_FUEL)])])
+g_poiSearch_interface.SetCategories(g_searchHandle,[dbus.Struct([dbus.UInt32(ID_HOTEL),dbus.UInt32(RADIUS_HOTEL)]),dbus.Struct([dbus.UInt32(ID_RESTAURANT),dbus.UInt32(RADIUS_RESTAURANT)])])
 
 g_poiSearch_interface.SetAttributes(g_searchHandle,attributesDetails)
 

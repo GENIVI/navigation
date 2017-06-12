@@ -32,12 +32,17 @@ import dbus
 import gobject
 import dbus.mainloop.glib
 import time
-from dltTrigger import *
 import xml.dom.minidom
 import argparse
 import sys
 import errno
 import genivi
+try:
+    from dltTrigger import *
+    dltTrigger=True
+    print('DLT signal sent')
+except dltTriggerNotBuilt:
+    dltTrigger=False
 #import pdb; pdb.set_trace()
 
 #name of the test 
@@ -185,7 +190,8 @@ def exit():
         dbus.UInt32(sessionhandle), \
         dbus.UInt32(mapviewerhandle))
     session_interface.DeleteSession(sessionhandle)
-    stopTrigger(test_name)
+    if dltTrigger==True:
+        stopTrigger(test_name)
     loop.quit()
 
 def next_step():
@@ -256,7 +262,8 @@ bus.add_signal_receiver(mapviewer_mapViewPerspectiveChanged_handler, \
                         dbus_interface = "org.genivi.navigation.mapviewer.MapViewerControl", \
                         signal_name = "MapViewPerspectiveChanged")
                         
-startTrigger(test_name)  
+if dltTrigger==True:
+    startTrigger(test_name)
 
 session = bus.get_object('org.genivi.navigation.mapviewer.Session','/org/genivi/mapviewer')
 session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.mapviewer.Session')

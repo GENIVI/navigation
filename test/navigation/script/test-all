@@ -1,11 +1,13 @@
 #!/bin/bash
 
+./test-poi.py -l ../resource/location.xml
+sleep 1
 ./test-location-input.py -l ../resource/locations.xml
-sleep 2
+sleep 1
 ./test-route-calculation.py -r ../resource/routes.xml
-sleep 2
+sleep 1
 ./test-address-input.py -l ../resource/location.xml
-sleep 2
+sleep 1
 ./test-guidance.py -r ../resource/route.xml
-sleep 2
+sleep 1
 ./test-map-viewer-control.py -l ../resource/location.xml

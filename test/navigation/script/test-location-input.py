@@ -37,7 +37,12 @@ import argparse
 import sys
 import errno
 import genivi
-from dltTrigger import *
+try:
+    from dltTrigger import *
+    dltTrigger=True
+    print('DLT signal sent')
+except dltTriggerNotBuilt:
+    dltTrigger=False
 #import pdb;pdb.set_trace()    
 
 #name of the test 
@@ -421,7 +426,8 @@ def exit():
     print('Delete location input: '+str(int(error)))
     error=session_interface.DeleteSession(dbus.UInt32(session_handle))
     print('Delete session: '+str(int(error)))
-    stopTrigger(test_name)
+    if dltTrigger==True:
+        stopTrigger(test_name)
     loop.quit()
 
 def startSearch(address_index):
@@ -445,8 +451,9 @@ def startSearch(address_index):
     elif country_search_mode == 1:
         full_string_search(location_input_handle, target_search_string)
 
-startTrigger(test_name)  
-  
+if dltTrigger==True:
+    startTrigger(test_name)
+ 
 session = bus.get_object('org.genivi.navigation.navigationcore.Session', '/org/genivi/navigationcore')
 session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.navigationcore.Session')
 
