@@ -89,6 +89,7 @@ enhpos=1
 replayer=1
 verbose=0 #no debug or log messages displayed
 center="4612 N 0608 E"
+poi=0
 
 CUR_DIR=$PWD
 BIN_DIR=$CUR_DIR/bin
@@ -96,7 +97,14 @@ SRC_DIR=$PWD
 LOGREPLAYER_LOGS_DIR=$SRC_DIR/positioning/log-replayer/logs
 NAVIT_BIN_DIR=$CUR_DIR/build/navit/navit/
 
-while getopts c:gnorvx opt
+POI_SERVER=poi-server
+POI_SERVER_SRC_DIR=$CUR_DIR/../../src/poi-service/$POI_SERVER
+POI_SERVER_BIN_DIR=$CUR_DIR/../../src/poi-service/bin
+POI_SERVER_RESOURCE_DIR=$CUR_DIR/../../src/poi-service/resource
+
+poidatabase=$POI_SERVER_RESOURCE_DIR/empty.db # empty poi database by default
+
+while getopts c:gnoprvx opt
 do
 	case $opt in
 	c)
@@ -125,6 +133,9 @@ do
 	o)
 		log=1
 		;;
+	p)
+		poi=1
+		;;
 	r)
 		replayer=0
 		;;
@@ -136,12 +147,13 @@ do
 		;;
 	\?)
 		echo "Usage:"
-		echo "$0 [-c center][-gnorvx]"
+		echo "$0 [-c center][-gnoprvx]"
 		echo "-c: Set center (supported values: paris,tokyo,longitude,latitude). Default is geneve"
 		echo "-g: Run subprocesses within gdb (only with -x)"
 		echo "-n: Don't start enhanced-position-service"
 		echo "-r: Don't start replayer"
 		echo "-o: Create log file of subprocess output"
+		echo "-p: Launch the poi server"
 		echo "-v: Enable the output debug messages"
 		echo "-x: Run subprocesses in own xterm to get separated log messages"
 		exit 1
@@ -168,6 +180,12 @@ then
 		fi
 		run LogReplayer ./log-replayer $REPLAYER_LOG_FILE 
 	fi
+fi
+
+if [ "$poi" = 1 ]
+then
+	# start the poi server 
+	run "POI service" $POI_SERVER_BIN_DIR/$POI_SERVER -f $poidatabase
 fi
 
 cd $NAVIT_BIN_DIR

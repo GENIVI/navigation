@@ -481,16 +481,14 @@ void poiContentAccessServer::ResetRegisteredAttributeCategoriesFlags(camId_t cam
 }
 
 void poiContentAccessServer::SetRegisteredSearchCategory(camId_t camId, DBus_categoryRadius::categoryRadius_t category)
-{
-    size_t index;
+{    
     DBus_categoryRadius catRad;
 
     if (camId == m_camId)
-    { //only one cam managed
-        //firstly clean up the list used for the search
-        m_poiCategories.clear();
-        for (index=0;index<m_poiCategoriesRegistered.size();index++)
-        {
+    { //only one cam managed        
+        bool isFound=false;
+        size_t index=0;
+        do{
             if ((m_poiCategoriesRegistered.at(index)).id == category.id)
             {
                 (m_poiCategoriesRegistered.at(index)).isSearch = true;
@@ -498,8 +496,10 @@ void poiContentAccessServer::SetRegisteredSearchCategory(camId_t camId, DBus_cat
                 (m_poiCategoriesRegistered.at(index)).radius = category.radius;
                 catRad.set(category);
                 m_poiCategories.push_back(catRad.getDBus()); //populate the list used for the search
+                isFound=true;
             }
-        }
+            index++;
+        }while((isFound==false)&&(index<m_poiCategoriesRegistered.size()));
     }
 }
 
@@ -632,12 +632,9 @@ bool poiContentAccessServer::isAttributeAvailable(attributeId_t attributeId)
 
 bool poiContentAccessServer::removeCategoryFromTables(categoryId_t id)
 {
-    size_t index;
-    bool isFound;
-
     //check if category has been registered and remove it
-    isFound = false;
-    index = 0;
+    bool isFound = false;
+    size_t index = 0;
     do {
         if ((m_poiCategoriesRegistered.at(index)).id == id)
         {
@@ -956,12 +953,12 @@ std::vector< DBus_category::DBus_category_t > poiSearchServer::GetCategoriesDeta
     categoryId_t category_index;
     camIdName_t cam;
 
+    return_value.clear();
     // load categories details from the embedded database
     index=0;
-    return_value.clear();
-    while ((index<categories.size())&&(index < m_availableCategories))
+    while (index<categories.size())
     {
-        if ( isCategoryAvailable(categories.at(index),&category_index) == true)
+        if ( isCategoryAvailable(categories.at(index),m_availableCategories,&category_index) == true)
         { //category found into the embedded data!
             categoryDetails.id = m_availableCategoryTable[category_index].id;
             categoryDetails.parents_id.clear();
@@ -1009,8 +1006,15 @@ std::vector< DBus_category::DBus_category_t > poiSearchServer::GetCategoriesDeta
         categoryCAMList.clear();
         if (mp_poiContentAccess->GetRegisteredCategoriesDetails(cam.id,&categoryCAMList) == true)
         {
-            for (index=0;index<categoryCAMList.size();index++)
-                return_value.push_back((categoryCAMList.at(index)).getDBus());
+            index=0;
+            while (index<categories.size())
+            {
+                if ( isCategoryAvailableInCAM(categories.at(index),categoryCAMList,&category_index) == true)
+                {
+                    return_value.push_back((categoryCAMList.at(category_index)).getDBus());
+                }
+                index++;
+            }
         }
     }
 
@@ -1143,7 +1147,7 @@ void poiSearchServer::SetCategories(const handleId_t& poiSearchHandle, const std
         {
             catRad.setDBus(poiCategories.at(index));
             categoryRadius = catRad.get();
-            if ( isCategoryAvailable(categoryRadius.id,&category_index) == true)
+            if ( isCategoryAvailable(categoryRadius.id,m_availableCategories,&category_index) == true)
             { //category found into the embedded data !
                 m_availableCategoryTable[category_index].isSearch = true;
                 m_availableCategoryTable[category_index].radius = (categoryRadius.radius)*10; //get the radius (unit is 10 m)
@@ -1191,7 +1195,7 @@ void poiSearchServer::SetAttributes(const handleId_t& poiSearchHandle, const std
         {
             attribDet.setDBus(poiAttributes[index]);
             attributeDetails = attribDet.get(); //get the attribute in readable format
-            if ( isCategoryAvailable(attributeDetails.categoryId,&category_index) == true)
+            if ( isCategoryAvailable(attributeDetails.categoryId,m_availableCategories,&category_index) == true)
             { //category found into the embedded database!
                 for (sub_index=0;sub_index<(m_availableCategoryTable[category_index].attributeList.size());sub_index++)
                 { //check attribute by name
@@ -1813,7 +1817,7 @@ uint16_t poiSearchServer::searchPOIRequest(uint16_t categoryIndex, std::string s
     return(sqlQueryResult.size());
 }
 
-bool poiSearchServer::isCategoryAvailable(categoryId_t id, categoryId_t *category_id)
+bool poiSearchServer::isCategoryAvailable(categoryId_t id, const uint16_t size, categoryId_t *category_id)
 {
     bool isFound = false;
     categoryId_t index = 0;
@@ -1826,7 +1830,27 @@ bool poiSearchServer::isCategoryAvailable(categoryId_t id, categoryId_t *categor
         }
         else
             ++index;
-    } while ((isFound==false) && (index < m_availableCategories));
+    } while ((isFound==false) && (index < size));
+
+    return(isFound);
+}
+
+bool poiSearchServer::isCategoryAvailableInCAM(categoryId_t id, const std::vector<DBus_category> categoryCAMList, categoryId_t *category_id)
+{
+    bool isFound = false;
+    DBus_category category;
+    categoryId_t index = 0;
+    do
+    {
+        category = categoryCAMList.at(index);
+        if (category.get().details.id == id)
+        {
+            *category_id = index;
+            isFound = true;
+        }
+        else
+            ++index;
+    } while ((isFound==false) && (index < categoryCAMList.size()));
 
     return(isFound);
 }

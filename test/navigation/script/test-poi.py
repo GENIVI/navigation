@@ -5,7 +5,7 @@
 * @licence app begin@
 * SPDX-License-Identifier: MPL-2.0
 *
-* \copyright Copyright (C) 2016, PSA GROUP
+* \copyright Copyright (C) 2017, PSA GROUP
 *
 * \file test-poi.py
 *
@@ -28,36 +28,44 @@
 import dbus
 import gobject
 import dbus.mainloop.glib
-import time
-
-import pdb;
-#pdb.set_trace()
 from dltTrigger import *
+import xml.dom.minidom
+import argparse
+import sys
+import errno
+import genivi
+#import pdb; pdb.set_trace()
 
 #name of the test 
 test_name = "poi search"
 
-#constants as defined in the Navigation API
-GENIVI_Configuration_Settings_LOCALE = 37
-GENIVI_SearchStatusState_FINISHED = 512
-GENIVI_SearchStatusState_NOT_STARTED = 510
-
 #constants used into the script
 TIME_OUT = 10000
-LATITUDE_PARIS = 48.8578
-LONGITUDE_PARIS = 2.3380
-ALTITUDE_PARIS = 30.0
-ID_HOTEL = 2
-ID_STATION = 6
+ID_FUEL = 256
+ID_HOTEL = 257
+ID_CAR_PARKING = 258
+ID_BAR = 259
+ID_RESTAURANT = 260
 ATTRIBUTE_SOURCE = 0
 ATTRIBUTE_PHONE = 2
 RADIUS_HOTEL = 100 #in tenth of meter !
-RADIUS_STATION = 500
-STRING_TO_SEARCH = "Saint-Germain"
+RADIUS_FUEL = 500
+STRING_TO_SEARCH = "Alpes"
+MAX_WINDOW_SIZE = 100
+OFFSET = 0
+
+# List of coordinates
+LATITUDE = list()
+LONGITUDE = list()
+ALTITUDE = list()
+COUNTRY_STRING = list()
+CITY_STRING = list()
+STREET_STRING = list()
+HOUSE_NUMBER_STRING = list()
 
 def catch_poi_configurationChanged_signal_handler(changedSettings):
     for changedSetting in changedSettings:
-        if changedSetting == GENIVI_Configuration_Settings_LOCALE:
+        if changedSetting == genivi.LOCALE:
             ret=g_poiConfiguration_interface.GetLocale()
             print("language: " + ret[0]) 
             print("country: " + ret[1]) 
@@ -65,9 +73,9 @@ def catch_poi_configurationChanged_signal_handler(changedSettings):
 
 def catch_poi_poiStatus_signal_handler(poiSearchHandle,statusValue):
     if poiSearchHandle == g_searchHandle:
-        if statusValue == GENIVI_SearchStatusState_FINISHED:
+        if statusValue == genivi.SEARCH_FINISHED:
             print("Search finished")
-        elif statusValue == GENIVI_SearchStatusState_NOT_STARTED:
+        elif statusValue == genivi.SEARCH_NOT_STARTED:
             g_poiSearch_interface.DeletePoiSearchHandle(poiSearchHandle)
             print("Test PASSED")
             exit()
@@ -75,8 +83,8 @@ def catch_poi_poiStatus_signal_handler(poiSearchHandle,statusValue):
 def catch_poi_resultListChanged_signal_handler(poiSearchHandle,resultListSize):
     poiList=[]
     if poiSearchHandle == g_searchHandle and resultListSize != 0:
-        ret=g_poiSearch_interface.RequestResultList(dbus.UInt32(poiSearchHandle),dbus.UInt16(0),dbus.UInt16(resultListSize),[ATTRIBUTE_SOURCE,ATTRIBUTE_PHONE])
-        if ret[0] == GENIVI_SearchStatusState_FINISHED and ret[1] >= 0:
+        ret=g_poiSearch_interface.RequestResultList(dbus.UInt32(poiSearchHandle),dbus.UInt16(OFFSET),dbus.UInt16(MAX_WINDOW_SIZE),[ATTRIBUTE_SOURCE,ATTRIBUTE_PHONE])
+        if ret[0] == genivi.SEARCH_FINISHED and ret[1] >= 0:
             print("Results: "+str(int(ret[1])))
             for result in ret[2]:
                 poiList.append(result[0])
@@ -84,11 +92,10 @@ def catch_poi_resultListChanged_signal_handler(poiSearchHandle,resultListSize):
             for resultDetail in ret:
                 if resultDetail[1][0] == ID_HOTEL:
                     print("Hotel: " +resultDetail[0][1])
-                elif resultDetail[1][0] == ID_STATION:
-                    print("Station: " +resultDetail[0][1])
+                elif resultDetail[1][0] == ID_FUEL:
+                    print("Fuel: " +resultDetail[0][1])
             g_poiSearch_interface.CancelPoiSearch(dbus.UInt32(poiSearchHandle))           
        
-#timeout
 def timeout():
     print ('Timeout Expired')
     print ('\nTest FAILED')
@@ -98,10 +105,45 @@ def exit():
     stopTrigger(test_name)
     loop.quit()
 
+
+print('\n--------------------------')
+print('Poi Test')
+print('--------------------------\n')
+
+parser = argparse.ArgumentParser(description='Poi Test for navigation PoC and FSA.')
+parser.add_argument('-l','--loc',action='store', dest='locations', help='List of locations in xml format')
+parser.add_argument("-v", "--verbose", action='store_true',help='print the whole log messages')
+args = parser.parse_args()
+
+if args.locations == None:
+    print('location file is missing')
+    sys.exit(1)
+else:
+    try:
+        DOMTree = xml.dom.minidom.parse(args.locations)
+    except OSError as e:
+        if e.errno == errno.ENOENT:
+            print('file not exists')
+        sys.exit(1)
+    location_set = DOMTree.documentElement
+            
+print("Area : %s" % location_set.getAttribute("area"))
+
+locations = location_set.getElementsByTagName("location")
+
+for location in location_set.getElementsByTagName("location"):
+    LATITUDE.append(location.getElementsByTagName("latitude")[0].childNodes[0].data)
+    LONGITUDE.append(location.getElementsByTagName("longitude")[0].childNodes[0].data)
+    ALTITUDE.append(0)
+    COUNTRY_STRING.append(location.getElementsByTagName("country")[0].childNodes[0].data)
+    CITY_STRING.append(location.getElementsByTagName("city")[0].childNodes[0].data)
+    STREET_STRING.append(location.getElementsByTagName("street")[0].childNodes[0].data)
+    HOUSE_NUMBER_STRING.append(location.getElementsByTagName("number")[0].childNodes[0].data)
+
 if __name__ == '__main__':
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True) 
 
-print("Search for hotel and station with keyword: "+ STRING_TO_SEARCH)
+print("Search for hotel and fuel with keyword: "+ STRING_TO_SEARCH)
 
 #connect to session bus
 bus = dbus.SessionBus()
@@ -134,13 +176,13 @@ g_poiConfiguration_interface.SetLocale(dbus.String("fra"),dbus.String("FRA"),dbu
 categories=[]
 ret=g_poiSearch_interface.GetAvailableCategories()
 for categoryAndName in ret:
-    if categoryAndName[0] == ID_HOTEL or categoryAndName[0] == ID_STATION:
+    if categoryAndName[0] == ID_HOTEL or categoryAndName[0] == ID_FUEL:
         print("Category ID: " + str(int(categoryAndName[0])))
         categories.append(categoryAndName[0])
         print("Name: " + categoryAndName[1])
 
 attributes_hotel=[]
-attributes_station=[]
+attributes_fuel=[]
 attributesDetails=[]
 ret=g_poiSearch_interface.GetCategoriesDetails(categories)
 for results in ret:
@@ -148,27 +190,29 @@ for results in ret:
         for attribute in results[1]:
             attributes_hotel.append(attribute[0])
             attributesDetails.append(dbus.Struct([dbus.UInt32(attribute[0]),dbus.UInt32(ID_HOTEL),dbus.Int32(1280),dbus.Struct([dbus.Byte(2),dbus.String("")]),dbus.Int32(1314),dbus.Boolean(False)])) 
-    elif results[0][0] == ID_STATION:
+    elif results[0][0] == ID_FUEL:
         for attribute in results[1]:
-            attributes_station.append(attribute[0])
-            attributesDetails.append(dbus.Struct([dbus.UInt32(attribute[0]),dbus.UInt32(ID_STATION),dbus.Int32(1280),dbus.Struct([dbus.Byte(2),dbus.String("")]),dbus.Int32(1314),dbus.Boolean(False)])) 
+            attributes_fuel.append(attribute[0])
+            attributesDetails.append(dbus.Struct([dbus.UInt32(attribute[0]),dbus.UInt32(ID_FUEL),dbus.Int32(1280),dbus.Struct([dbus.Byte(2),dbus.String("")]),dbus.Int32(1314),dbus.Boolean(False)])) 
         
 ret=g_poiSearch_interface.GetRootCategory()
 
 g_searchHandle=g_poiSearch_interface.CreatePoiSearchHandle()
 print("Search handle: " + str(int(g_searchHandle)))
 
-lat = LATITUDE_PARIS
-lon = LONGITUDE_PARIS
-alt = ALTITUDE_PARIS
+#init the target (it's the first location in the input file by default) and test 
+index=0
+lat = LATITUDE[index]
+lon = LONGITUDE[index]
+alt = ALTITUDE[index]
 
-g_poiSearch_interface.SetCenter(g_searchHandle,dbus.Struct([lat,lon,alt]))
+g_poiSearch_interface.SetCenter(g_searchHandle,dbus.Struct([dbus.Double(lat),dbus.Double(lon),dbus.Double(alt)]))
 
-g_poiSearch_interface.SetCategories(g_searchHandle,[dbus.Struct([dbus.UInt32(ID_HOTEL),dbus.UInt32(RADIUS_HOTEL)]),dbus.Struct([dbus.UInt32(ID_STATION),dbus.UInt32(RADIUS_STATION)])])
+g_poiSearch_interface.SetCategories(g_searchHandle,[dbus.Struct([dbus.UInt32(ID_HOTEL),dbus.UInt32(RADIUS_HOTEL)]),dbus.Struct([dbus.UInt32(ID_FUEL),dbus.UInt32(RADIUS_FUEL)])])
 
 g_poiSearch_interface.SetAttributes(g_searchHandle,attributesDetails)
 
-g_poiSearch_interface.StartPoiSearch(g_searchHandle,dbus.String(STRING_TO_SEARCH),dbus.Int32(1376))
+g_poiSearch_interface.StartPoiSearch(g_searchHandle,dbus.String(STRING_TO_SEARCH),dbus.Int32(genivi.SORT_BY_DISTANCE))
 
 
 #main loop 

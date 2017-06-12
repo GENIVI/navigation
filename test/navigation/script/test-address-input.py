@@ -7,6 +7,7 @@
 * SPDX-License-Identifier: MPL-2.0
 *
 * @copyright Copyright (C) 2014, Alpine Electronics R&D Europe GmbH
+* \copyright Copyright (C) 2017, PSA GROUP
 *
 * @file test-address-input.py
 *
@@ -31,34 +32,16 @@
 import dbus
 import gobject
 import dbus.mainloop.glib
-from xml.dom.minidom import parse
 import xml.dom.minidom
 import argparse
 import sys
 import errno
+import genivi
 from dltTrigger import *
 #import pdb;pdb.set_trace()    
 
 #name of the test 
 test_name = "address input"
-
-# constants as defined in the Navigation API
-LATITUDE = 0x00a0
-LONGITUDE = 0x00a1
-ALTITUDE = 0x00a2
-FULL_ADDRESS = 0x00b2
-COUNTRY = 0x00a6
-STATE = 0x00a7
-CITY = 0x00a8
-ZIPCODE = 0x00a9
-STREET = 0x00aa
-HOUSE_NUMBER = 0x00ab
-CROSSING = 0x00ac
-DISTRICT = 0x00ad
-PHONE_NUMBER = 0x00ae
-POI_NAME = 0x00af
-TOWN_CENTER = 0x00b0
-FINISHED = 0x00c2
 
 # List of addresses
 COUNTRY_STRING = list()
@@ -114,27 +97,27 @@ def vprint(text):
 # Turn selection criteria values to their corresponding string description
 def selection_criterion_to_string(selection_criterion):
     return_value = ''
-    if selection_criterion == LATITUDE:
+    if selection_criterion == genivi.LATITUDE:
         return_value += 'Latitude'
-    elif selection_criterion == LONGITUDE:
+    elif selection_criterion == genivi.LONGITUDE:
         return_value += 'Longitude'
-    elif selection_criterion == COUNTRY:
+    elif selection_criterion == genivi.COUNTRY:
         return_value += 'Country'
-    elif selection_criterion == STATE:
+    elif selection_criterion == genivi.STATE:
         return_value += 'State'
-    elif selection_criterion == CITY:
+    elif selection_criterion == genivi.CITY:
         return_value += 'City'
-    elif selection_criterion == TOWN_CENTER:
+    elif selection_criterion == genivi.TOWN_CENTER:
         return_value += 'City center'
-    elif selection_criterion == ZIPCODE:
+    elif selection_criterion == genivi.ZIPCODE:
         return_value += 'ZipCode'
-    elif selection_criterion == STREET:
+    elif selection_criterion == genivi.STREET:
         return_value += 'Street'
-    elif selection_criterion == HOUSE_NUMBER:
+    elif selection_criterion == genivi.HOUSE_NUMBER:
         return_value += 'House number'
-    elif selection_criterion == CROSSING:
+    elif selection_criterion == genivi.CROSSING:
         return_value += 'Crossing'
-    elif selection_criterion == FULL_ADDRESS:
+    elif selection_criterion == genivi.FULL_ADDRESS:
         return_value += 'Full address'
     else:
         return_value += str(selection_criterion)
@@ -216,20 +199,20 @@ def evaluate_address(address, guidable):
     print('\nAddress complete!\nEvaluating...')
     if COUNTRY_STRING[current_address_index] == '':
         test_passed = 1
-    elif address[COUNTRY][1] == COUNTRY_STRING[current_address_index]:
-        print ('Country\t\t\t-> ok (' + address[COUNTRY][1] + ')')
+    elif address[genivi.COUNTRY][1] == COUNTRY_STRING[current_address_index]:
+        print ('Country\t\t\t-> ok (' + address[genivi.COUNTRY][1] + ')')
         if CITY_STRING[current_address_index] == '':
             test_passed = 1
-        elif address[CITY][1] == CITY_STRING[current_address_index]:
-            print ('City\t\t\t-> ok (' + address[CITY][1] + ')')
+        elif address[genivi.CITY][1] == CITY_STRING[current_address_index]:
+            print ('City\t\t\t-> ok (' + address[genivi.CITY][1] + ')')
             if STREET_STRING[current_address_index] == '':
                 test_passed = 1
-            elif address[STREET][1] == STREET_STRING[current_address_index]:
-                print ('Street\t\t\t-> ok (' + address[STREET][1] + ')')
+            elif address[genivi.STREET][1] == STREET_STRING[current_address_index]:
+                print ('Street\t\t\t-> ok (' + address[genivi.STREET][1] + ')')
                 if HOUSE_NUMBER_STRING[current_address_index] == '':
                     test_passed = 1
-                elif address[HOUSE_NUMBER][1] == HOUSE_NUMBER_STRING[current_address_index]:
-                    print ('House number\t-> ok (' + address[HOUSE_NUMBER][1] + ')')
+                elif address[genivi.HOUSE_NUMBER][1] == HOUSE_NUMBER_STRING[current_address_index]:
+                    print ('House number\t-> ok (' + address[genivi.HOUSE_NUMBER][1] + ')')
                     test_passed = 1
 
     if guidable == 1:
@@ -255,7 +238,7 @@ def evaluate_address(address, guidable):
 
 def search_status_handler(handle,status):
     vprint('\n::Search status ' + str(int(status)))
-    if status == FINISHED:
+    if status == genivi.FINISHED:
             location_input_interface.RequestListUpdate(dbus.UInt32(session_handle), dbus.UInt32(handle),
                                                        dbus.UInt16(0),
                                                        dbus.UInt16(WINDOW_SIZE))
@@ -271,16 +254,16 @@ def content_updated_handler(handle, guidable, available_selection_criteria, addr
     vprint('\tAvailable selection criteria = ' + selection_criteria_array_to_string(available_selection_criteria))
     vprint('\tADDRESS: '+dictionary_to_string(address))
 
-    if current_selection_criterion == COUNTRY:
-        change_selection_criterion(CITY)
+    if current_selection_criterion == genivi.COUNTRY:
+        change_selection_criterion(genivi.CITY)
         target_search_string = CITY_STRING[current_address_index]
-    elif current_selection_criterion == CITY:
-        change_selection_criterion(STREET)
+    elif current_selection_criterion == genivi.CITY:
+        change_selection_criterion(genivi.STREET)
         target_search_string = STREET_STRING[current_address_index]
-    elif current_selection_criterion == STREET:
-        change_selection_criterion(HOUSE_NUMBER)
+    elif current_selection_criterion == genivi.STREET:
+        change_selection_criterion(genivi.HOUSE_NUMBER)
         target_search_string = HOUSE_NUMBER_STRING[current_address_index]
-    elif current_selection_criterion == HOUSE_NUMBER:
+    elif current_selection_criterion == genivi.HOUSE_NUMBER:
         target_search_string = ''
     entered_search_string = ''
     if target_search_string == '':
@@ -370,7 +353,7 @@ def startSearch(address_index):
     available_characters = ''
     target_search_string = COUNTRY_STRING[current_address_index]
     
-    change_selection_criterion(COUNTRY)
+    change_selection_criterion(genivi.COUNTRY)
     full_string_search(location_input_handle, target_search_string)
 
 startTrigger(test_name)  

@@ -3,6 +3,7 @@
 clean=0
 capi=0
 navit=0
+poi=0
 dlt_option="-DWITH_DLT=OFF"
 commonapi_tools_option="-DWITH_PLUGIN_MIGRATION=OFF"
 
@@ -32,7 +33,7 @@ function check_path_for_capi
 	commonapi_tools_option="-DWITH_PLUGIN_MIGRATION=ON -DWITH_DBUS_INTERFACE=OFF -DDBUS_LIB_PATH="$DBUS_LIB_PATH" -DCOMMONAPI_DBUS_TOOL_DIR="$COMMONAPI_DBUS_TOOL_DIR" -DCOMMONAPI_TOOL_DIR="$COMMONAPI_TOOL_DIR
 }
  
-while getopts cdmn opt
+while getopts cdmnp opt
 do
 	case $opt in
 	c)
@@ -47,45 +48,57 @@ do
 	n)
 		navit=1
 		;;
+	p)
+		poi=1
+		;;
 	\?)
 		echo "Usage:"
-		echo "$0 [-cdmn]"
-		echo "-c: build with clean"
+		echo "$0 [-cdmnp]"
+		echo "-c: clean and build"
 		echo "-d: build with dlt (only with -c)"
 		echo "-m: build with commonAPI plugins (only with -c) "
 		echo "-n: build navit"
+		echo "-p: build poi"
 		exit 1
 	esac
 done
 
+#check commonapi settings
 if [ "$capi" = 1 ]
 then
 	check_path_for_capi
 fi
 
-if [ "$clean" = 1 ]
+#clean
+if [ "$clean" = 1 ] && [ -d "./build" ]
 then
-	if [ -d "./build" ]
+	echo 'clean up navigation and positioning'
+	rm ./build/CMakeCache.txt
+	rm ./build/cmake_install.cmake
+	rm ./build/Makefile
+	rm ./build/positioning/cmake_install.cmake
+	rm ./build/positioning/Makefile
+	if [ "$navit" = 1 ]
 	then
-		if [ "$navit" = 1 ]
-		then
-			echo 'clean up the build folder and regenerate all the stuff'
-			find ./build ! -name '*.cbp' -type f -exec rm -f {} +
-		else
-			echo 'clean up the build folder and regenerate all the stuff except navit '
-			rm ./build/CMakeCache.txt
-			rm ./build/cmake_install.cmake
-			rm ./build/Makefile
-			rm -rf ./build/positioning
-		fi
+		echo 'clean up navit'
+		rm ./build/navit/CMakeCache.txt
+		rm ./build/navit/cmake_install.cmake
+		rm ./build/navit/Makefile
+	fi
+	if [ "$poi" = 1 ] && [ -d "../poi-service/build" ]
+	then
+		echo 'clean up poi'
+		rm ../poi-service/build/CMakeCache.txt
+		rm ../poi-service/build/cmake_install.cmake
+		rm ../poi-service/build/Makefile
 	fi
 fi
 
+#navit
 mkdir -p build
 cd build
 mkdir -p navit
 cd navit
-
 if [ "$navit" = 1 ]
 then
 	echo 'build navit'
@@ -94,19 +107,11 @@ then
 		cmake -DDISABLE_QT=1 -DSAMPLE_MAP=0 -DBUILD_MAPTOOL=0 -Dvehicle/null=1 -Dgraphics/qt_qpainter=0 ../../navit/
 	fi
 	make
-else
-	if [ "$clean" = 1 ]
-	then
-		cmake -DDISABLE_QT=1 -DSAMPLE_MAP=0 -DBUILD_MAPTOOL=0 -Dvehicle/null=1 -Dgraphics/qt_qpainter=0 ../../navit/
-		make
-	fi
 fi
-cd ../
+cd ..
+
+#navigation
 echo 'build navigation'
-if [ "$capi" = 1 ]
-then
-	echo 'delete <selective> option because DBus does not manage it'
-fi
 if [ "$clean" = 1 ]
 then
 	cmake $dlt_option $commonapi_tools_option ../
@@ -117,4 +122,18 @@ fi
 make
 cd ..
 
+#poi
+cd ../poi-service
+mkdir -p build
+cd build
+if [ "$poi" = 1 ]
+then
+	echo 'build poi'
+	if [ "$clean" = 1 ]
+	then
+		cmake -DWITH_PLUGIN_MIGRATION=0 ../
+	fi
+	make
+fi
+cd ../../navigation
 

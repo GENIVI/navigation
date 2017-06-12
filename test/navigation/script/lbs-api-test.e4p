@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric project file for project lbs-api-test -->
-<!-- Saved: 2017-05-23, 15:56:05 -->
+<!-- Saved: 2017-06-08, 15:30:45 -->
 <!-- Copyright (C) 2017 asanoaozora,  -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -12,6 +12,7 @@
   <Version>0.1</Version>
   <Author>asanoaozora</Author>
   <Email></Email>
+  <Eol index="-1"/>
   <Sources>
     <Source>__init__.py</Source>
     <Source>dltTrigger.py</Source>
@@ -22,6 +23,7 @@
     <Source>test-location-input.py</Source>
     <Source>test-map-viewer-control-single.py</Source>
     <Source>test-route-calculation.py</Source>
+    <Source>genivi.py</Source>
   </Sources>
   <Forms/>
   <Translations/>

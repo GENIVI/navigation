@@ -485,9 +485,17 @@ class  MapViewerControl
     DisplayRoute(const uint32_t& SessionHandle, const uint32_t& MapViewInstanceHandle, const uint32_t& RouteHandle, const bool& highlighted)
 	{
 		MapViewerControlObj *obj=handles[MapViewInstanceHandle];
+        std::vector< ::DBus::Struct< uint32_t, bool > > displayedRoutes;
+        ::DBus::Struct< uint32_t, bool > route;
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-                else obj->DisplayRoute(SessionHandle, RouteHandle, highlighted);
+        else{
+            obj->DisplayRoute(SessionHandle, RouteHandle, highlighted);
+            route._1 = RouteHandle;
+            route._2 = highlighted;
+            displayedRoutes.push_back(route);
+            DisplayedRoutes(MapViewInstanceHandle,displayedRoutes);
+        }
 	}
 
 	void	

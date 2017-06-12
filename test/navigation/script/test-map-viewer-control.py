@@ -33,25 +33,15 @@ import gobject
 import dbus.mainloop.glib
 import time
 from dltTrigger import *
-from xml.dom.minidom import parse
 import xml.dom.minidom
 import argparse
 import sys
 import errno
+import genivi
 #import pdb; pdb.set_trace()
 
 #name of the test 
 test_name = "map viewer"
-
-#constants as defined in the Navigation API
-LATITUDE = 0x00a0
-LONGITUDE = 0x00a1
-MAPVIEWER_MAX = 0x0041
-MAPVIEWER_MIN = 0x0040
-PERSPECTIVE_TWO_D = 0x0020
-PERSPECTIVE_THREE_D = 0x0021
-MAIN_MAP = 0x0010
-SPLIT_SCREEN = 0x0011
 
 #constants used by the script
 HORIZONTAL_SIZE = 800
@@ -115,7 +105,7 @@ def test_scale(scale,isMinMax):
     print('Is min max: '+str(isMinMax))
     g_scale=scale
     if g_scale_delta==SCALE_DELTA_DECREASE:
-        if isMinMax !=MAPVIEWER_MIN:
+        if isMinMax !=genivi.MAPVIEWER_MIN:
             print("Zoom in")
             MapViewerControl_interface.SetMapViewScaleByDelta( \
                 dbus.UInt32(sessionhandle), \
@@ -131,7 +121,7 @@ def test_scale(scale,isMinMax):
                 dbus.Int16(g_scale_delta))  
             return True
     else:
-        if isMinMax !=MAPVIEWER_MAX:
+        if isMinMax !=genivi.MAPVIEWER_MAX:
             print("Zoom out")
             MapViewerControl_interface.SetMapViewScaleByDelta( \
                 dbus.UInt32(sessionhandle), \
@@ -154,7 +144,7 @@ def test_three_d():
     MapViewerControl_interface.SetMapViewPerspective(\
         dbus.UInt32(sessionhandle),\
         dbus.UInt32(mapviewerhandle), \
-        PERSPECTIVE_THREE_D)
+        genivi.PERSPECTIVE_THREE_D)
     return False
 
 def mapviewer_mapViewRotated_handler(mapViewInstanceHandle):
@@ -178,7 +168,8 @@ def mapviewer_mapViewScaleChanged_handler(mapViewInstanceHandle,scale,isMinMax):
 def mapviewer_mapViewPerspectiveChanged_handler(mapViewInstanceHandle, perspective):
     print("Perspective: "+str(perspective))
     if step==TEST_STEP_THREE_D:
-        if int(perspective)==PERSPECTIVE_THREE_D:
+        if int(perspective)==genivi.PERSPECTIVE_THREE_D:
+            time.sleep(2)
             print('Test 3D PASSED')
         else:
             print('Test 3D failed')
@@ -188,7 +179,6 @@ def timeout():
     print('Timeout Expired') 
     print ('\nTest FAILED')
     exit()
-
 
 def exit():
     MapViewerControl_interface.ReleaseMapViewInstance( \
@@ -251,7 +241,6 @@ for location in location_set.getElementsByTagName("location"):
 if __name__ == '__main__':
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True) 
 
-
 #connect to session bus
 bus = dbus.SessionBus()
 
@@ -290,12 +279,10 @@ MapViewerControl_interface = dbus.Interface(MapViewerControl_obj, dbus_interface
 ret = MapViewerControl_interface.CreateMapViewInstance( \
   dbus.UInt32(sessionhandle), \
   dbus.Struct((dbus.UInt16(HORIZONTAL_SIZE),dbus.UInt16(VERTICAL_SIZE))), \
-  dbus.Int32(MAIN_MAP))
+  dbus.Int32(genivi.MAIN_MAP))
 mapviewerhandle=ret[1]
 
 print('MapView handle: ' + str(mapviewerhandle))
-
-time.sleep(2)
 
 print ('Stop following the car position') 
 MapViewerControl_interface.SetFollowCarMode( \
@@ -345,7 +332,7 @@ MapViewerControl_interface.SetMapViewScale( \
 time.sleep(0.25)
 
 #init the perspective to 2D
-MapViewerControl_interface.SetMapViewPerspective(dbus.UInt32(sessionhandle),dbus.UInt32(mapviewerhandle), PERSPECTIVE_TWO_D)
+MapViewerControl_interface.SetMapViewPerspective(dbus.UInt32(sessionhandle),dbus.UInt32(mapviewerhandle), genivi.PERSPECTIVE_TWO_D)
  
 #init the heading angle
 MapViewerControl_interface.SetCameraHeadingAngle(dbus.UInt32(sessionhandle),dbus.UInt32(mapviewerhandle), dbus.Int32(0))

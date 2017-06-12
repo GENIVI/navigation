@@ -7,6 +7,7 @@
 * SPDX-License-Identifier: MPL-2.0
 *
 * @copyright Copyright (C) 2014, Alpine Electronics R&D Europe GmbH
+* \copyright Copyright (C) 2017, PSA GROUP
 *
 * @file test-location-input.py
 *
@@ -31,34 +32,16 @@
 import dbus
 import gobject
 import dbus.mainloop.glib
-from xml.dom.minidom import parse
 import xml.dom.minidom
 import argparse
 import sys
 import errno
+import genivi
 from dltTrigger import *
 #import pdb;pdb.set_trace()    
 
 #name of the test 
 test_name = "location input"
-
-# constants as defined in the Navigation API
-LATITUDE = 0x00a0
-LONGITUDE = 0x00a1
-ALTITUDE = 0x00a2
-FULL_ADDRESS = 0x00b2
-COUNTRY = 0x00a6
-STATE = 0x00a7
-CITY = 0x00a8
-ZIPCODE = 0x00a9
-STREET = 0x00aa
-HOUSE_NUMBER = 0x00ab
-CROSSING = 0x00ac
-DISTRICT = 0x00ad
-PHONE_NUMBER = 0x00ae
-POI_NAME = 0x00af
-TOWN_CENTER = 0x00b0
-FINISHED = 0x00c2
 
 # List of addresses
 COUNTRY_STRING = list()
@@ -75,9 +58,9 @@ city_search_mode = 0
 street_search_mode = 1 #set to full because of a bug to be fixed in the plug-in
 house_number_search_mode = 1
 
-print '\n--------------------------\n' + \
+print ('\n--------------------------\n' + \
       'LocationInput Test' + \
-      '\n--------------------------\n'
+      '\n--------------------------\n')
 
 parser = argparse.ArgumentParser(description='Location input Test for navigation PoC and FSA.')
 parser.add_argument('-l','--loc',action='store', dest='locations', help='List of locations in xml format')
@@ -120,27 +103,27 @@ def vprint(text):
 # Turn selection criteria values to their corresponding string description
 def selection_criterion_to_string(selection_criterion):
     return_value = ''
-    if selection_criterion == LATITUDE:
+    if selection_criterion == genivi.LATITUDE:
         return_value += 'Latitude'
-    elif selection_criterion == LONGITUDE:
+    elif selection_criterion == genivi.LONGITUDE:
         return_value += 'Longitude'
-    elif selection_criterion == COUNTRY:
+    elif selection_criterion == genivi.COUNTRY:
         return_value += 'Country'
-    elif selection_criterion == STATE:
+    elif selection_criterion == genivi.STATE:
         return_value += 'State'
-    elif selection_criterion == CITY:
+    elif selection_criterion == genivi.CITY:
         return_value += 'City'
-    elif selection_criterion == TOWN_CENTER:
+    elif selection_criterion == genivi.TOWN_CENTER:
         return_value += 'City center'
-    elif selection_criterion == ZIPCODE:
+    elif selection_criterion == genivi.ZIPCODE:
         return_value += 'ZipCode'
-    elif selection_criterion == STREET:
+    elif selection_criterion == genivi.STREET:
         return_value += 'Street'
-    elif selection_criterion == HOUSE_NUMBER:
+    elif selection_criterion == genivi.HOUSE_NUMBER:
         return_value += 'House number'
-    elif selection_criterion == CROSSING:
+    elif selection_criterion == genivi.CROSSING:
         return_value += 'Crossing'
-    elif selection_criterion == FULL_ADDRESS:
+    elif selection_criterion == genivi.FULL_ADDRESS:
         return_value += 'Full address'
     else:
         return_value += str(selection_criterion)
@@ -228,13 +211,13 @@ def spell_search(handle, entered_string, search_string, valid_characters, first=
                 location_input_interface.Spell(dbus.UInt32(session_handle), dbus.UInt32(handle),
                                                dbus.String(spell_character), dbus.UInt16(20))
             else:
-                print 'TEST FAILED (Target character can not be entered)'
+                print ('TEST FAILED (Target character can not be entered)')
                 exit()
         else:
-            print 'TEST FAILED (Unexpected completion)'
+            print ('TEST FAILED (Unexpected completion)')
             exit()
     else:
-        print 'Full spell match'
+        print ('Full spell match')
 
 
 # Full string search
@@ -252,39 +235,39 @@ def full_string_search(handle, search_string):
 
 def evaluate_address(address, guidable):
     test_passed = 0
-    print '\nAddress complete!\nEvaluating...'
+    print ('\nAddress complete!\nEvaluating...')
     if COUNTRY_STRING[current_address_index] == '':
         test_passed = 1
-    elif address[COUNTRY][1] == COUNTRY_STRING[current_address_index]:
-        print 'Country\t\t\t-> ok (' + address[COUNTRY][1] + ')'
+    elif address[genivi.COUNTRY][1] == COUNTRY_STRING[current_address_index]:
+        print ('Country\t\t\t-> ok (' + address[genivi.COUNTRY][1] + ')')
         if CITY_STRING[current_address_index] == '':
             test_passed = 1
-        elif address[CITY][1] == CITY_STRING[current_address_index]:
-            print 'City\t\t\t-> ok (' + address[CITY][1] + ')'
+        elif address[genivi.CITY][1] == CITY_STRING[current_address_index]:
+            print ('City\t\t\t-> ok (' + address[genivi.CITY][1] + ')')
             if STREET_STRING[current_address_index] == '':
                 test_passed = 1
-            elif address[STREET][1] == STREET_STRING[current_address_index]:
-                print 'Street\t\t\t-> ok (' + address[STREET][1] + ')'
+            elif address[genivi.STREET][1] == STREET_STRING[current_address_index]:
+                print ('Street\t\t\t-> ok (' + address[genivi.STREET][1] + ')')
                 if HOUSE_NUMBER_STRING[current_address_index] == '':
                     test_passed = 1
-                elif address[HOUSE_NUMBER][1] == HOUSE_NUMBER_STRING[current_address_index]:
-                    print 'House number\t-> ok (' + address[HOUSE_NUMBER][1] + ')'
+                elif address[genivi.HOUSE_NUMBER][1] == HOUSE_NUMBER_STRING[current_address_index]:
+                    print ('House number\t-> ok (' + address[genivi.HOUSE_NUMBER][1] + ')')
                     test_passed = 1
 
     if guidable == 1:
         if test_passed == 1:
-            print 'TEST PASSED'
+            print ('TEST PASSED')
         else:
-            print 'TEST FAILED (wrong address)'
+            print ('TEST FAILED (wrong address)')
             exit()
     else:
-        print 'TEST FAILED (non-guidable address)'
+        print ('TEST FAILED (non-guidable address)')
         exit()
     address_index = current_address_index + 1
     if address_index < len(COUNTRY_STRING):
         startSearch(address_index)
     else:
-        print 'END OF THE TEST'
+        print ('END OF THE TEST')
         exit()
 
 
@@ -294,7 +277,7 @@ def evaluate_address(address, guidable):
 
 def search_status_handler(handle,status):
     vprint('\n::Search status ' + str(int(status)))
-    if status == FINISHED:
+    if status == genivi.FINISHED:
             location_input_interface.RequestListUpdate(dbus.UInt32(session_handle), dbus.UInt32(handle),
                                                        dbus.UInt16(0),
                                                        dbus.UInt16(WINDOW_SIZE))
@@ -312,19 +295,19 @@ def content_updated_handler(handle, guidable, available_selection_criteria, addr
 
     search_mode = -1
 
-    if current_selection_criterion == COUNTRY:
-        change_selection_criterion(CITY)
+    if current_selection_criterion == genivi.COUNTRY:
+        change_selection_criterion(genivi.CITY)
         target_search_string = CITY_STRING[current_address_index]
         search_mode = city_search_mode
-    elif current_selection_criterion == CITY:
-        change_selection_criterion(STREET)
+    elif current_selection_criterion == genivi.CITY:
+        change_selection_criterion(genivi.STREET)
         target_search_string = STREET_STRING[current_address_index]
         search_mode = street_search_mode
-    elif current_selection_criterion == STREET:
-        change_selection_criterion(HOUSE_NUMBER)
+    elif current_selection_criterion == genivi.STREET:
+        change_selection_criterion(genivi.HOUSE_NUMBER)
         target_search_string = HOUSE_NUMBER_STRING[current_address_index]
         search_mode = house_number_search_mode
-    elif current_selection_criterion == HOUSE_NUMBER:
+    elif current_selection_criterion == genivi.HOUSE_NUMBER:
         target_search_string = ''
 
     entered_search_string = ''
@@ -336,7 +319,7 @@ def content_updated_handler(handle, guidable, available_selection_criteria, addr
     elif search_mode == 1:
         full_string_search(handle, target_search_string)
     else:
-        print '\nTEST FAILED (Invalid search mode)'
+        print ('\nTEST FAILED (Invalid search mode)')
         exit()
 
 # Handler for SpellResult callback
@@ -358,7 +341,7 @@ def spell_result_handler(handle, unique_string, valid_characters, full_match):
 
     if len(valid_characters) == 1:
         if unicode(valid_characters[0]) == u'\x08':
-            print '\nTEST FAILED (Dead end spelling)'
+            print ('\nTEST FAILED (Dead end spelling)')
             exit()
 
     if unicode(entered_search_string) == unicode(target_search_string):
@@ -402,7 +385,7 @@ def search_result_list_handler(handle, total_size, window_offset, window_size, r
                   '\' (Session '+str(int(session_handle)) + ' LocationInputHandle ' + str(int(handle))+')')
             location_input_interface.SelectEntry(dbus.UInt32(session_handle), dbus.UInt32(handle), dbus.UInt16(0))
         else:
-            print '\nTEST FAILED (Unexpected single result list)'
+            print ('\nTEST FAILED (Unexpected single result list)')
             exit()
     elif spell_next_character == 1:
         spell_next_character = 0
@@ -429,8 +412,8 @@ bus.add_signal_receiver(content_updated_handler,
 
 # Timeout
 def timeout():
-    print 'Timeout Expired'
-    print '\nTEST FAILED\n'
+    print ('Timeout Expired')
+    print ('\nTEST FAILED\n')
     exit()
 
 def exit():
@@ -456,7 +439,7 @@ def startSearch(address_index):
     available_characters = ''
     target_search_string = COUNTRY_STRING[current_address_index]
     
-    change_selection_criterion(COUNTRY)
+    change_selection_criterion(genivi.COUNTRY)
     if country_search_mode == 0:
         spell_search(location_input_handle, entered_search_string, target_search_string, available_characters, 1)
     elif country_search_mode == 1:
@@ -470,7 +453,7 @@ session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigatio
 # Get SessionHandle
 ret = session_interface.CreateSession(dbus.String('test location input'))
 session_handle=ret[1]
-print 'Session handle = ' + str(session_handle)
+print ('Session handle = ' + str(session_handle))
 
 location_input_obj = bus.get_object('org.genivi.navigation.navigationcore.LocationInput', '/org/genivi/navigationcore')
 location_input_interface = dbus.Interface(location_input_obj, dbus_interface='org.genivi.navigation.navigationcore.LocationInput')
@@ -478,10 +461,10 @@ location_input_interface = dbus.Interface(location_input_obj, dbus_interface='or
 # Get LocationInputHandle
 ret = location_input_interface.CreateLocationInput(dbus.UInt32(session_handle))
 location_input_handle = ret[1]
-print 'LocationInput handle = ' + str(location_input_handle)
+print ('LocationInput handle = ' + str(location_input_handle))
 
 attributes = location_input_interface.GetSupportedAddressAttributes()
-print 'Initially supported address attributes = ' + selection_criteria_array_to_string(attributes)
+print ('Initially supported address attributes = ' + selection_criteria_array_to_string(attributes))
 
 # Configuration
 current_address_index = 0

@@ -298,7 +298,9 @@ private:
 
 // category and attribute routines
 
-    bool isCategoryAvailable(categoryId_t id, categoryId_t *categoryId_t);
+    bool isCategoryAvailable(categoryId_t id, const uint16_t size, categoryId_t *category_id);
+
+    bool isCategoryAvailableInCAM(categoryId_t id, const std::vector<DBus_category> categoryCAMList, categoryId_t *category_id);
 
     bool isAllCategoriesSelected(uint16_t* index);
 
