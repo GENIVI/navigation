@@ -1,9 +1,37 @@
 #!/bin/bash
 
-debug="OFF"
-clean=0
-capi=0
-commonapi_tools_option=""
+###########################################################################
+# @licence app begin@
+# SPDX-License-Identifier: MPL-2.0
+#
+# \copyright Copyright (C) 2013-2017, PSA Group
+#
+# \file build.sh
+#
+# \brief This file is part of the Build System for poi.
+#
+# \author Philippe Colliot <philippe.colliot@mpsa.com>
+#
+# \version 1.0
+#
+# This Source Code Form is subject to the terms of the
+# Mozilla Public License (MPL), v. 2.0.
+# If a copy of the MPL was not distributed with this file,
+# You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# For further information see http://www.genivi.org/.
+#
+# List of changes:
+# 
+#
+# @licence end@
+###########################################################################
+
+clean=0 #no clean (means no cmake) -> -c option
+capi=0 #no common api -> -m option
+commonapi_tools_option="-DWITH_PLUGIN_MIGRATION=OFF" 
+dlt_option="OFF" #no DLT -> -l option
+debug="OFF" #no debug -> -d option
 
 function check_path_for_capi
 {
@@ -31,7 +59,7 @@ function check_path_for_capi
 	commonapi_tools_option="-DDBUS_LIB_PATH="$DBUS_LIB_PATH" -DCOMMONAPI_DBUS_TOOL_DIR="$COMMONAPI_DBUS_TOOL_DIR" -DCOMMONAPI_TOOL_DIR="$COMMONAPI_TOOL_DIR
 }
  
-while getopts cdmh opt
+while getopts cdhlmh opt
 do
 	case $opt in
 	c)
@@ -40,23 +68,25 @@ do
 	d)
 		debug="ON"
 		;;
+	l)
+		dlt_option="ON"
+		;;
 	m)
 		capi=1
+		#check commonapi settings
+		check_path_for_capi
 		;;
 	h)
 		echo "Usage:"
-		echo "$0 [-cdm]"
-		echo "-c: build with clean"
+		echo "$0 [-cdhlm]"
+		echo "-c: Rebuild with clean"
 		echo "-d: Enable the debug messages"
-		echo "-m: build with commonAPI plugins "
+		echo "-h: Help"
+		echo "-l: Build with dlt (only with -c)"
+		echo "-m: Build with commonAPI plugins (only with -c)"
 		exit 1
 	esac
 done
-
-if [ "$capi" = 1 ]
-then
-	check_path_for_capi
-fi
 
 set -e
 
@@ -75,15 +105,7 @@ cd build
 echo 'build poi-server'
 if [ "$clean" = 1 ]
 then
-	if [ "$capi" = 0 ]
-	then
-		cmake -DWITH_PLUGIN_MIGRATION=0 -DWITH_DEBUG=$debug ../
-	else
-		cmake -DWITH_PLUGIN_MIGRATION=ON -DWITH_DBUS_INTERFACE=OFF $commonapi_tools_option -DWITH_DEBUG=$debug ../
-		echo 'fix a bug in the generation of CommonAPI hpp'
-		sed -i -e 's/(const TimeStampedEnum::/(const ::v4::org::genivi::navigation::navigationcore::NavigationCoreTypes::TimeStampedEnum::/' ./poi-server-capi/src-gen/v4/org/genivi/navigation/navigationcore/LocationInput.hpp
-		sed -i -e 's/(const TimeStampedEnum::/(const ::v4::org::genivi::navigation::navigationcore::NavigationCoreTypes::TimeStampedEnum::/' ./poi-server-capi/src-gen/v4/org/genivi/navigation/navigationcore/MapMatchedPosition.hpp
-	fi
+	cmake -DWITH_DLT=$dlt_option $commonapi_tools_option -DWITH_DEBUG=$debug ../
 fi
 make
 

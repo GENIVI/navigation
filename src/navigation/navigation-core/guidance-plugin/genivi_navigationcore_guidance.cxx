@@ -605,7 +605,39 @@ GuidanceObj::GetManeuver(struct item *item, uint32_t& DistanceToManeuver, int32_
         Maneuver=GENIVI_NAVIGATIONCORE_DESTINATION;
         data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_STRAIGHT);
 		break;
-	default:
+    case type_nav_merge_left:
+        Maneuver=GENIVI_NAVIGATIONCORE_DESTINATION;
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_LEFT);
+        break;
+    case type_nav_merge_right:
+        Maneuver=GENIVI_NAVIGATIONCORE_DESTINATION;
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_RIGHT);
+        break;
+    case type_nav_turnaround_left:
+        Maneuver=GENIVI_NAVIGATIONCORE_DESTINATION;
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_UTURN_LEFT);
+        break;
+    case type_nav_turnaround_right:
+        Maneuver=GENIVI_NAVIGATIONCORE_DESTINATION;
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_UTURN_RIGHT);
+        break;
+    case type_nav_exit_left:
+        Maneuver=GENIVI_NAVIGATIONCORE_DESTINATION;
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_LEFT);
+        break;
+    case type_nav_exit_right:
+        Maneuver=GENIVI_NAVIGATIONCORE_DESTINATION;
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_RIGHT);
+        break;
+    case type_nav_keep_left:
+        Maneuver=GENIVI_NAVIGATIONCORE_DESTINATION;
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_LEFT);
+        break;
+    case type_nav_keep_right:
+        Maneuver=GENIVI_NAVIGATIONCORE_DESTINATION;
+        data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_RIGHT);
+        break;
+    default:
         dbg(lvl_error,"Unable to convert type %s\n",item_to_name(item->type));
         Maneuver=GENIVI_NAVIGATIONCORE_INVALID;
         index = GENIVI_NAVIGATIONCORE_INVALID;

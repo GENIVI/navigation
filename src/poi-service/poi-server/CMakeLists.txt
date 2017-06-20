@@ -61,6 +61,7 @@ add_executable(poi-server
 )
 
 set(LIBRARIES 
+    ${LIBRARIES}
     ${DBUS_CPP_LIBRARIES}
     ${GLIB_LIBRARIES}
     ${SQLITE3_LIBRARIES}

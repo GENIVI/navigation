@@ -38,6 +38,10 @@
 #include <getopt.h>
 #include <dbus-c++/glib-integration.h>
 
+#include "log.h"
+
+DLT_DECLARE_CONTEXT(gCtx);
+
 #include "poi-common-database.h"
 
 #include "poi-server-class.h"
@@ -116,6 +120,7 @@ void Routing::AlternativeRoutesAvailable (const std::vector<handleId_t>& routeHa
 contentAccessModule::contentAccessModule(DBus::Connection &connection, const std::string& service)
     : DBus::ObjectProxy(connection, contentAccessModule_OBJECT_PATH,service.c_str())
 {
+    LOG_INFO_MSG(gCtx,"poi content access module client\n");
 }
 
 contentAccessModule::~contentAccessModule()
@@ -152,6 +157,8 @@ void contentAccessModule::SearchStatusChanged(const uint32_t& poiSearchHandle, c
 poiContentAccessServer::poiContentAccessServer(DBus::Connection &connection)
 : DBus::ObjectAdaptor(connection, poiContentAccess_OBJECT_PATH)
 {
+    LOG_INFO_MSG(gCtx,"poi content access server\n");
+
     //version is hard coded
     m_version._1 = 0;
     m_version._2 = 4;
@@ -684,6 +691,8 @@ poiSearchServer::poiSearchServer(DBus::Connection &connection, const char* poiDa
         category_attribute_t attribute;
         categoryId_t value;
         categoryId_t parent,child;
+
+        LOG_INFO_MSG(gCtx,"poi server\n");
 
         //version is hard coded
         DBus_version::version_t version;
@@ -2168,6 +2177,9 @@ void print_usage (FILE* stream, int exit_code)
  */
 int main(int  argc , char**  argv )
 {
+    DLT_REGISTER_APP("MPVS","MAP VIEWER CONTROL SERVER");
+    DLT_REGISTER_CONTEXT(gCtx,"MPVS","Global Context");
+
     GMainLoop * mainloop ;
 
     // Set the global C and C++ locale to the user-configured locale,
@@ -2237,9 +2249,6 @@ int main(int  argc , char**  argv )
 
                 // Create a new GMainLoop with default context and initial state of "not running "
                 mainloop = g_main_loop_new (g_main_context_default() , FALSE );
-
-                // Send a feedback to the user
-                cout << "poi server started" << endl;
 
                 // loop listening
 

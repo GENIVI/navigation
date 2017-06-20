@@ -17,6 +17,7 @@
 ###########################################################################
 project(poi-service-server)
 cmake_minimum_required(VERSION 2.8)
+find_package(PkgConfig)
 
 message(STATUS ${PROJECT_NAME})
 
@@ -24,11 +25,14 @@ option(WITH_DBUS_INTERFACE
        "Build using the D-Bus interfaces" ON)
 option(WITH_DEBUG
         "Enable the debug messages" OFF)
+option(WITH_DLT
+        "Enable DLT logging" OFF)
 option(WITH_PLUGIN_MIGRATION
         "Enable navit plugin migration to commonapi" OFF)
 
 message(STATUS "WITH_DBUS_INTERFACE = ${WITH_DBUS_INTERFACE}")
 message(STATUS "WITH_DEBUG = ${WITH_DEBUG}")
+message(STATUS "WITH_DLT = ${WITH_DLT}")
 message(STATUS "WITH_PLUGIN_MIGRATION = ${WITH_PLUGIN_MIGRATION}")
 
 set(API_DIR "${CMAKE_CURRENT_SOURCE_DIR}/../../api")
@@ -37,6 +41,17 @@ set(COMMON_DIR "${CMAKE_CURRENT_SOURCE_DIR}/poi-common")
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
+
+if(${WITH_DLT})
+    add_definitions("-DDLT_ENABLED=1")
+    pkg_check_modules(DLT REQUIRED automotive-dlt)
+    include_directories( ${DLT_INCLUDE_DIRS} )
+    set(LIBRARIES ${LIBRARIES} ${DLT_LIBRARIES})
+endif()
+
+if(WITH_DEBUG)
+    add_definitions("-DDEBUG_ENABLED=1")
+endif()
 
 if (WITH_PLUGIN_MIGRATION)
     add_subdirectory(poi-server-capi)
