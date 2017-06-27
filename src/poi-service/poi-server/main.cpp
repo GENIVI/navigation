@@ -1731,6 +1731,8 @@ uint16_t poiSearchServer::searchPOIRequest(uint16_t categoryIndex, std::string s
 
     name = m_availableCategoryTable[categoryIndex].name;
 
+    LOG_DEBUG(gCtx,"Start search POI request for category %s on area %.6f %.6f %.6f %.6f",name.c_str(), left_bottom_location.latitude,right_top_location.latitude,left_bottom_location.longitude,right_top_location.longitude );
+
     sqlQuery = "SELECT name,segment,latitude,longitude,altitude";
 
     for (attribute_index=0;attribute_index<m_availableCategoryTable[categoryIndex].attributeList.size();attribute_index++)
@@ -1822,7 +1824,9 @@ uint16_t poiSearchServer::searchPOIRequest(uint16_t categoryIndex, std::string s
         //calculate distance from the center location
         poi.distance = calculateDistance(m_centerLocation,poi.coordinate);
         m_poiTable.push_back(poi);
+        LOG_DEBUG(gCtx,"POI name: %s found at distance: %d",poi.name.c_str(),poi.distance);
     }
+    LOG_DEBUG(gCtx,"Amount of POI found: %d",sqlQueryResult.size());
 
     return(sqlQueryResult.size());
 }

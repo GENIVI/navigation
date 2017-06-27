@@ -41,11 +41,21 @@
 #include <navit/map.h>
 #include <navit/mapset.h>
 #include "navigation-common-dbus.h"
+#include "log.h"
+
+DLT_DECLARE_CONTEXT(gCtx);
 
 #if (!DEBUG_ENABLED)
 #undef dbg
 #define dbg(level,...) ;
 #endif
+
+
+#include "genivi-poiservice-constants.h"
+#include "genivi-poiservice-poicontentaccess_proxy.h"
+#include "genivi-poiservice-contentaccessmodule_adaptor.h"
+
+#include <algorithm>
 
 enum {
     POI_CONTENTACCESSMODULE_CONNECTION=0,
@@ -53,11 +63,7 @@ enum {
     CONNECTION_AMOUNT
 };
 
-#include "genivi-poiservice-constants.h"
-#include "genivi-poiservice-poicontentaccess_proxy.h"
-#include "genivi-poiservice-contentaccessmodule_adaptor.h"
-
-#include <algorithm>
+#define MAX_RESULT_LIST_SIZE 256
 
 static DBus::Glib::BusDispatcher dispatchers[CONNECTION_AMOUNT];
 static DBus::Connection *conns[CONNECTION_AMOUNT];
@@ -88,6 +94,7 @@ class PoiContentAccess
         PoiContentAccess(DBus::Connection &connection)
         : DBus::ObjectProxy(connection, "/org/genivi/poiservice/POIContentAccess","org.genivi.navigation.poiservice.POIContentAccess")
         {
+            LOG_INFO_MSG(gCtx,"POI content access client");
         }
 
 };
@@ -116,6 +123,7 @@ class ContentAccessModule
     std::vector< ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > > m_resultList;
     std::string m_inputString;
     int m_max_radius;
+    uint16_t m_max_requested_size;
     bool (*m_sort_func)(::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > a, ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > b);
     struct coord m_center;
     double m_scale;
@@ -131,6 +139,8 @@ class ContentAccessModule
     ContentAccessModule(DBus::Connection &connection)
     : DBus::ObjectAdaptor(connection, "/org/genivi/poiservice/POIContentAccessModule")
     {
+        LOG_INFO_MSG(gCtx,"POI content access module server");
+
         m_mapset=NULL;
         m_msh=NULL;
         m_map_rect=NULL;
@@ -187,16 +197,19 @@ class ContentAccessModule
         delete(pca);
     }
 
-	void
+    bool
 	map_next(void)
 	{
 		m_map=mapset_next(m_msh, 1);
 		if (m_map_rect)
 			map_rect_destroy(m_map_rect);
-		if (m_map)
+        if (m_map){
 			m_map_rect=map_rect_new(m_map, &m_selection);
+            return true;
+        }
 		else
 			m_map_rect=NULL;
+        return false;
 	}
 
     bool
@@ -339,7 +352,8 @@ class ContentAccessModule
 		struct attr navit;
 		struct coord_geo g;
 		dbg(lvl_debug,"enter handle=%d size=%d location=%f,%f,%d string='%s' sortOption=%d\n",poiSearchHandle, maxSize, location._1,location._2,location._3, inputString.c_str(), sortOption);
-		m_resultList.resize(0);
+        m_max_requested_size=maxSize;
+        m_resultList.resize(0);
 		m_max_radius=0;
         m_inputString=inputString;
         poiCategoryIdRadius categoryIdRadius;
@@ -411,11 +425,16 @@ class ContentAccessModule
             }while((isFound==false)&&(index<m_poiCategoriesIdRadius.size()));
         }
 
-		dbg(lvl_debug,"rect 0x%x,0x%x-0x%x,0x%x\n",m_selection.u.c_rect.lu.x,m_selection.u.c_rect.lu.y,m_selection.u.c_rect.rl.x,m_selection.u.c_rect.rl.y);
+        LOG_DEBUG(gCtx,"Range used for navit ID: %d %d",m_selection.range.min,m_selection.range.max);
+        LOG_DEBUG(gCtx,"Start search POI request in area: %x %x %x %x",m_selection.u.c_rect.lu.x,m_selection.u.c_rect.lu.y,m_selection.u.c_rect.rl.x,m_selection.u.c_rect.rl.y);
+        LOG_DEBUG(gCtx,"String to search: %s",m_inputString.c_str());
+
+        dbg(lvl_debug,"rect 0x%x,0x%x-0x%x,0x%x\n",m_selection.u.c_rect.lu.x,m_selection.u.c_rect.lu.y,m_selection.u.c_rect.rl.x,m_selection.u.c_rect.rl.y);
 		if (m_msh)
 			mapset_close(m_msh);
 		m_msh=mapset_open(m_mapset);
-		map_next();
+        if (!map_next())
+            LOG_DEBUG_MSG(gCtx,"No map rectangle created");
 		if (sortOption == GENIVI_POISERVICE_SORT_BY_DISTANCE)
 			m_sort_func=do_sort_distance;
 		else
@@ -436,22 +455,26 @@ class ContentAccessModule
         bool isFound;
         size_t index;
         dbg(lvl_debug,"enter camId=%d handle=%d\n", camId, poiSearchHandle);
-		while (resultList.size() < 256 && m_map_rect) {
-			while (resultList.size() < 256 && (item=map_rect_get_item(m_map_rect))) {
+        do {
+            while ((count < MAX_RESULT_LIST_SIZE) && (count < m_max_requested_size) && (item=map_rect_get_item(m_map_rect))) {
                 isFound=false;
                 index=0;
-                do{
+                do{ //check if the category matches one of the requested ones
                     if (item->type == (m_poiCategoriesIdRadius.at(index)).formerId)
                     {
-                        isFound=add_poi(item,(m_poiCategoriesIdRadius.at(index)).givenId,m_inputString);
+                        if(add_poi(item,(m_poiCategoriesIdRadius.at(index)).givenId,m_inputString)){
+                            //poi are added into m_resultList
+                            LOG_DEBUG(gCtx,"POI added: %s count: %d",(m_resultList.at(count))._2.c_str(), count);
+                            count++;
+                            isFound=true;
+                        }
                     }
                     index++;
                 }while((isFound==false)&&(index<m_poiCategoriesIdRadius.size()));
-				count++;
 			}
-			map_next();
-		}
-		dbg(lvl_debug,"got %d items\n",count);
+        } while (map_next());
+
+        dbg(lvl_debug,"got %d items\n",count);
 		statusValue=GENIVI_POISERVICE_FINISHED;
 		if (m_sort_func) 
 			std::sort(m_resultList.begin(), m_resultList.end(), m_sort_func);
@@ -485,7 +508,10 @@ static class ContentAccessModule *server;
 void
 plugin_init(void)
 {
-	dbg(lvl_debug,"enter\n");
+    DLT_REGISTER_APP("POIC","POI CONTENT ACCESS MODULE SERVER");
+    DLT_REGISTER_CONTEXT(gCtx,"POIC","Global Context");
+
+    dbg(lvl_debug,"enter\n");
     event_request_system("glib","genivi_poiservice");
     int i;
     for (i = 0 ; i < CONNECTION_AMOUNT ; i++) {

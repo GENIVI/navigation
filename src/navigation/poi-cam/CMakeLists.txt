@@ -69,5 +69,7 @@ if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
 endif()
 
 module_add_library(genivi_poiservice_cam_navit genivi_poiservice_cam_navit.cxx ${DBUS_GENERATED_INCLUDE_DIR}/poi-service/genivi-poiservice-poicontentaccess_proxy.h ${DBUS_GENERATED_INCLUDE_DIR}/poi-service/genivi-poiservice-contentaccessmodule_adaptor.h)
+target_link_libraries(genivi_poiservice_cam_navit ${LIBRARIES})
+add_dependencies(genivi_poiservice_cam_navit ${API_DIR}/poi-service)
 
 
