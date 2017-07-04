@@ -36,4 +36,5 @@ set(genivi_navigationcore_routing_LIBS ${PLUGIN_LDFLAGS})
 set(genivi_navigationcore_routing_LIBRARY_DIRS ${PLUGIN_LIBRARIES})
 
 module_add_library(genivi_navigationcore_routing genivi_navigationcore_routing.cxx ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-routing_adaptor.h)
+target_link_libraries(genivi_navigationcore_routing ${LIBRARIES})
 

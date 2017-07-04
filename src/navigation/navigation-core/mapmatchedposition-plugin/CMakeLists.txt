@@ -36,4 +36,5 @@ set(genivi_navigationcore_mapmatchedposition_LIBS ${PLUGIN_LDFLAGS})
 set(genivi_navigationcore_mapmatchedposition_LIBRARY_DIRS ${PLUGIN_LIBRARIES})
 
 module_add_library(genivi_navigationcore_mapmatchedposition genivi_navigationcore_mapmatchedposition.cxx ${DBUS_GENERATED_INCLUDE_DIR}/navigation-core/genivi-navigationcore-mapmatchedposition_adaptor.h)
+target_link_libraries(genivi_navigationcore_mapmatchedposition ${LIBRARIES})
 
