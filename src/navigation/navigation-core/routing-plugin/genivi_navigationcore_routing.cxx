@@ -50,6 +50,10 @@
 
 #include "navigation-common-dbus.h"
 
+#include "log.h"
+
+DLT_DECLARE_CONTEXT(gCtx);
+
 #if (!DEBUG_ENABLED)
 #undef dbg
 #define dbg(level,...) ;
@@ -142,7 +146,7 @@ class  Routing
     void
     CreateRoute(const uint32_t& sessionHandle, int32_t& error, uint32_t& routeHandle)
     {
-        dbg(lvl_debug,"enter\n");
+        LOG_INFO_MSG(gCtx,"Create route");
         routeHandle=1;
         while (handles[routeHandle]) {
             routeHandle++;
@@ -156,7 +160,8 @@ class  Routing
     int32_t
     DeleteRoute(const uint32_t& SessionHandle, const uint32_t& RouteHandle)
 	{
-		RoutingObj *obj=handles[RouteHandle];
+        LOG_INFO_MSG(gCtx,"Delete route");
+        RoutingObj *obj=handles[RouteHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Route handle invalid");
 		delete(obj);
@@ -179,7 +184,6 @@ class  Routing
     GetCostModel(const uint32_t& RouteHandle)
 	{
 		uint16_t CostModel;
-		dbg(lvl_debug,"enter\n");
 		RoutingObj *obj=handles[RouteHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Route handle invalid");
@@ -200,7 +204,6 @@ class  Routing
     int32_t
     SetWaypoints(const uint32_t& SessionHandle , const uint32_t& RouteHandle , const bool& StartFromCurrentPosition , const std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > >& Waypoints)
 	{
-		dbg(lvl_debug,"enter\n");
 		RoutingObj *obj=handles[RouteHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Route handle invalid");
@@ -221,7 +224,6 @@ class  Routing
     int32_t
     CalculateRoute(const uint32_t& SessionHandle , const uint32_t& RouteHandle )
 	{
-		dbg(lvl_debug,"enter\n");
 		RoutingObj *obj=handles[RouteHandle];
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Route handle invalid");
@@ -504,10 +506,12 @@ void
 RoutingObj::SetWaypoints(uint32_t SessionHandle, bool StartFromCurrentPosition, std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > > Waypoints)
 {
 	if (StartFromCurrentPosition) {
-		if (Waypoints.size() != 1)
+        LOG_INFO_MSG(gCtx,"Start from current position");
+        if (Waypoints.size() != 1)
 			throw DBus::ErrorFailed("StartFromCurrentPosition is set, but Waypoint size is not 1");
 	} else {
-		if (Waypoints.size() != 2)
+        LOG_INFO_MSG(gCtx,"Start from given position");
+        if (Waypoints.size() != 2)
 			throw DBus::ErrorFailed("StartFromCurrentPosition is not set, but Waypoint size is not 2");
 	}
 	for (int i=0 ; i < Waypoints.size(); i++) {
@@ -540,8 +544,7 @@ RoutingObj::map_to_pcoord(std::map< DBusCommonAPIEnumeration, DBusCommonAPIVaria
 	pc->pro=projection_mg;
 	pc->x=c.x;
 	pc->y=c.y;
-	dbg(lvl_debug,"lat %f lon %f is 0x%x,0x%x\n",g.lat,g.lng,pc->x,pc->y);
-
+    LOG_DEBUG(gCtx,"Lat %f Lon %f is 0x%x,0x%x",g.lat,g.lng,pc->x,pc->y);
 }
 
 void
@@ -550,18 +553,24 @@ RoutingObj::CalculateRoute(uint32_t SessionHandle)
 	struct pcoord pc;
 
 	if (!m_waypoints.size())
-		throw DBus::ErrorFailed("no waipoints set");
+        throw DBus::ErrorFailed("no waypoints set");
 	route_set_profile(m_route.u.route,m_vehicleprofile.u.vehicleprofile);
 	if (!m_startfromcurrentposition) {
+        LOG_INFO_MSG(gCtx,"Calculate route from A:");
 		route_set_destination(m_route.u.route, NULL, 0);
 		map_to_pcoord(m_waypoints[0], &pc);
-		route_set_position(m_route.u.route, &pc);
+        LOG_INFO_MSG(gCtx,"To B:");
+        route_set_position(m_route.u.route, &pc);
 		map_to_pcoord(m_waypoints[1], &pc);
 	} else {
 		struct tracking *tracking=get_tracking();
-		if (tracking) 
-			route_set_position_from_tracking(m_route.u.route, tracking, projection_mg);
-		map_to_pcoord(m_waypoints[0], &pc);
+        LOG_INFO_MSG(gCtx,"Calculate route from current position");
+        if (tracking){
+            LOG_INFO_MSG(gCtx,"Tracking active");
+            route_set_position_from_tracking(m_route.u.route, tracking, projection_mg);
+        }
+        LOG_INFO_MSG(gCtx,"To B:");
+        map_to_pcoord(m_waypoints[0], &pc);
 	}
 	m_route_status = route_status_destination_set;
 	route_set_destination(m_route.u.route, &pc, 1);
@@ -763,15 +772,15 @@ RoutingObj::GetRouteBoundingBox(::DBus::Struct< ::DBus::Struct< double, double >
 	map_rect_destroy(mr);
 	if (first) 
 		throw DBus::ErrorFailed("no route available");
-	dbg(lvl_debug,"bounding box 0x%x,0x%x-0x%x,0x%x\n",r.lu.x,r.lu.y,r.rl.x,r.rl.y);
+    LOG_DEBUG(gCtx,"Bounding box: 0x%x,0x%x-0x%x,0x%x",r.lu.x,r.lu.y,r.rl.x,r.rl.y);
 	transform_to_geo(projection_mg, &r.lu, &g);
 	boundingBox._1._1=g.lat;
 	boundingBox._1._2=g.lng;
-	dbg(lvl_debug,"%f,%f\n",g.lat,g.lng);
+    LOG_DEBUG(gCtx,"Left: %f,%f",g.lat,g.lng);
 	transform_to_geo(projection_mg, &r.rl, &g);
 	boundingBox._2._1=g.lat;
 	boundingBox._2._2=g.lng;
-	dbg(lvl_debug,"-%f,%f\n",g.lat,g.lng);
+    LOG_DEBUG(gCtx,"Right: %f,%f",g.lat,g.lng);
 }
 
 void
@@ -785,17 +794,20 @@ RoutingObj_Callback(struct RoutingObj *obj)
 {
 	struct attr route_status;
 	if (!route_get_attr(obj->m_route.u.route, attr_route_status, &route_status, NULL)) {
-		dbg(lvl_debug,"failed to get route status\n");
+        LOG_ERROR_MSG(gCtx,"Failed to get route status");
 		return;
 	}
 	if (route_status.u.num == route_status_destination_set) {
+        LOG_INFO_MSG(gCtx,"Destination set");
         obj->m_routing->RouteCalculationProgressUpdate(obj->m_handle, GENIVI_NAVIGATIONCORE_OK, 5);
 		obj->m_route_status=route_status.u.num;
 	}
 	if (route_status.u.num == route_status_building_graph) {
-		obj->m_route_status=route_status.u.num;
+        LOG_INFO_MSG(gCtx,"Building graph");
+        obj->m_route_status=route_status.u.num;
 	}
 	if (route_status.u.num == route_status_building_path && obj->m_route_status == route_status_building_graph) {
+        LOG_INFO_MSG(gCtx,"Building path");
         obj->m_routing->RouteCalculationProgressUpdate(obj->m_handle, GENIVI_NAVIGATIONCORE_OK, 50);
 		obj->m_route_status=route_status.u.num;
 	}
@@ -804,13 +816,13 @@ RoutingObj_Callback(struct RoutingObj *obj)
 		if (route_status.u.num == route_status_path_done_new)
             obj->m_routing->RouteCalculationProgressUpdate(obj->m_handle, GENIVI_NAVIGATIONCORE_OK, 100);
 		obj->m_route_status=route_status.u.num;
-		dbg(lvl_debug,"callback routing ok\n");
+        LOG_INFO_MSG(gCtx,"Route path done");
         std::map< int32_t, int32_t > unfulfilled_preferences;
         obj->m_routing->RouteCalculationSuccessful(obj->m_handle, unfulfilled_preferences);
 	}
 	if (route_status.u.num == route_status_not_found) {
 		obj->m_route_status=route_status.u.num;
-		dbg(lvl_debug,"callback routing failed\n");
+        LOG_ERROR_MSG(gCtx,"Routing status not found");
         std::map< int32_t, int32_t > unfulfilled_preferences;
         obj->m_routing->RouteCalculationFailed(obj->m_handle, GENIVI_NAVIGATIONCORE_UNREACHABLE_DESTINATION, unfulfilled_preferences);
 	}
@@ -934,7 +946,10 @@ static class Routing *server;
 void
 plugin_init(void)
 {
-	event_request_system("glib","genivi_routing");
+    DLT_REGISTER_APP("RTGS","ROUTING SERVER");
+    DLT_REGISTER_CONTEXT(gCtx,"RTGS","Global Context");
+
+    event_request_system("glib","genivi_routing");
 	dispatcher.attach(NULL);
 	DBus::default_dispatcher = &dispatcher;
 	conn = new DBus::Connection(DBus::Connection::SessionBus());

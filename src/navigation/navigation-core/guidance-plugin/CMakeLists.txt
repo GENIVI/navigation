@@ -35,13 +35,6 @@ if(WITH_SPEECH)
     include_directories(${DBUS_GENERATED_INCLUDE_DIR}/speech-service)
 endif()
 
-if(WITH_DLT)
-    pkg_check_modules(DLT REQUIRED automotive-dlt)
-    add_definitions("-DDLT_ENABLED=1")
-    include_directories( ${DLT_INCLUDE_DIRS} )
-    set(LIBRARIES ${LIBRARIES} ${DLT_LIBRARIES})
-endif()
-
 include_directories(${DBUS_GENERATED_INCLUDE_DIR}/navigation-core)
 
 set(genivi_navigationcore_guidance_LIBS ${PLUGIN_LDFLAGS})

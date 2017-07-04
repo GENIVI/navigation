@@ -63,7 +63,7 @@ enum {
     CONNECTION_AMOUNT
 };
 
-#define MAX_RESULT_LIST_SIZE 256
+#define MAX_RESULT_LIST_SIZE 1024
 
 static DBus::Glib::BusDispatcher dispatchers[CONNECTION_AMOUNT];
 static DBus::Connection *conns[CONNECTION_AMOUNT];
@@ -82,6 +82,28 @@ static bool
 do_sort_distance(::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > a, ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > b)
 {
 	return a._5 < b._5;
+}
+
+//case insensitive search
+//code got from stackoverflow, thanks to Kirill V. Lyadvinsky
+template<typename charT>
+struct my_equal {
+    my_equal( const std::locale& loc ) : loc_(loc) {}
+    bool operator()(charT ch1, charT ch2) {
+        return std::toupper(ch1, loc_) == std::toupper(ch2, loc_);
+    }
+private:
+    const std::locale& loc_;
+};
+
+// find substring (case insensitive)
+template<typename T>
+int ci_find_substr( const T& str1, const T& str2, const std::locale& loc = std::locale() )
+{
+    typename T::const_iterator it = std::search( str1.begin(), str1.end(),
+        str2.begin(), str2.end(), my_equal<typename T::value_type>(loc) );
+    if ( it != str1.end() ) return it - str1.begin();
+    else return -1; // not found
 }
 
 
@@ -213,7 +235,7 @@ class ContentAccessModule
 	}
 
     bool
-    add_poi(struct item *item, uint32_t category, std::string inputString)
+    search_and_add_poi(struct item *item, uint32_t category, std::string inputString)
     {
         struct attr label;
         struct coord c;
@@ -224,8 +246,7 @@ class ContentAccessModule
 
         if (item_attr_get(item, attr_label, &label)){
             result._2=std::string(label.u.str); /* name */
-            std::size_t found = result._2.find(inputString);
-            if (found!=std::string::npos)
+            if(ci_find_substr(result._2,inputString)!=-1)
                 stringMatched=true;
         }
 
@@ -429,7 +450,6 @@ class ContentAccessModule
         LOG_DEBUG(gCtx,"Start search POI request in area: %x %x %x %x",m_selection.u.c_rect.lu.x,m_selection.u.c_rect.lu.y,m_selection.u.c_rect.rl.x,m_selection.u.c_rect.rl.y);
         LOG_DEBUG(gCtx,"String to search: %s",m_inputString.c_str());
 
-        dbg(lvl_debug,"rect 0x%x,0x%x-0x%x,0x%x\n",m_selection.u.c_rect.lu.x,m_selection.u.c_rect.lu.y,m_selection.u.c_rect.rl.x,m_selection.u.c_rect.rl.y);
 		if (m_msh)
 			mapset_close(m_msh);
 		m_msh=mapset_open(m_mapset);
@@ -451,30 +471,32 @@ class ContentAccessModule
     ResultListRequested(const uint8_t& camId, const uint32_t& poiSearchHandle, const std::vector< uint32_t >& attributeList, int32_t& statusValue, uint16_t& resultListSize, std::vector< ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > >& resultList)
 	{
 		struct item *item;
-		int count=0;
+        int count=0;
+        int added=0;
         bool isFound;
         size_t index;
-        dbg(lvl_debug,"enter camId=%d handle=%d\n", camId, poiSearchHandle);
+        LOG_DEBUG(gCtx,"ResultListRequested on CAM number: %d",camId);
         do {
-            while ((count < MAX_RESULT_LIST_SIZE) && (count < m_max_requested_size) && (item=map_rect_get_item(m_map_rect))) {
+            while ((added < MAX_RESULT_LIST_SIZE) && (added < m_max_requested_size) && (item=map_rect_get_item(m_map_rect))) {
                 isFound=false;
                 index=0;
                 do{ //check if the category matches one of the requested ones
                     if (item->type == (m_poiCategoriesIdRadius.at(index)).formerId)
                     {
-                        if(add_poi(item,(m_poiCategoriesIdRadius.at(index)).givenId,m_inputString)){
+                        if(search_and_add_poi(item,(m_poiCategoriesIdRadius.at(index)).givenId,m_inputString)){
                             //poi are added into m_resultList
-                            LOG_DEBUG(gCtx,"POI added: %s count: %d",(m_resultList.at(count))._2.c_str(), count);
-                            count++;
+                            added++;
                             isFound=true;
                         }
                     }
                     index++;
+                    count++;
                 }while((isFound==false)&&(index<m_poiCategoriesIdRadius.size()));
 			}
         } while (map_next());
 
-        dbg(lvl_debug,"got %d items\n",count);
+        LOG_DEBUG(gCtx,"POI search result: scanned: %d added: %d ", count, added);
+
 		statusValue=GENIVI_POISERVICE_FINISHED;
 		if (m_sort_func) 
 			std::sort(m_resultList.begin(), m_resultList.end(), m_sort_func);

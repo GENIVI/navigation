@@ -46,10 +46,9 @@
 
 #include "navigation-common-dbus.h"
 
-#if (!DEBUG_ENABLED)
-#undef dbg
-#define dbg(level,...) ;
-#endif
+#include "log.h"
+
+DLT_DECLARE_CONTEXT(gCtx);
 
 static DBus::Glib::BusDispatcher dispatcher;
 static DBus::Connection *conn;
@@ -143,21 +142,10 @@ class  MapMatchedPosition
 		return Version;
 	}
 
-#if 0
-	void
-	GetSupportedPositionInfo(std::vector< int32_t >& PositionInfo, uint32_t& Result)
-	{
-		PositionInfo.push_back(GENIVI_NAVIGATIONCORE_LATITUDE);
-		PositionInfo.push_back(GENIVI_NAVIGATIONCORE_LONGITUDE);
-		PositionInfo.push_back(GENIVI_NAVIGATIONCORE_SPEED);
-		PositionInfo.push_back(GENIVI_NAVIGATIONCORE_HEADING);
-	}	
-#endif
-
     void
     GetPosition(const std::vector< int32_t >& valuesToReturn, int32_t& error, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >& position)
     {
-        dbg(lvl_debug,"enter\n");
+        LOG_INFO_MSG(gCtx,"Get position");
 		struct attr attr;
 		for (int i = 0 ; i < valuesToReturn.size() ; i++) {
 			switch (valuesToReturn[i]) {
@@ -262,7 +250,7 @@ class  MapMatchedPosition
 	void
     SetSimulationMode(const uint32_t& SessionHandle, const bool& Activate)
 	{
-        dbg(lvl_debug,"enter Activate=%d\n",Activate);
+        LOG_INFO_MSG(gCtx,"Activate simulation mode");
 		uint16_t newSimulationMode;
 		struct attr vehicle;
 		vehicle.type=attr_vehicle;
@@ -277,7 +265,7 @@ class  MapMatchedPosition
 			struct navit *navit=get_navit();
 			navit_set_attr(navit, &vehicle);
 		} else {
-            dbg(lvl_debug,"Failed to get vehicle\n");
+             LOG_ERROR_MSG(gCtx,"Failed to get vehicle");
         	}
 	}
 
@@ -306,7 +294,7 @@ static void
 tracking_attr_position_coord_geo(void)
 {
 	struct attr position_coord_geo, current_item;
-    dbg(lvl_debug,"enter\n");
+    LOG_INFO_MSG(gCtx,"Position updated");
 	if (tracking_get_attr(tracking, attr_position_coord_geo, &position_coord_geo, NULL)) {
         std::vector< int32_t >changes;
 		changes.push_back(GENIVI_NAVIGATIONCORE_LATITUDE);
@@ -365,7 +353,10 @@ config_attr_navit(struct navit *navit, int add)
 void
 plugin_init(void)
 {
-	dispatcher.attach(NULL);
+    DLT_REGISTER_APP("MMPS","MAP MATCHED POSITION SERVER");
+    DLT_REGISTER_CONTEXT(gCtx,"MMPS","Global Context");
+
+    dispatcher.attach(NULL);
 	DBus::default_dispatcher = &dispatcher;
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
 	conn->setup(&dispatcher);

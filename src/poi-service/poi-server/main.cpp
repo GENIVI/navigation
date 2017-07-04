@@ -120,7 +120,7 @@ void Routing::AlternativeRoutesAvailable (const std::vector<handleId_t>& routeHa
 contentAccessModule::contentAccessModule(DBus::Connection &connection, const std::string& service)
     : DBus::ObjectProxy(connection, contentAccessModule_OBJECT_PATH,service.c_str())
 {
-    LOG_INFO_MSG(gCtx,"poi content access module client\n");
+    LOG_INFO_MSG(gCtx,"POI content access module client");
 }
 
 contentAccessModule::~contentAccessModule()
@@ -157,7 +157,7 @@ void contentAccessModule::SearchStatusChanged(const uint32_t& poiSearchHandle, c
 poiContentAccessServer::poiContentAccessServer(DBus::Connection &connection)
 : DBus::ObjectAdaptor(connection, poiContentAccess_OBJECT_PATH)
 {
-    LOG_INFO_MSG(gCtx,"poi content access server\n");
+    LOG_INFO_MSG(gCtx,"POI content access server");
 
     //version is hard coded
     m_version._1 = 0;
@@ -692,7 +692,7 @@ poiSearchServer::poiSearchServer(DBus::Connection &connection, const char* poiDa
         categoryId_t value;
         categoryId_t parent,child;
 
-        LOG_INFO_MSG(gCtx,"poi server\n");
+        LOG_INFO_MSG(gCtx,"POI server");
 
         //version is hard coded
         DBus_version::version_t version;
@@ -2181,8 +2181,8 @@ void print_usage (FILE* stream, int exit_code)
  */
 int main(int  argc , char**  argv )
 {
-    DLT_REGISTER_APP("MPVS","MAP VIEWER CONTROL SERVER");
-    DLT_REGISTER_CONTEXT(gCtx,"MPVS","Global Context");
+    DLT_REGISTER_APP("POIS","POI SEARCH SERVER");
+    DLT_REGISTER_CONTEXT(gCtx,"POIS","Global Context");
 
     GMainLoop * mainloop ;
 

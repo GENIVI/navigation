@@ -52,14 +52,13 @@
 
 #include "navigation-common-dbus.h"
 
+#include "log.h"
+
+DLT_DECLARE_CONTEXT(gCtx);
+
 #if (!DEBUG_ENABLED)
 #undef dbg
 #define dbg(level,...) ;
-#endif
-
-#if (DLT_ENABLED)
-#include "dlt.h"
-DLT_DECLARE_CONTEXT(con_test)
 #endif
 
 static DBus::Glib::BusDispatcher dispatcher;
@@ -249,15 +248,9 @@ class  Guidance
             dbg(lvl_debug,"guidance already active\n");
 			throw DBus::ErrorFailed("guidance already active");
         } else {
-#if (DLT_ENABLED)
-            DLT_REGISTER_APP("GUID","Navigation core guidance");
-            DLT_REGISTER_CONTEXT(con_test,"TEST","Navigation context for testing");
-#endif
             s_guidance=new GuidanceObj(this, SessionHandle, RouteHandle);
             m_guidance_active=true;
-#if (DLT_ENABLED)
-            DLT_LOG(con_test,DLT_LOG_INFO,DLT_STRING("guidance active: "),DLT_BOOL(m_guidance_active));
-#endif
+            LOG_INFO_MSG(gCtx,"Guidance started");
         }
 	}
 
@@ -271,11 +264,7 @@ class  Guidance
         } else {
             delete(s_guidance);
             m_guidance_active=false;
-#if (DLT_ENABLED)
-            DLT_LOG(con_test,DLT_LOG_INFO,DLT_STRING("guidance active: "),DLT_BOOL(m_guidance_active));
-            DLT_UNREGISTER_CONTEXT(con_test);
-            DLT_UNREGISTER_APP();
-#endif
+            LOG_INFO_MSG(gCtx,"Guidance stopped");
         }
 	}
 
@@ -780,6 +769,7 @@ GuidanceObj_Callback(GuidanceObj *obj)
 		return;
 	mr=obj->get_map_rect();
 	if (!mr) {
+        LOG_ERROR_MSG(gCtx,"Failed to get map rect");
         dbg(lvl_debug,"failed to get map rect\n");
 		return;
 	}
@@ -804,13 +794,9 @@ GuidanceObj_Callback(GuidanceObj *obj)
 			maneuver=GENIVI_NAVIGATIONCORE_INVALID;
 		}
 		obj->m_guidance->ManeuverChanged(maneuver);
-#if (DLT_ENABLED)
-        DLT_LOG(con_test,DLT_LOG_INFO,DLT_STRING("maneuver: "),DLT_INT16(maneuver));
-#endif
+        LOG_INFO(gCtx,"Maneuver: %d",maneuver);
     } else {
-#if (DLT_ENABLED)
-        DLT_LOG(con_test,DLT_LOG_ERROR,DLT_STRING("item not found"));
-#endif
+        LOG_ERROR(gCtx,"Maneuver item not found: %p",item);
         dbg(lvl_debug,"failed to get level item=%p\n",item);
 	}
 }
@@ -856,9 +842,7 @@ GuidanceObj::get_map_rect(void)
 {
 	struct map *map=navigation_get_map(get_navigation());
     if (!map) {
-#if (DLT_ENABLED)
-        DLT_LOG(con_test,DLT_LOG_ERROR,DLT_STRING("map_rect null"));
-#endif
+        LOG_ERROR_MSG(gCtx,"map_rect null");
         return NULL;
     }
 	return map_rect_new(map, NULL);
@@ -907,9 +891,7 @@ GuidanceObj::GuidanceObj(Guidance *guidance, uint32_t SessionHandle, uint32_t Ro
 		g_free(ret);
 	}
 	m_guidance->GuidanceStatusChanged(GENIVI_NAVIGATIONCORE_ACTIVE, RouteHandle);
-#if (DLT_ENABLED)
-            DLT_LOG(con_test,DLT_LOG_INFO,DLT_STRING("guidance status: "),DLT_INT16(GENIVI_NAVIGATIONCORE_ACTIVE));
-#endif
+    LOG_INFO_MSG(gCtx,"Guidance status changed to active");
 }
 
 GuidanceObj::~GuidanceObj()
@@ -928,9 +910,7 @@ GuidanceObj::~GuidanceObj()
 #if (SPEECH_ENABLED)
     delete(m_speechoutput);
 #endif
-#if (DLT_ENABLED)
-            DLT_LOG(con_test,DLT_LOG_INFO,DLT_STRING("guidance status: "),DLT_INT16(GENIVI_NAVIGATIONCORE_INACTIVE));
-#endif
+    LOG_INFO_MSG(gCtx,"Guidance status changed to inactive");
 
 }
 
@@ -939,6 +919,9 @@ static class Guidance *s_server;
 void
 plugin_init(void)
 {
+    DLT_REGISTER_APP("GUIDS","GUIDANCE SERVER");
+    DLT_REGISTER_CONTEXT(gCtx,"GUIDS","Global Context");
+
     dispatcher.attach(NULL);
 	DBus::default_dispatcher = &dispatcher;
 	// FIXME: What dbus address to use? 

@@ -1,6 +1,6 @@
 /**
  * @licence app begin@
- * Copyright (C) 2011-2012  PCA Peugeot Citroën
+ * Copyright (C) 2017  PSA GROUP
  *
  * This file is part of GENIVI Project POISearch Proof Of Concept [POIPOCSupplier].
  *
@@ -18,6 +18,8 @@
  * Modifications:
  * 19-12-2013  Philippe Colliot 
  * add new fields to poi (brand and operateur)
+ * 04-07-2017  Philippe Colliot 
+ * add COLLATE NOCASE to poi name
  *
  * For further information see http://www.genivi.org/.
  * @licence end@
@@ -52,7 +54,7 @@ CREATE TABLE poiattribute (
 DROP TABLE IF EXISTS poi;
 CREATE TABLE poi (
   Id int NOT NULL,
-  name text UNIQUE,
+  name text UNIQUE COLLATE NOCASE,
   latitude double DEFAULT NULL,
   longitude double DEFAULT NULL,
   altitude int DEFAULT NULL,

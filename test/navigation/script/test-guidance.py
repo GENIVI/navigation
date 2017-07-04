@@ -48,12 +48,13 @@ except dltTriggerNotBuilt:
 test_name = "guidance"
 
 #constants used into the script
-TIME_OUT = 10000
+TIME_OUT = 20000
 HORIZONTAL_SIZE = 800
 VERTICAL_SIZE = 480
 MAIN_MAP = 0x0010
 NUMBER_OF_SEGMENTS = 500
 ZOOM_GUIDANCE = 2
+NUMBER_OF_MANEUVERS_BEFORE_STOP = 5
 
 #add signal receivers
 def routing_routeCalculationProgressUpdate_handler(routeHandle, status, percentage):
@@ -120,14 +121,17 @@ def guidance_positionOnRouteChanged_handler(offsetOnRoute):
     print ("Offset on route: " +str(offsetOnRoute))
     
 def guidance_maneuverChanged_handler(maneuver):
+    global g_amount_of_maneuvers
     print ("Maneuver: " +str(maneuver))
     ret = g_guidance_interface.GetDestinationInformation()
     print ("Travel time: " +str(ret[1]))
     ret = g_guidance_interface.GetManeuversList(dbus.UInt16(10),dbus.UInt32(0))
     print ("Number of maneuvers: " +str(ret[1]))
     print ("Next road to turn: " +str(ret[2][0][4]))
-    g_mapmatchedposition_interface.SetSimulationMode(dbus.UInt32(g_navigationcore_session_handle),dbus.Boolean(False))
-    g_guidance_interface.StopGuidance(dbus.UInt32(g_navigationcore_session_handle))
+    g_amount_of_maneuvers += 1
+    if g_amount_of_maneuvers > NUMBER_OF_MANEUVERS_BEFORE_STOP: 
+         g_mapmatchedposition_interface.SetSimulationMode(dbus.UInt32(g_navigationcore_session_handle),dbus.Boolean(False))
+         g_guidance_interface.StopGuidance(dbus.UInt32(g_navigationcore_session_handle))
 
 def mapmatchedposition_simulationStatusChanged_handler(simulationStatus):
     print ("Simulation status: " +str(simulationStatus))
@@ -337,6 +341,7 @@ createMapView()
 
 g_current_route = 0
 g_guidance_active = False
+g_amount_of_maneuvers = 0
 launch_route_calculation(0)
 
 #main loop 

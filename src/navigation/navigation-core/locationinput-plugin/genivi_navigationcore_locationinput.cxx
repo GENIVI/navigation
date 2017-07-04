@@ -43,10 +43,9 @@
 
 #include "navigation-common-dbus.h"
 
-#if (!DEBUG_ENABLED)
-#undef dbg
-#define dbg(level,...) ;
-#endif
+#include "log.h"
+
+DLT_DECLARE_CONTEXT(gCtx);
 
 static DBus::Glib::BusDispatcher dispatcher;
 static DBus::Connection *conn;
@@ -102,7 +101,7 @@ class  LocationInput
 
     void CreateLocationInput(const uint32_t& sessionHandle, int32_t& error, uint32_t& locationInputHandle)
 	{
-		dbg(lvl_debug,"enter\n");
+        LOG_INFO_MSG(gCtx,"Creation location input");
         locationInputHandle=1;
         while (handles[locationInputHandle]) {
             locationInputHandle++;
@@ -115,8 +114,8 @@ class  LocationInput
 
     int32_t DeleteLocationInput(const uint32_t& SessionHandle, const uint32_t& LocationInputHandle)
 	{
-		dbg(lvl_debug,"enter\n");
-		LocationInputObj *obj=handles[LocationInputHandle];
+        LOG_INFO_MSG(gCtx,"Delete location input");
+        LocationInputObj *obj=handles[LocationInputHandle];
 		if (!obj)
 			 throw DBus::ErrorInvalidArgs("location handle invalid");
 		delete(obj);
@@ -138,7 +137,7 @@ class  LocationInput
 
     void SetAddress(const uint32_t& sessionHandle, const uint32_t& locationInputHandle, const std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >& address)
 	{
-		dbg(lvl_debug,"enter\n");
+        LOG_INFO_MSG(gCtx,"Set address");
         LocationInputObj *obj=handles[locationInputHandle];
 		if (!obj)
 			 throw DBus::ErrorInvalidArgs("location handle invalid");
@@ -147,7 +146,7 @@ class  LocationInput
 
     void SetSelectionCriterion(const uint32_t& sessionHandle, const uint32_t& locationInputHandle, const int32_t& selectionCriterion)
 	{
-		dbg(lvl_debug,"enter\n");
+        LOG_INFO_MSG(gCtx,"Set selection criterion");
         LocationInputObj *obj=handles[locationInputHandle];
 		if (!obj)
 			 throw DBus::ErrorInvalidArgs("location handle invalid");
@@ -156,8 +155,8 @@ class  LocationInput
 
     void Search(const uint32_t& SessionHandle, const uint32_t& LocationInputHandle, const std::string& InputString, const uint16_t& MaxWindowSize)
 	{
-		dbg(lvl_debug,"enter\n");
-		LocationInputObj *obj=handles[LocationInputHandle];
+        LOG_INFO_MSG(gCtx,"Search");
+        LocationInputObj *obj=handles[LocationInputHandle];
 		if (!obj)
 			 throw DBus::ErrorInvalidArgs("location handle invalid");
 		obj->Search(SessionHandle, InputString, MaxWindowSize);
@@ -165,8 +164,8 @@ class  LocationInput
 
     void SelectEntry(const uint32_t& SessionHandle, const uint32_t& LocationInputHandle, const uint16_t& Index)
 	{
-		dbg(lvl_debug,"enter\n");
-		LocationInputObj *obj=handles[LocationInputHandle];
+        LOG_INFO_MSG(gCtx,"Select entry");
+        LocationInputObj *obj=handles[LocationInputHandle];
 		if (!obj)
 			 throw DBus::ErrorInvalidArgs("location handle invalid");
 		obj->SelectEntry(SessionHandle, Index);
@@ -295,14 +294,13 @@ LocationInputObj::Spell(uint32_t SessionHandle, const std::string& InputCharacte
 	char *newstr;
 	const char *input=InputCharacter.c_str();
 	int len=strlen(input)+1;
-	dbg(lvl_debug,"input '%s' (%d)\n",input,strlen(input));
+    LOG_DEBUG(gCtx,"Input '%s' (%d)",input,strlen(input));
 	if (m_search.u.str && strlen(m_search.u.str)) {
 		const char *i=input;
 		char c;
 		newstr=g_strdup(m_search.u.str);
-		dbg(lvl_debug,"string %s\n",newstr);
+            LOG_DEBUG(gCtx,"String %s",newstr);
 		while ((c=*i++)) {
-			dbg(lvl_debug,"char '%c'\n",c);
 			if (c == '\b') {
 				m_spell_backspace=true;
 				*g_utf8_prev_char(newstr+strlen(newstr))='\0';
@@ -312,7 +310,6 @@ LocationInputObj::Spell(uint32_t SessionHandle, const std::string& InputCharacte
 				newstr[len]=c;
 				newstr[len+1]='\0';
 			}
-			dbg(lvl_debug,"string now %s\n",newstr);
 		}
 	} else { 
 		if (strcmp(input,"\b")) 
@@ -321,12 +318,12 @@ LocationInputObj::Spell(uint32_t SessionHandle, const std::string& InputCharacte
 			newstr=NULL;
 	}
 	g_free(m_search.u.str);
-	dbg(lvl_debug,"search string '%s' (%d)\n",newstr,strlen(newstr));
+    LOG_DEBUG(gCtx,"Search string '%s' (%d)",newstr,strlen(newstr));
 	m_search.u.str=newstr;
 	m_windowsize=MaxWindowSize;
 
 	search_list_search(m_sl, &m_search, 1);
-	dbg(lvl_debug,"backspace %d\n",m_spell_backspace);
+    LOG_DEBUG(gCtx,"backspace %d",m_spell_backspace);
 	m_event=event_add_idle(0, m_callback);
 
 }
@@ -418,8 +415,8 @@ variant_double(double d)
 void
 LocationInputObj::Idle(void)
 {
-	dbg(lvl_debug,"enter\n");
-	m_locationinput->SearchStatus(m_handle, GENIVI_NAVIGATIONCORE_SEARCHING);
+    LOG_INFO_MSG(gCtx,"Idle callback");
+    m_locationinput->SearchStatus(m_handle, GENIVI_NAVIGATIONCORE_SEARCHING);
 	struct search_list_result *res;
 	int chunk=0;
 	uint16_t count=0,offset=0;
@@ -428,22 +425,18 @@ LocationInputObj::Idle(void)
 	while ((res=search_list_get_result(m_sl))) {
         std::map< int32_t, DBusCommonAPIVariant> entry;
 		if (res->country && res->country->name) {
-			dbg(lvl_debug,"country %s\n",res->country->name);
             entry[GENIVI_NAVIGATIONCORE_COUNTRY]._1 = 0;
             entry[GENIVI_NAVIGATIONCORE_COUNTRY]._2=variant_string(std::string(res->country->name));
 		}
 		if (res->town && res->town->common.town_name) {
-			dbg(lvl_debug,"town %s\n",res->town->common.town_name);
             entry[GENIVI_NAVIGATIONCORE_CITY]._1 = 0;
             entry[GENIVI_NAVIGATIONCORE_CITY]._2=variant_string(std::string(res->town->common.town_name));
 		}
 		if (res->street && res->street->name) {
-			dbg(lvl_debug,"street %s\n",res->street->name);
             entry[GENIVI_NAVIGATIONCORE_STREET]._1 = 0;
             entry[GENIVI_NAVIGATIONCORE_STREET]._2=variant_string(std::string(res->street->name));
 		}
 		if (res->house_number && res->house_number->house_number) {
-			dbg(lvl_debug,"house number %s\n",res->house_number->house_number);
             entry[GENIVI_NAVIGATIONCORE_HOUSENUMBER]._1 = 0;
             entry[GENIVI_NAVIGATIONCORE_HOUSENUMBER]._2=variant_string(std::string(res->house_number->house_number));
 		}
@@ -537,7 +530,10 @@ static class LocationInput *server;
 void
 plugin_init(void)
 {
-	dispatcher.attach(NULL);
+    DLT_REGISTER_APP("LOIS","LOCATION INPUT SERVER");
+    DLT_REGISTER_CONTEXT(gCtx,"LOIS","Global Context");
+
+    dispatcher.attach(NULL);
 	DBus::default_dispatcher = &dispatcher;
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
 	conn->setup(&dispatcher);
