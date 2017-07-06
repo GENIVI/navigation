@@ -1,17 +1,17 @@
 <route-set country="Switzerland">
 <route> 
 <start>"Geneve"</start>
-<destination>"Neuchatel"</destination>
-<name>"Route GENEVE to NEUCHATEL"</name>
+<destination>"Carouge"</destination>
+<name>"Route GENEVE to CAROUGE"</name>
 <handle>0</handle>
 </route>
 <location name='"Geneve"'>
 <latitude>46.206659</latitude>
 <longitude>6.1410842</longitude>
 </location>
-<location name='"Neuchatel"'> 
-<latitude>46.990585</latitude>
-<longitude>6.928453</longitude>
+<location name='"Carouge"'> 
+<latitude>46.1840286</latitude>
+<longitude>6.141048</longitude>
 </location>
 </route-set><!--NB: don't use accent.-->
 

@@ -51,6 +51,7 @@ test_name = "map viewer"
 #constants used by the script
 HORIZONTAL_SIZE = 800
 VERTICAL_SIZE = 480
+MAIN_MAP = 0x0010
 TIME_OUT = 1000000
 INIT_SCALE=8
 SCALE_FOR_ROTATE=4
@@ -76,18 +77,18 @@ HOUSE_NUMBER_STRING = list()
 
 def init_test_rotate():
     print ('Test rotate')
-    MapViewerControl_interface.SetMapViewScale( \
-        dbus.UInt32(sessionhandle), \
-        dbus.UInt32(mapviewerhandle), \
+    g_mapviewercontrol_interface.SetMapViewScale( \
+        dbus.UInt32(g_mapviewer_sessionhandle), \
+        dbus.UInt32(g_mapviewer_maphandle), \
         dbus.UInt16(SCALE_FOR_ROTATE))
    
 def test_rotate():    
     global g_angle
     if g_angle <   (ROTATE_MAX-ROTATE_INCREMENT):
         g_angle += ROTATE_INCREMENT
-        MapViewerControl_interface.SetMapViewRotation( \
-            dbus.UInt32(sessionhandle), \
-            dbus.UInt32(mapviewerhandle), \
+        g_mapviewercontrol_interface.SetMapViewRotation( \
+            dbus.UInt32(g_mapviewer_sessionhandle), \
+            dbus.UInt32(g_mapviewer_maphandle), \
             dbus.Int16(g_angle), \
             dbus.Int16(ROTATE_SPEED))
         return True
@@ -97,9 +98,9 @@ def test_rotate():
    
 def init_test_scale():
     print ('Test scale')
-    MapViewerControl_interface.SetMapViewScale( \
-    dbus.UInt32(sessionhandle), \
-    dbus.UInt32(mapviewerhandle), \
+    g_mapviewercontrol_interface.SetMapViewScale( \
+    dbus.UInt32(g_mapviewer_sessionhandle), \
+    dbus.UInt32(g_mapviewer_maphandle), \
     dbus.UInt16(INIT_SCALE))
     
 def test_scale(scale,isMinMax):
@@ -112,25 +113,25 @@ def test_scale(scale,isMinMax):
     if g_scale_delta==SCALE_DELTA_DECREASE:
         if isMinMax !=genivi.MAPVIEWER_MIN:
             print("Zoom in")
-            MapViewerControl_interface.SetMapViewScaleByDelta( \
-                dbus.UInt32(sessionhandle), \
-                dbus.UInt32(mapviewerhandle), \
+            g_mapviewercontrol_interface.SetMapViewScaleByDelta( \
+                dbus.UInt32(g_mapviewer_sessionhandle), \
+                dbus.UInt32(g_mapviewer_maphandle), \
                 dbus.Int16(g_scale_delta))
             return True
         else:
             print("Zoom out")
             g_scale_delta=SCALE_DELTA_INCREASE
-            MapViewerControl_interface.SetMapViewScaleByDelta( \
-                dbus.UInt32(sessionhandle), \
-                dbus.UInt32(mapviewerhandle), \
+            g_mapviewercontrol_interface.SetMapViewScaleByDelta( \
+                dbus.UInt32(g_mapviewer_sessionhandle), \
+                dbus.UInt32(g_mapviewer_maphandle), \
                 dbus.Int16(g_scale_delta))  
             return True
     else:
         if isMinMax !=genivi.MAPVIEWER_MAX:
             print("Zoom out")
-            MapViewerControl_interface.SetMapViewScaleByDelta( \
-                dbus.UInt32(sessionhandle), \
-                dbus.UInt32(mapviewerhandle), \
+            g_mapviewercontrol_interface.SetMapViewScaleByDelta( \
+                dbus.UInt32(g_mapviewer_sessionhandle), \
+                dbus.UInt32(g_mapviewer_maphandle), \
                 dbus.Int16(g_scale_delta))
             return True
         else:
@@ -140,15 +141,15 @@ def test_scale(scale,isMinMax):
 
 def init_test_three_d():
     print('Test 3D')
-    MapViewerControl_interface.SetMapViewScale( \
-        dbus.UInt32(sessionhandle), \
-        dbus.UInt32(mapviewerhandle), \
+    g_mapviewercontrol_interface.SetMapViewScale( \
+        dbus.UInt32(g_mapviewer_sessionhandle), \
+        dbus.UInt32(g_mapviewer_maphandle), \
         dbus.UInt16(SCALE_FOR_THREE_D))
 
 def test_three_d():
-    MapViewerControl_interface.SetMapViewPerspective(\
-        dbus.UInt32(sessionhandle),\
-        dbus.UInt32(mapviewerhandle), \
+    g_mapviewercontrol_interface.SetMapViewPerspective(\
+        dbus.UInt32(g_mapviewer_sessionhandle),\
+        dbus.UInt32(g_mapviewer_maphandle), \
         genivi.PERSPECTIVE_THREE_D)
     return False
 
@@ -185,15 +186,6 @@ def timeout():
     print ('\nTest FAILED')
     exit()
 
-def exit():
-    MapViewerControl_interface.ReleaseMapViewInstance( \
-        dbus.UInt32(sessionhandle), \
-        dbus.UInt32(mapviewerhandle))
-    session_interface.DeleteSession(sessionhandle)
-    if dltTrigger==True:
-        stopTrigger(test_name)
-    loop.quit()
-
 def next_step():
     global step
     if step == TEST_STEP_START:
@@ -210,6 +202,53 @@ def next_step():
                     else:
                         exit()
         
+
+def createMapView():
+    global g_mapviewer_sessionhandle
+    global g_mapviewer_sessionstatus
+    global g_mapviewer_sessionlist
+    global g_mapviewer_maphandle
+    
+    #get mapviewer session handle
+    ret = g_mapviewer_session_interface.CreateSession(dbus.String('test mapviewer'))
+    g_mapviewer_sessionhandle=ret[1]
+    print ('Mapviewer session handle: ' + str(g_mapviewer_sessionhandle))
+    
+    g_mapviewer_sessionstatus = g_mapviewer_session_interface.GetSessionStatus(dbus.UInt32(g_mapviewer_sessionhandle));
+    print ('Mapviewer session status: ' + str(g_mapviewer_sessionstatus))
+    
+    g_mapviewer_sessionlist = g_mapviewer_session_interface.GetAllSessions();
+    print ('Mapviewer active sessions = ' + str(len(g_mapviewer_sessionlist)))
+    
+    #get mapviewer handle
+    ret = g_mapviewercontrol_interface.CreateMapViewInstance( \
+      dbus.UInt32(g_mapviewer_sessionhandle), \
+      dbus.Struct((dbus.UInt16(HORIZONTAL_SIZE),dbus.UInt16(VERTICAL_SIZE))), \
+     dbus.Int32(MAIN_MAP))
+    g_mapviewer_maphandle=ret[1]
+    
+    print ('MapView handle: ' + str(g_mapviewer_maphandle))
+    
+    time.sleep(2)
+    
+    print ('Stop following the car position') 
+    g_mapviewercontrol_interface.SetFollowCarMode( \
+        dbus.UInt32(g_mapviewer_sessionhandle), \
+        dbus.UInt32(g_mapviewer_maphandle), \
+        dbus.Boolean(False))
+
+def deleteMapView():
+    g_mapviewercontrol_interface.ReleaseMapViewInstance( \
+      dbus.UInt32(g_mapviewer_sessionhandle), \
+      dbus.UInt32(g_mapviewer_maphandle))
+    g_mapviewer_session_interface.DeleteSession(g_mapviewer_sessionhandle)
+   
+def exit():
+    deleteMapView()
+    if dltTrigger==True:
+        stopTrigger(test_name)
+    loop.quit()
+   
 print('\n--------------------------')
 print('MapViewerControl Test')
 print('--------------------------\n')
@@ -265,37 +304,13 @@ bus.add_signal_receiver(mapviewer_mapViewPerspectiveChanged_handler, \
 if dltTrigger==True:
     startTrigger(test_name)
 
-session = bus.get_object('org.genivi.navigation.mapviewer.Session','/org/genivi/mapviewer')
-session_interface = dbus.Interface(session, dbus_interface='org.genivi.navigation.mapviewer.Session')
+mapviewer_session_obj = bus.get_object('org.genivi.navigation.mapviewer.Session','/org/genivi/mapviewer')
+g_mapviewer_session_interface = dbus.Interface(mapviewer_session_obj, dbus_interface='org.genivi.navigation.mapviewer.Session')
 
-#get session handle
-ret = session_interface.CreateSession(dbus.String("test mapviewer"))
-sessionhandle=ret[1]
-print('Session handle: ' + str(sessionhandle))
+mapviewercontrol_obj = bus.get_object('org.genivi.navigation.mapviewer.MapViewerControl','/org/genivi/mapviewer')
+g_mapviewercontrol_interface = dbus.Interface(mapviewercontrol_obj, dbus_interface='org.genivi.navigation.mapviewer.MapViewerControl')
 
-sessionstatus = session_interface.GetSessionStatus(dbus.UInt32(sessionhandle));
-print ('Session status: ' + str(sessionstatus))
-
-sessionlist = session_interface.GetAllSessions();
-print( 'Active sessions = ' + str(len(sessionlist)))
-
-MapViewerControl_obj = bus.get_object('org.genivi.navigation.mapviewer.MapViewerControl','/org/genivi/mapviewer')
-MapViewerControl_interface = dbus.Interface(MapViewerControl_obj, dbus_interface='org.genivi.navigation.mapviewer.MapViewerControl')
-
-#get mapviewer handle
-ret = MapViewerControl_interface.CreateMapViewInstance( \
-  dbus.UInt32(sessionhandle), \
-  dbus.Struct((dbus.UInt16(HORIZONTAL_SIZE),dbus.UInt16(VERTICAL_SIZE))), \
-  dbus.Int32(genivi.MAIN_MAP))
-mapviewerhandle=ret[1]
-
-print('MapView handle: ' + str(mapviewerhandle))
-
-print ('Stop following the car position') 
-MapViewerControl_interface.SetFollowCarMode( \
-    dbus.UInt32(sessionhandle), \
-    dbus.UInt32(mapviewerhandle), \
-    dbus.Boolean(False))
+createMapView()
 
 #init the target (it's the first location in the input file by default) and test 
 index=0
@@ -303,12 +318,12 @@ lat1 = LATITUDE[index]
 lon1 = LONGITUDE[index]
 alt1 = ALTITUDE[index]
 print('Set center in '+ CITY_STRING[index]+ ' (' + str(lat1) + ',' + str(lon1) + ')') 
-MapViewerControl_interface.SetTargetPoint( \
-    dbus.UInt32(sessionhandle), \
-    dbus.UInt32(mapviewerhandle), \
+g_mapviewercontrol_interface.SetTargetPoint( \
+    dbus.UInt32(g_mapviewer_sessionhandle), \
+    dbus.UInt32(g_mapviewer_maphandle), \
     dbus.Struct((dbus.Double(lat1),dbus.Double(lon1),dbus.Double(alt1))))
-targetPoint = MapViewerControl_interface.GetTargetPoint( \
-    dbus.UInt32(mapviewerhandle) )
+targetPoint = g_mapviewercontrol_interface.GetTargetPoint( \
+    dbus.UInt32(g_mapviewer_maphandle) )
 lat2 = targetPoint[0]
 lon2 = targetPoint[1]
 alt2 = targetPoint[2]
@@ -324,26 +339,26 @@ if round(float(alt1),4) != round(float(alt2),4) :
 
 #init the scale
 #get the default
-ret=MapViewerControl_interface.GetMapViewScale(dbus.UInt32(mapviewerhandle))
+ret=g_mapviewercontrol_interface.GetMapViewScale(dbus.UInt32(g_mapviewer_maphandle))
 print('Scale: '+str(int(ret[0])))
 print('Is min max: '+str(int(ret[1])))
 #and set it to init value
 g_scale=INIT_SCALE
 g_scale_delta=SCALE_DELTA_DECREASE
-MapViewerControl_interface.SetMapViewScale( \
-    dbus.UInt32(sessionhandle), \
-    dbus.UInt32(mapviewerhandle), \
+g_mapviewercontrol_interface.SetMapViewScale( \
+    dbus.UInt32(g_mapviewer_sessionhandle), \
+    dbus.UInt32(g_mapviewer_maphandle), \
     dbus.UInt16(g_scale))
 
 #wait for map refresh
 time.sleep(0.25)
 
 #init the perspective to 2D
-MapViewerControl_interface.SetMapViewPerspective(dbus.UInt32(sessionhandle),dbus.UInt32(mapviewerhandle), genivi.PERSPECTIVE_TWO_D)
+g_mapviewercontrol_interface.SetMapViewPerspective(dbus.UInt32(g_mapviewer_sessionhandle),dbus.UInt32(g_mapviewer_maphandle), genivi.PERSPECTIVE_TWO_D)
  
 #init the heading angle
-MapViewerControl_interface.SetCameraHeadingAngle(dbus.UInt32(sessionhandle),dbus.UInt32(mapviewerhandle), dbus.Int32(0))
-ret=MapViewerControl_interface.GetCameraHeading(dbus.UInt32(mapviewerhandle))
+g_mapviewercontrol_interface.SetCameraHeadingAngle(dbus.UInt32(g_mapviewer_sessionhandle),dbus.UInt32(g_mapviewer_maphandle), dbus.Int32(0))
+ret=g_mapviewercontrol_interface.GetCameraHeading(dbus.UInt32(g_mapviewer_maphandle))
 print('Heading: '+str(int(ret[1])))
 g_angle=int(ret[0])
 

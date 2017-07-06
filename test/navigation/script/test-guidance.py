@@ -48,13 +48,13 @@ except dltTriggerNotBuilt:
 test_name = "guidance"
 
 #constants used into the script
-TIME_OUT = 20000
+TIME_OUT = 240000
 HORIZONTAL_SIZE = 800
 VERTICAL_SIZE = 480
 MAIN_MAP = 0x0010
 NUMBER_OF_SEGMENTS = 500
 ZOOM_GUIDANCE = 2
-NUMBER_OF_MANEUVERS_BEFORE_STOP = 5
+SPEED_FACTOR = 16
 
 #add signal receivers
 def routing_routeCalculationProgressUpdate_handler(routeHandle, status, percentage):
@@ -106,6 +106,7 @@ def routing_routeDeleted_handler(routeHandle):
 
 def guidance_guidanceStatusChanged_handler(guidanceStatus,routeHandle):
     global g_guidance_active
+    global g_total_amount_of_maneuvers
     print('Guidance status changed: '+str(guidanceStatus))
     if guidanceStatus != genivi.ACTIVE and g_guidance_active == True:
         g_guidance_active = False
@@ -116,23 +117,37 @@ def guidance_guidanceStatusChanged_handler(guidanceStatus,routeHandle):
             for i in range(routes.length):
                 g_routing_interface.DeleteRoute(dbus.UInt32(g_navigationcore_session_handle),dbus.UInt32(routes[i].getElementsByTagName("handle")[0].childNodes[0].data))
             g_navigationcore_session_interface.DeleteSession(dbus.UInt32(g_navigationcore_session_handle))
+    else:
+        ret = g_guidance_interface.GetDestinationInformation()
+        m, s = divmod(ret[1], 60)
+        h, m = divmod(m, 60)
+        print ("Travel Time: %d:%02d:%02d" % (h, m, s))
+        ret = g_guidance_interface.GetManeuversList(dbus.UInt16(10),dbus.UInt32(0))
+        print ("Number of maneuvers: " +str(ret[1]))
+        print ("Next road to turn: " +ret[2][0][4])
    
 def guidance_positionOnRouteChanged_handler(offsetOnRoute):
     print ("Offset on route: " +str(offsetOnRoute))
     
 def guidance_maneuverChanged_handler(maneuver):
-    global g_amount_of_maneuvers
-    print ("Maneuver: " +str(maneuver))
+    if maneuver == genivi.PASSED:
+        print ("Maneuver passed ")
+    else:
+        print ("Maneuver: " +str(maneuver))
     ret = g_guidance_interface.GetDestinationInformation()
-    print ("Travel time: " +str(ret[1]))
+    m, s = divmod(ret[1], 60)
+    h, m = divmod(m, 60)
+    print ("Travel Time: %d:%02d:%02d" % (h, m, s))
     ret = g_guidance_interface.GetManeuversList(dbus.UInt16(10),dbus.UInt32(0))
     print ("Number of maneuvers: " +str(ret[1]))
-    print ("Next road to turn: " +str(ret[2][0][4]))
-    g_amount_of_maneuvers += 1
-    if g_amount_of_maneuvers > NUMBER_OF_MANEUVERS_BEFORE_STOP: 
-         g_mapmatchedposition_interface.SetSimulationMode(dbus.UInt32(g_navigationcore_session_handle),dbus.Boolean(False))
-         g_guidance_interface.StopGuidance(dbus.UInt32(g_navigationcore_session_handle))
-
+    print ("Next road to turn: " +ret[2][0][4])
+ 
+def guidance_waypointReached_handler(isDestination):
+    print("Waypoint reached: " +str(isDestination))
+    if isDestination == 1:
+        g_mapmatchedposition_interface.SetSimulationMode(dbus.UInt32(g_navigationcore_session_handle),dbus.Boolean(False))
+        g_guidance_interface.StopGuidance(dbus.UInt32(g_navigationcore_session_handle))
+        
 def mapmatchedposition_simulationStatusChanged_handler(simulationStatus):
     print ("Simulation status: " +str(simulationStatus))
         
@@ -141,11 +156,6 @@ def timeout():
     print ('Timeout Expired')
     print ('\nTest FAILED')
     exit()
-
-def exit():
-    if dltTrigger==True:
-        stopTrigger(test_name)
-    loop.quit()
     
 def display_route(route):
     ret = g_routing_interface.GetRouteBoundingBox(dbus.UInt32(g_route_handle))
@@ -168,7 +178,8 @@ def launch_guidance(route):
                                                 dbus.Double(locations[routes[g_current_route].getElementsByTagName("start")[0].childNodes[0].data][1]),\
                                                 dbus.Double(0)\
                                                 )))
-    g_mapmatchedposition_interface.StartSimulation(g_navigationcore_session_handle)
+    g_mapmatchedposition_interface.StartSimulation(dbus.UInt32(g_navigationcore_session_handle))
+    g_mapmatchedposition_interface.SetSimulationSpeed(dbus.UInt32(g_navigationcore_session_handle), dbus.Byte(SPEED_FACTOR))
         
 def launch_route_calculation(route):
     global g_current_route
@@ -239,10 +250,15 @@ def deleteMapView():
     g_mapviewercontrol_interface.ReleaseMapViewInstance( \
       dbus.UInt32(g_mapviewer_sessionhandle), \
       dbus.UInt32(g_mapviewer_maphandle))
-    
     g_mapviewer_session_interface.DeleteSession(g_mapviewer_sessionhandle)
     
-    
+
+def exit():
+    deleteMapView()
+    if dltTrigger==True:
+        stopTrigger(test_name)
+    loop.quit()
+
 print('--------------------------')
 print('Guidance Test')
 print('--------------------------')
@@ -307,6 +323,10 @@ bus.add_signal_receiver(guidance_maneuverChanged_handler, \
                         dbus_interface = "org.genivi.navigation.navigationcore.Guidance", \
                         signal_name = "ManeuverChanged")
 
+bus.add_signal_receiver(guidance_waypointReached_handler, \
+                        dbus_interface = "org.genivi.navigation.navigationcore.Guidance", \
+                        signal_name = "WaypointReached")
+
 bus.add_signal_receiver(mapmatchedposition_simulationStatusChanged_handler, \
                         dbus_interface = "org.genivi.navigation.navigationcore.MapMatchedPosition", \
                         signal_name = "SimulationStatusChanged")
@@ -326,8 +346,8 @@ g_guidance_interface = dbus.Interface(guidance_obj, dbus_interface='org.genivi.n
 mapviewer_session_obj = bus.get_object('org.genivi.navigation.mapviewer.Session','/org/genivi/mapviewer')
 g_mapviewer_session_interface = dbus.Interface(mapviewer_session_obj, dbus_interface='org.genivi.navigation.mapviewer.Session')
 
-g_mapviewercontrol_obj = bus.get_object('org.genivi.navigation.mapviewer.MapViewerControl','/org/genivi/mapviewer')
-g_mapviewercontrol_interface = dbus.Interface(g_mapviewercontrol_obj, dbus_interface='org.genivi.navigation.mapviewer.MapViewerControl')
+mapviewercontrol_obj = bus.get_object('org.genivi.navigation.mapviewer.MapViewerControl','/org/genivi/mapviewer')
+g_mapviewercontrol_interface = dbus.Interface(mapviewercontrol_obj, dbus_interface='org.genivi.navigation.mapviewer.MapViewerControl')
 
 g_mapmatchedposition_obj = bus.get_object('org.genivi.navigation.navigationcore.MapMatchedPosition','/org/genivi/navigationcore')
 g_mapmatchedposition_interface = dbus.Interface(g_mapmatchedposition_obj, dbus_interface='org.genivi.navigation.navigationcore.MapMatchedPosition')
@@ -341,7 +361,6 @@ createMapView()
 
 g_current_route = 0
 g_guidance_active = False
-g_amount_of_maneuvers = 0
 launch_route_calculation(0)
 
 #main loop 

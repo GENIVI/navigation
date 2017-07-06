@@ -55,7 +55,6 @@ ATTRIBUTE_SOURCE = 0
 ATTRIBUTE_PHONE = 2
 RADIUS_HOTEL = 100 #in tenth of meter !
 RADIUS_RESTAURANT = 500
-STRING_TO_SEARCH = "ZUm"
 MAX_WINDOW_SIZE = 100
 OFFSET = 0
 
@@ -102,6 +101,7 @@ def catch_poi_resultListChanged_signal_handler(poiSearchHandle,resultListSize):
                         print("Restaurant: " +resultDetail[0][1])
                 g_poiSearch_interface.CancelPoiSearch(dbus.UInt32(poiSearchHandle))
         else:
+            print('No poi found')
             g_poiSearch_interface.CancelPoiSearch(dbus.UInt32(poiSearchHandle))  
        
 def timeout():
@@ -122,7 +122,14 @@ print('--------------------------\n')
 parser = argparse.ArgumentParser(description='Poi Test for navigation PoC and FSA.')
 parser.add_argument('-l','--loc',action='store', dest='locations', help='List of locations in xml format')
 parser.add_argument("-v", "--verbose", action='store_true',help='print the whole log messages')
+parser.add_argument('-s','--string',action='store', dest='string', help='String to search')
 args = parser.parse_args()
+
+if args.string == None:
+    print('string to search is missing, by default no string, get all')
+    stringToSearch=''
+else:
+    stringToSearch=args.string
 
 if args.locations == None:
     print('location file is missing')
@@ -152,7 +159,7 @@ for location in location_set.getElementsByTagName("location"):
 if __name__ == '__main__':
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True) 
 
-print("Search for hotel and restaurant with keyword: "+ STRING_TO_SEARCH)
+print("Search for hotel and restaurant with keyword: "+ stringToSearch)
 
 #connect to session bus
 bus = dbus.SessionBus()
@@ -222,7 +229,7 @@ g_poiSearch_interface.SetCategories(g_searchHandle,[dbus.Struct([dbus.UInt32(ID_
 
 g_poiSearch_interface.SetAttributes(g_searchHandle,attributesDetails)
 
-g_poiSearch_interface.StartPoiSearch(g_searchHandle,dbus.String(STRING_TO_SEARCH),dbus.Int32(genivi.SORT_BY_DISTANCE))
+g_poiSearch_interface.StartPoiSearch(g_searchHandle,stringToSearch,dbus.Int32(genivi.SORT_BY_DISTANCE))
 
 
 #main loop 

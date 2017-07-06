@@ -1,13 +1,13 @@
 <route-set country="Japan">
 <route>
-<start>"Hamura"</start>
+<start>"Waseda"</start>
 <destination>"Shibuya"</destination>
-<name>"Route HAMURA to SHIBUYA"</name>
+<name>"Route WASEDA to SHIBUYA"</name>
 <handle>0</handle>
 </route>
-<location name='"Hamura"'>
-<latitude>35.758795</latitude>
-<longitude>139.316533</longitude>
+<location name='"Waseda"'>
+<latitude>35.709995</latitude>
+<longitude>139.666195</longitude>
 </location>
 <location name='"Shibuya"'>
 <latitude>35.660687</latitude>

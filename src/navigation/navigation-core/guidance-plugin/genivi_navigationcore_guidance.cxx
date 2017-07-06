@@ -117,9 +117,6 @@ class GuidanceObj
     std::string m_kind_of_voice;
 	struct item *get_item(struct map_rect *mr);
 	struct map_rect *get_map_rect(void);
-    void SetSimulationMode(uint32_t SessionHandle, bool Activate);
-    void GetSimulationMode(bool& SimulationMode);
-    void SetSimulationSpeed(uint32_t sessionHandle);
     void PauseGuidance(uint32_t sessionHandle);
     void ResumeGuidance(uint32_t sessionHandle);
 	void SetVoiceGuidance(const bool& activate, const std::string& voice);
@@ -218,28 +215,6 @@ class  Guidance
         m_guidance_active=false;
 	}
 
-	void
-    SetSimulationMode(const uint32_t& SessionHandle, const bool& Activate)
-	{
-        dbg(lvl_debug,"enter Activate=%d\n",Activate);
-		struct attr vehicle;
-		vehicle.type=attr_vehicle;
-        vehicle.u.vehicle=get_vehicle(Activate?"enhancedposition:":"demo:");
-		if (vehicle.u.vehicle) {
-            m_simulationMode = Activate;
-			struct navit *navit=get_navit();
-			navit_set_attr(navit, &vehicle);
-		} else {
-            dbg(lvl_debug,"Failed to get vehicle\n");
-        }
-	}
-
-	bool
-    GetSimulationMode()
-    {
-        return (m_simulationMode);
-    }
-
 	void	
     StartGuidance(const uint32_t& SessionHandle, const uint32_t& RouteHandle)
 	{
@@ -289,20 +264,6 @@ class  Guidance
 		Version._3=0;
 		Version._4=std::string("23-10-2013");
 		return Version;
-	}
-
-	void
-    SetSimulationSpeed(const uint32_t& sessionHandle, const uint8_t& speedFactor)
-	{
-		vehicle_speed.u.num=speedFactor*40/4;
-        if (m_guidance_active==true)
-            s_guidance->SetSimulationSpeed(sessionHandle);
-	}
-
-	uint8_t
-	GetSimulationSpeed()
-	{
-		return vehicle_speed.u.num*4/40;
 	}
 
 	void
@@ -690,14 +651,6 @@ GuidanceObj::GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const 
 }
 
 void
-GuidanceObj::SetSimulationSpeed(uint32_t sessionHandle)
-{
-	struct vehicle *vehicle=get_vehicle("demo:");
-	if (vehicle && !m_paused) 
-		vehicle_set_attr(vehicle, &vehicle_speed);
-}
-
-void
 GuidanceObj::PauseGuidance(uint32_t sessionHandle)
 {
 	struct vehicle *vehicle=get_vehicle("demo:");
@@ -779,7 +732,7 @@ GuidanceObj_Callback(GuidanceObj *obj)
         dbg(lvl_debug,"level=%d\n",(int) level.u.num);
 		switch(level.u.num) {
 		case 3:
-			maneuver=GENIVI_NAVIGATIONCORE_CRUISE;
+            maneuver=GENIVI_NAVIGATIONCORE_PASSED;
 			break;
 		case 2:
 			maneuver=GENIVI_NAVIGATIONCORE_MANEUVER_APPEARED;
