@@ -70,11 +70,6 @@
 
 DLT_DECLARE_CONTEXT(gCtx);
 
-#if (!DEBUG_ENABLED)
-#undef dbg
-#define dbg(level,...) ;
-#endif
-
 enum {
     MAPVIEWER_CONTROL_CONNECTION=0,
     NAVIGATIONCORE_SESSION_CONNECTION,
@@ -164,11 +159,11 @@ class MapViewerControlObj
     void GetMapViewTheme(uint16_t& mapViewTheme);
     void SetTargetPoint(uint32_t SessionHandle, ::DBus::Struct<double, double, double> target);
     void GetTargetPoint(::DBus::Struct<double, double, double> &target);
-    void SetMapViewPan(uint32_t SessionHandle, int32_t panningAction, ::DBus::Struct< uint16_t, uint16_t >p);
+    bool SetMapViewPan(uint32_t SessionHandle, int32_t panningAction, ::DBus::Struct< uint16_t, uint16_t >p);
     void GetMapViewPan(const int32_t &panningAction, ::DBus::Struct< uint16_t, uint16_t > &p);
-    void SetMapViewRotation(uint32_t sessionHandle, double rotationAngle, double rotationAnglePerSecond);
+    bool SetMapViewRotation(uint32_t sessionHandle, double rotationAngle, double rotationAnglePerSecond);
     void GetMapViewRotation(int32_t& rotationAngle, int32_t& rotationAnglePerSecond);
-    void SetMapViewBoundingBox(uint32_t sessionHandle, const ::DBus::Struct< ::DBus::Struct< double, double >, ::DBus::Struct< double, double > >& boundingBox);
+    bool SetMapViewBoundingBox(uint32_t sessionHandle, const ::DBus::Struct< ::DBus::Struct< double, double >, ::DBus::Struct< double, double > >& boundingBox);
     void GetMapViewBoundingBox(::DBus::Struct< ::DBus::Struct< double, double >, ::DBus::Struct< double, double > >& boundingBox);
     void GetDisplayedRoutes(std::vector< ::DBus::Struct< uint32_t, bool > >& displayedRoutes);
     void DisplayRoute(uint32_t SessionHandle, uint32_t RouteHandle, bool highlighted);
@@ -193,9 +188,13 @@ class Routing
 	: DBus::ObjectProxy(connection, "/org/genivi/navigationcore","org.genivi.navigation.navigationcore.Routing")
 	{
 		m_mapviewerobj=obj;
-        LOG_INFO_MSG(gCtx,"routing client");
+        LOG_INFO_MSG(gCtx,"routing client created");
     }
 
+    ~Routing()
+    {
+        LOG_INFO_MSG(gCtx,"routing client deleted");
+    }
 
     void RouteDeleted(const uint32_t& routeHandle)
 	{
@@ -248,7 +247,7 @@ class  NavigationCoreSession
 	NavigationCoreSession(DBus::Connection &connection)
 	: DBus::ObjectProxy(connection, "/org/genivi/navigationcore","org.genivi.navigation.navigationcore.Session")
 	{
-        LOG_INFO_MSG(gCtx,"session client");
+        LOG_INFO_MSG(gCtx,"session client created");
     }
     void SessionDeleted(const uint32_t& sessionHandle)
 	{
@@ -262,18 +261,24 @@ class  MapMatchedPosition
   public DBus::ObjectProxy
 {
 	public:
-	struct callback *cb;
+    struct callback *m_position_callback;
 	MapViewerControlObj *m_mapviewerobj;
 	MapMatchedPosition(DBus::Connection &connection, struct vehicle *v)
 	: DBus::ObjectProxy(connection, "/org/genivi/navigationcore","org.genivi.navigation.navigationcore.MapMatchedPosition")
 	{	
-		cb=callback_new_2(callback_cast(position_update), this, v);
-        LOG_INFO_MSG(gCtx,"map matched position client");
+        m_position_callback=callback_new_2(callback_cast(position_update), this, v);
+        LOG_INFO_MSG(gCtx,"map matched position client created");
+    }
+
+    ~MapMatchedPosition()
+    {
+        callback_destroy(m_position_callback);
+        LOG_DEBUG_MSG(gCtx,"map matched position client deleted");
     }
 
     void PositionUpdate(const std::vector< DBusCommonAPIEnumeration >& changedValues)
 	{
-		event_add_timeout(0, 0, cb);
+        event_add_timeout(0, 0, m_position_callback);
 	}
 
     void AddressUpdate(const std::vector< DBusCommonAPIEnumeration >& changedValues)
@@ -337,7 +342,7 @@ position_update(MapMatchedPosition *pos, struct vehicle *v)
 		position_coord_geo.u.coord_geo=&g;
         g.lat=double_variant(map[GENIVI_NAVIGATIONCORE_LATITUDE]._2);
         g.lng=double_variant(map[GENIVI_NAVIGATIONCORE_LONGITUDE]._2);
-        dbg(lvl_debug,"update %f %f\n",g.lat,g.lng);
+        LOG_DEBUG(gCtx,"update %f %f",g.lat,g.lng);
 		vehicle_set_attr(v, &position_coord_geo);
 	}
 }
@@ -357,7 +362,6 @@ class  MapViewerControl
     void
     CreateMapViewInstance(const uint32_t& sessionHandle, const ::DBus::Struct< uint16_t, uint16_t >& mapViewSize, const DBusCommonAPIEnumeration& mapViewType, int32_t& error, uint32_t& mapViewInstanceHandle)
 	{
-        dbg(lvl_debug,"enter\n");
         error=0; //not used
         mapViewInstanceHandle=0;
         if (mapViewType != GENIVI_MAPVIEWER_MAIN_MAP) {
@@ -370,6 +374,7 @@ class  MapViewerControl
                                     throw DBus::ErrorLimitsExceeded("Out of mapviewinstance handles");
                     }
             handles[mapViewInstanceHandle]=new MapViewerControlObj(this, mapViewInstanceHandle, mapViewSize);
+            LOG_INFO(gCtx,"Create map view instance, handle= %d",mapViewInstanceHandle);
         }
     }
 
@@ -383,6 +388,7 @@ class  MapViewerControl
             delete(obj); //delete the navit mapviewer instance
             //and remove the handle from the dictionary too
             handles.erase(iter);
+            LOG_INFO(gCtx,"Release map view instance, handle= %d",MapViewInstanceHandle);
             return(0);
 	}
         else {
@@ -422,7 +428,6 @@ class  MapViewerControl
     void
     SetMapViewScale(const uint32_t& SessionHandle, const uint32_t& MapViewInstanceHandle, const uint8_t& ScaleID)
     {
-        dbg(lvl_debug,"enter\n");
         MapViewerControlObj *obj=handles[MapViewInstanceHandle];
         if (!obj)
                 throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
@@ -466,7 +471,8 @@ class  MapViewerControl
         if (!obj)
             throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
         else {
-            obj->SetMapViewPan(sessionHandle, panningAction, pixelCoordinates);
+            if(!obj->SetMapViewPan(sessionHandle, panningAction, pixelCoordinates))
+              throw DBus::ErrorInvalidArgs("Not allowed if follow car mode is active");
         }
     }
 
@@ -722,9 +728,12 @@ class  MapViewerControl
     SetMapViewBoundingBox(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const ::DBus::Struct< ::DBus::Struct< double, double >, ::DBus::Struct< double, double > >& boundingBox)
 	{
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
-		if (!obj)
+        if (!obj){
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-                else obj->SetMapViewBoundingBox(sessionHandle, boundingBox);
+        }else{
+            if(!obj->SetMapViewBoundingBox(sessionHandle, boundingBox))
+                throw DBus::ErrorInvalidArgs("Not allowed if follow car mode is active");
+        }
 	}
 
 	::DBus::Struct< ::DBus::Struct< double, double >, ::DBus::Struct< double, double > >
@@ -745,8 +754,10 @@ class  MapViewerControl
 		if (!obj)
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
         else {
-            obj->SetMapViewRotation(sessionHandle, rotationAngle, rotationAnglePerSecond);
-            MapViewRotated(mapViewInstanceHandle);
+            if(!obj->SetMapViewRotation(sessionHandle, rotationAngle, rotationAnglePerSecond))
+                    throw DBus::ErrorInvalidArgs("Not allowed if follow car mode is active");
+            else
+                MapViewRotated(mapViewInstanceHandle);
         }
 	}
 
@@ -1176,7 +1187,6 @@ MapViewerControlObj::SetMapViewTheme(uint32_t sessionHandle, uint16_t mapViewThe
 	struct attr layout,name;
 	struct attr_iter *iter;
 	const char *layout_name=NULL;
-    dbg(lvl_debug,"Theme %d\n",mapViewTheme);
 	switch (mapViewTheme) {
 	case GENIVI_MAPVIEWER_THEME_1:
 		layout_name="Car";
@@ -1185,17 +1195,16 @@ MapViewerControlObj::SetMapViewTheme(uint32_t sessionHandle, uint16_t mapViewThe
 		layout_name="Car-dark";
 		break;
 	default:
-        dbg(lvl_debug,"Invalid mapViewTheme\n");
+        LOG_DEBUG_MSG(gCtx,"Invalid mapViewTheme");
 		throw DBus::ErrorInvalidArgs("Invalid mapViewTheme");
 	}
 	iter=navit_attr_iter_new();
 	while (navit_get_attr(m_navit.u.navit, attr_layout, &layout, iter)) {
-        dbg(lvl_debug,"layout\n");
 		if (!layout_get_attr(layout.u.layout, attr_name, &name, NULL)) {
 			navit_attr_iter_destroy(iter);
 			throw DBus::ErrorFailed("Internal error: Failed to get layout name");
 		}
-        dbg(lvl_debug,"%s vs %s\n",name.u.str,layout_name);
+        LOG_DEBUG(gCtx,"Layout: %s vs %s",name.u.str,layout_name);
 		if (!strcmp(name.u.str,layout_name)) {
 			navit_set_attr(m_navit.u.navit, &layout);
 			navit_attr_iter_destroy(iter);
@@ -1214,7 +1223,7 @@ MapViewerControlObj::GetMapViewTheme(uint16_t& mapViewTheme)
 		throw DBus::ErrorFailed("Internal error: Failed to get map layout");
 	if (!layout_get_attr(layout.u.layout, attr_name, &name, NULL)) 
 		throw DBus::ErrorFailed("Internal error: Failed to get layout name");
-    dbg(lvl_debug,"name %s\n",name.u.str);
+    LOG_DEBUG(gCtx,"Name: %s",name.u.str);
 	if (!strcmp(name.u.str,"Car-dark"))
 		mapViewTheme=GENIVI_MAPVIEWER_THEME_2;
 	else
@@ -1230,7 +1239,7 @@ MapViewerControlObj::SetFollowCarMode(uint32_t SessionHandle, bool active)
 		follow.u.num=1;
 	else
 		follow.u.num=100000;
-    dbg(lvl_debug,"setting follow to %d\n",(int) follow.u.num);
+    LOG_DEBUG(gCtx,"Setting follow to: %d",(int) follow.u.num);
 	navit_set_attr(m_navit.u.navit,&follow);
 	vehicle_set_attr(m_vehicle.u.vehicle,&follow);
 	follow.type=attr_timeout;
@@ -1298,7 +1307,7 @@ MapViewerControlObj::SetCameraDistanceFromTargetPoint(uint32_t sessionHandle, do
 {
 	struct transformation *t=navit_get_trans(m_navit.u.navit);
 	transform_set_distance(t, distance);
-    dbg(lvl_debug,"distance %f\n",distance);
+    LOG_DEBUG(gCtx,"Set camera distance from target point %f",distance);
 	transform_set_scales(t, 100, 100, 100 << 8);
 	navit_draw(m_navit.u.navit);
 }
@@ -1319,7 +1328,7 @@ MapViewerControlObj::SetCameraHeight(uint32_t sessionHandle, double height)
 		throw DBus::ErrorInvalidArgs("Height > Distance");
 	double angle=acos(height/distance)*180.0/M_PI;
 	transform_set_pitch(t, angle);
-    dbg(lvl_debug,"distance %f angle %f height %f\n",distance,angle,height);
+    LOG_DEBUG(gCtx,"Set camera: distance %f angle %f height %f",distance,angle,height);
 	navit_draw(m_navit.u.navit);
 }
 
@@ -1330,7 +1339,7 @@ MapViewerControlObj::GetCameraHeight(double &height)
 	double distance=transform_get_distance(t);
 	double angle=transform_get_pitch(t);
 	height=cos(angle*M_PI/180)*distance;
-    dbg(lvl_debug,"distance %f angle %f height %f\n",distance,angle,height);
+    LOG_DEBUG(gCtx,"Get camera: distance %f angle %f height %f",distance,angle,height);
 }
 
 void
@@ -1410,36 +1419,38 @@ MapViewerControlObj_PostDraw(class MapViewerControlObj *obj)
 	event_add_timeout(0, 0, obj->m_move_callback);
 }
 
-void
+bool
 MapViewerControlObj::SetMapViewPan(uint32_t SessionHandle, int32_t panningAction, ::DBus::Struct< uint16_t, uint16_t > p)
 {
     struct transformation *tr;
     struct coord co,cn,c,*cp;
     struct point pan;
-    SetFollowCarMode(SessionHandle, false);
-    dbg(lvl_debug,"enter %d\n",panningAction);
-    switch(panningAction) {
-    case GENIVI_MAPVIEWER_PAN_START:
-	break;
-    case GENIVI_MAPVIEWER_PAN_TO:
-    case GENIVI_MAPVIEWER_PAN_END:
-	tr=navit_get_trans(m_navit.u.navit);
-	transform_reverse(tr, &m_pan, &co);
-	pan.x=p._1;
-	pan.y=p._2;
-	transform_reverse(tr, &pan, &cn);
-    dbg(lvl_debug,"%d,%d - %d,%d\n",m_pan.x,m_pan.y,pan.x,pan.y);
-	cp=transform_get_center(tr);
-	c.x=cp->x+co.x-cn.x;
-	c.y=cp->y+co.y-cn.y;
-	transform_set_center(tr, &c);
-	navit_draw(m_navit.u.navit);
-    default:
-	return;
+    if(m_follow_car) return false; //not allowed if follow car is active
+    switch(panningAction)
+    {
+        case GENIVI_MAPVIEWER_PAN_START:
+        break;
+        case GENIVI_MAPVIEWER_PAN_TO:
+        case GENIVI_MAPVIEWER_PAN_END:
+            tr=navit_get_trans(m_navit.u.navit);
+            transform_reverse(tr, &m_pan, &co);
+            pan.x=p._1;
+            pan.y=p._2;
+            transform_reverse(tr, &pan, &cn);
+            LOG_DEBUG(gCtx,"Pan: %d,%d - %d,%d",m_pan.x,m_pan.y,pan.x,pan.y);
+            cp=transform_get_center(tr);
+            c.x=cp->x+co.x-cn.x;
+            c.y=cp->y+co.y-cn.y;
+            transform_set_center(tr, &c);
+            navit_draw(m_navit.u.navit);
+        default:
+            return false;
     }
     m_pan_action=panningAction;
     m_pan.x=p._1;
     m_pan.y=p._2;
+
+    return true;
 }
 
 void
@@ -1449,13 +1460,15 @@ MapViewerControlObj::GetMapViewPan(const int32_t& panningAction, ::DBus::Struct<
     p._2=m_pan.y;
 }
 
-void
+bool
 MapViewerControlObj::SetMapViewRotation(uint32_t sessionHandle, double rotationAngle, double rotationAnglePerSecond)
 {
 	m_rotationangle=rotationAngle;
     m_rotationanglepersecond=rotationAnglePerSecond;
-	SetFollowCarMode(sessionHandle, false);
-	MoveMap();
+    if(m_follow_car) return false; //not allowed if follow car is active
+    MoveMap();
+
+    return true;
 }
 
 void
@@ -1465,21 +1478,22 @@ MapViewerControlObj::GetMapViewRotation(int32_t& rotationAngle, int32_t& rotatio
     rotationAnglePerSecond=m_rotationanglepersecond;
 }
 
-void
+bool
 MapViewerControlObj::SetMapViewBoundingBox(uint32_t sessionHandle, const ::DBus::Struct< ::DBus::Struct< double, double >, ::DBus::Struct< double, double > >& boundingBox)
 {
 	struct coord_rect r;
 	struct coord_geo g;
-	SetFollowCarMode(sessionHandle, false);
-    dbg(lvl_debug,"%f,%f-%f,%f\n",boundingBox._1._1,boundingBox._1._2,boundingBox._2._1,boundingBox._2._2);
-	g.lat=boundingBox._1._1;
+    if(m_follow_car) return false; //not allowed if follow car is active
+    g.lat=boundingBox._1._1;
 	g.lng=boundingBox._1._2;
 	transform_from_geo(projection_mg, &g, &r.lu);
 	g.lat=boundingBox._2._1;
 	g.lng=boundingBox._2._2;
 	transform_from_geo(projection_mg, &g, &r.rl);
-    dbg(lvl_debug,"0x%x,0x%x-0x%x,0x%x\n",r.lu.x,r.lu.y,r.rl.x,r.rl.y);
+    LOG_DEBUG(gCtx,"Bounding box: 0x%x,0x%x-0x%x,0x%x",r.lu.x,r.lu.y,r.rl.x,r.rl.y);
 	navit_zoom_to_rect(m_navit.u.navit, &r);
+
+    return true;
 }
 
 void
@@ -1547,7 +1561,6 @@ MapViewerControlObj::HideRoute(uint32_t SessionHandle, uint32_t RouteHandle)
 			event_add_timeout(0, 0, m_move_callback);
 		}
 	}
-    dbg(lvl_debug,"Route not displayed\n");
 }
 
 void
@@ -1657,12 +1670,12 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
 	struct attr navit_flags={attr_flags};navit_flags.u.num=2;
 	struct attr *navit_attrs[]={&navit_flags,NULL};
 	if (!config_get_attr(config, attr_navit, &navit_template, NULL)) {
-        dbg(lvl_debug,"failed to get navit template from config\n");
+        LOG_DEBUG_MSG(gCtx,"failed to get navit template from config");
 		return;
 	}
 	m_navit.u.navit=navit_new(NULL,navit_attrs);
 	if (!m_navit.u.navit) {
-        dbg(lvl_debug,"failed to create new navit instance\n");
+        LOG_DEBUG_MSG(gCtx,"failed to create new navit instance");
 		return;
 	}
 	const char *graphics=getenv("NAVIT_GRAPHICS");
@@ -1678,7 +1691,7 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
 	g_free(graphics_window_title.u.str);
 
 	if (!m_graphics.u.graphics) {
-        dbg(lvl_debug,"failed to create new graphics\n");
+        LOG_DEBUG_MSG(gCtx,"failed to create new graphics");
 		return;
 	}
 	m_postdraw_callback=callback_new_attr_1(reinterpret_cast<void (*)(void)>(MapViewerControlObj_PostDraw), attr_postdraw, this);
@@ -1688,7 +1701,7 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
 
 	struct attr mapset;
 	if (!navit_get_attr(navit_template.u.navit, attr_mapset, &mapset, NULL)) {
-        dbg(lvl_debug,"failed to get mapset\n");
+        LOG_DEBUG_MSG(gCtx,"failed to get mapset");
 		return;
 	}
 	mapset.u.mapset=mapset_dup(mapset.u.mapset);
@@ -1751,6 +1764,8 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
     }
 #endif
 
+    LOG_DEBUG_MSG(gCtx,"Map viewer control obj created");
+
 }
 
 MapViewerControlObj::~MapViewerControlObj()
@@ -1768,11 +1783,10 @@ MapViewerControlObj::~MapViewerControlObj()
 #endif
 
 	graphics_remove_callback(m_graphics.u.graphics, m_postdraw_callback);
-#if 0
-	graphics_free(m_graphics.u.graphics);
-	vehicle_destroy(m_vehicle.u.vehicle);
-#endif
+    callback_destroy(m_postdraw_callback);
+    callback_destroy(m_move_callback);
 	navit_destroy(m_navit.u.navit);
+    LOG_DEBUG_MSG(gCtx,"Map viewer control obj deleted");
 	delete(m_routing);
 	delete(m_mapmatchedposition);
 }
@@ -1864,7 +1878,6 @@ DisplayedRoute::WriteSegment(FILE *out)
 
 DisplayedRoute::DisplayedRoute(class MapViewerControlObj *mapviewer, uint8_t RouteSession, uint32_t RouteHandle, struct mapset *mapset)
 {	
-    dbg(lvl_debug,"enter\n");
     std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > > RouteShape;
     std::vector< DBusCommonAPIEnumeration > valuesToReturn;
 	valuesToReturn.push_back(GENIVI_NAVIGATIONCORE_START_LATITUDE);
@@ -1890,13 +1903,13 @@ DisplayedRoute::DisplayedRoute(class MapViewerControlObj *mapviewer, uint8_t Rou
 			if (map.find(GENIVI_NAVIGATIONCORE_START_LATITUDE) != map.end() && map.find(GENIVI_NAVIGATIONCORE_START_LONGITUDE) != map.end()) 
                 AddGeoCoordinate(map[GENIVI_NAVIGATIONCORE_START_LATITUDE]._2,map[GENIVI_NAVIGATIONCORE_START_LONGITUDE]._2);
 			else
-                dbg(lvl_debug,"previous segment is missing end, but current segment is missing start also");
+                LOG_DEBUG_MSG(gCtx,"previous segment is missing end, but current segment is missing start also");
 			WriteSegment(f);
 		}
 		complete=AddSegment(map);
 	}
 	if (!complete)
-        dbg(lvl_debug,"last segment is missing end");
+        LOG_DEBUG_MSG(gCtx,"last segment is missing end");
 	WriteSegment(f);
 	fclose(f);
 	struct attr map_attr_type={attr_type};
@@ -1909,7 +1922,6 @@ DisplayedRoute::DisplayedRoute(class MapViewerControlObj *mapviewer, uint8_t Rou
 
 DisplayedRoute::~DisplayedRoute()
 {
-    dbg(lvl_debug,"enter\n");
 	if (m_map.u.map)
 		map_destroy(m_map.u.map);
 	if (m_filename) {

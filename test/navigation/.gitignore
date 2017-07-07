@@ -1,3 +1,8 @@
 .project
 .pydevproject
 .settings/
+*.e4q
+*.e4t
+*.pyc
+__init__.py
+

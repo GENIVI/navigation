@@ -51,7 +51,6 @@ test_name = "guidance"
 TIME_OUT = 240000
 HORIZONTAL_SIZE = 800
 VERTICAL_SIZE = 480
-MAIN_MAP = 0x0010
 NUMBER_OF_SEGMENTS = 500
 ZOOM_GUIDANCE = 2
 SPEED_FACTOR = 16
@@ -233,7 +232,7 @@ def createMapView():
     ret = g_mapviewercontrol_interface.CreateMapViewInstance( \
       dbus.UInt32(g_mapviewer_sessionhandle), \
       dbus.Struct((dbus.UInt16(HORIZONTAL_SIZE),dbus.UInt16(VERTICAL_SIZE))), \
-     dbus.Int32(MAIN_MAP))
+     dbus.Int32(genivi.MAIN_MAP))
     g_mapviewer_maphandle=ret[1]
     
     print ('MapView handle: ' + str(g_mapviewer_maphandle))
@@ -245,6 +244,12 @@ def createMapView():
         dbus.UInt32(g_mapviewer_sessionhandle), \
         dbus.UInt32(g_mapviewer_maphandle), \
         dbus.Boolean(False))
+    
+    print ('Set the 3D perspective') 
+    g_mapviewercontrol_interface.SetMapViewPerspective(\
+        dbus.UInt32(g_mapviewer_sessionhandle),\
+        dbus.UInt32(g_mapviewer_maphandle), \
+        genivi.PERSPECTIVE_THREE_D)
 
 def deleteMapView():
     g_mapviewercontrol_interface.ReleaseMapViewInstance( \
@@ -254,7 +259,7 @@ def deleteMapView():
     
 
 def exit():
-    deleteMapView()
+    #deleteMapView()
     if dltTrigger==True:
         stopTrigger(test_name)
     loop.quit()

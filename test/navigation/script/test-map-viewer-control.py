@@ -51,7 +51,6 @@ test_name = "map viewer"
 #constants used by the script
 HORIZONTAL_SIZE = 800
 VERTICAL_SIZE = 480
-MAIN_MAP = 0x0010
 TIME_OUT = 1000000
 INIT_SCALE=8
 SCALE_FOR_ROTATE=4
@@ -224,7 +223,7 @@ def createMapView():
     ret = g_mapviewercontrol_interface.CreateMapViewInstance( \
       dbus.UInt32(g_mapviewer_sessionhandle), \
       dbus.Struct((dbus.UInt16(HORIZONTAL_SIZE),dbus.UInt16(VERTICAL_SIZE))), \
-     dbus.Int32(MAIN_MAP))
+     dbus.Int32(genivi.MAIN_MAP))
     g_mapviewer_maphandle=ret[1]
     
     print ('MapView handle: ' + str(g_mapviewer_maphandle))
