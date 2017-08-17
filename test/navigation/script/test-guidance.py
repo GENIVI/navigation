@@ -33,7 +33,7 @@ import dbus.mainloop.glib
 import xml.dom.minidom
 import argparse
 import sys
-import errno
+import os.path
 import time
 import genivi
 try:
@@ -95,10 +95,9 @@ def routing_routeCalculationSuccessful_handler(routeHandle,unfullfilledPreferenc
 def session_sessionDeleted_handler(sessionHandle):
     print('Session handle deleted: '+str(sessionHandle))
     if sessionHandle == g_navigationcore_session_handle:
-        print ('Test PASSED')
+        exit(0)
     else:
-        print ('Test FAILED')
-    exit()
+        exit(1)
 
 def routing_routeDeleted_handler(routeHandle):
     print('Route handle deleted: '+str(routeHandle))
@@ -151,10 +150,18 @@ def mapmatchedposition_simulationStatusChanged_handler(simulationStatus):
     print ("Simulation status: " +str(simulationStatus))
         
 
+# Timeout
 def timeout():
-    print ('Timeout Expired')
-    print ('\nTest FAILED')
-    exit()
+    print ('Timeout Expired\n')
+    exit(1)
+
+def exit(value):
+    global g_exit
+    g_exit=value
+    #deleteMapView()
+    if dltTrigger==True:
+        stopTrigger(test_name)
+    loop.quit()
     
 def display_route(route):
     ret = g_routing_interface.GetRouteBoundingBox(dbus.UInt32(g_route_handle))
@@ -245,11 +252,11 @@ def createMapView():
         dbus.UInt32(g_mapviewer_maphandle), \
         dbus.Boolean(False))
     
-    print ('Set the 3D perspective') 
+    print ('Set the 2D perspective') 
     g_mapviewercontrol_interface.SetMapViewPerspective(\
         dbus.UInt32(g_mapviewer_sessionhandle),\
         dbus.UInt32(g_mapviewer_maphandle), \
-        genivi.PERSPECTIVE_THREE_D)
+        genivi.PERSPECTIVE_TWO_D)
 
 def deleteMapView():
     g_mapviewercontrol_interface.ReleaseMapViewInstance( \
@@ -257,16 +264,11 @@ def deleteMapView():
       dbus.UInt32(g_mapviewer_maphandle))
     g_mapviewer_session_interface.DeleteSession(g_mapviewer_sessionhandle)
     
-
-def exit():
-    #deleteMapView()
-    if dltTrigger==True:
-        stopTrigger(test_name)
-    loop.quit()
-
 print('--------------------------')
 print('Guidance Test')
 print('--------------------------')
+
+g_exit=0
 
 parser = argparse.ArgumentParser(description='Route Calculation Test for navigation PoC and FSA.')
 parser.add_argument('-r','--rou',action='store', dest='routes', help='List of routes in xml format')
@@ -274,13 +276,17 @@ args = parser.parse_args()
 
 if args.routes == None:
     print('route file is missing')
+    print >>sys.stderr,'Test '+test_name+' FAILED'
     sys.exit(1)
 else:
+    if not os.path.isfile(args.routes):
+        print('file not exists')
+        print >>sys.stderr,'Test '+test_name+' FAILED'
+        sys.exit(1)
     try:
         DOMTree = xml.dom.minidom.parse(args.routes)
     except OSError as e:
-        if e.errno == errno.ENOENT:
-            print('file not exists')
+        print >>sys.stderr,'Test '+test_name+' FAILED'
         sys.exit(1)
     route_set = DOMTree.documentElement
             
@@ -372,5 +378,8 @@ launch_route_calculation(0)
 gobject.timeout_add(TIME_OUT, timeout)
 loop = gobject.MainLoop()
 loop.run()
-
-#deleteMapView()
+if g_exit == 1:
+    print >>sys.stderr,'Test '+test_name+' FAILED'
+else:
+    print >>sys.stderr,'Test '+test_name+' PASSED'
+sys.exit(g_exit)

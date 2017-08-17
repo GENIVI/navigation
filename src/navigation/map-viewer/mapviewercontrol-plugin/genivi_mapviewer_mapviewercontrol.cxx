@@ -612,9 +612,12 @@ class  MapViewerControl
     SetCameraTiltAngle(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const int32_t& tilt)
 	{
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
-		if (!obj)
+        if (!obj){
 			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-                else obj->SetCameraTiltAngle(sessionHandle, tilt);
+        }else{
+            obj->SetCameraTiltAngle(sessionHandle, tilt);
+            CameraTiltAngleChanged(mapViewInstanceHandle,tilt);
+        }
 	}
 
 	int32_t
@@ -652,9 +655,12 @@ class  MapViewerControl
     SetCameraDistanceFromTargetPoint(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const uint32_t& distance)
     {
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
-		if (!obj)
-			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-                else obj->SetCameraDistanceFromTargetPoint(sessionHandle, distance);
+        if (!obj){
+            throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
+        }else{
+            obj->SetCameraDistanceFromTargetPoint(sessionHandle, distance);
+            CameraDistanceFromTargetPointChanged(mapViewInstanceHandle,distance);
+        }
 	}
 
 
@@ -691,9 +697,11 @@ class  MapViewerControl
 	SetCameraHeight(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const uint32_t& height)
 	{
 		MapViewerControlObj *obj=handles[mapViewInstanceHandle];
-		if (!obj)
-			throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
-                else obj->SetCameraHeight(sessionHandle, height);
+        if (!obj){
+            throw DBus::ErrorInvalidArgs("Invalid mapviewinstance handle");
+        }else{
+            obj->SetCameraHeight(sessionHandle, height);
+        }
 	}
 
 	uint32_t

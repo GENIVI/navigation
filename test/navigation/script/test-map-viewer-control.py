@@ -35,7 +35,7 @@ import time
 import xml.dom.minidom
 import argparse
 import sys
-import errno
+import os.path
 import genivi
 try:
     from dltTrigger import *
@@ -175,16 +175,10 @@ def mapviewer_mapViewPerspectiveChanged_handler(mapViewInstanceHandle, perspecti
     if step==TEST_STEP_THREE_D:
         if int(perspective)==genivi.PERSPECTIVE_THREE_D:
             time.sleep(2)
-            print('Test 3D PASSED')
+            exit(0)
         else:
-            print('Test 3D failed')
-        exit()
+            exit(1)
     
-def timeout():
-    print('Timeout Expired') 
-    print ('\nTest FAILED')
-    exit()
-
 def next_step():
     global step
     if step == TEST_STEP_START:
@@ -242,7 +236,14 @@ def deleteMapView():
       dbus.UInt32(g_mapviewer_maphandle))
     g_mapviewer_session_interface.DeleteSession(g_mapviewer_sessionhandle)
    
-def exit():
+# Timeout
+def timeout():
+    print ('Timeout Expired\n')
+    exit(1)
+
+def exit(value):
+    global g_exit
+    g_exit=value
     deleteMapView()
     if dltTrigger==True:
         stopTrigger(test_name)
@@ -252,6 +253,8 @@ print('\n--------------------------')
 print('MapViewerControl Test')
 print('--------------------------\n')
 
+g_exit=0
+
 parser = argparse.ArgumentParser(description='Map Viewer Test for navigation PoC and FSA.')
 parser.add_argument('-l','--loc',action='store', dest='locations', help='List of locations in xml format')
 parser.add_argument("-v", "--verbose", action='store_true',help='print the whole log messages')
@@ -259,13 +262,17 @@ args = parser.parse_args()
 
 if args.locations == None:
     print('location file is missing')
+    print >>sys.stderr,'Test '+test_name+' FAILED'
     sys.exit(1)
 else:
+    if not os.path.isfile(args.locations):
+        print('file not exists')
+        print >>sys.stderr,'Test '+test_name+' FAILED'
+        sys.exit(1)
     try:
         DOMTree = xml.dom.minidom.parse(args.locations)
     except OSError as e:
-        if e.errno == errno.ENOENT:
-            print('file not exists')
+        print >>sys.stderr,'Test '+test_name+' FAILED'
         sys.exit(1)
     location_set = DOMTree.documentElement
             
@@ -327,14 +334,14 @@ lat2 = targetPoint[0]
 lon2 = targetPoint[1]
 alt2 = targetPoint[2]
 if round(float(lat1),4) != round(float(lat2),4) :
-    print ('\nTest Failed:' + str(round(float(lat1),4)) + '!=' + str(round(float(lat2),4))  + '\n' )
-    exit()
+    print ('\nSet center failed:' + str(round(float(lat1),4)) + '!=' + str(round(float(lat2),4))  + '\n' )
+    exit(1)
 if round(float(lon1),4) != round(float(lon2),4) :
-    print('\nTest Failed:' + str(round(float(lon1),4)) + '!=' + str(round(float(lon2),4))  + '\n' )
-    exit()
+    print('\nSet center failed:' + str(round(float(lon1),4)) + '!=' + str(round(float(lon2),4))  + '\n' )
+    exit(1)
 if round(float(alt1),4) != round(float(alt2),4) :
-    print('\nTest Failed:' + str(round(float(alt1),4)) + '!=' + str(round(float(alt2),4))  + '\n')
-    exit()
+    print('\nSet center failed:' + str(round(float(alt1),4)) + '!=' + str(round(float(alt2),4))  + '\n')
+    exit(1)
 
 #init the scale
 #get the default
@@ -368,4 +375,8 @@ next_step()
 g_timer_timeout=gobject.timeout_add(TIME_OUT, timeout)
 loop = gobject.MainLoop()
 loop.run()
-
+if g_exit == 1:
+    print >>sys.stderr,'Test '+test_name+' FAILED'
+else:
+    print >>sys.stderr,'Test '+test_name+' PASSED'
+sys.exit(g_exit)

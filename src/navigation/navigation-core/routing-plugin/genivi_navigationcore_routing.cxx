@@ -146,7 +146,6 @@ class  Routing
     void
     CreateRoute(const uint32_t& sessionHandle, int32_t& error, uint32_t& routeHandle)
     {
-        LOG_INFO_MSG(gCtx,"Create route");
         routeHandle=1;
         while (handles[routeHandle]) {
             routeHandle++;
@@ -154,6 +153,7 @@ class  Routing
 				throw DBus::ErrorLimitsExceeded("Out of route handles");
 		}
         handles[routeHandle]=new RoutingObj(this, sessionHandle, routeHandle);
+        LOG_INFO_MSG(gCtx,"Route created");
         error=0; //not implemented yet
 	}
 

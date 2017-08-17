@@ -104,7 +104,7 @@ POI_SERVER_RESOURCE_DIR=$CUR_DIR/../../src/poi-service/resource
 
 poidatabase=$POI_SERVER_RESOURCE_DIR/empty.db # empty poi database by default
 
-while getopts c:gnoprvx opt
+while getopts c:ghnoprvx opt
 do
 	case $opt in
 	c)
@@ -145,11 +145,12 @@ do
 	x)
 		xterm=1
 		;;
-	\?)
+	h)
 		echo "Usage:"
 		echo "$0 [-c center][-gnoprvx]"
 		echo "-c: Set center (supported values: paris,tokyo,longitude,latitude). Default is geneve"
 		echo "-g: Run subprocesses within gdb (only with -x)"
+		echo "-h: This help"
 		echo "-n: Don't start enhanced-position-service"
 		echo "-r: Don't start replayer"
 		echo "-o: Create log file of subprocess output"

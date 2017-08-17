@@ -23,8 +23,8 @@ sudo apt-get install xsltproc libdbus-cpp-dev libdbus-c++-dev libglib2.0-dev gtk
 
 ## How to build
 ### From scratch
-A script allows to clone the third parties code (i.e. positioning and navit) and rebuild all
-./clone_and_build.sh
+A script allows to clone the third parties code (i.e. positioning and navit)
+./update_third_party.sh
 ### Build
 A script allows either:
 to clean and rebuild all (including invoking cmake) 
@@ -32,21 +32,30 @@ to clean and rebuild all (including invoking cmake)
 or to build updated parts
 ./build.sh
 
+There are other options available, please enter ./build.sh -h to display it
+
 ## How to test
 Some python scripts can be used for test. 
-Go to ../../test/navigation
+Go to ../../test/navigation/script
 For Python, you need to install some modules
 sudo apt-get install python-pip python-dbus python-gobject python-pil
 sudo pip install --upgrade pip
 
 To test, launch the navigation middleware by entering:
-../../src/navigation/run -r
+../../src/navigation/run -r -p
 and the test batch:
 ./test-all
 
 If everything is OK, you must see:
 
-Test PASSED
+Test poi search PASSED
+Test location input PASSED
+Test route calculation PASSED
+Test address input PASSED
+Test guidance PASSED
+Test map viewer PASSED
+Batch test PASSED
+
 
 ### How to test for Tokyo area (draft)
 It's also possible to launch test for Japan. 

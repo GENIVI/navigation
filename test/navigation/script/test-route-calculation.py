@@ -34,7 +34,7 @@ import dbus.mainloop.glib
 import xml.dom.minidom
 import argparse
 import sys
-import errno
+import os.path
 import genivi
 try:
     from dltTrigger import *
@@ -54,19 +54,25 @@ print('--------------------------')
 print('Route Calculation Test')
 print('--------------------------')
 
+g_exit=0
+
 parser = argparse.ArgumentParser(description='Route Calculation Test for navigation PoC and FSA.')
 parser.add_argument('-r','--rou',action='store', dest='routes', help='List of routes in xml format')
 args = parser.parse_args()
 
 if args.routes == None:
     print('route file is missing')
+    print >>sys.stderr,'Test '+test_name+' FAILED'
     sys.exit(1)
 else:
+    if not os.path.isfile(args.routes):
+        print('file not exists')
+        print >>sys.stderr,'Test '+test_name+' FAILED'
+        sys.exit(1)
     try:
         DOMTree = xml.dom.minidom.parse(args.routes)
     except OSError as e:
-        if e.errno == errno.ENOENT:
-            print('file not exists')
+        print >>sys.stderr,'Test '+test_name+' FAILED'
         sys.exit(1)
     route_set = DOMTree.documentElement
             
@@ -124,10 +130,9 @@ def catchall_route_calculation_signals_handler(routeHandle, status, percentage):
 def catchall_session_signals_handler(sessionHandle):
     print('Session handle deleted: '+str(sessionHandle))
     if sessionHandle == g_session_handle:
-        print ('Test PASSED')
+        exit(0)
     else:
-        print ('Test FAILED')
-    exit()
+        exit(1)
 
 def catchall_route_deleted_signals_handler(routeHandle):
     print('Route handle deleted: '+str(routeHandle))
@@ -146,11 +151,12 @@ bus.add_signal_receiver(catchall_session_signals_handler, \
 
 #timeout
 def timeout():
-    print ('Timeout Expired')
-    print ('\nTest FAILED')
-    exit()
+    print ('Timeout Expired\n')
+    exit(1)
 
-def exit():
+def exit(value):
+    global g_exit
+    g_exit=value
     if dltTrigger==True:
         stopTrigger(test_name)
     loop.quit()
@@ -201,10 +207,12 @@ g_routing_interface = dbus.Interface(routing_obj, dbus_interface='org.genivi.nav
 g_current_route = 0
 launch_route_calculation(0)
 
-
 #main loop 
 gobject.timeout_add(TIME_OUT, timeout)
 loop = gobject.MainLoop()
 loop.run()
-
-
+if g_exit == 1:
+    print >>sys.stderr,'Test '+test_name+' FAILED'
+else:
+    print >>sys.stderr,'Test '+test_name+' PASSED'
+sys.exit(g_exit)

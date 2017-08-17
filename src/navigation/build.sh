@@ -102,24 +102,24 @@ done
 if [ "$clean" = 1 ] && [ -d "./build" ]
 then
 	echo 'clean up navigation and positioning'
-	rm ./build/CMakeCache.txt
-	rm ./build/cmake_install.cmake
-	rm ./build/Makefile
-	rm ./build/positioning/cmake_install.cmake
-	rm ./build/positioning/Makefile
+	rm -f ./build/CMakeCache.txt
+	rm -f ./build/cmake_install.cmake
+	rm -f ./build/Makefile
+	rm -f ./build/positioning/cmake_install.cmake
+	rm -f ./build/positioning/Makefile
 	if [ "$navit" = 1 ]
 	then
 		echo 'clean up navit'
-		rm ./build/navit/CMakeCache.txt
-		rm ./build/navit/cmake_install.cmake
-		rm ./build/navit/Makefile
+		rm -f ./build/navit/CMakeCache.txt
+		rm -f ./build/navit/cmake_install.cmake
+		rm -f ./build/navit/Makefile
 	fi
 	if [ "$poi" = 1 ] && [ -d "../poi-service/build" ]
 	then
 		echo 'clean up poi'
-		rm ../poi-service/build/CMakeCache.txt
-		rm ../poi-service/build/cmake_install.cmake
-		rm ../poi-service/build/Makefile
+		rm -f ../poi-service/build/CMakeCache.txt
+		rm -f ../poi-service/build/cmake_install.cmake
+		rm -f ../poi-service/build/Makefile
 	fi
 fi
 

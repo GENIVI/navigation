@@ -1,13 +1,39 @@
 #!/bin/bash
 
-./test-poi.py -l ../resource/location.xml -s "zuM"
-sleep 1
-./test-location-input.py -l ../resource/locations.xml
-sleep 1
-./test-route-calculation.py -r ../resource/routes.xml
-sleep 1
-./test-address-input.py -l ../resource/location.xml
-sleep 1
-./test-guidance.py -r ../resource/route.xml
-sleep 1
-./test-map-viewer-control.py -l ../resource/location.xml
+export PYTHONIOENCODING=utf-8
+
+result="$(./test-poi.py -l ../resource/location.xml -s "sChü" 2>&1 >/dev/null)"
+echo $result
+if [[ $result != *"PASSED"* ]]; then 
+	exit 1 
+fi
+
+result="$(./test-location-input.py -l ../resource/locations.xml 2>&1 >/dev/null)"
+echo $result
+if [[ $result != *"PASSED"* ]]; then 
+	exit 1 
+fi
+
+result="$(./test-route-calculation.py -r ../resource/routes.xml  2>&1 >/dev/null)"
+echo $result
+if [[ $result != *"PASSED"* ]]; then 
+	exit 1 
+fi
+
+result="$(./test-address-input.py -l ../resource/location.xml  2>&1 >/dev/null)"
+echo $result
+if [[ $result != *"PASSED"* ]]; then 
+	exit 1 
+fi
+
+result="$(./test-guidance.py -r ../resource/route.xml  2>&1 >/dev/null)"
+echo $result
+if [[ $result != *"PASSED"* ]]; then 
+	exit 1 
+fi
+
+result="$(./test-map-viewer-control.py -l ../resource/location.xml  2>&1 >/dev/null)"
+echo $result
+if [[ $result == *"PASSED"* ]]; then 
+	echo "Batch test PASSED" 
+fi

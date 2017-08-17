@@ -31,7 +31,7 @@ import dbus.mainloop.glib
 import xml.dom.minidom
 import argparse
 import sys
-import errno
+import os.path
 import genivi
 try:
     from dltTrigger import *
@@ -81,8 +81,7 @@ def catch_poi_poiStatus_signal_handler(poiSearchHandle,statusValue):
             print("Search finished")
         elif statusValue == genivi.SEARCH_NOT_STARTED:
             g_poiSearch_interface.DeletePoiSearchHandle(poiSearchHandle)
-            print("Test PASSED")
-            exit()
+            exit(0)
          
 def catch_poi_resultListChanged_signal_handler(poiSearchHandle,resultListSize):
     poiList=[]
@@ -105,11 +104,12 @@ def catch_poi_resultListChanged_signal_handler(poiSearchHandle,resultListSize):
             g_poiSearch_interface.CancelPoiSearch(dbus.UInt32(poiSearchHandle))  
        
 def timeout():
-    print ('Timeout Expired')
-    print ('\nTest FAILED')
-    exit()
+    print ('Timeout Expired\n')
+    exit(1)
 
-def exit():
+def exit(value):
+    global g_exit
+    g_exit=value
     if dltTrigger==True:
         stopTrigger(test_name)
     loop.quit()
@@ -118,6 +118,9 @@ def exit():
 print('\n--------------------------')
 print('Poi Test')
 print('--------------------------\n')
+
+#this script loads a file that could contains several locations but only uses the first one (to avoid creating specific resource)
+g_exit=0
 
 parser = argparse.ArgumentParser(description='Poi Test for navigation PoC and FSA.')
 parser.add_argument('-l','--loc',action='store', dest='locations', help='List of locations in xml format')
@@ -133,13 +136,17 @@ else:
 
 if args.locations == None:
     print('location file is missing')
+    print >>sys.stderr,'Test '+test_name+' FAILED'
     sys.exit(1)
 else:
+    if not os.path.isfile(args.locations):
+        print('file not exists')
+        print >>sys.stderr,'Test '+test_name+' FAILED'
+        sys.exit(1)
     try:
         DOMTree = xml.dom.minidom.parse(args.locations)
     except OSError as e:
-        if e.errno == errno.ENOENT:
-            print('file not exists')
+        print >>sys.stderr,'Test '+test_name+' FAILED'
         sys.exit(1)
     location_set = DOMTree.documentElement
             
@@ -236,3 +243,9 @@ g_poiSearch_interface.StartPoiSearch(g_searchHandle,stringToSearch,dbus.Int32(ge
 gobject.timeout_add(TIME_OUT, timeout)
 loop = gobject.MainLoop()
 loop.run()
+if g_exit == 1:
+    print >>sys.stderr,'Test '+test_name+' FAILED'
+else:
+    print >>sys.stderr,'Test '+test_name+' PASSED'
+sys.exit(g_exit)
+

@@ -35,7 +35,7 @@ import dbus.mainloop.glib
 import xml.dom.minidom
 import argparse
 import sys
-import errno
+import os.path
 import genivi
 try:
     from dltTrigger import *
@@ -67,6 +67,8 @@ print ('\n--------------------------\n' + \
       'LocationInput Test' + \
       '\n--------------------------\n')
 
+g_exit=0
+
 parser = argparse.ArgumentParser(description='Location input Test for navigation PoC and FSA.')
 parser.add_argument('-l','--loc',action='store', dest='locations', help='List of locations in xml format')
 parser.add_argument("-v", "--verbose", action='store_true',help='print the whole log messages')
@@ -74,13 +76,17 @@ args = parser.parse_args()
 
 if args.locations == None:
     print('location file is missing')
+    print >>sys.stderr,'Test '+test_name+' FAILED'
     sys.exit(1)
 else:
+    if not os.path.isfile(args.locations):
+        print('file not exists')
+        print >>sys.stderr,'Test '+test_name+' FAILED'
+        sys.exit(1)
     try:
         DOMTree = xml.dom.minidom.parse(args.locations)
     except OSError as e:
-        if e.errno == errno.ENOENT:
-            print('file not exists')
+        print >>sys.stderr,'Test '+test_name+' FAILED'
         sys.exit(1)
     location_set = DOMTree.documentElement
             
@@ -195,7 +201,6 @@ def change_selection_criterion(selection_criterion):
 # Spell search
 def spell_search(handle, entered_string, search_string, valid_characters, first=0):
     global entered_search_string
-
     vprint('-> SpellSearch - entered \'' + entered_string + '\' target \'' + search_string + '\'')
 
     if unicode(search_string) != unicode(entered_string):
@@ -216,11 +221,11 @@ def spell_search(handle, entered_string, search_string, valid_characters, first=
                 location_input_interface.Spell(dbus.UInt32(session_handle), dbus.UInt32(handle),
                                                dbus.String(spell_character), dbus.UInt16(20))
             else:
-                print ('TEST FAILED (Target character can not be entered)')
-                exit()
+                print ('Target character can not be entered')
+                exit(1)
         else:
-            print ('TEST FAILED (Unexpected completion)')
-            exit()
+            print ('Unexpected completion')
+            exit(1)
     else:
         print ('Full spell match')
 
@@ -263,17 +268,17 @@ def evaluate_address(address, guidable):
         if test_passed == 1:
             print ('TEST PASSED')
         else:
-            print ('TEST FAILED (wrong address)')
-            exit()
+            print ('wrong address')
+            exit(1)
     else:
-        print ('TEST FAILED (non-guidable address)')
-        exit()
+        print ('non-guidable address')
+        exit(1)
     address_index = current_address_index + 1
     if address_index < len(COUNTRY_STRING):
         startSearch(address_index)
     else:
         print ('END OF THE TEST')
-        exit()
+        exit(0)
 
 
 # Signal receiver
@@ -324,8 +329,8 @@ def content_updated_handler(handle, guidable, available_selection_criteria, addr
     elif search_mode == 1:
         full_string_search(handle, target_search_string)
     else:
-        print ('\nTEST FAILED (Invalid search mode)')
-        exit()
+        print ('Invalid search mode')
+        exit(1)
 
 # Handler for SpellResult callback
 def spell_result_handler(handle, unique_string, valid_characters, full_match):
@@ -346,8 +351,8 @@ def spell_result_handler(handle, unique_string, valid_characters, full_match):
 
     if len(valid_characters) == 1:
         if unicode(valid_characters[0]) == u'\x08':
-            print ('\nTEST FAILED (Dead end spelling)')
-            exit()
+            print ('Dead end spelling')
+            exit(1)
 
     if unicode(entered_search_string) == unicode(target_search_string):
         found_exact_match = 1
@@ -390,8 +395,8 @@ def search_result_list_handler(handle, total_size, window_offset, window_size, r
                   '\' (Session '+str(int(session_handle)) + ' LocationInputHandle ' + str(int(handle))+')')
             location_input_interface.SelectEntry(dbus.UInt32(session_handle), dbus.UInt32(handle), dbus.UInt16(0))
         else:
-            print ('\nTEST FAILED (Unexpected single result list)')
-            exit()
+            print ('Unexpected single result list')
+            exit(1)
     elif spell_next_character == 1:
         spell_next_character = 0
         spell_search(handle, entered_search_string, target_search_string, available_characters)
@@ -417,11 +422,12 @@ bus.add_signal_receiver(content_updated_handler,
 
 # Timeout
 def timeout():
-    print ('Timeout Expired')
-    print ('\nTEST FAILED\n')
-    exit()
+    print ('Timeout Expired\n')
+    exit(1)
 
-def exit():
+def exit(value):
+    global g_exit
+    g_exit=value
     error=location_input_interface.DeleteLocationInput(dbus.UInt32(session_handle),dbus.UInt32(location_input_handle))
     print('Delete location input: '+str(int(error)))
     error=session_interface.DeleteSession(dbus.UInt32(session_handle))
@@ -487,3 +493,8 @@ startSearch(0)
 gobject.timeout_add(10000, timeout)
 loop = gobject.MainLoop()
 loop.run()
+if g_exit == 1:
+    print >>sys.stderr,'Test '+test_name+' FAILED'
+else:
+    print >>sys.stderr,'Test '+test_name+' PASSED'
+sys.exit(g_exit)
