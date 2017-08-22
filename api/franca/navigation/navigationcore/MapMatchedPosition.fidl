@@ -12,6 +12,14 @@ import org.genivi.navigation.navigationcore.NavigationCoreTypes.* from "Navigati
 
 <**
 	@description : MapMatchedPosition = This interface offers functions to retrieve the map matched position and to simulate positioning
+	  If NavigationCore is not in Simulation Mode (Simulation Status is SIMULATION_STATUS_NO_SIMULATION), it is using the EnhancedPosition from the Positioning component.
+	  In Simulation Mode it is not using this position, instead it uses FixedPosition or FollowActiveRoute to determine the position.
+	  With FixedPosition (Simulation Status is SIMULATION_STATUS_FIXED_POSITION), the position is fixed, unless it is changed by a call to setPosition().
+	  This supports use cases like: setting the current car position in a demo mode, or replay a position log file (where setPosition() is called for each logged location).
+	  In Follow Active Route mode, NavigationCore is generating positions itself.
+	  These positions follow the current active route. When the end of the route is reached, the position jumps back to the starting point of the route.
+	  There are two sub states: Running (Simulation Status is SIMULATION_STATUS_RUNNING) and Paused (Simulation Status is SIMULATION_STATUS_PAUSED).
+	  By default the ‘driving speed’ will be equal to the free flow speed of each road segment. However a speed factor can be set via the method SetSimulationSpeed.
 **>
 
 interface MapMatchedPosition {
@@ -29,31 +37,31 @@ interface MapMatchedPosition {
 	enumeration AddressItemKey  extends TimeStampedEnum {
 		TIMEZONE_OFFSET		= 17
 		DAYLIGHT_OFFSET		= 18
-		COUNTRY				= 166 //Base 0x00a0
-		STATE				= 167
-		CITY				= 168
-		STREET				= 170
-		HOUSENUMBER			= 171
-		CROSSING			= 172
-		DISTRICT			= 173
-		PHONENUMBER			= 174
-		POINAME				= 175
-		TOWNCENTER			= 176
+		COUNTRY			= 166 //Base 0x00a0
+		STATE			= 167
+		CITY			= 168
+		STREET			= 170
+		HOUSENUMBER		= 171
+		CROSSING		= 172
+		DISTRICT		= 173
+		PHONENUMBER		= 174
+		POINAME			= 175
+		TOWNCENTER		= 176
 		LOCATION_INPUT		= 177
 		FULL_ADDRESS		= 178
-		COUNTRYCODE			= 179
-		HOUSENAME			= 180
-		POSTAL_CODE			= 181
-		ROAD_NUMBER			= 334
-		MATCH_TYPE			= 240
-		ROADSHIELDS			= 182
+		COUNTRYCODE		= 179
+		HOUSENAME		= 180
+		POSTAL_CODE		= 181
+		ROAD_NUMBER		= 334
+		MATCH_TYPE		= 240
+		ROADSHIELDS		= 182
 	}
 		
 	enumeration PositionStatus extends GeoLocalizedEnum { //Base 0x00e0
-		GNSS_FIX_STATUS		= 224
+		GNSS_FIX_STATUS			= 224
 		DR_STATUS			= 225
 		MM_STATUS			= 226
-		SIMULATION_MODE		= 227		
+		SIMULATION_MODE			= 227
 	}
 	
 	enumeration MatchMode { //Base 0x00f0
@@ -73,16 +81,16 @@ interface MapMatchedPosition {
 	}
 		
 	enumeration PositionOnSegmentKey extends TimeStampedEnum { //Base 0x0110
-		SEGMENT_ID				= 272
-		DIRECTION_ON_SEGMENT	= 274
+		SEGMENT_ID			= 272
+		DIRECTION_ON_SEGMENT		= 274
 		DISTANCE_ON_SEGMENT		= 275
 	}
 	
 	enumeration SimulationStatus extends BasicEnum { //Base 0x0220
-		SIMULATION_STATUS_NO_SIMULATION		= 544
-		SIMULATION_STATUS_RUNNING			= 545
-		SIMULATION_STATUS_PAUSED			= 546
-		SIMULATION_STATUS_FIXED_POSITION	= 547
+		SIMULATION_STATUS_NO_SIMULATION		= 544 //means that NavigationCore is using the EnhancedPosition
+		SIMULATION_STATUS_RUNNING		= 545 //means that positions are generated along the active route
+		SIMULATION_STATUS_PAUSED		= 546 //means that the generation of positions along the active route is paused
+		SIMULATION_STATUS_FIXED_POSITION	= 547 //means that the position is fixed
 	}
 	
 	union PositionItemValue {
@@ -179,7 +187,7 @@ interface MapMatchedPosition {
 			Handle sessionHandle
 
 			<**
-				@description : speedFactor = speed factor
+				@description : speedFactor = speed factor. unit is x0.25. Normal speed x1 is 4
 			**>
 			UInt8 speedFactor
 		}
@@ -200,6 +208,8 @@ interface MapMatchedPosition {
 
 	<**
 		@description : startSimulation = This method starts, or resumes, a Follow Active Route simulation
+        	If the current Simulation Status is SIMULATION_STATUS_PAUSED, the simulation is resumed from the current location.
+		Otherwise the simulation is started from the starting point of the route. In both cases the new status will be SIMULATION_STATUS_RUNNING
 	**>
 	method startSimulation {
 		in {
@@ -242,6 +252,9 @@ interface MapMatchedPosition {
 
 	<**
 		@description : setPosition = This method sets the position to a specific location
+        		Independent of the current Simulation Status, the new status will be SIMULATION_STATUS_FIXED_POSITION.
+        		This method can be used to replay a position log file (with positions obtained via calls to GetPosition()) by calling this method for each position in the log file.
+        		It is of course also possible to call this method just once with e.g. a 'current location' entered by the user (via the HMI).
 	**>
 	method setPosition {
 		in {
@@ -311,6 +324,7 @@ interface MapMatchedPosition {
 
 	<**
 		@description : simulationSpeedChanged = This signal is emitted when the simulation speed factor has changed
+		NavigationCore will only send out a SimulationSpeedChanged signal if there is at least one node listening to these changes
 	**>
 	broadcast simulationSpeedChanged selective {
 		out {

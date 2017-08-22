@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric project file for project lbs-api-test -->
-<!-- Saved: 2017-06-08, 15:30:45 -->
+<!-- Saved: 2017-08-18, 10:56:55 -->
 <!-- Copyright (C) 2017 asanoaozora,  -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -21,7 +21,6 @@
     <Source>test-address-input.py</Source>
     <Source>test-map-viewer-control.py</Source>
     <Source>test-location-input.py</Source>
-    <Source>test-map-viewer-control-single.py</Source>
     <Source>test-route-calculation.py</Source>
     <Source>genivi.py</Source>
   </Sources>

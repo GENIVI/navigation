@@ -129,7 +129,8 @@ class  MapMatchedPosition
 	MapMatchedPosition(DBus::Connection &connection)
 	: DBus::ObjectAdaptor(connection, "/org/genivi/navigationcore")
 	{
-	}
+        m_position_set=false;
+    }
 
 	::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string >
 	GetVersion()
@@ -146,28 +147,51 @@ class  MapMatchedPosition
     GetPosition(const std::vector< int32_t >& valuesToReturn, int32_t& error, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >& position)
     {
         LOG_INFO_MSG(gCtx,"Get position");
-		struct attr attr;
-		for (int i = 0 ; i < valuesToReturn.size() ; i++) {
-			switch (valuesToReturn[i]) {
-			case GENIVI_NAVIGATIONCORE_LATITUDE:
-				if (tracking_get_attr(tracking, attr_position_coord_geo, &attr, NULL)) 
-                    position[GENIVI_NAVIGATIONCORE_LATITUDE]._2=variant_double(attr.u.coord_geo->lat);
-				break;
-			case GENIVI_NAVIGATIONCORE_LONGITUDE:
-				if (tracking_get_attr(tracking, attr_position_coord_geo, &attr, NULL)) 
-                    position[GENIVI_NAVIGATIONCORE_LONGITUDE]._2=variant_double(attr.u.coord_geo->lng);
-				break;
-			case GENIVI_NAVIGATIONCORE_SPEED:
-				if (tracking_get_attr(tracking, attr_position_speed, &attr, NULL))
-                    position[GENIVI_NAVIGATIONCORE_SPEED]._2=variant_double(*attr.u.numd);
-				break;
-			case GENIVI_NAVIGATIONCORE_HEADING:
-				if (tracking_get_attr(tracking, attr_position_direction, &attr, NULL))
-                    position[GENIVI_NAVIGATIONCORE_HEADING]._2=variant_double(*attr.u.numd);
-				break;
-			}
-		}
-        error=0; //not implemented yet
+        if(simulationMode==GENIVI_NAVIGATIONCORE_SIMULATION_STATUS_FIXED_POSITION){
+            if(m_position_set){
+                for (int i = 0 ; i < valuesToReturn.size() ; i++) {
+                    switch (valuesToReturn[i]) {
+                    case GENIVI_NAVIGATIONCORE_LATITUDE:
+                        position[GENIVI_NAVIGATIONCORE_LATITUDE]=m_position[GENIVI_NAVIGATIONCORE_LATITUDE];
+                        break;
+                    case GENIVI_NAVIGATIONCORE_LONGITUDE:
+                        position[GENIVI_NAVIGATIONCORE_LONGITUDE]=m_position[GENIVI_NAVIGATIONCORE_LONGITUDE];
+                        break;
+                    case GENIVI_NAVIGATIONCORE_SPEED:
+                        position[GENIVI_NAVIGATIONCORE_SPEED]=m_position[GENIVI_NAVIGATIONCORE_SPEED];
+                        break;
+                    case GENIVI_NAVIGATIONCORE_HEADING:
+                        position[GENIVI_NAVIGATIONCORE_HEADING]=m_position[GENIVI_NAVIGATIONCORE_HEADING];
+                        break;
+                    }
+                }
+                error=GENIVI_NAVIGATIONCORE_OK;
+            }
+            else error=GENIVI_NAVIGATIONCORE_NO_POSITION; //setposition has not been invoked, so vehicle is nowhere
+        }else{
+            struct attr attr;
+            for (int i = 0 ; i < valuesToReturn.size() ; i++) {
+                switch (valuesToReturn[i]) {
+                case GENIVI_NAVIGATIONCORE_LATITUDE:
+                    if (tracking_get_attr(tracking, attr_position_coord_geo, &attr, NULL))
+                        position[GENIVI_NAVIGATIONCORE_LATITUDE]._2=variant_double(attr.u.coord_geo->lat);
+                    break;
+                case GENIVI_NAVIGATIONCORE_LONGITUDE:
+                    if (tracking_get_attr(tracking, attr_position_coord_geo, &attr, NULL))
+                        position[GENIVI_NAVIGATIONCORE_LONGITUDE]._2=variant_double(attr.u.coord_geo->lng);
+                    break;
+                case GENIVI_NAVIGATIONCORE_SPEED:
+                    if (tracking_get_attr(tracking, attr_position_speed, &attr, NULL))
+                        position[GENIVI_NAVIGATIONCORE_SPEED]._2=variant_double(*attr.u.numd);
+                    break;
+                case GENIVI_NAVIGATIONCORE_HEADING:
+                    if (tracking_get_attr(tracking, attr_position_direction, &attr, NULL))
+                        position[GENIVI_NAVIGATIONCORE_HEADING]._2=variant_double(*attr.u.numd);
+                    break;
+                }
+            }
+            error=GENIVI_NAVIGATIONCORE_OK;
+        }
 	}
 
     void
@@ -223,8 +247,9 @@ class  MapMatchedPosition
     void
     SetPosition(const uint32_t& sessionHandle, const std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > >& position)
 	{
-		throw DBus::ErrorNotSupported("Not yet supported");
-	}
+        m_position_set=true;
+        m_position=position;
+    }
 
 	void
 	StartSimulation(const uint32_t& sessionHandle)
@@ -288,6 +313,8 @@ class  MapMatchedPosition
 		return vehicle_speed.u.num*4/40;
 	}
 
+    bool m_position_set;
+    std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > m_position;
 };
 
 static void

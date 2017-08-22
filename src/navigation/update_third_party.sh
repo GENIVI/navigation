@@ -1,6 +1,5 @@
 #!/bin/bash
 
-build_option=""
 positioning_version='9725fe1f553197042d6445997690d452a73490c0'
 navit_version='28478e7f26c1a0eedc06fb4765e2f736079c6f0c'
 
