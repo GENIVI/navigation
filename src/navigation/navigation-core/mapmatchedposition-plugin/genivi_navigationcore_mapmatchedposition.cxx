@@ -249,6 +249,9 @@ class  MapMatchedPosition
 	{
         m_position_set=true;
         m_position=position;
+        //set position is just used to set latitude and longitude in this application
+        m_position[GENIVI_NAVIGATIONCORE_SPEED]._2=variant_double(0);
+        m_position[GENIVI_NAVIGATIONCORE_HEADING]._2=variant_double(0);
     }
 
 	void
@@ -275,7 +278,7 @@ class  MapMatchedPosition
 	void
     SetSimulationMode(const uint32_t& SessionHandle, const bool& Activate)
 	{
-        LOG_INFO_MSG(gCtx,"Activate simulation mode");
+        LOG_DEBUG(gCtx,"Set simulation mode to: %d",Activate);
 		uint16_t newSimulationMode;
 		struct attr vehicle;
 		vehicle.type=attr_vehicle;
