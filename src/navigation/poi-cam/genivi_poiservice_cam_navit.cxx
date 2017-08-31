@@ -174,7 +174,7 @@ class ContentAccessModule
 		class PoiContentAccess *pca;
         pca=new PoiContentAccess(*conns[POI_CONTENTACCESS_CONNECTION]);
 		int camid=pca->RegisterContentAccessModule(cam_name);
-		dbg(lvl_debug,"camid=%d\n",camid);
+        LOG_INFO(gCtx,"camid=%d",camid);
         std::vector< ::DBus::Struct< ::DBus::Struct< std::vector< uint32_t >, DBusCommonAPIVariant, std::string, std::string, DBusCommonAPIVariant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, DBusCommonAPIVariant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > > poiCategories1;
         ::DBus::Struct< ::DBus::Struct< std::vector< uint32_t >, DBusCommonAPIVariant, std::string, std::string, DBusCommonAPIVariant >, std::vector< ::DBus::Struct< uint32_t, std::string, int32_t, std::vector< ::DBus::Struct< int32_t, std::string, DBusCommonAPIVariant > > > >, std::vector< ::DBus::Struct< uint32_t, std::string > > > poiCategory;
         size_t i;
@@ -239,7 +239,7 @@ class ContentAccessModule
     {
         struct attr label;
         struct coord c;
-        dbg(lvl_debug,"adding poi\n");
+        LOG_DEBUG_MSG(gCtx,"adding poi");
         ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > >  result;
         ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > attribute;
         bool stringMatched=false;
@@ -372,7 +372,7 @@ class ContentAccessModule
     {
 		struct attr navit;
 		struct coord_geo g;
-		dbg(lvl_debug,"enter handle=%d size=%d location=%f,%f,%d string='%s' sortOption=%d\n",poiSearchHandle, maxSize, location._1,location._2,location._3, inputString.c_str(), sortOption);
+        LOG_DEBUG(gCtx,"enter handle=%d size=%d location=%f,%f,%f string='%s' sortOption=%d",poiSearchHandle, maxSize, location._1,location._2,location._3, inputString.c_str(), sortOption);
         m_max_requested_size=maxSize;
         m_resultList.resize(0);
 		m_max_radius=0;
@@ -380,7 +380,7 @@ class ContentAccessModule
         poiCategoryIdRadius categoryIdRadius;
         m_poiCategoriesIdRadius.clear();
 		for (int i = 0 ; i < poiCategories.size(); i++) {
-			dbg(lvl_debug,"category %d %d\n",poiCategories[i]._1,poiCategories[i]._2);
+            LOG_DEBUG(gCtx,"category %d %d",poiCategories[i]._1,poiCategories[i]._2);
             categoryIdRadius.givenId=poiCategories[i]._1;
             categoryIdRadius.radius=poiCategories[i]._2;
             m_poiCategoriesIdRadius.push_back(categoryIdRadius);
@@ -388,21 +388,21 @@ class ContentAccessModule
 				m_max_radius=poiCategories[i]._2;
 		}
 		for (int i = 0 ; i < poiAttributes.size(); i++) {
-            dbg(lvl_debug,"attribute %d %d %d %d %d\n",poiAttributes[i]._1, poiAttributes[i]._2, poiAttributes[i]._3, poiAttributes[i]._5, poiAttributes[i]._6);
+            LOG_DEBUG(gCtx,"attribute %d %d %d %d %d",poiAttributes[i]._1, poiAttributes[i]._2, poiAttributes[i]._3, poiAttributes[i]._5, poiAttributes[i]._6);
 		}
-		dbg(lvl_debug,"max radius %d\n",m_max_radius);
+        LOG_DEBUG(gCtx,"max radius %d",m_max_radius);
 		if (!m_mapset) {
 			if (!config_get_attr(config, attr_navit, &navit, NULL)) {
-				dbg(lvl_debug,"failed to get navit\n");
+                LOG_ERROR_MSG(gCtx,"failed to get navit");
 				return;
 			}
 			m_mapset=navit_get_mapset(navit.u.navit);
 		}
-		dbg(lvl_debug,"mapset %p\n",m_mapset);
+        LOG_DEBUG(gCtx,"mapset %p",m_mapset);
 		g.lat=location._1;
 		g.lng=location._2;
 		transform_from_geo(projection_mg, &g, &m_center);
-		dbg(lvl_debug,"c 0x%x,0x%x\n",m_center.x,m_center.y);
+        LOG_DEBUG(gCtx,"c 0x%x,0x%x",m_center.x,m_center.y);
 		m_scale=transform_scale(m_center.y);
 		int d=m_max_radius*10/m_scale;
 		m_selection.next=NULL;
@@ -464,8 +464,8 @@ class ContentAccessModule
     void
     PoiSearchCanceled(const uint32_t& poiSearchHandle)
 	{
-		dbg(lvl_debug,"enter\n");
-	}
+        //to do something
+    }
 
     void
     ResultListRequested(const uint8_t& camId, const uint32_t& poiSearchHandle, const std::vector< uint32_t >& attributeList, int32_t& statusValue, uint16_t& resultListSize, std::vector< ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > >& resultList)
@@ -507,7 +507,6 @@ class ContentAccessModule
     std::vector< ::DBus::Struct< ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, double > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > >
 	PoiDetailsRequested(const std::vector< uint32_t >& source_id)
 	{
-		dbg(lvl_debug,"enter\n");
         std::vector< ::DBus::Struct< ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, double > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > > ret;
 		for (int i = 0 ; i < source_id.size() ; i++) {
 			int sid=source_id[i];
@@ -533,7 +532,6 @@ plugin_init(void)
     DLT_REGISTER_APP("POIC","POI CONTENT ACCESS MODULE SERVER");
     DLT_REGISTER_CONTEXT(gCtx,"POIC","Global Context");
 
-    dbg(lvl_debug,"enter\n");
     event_request_system("glib","genivi_poiservice");
     int i;
     for (i = 0 ; i < CONNECTION_AMOUNT ; i++) {
@@ -549,6 +547,6 @@ plugin_init(void)
 	try {
 		server->register_cam();
 	} catch(...) {
-		dbg(lvl_debug,"Exception during register_cam\n");
+        LOG_ERROR_MSG(gCtx,"Exception during register_cam");
 	}
 }

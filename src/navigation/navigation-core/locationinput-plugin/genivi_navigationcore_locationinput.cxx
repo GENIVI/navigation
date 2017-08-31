@@ -294,7 +294,7 @@ LocationInputObj::Spell(uint32_t SessionHandle, const std::string& InputCharacte
 	char *newstr;
 	const char *input=InputCharacter.c_str();
 	int len=strlen(input)+1;
-    LOG_DEBUG(gCtx,"Input '%s' (%d)",input,strlen(input));
+    LOG_DEBUG(gCtx,"Input '%s' (%lu)",input,strlen(input));
 	if (m_search.u.str && strlen(m_search.u.str)) {
 		const char *i=input;
 		char c;
@@ -318,7 +318,7 @@ LocationInputObj::Spell(uint32_t SessionHandle, const std::string& InputCharacte
 			newstr=NULL;
 	}
 	g_free(m_search.u.str);
-    LOG_DEBUG(gCtx,"Search string '%s' (%d)",newstr,strlen(newstr));
+    LOG_DEBUG(gCtx,"Search string '%s' (%lu)",newstr,strlen(newstr));
 	m_search.u.str=newstr;
 	m_windowsize=MaxWindowSize;
 

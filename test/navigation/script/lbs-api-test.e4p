@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- eric project file for project lbs-api-test -->
-<!-- Saved: 2017-08-18, 10:56:55 -->
+<!-- Saved: 2017-08-29, 11:17:14 -->
 <!-- Copyright (C) 2017 asanoaozora,  -->
 <Project version="5.1">
   <Language>en_US</Language>
@@ -23,6 +23,7 @@
     <Source>test-location-input.py</Source>
     <Source>test-route-calculation.py</Source>
     <Source>genivi.py</Source>
+    <Source>test-poi-guidance.py</Source>
   </Sources>
   <Forms/>
   <Translations/>

@@ -106,7 +106,8 @@ class GuidanceObj
 	public:
 	struct callback *m_guidance_callback;
 	struct attr m_route, m_vehicleprofile, m_tracking_callback;
-	uint32_t m_session,m_route_handle;
+    struct attr m_vehicle_speed;
+    uint32_t m_session,m_route_handle;
 	Guidance *m_guidance;
 #if (SPEECH_ENABLED)
     SpeechOutput *m_speechoutput;
@@ -133,8 +134,6 @@ class GuidanceObj
 };
 
 void GuidanceObj_Callback(GuidanceObj *obj);
-static class GuidanceObj *s_guidance;
-static struct attr vehicle_speed={attr_speed,(char *)40};
 
 static struct navit *
 get_navit(void)
@@ -218,12 +217,11 @@ class  Guidance
 	void	
     StartGuidance(const uint32_t& SessionHandle, const uint32_t& RouteHandle)
 	{
-        dbg(lvl_debug,"enter\n");
         if (m_guidance_active) {
-            dbg(lvl_debug,"guidance already active\n");
-			throw DBus::ErrorFailed("guidance already active");
+            LOG_ERROR_MSG(gCtx,"guidance already active");
+            throw DBus::ErrorFailed("guidance already active");
         } else {
-            s_guidance=new GuidanceObj(this, SessionHandle, RouteHandle);
+            mp_guidance=new GuidanceObj(this, SessionHandle, RouteHandle);
             m_guidance_active=true;
             LOG_INFO_MSG(gCtx,"Guidance started");
         }
@@ -232,12 +230,11 @@ class  Guidance
 	void	
     StopGuidance(const uint32_t& SessionHandle)
 	{
-        dbg(lvl_debug,"enter\n");
         if (m_guidance_active==false) {
-            dbg(lvl_debug,"no guidance active\n");
-			throw DBus::ErrorFailed("no guidance active");
+            LOG_ERROR_MSG(gCtx,"no guidance active");
+            throw DBus::ErrorFailed("no guidance active");
         } else {
-            delete(s_guidance);
+            delete(mp_guidance);
             m_guidance_active=false;
             LOG_INFO_MSG(gCtx,"Guidance stopped");
         }
@@ -246,12 +243,11 @@ class  Guidance
     void
     GetDestinationInformation(uint32_t& offset, uint32_t& travelTime, int32_t& direction, int32_t& side, int16_t& timeZone, int16_t& daylightSavingTime)
 	{
-        dbg(lvl_debug,"enter\n");
         if (m_guidance_active==false) {
-            dbg(lvl_debug,"no guidance active\n");
-			throw DBus::ErrorFailed("no guidance active");
+            LOG_ERROR_MSG(gCtx,"no guidance active");
+            throw DBus::ErrorFailed("no guidance active");
         } else {
-            s_guidance->GetDestinationInformation(offset, travelTime, direction, timeZone);
+            mp_guidance->GetDestinationInformation(offset, travelTime, direction, timeZone);
         }
 	}
 
@@ -270,10 +266,10 @@ class  Guidance
     PauseGuidance(const uint32_t& sessionHandle)
 	{
         if (m_guidance_active==false) {
-            dbg(lvl_debug,"no guidance active\n");
+            LOG_ERROR_MSG(gCtx,"no guidance active");
 			throw DBus::ErrorFailed("no guidance active");
         } else {
-            s_guidance->PauseGuidance(sessionHandle);
+            mp_guidance->PauseGuidance(sessionHandle);
         }
 	}
 
@@ -281,10 +277,10 @@ class  Guidance
     ResumeGuidance(const uint32_t& sessionHandle)
 	{
         if (m_guidance_active==false) {
-            dbg(lvl_debug,"no guidance active\n");
-			throw DBus::ErrorFailed("no guidance active");
+            LOG_ERROR_MSG(gCtx,"no guidance active");
+            throw DBus::ErrorFailed("no guidance active");
         } else {
-            s_guidance->ResumeGuidance(sessionHandle);
+            mp_guidance->ResumeGuidance(sessionHandle);
         }
 	}
 
@@ -292,10 +288,10 @@ class  Guidance
 	SetVoiceGuidance(const bool& activate, const std::string& voice)
 	{
         if (m_guidance_active==false) {
-            dbg(lvl_debug,"no guidance active\n");
+            LOG_ERROR_MSG(gCtx,"no guidance active");
             throw DBus::ErrorFailed("no guidance active");
         } else {
-            s_guidance->SetVoiceGuidance(activate,voice);
+            mp_guidance->SetVoiceGuidance(activate,voice);
         }
         return(0); //not implemented yet
 	}
@@ -304,10 +300,10 @@ class  Guidance
     GetGuidanceDetails(bool& voiceGuidance, bool& vehicleOnTheRoad, bool& isDestinationReached, int32_t& maneuver)
 	{
         if (m_guidance_active==false) {
-            dbg(lvl_debug,"no guidance active\n");
-			throw DBus::ErrorFailed("no guidance active");
+            LOG_ERROR_MSG(gCtx,"no guidance active");
+            throw DBus::ErrorFailed("no guidance active");
         } else {
-            s_guidance->GetGuidanceDetails(voiceGuidance, vehicleOnTheRoad, isDestinationReached, maneuver);
+            mp_guidance->GetGuidanceDetails(voiceGuidance, vehicleOnTheRoad, isDestinationReached, maneuver);
         }
 	}
 
@@ -315,10 +311,10 @@ class  Guidance
 	PlayVoiceManeuver()
 	{
         if (m_guidance_active==false) {
-            dbg(lvl_debug,"no guidance active\n");
+            LOG_ERROR_MSG(gCtx,"no guidance active");
             throw DBus::ErrorFailed("no guidance active");
         } else {
-            s_guidance->PlayVoiceManeuver();
+            mp_guidance->PlayVoiceManeuver();
         }
         return(0); //not implemented yet
 	}
@@ -333,10 +329,10 @@ class  Guidance
     GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, int32_t& error, uint16_t& numberOfManeuvers, std::vector< ::DBus::Struct< std::vector< ::DBus::Struct< std::string, std::vector< ::DBus::Struct< int32_t, std::string > >, std::string > >, std::string, std::string, std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > > >& maneuversList)
 	{
         if (m_guidance_active==false) {
-            dbg(lvl_debug,"no guidance active\n");
-			throw DBus::ErrorFailed("no guidance active");
+            LOG_ERROR_MSG(gCtx,"no guidance active");
+            throw DBus::ErrorFailed("no guidance active");
         } else {
-            s_guidance->GetManeuversList(requestedNumberOfManeuvers, maneuverOffset, numberOfManeuvers, maneuversList);
+            mp_guidance->GetManeuversList(requestedNumberOfManeuvers, maneuverOffset, numberOfManeuvers, maneuversList);
         }
         error=0; //not used
     }
@@ -358,7 +354,7 @@ class  Guidance
     GetGuidanceStatus(int32_t& guidanceStatus, uint32_t& routeHandle)
 	{
         if (m_guidance_active==true) {
-            s_guidance->GetGuidanceStatus(guidanceStatus, routeHandle);
+            mp_guidance->GetGuidanceStatus(guidanceStatus, routeHandle);
 		} else {
 			guidanceStatus=GENIVI_NAVIGATIONCORE_INACTIVE;
 			routeHandle=0;
@@ -369,10 +365,10 @@ class  Guidance
     SetVoiceGuidanceSettings(const int32_t& promptMode)
 	{
         if (m_guidance_active==false) {
-            dbg(lvl_debug,"no guidance active\n");
+            LOG_ERROR_MSG(gCtx,"no guidance active");
             throw DBus::ErrorFailed("no guidance active");
         } else {
-            s_guidance->SetVoiceGuidanceSettings(promptMode);
+            mp_guidance->SetVoiceGuidanceSettings(promptMode);
         }
         return(0); //not implemented yet
 	}
@@ -381,10 +377,10 @@ class  Guidance
 	GetVoiceGuidanceSettings()
 	{
         if (m_guidance_active==false) {
-            dbg(lvl_debug,"no guidance active\n");
+            LOG_ERROR_MSG(gCtx,"no guidance active");
             throw DBus::ErrorFailed("no guidance active");
         } else {
-            return s_guidance->GetVoiceGuidanceSettings();
+            return mp_guidance->GetVoiceGuidanceSettings();
         }
 	}
 
@@ -399,6 +395,8 @@ class  Guidance
     {
         throw DBus::ErrorNotSupported("Not yet supported");
     }
+
+    GuidanceObj *mp_guidance;
 
     bool m_simulationMode;
     bool m_guidance_active;
@@ -428,7 +426,7 @@ GuidanceObj::GetDestinationInformation(uint32_t& Distance, uint32_t& TravelTime,
 	if (!idx)
 		throw DBus::ErrorFailed("internal error:navigation has only one coordinate");
 	if (destination_time.u.num == -1 || destination_length.u.num == -1) {
-        dbg(lvl_debug,"time %d length %d\n",(int) destination_time.u.num, (int) destination_length.u.num);
+        LOG_ERROR(gCtx,"time %d length %d",(int) destination_time.u.num, (int) destination_length.u.num);
 		throw DBus::ErrorFailed("internal error:failed to get time or length");
 	}
 	Distance=destination_length.u.num;
@@ -588,7 +586,7 @@ GuidanceObj::GetManeuver(struct item *item, uint32_t& DistanceToManeuver, int32_
         data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_RIGHT);
         break;
     default:
-        dbg(lvl_error,"Unable to convert type %s\n",item_to_name(item->type));
+        LOG_ERROR(gCtx,"Unable to convert type %s",item_to_name(item->type));
         Maneuver=GENIVI_NAVIGATIONCORE_INVALID;
         index = GENIVI_NAVIGATIONCORE_INVALID;
         data._2=variant_enumeration(GENIVI_NAVIGATIONCORE_INVALID);
@@ -668,7 +666,7 @@ GuidanceObj::ResumeGuidance(uint32_t sessionHandle)
 	GuidanceObj_Callback(this);
 	if (vehicle) 
     {
-		vehicle_set_attr(vehicle, &vehicle_speed);
+        vehicle_set_attr(vehicle, &m_vehicle_speed);
     }
     m_paused=false;
 }
@@ -717,19 +715,17 @@ GuidanceObj_Callback(GuidanceObj *obj)
 	struct attr level;
 	struct map_rect *mr;
 	struct item *item;
-    dbg(lvl_debug,"enter\n");
 	if (obj->m_paused)
 		return;
-	mr=obj->get_map_rect();
+    mr=obj->get_map_rect();
 	if (!mr) {
         LOG_ERROR_MSG(gCtx,"Failed to get map rect");
-        dbg(lvl_debug,"failed to get map rect\n");
 		return;
 	}
 	item=obj->get_item(mr);
 	if (item && item_attr_get(item, attr_level, &level)) {
 		int maneuver;
-        dbg(lvl_debug,"level=%d\n",(int) level.u.num);
+        LOG_INFO(gCtx,"Level: %d",(int) level.u.num);
 		switch(level.u.num) {
 		case 3:
             maneuver=GENIVI_NAVIGATIONCORE_PASSED;
@@ -750,7 +746,6 @@ GuidanceObj_Callback(GuidanceObj *obj)
         LOG_INFO(gCtx,"Maneuver: %d",maneuver);
     } else {
         LOG_ERROR(gCtx,"Maneuver item not found: %p",item);
-        dbg(lvl_debug,"failed to get level item=%p\n",item);
 	}
 }
 
@@ -766,9 +761,8 @@ variant_double(double d)
 void
 GuidanceObj_TrackingCallback(GuidanceObj *obj)
 {
-    dbg(lvl_debug,"enter\n");
 	struct attr attr;
-	route_set_position_from_tracking(obj->m_route.u.route, get_tracking(), projection_mg);
+    route_set_position_from_tracking(obj->m_route.u.route, get_tracking(), projection_mg);
 	if (!obj->m_paused)
         obj->m_guidance->PositionOnRouteChanged(0); //to do return the current offset on the route in meters from the beginning of the route
 
@@ -806,14 +800,15 @@ GuidanceObj::GuidanceObj(Guidance *guidance, uint32_t SessionHandle, uint32_t Ro
 	m_guidance=guidance;
 	m_session=SessionHandle;
 	m_route_handle=RouteHandle;
-	m_guidance_callback=callback_new_1(reinterpret_cast<void (*)(void)>(GuidanceObj_Callback), this);
-	m_paused=false;
+    m_guidance_callback=callback_new_1(reinterpret_cast<void (*)(void)>(GuidanceObj_Callback), this);
+    m_paused=false;
 	m_voice_guidance=false;
     m_kind_of_voice="DEFAULT";
     m_prompt_mode=GENIVI_NAVIGATIONCORE_MANUAL_PROMPT;
 	m_tracking_callback.type=attr_callback;
 	m_tracking_callback.u.callback=NULL;
 	struct attr id={attr_id};
+    m_vehicle_speed={attr_speed,(char *)40};
 	id.u.num=RouteHandle;
 	struct attr *in[]={&id, NULL};
 	struct attr **ret=NULL;
@@ -825,22 +820,21 @@ GuidanceObj::GuidanceObj(Guidance *guidance, uint32_t SessionHandle, uint32_t Ro
 #endif
 	if (navit_get_attr(navit, attr_callback_list, &callback_list, NULL)) {
 		callback_list_call_attr_4(callback_list.u.callback_list, attr_command, "navit_genivi_get_route", in, &ret, NULL);
-		if (ret && ret[0] && ret[1] && ret[0]->type == attr_route && ret[1]->type == attr_vehicleprofile) {
+        if (ret && ret[0] && ret[1] && ret[0]->type == attr_route && ret[1]->type == attr_vehicleprofile) {
 			struct tracking *tracking=get_tracking();
-			m_route=*ret[0];
-			m_vehicleprofile=*ret[1];
+            m_route=*ret[0];
+            m_vehicleprofile=*ret[1];
 			m_tracking_callback.u.callback=callback_new_attr_1(reinterpret_cast<void (*)(void)>(GuidanceObj_TrackingCallback), attr_position_coord_geo, this);
-			tracking_add_attr(tracking, &m_tracking_callback);
-			struct vehicle *demo=get_vehicle("demo:");
-			if (demo) {
-				vehicle_set_attr(demo, &m_route);
-				vehicle_set_attr(demo, &vehicle_speed);
+            tracking_add_attr(tracking, &m_tracking_callback);
+            struct vehicle *vehicle=get_vehicle("demo:");
+            if (vehicle) {
+                vehicle_set_attr(vehicle, &m_route);
+                vehicle_set_attr(vehicle, &m_vehicle_speed);
 			}
-			navigation_set_route(get_navigation(), m_route.u.route);
-			tracking_set_route(get_tracking(), m_route.u.route);
-			navigation_register_callback(get_navigation(), attr_navigation_speech, m_guidance_callback);
-			GuidanceObj_Callback(this);
-		}
+            tracking_set_route(get_tracking(), m_route.u.route);
+            navigation_set_route(get_navigation(), m_route.u.route);
+            navigation_register_callback(get_navigation(), attr_navigation_speech, m_guidance_callback);
+        }
 		g_free(ret);
 	}
 	m_guidance->GuidanceStatusChanged(GENIVI_NAVIGATIONCORE_ACTIVE, RouteHandle);
@@ -849,16 +843,23 @@ GuidanceObj::GuidanceObj(Guidance *guidance, uint32_t SessionHandle, uint32_t Ro
 
 GuidanceObj::~GuidanceObj()
 {
-	if (m_tracking_callback.u.callback) {
+    navigation_unregister_callback(get_navigation(), attr_navigation_speech, m_guidance_callback);
+
+    struct vehicle *vehicle=get_vehicle("demo:");
+    if (vehicle) {
+        vehicle_remove_attr(vehicle,&m_route);
+        vehicle_remove_attr(vehicle,&m_vehicle_speed);
+    }
+
+    if (m_tracking_callback.u.callback) {
 		struct tracking *tracking=get_tracking();
 		if (tracking)
 			tracking_remove_attr(tracking, &m_tracking_callback);
 		callback_destroy(m_tracking_callback.u.callback);
 	}
-	if (m_guidance_callback) {
-		navigation_unregister_callback(get_navigation(), attr_navigation_speech, m_guidance_callback);
-		callback_destroy(m_guidance_callback);
-	}
+
+    callback_destroy(m_guidance_callback);
+
     m_guidance->GuidanceStatusChanged(GENIVI_NAVIGATIONCORE_INACTIVE, m_route_handle);
 #if (SPEECH_ENABLED)
     delete(m_speechoutput);

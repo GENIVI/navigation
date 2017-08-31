@@ -914,7 +914,7 @@ RoutingObj::RoutingObj(Routing *routing, uint32_t session, uint32_t handle)
 	struct attr callback;
            
 	m_routing=routing;
-        m_session=session; 
+    m_session=session;
 	m_handle=handle;
 	m_route.type=attr_route;
 	m_route.u.route=route_new(NULL, NULL);
@@ -935,7 +935,7 @@ RoutingObj::~RoutingObj()
 
 	callback.type=attr_callback;
 	callback.u.callback=m_callback;
-	route_remove_attr(m_route.u.route, &callback);
+    route_remove_attr(m_route.u.route, &callback);
 	callback_destroy(m_callback);
 	route_destroy(m_route.u.route);
 }

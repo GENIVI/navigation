@@ -96,8 +96,10 @@ def catch_poi_resultListChanged_signal_handler(poiSearchHandle,resultListSize):
                 for resultDetail in ret:
                     if resultDetail[1][0] == ID_HOTEL:
                         print("Hotel: " +resultDetail[0][1])
+                        print("Latitude: "+str(resultDetail[0][2][0])+" Longitude: "+str(resultDetail[0][2][1]))                       
                     elif resultDetail[1][0] == ID_RESTAURANT:
                         print("Restaurant: " +resultDetail[0][1])
+                        print("Latitude: "+str(resultDetail[0][2][0])+" Longitude: "+str(resultDetail[0][2][1]))                       
                 g_poiSearch_interface.CancelPoiSearch(dbus.UInt32(poiSearchHandle))
         else:
             print('No poi found')

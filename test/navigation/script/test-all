@@ -2,13 +2,13 @@
 
 export PYTHONIOENCODING=utf-8
 
-result="$(./test-poi.py -l ../resource/location.xml -s "sChü" 2>&1 >/dev/null)"
+result="$(./test-location-input.py -l ../resource/locations.xml 2>&1 >/dev/null)"
 echo $result
 if [[ $result != *"PASSED"* ]]; then 
 	exit 1 
 fi
 
-result="$(./test-location-input.py -l ../resource/locations.xml 2>&1 >/dev/null)"
+result="$(./test-address-input.py -l ../resource/location.xml  2>&1 >/dev/null)"
 echo $result
 if [[ $result != *"PASSED"* ]]; then 
 	exit 1 
@@ -20,7 +20,13 @@ if [[ $result != *"PASSED"* ]]; then
 	exit 1 
 fi
 
-result="$(./test-address-input.py -l ../resource/location.xml  2>&1 >/dev/null)"
+result="$(./test-poi.py -l ../resource/location.xml -s "sChü" 2>&1 >/dev/null)"
+echo $result
+if [[ $result != *"PASSED"* ]]; then 
+	exit 1 
+fi
+
+result="$(./test-poi-guidance.py -l ../resource/location-poi.xml -s "cOnT" 2>&1 >/dev/null)"
 echo $result
 if [[ $result != *"PASSED"* ]]; then 
 	exit 1 

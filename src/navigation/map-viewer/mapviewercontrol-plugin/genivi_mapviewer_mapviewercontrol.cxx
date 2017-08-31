@@ -1048,7 +1048,7 @@ MapViewerControlObj::SetMapViewPerspective(uint32_t SessionHandle, uint16_t MapV
 			transform_set_pitch(trans, 40);
 			break;
 		}
-		navit_draw_async(m_navit.u.navit, 1);
+        navit_draw(m_navit.u.navit);
 	}
 }
 
@@ -1266,7 +1266,7 @@ MapViewerControlObj::SetCameraHeadingAngle(uint32_t sessionHandle, int32_t angle
 	struct attr orientation={attr_orientation};
 	orientation.u.num=angle;
 	navit_set_attr(m_navit.u.navit, &orientation);
-	navit_draw_async(m_navit.u.navit, 1);
+    navit_draw(m_navit.u.navit);
 }
 
 void
@@ -1356,7 +1356,7 @@ MapViewerControlObj::SetCameraHeadingTrackUp(uint32_t sessionHandle)
 	struct attr orientation={attr_orientation};
 	orientation.u.num=-1;
 	navit_set_attr(m_navit.u.navit, &orientation);
-	navit_draw_async(m_navit.u.navit, 1);
+    navit_draw(m_navit.u.navit);
 }
 
 void
@@ -1368,7 +1368,7 @@ MapViewerControlObj::SetTargetPoint(uint32_t SessionHandle, ::DBus::Struct< doub
 	g.lat=target._1;
 	g.lng=target._2;
 	navit_set_attr(m_navit.u.navit, &center);
-	navit_draw_async(m_navit.u.navit, 1);
+    navit_draw(m_navit.u.navit);
 }
 
 void
@@ -1877,7 +1877,7 @@ DisplayedRoute::WriteSegment(FILE *out)
 {
 	if (m_coordinates.size()) {
 		int i;
-		uint32_t header[3]={2+2*m_coordinates.size(),type_street_route,2*m_coordinates.size()};
+        uint32_t header[3]={2+2*(uint32_t)m_coordinates.size(),type_street_route,2*(uint32_t)m_coordinates.size()};
 		fwrite(header, sizeof(header), 1, out);
 		for (i = 0 ; i < m_coordinates.size() ; i++) 
 			fwrite(&m_coordinates[i], sizeof(struct coord), 1, out);
