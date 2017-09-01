@@ -657,11 +657,15 @@ void
 RoutingObj::GetRouteSegments(int16_t detailLevel , const std::vector< DBusCommonAPIEnumeration >& valuesToReturn, const uint32_t& numberOfSegments, const uint32_t& offset, uint32_t& totalNumberOfSegments, std::vector< std::map< DBusCommonAPIEnumeration, DBusCommonAPIVariant > >& RouteSegments)
 {
 	struct map *m=route_get_map(m_route.u.route);
-	if (!m)
-		throw DBus::ErrorFailed("internal error:failed to get route map");
+    if (!m){
+        LOG_ERROR_MSG(gCtx,"GetRouteSegments: failed to get route map");
+        throw DBus::ErrorFailed("internal error:failed to get route map");
+    }
 	struct map_rect *mr=map_rect_new(m, NULL);
-	if (!mr)
-		throw DBus::ErrorFailed("internal error:failed to create route map rect");
+    if (!mr){
+        LOG_ERROR_MSG(gCtx,"GetRouteSegments: failed to create route map rect");
+        throw DBus::ErrorFailed("internal error:failed to create route map rect");
+    }
 	struct item *item;
 	struct coord c[128],last;
 	int count,i;
@@ -749,12 +753,16 @@ RoutingObj::GetRouteBoundingBox(::DBus::Struct< ::DBus::Struct< double, double >
 	struct map *m=route_get_map(m_route.u.route);
 	struct item *item;
 
-	if (!m)
-		throw DBus::ErrorFailed("internal error:failed to get route map");
-	struct map_rect *mr=map_rect_new(m, NULL);
-	if (!mr)
-		throw DBus::ErrorFailed("internal error:failed to create route map rect");
-	while ((item=map_rect_get_item(mr))) {
+    if (!m){
+        LOG_ERROR_MSG(gCtx,"GetRouteBoundingBox: failed to get route map");
+        throw DBus::ErrorFailed("internal error:failed to get route map");
+    }
+    struct map_rect *mr=map_rect_new(m, NULL);
+    if (!mr){
+        LOG_ERROR_MSG(gCtx,"GetRouteBoundingBox: failed to create route map rect");
+        throw DBus::ErrorFailed("internal error:failed to create route map rect");
+    }
+    while ((item=map_rect_get_item(mr))) {
 		struct coord c[128];
 		int count,i;
 		do {

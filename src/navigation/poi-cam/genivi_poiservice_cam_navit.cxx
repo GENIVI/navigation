@@ -239,7 +239,6 @@ class ContentAccessModule
     {
         struct attr label;
         struct coord c;
-        LOG_DEBUG_MSG(gCtx,"adding poi");
         ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > >  result;
         ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > attribute;
         bool stringMatched=false;
@@ -402,7 +401,7 @@ class ContentAccessModule
 		g.lat=location._1;
 		g.lng=location._2;
 		transform_from_geo(projection_mg, &g, &m_center);
-        LOG_DEBUG(gCtx,"c 0x%x,0x%x",m_center.x,m_center.y);
+        LOG_DEBUG(gCtx,"center 0x%x,0x%x",m_center.x,m_center.y);
 		m_scale=transform_scale(m_center.y);
 		int d=m_max_radius*10/m_scale;
 		m_selection.next=NULL;

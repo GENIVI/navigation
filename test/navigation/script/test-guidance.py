@@ -53,7 +53,10 @@ HORIZONTAL_SIZE = 800
 VERTICAL_SIZE = 480
 NUMBER_OF_SEGMENTS = 500
 ZOOM_GUIDANCE = 2
-SPEED_FACTOR = 16
+SPEED_FACTOR_SLOW = 16
+SPEED_FACTOR_FAST = 128
+SPEED_THRESHOLD_TO_FAST = 8
+SPEED_THRESHOLD_TO_SLOW = 2
 
 #add signal receivers
 def routing_routeCalculationProgressUpdate_handler(routeHandle, status, percentage):
@@ -90,6 +93,8 @@ def routing_routeCalculationSuccessful_handler(routeHandle,unfullfilledPreferenc
     g_guidance_active = True
 #        pdb.set_trace()
     display_route(routeHandle)
+    #wait to display the route
+    time.sleep(2)
     launch_guidance(routeHandle)
     
 def session_sessionDeleted_handler(sessionHandle):
@@ -139,6 +144,10 @@ def guidance_maneuverChanged_handler(maneuver):
     ret = g_guidance_interface.GetManeuversList(dbus.UInt16(10),dbus.UInt32(0))
     print ("Number of maneuvers: " +str(ret[1]))
     print ("Next road to turn: " +ret[2][0][4])
+    if ret[1] ==SPEED_THRESHOLD_TO_FAST:
+        g_mapmatchedposition_interface.SetSimulationSpeed(dbus.UInt32(g_navigationcore_session_handle), dbus.Byte(SPEED_FACTOR_FAST))
+    if ret[1] == SPEED_THRESHOLD_TO_SLOW:
+        g_mapmatchedposition_interface.SetSimulationSpeed(dbus.UInt32(g_navigationcore_session_handle), dbus.Byte(SPEED_FACTOR_SLOW))
  
 def guidance_waypointReached_handler(isDestination):
     print("Waypoint reached: " +str(isDestination))
@@ -185,7 +194,7 @@ def launch_guidance(route):
                                                 dbus.Double(0)\
                                                 )))
     g_mapmatchedposition_interface.StartSimulation(dbus.UInt32(g_navigationcore_session_handle))
-    g_mapmatchedposition_interface.SetSimulationSpeed(dbus.UInt32(g_navigationcore_session_handle), dbus.Byte(SPEED_FACTOR))
+    g_mapmatchedposition_interface.SetSimulationSpeed(dbus.UInt32(g_navigationcore_session_handle), dbus.Byte(SPEED_FACTOR_SLOW))
         
 def launch_route_calculation(route):
     global g_current_route

@@ -410,8 +410,10 @@ GuidanceObj::GetDestinationInformation(uint32_t& Distance, uint32_t& TravelTime,
 	struct attr destination_time, destination_length;
 	struct map_rect *mr=get_map_rect();
 	struct item *item;
-	if (!mr) 
+    if (!mr) {
+        LOG_ERROR_MSG(gCtx,"GetDestinationInformation: failed to get map rect");
 		throw DBus::ErrorFailed("internal error:failed to get map rect");
+    }
 	while (item=map_rect_get_item(mr)) {
 		if (item_coord_get(item, &c[idx], 1)) {
 			if (!idx) {
@@ -600,6 +602,10 @@ void
 GuidanceObj::GetGuidanceDetails(bool& voiceGuidance, bool& vehicleOnTheRoad, bool& isDestinationReached, int32_t& maneuver)
 {
     struct map_rect *mr=get_map_rect();
+    if (!mr) {
+        LOG_ERROR_MSG(gCtx,"Failed to get map rect");
+        return;
+    }
     struct item *item;
     item=get_item(mr);
     std::string road_name_after_maneuver;
@@ -618,7 +624,11 @@ void
 GuidanceObj::GetManeuversList(const uint16_t& requestedNumberOfManeuvers, const uint32_t& maneuverOffset, uint16_t& numberOfManeuvers,std::vector< ::DBus::Struct< std::vector< ::DBus::Struct< std::string, std::vector< ::DBus::Struct< int32_t, std::string > >, std::string > >, std::string, std::string, std::string, std::string, uint16_t, int32_t, uint32_t, std::vector< ::DBus::Struct< uint32_t, uint32_t, int32_t, int32_t, std::map< int32_t, ::DBus::Struct< uint8_t, ::DBus::Variant > > > > > >&  maneuversList)
 {
 	struct map_rect *mr=get_map_rect();
-	struct item *item;
+    if (!mr) {
+        LOG_ERROR_MSG(gCtx,"Failed to get map rect");
+        return;
+    }
+    struct item *item;
     uint16_t maneuverIndex;
     std::map< int32_t, DBusCommonAPIVariant >::iterator it;
 
