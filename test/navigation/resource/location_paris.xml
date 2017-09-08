@@ -1,0 +1,10 @@
+<location-set area="Paris">
+<location> 
+<latitude>48.852934</latitude>
+<longitude>2.335150</longitude>
+<country>France</country>
+<city>Paris</city>
+<street>Rue du Four</street>
+<number>4</number>
+</location>
+</location-set>

@@ -46,15 +46,19 @@ test_name = "poi search"
 
 #constants used into the script
 TIME_OUT = 10000
-ID_FUEL = 256
-ID_HOTEL = 257
-ID_CAR_PARKING = 258
-ID_BAR = 259
-ID_RESTAURANT = 260
+ID_HOTEL = 2
+ID_FUEL = 3
+ID_STATION = 6
+ID_FUEL_CAM = 256
+ID_HOTEL_CAM = 257
+ID_CAR_PARKING_CAM = 258
+ID_BAR_CAM = 259
+ID_RESTAURANT_CAM = 260
 ATTRIBUTE_SOURCE = 0
 ATTRIBUTE_PHONE = 2
 RADIUS_HOTEL = 100 #in tenth of meter !
 RADIUS_RESTAURANT = 500
+RADIUS_STATION = 500
 MAX_WINDOW_SIZE = 100
 OFFSET = 0
 
@@ -87,18 +91,24 @@ def catch_poi_resultListChanged_signal_handler(poiSearchHandle,resultListSize):
     poiList=[]
     if poiSearchHandle == g_searchHandle: 
         if resultListSize != 0:
-            ret=g_poiSearch_interface.RequestResultList(dbus.UInt32(poiSearchHandle),dbus.UInt16(OFFSET),dbus.UInt16(MAX_WINDOW_SIZE),[ATTRIBUTE_SOURCE,ATTRIBUTE_PHONE])
+            ret=g_poiSearch_interface.RequestResultList(dbus.UInt32(poiSearchHandle),dbus.UInt16(OFFSET),dbus.UInt16(window_size),[ATTRIBUTE_SOURCE,ATTRIBUTE_PHONE])
             if ret[0] == genivi.SEARCH_FINISHED and ret[1] >= 0:
                 print("Results: "+str(int(ret[1])))
                 for result in ret[2]:
                     poiList.append(result[0])
                 ret=g_poiSearch_interface.GetPoiDetails(poiList)
                 for resultDetail in ret:
-                    if resultDetail[1][0] == ID_HOTEL:
+                    if resultDetail[1][0] == ID_HOTEL_CAM:
+                        print("Hotel (CAM): " +resultDetail[0][1])
+                        print("Latitude: "+str(resultDetail[0][2][0])+" Longitude: "+str(resultDetail[0][2][1]))                       
+                    elif resultDetail[1][0] == ID_RESTAURANT_CAM:
+                        print("Restaurant (CAM): " +resultDetail[0][1])
+                        print("Latitude: "+str(resultDetail[0][2][0])+" Longitude: "+str(resultDetail[0][2][1]))                       
+                    elif resultDetail[1][0] == ID_HOTEL:
                         print("Hotel: " +resultDetail[0][1])
                         print("Latitude: "+str(resultDetail[0][2][0])+" Longitude: "+str(resultDetail[0][2][1]))                       
-                    elif resultDetail[1][0] == ID_RESTAURANT:
-                        print("Restaurant: " +resultDetail[0][1])
+                    elif resultDetail[1][0] == ID_STATION:
+                        print("Station: " +resultDetail[0][1])
                         print("Latitude: "+str(resultDetail[0][2][0])+" Longitude: "+str(resultDetail[0][2][1]))                       
                 g_poiSearch_interface.CancelPoiSearch(dbus.UInt32(poiSearchHandle))
         else:
@@ -128,7 +138,23 @@ parser = argparse.ArgumentParser(description='Poi Test for navigation PoC and FS
 parser.add_argument('-l','--loc',action='store', dest='locations', help='List of locations in xml format')
 parser.add_argument("-v", "--verbose", action='store_true',help='print the whole log messages')
 parser.add_argument('-s','--string',action='store', dest='string', help='String to search')
+parser.add_argument('-r','--radius',action='store', dest='radius', help='Search radius in tenth of meters')
+parser.add_argument('-w','--window',action='store', dest='window', help='Max number of requested results')
 args = parser.parse_args()
+
+if args.radius == None:
+    radius_hotel=RADIUS_HOTEL
+    radius_restaurant=RADIUS_RESTAURANT
+    radius_station=RADIUS_STATION
+else:
+    radius_hotel=args.radius
+    radius_restaurant=args.radius
+    radius_station=args.radius
+
+if args.window == None:
+    window_size=MAX_WINDOW_SIZE
+else:
+    window_size=args.window
 
 if args.string == None:
     print('string to search is missing, by default no string, get all')
@@ -202,13 +228,15 @@ g_poiConfiguration_interface.SetLocale(dbus.String("fra"),dbus.String("FRA"),dbu
 categories=[]
 ret=g_poiSearch_interface.GetAvailableCategories()
 for categoryAndName in ret:
-    if categoryAndName[0] == ID_HOTEL or categoryAndName[0] == ID_RESTAURANT:
+    if categoryAndName[0] == ID_HOTEL or categoryAndName[0] == ID_STATION or categoryAndName[0] == ID_RESTAURANT_CAM or categoryAndName[0] == ID_RESTAURANT_CAM:
         print("Category ID: " + str(int(categoryAndName[0])))
         categories.append(categoryAndName[0])
         print("Name: " + categoryAndName[1])
 
 attributes_hotel=[]
-attributes_restaurant=[]
+attributes_station=[]
+attributes_hotel_cam=[]
+attributes_restaurant_cam=[]
 attributesDetails=[]
 ret=g_poiSearch_interface.GetCategoriesDetails(categories)
 for results in ret:
@@ -216,11 +244,19 @@ for results in ret:
         for attribute in results[1]:
             attributes_hotel.append(attribute[0])
             attributesDetails.append(dbus.Struct([dbus.UInt32(attribute[0]),dbus.UInt32(ID_HOTEL),dbus.Int32(1280),dbus.Struct([dbus.Byte(2),dbus.String("")]),dbus.Int32(1314),dbus.Boolean(False)])) 
-    elif results[0][0] == ID_RESTAURANT:
+    elif results[0][0] == ID_STATION:
         for attribute in results[1]:
-            attributes_restaurant.append(attribute[0])
-            attributesDetails.append(dbus.Struct([dbus.UInt32(attribute[0]),dbus.UInt32(ID_RESTAURANT),dbus.Int32(1280),dbus.Struct([dbus.Byte(2),dbus.String("")]),dbus.Int32(1314),dbus.Boolean(False)])) 
-        
+            attributes_station.append(attribute[0])
+            attributesDetails.append(dbus.Struct([dbus.UInt32(attribute[0]),dbus.UInt32(ID_STATION),dbus.Int32(1280),dbus.Struct([dbus.Byte(2),dbus.String("")]),dbus.Int32(1314),dbus.Boolean(False)])) 
+    elif results[0][0] == ID_HOTEL_CAM:
+        for attribute in results[1]:
+            attributes_hotel_cam.append(attribute[0])
+            attributesDetails.append(dbus.Struct([dbus.UInt32(attribute[0]),dbus.UInt32(ID_HOTEL_CAM),dbus.Int32(1280),dbus.Struct([dbus.Byte(2),dbus.String("")]),dbus.Int32(1314),dbus.Boolean(False)])) 
+    elif results[0][0] == ID_RESTAURANT_CAM:
+        for attribute in results[1]:
+            attributes_restaurant_cam.append(attribute[0])
+            attributesDetails.append(dbus.Struct([dbus.UInt32(attribute[0]),dbus.UInt32(ID_RESTAURANT_CAM),dbus.Int32(1280),dbus.Struct([dbus.Byte(2),dbus.String("")]),dbus.Int32(1314),dbus.Boolean(False)])) 
+       
 ret=g_poiSearch_interface.GetRootCategory()
 
 g_searchHandle=g_poiSearch_interface.CreatePoiSearchHandle()
@@ -234,7 +270,11 @@ alt = ALTITUDE[index]
 
 g_poiSearch_interface.SetCenter(g_searchHandle,dbus.Struct([dbus.Double(lat),dbus.Double(lon),dbus.Double(alt)]))
 
-g_poiSearch_interface.SetCategories(g_searchHandle,[dbus.Struct([dbus.UInt32(ID_HOTEL),dbus.UInt32(RADIUS_HOTEL)]),dbus.Struct([dbus.UInt32(ID_RESTAURANT),dbus.UInt32(RADIUS_RESTAURANT)])])
+g_poiSearch_interface.SetCategories(g_searchHandle,[\
+    dbus.Struct([dbus.UInt32(ID_HOTEL),dbus.UInt32(radius_hotel)]),\
+    dbus.Struct([dbus.UInt32(ID_STATION),dbus.UInt32(radius_station)]), \
+    dbus.Struct([dbus.UInt32(ID_HOTEL_CAM),dbus.UInt32(radius_hotel)]),\
+    dbus.Struct([dbus.UInt32(ID_RESTAURANT_CAM),dbus.UInt32(radius_restaurant)])])
 
 g_poiSearch_interface.SetAttributes(g_searchHandle,attributesDetails)
 

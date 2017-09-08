@@ -1,11 +1,72 @@
 #!/bin/bash
 
-./test-location-input.py -l ../resource/location_tokyo.xml
-sleep 2
-./test-route-calculation.py -r ../resource/route_tokyo.xml
-sleep 2
-./test-address-input.py -l ../resource/location_tokyo.xml
-sleep 2
-./test-guidance.py -r ../resource/route_tokyo.xml
-sleep 2
-./test-map-viewer-control.py -l ../resource/location_tokyo.xml
+export PYTHONIOENCODING=utf-8
+verbose=0
+
+while getopts hv opt
+do
+	case $opt in
+	v)
+		verbose=1
+		;;
+	h)
+		echo "Usage:"
+		echo "-h: Help"
+		echo "-v: Verbose"
+		exit 1
+	esac
+done
+
+if [ "$verbose" = 1 ]
+then
+	./test-location-input.py -l ../resource/location_tokyo.xml
+	./test-address-input.py -l ../resource/location_tokyo.xml
+	./test-route-calculation.py -r ../resource/route_tokyo.xml
+	./test-poi.py -l ../resource/location_tokyo.xml -s "赤坂"
+	./test-poi-guidance.py -l ../resource/location_tokyo.xml -s "赤"
+	./test-guidance.py -r ../resource/route_tokyo.xml
+	./test-map-viewer-control.py -l ../resource/location_tokyo.xml
+else
+	result="$(./test-location-input.py -l ../resource/location_tokyo.xml 2>&1 >/dev/null)"
+	echo $result
+	if [[ $result != *"PASSED"* ]]; then 
+		exit 1 
+	fi
+
+	result="$(./test-address-input.py -l ../resource/location_tokyo.xml  2>&1 >/dev/null)"
+	echo $result
+	if [[ $result != *"PASSED"* ]]; then 
+		exit 1 
+	fi
+
+	result="$(./test-route-calculation.py -r ../resource/route_tokyo.xml  2>&1 >/dev/null)"
+	echo $result
+	if [[ $result != *"PASSED"* ]]; then 
+		exit 1 
+	fi
+
+	result="$(./test-poi.py -l ../resource/location_tokyo.xml -s "赤坂" 2>&1 >/dev/null)"
+	echo $result
+	if [[ $result != *"PASSED"* ]]; then 
+		exit 1 
+	fi
+
+	result="$(./test-poi-guidance.py -l ../resource/location_tokyo.xml -s "赤" 2>&1 >/dev/null)"
+	echo $result
+	if [[ $result != *"PASSED"* ]]; then 
+		exit 1 
+	fi
+
+	result="$(./test-guidance.py -r ../resource/route_tokyo.xml  2>&1 >/dev/null)"
+	echo $result
+	if [[ $result != *"PASSED"* ]]; then 
+		exit 1 
+	fi
+
+	result="$(./test-map-viewer-control.py -l ../resource/location_tokyo.xml  2>&1 >/dev/null)"
+	echo $result
+	if [[ $result == *"PASSED"* ]]; then 
+		echo "Batch test PASSED" 
+	fi
+fi
+

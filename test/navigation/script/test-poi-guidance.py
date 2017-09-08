@@ -186,7 +186,7 @@ def poi_resultListChanged_signal_handler(poiSearchHandle,resultListSize):
     poiList=[]
     if poiSearchHandle == g_searchHandle: 
         if resultListSize != 0:
-            ret=g_poiSearch_interface.RequestResultList(dbus.UInt32(poiSearchHandle),dbus.UInt16(OFFSET),dbus.UInt16(MAX_WINDOW_SIZE),[ATTRIBUTE_SOURCE,ATTRIBUTE_PHONE])
+            ret=g_poiSearch_interface.RequestResultList(dbus.UInt32(poiSearchHandle),dbus.UInt16(OFFSET),dbus.UInt16(window_size),[ATTRIBUTE_SOURCE,ATTRIBUTE_PHONE])
             if ret[0] == genivi.SEARCH_FINISHED and ret[1] >= 0:
                 print("Results: "+str(int(ret[1])))
                 for result in ret[2]:
@@ -264,7 +264,21 @@ parser = argparse.ArgumentParser(description='Poi Test for navigation PoC and FS
 parser.add_argument('-l','--loc',action='store', dest='locations', help='List of locations in xml format')
 parser.add_argument("-v", "--verbose", action='store_true',help='print the whole log messages')
 parser.add_argument('-s','--string',action='store', dest='string', help='String to search')
+parser.add_argument('-r','--radius',action='store', dest='radius', help='Search radius in tenth of meters')
+parser.add_argument('-w','--window',action='store', dest='window', help='Max number of requested results')
 args = parser.parse_args()
+
+if args.radius == None:
+    radius_hotel=RADIUS_HOTEL
+    radius_restaurant=RADIUS_RESTAURANT
+else:
+    radius_hotel=args.radius
+    radius_restaurant=args.radius
+
+if args.window == None:
+    window_size=MAX_WINDOW_SIZE
+else:
+    window_size=args.window
 
 if args.string == None:
     print('string to search is missing, by default no string, get all')
@@ -431,7 +445,7 @@ alt = ALTITUDE[index]
 
 g_poiSearch_interface.SetCenter(g_searchHandle,dbus.Struct([dbus.Double(lat),dbus.Double(lon),dbus.Double(alt)]))
 
-g_poiSearch_interface.SetCategories(g_searchHandle,[dbus.Struct([dbus.UInt32(ID_HOTEL),dbus.UInt32(RADIUS_HOTEL)]),dbus.Struct([dbus.UInt32(ID_RESTAURANT),dbus.UInt32(RADIUS_RESTAURANT)])])
+g_poiSearch_interface.SetCategories(g_searchHandle,[dbus.Struct([dbus.UInt32(ID_HOTEL),dbus.UInt32(radius_hotel)]),dbus.Struct([dbus.UInt32(ID_RESTAURANT),dbus.UInt32(radius_restaurant)])])
 
 g_poiSearch_interface.SetAttributes(g_searchHandle,attributesDetails)
 
