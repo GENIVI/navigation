@@ -1826,7 +1826,7 @@ uint16_t poiSearchServer::searchPOIRequest(uint16_t categoryIndex, std::string s
         m_poiTable.push_back(poi);
         LOG_DEBUG(gCtx,"POI name: %s found at distance: %d",poi.name.c_str(),poi.distance);
     }
-    LOG_DEBUG(gCtx,"Amount of POI found: %d",sqlQueryResult.size());
+    LOG_DEBUG(gCtx,"Amount of POI found: %lu",sqlQueryResult.size());
 
     return(sqlQueryResult.size());
 }
@@ -2125,9 +2125,15 @@ std::vector< ::DBus::Struct< std::string, std::string, std::string > > poiConfig
 {
     std::vector< ::DBus::Struct< std::string, std::string, std::string > > ret;
     ::DBus::Struct< std::string, std::string, std::string > en_US { "eng","USA", "Latn" };
+    ::DBus::Struct< std::string, std::string, std::string > de_DE { "deu","DEU", "Latn" };
     ::DBus::Struct< std::string, std::string, std::string > fr_FR { "fra","FRA", "Latn" };
+    ::DBus::Struct< std::string, std::string, std::string > jp_JP { "jpn","JPN", "Hrkt" };
+    ::DBus::Struct< std::string, std::string, std::string > ko_KO { "kor","KOR", "Hang" };
     ret.push_back(en_US);
+    ret.push_back(de_DE);
     ret.push_back(fr_FR);
+    ret.push_back(jp_JP);
+    ret.push_back(ko_KO);
     return ret;
 }
 

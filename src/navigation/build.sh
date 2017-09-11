@@ -144,9 +144,9 @@ echo 'build navigation'
 if [ "$clean" = 1 ]
 then
 	cmake -DWITH_DLT=$dlt_option $commonapi_tools_option -DWITH_DEBUG=$debug ../
-	echo 'replace a missing font in the configuration file of navit instances'
-	sed -i -e 's/Liberation Sans/TakaoPGothic/' ./navit/navit/navit_genivi_mapviewer.xml
-	sed -i -e 's/Liberation Sans/TakaoPGothic/' ./navit/navit/navit_genivi_navigationcore.xml
+	echo 'Allow to display Korean and Japanese by replacing a font in the configuration file of navit instances'
+	sed -i -e 's/Liberation Sans/NanumGothic/' ./navit/navit/navit_genivi_mapviewer.xml
+	sed -i -e 's/Liberation Sans/NanumGothic/' ./navit/navit/navit_genivi_navigationcore.xml
 fi
 make
 cd ..

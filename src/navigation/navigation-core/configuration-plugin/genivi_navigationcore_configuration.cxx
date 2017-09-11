@@ -64,6 +64,7 @@ static struct map32 {
 	{"eng","en"},
 	{"fra","fr"},
 	{"jpn","jp"},
+    {"kor","ko"},
 };
 
 static struct map32 country_map[] = {
@@ -72,6 +73,7 @@ static struct map32 country_map[] = {
 	{"FRA","FR"},
 	{"USA","US"},
 	{"JPN","JP"},
+    {"KOR","KO"},
 };
 
 static std::string scriptCode = "Latn";
@@ -228,10 +230,12 @@ class  Configuration
         ::DBus::Struct< std::string, std::string, std::string > de_DE { "deu","DEU", "Latn" };
         ::DBus::Struct< std::string, std::string, std::string > fr_FR { "fra","FRA", "Latn" };
         ::DBus::Struct< std::string, std::string, std::string > jp_JP { "jpn","JPN", "Hrkt" };
+        ::DBus::Struct< std::string, std::string, std::string > ko_KO { "kor","KOR", "Hang" };
         ret.push_back(en_US);
         ret.push_back(de_DE);
         ret.push_back(fr_FR);
         ret.push_back(jp_JP);
+        ret.push_back(ko_KO);
         return ret;
     }
 

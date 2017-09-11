@@ -11,8 +11,8 @@ read -r -p "Are you sure ? [y/N] " input
 
 case "$input" in
 	[y/Y])
-	./update_navit $navit_version
-	./update_positioning $positioning_version
+	./update_navit.sh $navit_version
+	./update_positioning.sh $positioning_version
 	echo "Please rebuild with at least -c option"
 	;;
 	*)
