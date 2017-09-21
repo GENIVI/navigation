@@ -1,7 +1,7 @@
 [Unit]
 Description=Navit (Navigationcore part) Service for FSA configuration file
-Requires=dbus.service enhanced-position-service.service
-After=enhanced-position-service.service 
+Requires=dbus.service enhanced-position-service.service gdp-new-hmi.service
+After=enhanced-position-service.service gdp-new-hmi.service
 
 [Service]
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/0/dbus/user_bus_socket

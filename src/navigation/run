@@ -115,6 +115,9 @@ do
 		tokyo)
 			center="139.74 35.70"
 			;;
+		seoul)
+			center="126.99 37.54"
+			;;
 		[0-9-]*)
 			center=$OPTARG
 			;;
@@ -148,7 +151,7 @@ do
 	h)
 		echo "Usage:"
 		echo "$0 [-c center][-gnoprvx]"
-		echo "-c: Set center (supported values: paris,tokyo,longitude,latitude). Default is geneve"
+		echo "-c: Set center (supported values: paris,tokyo,seoul,longitude,latitude). Default is geneve"
 		echo "-g: Run subprocesses within gdb (only with -x)"
 		echo "-h: This help"
 		echo "-n: Don't start enhanced-position-service"
