@@ -1622,12 +1622,19 @@ static void callbackFunction(ilmObjectType object, t_ilm_uint surfaceId, t_ilm_b
     struct ilmSurfaceProperties pSurfaceProperties;
     t_ilm_layer renderOrder[2];
 
+    if(object == ILM_LAYER) {
+        if(created){
+            //FIXIT: Need to add tempo
+            sleep(1);
+        }
+    }
+
     if (object == ILM_SURFACE) {
         if (created) {
             if (surfaceId == FSA_SURFACE) {
 
                 //FIXIT: Need to add tempo
-                sleep(1);
+                sleep(2);
 
                 //Grab all the layers - HMI will be pLength-2 and FSA pLength-1
                 if (ilm_getLayerIDs(&pLength, &ppArray)  != ILM_SUCCESS) {
@@ -1635,7 +1642,7 @@ static void callbackFunction(ilmObjectType object, t_ilm_uint surfaceId, t_ilm_b
                 }
 
 		//FIXIT: Since we don't know thep id of hmi_launcher and order of start.
-                //Guess it is teh last one or the one before navit mapviewer PID.
+                //Guess it is the last one or the one before navit mapviewer PID.
                 renderOrder[0] = FSA_SURFACE;
                 if (ppArray[pLength - 2] != FSA_SURFACE)
                     renderOrder[1] = SURFACE_OFFSET + ppArray[pLength - 2];

@@ -2,17 +2,17 @@
 * @licence app begin@
 * SPDX-License-Identifier: MPL-2.0
 *
-* \copyright Copyright (C) 2013-2017, PCA Peugeot Citroen
+* \copyright Copyright (C) 2013-2017, PSA GROUP
 *
 * \file main.cpp
 *
-* \brief This file is part of the speech proof of concept.
+* \brief This file is part of the speech service proof of concept.
 *
 * \author Philippe Colliot <philippe.colliot@mpsa.com>
 * \brief Some parts of the code has been inspired by the following people:
 * \brief Mario Thielert, David Kämpf, Dominique Massonie
 *
-* \version 1.1
+* \version 1.0
 *
 * This Source Code Form is subject to the terms of the
 * Mozilla Public License (MPL), v. 2.0.
@@ -36,7 +36,10 @@
 #include <iostream>
 #include <cmath>
 #include <typeinfo>
-#include <dbus-c++-1/dbus-c++/glib-integration.h>
+#include <dbus-c++/glib-integration.h>
+#include "genivi-speechservice-constants.h"
+#include "genivi-speechservice-speechoutput_adaptor.h"
+#include "log.h"
 #include <semaphore.h>
 #include <flite.h>
 
@@ -45,16 +48,13 @@ extern "C" {
     void unregister_cmu_us_kal(cst_voice *vox);
 }
 
+DLT_DECLARE_CONTEXT(gCtx)
 
-#include <CommonAPI/CommonAPI.hpp>
-#include <CommonTypes.hpp>
-#include <SpeechOutputStubDefault.hpp>
+static const char* speech_SERVICE_NAME = "org.genivi.hmi.speechservice.SpeechOutput";
+static const char* speech_OBJECT_PATH = "/org/genivi/hmi/speechservice/SpeechOutput";
 
-using namespace v1::org::genivi::hmi::speechservice;
-using namespace v4::org::genivi;
-
-static std::shared_ptr < CommonAPI::Runtime > runtime;
-static const std::string domain = "local";
+static DBus::Glib::BusDispatcher *dispatcher;
+static DBus::Connection *dbusConnection;
 
 static int m_lenLastChunk;
 static int m_slotCount;
@@ -70,64 +70,65 @@ static pthread_mutex_t mutex;
 
 static std::string m_chunkBuffer; /** max size = MAX_CHUNK_SIZE*MAX_SLOT_COUNT */
 
- gboolean processChunks(gpointer data) {
-    //worker thread to process chunks in buffer
+gboolean processChunks(gpointer data) {
+   //worker thread to process chunks in buffer
 
-    pthread_mutex_lock(&mutex);
+   pthread_mutex_lock(&mutex);
 
-    if (m_chunkBuffer.length() > 0)
-    {
-        printf("\n>>> [server] processChunks()\n");
-        std::string tempBuffer;
-        tempBuffer.assign(m_chunkBuffer);
-        m_chunkBuffer.clear(); //buffer empty
-        m_slotCount=0; //reset counter of slots
+   if (m_chunkBuffer.length() > 0)
+   {
+       LOG_DEBUG_MSG(gCtx,"processChunks");
+       std::string tempBuffer;
+       tempBuffer.assign(m_chunkBuffer);
+       m_chunkBuffer.clear(); //buffer empty
+       m_slotCount=0; //reset counter of slots
 
-        pthread_mutex_unlock(&mutex);
+       pthread_mutex_unlock(&mutex);
 
-        // pass string to TTS engine
-        flite_text_to_speech(tempBuffer.c_str(),mp_voice,"play");
-    }
-    else
-    {
-        pthread_mutex_unlock(&mutex);
-    }
-    return(true);
+       // pass string to TTS engine
+       flite_text_to_speech(tempBuffer.c_str(),mp_voice,"play");
+   }
+   else
+   {
+       pthread_mutex_unlock(&mutex);
+   }
+   return(true);
 }
 
- static int fliteCallback(const cst_wave *w, int start, int size,
-              int last, cst_audio_streaming_info_struct *asi)
- {
-     printf("\n>>> [server] fliteCallback()\n");
-     printf("start: %d size: %d last: %d \n",start,size,last);
-     static cst_audiodev *ad = 0;
-
-     if (start == 0)
-         ad = audio_open(w->sample_rate,w->num_channels,CST_AUDIO_LINEAR16);
-
-     audio_write(ad,&w->samples[start],size*sizeof(short));
-
-     if (last == 1)
-     {
-         audio_close(ad);
-         ad = NULL;
-     }
-
-     /* if you want to stop return CST_AUDIO_STREAM_STOP */
-     return CST_AUDIO_STREAM_CONT;
- }
-
-class  SpeechOutputServerStub
-: public SpeechOutputStubDefault
+static int fliteCallback(const cst_wave *w, int start, int size,
+             int last, cst_audio_streaming_info_struct *asi)
 {
+    static cst_audiodev *ad = 0;
 
+    if (start == 0)
+        ad = audio_open(w->sample_rate,w->num_channels,CST_AUDIO_LINEAR16);
+
+    audio_write(ad,&w->samples[start],size*sizeof(short));
+
+    if (last == 1)
+    {
+        audio_drain(ad);
+        audio_close(ad);
+        ad = NULL;
+        LOG_DEBUG_MSG(gCtx,"end of processing chunks");
+    }
+
+    /* if you want to stop return CST_AUDIO_STREAM_STOP */
+    return CST_AUDIO_STREAM_CONT;
+}
+
+class SpeechOutput
+: public org::genivi::hmi::speechservice::SpeechOutput_adaptor,
+  public DBus::IntrospectableAdaptor,
+  public DBus::ObjectAdaptor
+{
 public:
 
-    SpeechOutputServerStub() {
-        m_version.setVersionMajor(1);
-        m_version.setVersionMinor(0);
-        m_version.setVersionMicro(0);
-        m_version.setDate("12-10-2016");
+    SpeechOutput(DBus::Connection &connection) : DBus::ObjectAdaptor(connection, speech_OBJECT_PATH){
+        m_version._1=1;
+        m_version._2=0;
+        m_version._3=0;
+        m_version._4="12-10-2016";
 
         m_lenLastChunk = 0;
         m_slotCount = 0;
@@ -139,28 +140,18 @@ public:
         mp_asi->asc = fliteCallback;
 
         feat_set(mp_voice->features,"streaming_info",audio_streaming_info_val(mp_asi));
-
     }
 
-    ~SpeechOutputServerStub() {
+    ~SpeechOutput(){
         unregister_cmu_us_kal(mp_voice);
     }
 
-    /**
-     * description: This method returns the API version implemented by the SpeechOutput.
-     */
-    void getVersion(const std::shared_ptr<CommonAPI::ClientId> _client, getVersionReply_t _reply) {
-        _reply(m_version);
+    ::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string > getVersion(){
+        return m_version;
     }
 
-    /**
-     * description: Must be called to open a SpeechOutputService session and to get the audio
-     *   connection.
-     */
-    void openPrompter(const std::shared_ptr<CommonAPI::ClientId> _client, SpeechOutput::ConnectionType _connectionType, SpeechOutput::PreProcessingType _preProcessingType, openPrompterReply_t _reply) {
-        printf("\n>>> [server] openPrompter()\n");
-
-        _reply();
+    void openPrompter(const int32_t& connectionType, const int32_t& preProcessingType){
+        LOG_DEBUG(gCtx,"openPrompter: connection %d preprocessing %d",connectionType,preProcessingType);
     }
 
     /**
@@ -180,71 +171,68 @@ public:
      *   all previously added text chunks are played back. For every text chunk
      *   provided a notification will be send.
      */
-    void addTextChunk(const std::shared_ptr<CommonAPI::ClientId> _client, SpeechOutput::Chunk _chunk, addTextChunkReply_t _reply) {
-        printf("\n>>> [server] addTextChunk()\n    \"%s\"\n", _chunk.c_str());
+    uint32_t addTextChunk(const std::string& chunk){
+        LOG_DEBUG(gCtx,"addTextChunk: %s", chunk.c_str());
 
-        SpeechOutput::ChunkID _chunkID;
+        uint32_t _chunkID;
 
         // todo: manage _chunkID
 
-        SpeechOutput::QueueStatus qStatus = SpeechOutput::QueueStatus::QS_UNKNOWN;
+        int32_t qStatus =  GENIVI_SPEECHSERVICE_CS_UNKNOWN;
 
-        if (_chunk.size() > 0 && _chunk.size() < MAX_CHUNK_LENGTH)
+        if (chunk.size() > 0 && chunk.size() < MAX_CHUNK_LENGTH)
         {
             if (m_slotCount <  (int) MAX_SLOT_COUNT)
             {
                 if (m_slotCount <= (int) MAX_SLOT_COUNT_NO_WARN)
                 {
-                    qStatus = SpeechOutput::QueueStatus::QS_LOW_FILL;
+                    qStatus = GENIVI_SPEECHSERVICE_QS_LOW_FILL;
                 }
                 else
                 {
-                    qStatus = SpeechOutput::QueueStatus::QS_HIGH_FILL;
+                    qStatus = GENIVI_SPEECHSERVICE_QS_HIGH_FILL;
                 }
-                m_chunkBuffer.append(_chunk);
-                m_lenLastChunk = _chunk.size();
+                m_chunkBuffer.append(chunk);
+                m_lenLastChunk = chunk.size();
                 ++m_slotCount;
             }
             else
             {
-                qStatus = SpeechOutput::QueueStatus::QS_FULL;
+                qStatus = GENIVI_SPEECHSERVICE_QS_FULL;
             }
         }
 
-        fireNotifyQueueStatusSelective(qStatus);
+        notifyQueueStatus(qStatus);
 
-        _reply(_chunkID);
+        return(_chunkID);
     }
 
     /**
      * description: A prompt must be playing to perform an abort action. If no prompting operation
      *   in progress there will be no reaction of the system.
      */
-    void abortPrompter(const std::shared_ptr<CommonAPI::ClientId> _client) {
-        printf("\n>>> [server] abortPrompter()\n");
-
+    void abortPrompter(){
+        LOG_DEBUG_MSG(gCtx,"abortPrompter");
     }
 
     /**
      * description: The prompter is closed after the last text chunk submitted has finished playing.
      */
-    void closePrompter(const std::shared_ptr<CommonAPI::ClientId> _client) {
-        printf("\n>>> [server] closePrompter()\n");
-
+    void closePrompter(){
+        LOG_DEBUG_MSG(gCtx,"closePrompter");
     }
 
-
-// Specific methods
-
-
 private:
-    CommonTypes::Version m_version;
-
+    ::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string > m_version;
 };
 
+static SpeechOutput* serverSpeechOutput;
 
 int main(int  argc , char**  argv )
 {
+    DLT_REGISTER_APP("SPCS","SPEECH SERVER");
+    DLT_REGISTER_CONTEXT(gCtx,"SPCS","Global Context");
+
     GMainLoop * mainloop ;
     guint processChunksID;
 
@@ -252,17 +240,18 @@ int main(int  argc , char**  argv )
     // so we can use std::cout with UTF-8, via Glib::ustring, without exceptions.
     std::locale::global(std::locale(""));
 
-    // Common API data init
-    runtime = CommonAPI::Runtime::get();
-    bool successfullyRegistered;
+    // creating the dispatcher
+    dispatcher = new DBus::Glib::BusDispatcher();
+    DBus::default_dispatcher = dispatcher;
+    dispatcher->attach(NULL);
 
-    const std::string instanceSpeechOutput = "SpeechOutput";
-    std::shared_ptr<SpeechOutputServerStub> myServiceSpeechOutput = std::make_shared<SpeechOutputServerStub>();
-    successfullyRegistered = runtime->registerService(domain, instanceSpeechOutput, myServiceSpeechOutput);
-    while (!successfullyRegistered) {
-        std::this_thread::sleep_for(std::chrono::milliseconds(100));
-        successfullyRegistered = runtime->registerService(domain, instanceSpeechOutput, myServiceSpeechOutput);
-    }
+    // create a connection on the session bus
+    dbusConnection = new DBus::Connection(DBus::Connection::SessionBus());
+    dbusConnection->setup(dispatcher);
+
+    // create the server for SpeechOutput
+    dbusConnection->request_name(speech_SERVICE_NAME);
+    serverSpeechOutput=new SpeechOutput(*dbusConnection);
 
     processChunksID = g_timeout_add(PROCESS_CHUNKS_LOOP,processChunks,NULL);
 
@@ -270,12 +259,18 @@ int main(int  argc , char**  argv )
     mainloop = g_main_loop_new (g_main_context_default() , FALSE );
 
     // Send a feedback to the user
-    std::cout << "speech server started" << std::endl;
+    LOG_INFO_MSG(gCtx,"Speech output server started");
 
     // loop listening
-
     g_main_loop_run ( mainloop );
 
+    // clean memory
+    delete serverSpeechOutput;
+    delete dbusConnection;
+    delete dispatcher;
+
+    LOG_INFO_MSG(gCtx,"Speech output server stopped");
 
     return EXIT_SUCCESS;
 }
+

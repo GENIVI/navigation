@@ -90,6 +90,7 @@ replayer=1
 verbose=0 #no debug or log messages displayed
 center="4612 N 0608 E"
 poi=0
+speech=0
 
 CUR_DIR=$PWD
 BIN_DIR=$CUR_DIR/bin
@@ -104,7 +105,10 @@ POI_SERVER_RESOURCE_DIR=$CUR_DIR/../../src/poi-service/resource
 
 poidatabase=$POI_SERVER_RESOURCE_DIR/empty.db # empty poi database by default
 
-while getopts c:ghnoprvx opt
+SPEECH_SERVER=speech-server
+SPEECH_OUTPUT_BIN_DIR=$CUR_DIR/../../src/speech-service/bin/
+
+while getopts c:ghnoprsvx opt
 do
 	case $opt in
 	c)
@@ -142,6 +146,9 @@ do
 	r)
 		replayer=0
 		;;
+	s)
+		speech=1
+		;;
 	v) #enable log messages
 		verbose=1
 		;;
@@ -150,7 +157,7 @@ do
 		;;
 	h)
 		echo "Usage:"
-		echo "$0 [-c center][-gnoprvx]"
+		echo "$0 [-c center][-gnoprsvxh]"
 		echo "-c: Set center (supported values: paris,tokyo,seoul,longitude,latitude). Default is geneve"
 		echo "-g: Run subprocesses within gdb (only with -x)"
 		echo "-h: This help"
@@ -158,6 +165,7 @@ do
 		echo "-r: Don't start replayer"
 		echo "-o: Create log file of subprocess output"
 		echo "-p: Launch the poi server"
+		echo "-s: Launch the speech server"
 		echo "-v: Enable the output debug messages"
 		echo "-x: Run subprocesses in own xterm to get separated log messages"
 		exit 1
@@ -190,6 +198,12 @@ if [ "$poi" = 1 ]
 then
 	# start the poi server 
 	run "POI service" $POI_SERVER_BIN_DIR/$POI_SERVER -f $poidatabase
+fi
+
+if [ "$speech" = 1 ]
+then
+	# start the speech server 
+	run "Speech service" $SPEECH_OUTPUT_BIN_DIR/$SPEECH_SERVER 
 fi
 
 cd $NAVIT_BIN_DIR

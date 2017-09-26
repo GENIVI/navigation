@@ -1,0 +1,4 @@
+#!/bin/sh
+echo 'kill all remaining process'
+kill -9 `ps -ef | grep speech-server | grep -v grep | awk '{print $2}'`
+

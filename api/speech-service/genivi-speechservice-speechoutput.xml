@@ -24,13 +24,13 @@
       <doc>
         <line>openPrompter = Must be called to open a SpeechOutputService session and to get the audio connection.</line>
       </doc>
-      <arg direction="in" name="connectionType" type="u">
+      <arg direction="in" name="connectionType" type="i">
         <doc>
           <line>connectionType (of type ConnectionType) = Sets the Audio connection that should be used for the prompter application.</line>
           <line>enum[CT_NAVIGATION (null), CT_READER (null), CT_GEN_HIGH (null), CT_GEN_MEDIUM (null), CT_GEN_LOW (null), CT_MAX (null)]</line>
         </doc>
       </arg>
-      <arg direction="in" name="preProcessingType" type="u">
+      <arg direction="in" name="preProcessingType" type="i">
         <doc>
           <line>preProcessingType (of type PreProcessingType) = Sets the text normaization mode and which active prompt data base will be activated.</line>
           <line>enum[PPT_DIALOG (null), PPT_NAVIGATION (null), PPT_NONE (null), PPT_READER (null), PPT_MAX (null)]</line>
@@ -72,7 +72,7 @@
       <doc>
         <line>notifyConnectionStatus = Notifies the connection status</line>
       </doc>
-      <arg direction="out" name="connectionStatus" type="u">
+      <arg direction="out" name="connectionStatus" type="i">
         <doc>
           <line>connectionStatus (of type ConnectionStatus) = Client connection status.</line>
           <line>enum[CS_UNKNOWN (null), CS_ESTABLISHED (null), CS_REFUSED (null), CS_POSSIBLE (null), CS_PENDING (null), CS_PAUSED (null), CS_TERMINATED (null), CS_MAX (null)]</line>
@@ -100,7 +100,7 @@
       <doc>
         <line>notifyQueueStatus = Notifies the queue status.</line>
       </doc>
-      <arg direction="out" name="queueStatus" type="u">
+      <arg direction="out" name="queueStatus" type="i">
         <doc>
           <line>queueStatus (of type QueueStatus) = Fill status of the text buffer.</line>
           <line>enum[QS_UNKNOWN (null), QS_FULL (null), QS_HIGH_FILL (null), QS_LOW_FILL (null), QS_MAX (null)]</line>
@@ -111,7 +111,7 @@
       <doc>
         <line>notifyTTSStatus = Notifies the TTS engine status.</line>
       </doc>
-      <arg direction="out" name="ttsStatus" type="u">
+      <arg direction="out" name="ttsStatus" type="i">
         <doc>
           <line>ttsStatus (of type TtsStatus) = Current status of the TTS.</line>
           <line>enum[TS_UNKNOWN (null), TS_NOT_INITIALIZED (null), TS_ACTIVE (null), TS_ABORTED (null), TS_MARKER (null), TS_IDLE (null), TS_ENQUEUED (null), TS_FINISHED (null), TS_FAILED (null), TS_MAX (null)]</line>

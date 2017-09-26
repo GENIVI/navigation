@@ -34,6 +34,8 @@ navit=0 #no build of navit -> -n option
 poi=0 #no build of poi -> -p option 
 dlt_option="OFF" #no DLT -> -l option
 debug="OFF" #no debug -> -d option
+speech=0 #no build of speech -> -s option
+speech_option="OFF"
 
 function check_path_for_capi
 {
@@ -61,7 +63,7 @@ function check_path_for_capi
 	commonapi_tools_option="-DWITH_PLUGIN_MIGRATION=ON -DWITH_DBUS_INTERFACE=OFF -DDBUS_LIB_PATH="$DBUS_LIB_PATH" -DCOMMONAPI_DBUS_TOOL_DIR="$COMMONAPI_DBUS_TOOL_DIR" -DCOMMONAPI_TOOL_DIR="$COMMONAPI_TOOL_DIR
 }
  
-while getopts cdlmhnp opt
+while getopts cdlmhnps opt
 do
 	case $opt in
 	c)
@@ -84,9 +86,13 @@ do
 	p)
 		poi=1
 		;;
+	s)
+		speech=1
+		speech_option="ON"
+		;;
 	h)
 		echo "Usage:"
-		echo "$0 [-cdhlmnp]"
+		echo "$0 [-cdhlmnps]"
 		echo "-c: Rebuild with clean"
 		echo "-d: Enable the debug messages"
 		echo "-h: Help"
@@ -94,6 +100,7 @@ do
 		echo "-m: Build with commonAPI plugins (only with -c)"
 		echo "-n: Build navit"
 		echo "-p: Build poi"
+		echo "-s: Build with speech"
 		exit 1
 	esac
 done
@@ -143,7 +150,7 @@ cd ..
 echo 'build navigation'
 if [ "$clean" = 1 ]
 then
-	cmake -DWITH_DLT=$dlt_option $commonapi_tools_option -DWITH_DEBUG=$debug ../
+	cmake -DWITH_DLT=$dlt_option $commonapi_tools_option -DWITH_SPEECH=$speech_option -DWITH_DEBUG=$debug ../
 	echo 'Allow to display Korean and Japanese by replacing a font in the configuration file of navit instances'
 	sed -i -e 's/Liberation Sans/NanumGothic/' ./navit/navit/navit_genivi_mapviewer.xml
 	sed -i -e 's/Liberation Sans/NanumGothic/' ./navit/navit/navit_genivi_navigationcore.xml
@@ -161,6 +168,21 @@ then
 	if [ "$clean" = 1 ]
 	then
 		cmake -DWITH_DLT=$dlt_option -DWITH_DEBUG=$debug -DWITH_PLUGIN_MIGRATION=0 ../
+	fi
+	make
+fi
+cd ../../navigation
+
+#speech
+cd ../speech-service
+mkdir -p build
+cd build
+if [ "$speech" = 1 ]
+then
+	echo 'build speech'
+	if [ "$clean" = 1 ]
+	then
+		cmake -DWITH_DLT=$dlt_option -DWITH_DEBUG=$debug ../
 	fi
 	make
 fi

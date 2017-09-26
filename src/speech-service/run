@@ -1,0 +1,41 @@
+#!/bin/sh
+
+# @licence app begin@
+# SPDX-License-Identifier: MPL-2.0
+#
+# \copyright Copyright (C) 2013-2014, PCA Peugeot Citroen
+#
+# \file run
+#
+# \brief This file is part of the Build System.
+#
+# \author Philippe Colliot <philippe.colliot@mpsa.com>
+#
+# \version 1.0
+#
+# This Source Code Form is subject to the terms of the
+# Mozilla Public License (MPL), v. 2.0.
+# If a copy of the MPL was not distributed with this file,
+# You can obtain one at http://mozilla.org/MPL/2.0/.
+#
+# For further information see http://www.genivi.org/.
+#
+# List of changes:
+# 
+# <date>, <name>, <description of change>
+#
+# @licence end@
+
+CURDIR=$PWD
+
+BIN_DIR=$CURDIR/bin
+SPEECH_OUPUT_SERVER_BIN_DIR=$BIN_DIR
+
+echo 'kill reminding orphan process if necessary'
+./kill-all
+
+echo '------------------------start the server------------------------'
+$SPEECH_OUPUT_SERVER_BIN_DIR/speech-server
+
+
+

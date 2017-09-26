@@ -7,7 +7,7 @@
 *
 * \copyright Copyright (C) 2016, PSA GROUP
 *
-* \file test-speech-capi.py
+* \file test-speech.py
 *
 * \brief This simple test shows how the speech 
 *              could be easily tested using a python script
@@ -33,6 +33,7 @@ import time
 import pdb;
 #pdb.set_trace()
 #constants as defined in the Navigation API
+GENIVI_SPEECHSERVICE_QS_LOW_FILL=51
 
 #constants used into the script
 TIME_OUT = 10000
@@ -45,6 +46,9 @@ def catch_speech_notifyMarkerReached_signal_handler(chunkID,marker):
 
 def catch_speech_notifyQueueStatus_signal_handler(queueStatus):
     print("Queue status: " + str(int(queueStatus))) 
+    if queueStatus==GENIVI_SPEECHSERVICE_QS_LOW_FILL:
+    	print ('\nTest OK')
+    	loop.quit()
 
 def catch_speech_notifyTTSStatus_signal_handler(ttsStatus):
     print("TTS status: " + str(int(ttsStatus))) 
@@ -62,20 +66,20 @@ if __name__ == '__main__':
 bus = dbus.SessionBus()
 
 bus.add_signal_receiver(catch_speech_notifyConnectionStatus_signal_handler, \
-                        dbus_interface = "org.genivi.hmi.speechservice.SpeechOutput.v1_0", \
+                        dbus_interface = "org.genivi.hmi.speechservice.SpeechOutput", \
                         signal_name = "notifyConnectionStatus")
 bus.add_signal_receiver(catch_speech_notifyMarkerReached_signal_handler, \
-                        dbus_interface = "org.genivi.hmi.speechservice.SpeechOutput.v1_0", \
+                        dbus_interface = "org.genivi.hmi.speechservice.SpeechOutput", \
                         signal_name = "notifyMarkerReached")
 bus.add_signal_receiver(catch_speech_notifyQueueStatus_signal_handler, \
-                        dbus_interface = "org.genivi.hmi.speechservice.SpeechOutput.v1_0", \
+                        dbus_interface = "org.genivi.hmi.speechservice.SpeechOutput", \
                         signal_name = "notifyQueueStatus")
 bus.add_signal_receiver(catch_speech_notifyTTSStatus_signal_handler, \
-                        dbus_interface = "org.genivi.hmi.speechservice.SpeechOutput.v1_0", \
+                        dbus_interface = "org.genivi.hmi.speechservice.SpeechOutput", \
                         signal_name = "notifyTTSStatus")
 
-speech = bus.get_object('org.genivi.hmi.speechservice.SpeechOutput.v1_0_SpeechOutput','/SpeechOutput')
-g_speech_interface = dbus.Interface(speech, dbus_interface='org.genivi.hmi.speechservice.SpeechOutput.v1_0')
+speech = bus.get_object('org.genivi.hmi.speechservice.SpeechOutput','/org/genivi/speechservice/SpeechOutput')
+g_speech_interface = dbus.Interface(speech, dbus_interface='org.genivi.hmi.speechservice.SpeechOutput')
 
 g_speech_interface.addTextChunk(dbus.String("Hello"))
 

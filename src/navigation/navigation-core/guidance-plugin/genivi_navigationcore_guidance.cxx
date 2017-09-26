@@ -49,7 +49,7 @@
 #include <navit/track.h>
 #include <navit/vehicle.h>
 #include <navit/route.h>
-
+#include <navit/messages.h>
 #include "navigation-common-dbus.h"
 
 #include "log.h"
@@ -73,11 +73,11 @@ class SpeechOutput
     SpeechOutput(DBus::Connection &connection)
         : DBus::ObjectProxy(connection,
                                     "/org/genivi/hmi/speechservice/SpeechOutput",
-                                    "org.genivi.navigation.hmi.speechservice.SpeechOutput")
+                                    "org.genivi.hmi.speechservice.SpeechOutput")
     {
     }
 
-    void notifyConnectionStatus(const uint32_t& connectionStatus)
+    void notifyConnectionStatus(const int32_t& connectionStatus)
     {
 
     }
@@ -87,12 +87,12 @@ class SpeechOutput
 
     }
 
-    void notifyQueueStatus(const uint32_t& queueStatus)
+    void notifyQueueStatus(const int32_t& queueStatus)
     {
 
     }
 
-    void notifyTTSStatus(const uint32_t& ttsStatus)
+    void notifyTTSStatus(const int32_t& ttsStatus)
     {
 
     }
@@ -690,12 +690,17 @@ void GuidanceObj::SetVoiceGuidance(const bool& activate, const std::string& voic
 
 void GuidanceObj::PlayVoiceManeuver()
 {
+#if (SPEECH_ENABLED)
     message *messages;
     messages = navit_get_messages(get_navit());
-#if (SPEECH_ENABLED)
-    m_speechoutput->openPrompter(GENIVI_SPEECHSERVICE_CT_NAVIGATION,GENIVI_SPEECHSERVICE_PPT_NAVIGATION);
-    m_speechoutput->addTextChunk(messages);
-    m_speechoutput->closePrompter();
+    if(messages){
+        m_speechoutput->openPrompter(GENIVI_SPEECHSERVICE_CT_NAVIGATION,GENIVI_SPEECHSERVICE_PPT_NAVIGATION);
+        while(messages){
+            m_speechoutput->addTextChunk(std::string(messages->text));
+            messages=messages->next;
+        }
+        m_speechoutput->closePrompter();
+    }
 #endif
 }
 
@@ -754,6 +759,7 @@ GuidanceObj_Callback(GuidanceObj *obj)
 		}
 		obj->m_guidance->ManeuverChanged(maneuver);
         LOG_INFO(gCtx,"Maneuver: %d",maneuver);
+        obj->PlayVoiceManeuver();
     } else {
         LOG_ERROR(gCtx,"Maneuver item not found: %p",item);
 	}
