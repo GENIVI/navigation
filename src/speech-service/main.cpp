@@ -69,6 +69,34 @@ static cst_audio_streaming_info* mp_asi;
 static pthread_mutex_t mutex;
 
 static std::string m_chunkBuffer; /** max size = MAX_CHUNK_SIZE*MAX_SLOT_COUNT */
+static bool m_abortRequest;
+
+class SpeechOutput
+: public org::genivi::hmi::speechservice::SpeechOutput_adaptor,
+  public DBus::IntrospectableAdaptor,
+  public DBus::ObjectAdaptor
+{
+public:
+
+    SpeechOutput(DBus::Connection &connection);
+
+    ~SpeechOutput();
+
+    ::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string > getVersion();
+
+    void openPrompter(const int32_t& connectionType, const int32_t& preProcessingType);
+
+    uint32_t addTextChunk(const std::string& chunk);
+
+    void abortPrompter();
+
+    void closePrompter();
+
+private:
+    ::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string > m_version;
+    int32_t m_preProcessingType;
+    int32_t m_connectionType;
+};
 
 gboolean processChunks(gpointer data) {
    //worker thread to process chunks in buffer
@@ -77,13 +105,14 @@ gboolean processChunks(gpointer data) {
 
    if (m_chunkBuffer.length() > 0)
    {
-       LOG_DEBUG_MSG(gCtx,"processChunks");
        std::string tempBuffer;
        tempBuffer.assign(m_chunkBuffer);
        m_chunkBuffer.clear(); //buffer empty
        m_slotCount=0; //reset counter of slots
 
        pthread_mutex_unlock(&mutex);
+
+       LOG_DEBUG_MSG(gCtx,"processChunks");
 
        // pass string to TTS engine
        flite_text_to_speech(tempBuffer.c_str(),mp_voice,"play");
@@ -99,9 +128,11 @@ static int fliteCallback(const cst_wave *w, int start, int size,
              int last, cst_audio_streaming_info_struct *asi)
 {
     static cst_audiodev *ad = 0;
-
-    if (start == 0)
+    int32_t ret=CST_AUDIO_STREAM_CONT;
+    if (start == 0){
+        ((SpeechOutput*)asi->userdata)->notifyTTSStatus(GENIVI_SPEECHSERVICE_TS_ENQUEUED);
         ad = audio_open(w->sample_rate,w->num_channels,CST_AUDIO_LINEAR16);
+    }
 
     audio_write(ad,&w->samples[start],size*sizeof(short));
 
@@ -111,50 +142,65 @@ static int fliteCallback(const cst_wave *w, int start, int size,
         audio_close(ad);
         ad = NULL;
         LOG_DEBUG_MSG(gCtx,"end of processing chunks");
+        ((SpeechOutput*)asi->userdata)->notifyTTSStatus(GENIVI_SPEECHSERVICE_TS_FINISHED);
     }
 
+    pthread_mutex_lock(&mutex);
+    if(m_abortRequest){
+        m_abortRequest=false;
+        ret=CST_AUDIO_STREAM_STOP;
+        ((SpeechOutput*)asi->userdata)->notifyTTSStatus(GENIVI_SPEECHSERVICE_TS_ABORTED);
+    }
+    pthread_mutex_unlock(&mutex);
     /* if you want to stop return CST_AUDIO_STREAM_STOP */
-    return CST_AUDIO_STREAM_CONT;
+    return ret;
 }
 
-class SpeechOutput
-: public org::genivi::hmi::speechservice::SpeechOutput_adaptor,
-  public DBus::IntrospectableAdaptor,
-  public DBus::ObjectAdaptor
-{
-public:
 
-    SpeechOutput(DBus::Connection &connection) : DBus::ObjectAdaptor(connection, speech_OBJECT_PATH){
-        m_version._1=1;
-        m_version._2=0;
-        m_version._3=0;
-        m_version._4="12-10-2016";
+SpeechOutput::SpeechOutput(DBus::Connection &connection) : DBus::ObjectAdaptor(connection, speech_OBJECT_PATH){
+    m_version._1=1;
+    m_version._2=0;
+    m_version._3=0;
+    m_version._4="12-10-2016";
 
-        m_lenLastChunk = 0;
-        m_slotCount = 0;
+    m_lenLastChunk = 0;
+    m_slotCount = 0;
 
-        flite_init();
+    m_preProcessingType=GENIVI_SPEECHSERVICE_PPT_NONE;
 
-        mp_voice = register_cmu_us_kal(NULL);
-        mp_asi = new_audio_streaming_info();
-        mp_asi->asc = fliteCallback;
+    flite_init();
 
-        feat_set(mp_voice->features,"streaming_info",audio_streaming_info_val(mp_asi));
-    }
+    mp_voice = register_cmu_us_kal(NULL);
+    LOG_DEBUG(gCtx,"Voice name: %s",mp_voice->name);
+    mp_asi = new_audio_streaming_info();
+    mp_asi->asc = fliteCallback;
+    mp_asi->userdata=this;
 
-    ~SpeechOutput(){
+    feat_set(mp_voice->features,"streaming_info",audio_streaming_info_val(mp_asi));
+
+    notifyTTSStatus(GENIVI_SPEECHSERVICE_TS_ACTIVE);
+}
+
+SpeechOutput::~SpeechOutput(){
         unregister_cmu_us_kal(mp_voice);
     }
 
-    ::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string > getVersion(){
+::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string > SpeechOutput::getVersion(){
         return m_version;
     }
 
-    void openPrompter(const int32_t& connectionType, const int32_t& preProcessingType){
-        LOG_DEBUG(gCtx,"openPrompter: connection %d preprocessing %d",connectionType,preProcessingType);
+void SpeechOutput::openPrompter(const int32_t& connectionType, const int32_t& preProcessingType){
+    LOG_DEBUG(gCtx,"openPrompter: connection %d preprocessing %d",connectionType,preProcessingType);
+    if(m_preProcessingType==GENIVI_SPEECHSERVICE_PPT_NONE){
+        m_preProcessingType=preProcessingType;
+        m_connectionType=connectionType;
+        notifyConnectionStatus(GENIVI_SPEECHSERVICE_CS_ESTABLISHED);
+    }else{
+        notifyConnectionStatus(GENIVI_SPEECHSERVICE_CS_REFUSED);
     }
+}
 
-    /**
+/**
      * description: The prompter must be opened to trigger the playback of the provided prompt.
      *
         The prompt length must not exceed the length of a PromptChunk
@@ -171,60 +217,63 @@ public:
      *   all previously added text chunks are played back. For every text chunk
      *   provided a notification will be send.
      */
-    uint32_t addTextChunk(const std::string& chunk){
-        LOG_DEBUG(gCtx,"addTextChunk: %s", chunk.c_str());
+uint32_t SpeechOutput::addTextChunk(const std::string& chunk){
+    LOG_DEBUG(gCtx,"addTextChunk: %s", chunk.c_str());
 
-        uint32_t _chunkID;
+    uint32_t _chunkID;
 
-        // todo: manage _chunkID
+    // todo: manage _chunkID
 
-        int32_t qStatus =  GENIVI_SPEECHSERVICE_CS_UNKNOWN;
+    int32_t qStatus =  GENIVI_SPEECHSERVICE_CS_UNKNOWN;
 
-        if (chunk.size() > 0 && chunk.size() < MAX_CHUNK_LENGTH)
+    if (chunk.size() > 0 && chunk.size() < MAX_CHUNK_LENGTH)
+    {
+        if (m_slotCount <  (int) MAX_SLOT_COUNT)
         {
-            if (m_slotCount <  (int) MAX_SLOT_COUNT)
+            if (m_slotCount <= (int) MAX_SLOT_COUNT_NO_WARN)
             {
-                if (m_slotCount <= (int) MAX_SLOT_COUNT_NO_WARN)
-                {
-                    qStatus = GENIVI_SPEECHSERVICE_QS_LOW_FILL;
-                }
-                else
-                {
-                    qStatus = GENIVI_SPEECHSERVICE_QS_HIGH_FILL;
-                }
-                m_chunkBuffer.append(chunk);
-                m_lenLastChunk = chunk.size();
-                ++m_slotCount;
+                qStatus = GENIVI_SPEECHSERVICE_QS_LOW_FILL;
             }
             else
             {
-                qStatus = GENIVI_SPEECHSERVICE_QS_FULL;
+                qStatus = GENIVI_SPEECHSERVICE_QS_HIGH_FILL;
             }
+            m_chunkBuffer.append(chunk);
+            m_lenLastChunk = chunk.size();
+            ++m_slotCount;
         }
-
-        notifyQueueStatus(qStatus);
-
-        return(_chunkID);
+        else
+        {
+            qStatus = GENIVI_SPEECHSERVICE_QS_FULL;
+        }
     }
 
-    /**
-     * description: A prompt must be playing to perform an abort action. If no prompting operation
-     *   in progress there will be no reaction of the system.
-     */
-    void abortPrompter(){
-        LOG_DEBUG_MSG(gCtx,"abortPrompter");
-    }
+    notifyQueueStatus(qStatus);
 
-    /**
-     * description: The prompter is closed after the last text chunk submitted has finished playing.
-     */
-    void closePrompter(){
-        LOG_DEBUG_MSG(gCtx,"closePrompter");
-    }
+    return(_chunkID);
+}
 
-private:
-    ::DBus::Struct< uint16_t, uint16_t, uint16_t, std::string > m_version;
-};
+/**
+ * description: A prompt must be playing to perform an abort action. If no prompting operation
+ *   in progress there will be no reaction of the system.
+ */
+void SpeechOutput::abortPrompter(){
+    LOG_DEBUG_MSG(gCtx,"abortPrompter");
+    pthread_mutex_lock(&mutex);
+    m_abortRequest=true;
+    pthread_mutex_unlock(&mutex);
+    m_preProcessingType=GENIVI_SPEECHSERVICE_PPT_NONE;
+    notifyConnectionStatus(GENIVI_SPEECHSERVICE_CS_TERMINATED);
+}
+
+/**
+ * description: The prompter is closed after the last text chunk submitted has finished playing.
+ */
+void SpeechOutput::closePrompter(){
+    LOG_DEBUG_MSG(gCtx,"closePrompter");
+    m_preProcessingType=GENIVI_SPEECHSERVICE_PPT_NONE;
+    notifyConnectionStatus(GENIVI_SPEECHSERVICE_CS_TERMINATED);
+}
 
 static SpeechOutput* serverSpeechOutput;
 
@@ -253,7 +302,7 @@ int main(int  argc , char**  argv )
     dbusConnection->request_name(speech_SERVICE_NAME);
     serverSpeechOutput=new SpeechOutput(*dbusConnection);
 
-    processChunksID = g_timeout_add(PROCESS_CHUNKS_LOOP,processChunks,NULL);
+    processChunksID = g_timeout_add(PROCESS_CHUNKS_LOOP,processChunks,serverSpeechOutput);
 
     // Create a new GMainLoop with default context and initial state of "not running "
     mainloop = g_main_loop_new (g_main_context_default() , FALSE );

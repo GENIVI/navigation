@@ -42,7 +42,7 @@ except dltTriggerNotBuilt:
 test_name = "speech output"
 
 #constants used into the script
-TIME_OUT = 10000
+TIME_OUT = 20000
 
 def catch_speech_notifyConnectionStatus_signal_handler(connectionStatus):
     print("Connection status: " + str(int(connectionStatus))) 
@@ -52,7 +52,8 @@ def catch_speech_notifyMarkerReached_signal_handler(chunkID,marker):
 
 def catch_speech_notifyQueueStatus_signal_handler(queueStatus):
     print("Queue status: " + str(int(queueStatus))) 
-    if queueStatus==genivi.SPEECHSERVICE_QS_LOW_FILL:
+    if queueStatus==genivi.SPEECHSERVICE_QS_FULL:
+        print("Test failed, queue full")
         g_speech_interface.closePrompter()
         exit(0)
 
@@ -103,7 +104,11 @@ speech = bus.get_object('org.genivi.hmi.speechservice.SpeechOutput','/org/genivi
 g_speech_interface = dbus.Interface(speech, dbus_interface='org.genivi.hmi.speechservice.SpeechOutput')
 
 g_speech_interface.openPrompter(genivi.SPEECHSERVICE_CT_NAVIGATION, genivi.SPEECHSERVICE_PPT_NAVIGATION)
-g_speech_interface.addTextChunk(dbus.String("Hello"))
+g_speech_interface.addTextChunk(dbus.String("\
+    Now is the winter of our discontent\
+    Made glorious summer by this sun of York;\
+    And all the clouds that lour'd upon our house\
+    In the deep bosom of the ocean buried. "))
 
 #main loop 
 gobject.timeout_add(TIME_OUT, timeout)
