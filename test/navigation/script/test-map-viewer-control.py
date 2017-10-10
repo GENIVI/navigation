@@ -36,14 +36,19 @@ import xml.dom.minidom
 import argparse
 import sys
 import os.path
+import commands
 import genivi
 try:
     from dltTrigger import *
-    dltTrigger=True
-    print('DLT signal sent')
 except dltTriggerNotBuilt:
-    dltTrigger=False
+    dltAvailable=False
+else:
+    dltAvailable=True
 #import pdb; pdb.set_trace()
+
+output = commands.getoutput('ps -A')
+if not 'dlt' in output:
+    dltAvailable=False
 
 #name of the test 
 test_name = "map viewer"
@@ -245,7 +250,7 @@ def exit(value):
     global g_exit
     g_exit=value
     deleteMapView()
-    if dltTrigger==True:
+    if dltAvailable==True:
         stopTrigger(test_name)
     loop.quit()
    
@@ -257,7 +262,9 @@ g_exit=0
 
 parser = argparse.ArgumentParser(description='Map Viewer Test for navigation PoC and FSA.')
 parser.add_argument('-l','--loc',action='store', dest='locations', help='List of locations in xml format')
-parser.add_argument("-v", "--verbose", action='store_true',help='print the whole log messages')
+parser.add_argument("-v", "--verbose", action='store_true',help='Print the whole log messages')
+parser.add_argument('-a','--address',action='store', dest='host', help='Set remote host address')
+parser.add_argument('-p','--prt',action='store', dest='port', help='Set remote port number')
 args = parser.parse_args()
 
 if args.locations == None:
@@ -292,8 +299,11 @@ for location in location_set.getElementsByTagName("location"):
 if __name__ == '__main__':
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True) 
 
-#connect to session bus
-bus = dbus.SessionBus()
+# connect to session bus (remote or local)
+if args.host != None:
+	bus = dbus.bus.BusConnection("tcp:host=" + args.host +",port="+args.port)
+else:
+    bus = dbus.SessionBus()
 
 bus.add_signal_receiver(mapviewer_mapViewScaleChanged_handler, \
                         dbus_interface = "org.genivi.navigation.mapviewer.MapViewerControl", \
@@ -307,7 +317,7 @@ bus.add_signal_receiver(mapviewer_mapViewPerspectiveChanged_handler, \
                         dbus_interface = "org.genivi.navigation.mapviewer.MapViewerControl", \
                         signal_name = "MapViewPerspectiveChanged")
                         
-if dltTrigger==True:
+if dltAvailable==True:
     startTrigger(test_name)
 
 mapviewer_session_obj = bus.get_object('org.genivi.navigation.mapviewer.Session','/org/genivi/mapviewer')

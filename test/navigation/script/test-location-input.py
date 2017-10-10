@@ -36,17 +36,22 @@ import xml.dom.minidom
 import argparse
 import sys
 import os.path
+import commands
 import genivi
 try:
     from dltTrigger import *
-    dltTrigger=True
-    print('DLT signal sent')
 except dltTriggerNotBuilt:
-    dltTrigger=False
+    dltAvailable=False
+else:
+    dltAvailable=True
 #import pdb;pdb.set_trace()    
 
 #name of the test 
 test_name = "location input"
+
+output = commands.getoutput('ps -A')
+if not 'dlt' in output:
+    dltAvailable=False
 
 # List of addresses
 COUNTRY_STRING = list()
@@ -71,7 +76,9 @@ g_exit=0
 
 parser = argparse.ArgumentParser(description='Location input Test for navigation PoC and FSA.')
 parser.add_argument('-l','--loc',action='store', dest='locations', help='List of locations in xml format')
-parser.add_argument("-v", "--verbose", action='store_true',help='print the whole log messages')
+parser.add_argument("-v", "--verbose", action='store_true',help='Print the whole log messages')
+parser.add_argument('-a','--address',action='store', dest='host', help='Set remote host address')
+parser.add_argument('-p','--prt',action='store', dest='port', help='Set remote port number')
 args = parser.parse_args()
 
 if args.locations == None:
@@ -104,8 +111,11 @@ for location in location_set.getElementsByTagName("location"):
 if __name__ == '__main__':
     dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
 
-# connect to session bus
-bus = dbus.SessionBus()
+# connect to session bus (remote or local)
+if args.host != None:
+	bus = dbus.bus.BusConnection("tcp:host=" + args.host +",port="+args.port)
+else:
+    bus = dbus.SessionBus()
 
 def vprint(text):
     if args.verbose:
@@ -432,7 +442,7 @@ def exit(value):
     print('Delete location input: '+str(int(error)))
     error=session_interface.DeleteSession(dbus.UInt32(session_handle))
     print('Delete session: '+str(int(error)))
-    if dltTrigger==True:
+    if dltAvailable==True:
         stopTrigger(test_name)
     loop.quit()
 
@@ -457,7 +467,7 @@ def startSearch(address_index):
     elif country_search_mode == 1:
         full_string_search(location_input_handle, target_search_string)
 
-if dltTrigger==True:
+if dltAvailable==True:
     startTrigger(test_name)
  
 session = bus.get_object('org.genivi.navigation.navigationcore.Session', '/org/genivi/navigationcore')

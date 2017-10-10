@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dltfilter>
     <filter>
-        <type>1</type>
-        <name>HIDE-APP</name>
-        <ecuid></ecuid>
-        <applicationid>APP</applicationid>
-        <contextid></contextid>
-        <headertext></headertext>
-        <payloadtext></payloadtext>
+        <type>0</type>
+        <name>New Filter</name>
+        <ecuid>ECU1</ecuid>
+        <applicationid>ENHP</applicationid>
+        <contextid>EPSR</contextid>
+        <headertext>2017/10/09 04:28:01.200296 3875.1529 0 ECU1 ENHP EPSR 6729 log info verbose 1</headertext>
+        <payloadtext>Starting EnhancedPositionService...</payloadtext>
         <enableregexp_Context>0</enableregexp_Context>
         <enableregexp_Header>0</enableregexp_Header>
         <enableregexp_Payload>0</enableregexp_Payload>
@@ -16,7 +16,7 @@
         <enablefilter>1</enablefilter>
         <enableecuid>0</enableecuid>
         <enableapplicationid>1</enableapplicationid>
-        <enablecontextid>0</enablecontextid>
+        <enablecontextid>1</enablecontextid>
         <enableheadertext>0</enableheadertext>
         <enablepayloadtext>0</enablepayloadtext>
         <enablectrlmsgs>0</enablectrlmsgs>
@@ -28,13 +28,13 @@
         <logLevelMin>0</logLevelMin>
     </filter>
     <filter>
-        <type>1</type>
-        <name>HIDE-DA1</name>
-        <ecuid></ecuid>
-        <applicationid>DA1</applicationid>
-        <contextid></contextid>
-        <headertext></headertext>
-        <payloadtext></payloadtext>
+        <type>0</type>
+        <name>New Filter</name>
+        <ecuid>ECU1</ecuid>
+        <applicationid>GNSS</applicationid>
+        <contextid>EPSR</contextid>
+        <headertext>2017/10/09 04:28:01.213970 3875.1669 1 ECU1 GNSS EPSR 6729 log info verbose 1</headertext>
+        <payloadtext>Starting EnhancedPosition dispatcher...</payloadtext>
         <enableregexp_Context>0</enableregexp_Context>
         <enableregexp_Header>0</enableregexp_Header>
         <enableregexp_Payload>0</enableregexp_Payload>
@@ -43,7 +43,7 @@
         <enablefilter>1</enablefilter>
         <enableecuid>0</enableecuid>
         <enableapplicationid>1</enableapplicationid>
-        <enablecontextid>0</enablecontextid>
+        <enablecontextid>1</enablecontextid>
         <enableheadertext>0</enableheadertext>
         <enablepayloadtext>0</enablepayloadtext>
         <enablectrlmsgs>0</enablectrlmsgs>
@@ -55,56 +55,191 @@
         <logLevelMin>0</logLevelMin>
     </filter>
     <filter>
-        <type>2</type>
+        <type>0</type>
         <name>New Filter</name>
         <ecuid>ECU1</ecuid>
-        <applicationid>NAVI</applicationid>
-        <contextid>TEST</contextid>
-        <headertext></headertext>
-        <payloadtext>Start test</payloadtext>
+        <applicationid>POIS</applicationid>
+        <contextid>POIS</contextid>
+        <headertext>2017/10/09 04:28:01.219091 3875.1714 0 ECU1 POIS POIS 6735 log info verbose 1</headertext>
+        <payloadtext>POI content access server</payloadtext>
         <enableregexp_Context>0</enableregexp_Context>
         <enableregexp_Header>0</enableregexp_Header>
         <enableregexp_Payload>0</enableregexp_Payload>
         <ignoreCase_Header>0</ignoreCase_Header>
         <ignoreCase_Payload>0</ignoreCase_Payload>
         <enablefilter>1</enablefilter>
-        <enableecuid>1</enableecuid>
+        <enableecuid>0</enableecuid>
         <enableapplicationid>1</enableapplicationid>
         <enablecontextid>1</enablecontextid>
         <enableheadertext>0</enableheadertext>
-        <enablepayloadtext>1</enablepayloadtext>
+        <enablepayloadtext>0</enablepayloadtext>
         <enablectrlmsgs>0</enablectrlmsgs>
         <enableLogLevelMin>0</enableLogLevelMin>
         <enableLogLevelMax>0</enableLogLevelMax>
         <enableMarker>0</enableMarker>
-        <filterColour>#00ff00</filterColour>
+        <filterColour>#ffffff</filterColour>
         <logLevelMax>0</logLevelMax>
         <logLevelMin>0</logLevelMin>
     </filter>
     <filter>
-        <type>2</type>
+        <type>0</type>
         <name>New Filter</name>
         <ecuid>ECU1</ecuid>
-        <applicationid>NAVI</applicationid>
-        <contextid>TEST</contextid>
-        <headertext></headertext>
-        <payloadtext>Stop test</payloadtext>
+        <applicationid>MPVS</applicationid>
+        <contextid>MPVS</contextid>
+        <headertext>2017/10/09 04:28:01.305274 3875.2180 0 ECU1 MPVS MPVS 6737 log info verbose 1</headertext>
+        <payloadtext>map viewer control server</payloadtext>
         <enableregexp_Context>0</enableregexp_Context>
         <enableregexp_Header>0</enableregexp_Header>
         <enableregexp_Payload>0</enableregexp_Payload>
         <ignoreCase_Header>0</ignoreCase_Header>
         <ignoreCase_Payload>0</ignoreCase_Payload>
         <enablefilter>1</enablefilter>
-        <enableecuid>1</enableecuid>
-        <enableapplicationid>1</enableapplicationid>
+        <enableecuid>0</enableecuid>
+        <enableapplicationid>0</enableapplicationid>
         <enablecontextid>1</enablecontextid>
         <enableheadertext>0</enableheadertext>
-        <enablepayloadtext>1</enablepayloadtext>
+        <enablepayloadtext>0</enablepayloadtext>
         <enablectrlmsgs>0</enablectrlmsgs>
         <enableLogLevelMin>0</enableLogLevelMin>
         <enableLogLevelMax>0</enableLogLevelMax>
         <enableMarker>0</enableMarker>
-        <filterColour>#ff0000</filterColour>
+        <filterColour>#ffffff</filterColour>
+        <logLevelMax>0</logLevelMax>
+        <logLevelMin>0</logLevelMin>
+    </filter>
+    <filter>
+        <type>0</type>
+        <name>New Filter</name>
+        <ecuid>ECU1</ecuid>
+        <applicationid>POIC</applicationid>
+        <contextid>POIC</contextid>
+        <headertext>2017/10/09 04:28:01.384789 3875.3337 0 ECU1 POIC POIC 6750 log info verbose 1</headertext>
+        <payloadtext>POI content access module server</payloadtext>
+        <enableregexp_Context>0</enableregexp_Context>
+        <enableregexp_Header>0</enableregexp_Header>
+        <enableregexp_Payload>0</enableregexp_Payload>
+        <ignoreCase_Header>0</ignoreCase_Header>
+        <ignoreCase_Payload>0</ignoreCase_Payload>
+        <enablefilter>1</enablefilter>
+        <enableecuid>0</enableecuid>
+        <enableapplicationid>0</enableapplicationid>
+        <enablecontextid>1</enablecontextid>
+        <enableheadertext>0</enableheadertext>
+        <enablepayloadtext>0</enablepayloadtext>
+        <enablectrlmsgs>0</enablectrlmsgs>
+        <enableLogLevelMin>0</enableLogLevelMin>
+        <enableLogLevelMax>0</enableLogLevelMax>
+        <enableMarker>0</enableMarker>
+        <filterColour>#ffffff</filterColour>
+        <logLevelMax>0</logLevelMax>
+        <logLevelMin>0</logLevelMin>
+    </filter>
+    <filter>
+        <type>0</type>
+        <name>New Filter</name>
+        <ecuid>ECU1</ecuid>
+        <applicationid>NAVI</applicationid>
+        <contextid>TEST</contextid>
+        <headertext>2017/10/09 04:42:45.901627 4759.8546 0 ECU1 NAVI TEST 7621 log info verbose 2</headertext>
+        <payloadtext>Start test of  location input</payloadtext>
+        <enableregexp_Context>0</enableregexp_Context>
+        <enableregexp_Header>0</enableregexp_Header>
+        <enableregexp_Payload>0</enableregexp_Payload>
+        <ignoreCase_Header>0</ignoreCase_Header>
+        <ignoreCase_Payload>0</ignoreCase_Payload>
+        <enablefilter>1</enablefilter>
+        <enableecuid>0</enableecuid>
+        <enableapplicationid>1</enableapplicationid>
+        <enablecontextid>1</enablecontextid>
+        <enableheadertext>0</enableheadertext>
+        <enablepayloadtext>0</enablepayloadtext>
+        <enablectrlmsgs>0</enablectrlmsgs>
+        <enableLogLevelMin>0</enableLogLevelMin>
+        <enableLogLevelMax>0</enableLogLevelMax>
+        <enableMarker>0</enableMarker>
+        <filterColour>#ffffff</filterColour>
+        <logLevelMax>0</logLevelMax>
+        <logLevelMin>0</logLevelMin>
+    </filter>
+    <filter>
+        <type>0</type>
+        <name>New Filter</name>
+        <ecuid>ECU1</ecuid>
+        <applicationid>POIC</applicationid>
+        <contextid>RTGS</contextid>
+        <headertext>2017/10/09 04:42:53.024493 4766.9773 50 ECU1 POIC RTGS 7601 log info verbose 1</headertext>
+        <payloadtext>Building graph</payloadtext>
+        <enableregexp_Context>0</enableregexp_Context>
+        <enableregexp_Header>0</enableregexp_Header>
+        <enableregexp_Payload>0</enableregexp_Payload>
+        <ignoreCase_Header>0</ignoreCase_Header>
+        <ignoreCase_Payload>0</ignoreCase_Payload>
+        <enablefilter>1</enablefilter>
+        <enableecuid>0</enableecuid>
+        <enableapplicationid>0</enableapplicationid>
+        <enablecontextid>1</enablecontextid>
+        <enableheadertext>0</enableheadertext>
+        <enablepayloadtext>0</enablepayloadtext>
+        <enablectrlmsgs>0</enablectrlmsgs>
+        <enableLogLevelMin>0</enableLogLevelMin>
+        <enableLogLevelMax>0</enableLogLevelMax>
+        <enableMarker>0</enableMarker>
+        <filterColour>#ffffff</filterColour>
+        <logLevelMax>0</logLevelMax>
+        <logLevelMin>0</logLevelMin>
+    </filter>
+    <filter>
+        <type>0</type>
+        <name>New Filter</name>
+        <ecuid>ECU1</ecuid>
+        <applicationid>POIC</applicationid>
+        <contextid>GUID</contextid>
+        <headertext>2017/10/09 04:42:55.224174 4769.1768 6 ECU1 POIC GUID 7601 log info verbose 1</headertext>
+        <payloadtext>Guidance status changed to active</payloadtext>
+        <enableregexp_Context>0</enableregexp_Context>
+        <enableregexp_Header>0</enableregexp_Header>
+        <enableregexp_Payload>0</enableregexp_Payload>
+        <ignoreCase_Header>0</ignoreCase_Header>
+        <ignoreCase_Payload>0</ignoreCase_Payload>
+        <enablefilter>1</enablefilter>
+        <enableecuid>0</enableecuid>
+        <enableapplicationid>0</enableapplicationid>
+        <enablecontextid>1</enablecontextid>
+        <enableheadertext>0</enableheadertext>
+        <enablepayloadtext>0</enablepayloadtext>
+        <enablectrlmsgs>0</enablectrlmsgs>
+        <enableLogLevelMin>0</enableLogLevelMin>
+        <enableLogLevelMax>0</enableLogLevelMax>
+        <enableMarker>0</enableMarker>
+        <filterColour>#ffffff</filterColour>
+        <logLevelMax>0</logLevelMax>
+        <logLevelMin>0</logLevelMin>
+    </filter>
+    <filter>
+        <type>0</type>
+        <name>New Filter</name>
+        <ecuid>ECU1</ecuid>
+        <applicationid>POIC</applicationid>
+        <contextid>LOIS</contextid>
+        <headertext>2017/10/09 04:42:48.158576 4762.0966 92 ECU1 POIC LOIS 7601 log info verbose 1</headertext>
+        <payloadtext>Select entry</payloadtext>
+        <enableregexp_Context>0</enableregexp_Context>
+        <enableregexp_Header>0</enableregexp_Header>
+        <enableregexp_Payload>0</enableregexp_Payload>
+        <ignoreCase_Header>0</ignoreCase_Header>
+        <ignoreCase_Payload>0</ignoreCase_Payload>
+        <enablefilter>1</enablefilter>
+        <enableecuid>0</enableecuid>
+        <enableapplicationid>0</enableapplicationid>
+        <enablecontextid>1</enablecontextid>
+        <enableheadertext>0</enableheadertext>
+        <enablepayloadtext>0</enablepayloadtext>
+        <enablectrlmsgs>0</enablectrlmsgs>
+        <enableLogLevelMin>0</enableLogLevelMin>
+        <enableLogLevelMax>0</enableLogLevelMax>
+        <enableMarker>0</enableMarker>
+        <filterColour>#ffffff</filterColour>
         <logLevelMax>0</logLevelMax>
         <logLevelMin>0</logLevelMin>
     </filter>

@@ -2,15 +2,27 @@
 
 export PYTHONIOENCODING=utf-8
 verbose=0
+remote=""
 
-while getopts hv opt
+while getopts hva:p: opt
 do
 	case $opt in
 	v)
 		verbose=1
 		;;
+	a)
+		remote=$remote" -a "$OPTARG
+		;;
+	p)
+		remote=$remote" -p "$OPTARG
+		;;
+	v)
+		verbose=1
+		;;
 	h)
 		echo "Usage:"
+		echo "-a <host address>: host address for remote"
+		echo "-p <port number>: port number"
 		echo "-h: Help"
 		echo "-v: Verbose"
 		exit 1
@@ -19,51 +31,51 @@ done
 
 if [ "$verbose" = 1 ]
 then
-	./test-location-input.py -l ../resource/locations.xml
-	./test-address-input.py -l ../resource/location.xml
-	./test-route-calculation.py -r ../resource/routes.xml
-	./test-poi.py -l ../resource/location.xml -s "sChü"
-	./test-poi-guidance.py -l ../resource/location-poi.xml -s "cOnT"
-	./test-guidance.py -r ../resource/route.xml
-	./test-map-viewer-control.py -l ../resource/location.xml
+	./test-location-input.py -l ../resource/locations.xml $remote
+	./test-address-input.py -l ../resource/location.xml $remote
+	./test-route-calculation.py -r ../resource/routes.xml $remote
+	./test-poi.py -l ../resource/location.xml -s "sChü" $remote
+	./test-poi-guidance.py -l ../resource/location-poi.xml -s "cOnT" $remote
+	./test-guidance.py -r ../resource/route.xml $remote
+	./test-map-viewer-control.py -l ../resource/location.xml $remote
 else
-	result="$(./test-location-input.py -l ../resource/locations.xml 2>&1 >/dev/null)"
+	result="$(./test-location-input.py -l ../resource/locations.xml $remote 2>&1 >/dev/null)"
 	echo $result
 	if [[ $result != *"PASSED"* ]]; then 
 		exit 1 
 	fi
 
-	result="$(./test-address-input.py -l ../resource/location.xml  2>&1 >/dev/null)"
+	result="$(./test-address-input.py -l ../resource/location.xml $remote  2>&1 >/dev/null)"
 	echo $result
 	if [[ $result != *"PASSED"* ]]; then 
 		exit 1 
 	fi
 
-	result="$(./test-route-calculation.py -r ../resource/routes.xml  2>&1 >/dev/null)"
+	result="$(./test-route-calculation.py -r ../resource/routes.xml $remote  2>&1 >/dev/null)"
 	echo $result
 	if [[ $result != *"PASSED"* ]]; then 
 		exit 1 
 	fi
 
-	result="$(./test-poi.py -l ../resource/location.xml -s "sChü" 2>&1 >/dev/null)"
+	result="$(./test-poi.py -l ../resource/location.xml -s "sChü" $remote 2>&1 >/dev/null)"
 	echo $result
 	if [[ $result != *"PASSED"* ]]; then 
 		exit 1 
 	fi
 
-	result="$(./test-poi-guidance.py -l ../resource/location-poi.xml -s "cOnT" 2>&1 >/dev/null)"
+	result="$(./test-poi-guidance.py -l ../resource/location-poi.xml -s "cOnT" $remote 2>&1 >/dev/null)"
 	echo $result
 	if [[ $result != *"PASSED"* ]]; then 
 		exit 1 
 	fi
 
-	result="$(./test-guidance.py -r ../resource/route.xml  2>&1 >/dev/null)"
+	result="$(./test-guidance.py -r ../resource/route.xml $remote  2>&1 >/dev/null)"
 	echo $result
 	if [[ $result != *"PASSED"* ]]; then 
 		exit 1 
 	fi
 
-	result="$(./test-map-viewer-control.py -l ../resource/location.xml  2>&1 >/dev/null)"
+	result="$(./test-map-viewer-control.py -l ../resource/location.xml $remote  2>&1 >/dev/null)"
 	echo $result
 	if [[ $result == *"PASSED"* ]]; then 
 		echo "Batch test PASSED" 
