@@ -37,7 +37,10 @@ then
 	./test-poi.py -l ../resource/location.xml -s "sChü" $remote
 	./test-poi-guidance.py -l ../resource/location-poi.xml -s "cOnT" $remote
 	./test-guidance.py -r ../resource/route.xml $remote
+	if [ "$remote" = "" ]
+	then
 	./test-map-viewer-control.py -l ../resource/location.xml $remote
+	fi
 else
 	result="$(./test-location-input.py -l ../resource/locations.xml $remote 2>&1 >/dev/null)"
 	echo $result
@@ -75,9 +78,12 @@ else
 		exit 1 
 	fi
 
-	result="$(./test-map-viewer-control.py -l ../resource/location.xml $remote  2>&1 >/dev/null)"
-	echo $result
-	if [[ $result == *"PASSED"* ]]; then 
-		echo "Batch test PASSED" 
+	if [ "$remote" = "" ]
+	then
+		result="$(./test-map-viewer-control.py -l ../resource/location.xml $remote  2>&1 >/dev/null)"
+		echo $result
+		if [[ $result == *"PASSED"* ]]; then 
+			echo "Batch test PASSED" 
+		fi
 	fi
 fi

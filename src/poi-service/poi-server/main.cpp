@@ -36,6 +36,9 @@
 #include <cmath>
 #include <typeinfo>
 #include <getopt.h>
+#ifndef DBUS_HAS_RECURSIVE_MUTEX
+#define DBUS_HAS_RECURSIVE_MUTEX
+#endif
 #include <dbus-c++/glib-integration.h>
 
 #include "log.h"

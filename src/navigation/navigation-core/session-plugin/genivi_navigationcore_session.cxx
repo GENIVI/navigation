@@ -25,6 +25,9 @@
 *
 * @licence end@
 */
+#ifndef DBUS_HAS_RECURSIVE_MUTEX
+#define DBUS_HAS_RECURSIVE_MUTEX
+#endif
 #include <dbus-c++/glib-integration.h>
 #include "genivi-navigationcore-constants.h"
 #include "genivi-navigationcore-session_adaptor.h"
