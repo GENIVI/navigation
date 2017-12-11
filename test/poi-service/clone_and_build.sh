@@ -1,6 +1,6 @@
 #!/bin/bash
 
-positioning_version='9e65831eed02cc8a1b2e2e73787d6007b54214b4'
+positioning_version='d4c46f13019aefb11aebd0fc1210a29a46f0b521'
 
 echo "version of positioning is: $positioning_version"
 

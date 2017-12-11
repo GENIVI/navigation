@@ -36,6 +36,9 @@
 #include <cmath>
 #include <typeinfo>
 #include <getopt.h>
+#ifndef DBUS_HAS_RECURSIVE_MUTEX
+#define DBUS_HAS_RECURSIVE_MUTEX
+#endif
 #include <dbus-c++/glib-integration.h>
 
 #include <CommonAPI/CommonAPI.hpp>
@@ -157,9 +160,9 @@ public:
             configurationChanged(changedSettings);});
         myServicePOIContentAccessModule->getCategoriesRemovedEvent().subscribe([&](const std::vector< CommonTypes::CategoryID >& categories) {
             categoriesRemoved(categories);});
-        myServicePOIContentAccessModule->getPOIAddedEvent().subscribe([&](const std::vector< POIServiceTypes::POI_ID >& pois) {
+        myServicePOIContentAccessModule->getPoiAddedEvent().subscribe([&](const std::vector< POIServiceTypes::POI_ID >& pois) {
             POIAdded(pois);});
-        myServicePOIContentAccessModule->getPOIRemovedEvent().subscribe([&](const std::vector< POIServiceTypes::POI_ID >& pois) {
+        myServicePOIContentAccessModule->getPoiRemovedEvent().subscribe([&](const std::vector< POIServiceTypes::POI_ID >& pois) {
             POIRemoved(pois);});
         myServicePOIContentAccessModule->getSearchStatusChangedEvent().subscribe([&](const NavigationTypes::Handle& poiSearchHandle, const POIServiceTypes::SearchStatusState& statusValue, const std::vector< POIServiceTypes::POI_ID >& pois) {
             searchStatusChanged(poiSearchHandle,statusValue,pois);});

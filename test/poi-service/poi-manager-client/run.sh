@@ -26,6 +26,8 @@
 #
 # @licence end@
 
+export LD_LIBRARY_PATH=$DBUS_LIB_PATH/lib
+
 CURDIR=$PWD
 
 POI_MANAGER_CLIENT_DIR=$CURDIR

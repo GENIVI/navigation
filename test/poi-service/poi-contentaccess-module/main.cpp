@@ -37,6 +37,9 @@
 #include <typeinfo>
 #include <getopt.h>
 
+#ifndef DBUS_HAS_RECURSIVE_MUTEX
+#define DBUS_HAS_RECURSIVE_MUTEX
+#endif
 #include "poi-contentaccess-module-class.h"
 
 #include <QApplication>

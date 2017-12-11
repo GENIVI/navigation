@@ -34,6 +34,9 @@
 #include "genivi-poiservice-poicontentaccess_proxy.h"
 #include "poi-common-dbus-data-model.h"
 
+#ifndef DBUS_HAS_RECURSIVE_MUTEX
+#define DBUS_HAS_RECURSIVE_MUTEX
+#endif
 #include <dbus-c++/glib-integration.h>
 
 #include "poi-common-database.h"
