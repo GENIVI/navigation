@@ -29,9 +29,11 @@
 #include <v1/org/genivi/navigation/freetextsearchservice/FreeTextSearch.hpp>
 #include <v1/org/genivi/navigation/freetextsearchservice/FreeTextSearchStubDefault.hpp>
 
-using namespace v1::org::genivi::navigation::freetextsearchservice;
-using namespace v4::org::genivi::navigation;
-using namespace v4::org::genivi;
+namespace v1 {
+namespace org {
+namespace genivi {
+namespace navigation {
+namespace freetextsearchservice {
 
 class FreeTextSearchStubImpl: public FreeTextSearchStubDefault
 {
@@ -42,7 +44,7 @@ public:
 
   void ftsRequest(const std::shared_ptr<CommonAPI::ClientId> _client,
       FreeTextSearch::FtsString _inputString,
-      NavigationTypes::Coordinate2D _searchLocation,
+      v4::org::genivi::navigation::NavigationTypes::Coordinate2D _searchLocation,
       FreeTextSearch::ShapeList _searchShapes,
       FreeTextSearch::PageSize _pageSize,
       FreeTextSearch::SearchOptions _searchOptions,
@@ -51,21 +53,26 @@ public:
           override;
 
   void ftsNextPage(const std::shared_ptr<CommonAPI::ClientId> _client,
-      NavigationTypes::Handle _sessionHandle,
+      v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle,
       FreeTextSearch::SearchOptions _searchOptions, ftsNextPageReply_t _reply)
           override;
 
   void ftsCancel(const std::shared_ptr<CommonAPI::ClientId> _client,
-      NavigationTypes::Handle _sessionHandle, ftsCancelReply_t _reply) override;
+      v4::org::genivi::navigation::NavigationTypes::Handle _sessionHandle, ftsCancelReply_t _reply) override;
 
   void deleteLocationHandles(const std::shared_ptr<CommonAPI::ClientId> _client,
       FreeTextSearch::LocationHandleList _locationHandleList,
       deleteLocationHandlesReply_t _reply) override;
 private:
-  NavigationTypes::Handle iSessionHandle = 0;
+  v4::org::genivi::navigation::NavigationTypes::Handle iSessionHandle = 0;
   FreeTextSearch::PageId iPageId = 0;
   bool iSearchIsInProgress = false;
 
 };
+} // namespace freetextsearchservice
+} // namespace navigation
+} // namespace genivi
+} // namespace org
+} // namespace v1
 
 #endif /* FREETEXTSEARCHSTUBIMPL_H_ */

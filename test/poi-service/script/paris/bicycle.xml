@@ -1,31 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<osm version="0.6" generator="Overpass API">
+<osm version="0.6" generator="Overpass API 0.7.54.12 054bb0bb">
 <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
-<meta osm_base="2015-03-09T10:26:02Z"/>
+<meta osm_base="2017-12-11T17:05:02Z"/>
 
   <node id="251373376" lat="48.8402323" lon="2.3503076">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="46"/>
+    <tag k="addr:postcode" v="75005"/>
+    <tag k="addr:street" v="Rue Daubenton"/>
     <tag k="name" v="Gepetto &amp; Vélos"/>
     <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.gepetto-velos.com/"/>
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="287611762" lat="48.8626879" lon="2.3507834">
-    <tag k="addr:city" v="Paris"/>
-    <tag k="addr:country" v="FR"/>
-    <tag k="addr:housenumber" v="52"/>
-    <tag k="addr:street" v="Boulevard de Sébastopol"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:country" v="FR"/>
+    <tag k="contact:housenumber" v="52"/>
+    <tag k="contact:phone" v="+33 1 48 04 51 19"/>
+    <tag k="contact:postcode" v="75003"/>
+    <tag k="contact:street" v="Boulevard de Sébastopol"/>
     <tag k="name" v="Au Réparateur de Bicyclettes"/>
+    <tag k="note" v="Hollandais et ville, réparation vélos anciens"/>
     <tag k="opening_hours" v="Mo-Sa 10:00-19:15"/>
-    <tag k="phone" v="01 48 04 51 19"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="http://www.aureparateurdebicyclettes.fr/"/>
   </node>
-  <node id="287612106" lat="48.8775699" lon="2.3374536">
+  <node id="287612106" lat="48.8773406" lon="2.3373832">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="39et50"/>
+    <tag k="contact:phone" v="+33 1 42 81 54 68"/>
+    <tag k="contact:postcode" v="75009"/>
+    <tag k="contact:street" v="Rue Saint-Georges"/>
     <tag k="email" v="contact@velo-electro.com"/>
     <tag k="name" v="Vélo Electro"/>
+    <tag k="note" v="Vente, réparation. Vélos de ville + quelques occasions, vélos à assistance électrique"/>
     <tag k="opening_hours" v="Tu-Fr 10:00-14:30,15:30-19:30; Sa 10:00-19:30"/>
-    <tag k="phone" v="01 42 81 54 68"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="service:bicycle:second_hand" v="yes"/>
@@ -33,33 +46,64 @@
     <tag k="website" v="http://www.velo-electro.com/"/>
   </node>
   <node id="381167598" lat="48.8338563" lon="2.3018511">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="27"/>
+    <tag k="contact:phone" v="+33 1 40 43 93 04"/>
+    <tag k="contact:postcode" v="75015"/>
+    <tag k="contact:street" v="Rue de Cronstadt"/>
+    <tag k="email" v="contact@neovelo.fr"/>
     <tag k="name" v="Neovelo"/>
+    <tag k="note" v="Vente et location de Vélos à Assistance Electrique. Réparations tous cycles"/>
+    <tag k="service:bicycle:rental" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
   </node>
   <node id="406633544" lat="48.8613337" lon="2.3721111">
-    <tag k="addr:housenumber" v="81"/>
-    <tag k="addr:street" v="Boulevard Richard Lenoir"/>
+    <tag k="brand" v="Orbita;TVT;Renault;EXS"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="81"/>
+    <tag k="contact:phone" v="+33 1 44 93 79 84"/>
+    <tag k="contact:postcode" v="75011"/>
+    <tag k="contact:street" v="Boulevard Richard Lenoir"/>
     <tag k="email" v="lespetitsvelos@wanadoo.fr"/>
     <tag k="name" v="Les Petits Vélos de Maurice"/>
     <tag k="opening_hours" v="Tu-Fr 09:00-18:30;Sa 11:00-13:30,14:30-18:30"/>
-    <tag k="phone" v="01 44 93 79 84"/>
     <tag k="service:bicycle:pump" v="yes"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
-    <tag k="website" v="http://www.lespetitsvelosdemaurice.fr"/>
+    <tag k="website" v="http://www.lespetitsvelosdemaurice.fr/"/>
   </node>
   <node id="406637567" lat="48.8501427" lon="2.3910294">
+    <tag k="addr:housenumber" v="18"/>
+    <tag k="addr:postcode" v="75011"/>
+    <tag k="addr:street" v="Rue des Boulets"/>
+    <tag k="brand" v="Brompton;Mini Velo;Diana;Pocket Bike;Silver Fly"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="18"/>
+    <tag k="contact:phone" v="+33 1 43 48 65 46"/>
+    <tag k="contact:postcode" v="75011"/>
+    <tag k="contact:street" v="Rue Boulets"/>
     <tag k="name" v="Cycles Pliants Expansion"/>
+    <tag k="note" v="Vélos pliants, vélos électriques, tricycles et remorques"/>
+    <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.velo-pliant.com"/>
   </node>
   <node id="406638261" lat="48.8500086" lon="2.3911871">
     <tag k="name" v="Velectris"/>
     <tag k="shop" v="bicycle"/>
   </node>
   <node id="406639776" lat="48.8499064" lon="2.3992524">
+    <tag k="brand" v="MBK;Giant;BH;Thomas"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="24"/>
+    <tag k="contact:phone" v="+33 1 43 73 06 10"/>
+    <tag k="contact:postcode" v="75020"/>
+    <tag k="contact:street" v="Boulevard de Charonne"/>
     <tag k="name" v="Cycles Delcayre"/>
-    <tag k="phone" v="0143730610"/>
+    <tag k="note" v="Vélos enfants, électriques, sacoches"/>
     <tag k="service:bicycle:pump" v="unknown"/>
     <tag k="service:bicycle:rental" v="no"/>
     <tag k="service:bicycle:repair" v="yes"/>
@@ -69,9 +113,15 @@
     <tag k="website" v="http://cyclesdelcayre.fr/"/>
   </node>
   <node id="406641765" lat="48.8463059" lon="2.4121013">
+    <tag k="brand" v="Hase;Velotechnik"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="1à5"/>
+    <tag k="contact:phone" v="+33 1 43 41 18 10"/>
+    <tag k="contact:postcode" v="75012"/>
+    <tag k="contact:street" v="Rue Fernand-Foureau"/>
     <tag k="name" v="Rando Cycles"/>
+    <tag k="note" v="Fabrication vélos de randonnée sur mesures. Vente accessoires, pièces et outillage. Distribution vélos couchés. Vente tricycles et remorques"/>
     <tag k="opening_hours" v="Tu-Sa 10:00-13:00, 14:00-19:00; Sa 10:00-13:00, 14:00-18:00"/>
-    <tag k="phone" v="+331 43 41 18 10"/>
     <tag k="service:bicycle:cleaning" v="no"/>
     <tag k="service:bicycle:pump" v="no"/>
     <tag k="service:bicycle:repair" v="yes"/>
@@ -81,65 +131,88 @@
     <tag k="website" v="http://www.rando-cycles.com/"/>
     <tag k="wheelchair" v="no"/>
   </node>
-  <node id="406649851" lat="48.8680273" lon="2.3900290">
-    <tag k="name" v="BMG Baillou"/>
+  <node id="406649851" lat="48.8679871" lon="2.3900342">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="10"/>
+    <tag k="contact:phone" v="+33 1 46 36 74 63"/>
+    <tag k="contact:postcode" v="75020"/>
+    <tag k="contact:street" v="Rue Sorbier"/>
+    <tag k="name" v="BMG Cycles"/>
+    <tag k="note" v="de père en fils depuis 1903"/>
+    <tag k="service:bicycle:rental" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
   </node>
   <node id="406651951" lat="48.8661235" lon="2.3664950">
+    <tag k="contact:phone" v="+33 1 47 00 27 47"/>
+    <tag k="contact:website" v="http://www.cycleslaurent.com/"/>
     <tag k="name" v="Cycles Laurent"/>
+    <tag k="note" v="Cadres sur mesures, vélos de course"/>
     <tag k="opening_hours" v="Mo-Sa 10:00-18:45"/>
-    <tag k="phone" v="+331 47 00 27 47"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
-    <tag k="website" v="http://www.cycles-laurent-paris.fr/"/>
   </node>
   <node id="406653301" lat="48.8610723" lon="2.3703539">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="22"/>
+    <tag k="contact:phone" v="+33 1 48 87 60 01"/>
+    <tag k="contact:postcode" v="75011"/>
+    <tag k="contact:street" v="Rue Alphonse Baudin"/>
     <tag k="email" v="info@parisvelosympa.com"/>
     <tag k="name" v="Paris à Vélo, c’est Sympa"/>
-    <tag k="phone" v="+33 1 48 87 60 01"/>
+    <tag k="note" v="Organisation de balades à vélo dans Paris. Location vélos de ville et tandems"/>
     <tag k="service:bicycle:cleaning" v="no"/>
     <tag k="service:bicycle:diy" v="no"/>
     <tag k="service:bicycle:pump" v="no"/>
     <tag k="service:bicycle:rental" v="yes"/>
     <tag k="service:bicycle:repair" v="no"/>
     <tag k="service:bicycle:retail" v="no"/>
-    <tag k="service:bicycle:second_hand" v="no"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="http://www.parisvelosympa.com"/>
   </node>
-  <node id="406654663" lat="48.8568808" lon="2.3729654">
-    <tag k="addr:housename" v="7"/>
-    <tag k="name" v="Bicloune"/>
-    <tag k="opening_hours" v="Tu,We,Fr 13:00-18:00; Tu 13:00-20:00; Sa 09:30-12:00,13:00-18:00"/>
-    <tag k="service:bicycle:pump" v="fee"/>
-    <tag k="service:bicycle:rental" v="fixme"/>
-    <tag k="service:bicycle:repair" v="yes"/>
-    <tag k="service:bicycle:retail" v="yes"/>
-    <tag k="service:bicycle:second_hand" v="no"/>
-    <tag k="shop" v="bicycle"/>
-    <tag k="website" v="http://www.bicloune.fr/"/>
-  </node>
   <node id="406661388" lat="48.8647160" lon="2.3654795">
-    <tag k="name" v="Preya cycle"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="23"/>
+    <tag k="contact:phone" v="+33 1 42 77 01 19"/>
+    <tag k="contact:postcode" v="75003"/>
+    <tag k="contact:street" v="Boulevard du Temple"/>
+    <tag k="name" v="Preya Cycle"/>
+    <tag k="note" v="Hollandais, ville, VTT, VTC"/>
+    <tag k="opening_hours" v="Tu-Sa 11:00-19:00"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://preyacycles.com/"/>
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="406664708" lat="48.8456128" lon="2.3401302">
-    <tag k="addr:housenumber" v="81"/>
-    <tag k="addr:street" v="Boulevard Saint-Michel"/>
+    <tag k="brand" v="Gazelle;Cyrus;Mac Douglas;Giant"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="81"/>
+    <tag k="contact:phone" v="+33 1 43 54 85 36"/>
+    <tag k="contact:postcode" v="75005"/>
+    <tag k="contact:street" v="Boulevard Saint-Michel"/>
     <tag k="name" v="Au Point Vélo Hollandais"/>
-    <tag k="phone" v="01 43 54 85 36"/>
+    <tag k="note" v="Hollandais et ville"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
-    <tag k="website" v="http://www.velo-ville-hollandais.fr/; http://www.pointvelo.com/"/>
+    <tag k="website" v="http://www.pointvelo.com/"/>
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="406669671" lat="48.8351552" lon="2.3241552">
-    <tag k="contact:fax" v="01 43 20 95 88"/>
-    <tag k="contact:phone" v="01 43 22 78 55"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:fax" v="+33 1 43 20 95 88"/>
+    <tag k="contact:housenumber" v="129"/>
+    <tag k="contact:phone" v="+33 1 43 22 78 55"/>
+    <tag k="contact:postcode" v="75014"/>
+    <tag k="contact:street" v="Avenue du Maine"/>
     <tag k="name" v="Vélo &amp; Oxygen"/>
     <tag k="service:bicycle:parts" v="yes"/>
     <tag k="service:bicycle:repair" v="yes"/>
@@ -149,119 +222,201 @@
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="406670408" lat="48.8451785" lon="2.3193421">
+    <tag k="brand" v="Giant;Lapierre;Orbéa"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="36"/>
+    <tag k="contact:phone" v="+33 1 45 44 10 09"/>
+    <tag k="contact:postcode" v="75015"/>
+    <tag k="contact:street" v="Boulevard Montparnasse"/>
     <tag k="name" v="Bike in Paris"/>
+    <tag k="note" v="Montage à la carte"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="406674136" lat="48.8496463" lon="2.3235990">
+    <tag k="alt_name" v="Brompton Junction"/>
+    <tag k="brand" v="Cannondale;Utopia;Brompton;Gazelle;Azor;Michel Thomas"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="3"/>
+    <tag k="contact:phone" v="+33 1 45 44 72 97"/>
+    <tag k="contact:postcode" v="75006"/>
+    <tag k="contact:street" v="Rue de l’Abbé-Grégoire"/>
     <tag k="name" v="Les Vélos Parisiens"/>
+    <tag k="note" v="Vente ville et VTC, vélos enfants, pliants"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.lesvelosparisiens.com"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="406676109" lat="48.8524944" lon="2.3375559">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="30"/>
+    <tag k="contact:phone" v="+33 1 43 29 09 04"/>
+    <tag k="contact:postcode" v="75006"/>
+    <tag k="contact:street" v="Rue Grégoire de Tours"/>
+    <tag k="name" v="Cycle Centre"/>
+    <tag k="note" v="Spécialiste du vélo Hollandais Anglais. VTT – VTC"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
     <tag k="wheelchair" v="no"/>
   </node>
-  <node id="406676109" lat="48.8524944" lon="2.3375559">
-    <tag k="name" v="Cycle Centre"/>
-    <tag k="shop" v="bicycle"/>
-    <tag k="wheelchair" v="no"/>
-  </node>
   <node id="406678204" lat="48.8393787" lon="2.3607356">
+    <tag k="brand" v="Puch;Gitane"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="11"/>
+    <tag k="contact:phone" v="+33 1 42 17 01 79"/>
+    <tag k="contact:postcode" v="75013"/>
+    <tag k="contact:street" v="Boulevard St Marcel"/>
+    <tag k="email" v="espritvelo@free.fr"/>
     <tag k="name" v="Esprit Vélo"/>
+    <tag k="note" v="Réparation sans RDV, vente d’équipement pour vélo de ville. Vélo enfant, vélo ville, vélo hollandais, vélo électrique. Travaille avec le groupe CycleEurope. Propose le gravage sans rendez-vous."/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.espritvelo.fr"/>
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="406680366" lat="48.8231589" lon="2.3553031">
+    <tag k="brand" v="Gitane;Lapierre;Bianchi;Peugeot"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="34"/>
+    <tag k="contact:phone" v="+33 1 45 88 50 04"/>
+    <tag k="contact:postcode" v="75013"/>
+    <tag k="contact:street" v="Rue Damesme"/>
     <tag k="name" v="Cyclo Sport 34"/>
     <tag k="opening_hours" v="Tu-Fr 09:30-12:30,14:00-19:00; Sa 09:30-12:30,14:00-18:00"/>
-    <tag k="phone" v="01 45 88 50 04"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="406683542" lat="48.8224146" lon="2.3462367">
-    <tag k="addr:housenumber" v="14"/>
-    <tag k="addr:street" v="Place de Rungis"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="14"/>
+    <tag k="contact:phone" v="+33 1 45 65 49 89"/>
+    <tag k="contact:postcode" v="75013"/>
+    <tag k="contact:street" v="Place de Rungis"/>
     <tag k="name" v="Mountain Biker"/>
+    <tag k="note" v="Spécialiste VTT"/>
     <tag k="opening_hours" v="Tu-Fr 10:00-19:00; Sa 10:00-18:30"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="http://www.mountainbikerparis.fr/"/>
     <tag k="wheelchair" v="no"/>
   </node>
-  <node id="406687039" lat="48.8276355" lon="2.3329933">
-    <tag k="name" v="Sri Kanaga Ambika Velo"/>
-    <tag k="shop" v="bicycle"/>
-  </node>
   <node id="406692819" lat="48.8904588" lon="2.3845951">
-    <tag k="addr:city" v="Paris"/>
-    <tag k="addr:housenumber" v="38 bis"/>
-    <tag k="addr:postcode" v="75019"/>
-    <tag k="addr:street" v="Quai de la Marne"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="38 bis"/>
+    <tag k="contact:phone" v="+33 1 43 43 40 74"/>
+    <tag k="contact:postcode" v="75019"/>
+    <tag k="contact:street" v="Quai de la Marne"/>
+    <tag k="description" v="Association fondée sur un projet d'animation et une démarche sociale."/>
     <tag k="name" v="AICV"/>
-    <tag k="opening_hours" v="9h30 - 18h"/>
-    <tag k="phone" v="+33 1 43 43 40 74"/>
+    <tag k="opening_hours" v="Tu-Sa 09:45-12:30,13:30-17:15"/>
+    <tag k="service:bicycle:rental" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="http://www.aicv.net/"/>
   </node>
-  <node id="406696580" lat="48.8802190" lon="2.3670520">
-    <tag k="name" v="Valmy Cycle"/>
+  <node id="406696580" lat="48.8799209" lon="2.3669233">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="177"/>
+    <tag k="contact:phone" v="+33 1 42 09 68 16"/>
+    <tag k="contact:postcode" v="75010"/>
+    <tag k="contact:street" v="Quai de Valmy"/>
+    <tag k="name" v="Cyclo Store"/>
+    <tag k="note" v="Réparation sans rendez-vous. Station de gonflage et de réglages"/>
+    <tag k="opening_hours" v="Mo-Su 9:00-19:00"/>
     <tag k="service:bicycle:pump" v="yes"/>
+    <tag k="service:bicycle:rental" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://cyclostore.canalblog.com/"/>
   </node>
   <node id="406698923" lat="48.8821782" lon="2.3636917">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="36"/>
+    <tag k="contact:phone" v="+33 1 40 34 81 18"/>
+    <tag k="contact:postcode" v="75010"/>
+    <tag k="contact:street" v="Rue de l’aqueduc"/>
     <tag k="name" v="Le Petit Boyauteur"/>
+    <tag k="note" v="Montage de vélos personnalisés"/>
+    <tag k="opening_hours" v="Tu-Su 09:29-13:03,15:37-19:08"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
   </node>
   <node id="408498997" lat="48.8620618" lon="2.3399933">
     <tag k="addr:housenumber" v="156"/>
     <tag k="addr:street" v="Rue Saint-Honoré"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:postcode" v="75001"/>
     <tag k="name" v="Cycles Saint-Honoré"/>
     <tag k="opening_hours" v="Mo-Fr 10:00-13:00, 14:00-19:00; Sa 14:00-19:00"/>
-    <tag k="phone" v="01 42 60 06 19"/>
+    <tag k="phone" v="+33 1 42 60 06 19"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="http://cyclesainthonore.fr/"/>
-  </node>
-  <node id="408500826" lat="48.8838731" lon="2.3182772">
-    <tag k="name" v="ADV Atelier des Vélos"/>
-    <tag k="shop" v="bicycle"/>
   </node>
   <node id="408501350" lat="48.8979512" lon="2.3360083">
     <tag k="name" v="Lardais Patrick"/>
     <tag k="shop" v="bicycle"/>
   </node>
   <node id="408503857" lat="48.8488852" lon="2.4290130">
+    <tag k="addr:city" v="Montreuil"/>
+    <tag k="addr:postcode" v="93100"/>
     <tag k="name" v="Bouticycle du Château"/>
+    <tag k="opening_hours" v="Tu-Fr 10:00-12:45,15:00-19:00; Sa 10:00-13:00,15:00-18:30"/>
     <tag k="shop" v="bicycle"/>
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="408561503" lat="48.8158200" lon="2.3049898">
-    <tag k="addr:city" v="Malakoff"/>
-    <tag k="addr:housenumber" v="142"/>
-    <tag k="addr:postcode" v="92240"/>
-    <tag k="addr:street" v="Avenue Pierre Brossolette"/>
+    <tag k="brand" v="Giant;Scott"/>
+    <tag k="contact:city" v="Malakoff"/>
+    <tag k="contact:housenumber" v="142"/>
+    <tag k="contact:phone" v="+33 1 46 57 37 23"/>
+    <tag k="contact:postcode" v="92240"/>
+    <tag k="contact:street" v="Avenue Pierre Brossolette"/>
+    <tag k="contact:website" v="www.velo-dans-la-ville.fr"/>
     <tag k="name" v="Un vélo dans la ville"/>
-    <tag k="opening_hours" v="Mon-Sat 10-12 13-18h30"/>
-    <tag k="phone" v="+33 1 46 57 37 23"/>
-    <tag k="shop" v="bicycle"/>
-    <tag k="website" v="www.velo-dans-la-ville.fr"/>
-  </node>
-  <node id="408561867" lat="48.8336693" lon="2.3187014">
-    <tag k="addr:housenumber" v="36"/>
-    <tag k="addr:street" v="Rue Pernety"/>
-    <tag k="name" v="Ok Ça Roule"/>
-    <tag k="phone" v="01 45 42 74 56"/>
+    <tag k="opening_hours" v="Tu-Th,Sa 10:00-12:00,13:00-19:00;Fr 10:00-12:00,13:00-18:00"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="408561867" lat="48.8336693" lon="2.3187014">
+    <tag k="addr:street" v="Rue Pernety"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="36"/>
+    <tag k="contact:phone" v="+33 1 45 42 74 56"/>
+    <tag k="contact:postcode" v="75014"/>
+    <tag k="contact:street" v="Rue Pernety"/>
+    <tag k="name" v="Ok Ça Roule"/>
+    <tag k="note" v="Réparation, vente de vélos. Neufs et occasions de toutes marques."/>
+    <tag k="service:bicycle:rental" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.okcaroule.fr"/>
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="408561950" lat="48.8397690" lon="2.2932915">
-    <tag k="name" v="URBAN CYCLES 15"/>
+    <tag k="name" v="Urban Cycles 15"/>
     <tag k="shop" v="bicycle"/>
     <tag k="wheelchair" v="no"/>
   </node>
@@ -271,7 +426,15 @@
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="408562162" lat="48.8254765" lon="2.2487000">
+    <tag k="contact:city" v="Boulogne-Billancourt"/>
+    <tag k="contact:housenumber" v="2"/>
+    <tag k="contact:phone" v="+33 1 46 21 23 23"/>
+    <tag k="contact:postcode" v="92100"/>
+    <tag k="contact:street" v="av Pierre Grenier"/>
     <tag k="name" v="Giant Bicycles"/>
+    <tag k="note" v="Montage à la carte."/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
     <tag k="source" v="survey"/>
   </node>
@@ -283,19 +446,31 @@
     <tag k="name" v="Respiro"/>
     <tag k="shop" v="bicycle"/>
   </node>
-  <node id="621288102" lat="48.8696198" lon="2.3660804">
-    <tag k="shop" v="bicycle"/>
-  </node>
   <node id="632979744" lat="48.8943204" lon="2.3406884">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="58"/>
+    <tag k="contact:phone" v="+33 6 13 13 42 27"/>
+    <tag k="contact:postcode" v="75018"/>
+    <tag k="contact:street" v="Rue du Ruisseau"/>
     <tag k="name" v="Vélo 18 Vintage"/>
+    <tag k="note" v="Spécialiste vélos français années 1960-1980"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.velo-vintage.com/"/>
   </node>
   <node id="647811682" lat="48.8578908" lon="2.3534575">
     <tag k="name" v="BHV Vélo"/>
     <tag k="shop" v="bicycle"/>
   </node>
-  <node id="647817455" lat="48.8948379" lon="2.2975723">
+  <node id="647817455" lat="48.8948264" lon="2.2975816">
+    <tag k="contact:city" v="Levallois-Perret"/>
+    <tag k="contact:housenumber" v="53"/>
+    <tag k="contact:phone" v="+33 1 47 37 42 14"/>
+    <tag k="contact:postcode" v="92300"/>
+    <tag k="contact:street" v="Rue Victor Hugo"/>
     <tag k="name" v="Alex Singer"/>
+    <tag k="note" v="Fabrication de cycles et pièces détachées"/>
     <tag k="service:bicycle:cleaning" v="no"/>
     <tag k="service:bicycle:diy" v="no"/>
     <tag k="service:bicycle:pump" v="no"/>
@@ -317,29 +492,68 @@
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="http://www.rando-boutique.com"/>
   </node>
-  <node id="675841308" lat="48.8312605" lon="2.3488990">
+  <node id="675841308" lat="48.8309780" lon="2.3487086">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="67"/>
+    <tag k="addr:postcode" v="75013"/>
+    <tag k="addr:street" v="Rue de Croulebarbe"/>
+    <tag k="branch" v="13ème Corvisart"/>
+    <tag k="brand" v="Buzibi"/>
+    <tag k="description" v="Spécialiste vélo à assitance électrique. Atelier réparation tous vélos"/>
     <tag k="name" v="Buzibi"/>
+    <tag k="opening_hours" v="Tu-Sa 10:00-19:00"/>
+    <tag k="phone" v="+33 1 47 07 16 75"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.buzibi.fr/"/>
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="675848662" lat="48.8641571" lon="2.3658170">
+    <tag k="brand" v="composants Brooks;BLB;Miche;Nitto;Sugino;MKS"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="17"/>
+    <tag k="contact:phone" v="+33 9 51 61 68 29"/>
+    <tag k="contact:postcode" v="75003"/>
+    <tag k="contact:street" v="Boulevard du Temple"/>
     <tag k="name" v="BiCyCle Store"/>
+    <tag k="note" v="Beach cruisers, vélos pliants, vélos de ville, pignon fixe..."/>
     <tag k="opening_hours" v="Mo-Sa 10:00-19:00"/>
-    <tag k="phone" v="+339 51 61 68 29"/>
+    <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="http://www.bicyclestore.fr"/>
   </node>
   <node id="675865742" lat="48.8510262" lon="2.2933495">
+    <tag k="brand" v="Brompton;Strida;Montague"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="5"/>
+    <tag k="contact:phone" v="+33 1 40 58 12 22"/>
+    <tag k="contact:postcode" v="75015"/>
+    <tag k="contact:street" v="Rue Humblot"/>
+    <tag k="email" v="info@roulezchampions.com"/>
     <tag k="name" v="Roulez Champions"/>
+    <tag k="note" v="Spécialiste vélos pliants... Vélos hollandais. Réparation toutes marques."/>
+    <tag k="service:bicycle:rental" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.roulezchampions.com"/>
   </node>
   <node id="675891753" lat="48.8621084" lon="2.3821230">
+    <tag k="brand" v="Specialized;Trek;Look;Time"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="47"/>
+    <tag k="contact:phone" v="+33 1 47 00 68 43"/>
+    <tag k="contact:postcode" v="75011"/>
+    <tag k="contact:street" v="Rue Servan"/>
     <tag k="name" v="Franscoop"/>
+    <tag k="note" v="VTT, VTC, vélos de course, vélos pliants, vélos électriques."/>
     <tag k="service:bicycle:diy" v="no"/>
     <tag k="service:bicycle:pump" v="unknown"/>
     <tag k="service:bicycle:rental" v="no"/>
-    <tag k="service:bicycle:repair" v="customer"/>
+    <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="service:bicycle:second_hand" v="no"/>
     <tag k="shop" v="bicycle"/>
@@ -369,101 +583,111 @@
     <tag k="website" v="http://www.velorution.org"/>
     <tag k="wheelchair" v="yes"/>
   </node>
-  <node id="836328472" lat="48.8720812" lon="2.4115488"/>
-  <node id="836331256" lat="48.8721138" lon="2.4114902"/>
-  <node id="836331365" lat="48.8719777" lon="2.4113693"/>
-  <node id="836332448" lat="48.8719349" lon="2.4113432"/>
-  <node id="836339426" lat="48.8719469" lon="2.4113587"/>
-  <node id="836342842" lat="48.8718001" lon="2.4112153"/>
-  <node id="836346356" lat="48.8719632" lon="2.4113564"/>
-  <node id="836351447" lat="48.8719811" lon="2.4113620"/>
-  <node id="836355049" lat="48.8720893" lon="2.4118130"/>
-  <node id="836356532" lat="48.8720407" lon="2.4114347"/>
-  <node id="836357374" lat="48.8720205" lon="2.4114741"/>
-  <node id="836361778" lat="48.8722043" lon="2.4116012"/>
-  <node id="836366562" lat="48.8719196" lon="2.4112872"/>
-  <node id="836371275" lat="48.8719677" lon="2.4113582"/>
-  <node id="836372624" lat="48.8719537" lon="2.4113563"/>
-  <node id="836376927" lat="48.8718444" lon="2.4112719"/>
-  <node id="836388785" lat="48.8719076" lon="2.4113088"/>
-  <node id="836402636" lat="48.8719473" lon="2.4113211"/>
-  <node id="836404857" lat="48.8718578" lon="2.4112483"/>
-  <node id="836405357" lat="48.8717258" lon="2.4113626"/>
-  <node id="836814910" lat="48.8304519" lon="2.2944314">
-    <tag k="addr:housenumber" v="77"/>
-    <tag k="addr:street" v="Boulevard Lefebvre"/>
-    <tag k="name" v="Holland Bikes"/>
-    <tag k="note" v="Réparation toutes marques"/>
-    <tag k="phone" v="01 42 50 42 40"/>
-    <tag k="service:bicycle:repair" v="yes"/>
-    <tag k="service:bicycle:retail" v="yes"/>
-    <tag k="shop" v="bicycle"/>
-    <tag k="website" v="http://www.hollandbikes.com/"/>
-    <tag k="wheelchair" v="no"/>
-  </node>
   <node id="836814947" lat="48.8305317" lon="2.2941957">
     <tag k="addr:housenumber" v="77"/>
     <tag k="addr:street" v="Boulevard Lefebvre"/>
     <tag k="name" v="Holland Bikes"/>
     <tag k="note" v="Réparation toutes marques"/>
-    <tag k="phone" v="01 42 50 42 40"/>
+    <tag k="opening_hours" v="Tu-Fr 10:00-19:00"/>
+    <tag k="phone" v="+33 1 42 50 42 40"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="http://www.hollandbikes.com/"/>
   </node>
-  <node id="867461114" lat="48.9008522" lon="2.3924044"/>
-  <node id="867497570" lat="48.9008730" lon="2.3924109"/>
-  <node id="867507166" lat="48.9007497" lon="2.3924885"/>
-  <node id="867517715" lat="48.9007636" lon="2.3923822"/>
-  <node id="867527154" lat="48.9007875" lon="2.3923878"/>
-  <node id="867529215" lat="48.9008591" lon="2.3925174"/>
-  <node id="904060582" lat="48.8502727" lon="2.3588853">
-    <tag k="name" v="Giant"/>
+  <node id="904060582" lat="48.8502135" lon="2.3588712">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="1"/>
+    <tag k="contact:phone" v="+33 1 43 29 05 63"/>
+    <tag k="contact:postcode" v="75004"/>
+    <tag k="contact:street" v="Boulevard Henri IV"/>
+    <tag k="name" v="Giant Store Notre-Dame"/>
+    <tag k="note" v="Réparation toutes marques. Montage à la carte. Accessoires. Textiles. Nutrition. Vélos enfants, ville, VTC, VTT, route, Triathlon, Vélos à Assistance Électrique, Fixie."/>
+    <tag k="opening_hours" v="Tu-Sa 10:00-19:00"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
-    <tag k="wheelchair" v="no"/>
-  </node>
-  <node id="1002548792" lat="48.8652464" lon="2.3695461">
-    <tag k="name" v="Go Sport Vélo"/>
-    <tag k="opening_hours" v="Mo-Sa 10:00-19:30"/>
-    <tag k="shop" v="bicycle"/>
-    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"/>
+    <tag k="website" v="http://www.giant-notredame.fr/"/>
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="1079210602" lat="48.8464625" lon="2.3817701">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="25"/>
+    <tag k="contact:phone" v="+33 1 43 07 39 05"/>
+    <tag k="contact:postcode" v="75012"/>
+    <tag k="contact:street" v="Rue Crozatier"/>
     <tag k="name" v="Vélo services"/>
+    <tag k="phone" v="+33 1 43 43 92 52"/>
+    <tag k="service:bicycle:rental" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.veloservices.fr"/>
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="1300607533" lat="48.8772979" lon="2.2851254">
+    <tag k="brand" v="Gitane;Bianchi;Meteor"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="72"/>
+    <tag k="contact:postcode" v="75017"/>
+    <tag k="contact:street" v="Avenue de la Grande Armée"/>
     <tag k="name" v="Velo &amp; Oxygen"/>
+    <tag k="service:bicycle:parts" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
   </node>
   <node id="1366642101" lat="48.8393036" lon="2.2837056">
-    <tag k="addr:city" v="Paris"/>
-    <tag k="addr:housenumber" v="93"/>
-    <tag k="addr:street" v="Avenue Félix Faure"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="93"/>
+    <tag k="contact:phone" v="+33 1 45 57 56 88"/>
+    <tag k="contact:postcode" v="75015"/>
+    <tag k="contact:street" v="Avenue Félix Faure"/>
     <tag k="name" v="Cyclo Paris 15"/>
-    <tag k="phone" v="01 45 57 56 88"/>
+    <tag k="note" v="Spécialiste du vélo hollandais"/>
+    <tag k="service:bicycle:rental" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
     <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre ; mise à jour : 2011"/>
-    <tag k="website" v="http://www.velo-hollandais-paris.fr/"/>
+    <tag k="website" v="http://www.cycloparis15.fr"/>
   </node>
   <node id="1369678524" lat="48.8560577" lon="2.3569772">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="23"/>
+    <tag k="addr:postcode" v="75004"/>
+    <tag k="addr:street" v="Rue de Rivoli"/>
     <tag k="name" v="Ecox"/>
     <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.ecox.fr/nos-magasins/ecox-paris-rivoli"/>
   </node>
-  <node id="1378321857" lat="48.8699573" lon="2.3668657">
-    <tag k="name" v="Velovia"/>
+  <node id="1378321857" lat="48.8700199" lon="2.3668590">
+    <tag k="brand" v="Brompton"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="50"/>
+    <tag k="contact:phone" v="+33 1 48 04 84 91"/>
+    <tag k="contact:postcode" v="75010"/>
+    <tag k="contact:street" v="Quai de Jemmapes"/>
+    <tag k="name" v="Cyclable"/>
+    <tag k="note" v="Spécialiste du vélo de ville haut de gamme, vélos pliants, vélos électriques ainsi que les nouveaux vélos couchés."/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
-    <tag k="website" v="www.cyclable.com"/>
+    <tag k="website" v="http://paris10.cyclable.com/"/>
   </node>
   <node id="1457573267" lat="48.8401416" lon="2.3146953">
     <tag k="addr:city" v="Paris"/>
     <tag k="addr:housenumber" v="2"/>
     <tag k="addr:street" v="Rue de l'Armorique"/>
-    <tag k="name" v="Freemoos"/>
+    <tag k="brand" v="Matra;Gazelle"/>
+    <tag k="description" v="Electriser vos déplacements"/>
+    <tag k="name" v="Altermove"/>
+    <tag k="note" v="VAE"/>
+    <tag k="old_name" v="Freemoos"/>
+    <tag k="opening_hours" v="Tu-Sa 10:00-13:45,15:00-19:00"/>
     <tag k="shop" v="bicycle"/>
     <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2011"/>
   </node>
@@ -473,31 +697,41 @@
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="1458511693" lat="48.8647906" lon="2.3476242">
-    <tag k="addr:housenumber" v="40"/>
-    <tag k="addr:street" v="Rue Tiquetonne"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="40"/>
+    <tag k="contact:phone" v="+33 1 44 54 06 46"/>
+    <tag k="contact:postcode" v="75002"/>
+    <tag k="contact:street" v="Rue Tiquetonne"/>
     <tag k="name" v="En Selle Marcel"/>
+    <tag k="note" v="Beaux vélos pour tous les jours, vélos rares pour amateurs, vélos vintage des années 50s aux 80s, accessoires inédits style et confort. Atelier pour l'entretien"/>
     <tag k="opening_hours" v="tu-sa 11:00-19:00"/>
-    <tag k="phone" v="01 44 54 06 46"/>
+    <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
-    <tag k="website" v="http://ensellemarcel.over-blog.com/"/>
+    <tag k="website" v="http://www.ensellemarcel.com"/>
   </node>
-  <node id="1458511931" lat="48.8630959" lon="2.3587203">
-    <tag k="name" v="freemos"/>
+  <node id="1672310011" lat="48.8685084" lon="2.3857567">
+    <tag k="name" v="Velotority"/>
+    <tag k="opening_hours" v="Tu-Fr 10:00-13:00,14:00-19:00; Sa 13:00-19:00"/>
     <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.velotority.com"/>
   </node>
   <node id="1747138935" lat="48.8392743" lon="2.4024830">
     <tag k="contact:housenumber" v="23"/>
     <tag k="contact:street" v="Rue de Toul"/>
     <tag k="name" v="Belleville Lowrider"/>
     <tag k="note" v="Vélo californien"/>
-    <tag k="phone" v="01 44 87 09 66"/>
+    <tag k="phone" v="+33 1 44 87 09 66"/>
     <tag k="service:bicycle:rental" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="http://www.belleville-lowrider.fr/"/>
   </node>
   <node id="1747138937" lat="48.8520816" lon="2.2952447">
+    <tag k="addr:housenumber" v="24"/>
+    <tag k="addr:postcode" v="75015"/>
+    <tag k="addr:street" v="Rue Edgar Faure"/>
     <tag k="name" v="Fat Tire Bike Tours"/>
     <tag k="service:bicycle:cleaning" v="no"/>
     <tag k="service:bicycle:diy" v="no"/>
@@ -510,30 +744,38 @@
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="1827357919" lat="48.8484768" lon="2.2750574">
-    <tag k="addr:city" v="Paris"/>
-    <tag k="addr:housenumber" v="47"/>
-    <tag k="addr:postcode" v="75016;75116"/>
-    <tag k="addr:street" v="Avenue de Versailles"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="47"/>
+    <tag k="contact:phone" v="+33 9 80 85 62 04"/>
+    <tag k="contact:postcode" v="75016"/>
+    <tag k="contact:street" v="avenue de Versailles"/>
     <tag k="name" v="Les Cyclistes Branchés"/>
-    <tag k="opening_hours" v="Tue-Fri 10.30 - 19.30, Sat 10.00 - 19.00"/>
-    <tag k="phone" v="+33 9 80 85 62 04"/>
+    <tag k="note" v="Spécialiste du vélo électrique"/>
+    <tag k="opening_hours" v="Tu-Fr 10:30-19:30; Sa 10:00-19:00"/>
+    <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="http://www.les-cyclistes-branches.com/"/>
   </node>
   <node id="1883161740" lat="48.8784909" lon="2.3722436">
-    <tag k="addr:housenumber" v="10"/>
-    <tag k="addr:street" v="Rue des Chaufourniers"/>
-    <tag k="name" v="JPCycles"/>
-    <tag k="note" v="à vérifier sur place"/>
-    <tag k="phone" v="09 53 76 97 70"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="10"/>
+    <tag k="contact:postcode" v="75019"/>
+    <tag k="contact:street" v="Rue des Chaufourniers"/>
+    <tag k="name" v="JP Cycles"/>
+    <tag k="note" v="Débarras de vos bicyclettes"/>
+    <tag k="opening_hours" v="Mo-Sa 9:00-13:00, 15:00-19:00"/>
+    <tag k="phone" v="+33 9 53 76 97 70"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://jpcycles.sitego.fr"/>
   </node>
   <node id="1896147373" lat="48.8891012" lon="2.3335587">
+    <tag k="contact:street" v="Rue Damrémont"/>
     <tag k="name" v="Paris Vert"/>
     <tag k="opening_hours" v="Tu-Sa 09:30-18:30"/>
-    <tag k="phone" v="01 53 09 99 09"/>
+    <tag k="phone" v="+33 1 53 09 99 09"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
@@ -555,46 +797,50 @@
     <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2012"/>
     <tag k="website" v="https://www.cyclocoop.org"/>
   </node>
-  <node id="1989949313" lat="48.8717596" lon="2.4114045">
-    <tag k="addr:housenumber" v="5"/>
-    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2012"/>
-  </node>
-  <node id="1989949317" lat="48.8720680" lon="2.4117866">
-    <tag k="addr:housenumber" v="7"/>
-    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2012"/>
-  </node>
   <node id="2050246285" lat="48.8772478" lon="2.2860197">
     <tag k="shop" v="bicycle"/>
   </node>
-  <node id="2184305426" lat="48.8462365" lon="2.3513428">
-    <tag k="name" v="Gepetto &amp; Vélos"/>
-    <tag k="phone" v="+33 1 43 54 19 95"/>
+  <node id="2121960202" lat="48.8841392" lon="2.3039160">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:country" v="FR"/>
+    <tag k="addr:housenumber" v="76"/>
+    <tag k="addr:postcode" v="75017"/>
+    <tag k="addr:street" v="Avenue de Villiers"/>
+    <tag k="name" v="Cyclable"/>
+    <tag k="opening_hours" v="Tu-Sa 10:00-13:00, 14:00-19:00"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2013"/>
+    <tag k="website" v="http://paris17.cyclable.com/"/>
+  </node>
+  <node id="2304319861" lat="48.8714764" lon="2.3601029">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="29b"/>
+    <tag k="addr:postcode" v="75010"/>
+    <tag k="addr:street" v="Boulevard de Magenta"/>
+    <tag k="name" v="Cycles Minutes"/>
+    <tag k="opening_hours" v="Mo-Su 09:00-19:00"/>
+    <tag k="service:bicycle:rental" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.cyclesminutes.fr/"/>
+  </node>
+  <node id="2304319863" lat="48.8569202" lon="2.3801348">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="50"/>
+    <tag k="contact:postcode" v="75011"/>
+    <tag k="contact:street" v="Rue Godefroy Cavaignac"/>
+    <tag k="name" v="Rapid Vélos"/>
+    <tag k="note" v="Le spécialiste du Hollandais. Réparateur toutes marques."/>
+    <tag k="opening_hours" v="Tu-Su 9:00-20:00"/>
+    <tag k="phone" v="+33 1 43 73 18 12"/>
+    <tag k="service:bicycle:pump" v="yes"/>
     <tag k="service:bicycle:rental" v="yes"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="service:bicycle:second_hand" v="yes"/>
-    <tag k="shop" v="bicycle"/>
-    <tag k="website" v="http://www.gepetto-velos.com/"/>
-  </node>
-  <node id="2267747897" lat="48.8458046" lon="2.3826922">
-    <tag k="name" v="La Bicyclette"/>
-    <tag k="opening_hours" v="Mo-Sa 10:00-19:00"/>
-    <tag k="phone" v="09 54 71 92 19"/>
-    <tag k="shop" v="bicycle"/>
-  </node>
-  <node id="2304319861" lat="48.8714764" lon="2.3601029">
-    <tag k="name" v="Cycles Minutes"/>
-    <tag k="service:bicycle:rental" v="yes"/>
-    <tag k="service:bicycle:repair" v="yes"/>
-    <tag k="service:bicycle:retail" v="yes"/>
-    <tag k="shop" v="bicycle"/>
-  </node>
-  <node id="2304319863" lat="48.8569202" lon="2.3801348">
-    <tag k="name" v="Rapid Vélos"/>
-    <tag k="phone" v="+33 1 43 73 18 12"/>
-    <tag k="service:bicycle:pump" v="yes"/>
-    <tag k="service:bicycle:repair" v="yes"/>
-    <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
   </node>
   <node id="2328496615" lat="48.8677236" lon="2.3688989">
@@ -604,35 +850,32 @@
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="http://www.cyclopebikes.fr/"/>
   </node>
-  <node id="2346487915" lat="48.8302973" lon="2.3765630">
-    <tag k="name" v="Decathlon"/>
+  <node id="2445444744" lat="48.8403910" lon="2.3454092">
+    <tag k="brand" v="Strida;Brompton"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="51"/>
+    <tag k="contact:phone" v="+33 1 45 35 30 75"/>
+    <tag k="contact:postcode" v="75005"/>
+    <tag k="contact:street" v="Rue Claude Bernard"/>
+    <tag k="email" v="contact@labicycletteelectrique.fr"/>
+    <tag k="name" v="La Bicyclette Électrique"/>
+    <tag k="note" v="Spécialiste vélos électriques et vélos pliables"/>
+    <tag k="opening_hours" v="Mo-Sa 10:00-19:30"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
-    <tag k="wheelchair" v="no"/>
-  </node>
-  <node id="2445444744" lat="48.8403910" lon="2.3454092">
-    <tag k="name" v="La Bicyclette Électrique"/>
-    <tag k="shop" v="bicycle"/>
     <tag k="source" v="survey"/>
   </node>
-  <node id="2458633044" lat="48.8219353" lon="2.2873558">
-    <tag k="addr:city" v="Vanves"/>
-    <tag k="addr:housenumber" v="11"/>
-    <tag k="addr:postcode" v="92170"/>
-    <tag k="addr:street" v="Rue Sadi Carnot"/>
-    <tag k="name" v="CRC Cycles"/>
-    <tag k="opening_hours" v="Tu-Sa 10:30-13:00,15:30-19:00; Mo,Su off"/>
-    <tag k="shop" v="bicycle"/>
-    <tag k="website" v="http://www.crc-cycles.com"/>
-  </node>
-  <node id="2460362212" lat="48.8160667" lon="2.2762302">
-    <tag k="addr:city" v="Vanves"/>
-    <tag k="addr:housenumber" v="40"/>
-    <tag k="addr:postcode" v="92170"/>
-    <tag k="addr:street" v="Avenue de la Paix"/>
+  <node id="2460362212" lat="48.8164252" lon="2.2756012">
+    <tag k="brand" v="MBK;LaPierre"/>
+    <tag k="contact:city" v="Vanves"/>
+    <tag k="contact:housenumber" v="40"/>
+    <tag k="contact:phone" v="+33 1 46 42 32 98"/>
+    <tag k="contact:postcode" v="92170"/>
+    <tag k="contact:street" v="Avenue de la Paix"/>
     <tag k="name" v="Chardonnet"/>
-    <tag k="note" v="Sells bikes from MBK and LaPierre."/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
   </node>
   <node id="2464044815" lat="48.8170382" lon="2.2479946">
@@ -645,9 +888,43 @@
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="www.vtt-cube.fr"/>
   </node>
+  <node id="2503108174" lat="48.8261936" lon="2.3733792">
+    <tag k="addr:housenumber" v="1"/>
+    <tag k="addr:street" v="Rue Trolley de Prévaux"/>
+    <tag k="name" v="Les petits vélos de Tolbiac"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2013"/>
+  </node>
+  <node id="2639430689" lat="48.8146444" lon="2.4012557">
+    <tag k="addr:city" v="Ivry-sur-Seine"/>
+    <tag k="addr:housenumber" v="6"/>
+    <tag k="addr:postcode" v="94200"/>
+    <tag k="addr:street" v="Boulevard de Brandebourg"/>
+    <tag k="name" v="Cyclofficine d'Ivry"/>
+    <tag k="note" v="Atelier vélo coopératif. Ouvertures : mardi 19h-22h, jeudi et samedi 14h-19h (sauf 1er sam du mois)"/>
+    <tag k="opening_hours" v="Tu 19:00-22:00; Th,Sa 14:00-19:00; Sa[1] off"/>
+    <tag k="service:bicycle:diy" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Generale des Impots - Cadastre. Mise a jour : 2014"/>
+    <tag k="website" v="https://www.cyclocoop.org"/>
+  </node>
+  <node id="2670790926" lat="48.8530768" lon="2.4216908">
+    <tag k="addr:housenumber" v="12"/>
+    <tag k="name" v="Le Comptoir Bike Shop"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2014"/>
+    <tag k="url" v="http://lecomptoirbikeshop.com/"/>
+  </node>
   <node id="2682494131" lat="48.8350876" lon="2.3236228">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="136"/>
+    <tag k="addr:postcode" v="75014"/>
+    <tag k="addr:street" v="Avenue du Maine"/>
     <tag k="name" v="Ecox"/>
-    <tag k="phone" v="01 43 21 81 78"/>
+    <tag k="phone" v="+33 1 43 21 81 78"/>
     <tag k="service:bicycle:rental" v="no"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
@@ -655,17 +932,14 @@
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="http://www.ecox.fr/nos-magasins/ecox-montparnasse/"/>
   </node>
-  <node id="2739184613" lat="48.8342154" lon="2.4038005">
-    <tag k="service:bicycle:retail" v="yes"/>
-    <tag k="shop" v="bicycle"/>
-  </node>
   <node id="2810060724" lat="48.8472580" lon="2.3874271">
     <tag k="email" v="paris12@cyclable.com"/>
     <tag k="name" v="Cyclable 12e"/>
-    <tag k="phone" v="09 72 45 78 01"/>
+    <tag k="phone" v="+33 9 72 45 78 01"/>
     <tag k="service:bicycle:repair" v="yes"/>
     <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
+    <tag k="website" v="https://paris12.cyclable.com/"/>
   </node>
   <node id="2827746701" lat="48.8249912" lon="2.3579762">
     <tag k="name" v="Cycles Sport Urbain"/>
@@ -674,7 +948,7 @@
     <tag k="source:opening_hours" v="survey"/>
     <tag k="website" v="http://cyclesurbain.fr"/>
   </node>
-  <node id="2845063415" lat="48.8710692" lon="2.3601169">
+  <node id="2845063415" lat="48.8710703" lon="2.3600993">
     <tag k="name" v="Alternative Bike"/>
     <tag k="shop" v="bicycle"/>
   </node>
@@ -696,35 +970,50 @@
     <tag k="wheelchair" v="no"/>
   </node>
   <node id="3213130438" lat="48.8424383" lon="2.2646195">
+    <tag k="addr:city" v="Paris"/>
     <tag k="addr:housenumber" v="59"/>
     <tag k="addr:postcode" v="75016"/>
     <tag k="addr:street" v="Rue Chardon-Lagache"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="59"/>
+    <tag k="contact:postcode" v="75016"/>
+    <tag k="contact:street" v="Rue Chardon-Lagache"/>
     <tag k="name" v="Paris Vert"/>
+    <tag k="note" v="&quot;As of 1st April 2017, temporarily closed due to illness&quot;, so call before going."/>
+    <tag k="phone" v="+33.1 40 50 20 01"/>
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="http://parisvert.fr/"/>
   </node>
   <node id="3222082587" lat="48.8448042" lon="2.2707467">
-    <tag k="addr:city" v="Paris"/>
-    <tag k="addr:housenumber" v="98"/>
-    <tag k="addr:postcode" v="75016"/>
-    <tag k="addr:street" v="Avenue de Versailles"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="98"/>
+    <tag k="contact:phone" v="+33 1 45 20 03 95"/>
+    <tag k="contact:postcode" v="75016"/>
+    <tag k="contact:street" v="Avenue de Versailles"/>
     <tag k="name" v="Bicycland"/>
-    <tag k="phone" v="+33 1 45 20 03 95"/>
+    <tag k="note" v="Spécialiste du vélo hollandais. Dépositaire vélos pliant Dahon. Réparation vélos toutes marques, vente vélos d'occasion."/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="http://www.bicycland.com/"/>
   </node>
   <node id="3236199132" lat="48.8649312" lon="2.3653471">
-    <tag k="name" v="triathlon"/>
+    <tag k="name" v="Triathlon Store"/>
     <tag k="opening_hours" v="Mo-Sa 10:00-19:00"/>
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="triathlonstore.fr"/>
   </node>
   <node id="3247620975" lat="48.8510185" lon="2.3975274">
-    <tag k="addr:city" v="Paris"/>
-    <tag k="addr:housenumber" v="110"/>
-    <tag k="addr:postcode" v="75011"/>
-    <tag k="addr:street" v="Rue de Montreuil"/>
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="110"/>
+    <tag k="contact:phone" v="+33 9 84 58 35 94"/>
+    <tag k="contact:postcode" v="75011"/>
+    <tag k="contact:street" v="Rue de Montreuil"/>
     <tag k="name" v="Cycles Bogoss"/>
+    <tag k="note" v="Spécialiste vélos anciens restaurés ou transformés : pignon fixe, single speed, randonneuse..."/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
     <tag k="website" v="http://cyclesbogoss.com/"/>
   </node>
@@ -739,67 +1028,540 @@
     <tag k="website" v="http://www.beastybike.com/"/>
   </node>
   <node id="3335961964" lat="48.8843245" lon="2.3768303">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="68"/>
+    <tag k="contact:phone" v="+33 9 84 09 93 42"/>
+    <tag k="contact:postcode" v="75019"/>
+    <tag k="contact:street" v="Avenue Jean Jaurès"/>
     <tag k="name" v="Cyclable"/>
+    <tag k="opening_hours" v="Tu-Sa 10:00-13:00, 14:00-19:00"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://paris19.cyclable.com/"/>
+  </node>
+  <node id="3407822104" lat="48.8471493" lon="2.4052908">
+    <tag k="email" v="contact@giant-paris12.com"/>
+    <tag k="name" v="Giant Paris 12"/>
+    <tag k="opening_hours" v="Tu-Fr 09:00-13:00,14:30-19:00; Th 09:00-13:00,14:30-17:30; Sa 10:00-13:00,14:30-18:30"/>
+    <tag k="phone" v="+33143435105"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.giant-paris12.com"/>
+    <tag k="wheelchair" v="limited"/>
+  </node>
+  <node id="3455588002" lat="48.8270223" lon="2.2769257">
+    <tag k="name" v="CRC Cycles"/>
+    <tag k="opening_hours" v="Tu-Sa 10:30-13:00,15:30-19:00"/>
+    <tag k="phone" v="+33145291045"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
   </node>
-  <way id="70003214">
-    <nd ref="836355049"/>
-    <nd ref="836361778"/>
-    <nd ref="836331256"/>
-    <nd ref="836328472"/>
-    <nd ref="836357374"/>
-    <nd ref="836356532"/>
-    <nd ref="836351447"/>
-    <nd ref="836331365"/>
-    <nd ref="836371275"/>
-    <nd ref="836346356"/>
-    <nd ref="836372624"/>
-    <nd ref="836339426"/>
-    <nd ref="836332448"/>
-    <nd ref="836402636"/>
-    <nd ref="836366562"/>
-    <nd ref="836388785"/>
-    <nd ref="836404857"/>
-    <nd ref="836376927"/>
-    <nd ref="836342842"/>
-    <nd ref="836405357"/>
-    <nd ref="1989949313"/>
-    <nd ref="1989949317"/>
-    <nd ref="836355049"/>
-    <tag k="addr:city" v="Paris"/>
-    <tag k="addr:housenumber" v="3"/>
-    <tag k="addr:postcode" v="75020"/>
-    <tag k="addr:street" v="Rue de Noisy le Sec"/>
-    <tag k="building" v="yes"/>
-    <tag k="name" v="La Cyclofficine de Paris"/>
-    <tag k="opening_hours" v="We 14:00-18:00, Sa 14:00-19:00"/>
+  <node id="3486922690" lat="48.8434401" lon="2.3829185">
+    <tag k="email" v="75paris12@culturevelo.com"/>
+    <tag k="name" v="Culture Vélo Paris 12ème"/>
+    <tag k="opening_hours" v="Tu-Fr 10:00-19:00; Sa 09:00-19:00"/>
+    <tag k="phone" v="+33 1 43 14 47 17"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
     <tag k="shop" v="bicycle"/>
-    <tag k="source" v="cadastre-dgi-fr source : Direction Générale des Impôts - Cadastre. Mise à jour : 2010"/>
-    <tag k="website" v="http://www.cyclocoop.org/"/>
-  </way>
-  <way id="73111997">
-    <nd ref="867517715"/>
-    <nd ref="867507166"/>
-    <nd ref="867529215"/>
-    <nd ref="867497570"/>
-    <nd ref="867461114"/>
-    <nd ref="867527154"/>
-    <nd ref="867517715"/>
+    <tag k="source" v="survey"/>
+    <tag k="website" v="http://www.culturevelo.com/-Paris-12eme-"/>
+  </node>
+  <node id="3501719712" lat="48.8725964" lon="2.3500793">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="15"/>
+    <tag k="contact:phone" v="+33 1 83 94 92 62"/>
+    <tag k="contact:postcode" v="75010"/>
+    <tag k="contact:street" v="Rue d'Hauteville"/>
+    <tag k="name" v="Cyclo de ville"/>
+    <tag k="note" v="Ventes de vélos, pièces détachées, réparation toutes marques"/>
+    <tag k="opening_hours" v="Mo-Sa 10:00-19:00"/>
+    <tag k="operator" v="Achraf Marhag"/>
+    <tag k="service:bicycle:pump" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="local_knowledge"/>
+    <tag k="wheelchair" v="no"/>
+  </node>
+  <node id="3591966558" lat="48.8477354" lon="2.3513141">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="17"/>
+    <tag k="contact:postcode" v="75005"/>
+    <tag k="contact:street" v="Rue des Écoles"/>
+    <tag k="name" v="Holland Bikes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.hollandbikes.com/"/>
+  </node>
+  <node id="3638681300" lat="48.8555280" lon="2.4282892">
+    <tag k="addr:city" v="Montreuil"/>
+    <tag k="addr:housenumber" v="4"/>
+    <tag k="addr:postcode" v="93100"/>
+    <tag k="addr:street" v="Rue Garibaldi"/>
+    <tag k="name" v="Ohcyclo, atelier vélo solidaire et coopératif"/>
+    <tag k="operator" v="Ohcyclo"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://http://www.ohcyclo.org"/>
+  </node>
+  <node id="3651262894" lat="48.8821622" lon="2.3683439">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="226"/>
+    <tag k="contact:phone" v="+33 1 40 34 92 94"/>
+    <tag k="contact:postcode" v="75010"/>
+    <tag k="contact:street" v="Rue La Fayette"/>
+    <tag k="name" v="Bicycl'Art"/>
+    <tag k="note" v="Par amour du vélo"/>
+    <tag k="service:bicycle:rental" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://bicyclart.fr/"/>
+  </node>
+  <node id="3659115001" lat="48.8703250" lon="2.3619582">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="49"/>
+    <tag k="addr:postcode" v="75010"/>
+    <tag k="addr:street" v="Rue Albert Thomas"/>
+    <tag k="name" v="La Crèmerie"/>
+    <tag k="note" v="Spécialisé dans le BMX"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://lacremeriebmx.com/f"/>
+  </node>
+  <node id="3672042540" lat="48.8680988" lon="2.3543734">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="82"/>
+    <tag k="contact:postcode" v="75003"/>
+    <tag k="contact:street" v="Rue Notre-Dame de Nazareth"/>
+    <tag k="name" v="E-Bicycle"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.e-bicycle.fr/"/>
+  </node>
+  <node id="3730863782" lat="48.8311771" lon="2.3237740">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="2bis"/>
+    <tag k="addr:postcode" v="75014"/>
+    <tag k="addr:street" v="Rue Bénard"/>
+    <tag k="name" v="Fixie Warehouse"/>
+    <tag k="phone" v="+33 6 52 43 49 03"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.fixie-warehouse.com/fr/"/>
+  </node>
+  <node id="3761829300" lat="48.8849060" lon="2.3289524">
+    <tag k="name" v="Cycles Tosi"/>
+    <tag k="phone" v="+33 7 89 03 41 08"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="https://www.facebook.com/cyclestosi"/>
+  </node>
+  <node id="3764314581" lat="48.8365634" lon="2.2893945">
+    <tag k="email" v="75paris15@culturevelo.com"/>
+    <tag k="name" v="Culture Vélo Paris 15ème"/>
+    <tag k="opening_hours" v="Tu-Sa 10:00-19:00"/>
+    <tag k="phone" v="+33 1 47 07 74 42"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.culturevelo.com/-Paris-15eme-"/>
+  </node>
+  <node id="3792503782" lat="48.8691529" lon="2.3479837">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="2"/>
+    <tag k="contact:phone" v="+33 1 40 35 36 36"/>
+    <tag k="contact:postcode" v="75002"/>
+    <tag k="contact:street" v="Rue Beauregard"/>
+    <tag k="email" v="allovelo@gmail.com"/>
+    <tag k="name" v="Allo Vélo"/>
+    <tag k="opening_hours" v="Mo-Su 10:00-19:00"/>
+    <tag k="service:bicycle:rental" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.allovelo.com/"/>
+  </node>
+  <node id="3801134121" lat="48.8552220" lon="2.3821106">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="20"/>
+    <tag k="addr:postcode" v="75011"/>
+    <tag k="addr:street" v="Rue Richard Lenoir"/>
+    <tag k="name" v="Boutique de vélos hollandais"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="3834162505" lat="48.8453063" lon="2.3827078">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="5"/>
+    <tag k="contact:phone" v="+33 9 54 71 92 19"/>
+    <tag k="contact:postcode" v="75012"/>
+    <tag k="contact:street" v="Rue Crozatier"/>
+    <tag k="name" v="La Bicyclette"/>
+    <tag k="note" v="Vélos d'hier et d'aujourd'hui"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="service:bicycle:second_hand" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://la-bicyclette.over-blog.com/"/>
+  </node>
+  <node id="3889495162" lat="48.8171270" lon="2.3382242">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="17"/>
+    <tag k="addr:postcode" v="75014"/>
+    <tag k="addr:street" v="Boulevard Jourdan"/>
+    <tag k="name" v="Le vélo volant"/>
+    <tag k="opening_hours" v="Sa 14:00-19:00"/>
+    <tag k="service:bicycle:diy" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="https://www.facebook.com/levelovolant/"/>
+  </node>
+  <node id="3955505317" lat="48.8936804" lon="2.2947953">
+    <tag k="brand" v="Lapierre;Torpado"/>
+    <tag k="contact:city" v="Levallois-Perret"/>
+    <tag k="contact:housenumber" v="85"/>
+    <tag k="contact:phone" v="+33 1 47 37 28 82"/>
+    <tag k="contact:postcode" v="92300"/>
+    <tag k="contact:street" v="Rue Jean Jaurès"/>
+    <tag k="name" v="Cycles Cossia"/>
+    <tag k="note" v="Montage à la carte"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="3955518653" lat="48.8942623" lon="2.2915937">
+    <tag k="addr:city" v="Levallois-Perret"/>
+    <tag k="addr:housenumber" v="63"/>
+    <tag k="addr:postcode" v="92300"/>
+    <tag k="addr:street" v="Rue Jules Guesde"/>
+    <tag k="name" v="Cityzen Vélo"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="3959744506" lat="48.8722459" lon="2.3921752">
+    <tag k="email" v="docvelos@hotmail.fr"/>
+    <tag k="name" v="Doc'velos"/>
+    <tag k="opening_hours" v="Tu-Sa 09:30-19:00; We 14:00-19:00"/>
+    <tag k="phone" v="+33 6 70 20 88 01"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.doc-velos.fr/"/>
+  </node>
+  <node id="4003949511" lat="48.9006358" lon="2.3923740">
     <tag k="addr:city" v="Pantin"/>
     <tag k="addr:housenumber" v="20"/>
     <tag k="addr:postcode" v="93500"/>
     <tag k="addr:street" v="Rue Magenta"/>
-    <tag k="building" v="yes"/>
-    <tag k="contact:email" v="info.pantin@cyclocoop.org"/>
-    <tag k="contact:website" v="http://www.cyclocoop.org/index.php/les-ateliers/pantin"/>
     <tag k="name" v="La Cyclofficine de Pantin"/>
-    <tag k="opening_hours" v="Th 19:00-22:00; Sa 14:00-19:00; Sa[1] off"/>
+    <tag k="opening_hours" v="Tu,Th 19:00-22:00; Sa 14:00-19:00; Sa[1] off"/>
     <tag k="service:bicycle:diy" v="yes"/>
-    <tag k="service:bicycle:pump" v="yes"/>
+    <tag k="service:bicycle:retail" v="no"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="https://www.cyclocoop.org"/>
+  </node>
+  <node id="4054513400" lat="48.8497440" lon="2.3810939">
+    <tag k="addr:housenumber" v="41"/>
+    <tag k="addr:postcode" v="75012"/>
+    <tag k="addr:street" v="Rue de Cîteaux"/>
+    <tag k="amenity" v="cafe"/>
+    <tag k="name" v="Café-vélo Jour de vélo"/>
+    <tag k="phone" v="+33 9 54 31 29 44"/>
+    <tag k="service:bicycle:diy" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.jourdevelo.fr/"/>
+    <tag k="website_1" v="https://www.facebook.com/Jour-de-V%C3%A9lo-1746704848882644/"/>
+  </node>
+  <node id="4054553560" lat="48.8701689" lon="2.3603582">
+    <tag k="contact:city" v="Paris"/>
+    <tag k="contact:housenumber" v="20"/>
+    <tag k="contact:postcode" v="75010"/>
+    <tag k="contact:street" v="Rue du Château d'Eau"/>
+    <tag k="description" v="Aussi : café, thé, bagels et gateaux"/>
+    <tag k="email" v="contact@lachouetteparis.com"/>
+    <tag k="name" v="Café-vélo La Chouette"/>
+    <tag k="opening_hours" v="Tu-Sa 09:00-19:00"/>
+    <tag k="phone" v="+33 9 82 29 57 01"/>
+    <tag k="service:bicycle:dealer" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="https://www.facebook.com/lachouetteparis/"/>
+  </node>
+  <node id="4086305749" lat="48.8841280" lon="2.3039334">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="76"/>
+    <tag k="addr:postcode" v="75017"/>
+    <tag k="addr:street" v="Avenue de Villiers"/>
+    <tag k="name" v="Cyclable"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="4170171701" lat="48.8766627" lon="2.3912665">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="44"/>
+    <tag k="addr:postcode" v="75019"/>
+    <tag k="addr:street" v="Rue des Solitaires"/>
+    <tag k="name" v="Stock Vélos"/>
+    <tag k="phone" v="+33.6 09 40 32 15"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="source" v="survey"/>
+    <tag k="website" v="https://www.facebook.com/StockV%C3%A9los-987103844657943/"/>
+  </node>
+  <node id="4268470281" lat="48.8715966" lon="2.4110712">
+    <tag k="contact:housenumber" v="3"/>
+    <tag k="contact:street" v="Rue de Noisy le Sec"/>
+    <tag k="name" v="La Cyclofficine de Paris"/>
+    <tag k="opening_hours" v="We 14:00-18:00; Sa 14:00-19:00"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.cyclocoop.org/"/>
+  </node>
+  <node id="4370198351" lat="48.8865854" lon="2.3128616">
+    <tag k="name" v="Urban Wheel"/>
+    <tag k="opening_hours" v="Tu-Fr 09:00-13:30,14:30-19:00; Sa 10:00-13:00,14:00-19:00"/>
+    <tag k="phone" v="+33 9 84 11 54 75"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="url" v="http://www.urban-wheel.fr/"/>
+  </node>
+  <node id="4430480696" lat="48.8458094" lon="2.3826824">
+    <tag k="name" v="La bicyclette"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="4432561734" lat="48.8260898" lon="2.3085435">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="1"/>
+    <tag k="addr:postcode" v="75014"/>
+    <tag k="addr:street" v="Rue Prévost-Paradol"/>
+    <tag k="email" v="paris14@solicycle.org"/>
+    <tag k="name" v="SoliCycle"/>
+    <tag k="phone" v="+33 6 21 88 16 67"/>
+    <tag k="service:bicycle:diy" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://solicycle.org/"/>
+  </node>
+  <node id="4501300361" lat="48.8607407" lon="2.3881015">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="41"/>
+    <tag k="addr:postcode" v="75011"/>
+    <tag k="addr:street" v="Boulevard de Ménilmontant"/>
+    <tag k="description" v="Magasin de réparation de vélos Paris 11ème, bicyclettes. Vente de vélos neufs et occasions et location de vélos. Accessoires et pièces vélos, casques, sacoches..."/>
+    <tag k="name" v="Velo Time"/>
+    <tag k="opening_hours" v="Mo-Su 09:30-19:30"/>
+    <tag k="phone" v="+33 1 45671230"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.velo-time.com/"/>
+  </node>
+  <node id="4509531403" lat="48.8681196" lon="2.3738797">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="58"/>
+    <tag k="addr:postcode" v="75011"/>
+    <tag k="addr:street" v="Rue de la Fontaine au Roi"/>
+    <tag k="amenity" v="cafe"/>
+    <tag k="name" v="Steel Cyclewear &amp; Coffeeshop"/>
+    <tag k="note" v="06 47 58 32 46"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="https://www.facebook.com/steelcyclecoffeeshop"/>
+  </node>
+  <node id="4510912183" lat="48.8781214" lon="2.3656300">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="155"/>
+    <tag k="addr:postcode" v="75010"/>
+    <tag k="addr:street" v="Quai de Valmy"/>
+    <tag k="email" v="laventureavelo@gmail.com"/>
+    <tag k="name" v="L'Aventure A Vélo"/>
+    <tag k="opening_hours" v="Tu-Su 09:00-20:00; Mo 13:00-20:00"/>
+    <tag k="phone" v="+33 1 40 34 17 99"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://laventureavelo.com/"/>
+  </node>
+  <node id="4582362405" lat="48.8522640" lon="2.3676063">
+    <tag k="addr:country" v="FR"/>
+    <tag k="addr:housenumber" v="37"/>
+    <tag k="addr:street" v="Boulevard Bourdon"/>
+    <tag k="contact:email" v="courrier@mdb-idf.org"/>
+    <tag k="contact:facebook" v="https://m.facebook.com/MieuxseDeplaceraBicyclette/"/>
+    <tag k="contact:framasphere" v="https://framasphere.org/u/mdb"/>
+    <tag k="contact:phone" v="+33 1 43 20 26 02"/>
+    <tag k="contact:twitter" v="https://mobile.twitter.com/mdbidf"/>
+    <tag k="contact:website" v="http://www.mdb-idf.org"/>
+    <tag k="name" v="Mieux se Déplacer à Bicyclette"/>
+    <tag k="opening_hours" v="Tu-Sa 09:30-12:30,13:30-17:30"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="short_name" v="MDB"/>
+    <tag k="wheelchair" v="yes"/>
+  </node>
+  <node id="4589307792" lat="48.8652202" lon="2.3695325">
+    <tag k="addr:housenumber" v="117"/>
+    <tag k="contact:facebook" v="https://www.facebook.com/GOSportParisRepubliqueCycle"/>
+    <tag k="contact:phone" v="+33155283550"/>
+    <tag k="name" v="Boutique Cycle Go Sport Republique"/>
+    <tag k="opening_hours" v="Mo-Sa 10:00-19:30"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.go-sport.com/edito/atelier-cycle"/>
+  </node>
+  <node id="4642561381" lat="48.8764397" lon="2.3466471">
+    <tag k="name" v="Ecox"/>
+    <tag k="opening_hours" v="Tu-Sa 10:00-14:00,15:00-19:00"/>
+    <tag k="service:bicycle:ebike" v="yes"/>
+    <tag k="service:bicycle:rental" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.ecox.fr/nos-magasins/ecox-lafayette"/>
+  </node>
+  <node id="4704552073" lat="48.8764281" lon="2.2909037">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="20"/>
+    <tag k="addr:postcode" v="75017"/>
+    <tag k="addr:street" v="Rue des Acacias"/>
+    <tag k="name" v="Kilomètre 0"/>
+    <tag k="phone" v="+33 1 40 54 67 40"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.km0.paris"/>
+  </node>
+  <node id="4705447996" lat="48.8468906" lon="2.3765935">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="65"/>
+    <tag k="addr:postcode" v="75012"/>
+    <tag k="addr:street" v="Avenue Daumesnil"/>
+    <tag k="name" v="Bicloune"/>
+    <tag k="phone" v="+33 1 48 05 47 75"/>
+    <tag k="service:bicycle:parts" v="yes"/>
+    <tag k="service:bicycle:rental" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
     <tag k="service:bicycle:second_hand" v="yes"/>
     <tag k="shop" v="bicycle"/>
-    <tag k="source" v="bicycle_coop_atelier_velo_participatif"/>
-    <tag k="website" v="https://www.cyclocoop.org"/>
-  </way>
+    <tag k="website" v="http://www.cycles-bicloune.com/"/>
+  </node>
+  <node id="4732816621" lat="48.8454486" lon="2.3238646">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="8"/>
+    <tag k="addr:postcode" v="75006"/>
+    <tag k="addr:street" v="Rue Littré"/>
+    <tag k="name" v="Les nouveaux cyclistes"/>
+    <tag k="phone" v="+33158901547"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.lesnouveauxcyclistes.com/"/>
+  </node>
+  <node id="4760691715" lat="48.8560138" lon="2.3503854">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:postcode" v="75004"/>
+    <tag k="addr:street" v="Voie Georges Pompidou"/>
+    <tag k="email" v="berges@solicycle.org"/>
+    <tag k="name" v="SoliCycle"/>
+    <tag k="phone" v="+33 6 66 52 76 55"/>
+    <tag k="service:bicycle:diy" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://solicycle.org/"/>
+  </node>
+  <node id="4810300842" lat="48.8793770" lon="2.4217727">
+    <tag k="addr:city" v="Les Lilas"/>
+    <tag k="addr:housenumber" v="112"/>
+    <tag k="addr:postcode" v="93260"/>
+    <tag k="addr:street" v="Rue Romain Rolland"/>
+    <tag k="email" v="arianri@hotmail.de"/>
+    <tag k="name" v="Tous pour un vélo"/>
+    <tag k="phone" v="+33.6.88.04.48.63"/>
+    <tag k="service:bicycle:diy" v="yes"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="https://www.facebook.com/pg/touspourunvelo/"/>
+  </node>
+  <node id="4813723480" lat="48.8470589" lon="2.2938694">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="135"/>
+    <tag k="addr:postcode" v="75015"/>
+    <tag k="addr:street" v="Avenue Émile Zola"/>
+    <tag k="name" v="Cyclable"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="https://paris15.cyclable.com/"/>
+  </node>
+  <node id="4888402227" lat="48.8221668" lon="2.3058603">
+    <tag k="name" v="Paris Bike Company"/>
+    <tag k="phone" v="+33 9 51 54 59 32"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://parisbikeco.com"/>
+  </node>
+  <node id="4951102667" lat="48.8466724" lon="2.2727252">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="68"/>
+    <tag k="addr:postcode" v="75016"/>
+    <tag k="addr:street" v="Avenue de Versailles"/>
+    <tag k="name" v="Cyclable"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:sales" v="yes"/>
+    <tag k="service:bicycle:tools" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="https://paris16.cyclable.com/"/>
+  </node>
+  <node id="4966247880" lat="48.8693179" lon="2.3724247">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="6"/>
+    <tag k="addr:postcode" v="75011"/>
+    <tag k="addr:street" v="Rue des Goncourt"/>
+    <tag k="email" v="cycklette@lapetiterockette.org"/>
+    <tag k="name" v="La Cycklette"/>
+    <tag k="service:bicycle:diy" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="https://www.facebook.com/La-Cycklette-1508391019226339/"/>
+  </node>
+  <node id="4970267736" lat="48.8889291" lon="2.3222301">
+    <tag k="contact:facebook" v="https://www.facebook.com/Byke-the-Way-1416101925301171/"/>
+    <tag k="name" v="Byke the Way"/>
+    <tag k="opening_hours" v="Mo-Sa 09:00-19:00"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="5059095705" lat="48.8682753" lon="2.3725152">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="128"/>
+    <tag k="addr:postcode" v="75011"/>
+    <tag k="addr:street" v="Avenue Parmentier"/>
+    <tag k="name" v="Paradis des vélos"/>
+    <tag k="phone" v="+33.6 21 98 87 96"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="https://www.facebook.com/Paradis-Des-V%C3%A9los-827633057411747/"/>
+  </node>
+  <node id="5136400460" lat="48.8482366" lon="2.3542108">
+    <tag k="addr:city" v="Paris"/>
+    <tag k="addr:housenumber" v="28"/>
+    <tag k="addr:postcode" v="75005"/>
+    <tag k="addr:street" v="Rue des Fossés Saint-Bernard"/>
+    <tag k="name" v="Gepetto &amp; Vélos"/>
+    <tag k="phone" v="+33.1 43 54 19 95"/>
+    <tag k="shop" v="bicycle"/>
+    <tag k="website" v="http://www.gepetto-velos.com/"/>
+  </node>
+  <node id="5211024238" lat="48.8242813" lon="2.2822635">
+    <tag k="contact:city" v="Vanves"/>
+    <tag k="contact:email" v="info@crc-cycles.com"/>
+    <tag k="contact:housenumber" v="45"/>
+    <tag k="contact:phone" v="+33 1 45 29 10 42"/>
+    <tag k="contact:postcode" v="92170"/>
+    <tag k="contact:street" v="Boulevard du Lycée"/>
+    <tag k="contact:website" v="http://www.crc-cycles.com/"/>
+    <tag k="name" v="CRC Cycles"/>
+    <tag k="note" v="Course, VTT, VAE"/>
+    <tag k="opening_hours" v="Tu-Sa 10:30-13:00,15:00-19:00"/>
+    <tag k="service:bicycle:repair" v="yes"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="5273955199" lat="48.8561083" lon="2.3728517">
+    <tag k="fixme" v="Magasin en cours de création, pas encore d'enseigne"/>
+    <tag k="service:bicycle:cleaning" v="no"/>
+    <tag k="service:bicycle:diy" v="no"/>
+    <tag k="service:bicycle:pump" v="no"/>
+    <tag k="service:bicycle:retail" v="yes"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
+  <node id="5275610306" lat="48.8663850" lon="2.3596443">
+    <tag k="name" v="Vintage cycles"/>
+    <tag k="shop" v="bicycle"/>
+  </node>
 
 </osm>
