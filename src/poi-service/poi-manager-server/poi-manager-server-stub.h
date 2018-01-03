@@ -62,7 +62,7 @@ public:
         OK
     } SQL_REQUEST_ERRORS;
 
-    typedef uint32_t recordId_t;
+    typedef uint64_t recordId_t;
     typedef uint32_t iconId_t;
     typedef uint32_t poiproviderId_t;
 

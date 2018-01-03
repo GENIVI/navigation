@@ -203,7 +203,7 @@
       <doc>
         <line>removePOIs = Removes a list of POIs to a category. Because of required time to remove it from the database, a signal is emitted when the update is done.</line>
       </doc>
-      <arg direction="in" name="ids" type="au">
+      <arg direction="in" name="ids" type="at">
         <doc>
           <line>ids (of type POI_ID) = List of unique ids of POIs to remove.</line>
           <line>lineComment to be defined</line>
@@ -304,7 +304,7 @@
           <line>resultListSize = Number of items of the results list</line>
         </doc>
       </arg>
-      <arg name="resultList" type="a(usu(ddd)qa(ui(yv)))" direction="out">
+      <arg name="resultList" type="a(tsu(ddd)qa(ui(yv)))" direction="out">
         <doc>
           <line>resultList = array[source_id,name, category, location, distance, attributeList]</line>
           <line>source_id = POI unique id as known by the content access module. This id will be used by POI service to request POI details.</line>
@@ -344,12 +344,12 @@
         <line>PoiDetailsRequested = This method retrieves the details associated to one or more POI.</line>
         <line>It contains the name, the parent categories, the list of attributes, the icons, ... .</line>
       </doc>
-      <arg name="source_id" type="au" direction="in">
+      <arg name="source_id" type="at" direction="in">
         <doc>
           <line>list of poi = Unique source poi id</line>
         </doc>
       </arg>
-      <arg name="results" type="a((us(ddd))aua(ui(yv)))" direction="out">
+      <arg name="results" type="a((ts(ddd))aua(ui(yv)))" direction="out">
         <doc>
           <line>results = array[details, categories, attributeList]</line>
           <line>results = List of details for all the POI.</line>
@@ -406,7 +406,7 @@
       <doc>
         <line>POIAdded = POIAdded = This signal is emitted when a list of POIs and associated content has been added to the database. It returns the ids.</line>
       </doc>
-      <arg direction="out" name="pois" type="au">
+      <arg direction="out" name="pois" type="at">
         <doc>
           <line>pois (of type POI_ID) = List of unique ids of POIs added. The order is the same as the order in the AddPOIs method.</line>
           <line>lineComment to be defined</line>
@@ -417,7 +417,7 @@
       <doc>
         <line>POIRemoved = POIRemoved = This signal is emitted when a list of POIs and associated content has been removed from the database.</line>
       </doc>
-      <arg direction="out" name="pois" type="au">
+      <arg direction="out" name="pois" type="at">
         <doc>
           <line>pois (of type POI_ID) = List of unique ids of POIs removed.</line>
           <line>lineComment to be defined</line>
@@ -440,7 +440,7 @@
           <line>enum[INVALID (org.franca.core.franca.impl.FIntegerConstantImpl@12babf4 (val: 0)), NOT_STARTED (org.franca.core.franca.impl.FIntegerConstantImpl@1a3c8e3 (val: 1296)), SEARCHING (org.franca.core.franca.impl.FIntegerConstantImpl@1f53788 (val: 1297)), FINISHED (org.franca.core.franca.impl.FIntegerConstantImpl@bdae21 (val: 1298))]</line>
         </doc>
       </arg>
-      <arg direction="out" name="pois" type="au">
+      <arg direction="out" name="pois" type="at">
         <doc>
           <line>pois (of type POI_ID) = List of pois that match the search (only valid if status is set to SEARCHING or FINISHED, by default empty list).</line>
           <line>lineComment to be defined</line>

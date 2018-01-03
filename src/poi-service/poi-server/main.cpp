@@ -140,17 +140,17 @@ void contentAccessModule::CategoriesRemoved(const std::vector< uint32_t >& categ
 
 }
 
-void contentAccessModule::POIAdded(const std::vector< uint32_t >& pois)
+void contentAccessModule::POIAdded(const std::vector<uint64_t> &pois)
 {
 
 }
 
-void contentAccessModule::POIRemoved(const std::vector< uint32_t >& pois)
+void contentAccessModule::POIRemoved(const std::vector< uint64_t >& pois)
 {
 
 }
 
-void contentAccessModule::SearchStatusChanged(const uint32_t& poiSearchHandle, const int32_t& statusValue, const std::vector< uint32_t >& pois)
+void contentAccessModule::SearchStatusChanged(const uint32_t& poiSearchHandle, const int32_t& statusValue, const std::vector< uint64_t >& pois)
 {
 
 }

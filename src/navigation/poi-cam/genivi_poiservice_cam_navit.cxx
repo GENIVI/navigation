@@ -82,7 +82,7 @@ variant_string(std::string s)
 }
 
 static bool
-do_sort_distance(::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > a, ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > b)
+do_sort_distance(::DBus::Struct< uint64_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > a, ::DBus::Struct< uint64_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > b)
 {
 	return a._5 < b._5;
 }
@@ -145,11 +145,11 @@ class ContentAccessModule
     item_type m_bottom_poi_type;
     std::vector< uint32_t > m_poiCategoriesId;
     std::vector<poiCategoryIdRadius> m_poiCategoriesIdRadius;
-    std::vector< ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > > m_resultList;
+    std::vector< ::DBus::Struct< uint64_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > > m_resultList;
     std::string m_inputString;
     int m_max_radius;
     uint16_t m_max_requested_size;
-    bool (*m_sort_func)(::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > a, ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > b);
+    bool (*m_sort_func)(::DBus::Struct< uint64_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > a, ::DBus::Struct< uint64_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > b);
     struct coord m_center;
     double m_scale;
     struct mapset *m_mapset;
@@ -242,7 +242,7 @@ class ContentAccessModule
     {
         struct attr label;
         struct coord c;
-        ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > >  result;
+        ::DBus::Struct< uint64_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > >  result;
         ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > attribute;
         bool stringMatched=false;
 
@@ -364,7 +364,7 @@ class ContentAccessModule
     }
 
     void
-    removePOIs(const std::vector< uint32_t >& ids)
+    removePOIs(const std::vector< uint64_t >& ids)
     {
         throw DBus::ErrorNotSupported("Not yet supported");
     }
@@ -470,7 +470,7 @@ class ContentAccessModule
     }
 
     void
-    ResultListRequested(const uint8_t& camId, const uint32_t& poiSearchHandle, const std::vector< uint32_t >& attributeList, int32_t& statusValue, uint16_t& resultListSize, std::vector< ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > >& resultList)
+    ResultListRequested(const uint8_t& camId, const uint32_t& poiSearchHandle, const std::vector< uint32_t >& attributeList, int32_t& statusValue, uint16_t& resultListSize, std::vector< ::DBus::Struct< uint64_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > >& resultList)
 	{
 		struct item *item;
         int count=0;
@@ -506,13 +506,13 @@ class ContentAccessModule
 		resultListSize=resultList.size();
 	}
 
-    std::vector< ::DBus::Struct< ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, double > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > >
-	PoiDetailsRequested(const std::vector< uint32_t >& source_id)
+    std::vector< ::DBus::Struct< ::DBus::Struct< uint64_t, std::string, ::DBus::Struct< double, double, double > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > >
+    PoiDetailsRequested(const std::vector< uint64_t >& source_id)
 	{
-        std::vector< ::DBus::Struct< ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, double > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > > ret;
+        std::vector< ::DBus::Struct< ::DBus::Struct< uint64_t, std::string, ::DBus::Struct< double, double, double > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > > ret;
 		for (int i = 0 ; i < source_id.size() ; i++) {
 			int sid=source_id[i];
-            ::DBus::Struct< ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, double > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > result;
+            ::DBus::Struct< ::DBus::Struct< uint64_t, std::string, ::DBus::Struct< double, double, double > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > result;
 			result._1._1=sid; /* source id */
 			result._1._2=m_resultList[sid]._2; /* name */
             result._1._3._1=m_resultList[sid]._4._1; /* lat */

@@ -24,7 +24,7 @@
 #include <QtCore/QString>
 #include <QDBusArgument>
 
-typedef uint poiId_t;
+typedef qulonglong poiId_t;
 typedef uint categoryId_t;
 typedef uint resourceId_t;
 typedef uint attributeId_t;
@@ -118,22 +118,22 @@ struct poiAttributeFull_t //(uui(yv)ib)
     bool mandatory; //true if the attribute is mandatory for the search and false for optional
 };
 
-struct resultSearch_t //(uuia(ui(yv)))
+struct resultSearch_t //(tuia(ui(yv)))
 {
-    uint id;
+    poiId_t id;
     uint distance;
     int route_status;
     QList<poiAttribute_t> attributes;
 };
 
-struct detailsPOISearch_t //(us(ddd))
+struct detailsPOISearch_t //(ts(ddd))
 {
     poiId_t id;
     QString name; //need to be a QString for UTF8
     geoCoordinate3D_t location;
 };
 
-struct resultSearchDetails_t //((us(ddd))aua(ui(yv)))
+struct resultSearchDetails_t //((ts(ddd))aua(ui(yv)))
 {
     detailsPOISearch_t details;
     QList<categoryId_t> categories;
@@ -186,7 +186,7 @@ typedef QMap<qulonglong,QDBusVariant> tupleUlongVariant;
 
 typedef QMap<ushort,ushort> tupleUshortUshort;
 
-struct resultCamSearch_t //(usu(ddd)qa(ui(yv)))
+struct resultCamSearch_t //(tsu(ddd)qa(ui(yv)))
 {
     poiId_t source_id;
     std::string name;
@@ -196,7 +196,7 @@ struct resultCamSearch_t //(usu(ddd)qa(ui(yv)))
     QList<poiAttribute_t> attributes;
 };
 
-struct resultCamSearchDetails_t //((us(ddd))aua(ui(yv)))
+struct resultCamSearchDetails_t //((ts(ddd))aua(ui(yv)))
 {
     detailsPOISearch_t details;
     QList<categoryId_t> categories;

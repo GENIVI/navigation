@@ -675,7 +675,7 @@ sqlRequest::SQL_REQUEST_ERRORS sqlRequest::getFreePoiId(POIServiceTypes::POI_ID 
     else
     { // Id
         query_line = query_result.at(0);
-        fromString<categoryId_t>(unique_id,query_line[0], std::dec);
+        fromString<POIServiceTypes::POI_ID>(unique_id,query_line[0], std::dec);
         ret = OK;
     }
 

@@ -100,9 +100,9 @@ public:
 
     void ConfigurationChanged(const std::vector< uint16_t >& changedSettings);
     void CategoriesRemoved(const std::vector< uint32_t >& categories);
-    void POIAdded(const std::vector< uint32_t >& pois);
-    void POIRemoved(const std::vector< uint32_t >& pois);
-    void SearchStatusChanged(const uint32_t& poiSearchHandle, const int32_t& statusValue, const std::vector< uint32_t >& pois);
+    void POIAdded(const std::vector< uint64_t >& pois);
+    void POIRemoved(const std::vector< uint64_t >& pois);
+    void SearchStatusChanged(const uint32_t& poiSearchHandle, const int32_t& statusValue, const std::vector<uint64_t> &pois);
 
 private:
 

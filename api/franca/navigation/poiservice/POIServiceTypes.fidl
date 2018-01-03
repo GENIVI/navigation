@@ -16,7 +16,7 @@ typeCollection POIServiceTypes {
 	}
 	
    <** @description:Unique ID for a POI results**>
-    typedef POI_ID is UInt32
+    typedef POI_ID is UInt64
     
     <** @description:Unique ID for a POI Icon Resource**>
     typedef ResourceID is UInt32

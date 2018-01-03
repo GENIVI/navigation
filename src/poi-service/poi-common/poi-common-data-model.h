@@ -30,7 +30,7 @@
 
 // Content of this file is the result of several updates of code used by different projects and for this reason is still messy
 
-typedef uint32_t poiId_t;
+typedef uint64_t poiId_t;
 typedef uint32_t categoryId_t;
 typedef uint32_t resourceId_t;
 typedef uint32_t attributeId_t;

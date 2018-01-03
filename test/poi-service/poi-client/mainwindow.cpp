@@ -1041,7 +1041,7 @@ void MainWindow::refreshViewTable(ushort windowSize)
     QList<attributeId_t> attributes;
     QList<resultSearch_t> poiList;
     QList<resultSearchDetails_t> poiDetailsList;
-    QList<uint> idList;
+    QList<poiId_t> idList;
 
     //populate attributes list with the requested attributes
     if (mp_attributeGetCheckBox.at(settingsAttributeSource)->isChecked())

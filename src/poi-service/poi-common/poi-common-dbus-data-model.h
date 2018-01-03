@@ -903,7 +903,7 @@ private:
     geoCoordinate3D_t m_geoCoordinate3D;
 };
 
-class DBus_poiDetails : DBus_dataFormatConverter //(us(ddd))
+class DBus_poiDetails : DBus_dataFormatConverter //(ts(ddd))
 {
 public:
     struct poiDetails_t
@@ -912,7 +912,7 @@ public:
         std::string name;
         DBus_geoCoordinate3D::geoCoordinate3D_t location;
     };
-    typedef ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, double > > DBus_poiDetails_t;
+    typedef ::DBus::Struct< uint64_t, std::string, ::DBus::Struct< double, double, double > > DBus_poiDetails_t;
 
     DBus_poiDetails(){
         DBus_geoCoordinate3D loc;
@@ -957,7 +957,7 @@ private:
     poiDetails_t m_poiDetails;
 };
 
-class DBus_searchResult : DBus_dataFormatConverter //(uuia(ui(yv))) -->in this implementation, the variant data depends on the value of 'type'
+class DBus_searchResult : DBus_dataFormatConverter //(tuia(ui(yv))) -->in this implementation, the variant data depends on the value of 'type'
 {
 public:
     struct searchResult_t
@@ -968,7 +968,7 @@ public:
         std::vector<DBus_poiAttribute::poiAttribute_t> attributes;
     };
 
-    typedef ::DBus::Struct< uint32_t, uint32_t, int32_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > DBus_searchResult_t;
+    typedef ::DBus::Struct< uint64_t, uint32_t, int32_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > DBus_searchResult_t;
 
     DBus_searchResult(){
         DBus_poiAttribute attrib;
@@ -1032,7 +1032,7 @@ private:
     searchResult_t m_searchResult;
 };
 
-class DBus_searchResultDetails : DBus_dataFormatConverter // ((us(ddd))aua(ui(yv))) -->in this implementation, the variant data depends on the value of 'type'
+class DBus_searchResultDetails : DBus_dataFormatConverter // ((ts(ddd))aua(ui(yv))) -->in this implementation, the variant data depends on the value of 'type'
 {
 public:
     struct searchResultDetails_t
@@ -1042,7 +1042,7 @@ public:
         std::vector<DBus_poiAttribute::poiAttribute_t> attributes;
     };
 
-    typedef ::DBus::Struct< ::DBus::Struct< uint32_t, std::string, ::DBus::Struct< double, double, double > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > DBus_searchResultDetails_t;
+    typedef ::DBus::Struct< ::DBus::Struct< uint64_t, std::string, ::DBus::Struct< double, double, double > >, std::vector< uint32_t >, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > DBus_searchResultDetails_t;
 
 
     DBus_searchResultDetails(){
@@ -1123,7 +1123,7 @@ private:
     searchResultDetails_t m_searchResultDetails;
 };
 
-class DBus_poiCAMDetails : DBus_dataFormatConverter // (usq(ddd)qa(ui(yv))) -->in this implementation, the variant data depends on the value of 'type'
+class DBus_poiCAMDetails : DBus_dataFormatConverter // (tsq(ddd)qa(ui(yv))) -->in this implementation, the variant data depends on the value of 'type'
 {
 public:
     struct poiCAMDetails_t //no class used into this public structure
@@ -1136,7 +1136,7 @@ public:
         std::vector<DBus_poiAttribute::poiAttribute_t> attributes;
     };
 
-    typedef ::DBus::Struct< uint32_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > DBus_poiCAMDetails_t;
+    typedef ::DBus::Struct< uint64_t, std::string, uint32_t, ::DBus::Struct< double, double, double >, uint16_t, std::vector< ::DBus::Struct< uint32_t, int32_t, DBusCommonAPIVariant > > > DBus_poiCAMDetails_t;
 
     DBus_poiCAMDetails(){
         DBus_poiAttribute attrib;
