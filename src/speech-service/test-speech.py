@@ -78,7 +78,7 @@ bus.add_signal_receiver(catch_speech_notifyTTSStatus_signal_handler, \
                         dbus_interface = "org.genivi.hmi.speechservice.SpeechOutput", \
                         signal_name = "notifyTTSStatus")
 
-speech = bus.get_object('org.genivi.hmi.speechservice.SpeechOutput','/org/genivi/speechservice/SpeechOutput')
+speech = bus.get_object('org.genivi.hmi.speechservice.SpeechOutput','/org/genivi/hmi/speechservice/SpeechOutput')
 g_speech_interface = dbus.Interface(speech, dbus_interface='org.genivi.hmi.speechservice.SpeechOutput')
 
 g_speech_interface.addTextChunk(dbus.String("Hello"))
