@@ -2077,7 +2077,7 @@ interface MapViewerControl {
 	}
 
 	<**
-		@description : mapViewThemeChanged = This signal is emitted when the theme of a map view instance changes
+		@description : mapViewThemeChanged = This signal is emitted when the theme of a map view instance changed
 	**>
 	broadcast mapViewThemeChanged {
 		out {
@@ -2091,6 +2091,20 @@ interface MapViewerControl {
 				@description : mapViewTheme = enum(INVALID,THEME_1,THEME_2,THEME_3, ... )
 			**>
 			MapTheme mapViewTheme
+		}
+	}
+
+	<**
+		@description : mapViewRotated = This signal is emitted when the rotation is achieved
+		This signal is meant for debugging purposes
+	**>
+	broadcast mapViewRotated {
+		out {
+			
+			<**
+				@description : mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value
+			**>
+			Handle mapViewInstanceHandle
 		}
 	}
 

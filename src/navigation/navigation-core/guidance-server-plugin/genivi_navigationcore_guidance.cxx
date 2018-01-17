@@ -26,6 +26,9 @@
 *
 * @licence end@
 */
+#ifndef DBUS_HAS_RECURSIVE_MUTEX
+#define DBUS_HAS_RECURSIVE_MUTEX
+#endif
 #include <dbus-c++/glib-integration.h>
 
 #if (SPEECH_ENABLED)
