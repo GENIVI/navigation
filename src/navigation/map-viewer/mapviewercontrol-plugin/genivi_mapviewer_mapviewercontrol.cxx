@@ -981,6 +981,16 @@ class  MapViewerControl
 
     }
 
+    bool subscribeFormapViewScaleByMetersPerPixelChangedSelective()
+    {//not implemented yet, always return true
+        return true;
+    }
+
+    void unsubscribeFrommapViewScaleByMetersPerPixelChangedSelective()
+    {//not implemented yet
+
+    }
+
     int32_t MapViewRotateBegin(const uint32_t& sessionHandle, const uint32_t& mapViewInstanceHandle, const ::DBus::Struct< uint16_t, uint16_t >& anchorPoint)
     {
         throw DBus::ErrorNotSupported("Not yet supported");

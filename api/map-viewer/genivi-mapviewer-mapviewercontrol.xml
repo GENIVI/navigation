@@ -613,6 +613,27 @@
     </method>
     <method name="unsubscribeFrommapViewScaleChangedSelective">
     </method>  
+    <signal name="MapViewScaleByMetersPerPixelChanged">
+      <doc>
+        <line>MapViewScaleByMetersPerPixelChanged = This signal is emitted when the mapview scale ByMetersPerPixel changes</line>
+      </doc>
+      <arg name="mapViewInstanceHandle" type="u">
+        <doc>
+          <line>mapViewInstanceHandle = Map instance handle. Range[0x0:0x7fffffff]. 0x0 is reserved as an invalid handle value</line>
+        </doc>
+      </arg>
+      <arg name="metersPerPixel" type="d">
+        <doc>
+          <line>metersPerPixel = meters per pixel</line>
+        </doc>
+      </arg>
+    </signal>
+    <method name="subscribeFormapViewScaleByMetersPerPixelChangedSelective">
+      <arg direction="out" name="status" type="b">
+      </arg>
+    </method>
+    <method name="unsubscribeFrommapViewScaleByMetersPerPixelChangedSelective">
+    </method>  
     <method name="SetCameraHeight">
       <doc>
         <line>SetCameraHeight = This method sets the camera height</line>
