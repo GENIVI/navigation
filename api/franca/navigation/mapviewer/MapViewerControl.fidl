@@ -1690,7 +1690,7 @@ interface MapViewerControl {
 		out {
 
 			<**
-				@description : rotationAngle = rotation angle in degrees measured from the North axis clockwise if possitive 
+				@description : rotationAngle = rotation angle in degrees measured from the North axis clockwise if positive 
 				or counter clockwise if negative. Range[-179:180].
 			**>
 			Int32 rotationAngle
