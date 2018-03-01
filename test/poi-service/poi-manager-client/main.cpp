@@ -49,8 +49,13 @@
 
 using namespace std;
 using namespace v2::org::genivi::navigation::poiservice;
+using namespace v3::org::genivi::navigation::poiservice;
 using namespace v4::org::genivi::navigation;
 using namespace v4::org::genivi;
+
+#define REGISTER_COUNTER 10
+#define REGISTER_SLEEP 50
+static std::shared_ptr < CommonAPI::Runtime > runtime;
 
 // class  contentManager
 class  contentManager
@@ -584,7 +589,8 @@ int main(int  argc , char**  argv )
     // so we can use std::cout with UTF-8, via Glib::ustring, without exceptions.
     std::locale::global(std::locale(""));
 
-    std::shared_ptr < CommonAPI::Runtime > runtime = CommonAPI::Runtime::get();
+    runtime = CommonAPI::Runtime::get();
+    uint8_t counter=0;
 
     const std::string domain = "local";
     const std::string instance = "POIContentAccessModuleService";
@@ -594,7 +600,11 @@ int main(int  argc , char**  argv )
             runtime->buildProxy<POIContentAccessModuleProxy>(domain,instance);
 
     while (!myProxy->isAvailable()) {
-        usleep(10);
+        if(++counter>REGISTER_COUNTER){
+            std::cout << "unable to build proxy: "<< instance << std::endl;
+            return EXIT_FAILURE;
+        }
+        std::this_thread::sleep_for(std::chrono::milliseconds(REGISTER_SLEEP));
     }
 
     //index used for argument analysis

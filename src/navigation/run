@@ -85,8 +85,9 @@ function terminate
 gdb=0
 xterm=0
 log=0
-enhpos=1
-replayer=1
+enhpos=1 #enhanced position server enabled
+replayer=0 #replayer disabled
+repl=""
 verbose=0 #no debug or log messages displayed
 center="4612 N 0608 E"
 poi=0
@@ -108,7 +109,7 @@ poidatabase=$POI_SERVER_RESOURCE_DIR/empty.db # empty poi database by default
 SPEECH_SERVER=speech-server
 SPEECH_OUTPUT_BIN_DIR=$CUR_DIR/../../src/speech-service/bin/
 
-while getopts c:ghnoprsvx opt
+while getopts c:ghnopr:svx opt
 do
 	case $opt in
 	c)
@@ -143,8 +144,9 @@ do
 	p)
 		poi=1
 		;;
-	r)
-		replayer=0
+	r) #enable the log replayer and set the file
+		replayer=1
+		repl=$(readlink -f $OPTARG) 
 		;;
 	s)
 		speech=1
@@ -157,12 +159,12 @@ do
 		;;
 	h)
 		echo "Usage:"
-		echo "$0 [-c center][-gnoprsvxh]"
+		echo "$0 [-c center][-r replayerfile][-gnopsvxh]"
 		echo "-c: Set center (supported values: paris,tokyo,seoul,longitude,latitude). Default is geneve"
 		echo "-g: Run subprocesses within gdb (only with -x)"
 		echo "-h: This help"
 		echo "-n: Don't start enhanced-position-service"
-		echo "-r: Don't start replayer"
+		echo "-r: Start replayer"
 		echo "-o: Create log file of subprocess output"
 		echo "-p: Launch the poi server"
 		echo "-s: Launch the speech server"
@@ -186,11 +188,7 @@ then
 
 	if [ "$replayer" = 1 ]
 	then
-		if [ -z "$REPLAYER_LOG_FILE" ]
-		then
-			REPLAYER_LOG_FILE=$LOGREPLAYER_LOGS_DIR/geneve-cologny.log
-		fi
-		run LogReplayer ./log-replayer $REPLAYER_LOG_FILE 
+		run "Log Replayer" $LOG_REPLAYER_BIN_DIR/$LOG_REPLAYER  $repl
 	fi
 fi
 

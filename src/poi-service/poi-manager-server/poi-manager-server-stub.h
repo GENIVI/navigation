@@ -42,6 +42,7 @@
 
 using namespace std;
 using namespace v2::org::genivi::navigation::poiservice;
+using namespace v3::org::genivi::navigation::poiservice;
 using namespace v4::org::genivi::navigation;
 using namespace v4::org::genivi;
 

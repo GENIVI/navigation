@@ -40,8 +40,6 @@ endif()
 
 # Packages
 find_package(PkgConfig REQUIRED)
-find_package(CommonAPI)
-find_package(CommonAPI)
 
 #pkg_check_modules(DBUS "dbus-1 >= 1.8.4") // #to be fixed, it doesn't work so the paths are set manually (see above)
 pkg_check_modules(COMMONAPI "CommonAPI >= 3.1.5")
