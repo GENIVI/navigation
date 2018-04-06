@@ -53,7 +53,7 @@ if not 'dlt' in output:
 test_name = "route calculation"
 
 #constants used into the script
-TIME_OUT = 10000
+TIME_OUT = 15000
 
 print('--------------------------')
 print('Route Calculation Test')

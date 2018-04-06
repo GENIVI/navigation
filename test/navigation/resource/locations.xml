@@ -31,12 +31,4 @@
 <street>Place des Halles</street>
 <number>8</number>
 </location>
-<location> 
-<latitude>47.415637</latitude>
-<longitude>8.614971</longitude>
-<country>Switzerland</country>
-<city>Zürich</city>
-<street>In Lampitzäckern</street>
-<number>24</number>
-</location>
 </location-set>

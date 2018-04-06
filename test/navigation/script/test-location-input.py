@@ -53,6 +53,9 @@ output = commands.getoutput('ps -A')
 if not 'dlt' in output:
     dltAvailable=False
 
+#constants used into the script
+TIME_OUT=20000
+
 # List of addresses
 COUNTRY_STRING = list()
 CITY_STRING = list()
@@ -500,7 +503,7 @@ target_search_string = ''
 startSearch(0)
 
 # Main loop
-gobject.timeout_add(10000, timeout)
+gobject.timeout_add(TIME_OUT, timeout)
 loop = gobject.MainLoop()
 loop.run()
 if g_exit == 1:

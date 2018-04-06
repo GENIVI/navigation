@@ -1,10 +1,10 @@
 <location-set area="Switzerland extract">
 <location> 
-<latitude>47.415637</latitude>
-<longitude>8.614971</longitude>
+<latitude>47.367264</latitude>
+<longitude>8.550330</longitude>
 <country>Switzerland</country>
 <city>Zürich</city>
-<street>In Lampitzäckern</street>
-<number>24</number>
+<street>Schanzengasse</street>
+<number>11</number>
 </location>
 </location-set>

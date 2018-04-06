@@ -128,14 +128,6 @@ def guidance_guidanceStatusChanged_handler(guidanceStatus,routeHandle):
         g_guidance_active = False
         g_routing_interface.DeleteRoute(dbus.UInt32(g_navigationcore_session_handle),dbus.UInt32(g_route_handle))
         g_navigationcore_session_interface.DeleteSession(dbus.UInt32(g_navigationcore_session_handle))
-    else:
-        ret = g_guidance_interface.GetDestinationInformation()
-        m, s = divmod(ret[1], 60)
-        h, m = divmod(m, 60)
-        print ("Travel Time: %d:%02d:%02d" % (h, m, s))
-        ret = g_guidance_interface.GetManeuversList(dbus.UInt16(10),dbus.UInt32(0))
-        print ("Number of maneuvers: " +str(ret[1]))
-        print ("Next road to turn: " +ret[2][0][4])
    
 def guidance_positionOnRouteChanged_handler(offsetOnRoute):
     print ("Offset on route: " +str(offsetOnRoute))
