@@ -32,18 +32,14 @@ else()
     set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/src-gen")
 endif()
 
-option(COMMONAPI_TOOL_DIR
-       "Absolute path to CommonAPI tool" "")
-option(COMMONAPI_DBUS_TOOL_DIR
-       "Absolute path to CommonAPI-DBus tool" "")
-
-execute_process(COMMAND uname -i OUTPUT_VARIABLE OS_VERSION)
-if("${OS_VERSION}" MATCHES "i686")
-  set(OS_VERSION "x86")
-else()
-  set(OS_VERSION "x86_64")
-endif()
-message(STATUS "OS_VERSION = ${OS_VERSION}")
+option(COMMONAPI_TOOL_GENERATOR
+       "Absolute path to CommonAPI code generator" "")
+option(COMMONAPI_DBUS_TOOL_GENERATOR
+       "Absolute path to CommonAPI-DBus code generator" "")
+option(COMMONAPI_WAMP_TOOL_GENERATOR
+       "Absolute path to CommonAPI-Wamp code generator" "")
+option(WITH_WAMP_GENERATION
+       "Generate Wamp files" OFF)
 
 set(COMMONAPI_FIDL_DIR "${CMAKE_CURRENT_SOURCE_DIR}")
 
@@ -58,17 +54,29 @@ endif()
 
 file(GLOB FIDL_FILES "${COMMONAPI_FIDL_DIR}/*.fidl")
 
-if(COMMONAPI_TOOL_DIR)
+if (COMMONAPI_TOOL_GENERATOR)
      execute_process(WORKING_DIRECTORY ${COMMONAPI_FIDL_DIR}
-                COMMAND ${COMMONAPI_TOOL_DIR}/org.genivi.commonapi.core.cli.product/target/products/org.genivi.commonapi.core.cli.product/linux/gtk/${OS_VERSION}/commonapi-generator-linux-${OS_VERSION} -sk -d ${COMMONAPI_GEN_DIR} ${FIDL_FILES})
+                COMMAND ${COMMONAPI_TOOL_GENERATOR} -sk -d ${COMMONAPI_GEN_DIR} ${FIDL_FILES})
+else ()
+    message (FATAL_ERROR "Set the variable -DCOMMONAPI_TOOL_GENERATOR=<tool>")
+endif ()
+
+if (WITH_WAMP_GENERATION)
+    if (COMMONAPI_WAMP_TOOL_GENERATOR)
+        foreach(RAW_FILE ${FIDL_FILES})
+        execute_process(WORKING_DIRECTORY ${COMMONAPI_FIDL_DIR}
+                    COMMAND java -jar ${COMMONAPI_WAMP_TOOL_GENERATOR} -f ${RAW_FILE} -d ${COMMONAPI_GEN_DIR} )
+        endforeach()
+    else ()
+        message (FATAL_ERROR "Set the variable -DCOMMONAPI_WAMP_TOOL_GENERATOR=<tool>")
+    endif ()
 else()
-    message (FATAL_ERROR "Set the variable -DCOMMONAPI_TOOL_DIR=<path>")
+    if (COMMONAPI_DBUS_TOOL_GENERATOR)
+        execute_process(WORKING_DIRECTORY ${COMMONAPI_FIDL_DIR}
+                    COMMAND ${COMMONAPI_DBUS_TOOL_GENERATOR} -d ${COMMONAPI_GEN_DIR} ${FIDL_FILES})
+    else ()
+        message (FATAL_ERROR "Set the variable -DCOMMONAPI_DBUS_TOOL_GENERATOR=<tool>")
+    endif ()
 endif()
 
-if(COMMONAPI_DBUS_TOOL_DIR)
-    execute_process(WORKING_DIRECTORY ${COMMONAPI_FIDL_DIR}
-                COMMAND ${COMMONAPI_DBUS_TOOL_DIR}/org.genivi.commonapi.dbus.cli.product/target/products/org.genivi.commonapi.dbus.cli.product/linux/gtk/${OS_VERSION}/commonapi-dbus-generator-linux-${OS_VERSION} -d ${COMMONAPI_GEN_DIR} ${FIDL_FILES})
-else()
-    message (FATAL_ERROR "Set the variable -DCOMMONAPI_DBUS_TOOL_DIR=<path>")
-endif()
 

@@ -24,10 +24,14 @@ cmake_minimum_required (VERSION 2.8.1)
 
 project(whole-franca)
 
-option(COMMONAPI_TOOL_DIR
-       "Absolute path to CommonAPI tool" "")
-option(COMMONAPI_DBUS_TOOL_DIR
-       "Absolute path to CommonAPI-DBus tool" "")
+option(COMMONAPI_TOOL_GENERATOR
+       "Absolute path to CommonAPI code generator" "")
+option(COMMONAPI_DBUS_TOOL_GENERATOR
+       "Absolute path to CommonAPI-DBus code generator" "")
+option(COMMONAPI_WAMP_TOOL_GENERATOR
+       "Absolute path to CommonAPI-Wamp code generator" "")
+option(WITH_WAMP_GENERATION
+       "Generate Wamp files" OFF)
 
 get_directory_property(hasParent PARENT_DIRECTORY)
 
@@ -36,18 +40,6 @@ if(hasParent)
 else()
     set(COMMONAPI_GEN_DIR "${CMAKE_CURRENT_BINARY_DIR}/src-gen")
 endif()
-
-if (COMMONAPI_TOOL_DIR)
-    message(STATUS "COMMONAPI_TOOL_DIR ${COMMONAPI_TOOL_DIR}")
-else ()
-    message (FATAL_ERROR "Set the variable -DCOMMONAPI_TOOL_DIR=<path>")
-endif ()
-
-if (COMMONAPI_DBUS_TOOL_DIR)
-    message(STATUS "COMMONAPI_DBUS_TOOL_DIR ${COMMONAPI_DBUS_TOOL_DIR}")
-else ()
-    message (FATAL_ERROR "Set the variable -DCOMMONAPI_DBUS_TOOL_DIR=<path>")
-endif ()
 
 add_subdirectory(hmi)
 add_subdirectory(navigation)

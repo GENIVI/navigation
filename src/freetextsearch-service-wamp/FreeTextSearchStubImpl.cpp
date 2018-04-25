@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: MPL-2.0
  *
  * \copyright Copyright (C) 2015, 2016 TomTom International B.V.
- * \copyright Copyright (C) 2016, PCA Peugeot Citroen
+ * \copyright Copyright (C) 2018, PSA GROUPE
  * \author Peter Goedegebure (Peter.Goedegebure@tomtom.com)
  * \author Philippe Colliot <philippe.colliot@mpsa.com>
  * \author Morteza Damavandpeyma <Morteza.Damavandpeyma@tomtom.com>
