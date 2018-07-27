@@ -43,7 +43,7 @@
       <doc>
         <line>GetUnitsOfMeasurement = This method retrieves the units of measurement</line>
       </doc>
-      <arg name="unitsOfMeasurement" type="a{ii}" direction="out">
+      <arg name="unitsOfMeasurementList" type="a{ii}" direction="out">
         <doc>
           <line>unitsOfMeasurementList = array[unitsOfMeasurement]</line>
           <line>unitsOfMeasurement = tuple (key,value)</line>
