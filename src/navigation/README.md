@@ -42,7 +42,7 @@ sudo apt-get install python-pip python-dbus python-gobject python-pil
 sudo pip install --upgrade pip
 
 To test, launch the navigation middleware by entering:
-../../src/navigation/run -r -p
+../../src/navigation/run -p
 and the test batch:
 ./test-all
 

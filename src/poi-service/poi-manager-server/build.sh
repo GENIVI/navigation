@@ -22,17 +22,17 @@ do
 done
 set -e
 
-if [ ! $COMMONAPI_TOOL_DIR ]
+if [ ! $COMMONAPI_TOOL_GENERATOR ]
 then 
-	echo 'Set the dir of the common api tools'
-	echo 'export COMMONAPI_TOOL_DIR=<path>'
+	echo 'Set the link to the common api generator'
+	echo 'export COMMONAPI_TOOL_GENERATOR=<tool>'
 	exit 1
 fi
 
-if [ ! $COMMONAPI_DBUS_TOOL_DIR ]
+if [ ! $COMMONAPI_DBUS_TOOL_GENERATOR ]
 then 
-	echo 'Set the dir of the common api dbus tools'
-	echo 'export COMMONAPI_DBUS_TOOL_DIR=<path>'
+	echo 'Set the link to the common api dbus generator'
+	echo 'export COMMONAPI_DBUS_TOOL_GENERATOR=<tool>'
 	exit 1
 fi
 
@@ -43,7 +43,7 @@ then
 	exit 1
 fi
 
-commonapi_tools_option="-DDBUS_LIB_PATH="$DBUS_LIB_PATH" -DCOMMONAPI_DBUS_TOOL_DIR="$COMMONAPI_DBUS_TOOL_DIR" -DCOMMONAPI_TOOL_DIR="$COMMONAPI_TOOL_DIR
+commonapi_tools_option="-DDBUS_LIB_PATH="$DBUS_LIB_PATH" -DCOMMONAPI_DBUS_TOOL_GENERATOR="$COMMONAPI_DBUS_TOOL_GENERATOR" -DCOMMONAPI_TOOL_GENERATOR="$COMMONAPI_TOOL_GENERATOR
 
 
 if [ "$clean" = 1 ]

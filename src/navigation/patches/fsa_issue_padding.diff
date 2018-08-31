@@ -2,18 +2,18 @@ Index: navit/navit/navit.c
 ===================================================================
 --- navit/navit.c	(revision 5827)
 +++ navit/navit.c	(working copy)
-@@ -2392,12 +2392,12 @@ navit_get_cursor_pnt(struct navit *this_, struct point *p, int keep_orientation,
-             offset = (max_offset - min_offset) / (max_offset_speed - min_offset_speed) * (nv->speed - min_offset_speed);
-         }
+@@ -2229,12 +2229,12 @@ static int navit_get_cursor_pnt(struct navit *this_, struct point *p, int keep_o
+         offset = (max_offset - min_offset) / (max_offset_speed - min_offset_speed) * (nv->speed - min_offset_speed);
+     }
  #endif
 -
 +#if 0
- 	if (this_->gra) {
- 		padding = graphics_get_data(this_->gra, "padding");
- 	} else
- 		dbg(lvl_warning, "cannot get padding: this->gra is NULL");
+     if (this_->gra) {
+         padding = graphics_get_data(this_->gra, "padding");
+     } else
+         dbg(lvl_warning, "cannot get padding: this->gra is NULL");
 -
 +#endif
- 	transform_get_size(this_->trans, &width, &height);
- 	dbg(lvl_debug, "width=%d height=%d", width, height);
-
+     transform_get_size(this_->trans, &width, &height);
+     dbg(lvl_debug, "width=%d height=%d", width, height);
+ 

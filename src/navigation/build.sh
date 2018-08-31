@@ -40,17 +40,17 @@ speech_option="OFF"
 function check_path_for_capi
 {
 	echo 'check path for CommonAPI'
-	if [ ! $COMMONAPI_TOOL_DIR ]
+	if [ ! $COMMONAPI_TOOL_GENERATOR ]
 	then 
-		echo 'Set the dir of the common api tools'
-		echo 'export COMMONAPI_TOOL_DIR=<path>'
+		echo 'Set the link to the common api generator'
+		echo 'export COMMONAPI_TOOL_GENERATOR=<tool>'
 		exit 1
 	fi
 
-	if [ ! $COMMONAPI_DBUS_TOOL_DIR ]
+	if [ ! $COMMONAPI_DBUS_TOOL_GENERATOR ]
 	then 
-		echo 'Set the dir of the common api dbus tools'
-		echo 'export COMMONAPI_DBUS_TOOL_DIR=<path>'
+		echo 'Set the link to the common api dbus generator'
+		echo 'export COMMONAPI_DBUS_TOOL_GENERATOR=<tool>'
 		exit 1
 	fi
 
@@ -60,7 +60,8 @@ function check_path_for_capi
 		echo 'export DBUS_LIB_PATH=<path>'
 		exit 1
 	fi
-	commonapi_tools_option="-DWITH_PLUGIN_MIGRATION=ON -DWITH_DBUS_INTERFACE=OFF -DDBUS_LIB_PATH="$DBUS_LIB_PATH" -DCOMMONAPI_DBUS_TOOL_DIR="$COMMONAPI_DBUS_TOOL_DIR" -DCOMMONAPI_TOOL_DIR="$COMMONAPI_TOOL_DIR
+
+	commonapi_tools_option="-DWITH_PLUGIN_MIGRATION=ON -DWITH_DBUS_INTERFACE=OFF -DDBUS_LIB_PATH="$DBUS_LIB_PATH" -DCOMMONAPI_DBUS_TOOL_GENERATOR="$COMMONAPI_DBUS_TOOL_GENERATOR" -DCOMMONAPI_TOOL_GENERATOR="$COMMONAPI_TOOL_GENERATOR
 }
  
 while getopts cdlmhnps opt

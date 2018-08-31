@@ -48,6 +48,10 @@
 
 #include "time.h"
 
+#include "log.h"
+
+DLT_DECLARE_CONTEXT(gCtx);
+
 #if (!DEBUG_ENABLED)
 #undef dbg
 #define dbg(level,...) ;
@@ -274,7 +278,10 @@ vehicle_enhancedposition_new(struct vehicle_methods *meth,
 
 void plugin_init(void)
 {
-	event_request_system("glib","genivi_navigationcore_enhpos");
+    DLT_REGISTER_APP("ENHPC","ENHPOS CLIENT");
+    DLT_REGISTER_CONTEXT(gCtx,"ENHPC","Global Context");
+
+    event_request_system("glib","genivi_navigationcore_enhpos");
 	dispatcher.attach(NULL);
 	DBus::default_dispatcher = &dispatcher;
 	conn = new DBus::Connection(DBus::Connection::SessionBus());
