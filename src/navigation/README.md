@@ -35,15 +35,15 @@ or to build updated parts
 There are other options available, please enter ./build.sh -h to display it
 
 ## How to test
+First launch the navigation middleware by entering:
+./run -p
+Open a terminal and go to ../../test/navigation/script
 Some python scripts can be used for test. 
-Go to ../../test/navigation/script
+REM:
 For Python, you need to install some modules
 sudo apt-get install python-pip python-dbus python-gobject python-pil
 sudo pip install --upgrade pip
-
-To test, launch the navigation middleware by entering:
-../../src/navigation/run -p
-and the test batch:
+Launch the test batch:
 ./test-all
 
 If everything is OK, you must see:
@@ -63,7 +63,7 @@ Before testing it's necessary to get the map by picking it from this site:
 http://maps9.navit-project.org/api/map/?bbox=139.1,35.5,140.4,36.0&timestamp=170217
 Rename the file to tokyo.bin, copy it to ./map and do ./build.sh -c
 To test, launch the navigation middleware by entering:
-../../src/navigation/run -r -c tokyo
+../../src/navigation/run -p -c tokyo
 and the test batch:
 ./test-all_tokyo
 
