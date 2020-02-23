@@ -1,7 +1,7 @@
 #!/bin/bash
 
 positioning_version='d4c46f13019aefb11aebd0fc1210a29a46f0b521'
-navit_version='7bba198ae2fd42f6092de74a64b9d544dc10e4ff'
+navit_version='c9f7dd254974ac186c6b036b19cfed65385038d8'
 
 echo "version of positioning is: $positioning_version"
 echo "version of navit is: $navit_version"
