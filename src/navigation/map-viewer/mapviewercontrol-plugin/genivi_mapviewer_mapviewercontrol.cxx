@@ -1219,7 +1219,8 @@ MapViewerControlObj::SetMapViewTheme(uint32_t sessionHandle, uint16_t mapViewThe
         LOG_DEBUG_MSG(gCtx,"Invalid mapViewTheme");
 		throw DBus::ErrorInvalidArgs("Invalid mapViewTheme");
 	}
-	iter=navit_attr_iter_new();
+    void * unused;
+    iter=navit_attr_iter_new(unused);
 	while (navit_get_attr(m_navit.u.navit, attr_layout, &layout, iter)) {
 		if (!layout_get_attr(layout.u.layout, attr_name, &name, NULL)) {
 			navit_attr_iter_destroy(iter);
@@ -1735,8 +1736,8 @@ MapViewerControlObj::MapViewerControlObj(MapViewerControl *mapviewercontrol, uin
 	mapset.u.mapset=mapset_dup(mapset.u.mapset);
 	m_mapset=mapset.u.mapset;
 	navit_add_attr(m_navit.u.navit, &mapset);
-
-	struct attr_iter *iter=navit_attr_iter_new();
+    void * unused;
+    struct attr_iter *iter=navit_attr_iter_new(unused);
 	struct attr layout;
 	while (navit_get_attr(navit_template.u.navit, attr_layout, &layout, iter)) {
 		navit_add_attr(m_navit.u.navit, &layout);

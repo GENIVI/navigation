@@ -879,7 +879,8 @@ RoutingObj::SetRoutePreferences(uint32_t sessionHandle, const std::string& count
 	}
 	vehicleprofile_set_attr(m_vehicleprofile.u.vehicleprofile, &flags_forward_mask);
 	vehicleprofile_set_attr(m_vehicleprofile.u.vehicleprofile, &flags_reverse_mask);
-	struct attr_iter *iter=vehicleprofile_attr_iter_new();
+    void * unused;
+    struct attr_iter *iter=vehicleprofile_attr_iter_new(unused);
 	while (vehicleprofile_get_attr(m_vehicleprofile.u.vehicleprofile, attr_roadprofile, &roadprofile, iter)) {
 		if (roadprofile_get_attr(roadprofile.u.roadprofile, attr_item_types, &item_types, NULL)) {
 			int *par=NULL;

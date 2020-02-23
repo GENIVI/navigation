@@ -82,7 +82,8 @@ get_vehicle(const char *source_prefix)
 		if (navit_get_attr(navit, attr_vehicle, &vehicle, NULL))
 			ret=vehicle.u.vehicle;
 	} else {
-		struct attr_iter *iter=navit_attr_iter_new();
+        void * unused;
+        struct attr_iter *iter=navit_attr_iter_new(unused);
 		while (navit_get_attr(navit, attr_vehicle, &vehicle, iter)) {
 			struct attr source;
 			if (vehicle.u.vehicle && vehicle_get_attr(vehicle.u.vehicle, attr_source, &source, NULL) && 
